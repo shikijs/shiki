@@ -10,8 +10,8 @@ async function go() {
   const tokenizingInfo = themedTokenizer("console.log('foo');", 'javascript')
   const html = shiki.buildHTML(tokenizingInfo, 'JavaScript')
 
-  console.log(JSON.stringify(tokenizingInfo, null, 2))
   console.log(html)
+  console.log(JSON.stringify(tokenizingInfo, null, 2))
 }
 
 go()
