@@ -9,10 +9,12 @@ let onigasmLib: Thenable<IOnigLib> = null;
 
 export function getOnigasm(): Thenable<IOnigLib> {
 	if (!onigasmLib) {
-		let onigasmModule = require('onigasm');
-		let fs = require('fs');
-		let path = require('path');
-		const wasmBin = fs.readFileSync(path.join(__dirname, '../node_modules/onigasm/lib/onigasm.wasm')).buffer;
+		const onigasmModule = require('onigasm');
+		const onigasmIndexpath = require.resolve('onigasm')
+		
+		const fs = require('fs');
+		const path = require('path');
+		const wasmBin = fs.readFileSync(path.join(onigasmIndexpath, '../onigasm.wasm')).buffer;
 		onigasmLib = onigasmModule.loadWASM(wasmBin).then((_: any) => {
 			return {
 				createOnigScanner(patterns: string[]) { return new onigasmModule.OnigScanner(patterns); },
