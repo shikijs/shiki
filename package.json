@@ -1,0 +1,19 @@
+{
+  "name": "shiki",
+  "main": "./out/main.js",
+  "files": [
+    "data",
+    "out"
+  ],
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.0"
+  },
+  "dependencies": {
+    "onigasm": "^2.2.1",
+    "vscode-textmate": "^4.0.1"
+  }
+}
