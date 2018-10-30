@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "compile": "tsc -p .",
+    "prepublish": "npm run compile",
     "watch": "tsc -w -p ."
   },
   "devDependencies": {
