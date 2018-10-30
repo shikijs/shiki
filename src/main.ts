@@ -117,6 +117,7 @@ export function buildHTML(lines: IThemedToken[][], langId: string) {
       html += `\n`
     }
   })
+  html = html.slice(0, -1) // Get rid of last \n
   html += `</code></pre>`
 
   return html
