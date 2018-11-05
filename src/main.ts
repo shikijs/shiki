@@ -24,7 +24,8 @@ let THEMES = [
   new ThemeInfo('red', 'red.tmTheme'),
   new ThemeInfo('solarized_dark', 'Solarized-dark.tmTheme'),
   new ThemeInfo('solarized_light', 'Solarized-light.tmTheme'),
-  new ThemeInfo('tomorrow_night_blue', 'Tomorrow-Night-Blue.tmTheme')
+  new ThemeInfo('tomorrow_night_blue', 'Tomorrow-Night-Blue.tmTheme'),
+  new ThemeInfo('material_palenight', 'Material-Theme-Palenight.json')
 ]
 
 let LANGUAGES = [
@@ -41,7 +42,9 @@ let LANGUAGES = [
   'shellscript',
   'dockerfile',
   'bat',
-  'ini'
+  'ini',
+  'vue',
+  'vue-html'
 ]
 
 let _grammars: IGrammarRegistration[] = JSON.parse(
@@ -103,10 +106,15 @@ export async function getCodeTokenizer(themeName: string): Promise<(code: string
   }
 }
 
-export function buildHTML(lines: IThemedToken[][], langId: string) {
+export function buildHTML(lines: IThemedToken[][], langId?: string) {
   let html = ''
 
-  html += `<pre class="shiki"><div class="language-id">${langId}</div><code>`
+  html += `<pre class="shiki">`
+  if (langId) {
+    html += `<div class="language-id">${langId}</div>`
+  }
+  html += `<code>`
+
   lines.forEach((l: any[]) => {
     if (l.length === 0) {
       html += `\n`
