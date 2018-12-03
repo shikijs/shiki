@@ -44,7 +44,8 @@ let LANGUAGES = [
   'bat',
   'ini',
   'vue',
-  'vue-html'
+  'vue-html',
+  'yaml'
 ]
 
 let _grammars: IGrammarRegistration[] = JSON.parse(
