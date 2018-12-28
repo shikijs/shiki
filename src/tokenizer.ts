@@ -1,6 +1,6 @@
 import { IEmbeddedLanguagesMap, IGrammar } from 'vscode-textmate'
 import { ThemeData } from './themes'
-import { tokenizeWithTheme } from './themedTokenizer';
+import { tokenizeWithTheme } from './themedTokenizer'
 
 export class ThemeTokenizer {
   constructor(
@@ -19,6 +19,11 @@ export class ThemeTokenizer {
   }
 
   public tokenizeWithTheme(contents: string, grammar: IGrammar) {
-    return tokenizeWithTheme(this.themeData.theme, this.themeData.registry.getColorMap(), contents, grammar);
+    return tokenizeWithTheme(
+      this.themeData.theme,
+      this.themeData.registry.getColorMap(),
+      contents,
+      grammar
+    )
   }
 }

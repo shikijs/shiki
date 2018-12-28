@@ -12,11 +12,13 @@
   "scripts": {
     "compile": "tsc -p .",
     "prepublish": "npm run compile",
-    "watch": "tsc -w -p ."
+    "watch": "tsc -w -p .",
+    "fmt": "prettier --parser=typescript --write src/**/*.ts"
   },
   "devDependencies": {
     "@types/node": "^10.12.0",
     "lerna": "^3.8.0",
+    "prettier": "^1.15.3",
     "typescript": "^3.2.1"
   },
   "dependencies": {

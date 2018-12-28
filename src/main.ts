@@ -62,7 +62,9 @@ let _languages: ILanguageRegistration[] = JSON.parse(
 let OnigasmResolver = new Resolver(_grammars, _languages, getOnigasm(), 'onigasm')
 let _themeDatas = THEMES.map(theme => theme.create(OnigasmResolver))
 
-export async function getCodeTokenizer(themeName: string): Promise<(code: string, lang: string) => IThemedToken[][]> {
+export async function getCodeTokenizer(
+  themeName: string
+): Promise<(code: string, lang: string) => IThemedToken[][]> {
   const themeData = _themeDatas.find(td => td.themeName === themeName)
 
   const tokenizerMap: { [lang: string]: { tokenizer: ThemeTokenizer; grammar: IGrammar } } = {}
@@ -73,7 +75,8 @@ export async function getCodeTokenizer(themeName: string): Promise<(code: string
     const embeddedLanguages: IEmbeddedLanguagesMap = Object.create(null)
     if (grammar.embeddedLanguages) {
       for (let scopeName in grammar.embeddedLanguages) {
-        embeddedLanguages[scopeName] = OnigasmResolver.language2id[grammar.embeddedLanguages[scopeName]]
+        embeddedLanguages[scopeName] =
+          OnigasmResolver.language2id[grammar.embeddedLanguages[scopeName]]
       }
     }
 
