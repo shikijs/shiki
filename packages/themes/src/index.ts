@@ -12,7 +12,7 @@ function mapF (subdir: string) {
   }
 }
 
-export const VSCODE_THEMES = [
+export const vscode = [
   'abyss',
   'dark_vs',
   'light_vs',
@@ -28,7 +28,7 @@ export const VSCODE_THEMES = [
   'solarized_light'
 ].map(mapF('vscode'))
 
-export const MATERIAL_THEMES = [
+export const material = [
   'Darker-High-Contrast',
   'Darker',
   'Default-High-Contrast',
@@ -46,7 +46,7 @@ export const MATERIAL_THEMES = [
   'Palenight'
 ].map(mapF('material'))
 
-export const NICE_THEMES = [
+export const nice = [
   'nord',
   'min-light',
   'min-dark',
