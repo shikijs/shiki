@@ -27,10 +27,18 @@ export type TCommonLang =
   | 'swift'
   | 'typescript'
   | 'tsx'
-  | 'vue'
-  | 'vue-html'
   | 'xml'
   | 'yaml'
+  /**
+   * Extra grammars
+   */
+  | 'haml'
+  | 'graphql'
+  | 'postcss'
+  | 'sass'
+  | 'stylus'
+  | 'vue'
+  | 'vue-html'
 
 export type TCommonLangAlias =
   | 'clj'
@@ -41,11 +49,14 @@ export type TCommonLangAlias =
   | 'objc'
   | 'py'
   | 'rb'
-  | 'sass'
   | 'shell'
   | 'bash'
   | 'sh'
   | 'ts'
+  /**
+   * Extra grammars
+   */
+  | 'styl'
 
 export type TOtherLang =
   | 'bat'

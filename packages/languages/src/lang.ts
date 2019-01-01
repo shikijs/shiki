@@ -1,4 +1,4 @@
-import { TCommonLang, TCommonLangAlias, TOtherLang, TLang } from "./types";
+import { TCommonLang, TCommonLangAlias, TOtherLang, TLang } from './types'
 import { IRawGrammar } from 'vscode-textmate'
 
 export const commonLangIds: TCommonLang[] = [
@@ -30,10 +30,18 @@ export const commonLangIds: TCommonLang[] = [
   'swift',
   'typescript',
   'tsx',
-  'vue',
-  'vue-html',
   'xml',
-  'yaml'
+  'yaml',
+  /**
+   * Extra grammars
+   */
+  'haml',
+  'graphql',
+  'sass',
+  'stylus',
+  'postcss',
+  'vue',
+  'vue-html'
 ]
 
 export const commonLangAliases: TCommonLangAlias[] = [
@@ -45,11 +53,14 @@ export const commonLangAliases: TCommonLangAlias[] = [
   'objc',
   'py',
   'rb',
-  'sass',
   'shell',
   'bash',
   'sh',
-  'ts'
+  'ts',
+  /**
+   * Extra grammars
+   */
+  'styl'
 ]
 
 export const otherLangIds: TOtherLang[] = [
@@ -364,18 +375,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: []
   },
   {
-    id: 'vue',
-    scopeName: 'source.vue',
-    path: '../data/grammars/vue.json',
-    aliases: []
-  },
-  {
-    id: 'vue-html',
-    scopeName: 'text.html.vue-html',
-    path: '../data/grammars/vue-html.json',
-    aliases: []
-  },
-  {
     id: 'xml',
     scopeName: 'text.xml',
     path: '../data/grammars/xml.json',
@@ -391,6 +390,51 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: '../data/grammars/yaml.json',
+    aliases: []
+  },
+  /**
+   * Extra grammars
+   */
+  {
+    id: 'haml',
+    scopeName: 'text.haml',
+    path: '../data/extraGrammars/haml.json',
+    aliases: []
+  },
+  {
+    id: 'graphql',
+    scopeName: 'source.graphql',
+    path: '../data/extraGrammars/graphql.json',
+    aliases: []
+  },
+  {
+    id: 'sass',
+    scopeName: 'source.sass',
+    path: '../data/extraGrammars/sass.tmLanguage',
+    aliases: []
+  },
+  {
+    id: 'stylus',
+    scopeName: 'source.stylus',
+    path: '../data/extraGrammars/stylus.json',
+    aliases: ['styl']
+  },
+  {
+    id: 'postcss',
+    scopeName: 'source.css.postcss',
+    path: '../data/extraGrammars/postcss.json',
+    aliases: []
+  },
+  {
+    id: 'vue',
+    scopeName: 'source.vue',
+    path: '../data/extraGrammars/vue.json',
+    aliases: []
+  },
+  {
+    id: 'vue-html',
+    scopeName: 'text.html.vue-html',
+    path: '../data/extraGrammars/vue-html.json',
     aliases: []
   }
 ]
