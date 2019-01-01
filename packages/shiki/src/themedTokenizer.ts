@@ -4,7 +4,7 @@
 'use strict'
 
 import { IGrammar, StackElement, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
-import { StackElementMetadata } from './grammar'
+import { StackElementMetadata } from 'shiki-languages'
 
 export interface IThemedTokenScopeExplanation {
   scopeName: string

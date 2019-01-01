@@ -1,0 +1,11 @@
+{
+  "extends": "../tsconfig.options.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "references": [
+    { "path": "../themes" }
+  ]
+}

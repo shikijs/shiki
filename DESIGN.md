@@ -2,8 +2,8 @@
 
 From user's pov:
 
-- code -> tokenizer + | grammars | -> tokens -> | themes | -> themed tokens
-- themed tokens + | renderer | -> HTML
+- code -> tokenizer + | grammars | & | themes | -> tokens
+- tokens + | renderer | -> HTML
 
 ## Choices
 
@@ -14,26 +14,16 @@ From user's pov:
 
 ### Where does Polacode fit?
 
-Polacode generate themed tokens as Shiki does.
+Polacode generate tokens as Shiki does.
 
 Rendering should take two parts:
 
 - HTML renderer: same as Shiki, this should be customizable
-- HTML to IMG: no options
+- HTML to IMG
 
-## Repos
+---
 
-Find a way to auto generate these repos from upstream:
+Polacode has access to Webview, can measure glyph width -> can export to SVG.
+Make Shiki renderer more focused on HTML.
+Make Polacode export sketch/svg/etc.
 
-- grammars
-- themes
-
-### Core
-
-- tokenizer (Onigasm, tokenize all lines)
-- themer
-- resolver
-  - resolve extension to grammar
-  - resolve embedded grammars
-  - tokens -> themed tokens
-- renderer

@@ -3,11 +3,11 @@
  *--------------------------------------------------------*/
 'use strict'
 
-import { IOnigLib, Thenable } from 'vscode-textmate'
+import { IOnigLib } from 'vscode-textmate'
 
-let onigasmLib: Thenable<IOnigLib> = null
+let onigasmLib: Promise<IOnigLib> = null
 
-export function getOnigasm(): Thenable<IOnigLib> {
+export function getOnigasm(): Promise<IOnigLib> {
   if (!onigasmLib) {
     const onigasmModule = require('onigasm')
     const onigasmIndexpath = require.resolve('onigasm')

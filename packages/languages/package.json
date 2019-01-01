@@ -1,18 +1,22 @@
 {
-  "name": "shiki-grammars",
+  "name": "shiki-languages",
   "version": "0.4.0",
-  "description": "Grammars for shiki",
+  "description": "Languages for shiki",
   "keywords": [
     "shiki",
+    "languages",
     "grammar",
     "TextMate"
   ],
   "author": "Pine Wu <octref@gmail.com>",
   "homepage": "https://github.com/octref/shiki/tree/master/packages/grammars",
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octref/shiki.git"
+  },
+  "dependencies": {
+    "vscode-textmate": "https://github.com/octref/vscode-textmate"
   }
 }
