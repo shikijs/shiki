@@ -4,11 +4,6 @@
     "packages/*"
   ],
   "name": "shiki",
-  "main": "./out/main.js",
-  "files": [
-    "data",
-    "out"
-  ],
   "scripts": {
     "build": "tsc -b packages",
     "watch": "tsc -b -w packages",
@@ -20,9 +15,6 @@
     "prettier": "^1.15.3",
     "typescript": "^3.2.1"
   },
-  "dependencies": {
-    "onigasm": "^2.2.1",
-    "vscode-textmate": "https://github.com/octref/vscode-textmate"
-  },
+  "dependencies": {},
   "license": "MIT"
 }

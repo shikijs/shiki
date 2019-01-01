@@ -1,10 +1,7 @@
 import { IRawTheme } from 'vscode-textmate'
 
 import * as fs from 'fs'
-import * as path from 'path'
 import { parse as plistParse } from './plist'
-
-const THEME_PATH = path.resolve(__dirname, '../data')
 
 function loadJSONTheme(themePath: string): IRawTheme {
   const fileContents = fs.readFileSync(themePath, 'utf-8')
