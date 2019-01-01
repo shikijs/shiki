@@ -1,8 +1,8 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { loadTheme, IShikiTheme } from './loadTheme'
-import { Tvsc, Tmaterial, Tnice } from './types';
-export { Tvsc, Tmaterial, Tnice } from './types';
+import { TTheme } from './types';
+export * from './types'
 
 const vscThemes = [
   'abyss',
@@ -52,7 +52,7 @@ function mapF(subdir: string) {
   }
 }
 
-export function getTheme(t: Tvsc | Tmaterial | Tnice): IShikiTheme {
+export function getTheme(t: TTheme): IShikiTheme {
   if (vscThemes.includes(t)) {
     return mapF('vscode')(t)
   }

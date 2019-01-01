@@ -1,4 +1,4 @@
-export type Tvsc =
+export type TVSCode =
   | 'abyss'
   | 'dark_vs'
   | 'light_vs'
@@ -13,7 +13,7 @@ export type Tvsc =
   | 'solarized_dark'
   | 'solarized_light'
 
-export type Tmaterial =
+export type TMaterial =
   | 'Darker-High-Contrast'
   | 'Darker'
   | 'Default-High-Contrast'
@@ -25,10 +25,12 @@ export type Tmaterial =
   | 'Palenight-High-Contrast'
   | 'Palenight'
 
-export type Tnice =
+export type TNice =
   | 'nord'
   | 'min-light'
   | 'min-dark'
   | 'white'
   | 'white-night'
   | 'zeit'
+
+export type TTheme = TVSCode | TMaterial | TNice
