@@ -1,36 +1,58 @@
+import * as fs from 'fs'
 import * as path from 'path'
-import { loadTheme } from './loadTheme';
+import { loadTheme } from './loadTheme'
 
-function loadLocalTheme(filename: string, includeFileName?: string) {
-  const THEME_PATH = path.resolve(__dirname, '../data')
+function mapF (subdir: string) {
+  return (n) => {
+    const p = fs.existsSync(path.resolve(__dirname, `../data/${subdir}/${n}.json`))
+      ? path.resolve(__dirname, `../data/${subdir}/${n}.json`) 
+      : path.resolve(__dirname, `../data/${subdir}/${n}.tmTheme`) 
 
-  const fullPath = path.join(THEME_PATH, filename)
-  const includeFileFullPath = includeFileName
-    ? path.join(THEME_PATH, includeFileName)
-    : null
-
-  return loadTheme(fullPath, includeFileFullPath)
+    return loadTheme(n)
+  }
 }
 
-export const VSCODE_THEMES = {
-  abyss: loadLocalTheme('vscode/Abyss.tmTheme'),
-  dark_vs: loadLocalTheme('vscode/dark_vs.json'),
-  light_vs: loadLocalTheme('vscode/light_vs.json'),
-  hc_black: loadLocalTheme('vscode/hc_black.json'),
-  dark_plus: loadLocalTheme('vscode/dark_plus.json', 'vscode/dark_vs.json'),
-  light_plus: loadLocalTheme('vscode/light_plus.json', 'vscode/light_vs.json'),
-  kimbie_dark: loadLocalTheme('vscode/Kimbie_dark.tmTheme'),
-  monokai: loadLocalTheme('vscode/Monokai.tmTheme'),
-  monokai_dimmed: loadLocalTheme('vscode/dimmed-monokai.tmTheme'),
-  quietlight: loadLocalTheme('vscode/QuietLight.tmTheme'),
-  red: loadLocalTheme('vscode/red.tmTheme'),
-  solarized_dark: loadLocalTheme('vscode/Solarized-dark.tmTheme'),
-  solarized_light: loadLocalTheme('vscode/Solarized-light.tmTheme')
-}
+export const VSCODE_THEMES = [
+  'abyss',
+  'dark_vs',
+  'light_vs',
+  'hc_black',
+  'dark_plus',
+  'light_plus',
+  'kimbie_dark',
+  'monokai',
+  'monokai_dimmed',
+  'quietlight',
+  'red',
+  'solarized_dark',
+  'solarized_light'
+].map(mapF('vscode'))
 
-export const NICE_THEMES = {
-  tomorrow_night_blue: loadLocalTheme('nice/Tomorrow-Night-Blue.tmTheme'),
-  material_palenight: loadLocalTheme('nice/Material-Theme-Palenight.json')
-}
+export const MATERIAL_THEMES = [
+  'Darker-High-Contrast',
+  'Darker',
+  'Default-High-Contrast',
+  'Default',
+  'Icons-Darker',
+  'Icons-Light',
+  'Icons-Ocean',
+  'Icons-Palenight',
+  'Icons',
+  'Lighter-High-Contrast',
+  'Lighter',
+  'Ocean-High-Contrast',
+  'Ocean',
+  'Palenight-High-Contrast',
+  'Palenight'
+].map(mapF('material'))
+
+export const NICE_THEMES = [
+  'nord',
+  'min-light',
+  'min-dark',
+  'white',
+  'white-night',
+  'zeit'
+].map(mapF('nice'))
 
 export { loadTheme } from './loadTheme'

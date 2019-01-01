@@ -1,6 +1,7 @@
 import { IRawTheme } from 'vscode-textmate'
 
 import * as fs from 'fs'
+import * as path from 'path'
 import { parse as plistParse } from './plist'
 
 function loadJSONTheme(themePath: string): IRawTheme {
@@ -14,7 +15,24 @@ function loadPListTheme(themePath: string): IRawTheme {
   return plistParse(fileContents)
 }
 
-export function loadTheme(themePath: string, includedThemePath?: string): IRawTheme {
+function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
+  const bg = getThemeBg(rawTheme)
+  const shikiTheme: IShikiTheme = {
+    ...rawTheme,
+    bg
+  }
+  if ((<any>rawTheme).include) {
+    shikiTheme.include = (<any>rawTheme).include
+  }
+
+  return shikiTheme
+}
+
+/**
+ * 
+ * @param themePath Absolute path to theme.json / theme.tmTheme
+ */
+export function loadTheme(themePath: string): IRawTheme {
   let theme: IRawTheme
 
   if (/\.json$/.test(themePath)) {
@@ -23,10 +41,33 @@ export function loadTheme(themePath: string, includedThemePath?: string): IRawTh
     theme = loadPListTheme(themePath)
   }
 
-  if (includedThemePath) {
+  const shikiTheme = toShikiTheme(theme)
+
+  if (shikiTheme.include) {
+    const includedThemePath = path.resolve(themePath, shikiTheme.include)
     const includedTheme = loadTheme(includedThemePath)
     ;(<any>theme).settings = theme.settings.concat(includedTheme.settings)
   }
 
   return theme
+}
+
+export interface IShikiTheme extends IRawTheme {
+  /**
+   * @description text background color
+   */
+  bg: string;
+
+  /**
+   * @description relative path of included theme
+   */
+  include?: string
+}
+
+function getThemeBg(theme: IRawTheme): string {
+  const globalSetting = theme.settings.find(s => {
+    return !s.name && !s.scope
+  })
+
+  return globalSetting ? globalSetting.settings.background : null
 }
