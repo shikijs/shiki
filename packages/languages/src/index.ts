@@ -12,7 +12,7 @@ export interface ILanguageRegistration {
 
 const languageList: ILanguageRegistration[] = require('../languages.json')
 languageList.forEach(l => {
-  l.path = path.resolve(__dirname, '../', l.path)
+  l.path = path.resolve(__dirname, '../data', l.path)
 })
 
 /**

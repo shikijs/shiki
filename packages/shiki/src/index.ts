@@ -1,4 +1,4 @@
-export { loadTheme, vscode, material, nice  } from 'shiki-themes'
+export { getTheme, loadTheme } from 'shiki-themes'
 export { Shiki } from './highlighter';
 
 export { IThemedToken } from './themedTokenizer';
