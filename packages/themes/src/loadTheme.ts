@@ -47,9 +47,10 @@ export function loadTheme(themePath: string): IShikiTheme {
   const shikiTheme = toShikiTheme(theme)
 
   if (shikiTheme.include) {
-    const includedThemePath = path.resolve(themePath, shikiTheme.include)
+    const includedThemePath = path.resolve(themePath, '..', shikiTheme.include)
     const includedTheme = loadTheme(includedThemePath)
-    ;(<any>shikiTheme).settings = theme.settings.concat(includedTheme.settings)
+    shikiTheme.settings = theme.settings.concat(includedTheme.settings)
+    shikiTheme.bg = getThemeBg(shikiTheme)
   }
 
   return shikiTheme

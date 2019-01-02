@@ -14,16 +14,16 @@ export type TVSCode =
   | 'solarized_light'
 
 export type TMaterial =
-  | 'Darker-High-Contrast'
-  | 'Darker'
-  | 'Default-High-Contrast'
-  | 'Default'
-  | 'Lighter-High-Contrast'
-  | 'Lighter'
-  | 'Ocean-High-Contrast'
-  | 'Ocean'
-  | 'Palenight-High-Contrast'
-  | 'Palenight'
+  | 'Material-Theme-Darker-High-Contrast'
+  | 'Material-Theme-Darker'
+  | 'Material-Theme-Default-High-Contrast'
+  | 'Material-Theme-Default'
+  | 'Material-Theme-Lighter-High-Contrast'
+  | 'Material-Theme-Lighter'
+  | 'Material-Theme-Ocean-High-Contrast'
+  | 'Material-Theme-Ocean'
+  | 'Material-Theme-Palenight-High-Contrast'
+  | 'Material-Theme-Palenight'
 
 export type TNice =
   | 'nord'
