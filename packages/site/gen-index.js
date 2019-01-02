@@ -11,9 +11,10 @@ shiki.getHighlighter({
   })
 
   const result = md.render(fs.readFileSync('index.md', 'utf-8'))
+  const head = '<title>Shiki</title>\n'
   const style = `<link rel="stylesheet" href="style.css">\n`
   const script = `\n<script src="index.js"></script>`
-  fs.writeFileSync('index.html', style + result + script)
+  fs.writeFileSync('index.html', head + style + result + script)
 
   console.log('done')
 })
