@@ -1,13 +1,13 @@
 import { Registry, IRawTheme } from 'vscode-textmate'
 
-import { TLang, commonLangIds, commonLangAliases, ILanguageRegistration, otherLangIds, getLangRegistrations } from 'shiki-languages'
+import { TLang, commonLangIds, commonLangAliases, ILanguageRegistration, getLangRegistrations } from 'shiki-languages'
 
 import { Resolver } from './resolver'
 import { getOnigasm } from './onigLibs'
 import { tokenizeWithTheme, IThemedToken } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getTheme, TTheme } from 'shiki-themes'
+import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
   theme: TTheme
@@ -32,16 +32,15 @@ export async function getHighlighter(options: HighlighterOptions) {
   return await s.getHighlighter()
 }
 
-export class Shiki {
+class Shiki {
   private _resolver: Resolver
   private _registry: Registry
 
-  private _theme: IRawTheme
+  private _theme: IShikiTheme
   private _colorMap: string[]
-  private _themeBg: string
   private _langs: ILanguageRegistration[]
 
-  constructor(theme: IRawTheme, langs: ILanguageRegistration[]) {
+  constructor(theme: IShikiTheme, langs: ILanguageRegistration[]) {
     this._resolver = new Resolver(langs, getOnigasm(), 'onigasm')
     this._registry = new Registry(this._resolver)
 
@@ -49,8 +48,6 @@ export class Shiki {
 
     this._theme = theme
     this._colorMap = this._registry.getColorMap()
-
-    this._themeBg = getThemeBg(this._theme)
 
     this._langs = langs
   }
@@ -75,7 +72,7 @@ export class Shiki {
       codeToHtml: (code, lang) => {
         const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang])
         return renderToHtml(tokens, {
-          bg: this._themeBg
+          bg: this._theme.bg
         })
       }
     }
@@ -91,12 +88,4 @@ export interface Highlighter {
 
   // codeToSVG?(): string
   // codeToImage?(): string
-}
-
-function getThemeBg(theme: IRawTheme): string {
-  const globalSetting = theme.settings.find(s => {
-    return !s.name && !s.scope
-  })
-
-  return globalSetting ? globalSetting.settings.background : null
 }

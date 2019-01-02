@@ -78,6 +78,9 @@ export interface IShikiTheme extends IRawTheme {
 }
 
 function getThemeBg(theme: IRawTheme): string {
+  if ((<any>theme).colors && (<any>theme).colors['editor.background']) {
+    return (<any>theme).colors['editor.background']
+  }
   let settings = theme.settings ? theme.settings : (<any>theme).tokenColors
 
   const globalSetting = settings.find(s => {
