@@ -1,3 +1,4 @@
+import * as path from 'path'
 import { TCommonLang, TCommonLangAlias, TOtherLang, TLang } from './types'
 import { IRawGrammar } from 'vscode-textmate'
 
@@ -92,21 +93,16 @@ export interface ILanguageRegistration {
 }
 
 export function getLangRegistrations(langs: TLang[]): ILanguageRegistration[] {
-  const aliasToId = {}
+  const langRegistrationMap = {}
+
   languages.forEach(l => {
+    langRegistrationMap[l.id] = l
     l.aliases.forEach(a => {
-      aliasToId[a] = l.id
+      langRegistrationMap[a] = l
     })
   })
 
-  return langs.map(l => {
-    if (languages[l]) {
-      return languages[l]
-    } else {
-      const langId = aliasToId[l]
-      return languages[langId]
-    }
-  })
+  return langs.map(l => langRegistrationMap[l])
 }
 
 export const languages: ILanguageRegistration[] = [
@@ -438,3 +434,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: []
   }
 ]
+languages.forEach(l => {
+  l.path = path.resolve(__dirname, l.path)
+})

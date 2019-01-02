@@ -1,4 +1,4 @@
-import { IRawTheme } from 'vscode-textmate'
+import { IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 
 import * as fs from 'fs'
 import * as path from 'path'
@@ -16,13 +16,16 @@ function loadPListTheme(themePath: string): IRawTheme {
 }
 
 function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
-  const bg = getThemeBg(rawTheme)
   const shikiTheme: IShikiTheme = {
     ...rawTheme,
-    bg
+    bg: getThemeBg(rawTheme)
   }
+
   if ((<any>rawTheme).include) {
     shikiTheme.include = (<any>rawTheme).include
+  }
+  if ((<any>rawTheme).tokenColors) {
+    shikiTheme.settings = (<any>rawTheme).tokenColors
   }
 
   return shikiTheme
@@ -54,6 +57,16 @@ export function loadTheme(themePath: string): IShikiTheme {
 
 export interface IShikiTheme extends IRawTheme {
   /**
+   * @description theme name
+   */
+  name?: string;
+
+  /**
+   * tokenColors of the theme file
+   */
+  settings: IRawThemeSetting[];
+
+  /**
    * @description text background color
    */
   bg: string;
@@ -65,7 +78,9 @@ export interface IShikiTheme extends IRawTheme {
 }
 
 function getThemeBg(theme: IRawTheme): string {
-  const globalSetting = theme.settings.find(s => {
+  let settings = theme.settings ? theme.settings : (<any>theme).tokenColors
+
+  const globalSetting = settings.find(s => {
     return !s.name && !s.scope
   })
 

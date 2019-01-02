@@ -48,7 +48,7 @@ function mapF(subdir: string) {
       ? path.resolve(__dirname, `../data/${subdir}/${n}.json`)
       : path.resolve(__dirname, `../data/${subdir}/${n}.tmTheme`)
 
-    return loadTheme(n)
+    return loadTheme(p)
   }
 }
 

@@ -14,7 +14,7 @@ export interface HighlighterOptions {
   langs?: TLang[]
 }
 
-export function getHighlighter(options: HighlighterOptions) {
+export async function getHighlighter(options: HighlighterOptions) {
   const t = getTheme(options.theme)
 
   let langs: TLang[] = [
@@ -29,6 +29,7 @@ export function getHighlighter(options: HighlighterOptions) {
   const langRegistrations = getLangRegistrations(langs)
 
   const s = new Shiki(t, langRegistrations)
+  return await s.getHighlighter()
 }
 
 export class Shiki {
