@@ -17,7 +17,7 @@ shiki.getHighlighter({
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
 //   <!-- Highlighted Code -->
-// </code></pre
+// </code></pre>
 ```
 
 Here's the js that [generated](https://github.com/octref/shiki/blob/master/packages/site/gen-index.js) this HTML page from a [Markdown file](https://github.com/octref/shiki/blob/master/packages/site/index.md):
