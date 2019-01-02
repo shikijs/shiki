@@ -2,7 +2,7 @@
 
 [Shiki](https://github.com/octref/shiki) is a beautiful Syntax Highlighter.
 
-It uses TextMate grammar to tokenize strings, and theme the tokens with VS Code themes.
+It uses TextMate grammar to tokenize strings, and themes the tokens with TextMate / VS Code themes.
 
 It's simple to use:
 
@@ -20,27 +20,37 @@ shiki.getHighlighter({
 // </code></pre
 ```
 
-Here's roughly the js that generated this HTML page:
+Here's the js that [generated](https://github.com/octref/shiki/blob/master/packages/site/gen-index.js) this HTML page from a [Markdown file](https://github.com/octref/shiki/blob/master/packages/site/index.md):
 
 ```js
+const fs = require('fs')
 const markdown = require('markdown-it')
 const shiki = require('shiki')
 
 shiki.getHighlighter({
   theme: 'nord'
 }).then(highlighter => {
-  markdown({
+  const md = markdown({
+    html: true,
     highlight: (code, lang) => highlighter.codeToHtml(code, lang)
   })
+
+  const result = md.render(fs.readFileSync('index.md', 'utf-8'))
+  const style = `<link rel="stylesheet" href="style.css">\n`
+  const script = `\n<script src="index.js"></script>`
+  fs.writeFileSync('index.html', style + result + script)
+
+  console.log('done')
 })
 ```
 
 And here's the referenced CSS:
 
 ```css
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
 body {
   max-width: 800px;
-  margin: 4rem auto 4rem auto;
+  margin: 4rem auto 16rem auto;
   font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, sans-serif;
 }
 pre {
@@ -48,11 +58,32 @@ pre {
   margin-bottom: 3rem;
 }
 pre code {
-  font-family: 'Input Mono', Inconsolata, monospace;
+  font-family: 'Input Mono', 'IBM Plex Mono', monospace;
   font-size: 12px;
 }
 h1, h2 {
   font-weight: 300;
+}
+a {
+  position: relative;
+  text-decoration: none;
+  color: #6f92ba;
+  transition: color .4s;
+}
+a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #6f92ba;
+  transform: scaleX(0);
+  transition: all 0.2s cubic-bezier(.82, 0, .12, 1) 0s;
+}
+a:hover:before {
+  visibility: visible;
+  transform: scaleX(1);
 }
 ```
 
@@ -120,7 +151,7 @@ export default {
 </style>
 ```
 
-Shiki bundles a few good themes. I'm using [Nord](https://github.com/arcticicestudio/nord-visual-studio-code) here, but I [Material Palenight](https://github.com/equinusocio/vsc-material-theme) is a good one, too.
+Shiki bundles a few good themes. I'm using [Nord](https://github.com/arcticicestudio/nord-visual-studio-code) here, but [Material Palenight](https://github.com/equinusocio/vsc-material-theme) look good, too.
 
 <div id="palenight"></div>
 
@@ -128,9 +159,9 @@ You can find all themes in [shiki-themes](https://github.com/octref/shiki/tree/m
 
 ```js
 shiki.getHighlighter({
-  // 'dark_plus' | 'light_plus' for the classic VS Code feel
-  // 'Material-Theme-Ocean' | 'Material-Theme-Palenight' for the materialists
-  // 'min-light' | 'white' for the minimalists
+  // 'dark_plus' | 'light_plus' => for the classic VS Code feel
+  // 'Material-Theme-Ocean' | 'Material-Theme-Palenight' => for the materialists
+  // 'min-light' | 'white' => for the minimalists
   theme: 'nord'
 })
 ```
@@ -139,7 +170,7 @@ Or, load your own theme:
 
 <div id="solarized"></div>
 
-Finally, you can build custom renderers to generate a different HTML structure, SVG or even images (you might be interested in [Polacode](https://github.com/octref/polacode).
+You can also build custom renderers to generate a different HTML structure, SVG or even images:
 
 ```js
 const shiki = require('shiki')
