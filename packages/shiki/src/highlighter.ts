@@ -1,4 +1,4 @@
-import { Registry, IRawTheme } from 'vscode-textmate'
+import { Registry } from 'vscode-textmate'
 
 import { TLang, commonLangIds, commonLangAliases, ILanguageRegistration, getLangRegistrations } from 'shiki-languages'
 
@@ -20,7 +20,7 @@ export async function getHighlighter(options: HighlighterOptions) {
     t = getTheme(options.theme) 
   } else if (options.theme.name) {
     t = options.theme
-  } {
+  } else {
     t = getTheme('nord')
   }
 
