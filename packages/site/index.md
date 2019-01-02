@@ -83,7 +83,7 @@ function App() {
 export default App;
 ```
 
-With proper embedded language support, too, so Shiki works great with Vue files:
+With embedded language support, Shiki works great with Vue files:
 
 ```vue
 <template>
@@ -120,7 +120,7 @@ export default {
 </style>
 ```
 
-Shiki bundles a few good themes. I'm using [Nord](https://github.com/arcticicestudio/nord-visual-studio-code) here, but I like [Material Palenight](https://github.com/equinusocio/vsc-material-theme) too.
+Shiki bundles a few good themes. I'm using [Nord](https://github.com/arcticicestudio/nord-visual-studio-code) here, but I [Material Palenight](https://github.com/equinusocio/vsc-material-theme) is a good one, too.
 
 <div id="palenight"></div>
 
@@ -139,6 +139,19 @@ Or, load your own theme:
 
 <div id="solarized"></div>
 
-Made by [Pine](https://blog.matsu.io/about) when he was working on the revamped [VS Code API doc](https://code.visualstudio.com/api), which is now highlighted with the Light Plus theme.
+Finally, you can build custom renderers to generate a different HTML structure, SVG or even images (you might be interested in [Polacode](https://github.com/octref/polacode).
+
+```js
+const shiki = require('shiki')
+
+shiki.getHighlighter({
+  theme: 'nord'
+}).then(highlighter => {
+  const tokens = highlighter.codeToThemedTokens(`console.log('shiki');`, 'js')
+  const html = shiki.renderToHtml(tokens) // default renderer, replace with yours
+})
+```
+
+Made by [Pine](https://blog.matsu.io/about).
 
 Enjoy!

@@ -5,7 +5,7 @@ export interface HtmlRendererOptions {
   bg?: string
 }
 
-export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions) {
+export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
 
   let html = ''

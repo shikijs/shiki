@@ -65,7 +65,7 @@
 <span style="color: #ECEFF4">}</span>
 
 <span style="color: #81A1C1">export</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">default</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">App</span><span style="color: #81A1C1">;</span></code></pre>
-<p>With proper embedded language support, too, so Shiki works great with Vue files:</p>
+<p>With embedded language support, Shiki works great with Vue files:</p>
 <pre class="shiki" style="background-color: #2e3440"><code><span style="color: #81A1C1">&lt;template&gt;</span>
 <span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">&lt;div</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">id</span><span style="color: #ECEFF4">=</span><span style="color: #ECEFF4">"</span><span style="color: #A3BE8C">app</span><span style="color: #ECEFF4">"</span><span style="color: #81A1C1">&gt;</span>
 <span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">&lt;h1&gt;</span><span style="color: #D8DEE9FF">My Todo App!</span><span style="color: #81A1C1">&lt;/h1&gt;</span>
@@ -98,7 +98,7 @@
 <span style="color: #D8DEE9FF">  </span><span style="color: #ECEFF4">}</span>
 <span style="color: #ECEFF4">}</span>
 <span style="color: #81A1C1">&lt;/style&gt;</span></code></pre>
-<p>Shiki bundles a few good themes. I'm using <a href="https://github.com/arcticicestudio/nord-visual-studio-code">Nord</a> here, but I like <a href="https://github.com/equinusocio/vsc-material-theme">Material Palenight</a> too.</p>
+<p>Shiki bundles a few good themes. I'm using <a href="https://github.com/arcticicestudio/nord-visual-studio-code">Nord</a> here, but I <a href="https://github.com/equinusocio/vsc-material-theme">Material Palenight</a> is a good one, too.</p>
 <div id="palenight"></div>
 <p>You can find all themes in <a href="https://github.com/octref/shiki/tree/master/packages/themes">shiki-themes</a>, and use them like:</p>
 <pre class="shiki" style="background-color: #2e3440"><code><span style="color: #D8DEE9">shiki</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">getHighlighter</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span>
@@ -109,7 +109,16 @@
 <span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span></code></pre>
 <p>Or, load your own theme:</p>
 <div id="solarized"></div>
-<p>Made by <a href="https://blog.matsu.io/about">Pine</a> when he was working on the revamped <a href="https://code.visualstudio.com/api">VS Code API doc</a>, which is now highlighted with the Light Plus theme.</p>
+<p>Finally, you can build custom renderers to generate a different HTML structure, SVG or even images (you might be interested in <a href="https://github.com/octref/polacode">Polacode</a>.</p>
+<pre class="shiki" style="background-color: #2e3440"><code><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">shiki</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #88C0D0">require</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">'</span><span style="color: #A3BE8C">shiki</span><span style="color: #ECEFF4">'</span><span style="color: #D8DEE9FF">)</span>
+
+<span style="color: #D8DEE9">shiki</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">getHighlighter</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span>
+<span style="color: #D8DEE9FF">  </span><span style="color: #88C0D0">theme</span><span style="color: #ECEFF4">:</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">'</span><span style="color: #A3BE8C">nord</span><span style="color: #ECEFF4">'</span>
+<span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">then</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">highlighter</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=&gt;</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">{</span>
+<span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">tokens</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">highlighter</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">codeToThemedTokens</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">`</span><span style="color: #A3BE8C">console.log('shiki');</span><span style="color: #ECEFF4">`</span><span style="color: #ECEFF4">,</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">'</span><span style="color: #A3BE8C">js</span><span style="color: #ECEFF4">'</span><span style="color: #D8DEE9FF">)</span>
+<span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">html</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">shiki</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">renderToHtml</span><span style="color: #D8DEE9FF">(</span><span style="color: #D8DEE9">tokens</span><span style="color: #D8DEE9FF">) </span><span style="color: #4C566A">// default renderer, replace with yours</span>
+<span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span></code></pre>
+<p>Made by <a href="https://blog.matsu.io/about">Pine</a>.</p>
 <p>Enjoy!</p>
 
 <script src="index.js"></script>
