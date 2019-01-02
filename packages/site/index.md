@@ -2,7 +2,7 @@
 
 [Shiki](https://github.com/octref/shiki) is a beautiful Syntax Highlighter.
 
-It uses TextMate grammar to tokenize strings, and themes the tokens with TextMate / VS Code themes.
+It uses TextMate grammar to tokenize strings, and colors the tokens with TextMate / VS Code themes.
 
 It's simple to use:
 
