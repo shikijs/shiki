@@ -1,0 +1,13 @@
+{
+  "name": "shiki-site",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "markdown-it": "^8.4.2",
+    "shiki": "^0.0.6",
+    "@types/node": "^10.12.2"
+  },
+  "scripts": {
+    "gen": "node gen-index.js && node gen-palenight.js && node gen-solarized.js"
+  }
+}
