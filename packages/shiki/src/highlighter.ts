@@ -10,12 +10,19 @@ import { renderToHtml } from './renderer'
 import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
-  theme: TTheme
+  theme: TTheme | IShikiTheme
   langs?: TLang[]
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
-  const t = getTheme(options.theme)
+  let t: IShikiTheme;
+  if (typeof options.theme === 'string') {
+    t = getTheme(options.theme) 
+  } else if (options.theme.name) {
+    t = options.theme
+  } {
+    t = getTheme('nord')
+  }
 
   let langs: TLang[] = [
     ...commonLangIds,
