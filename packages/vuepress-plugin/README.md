@@ -1,5 +1,10 @@
 # vuepress-plugin-shiki
 
+```bash
+yarn global add vuepress@next 
+yarn add -D vuepress-plugin-shiki
+```
+
 `.vuepress/config.js`
 
 ```js
@@ -50,4 +55,3 @@ export type TNice =
 
 export type TTheme = TVSCode | TMaterial | TNice
 ```
-
