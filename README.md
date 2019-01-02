@@ -18,7 +18,7 @@ shiki.getHighlighter({
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
 //   <!-- Highlighted Code -->
-// </code></pre
+// </code></pre>
 ```
 
 - [Themes](./packages/themes/README.md#literal-values)
