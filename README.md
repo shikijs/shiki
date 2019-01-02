@@ -24,6 +24,11 @@ shiki.getHighlighter({
 - [Themes](./packages/themes/README.md#literal-values)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
+## Credits
+
+- Shiki uses [Onigasm](https://github.com/NeekSandhu/onigasm) by [@NeekSandhu](https://github.com/NeekSandhu)
+- A lot of code is based on [vscode-textmate](https://github.com/Microsoft/vscode-textmate)
+
 ## License
 
 MIT © [Pine Wu](https://github.com/octref) 
