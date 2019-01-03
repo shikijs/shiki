@@ -87,6 +87,8 @@ shiki.getHighlighter({
 
 And you get the above code in [Material Palenight](https://github.com/equinusocio/vsc-material-theme). 
 
+<div id="palenight"></div>
+
 <!-- <div id="palenight"></div> -->
 
 You can find all bundled themes in [shiki-themes](https://github.com/octref/shiki/tree/master/packages/themes), and use them like:
@@ -102,7 +104,7 @@ shiki.getHighlighter({
 
 But really, any VS Code theme will do:
 
-<!-- <div id="solarized"></div> -->
+<div id="solarized"></div>
 
 Embedded language like Vue works great, too:
 
