@@ -7,14 +7,19 @@ shiki.getHighlighter({
 }).then(highlighter => {
   const md = markdown({
     html: true,
-    highlight: (code, lang) => highlighter.codeToHtml(code, lang)
+    highlight: (code, lang) => {
+      return highlighter.codeToHtml(code, lang)
+    }
   })
 
-  const result = md.render(fs.readFileSync('index.md', 'utf-8'))
-  const head = '<title>Shiki</title>\n'
-  const style = `<link rel="stylesheet" href="style.css">\n`
-  const script = `\n<script src="index.js"></script>`
-  fs.writeFileSync('index.html', head + style + result + script)
+  const html = md.render(fs.readFileSync('index.md', 'utf-8'))
+  const out = `
+    <title>Shiki</title>
+    <link rel="stylesheet" href="style.css">
+    ${html}
+    <script src="index.js"></script>
+  `
+  fs.writeFileSync('index.html', out)
 
   console.log('done')
 })

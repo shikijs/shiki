@@ -1,20 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  max-width: 800px;
+  max-width: 720px;
   margin: 4rem auto 16rem auto;
-  font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Avenir Next', 'Open Sans', Helvetica, sans-serif;
+  font-size: 18px;
 }
 pre {
+  overflow: auto;
+  overflow-wrap: break-word;
   padding: 2rem;
   margin-bottom: 3rem;
+  white-space: pre-wrap;
 }
 pre code {
+  white-space: pre-wrap;
   font-family: 'Input Mono', 'IBM Plex Mono', monospace;
-  font-size: 12px;
+  font-size: 14px;
 }
 h1, h2 {
-  font-weight: 300;
+  font-weight: normal;
+  font-size: 1.5rem;
 }
+
+@media (max-width: 720px) {
+  body {
+    font-size: 12px;
+    margin: 2rem 0 8rem 0;
+  }
+  pre {
+    margin: 0 0 1rem 0;
+    padding: 1rem .5rem;
+  }
+  pre code {
+    font-size: 11px;
+  }
+  p, h1, h2 {
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
 a {
   position: relative;
   text-decoration: none;

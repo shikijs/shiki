@@ -2,7 +2,7 @@
 
 [Shiki](https://github.com/octref/shiki) is a beautiful Syntax Highlighter.
 
-It uses TextMate grammar to tokenize strings, and colors the tokens with TextMate / VS Code themes.
+It uses TextMate grammar to tokenize strings, and colors the tokens with VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code.
 
 It's simple to use:
 
@@ -20,7 +20,7 @@ shiki.getHighlighter({
 // </code></pre>
 ```
 
-Here's the js that [generated](https://github.com/octref/shiki/blob/master/packages/site/gen-index.js) this HTML page from a [Markdown file](https://github.com/octref/shiki/blob/master/packages/site/index.md):
+Here's me using Shiki and [markdown-it](https://github.com/markdown-it/markdown-it) to [generate](https://github.com/octref/shiki/blob/master/packages/site/gen-index.js) this page:
 
 ```js
 const fs = require('fs')
@@ -32,60 +32,22 @@ shiki.getHighlighter({
 }).then(highlighter => {
   const md = markdown({
     html: true,
-    highlight: (code, lang) => highlighter.codeToHtml(code, lang)
+    highlight: (code, lang) => {
+      return highlighter.codeToHtml(code, lang)
+    }
   })
 
-  const result = md.render(fs.readFileSync('index.md', 'utf-8'))
-  const head = '<title>Shiki</title>\n'
-  const style = `<link rel="stylesheet" href="style.css">\n`
-  const script = `\n<script src="index.js"></script>`
-  fs.writeFileSync('index.html', head + style + result + script)
+  const html = md.render(fs.readFileSync('index.md', 'utf-8'))
+  const out = `
+    <title>Shiki</title>
+    <link rel="stylesheet" href="style.css">
+    ${html}
+    <script src="index.js"></script>
+  `
+  fs.writeFileSync('index.html', out)
 
   console.log('done')
 })
-```
-
-And here's the referenced CSS:
-
-```css
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
-body {
-  max-width: 800px;
-  margin: 4rem auto 16rem auto;
-  font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, sans-serif;
-}
-pre {
-  padding: 2rem;
-  margin-bottom: 3rem;
-}
-pre code {
-  font-family: 'Input Mono', 'IBM Plex Mono', monospace;
-  font-size: 12px;
-}
-h1, h2 {
-  font-weight: 300;
-}
-a {
-  position: relative;
-  text-decoration: none;
-  color: #6f92ba;
-  transition: color .4s;
-}
-a:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: #6f92ba;
-  transform: scaleX(0);
-  transition: all 0.2s cubic-bezier(.82, 0, .12, 1) 0s;
-}
-a:hover:before {
-  visibility: visible;
-  transform: scaleX(1);
-}
 ```
 
 Why Shiki though? Take a look at this [monstrous TextMate grammar](https://github.com/Microsoft/TypeScript-TmLanguage/blob/master/TypeScriptReact.tmLanguage). It's what highlights TypeScript code in VS Code. Insane, I know. But it gets the color right.
@@ -115,7 +77,34 @@ function App() {
 export default App;
 ```
 
-With embedded language support, Shiki works great with Vue files:
+Shiki bundles a few good themes. Just change this line:
+
+```js
+shiki.getHighlighter({
+  theme: 'Material-Theme-Palenight'
+})
+```
+
+And you get the above code in [Material Palenight](https://github.com/equinusocio/vsc-material-theme). 
+
+<!-- <div id="palenight"></div> -->
+
+You can find all bundled themes in [shiki-themes](https://github.com/octref/shiki/tree/master/packages/themes), and use them like:
+
+```js
+shiki.getHighlighter({
+  // 'dark_plus' | 'light_plus' => for the classic VS Code feel
+  // 'Material-Theme-*'         => for the materialists
+  // 'min-light' | 'white'      => for the minimalists
+  theme: 'nord'
+})
+```
+
+But really, any VS Code theme will do:
+
+<!-- <div id="solarized"></div> -->
+
+Embedded language like Vue works great, too:
 
 ```vue
 <template>
@@ -152,25 +141,6 @@ export default {
 </style>
 ```
 
-Shiki bundles a few good themes. I'm using [Nord](https://github.com/arcticicestudio/nord-visual-studio-code) here, but [Material Palenight](https://github.com/equinusocio/vsc-material-theme) look good, too.
-
-<div id="palenight"></div>
-
-You can find all themes in [shiki-themes](https://github.com/octref/shiki/tree/master/packages/themes), and use them like:
-
-```js
-shiki.getHighlighter({
-  // 'dark_plus' | 'light_plus' => for the classic VS Code feel
-  // 'Material-Theme-Ocean' | 'Material-Theme-Palenight' => for the materialists
-  // 'min-light' | 'white' => for the minimalists
-  theme: 'nord'
-})
-```
-
-Or, load your own theme:
-
-<div id="solarized"></div>
-
 You can also build custom renderers to generate a different HTML structure, SVG or even images:
 
 ```js
@@ -180,7 +150,8 @@ shiki.getHighlighter({
   theme: 'nord'
 }).then(highlighter => {
   const tokens = highlighter.codeToThemedTokens(`console.log('shiki');`, 'js')
-  const html = shiki.renderToHtml(tokens) // default renderer, replace with yours
+  // default renderer, replace with yours
+  const html = shiki.renderToHtml(tokens) 
 })
 ```
 
