@@ -7,6 +7,8 @@
 
 ## Usage
 
+`yarn add shiki`
+
 ```js
 const shiki = require('shiki')
 
