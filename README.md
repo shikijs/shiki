@@ -7,7 +7,12 @@
 
 ## Usage
 
-`yarn add shiki`
+#### npm
+
+```sh
+npm i shiki
+# yarn add shiki
+```
 
 ```js
 const shiki = require('shiki')
