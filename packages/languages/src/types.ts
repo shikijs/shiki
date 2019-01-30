@@ -39,6 +39,7 @@ export type TCommonLang =
   | 'stylus'
   | 'vue'
   | 'vue-html'
+  | 'latex'
 
 export type TCommonLangAlias =
   | 'clj'
@@ -57,6 +58,7 @@ export type TCommonLangAlias =
    * Extra grammars
    */
   | 'styl'
+  | 'tex'
 
 export type TOtherLang =
   | 'bat'

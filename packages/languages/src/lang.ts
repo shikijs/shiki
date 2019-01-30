@@ -42,7 +42,8 @@ export const commonLangIds: TCommonLang[] = [
   'stylus',
   'postcss',
   'vue',
-  'vue-html'
+  'vue-html',
+  'latex'
 ]
 
 export const commonLangAliases: TCommonLangAlias[] = [
@@ -61,7 +62,8 @@ export const commonLangAliases: TCommonLangAlias[] = [
   /**
    * Extra grammars
    */
-  'styl'
+  'styl',
+  'tex'
 ]
 
 export const otherLangIds: TOtherLang[] = [
@@ -432,7 +434,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.vue-html',
     path: '../data/extraGrammars/vue-html.json',
     aliases: []
-  }
+  },
+  {
+    id: 'latex',
+    scopeName: 'text.tex.latex',
+    path: '../data/extraGrammars/latex.plist',
+    aliases: []
+  },
 ]
 languages.forEach(l => {
   l.path = path.resolve(__dirname, l.path)
