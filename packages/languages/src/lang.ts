@@ -439,7 +439,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'latex',
     scopeName: 'text.tex.latex',
     path: '../data/extraGrammars/latex.plist',
-    aliases: []
+    aliases: ['tex']
   },
 ]
 languages.forEach(l => {
