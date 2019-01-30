@@ -12,6 +12,9 @@ module.exports = (options, ctx) => {
 
     chainMarkdown(config) {
       config.options.highlight((code, lang) => {
+        if (!lang) {
+          return `<pre><code>${code}</code></pre>`
+        }
         return h.codeToHtml(code, lang)
       })
     }
