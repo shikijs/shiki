@@ -17,12 +17,12 @@
 ```ts
 export type TVSCode =
   | 'abyss'
-  | 'dark_vs'
-  | 'light_vs'
-  | 'hc_black'
   | 'dark_plus'
-  | 'light_plus'
+  | 'dark_vs'
+  | 'hc_black'
   | 'kimbie_dark'
+  | 'light_plus'
+  | 'light_vs'
   | 'monokai'
   | 'monokai_dimmed'
   | 'quietlight'
