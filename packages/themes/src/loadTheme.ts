@@ -3,11 +3,12 @@ import { IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 import * as fs from 'fs'
 import * as path from 'path'
 import { parse as plistParse } from './plist'
+import JSON5 from 'json5';
 
 function loadJSONTheme(themePath: string): IRawTheme {
   const fileContents = fs.readFileSync(themePath, 'utf-8')
 
-  return JSON.parse(fileContents)
+  return JSON5.parse(fileContents)
 }
 function loadPListTheme(themePath: string): IRawTheme {
   const fileContents = fs.readFileSync(themePath, 'utf-8')
@@ -32,7 +33,7 @@ function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
 }
 
 /**
- * 
+ *
  * @param themePath Absolute path to theme.json / theme.tmTheme
  */
 export function loadTheme(themePath: string): IShikiTheme {
