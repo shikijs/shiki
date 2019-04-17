@@ -56,10 +56,11 @@ export type TTheme = TVSCode | TMaterial | TNice
 ## Yours
 
 ```js
-const { Shiki }  = require('shiki')
-const { loadTheme }  = require('shiki-themes')
+const shiki  = require('shiki')
 
-const t = loadTheme('./my-theme.json')
-const h = await new Shiki(t)
-h.codeToHtml(code, lang)
+const t = shiki.loadTheme('./my-theme.json')
+
+shiki.getHighlighter({
+  theme: t
+})
 ```
