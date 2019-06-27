@@ -87,8 +87,8 @@ class Shiki {
 }
 
 export interface Highlighter {
-  codeToThemedTokens(code: string, lang: string): IThemedToken[][]
-  codeToHtml?(code: string, lang: string): string
+  codeToThemedTokens(code: string, lang: TLang): IThemedToken[][]
+  codeToHtml?(code: string, lang: TLang): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

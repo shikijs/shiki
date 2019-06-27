@@ -2,6 +2,7 @@ export type TCommonLang =
   | 'clojure'
   | 'c'
   | 'cpp'
+  | 'csharp'
   | 'css'
   | 'go'
   | 'html'

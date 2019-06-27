@@ -3,7 +3,7 @@ import { IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 import * as fs from 'fs'
 import * as path from 'path'
 import { parse as plistParse } from './plist'
-import JSON5 from 'json5';
+import * as JSON5 from 'json5';
 
 function loadJSONTheme(themePath: string): IRawTheme {
   const fileContents = fs.readFileSync(themePath, 'utf-8')

@@ -6,6 +6,7 @@ export const commonLangIds: TCommonLang[] = [
   'clojure',
   'c',
   'cpp',
+  'csharp',
   'css',
   'go',
   'html',
@@ -137,6 +138,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cpp',
     path: '../data/grammars/c++.json',
     aliases: ['c++']
+  },
+  {
+    id: 'csharp',
+    scopeName: 'source.cs',
+    path: '../data/grammars/csharp.tmLanguage.json',
+    aliases: []
   },
   {
     id: 'css',
