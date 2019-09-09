@@ -1,6 +1,12 @@
 import { Registry } from 'vscode-textmate'
 
-import { TLang, commonLangIds, commonLangAliases, ILanguageRegistration, getLangRegistrations } from 'shiki-languages'
+import {
+  TLang,
+  commonLangIds,
+  commonLangAliases,
+  ILanguageRegistration,
+  getLangRegistrations
+} from 'shiki-languages'
 
 import { Resolver } from './resolver'
 import { getOnigasm } from './onigLibs'
@@ -15,19 +21,16 @@ export interface HighlighterOptions {
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
-  let t: IShikiTheme;
+  let t: IShikiTheme
   if (typeof options.theme === 'string') {
-    t = getTheme(options.theme) 
+    t = getTheme(options.theme)
   } else if (options.theme.name) {
     t = options.theme
   } else {
     t = getTheme('nord')
   }
 
-  let langs: TLang[] = [
-    ...commonLangIds,
-    ...commonLangAliases
-  ]
+  let langs: TLang[] = [...commonLangIds, ...commonLangAliases]
 
   if (options.langs) {
     langs = options.langs
@@ -74,9 +77,23 @@ class Shiki {
 
     return {
       codeToThemedTokens: (code, lang) => {
+        if (isPlaintext(lang)) {
+          throw Error('Cannot tokenize plaintext')
+        }
+        if (!ltog[lang]) {
+          throw Error(`No language registration for ${lang}`)
+        }
         return tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang])
       },
       codeToHtml: (code, lang) => {
+        if (isPlaintext(lang)) {
+          return renderToHtml([[{ content: code }]], {
+            bg: this._theme.bg
+          })
+        }
+        if (!ltog[lang]) {
+          throw Error(`No language registration for ${lang}`)
+        }
         const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang])
         return renderToHtml(tokens, {
           bg: this._theme.bg
@@ -84,6 +101,10 @@ class Shiki {
       }
     }
   }
+}
+
+function isPlaintext(lang) {
+  return ['plaintext', 'txt', 'text'].indexOf(lang) !== -1
 }
 
 export interface Highlighter {
