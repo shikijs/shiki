@@ -29,6 +29,7 @@ shiki.getHighlighter({
 ```
 
 - [Themes](./packages/themes/README.md#literal-values)
+- [Languages](./packages/languages/README.md#literal-values)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
 ## Credits
