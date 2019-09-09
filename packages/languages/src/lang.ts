@@ -63,6 +63,7 @@ export const commonLangAliases: TCommonLangAlias[] = [
   'zsh',
   'ts',
   'yml',
+  'md',
   /**
    * Extra grammars
    */
@@ -279,7 +280,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'markdown',
     scopeName: 'text.html.markdown',
     path: '../data/grammars/markdown.tmLanguage',
-    aliases: []
+    aliases: ['md']
   },
   {
     id: 'objective-c',

@@ -58,6 +58,7 @@ export type TCommonLangAlias =
   | 'zsh'
   | 'ts'
   | 'yml'
+  | 'md'
   /**
    * Extra grammars
    */
