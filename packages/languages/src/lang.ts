@@ -15,6 +15,7 @@ export const commonLangIds: TCommonLang[] = [
   'jsx',
   'javascript',
   'json',
+  'jsonc',
   'less',
   'lua',
   'makefile',
@@ -247,6 +248,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'json',
     scopeName: 'source.json',
     path: '../data/grammars/JSON.tmLanguage',
+    aliases: []
+  },
+  {
+    id: 'jsonc',
+    scopeName: 'source.json.comments',
+    path: '../data/grammars/JSONC.tmLanguage.json',
     aliases: []
   },
   {

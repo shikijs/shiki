@@ -11,6 +11,7 @@ export type TCommonLang =
   | 'jsx'
   | 'javascript'
   | 'json'
+  | 'jsonc'
   | 'less'
   | 'lua'
   | 'makefile'
