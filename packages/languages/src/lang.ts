@@ -87,6 +87,7 @@ export const otherLangIds: TOtherLang[] = [
   'razor',
   'shaderlab',
   'vb',
+  'cmd',
   'xsl'
 ]
 
@@ -386,7 +387,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vb',
     scopeName: 'source.asp.vb.net',
     path: '../data/grammars/ASPVBnet.plist',
-    aliases: []
+    aliases: ['cmd']
   },
   {
     id: 'xml',

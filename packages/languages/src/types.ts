@@ -81,6 +81,7 @@ export type TOtherLang =
   | 'razor'
   | 'shaderlab'
   | 'vb'
+  | 'cmd'
   | 'xsl'
 
 export type TLang = TCommonLang | TCommonLangAlias | TOtherLang
