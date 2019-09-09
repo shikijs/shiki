@@ -54,7 +54,9 @@ export type TCommonLangAlias =
   | 'shell'
   | 'bash'
   | 'sh'
+  | 'zsh'
   | 'ts'
+  | 'yml'
   /**
    * Extra grammars
    */

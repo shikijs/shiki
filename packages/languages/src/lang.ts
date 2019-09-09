@@ -59,7 +59,9 @@ export const commonLangAliases: TCommonLangAlias[] = [
   'shell',
   'bash',
   'sh',
+  'zsh',
   'ts',
+  'yml',
   /**
    * Extra grammars
    */
@@ -347,7 +349,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellscript',
     scopeName: 'source.shell',
     path: '../data/grammars/Shell-Unix-Bash.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh']
+    aliases: ['shell', 'bash', 'sh', 'zsh']
   },
   {
     id: 'sql',
@@ -395,7 +397,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: '../data/grammars/yaml.json',
-    aliases: []
+    aliases: ['yml']
   },
   /**
    * Extra grammars
