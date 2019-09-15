@@ -5,13 +5,6 @@
   Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Demo</a>.
 </p>
 
-## Seen
-
-- https://shiki.matsu.io
-- [VS Code website](https://code.visualstudio.com), such as in the [Programmatic Language Features page](https://code.visualstudio.com/api/language-extensions/programmatic-language-features).
-- [New TypeScript handbook](https://github.com/microsoft/TypeScript-New-Handbook), such as in the [everything page](https://microsoft.github.io/TypeScript-New-Handbook/everything/).
-- [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
-
 ## Usage
 
 #### npm
@@ -40,6 +33,13 @@ shiki
 - [Themes](./packages/themes/README.md#literal-values)
 - [Languages](./packages/languages/README.md#literal-values)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
+
+## Seen
+
+- https://shiki.matsu.io
+- [VS Code website](https://code.visualstudio.com), such as in the [Programmatic Language Features page](https://code.visualstudio.com/api/language-extensions/programmatic-language-features).
+- [New TypeScript handbook](https://github.com/microsoft/TypeScript-New-Handbook), such as in the [everything page](https://microsoft.github.io/TypeScript-New-Handbook/everything/).
+- [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
 
 ## Credits
 
