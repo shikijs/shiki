@@ -5,6 +5,13 @@
   Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Demo</a>.
 </p>
 
+## Seen
+
+- https://shiki.matsu.io
+- [VS Code website](https://code.visualstudio.com), such as in the [Programmatic Language Features page](https://code.visualstudio.com/api/language-extensions/programmatic-language-features).
+- [New TypeScript handbook](https://github.com/microsoft/TypeScript-New-Handbook), such as in the [everything page](https://microsoft.github.io/TypeScript-New-Handbook/everything/).
+- [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
+
 ## Usage
 
 #### npm
@@ -17,11 +24,13 @@ npm i shiki
 ```js
 const shiki = require('shiki')
 
-shiki.getHighlighter({
-  theme: 'nord'
-}).then(highlighter => {
-  console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))
-})
+shiki
+  .getHighlighter({
+    theme: 'nord'
+  })
+  .then(highlighter => {
+    console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))
+  })
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
 //   <!-- Highlighted Code -->
@@ -39,4 +48,4 @@ shiki.getHighlighter({
 
 ## License
 
-MIT © [Pine Wu](https://github.com/octref) 
+MIT © [Pine Wu](https://github.com/octref)
