@@ -45,7 +45,8 @@ export const commonLangIds: TCommonLang[] = [
   'postcss',
   'vue',
   'vue-html',
-  'latex'
+  'latex',
+  'toml'
 ]
 
 export const commonLangAliases: TCommonLangAlias[] = [
@@ -459,6 +460,12 @@ export const languages: ILanguageRegistration[] = [
     path: '../data/extraGrammars/latex.plist',
     aliases: ['tex']
   },
+  {
+    id: 'toml',
+    scopeName: 'source.toml',
+    path: '../data/extraGrammars/TOML.tmLanguage',
+    aliases: []
+  }
 ]
 languages.forEach(l => {
   l.path = path.resolve(__dirname, l.path)
