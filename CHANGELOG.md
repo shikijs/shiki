@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.6 | 2019-09-19
+
+- Add `toml` language from https://github.com/bungcip/better-toml. [#20](https://github.com/octref/shiki/issues/20).
+
 ### 0.1.5 | 2019-09-09
 
 - Begin to keep a changelog. [#7](https://github.com/octref/shiki/issues/7).
