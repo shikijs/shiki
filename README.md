@@ -7,8 +7,6 @@
 
 ## Usage
 
-#### npm
-
 ```sh
 npm i shiki
 # yarn add shiki
