@@ -22,9 +22,11 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
       html += `\n`
     } else {
       l.forEach(token => {
-        html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
-          token.content
-        )}</span>`
+        const styleValue = token.preserveFontStyle
+          ? `color: ${token.color || options.fg}; ${token.fontStyle}`
+          : `color: ${token.color || options.fg}`
+
+        html += `<span style="${styleValue}">${escapeHtml(token.content)}</span>`
       })
       html += `\n`
     }

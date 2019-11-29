@@ -17,7 +17,8 @@ const shiki = require('shiki')
 
 shiki
   .getHighlighter({
-    theme: 'nord'
+    theme: 'nord',
+    preserveFontStyle: false //Optional. Defaults to true
   })
   .then(highlighter => {
     console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))

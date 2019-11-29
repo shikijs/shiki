@@ -12,6 +12,7 @@ import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 export interface HighlighterOptions {
   theme: TTheme | IShikiTheme
   langs?: ILanguageRegistration[]
+  preserveFontStyle?: boolean
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
@@ -30,7 +31,14 @@ export async function getHighlighter(options: HighlighterOptions) {
     languages = [...bundledLanguages, ...options.langs]
   }
 
-  const s = new Shiki(t, languages)
+  let preserveFontStyle: boolean
+  if (typeof options.preserveFontStyle  === 'boolean') {
+    preserveFontStyle = options.preserveFontStyle  ? true : false
+  } else {
+    preserveFontStyle = true
+  }
+
+  const s = new Shiki(t, languages, preserveFontStyle)
   return await s.getHighlighter()
 }
 
@@ -45,20 +53,21 @@ interface ThemedTokenizerOptions {
 class Shiki {
   private _resolver: Resolver
   private _registry: Registry
-
+  private _preserveFontStyle: boolean
   private _theme: IShikiTheme
   private _colorMap: string[]
+  private _styleMap: object
   private _langs: ILanguageRegistration[]
 
-  constructor(theme: IShikiTheme, langs: ILanguageRegistration[]) {
+  constructor(theme: IShikiTheme, langs: ILanguageRegistration[], preserveFontStyle: boolean) {
     this._resolver = new Resolver(langs, getOnigasm(), 'onigasm')
     this._registry = new Registry(this._resolver)
-
+    this._preserveFontStyle = preserveFontStyle
     this._registry.setTheme(theme)
 
     this._theme = theme
     this._colorMap = this._registry.getColorMap()
-
+    this._styleMap = {1: `font-style: italic;`, 2: `font-weight: bold`, 4: `text-decoration: underline`}
     this._langs = langs
   }
 
@@ -85,7 +94,7 @@ class Shiki {
         if (!ltog[lang]) {
           throw Error(`No language registration for ${lang}`)
         }
-        return tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], options)
+        return tokenizeWithTheme(this._theme, this._preserveFontStyle, this._colorMap, this._styleMap, code, ltog[lang], options)
       },
       codeToHtml: (code, lang) => {
         if (isPlaintext(lang)) {
@@ -97,9 +106,10 @@ class Shiki {
         if (!ltog[lang]) {
           throw Error(`No language registration for ${lang}`)
         }
-        const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], {
+        const tokens = tokenizeWithTheme(this._theme, this._preserveFontStyle, this._colorMap, this._styleMap, code, ltog[lang], {
           includeExplanation: false
         })
+
         return renderToHtml(tokens, {
           bg: this._theme.bg
         })

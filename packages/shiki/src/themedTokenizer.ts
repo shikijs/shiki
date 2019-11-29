@@ -85,11 +85,15 @@ export interface IThemedToken {
    * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
    */
   explanation?: IThemedTokenExplanation[]
+
+  preserveFontStyle?: boolean
 }
 
 export function tokenizeWithTheme(
   theme: IRawTheme,
+  preserveFontStyle: boolean,
   colorMap: string[],
+  styleMap: object,
   fileContents: string,
   grammar: IGrammar,
   options: { includeExplanation?: boolean }
@@ -124,7 +128,11 @@ export function tokenizeWithTheme(
       let metadata = result.tokens[2 * j + 1]
       let foreground = StackElementMetadata.getForeground(metadata)
       let foregroundColor = colorMap[foreground]
-
+      let font = StackElementMetadata.getFontStyle(metadata);
+      let fontStyle = null;
+      if (preserveFontStyle) {
+        fontStyle = font > 0 ? styleMap[font.toString()] : null
+      } 
       let explanation: IThemedTokenExplanation[] = []
       if (options.includeExplanation) {
         let offset = 0
@@ -148,8 +156,10 @@ export function tokenizeWithTheme(
       actual.push({
         content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
-        explanation: explanation
+        explanation: explanation,
+        fontStyle
       })
+
     }
     final.push(actual)
     actual = []
