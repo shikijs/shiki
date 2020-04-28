@@ -33,7 +33,6 @@ function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
 }
 
 /**
- *
  * @param themePath Absolute path to theme.json / theme.tmTheme
  */
 export function loadTheme(themePath: string): IShikiTheme {
@@ -50,8 +49,14 @@ export function loadTheme(themePath: string): IShikiTheme {
   if (shikiTheme.include) {
     const includedThemePath = path.resolve(themePath, '..', shikiTheme.include)
     const includedTheme = loadTheme(includedThemePath)
-    shikiTheme.settings = theme.settings.concat(includedTheme.settings)
-    shikiTheme.bg = getThemeBg(shikiTheme)
+
+    if (includedTheme.settings) {
+      shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
+    }
+
+    if (includedTheme.bg && !shikiTheme.bg) {
+      shikiTheme.bg = includedTheme.bg
+    }
   }
 
   return shikiTheme
