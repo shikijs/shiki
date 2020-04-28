@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.7 | 2020-04-28
+
+- Update to latest Dark+/Light+ theme from VS Code.
+
 ### 0.1.6 | 2019-09-19
 
 - Add `toml` language from https://github.com/bungcip/better-toml. [#20](https://github.com/octref/shiki/issues/20).
