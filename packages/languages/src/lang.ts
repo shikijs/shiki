@@ -46,7 +46,8 @@ export const commonLangIds: TCommonLang[] = [
   'vue',
   'vue-html',
   'latex',
-  'toml'
+  'toml',
+  'clarity'
 ]
 
 export const commonLangAliases: TCommonLangAlias[] = [
@@ -69,7 +70,8 @@ export const commonLangAliases: TCommonLangAlias[] = [
    * Extra grammars
    */
   'styl',
-  'tex'
+  'tex',
+  'clar'
 ]
 
 export const otherLangIds: TOtherLang[] = [
@@ -465,6 +467,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.toml',
     path: '../data/extraGrammars/TOML.tmLanguage',
     aliases: []
+  },
+  {
+    id: 'clarity',
+    scopeName: 'source.clar',
+    path: '../data/extraGrammars/clarity.tmLanguage.json',
+    aliases: ['clar']
   }
 ]
 languages.forEach(l => {
