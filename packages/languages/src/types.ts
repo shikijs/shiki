@@ -43,6 +43,7 @@ export type TCommonLang =
   | 'vue-html'
   | 'latex'
   | 'toml'
+  | 'arc'
 
 export type TCommonLangAlias =
   | 'clj'

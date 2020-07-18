@@ -46,7 +46,8 @@ export const commonLangIds: TCommonLang[] = [
   'vue',
   'vue-html',
   'latex',
-  'toml'
+  'toml',
+  'arc'
 ]
 
 export const commonLangAliases: TCommonLangAlias[] = [
@@ -464,6 +465,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'toml',
     scopeName: 'source.toml',
     path: '../data/extraGrammars/TOML.tmLanguage',
+    aliases: []
+  },
+  {
+    id: 'arc',
+    scopeName: 'source.arc',
+    path: '../data/extraGrammars/arc.tmLanguage.json',
     aliases: []
   }
 ]
