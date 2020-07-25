@@ -17,7 +17,7 @@ import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
   theme: TTheme | IShikiTheme
-  langs?: TLang[]
+  langs?: (TLang | ILanguageRegistration)[]
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
@@ -30,7 +30,7 @@ export async function getHighlighter(options: HighlighterOptions) {
     t = getTheme('nord')
   }
 
-  let langs: TLang[] = [...commonLangIds, ...commonLangAliases]
+  let langs: (TLang | ILanguageRegistration)[] = [...commonLangIds, ...commonLangAliases]
 
   if (options.langs) {
     langs = options.langs

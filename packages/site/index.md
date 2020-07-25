@@ -157,6 +157,28 @@ shiki.getHighlighter({
 })
 ```
 
+If you have a `*.tmlanguage` for a particular language, then you can use that to highlight whatever languages you need:
+
+```js
+const shiki = require('shiki')
+
+shiki.getHighlighter({
+  theme: "nord",
+  langs: [{
+    id: 'svelte',
+    scopeName: 'source.svelte',
+    path: './svelte.tmLanguage.json',
+    aliases: []
+  },
+  ...shiki.commonLangIds,
+  ...shiki.commonLangAliases
+  ]
+})
+```
+
+<div id="svelte"></div>
+
+
 Made by [Pine](https://blog.matsu.io/about).
 
 Enjoy!

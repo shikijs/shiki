@@ -12,5 +12,12 @@ async function go() {
   document
     .getElementById('solarized')
     .innerHTML = solarizedHtml
+
+  const svelteHtml = await (await fetch(
+    '/svelte'
+  )).text()
+  document
+    .getElementById('svelte')
+    .innerHTML = svelteHtml
 }
 go()
