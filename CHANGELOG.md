@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.2.0
+
+- 🙌 Update Java grammar. [#36](https://github.com/octref/shiki/issues/36) and [#37](https://github.com/octref/shiki/issues/37). Thanks to contribution from [@0xflotus](https://github.com/0xflotus).
+
 ### 0.1.7 | 2020-04-28
 
 - Update to latest Dark+/Light+ theme from VS Code.
