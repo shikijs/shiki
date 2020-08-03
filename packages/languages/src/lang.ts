@@ -102,11 +102,10 @@ export interface ILanguageRegistration {
 }
 
 export function getLangRegistrations(langs: (TLang | ILanguageRegistration)[]): ILanguageRegistration[] {
+  const langByName = langs.filter(l => typeof l === "string") as string[]
   const langReferences = langs.filter(l => typeof l !== "string")
 
   const langRegistrationMap = {}
-  const langByName = langs.filter(l => typeof l === "string") as string[]
-
   languages.forEach(l => {
     langRegistrationMap[l.id] = l
     l.aliases.forEach(a => {
@@ -115,7 +114,7 @@ export function getLangRegistrations(langs: (TLang | ILanguageRegistration)[]): 
   })
 
   const shikiLanguages = langByName.map(l => langRegistrationMap[l])
-  return [...langReferences, ...shikiLanguages]
+  return [...shikiLanguages, ...langReferences]
 }
 
 export const languages: ILanguageRegistration[] = [

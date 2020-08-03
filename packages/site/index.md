@@ -157,7 +157,7 @@ shiki.getHighlighter({
 })
 ```
 
-If you have a `*.tmlanguage` for a particular language, then you can use that to highlight whatever languages you need:
+Supports using a custom `*.tmlanguage` giving you syntax highlighting for most programming langauges:
 
 ```js
 const shiki = require('shiki')
@@ -165,9 +165,9 @@ const shiki = require('shiki')
 shiki.getHighlighter({
   theme: "nord",
   langs: [{
-    id: 'svelte',
-    scopeName: 'source.svelte',
-    path: './svelte.tmLanguage.json',
+    id: 'rockstar',
+    scopeName: 'source.rockstar',
+    path: './rockstar.tmLanguage.json',
     aliases: []
   },
   ...shiki.commonLangIds,
@@ -176,7 +176,7 @@ shiki.getHighlighter({
 })
 ```
 
-<div id="svelte"></div>
+<div id="rockstar"></div>
 
 
 Made by [Pine](https://blog.matsu.io/about).

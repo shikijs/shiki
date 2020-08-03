@@ -7,12 +7,11 @@ const shiki = require('shiki')
 shiki.getHighlighter({
   theme: "nord",
   langs: [{
-    id: 'svelte',
-    scopeName: 'source.svelte',
-    path: './svelte.tmLanguage.json',
+    id: 'rockstar',
+    scopeName: 'source.rockstar',
+    path: './rockstar.tmLanguage.json',
     aliases: []
-  },
-  ...shiki.commonLangIds
+  }
 ]
 }).then(highlighter => {
   const md = markdown({
@@ -21,8 +20,8 @@ shiki.getHighlighter({
     }
   })
 
-  const result = md.render(fs.readFileSync('svelte.md', 'utf-8'))
-  fs.writeFileSync('svelte.html', result)
+  const result = md.render(fs.readFileSync('rockstar.md', 'utf-8'))
+  fs.writeFileSync('rockstar.html', result)
 
   console.log('done')
 })

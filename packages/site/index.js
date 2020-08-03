@@ -13,11 +13,11 @@ async function go() {
     .getElementById('solarized')
     .innerHTML = solarizedHtml
 
-  const svelteHtml = await (await fetch(
-    '/svelte'
+  const rockstarHtml = await (await fetch(
+    '/rockstar'
   )).text()
   document
-    .getElementById('svelte')
-    .innerHTML = svelteHtml
+    .getElementById('rockstar')
+    .innerHTML = rockstarHtml
 }
 go()
