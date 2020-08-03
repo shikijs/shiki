@@ -70,14 +70,14 @@ class Shiki {
     )
 
     return {
-      codeToThemedTokens: (code, lang) => {
+      codeToThemedTokens: (code, lang, options = { includeExplanation: true }) => {
         if (isPlaintext(lang)) {
           throw Error('Cannot tokenize plaintext')
         }
         if (!ltog[lang]) {
           throw Error(`No language registration for ${lang}`)
         }
-        return tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang])
+        return tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], options)
       },
       codeToHtml: (code, lang) => {
         if (isPlaintext(lang)) {
@@ -89,7 +89,9 @@ class Shiki {
         if (!ltog[lang]) {
           throw Error(`No language registration for ${lang}`)
         }
-        const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang])
+        const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], {
+          includeExplanation: false
+        })
         return renderToHtml(tokens, {
           bg: this._theme.bg
         })
@@ -108,7 +110,11 @@ function isPlaintext(lang) {
  */
 type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface Highlighter {
-  codeToThemedTokens(code: string, lang: StringLiteralUnion<Lang>): IThemedToken[][]
+  codeToThemedTokens(
+    code: string,
+    lang: StringLiteralUnion<Lang>,
+    options?: { includeExplanation?: boolean }
+  ): IThemedToken[][]
   codeToHtml?(code: string, lang: StringLiteralUnion<Lang>): string
 
   // codeToRawHtml?(code: string): string

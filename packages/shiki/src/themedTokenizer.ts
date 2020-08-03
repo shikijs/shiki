@@ -26,7 +26,8 @@ export function tokenizeWithTheme(
   theme: IRawTheme,
   colorMap: string[],
   fileContents: string,
-  grammar: IGrammar
+  grammar: IGrammar,
+  options: { includeExplanation?: boolean }
 ): IThemedToken[][] {
   let lines = fileContents.split(/\r\n|\r|\n/)
 
@@ -60,22 +61,25 @@ export function tokenizeWithTheme(
       let foregroundColor = colorMap[foreground]
 
       let explanation: IThemedTokenExplanation[] = []
-      let offset = 0
-      while (startIndex + offset < nextStartIndex) {
-        let tokenWithScopes = tokensWithScopes[tokensWithScopesIndex]
+      if (options.includeExplanation) {
+        let offset = 0
+        while (startIndex + offset < nextStartIndex) {
+          let tokenWithScopes = tokensWithScopes[tokensWithScopesIndex]
 
-        let tokenWithScopesText = line.substring(
-          tokenWithScopes.startIndex,
-          tokenWithScopes.endIndex
-        )
-        offset += tokenWithScopesText.length
-        explanation.push({
-          content: tokenWithScopesText,
-          scopes: explainThemeScopes(theme, tokenWithScopes.scopes)
-        })
+          let tokenWithScopesText = line.substring(
+            tokenWithScopes.startIndex,
+            tokenWithScopes.endIndex
+          )
+          offset += tokenWithScopesText.length
+          explanation.push({
+            content: tokenWithScopesText,
+            scopes: explainThemeScopes(theme, tokenWithScopes.scopes)
+          })
 
-        tokensWithScopesIndex++
+          tokensWithScopesIndex++
+        }
       }
+
       actual.push({
         content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
