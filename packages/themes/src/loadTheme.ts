@@ -3,7 +3,7 @@ import { IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 import * as fs from 'fs'
 import * as path from 'path'
 import { parse as plistParse } from './plist'
-import * as JSON5 from 'json5';
+import * as JSON5 from 'json5'
 
 function loadJSONTheme(themePath: string): IRawTheme {
   const fileContents = fs.readFileSync(themePath, 'utf-8')
@@ -66,17 +66,17 @@ export interface IShikiTheme extends IRawTheme {
   /**
    * @description theme name
    */
-  name?: string;
+  name?: string
 
   /**
    * tokenColors of the theme file
    */
-  settings: IRawThemeSetting[];
+  settings: IRawThemeSetting[]
 
   /**
    * @description text background color
    */
-  bg: string;
+  bg: string
 
   /**
    * @description relative path of included theme

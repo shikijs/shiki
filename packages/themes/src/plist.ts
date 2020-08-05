@@ -147,7 +147,7 @@ function _parse(content: string, filename: string | null, locationKeyName: strin
   }
 
   const dictState = {
-    enterDict: function() {
+    enterDict: function () {
       if (curKey === null) {
         return fail('missing <key>')
       }
@@ -163,7 +163,7 @@ function _parse(content: string, filename: string | null, locationKeyName: strin
       curKey = null
       pushState(State.DICT_STATE, newDict)
     },
-    enterArray: function() {
+    enterArray: function () {
       if (curKey === null) {
         return fail('missing <key>')
       }
@@ -175,7 +175,7 @@ function _parse(content: string, filename: string | null, locationKeyName: strin
   }
 
   const arrState = {
-    enterDict: function() {
+    enterDict: function () {
       let newDict: any = {}
       if (locationKeyName !== null) {
         newDict[locationKeyName] = {
@@ -187,7 +187,7 @@ function _parse(content: string, filename: string | null, locationKeyName: strin
       cur.push(newDict)
       pushState(State.DICT_STATE, newDict)
     },
-    enterArray: function() {
+    enterArray: function () {
       let newArr: any[] = []
       cur.push(newArr)
       pushState(State.ARR_STATE, newArr)
@@ -349,13 +349,13 @@ function _parse(content: string, filename: string | null, locationKeyName: strin
 
   function escapeVal(str: string): string {
     return str
-      .replace(/&#([0-9]+);/g, function(_: string, m0: string) {
+      .replace(/&#([0-9]+);/g, function (_: string, m0: string) {
         return (<any>String).fromCodePoint(parseInt(m0, 10))
       })
-      .replace(/&#x([0-9a-f]+);/g, function(_: string, m0: string) {
+      .replace(/&#x([0-9a-f]+);/g, function (_: string, m0: string) {
         return (<any>String).fromCodePoint(parseInt(m0, 16))
       })
-      .replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, function(_: string) {
+      .replace(/&amp;|&lt;|&gt;|&quot;|&apos;/g, function (_: string) {
         switch (_) {
           case '&amp;':
             return '&'

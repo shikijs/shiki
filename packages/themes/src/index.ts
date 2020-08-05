@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { loadTheme, IShikiTheme } from './loadTheme'
-import { TTheme } from './types';
+import { TTheme } from './types'
 export * from './types'
 
 const vscThemes = [
@@ -30,17 +30,10 @@ export const materialThemes = [
   'Material-Theme-Ocean-High-Contrast',
   'Material-Theme-Ocean',
   'Material-Theme-Palenight-High-Contrast',
-  'Material-Theme-Palenight',
+  'Material-Theme-Palenight'
 ]
 
-export const niceThemes = [
-  'nord',
-  'min-light',
-  'min-dark',
-  'white',
-  'white-night',
-  'zeit',
-]
+export const niceThemes = ['nord', 'min-light', 'min-dark', 'white', 'white-night', 'zeit']
 
 function mapF(subdir: string) {
   return n => {
