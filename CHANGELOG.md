@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.3.0
+
+- Fix HTML escaping. [#26](https://github.com/octref/shiki/issues/26) and [#28](https://github.com/octref/shiki/pull/28). Thanks to contribution from [@jackens](https://github.com/jackens).
+
 ### 0.2.0
 
 - 🙌 Update Java grammar. [#36](https://github.com/octref/shiki/issues/36) and [#37](https://github.com/octref/shiki/issues/37). Thanks to contribution from [@0xflotus](https://github.com/0xflotus).

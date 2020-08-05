@@ -1,4 +1,4 @@
-import { IThemedToken } from "./themedTokenizer";
+import { IThemedToken } from './themedTokenizer'
 
 export interface HtmlRendererOptions {
   langId?: string
@@ -33,5 +33,10 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
 }
 
 function escapeHtml(html: string) {
-  return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  return html
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/&/g, '&amp;')
+    .replace(/'/g, '&apos;')
 }
