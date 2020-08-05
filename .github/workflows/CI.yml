@@ -24,3 +24,6 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn workspace shiki-site gen
+      - run: yarn test
+        env:
+          CI: true
