@@ -9,11 +9,25 @@
     "watch": "tsc -b -w packages",
     "fmt": "prettier --parser=typescript --write packages/**/*.ts"
   },
+  "gitHooks": {
+    "pre-commit": "ls-lint && lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts": [
+      "prettier --parser=typescript --write"
+    ]
+  },
   "devDependencies": {
+    "@ls-lint/ls-lint": "^1.9.2",
     "@types/node": "^14.0.27",
     "lerna": "^3.22.1",
+    "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "yorkie": "^2.0.0"
   },
   "dependencies": {},
   "license": "MIT"
