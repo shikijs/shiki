@@ -167,7 +167,7 @@ shiki.getHighlighter({
   langs: [{
     id: 'rockstar',
     scopeName: 'source.rockstar',
-    path: './rockstar.tmLanguage.json',
+    path: './rockstar.tmLanguage.json', // or `plist`
     aliases: []
   },
   ...shiki.commonLangIds,
