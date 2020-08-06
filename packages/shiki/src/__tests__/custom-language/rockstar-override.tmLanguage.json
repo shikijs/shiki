@@ -1,0 +1,211 @@
+{
+  "_source":"https://github.com/ra100/vscode-rockstar-language",
+  "_license": "https://github.com/ra100/vscode-rockstar-language/blob/master/LICENSE",
+  "scopeName": "source.rockstar",
+	"name": "Rockstar",
+	"fileTypes": [
+		"rock",
+		"rockstar"
+	],
+	"patterns": [{
+		"include": "#proper-variable"
+	}, {
+		"include": "#loop"
+	}, {
+		"include": "#conditional"
+	}, {
+		"include": "#method"
+	}, {
+		"include": "#comment"
+	}, {
+		"include": "#string"
+	}, {
+		"include": "#io"
+	}, {
+		"include": "#pronoun"
+	}, {
+		"include": "#number"
+	}, {
+		"include": "#boolean"
+	}, {
+		"include": "#common"
+	}, {
+		"include": "#equal"
+	}, {
+		"include": "#comparator"
+	}, {
+		"include": "#arithmetic"
+	}, {
+		"include": "#string-assignment"
+	}, {
+		"include": "#null"
+	}],
+	"repository": {
+		"comment": {
+			"patterns": [{
+				"begin": "\\(",
+				"beginCaptures": {
+					"0": {
+						"name": "comment.block.rockstar"
+					}
+				},
+				"end": "\\)",
+				"endCaptures": {
+					"0": {
+						"name": "comment.block.rockstar"
+					}
+				},
+				"name": "comment.block.rockstar"
+			}]
+		},
+		"boolean": {
+			"patterns": [{
+				"match": "(\\b(is|was|were) )?\\b(true|false|right|yes|ok|wrong|no($| +)|lies)\\b",
+				"name": "keyword.operator.rockstar",
+				"captures": {
+					"2": {
+						"name": "constant.language.rockstar"
+					},
+					"3": {
+						"name": "constant.language.rockstar"
+					}
+				}
+			}]
+		},
+		"null": {
+			"patterns": [{
+				"match": "(\\b(is|was|were) )?\\b(nothing|nowhere|nobody|null)\\b",
+				"captures": {
+					"2": {
+						"name": "keyword.operator.rockstar"
+					},
+					"3": {
+						"name": "constant.language.rockstar"
+					}
+				}
+			}]
+		},
+		"pronoun": {
+			"patterns": [{
+				"match": "\\b(it|he|she|him|her|they|them|ze|hir|zie|zir|xe|xem|ve|ver)\\b",
+				"name": "storage.type.pronoun.rockstar"
+			}]
+		},
+		"number": {
+			"patterns": [{
+				"match": "\\b(is|was|were) (?!and|as|nothing|nowhere|nobody|null|true|false|right|yes|ok|wrong|no|lies)(([a-z]+($|\\s))+)",
+				"captures": {
+					"1": {
+						"name": "keyword.operator.rockstar"
+					},
+					"2": {
+						"name": "constant.numeric.rockstar"
+					}
+				}
+			}]
+		},
+		"string": {
+			"patterns": [{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "constant.numeric.rockstar"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "constant.numeric.rockstar"
+						}
+					},
+					"name": "constant.numeric.rockstar"
+				},
+				{
+					"match": "'\\w*'",
+					"name": "constant.numeric.rockstar"
+				},
+				{
+					"match": ",",
+					"scope": "constant.numeric.rockstar"
+				}
+			]
+		},
+		"equal": {
+			"patterns": [{
+				"match": "\\b('s|is( not($| +))?|ain't|was|were)\\b",
+				"name": "keyword.operator.rockstar"
+			}]
+		},
+		"comparator": {
+			"patterns": [{
+				"match": "(higher|greater|bigger|stronger|lower|less|smaller|weaker) than|as (high|great|big|strong|low|little|small|weak) as",
+				"name": "keyword.operator.rockstar"
+			}]
+		},
+		"loop": {
+			"patterns": [{
+				"match": "(^| )(While|Until|Continue|Break it down|break|Take it to the top)($| )",
+				"name": "keyword.control.rockstar"
+			}]
+		},
+		"conditional": {
+			"patterns": [{
+				"match": "(^| )(If|if|Else|else)",
+				"name": "keyword.control.conditional.rockstar"
+			}]
+		},
+		"method": {
+			"patterns": [{
+				"match": "\\b(taking|takes|and|Give back)\\b",
+				"name": "keyword.other.rockstar"
+			}]
+		},
+		"io": {
+			"patterns": [{
+				"match": "(^| )(Say|Shout|Whisper|Scream|Listen( to)?)",
+				"name": "support.function.builtin.rockstar"
+			}]
+		},
+		"assignment": {
+			"patterns": [{
+				"match": "((^Put\\b)|\\b(into)\\b)",
+				"name": "keyword.operator.rockstar"
+			}]
+		},
+		"arithmetic": {
+			"patterns": [{
+				"match": "(Knock | down|Build | up|plus|without|minus|with|times|of|over|by)",
+				"name": "keyword.operator.arithmetic.rockstar"
+			}]
+		},
+		"common": {
+			"patterns": [{
+				"match": "(?<!is )(?<!was )(?<!were )\\b([Aa]|[Aa]n|[Tt]he|[Mm]y|[Yy]our) ([a-z]+)",
+				"captures": {
+					"0": {
+						"name": "storage.type.common.rockstar"
+					},
+					"1": {
+						"name": "variable.name.common.rockstar"
+					}
+				}
+			}]
+		},
+		"proper-variable": {
+			"patterns": [{
+				"match": "\\b(?:(\\b(says) ([A-Za-z\\s]+))|(?!(?:Say|Shout|Whisper|Scream|Listen(?: to)?|Put|If|Until|Build|Take it to the top|Knock|While|Continue|Break it down|My|Your|An?|The)\\s)\\b([A-Z][a-zA-Z]*(?:\\s+[A-Z][a-zA-Z]*)*)(?!\\S))",
+				"captures": {
+					"2": {
+						"name": "keyword.operator.rockstar"
+					},
+					"3": {
+						"name": "constant.numeric.rockstar"
+					},
+					"4": {
+						"name": "storage.type.pronoun.rockstar"
+					}
+				}
+			}]
+		}
+	}
+}

@@ -157,6 +157,27 @@ shiki.getHighlighter({
 })
 ```
 
+Can't find your language? As long as you have a [TextMate grammar](https://macromates.com/manual/en/language_grammars), Shiki can highlight it:
+
+```js
+const shiki = require('shiki')
+
+shiki.getHighlighter({
+  theme: "nord",
+  langs: [{
+    id: 'rockstar',
+    scopeName: 'source.rockstar',
+    path: './rockstar.tmLanguage.json', // or `plist`
+    aliases: []
+  },
+  ...shiki.commonLangIds,
+  ...shiki.commonLangAliases
+  ]
+})
+```
+
+<div id="rockstar"></div>
+
 Made by [Pine](https://blog.matsu.io/about).
 
 Enjoy!

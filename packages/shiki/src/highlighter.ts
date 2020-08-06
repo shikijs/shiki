@@ -17,7 +17,7 @@ import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
   theme: TTheme | IShikiTheme
-  langs?: TLang[]
+  langs?: (TLang | ILanguageRegistration)[]
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
@@ -30,7 +30,7 @@ export async function getHighlighter(options: HighlighterOptions) {
     t = getTheme('nord')
   }
 
-  let langs: TLang[] = [...commonLangIds, ...commonLangAliases]
+  let langs: (TLang | ILanguageRegistration)[] = [...commonLangIds, ...commonLangAliases]
 
   if (options.langs) {
     langs = options.langs
@@ -107,9 +107,14 @@ function isPlaintext(lang) {
   return ['plaintext', 'txt', 'text'].indexOf(lang) !== -1
 }
 
+/**
+ * Adapted from https://github.com/microsoft/TypeScript/issues/29729
+ * Since `string | 'foo'` doesn't offer auto completion
+ */
+type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface Highlighter {
-  codeToThemedTokens(code: string, lang: TLang): IThemedToken[][]
-  codeToHtml?(code: string, lang: TLang): string
+  codeToThemedTokens(code: string, lang: StringLiteralUnion<TLang>): IThemedToken[][]
+  codeToHtml?(code: string, lang: StringLiteralUnion<TLang>): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

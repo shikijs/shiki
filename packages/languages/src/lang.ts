@@ -101,9 +101,11 @@ export interface ILanguageRegistration {
   grammar?: IRawGrammar
 }
 
-export function getLangRegistrations(langs: TLang[]): ILanguageRegistration[] {
-  const langRegistrationMap = {}
+export function getLangRegistrations(langs: (TLang | ILanguageRegistration)[]): ILanguageRegistration[] {
+  const langByName = langs.filter(l => typeof l === "string") as string[]
+  const langReferences = langs.filter(l => typeof l !== "string")
 
+  const langRegistrationMap = {}
   languages.forEach(l => {
     langRegistrationMap[l.id] = l
     l.aliases.forEach(a => {
@@ -111,7 +113,8 @@ export function getLangRegistrations(langs: TLang[]): ILanguageRegistration[] {
     })
   })
 
-  return langs.map(l => langRegistrationMap[l])
+  const shikiLanguages = langByName.map(l => langRegistrationMap[l])
+  return [...shikiLanguages, ...langReferences]
 }
 
 export const languages: ILanguageRegistration[] = [
