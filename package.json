@@ -13,7 +13,7 @@
     "pre-commit": "ls-lint && lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,json,yml}": [
       "prettier --write"
     ],
     "*.ts": [
