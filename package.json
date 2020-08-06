@@ -7,7 +7,8 @@
     "build": "tsc -b packages",
     "watch": "tsc -b -w packages",
     "fmt": "prettier --parser=typescript --write packages/**/*.ts",
-    "test": "jest --colors"
+    "test": "jest --colors",
+    "gen": "yarn workspace shiki-site gen"
   },
   "gitHooks": {
     "pre-commit": "ls-lint && lint-staged"

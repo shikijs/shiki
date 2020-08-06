@@ -176,6 +176,8 @@ shiki.getHighlighter({
 })
 ```
 
+Here’s Fizzbuzz in [Rockstar](https://codewithrockstar.com).
+
 <div id="rockstar"></div>
 
 Made by [Pine](https://blog.matsu.io/about).
