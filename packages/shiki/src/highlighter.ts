@@ -5,7 +5,8 @@ import {
   commonLangIds,
   commonLangAliases,
   ILanguageRegistration,
-  getLangRegistrations
+  getLangRegistrations,
+  StringLiteralUnion
 } from 'shiki-languages'
 
 import { Resolver } from './resolver'
@@ -108,8 +109,8 @@ function isPlaintext(lang) {
 }
 
 export interface Highlighter {
-  codeToThemedTokens(code: string, lang: TLang): IThemedToken[][]
-  codeToHtml?(code: string, lang: TLang): string
+  codeToThemedTokens(code: string, lang: StringLiteralUnion<TLang>): IThemedToken[][]
+  codeToHtml?(code: string, lang: StringLiteralUnion<TLang>): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
