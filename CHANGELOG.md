@@ -1,12 +1,9 @@
 # Changelog
 
-### 0.3.0
+### 0.2.0
 
 - Fix HTML escaping. [#26](https://github.com/octref/shiki/issues/26) and [#28](https://github.com/octref/shiki/pull/28). Thanks to contribution from [@jackens](https://github.com/jackens).
 - 🙌 Allow loading custom `tmLanguage`. [#10](https://github.com/octref/shiki/issues/10) and [#49](https://github.com/octref/shiki/pull/49). Thanks to contribution from [Orta Therox](https://github.com/orta) and [@pngwn](https://github.com/pngwn).
-
-### 0.2.0
-
 - 🙌 Update Java grammar. [#36](https://github.com/octref/shiki/issues/36) and [#37](https://github.com/octref/shiki/issues/37). Thanks to contribution from [@0xflotus](https://github.com/0xflotus).
 
 ### 0.1.7 | 2020-04-28
