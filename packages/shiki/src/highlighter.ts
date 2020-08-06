@@ -5,8 +5,7 @@ import {
   commonLangIds,
   commonLangAliases,
   ILanguageRegistration,
-  getLangRegistrations,
-  StringLiteralUnion
+  getLangRegistrations
 } from 'shiki-languages'
 
 import { Resolver } from './resolver'
@@ -108,6 +107,11 @@ function isPlaintext(lang) {
   return ['plaintext', 'txt', 'text'].indexOf(lang) !== -1
 }
 
+/**
+ * Adapted from https://github.com/microsoft/TypeScript/issues/29729
+ * Since `string | 'foo'` doesn't offer auto completion
+ */
+type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface Highlighter {
   codeToThemedTokens(code: string, lang: StringLiteralUnion<TLang>): IThemedToken[][]
   codeToHtml?(code: string, lang: StringLiteralUnion<TLang>): string
