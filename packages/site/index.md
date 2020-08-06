@@ -157,7 +157,7 @@ shiki.getHighlighter({
 })
 ```
 
-Supports using a custom `*.tmlanguage` giving you syntax highlighting for most programming langauges:
+Can't find your language? As long as you have a [TextMate grammar](https://macromates.com/manual/en/language_grammars), Shiki can highlight it:
 
 ```js
 const shiki = require('shiki')
@@ -177,7 +177,6 @@ shiki.getHighlighter({
 ```
 
 <div id="rockstar"></div>
-
 
 Made by [Pine](https://blog.matsu.io/about).
 
