@@ -38,6 +38,7 @@ shiki
 - [VS Code website](https://code.visualstudio.com), such as in the [Programmatic Language Features page](https://code.visualstudio.com/api/language-extensions/programmatic-language-features).
 - [New TypeScript handbook](https://github.com/microsoft/TypeScript-New-Handbook), such as in the [everything page](https://microsoft.github.io/TypeScript-New-Handbook/everything/).
 - [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
+- [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
 ## Credits
 
