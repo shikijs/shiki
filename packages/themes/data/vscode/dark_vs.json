@@ -4,6 +4,12 @@
 	"include": "./dark_defaults.json",
 	"tokenColors": [
 		{
+			"scope": "source",
+			"settings": {
+				"foreground": "#FFFFFF",
+			}
+		},
+		{
 			"scope": [
 				"meta.embedded",
 				"source.groovy.embedded"
