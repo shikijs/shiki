@@ -1,0 +1,27 @@
+name: Deploy Daily Builds
+
+# For testing
+# on: push
+
+# For production
+on:
+  schedule:
+    - cron: '0 4 * * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: 'yarn install'
+      - run: 'yarn test'
+      - run: 'yarn build'
+
+      - uses: orta/monorepo-deploy-nightly@master
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
