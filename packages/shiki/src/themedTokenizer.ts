@@ -52,8 +52,7 @@ export function tokenizeWithTheme(
     for (let j = 0; j < tokensLength; j++) {
       let startIndex = result.tokens[2 * j]
       let nextStartIndex = j + 1 < tokensLength ? result.tokens[2 * j + 2] : line.length
-      let tokenText = line.substring(startIndex, nextStartIndex)
-      if (tokenText === '') {
+      if (startIndex === nextStartIndex) {
         continue
       }
       let metadata = result.tokens[2 * j + 1]
@@ -61,15 +60,15 @@ export function tokenizeWithTheme(
       let foregroundColor = colorMap[foreground]
 
       let explanation: IThemedTokenExplanation[] = []
-      let tmpTokenText = tokenText
-      while (tmpTokenText.length > 0) {
+      let offset = 0
+      while (startIndex + offset < nextStartIndex) {
         let tokenWithScopes = tokensWithScopes[tokensWithScopesIndex]
 
         let tokenWithScopesText = line.substring(
           tokenWithScopes.startIndex,
           tokenWithScopes.endIndex
         )
-        tmpTokenText = tmpTokenText.substring(tokenWithScopesText.length)
+        offset += tokenWithScopesText.length
         explanation.push({
           content: tokenWithScopesText,
           scopes: explainThemeScopes(theme, tokenWithScopes.scopes)
@@ -78,7 +77,7 @@ export function tokenizeWithTheme(
         tokensWithScopesIndex++
       }
       actual.push({
-        content: tokenText,
+        content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
         explanation: explanation
       })
