@@ -32,11 +32,14 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   return html
 }
 
+const htmlEscapes = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}
+
 function escapeHtml(html: string) {
-  return html
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/&/g, '&amp;')
-    .replace(/'/g, '&apos;')
+  return html.replace(/[&<>"']/g, (chr) => htmlEscapes[chr])
 }
