@@ -6,7 +6,7 @@ test('Can convert single line code to SVG', async () => {
     theme: 'nord'
   })
   const svgRenderer = await getSVGRenderer({
-    fontFamily: 'IBM Plex Mono'
+    fontFamily: 'Courier'
   })
 
   const tokens = highlighter.codeToThemedTokens(`console.log('shiki');`, 'js')
@@ -19,7 +19,7 @@ test('Can convert multi line code to SVG', async () => {
     theme: 'nord'
   })
   const svgRenderer = await getSVGRenderer({
-    fontFamily: 'IBM Plex Mono'
+    fontFamily: 'Courier'
   })
 
   const tokens = highlighter.codeToThemedTokens(`function go() {\n  console.log('shiki');\n}`, 'js')
