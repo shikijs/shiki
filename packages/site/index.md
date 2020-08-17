@@ -157,6 +157,14 @@ shiki.getHighlighter({
 })
 ```
 
+Here's me generating SVG with `shiki-renderer-svg`:
+
+<div id="svg"></div>
+
+And then dropping into Figma and Affinity Designer:
+
+![Dropping into Figma and Affinity Designer](./assets/svg-figma-af.jpg)
+
 Can't find your language? As long as you have a [TextMate grammar](https://macromates.com/manual/en/language_grammars), Shiki can highlight it:
 
 ```js

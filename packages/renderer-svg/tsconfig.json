@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.options.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "lib": ["dom"]
+  },
+  "references": [{ "path": "../shiki" }]
+}

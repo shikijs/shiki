@@ -30,6 +30,7 @@ shiki
 
 - [Themes](./packages/themes/README.md#literal-values)
 - [Languages](./packages/languages/README.md#literal-values)
+- [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
 ## Seen

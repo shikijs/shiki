@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can convert multi line code to SVG 1`] = `
+"<svg viewBox=\\"0 0 297.59971618652344 150.52800598144532\\" width=\\"297.59971618652344\\" height=\\"150.52800598144532\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"297.59971618652344\\" height=\\"150.52800598144532\\" rx=\\"4\\"></rect><g id=\\"tokens\\" transform=\\"translate(38.39996337890625, 43.008001708984374)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"21.504000854492187\\">
+<tspan x=\\"0\\" style=\\"fill: #81A1C1\\">function</tspan><tspan x=\\"76.7999267578125\\" style=\\"fill: #D8DEE9FF\\"> </tspan><tspan x=\\"86.39991760253906\\" style=\\"fill: #88C0D0\\">go</tspan><tspan x=\\"105.59989929199219\\" style=\\"fill: #ECEFF4\\">()</tspan><tspan x=\\"124.79988098144531\\" style=\\"fill: #D8DEE9FF\\"> </tspan><tspan x=\\"134.39987182617188\\" style=\\"fill: #ECEFF4\\">{</tspan>
+</text>
+<text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"43.008001708984374\\">
+<tspan x=\\"0\\" style=\\"fill: #D8DEE9FF\\">  </tspan><tspan x=\\"19.199981689453125\\" style=\\"fill: #8FBCBB\\">console</tspan><tspan x=\\"86.39991760253906\\" style=\\"fill: #ECEFF4\\">.</tspan><tspan x=\\"95.99990844726562\\" style=\\"fill: #88C0D0\\">log</tspan><tspan x=\\"124.79988098144531\\" style=\\"fill: #D8DEE9FF\\">(</tspan><tspan x=\\"134.39987182617188\\" style=\\"fill: #ECEFF4\\">&#39;</tspan><tspan x=\\"143.99986267089844\\" style=\\"fill: #A3BE8C\\">shiki</tspan><tspan x=\\"191.99981689453125\\" style=\\"fill: #ECEFF4\\">&#39;</tspan><tspan x=\\"201.5998077392578\\" style=\\"fill: #D8DEE9FF\\">)</tspan><tspan x=\\"211.19979858398438\\" style=\\"fill: #81A1C1\\">;</tspan>
+</text>
+<text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"64.51200256347656\\">
+<tspan x=\\"0\\" style=\\"fill: #ECEFF4\\">}</tspan>
+</text></g>
+</svg>
+"
+`;
+
+exports[`Can convert single line code to SVG 1`] = `
+"<svg viewBox=\\"0 0 278.3997344970703 107.52000427246094\\" width=\\"278.3997344970703\\" height=\\"107.52000427246094\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"278.3997344970703\\" height=\\"107.52000427246094\\" rx=\\"4\\"></rect><g id=\\"tokens\\" transform=\\"translate(38.39996337890625, 43.008001708984374)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"21.504000854492187\\">
+<tspan x=\\"0\\" style=\\"fill: #8FBCBB\\">console</tspan><tspan x=\\"67.19993591308594\\" style=\\"fill: #ECEFF4\\">.</tspan><tspan x=\\"76.7999267578125\\" style=\\"fill: #88C0D0\\">log</tspan><tspan x=\\"105.59989929199219\\" style=\\"fill: #D8DEE9FF\\">(</tspan><tspan x=\\"115.19989013671875\\" style=\\"fill: #ECEFF4\\">&#39;</tspan><tspan x=\\"124.79988098144531\\" style=\\"fill: #A3BE8C\\">shiki</tspan><tspan x=\\"172.79983520507812\\" style=\\"fill: #ECEFF4\\">&#39;</tspan><tspan x=\\"182.3998260498047\\" style=\\"fill: #D8DEE9FF\\">)</tspan><tspan x=\\"191.99981689453125\\" style=\\"fill: #81A1C1\\">;</tspan>
+</text></g>
+</svg>
+"
+`;

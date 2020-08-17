@@ -5,9 +5,10 @@
   "devDependencies": {
     "@types/node": "^10.12.2",
     "markdown-it": "^8.4.2",
-    "shiki": "^0.1.7"
+    "shiki": "^0.1.7",
+    "shiki-renderer-svg": "^0.1.7"
   },
   "scripts": {
-    "gen": "node gen-index.js && node gen-palenight.js && node gen-solarized.js && node gen-custom-theme.js"
+    "gen": "node gen-index.js && node gen-palenight.js && node gen-solarized.js && node gen-custom-theme.js && node gen-svg.js"
   }
 }
