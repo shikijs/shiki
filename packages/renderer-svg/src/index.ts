@@ -89,6 +89,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
           let indent = 0
 
           l.forEach(token => {
+            const tokenAttributes = tokenColorToSVGAttributes(token.color)
             /**
              * SVG rendering in Sketch/Affinity Photos: `<tspan>` with leading whitespace will render without whitespace
              * Need to manually offset `x`
@@ -98,19 +99,19 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
 
               // Whitespace + content, such as ` foo`
               // Render as `<tspan> </tspan><tspan>foo</tspan>`, where the second `tspan` is offset by whitespace * width
-              svg += `<tspan x="${indent * measurement.width}" style="fill: ${
-                token.color
-              }">${escapeHtml(token.content.slice(0, firstNonWhitespaceIndex))}</tspan>`
+              svg += `<tspan x="${indent * measurement.width}" ${tokenAttributes}>${escapeHtml(
+                token.content.slice(0, firstNonWhitespaceIndex)
+              )}</tspan>`
 
               svg += `<tspan x="${
                 (indent + firstNonWhitespaceIndex) * measurement.width
-              }" style="fill: ${token.color}">${escapeHtml(
+              }" ${tokenAttributes}>${escapeHtml(
                 token.content.slice(firstNonWhitespaceIndex)
               )}</tspan>`
             } else {
-              svg += `<tspan x="${indent * measurement.width}" style="fill: ${
-                token.color
-              }">${escapeHtml(token.content)}</tspan>`
+              svg += `<tspan x="${indent * measurement.width}" ${tokenAttributes}>${escapeHtml(
+                token.content
+              )}</tspan>`
             }
 
             indent += token.content.length
@@ -138,4 +139,16 @@ const htmlEscapes = {
 
 function escapeHtml(html: string) {
   return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
+}
+
+function tokenColorToSVGAttributes(color: string) {
+  if (color.slice(1).length <= 6) {
+    return `fill="${color}"`
+  } else if (color.slice(1).length === 8) {
+    const opacity = parseInt(color.slice(1 + 6), 16) / 255
+    const roughRoundedOpacity = Math.floor(opacity * 100) / 100
+    return `fill="${color.slice(0, 1 + 6)}" opacity="${roughRoundedOpacity}"`
+  }
+
+  return `fill="#fff"`
 }
