@@ -157,13 +157,17 @@ shiki.getHighlighter({
 })
 ```
 
-Here's me generating SVG with `shiki-renderer-svg`:
+Below is a SVG, containing code that generated itself:
 
 <div id="svg"></div>
 
-And then dropping into Figma and Affinity Designer:
+You can easily drop the SVG into Figma and Affinity Designer:
 
 ![Dropping into Figma and Affinity Designer](./assets/svg-figma-af.jpg)
+
+And use the full arsenal of vector editing tools to enhance your code presentation:
+
+![Editing In Figma](./assets/figma-editing.png)
 
 Can't find your language? As long as you have a [TextMate grammar](https://macromates.com/manual/en/language_grammars), Shiki can highlight it:
 
