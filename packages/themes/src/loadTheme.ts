@@ -19,7 +19,7 @@ function loadPListTheme(themePath: string): IRawTheme {
 function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
   const shikiTheme: IShikiTheme = {
     ...rawTheme,
-    bg: getThemeBg(rawTheme)
+    ...getThemeDefaultColors(rawTheme)
   }
 
   if ((<any>rawTheme).include) {
@@ -74,7 +74,12 @@ export interface IShikiTheme extends IRawTheme {
   settings: IRawThemeSetting[]
 
   /**
-   * @description text background color
+   * @description text default foreground color
+   */
+  fg: string
+
+  /**
+   * @description text default background color
    */
   bg: string
 
@@ -84,15 +89,46 @@ export interface IShikiTheme extends IRawTheme {
   include?: string
 }
 
-function getThemeBg(theme: IRawTheme): string {
-  if ((<any>theme).colors && (<any>theme).colors['editor.background']) {
-    return (<any>theme).colors['editor.background']
-  }
-  let settings = theme.settings ? theme.settings : (<any>theme).tokenColors
+/**
+ * https://github.com/microsoft/vscode/blob/f7f05dee53fb33fe023db2e06e30a89d3094488f/src/vs/platform/theme/common/colorRegistry.ts#L258-L268
+ */
+const editorBackground = { light: '#fffffe', dark: '#1E1E1E' }
+const editorForeground = { light: '#333333', dark: '#BBBBBB' }
 
+function getThemeDefaultColors(theme: IRawTheme): { fg: string; bg: string } {
+  let fg = editorForeground.dark
+  let bg = editorBackground.dark
+
+  if (theme.type === 'light') {
+    fg = editorForeground.light
+    bg = editorBackground.light
+  }
+
+  /**
+   * Theme might contain a global `tokenColor` without `name` or `scope`
+   * Used as default value for foreground/background
+   */
+  let settings = theme.settings ? theme.settings : (<any>theme).tokenColors
   const globalSetting = settings.find(s => {
     return !s.name && !s.scope
   })
 
-  return globalSetting ? globalSetting.settings.background : null
+  if (globalSetting?.settings?.foreground) {
+    fg = globalSetting.settings.foreground
+  }
+  if (globalSetting?.settings?.background) {
+    bg = globalSetting.settings.background
+  }
+
+  if ((<any>theme).colors && (<any>theme).colors['editor.foreground']) {
+    fg = (<any>theme).colors['editor.foreground']
+  }
+  if ((<any>theme).colors && (<any>theme).colors['editor.background']) {
+    bg = (<any>theme).colors['editor.background']
+  }
+
+  return {
+    fg,
+    bg
+  }
 }

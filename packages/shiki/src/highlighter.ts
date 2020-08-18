@@ -88,6 +88,7 @@ class Shiki {
       codeToHtml: (code, lang) => {
         if (isPlaintext(lang)) {
           return renderToHtml([[{ content: code }]], {
+            fg: this._theme.fg,
             bg: this._theme.bg
           })
         }

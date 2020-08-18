@@ -2,6 +2,7 @@ import { IThemedToken } from './themedTokenizer'
 
 export interface HtmlRendererOptions {
   langId?: string
+  fg?: string
   bg?: string
 }
 
@@ -16,12 +17,14 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   }
   html += `<code>`
 
-  lines.forEach((l: any[]) => {
+  lines.forEach((l: IThemedToken[]) => {
     if (l.length === 0) {
       html += `\n`
     } else {
       l.forEach(token => {
-        html += `<span style="color: ${token.color}">${escapeHtml(token.content)}</span>`
+        html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
+          token.content
+        )}</span>`
       })
       html += `\n`
     }
@@ -41,5 +44,5 @@ const htmlEscapes = {
 }
 
 function escapeHtml(html: string) {
-  return html.replace(/[&<>"']/g, (chr) => htmlEscapes[chr])
+  return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
 }
