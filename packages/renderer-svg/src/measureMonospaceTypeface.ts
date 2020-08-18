@@ -4,7 +4,7 @@ export async function measureMonospaceTypeface(
   fontName: string,
   fontSize: number
 ): Promise<{ width: number; height: number }> {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   const measurement = await page.evaluate(measureFont, fontName, fontSize)
   await browser.close()
