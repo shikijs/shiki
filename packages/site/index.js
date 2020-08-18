@@ -1,23 +1,19 @@
 async function go() {
-  const palenightHtml = await (await fetch(
-    '/palenight'
-  )).text()
-  document
-    .getElementById('palenight')
-    .innerHTML = palenightHtml
+  const urlAndIds = [
+    ['/palenight', 'palenight'],
+    ['/solarized', 'solarized'],
+    ['/rockstar', 'rockstar'],
+    ['/svg.svg', 'svg']
+  ]
 
-  const solarizedHtml = await (await fetch(
-    '/solarized'
-  )).text()
-  document
-    .getElementById('solarized')
-    .innerHTML = solarizedHtml
-
-  const rockstarHtml = await (await fetch(
-    '/rockstar'
-  )).text()
-  document
-    .getElementById('rockstar')
-    .innerHTML = rockstarHtml
+  for (let [url, id] of urlAndIds) {
+    await getHtmlAndReplace(url, id)
+  }
 }
+
+async function getHtmlAndReplace(url, elementId) {
+  const targetHtml = await (await fetch(url)).text()
+  document.getElementById(elementId).innerHTML = targetHtml
+}
+
 go()

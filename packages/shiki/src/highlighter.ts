@@ -119,6 +119,5 @@ export interface Highlighter {
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
 
-  // codeToSVG?(): string
   // codeToImage?(): string
 }

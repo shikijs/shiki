@@ -15,17 +15,24 @@ pre {
   overflow: auto;
   overflow-wrap: break-word;
   padding: 2rem;
+  margin-top: 1rem;
   margin-bottom: 3rem;
   white-space: pre-wrap;
 }
 pre code {
   white-space: pre-wrap;
-  font-family: 'Input Mono', 'IBM Plex Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 14px;
 }
 h1, h2 {
   font-weight: normal;
   font-size: 1.5rem;
+}
+p img {
+  max-width: 100%;
+}
+p code {
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 @media (max-width: 720px) {
@@ -69,4 +76,10 @@ a:before {
 a:hover:before {
   visibility: visible;
   transform: scaleX(1);
+}
+
+#svg {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 }
