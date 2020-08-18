@@ -41,7 +41,7 @@ p code {
     margin: 2rem 0 8rem 0;
   }
   pre {
-    margin: 0 0 1rem 0;
+    margin: 1.5rem 0 2.5rem 0;
     padding: 1rem .5rem;
   }
   pre code {
@@ -85,4 +85,13 @@ a:hover:before {
 }
 #svg svg {
   max-width: 100%;
+}
+@media (max-width: 720px) {
+  #svg {
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  #svg svg {
+    height: auto;
+  }
 }
