@@ -93,22 +93,20 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
              * SVG rendering in Sketch/Affinity Photos: `<tspan>` with leading whitespace will render without whitespace
              * Need to manually offset `x`
              */
-            if (token.content.startsWith(' ')) {
+            if (token.content.startsWith(' ') && token.content.search(/\S/) !== -1) {
               const firstNonWhitespaceIndex = token.content.search(/\S/)
-              // Skip rendering `<tspan>` only containing whitespaces for Figma compatibility
-              if (firstNonWhitespaceIndex !== -1) {
-                svg += `<tspan x="${
-                  (indent + firstNonWhitespaceIndex) * measurement.width
-                }" style="fill: ${token.color}">${escapeHtml(
-                  token.content.slice(firstNonWhitespaceIndex)
-                )}</tspan>`
-              }
-              // Render `<tspan>` with empty whitespaces for Figma compatibility
-              else {
-                svg += `<tspan x="${indent * measurement.width}" style="fill: ${
-                  token.color
-                }">${escapeHtml(token.content)}</tspan>`
-              }
+
+              // Whitespace + content, such as ` foo`
+              // Render as `<tspan> </tspan><tspan>foo</tspan>`, where the second `tspan` is offset by whitespace * width
+              svg += `<tspan x="${indent * measurement.width}" style="fill: ${
+                token.color
+              }">${escapeHtml(token.content.slice(0, firstNonWhitespaceIndex))}</tspan>`
+
+              svg += `<tspan x="${
+                (indent + firstNonWhitespaceIndex) * measurement.width
+              }" style="fill: ${token.color}">${escapeHtml(
+                token.content.slice(firstNonWhitespaceIndex)
+              )}</tspan>`
             } else {
               svg += `<tspan x="${indent * measurement.width}" style="fill: ${
                 token.color
