@@ -35,7 +35,7 @@ export class Resolver implements RegistryOptions {
     })
   }
 
-  public getOnigLib(): Promise<IOnigLib> {
+  public get onigLib(): Promise<IOnigLib> {
     return this._onigLibPromise
   }
 
