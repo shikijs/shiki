@@ -95,7 +95,7 @@ export interface IShikiTheme extends IRawTheme {
 const editorBackground = { light: '#fffffe', dark: '#1E1E1E' }
 const editorForeground = { light: '#333333', dark: '#BBBBBB' }
 
-function getThemeDefaultColors(theme: IRawTheme): { fg: string; bg: string } {
+function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: string; bg: string } {
   let fg = editorForeground.dark
   let bg = editorBackground.dark
 
