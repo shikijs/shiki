@@ -1,9 +1,3 @@
-// This theme's colors are based on the original Monokai:
-//   #1e1f1c (tab well, borders)
-//   #272822 (editor background)
-//   #414339 (selection)
-//   #75715e (focus)
-//   #f8f8f2 (editor foreground)
 {
   "type": "dark",
   "colors": {
@@ -36,7 +30,7 @@
     "editorGroup.dropBackground": "#41433980",
     "tab.inactiveBackground": "#34352f",
     "tab.border": "#1e1f1c",
-    "tab.inactiveForeground": "#ccccc7", // needs to be bright so it's readable when another editor group is focused
+    "tab.inactiveForeground": "#ccccc7",
     "widget.shadow": "#000000",
     "progressBar.background": "#75715E",
     "badge.background": "#75715E",
@@ -64,13 +58,13 @@
     "focusBorder": "#75715E",
     "editorWidget.background": "#1e1f1c",
     "debugToolBar.background": "#1e1f1c",
-    "diffEditor.insertedTextBackground": "#4b661680", // middle of #272822 and #a6e22e
-    "diffEditor.removedTextBackground": "#90274A70", // middle of #272822 and #f92672
-    "inputValidation.errorBackground": "#90274A", // middle of #272822 and #f92672
+    "diffEditor.insertedTextBackground": "#4b661680",
+    "diffEditor.removedTextBackground": "#90274A70",
+    "inputValidation.errorBackground": "#90274A",
     "inputValidation.errorBorder": "#f92672",
-    "inputValidation.warningBackground": "#848528", // middle of #272822 and #e2e22e
+    "inputValidation.warningBackground": "#848528",
     "inputValidation.warningBorder": "#e2e22e",
-    "inputValidation.infoBackground": "#546190", // middle of #272822 and #819aff
+    "inputValidation.infoBackground": "#546190",
     "inputValidation.infoBorder": "#819aff",
     "editorHoverWidget.background": "#414339",
     "editorHoverWidget.border": "#75715E",
@@ -85,7 +79,7 @@
     "peekViewResult.matchHighlightBackground": "#75715E",
     "peekViewEditor.matchHighlightBackground": "#75715E",
     "terminal.ansiBlack": "#333333",
-    "terminal.ansiRed": "#C4265E", // the bright color with ~75% transparent on the background
+    "terminal.ansiRed": "#C4265E",
     "terminal.ansiGreen": "#86B42B",
     "terminal.ansiYellow": "#B3B42B",
     "terminal.ansiBlue": "#6A7EC8",
@@ -95,8 +89,8 @@
     "terminal.ansiBrightBlack": "#666666",
     "terminal.ansiBrightRed": "#f92672",
     "terminal.ansiBrightGreen": "#A6E22E",
-    "terminal.ansiBrightYellow": "#e2e22e", // hue shifted #A6E22E
-    "terminal.ansiBrightBlue": "#819aff", // hue shifted #AE81FF
+    "terminal.ansiBrightYellow": "#e2e22e",
+    "terminal.ansiBrightBlue": "#819aff",
     "terminal.ansiBrightMagenta": "#AE81FF",
     "terminal.ansiBrightCyan": "#66D9EF",
     "terminal.ansiBrightWhite": "#f8f8f2"
@@ -467,5 +461,6 @@
       }
     }
   ],
-  "semanticHighlighting": true
+  "semanticHighlighting": true,
+  "name": "monokai"
 }

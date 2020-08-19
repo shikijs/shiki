@@ -1,4 +1,3 @@
-//@ts-check
 /**
  * Update themes from upstream sources
  */
@@ -8,7 +7,7 @@ const fs = require('fs')
 const url = require('url')
 const path = require('path')
 
-const THEME_FOLDER_PATH = path.join(__dirname, '..', 'packages/themes/data/github')
+const THEME_FOLDER_PATH = path.join(__dirname, '..', 'tmp/themes')
 
 function convertURL(ghURL) {
   const oldPath = url.parse(ghURL).path
