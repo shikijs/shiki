@@ -3,12 +3,7 @@ name: 'Update Themes'
 on:
   schedule:
     - cron: '* * * * 1'
-  workflow_dispatch:
-
-defaults:
-  run:
-    # for globs
-    shell: zsh
+  # workflow_dispatch:
 
 jobs:
   update-themes:
