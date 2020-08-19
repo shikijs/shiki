@@ -60,4 +60,4 @@ jobs:
           rm -r packages/themes/data/github-vscode-theme
           cp -r tmp/github-vscode-theme/themes packages/themes/data/github-vscode-theme
 
-      - run: tree packages/themes/data
+      - run: ls -R packages/themes/data
