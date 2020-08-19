@@ -161,7 +161,7 @@ Below is a SVG, containing code that generated itself:
 
 <div id="svg"></div>
 
-You can easily drop the SVG into Figma and Affinity Designer:
+You can easily drop the SVG into Figma, Affinity Designer or Adobe Illustrator:
 
 ![Dropping into Figma and Affinity Designer](./assets/svg-figma-af.jpg)
 
