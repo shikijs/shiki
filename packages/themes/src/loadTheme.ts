@@ -109,9 +109,11 @@ function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: stri
    * Used as default value for foreground/background
    */
   let settings = theme.settings ? theme.settings : (<any>theme).tokenColors
-  const globalSetting = settings.find(s => {
-    return !s.name && !s.scope
-  })
+  const globalSetting = settings
+    ? settings.find(s => {
+        return !s.name && !s.scope
+      })
+    : undefined
 
   if (globalSetting?.settings?.foreground) {
     fg = globalSetting.settings.foreground
