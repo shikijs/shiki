@@ -23,7 +23,12 @@ jobs:
           repository: microsoft/vscode
           path: tmp/vscode
 
-      - run: cp tmp/vscode/extensions/theme-*/themes/*.json packages/themes/data/vscode
+      - run: |
+          rm -rf packages/themes/data/vscode/*
+          cp tmp/vscode/extensions/theme-*/themes/dark*.json packages/themes/data/vscode
+          cp tmp/vscode/extensions/theme-*/themes/light*.json packages/themes/data/vscode
+          cp tmp/vscode/extensions/theme-*/themes/monokai*.json packages/themes/data/vscode
+          cp tmp/vscode/extensions/theme-*/themes/solarized*.json packages/themes/data/vscode
 
       # Themes on GitHub
       - run: node scripts/updateThemesOnGitHub.js
@@ -61,3 +66,11 @@ jobs:
           cp -r tmp/github-vscode-theme/themes packages/themes/data/github-vscode-theme
 
       - run: ls -R packages/themes/data
+
+      - uses: actions/checkout@v2
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Updated theme"
+          git push
