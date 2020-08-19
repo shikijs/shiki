@@ -7,16 +7,12 @@ on:
 
 defaults:
   run:
-    shell: bash
+    # for globs
+    shell: zsh
 
 jobs:
-  test:
+  update-themes:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        # for globs
-        shell: zsh
 
     steps:
       - uses: actions/checkout@v2
