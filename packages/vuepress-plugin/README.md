@@ -51,7 +51,6 @@ export type TNice =
   | 'min-dark'
   | 'white'
   | 'white-night'
-  | 'zeit'
 
 export type TTheme = TVSCode | TMaterial | TNice
 ```

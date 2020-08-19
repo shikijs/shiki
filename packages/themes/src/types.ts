@@ -25,6 +25,6 @@ export type TMaterial =
   | 'Material-Theme-Palenight-High-Contrast'
   | 'Material-Theme-Palenight'
 
-export type TNice = 'nord' | 'min-light' | 'min-dark' | 'white' | 'white-night' | 'zeit'
+export type TNice = 'nord' | 'min-light' | 'min-dark' | 'white' | 'white-night'
 
 export type TTheme = TVSCode | TMaterial | TNice

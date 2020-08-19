@@ -5,17 +5,10 @@ import { TTheme } from './types'
 export * from './types'
 
 const vscThemes = [
-  'abyss',
   'dark_plus',
-  'dark_vs',
   'hc_black',
-  'kimbie_dark',
   'light_plus',
-  'light_vs',
   'monokai',
-  'monokai_dimmed',
-  'quietlight',
-  'red',
   'solarized_dark',
   'solarized_light'
 ]
@@ -33,7 +26,7 @@ export const materialThemes = [
   'Material-Theme-Palenight'
 ]
 
-export const niceThemes = ['nord', 'min-light', 'min-dark', 'white', 'white-night', 'zeit']
+export const themesOnGitHub = ['nord', 'min-light', 'min-dark']
 
 function mapF(subdir: string) {
   return n => {
@@ -54,7 +47,7 @@ export function getTheme(t: TTheme): IShikiTheme {
     return mapF('material')(t)
   }
 
-  if (niceThemes.includes(t)) {
+  if (themesOnGitHub.includes(t)) {
     return mapF('nice')(t)
   }
 

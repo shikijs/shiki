@@ -1,0 +1,69 @@
+name: 'Update Themes'
+
+on:
+  schedule:
+    - cron: '* * * * 1'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        # for globs
+        shell: zsh
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+
+      - run: mkdir tmp
+
+      # Themes in VS Code
+      - uses: actions/checkout@v2
+        with:
+          repository: microsoft/vscode
+          path: tmp/vscode
+
+      - run: cp tmp/vscode/extensions/theme-*/themes/*.json packages/themes/data/vscode
+
+      # Themes on GitHub
+      - run: node scripts/updateThemesOnGitHub.js
+
+      # Material theme
+      - uses: actions/checkout@v2
+        with:
+          repository: material-theme/vsc-material-theme
+          path: tmp/vsc-material-theme
+
+      - run: |
+          yarn install
+          yarn build:ts
+          yarn build:generate-themes
+        working-directory: tmp/vsc-material-theme
+
+      - run: |
+          rm -r packages/themes/data/material
+          cp -r tmp/vsc-material-theme/build/themes packages/themes/data/material
+          rm packages/themes/data/material/*High-Contrast.json
+
+      # GitHub theme
+      - uses: actions/checkout@v2
+        with:
+          repository: primer/github-vscode-theme
+          path: tmp/github-vscode-theme
+
+      - run: |
+          npm install
+          npm run build
+        working-directory: tmp/github-vscode-theme
+
+      - run: |
+          rm -r packages/themes/data/github-vscode-theme
+          cp -r tmp/github-vscode-theme/themes packages/themes/data/github-vscode-theme
+
+      - run: tree packages/themes/data
