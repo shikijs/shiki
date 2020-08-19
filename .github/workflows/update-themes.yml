@@ -27,11 +27,13 @@ jobs:
       - run: |
           rm -rf packages/themes/data/vscode/*
           ls .
+          pwd
           ls -la tmp/vscode/extensions/theme-*/themes/dark*.json
           cp tmp/vscode/extensions/theme-*/themes/dark*.json packages/themes/data/vscode
           cp tmp/vscode/extensions/theme-*/themes/light*.json packages/themes/data/vscode
           cp tmp/vscode/extensions/theme-*/themes/monokai*.json packages/themes/data/vscode
           cp tmp/vscode/extensions/theme-*/themes/solarized*.json packages/themes/data/vscode
+          git status
 
       # Themes on GitHub
       - run: node scripts/updateThemesOnGitHub.js
@@ -69,10 +71,6 @@ jobs:
           cp -r tmp/github-vscode-theme/themes packages/themes/data/github-vscode-theme
 
       - run: ls -R packages/themes/data
-
-      - uses: actions/checkout@v2
-        with:
-          repository: shikijs/shiki
 
       - run: |
           pwd

@@ -15,13 +15,6 @@ function convertURL(ghURL) {
   return 'https://raw.githubusercontent.com' + oldPath.replace('/blob/', '/')
 }
 
-async function download(t) {
-  const localPath = path.join(__dirname, '..', THEME_FOLDER_PATH, t.localPath)
-  const remoteUrl = `https://raw.githubusercontent.com/${t.repo}/${t.branch || 'master'}/${t.path}`
-  const content = await get(remoteUrl)
-  fs.writeFileSync(localPath, content)
-}
-
 const themes = [
   'https://github.com/arcticicestudio/nord-visual-studio-code/blob/develop/themes/nord-color-theme.json',
   'https://github.com/misolori/min-theme/blob/master/themes/min-light.json',
