@@ -43,3 +43,15 @@ shiki.getHighlighter({
   theme: t
 })
 ```
+
+## Add
+
+First, please open an issue to discuss including a new theme.
+
+Here are the places you need to change:
+
+- [/scripts/updateThemesOnGitHub.js](/scripts/updateThemesOnGitHub.js)
+- Run `scripts/pullGHThemes.sh` at project root
+- [./src/index.ts](./src/index.ts)
+- [./src/types.ts](./src/types.ts)
+- [Literal Values](./README.md#literal-values)

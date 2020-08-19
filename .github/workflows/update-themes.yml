@@ -78,7 +78,9 @@ jobs:
           cp tmp/github-vscode-theme/themes/* tmp/themes
 
       - name: Normalize paths
-        run: node scripts/normalizeThemePaths.js
+        run: |
+          node scripts/normalizeVSCThemePaths.js
+          node scripts/normalizeThemePaths.js
 
       - name: Move files
         run: |
