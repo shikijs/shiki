@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
@@ -68,7 +69,11 @@ jobs:
       - run: ls -R packages/themes/data
 
       - uses: actions/checkout@v2
+        with:
+          repository: shikijs/shiki
+
       - run: |
+          pwd
           git config user.name github-actions
           git config user.email github-actions@github.com
           git status
