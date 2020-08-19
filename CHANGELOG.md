@@ -2,6 +2,7 @@
 
 ### 0.2.0
 
+- Use GitHub workflow to update themes periodically. [#71](https://github.com/shikijs/shiki/issues/71).
 - Use theme foreground color when color of token is `undefined`. [#27](https://github.com/shikijs/shiki/issues/27).
 - SVG Renderer. [#2](https://github.com/shikijs/shiki/issues/2).
 - Fix HTML escaping. [#26](https://github.com/octref/shiki/issues/26) and [#28](https://github.com/octref/shiki/pull/28). Thanks to contribution from [@jackens](https://github.com/jackens).
