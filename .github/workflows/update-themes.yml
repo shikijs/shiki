@@ -26,6 +26,8 @@ jobs:
 
       - run: |
           rm -rf packages/themes/data/vscode/*
+          ls .
+          ls -la tmp/vscode/extensions/theme-*/themes/dark*.json
           cp tmp/vscode/extensions/theme-*/themes/dark*.json packages/themes/data/vscode
           cp tmp/vscode/extensions/theme-*/themes/light*.json packages/themes/data/vscode
           cp tmp/vscode/extensions/theme-*/themes/monokai*.json packages/themes/data/vscode
