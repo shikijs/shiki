@@ -52,13 +52,11 @@ jobs:
       - name: Move files
         run: |
           rm -rf packages/languages/data/*
-          mkdir -p packages/languages/data/*
+          mkdir -p packages/languages/data
           cp tmp/grammars/*.json packages/languages/data
 
       - name: Update `packages/languages` source
-        run: |
-          ls packages/languages/data
-          node scripts/updateLangSrc.js
+        run: node scripts/updateLangSrc.js
 
       - run: |
           if [[ `git status --porcelain` ]]; then

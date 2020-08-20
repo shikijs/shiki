@@ -29,7 +29,6 @@ const aliases = {
 
 const langRegistrationContent = langids
   .map(id => {
-    console.log(id)
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
     const grammar = JSON.parse(fs.readFileSync(grammarPath, 'utf-8'))
 
