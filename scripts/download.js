@@ -1,4 +1,5 @@
 const https = require('https')
+const url = require('url')
 
 async function get(url) {
   return new Promise((r, reject) => {
@@ -27,6 +28,12 @@ async function get(url) {
   })
 }
 
+function convertGHURLToDownloadURL(ghURL) {
+  const oldPath = url.parse(ghURL).path
+  return 'https://raw.githubusercontent.com' + oldPath.replace('/blob/', '/')
+}
+
 module.exports = {
-  get
+  get,
+  convertGHURLToDownloadURL
 }

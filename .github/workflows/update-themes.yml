@@ -45,7 +45,7 @@ jobs:
           cp tmp/vscode/extensions/theme-*/themes/solarized*.json tmp/themes/vscode
 
       # Themes on GitHub
-      - run: node scripts/updateThemesOnGitHub.js
+      - run: node scripts/pullThemesFromGitHub.js
 
       # Material theme
       - uses: actions/checkout@v2
@@ -94,7 +94,7 @@ jobs:
             git status
             git add -A
             git commit -m "[Weekly Cron Job] Update themes"
-            git push
+            # git push
           else
             echo "no changes"
           fi

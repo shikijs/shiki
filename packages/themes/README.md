@@ -50,7 +50,7 @@ First, please open an issue to discuss including a new theme.
 
 Here are the places you need to change:
 
-- [/scripts/updateThemesOnGitHub.js](/scripts/updateThemesOnGitHub.js)
+- [/scripts/pullThemesFromGitHub.js](/scripts/pullThemesFromGitHub.js)
 - Run `scripts/pullGHThemes.sh` at project root
 - [./src/index.ts](./src/index.ts)
 - [./src/types.ts](./src/types.ts)

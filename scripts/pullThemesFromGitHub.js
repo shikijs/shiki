@@ -1,18 +1,9 @@
-/**
- * Update themes from upstream sources
- */
-
-const { get } = require('./getURLContent')
+const { get, convertGHURLToDownloadURL } = require('./download')
 const fs = require('fs')
 const url = require('url')
 const path = require('path')
 
 const THEME_FOLDER_PATH = path.join(__dirname, '..', 'tmp/themes')
-
-function convertURL(ghURL) {
-  const oldPath = url.parse(ghURL).path
-  return 'https://raw.githubusercontent.com' + oldPath.replace('/blob/', '/')
-}
 
 const themes = [
   'https://github.com/arcticicestudio/nord-visual-studio-code/blob/develop/themes/nord-color-theme.json',
@@ -22,10 +13,11 @@ const themes = [
 
 async function go() {
   for (let t of themes) {
-    const targetUrl = convertURL(t)
+    const targetUrl = convertGHURLToDownloadURL(t)
     const fileName = path.parse(url.parse(t).path).base
     const content = await get(targetUrl)
     fs.writeFileSync(path.resolve(THEME_FOLDER_PATH, fileName), content)
+    console.log(`Downloaded ${fileName}`)
   }
 }
 

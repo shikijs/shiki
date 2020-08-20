@@ -101,9 +101,11 @@ export interface ILanguageRegistration {
   grammar?: IRawGrammar
 }
 
-export function getLangRegistrations(langs: (TLang | ILanguageRegistration)[]): ILanguageRegistration[] {
-  const langByName = langs.filter(l => typeof l === "string") as string[]
-  const langReferences = langs.filter(l => typeof l !== "string")
+export function getLangRegistrations(
+  langs: (TLang | ILanguageRegistration)[]
+): ILanguageRegistration[] {
+  const langByName = langs.filter(l => typeof l === 'string') as string[]
+  const langReferences = langs.filter(l => typeof l !== 'string')
 
   const langRegistrationMap = {}
   languages.forEach(l => {
@@ -209,6 +211,12 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['hbs']
   },
   {
+    id: 'hlsl',
+    scopeName: 'source.hlsl',
+    path: path.resolve(__dirname, '../data/grammars/hlsl.json'),
+    aliases: ['htm', 'xhtml']
+  },
+  {
     id: 'html',
     scopeName: 'text.html.basic',
     path: path.resolve(__dirname, '../data/grammars/html.json'),
@@ -216,14 +224,8 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'ini',
-    scopeName: 'source.properties',
-    path: path.resolve(__dirname, '../data/grammars/properties.plist'),
-    aliases: []
-  },
-  {
-    id: 'properties',
-    scopeName: 'source.properties',
-    path: path.resolve(__dirname, '../data/grammars/properties.plist'),
+    scopeName: 'source.ini',
+    path: path.resolve(__dirname, '../data/grammars/ini.tmLanguage.json'),
     aliases: []
   },
   {

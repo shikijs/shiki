@@ -10,7 +10,7 @@ const THEME_FOLDER_PATH = path.join(__dirname, '..', 'tmp/themes')
  * Give each file a kebab-case name and name its file accordingly
  */
 
-function normalizeFile(file, newName) {
+function normalizeThemeFile(file, newName) {
   const oldPath = path.resolve(THEME_FOLDER_PATH, file)
   if (fs.existsSync(oldPath)) {
     const newJson = json5.parse(fs.readFileSync(oldPath, 'utf-8'))
@@ -30,5 +30,5 @@ function normalizeFile(file, newName) {
 
 module.exports = {
   THEME_FOLDER_PATH,
-  normalizeFile
+  normalizeThemeFile
 }
