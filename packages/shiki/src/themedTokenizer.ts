@@ -16,9 +16,74 @@ export interface IThemedTokenExplanation {
   scopes: IThemedTokenScopeExplanation[]
 }
 
+/**
+ * A single token with color, and optionally with explanation.
+ *
+ * For example:
+ *
+ * {
+ *   "content": "shiki",
+ *   "color": "#D8DEE9",
+ *   "explanation": [
+ *     {
+ *       "content": "shiki",
+ *       "scopes": [
+ *         {
+ *           "scopeName": "source.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.objectliteral.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.object.member.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.array.literal.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "variable.other.object.js",
+ *           "themeMatches": [
+ *             {
+ *               "name": "Variable",
+ *               "scope": "variable.other",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             },
+ *             {
+ *               "name": "[JavaScript] Variable Other Object",
+ *               "scope": "source.js variable.other.object",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             }
+ *           ]
+ *         }
+ *       ]
+ *     }
+ *   ]
+ * }
+ *
+ */
 export interface IThemedToken {
+  /**
+   * The content of the token
+   */
   content: string
+  /**
+   * 6 or 8 digit hex code representation of the token's color
+   */
   color?: string
+  /**
+   * Explanation of
+   *
+   * - token text's matching scopes
+   * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
+   */
   explanation?: IThemedTokenExplanation[]
 }
 

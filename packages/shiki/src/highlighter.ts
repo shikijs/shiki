@@ -34,6 +34,14 @@ export async function getHighlighter(options: HighlighterOptions) {
   return await s.getHighlighter()
 }
 
+interface ThemedTokenizerOptions {
+  /**
+   * Whether to include explanation of each token's matching scopes
+   * and why it's given its color. Default to false.
+   */
+  includeExplanation: boolean
+}
+
 class Shiki {
   private _resolver: Resolver
   private _registry: Registry
@@ -113,7 +121,7 @@ export interface Highlighter {
   codeToThemedTokens(
     code: string,
     lang: StringLiteralUnion<Lang>,
-    options?: { includeExplanation?: boolean }
+    options?: ThemedTokenizerOptions
   ): IThemedToken[][]
   codeToHtml?(code: string, lang: StringLiteralUnion<Lang>): string
 
