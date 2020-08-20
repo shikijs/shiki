@@ -62,7 +62,7 @@ jobs:
             git config user.email octref@gmail.com
             git status
             git add -A
-            git commit -m "[Weekly Cron Job] Update grammars"
+            git commit -m "Update grammars"
             git push
           else
             echo "no changes"
