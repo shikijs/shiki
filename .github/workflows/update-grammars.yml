@@ -38,7 +38,9 @@ jobs:
           repository: microsoft/vscode
           path: tmp/vscode
 
-      - run: cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
+      - run: |
+          rm tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json
+          cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 
       - name: Normalize paths
         run: |

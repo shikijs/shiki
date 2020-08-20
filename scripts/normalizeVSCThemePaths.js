@@ -2,7 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 const json5 = require('json5')
-const { THEME_FOLDER_PATH, normalizeFile } = require('./normalizeFile')
+const { THEME_FOLDER_PATH, normalizeThemeFile } = require('./normalizeThemeFile')
 
 const VSCODE_THEME_FOLDER_PATH = path.join(THEME_FOLDER_PATH, 'vscode')
 
@@ -65,8 +65,8 @@ if (lightDefaultsContent && lightVSContent && lightPlusContent) {
   fs.unlinkSync(path.resolve(VSCODE_THEME_FOLDER_PATH, 'light_vs.json'))
 }
 
-normalizeFile('vscode/dark_plus.json')
-normalizeFile('vscode/light_plus.json')
-normalizeFile('vscode/monokai-color-theme.json', 'monokai')
-normalizeFile('vscode/solarized-dark-color-theme.json', 'solarized-dark')
-normalizeFile('vscode/solarized-light-color-theme.json', 'solarized-light')
+normalizeThemeFile('vscode/dark_plus.json')
+normalizeThemeFile('vscode/light_plus.json')
+normalizeThemeFile('vscode/monokai-color-theme.json', 'monokai')
+normalizeThemeFile('vscode/solarized-dark-color-theme.json', 'solarized-dark')
+normalizeThemeFile('vscode/solarized-light-color-theme.json', 'solarized-light')
