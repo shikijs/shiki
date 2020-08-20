@@ -2,7 +2,7 @@
 
 ### 0.2.0
 
-- Add `hlsl`, `asm` (x86 Assembly), `m` (Matlab), `sas`, `d`, `dart`, `plsql`, `logo`, , `pas` (Object Pascal/Delphi), `cobol`, `kt` (Kotlin), `scala`, `abap`, `julia`, `scheme`, `prolog`, `ada`, `lisp`, `apex`, `fortran`, `haskell`, `hcl`, `hack`, `awk`, `as` (ActionScript), `tcl`, `ocaml`, `viml`, `puppet`, `jsonnet`, `smalltalk`, `cr` (Crystal), `wat` (WASM), `nix`, `elm`, `purescript`.
+- Add `hlsl`, `asm` (x86 Assembly), `m` (Matlab), `sas`, `d`, `dart`, `plsql`, `logo`, , `pas` (Object Pascal/Delphi), `cobol`, `kt` (Kotlin), `scala`, `abap`, `julia`, `scheme`, `prolog`, `ada`, `lisp`, `apex`, `fortran`, `haskell`, `hcl`, `hack`, `awk`, `as` (ActionScript), `tcl`, `ocaml`, `viml`, `puppet`, `jsonnet`, `smalltalk`, `cr` (Crystal), `wat` (WASM), `nix`, `elm`, `purescript`, `svelte`.
 - Add `pug` language and make `jade` an alias of it.
 - Use GitHub workflow to update grammars periodically. [#72](https://github.com/shikijs/shiki/issues/72).
 - Use GitHub workflow to update themes periodically. [#71](https://github.com/shikijs/shiki/issues/71).
