@@ -83,6 +83,7 @@ export type Lang =
   | 'smalltalk'
   | 'sql'
   | 'stylus'
+  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
@@ -517,6 +518,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.stylus',
     path: path.resolve(__dirname, '../data/stylus.tmLanguage.json'),
     aliases: ['styl']
+  },
+  {
+    id: 'svelte',
+    scopeName: 'source.svelte',
+    path: path.resolve(__dirname, '../data/svelte.tmLanguage.json')
   },
   {
     id: 'swift',

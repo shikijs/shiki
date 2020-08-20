@@ -23,6 +23,7 @@ const specialNewNames = {
   log: 'log',
   MagicPython: 'python',
   'shell-unix-bash': 'shellscript',
+  svelte: 'svelte',
   TypeScriptReact: 'tsx',
   ini: 'ini',
   perl6: 'perl6',
