@@ -478,5 +478,3 @@ export const languages: ILanguageRegistration[] = [
     aliases: []
   }
 ]
-
-console.log(languages.map(l => l.id))
