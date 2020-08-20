@@ -12,7 +12,7 @@ export type Lang =
   | 'c'
   | 'clojure'
   | 'cobol'
-  | 'coffeescript'
+  | 'coffee'
   | 'cpp'
   | 'crystal'
   | 'csharp'
@@ -151,9 +151,9 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/cobol.tmLanguage.json')
   },
   {
-    id: 'coffeescript',
+    id: 'coffee',
     scopeName: 'source.coffee',
-    path: path.resolve(__dirname, '../data/coffeescript.tmLanguage.json')
+    path: path.resolve(__dirname, '../data/coffee.tmLanguage.json')
   },
   {
     id: 'cpp',
