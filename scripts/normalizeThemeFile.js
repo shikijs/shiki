@@ -1,4 +1,3 @@
-//@ts-check
 const fs = require('fs')
 const path = require('path')
 const json5 = require('json5')

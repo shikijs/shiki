@@ -1,5 +1,3 @@
-// @ts-check
-
 const fs = require('fs')
 const markdown = require('markdown-it')
 const shiki = require('shiki')
