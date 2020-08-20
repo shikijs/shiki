@@ -24,7 +24,13 @@ const specialNewNames = {
   TypeScriptReact: 'tsx',
   ini: 'ini',
   perl6: 'perl6',
-  haml: 'haml'
+  haml: 'haml',
+  'fortran_free-form.tmLanguage': 'fortran',
+  plsql: 'pls',
+  sas: 'sas',
+  prolog: 'prolog',
+  'language-x86_64-assembly': 'asm',
+  wat: 'wasm'
 }
 
 for (let f of files) {
