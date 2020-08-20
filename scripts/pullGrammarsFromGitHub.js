@@ -5,6 +5,15 @@ const path = require('path')
 
 const LANGUAGE_GRAMMAR_FOLDER_PATH = path.join(__dirname, '..', 'tmp/grammars')
 
+/**
+ * All language grammar sources on github.com.
+ *
+ * To add one:
+ * - Search `<lang> textmate` on GitHub
+ * - Search `<lang>` on VS Code Marketplace
+ * - Pick the most recently updated fork that contains the grammar
+ * - Add the URL to the end
+ */
 const languageSources = [
   'https://github.com/prisma-labs/vscode-graphql/blob/master/grammars/graphql.json',
   'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json',

@@ -8,107 +8,109 @@ Languages & grammars for Shiki.
 
 ## Extras
 
-- [Haml](https://github.com/karuna/haml-vscode)
-- [Graphql](https://github.com/prisma/vscode-graphql)
-- [Sass](https://github.com/robinbentley/vscode-sass-indented)
-- [Stylus](https://github.com/d4rkr00t/language-stylus)
-- [Postcss](https://github.com/vuejs/vetur)
-- [Vue](https://github.com/vuejs/vetur)
-- [Vue-html](https://github.com/vuejs/vetur)
+See [/scripts/pullGrammarsFromGitHub.js](/scripts/pullGrammarsFromGitHub.js)
 
 ## Literal Values
 
 ```ts
-export type TCommonLang =
-  | 'clojure'
+export type Lang =
+  | 'abap'
+  | 'actionscript-3'
+  | 'ada'
+  | 'apex'
+  | 'asm'
+  | 'awk'
+  | 'bat'
   | 'c'
+  | 'clojure'
+  | 'cobol'
+  | 'coffeescript'
   | 'cpp'
+  | 'crystal'
   | 'csharp'
   | 'css'
-  | 'go'
-  | 'html'
-  | 'jade'
-  | 'java'
-  | 'jsx'
-  | 'javascript'
-  | 'json'
-  | 'jsonc'
-  | 'less'
-  | 'lua'
-  | 'makefile'
-  | 'markdown'
-  | 'objective-c'
-  | 'perl6'
-  | 'php'
-  | 'python'
-  | 'r'
-  | 'ruby'
-  | 'rust'
-  | 'scss'
-  | 'shellscript'
-  | 'sql'
-  | 'swift'
-  | 'typescript'
-  | 'tsx'
-  | 'xml'
-  | 'yaml'
-  /**
-   * Extra grammars
-   */
-  | 'haml'
-  | 'graphql'
-  | 'postcss'
-  | 'sass'
-  | 'stylus'
-  | 'vue'
-  | 'vue-html'
-  | 'latex'
-
-export type TCommonLangAlias =
-  | 'clj'
-  | 'c++'
-  | 'htm'
-  | 'xhtml'
-  | 'js'
-  | 'objc'
-  | 'py'
-  | 'rb'
-  | 'shell'
-  | 'bash'
-  | 'sh'
-  | 'zsh'
-  | 'ts'
-  | 'yml'
-  | 'md'
-  /**
-   * Extra grammars
-   */
-  | 'styl'
-  | 'tex'
-
-export type TOtherLang =
-  | 'bat'
-  | 'coffeescript'
+  | 'd'
+  | 'dart'
   | 'diff'
   | 'dockerfile'
+  | 'elm'
+  | 'fortran'
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
+  | 'go'
+  | 'graphql'
   | 'groovy'
+  | 'hack'
+  | 'haml'
   | 'handlebars'
+  | 'haskell'
+  | 'hcl'
+  | 'hlsl'
+  | 'html'
   | 'ini'
-  | 'properties'
+  | 'java'
+  | 'javascript'
+  | 'json'
+  | 'jsonc'
+  | 'jsonnet'
+  | 'jsx'
+  | 'julia'
+  | 'kotlin'
+  | 'latex'
+  | 'less'
+  | 'lisp'
+  | 'log'
+  | 'logo'
+  | 'lua'
+  | 'makefile'
+  | 'markdown'
+  | 'matlab'
+  | 'nix'
+  | 'objective-c'
+  | 'ocaml'
+  | 'pascal'
   | 'perl'
+  | 'perl6'
+  | 'php'
+  | 'pls'
+  | 'postcss'
   | 'powershell'
+  | 'prolog'
+  | 'pug'
+  | 'puppet'
+  | 'purescript'
+  | 'python'
+  | 'r'
   | 'razor'
+  | 'ruby'
+  | 'rust'
+  | 'sas'
+  | 'sass'
+  | 'scala'
+  | 'scheme'
+  | 'scss'
   | 'shaderlab'
+  | 'shellscript'
+  | 'smalltalk'
+  | 'sql'
+  | 'stylus'
+  | 'swift'
+  | 'tcl'
+  | 'toml'
+  | 'tsx'
+  | 'typescript'
   | 'vb'
-  | 'cmd'
+  | 'viml'
+  | 'vue-html'
+  | 'vue'
+  | 'wasm'
+  | 'xml'
   | 'xsl'
-
-export type TLang = TCommonLang | TCommonLangAlias | TOtherLang
+  | 'yaml'
 ```
 
-### Upstream
+## Add
 
-- `toml`: https://github.com/bungcip/better-toml
+- [/scripts/pullGrammarsFromGitHub.js](/scripts/pullGrammarsFromGitHub.js)
+- `yarn update:grammars`

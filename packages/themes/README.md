@@ -51,7 +51,7 @@ First, please open an issue to discuss including a new theme.
 Here are the places you need to change:
 
 - [/scripts/pullThemesFromGitHub.js](/scripts/pullThemesFromGitHub.js)
-- Run `scripts/pullGHThemes.sh` at project root
+- `yarn update:themes`
 - [./src/index.ts](./src/index.ts)
 - [./src/types.ts](./src/types.ts)
 - [Literal Values](./README.md#literal-values)

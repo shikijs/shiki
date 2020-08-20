@@ -8,7 +8,9 @@
     "watch": "tsc -b -w packages",
     "fmt": "prettier --parser=typescript --write packages/**/*.ts",
     "test": "jest --colors",
-    "gen": "yarn workspace shiki-site gen"
+    "gen": "yarn workspace shiki-site gen",
+    "update:themes": "bash ./scripts/pullGHThemes.sh",
+    "update:grammars": "bash ./scripts/pullGHGrammars.sh"
   },
   "gitHooks": {
     "pre-commit": "ls-lint && lint-staged"
