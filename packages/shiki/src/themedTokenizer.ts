@@ -16,9 +16,74 @@ export interface IThemedTokenExplanation {
   scopes: IThemedTokenScopeExplanation[]
 }
 
+/**
+ * A single token with color, and optionally with explanation.
+ *
+ * For example:
+ *
+ * {
+ *   "content": "shiki",
+ *   "color": "#D8DEE9",
+ *   "explanation": [
+ *     {
+ *       "content": "shiki",
+ *       "scopes": [
+ *         {
+ *           "scopeName": "source.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.objectliteral.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.object.member.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.array.literal.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "variable.other.object.js",
+ *           "themeMatches": [
+ *             {
+ *               "name": "Variable",
+ *               "scope": "variable.other",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             },
+ *             {
+ *               "name": "[JavaScript] Variable Other Object",
+ *               "scope": "source.js variable.other.object",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             }
+ *           ]
+ *         }
+ *       ]
+ *     }
+ *   ]
+ * }
+ *
+ */
 export interface IThemedToken {
+  /**
+   * The content of the token
+   */
   content: string
+  /**
+   * 6 or 8 digit hex code representation of the token's color
+   */
   color?: string
+  /**
+   * Explanation of
+   *
+   * - token text's matching scopes
+   * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
+   */
   explanation?: IThemedTokenExplanation[]
 }
 
@@ -26,7 +91,8 @@ export function tokenizeWithTheme(
   theme: IRawTheme,
   colorMap: string[],
   fileContents: string,
-  grammar: IGrammar
+  grammar: IGrammar,
+  options: { includeExplanation?: boolean }
 ): IThemedToken[][] {
   let lines = fileContents.split(/\r\n|\r|\n/)
 
@@ -60,22 +126,25 @@ export function tokenizeWithTheme(
       let foregroundColor = colorMap[foreground]
 
       let explanation: IThemedTokenExplanation[] = []
-      let offset = 0
-      while (startIndex + offset < nextStartIndex) {
-        let tokenWithScopes = tokensWithScopes[tokensWithScopesIndex]
+      if (options.includeExplanation) {
+        let offset = 0
+        while (startIndex + offset < nextStartIndex) {
+          let tokenWithScopes = tokensWithScopes[tokensWithScopesIndex]
 
-        let tokenWithScopesText = line.substring(
-          tokenWithScopes.startIndex,
-          tokenWithScopes.endIndex
-        )
-        offset += tokenWithScopesText.length
-        explanation.push({
-          content: tokenWithScopesText,
-          scopes: explainThemeScopes(theme, tokenWithScopes.scopes)
-        })
+          let tokenWithScopesText = line.substring(
+            tokenWithScopes.startIndex,
+            tokenWithScopes.endIndex
+          )
+          offset += tokenWithScopesText.length
+          explanation.push({
+            content: tokenWithScopesText,
+            scopes: explainThemeScopes(theme, tokenWithScopes.scopes)
+          })
 
-        tokensWithScopesIndex++
+          tokensWithScopesIndex++
+        }
       }
+
       actual.push({
         content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
