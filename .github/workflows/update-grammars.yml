@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-themes:
+  update-grammars:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,8 +38,9 @@ jobs:
           repository: microsoft/vscode
           path: tmp/vscode
 
+      # Two html file will cause `cp` to fail
       - run: |
-          rm tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json
+          mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
           cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 
       - name: Normalize paths
