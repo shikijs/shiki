@@ -94,7 +94,7 @@ jobs:
             git status
             git add -A
             git commit -m "[Weekly Cron Job] Update themes"
-            # git push
+            git push
           else
             echo "no changes"
           fi

@@ -10,7 +10,6 @@ export const commonLangIds: TCommonLang[] = [
   'css',
   'go',
   'html',
-  'jade',
   'java',
   'jsx',
   'javascript',
@@ -65,6 +64,7 @@ export const commonLangAliases: TCommonLangAlias[] = [
   'ts',
   'yml',
   'md',
+  'jade',
   /**
    * Extra grammars
    */
@@ -229,10 +229,10 @@ export const languages: ILanguageRegistration[] = [
     aliases: []
   },
   {
-    id: 'jade',
+    id: 'pug',
     scopeName: 'text.jade',
     path: path.resolve(__dirname, '../data/grammars/Jade.json'),
-    aliases: []
+    aliases: ['jade']
   },
   {
     id: 'java',
@@ -470,5 +470,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.toml',
     path: path.resolve(__dirname, '../data/extraGrammars/TOML.tmLanguage'),
     aliases: []
+  },
+  {
+    id: 'hlsl',
+    scopeName: 'source.hlsl',
+    path: path.resolve(__dirname, '../data/extraGrammars/hlsl.tmLanguage.json'),
+    aliases: []
   }
 ]
+
+console.log(languages.map(l => l.id))

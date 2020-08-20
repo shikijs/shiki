@@ -6,7 +6,6 @@ export type TCommonLang =
   | 'css'
   | 'go'
   | 'html'
-  | 'jade'
   | 'java'
   | 'jsx'
   | 'javascript'
@@ -19,6 +18,7 @@ export type TCommonLang =
   | 'objective-c'
   | 'perl6'
   | 'php'
+  | 'pug'
   | 'python'
   | 'r'
   | 'ruby'
@@ -60,6 +60,7 @@ export type TCommonLangAlias =
   | 'ts'
   | 'yml'
   | 'md'
+  | 'jade'
   /**
    * Extra grammars
    */

@@ -13,16 +13,19 @@ const languageSources = [
   'https://github.com/d4rkr00t/language-stylus/blob/master/syntaxes/stylus.json',
   'https://github.com/textmate/toml.tmbundle/blob/master/Syntaxes/TOML.tmLanguage',
   'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-generated.json',
-  'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'
+  'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json',
+  'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'
 ]
 
 async function go() {
   for (let l of languageSources) {
     const targetUrl = convertGHURLToDownloadURL(l)
-    const fileName = path.parse(url.parse(l).path).base
+    const newFileName = l.endsWith('.json')
+      ? path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.json'
+      : path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.plist'
     const content = await get(targetUrl)
-    fs.writeFileSync(path.resolve(LANGUAGE_GRAMMAR_FOLDER_PATH, fileName), content)
-    console.log(`Downloaded ${fileName}`)
+    fs.writeFileSync(path.resolve(LANGUAGE_GRAMMAR_FOLDER_PATH, newFileName), content)
+    console.log(`Downloaded ${newFileName}`)
   }
 }
 

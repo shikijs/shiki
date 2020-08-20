@@ -2,6 +2,9 @@
 
 ### 0.2.0
 
+- Add HLSL language.
+- Add `pug` language and make `jade` an alias of it.
+- Use GitHub workflow to update grammars periodically. [#72](https://github.com/shikijs/shiki/issues/72).
 - Use GitHub workflow to update themes periodically. [#71](https://github.com/shikijs/shiki/issues/71).
 - Use theme foreground color when color of token is `undefined`. [#27](https://github.com/shikijs/shiki/issues/27).
 - SVG Renderer. [#2](https://github.com/shikijs/shiki/issues/2).

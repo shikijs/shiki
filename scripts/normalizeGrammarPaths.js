@@ -2,12 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const { GRAMMAR_FOLDER_PATH, normalizeGrammarFile } = require('./normalizeGrammarFile')
 
-/**
- * Extras:
- *
- * hlsl?
- */
-
 const files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
 
 const toRemove = ['html-derivative', 'ignore', 'MagicRegExp', 'platform', 'sassdoc', 'searchResult']
@@ -29,7 +23,8 @@ const specialNewNames = {
   'shell-unix-bash': 'shellscript',
   TypeScriptReact: 'tsx',
   ini: 'ini',
-  perl6: 'perl6'
+  perl6: 'perl6',
+  haml: 'haml'
 }
 
 for (let f of files) {
