@@ -56,7 +56,9 @@ jobs:
           cp tmp/grammars/*.json packages/languages/data
 
       - name: Update `packages/languages` source
-        run: node scripts/updateLangSrc.js
+        run: |
+          ls packages/languages/data
+          node scripts/updateLangSrc.js
 
       - run: |
           if [[ `git status --porcelain` ]]; then
