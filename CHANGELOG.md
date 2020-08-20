@@ -9,6 +9,8 @@
 - Use theme foreground color when color of token is `undefined`. [#27](https://github.com/shikijs/shiki/issues/27).
 - SVG Renderer. [#2](https://github.com/shikijs/shiki/issues/2).
 - Fix HTML escaping. [#26](https://github.com/octref/shiki/issues/26) and [#28](https://github.com/octref/shiki/pull/28). Thanks to contribution from [@jackens](https://github.com/jackens).
+- 🙌 Add an option to skip generating the explanation text. [#52](https://github.com/shikijs/shiki/pull/52). Thanks to contribution from [Gerrit Birkeland](https://github.com/Gerrit0).
+- 🙌 Improve performance by avoiding some unnecessary string copies. [#51](https://github.com/shikijs/shiki/pull/51). Thanks to contribution from [Gerrit Birkeland](https://github.com/Gerrit0).
 - 🙌 Allow loading custom `tmLanguage`. [#10](https://github.com/octref/shiki/issues/10) and [#49](https://github.com/octref/shiki/pull/49). Thanks to contribution from [Orta Therox](https://github.com/orta) and [@pngwn](https://github.com/pngwn).
 - 🙌 Update Java grammar. [#36](https://github.com/octref/shiki/issues/36) and [#37](https://github.com/octref/shiki/issues/37). Thanks to contribution from [@0xflotus](https://github.com/0xflotus).
 
