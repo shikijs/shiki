@@ -50,7 +50,7 @@ jobs:
       - name: Move files
         run: |
           rm -rf packages/languages/data/*
-          cp tmp/languages/*.json packages/languages/data
+          cp tmp/grammars/*.json packages/languages/data
 
       - run: |
           if [[ `git status --porcelain` ]]; then
