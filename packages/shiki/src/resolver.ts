@@ -27,10 +27,11 @@ export class Resolver implements RegistryOptions {
 
     this._languages.forEach(l => {
       this.langMap[l.id] = l
-      l.aliases.forEach(a => {
-        this.langMap[a] = l
-      })
-
+      if (l.aliases) {
+        l.aliases.forEach(a => {
+          this.langMap[a] = l
+        })
+      }
       this.scopeToLangMap[l.scopeName] = l
     })
   }

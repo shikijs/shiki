@@ -1,12 +1,6 @@
 import { Registry } from 'vscode-textmate'
 
-import {
-  TLang,
-  commonLangIds,
-  commonLangAliases,
-  ILanguageRegistration,
-  getLangRegistrations
-} from 'shiki-languages'
+import { Lang, ILanguageRegistration, languages as bundledLanguages } from 'shiki-languages'
 
 import { Resolver } from './resolver'
 import { getOnigasm } from './onigLibs'
@@ -17,7 +11,7 @@ import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
   theme: TTheme | IShikiTheme
-  langs?: (TLang | ILanguageRegistration)[]
+  langs?: ILanguageRegistration[]
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
@@ -30,15 +24,13 @@ export async function getHighlighter(options: HighlighterOptions) {
     t = getTheme('nord')
   }
 
-  let langs: (TLang | ILanguageRegistration)[] = [...commonLangIds, ...commonLangAliases]
+  let languages: ILanguageRegistration[] = bundledLanguages
 
   if (options.langs) {
-    langs = options.langs
+    languages = [...bundledLanguages, ...options.langs]
   }
 
-  const langRegistrations = getLangRegistrations(langs)
-
-  const s = new Shiki(t, langRegistrations)
+  const s = new Shiki(t, languages)
   return await s.getHighlighter()
 }
 
@@ -69,9 +61,11 @@ class Shiki {
       this._langs.map(async l => {
         const g = await this._registry.loadGrammar(l.scopeName)
         ltog[l.id] = g
-        l.aliases.forEach(la => {
-          ltog[la] = g
-        })
+        if (l.aliases) {
+          l.aliases.forEach(la => {
+            ltog[la] = g
+          })
+        }
       })
     )
 
@@ -114,8 +108,8 @@ function isPlaintext(lang) {
  */
 type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface Highlighter {
-  codeToThemedTokens(code: string, lang: StringLiteralUnion<TLang>): IThemedToken[][]
-  codeToHtml?(code: string, lang: StringLiteralUnion<TLang>): string
+  codeToThemedTokens(code: string, lang: StringLiteralUnion<Lang>): IThemedToken[][]
+  codeToHtml?(code: string, lang: StringLiteralUnion<Lang>): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

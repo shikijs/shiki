@@ -47,14 +47,16 @@ jobs:
       - run: node scripts/pullGrammarsFromGitHub.js
 
       - name: Normalize paths
-        run: |
-          node scripts/normalizeGrammarPaths.js
+        run: node scripts/normalizeGrammarPaths.js
 
       - name: Move files
         run: |
           rm -rf packages/languages/data/*
           mkdir -p packages/languages/data/*
           cp tmp/grammars/*.json packages/languages/data
+
+      - name: Update `packages/languages` source
+        run: node scripts/updateLangSrc.js
 
       - run: |
           if [[ `git status --porcelain` ]]; then

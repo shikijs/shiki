@@ -9,9 +9,11 @@ const toRemove = ['html-derivative', 'ignore', 'MagicRegExp', 'platform', 'sassd
 const specialNewNames = {
   'asp-vb-net': 'vb',
   batchfile: 'bat',
+  coffeescript: 'coffee',
   cpp: 'cpp',
   csharp: 'csharp',
   cshtml: 'razor',
+  dockerfile: 'docker',
   'git-commit': 'git-commit',
   'git-rebase': 'git-rebase',
   JavaScript: 'javascript',
