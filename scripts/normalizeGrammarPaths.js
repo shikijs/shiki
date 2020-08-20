@@ -25,7 +25,7 @@ const specialNewNames = {
   ini: 'ini',
   perl6: 'perl6',
   haml: 'haml',
-  'fortran_free-form.tmLanguage': 'fortran',
+  'fortran_free-form': 'fortran',
   plsql: 'pls',
   sas: 'sas',
   prolog: 'prolog',
