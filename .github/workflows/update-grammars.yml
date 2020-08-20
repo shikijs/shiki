@@ -43,6 +43,9 @@ jobs:
           mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
           cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 
+      # Grammars on GitHub
+      - run: node scripts/pullGrammarsFromGitHub.js
+
       - name: Normalize paths
         run: |
           node scripts/normalizeGrammarPaths.js
