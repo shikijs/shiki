@@ -1,13 +1,25 @@
 import { IThemedToken } from './themedTokenizer'
+import { FontStyle } from './stackElementMetadata'
 
 export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
+  /**
+   * Whether to show italics/bold/underline
+   */
+  preserveFontStyle?: boolean
+}
+
+const FONT_STYLE_TO_CSS = {
+  [FontStyle.Italic]: 'font-style: italic',
+  [FontStyle.Bold]: 'font-weight: bold',
+  [FontStyle.Underline]: 'text-decoration: underline'
 }
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const preserveFontStyle = !!options.preserveFontStyle
 
   let html = ''
 
@@ -22,11 +34,11 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
       html += `\n`
     } else {
       l.forEach(token => {
-        const styleValue = token.preserveFontStyle
-          ? `color: ${token.color || options.fg}; ${token.fontStyle}`
-          : `color: ${token.color || options.fg}`
-
-        html += `<span style="${styleValue}">${escapeHtml(token.content)}</span>`
+        const cssDeclarations = [`color: ${token.color || options.fg}`]
+        if (preserveFontStyle && token.fontStyle > FontStyle.None) {
+          cssDeclarations.push(FONT_STYLE_TO_CSS[token.fontStyle])
+        }
+        html += `<span style="${cssDeclarations.join('; ')}">${escapeHtml(token.content)}</span>`
       })
       html += `\n`
     }

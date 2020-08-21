@@ -4,7 +4,7 @@
 'use strict'
 
 import { IGrammar, StackElement, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
-import { StackElementMetadata } from './stackElementMetadata'
+import { StackElementMetadata, FontStyle } from './stackElementMetadata'
 
 export interface IThemedTokenScopeExplanation {
   scopeName: string
@@ -85,15 +85,15 @@ export interface IThemedToken {
    * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
    */
   explanation?: IThemedTokenExplanation[]
-
-  preserveFontStyle?: boolean
+  /**
+   * Font style of token. Can be None/Italic/Bold/Underline
+   */
+  fontStyle?: FontStyle
 }
 
 export function tokenizeWithTheme(
   theme: IRawTheme,
-  preserveFontStyle: boolean,
   colorMap: string[],
-  styleMap: object,
   fileContents: string,
   grammar: IGrammar,
   options: { includeExplanation?: boolean }
@@ -128,11 +128,7 @@ export function tokenizeWithTheme(
       let metadata = result.tokens[2 * j + 1]
       let foreground = StackElementMetadata.getForeground(metadata)
       let foregroundColor = colorMap[foreground]
-      let font = StackElementMetadata.getFontStyle(metadata);
-      let fontStyle = null;
-      if (preserveFontStyle) {
-        fontStyle = font > 0 ? styleMap[font.toString()] : null
-      } 
+      let fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
       let explanation: IThemedTokenExplanation[] = []
       if (options.includeExplanation) {
         let offset = 0
@@ -159,7 +155,6 @@ export function tokenizeWithTheme(
         explanation: explanation,
         fontStyle
       })
-
     }
     final.push(actual)
     actual = []
