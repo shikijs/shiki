@@ -12,6 +12,8 @@ export type Theme =
   | 'min-light'
   | 'monokai'
   | 'nord'
+  | 'slack-theme-dark-mode'
+  | 'slack-theme-ochin'
   | 'solarized-dark'
   | 'solarized-light'
 
@@ -29,6 +31,8 @@ export const themes = [
   'min-light',
   'monokai',
   'nord',
+  'slack-theme-dark-mode',
+  'slack-theme-ochin',
   'solarized-dark',
   'solarized-light'
 ]

@@ -27,6 +27,8 @@ export type Theme =
   | 'min-light'
   | 'monokai'
   | 'nord'
+  | 'slack-theme-dark-mode'
+  | 'slack-theme-ochin'
   | 'solarized-dark'
   | 'solarized-light'
 ```
@@ -34,7 +36,7 @@ export type Theme =
 ## Yours
 
 ```js
-const shiki  = require('shiki')
+const shiki = require('shiki')
 
 const t = shiki.loadTheme('./my-theme.json')
 
