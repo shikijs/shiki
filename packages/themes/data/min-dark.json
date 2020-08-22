@@ -137,11 +137,17 @@
     },
     {
       "scope": [
-        "comment",
-        "strings",
         "string",
         "markup.fenced_code",
         "markup.inline"
+      ],
+      "settings": {
+        "foreground": "#9db1c5"
+      }
+    },
+    {
+      "scope": [
+        "comment"
       ],
       "settings": {
         "foreground": "#4e5761"
@@ -155,7 +161,8 @@
         "variable.other.class",
         "variable.other.constant",
         "meta.property-name",
-        "support"
+        "support",
+        "string.other.link.title.markdown"
       ],
       "settings": {
         "foreground": "#79b8ff"
