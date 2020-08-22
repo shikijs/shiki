@@ -4,10 +4,12 @@ export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
+  wrapLines?: boolean
 }
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const wrapLines = options.wrapLines || false
 
   let html = ''
 
@@ -19,14 +21,15 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
 
   lines.forEach((l: IThemedToken[]) => {
     if (l.length === 0) {
-      html += `\n`
+      html += wrapLines ? `<span></span>\n` : `\n`
     } else {
+      html += wrapLines ? `<span>` : ``
       l.forEach(token => {
         html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
           token.content
         )}</span>`
       })
-      html += `\n`
+      html += wrapLines ? `</span>\n` : `\n`
     }
   })
   html = html.replace(/\n*$/, '') // Get rid of final new lines
