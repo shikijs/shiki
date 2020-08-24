@@ -7,10 +7,10 @@ import { getOnigasm } from './onigLibs'
 import { tokenizeWithTheme, IThemedToken } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getTheme, TTheme, IShikiTheme } from 'shiki-themes'
+import { getTheme, Theme, IShikiTheme } from 'shiki-themes'
 
 export interface HighlighterOptions {
-  theme: TTheme | IShikiTheme
+  theme: Theme | IShikiTheme
   langs?: ILanguageRegistration[]
 }
 

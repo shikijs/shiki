@@ -5,7 +5,7 @@ const langDir = path.resolve(__dirname, '../packages/languages/data')
 const langPath = path.resolve(__dirname, '../packages/languages/src/lang.ts')
 
 const files = fs.readdirSync(langDir)
-const langids = files.map(f => f.replace('.tmLanguage.json', ''))
+const langIds = files.map(f => f.replace('.tmLanguage.json', ''))
 
 const aliases = {
   bat: ['batch'],
@@ -27,7 +27,7 @@ const aliases = {
   vb: ['cmd']
 }
 
-const langRegistrationContent = langids
+const langRegistrationContent = langIds
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
     const grammar = JSON.parse(fs.readFileSync(grammarPath, 'utf-8'))
@@ -54,7 +54,7 @@ const langContent = `import * as path from 'path'
 import { ILanguageRegistration } from './index'
 
 export type Lang =
-${langids.map(id => `  | '${id}'`).join('\n')}
+${langIds.map(id => `  | '${id}'`).join('\n')}
 
 export const languages: ILanguageRegistration[] = [
 ${langRegistrationContent}

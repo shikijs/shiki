@@ -87,6 +87,9 @@ jobs:
           rm -rf packages/themes/data/*
           cp tmp/themes/*.json packages/themes/data
 
+      - name: Update `packages/themes` source
+        run: node scripts/updateThemeSrc.js
+
       - run: |
           if [[ `git status --porcelain` ]]; then
             git config user.name "Pine Wu"

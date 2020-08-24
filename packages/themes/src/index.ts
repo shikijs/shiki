@@ -1,27 +1,9 @@
 import * as path from 'path'
 
 import { loadTheme, IShikiTheme } from './loadTheme'
-import { TTheme } from './types'
+import { Theme, themes } from './theme'
 
-export * from './types'
-
-const themes = [
-  'dark-plus',
-  'light-plus',
-  'monokai',
-  'solarized-dark',
-  'solarized-light',
-  'material-theme-darker',
-  'material-theme-default',
-  'material-theme-lighter',
-  'material-theme-ocean',
-  'material-theme-palenight',
-  'github-dark',
-  'github-light',
-  'nord',
-  'min-light',
-  'min-dark'
-]
+export { Theme } from './theme'
 
 const allThemes = {}
 
@@ -29,7 +11,7 @@ for (let theme of themes) {
   allThemes[theme] = loadTheme(path.resolve(__dirname, '../data', `${theme}.json`))
 }
 
-export function getTheme(t: TTheme): IShikiTheme {
+export function getTheme(t: Theme): IShikiTheme {
   if (t in allThemes) {
     return allThemes[t]
   }
