@@ -191,6 +191,12 @@ shiki.getHighlighter({
 })
 ```
 
-Made by [Pine](https://blog.matsu.io/about).
+Shiki is now used on [VS Code website](https://code.visualstudio.com/api/extension-guides/notebook) to teach VS Code API, and on [TypeScript website](https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple) to teach TypeScript:
 
-Enjoy!
+![VS Code and TypeScript website](./assets/vscode-ts.png)
+
+Among all usages of Shiki, I like Fatih Kalifa's [beautiful presentation](https://fatihkalifa.com/typescript-twoslash) most. Leandro Facchinetti has made [shiki-latex](https://github.com/leafac/shiki-latex) to format his [PhD dissertation](https://github.com/leafac/yocto-cfa), which makes me feel incredibly inspired.
+
+![Fatih Kalifa's website and Leandro Facchinetti's dissertation](./assets/leandro-fatih.png)
+
+Made by [Pine](https://blog.matsu.io/about). I enjoy building tools to help others. If you have found Shiki useful, please consider [sponsoring](https://github.com/sponsors/octref) my Open Source development. Thank you.

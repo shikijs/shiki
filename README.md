@@ -36,10 +36,11 @@ shiki
 ## Seen
 
 - https://shiki.matsu.io
-- [VS Code website](https://code.visualstudio.com), such as in the [Programmatic Language Features page](https://code.visualstudio.com/api/language-extensions/programmatic-language-features).
-- [New TypeScript handbook](https://github.com/microsoft/TypeScript-New-Handbook), such as in the [everything page](https://microsoft.github.io/TypeScript-New-Handbook/everything/).
+- [VS Code website](https://code.visualstudio.com), such as in the [Notebook API page](https://code.visualstudio.com/api/extension-guides/notebook).
+- [TypeScript website](https://www.typescriptlang.org), such as in the [Basic Types documentation page](https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple).
 - [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
 - [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
+- [Fatih Kalifa's website](https://fatihkalifa.com/typescript-twoslash)
 
 ## Contributing
 
@@ -50,6 +51,12 @@ shiki
 
 - Shiki uses [Onigasm](https://github.com/NeekSandhu/onigasm) by [@NeekSandhu](https://github.com/NeekSandhu)
 - A lot of code is based on [vscode-textmate](https://github.com/Microsoft/vscode-textmate)
+
+## Sponsorship
+
+If you enjoy Shiki, please consider sponsoring my Open Source development. Thank you 🙏
+
+https://github.com/sponsors/octref
 
 ## License
 
