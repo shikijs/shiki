@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.2.0
+### 0.2.0 | 2020-08-24
 
 - Normalize all theme names to kebab-case.
 - Add GitHub light/dark themes.
