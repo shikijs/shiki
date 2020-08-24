@@ -1,6 +1,6 @@
 # shiki
 
-[Shiki](https://github.com/octref/shiki) is a beautiful Syntax Highlighter.
+[Shiki](https://github.com/shikijs/shiki) is a beautiful Syntax Highlighter.
 
 It uses TextMate grammar to tokenize strings, and colors the tokens with VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code, and it works great in your static website generator.
 
