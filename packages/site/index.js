@@ -1,7 +1,7 @@
 async function go() {
   const urlAndIds = [
     ['/palenight', 'palenight'],
-    ['/solarized', 'solarized'],
+    ['/mono', 'mono'],
     ['/rockstar', 'rockstar'],
     ['/svg.svg', 'svg']
   ]

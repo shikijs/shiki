@@ -77,11 +77,32 @@ function App() {
 export default App;
 ```
 
+Besides VS Code, TextMate (of course), Sublime Text and Atom all support [TextMate grammar](https://macromates.com/manual/en/language_grammars). If you can get syntax highlighting to work for [your favorite language](https://codewithrockstar.com/) in any one of them, try to [find its grammar](https://github.com/ra100/vscode-rockstar-language/blob/master/syntaxes/rockstar.tmLanguage.json) and load it in Shiki to syntax highlight it:
+
+```js
+const shiki = require('shiki')
+
+shiki.getHighlighter({
+  theme: 'nord',
+  langs: [
+    {
+      id: 'rockstar',
+      scopeName: 'source.rockstar',
+      path: './rockstar.tmLanguage.json' // or `plist`
+    }
+  ]
+}).then(highlighter => {
+  highlighter.codeToHtml('Shout Rockstar', 'rockstar')
+})
+```
+
+<div id="rockstar"></div>
+
 Shiki bundles a few good themes. Just change this line:
 
 ```js
 shiki.getHighlighter({
-  theme: 'Material-Theme-Palenight'
+  theme: 'material-theme-palenight'
 })
 ```
 
@@ -95,16 +116,17 @@ You can find all bundled themes in [shiki-themes](https://github.com/octref/shik
 
 ```js
 shiki.getHighlighter({
-  // 'dark_plus' | 'light_plus' => for the classic VS Code feel
-  // 'Material-Theme-*'         => for the materialists
-  // 'min-light' | 'white'      => for the minimalists
+  // 'dark-plus'   | 'light-plus'     => for the classic VS Code feel
+  // 'github-dark' | 'github-light'   => for the GitHub feel
+  // 'material-theme-*'               => for the materialists
+  // 'min-dark'    | 'min-light'      => for the minimalists
   theme: 'nord'
 })
 ```
 
-But really, any VS Code theme will do:
+But really, any VS Code theme will do. Here's [anotherglitchinthematrix/monochrome](https://github.com/anotherglitchinthematrix/monochrome):
 
-<div id="solarized"></div>
+<div id="mono"></div>
 
 Embedded language like Vue works great, too:
 
@@ -143,7 +165,19 @@ export default {
 </style>
 ```
 
-You can also build custom renderers to generate a different HTML structure, SVG or even images:
+For those visually attentive, render your code to SVG,
+
+<div id="svg"></div>
+
+drop the SVG into Figma, Affinity Designer or Adobe Illustrator,
+
+![Dropping into Figma and Affinity Designer](./assets/svg-figma-af.jpg)
+
+and use the full arsenal of vector editing tools to enhance your code presentation:
+
+![Editing In Figma](./assets/figma-editing.png)
+
+You can also build custom renderers to generate anything — a different HTML structure, SVG, or even images:
 
 ```js
 const shiki = require('shiki')
@@ -156,41 +190,6 @@ shiki.getHighlighter({
   const html = shiki.renderToHtml(tokens) 
 })
 ```
-
-Below is a SVG, containing code that generated itself:
-
-<div id="svg"></div>
-
-You can easily drop the SVG into Figma, Affinity Designer or Adobe Illustrator:
-
-![Dropping into Figma and Affinity Designer](./assets/svg-figma-af.jpg)
-
-And use the full arsenal of vector editing tools to enhance your code presentation:
-
-![Editing In Figma](./assets/figma-editing.png)
-
-Can't find your language? As long as you have a [TextMate grammar](https://macromates.com/manual/en/language_grammars), Shiki can highlight it:
-
-```js
-const shiki = require('shiki')
-
-shiki.getHighlighter({
-  theme: "nord",
-  langs: [{
-    id: 'rockstar',
-    scopeName: 'source.rockstar',
-    path: './rockstar.tmLanguage.json', // or `plist`
-    aliases: []
-  },
-  ...shiki.commonLangIds,
-  ...shiki.commonLangAliases
-  ]
-})
-```
-
-Here’s Fizzbuzz in [Rockstar](https://codewithrockstar.com).
-
-<div id="rockstar"></div>
 
 Made by [Pine](https://blog.matsu.io/about).
 
