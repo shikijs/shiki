@@ -5,7 +5,7 @@ import { Lang, ILanguageRegistration, languages as bundledLanguages } from 'shik
 import { Resolver } from './resolver'
 import { getOnigasm } from './onigLibs'
 import { tokenizeWithTheme, IThemedToken } from './themedTokenizer'
-import { renderToHtml } from './renderer'
+import { renderToHtml, makeHighlightSet } from './renderer'
 
 import { getTheme, Theme, IShikiTheme } from 'shiki-themes'
 
@@ -17,6 +17,11 @@ export interface HighlighterOptions {
 export interface HtmlOptions {
   // Pass an array of lines and line ranges (strikes like "4-18")
   highlightLines?: (string | number)[]
+  addLines?: (string | number)[]
+  deleteLines?: (string | number)[]
+  focusLines?: (string | number)[]
+  // When debugColors is true, include token scope info in the HTML as data attributes
+  debugColors?: boolean
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
@@ -102,12 +107,25 @@ class Shiki {
         if (!ltog[lang]) {
           throw Error(`No language registration for ${lang}`)
         }
-        const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], {
-          includeExplanation: false
-        })
+
+        const tokens = tokenizeWithTheme(
+          this._theme,
+          this._colorMap,
+          code,
+          ltog[lang],
+          {
+            includeExplanation: options?.debugColors
+          },
+          // Exclude deleted lines from highlighting, so they don't mess up the surrounding lines
+          options?.deleteLines ? makeHighlightSet(options.deleteLines) : new Set()
+        )
         return renderToHtml(tokens, {
           bg: this._theme.bg,
-          highlightLines: options?.highlightLines
+          highlightLines: options?.highlightLines,
+          addLines: options?.addLines,
+          deleteLines: options?.deleteLines,
+          focusLines: options?.focusLines,
+          debugColors: options?.debugColors
         })
       }
     }
