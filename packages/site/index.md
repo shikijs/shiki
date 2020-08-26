@@ -200,23 +200,3 @@ Among all usages of Shiki, I like Fatih Kalifa's [beautiful presentation](https:
 ![Fatih Kalifa's website and Leandro Facchinetti's dissertation](./assets/leandro-fatih.png)
 
 Made by [Pine](https://blog.matsu.io/about). I enjoy building tools to help others. If you have found Shiki useful, please consider [sponsoring](https://github.com/sponsors/octref) my Open Source development. Thank you.
-
-```jinja-html
-<html lang="en">
-<head>
-    <title>My Webpage</title>
-</head>
-<body>
-    <ul id="navigation">
-    {% for item in navigation %}
-        <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-    {% endfor %}
-    </ul>
-
-    <h1>My Webpage</h1>
-    {{ a_variable }}
-
-    {# a comment #}
-</body>
-</html>
-```
