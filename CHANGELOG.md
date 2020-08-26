@@ -4,6 +4,7 @@
 
 - Add `jinja-html` language, which embeds `jinja` language. [#24](https://github.com/shikijs/shiki/issues/24).
 - Remove `vue-html` language. Either use `vue` or `html` language.
+- Fix `php` syntax highlighting. [#21](https://github.com/shikijs/shiki/issues/21).
 
 ### 0.2.0 | 2020-08-24
 

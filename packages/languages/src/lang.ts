@@ -408,8 +408,13 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/perl6.tmLanguage.json')
   },
   {
-    id: 'php',
+    id: 'php-html',
     scopeName: 'text.html.php',
+    path: path.resolve(__dirname, '../data/php-html.tmLanguage.json')
+  },
+  {
+    id: 'php',
+    scopeName: 'source.php',
     path: path.resolve(__dirname, '../data/php.tmLanguage.json')
   },
   {

@@ -27,7 +27,14 @@ const aliases = {
   vb: ['cmd']
 }
 
-const embeddedLanguages = ['vue-html', 'jinja']
+const excludeLanguages = [
+  // `vue` or `html` instead
+  'vue-html',
+  // `jinja-html` instead
+  'jinja',
+  // `php` instead
+  'php-html'
+]
 
 const langRegistrationContent = langIds
   .map(id => {
@@ -57,7 +64,7 @@ import { ILanguageRegistration } from './index'
 
 export type Lang =
 ${langIds
-  .filter(id => !embeddedLanguages.includes(id))
+  .filter(id => !excludeLanguages.includes(id))
   .map(id => `  | '${id}'`)
   .join('\n')}
 

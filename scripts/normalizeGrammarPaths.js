@@ -26,6 +26,8 @@ const specialNewNames = {
   svelte: 'svelte',
   TypeScriptReact: 'tsx',
   ini: 'ini',
+  php: 'php',
+  'php-html': 'php-html',
   perl6: 'perl6',
   haml: 'haml',
   'fortran_free-form': 'fortran',
