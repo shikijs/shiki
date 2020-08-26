@@ -1,10 +1,11 @@
 # Changelog
 
-### 0.3.0
+### 0.2.1 | 2020-08-24
 
+- Allow custom languages for vuepress. [#80](https://github.com/shikijs/shiki/issues/80).
+- Fix `php` syntax highlighting. [#21](https://github.com/shikijs/shiki/issues/21).
 - Add `jinja-html` language, which embeds `jinja` language. [#24](https://github.com/shikijs/shiki/issues/24).
 - Remove `vue-html` language. Either use `vue` or `html` language.
-- Fix `php` syntax highlighting. [#21](https://github.com/shikijs/shiki/issues/21).
 
 ### 0.2.0 | 2020-08-24
 
