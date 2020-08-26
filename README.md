@@ -2,7 +2,7 @@
   <h2 align="center">Shiki</h2>
 </p>
 <p align="center">
-  Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Demo</a>.
+  Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Docs</a>. <a href="https://codesandbox.io/s/shiki-next-js-cir0y">CodeSandbox</a>.
 </p>
 
 ## Usage
@@ -35,7 +35,8 @@ shiki
 
 ## Seen
 
-- https://shiki.matsu.io
+- Shiki Docs: https://shiki.matsu.io
+- Interactive Demo on CodeSandbox (with Next.js): https://codesandbox.io/s/shiki-next-js-cir0y
 - [VS Code website](https://code.visualstudio.com), such as in the [Notebook API page](https://code.visualstudio.com/api/extension-guides/notebook).
 - [TypeScript website](https://www.typescriptlang.org), such as in the [Basic Types documentation page](https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple).
 - [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
