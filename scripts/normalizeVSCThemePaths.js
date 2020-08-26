@@ -10,6 +10,7 @@ const VSCODE_THEME_FOLDER_PATH = path.join(THEME_FOLDER_PATH, 'vscode')
  *
  * - Merge dark_defaults/dark_vs into dark_plus
  * - Merge light_defaults/light_vs into light_plus
+ * - Unshift `editor.foreground` and `editor.background` to beginning of `tokenColors`.
  */
 
 function readJson5(f) {
@@ -26,9 +27,18 @@ const darkPlusContent = readJson5('dark_plus.json')
 
 if (darkDefaultsContent && darkVSContent && darkPlusContent) {
   delete darkPlusContent['include']
+  const darkDefaultFgBgTokenColor = {
+    settings: {
+      foreground: darkDefaultsContent['colors']['editor.foreground']
+    }
+  }
   darkPlusContent.name = 'dark-plus'
   darkPlusContent.colors = { ...darkDefaultsContent.colors }
-  darkPlusContent.tokenColors = [...darkVSContent.tokenColors, ...darkPlusContent.tokenColors]
+  darkPlusContent.tokenColors = [
+    darkDefaultFgBgTokenColor,
+    ...darkVSContent.tokenColors,
+    ...darkPlusContent.tokenColors
+  ]
   darkPlusContent.semanticTokenColors = {
     ...darkVSContent.semanticTokenColors,
     ...darkPlusContent.semanticTokenColors
@@ -48,9 +58,18 @@ const lightPlusContent = readJson5('light_plus.json')
 
 if (lightDefaultsContent && lightVSContent && lightPlusContent) {
   delete lightPlusContent['include']
+  const lightDefaultFgBgTokenColor = {
+    settings: {
+      foreground: lightDefaultsContent['colors']['editor.foreground']
+    }
+  }
   lightPlusContent.name = 'light-plus'
   lightPlusContent.colors = { ...lightDefaultsContent.colors }
-  lightPlusContent.tokenColors = [...lightVSContent.tokenColors, ...lightPlusContent.tokenColors]
+  lightPlusContent.tokenColors = [
+    lightDefaultFgBgTokenColor,
+    ...lightVSContent.tokenColors,
+    ...lightPlusContent.tokenColors
+  ]
   lightPlusContent.semanticTokenColors = {
     ...lightVSContent.semanticTokenColors,
     ...lightPlusContent.semanticTokenColors
