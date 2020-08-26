@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.2.2 | 2020-08-26
+
+- Fix dark-plus syntax highlighting for uncolored white text.
+
 ### 0.2.1 | 2020-08-24
 
 - Allow custom languages for vuepress. [#80](https://github.com/shikijs/shiki/issues/80).
