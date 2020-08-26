@@ -6,7 +6,8 @@ module.exports = (options, ctx) => {
   return {
     async ready() {
       h = await shiki.getHighlighter({
-        theme: options.theme ? options.theme : 'nord'
+        theme: options.theme ? options.theme : 'nord',
+        langs: options.langs ? options.langs : {}
       })
     },
 
