@@ -27,6 +27,8 @@ const aliases = {
   vb: ['cmd']
 }
 
+const embeddedLanguages = ['vue-html', 'jinja']
+
 const langRegistrationContent = langIds
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
@@ -54,7 +56,10 @@ const langContent = `import * as path from 'path'
 import { ILanguageRegistration } from './index'
 
 export type Lang =
-${langIds.map(id => `  | '${id}'`).join('\n')}
+${langIds
+  .filter(id => !embeddedLanguages.includes(id))
+  .map(id => `  | '${id}'`)
+  .join('\n')}
 
 export const languages: ILanguageRegistration[] = [
 ${langRegistrationContent}

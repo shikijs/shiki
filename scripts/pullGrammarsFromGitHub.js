@@ -59,7 +59,9 @@ const languageSources = [
   'https://github.com/bbenoist/vscode-nix/blob/master/syntaxes/nix.tmLanguage',
   'https://github.com/elm-tooling/elm-language-client-vscode/blob/master/syntaxes/elm-syntax.json',
   'https://github.com/nwolverson/vscode-language-purescript/blob/master/syntaxes/purescript.json',
-  'https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/syntaxes/svelte.tmLanguage.json'
+  'https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/syntaxes/svelte.tmLanguage.json',
+  'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json',
+  'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json'
 ]
 
 async function go() {

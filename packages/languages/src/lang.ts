@@ -39,6 +39,7 @@ export type Lang =
   | 'ini'
   | 'java'
   | 'javascript'
+  | 'jinja-html'
   | 'json'
   | 'jsonc'
   | 'jsonnet'
@@ -91,7 +92,6 @@ export type Lang =
   | 'typescript'
   | 'vb'
   | 'viml'
-  | 'vue-html'
   | 'vue'
   | 'wasm'
   | 'xml'
@@ -289,6 +289,16 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.js',
     path: path.resolve(__dirname, '../data/javascript.tmLanguage.json'),
     aliases: ['js']
+  },
+  {
+    id: 'jinja-html',
+    scopeName: 'text.html.jinja',
+    path: path.resolve(__dirname, '../data/jinja-html.tmLanguage.json')
+  },
+  {
+    id: 'jinja',
+    scopeName: 'source.jinja',
+    path: path.resolve(__dirname, '../data/jinja.tmLanguage.json')
   },
   {
     id: 'json',

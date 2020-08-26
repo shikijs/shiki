@@ -1,11 +1,16 @@
 # Changelog
 
+### 0.3.0
+
+- Add `jinja-html` language, which embeds `jinja` language. [#24](https://github.com/shikijs/shiki/issues/24).
+- Remove `vue-html` language. Either use `vue` or `html` language.
+
 ### 0.2.0 | 2020-08-24
 
 - Normalize all theme names to kebab-case.
 - Add GitHub light/dark themes.
 - Remove less popular themes.
-- Add `hlsl`, `asm` (x86 Assembly), `m` (Matlab), `sas`, `d`, `dart`, `plsql`, `logo`, , `pas` (Object Pascal/Delphi), `cobol`, `kt` (Kotlin), `scala`, `abap`, `julia`, `scheme`, `prolog`, `ada`, `lisp`, `apex`, `fortran`, `haskell`, `hcl`, `hack`, `awk`, `as` (ActionScript), `tcl`, `ocaml`, `viml`, `puppet`, `jsonnet`, `smalltalk`, `cr` (Crystal), `wat` (WASM), `nix`, `elm`, `purescript`, `svelte`.
+- Add `hlsl`, `asm` (x86 Assembly), `m` (Matlab), `sas`, `d`, `dart`, `plsql`, `logo`, , `pas` (Object Pascal/Delphi), `cobol`, `kt` (Kotlin), `scala`, `abap`, `julia`, `scheme`, `prolog`, `ada`, `lisp`, `apex`, `fortran`, `haskell`, `hcl`, `hack`, `awk`, `as` (ActionScript), `tcl`, `ocaml`, `viml`, `puppet`, `jsonnet`, `smalltalk`, `cr` (Crystal), `wat` (WASM), `nix`, `elm`, `purescript` and `svelte` languages.
 - Add `pug` language and make `jade` an alias of it.
 - Use GitHub workflow to update grammars periodically. [#72](https://github.com/shikijs/shiki/issues/72).
 - Use GitHub workflow to update themes periodically. [#71](https://github.com/shikijs/shiki/issues/71).
