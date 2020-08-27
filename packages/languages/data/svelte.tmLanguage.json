@@ -791,7 +791,7 @@
       ]
     },
     "tag-moustaches": {
-      "begin": "\\b([a-zA-Z\\-_:]+)=(\"|')(?=.*{)",
+      "begin": "\\b([a-zA-Z\\-_:]+)=(\"|')",
       "beginCaptures": {
         "1": {
           "name": "entity.other.attribute-name.html"
