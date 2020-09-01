@@ -3,6 +3,7 @@ const path = require('path')
 
 const langDir = path.resolve(__dirname, '../packages/languages/data')
 const langPath = path.resolve(__dirname, '../packages/languages/src/lang.ts')
+const readmePath = path.resolve(__dirname, '../packages/languages/README.md')
 
 const files = fs.readdirSync(langDir)
 const langIds = files.map(f => f.replace('.tmLanguage.json', ''))
@@ -74,3 +75,17 @@ ${langRegistrationContent}
 `
 
 fs.writeFileSync(langPath, langContent)
+
+const readmeReplaceContent = `export type Lang =
+${langIds
+  .filter(id => !excludeLanguages.includes(id))
+  .map(id => `  | '${id}'`)
+  .join('\n')}
+`
+
+const readmeSrc = fs.readFileSync(readmePath, 'utf-8')
+const newReadmeSrc = readmeSrc.replace(/## Literal Values\n\n```ts([^`]+)```/, (_match, langs) => {
+  return '## Literal Values\n\n```ts\n' + readmeReplaceContent + '```'
+})
+
+fs.writeFileSync(readmePath, newReadmeSrc)

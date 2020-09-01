@@ -13,23 +13,22 @@
 ## Literal Values
 
 ```ts
-export type TVSCode =
+export type Theme =
   | 'dark-plus'
+  | 'github-dark'
+  | 'github-light'
   | 'light-plus'
-  | 'monokai'
-  | 'solarized-dark'
-  | 'solarized-light'
-
-export type TMaterial =
   | 'material-theme-darker'
   | 'material-theme-default'
   | 'material-theme-lighter'
   | 'material-theme-ocean'
   | 'material-theme-palenight'
-
-export type TNice = 'nord' | 'min-light' | 'min-dark'
-
-export type TTheme = TVSCode | TMaterial | TNice
+  | 'min-dark'
+  | 'min-light'
+  | 'monokai'
+  | 'nord'
+  | 'solarized-dark'
+  | 'solarized-light'
 ```
 
 ## Yours
