@@ -33,7 +33,7 @@ shiki
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
-Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play with Shiki, or try it out on [CodeSandbox](https://codesandbox.io/s/shiki-starter-gphup).
+Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play with Shiki, or try it out on [Repl.it](https://repl.it/@octref/shiki-starter).
 
 ## Seen
 
