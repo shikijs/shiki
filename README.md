@@ -2,7 +2,7 @@
   <h2 align="center">Shiki</h2>
 </p>
 <p align="center">
-  Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Docs</a>. <a href="https://codesandbox.io/s/shiki-next-js-cir0y">CodeSandbox</a>.
+  Shiki is a beautiful Syntax Highlighter. <a href="http://shiki.matsu.io">Demo</a>.
 </p>
 
 ## Usage
@@ -32,6 +32,8 @@ shiki
 - [Languages](./packages/languages/README.md#literal-values)
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
+
+Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play with Shiki, or try it out on [CodeSandbox](https://codesandbox.io/s/shiki-starter-gphup).
 
 ## Seen
 
