@@ -734,6 +734,9 @@
     "comment": {
       "patterns": [
         {
+          "include": "#preprocessor"
+        },
+        {
           "include": "#comment-section"
         },
         {
@@ -2302,6 +2305,54 @@
       "patterns": [
         {
           "include": "#expression"
+        }
+      ]
+    },
+    "preprocessor": {
+      "name": "meta.preprocessor.ada",
+      "patterns": [
+        {
+          "match": "^\\s*(#)(if|elsif)\\s+(.*)$",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.directive.ada"
+            },
+            "2": {
+              "name": "keyword.control.directive.conditional.ada"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#expression"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "match": "^\\s*(#)(end if)(;)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.directive.ada"
+            },
+            "2": {
+              "name": "keyword.control.directive.conditional"
+            },
+            "3": {
+              "name": "punctuation.ada"
+            }
+          }
+        },
+        {
+          "match": "^\\s*(#)(else)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.directive.ada"
+            },
+            "2": {
+              "name": "keyword.control.directive.conditional"
+            }
+          }
         }
       ]
     },
