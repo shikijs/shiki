@@ -94,6 +94,7 @@ export type Lang =
   | 'viml'
   | 'vue'
   | 'wasm'
+  | 'wenyan'
   | 'xml'
   | 'xsl'
   | 'yaml'
@@ -590,6 +591,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'wasm',
     scopeName: 'source.wat',
     path: path.resolve(__dirname, '../data/wasm.tmLanguage.json')
+  },
+  {
+    id: 'wenyan',
+    scopeName: 'source.wenyan',
+    path: path.resolve(__dirname, '../data/wenyan.tmLanguage.json')
   },
   {
     id: 'xml',

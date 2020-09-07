@@ -17,7 +17,12 @@ function normalizeGrammarFile(file, newName) {
       ? json5.parse(fs.readFileSync(oldPath, 'utf-8'))
       : plistParse(fs.readFileSync(oldPath, 'utf-8'))
 
-    const kebabName = newName || kebabCase(parsedContent.name.toLowerCase())
+    let kebabName = newName
+    if (!kebabName && parsedContent.name) {
+      kebabName = kebabCase(parsedContent.name.toLowerCase())
+    } else if (!kebabName && parsedContent.scopeName) {
+      kebabName = kebabCase(parsedContent.scopeName.split('.').pop())
+    }
     const newPath = path.resolve(GRAMMAR_FOLDER_PATH, `${kebabName}.tmLanguage.json`)
     parsedContent.name = kebabName
     if (newPath !== oldPath) {

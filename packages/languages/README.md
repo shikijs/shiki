@@ -106,6 +106,7 @@ export type Lang =
   | 'viml'
   | 'vue'
   | 'wasm'
+  | 'wenyan'
   | 'xml'
   | 'xsl'
   | 'yaml'
