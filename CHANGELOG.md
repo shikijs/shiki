@@ -1,11 +1,8 @@
 # Changelog
 
-### 0.2.4 | 2020-09-02
+### 0.2.3 | 2020-09-08
 
 - Add `文言` language. [#88](https://github.com/shikijs/shiki/issues/88).
-
-### 0.2.3 | 2020-09-02
-
 - Add `slack-theme-dark-mode` and `slack-theme-ochin` themes. Thanks to contribution from [Christoph Werner](https://github.com/codepunkt). [#78](https://github.com/shikijs/shiki/pull/78).
 
 ### 0.2.2 | 2020-08-26
