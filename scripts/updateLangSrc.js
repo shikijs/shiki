@@ -25,7 +25,8 @@ const aliases = {
   shellscript: ['shell', 'bash', 'sh', 'zsh'],
   stylus: ['styl'],
   typescript: ['ts'],
-  vb: ['cmd']
+  vb: ['cmd'],
+  文言: ['wenyan']
 }
 
 const excludeLanguages = [

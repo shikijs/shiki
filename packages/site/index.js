@@ -3,6 +3,7 @@ async function go() {
     ['/palenight', 'palenight'],
     ['/mono', 'mono'],
     ['/rockstar', 'rockstar'],
+    ['/文言', '文言'],
     ['/svg.svg', 'svg']
   ]
 

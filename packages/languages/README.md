@@ -106,10 +106,10 @@ export type Lang =
   | 'viml'
   | 'vue'
   | 'wasm'
-  | 'wenyan'
   | 'xml'
   | 'xsl'
   | 'yaml'
+  | '文言'
 ```
 
 ## Add

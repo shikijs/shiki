@@ -94,10 +94,10 @@ export type Lang =
   | 'viml'
   | 'vue'
   | 'wasm'
-  | 'wenyan'
   | 'xml'
   | 'xsl'
   | 'yaml'
+  | '文言'
 
 export const languages: ILanguageRegistration[] = [
   {
@@ -593,11 +593,6 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/wasm.tmLanguage.json')
   },
   {
-    id: 'wenyan',
-    scopeName: 'source.wenyan',
-    path: path.resolve(__dirname, '../data/wenyan.tmLanguage.json')
-  },
-  {
     id: 'xml',
     scopeName: 'text.xml',
     path: path.resolve(__dirname, '../data/xml.tmLanguage.json')
@@ -611,5 +606,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: path.resolve(__dirname, '../data/yaml.tmLanguage.json')
+  },
+  {
+    id: '文言',
+    scopeName: 'source.wenyan',
+    path: path.resolve(__dirname, '../data/文言.tmLanguage.json'),
+    aliases: ['wenyan']
   }
 ]
