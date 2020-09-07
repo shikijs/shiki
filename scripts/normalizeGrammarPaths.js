@@ -35,7 +35,8 @@ const specialNewNames = {
   sas: 'sas',
   prolog: 'prolog',
   'language-x86_64-assembly': 'asm',
-  wat: 'wasm'
+  wat: 'wasm',
+  wenyan: '文言'
 }
 
 for (let f of files) {
