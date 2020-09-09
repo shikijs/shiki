@@ -1,6 +1,9 @@
 {
+  "_LICENSE": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json",
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "fileTypes": [
+    "ccp",
+    "scbl",
     "cobol",
     "cbl",
     "cblsrce",
@@ -29,8 +32,23 @@
       "name": "token.info-token.cobol"
     },
     {
+      "match": "(^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*])(\\/\\s.*$)",
+      "name": "comment.line.cobol.newpage"
+    },
+    {
       "match": "(^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*])(\\*.*$)",
       "name": "comment.line.cobol.fixed"
+    },
+    {
+      "match": "(^[0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s])(\\/.*$)",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.cobol"
+        },
+        "2": {
+          "name": "comment.line.cobol.newpage"
+        }
+      }
     },
     {
       "match": "(^[0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s])(\\*.*$)",
@@ -44,13 +62,24 @@
       }
     },
     {
-      "match": "(^[0-9a-zA-Z\\s\\$#%\\.][0-9a-zA-Z\\s\\$#%\\.][0-9a-zA-Z\\s\\$#%\\.][0-9a-zA-Z\\s\\$#%\\.][0-9a-zA-Z\\s\\$#%\\.][0-9a-zA-Z\\s\\$#%\\.])(\\*.*$)",
+      "match": "(^[0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@])(\\*.*$)",
       "captures": {
         "1": {
           "name": "constant.cobol"
         },
         "2": {
           "name": "comment.line.cobol.fixed"
+        }
+      }
+    },
+    {
+      "match": "(^[0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@])(\\/.*$)",
+      "captures": {
+        "1": {
+          "name": "constant.cobol"
+        },
+        "2": {
+          "name": "comment.line.cobol.newpage"
         }
       }
     },
