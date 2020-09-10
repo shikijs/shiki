@@ -98,11 +98,11 @@ shiki.getHighlighter({
 
 <div id="rockstar"></div>
 
-Shiki includes support for over [100 programming languages](https://github.com/shikijs/shiki/tree/master/packages/languages), including a traditional Chinese one, [文言](https://wy-lang.org/):
+Over [100 programming languages](https://github.com/shikijs/shiki/tree/master/packages/languages) are supported out of the box, including a traditional Chinese one, [文言](https://wy-lang.org/):
 
 <div id="文言"></div>
 
-Shiki bundles a few good themes. Just change this line:
+Shiki can load any VS Code themes. Just change this line:
 
 ```js
 shiki.getHighlighter({
