@@ -162,7 +162,7 @@
             },
             {
               "match": "([-+])?([A-Za-z_][A-Za-z0-9_]*)(?:\\s+(as|super)\\s+([A-Za-z_][A-Za-z0-9_]*))?",
-              "name": "storage.type.php"
+              "name": "support.type.php"
             },
             {
               "include": "#type-annotation"
@@ -361,15 +361,15 @@
       ]
     },
     "type-annotation": {
-      "name": "storage.type.php",
+      "name": "support.type.php",
       "patterns": [
         {
           "match": "\\barray\\b",
-          "name": "storage.type.array.php"
+          "name": "support.type.array.php"
         },
         {
           "match": "\\b(?:bool|int|float|string|array|resource|mixed|arraykey|nonnull|dict|vec|keyset)\\b",
-          "name": "storage.type.php"
+          "name": "support.type.php"
         },
         {
           "begin": "([A-Za-z_][A-Za-z0-9_]*)<",
@@ -577,7 +577,7 @@
       "patterns": [
         {
           "match": "(parent|static|self)(?=[^a-z0-9_])",
-          "name": "storage.type.php"
+          "name": "support.type.php"
         },
         {
           "include": "#class-name"
@@ -1100,7 +1100,7 @@
           "patterns": [
             {
               "match": "(self|static|parent)\\b",
-              "name": "storage.type.php"
+              "name": "support.type.php"
             },
             {
               "include": "#class-name"
@@ -1157,14 +1157,14 @@
         {
           "captures": {
             "1": {
-              "name": "storage.type.php"
+              "name": "support.type.php"
             }
           },
           "match": "(?i)\\s*\\(\\s*(array|real|double|float|int(eger)?|bool(ean)?|string|object|binary|unset|arraykey|nonnull|dict|vec|keyset)\\s*\\)"
         },
         {
           "match": "(?i)\\b(array|real|double|float|int(eger)?|bool(ean)?|string|class|clone|var|function|interface|trait|parent|self|object|arraykey|nonnull|dict|vec|keyset)\\b",
-          "name": "storage.type.php"
+          "name": "support.type.php"
         },
         {
           "match": "(?i)\\b(global|abstract|const|extends|implements|final|p(r(ivate|otected)|ublic)|static)\\b",

@@ -1,5 +1,5 @@
 {
-  "_LICENSE": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json",
+  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json",
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "fileTypes": [
     "ccp",
@@ -32,12 +32,26 @@
       "name": "token.info-token.cobol"
     },
     {
-      "match": "(^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*])(\\/\\s.*$)",
-      "name": "comment.line.cobol.newpage"
+      "match": "(^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*])(\\/.*$)",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.cobol"
+        },
+        "2": {
+          "name": "comment.line.cobol.newpage"
+        }
+      }
     },
     {
       "match": "(^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*])(\\*.*$)",
-      "name": "comment.line.cobol.fixed"
+      "captures": {
+        "1": {
+          "name": "constant.numeric.cobol"
+        },
+        "2": {
+          "name": "comment.line.cobol.fixed"
+        }
+      }
     },
     {
       "match": "(^[0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s][0-9\\s])(\\/.*$)",
