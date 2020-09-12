@@ -242,6 +242,9 @@
           "include": "#singleton-type"
         },
         {
+          "include": "#inline"
+        },
+        {
           "include": "#scala-quoted"
         },
         {
@@ -559,6 +562,26 @@
         }
       }
     },
+    "inline": {
+      "patterns": [
+        {
+          "match": "\\b(inline)\\b(?=(?:.(?!val|def|given))*(if|match))",
+          "captures": {
+            "1": {
+              "name": "keyword.control.flow.scala"
+            }
+          }
+        },
+        {
+          "match": "\\b(inline)\\s+(?=(([\\w\\s]*(val|def|given))|((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)\\s*:))",
+          "captures": {
+            "1": {
+              "name": "storage.modifier.other"
+            }
+          }
+        }
+      ]
+    },
     "scala-quoted": {
       "match": "('\\{|'\\[)(?!')",
       "name": "constant.other.quoted.scala"
@@ -695,19 +718,24 @@
           "name": "meta.package.scala"
         },
         {
-          "match": "\\b(given)\\b\\s*(?:\\b(as)\\b|([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)|(`[^`]+`|(?!//|/\\*)(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))?)",
+          "match": "\\b(given)\\s+(?:([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)|(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)))?(?=\\s+as\\b|\\(|\\[[^;]+\\s(?:as|<:)\\s)",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
             },
             "2": {
-              "name": "keyword.declaration.scala"
-            },
-            "3": {
               "name": "entity.name.type.declaration"
             },
-            "4": {
+            "3": {
               "name": "entity.name.declaration"
+            }
+          }
+        },
+        {
+          "match": "\\b(given)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.declaration.scala"
             }
           }
         }
@@ -814,7 +842,7 @@
           "name": "storage.modifier.access"
         },
         {
-          "match": "\\b(synchronized|@volatile|abstract|final|lazy|sealed|implicit|inline |opaque |override|@transient|@native)\\b",
+          "match": "\\b(synchronized|@volatile|abstract|final|lazy|sealed|implicit|opaque |override|@transient|@native)\\b",
           "name": "storage.modifier.other"
         }
       ]
@@ -985,7 +1013,7 @@
     "inheritance": {
       "patterns": [
         {
-          "match": "(extends|with|derives)\\s+((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`|(?=\\([^\\)]+=>)|(?=\"))",
+          "match": "(extends|with|derives)\\s+([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`|(?=\\([^\\)]+=>)|(?=(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))|(?=\"))",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -1000,21 +1028,7 @@
     "extension": {
       "patterns": [
         {
-          "match": "(extension)\\s+(?:((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))\\s)?\\s*(on|(?=\\{))",
-          "captures": {
-            "1": {
-              "name": "keyword.declaration.scala"
-            },
-            "2": {
-              "name": "entity.name.class"
-            },
-            "3": {
-              "name": "keyword.declaration.scala"
-            }
-          }
-        },
-        {
-          "match": "(extension)\\s+(?=[\\[\\(])",
+          "match": "^\\s*(extension)\\s+(?=[\\[\\(])",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
