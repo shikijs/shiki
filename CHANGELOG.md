@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.2.4
+### 0.2.4 | 2020-09-13
 
 - Fix `RangeError: Invalid array length` in `vuepress-plugin-shiki`.
 - 🙌 Wrap line in `<span class='line'></span>`. [#76](https://github.com/shikijs/shiki/issues/76). Thanks to contribution from [Christoph Werner](https://github.com/codepunkt).
