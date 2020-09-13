@@ -58,7 +58,7 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 
 ## Sponsorship
 
-If you enjoy Shiki, please consider sponsoring my Open Source development. Thank you 🙏
+If you find Shiki useful, please consider sponsoring my Open Source development. Thank you 🙏
 
 https://github.com/sponsors/octref
 
