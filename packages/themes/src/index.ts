@@ -3,7 +3,7 @@ import * as path from 'path'
 import { loadTheme, IShikiTheme } from './loadTheme'
 import { Theme, themes } from './theme'
 
-export { Theme } from './theme'
+export { Theme, themes as BUNDLED_THEMES } from './theme'
 
 const allThemes = {}
 

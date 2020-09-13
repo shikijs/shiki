@@ -8,4 +8,4 @@ export interface ILanguageRegistration {
   grammar?: IRawGrammar
 }
 
-export { Lang, languages } from './lang'
+export { Lang, languages as BUNDLED_LANGUAGES } from './lang'

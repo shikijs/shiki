@@ -1,6 +1,6 @@
 import { Registry } from 'vscode-textmate'
 
-import { Lang, ILanguageRegistration, languages as bundledLanguages } from 'shiki-languages'
+import { Lang, ILanguageRegistration, BUNDLED_LANGUAGES } from 'shiki-languages'
 
 import { Resolver } from './resolver'
 import { getOnigasm } from './onigLibs'
@@ -24,10 +24,10 @@ export async function getHighlighter(options: HighlighterOptions) {
     t = getTheme('nord')
   }
 
-  let languages: ILanguageRegistration[] = bundledLanguages
+  let languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
 
   if (options.langs) {
-    languages = [...bundledLanguages, ...options.langs]
+    languages = [...BUNDLED_LANGUAGES, ...options.langs]
   }
 
   const s = new Shiki(t, languages)
