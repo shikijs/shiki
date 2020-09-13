@@ -15,7 +15,7 @@ module.exports = {
 }
 ```
 
-`TTheme`
+[`TTheme` values](../themes/README.md#literal-values)
 
 ```ts
 export type TVSCode =
