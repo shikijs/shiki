@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.2.5 | 2020-09-17
+
+- Reduce dependency size (shiki-themes is 47M). [#94](https://github.com/shikijs/shiki/issues/94).
+
 ### 0.2.4 | 2020-09-13
 
 - Fix `RangeError: Invalid array length` in `vuepress-plugin-shiki`.
