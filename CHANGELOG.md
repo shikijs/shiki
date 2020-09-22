@@ -3,6 +3,7 @@
 ### 0.2.6
 
 - Upgrade to onigasm 2.2.5.
+- 🙌 Fix wrong escape sequence in vuepress plugin. [#93](https://github.com/shikijs/shiki/issues/93). Thanks to contribution from [Yu Zhang](https://github.com/yzhang-gh).
 
 ### 0.2.5 | 2020-09-17
 
