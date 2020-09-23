@@ -62,7 +62,8 @@ const languageSources = [
   'https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/syntaxes/svelte.tmLanguage.json',
   'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json',
   'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json',
-  'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json'
+  'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json',
+  'https://github.com/elixir-editors/elixir-tmbundle/blob/master/Syntaxes/Elixir.tmLanguage'
 ]
 
 async function go() {

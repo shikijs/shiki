@@ -33,6 +33,7 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'dockerfile'
+  | 'elixir'
   | 'elm'
   | 'fortran'
   | 'fsharp'
