@@ -21,6 +21,7 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'dockerfile'
+  | 'elixir'
   | 'elm'
   | 'fortran'
   | 'fsharp'
@@ -197,6 +198,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'dockerfile',
     scopeName: 'source.dockerfile',
     path: path.resolve(__dirname, '../data/dockerfile.tmLanguage.json')
+  },
+  {
+    id: 'elixir',
+    scopeName: 'source.elixir',
+    path: path.resolve(__dirname, '../data/elixir.tmLanguage.json')
   },
   {
     id: 'elm',
