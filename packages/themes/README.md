@@ -33,6 +33,8 @@ export type Theme =
   | 'solarized-light'
 ```
 
+You can preview some of these themes on https://vscodethemes.com/.
+
 ## Yours
 
 ```js
