@@ -1,11 +1,15 @@
 # clean up
-rm -rf tmp
+rm -rf tmp/grammars
 mkdir -p tmp/grammars
 
 echo "> Getting VS Code grammars"
-git clone git@github.com:microsoft/vscode.git tmp/vscode --depth=1
-# Two html file will cause `cp` to fail
-mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
+if [ ! -d tmp/vscode ]; then
+  git clone git@github.com:microsoft/vscode.git tmp/vscode --depth=1
+  # Two html file will cause `cp` to fail
+  mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
+else
+  (cd tmp/vscode && git pull)
+fi
 cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 echo "> Done getting VS Code grammars"
 

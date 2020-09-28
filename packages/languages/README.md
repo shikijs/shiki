@@ -35,6 +35,7 @@ export type Lang =
   | 'dockerfile'
   | 'elixir'
   | 'elm'
+  | 'erlang'
   | 'fortran'
   | 'fsharp'
   | 'git-commit'

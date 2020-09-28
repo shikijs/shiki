@@ -23,6 +23,7 @@ export type Lang =
   | 'dockerfile'
   | 'elixir'
   | 'elm'
+  | 'erlang'
   | 'fortran'
   | 'fsharp'
   | 'git-commit'
@@ -208,6 +209,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'elm',
     scopeName: 'source.elm',
     path: path.resolve(__dirname, '../data/elm.tmLanguage.json')
+  },
+  {
+    id: 'erlang',
+    scopeName: 'source.erlang',
+    path: path.resolve(__dirname, '../data/erlang.tmLanguage.json')
   },
   {
     id: 'fortran',
