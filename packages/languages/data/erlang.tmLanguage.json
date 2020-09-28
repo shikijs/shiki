@@ -1,6 +1,12 @@
 {
   "comment": "The recognition of function definitions and compiler directives (such as module, record and macro definitions) requires that each of the aforementioned constructs must be the first string inside a line (except for whitespace).  Also, the function/module/record/macro names must be given unquoted.  -- desp",
-  "fileTypes": ["erl", "escript", "hrl", "xrl", "yrl"],
+  "fileTypes": [
+    "erl",
+    "escript",
+    "hrl",
+    "xrl",
+    "yrl"
+  ],
   "keyEquivalent": "^~E",
   "name": "erlang",
   "patterns": [
