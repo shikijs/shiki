@@ -608,7 +608,7 @@
       ]
     },
     {
-      "begin": "(</?)([A-Z][a-zA-Z0-9:-]*)",
+      "begin": "(</?)([A-Z][a-zA-Z0-9\\.:-]*)",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.html"
