@@ -102,6 +102,7 @@ export type Lang =
   | 'swift'
   | 'tcl'
   | 'toml'
+  | 'ts'
   | 'tsx'
   | 'typescript'
   | 'vb'

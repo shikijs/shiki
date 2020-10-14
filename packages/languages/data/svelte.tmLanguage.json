@@ -706,7 +706,7 @@
     },
     "tag-generic-attribute": {
       "name": "entity.other.attribute-name.html",
-      "match": "\\b([a-zA-Z\\-_:]+)"
+      "match": "(?<=[^=])\\b([a-zA-Z\\-_:]+)"
     },
     "tag-id-attribute": {
       "name": "meta.attribute-with-value.id.html",
