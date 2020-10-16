@@ -225,6 +225,12 @@
           "name": "keyword.identifiers.cobol"
         }
       },
+      "patterns": [
+        {
+          "match": "(^[0-9 ][0-9 ][0-9 ][0-9 ][0-9 ][0-9 ])",
+          "name": "constant.numeric.line_number.cobol"
+        }
+      ],
       "name": "comment.block.cobol.remark",
       "end": "(?=((?<![-_])(?i:remarks|author|date-written|source-computer|object-computer|installation|date-compiled|special-names|security|environment\\s+division|data\\s+division|working-storage\\s+section|input-output\\s+section|linkage\\s+section|procedure\\s+division|local-storage\\s+section)|^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*]\\*.*$|^\\+$|^$))"
     },

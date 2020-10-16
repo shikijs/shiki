@@ -783,7 +783,7 @@
       ]
     },
     {
-      "begin": "(?:\\s*)((\\\\)begin)(\\{)(array|tabular[xy*]?|xltabular)(\\})(\\s*\\n)?",
+      "begin": "(?:\\s*)((\\\\)begin)(\\{)(array|tabular[xy*]?|xltabular|longtable)(\\})(\\s*\\n)?",
       "captures": {
         "1": {
           "name": "support.function.be.latex"
