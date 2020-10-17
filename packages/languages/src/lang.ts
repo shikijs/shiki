@@ -2,29 +2,44 @@ import * as path from 'path'
 import { ILanguageRegistration } from './index'
 
 export type Lang =
+  | 'JavaScriptReact'
+  | 'MagicPython'
+  | 'MagicRegExp'
+  | 'TypeScriptReact'
   | 'abap'
   | 'actionscript-3'
   | 'ada'
   | 'apex'
   | 'asm'
+  | 'asp-vb-net.tmlanguage.json'
+  | 'asp-vb-net.tmlanguage.json'
   | 'awk'
   | 'bat'
+  | 'batchfile'
   | 'c'
   | 'clojure'
   | 'cobol'
   | 'coffee'
+  | 'coffeescript'
+  | 'cpp.embedded.macro'
   | 'cpp'
   | 'crystal'
   | 'csharp'
+  | 'cshtml'
   | 'css'
   | 'd'
   | 'dart'
   | 'diff'
+  | 'docker'
   | 'dockerfile'
+  | 'edi'
+  | 'electronic-data-interchange'
   | 'elixir'
+  | 'elm-syntax'
   | 'elm'
   | 'erlang'
   | 'fortran'
+  | 'fortran_free-form'
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
@@ -37,11 +52,15 @@ export type Lang =
   | 'haskell'
   | 'hcl'
   | 'hlsl'
+  | 'html-derivative'
   | 'html'
+  | 'ignore'
   | 'ini'
   | 'java'
   | 'javascript'
   | 'jinja-html'
+  | 'jsdoc.js.injection'
+  | 'jsdoc.ts.injection'
   | 'json'
   | 'jsonc'
   | 'jsonnet'
@@ -54,19 +73,23 @@ export type Lang =
   | 'log'
   | 'logo'
   | 'lua'
+  | 'make'
   | 'makefile'
   | 'markdown'
   | 'matlab'
   | 'nix'
+  | 'objective-c++'
   | 'objective-c'
   | 'ocaml'
   | 'pascal'
   | 'perl'
   | 'perl6'
   | 'php'
+  | 'platform'
   | 'pls'
   | 'postcss'
   | 'powershell'
+  | 'prolog.swi'
   | 'prolog'
   | 'pug'
   | 'puppet'
@@ -78,12 +101,17 @@ export type Lang =
   | 'rust'
   | 'sas'
   | 'sass'
+  | 'sassdoc'
   | 'scala'
   | 'scheme'
   | 'scss'
+  | 'searchResult'
   | 'shaderlab'
+  | 'shell-unix-bash'
   | 'shellscript'
   | 'smalltalk'
+  | 'solidity'
+  | 'soliditysec'
   | 'sql'
   | 'stylus'
   | 'svelte'
@@ -95,14 +123,39 @@ export type Lang =
   | 'typescript'
   | 'vb'
   | 'viml'
+  | 'vue-generated'
+  | 'vue-postcss'
   | 'vue'
+  | 'vyper'
   | 'wasm'
+  | 'wat'
+  | 'wenyan'
   | 'xml'
   | 'xsl'
   | 'yaml'
   | '文言'
 
 export const languages: ILanguageRegistration[] = [
+  {
+    id: 'JavaScriptReact',
+    scopeName: 'source.js.jsx',
+    path: path.resolve(__dirname, '../data/JavaScriptReact.tmLanguage.json')
+  },
+  {
+    id: 'MagicPython',
+    scopeName: 'source.python',
+    path: path.resolve(__dirname, '../data/MagicPython.tmLanguage.json')
+  },
+  {
+    id: 'MagicRegExp',
+    scopeName: 'source.regexp.python',
+    path: path.resolve(__dirname, '../data/MagicRegExp.tmLanguage.json')
+  },
+  {
+    id: 'TypeScriptReact',
+    scopeName: 'source.tsx',
+    path: path.resolve(__dirname, '../data/TypeScriptReact.tmLanguage.json')
+  },
   {
     id: 'abap',
     scopeName: 'source.abap',
@@ -129,6 +182,16 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/asm.tmLanguage.json')
   },
   {
+    id: 'asp-vb-net.tmlanguage.json',
+    scopeName: 'source.asp.vb.net',
+    path: path.resolve(__dirname, '../data/asp-vb-net.tmlanguage.json.tmLanguage.json')
+  },
+  {
+    id: 'asp-vb-net.tmlanguage.json',
+    scopeName: 'source.asp.vb.net',
+    path: path.resolve(__dirname, '../data/asp-vb-net.tmlanguage.json.tmLanguage.json')
+  },
+  {
     id: 'awk',
     scopeName: 'source.awk',
     path: path.resolve(__dirname, '../data/awk.tmLanguage.json')
@@ -138,6 +201,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.batchfile',
     path: path.resolve(__dirname, '../data/bat.tmLanguage.json'),
     aliases: ['batch']
+  },
+  {
+    id: 'batchfile',
+    scopeName: 'source.batchfile',
+    path: path.resolve(__dirname, '../data/batchfile.tmLanguage.json')
   },
   {
     id: 'c',
@@ -161,6 +229,16 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/coffee.tmLanguage.json')
   },
   {
+    id: 'coffeescript',
+    scopeName: 'source.coffee',
+    path: path.resolve(__dirname, '../data/coffeescript.tmLanguage.json')
+  },
+  {
+    id: 'cpp.embedded.macro',
+    scopeName: 'source.cpp.embedded.macro',
+    path: path.resolve(__dirname, '../data/cpp.embedded.macro.tmLanguage.json')
+  },
+  {
     id: 'cpp',
     scopeName: 'source.cpp.embedded.macro',
     path: path.resolve(__dirname, '../data/cpp.tmLanguage.json')
@@ -175,6 +253,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cs',
     path: path.resolve(__dirname, '../data/csharp.tmLanguage.json'),
     aliases: ['c#']
+  },
+  {
+    id: 'cshtml',
+    scopeName: 'text.html.cshtml',
+    path: path.resolve(__dirname, '../data/cshtml.tmLanguage.json')
   },
   {
     id: 'css',
@@ -197,14 +280,34 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/diff.tmLanguage.json')
   },
   {
+    id: 'docker',
+    scopeName: 'source.dockerfile',
+    path: path.resolve(__dirname, '../data/docker.tmLanguage.json')
+  },
+  {
     id: 'dockerfile',
     scopeName: 'source.dockerfile',
     path: path.resolve(__dirname, '../data/dockerfile.tmLanguage.json')
   },
   {
+    id: 'edi',
+    scopeName: 'source.edi',
+    path: path.resolve(__dirname, '../data/edi.tmLanguage.json')
+  },
+  {
+    id: 'electronic-data-interchange',
+    scopeName: 'source.edi',
+    path: path.resolve(__dirname, '../data/electronic-data-interchange.tmLanguage.json')
+  },
+  {
     id: 'elixir',
     scopeName: 'source.elixir',
     path: path.resolve(__dirname, '../data/elixir.tmLanguage.json')
+  },
+  {
+    id: 'elm-syntax',
+    scopeName: 'source.elm',
+    path: path.resolve(__dirname, '../data/elm-syntax.tmLanguage.json')
   },
   {
     id: 'elm',
@@ -220,6 +323,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'fortran',
     scopeName: 'source.fortran.free',
     path: path.resolve(__dirname, '../data/fortran.tmLanguage.json')
+  },
+  {
+    id: 'fortran_free-form',
+    scopeName: 'source.fortran.free',
+    path: path.resolve(__dirname, '../data/fortran_free-form.tmLanguage.json')
   },
   {
     id: 'fsharp',
@@ -284,9 +392,19 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/hlsl.tmLanguage.json')
   },
   {
+    id: 'html-derivative',
+    scopeName: 'text.html.derivative',
+    path: path.resolve(__dirname, '../data/html-derivative.tmLanguage.json')
+  },
+  {
     id: 'html',
     scopeName: 'text.html.basic',
     path: path.resolve(__dirname, '../data/html.tmLanguage.json')
+  },
+  {
+    id: 'ignore',
+    scopeName: 'source.ignore',
+    path: path.resolve(__dirname, '../data/ignore.tmLanguage.json')
   },
   {
     id: 'ini',
@@ -313,6 +431,16 @@ export const languages: ILanguageRegistration[] = [
     id: 'jinja',
     scopeName: 'source.jinja',
     path: path.resolve(__dirname, '../data/jinja.tmLanguage.json')
+  },
+  {
+    id: 'jsdoc.js.injection',
+    scopeName: 'documentation.injection.js.jsx',
+    path: path.resolve(__dirname, '../data/jsdoc.js.injection.tmLanguage.json')
+  },
+  {
+    id: 'jsdoc.ts.injection',
+    scopeName: 'documentation.injection.ts',
+    path: path.resolve(__dirname, '../data/jsdoc.ts.injection.tmLanguage.json')
   },
   {
     id: 'json',
@@ -375,6 +503,11 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/lua.tmLanguage.json')
   },
   {
+    id: 'make',
+    scopeName: 'source.makefile',
+    path: path.resolve(__dirname, '../data/make.tmLanguage.json')
+  },
+  {
     id: 'makefile',
     scopeName: 'source.makefile',
     path: path.resolve(__dirname, '../data/makefile.tmLanguage.json')
@@ -394,6 +527,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'nix',
     scopeName: 'source.nix',
     path: path.resolve(__dirname, '../data/nix.tmLanguage.json')
+  },
+  {
+    id: 'objective-c++',
+    scopeName: 'source.objcpp',
+    path: path.resolve(__dirname, '../data/objective-c++.tmLanguage.json')
   },
   {
     id: 'objective-c',
@@ -432,6 +570,11 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/php.tmLanguage.json')
   },
   {
+    id: 'platform',
+    scopeName: 'source.c.platform',
+    path: path.resolve(__dirname, '../data/platform.tmLanguage.json')
+  },
+  {
     id: 'pls',
     scopeName: 'source.plsql.oracle',
     path: path.resolve(__dirname, '../data/pls.tmLanguage.json')
@@ -446,6 +589,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.powershell',
     path: path.resolve(__dirname, '../data/powershell.tmLanguage.json'),
     aliases: ['ps', 'ps1']
+  },
+  {
+    id: 'prolog.swi',
+    scopeName: 'source.prolog',
+    path: path.resolve(__dirname, '../data/prolog.swi.tmLanguage.json')
   },
   {
     id: 'prolog',
@@ -506,6 +654,11 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/sass.tmLanguage.json')
   },
   {
+    id: 'sassdoc',
+    scopeName: 'source.sassdoc',
+    path: path.resolve(__dirname, '../data/sassdoc.tmLanguage.json')
+  },
+  {
     id: 'scala',
     scopeName: 'source.scala',
     path: path.resolve(__dirname, '../data/scala.tmLanguage.json')
@@ -521,10 +674,20 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/scss.tmLanguage.json')
   },
   {
+    id: 'searchResult',
+    scopeName: 'text.searchResult',
+    path: path.resolve(__dirname, '../data/searchResult.tmLanguage.json')
+  },
+  {
     id: 'shaderlab',
     scopeName: 'source.shaderlab',
     path: path.resolve(__dirname, '../data/shaderlab.tmLanguage.json'),
     aliases: ['shader']
+  },
+  {
+    id: 'shell-unix-bash',
+    scopeName: 'source.shell',
+    path: path.resolve(__dirname, '../data/shell-unix-bash.tmLanguage.json')
   },
   {
     id: 'shellscript',
@@ -536,6 +699,16 @@ export const languages: ILanguageRegistration[] = [
     id: 'smalltalk',
     scopeName: 'source.smalltalk',
     path: path.resolve(__dirname, '../data/smalltalk.tmLanguage.json')
+  },
+  {
+    id: 'solidity',
+    scopeName: 'source.solidity.security',
+    path: path.resolve(__dirname, '../data/solidity.tmLanguage.json')
+  },
+  {
+    id: 'soliditysec',
+    scopeName: 'source.solidity.security',
+    path: path.resolve(__dirname, '../data/soliditysec.tmLanguage.json')
   },
   {
     id: 'sql',
@@ -596,9 +769,19 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/viml.tmLanguage.json')
   },
   {
+    id: 'vue-generated',
+    scopeName: 'source.vue',
+    path: path.resolve(__dirname, '../data/vue-generated.tmLanguage.json')
+  },
+  {
     id: 'vue-html',
     scopeName: 'text.html.vue-html',
     path: path.resolve(__dirname, '../data/vue-html.tmLanguage.json')
+  },
+  {
+    id: 'vue-postcss',
+    scopeName: 'source.css.postcss',
+    path: path.resolve(__dirname, '../data/vue-postcss.tmLanguage.json')
   },
   {
     id: 'vue',
@@ -606,9 +789,24 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/vue.tmLanguage.json')
   },
   {
+    id: 'vyper',
+    scopeName: 'source.vyper',
+    path: path.resolve(__dirname, '../data/vyper.tmLanguage.json')
+  },
+  {
     id: 'wasm',
     scopeName: 'source.wat',
     path: path.resolve(__dirname, '../data/wasm.tmLanguage.json')
+  },
+  {
+    id: 'wat',
+    scopeName: 'source.wat',
+    path: path.resolve(__dirname, '../data/wat.tmLanguage.json')
+  },
+  {
+    id: 'wenyan',
+    scopeName: 'source.wenyan',
+    path: path.resolve(__dirname, '../data/wenyan.tmLanguage.json')
   },
   {
     id: 'xml',

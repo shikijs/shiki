@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "electronic-data-interchange",
+  "patterns": [
+    {
+      "include": "#segments"
+    }
+  ],
+  "repository": {
+    "segments": {
+      "name": "meta.segment.edi",
+      "begin": "",
+      "end": "\\~",
+      "patterns": [
+        {
+          "name": "meta.segment.data-element.edi",
+          "match": "(\\*)([\\w+\\(\\)'&\"! ,\\-\\./;\\?=%@\\[\\]_\\{\\}\\\\|<#$]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.segment.data-element.separator.edi"
+            },
+            "2": {
+              "name": "string.segment.data-element.edi"
+            }
+          }
+        },
+        {
+          "name": "meta.segment.repetition.edi",
+          "match": "(\\^)([\\w+\\(\\)'&\"! ,\\-\\./;\\?=%@\\[\\]_\\{\\}\\\\|<#$]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.segment.repetition.separator.edi"
+            },
+            "2": {
+              "name": "string.segment.repetition.edi"
+            }
+          }
+        },
+        {
+          "name": "meta.segment.component.edi",
+          "match": "([:>])([\\w+\\(\\)'&\"! ,\\-\\./;\\?=%@\\[\\]_\\{\\}\\\\|<#$]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.segment.component.separator.edi"
+            },
+            "2": {
+              "name": "string.segment.component.edi"
+            }
+          }
+        },
+        {
+          "name": "keyword.operator.segment.separator.edi",
+          "match": "\\~"
+        },
+        {
+          "name": "storage.type.segment.id.edi",
+          "match": "[\\w\\d]{2,3}"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.edi"
+}
