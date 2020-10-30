@@ -741,7 +741,7 @@
       "name": "meta.function.end-document.latex"
     },
     {
-      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:align|equation|(?:IEEE)?eqnarray|multline|aligned|alignat|split|gather|gathered|cases|displaymath|[a-zA-Z]*matrix)(?:\\*)?)(\\})(\\s*\\n)?",
+      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:align|equation|(?:IEEE)?eqnarray|multline|aligned|alignat|split|gather|gathered|cases|displaymath|[a-zA-Z]*matrix|(?:(?:arg)?(?:mini|maxi)))(?:\\*|!)?)(\\})(\\s*\\n)?",
       "captures": {
         "1": {
           "name": "support.function.be.latex"
