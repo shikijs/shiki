@@ -2259,11 +2259,11 @@
       "patterns": [
         {
           "name": "constant.numeric.datetime.apex",
-          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\-|\\+)\\d{2}\\:\\d{2})\\b"
+          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\.\\d{1,3})?(\\-|\\+)\\d{2}\\:\\d{2})\\b"
         },
         {
           "name": "constant.numeric.datetime.apex",
-          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(Z)?)\\b"
+          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\.\\d{1,3})?(Z)?)\\b"
         },
         {
           "name": "constant.numeric.date.apex",
