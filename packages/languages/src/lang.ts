@@ -6,6 +6,7 @@ export type Lang =
   | 'actionscript-3'
   | 'ada'
   | 'apex'
+  | 'applescript'
   | 'asm'
   | 'awk'
   | 'bat'
@@ -122,6 +123,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'apex',
     scopeName: 'source.apex',
     path: path.resolve(__dirname, '../data/apex.tmLanguage.json')
+  },
+  {
+    id: 'applescript',
+    scopeName: 'source.applescript',
+    path: path.resolve(__dirname, '../data/applescript.tmLanguage.json')
   },
   {
     id: 'asm',
