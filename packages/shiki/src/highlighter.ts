@@ -54,6 +54,7 @@ class Shiki {
     this._resolver = new Resolver(langs, getOnigasm(), 'onigasm')
     this._registry = new Registry(this._resolver)
 
+    repairThemeIfNoFallbackColor(theme)
     this._registry.setTheme(theme)
 
     this._theme = theme
@@ -129,4 +130,19 @@ export interface Highlighter {
   // getRawCSS?(): string
 
   // codeToImage?(): string
+}
+
+function repairThemeIfNoFallbackColor(theme: IShikiTheme) {
+  // Has the default no-scope setting with fallback colors
+  if (theme.settings[0].settings && !theme.settings[0].scope) {
+    return
+  }
+
+  // Push a no-scope setting with fallback colors
+  theme.settings.unshift({
+    settings: {
+      foreground: theme.fg,
+      background: theme.bg
+    }
+  })
 }
