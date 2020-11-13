@@ -14,7 +14,6 @@ npm i shiki
 
 ```js
 const shiki = require('shiki')
-// import { getHighlighter } from 'shiki'
 
 shiki
   .getHighlighter({
