@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.2.7 | 2020-11-13
+
+- Fix color fallback issues. [#100](https://github.com/shikijs/shiki/issues/100).
+- 🙌 Add Applescript grammar. [#99](https://github.com/shikijs/shiki/issues/99). Thanks to contribution from [Arturo Galán](https://github.com/arturogalan).
+
 ### 0.2.6 | 2020-09-28
 
 - Upgrade to onigasm 2.2.5.
