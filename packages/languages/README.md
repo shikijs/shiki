@@ -18,7 +18,6 @@ export type Lang =
   | 'actionscript-3'
   | 'ada'
   | 'apex'
-  | 'applescript'
   | 'asm'
   | 'awk'
   | 'bat'
@@ -34,9 +33,7 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'dockerfile'
-  | 'elixir'
   | 'elm'
-  | 'erlang'
   | 'fortran'
   | 'fsharp'
   | 'git-commit'
@@ -54,7 +51,6 @@ export type Lang =
   | 'ini'
   | 'java'
   | 'javascript'
-  | 'jinja-html'
   | 'json'
   | 'jsonc'
   | 'jsonnet'
@@ -99,7 +95,6 @@ export type Lang =
   | 'smalltalk'
   | 'sql'
   | 'stylus'
-  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
@@ -113,7 +108,6 @@ export type Lang =
   | 'xml'
   | 'xsl'
   | 'yaml'
-  | '文言'
 ```
 
 ## Add

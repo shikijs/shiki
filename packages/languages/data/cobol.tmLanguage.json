@@ -183,6 +183,20 @@
       "name": "meta.preprocessor.iso2002"
     },
     {
+      "match": "(\\*>)\\s+(@[0-9a-zA-Z][a-zA-Z\\-0-9]+)\\s+(.*$)",
+      "captures": {
+        "1": {
+          "name": "comment.line.scantoken.cobol"
+        },
+        "2": {
+          "name": "keyword.cobol"
+        },
+        "3": {
+          "name": "string.cobol"
+        }
+      }
+    },
+    {
       "match": "(\\*>.*$)",
       "name": "comment.line.modern"
     },

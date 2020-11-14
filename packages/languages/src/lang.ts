@@ -6,7 +6,6 @@ export type Lang =
   | 'actionscript-3'
   | 'ada'
   | 'apex'
-  | 'applescript'
   | 'asm'
   | 'awk'
   | 'bat'
@@ -22,9 +21,7 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'dockerfile'
-  | 'elixir'
   | 'elm'
-  | 'erlang'
   | 'fortran'
   | 'fsharp'
   | 'git-commit'
@@ -42,7 +39,6 @@ export type Lang =
   | 'ini'
   | 'java'
   | 'javascript'
-  | 'jinja-html'
   | 'json'
   | 'jsonc'
   | 'jsonnet'
@@ -87,7 +83,6 @@ export type Lang =
   | 'smalltalk'
   | 'sql'
   | 'stylus'
-  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
@@ -101,7 +96,6 @@ export type Lang =
   | 'xml'
   | 'xsl'
   | 'yaml'
-  | '文言'
 
 export const languages: ILanguageRegistration[] = [
   {
@@ -123,11 +117,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'apex',
     scopeName: 'source.apex',
     path: path.resolve(__dirname, '../data/apex.tmLanguage.json')
-  },
-  {
-    id: 'applescript',
-    scopeName: 'source.applescript',
-    path: path.resolve(__dirname, '../data/applescript.tmLanguage.json')
   },
   {
     id: 'asm',
@@ -208,19 +197,9 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/dockerfile.tmLanguage.json')
   },
   {
-    id: 'elixir',
-    scopeName: 'source.elixir',
-    path: path.resolve(__dirname, '../data/elixir.tmLanguage.json')
-  },
-  {
     id: 'elm',
     scopeName: 'source.elm',
     path: path.resolve(__dirname, '../data/elm.tmLanguage.json')
-  },
-  {
-    id: 'erlang',
-    scopeName: 'source.erlang',
-    path: path.resolve(__dirname, '../data/erlang.tmLanguage.json')
   },
   {
     id: 'fortran',
@@ -309,16 +288,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.js',
     path: path.resolve(__dirname, '../data/javascript.tmLanguage.json'),
     aliases: ['js']
-  },
-  {
-    id: 'jinja-html',
-    scopeName: 'text.html.jinja',
-    path: path.resolve(__dirname, '../data/jinja-html.tmLanguage.json')
-  },
-  {
-    id: 'jinja',
-    scopeName: 'source.jinja',
-    path: path.resolve(__dirname, '../data/jinja.tmLanguage.json')
   },
   {
     id: 'json',
@@ -555,11 +524,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['styl']
   },
   {
-    id: 'svelte',
-    scopeName: 'source.svelte',
-    path: path.resolve(__dirname, '../data/svelte.tmLanguage.json')
-  },
-  {
     id: 'swift',
     scopeName: 'source.swift',
     path: path.resolve(__dirname, '../data/swift.tmLanguage.json')
@@ -630,11 +594,5 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: path.resolve(__dirname, '../data/yaml.tmLanguage.json')
-  },
-  {
-    id: '文言',
-    scopeName: 'source.wenyan',
-    path: path.resolve(__dirname, '../data/文言.tmLanguage.json'),
-    aliases: ['wenyan']
   }
 ]
