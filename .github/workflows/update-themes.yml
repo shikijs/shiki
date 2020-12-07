@@ -84,10 +84,10 @@ jobs:
 
       - name: Move files
         run: |
-          rm -rf packages/themes/data/*
-          cp tmp/themes/*.json packages/themes/data
+          rm -rf packages/shiki/themes/*
+          cp tmp/themes/*.json packages/shiki/themes
 
-      - name: Update `packages/themes` source
+      - name: Update `themes` source
         run: node scripts/updateThemeSrc.js
 
       - run: |

@@ -11,7 +11,7 @@ node scripts/normalizeThemePaths.js
 echo "> Done normalizing themes"
 
 echo "> Copying themes"
-cp tmp/themes/*.json packages/themes/data
+cp tmp/themes/*.json packages/shiki/themes
 echo "> Done copying themes"
 
 echo "> Updating source files"

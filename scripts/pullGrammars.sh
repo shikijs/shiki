@@ -22,7 +22,7 @@ node scripts/normalizeGrammarPaths.js
 echo "> Done normalizing grammars"
 
 echo "> Copying grammars"
-cp tmp/grammars/*.json packages/languages/data
+cp tmp/grammars/*.json packages/shiki/languages
 echo "> Done copying grammars"
 
 echo "> Updating source files"

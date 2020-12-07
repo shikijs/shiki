@@ -4,8 +4,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "tsc -b packages",
-    "watch": "tsc -b -w packages",
+    "build": "lerna run build",
+    "watch": "lerna run watch --parallel",
     "fmt": "prettier --parser=typescript --write packages/**/*.ts",
     "test": "jest --colors",
     "gen": "yarn workspace shiki-site gen",

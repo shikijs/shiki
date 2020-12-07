@@ -1,9 +1,6 @@
 import * as Onigasm from 'onigasm'
 import { IOnigLib, IRawGrammar, IRawTheme, parseRawGrammar } from 'vscode-textmate'
-import path from 'path'
-import { promises as fs } from 'fs'
 import { ILanguageRegistration, IShikiTheme } from './types'
-import { Theme } from './themes'
 
 export const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
 
@@ -37,34 +34,33 @@ export async function getOnigasm(): Promise<IOnigLib> {
   return _onigasmPromise
 }
 
-function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
-  const shikiTheme: IShikiTheme = {
-    ...rawTheme,
-    ...getThemeDefaultColors(rawTheme)
+/**
+ * @param filepath assert path related to ./packages/shiki
+ */
+async function _loadAssets(filepath: string): Promise<string> {
+  if (isBrowser) {
+    return await fetch(`../${filepath}`).then(r => r.text())
+  } else {
+    const path = require('path') as typeof import('path')
+    const fs = require('fs') as typeof import('fs')
+    return await fs.promises.readFile(path.resolve(__dirname, '..', filepath), 'utf-8')
   }
+}
 
-  if ((<any>rawTheme).include) {
-    shikiTheme.include = (<any>rawTheme).include
-  }
-  if ((<any>rawTheme).tokenColors) {
-    shikiTheme.settings = (<any>rawTheme).tokenColors
-  }
-
-  return shikiTheme
+async function _loadJSONAssets(filepath: string) {
+  return JSON.parse(await _loadAssets(filepath))
 }
 
 /**
- * @param themePath Absolute path to theme.json
+ * @param themePath related path to theme.json
  */
 export async function loadTheme(themePath: string): Promise<IShikiTheme> {
-  // TODO: browser
-  let theme: IRawTheme = JSON.parse(await fs.readFile(themePath, 'utf-8'))
+  let theme: IRawTheme = await _loadJSONAssets(`themes/${themePath}`)
 
-  const shikiTheme = toShikiTheme(theme)
+  const shikiTheme = _toShikiTheme(theme)
 
   if (shikiTheme.include) {
-    const includedThemePath = path.resolve(themePath, '..', shikiTheme.include)
-    const includedTheme = await loadTheme(includedThemePath)
+    const includedTheme = await loadTheme(shikiTheme.include)
 
     if (includedTheme.settings) {
       shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
@@ -78,17 +74,42 @@ export async function loadTheme(themePath: string): Promise<IShikiTheme> {
   return shikiTheme
 }
 
-const theme_cache = {}
+export async function loadGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
+  const content = await _loadJSONAssets(`languages/${lang.path}`)
+  return parseRawGrammar(content.toString())
+}
 
-export async function getTheme(name: Theme): Promise<IShikiTheme> {
-  if (!theme_cache[name]) {
-    theme_cache[name] = await loadTheme(path.resolve(__dirname, '../themes', `${name}.json`))
-  }
-  if (theme_cache[name]) {
-    return theme_cache[name]
+export function repairTheme(theme: IShikiTheme) {
+  // Has the default no-scope setting with fallback colors
+  if (theme.settings[0].settings && !theme.settings[0].scope) {
+    return
   }
 
-  throw Error(`No theme ${name} found`)
+  // Push a no-scope setting with fallback colors
+  theme.settings.unshift({
+    settings: {
+      foreground: theme.fg,
+      background: theme.bg
+    }
+  })
+}
+
+function _toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
+  const shikiTheme: IShikiTheme = {
+    ...rawTheme,
+    ...getThemeDefaultColors(rawTheme)
+  }
+
+  if ((<any>rawTheme).include) {
+    shikiTheme.include = (<any>rawTheme).include
+  }
+  if ((<any>rawTheme).tokenColors) {
+    shikiTheme.settings = (<any>rawTheme).tokenColors
+  }
+
+  repairTheme(shikiTheme)
+
+  return shikiTheme
 }
 
 /**
@@ -146,10 +167,4 @@ function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: stri
     fg,
     bg
   }
-}
-
-export async function readGrammarFromPath(lang: ILanguageRegistration): Promise<IRawGrammar> {
-  const filepath = path.resolve(__dirname, '../languages', lang.path)
-  const content = await fs.readFile(filepath, 'utf-8')
-  return parseRawGrammar(content.toString(), filepath)
 }
