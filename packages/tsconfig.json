@@ -1,4 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "files": []
+  "files": [],
+  "references": [{ "path": "./shiki" }, { "path": "./renderer-svg" }]
 }
