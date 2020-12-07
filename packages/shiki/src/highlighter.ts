@@ -24,11 +24,9 @@ export async function getHighlighter(options: HighlighterOptions) {
   if (options.langs) {
     languages = [...BUNDLED_LANGUAGES, ...options.langs]
   }
-
   if (options.theme) {
     themes.unshift(options.theme)
   }
-
   if (!themes.length) {
     themes = ['nord']
   }

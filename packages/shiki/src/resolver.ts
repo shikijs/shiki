@@ -3,17 +3,15 @@
  *--------------------------------------------------------*/
 'use strict'
 
-import { IRawGrammar, IOnigLib, parseRawGrammar, RegistryOptions } from 'vscode-textmate'
+import { IRawGrammar, IOnigLib, RegistryOptions } from 'vscode-textmate'
 import { ILanguageRegistration } from 'shiki-languages'
-import path from 'path'
 
-import { promises as fs } from 'fs'
-import { getTheme } from './loader'
+import { getTheme, readGrammarFromPath } from './loader'
 import { IShikiTheme, IThemeRegistration } from './types'
 import { Theme } from './themes'
 
 export class Resolver implements RegistryOptions {
-  private readonly langMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
+  private readonly languageMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
   private readonly scopeToLangMap: { [scope: string]: ILanguageRegistration } = {}
 
   private readonly _languages: ILanguageRegistration[]
@@ -30,10 +28,10 @@ export class Resolver implements RegistryOptions {
     this._onigLibName = onigLibName
 
     this._languages.forEach(l => {
-      this.langMap[l.id] = l
+      this.languageMap[l.id] = l
       if (l.aliases) {
         l.aliases.forEach(a => {
-          this.langMap[a] = l
+          this.languageMap[a] = l
         })
       }
       this.scopeToLangMap[l.scopeName] = l
@@ -49,7 +47,7 @@ export class Resolver implements RegistryOptions {
   }
 
   public getLangRegistration(langIdOrAlias: string): ILanguageRegistration {
-    return this.langMap[langIdOrAlias]
+    return this.languageMap[langIdOrAlias]
   }
 
   public async loadGrammar(scopeName: string): Promise<IRawGrammar> {
@@ -63,14 +61,9 @@ export class Resolver implements RegistryOptions {
       return lang.grammar
     }
 
-    const g = await this.readGrammarFromPath(path.resolve(__dirname, '../languages', lang.path))
+    const g = await readGrammarFromPath(lang)
     lang.grammar = g
     return g
-  }
-
-  private async readGrammarFromPath(path: string): Promise<IRawGrammar> {
-    const content = await fs.readFile(path, 'utf-8')
-    return parseRawGrammar(content.toString(), path)
   }
 
   async resolveTheme(theme: Theme | IShikiTheme) {

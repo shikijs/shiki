@@ -1,8 +1,8 @@
-import { IOnigLib, IRawTheme } from 'vscode-textmate'
 import * as Onigasm from 'onigasm'
-import { IShikiTheme } from './types'
-import { promises as fs } from 'fs'
+import { IOnigLib, IRawGrammar, IRawTheme, parseRawGrammar } from 'vscode-textmate'
 import path from 'path'
+import { promises as fs } from 'fs'
+import { ILanguageRegistration, IShikiTheme } from './types'
 import { Theme } from './themes'
 
 export const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
@@ -135,4 +135,10 @@ function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: stri
     fg,
     bg
   }
+}
+
+export async function readGrammarFromPath(lang: ILanguageRegistration): Promise<IRawGrammar> {
+  const filepath = path.resolve(__dirname, '../languages', lang.path)
+  const content = await fs.readFile(filepath, 'utf-8')
+  return parseRawGrammar(content.toString(), filepath)
 }
