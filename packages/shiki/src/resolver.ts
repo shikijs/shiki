@@ -81,7 +81,11 @@ export class Resolver implements RegistryOptions {
     await Promise.all(
       themes.map(async name => {
         const theme = await this.resolveTheme(name)
-        if (theme.name) themes[theme.name] = theme
+        if (theme.name) {
+          resolved[theme.name] = theme
+        } else {
+          throw new Error(`Can not find name for theme '${name}'`)
+        }
       })
     )
 

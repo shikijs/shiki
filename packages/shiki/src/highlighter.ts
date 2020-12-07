@@ -12,7 +12,7 @@ import { Theme } from './themes'
 import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 
 export interface HighlighterOptions {
-  theme: IThemeRegistration
+  theme?: IThemeRegistration
   langs?: ILanguageRegistration[]
   themes?: IThemeRegistration[]
 }
@@ -80,18 +80,21 @@ class Shiki {
       })
     )
 
-    const getLangTheme = (lang: string, theme: string) => {
-      if (!ltog[lang]) {
-        throw Error(`No language registration for ${lang}`)
-      }
+    const getTheme = (theme: string) => {
       const _theme = theme ? this._resolvedThemes[theme] : _defaultTheme
       if (!_theme) {
         throw Error(`No theme registration for ${theme}`)
       }
       _registry.setTheme(_theme)
       const _colorMap = _registry.getColorMap()
+      return { _theme, _colorMap }
+    }
+    const getLang = (lang: string) => {
+      if (!ltog[lang]) {
+        throw Error(`No language registration for ${lang}`)
+      }
 
-      return { _lang: ltog[lang], _theme, _colorMap }
+      return { _lang: ltog[lang] }
     }
 
     return {
@@ -99,18 +102,21 @@ class Shiki {
         if (isPlaintext(lang)) {
           throw Error('Cannot tokenize plaintext')
         }
-        const { _lang, _theme, _colorMap } = getLangTheme(lang, options.theme)
+        const { _lang } = getLang(lang)
+        const { _theme, _colorMap } = getTheme(options.theme)
         return tokenizeWithTheme(_theme, _colorMap, code, _lang, options)
       },
       codeToHtml: (code: string, lang = 'text', theme?: string) => {
+        const { _theme, _colorMap } = getTheme(theme)
+
         if (isPlaintext(lang)) {
           return renderToHtml([[{ content: code }]], {
-            fg: _defaultTheme.fg,
-            bg: _defaultTheme.bg
+            fg: _theme.fg,
+            bg: _theme.bg
           })
         }
-        const { _lang, _theme, _colorMap } = getLangTheme(lang, theme)
 
+        const { _lang } = getLang(lang)
         const tokens = tokenizeWithTheme(_theme, _colorMap, code, _lang, {
           includeExplanation: false
         })
