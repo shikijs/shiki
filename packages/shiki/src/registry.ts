@@ -1,8 +1,7 @@
-import { IShikiTheme, IThemeRegistration } from './types'
-import { loadTheme, repairTheme } from './loader'
 import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
+import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
+import { loadTheme, repairTheme } from './loader'
 import { Theme } from './themes'
-import { ILanguageRegistration } from '../dist'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Record<string, IShikiTheme> = {}
