@@ -1,37 +1,40 @@
 import { Registry } from 'vscode-textmate'
 
-import { Lang, ILanguageRegistration, BUNDLED_LANGUAGES } from 'shiki-languages'
+import { ILanguageRegistration } from './types'
 
 import { Resolver } from './resolver'
-import { getOnigasm } from './onigLibs'
 import { tokenizeWithTheme, IThemedToken } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getTheme, Theme, IShikiTheme } from 'shiki-themes'
+import { getOnigasm } from './loader'
+import { IShikiTheme, IThemeRegistration } from './types'
+import { Theme } from './themes'
+import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 
 export interface HighlighterOptions {
-  theme: Theme | IShikiTheme
+  theme: IThemeRegistration
   langs?: ILanguageRegistration[]
+  themes?: IThemeRegistration[]
 }
 
 export async function getHighlighter(options: HighlighterOptions) {
-  let t: IShikiTheme
-  if (typeof options.theme === 'string') {
-    t = getTheme(options.theme)
-  } else if (options.theme.name) {
-    t = options.theme
-  } else {
-    t = getTheme('nord')
-  }
-
   let languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
+  let themes: IThemeRegistration[] = options.themes || []
 
   if (options.langs) {
     languages = [...BUNDLED_LANGUAGES, ...options.langs]
   }
 
-  const s = new Shiki(t, languages)
-  return await s.getHighlighter()
+  if (options.theme) {
+    themes.unshift(options.theme)
+  }
+
+  if (!themes.length) {
+    themes = ['nord']
+  }
+
+  const s = new Shiki(languages, themes)
+  return await s.getHighlighter(themes[0])
 }
 
 interface ThemedTokenizerOptions {
@@ -40,34 +43,36 @@ interface ThemedTokenizerOptions {
    * and why it's given its color. Default to false.
    */
   includeExplanation: boolean
+
+  theme?: StringLiteralUnion<Theme>
 }
 
 class Shiki {
   private _resolver: Resolver
-  private _registry: Registry
 
-  private _theme: IShikiTheme
-  private _colorMap: string[]
   private _langs: ILanguageRegistration[]
+  private _themes: IThemeRegistration[]
 
-  constructor(theme: IShikiTheme, langs: ILanguageRegistration[]) {
+  private _resolvedThemes: Record<string, IShikiTheme> = {}
+
+  constructor(langs: ILanguageRegistration[], themes: IThemeRegistration[] = []) {
     this._resolver = new Resolver(langs, getOnigasm(), 'onigasm')
-    this._registry = new Registry(this._resolver)
-
-    this._registry.setTheme(theme)
-
-    this._theme = theme
-    this._colorMap = this._registry.getColorMap()
-
     this._langs = langs
+    this._themes = themes
   }
 
-  async getHighlighter(): Promise<Highlighter> {
+  async getHighlighter(_theme: IThemeRegistration): Promise<Highlighter> {
     const ltog = {}
+
+    this._resolvedThemes = await this._resolver.resolveThemes(this._themes)
+    const _defaultTheme = await this._resolver.resolveTheme(_theme)
+
+    const _registry = new Registry(this._resolver)
+    _registry.setTheme(_defaultTheme)
 
     await Promise.all(
       this._langs.map(async l => {
-        const g = await this._registry.loadGrammar(l.scopeName)
+        const g = await _registry.loadGrammar(l.scopeName)
         ltog[l.id] = g
         if (l.aliases) {
           l.aliases.forEach(la => {
@@ -77,31 +82,42 @@ class Shiki {
       })
     )
 
+    const getLangTheme = (lang: string, theme: string) => {
+      if (!ltog[lang]) {
+        throw Error(`No language registration for ${lang}`)
+      }
+      const _theme = theme ? this._resolvedThemes[theme] : _defaultTheme
+      if (!_theme) {
+        throw Error(`No theme registration for ${theme}`)
+      }
+      _registry.setTheme(_theme)
+      const _colorMap = _registry.getColorMap()
+
+      return { _lang: ltog[lang], _theme, _colorMap }
+    }
+
     return {
-      codeToThemedTokens: (code, lang, options = { includeExplanation: true }) => {
+      codeToThemedTokens: (code: string, lang = 'text', options = { includeExplanation: true }) => {
         if (isPlaintext(lang)) {
           throw Error('Cannot tokenize plaintext')
         }
-        if (!ltog[lang]) {
-          throw Error(`No language registration for ${lang}`)
-        }
-        return tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], options)
+        const { _lang, _theme, _colorMap } = getLangTheme(lang, options.theme)
+        return tokenizeWithTheme(_theme, _colorMap, code, _lang, options)
       },
-      codeToHtml: (code, lang) => {
+      codeToHtml: (code: string, lang = 'text', theme?: string) => {
         if (isPlaintext(lang)) {
           return renderToHtml([[{ content: code }]], {
-            fg: this._theme.fg,
-            bg: this._theme.bg
+            fg: _defaultTheme.fg,
+            bg: _defaultTheme.bg
           })
         }
-        if (!ltog[lang]) {
-          throw Error(`No language registration for ${lang}`)
-        }
-        const tokens = tokenizeWithTheme(this._theme, this._colorMap, code, ltog[lang], {
+        const { _lang, _theme, _colorMap } = getLangTheme(lang, theme)
+
+        const tokens = tokenizeWithTheme(_theme, _colorMap, code, _lang, {
           includeExplanation: false
         })
         return renderToHtml(tokens, {
-          bg: this._theme.bg
+          bg: _theme.bg
         })
       }
     }
@@ -120,10 +136,14 @@ type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface Highlighter {
   codeToThemedTokens(
     code: string,
-    lang: StringLiteralUnion<Lang>,
+    lang?: StringLiteralUnion<Lang>,
     options?: ThemedTokenizerOptions
   ): IThemedToken[][]
-  codeToHtml?(code: string, lang: StringLiteralUnion<Lang>): string
+  codeToHtml(
+    code: string,
+    lang?: StringLiteralUnion<Lang>,
+    theme?: StringLiteralUnion<Theme>
+  ): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "declaration": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["es2015", "es2016.array.include", "DOM"],
+    "sourceMap": true
+  },
+  "references": [
+    { "path": "packages/languages" },
+    { "path": "packages/shiki" },
+    { "path": "packages/themes" },
+    { "path": "packages/renderer-svg" }
+  ]
+}

@@ -1,4 +1,4 @@
-import * as puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer'
 
 export async function measureMonospaceTypeface(
   fontName: string,

@@ -1,11 +1,17 @@
 {
-  "name": "shiki",
+  "name": "@antfu/shiki",
   "version": "0.2.4",
   "description": "shiki",
   "keywords": [
     "shiki",
     "syntax-highlighter",
     "highlighter"
+  ],
+  "files": [
+    "dist",
+    "languages",
+    "themes",
+    "src"
   ],
   "author": "Pine Wu <octref@gmail.com>",
   "homepage": "https://github.com/octref/shiki/tree/master/packages/shiki",
@@ -17,9 +23,9 @@
     "url": "git+https://github.com/octref/shiki.git"
   },
   "dependencies": {
+    "@antfu/shiki-languages": "*",
+    "@antfu/shiki-themes": "*",
     "onigasm": "^2.2.1",
-    "shiki-languages": "^0.2.4",
-    "shiki-themes": "^0.2.4",
     "vscode-textmate": "^5.2.0"
   }
 }

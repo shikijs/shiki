@@ -5,8 +5,12 @@
 
 import { IRawGrammar, IOnigLib, parseRawGrammar, RegistryOptions } from 'vscode-textmate'
 import { ILanguageRegistration } from 'shiki-languages'
+import path from 'path'
 
-import * as fs from 'fs'
+import { promises as fs } from 'fs'
+import { getTheme } from './loader'
+import { IShikiTheme, IThemeRegistration } from './types'
+import { Theme } from './themes'
 
 export class Resolver implements RegistryOptions {
   private readonly langMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
@@ -59,20 +63,35 @@ export class Resolver implements RegistryOptions {
       return lang.grammar
     }
 
-    const g = await readGrammarFromPath(lang.path)
+    const g = await this.readGrammarFromPath(path.resolve(__dirname, '../languages', lang.path))
     lang.grammar = g
     return g
   }
-}
 
-function readGrammarFromPath(path: string): Promise<IRawGrammar> {
-  return new Promise((c, e) => {
-    fs.readFile(path, (error, content) => {
-      if (error) {
-        e(error)
-      } else {
-        c(parseRawGrammar(content.toString(), path))
-      }
-    })
-  })
+  private async readGrammarFromPath(path: string): Promise<IRawGrammar> {
+    const content = await fs.readFile(path, 'utf-8')
+    return parseRawGrammar(content.toString(), path)
+  }
+
+  async resolveTheme(theme: Theme | IShikiTheme) {
+    if (typeof theme === 'string') {
+      return await getTheme(theme)
+    } else if (theme.name) {
+      return theme
+    } else {
+      throw new Error(`Failed to resolve theme ${theme}`)
+    }
+  }
+
+  async resolveThemes(themes: IThemeRegistration[]) {
+    const resolved: Record<string, IShikiTheme> = {}
+    await Promise.all(
+      themes.map(async name => {
+        const theme = await this.resolveTheme(name)
+        if (theme.name) themes[theme.name] = theme
+      })
+    )
+
+    return resolved
+  }
 }

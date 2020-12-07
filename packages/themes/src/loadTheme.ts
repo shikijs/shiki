@@ -1,17 +1,18 @@
 import { IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 
-import * as fs from 'fs'
-import * as path from 'path'
+import { promises as fs } from 'fs'
+import path from 'path'
 import { parse as plistParse } from './plist'
 import * as JSON5 from 'json5'
 
-function loadJSONTheme(themePath: string): IRawTheme {
-  const fileContents = fs.readFileSync(themePath, 'utf-8')
+async function loadJSONTheme(themePath: string): Promise<IRawTheme> {
+  const fileContents = await fs.readFile(themePath, 'utf-8')
 
   return JSON5.parse(fileContents)
 }
-function loadPListTheme(themePath: string): IRawTheme {
-  const fileContents = fs.readFileSync(themePath, 'utf-8')
+
+async function loadPListTheme(themePath: string): Promise<IRawTheme> {
+  const fileContents = await fs.readFile(themePath, 'utf-8')
 
   return plistParse(fileContents)
 }
@@ -35,20 +36,20 @@ function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
 /**
  * @param themePath Absolute path to theme.json / theme.tmTheme
  */
-export function loadTheme(themePath: string): IShikiTheme {
+export async function loadTheme(themePath: string): Promise<IShikiTheme> {
   let theme: IRawTheme
 
   if (/\.json$/.test(themePath)) {
-    theme = loadJSONTheme(themePath)
+    theme = await loadJSONTheme(themePath)
   } else {
-    theme = loadPListTheme(themePath)
+    theme = await loadPListTheme(themePath)
   }
 
   const shikiTheme = toShikiTheme(theme)
 
   if (shikiTheme.include) {
     const includedThemePath = path.resolve(themePath, '..', shikiTheme.include)
-    const includedTheme = loadTheme(includedThemePath)
+    const includedTheme = await loadTheme(includedThemePath)
 
     if (includedTheme.settings) {
       shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)

@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const themeDir = path.resolve(__dirname, '../packages/themes/data')
-const themePath = path.resolve(__dirname, '../packages/themes/src/theme.ts')
+const themeDir = path.resolve(__dirname, '../packages/shiki/themes')
+const themePath = path.resolve(__dirname, '../packages/shiki/src/themes.ts')
 const readmePath = path.resolve(__dirname, '../packages/themes/README.md')
 
 const files = fs.readdirSync(themeDir)
