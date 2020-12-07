@@ -284,7 +284,7 @@
           "end": "(?=[^\\\\a-zA-Z_\\x{7f}-\\x{ff}])",
           "patterns": [
             {
-              "match": "(?i)\\b(TRUE|FALSE|NULL|__(FILE|DIR|FUNCTION|CLASS|METHOD|LINE|NAMESPACE)__|ON|OFF|YES|NO|NL|BR|TAB)\\b",
+              "match": "(?i)\\b(TRUE|FALSE|NULL|__(FILE|DIR|FUNCTION|CLASS|METHOD|LINE|NAMESPACE)__)\\b",
               "name": "constant.language.php"
             },
             {
@@ -1193,20 +1193,6 @@
           "name": "keyword.operator.pipe.php"
         },
         {
-          "captures": {
-            "1": {
-              "name": "keyword.operator.assignment.php"
-            },
-            "2": {
-              "name": "storage.modifier.reference.php"
-            },
-            "3": {
-              "name": "storage.modifier.reference.php"
-            }
-          },
-          "match": "(?:(\\=)(&))|(&(?=[$A-Za-z_]))"
-        },
-        {
           "match": "(@)",
           "name": "keyword.operator.error-control.php"
         },
@@ -1219,7 +1205,7 @@
           "name": "keyword.operator.assignment.php"
         },
         {
-          "match": "(<=|>=|<>|<|>)",
+          "match": "(<=|>=|<|>)",
           "name": "keyword.operator.comparison.php"
         },
         {
@@ -1231,22 +1217,11 @@
           "name": "keyword.operator.arithmetic.php"
         },
         {
-          "match": "(?i)(!|&&|\\|\\|)|\\b(and|or|xor)\\b",
+          "match": "(!|&&|\\|\\|)",
           "name": "keyword.operator.logical.php"
         },
         {
-          "match": "(?i)\\b(is|as)\\b",
-          "name": "keyword.operator.type.php"
-        },
-        {
-          "include": "#function-call"
-        },
-        {
-          "match": "<<|>>|~|\\^|&|\\|",
-          "name": "keyword.operator.bitwise.php"
-        },
-        {
-          "begin": "(?i)\\b(instanceof)\\b\\s+(?=[\\\\$a-z_])",
+          "begin": "(?i)\\b(as|is)\\b\\s+(?=[\\\\$a-z_])",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.type.php"
@@ -1263,29 +1238,21 @@
           ]
         },
         {
+          "match": "(?i)\\b(is|as)\\b",
+          "name": "keyword.operator.type.php"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "match": "<<|>>|~|\\^|&|\\|",
+          "name": "keyword.operator.bitwise.php"
+        },
+        {
           "include": "#numbers"
         },
         {
           "include": "#instantiation"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "keyword.control.goto.php"
-            },
-            "2": {
-              "name": "support.other.php"
-            }
-          },
-          "match": "(?i)(goto)\\s+([a-z_][a-z_0-9]*)"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "entity.name.goto-label.php"
-            }
-          },
-          "match": "(?i)^\\s*([a-z_][a-z_0-9]*)\\s*:"
         },
         {
           "begin": "\\[",

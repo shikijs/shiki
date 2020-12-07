@@ -3,7 +3,7 @@ const path = require('path')
 
 const langDir = path.resolve(__dirname, '../packages/shiki/languages')
 const langPath = path.resolve(__dirname, '../packages/shiki/src/languages.ts')
-const readmePath = path.resolve(__dirname, '../packages/languages/README.md')
+const readmePath = path.resolve(__dirname, '../docs/languages.md')
 
 const files = fs.readdirSync(langDir)
 const langIds = files.map(f => f.replace('.tmLanguage.json', ''))

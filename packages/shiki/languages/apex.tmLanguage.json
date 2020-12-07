@@ -706,10 +706,17 @@
           "match": "\\b(isExecuting|isInsert|isUpdate|isDelete|isBefore|isAfter|isUndelete|new|newMap|old|oldMap|size)\\b"
         },
         {
-          "match": "(?:(\\.))([[:alpha:]]+)(?=\\()",
+          "match": "(?:(\\??\\.))([[:alpha:]]+)(?=\\()",
           "captures": {
             "1": {
-              "name": "punctuation.accessor.apex"
+              "patterns": [
+                {
+                  "include": "#punctuation-accessor"
+                },
+                {
+                  "include": "#operator-safe-navigation"
+                }
+              ]
             },
             "2": {
               "name": "support.function.trigger.apex"
@@ -1009,13 +1016,20 @@
           "include": "#trigger-context-declaration"
         },
         {
-          "match": "([_[:alpha:]][_[:alnum:]]*)(\\.)",
+          "match": "([_[:alpha:]][_[:alnum:]]*)(\\??\\.)",
           "captures": {
             "1": {
               "name": "variable.other.object.apex"
             },
             "2": {
-              "name": "punctuation.accessor.apex"
+              "patterns": [
+                {
+                  "include": "#punctuation-accessor"
+                },
+                {
+                  "include": "#operator-safe-navigation"
+                }
+              ]
             }
           }
         },
@@ -1147,7 +1161,7 @@
       ]
     },
     "from-clause": {
-      "match": "(FROM)\\b\\s*([_\\.[:alnum:]]+)\\b\\s*",
+      "match": "(FROM)\\b\\s*([_\\.[:alnum:]]+\\b)?",
       "captures": {
         "1": {
           "name": "keyword.operator.query.from.apex"
@@ -1711,7 +1725,7 @@
       ]
     },
     "switch-statement": {
-      "begin": "(?x)\n(switch)\\b\\s+\n(on)\\b\\s+\n(?:([_.\\'\\(\\)[:alnum:]]+)\\s*)?\n(\\{)",
+      "begin": "(?x)\n(switch)\\b\\s+\n(on)\\b\\s+\n(?:([_.?\\'\\(\\)[:alnum:]]+)\\s*)?\n(\\{)",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.switch.apex"
@@ -2241,11 +2255,11 @@
       "patterns": [
         {
           "name": "constant.numeric.datetime.apex",
-          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\-|\\+)\\d{2}\\:\\d{2})\\b"
+          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\.\\d{1,3})?(\\-|\\+)\\d{2}\\:\\d{2})\\b"
         },
         {
           "name": "constant.numeric.datetime.apex",
-          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(Z)?)\\b"
+          "match": "\\b(\\d{4}\\-\\d{2}\\-\\d{2}T\\d{2}\\:\\d{2}\\:\\d{2}(\\.\\d{1,3})?(Z)?)\\b"
         },
         {
           "name": "constant.numeric.date.apex",
@@ -2450,18 +2464,22 @@
       }
     },
     "invocation-expression": {
-      "begin": "(?x)\n(?:(\\?)\\s*)?                                     # preceding null-conditional operator?\n(?:(\\.)\\s*)?                                     # preceding dot?\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                   # method name\n(?<type-args>\\s*<([^<>]|\\g<type-args>)+>\\s*)?\\s* # type arguments\n(?=\\()                                           # open paren of argument list",
+      "begin": "(?x)\n(?:(\\??\\.)\\s*)?                                  # safe navigator or accessor\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                 # method name\n(?<type-args>\\s*<([^<>]|\\g<type-args>)+>\\s*)?\\s* # type arguments\n(?=\\()                                           # open paren of argument list",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.null-conditional.apex"
+          "patterns": [
+            {
+              "include": "#punctuation-accessor"
+            },
+            {
+              "include": "#operator-safe-navigation"
+            }
+          ]
         },
         "2": {
-          "name": "punctuation.accessor.apex"
-        },
-        "3": {
           "name": "entity.name.function.apex"
         },
-        "4": {
+        "3": {
           "patterns": [
             {
               "include": "#type-arguments"
@@ -2477,18 +2495,22 @@
       ]
     },
     "element-access-expression": {
-      "begin": "(?x)\n(?:(\\?)\\s*)?                        # preceding null-conditional operator?\n(?:(\\.)\\s*)?                        # preceding dot?\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*)? # property name\n(?:(\\?)\\s*)?                        # null-conditional operator?\n(?=\\[)                              # open bracket of argument list",
+      "begin": "(?x)\n(?:(\\??\\.)\\s*)?                       # safe navigator or accessor\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*)? # property name\n(?:(\\?)\\s*)?                          # null-conditional operator?\n(?=\\[)                                # open bracket of argument list",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.null-conditional.apex"
+          "patterns": [
+            {
+              "include": "#punctuation-accessor"
+            },
+            {
+              "include": "#operator-safe-navigation"
+            }
+          ]
         },
         "2": {
-          "name": "punctuation.accessor.apex"
-        },
-        "3": {
           "name": "variable.other.object.property.apex"
         },
-        "4": {
+        "3": {
           "name": "keyword.operator.null-conditional.apex"
         }
       },
@@ -2502,24 +2524,35 @@
     "member-access-expression": {
       "patterns": [
         {
-          "match": "(?x)\n(?:(\\?)\\s*)?                   # preceding null-conditional operator?\n(\\.)\\s*                        # preceding dot\n(@?[_[:alpha:]][_[:alnum:]]*)\\s* # property name\n(?![_[:alnum:]]|\\(|(\\?)?\\[|<)  # next character is not alpha-numeric, nor a (, [, or <. Also, test for ?[",
+          "match": "(?x)\n(\\??\\.)\\s*                       # safe navigator or accessor\n(@?[_[:alpha:]][_[:alnum:]]*)\\s* # property name\n(?![_[:alnum:]]|\\(|(\\?)?\\[|<)    # next character is not alpha-numeric, nor a (, [, or <. Also, test for ?[",
           "captures": {
             "1": {
-              "name": "keyword.operator.null-conditional.apex"
+              "patterns": [
+                {
+                  "include": "#punctuation-accessor"
+                },
+                {
+                  "include": "#operator-safe-navigation"
+                }
+              ]
             },
             "2": {
-              "name": "punctuation.accessor.apex"
-            },
-            "3": {
               "name": "variable.other.object.property.apex"
             }
           }
         },
         {
-          "match": "(?x)\n(\\.)?\\s*\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?<type-params>\\s*<([^<>]|\\g<type-params>)+>\\s*)\n(?=\n  (\\s*\\?)?\n  \\s*\\.\\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
+          "match": "(?x)\n(\\??\\.)?\\s*\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?<type-params>\\s*<([^<>]|\\g<type-params>)+>\\s*)\n(?=\n  (\\s*\\?)?\n  \\s*\\.\\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
           "captures": {
             "1": {
-              "name": "punctuation.accessor.apex"
+              "patterns": [
+                {
+                  "include": "#punctuation-accessor"
+                },
+                {
+                  "include": "#operator-safe-navigation"
+                }
+              ]
             },
             "2": {
               "name": "variable.other.object.apex"
@@ -2866,6 +2899,10 @@
     "operator-assignment": {
       "name": "keyword.operator.assignment.apex",
       "match": "(?<!=|!)(=)(?!=)"
+    },
+    "operator-safe-navigation": {
+      "name": "keyword.operator.safe-navigation.apex",
+      "match": "\\?\\."
     },
     "punctuation-comma": {
       "name": "punctuation.separator.comma.apex",

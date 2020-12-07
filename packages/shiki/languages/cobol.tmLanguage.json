@@ -1,5 +1,5 @@
 {
-  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json",
+  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/main/syntaxes/COBOL.tmLanguage.json",
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "fileTypes": [
     "ccp",
@@ -76,13 +76,24 @@
       }
     },
     {
-      "match": "(^[0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@])(\\*.*$)",
+      "match": "(^[0-9a-zA-Z\\s\\$#%\\.@\\- ][0-9a-zA-Z\\s\\$#%\\.@\\- ][0-9a-zA-Z\\s\\$#%\\.@\\- ][0-9a-zA-Z\\s\\$#%\\.@\\- ][0-9a-zA-Z\\s\\$#%\\.@\\- ][0-9a-zA-Z\\s\\$#%\\.@\\- ])(\\*.*$)",
       "captures": {
         "1": {
           "name": "constant.cobol"
         },
         "2": {
           "name": "comment.line.cobol.fixed"
+        }
+      }
+    },
+    {
+      "match": "\\s+(78)\\s+([0-9a-zA-Z][a-zA-Z\\-0-9_]+)",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.cobol"
+        },
+        "2": {
+          "name": "variable.other.constant"
         }
       }
     },
@@ -183,6 +194,20 @@
       "name": "meta.preprocessor.iso2002"
     },
     {
+      "match": "(\\*>)\\s+(@[0-9a-zA-Z][a-zA-Z\\-0-9]+)\\s+(.*$)",
+      "captures": {
+        "1": {
+          "name": "comment.line.scantoken.cobol"
+        },
+        "2": {
+          "name": "keyword.cobol"
+        },
+        "3": {
+          "name": "string.cobol"
+        }
+      }
+    },
+    {
       "match": "(\\*>.*$)",
       "name": "comment.line.modern"
     },
@@ -225,6 +250,12 @@
           "name": "keyword.identifiers.cobol"
         }
       },
+      "patterns": [
+        {
+          "match": "(^[0-9 ][0-9 ][0-9 ][0-9 ][0-9 ][0-9 ])",
+          "name": "constant.numeric.line_number.cobol"
+        }
+      ],
       "name": "comment.block.cobol.remark",
       "end": "(?=((?<![-_])(?i:remarks|author|date-written|source-computer|object-computer|installation|date-compiled|special-names|security|environment\\s+division|data\\s+division|working-storage\\s+section|input-output\\s+section|linkage\\s+section|procedure\\s+division|local-storage\\s+section)|^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*]\\*.*$|^\\+$|^$))"
     },
@@ -344,6 +375,17 @@
       "patterns": [
         {
           "include": "text.html.basic"
+        }
+      ],
+      "end": "(?i:end\\-exec)"
+    },
+    {
+      "begin": "(?i:exec\\s+java)",
+      "name": "string.quoted.cobol.java",
+      "contentName": "meta.embedded.block.java",
+      "patterns": [
+        {
+          "include": "source.java"
         }
       ],
       "end": "(?i:end\\-exec)"
@@ -495,11 +537,11 @@
       "name": "string.quoted.single.cobol"
     },
     {
-      "match": "(?<![-_])(?i:id\\s+division|identification\\s+division|identification|property-id|getter|setter|entry|function-id|end\\s+attribute|attribute|interface-id|indexer-id|factory|ctl|class-control|options|environment\\s+division|environment-name|environment-value|environment|configuration\\s+section|configuration|decimal-point\\s+is|decimal-point|console\\s+is|call-convention|special-names|cursor\\s+is|update|picture\\s+symbol|currency\\s+sign|currency|repository|input-output\\s+section|input-output|file\\s+section|file-control|select|optional|i-o-control|data\\s+division|working-storage\\s+section|working-storage|section|local-storage|linkage\\s+section|linkage|communication|report|screen\\s+section|object-storage|object\\s+section|class-object|fd|rd|cd|sd|printing|procedure\\s+division|procedure|references|debugging|end\\s+declaratives|declaratives|end\\s+static|end\\s+factory|end\\s+class-object|based-storage|size|font|national-edited|national)(?![0-9A-Za-z_-])",
+      "match": "(?<![-_])(?i:id\\s+division|identification\\s+division|identification|id|property-id|getter|setter|entry|function-id|end\\s+attribute|attribute|interface-id|indexer-id|factory|ctl|class-control|options|environment\\s+division|environment-name|environment-value|environment|configuration\\s+section|configuration|decimal-point\\s+is|decimal-point|console\\s+is|call-convention|special-names|cursor\\s+is|update|picture\\s+symbol|currency\\s+sign|currency|repository|input-output\\s+section|input-output|file\\s+section|file-control|select|optional|i-o-control|data\\s+division|working-storage\\s+section|working-storage|section|local-storage|linkage\\s+section|linkage|communication|report|screen\\s+section|object-storage|object\\s+section|class-object|fd|rd|cd|sd|printing|procedure\\s+division|procedure|division|references|debugging|end\\s+declaratives|declaratives|end\\s+static|end\\s+factory|end\\s+class-object|based-storage|size|font|national-edited|national)(?![0-9A-Za-z_-])",
       "name": "keyword.identifiers.cobol"
     },
     {
-      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.\\s+|\\s+]([a-zA-Z0-9_]*)",
+      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|method|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.\\s+|\\s+]([a-zA-Z0-9_]*)",
       "captures": {
         "1": {
           "name": "keyword.verb.cobol"
@@ -530,7 +572,7 @@
       "name": "keyword.control.catch-exception.cobol"
     },
     {
-      "match": "(?<![-_])(?i:select|use|thru|varying|giving|remainder|tallying|through|until|execute|returning|using|yielding|\\+\\+include|copy|replace)(?=\\s)",
+      "match": "(?<![-_])(?i:select|use|thru|varying|giving|remainder|tallying|through|until|execute|returning|using|chaining|yielding|\\+\\+include|copy|replace)(?=\\s)",
       "name": "keyword.otherverbs.cobol"
     },
     {
@@ -679,6 +721,10 @@
           "name": "invalid.illegal.constant.numeric.integer"
         }
       }
+    },
+    {
+      "match": "(?i:cblt-x9-compx|cblt-x8-compx|cblt-x8-comp5|cblt-x4-compx|cblt-x4-comp5|cblt-x2-compx|cblt-x2-comp5|cblt-x1-compx|cblt-x1-comp5|cblt-x1|cblt-vfile-status|cblt-vfile-handle|cblt-sx8-comp5|cblt-sx4-comp5|cblt-sx2-comp5|cblt-sx1-comp5|cblt-subsys-params|cblt-splitjoin-buf|cblt-screen-position|cblt-rtncode|cblt-request-context|cblt-reqhand-service-info|cblt-reqhand-service-funcs|cblt-reqhand-response|cblt-reqhand-funcs|cblt-prog-info-params|cblt-prog-info-arg-info|cblt-printer-properties|cblt-printer-name|cblt-printer-info|cblt-printer-default|cblt-ppointer|cblt-pointer|cblt-os-ssize|cblt-os-size|cblt-os-offset|cblt-os-info-params|cblt-os-flags|cblt-node-name|cblt-nls-msg-params|cblt-nls-msg-number-pair|cblt-nls-msg-ins-struct|cblt-nls-msg-buffer|cblt-mouse-shape|cblt-mouse-rect|cblt-mouse-pos|cblt-mouse-event|cblt-mem-validate-param|cblt-idp-exit-service-funcs|cblt-idp-exit-info|cblt-HWND|cblt-HINSTANCE|cblt-get-scr-line-draw-buffer|cblt-get-scr-graphics-buffer|cblt-generic-attr-value|cblt-generic-attr-rgb-values|cblt-generic-attr-information|cblt-file-status|cblt-fileexist-buf|cblt-exit-params|cblt-exit-info-params|cblt-cancel-proc-params|cblt-bytestream-handle|cblt-alphanum)",
+      "name": "support.function.cbltypes.cobol"
     },
     {
       "match": "(?<![-_])(?i:computational-1|comp-1|computational-2|comp-2|computational-3|comp-3|computational-4|comp-4|computational-x|comp-x|computational-5|comp-5|computational-6|comp-6|computational-n|comp-n|packed-decimal|index|float|double|signed-short|unsigned-short|signed-int|unsigned-int|signed-long|unsigned-long|comp|computational|usage\\sis\\sdisplay|usage\\sis\\sfont|usage\\s+display|binary|mutex-pointer|data-pointer|thread-pointer|sempahore-pointer|event-pointer|program-pointer|procedure-pointer|pointer|window|subwindow|control-type|thread|menu|variant|layout-manager|occurs|typedef|any|times|display\\s+blank\\s+when|blank\\s+when|blank\\s+screen|blank|usage\\sis|is\\spartial|usage|justified|just|right|signed|trailing\\s+separate|sign|seperate)(?=\\s|\\.|\\))",

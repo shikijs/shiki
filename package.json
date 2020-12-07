@@ -9,8 +9,8 @@
     "fmt": "prettier --parser=typescript --write packages/**/*.ts",
     "test": "jest --colors",
     "gen": "yarn workspace shiki-site gen",
-    "update:themes": "bash ./scripts/pullGHThemes.sh",
-    "update:grammars": "bash ./scripts/pullGHGrammars.sh"
+    "update:themes": "bash ./scripts/pullThemes.sh",
+    "update:grammars": "bash ./scripts/pullGrammars.sh"
   },
   "gitHooks": {
     "pre-commit": "ls-lint && lint-staged"

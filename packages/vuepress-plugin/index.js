@@ -14,10 +14,22 @@ module.exports = (options, ctx) => {
     chainMarkdown(config) {
       config.options.highlight((code, lang) => {
         if (!lang) {
-          return `<pre><code>${code}</code></pre>`
+          return `<pre><code>${escapeHtml(code)}</code></pre>`
         }
         return h.codeToHtml(code, lang)
       })
     }
   }
+}
+
+const htmlEscapes = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+}
+
+function escapeHtml(html) {
+  return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
 }

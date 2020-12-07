@@ -563,18 +563,18 @@
     "inline": {
       "patterns": [
         {
-          "match": "\\b(inline)\\b(?=(?:.(?!val|def|given))*(if|match))",
+          "match": "\\b(inline)\\s+(?=(([\\w\\s]*\\b(val|def|given)\\b)|((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)\\s*:))",
           "captures": {
             "1": {
-              "name": "keyword.control.flow.scala"
+              "name": "storage.modifier.other"
             }
           }
         },
         {
-          "match": "\\b(inline)\\s+(?=(([\\w\\s]*(val|def|given))|((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)\\s*:))",
+          "match": "\\b(inline)\\b(?=(?:.(?!\\b(?:val|def|given)\\b))*\\b(if|match)\\b)",
           "captures": {
             "1": {
-              "name": "storage.modifier.other"
+              "name": "keyword.control.flow.scala"
             }
           }
         }

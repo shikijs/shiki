@@ -87,6 +87,7 @@ export type Lang =
   | 'swift'
   | 'tcl'
   | 'toml'
+  | 'ts'
   | 'tsx'
   | 'typescript'
   | 'vb'
@@ -317,7 +318,7 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'jsx',
-    scopeName: 'source.js.jsx',
+    scopeName: 'documentation.injection.js.jsx',
     path: 'jsx.tmLanguage.json'
   },
   {
@@ -553,6 +554,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'toml',
     scopeName: 'source.toml',
     path: 'toml.tmLanguage.json'
+  },
+  {
+    id: 'ts',
+    scopeName: 'documentation.injection.ts',
+    path: 'ts.tmLanguage.json'
   },
   {
     id: 'tsx',

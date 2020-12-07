@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.2.7 | 2020-11-13
+
+- Fix color fallback issues. [#100](https://github.com/shikijs/shiki/issues/100).
+- 🙌 Add Applescript grammar. [#99](https://github.com/shikijs/shiki/issues/99). Thanks to contribution from [Arturo Galán](https://github.com/arturogalan).
+
+### 0.2.6 | 2020-09-28
+
+- Upgrade to onigasm 2.2.5.
+- Add Erlang grammar.
+- 🙌 Add Elixir grammar. [#95](https://github.com/shikijs/shiki/issues/95). Thanks to contribution from [Sebastien Baudray](https://github.com/https://github.com/sbaudray).
+- 🙌 Fix wrong escape sequence in vuepress plugin. [#93](https://github.com/shikijs/shiki/issues/93). Thanks to contribution from [Yu Zhang](https://github.com/yzhang-gh).
+
+### 0.2.5 | 2020-09-17
+
+- Reduce dependency size (shiki-themes is 47M). [#94](https://github.com/shikijs/shiki/issues/94).
+
 ### 0.2.4 | 2020-09-13
 
 - Fix `RangeError: Invalid array length` in `vuepress-plugin-shiki`.

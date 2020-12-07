@@ -94,19 +94,14 @@ export async function getTheme(name: Theme): Promise<IShikiTheme> {
 /**
  * https://github.com/microsoft/vscode/blob/f7f05dee53fb33fe023db2e06e30a89d3094488f/src/vs/platform/theme/common/colorRegistry.ts#L258-L268
  */
-const editorBackground = { light: '#fffffe', dark: '#1E1E1E' }
-const editorForeground = { light: '#333333', dark: '#BBBBBB' }
+const VSCODE_FALLBACK_EDITOR_FG = { light: '#333333', dark: '#bbbbbb' }
+const VSCODE_FALLBACK_EDITOR_BG = { light: '#fffffe', dark: '#1e1e1e' }
 
 function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: string; bg: string } {
-  let fg = editorForeground.dark
-  let bg = editorBackground.dark
-
-  if (theme.type === 'light') {
-    fg = editorForeground.light
-    bg = editorBackground.light
-  }
+  let fg, bg
 
   /**
+   * First try:
    * Theme might contain a global `tokenColor` without `name` or `scope`
    * Used as default value for foreground/background
    */
@@ -124,11 +119,27 @@ function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: stri
     bg = globalSetting.settings.background
   }
 
-  if ((<any>theme).colors && (<any>theme).colors['editor.foreground']) {
+  /**
+   * Second try:
+   * If there's no global `tokenColor` without `name` or `scope`
+   * Use `editor.foreground` and `editor.background`
+   */
+  if (!fg && (<any>theme)?.colors['editor.foreground']) {
     fg = (<any>theme).colors['editor.foreground']
   }
-  if ((<any>theme).colors && (<any>theme).colors['editor.background']) {
+  if (!bg && (<any>theme)?.colors['editor.background']) {
     bg = (<any>theme).colors['editor.background']
+  }
+
+  /**
+   * Last try:
+   * If there's no fg/bg color specified in theme, use default
+   */
+  if (!fg) {
+    fg = theme.type === 'light' ? VSCODE_FALLBACK_EDITOR_FG.light : VSCODE_FALLBACK_EDITOR_FG.dark
+  }
+  if (!bg) {
+    bg = theme.type === 'light' ? VSCODE_FALLBACK_EDITOR_BG.light : VSCODE_FALLBACK_EDITOR_BG.dark
   }
 
   return {
