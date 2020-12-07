@@ -4,7 +4,7 @@ import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getOnigasm, loadTheme } from './loader'
+import { getOnigasm } from './loader'
 import { IThemeRegistration } from './types'
 import { languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'

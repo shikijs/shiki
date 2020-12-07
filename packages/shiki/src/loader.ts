@@ -34,28 +34,42 @@ export async function getOnigasm(): Promise<IOnigLib> {
   return _onigasmPromise
 }
 
-/**
- * @param filepath assert path related to ./packages/shiki
- */
-async function _loadAssets(filepath: string): Promise<string> {
+function _resolvePath(filepath: string, prepend: string = '') {
   if (isBrowser) {
-    return await fetch(`../${filepath}`).then(r => r.text())
+    return `../${prepend}${filepath}`
   } else {
     const path = require('path') as typeof import('path')
-    const fs = require('fs') as typeof import('fs')
-    return await fs.promises.readFile(path.resolve(__dirname, '..', filepath), 'utf-8')
+
+    if (path.isAbsolute(filepath)) {
+      return filepath
+    } else {
+      return path.resolve(__dirname, '..', prepend + filepath)
+    }
   }
 }
 
-async function _loadJSONAssets(filepath: string) {
-  return JSON.parse(await _loadAssets(filepath))
+/**
+ * @param filepath assert path related to ./packages/shiki
+ */
+async function _loadAssets(filepath: string, prepend: string = ''): Promise<string> {
+  const path = _resolvePath(filepath, prepend)
+  if (isBrowser) {
+    return await fetch(path).then(r => r.text())
+  } else {
+    const fs = require('fs') as typeof import('fs')
+    return await fs.promises.readFile(path, 'utf-8')
+  }
+}
+
+async function _loadJSONAssets(filepath: string, prepend?: string) {
+  return JSON.parse(await _loadAssets(filepath, prepend))
 }
 
 /**
  * @param themePath related path to theme.json
  */
 export async function loadTheme(themePath: string): Promise<IShikiTheme> {
-  let theme: IRawTheme = await _loadJSONAssets(`themes/${themePath}`)
+  let theme: IRawTheme = await _loadJSONAssets(themePath, 'themes/')
 
   const shikiTheme = _toShikiTheme(theme)
 
@@ -75,8 +89,8 @@ export async function loadTheme(themePath: string): Promise<IShikiTheme> {
 }
 
 export async function loadGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
-  const content = await _loadJSONAssets(`languages/${lang.path}`)
-  return parseRawGrammar(content.toString())
+  const content = await _loadAssets(lang.path, 'languages/')
+  return parseRawGrammar(content, isBrowser ? undefined : _resolvePath(lang.path, 'languages/'))
 }
 
 export function repairTheme(theme: IShikiTheme) {
