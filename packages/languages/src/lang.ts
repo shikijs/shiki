@@ -3,37 +3,29 @@ import { ILanguageRegistration } from './index'
 
 export type Lang =
   | 'abap'
-  | 'actionscript-3'
   | 'ada'
   | 'apex'
   | 'asm'
-  | 'awk'
   | 'bat'
   | 'c'
   | 'clojure'
   | 'cobol'
   | 'coffee'
   | 'cpp'
-  | 'crystal'
   | 'csharp'
   | 'css'
   | 'd'
   | 'dart'
   | 'diff'
   | 'dockerfile'
-  | 'elm'
-  | 'fortran'
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
   | 'go'
   | 'graphql'
   | 'groovy'
-  | 'hack'
   | 'haml'
   | 'handlebars'
-  | 'haskell'
-  | 'hcl'
   | 'hlsl'
   | 'html'
   | 'ini'
@@ -41,7 +33,6 @@ export type Lang =
   | 'javascript'
   | 'json'
   | 'jsonc'
-  | 'jsonnet'
   | 'jsx'
   | 'julia'
   | 'kotlin'
@@ -54,9 +45,7 @@ export type Lang =
   | 'makefile'
   | 'markdown'
   | 'matlab'
-  | 'nix'
   | 'objective-c'
-  | 'ocaml'
   | 'pascal'
   | 'perl'
   | 'perl6'
@@ -66,8 +55,6 @@ export type Lang =
   | 'powershell'
   | 'prolog'
   | 'pug'
-  | 'puppet'
-  | 'purescript'
   | 'python'
   | 'r'
   | 'razor'
@@ -80,19 +67,15 @@ export type Lang =
   | 'scss'
   | 'shaderlab'
   | 'shellscript'
-  | 'smalltalk'
   | 'sql'
   | 'stylus'
   | 'swift'
-  | 'tcl'
   | 'toml'
   | 'ts'
   | 'tsx'
   | 'typescript'
   | 'vb'
-  | 'viml'
   | 'vue'
-  | 'wasm'
   | 'xml'
   | 'xsl'
   | 'yaml'
@@ -102,11 +85,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'abap',
     scopeName: 'source.abap',
     path: path.resolve(__dirname, '../data/abap.tmLanguage.json')
-  },
-  {
-    id: 'actionscript-3',
-    scopeName: 'source.actionscript.3',
-    path: path.resolve(__dirname, '../data/actionscript-3.tmLanguage.json')
   },
   {
     id: 'ada',
@@ -122,11 +100,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: path.resolve(__dirname, '../data/asm.tmLanguage.json')
-  },
-  {
-    id: 'awk',
-    scopeName: 'source.awk',
-    path: path.resolve(__dirname, '../data/awk.tmLanguage.json')
   },
   {
     id: 'bat',
@@ -161,11 +134,6 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/cpp.tmLanguage.json')
   },
   {
-    id: 'crystal',
-    scopeName: 'source.crystal',
-    path: path.resolve(__dirname, '../data/crystal.tmLanguage.json')
-  },
-  {
     id: 'csharp',
     scopeName: 'source.cs',
     path: path.resolve(__dirname, '../data/csharp.tmLanguage.json'),
@@ -195,16 +163,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'dockerfile',
     scopeName: 'source.dockerfile',
     path: path.resolve(__dirname, '../data/dockerfile.tmLanguage.json')
-  },
-  {
-    id: 'elm',
-    scopeName: 'source.elm',
-    path: path.resolve(__dirname, '../data/elm.tmLanguage.json')
-  },
-  {
-    id: 'fortran',
-    scopeName: 'source.fortran.free',
-    path: path.resolve(__dirname, '../data/fortran.tmLanguage.json')
   },
   {
     id: 'fsharp',
@@ -238,11 +196,6 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/groovy.tmLanguage.json')
   },
   {
-    id: 'hack',
-    scopeName: 'source.hack',
-    path: path.resolve(__dirname, '../data/hack.tmLanguage.json')
-  },
-  {
     id: 'haml',
     scopeName: 'text.haml',
     path: path.resolve(__dirname, '../data/haml.tmLanguage.json')
@@ -252,16 +205,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.handlebars',
     path: path.resolve(__dirname, '../data/handlebars.tmLanguage.json'),
     aliases: ['hbs']
-  },
-  {
-    id: 'haskell',
-    scopeName: 'source.haskell',
-    path: path.resolve(__dirname, '../data/haskell.tmLanguage.json')
-  },
-  {
-    id: 'hcl',
-    scopeName: 'source.hcl',
-    path: path.resolve(__dirname, '../data/hcl.tmLanguage.json')
   },
   {
     id: 'hlsl',
@@ -298,11 +241,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: path.resolve(__dirname, '../data/jsonc.tmLanguage.json')
-  },
-  {
-    id: 'jsonnet',
-    scopeName: 'source.jsonnet',
-    path: path.resolve(__dirname, '../data/jsonnet.tmLanguage.json')
   },
   {
     id: 'jsx',
@@ -366,20 +304,10 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/matlab.tmLanguage.json')
   },
   {
-    id: 'nix',
-    scopeName: 'source.nix',
-    path: path.resolve(__dirname, '../data/nix.tmLanguage.json')
-  },
-  {
     id: 'objective-c',
     scopeName: 'source.objcpp',
     path: path.resolve(__dirname, '../data/objective-c.tmLanguage.json'),
     aliases: ['objc']
-  },
-  {
-    id: 'ocaml',
-    scopeName: 'source.ocaml',
-    path: path.resolve(__dirname, '../data/ocaml.tmLanguage.json')
   },
   {
     id: 'pascal',
@@ -432,16 +360,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.pug',
     path: path.resolve(__dirname, '../data/pug.tmLanguage.json'),
     aliases: ['jade']
-  },
-  {
-    id: 'puppet',
-    scopeName: 'source.puppet',
-    path: path.resolve(__dirname, '../data/puppet.tmLanguage.json')
-  },
-  {
-    id: 'purescript',
-    scopeName: 'source.purescript',
-    path: path.resolve(__dirname, '../data/purescript.tmLanguage.json')
   },
   {
     id: 'python',
@@ -508,11 +426,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['shell', 'bash', 'sh', 'zsh']
   },
   {
-    id: 'smalltalk',
-    scopeName: 'source.smalltalk',
-    path: path.resolve(__dirname, '../data/smalltalk.tmLanguage.json')
-  },
-  {
     id: 'sql',
     scopeName: 'source.sql',
     path: path.resolve(__dirname, '../data/sql.tmLanguage.json')
@@ -527,11 +440,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'swift',
     scopeName: 'source.swift',
     path: path.resolve(__dirname, '../data/swift.tmLanguage.json')
-  },
-  {
-    id: 'tcl',
-    scopeName: 'source.tcl',
-    path: path.resolve(__dirname, '../data/tcl.tmLanguage.json')
   },
   {
     id: 'toml',
@@ -561,11 +469,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['cmd']
   },
   {
-    id: 'viml',
-    scopeName: 'source.viml',
-    path: path.resolve(__dirname, '../data/viml.tmLanguage.json')
-  },
-  {
     id: 'vue-html',
     scopeName: 'text.html.vue-html',
     path: path.resolve(__dirname, '../data/vue-html.tmLanguage.json')
@@ -574,11 +477,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue',
     scopeName: 'source.vue',
     path: path.resolve(__dirname, '../data/vue.tmLanguage.json')
-  },
-  {
-    id: 'wasm',
-    scopeName: 'source.wat',
-    path: path.resolve(__dirname, '../data/wasm.tmLanguage.json')
   },
   {
     id: 'xml',
