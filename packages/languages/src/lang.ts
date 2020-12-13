@@ -230,7 +230,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'javascript',
     scopeName: 'source.js',
     path: path.resolve(__dirname, '../data/javascript.tmLanguage.json'),
-    aliases: ['js']
+    aliases: ['js', 'jsx']
   },
   {
     id: 'json',
@@ -241,11 +241,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: path.resolve(__dirname, '../data/jsonc.tmLanguage.json')
-  },
-  {
-    id: 'jsx',
-    scopeName: 'documentation.injection.js.jsx',
-    path: path.resolve(__dirname, '../data/jsx.tmLanguage.json')
   },
   {
     id: 'julia',
@@ -445,11 +440,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'toml',
     scopeName: 'source.toml',
     path: path.resolve(__dirname, '../data/toml.tmLanguage.json')
-  },
-  {
-    id: 'ts',
-    scopeName: 'documentation.injection.ts',
-    path: path.resolve(__dirname, '../data/ts.tmLanguage.json')
   },
   {
     id: 'tsx',
