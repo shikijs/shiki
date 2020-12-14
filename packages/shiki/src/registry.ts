@@ -12,7 +12,7 @@ export class Registry extends TextMateRegistry {
     super(_resolver)
   }
 
-  getTheme(theme: Theme | IShikiTheme | string) {
+  public getTheme(theme: Theme | IShikiTheme | string) {
     if (typeof theme === 'string') {
       return this._resolvedThemes[theme]
     } else {
@@ -20,7 +20,7 @@ export class Registry extends TextMateRegistry {
     }
   }
 
-  async loadTheme(theme: Theme | IShikiTheme | string) {
+  public async loadTheme(theme: Theme | IShikiTheme | string) {
     if (typeof theme === 'string') {
       if (!this._resolvedThemes[theme]) {
         this._resolvedThemes[theme] = await fetchTheme(`${theme}.json`)
@@ -35,16 +35,15 @@ export class Registry extends TextMateRegistry {
     }
   }
 
-  async loadThemes(themes: IThemeRegistration[]) {
+  public async loadThemes(themes: IThemeRegistration[]) {
     return await Promise.all(themes.map(theme => this.loadTheme(theme)))
   }
 
-  getGrammer(name: string) {
+  public getGrammer(name: string) {
     return this._resolvedGammer[name]
   }
 
-  async loadLanguage(lang: ILanguageRegistration) {
-    this._resolver.addLanguage(lang)
+  public async loadLanguage(lang: ILanguageRegistration) {
     const g = await this.loadGrammar(lang.scopeName)
     this._resolvedGammer[lang.id] = g
     if (lang.aliases) {
@@ -54,7 +53,7 @@ export class Registry extends TextMateRegistry {
     }
   }
 
-  async loadLanguages(langs: ILanguageRegistration[]) {
+  public async loadLanguages(langs: ILanguageRegistration[]) {
     for (const lang of langs) {
       this._resolver.addLanguage(lang)
     }
