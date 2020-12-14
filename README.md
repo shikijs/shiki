@@ -28,6 +28,20 @@ shiki
 // </code></pre>
 ```
 
+```html
+<script src='https://unpkg.com/shiki'></script>
+<script>
+shiki
+  .getHighlighter({
+    theme: 'nord'
+  })
+  .then(highlighter => {
+    const code = highlighter.codeToHtml(`console.log('shiki');`, 'js')
+    document.getElementById('output').innerHTML = code
+  })
+</script>
+```
+
 - [Themes](./packages/docs/README.md#literal-values)
 - [Languages](./packages/docs/README.md#literal-values)
 - [SVG Renderer](./packages/renderer-svg/README.md)

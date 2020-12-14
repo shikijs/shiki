@@ -4,6 +4,7 @@ import dts from 'rollup-plugin-dts'
 import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
+import rollup from 'rollup'
 
 const external = ['shiki', 'puppeteer']
 
@@ -37,12 +38,14 @@ export default [
       {
         file: 'dist/index.iife.js',
         format: 'iife',
-        name: 'ShikiRendererSVG'
+        extend: true,
+        name: 'shiki'
       },
       {
         file: 'dist/index.iife.min.js',
         format: 'iife',
-        name: 'ShikiRendererSVG',
+        extend: true,
+        name: 'shiki',
         plugins: [terser()]
       }
     ],

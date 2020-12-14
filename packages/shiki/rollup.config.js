@@ -38,7 +38,8 @@ export default [
       {
         file: 'dist/index.iife.js',
         format: 'iife',
-        name: 'Shiki',
+        name: 'shiki',
+        extend: true,
         plugins: [
           replace({
             __CDN_ROOT__: ''
@@ -48,7 +49,8 @@ export default [
       {
         file: 'dist/index.unpkg.iife.js',
         format: 'iife',
-        name: 'Shiki',
+        name: 'shiki',
+        extend: true,
         plugins: [
           replace({
             __CDN_ROOT__: `https://unpkg.com/@antfu/shiki@${version}/`
@@ -58,7 +60,8 @@ export default [
       {
         file: 'dist/index.jsdelivr.iife.js',
         format: 'iife',
-        name: 'Shiki',
+        name: 'shiki',
+        extend: true,
         plugins: [
           replace({
             __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/@antfu/shiki@${version}/`
