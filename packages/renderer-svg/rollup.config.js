@@ -32,6 +32,7 @@ export default [
   },
   {
     input: 'src/index.ts',
+    external,
     output: [
       {
         file: 'dist/index.iife.js',
