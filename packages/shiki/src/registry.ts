@@ -27,7 +27,7 @@ export class Registry extends TextMateRegistry {
       }
       return this._resolvedThemes[theme]
     } else {
-      toShikiTheme(theme)
+      theme = toShikiTheme(theme)
       if (theme.name) {
         this._resolvedThemes[theme.name] = theme
       }
