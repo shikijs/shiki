@@ -11,4 +11,4 @@ export {
   Highlighter,
   HighlighterOptions
 } from './types'
-export { setCDN } from './loader'
+export { setCDN, setOnigasmWASM } from './loader'

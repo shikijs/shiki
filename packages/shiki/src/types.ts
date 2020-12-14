@@ -24,6 +24,9 @@ export interface Highlighter {
   loadTheme(theme: IThemeRegistration): Promise<void>
   loadLanguage(theme: ILanguageRegistration | Lang): Promise<void>
 
+  getForegroundColor(theme?: StringLiteralUnion<Theme>): string
+  getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
+
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
 

@@ -38,7 +38,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
   const fontFamily = options.fontFamily
   const fontSize = options.fontSize || 16
   const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio || 1.4
-  const bg = options.bg || '#fff'
+  const _bg = options.bg || '#fff'
   const bgCornerRadius = options.bgCornerRadius || 4
   const bgSideCharPadding = options.bgSideCharPadding || 4
   const bgVerticalCharPadding = options.bgVerticalCharPadding || 2
@@ -48,7 +48,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
   const lineheight = measurement.height * lineHeightToFontSizeRatio
 
   return {
-    renderToSVG(lines: IThemedToken[][]) {
+    renderToSVG(lines: IThemedToken[][], { bg } = { bg: _bg }) {
       let longestLineTextLength = 0
       lines.forEach(lTokens => {
         let lineTextLength = 0

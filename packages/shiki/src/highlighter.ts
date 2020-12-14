@@ -99,11 +99,23 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     await _registry.loadLanguage(_lang)
   }
 
+  function getBackgroundColor(theme?: StringLiteralUnion<Theme>) {
+    const { _theme } = getTheme(theme)
+    return _theme.bg
+  }
+
+  function getForegroundColor(theme?: StringLiteralUnion<Theme>) {
+    const { _theme } = getTheme(theme)
+    return _theme.fg
+  }
+
   return {
     codeToThemedTokens,
     codeToHtml,
     loadTheme,
-    loadLanguage
+    loadLanguage,
+    getBackgroundColor,
+    getForegroundColor
   }
 }
 

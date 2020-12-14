@@ -37,12 +37,12 @@ export default [
       {
         file: 'dist/index.iife.js',
         format: 'iife',
-        name: 'ShikiRenderSVG'
+        name: 'ShikiRendererSVG'
       },
       {
         file: 'dist/index.iife.min.js',
         format: 'iife',
-        name: 'ShikiRenderSVG',
+        name: 'ShikiRendererSVG',
         plugins: [terser()]
       }
     ],
