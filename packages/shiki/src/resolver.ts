@@ -12,28 +12,12 @@ export class Resolver implements RegistryOptions {
   private readonly languageMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
   private readonly scopeToLangMap: { [scope: string]: ILanguageRegistration } = {}
 
-  private readonly _languages: ILanguageRegistration[]
   private readonly _onigLibPromise: Promise<IOnigLib>
   private readonly _onigLibName: string
 
-  constructor(
-    languages: ILanguageRegistration[],
-    onigLibPromise: Promise<IOnigLib>,
-    onigLibName: string
-  ) {
-    this._languages = languages
+  constructor(onigLibPromise: Promise<IOnigLib>, onigLibName: string) {
     this._onigLibPromise = onigLibPromise
     this._onigLibName = onigLibName
-
-    this._languages.forEach(l => {
-      this.languageMap[l.id] = l
-      if (l.aliases) {
-        l.aliases.forEach(a => {
-          this.languageMap[a] = l
-        })
-      }
-      this.scopeToLangMap[l.scopeName] = l
-    })
   }
 
   public get onigLib(): Promise<IOnigLib> {
@@ -62,5 +46,15 @@ export class Resolver implements RegistryOptions {
     const g = await loadGrammar(lang)
     lang.grammar = g
     return g
+  }
+
+  public addLanguage(l: ILanguageRegistration) {
+    this.languageMap[l.id] = l
+    if (l.aliases) {
+      l.aliases.forEach(a => {
+        this.languageMap[a] = l
+      })
+    }
+    this.scopeToLangMap[l.scopeName] = l
   }
 }

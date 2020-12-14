@@ -16,7 +16,8 @@ export interface Highlighter {
     options?: ThemedTokenizerOptions
   ): IThemedToken[][]
   codeToHtml(code: string, lang?: StringLiteralUnion<Lang>, theme?: IThemeRegistration): string
-  loadTheme(theme: IThemeRegistration): Promise<IShikiTheme>
+  loadTheme(theme: IThemeRegistration): Promise<void>
+  loadLanguage(theme: ILanguageRegistration | Lang): Promise<void>
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

@@ -6,20 +6,21 @@ import { renderToHtml } from './renderer'
 
 import { getOnigasm } from './loader'
 import { IThemeRegistration } from './types'
-import { languages as BUNDLED_LANGUAGES } from './languages'
+import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'
+
+function resolveLang(lang: ILanguageRegistration | Lang) {
+  return typeof lang === 'string'
+    ? BUNDLED_LANGUAGES.find(l => l.id === lang || l.aliases?.includes(lang))
+    : lang
+}
 
 function resolveOptions(options: HighlighterOptions) {
   let languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
   let themes: IThemeRegistration[] = options.themes || []
 
   if (options.langs?.length) {
-    languages = options.langs.map(
-      (i): ILanguageRegistration =>
-        typeof i === 'string'
-          ? BUNDLED_LANGUAGES.find(lang => lang.id === i || lang.aliases?.includes(i))
-          : i
-    )
+    languages = options.langs.map(resolveLang)
   }
   if (options.theme) {
     themes.unshift(options.theme)
@@ -33,7 +34,7 @@ function resolveOptions(options: HighlighterOptions) {
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
   const { languages: _languages, themes: _themes } = resolveOptions(options)
-  const _resolver = new Resolver(_languages, getOnigasm(), 'onigasm')
+  const _resolver = new Resolver(getOnigasm(), 'onigasm')
   const _registry = new Registry(_resolver)
 
   const themes = await _registry.loadThemes(_themes)
@@ -87,7 +88,11 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
       })
     },
     async loadTheme(theme: IThemeRegistration) {
-      return await _registry.loadTheme(theme)
+      await _registry.loadTheme(theme)
+    },
+    async loadLanguage(lang: ILanguageRegistration | Lang) {
+      const _lang = resolveLang(lang)
+      await _registry.loadLanguage(_lang)
     }
   }
 }

@@ -2,10 +2,15 @@ import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
 import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
 import { loadTheme, repairTheme } from './loader'
 import { Theme } from './themes'
+import { Resolver } from './resolver'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Record<string, IShikiTheme> = {}
   private _resolvedGammer: Record<string, IGrammar> = {}
+
+  constructor(private _resolver: Resolver) {
+    super(_resolver)
+  }
 
   getTheme(theme: Theme | IShikiTheme | string) {
     if (typeof theme === 'string') {
@@ -39,6 +44,7 @@ export class Registry extends TextMateRegistry {
   }
 
   async loadLanguage(lang: ILanguageRegistration) {
+    this._resolver.addLanguage(lang)
     const g = await this.loadGrammar(lang.scopeName)
     this._resolvedGammer[lang.id] = g
     if (lang.aliases) {
