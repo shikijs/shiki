@@ -25,7 +25,11 @@
   "dependencies": {
     "puppeteer": "^5.2.1"
   },
+  "peerDependencies": {
+    "shiki": "^0.3.0"
+  },
   "devDependencies": {
-    "@types/puppeteer": "^3.0.1"
+    "@types/puppeteer": "^3.0.1",
+    "shiki": "^0.3.0"
   }
 }

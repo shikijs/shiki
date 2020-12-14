@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build --include-dependencies",
     "watch": "lerna run watch --parallel",
     "fmt": "prettier --parser=typescript --write packages/**/*.ts",
     "test": "jest --colors",
