@@ -87,7 +87,7 @@ async function _fetchJSONAssets(filepath: string, prepend?: string) {
 export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
   let theme: IRawTheme = await _fetchJSONAssets(themePath, 'themes/')
 
-  const shikiTheme = _toShikiTheme(theme)
+  const shikiTheme = toShikiTheme(theme)
 
   if (shikiTheme.include) {
     const includedTheme = await fetchTheme(shikiTheme.include)
@@ -124,7 +124,7 @@ export function repairTheme(theme: IShikiTheme) {
   })
 }
 
-function _toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
+export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
   const shikiTheme: IShikiTheme = {
     ...rawTheme,
     ...getThemeDefaultColors(rawTheme)

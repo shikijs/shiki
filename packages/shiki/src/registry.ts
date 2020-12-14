@@ -1,6 +1,6 @@
 import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
 import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
-import { fetchTheme, repairTheme } from './loader'
+import { fetchTheme, toShikiTheme } from './loader'
 import { Theme } from './themes'
 import { Resolver } from './resolver'
 
@@ -27,7 +27,7 @@ export class Registry extends TextMateRegistry {
       }
       return this._resolvedThemes[theme]
     } else {
-      repairTheme(theme)
+      toShikiTheme(theme)
       if (theme.name) {
         this._resolvedThemes[theme.name] = theme
       }

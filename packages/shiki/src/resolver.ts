@@ -4,9 +4,9 @@
 'use strict'
 
 import { IRawGrammar, IOnigLib, RegistryOptions } from 'vscode-textmate'
-import { ILanguageRegistration } from 'shiki-languages'
 
 import { fetchGrammar } from './loader'
+import { ILanguageRegistration } from './types'
 
 export class Resolver implements RegistryOptions {
   private readonly languageMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
