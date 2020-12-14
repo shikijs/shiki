@@ -22,24 +22,24 @@ function resolveLang(lang: ILanguageRegistration | Lang) {
 }
 
 function resolveOptions(options: HighlighterOptions) {
-  let languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
-  let themes: IThemeRegistration[] = options.themes || []
+  let _languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
+  let _themes: IThemeRegistration[] = options.themes || []
 
   if (options.langs?.length) {
-    languages = options.langs.map(resolveLang)
+    _languages = options.langs.map(resolveLang)
   }
   if (options.theme) {
-    themes.unshift(options.theme)
+    _themes.unshift(options.theme)
   }
-  if (!themes.length) {
-    themes = ['nord']
+  if (!_themes.length) {
+    _themes = ['nord']
   }
 
-  return { languages, themes }
+  return { _languages, _themes }
 }
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
-  const { languages: _languages, themes: _themes } = resolveOptions(options)
+  const { _languages, _themes } = resolveOptions(options)
   const _resolver = new Resolver(getOnigasm(), 'onigasm')
   const _registry = new Registry(_resolver)
 
@@ -62,7 +62,6 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     if (!_grammer) {
       throw Error(`No language registration for ${lang}`)
     }
-
     return { _grammer }
   }
 
@@ -86,6 +85,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     })
     const { _theme } = getTheme(theme)
     return renderToHtml(tokens, {
+      fg: _theme.fg,
       bg: _theme.bg
     })
   }

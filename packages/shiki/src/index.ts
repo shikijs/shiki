@@ -4,6 +4,7 @@ export { languages as BUNDLED_LANGUAGES, Lang } from './languages'
 export { getHighlighter } from './highlighter'
 export { renderToHtml } from './renderer'
 export { IThemedToken } from './themedTokenizer'
+export { setCDN, setOnigasmWASM } from './loader'
 export {
   ILanguageRegistration,
   IShikiTheme,
@@ -11,4 +12,3 @@ export {
   Highlighter,
   HighlighterOptions
 } from './types'
-export { setCDN, setOnigasmWASM } from './loader'

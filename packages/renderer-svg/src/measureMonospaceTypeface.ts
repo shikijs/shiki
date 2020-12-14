@@ -51,7 +51,7 @@ export async function measureMonospaceTypeface(
   if (__BROWSER__) {
     return measureFont(fontName, fontSize)
   } else {
-    const puppeteer = await import('puppeteer')
+    const puppeteer = require('puppeteer') as typeof import('puppeteer')
     const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     const measurement = await page.evaluate(measureFont, fontName, fontSize)

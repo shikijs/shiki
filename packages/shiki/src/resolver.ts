@@ -6,7 +6,7 @@
 import { IRawGrammar, IOnigLib, RegistryOptions } from 'vscode-textmate'
 import { ILanguageRegistration } from 'shiki-languages'
 
-import { loadGrammar } from './loader'
+import { fetchGrammar } from './loader'
 
 export class Resolver implements RegistryOptions {
   private readonly languageMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
@@ -43,7 +43,7 @@ export class Resolver implements RegistryOptions {
       return lang.grammar
     }
 
-    const g = await loadGrammar(lang)
+    const g = await fetchGrammar(lang)
     lang.grammar = g
     return g
   }

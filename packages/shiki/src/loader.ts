@@ -67,7 +67,7 @@ function _resolvePath(filepath: string, prepend: string = '') {
 /**
  * @param filepath assert path related to ./packages/shiki
  */
-async function _loadAssets(filepath: string, prepend: string = ''): Promise<string> {
+async function _fetchAssets(filepath: string, prepend: string = ''): Promise<string> {
   const path = _resolvePath(filepath, prepend)
   if (isBrowser) {
     return await fetch(path).then(r => r.text())
@@ -77,20 +77,20 @@ async function _loadAssets(filepath: string, prepend: string = ''): Promise<stri
   }
 }
 
-async function _loadJSONAssets(filepath: string, prepend?: string) {
-  return JSON.parse(await _loadAssets(filepath, prepend))
+async function _fetchJSONAssets(filepath: string, prepend?: string) {
+  return JSON.parse(await _fetchAssets(filepath, prepend))
 }
 
 /**
  * @param themePath related path to theme.json
  */
-export async function loadTheme(themePath: string): Promise<IShikiTheme> {
-  let theme: IRawTheme = await _loadJSONAssets(themePath, 'themes/')
+export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
+  let theme: IRawTheme = await _fetchJSONAssets(themePath, 'themes/')
 
   const shikiTheme = _toShikiTheme(theme)
 
   if (shikiTheme.include) {
-    const includedTheme = await loadTheme(shikiTheme.include)
+    const includedTheme = await fetchTheme(shikiTheme.include)
 
     if (includedTheme.settings) {
       shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
@@ -104,8 +104,8 @@ export async function loadTheme(themePath: string): Promise<IShikiTheme> {
   return shikiTheme
 }
 
-export async function loadGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
-  const content = await _loadAssets(lang.path, 'languages/')
+export async function fetchGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
+  const content = await _fetchAssets(lang.path, 'languages/')
   return JSON.parse(content)
 }
 

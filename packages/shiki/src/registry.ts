@@ -1,6 +1,6 @@
 import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
 import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
-import { loadTheme, repairTheme } from './loader'
+import { fetchTheme, repairTheme } from './loader'
 import { Theme } from './themes'
 import { Resolver } from './resolver'
 
@@ -23,7 +23,7 @@ export class Registry extends TextMateRegistry {
   async loadTheme(theme: Theme | IShikiTheme | string) {
     if (typeof theme === 'string') {
       if (!this._resolvedThemes[theme]) {
-        this._resolvedThemes[theme] = await loadTheme(`${theme}.json`)
+        this._resolvedThemes[theme] = await fetchTheme(`${theme}.json`)
       }
       return this._resolvedThemes[theme]
     } else {
@@ -55,6 +55,11 @@ export class Registry extends TextMateRegistry {
   }
 
   async loadLanguages(langs: ILanguageRegistration[]) {
-    return await Promise.all(langs.map(lang => this.loadLanguage(lang)))
+    for (const lang of langs) {
+      this._resolver.addLanguage(lang)
+    }
+    for (const lang of langs) {
+      await this.loadLanguage(lang)
+    }
   }
 }
