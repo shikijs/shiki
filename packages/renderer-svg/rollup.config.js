@@ -4,7 +4,6 @@ import dts from 'rollup-plugin-dts'
 import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
-import rollup from 'rollup'
 
 const external = ['shiki', 'puppeteer']
 

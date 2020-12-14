@@ -53,7 +53,7 @@ export default [
         extend: true,
         plugins: [
           replace({
-            __CDN_ROOT__: `https://unpkg.com/@antfu/shiki@${version}/`
+            __CDN_ROOT__: `https://unpkg.com/shiki@${version}/`
           })
         ]
       },
@@ -64,7 +64,7 @@ export default [
         extend: true,
         plugins: [
           replace({
-            __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/@antfu/shiki@${version}/`
+            __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/shiki@${version}/`
           })
         ]
       }
@@ -92,6 +92,11 @@ export default [
       copy({
         targets: [{ src: '../../node_modules/onigasm/lib/onigasm.wasm', dest: 'dist' }]
       })
-    ]
+    ],
+    onwarn: (msg, warn) => {
+      if (!/Circular/.test(msg)) {
+        warn(msg)
+      }
+    }
   }
 ]
