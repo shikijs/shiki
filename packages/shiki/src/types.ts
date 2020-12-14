@@ -13,9 +13,14 @@ export interface Highlighter {
   codeToThemedTokens(
     code: string,
     lang?: StringLiteralUnion<Lang>,
+    theme?: StringLiteralUnion<Theme>,
     options?: ThemedTokenizerOptions
   ): IThemedToken[][]
-  codeToHtml(code: string, lang?: StringLiteralUnion<Lang>, theme?: IThemeRegistration): string
+  codeToHtml(
+    code: string,
+    lang?: StringLiteralUnion<Lang>,
+    theme?: StringLiteralUnion<Theme>
+  ): string
   loadTheme(theme: IThemeRegistration): Promise<void>
   loadLanguage(theme: ILanguageRegistration | Lang): Promise<void>
 
@@ -74,6 +79,4 @@ export interface ThemedTokenizerOptions {
    * and why it's given its color. Default to false.
    */
   includeExplanation?: boolean
-
-  theme?: IThemeRegistration
 }
