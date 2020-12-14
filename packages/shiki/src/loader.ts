@@ -11,7 +11,7 @@ export async function getOnigasm(): Promise<IOnigLib> {
     let loader: Promise<any>
 
     if (isBrowser) {
-      loader = Onigasm.loadWASM('') // TODO:
+      loader = Onigasm.loadWASM(_resolvePath('onigasm.wasm', 'dist/'))
     } else {
       const path = require('path')
       const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')

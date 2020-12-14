@@ -2,6 +2,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import typescript from 'rollup-plugin-typescript2'
+import copy from 'rollup-plugin-copy'
 
 const external = ['onigasm', 'vscode-textmate']
 
@@ -40,6 +41,11 @@ export default [
         format: 'es'
       }
     ],
-    plugins: [dts()]
+    plugins: [
+      dts(),
+      copy({
+        targets: [{ src: '../../node_modules/onigasm/lib/onigasm.wasm', dest: 'dist' }]
+      })
+    ]
   }
 ]
