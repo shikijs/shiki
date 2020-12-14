@@ -1,6 +1,6 @@
 {
   "name": "@antfu/shiki",
-  "version": "0.4.0-alpha.1",
+  "version": "0.4.0",
   "description": "shiki",
   "author": "Pine Wu <octref@gmail.com>",
   "homepage": "https://github.com/octref/shiki/tree/master/packages/shiki",
@@ -8,8 +8,8 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "unpkg": "dist/index.iife.js",
-  "jsdelivr": "dist/index.iife.js",
+  "unpkg": "dist/index.unpkg.iife.js",
+  "jsdelivr": "dist/index.jsdelivr.iife.js",
   "keywords": [
     "shiki",
     "syntax-highlighter",
@@ -21,6 +21,7 @@
     "themes"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "rollup -c",
     "watch": "rollup -c -w"
   },

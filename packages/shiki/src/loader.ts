@@ -1,8 +1,14 @@
 import * as Onigasm from 'onigasm'
-import { IOnigLib, IRawGrammar, IRawTheme, parseRawGrammar } from 'vscode-textmate'
-import { ILanguageRegistration, IShikiTheme } from './types'
+import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { ILanguageRegistration, IShikiTheme } from './types'
 
 export const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
+
+let CDN_ROOT = '__CDN_ROOT__'
+
+export function setCDN(root: string) {
+  CDN_ROOT = root
+}
 
 let _onigasmPromise: Promise<IOnigLib> = null
 
@@ -36,7 +42,12 @@ export async function getOnigasm(): Promise<IOnigLib> {
 
 function _resolvePath(filepath: string, prepend: string = '') {
   if (isBrowser) {
-    return `../${prepend}${filepath}`
+    if (!CDN_ROOT) {
+      console.warn(
+        '[Shiki] no CDN provider found, use `setCDN()` to specify the CDN for loading the resources before calling `getHighlighter()`'
+      )
+    }
+    return `${CDN_ROOT}${prepend}${filepath}`
   } else {
     const path = require('path') as typeof import('path')
 
@@ -90,7 +101,7 @@ export async function loadTheme(themePath: string): Promise<IShikiTheme> {
 
 export async function loadGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
   const content = await _loadAssets(lang.path, 'languages/')
-  return parseRawGrammar(content, isBrowser ? undefined : _resolvePath(lang.path, 'languages/'))
+  return JSON.parse(content)
 }
 
 export function repairTheme(theme: IShikiTheme) {

@@ -5,7 +5,7 @@ import { Theme } from './themes'
 
 export interface HighlighterOptions {
   theme?: IThemeRegistration
-  langs?: ILanguageRegistration[]
+  langs?: (Lang | ILanguageRegistration)[]
   themes?: IThemeRegistration[]
 }
 

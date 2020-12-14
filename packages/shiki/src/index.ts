@@ -11,3 +11,4 @@ export {
   Highlighter,
   HighlighterOptions
 } from './types'
+export { setCDN } from './loader'

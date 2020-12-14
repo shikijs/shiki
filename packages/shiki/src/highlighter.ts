@@ -13,8 +13,13 @@ function resolveOptions(options: HighlighterOptions) {
   let languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
   let themes: IThemeRegistration[] = options.themes || []
 
-  if (options.langs) {
-    languages = [...BUNDLED_LANGUAGES, ...options.langs]
+  if (options.langs?.length) {
+    languages = options.langs.map(
+      (i): ILanguageRegistration =>
+        typeof i === 'string'
+          ? BUNDLED_LANGUAGES.find(lang => lang.id === i || lang.aliases?.includes(i))
+          : i
+    )
   }
   if (options.theme) {
     themes.unshift(options.theme)
