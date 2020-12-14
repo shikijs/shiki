@@ -10,6 +10,7 @@
     "test": "jest --colors",
     "gen": "yarn workspace shiki-site gen",
     "release": "learn publish",
+    "update": "npm run update:themes && npm run update:grammars",
     "update:themes": "bash ./scripts/pullThemes.sh",
     "update:grammars": "bash ./scripts/pullGrammars.sh"
   },
