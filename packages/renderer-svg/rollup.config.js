@@ -2,12 +2,10 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import typescript from 'rollup-plugin-typescript2'
-import copy from 'rollup-plugin-copy'
 import replace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
-import { version } from './package.json'
 
-const external = ['onigasm', 'vscode-textmate']
+const external = ['shiki', 'puppeteer']
 
 export default [
   {
@@ -38,32 +36,13 @@ export default [
       {
         file: 'dist/index.iife.js',
         format: 'iife',
-        name: 'Shiki',
-        plugins: [
-          replace({
-            __CDN_ROOT__: ''
-          })
-        ]
+        name: 'ShikiRenderSVG'
       },
       {
-        file: 'dist/index.unpkg.iife.js',
+        file: 'dist/index.iife.min.js',
         format: 'iife',
-        name: 'Shiki',
-        plugins: [
-          replace({
-            __CDN_ROOT__: `https://unpkg.com/@antfu/shiki@${version}/`
-          })
-        ]
-      },
-      {
-        file: 'dist/index.jsdelivr.iife.js',
-        format: 'iife',
-        name: 'Shiki',
-        plugins: [
-          replace({
-            __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/@antfu/shiki@${version}/`
-          })
-        ]
+        name: 'ShikiRenderSVG',
+        plugins: [terser()]
       }
     ],
     plugins: [
@@ -72,8 +51,7 @@ export default [
       }),
       typescript(),
       nodeResolve(),
-      commonjs(),
-      terser()
+      commonjs()
     ]
   },
   {
@@ -84,11 +62,6 @@ export default [
         format: 'es'
       }
     ],
-    plugins: [
-      dts(),
-      copy({
-        targets: [{ src: '../../node_modules/onigasm/lib/onigasm.wasm', dest: 'dist' }]
-      })
-    ]
+    plugins: [dts()]
   }
 ]

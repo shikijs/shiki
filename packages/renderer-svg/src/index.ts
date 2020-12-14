@@ -1,4 +1,4 @@
-import { IThemedToken } from 'shiki'
+import type { IThemedToken } from 'shiki'
 import { measureMonospaceTypeface } from './measureMonospaceTypeface'
 
 interface SVGRendererOptions {

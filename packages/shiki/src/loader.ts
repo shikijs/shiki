@@ -5,9 +5,14 @@ import type { ILanguageRegistration, IShikiTheme } from './types'
 export const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
 
 let CDN_ROOT = '__CDN_ROOT__'
+let ONIGASM_WASM = ''
 
 export function setCDN(root: string) {
   CDN_ROOT = root
+}
+
+export function setOnigasmWASM(path: string) {
+  ONIGASM_WASM = path
 }
 
 let _onigasmPromise: Promise<IOnigLib> = null
@@ -17,7 +22,7 @@ export async function getOnigasm(): Promise<IOnigLib> {
     let loader: Promise<any>
 
     if (isBrowser) {
-      loader = Onigasm.loadWASM(_resolvePath('onigasm.wasm', 'dist/'))
+      loader = Onigasm.loadWASM(ONIGASM_WASM || _resolvePath('onigasm.wasm', 'dist/'))
     } else {
       const path = require('path')
       const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')

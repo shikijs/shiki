@@ -1,9 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "rootDir": "src",
-    "outDir": "dist",
-    "lib": ["dom"]
+    "module": "esnext",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["esnext", "DOM"],
+    "sourceMap": true
   }
 }
