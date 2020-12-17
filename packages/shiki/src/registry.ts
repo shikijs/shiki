@@ -23,7 +23,7 @@ export class Registry extends TextMateRegistry {
   public async loadTheme(theme: Theme | IShikiTheme | string) {
     if (typeof theme === 'string') {
       if (!this._resolvedThemes[theme]) {
-        this._resolvedThemes[theme] = await fetchTheme(`${theme}.json`)
+        this._resolvedThemes[theme] = await fetchTheme(`themes/${theme}.json`)
       }
       return this._resolvedThemes[theme]
     } else {

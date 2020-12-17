@@ -1,9 +1,11 @@
 import * as Onigasm from 'onigasm'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
-import type { ILanguageRegistration, IShikiTheme } from './types'
+import type { IShikiTheme } from './types'
+import { dirname, join } from 'path'
 
 export const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
 
+// to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'
 let ONIGASM_WASM = ''
 
@@ -22,7 +24,7 @@ export async function getOnigasm(): Promise<IOnigLib> {
     let loader: Promise<any>
 
     if (isBrowser) {
-      loader = Onigasm.loadWASM(ONIGASM_WASM || _resolvePath('onigasm.wasm', 'dist/'))
+      loader = Onigasm.loadWASM(ONIGASM_WASM || _resolvePath('dist/onigasm.wasm'))
     } else {
       const path = require('path')
       const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')
@@ -45,21 +47,21 @@ export async function getOnigasm(): Promise<IOnigLib> {
   return _onigasmPromise
 }
 
-function _resolvePath(filepath: string, prepend: string = '') {
+function _resolvePath(filepath: string) {
   if (isBrowser) {
     if (!CDN_ROOT) {
       console.warn(
         '[Shiki] no CDN provider found, use `setCDN()` to specify the CDN for loading the resources before calling `getHighlighter()`'
       )
     }
-    return `${CDN_ROOT}${prepend}${filepath}`
+    return `${CDN_ROOT}${filepath}`
   } else {
     const path = require('path') as typeof import('path')
 
     if (path.isAbsolute(filepath)) {
       return filepath
     } else {
-      return path.resolve(__dirname, '..', prepend + filepath)
+      return path.resolve(__dirname, '..', filepath)
     }
   }
 }
@@ -67,8 +69,8 @@ function _resolvePath(filepath: string, prepend: string = '') {
 /**
  * @param filepath assert path related to ./packages/shiki
  */
-async function _fetchAssets(filepath: string, prepend: string = ''): Promise<string> {
-  const path = _resolvePath(filepath, prepend)
+async function _fetchAssets(filepath: string): Promise<string> {
+  const path = _resolvePath(filepath)
   if (isBrowser) {
     return await fetch(path).then(r => r.text())
   } else {
@@ -77,20 +79,20 @@ async function _fetchAssets(filepath: string, prepend: string = ''): Promise<str
   }
 }
 
-async function _fetchJSONAssets(filepath: string, prepend?: string) {
-  return JSON.parse(await _fetchAssets(filepath, prepend))
+async function _fetchJSONAssets(filepath: string) {
+  return JSON.parse(await _fetchAssets(filepath))
 }
 
 /**
  * @param themePath related path to theme.json
  */
 export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
-  let theme: IRawTheme = await _fetchJSONAssets(themePath, 'themes/')
+  let theme: IRawTheme = await _fetchJSONAssets(themePath)
 
   const shikiTheme = toShikiTheme(theme)
 
   if (shikiTheme.include) {
-    const includedTheme = await fetchTheme(shikiTheme.include)
+    const includedTheme = await fetchTheme(join(dirname(themePath), shikiTheme.include))
 
     if (includedTheme.settings) {
       shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
@@ -104,8 +106,8 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
   return shikiTheme
 }
 
-export async function fetchGrammar(lang: ILanguageRegistration): Promise<IRawGrammar> {
-  const content = await _fetchAssets(lang.path, 'languages/')
+export async function fetchGrammar(filepath: string): Promise<IRawGrammar> {
+  const content = await _fetchAssets(filepath)
   return JSON.parse(content)
 }
 

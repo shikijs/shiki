@@ -4,6 +4,7 @@
 'use strict'
 
 import { IRawGrammar, IOnigLib, RegistryOptions } from 'vscode-textmate'
+import { languages } from './languages'
 
 import { fetchGrammar } from './loader'
 import { ILanguageRegistration } from './types'
@@ -43,7 +44,7 @@ export class Resolver implements RegistryOptions {
       return lang.grammar
     }
 
-    const g = await fetchGrammar(lang)
+    const g = await fetchGrammar(languages.includes(lang) ? `languages/${lang.path}` : lang.path)
     lang.grammar = g
     return g
   }
