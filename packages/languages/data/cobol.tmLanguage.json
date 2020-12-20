@@ -576,11 +576,11 @@
       "name": "keyword.otherverbs.cobol"
     },
     {
-      "match": "(?<![-_])(?i:assign|external|organization|indexed|column|plus|line\\*s*sequential|sequential|access|dynamic|relative|label|block|contains|standard|records|record\\s+key|record|is|alternate|duplicates|reel|tape|terminal|disk\\sfilename|disk|disc|recording\\smode|mode|random)(?=\\s|\\.)",
+      "match": "(?<![-_])(?i:assign|external|prototype|organization|indexed|column|plus|line\\*s*sequential|sequential|access|dynamic|relative|label|block|contains|standard|records|record\\s+key|record|is|alternate|duplicates|reel|tape|terminal|disk\\sfilename|disk|disc|recording\\smode|mode|random)(?=\\s|\\.)",
       "name": "keyword.identifers.cobol"
     },
     {
-      "match": "(?<![-_])(?i:max|min|integer-of-date|integer-of-day|integer-part|integer|date-to-yyyymmdd|year-to-yyyy|day-to-yyyyddd|exp|exception-file|exception-location|exception-statement|exception-status|e|variance|integer-of-date|rem|pi|factorial|sqrt|log10|fraction-part|mean|exp|log|char|day-of-integer|date-of-integer|exp10|atan|integer-part|tan|sin|cos|midrange|addr|acos|asin|annuity|present-value|integer-of-day|ord-max|ord-min|ord|random|integer-of-date|sum|standard-deviation|median|reverse|abs|upper-case|lower-case|char-national|numval|mod|range|length|locale-date|locale-time-from-seconds|locale-time|seconds-past-midnight|stored-char-length|substitute-case|substitute|seconds-from-formatted-time|seconds=past-midnight|trim|length-an|numval-c|current-date|national-of|display-of|when-compiled|integer-of-boolean|combined-datetime|concatenate)(?=\\s|\\.|\\(|\\))",
+      "match": "(?<![-_])(?i:max|min|integer-of-date|integer-of-day|integer-part|integer|date-to-yyyymmdd|year-to-yyyy|day-to-yyyyddd|exp|exception-file|exception-location|exception-statement|exception-status|e|variance|integer-of-date|rem|pi|factorial|sqrt|log10|fraction-part|mean|exp|log|char|day-of-integer|date-of-integer|exp10|atan|integer-part|tan|sin|cos|midrange|addr|acos|asin|annuity|present-value|integer-of-day|ord-max|ord-min|ord|random|integer-of-date|sum|standard-deviation|median|reverse|abs|upper-case|lower-case|char-national|numval|mod|range|length|locale-date|locale-time-from-seconds|locale-time|seconds-past-midnight|stored-char-length|substitute-case|substitute|seconds-from-formatted-time|seconds-past-midnight|trim|length-an|numval-c|current-date|national-of|display-of|when-compiled|integer-of-boolean|combined-datetime|concatenate)(?=\\s|\\.|\\(|\\))",
       "name": "support.function.cobol"
     },
     {
@@ -779,6 +779,10 @@
       "name": "invalid.illegal.acu.cobol"
     },
     {
+      "match": "(?<![-_])(?i:actual|auto|automatic|based-storage|complex|connect|contained|core-index|db-access-control-key|db-data-name|db-exception|db-record-name|db-set-name|db-status|dead-lock|endcobol|end-disable|end-enable|end-send|end-transceive|eos|file-limits|file-limit|formatted|sort-status|usage-mode)(?=\\s|\\.|,|;|$)",
+      "name": "invalid.illegal.netcobol.cobol"
+    },
+    {
       "match": "(?<![-_])(?i:System-Info|Terminal-Info)(?![0-9A-Za-z_-])",
       "name": "support.type.cobol.acu strong"
     },
@@ -804,6 +808,10 @@
     {
       "match": "(?<![-_])(?i:apply|areas|area|clock-units|code|com-reg|controls|dbcs|destination|detail|display-1|ending|every|insert|kanjikey|last|left|less|limits|limit|memory|metaclass|modules|more-labels|multiple|native_binary|native|negative|number|numeric-edited|other|padding|password|pf|ph|postive|processing|queue|recording|reload|removal|rerun|reserve|reserved|rewind|segment-limit|segment|separate|sequence|skip1|skip2|skip3|standard-1|standard-2|sub-queue-1|sub-queue-2|sub-queue-3|sum|symbolic|synchronized|sync|table|test|text|than|top|trace|trailing|unit|words|write-only|at|basis|beginning|bottom|cbl|cf|ch|de|positive|egcs|egi|emi|end|reversed|rf|rh|run|same|order|heading|esi)(?![0-9A-Za-z_-])",
       "name": "keyword.ibmreserved.cobol"
+    },
+    {
+      "match": "(?<![-_])(?i:active-class|aligned|anycase|boolean|cols|col|condition|ec|eo|system-default|function-pointer)(?![0-9A-Za-z_-])",
+      "name": "strong keyword.potential.reserved.cobol"
     },
     {
       "match": "(?i:filler)",
