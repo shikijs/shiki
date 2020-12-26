@@ -74,7 +74,13 @@ async function go() {
     const newFileName = l.endsWith('.json')
       ? path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.json'
       : path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.plist'
-    const content = await get(targetUrl)
+    let content
+    try {
+      content = await get(targetUrl)
+    } catch (e) {
+      console.log(`Failed to download ${newFileName}: ${e}`)
+      continue
+    }
     fs.writeFileSync(path.resolve(LANGUAGE_GRAMMAR_FOLDER_PATH, newFileName), content)
     console.log(`Downloaded ${newFileName}`)
   }
