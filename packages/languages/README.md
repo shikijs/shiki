@@ -18,6 +18,7 @@ export type Lang =
   | 'ada'
   | 'apex'
   | 'asm'
+  | 'asp-net-razor'
   | 'bat'
   | 'c'
   | 'clojure'

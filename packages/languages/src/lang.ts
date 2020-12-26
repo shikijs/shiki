@@ -6,6 +6,7 @@ export type Lang =
   | 'ada'
   | 'apex'
   | 'asm'
+  | 'asp-net-razor'
   | 'bat'
   | 'c'
   | 'clojure'
@@ -100,6 +101,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: path.resolve(__dirname, '../data/asm.tmLanguage.json')
+  },
+  {
+    id: 'asp-net-razor',
+    scopeName: 'text.aspnetcorerazor',
+    path: path.resolve(__dirname, '../data/asp-net-razor.tmLanguage.json')
   },
   {
     id: 'bat',
