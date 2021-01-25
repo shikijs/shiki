@@ -124,7 +124,7 @@ export interface Highlighter {
     lang: StringLiteralUnion<Lang>,
     options?: ThemedTokenizerOptions
   ): IThemedToken[][]
-  codeToHtml?(code: string, lang: StringLiteralUnion<Lang>): string
+  codeToHtml(code: string, lang: StringLiteralUnion<Lang>): string
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string

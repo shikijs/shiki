@@ -2,10 +2,15 @@ import * as path from 'path'
 import { ILanguageRegistration } from './index'
 
 export type Lang =
+  | 'abap'
+  | 'ada'
+  | 'apex'
   | 'asm'
+  | 'asp-net-razor'
   | 'bat'
   | 'c'
   | 'clojure'
+  | 'cobol'
   | 'coffee'
   | 'cpp'
   | 'csharp'
@@ -30,8 +35,11 @@ export type Lang =
   | 'json'
   | 'jsonc'
   | 'jsx'
+  | 'julia'
+  | 'kotlin'
   | 'latex'
   | 'less'
+  | 'lisp'
   | 'log'
   | 'logo'
   | 'lua'
@@ -46,6 +54,7 @@ export type Lang =
   | 'pls'
   | 'postcss'
   | 'powershell'
+  | 'prolog'
   | 'pug'
   | 'python'
   | 'r'
@@ -54,6 +63,8 @@ export type Lang =
   | 'rust'
   | 'sas'
   | 'sass'
+  | 'scala'
+  | 'scheme'
   | 'scss'
   | 'shaderlab'
   | 'shellscript'
@@ -72,9 +83,29 @@ export type Lang =
 
 export const languages: ILanguageRegistration[] = [
   {
+    id: 'abap',
+    scopeName: 'source.abap',
+    path: path.resolve(__dirname, '../data/abap.tmLanguage.json')
+  },
+  {
+    id: 'ada',
+    scopeName: 'source.ada',
+    path: path.resolve(__dirname, '../data/ada.tmLanguage.json')
+  },
+  {
+    id: 'apex',
+    scopeName: 'source.apex',
+    path: path.resolve(__dirname, '../data/apex.tmLanguage.json')
+  },
+  {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: path.resolve(__dirname, '../data/asm.tmLanguage.json')
+  },
+  {
+    id: 'asp-net-razor',
+    scopeName: 'text.aspnetcorerazor',
+    path: path.resolve(__dirname, '../data/asp-net-razor.tmLanguage.json')
   },
   {
     id: 'bat',
@@ -92,6 +123,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.clojure',
     path: path.resolve(__dirname, '../data/clojure.tmLanguage.json'),
     aliases: ['clj']
+  },
+  {
+    id: 'cobol',
+    scopeName: 'source.cobol',
+    path: path.resolve(__dirname, '../data/cobol.tmLanguage.json')
   },
   {
     id: 'coffee',
@@ -218,6 +254,16 @@ export const languages: ILanguageRegistration[] = [
     path: path.resolve(__dirname, '../data/jsx.tmLanguage.json')
   },
   {
+    id: 'julia',
+    scopeName: 'source.julia',
+    path: path.resolve(__dirname, '../data/julia.tmLanguage.json')
+  },
+  {
+    id: 'kotlin',
+    scopeName: 'source.kotlin',
+    path: path.resolve(__dirname, '../data/kotlin.tmLanguage.json')
+  },
+  {
     id: 'latex',
     scopeName: 'text.tex.latex',
     path: path.resolve(__dirname, '../data/latex.tmLanguage.json')
@@ -226,6 +272,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'less',
     scopeName: 'source.css.less',
     path: path.resolve(__dirname, '../data/less.tmLanguage.json')
+  },
+  {
+    id: 'lisp',
+    scopeName: 'source.lisp',
+    path: path.resolve(__dirname, '../data/lisp.tmLanguage.json')
   },
   {
     id: 'log',
@@ -306,6 +357,11 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['ps', 'ps1']
   },
   {
+    id: 'prolog',
+    scopeName: 'source.prolog',
+    path: path.resolve(__dirname, '../data/prolog.tmLanguage.json')
+  },
+  {
     id: 'pug',
     scopeName: 'text.pug',
     path: path.resolve(__dirname, '../data/pug.tmLanguage.json'),
@@ -347,6 +403,16 @@ export const languages: ILanguageRegistration[] = [
     id: 'sass',
     scopeName: 'source.sass',
     path: path.resolve(__dirname, '../data/sass.tmLanguage.json')
+  },
+  {
+    id: 'scala',
+    scopeName: 'source.scala',
+    path: path.resolve(__dirname, '../data/scala.tmLanguage.json')
+  },
+  {
+    id: 'scheme',
+    scopeName: 'source.scheme',
+    path: path.resolve(__dirname, '../data/scheme.tmLanguage.json')
   },
   {
     id: 'scss',
