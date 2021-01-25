@@ -42,7 +42,6 @@ const languageSources = [
   'https://github.com/AdaCore/ada_language_server/blob/master/integration/vscode/ada/advanced/ada.tmLanguage.json',
   'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage',
   'https://github.com/forcedotcom/apex-tmLanguage/blob/main/grammars/apex.tmLanguage',
-  'https://github.com/krvajal/vscode-fortran-support/blob/master/syntaxes/fortran_free-form.tmLanguage.json',
   'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json',
   'https://github.com/wholroyd/vscode-hcl/blob/develop/syntaxes/hcl.json',
   'https://github.com/slackhq/vscode-hack/blob/master/syntaxes/hack.json',
