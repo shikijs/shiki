@@ -65,7 +65,8 @@ const languageSources = [
   'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json',
   'https://github.com/elixir-editors/elixir-tmbundle/blob/master/Syntaxes/Elixir.tmLanguage',
   'https://github.com/pgourlain/vscode_erlang/blob/master/syntaxes/erlang.tmLanguage',
-  'https://github.com/textmate/applescript.tmbundle/blob/master/Syntaxes/AppleScript.tmLanguage'
+  'https://github.com/textmate/applescript.tmbundle/blob/master/Syntaxes/AppleScript.tmLanguage',
+  'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json'
 ]
 
 async function go() {
