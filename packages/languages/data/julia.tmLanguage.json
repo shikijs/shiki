@@ -1,5 +1,5 @@
 {
-  "comment": "Reference to the Oniguruma Regex libraray:\n  https://github.com/kkos/oniguruma/blob/master/doc/RE",
+  "comment": "This grammar is used by Atom (Oniguruma), GitHub (PCRE), and VSCode (Oniguruma),\nso all regexps must be compatible with both engines.\n\nSpecs:\n- https://github.com/kkos/oniguruma/blob/master/doc/RE\n- https://www.pcre.org/current/doc/html/",
   "fileTypes": [
     "jl"
   ],
@@ -658,6 +658,60 @@
               "name": "punctuation.definition.string.end.julia"
             }
           }
+        },
+        {
+          "begin": "(sql)(\"\"\")",
+          "beginCaptures": {
+            "1": {
+              "name": "support.function.macro.julia"
+            },
+            "2": {
+              "name": "punctuation.definition.string.begin.julia"
+            }
+          },
+          "end": "\"\"\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.julia"
+            }
+          },
+          "name": "embed.sql.julia",
+          "contentName": "meta.embedded.inline.sql",
+          "patterns": [
+            {
+              "include": "source.sql"
+            },
+            {
+              "include": "#string_dollar_sign_interpolate"
+            }
+          ]
+        },
+        {
+          "begin": "(sql)(\")",
+          "beginCaptures": {
+            "1": {
+              "name": "support.function.macro.julia"
+            },
+            "2": {
+              "name": "punctuation.definition.string.begin.julia"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.julia"
+            }
+          },
+          "name": "embed.sql.julia",
+          "contentName": "meta.embedded.inline.sql",
+          "patterns": [
+            {
+              "include": "source.sql"
+            },
+            {
+              "include": "#string_dollar_sign_interpolate"
+            }
+          ]
         },
         {
           "begin": "var\"\"\"",
