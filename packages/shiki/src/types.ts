@@ -7,6 +7,7 @@ export interface HighlighterOptions {
   theme?: IThemeRegistration
   langs?: (Lang | ILanguageRegistration)[]
   themes?: IThemeRegistration[]
+  paths?: IHighlighterPaths
 }
 
 export interface Highlighter {
@@ -31,6 +32,11 @@ export interface Highlighter {
   // getRawCSS?(): string
 
   // codeToImage?(): string
+}
+
+export interface IHighlighterPaths {
+  themes?: string
+  languages?: string
 }
 
 export interface ILanguageRegistration {

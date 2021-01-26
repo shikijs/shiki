@@ -47,6 +47,14 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   const _defaultTheme = themes[0]
   await _registry.loadLanguages(_languages)
 
+  if (options.paths?.themes) {
+    _registry.themesPath = options.paths.themes
+  }
+
+  if (options.paths?.languages) {
+    _resolver.languagesPath = options.paths.languages
+  }
+
   function getTheme(theme: IThemeRegistration) {
     const _theme = theme ? _registry.getTheme(theme) : _defaultTheme
     if (!_theme) {

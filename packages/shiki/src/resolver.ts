@@ -10,6 +10,8 @@ import { fetchGrammar } from './loader'
 import { ILanguageRegistration } from './types'
 
 export class Resolver implements RegistryOptions {
+  public languagesPath: string = 'languages/'
+
   private readonly languageMap: { [langIdOrAlias: string]: ILanguageRegistration } = {}
   private readonly scopeToLangMap: { [scope: string]: ILanguageRegistration } = {}
 
@@ -44,7 +46,9 @@ export class Resolver implements RegistryOptions {
       return lang.grammar
     }
 
-    const g = await fetchGrammar(languages.includes(lang) ? `languages/${lang.path}` : lang.path)
+    const g = await fetchGrammar(
+      languages.includes(lang) ? `${this.languagesPath}${lang.path}` : lang.path
+    )
     lang.grammar = g
     return g
   }
