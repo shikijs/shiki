@@ -7,6 +7,9 @@ export interface HighlighterOptions {
   theme?: IThemeRegistration
   langs?: (Lang | ILanguageRegistration)[]
   themes?: IThemeRegistration[]
+  /**
+   * Paths for loading themes and langs. Relative to the package's root.
+   */
   paths?: IHighlighterPaths
 }
 
@@ -35,7 +38,13 @@ export interface Highlighter {
 }
 
 export interface IHighlighterPaths {
+  /**
+   * @default 'themes/'
+   */
   themes?: string
+  /**
+   * @default 'languages/'
+   */
   languages?: string
 }
 
