@@ -27,6 +27,10 @@
           "include": "#comments"
         },
         {
+          "match": "given",
+          "name": "keyword.other.import.given.scala"
+        },
+        {
           "match": "[A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?",
           "name": "entity.name.class.import.scala"
         },
@@ -69,6 +73,10 @@
                   "name": "entity.name.import.renamed-to.scala"
                 }
               }
+            },
+            {
+              "match": "given",
+              "name": "keyword.other.import.given.scala"
             },
             {
               "match": "(given\\s+)?(?:([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)|(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)))",
@@ -541,14 +549,6 @@
         {
           "match": "(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+",
           "name": "keyword.operator.scala"
-        },
-        {
-          "match": "\\s(as)\\s",
-          "captures": {
-            "1": {
-              "name": "keyword.declaration.scala"
-            }
-          }
         }
       ]
     },
@@ -563,26 +563,26 @@
     "inline": {
       "patterns": [
         {
-          "match": "\\b(inline)\\s+(?=(([\\w\\s]*\\b(val|def|given)\\b)|((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)\\s*:))",
-          "captures": {
-            "1": {
-              "name": "storage.modifier.other"
-            }
-          }
+          "match": "\\b(inline)(?=\\s+((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)\\s*:)",
+          "name": "storage.modifier.other"
         },
         {
           "match": "\\b(inline)\\b(?=(?:.(?!\\b(?:val|def|given)\\b))*\\b(if|match)\\b)",
-          "captures": {
-            "1": {
-              "name": "keyword.control.flow.scala"
-            }
-          }
+          "name": "keyword.control.flow.scala"
         }
       ]
     },
     "scala-quoted": {
-      "match": "('\\{|'\\[)(?!')",
-      "name": "constant.other.quoted.scala"
+      "patterns": [
+        {
+          "match": "['$]\\{(?!')",
+          "name": "punctuation.section.block.begin.scala"
+        },
+        {
+          "match": "'\\[(?!')",
+          "name": "meta.bracket.scala"
+        }
+      ]
     },
     "xml-doublequotedString": {
       "end": "\"",
@@ -607,7 +607,7 @@
     "declarations": {
       "patterns": [
         {
-          "match": "(?x)\\b(def)\\s+(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))",
+          "match": "\\b(def)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -618,7 +618,7 @@
           }
         },
         {
-          "match": "\\b(trait)\\s+([^\\s\\{\\(\\[;]+)(?<![^[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]]:)",
+          "match": "\\b(trait)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -629,7 +629,7 @@
           }
         },
         {
-          "match": "\\b(?:(case|open)\\s+)?(class|object|enum)\\s+([^\\s\\{\\(\\[;]+)(?<![^[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]]:)",
+          "match": "\\b(?:(case)\\s+)?(class|object|enum)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -643,7 +643,7 @@
           }
         },
         {
-          "match": "(?<!\\.)\\b(type)\\s+(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))",
+          "match": "(?<!\\.)\\b(type)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -654,18 +654,29 @@
           }
         },
         {
-          "match": "\\b(val)\\s+([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?(\\s*,\\s*[A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)*)\\b",
+          "match": "\\b(?:(val)|(var))\\b\\s*(?!//|/\\*)(?=(?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)?\\()",
           "captures": {
             "1": {
               "name": "keyword.declaration.stable.scala"
             },
             "2": {
-              "name": "constant.other.declaration.scala"
+              "name": "keyword.declaration.volatile.scala"
             }
           }
         },
         {
-          "match": "\\b(?:(val)|(var))\\s+(?:(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))|(?=\\())",
+          "match": "\\b(?:(val)|(var))\\b\\s*(?!//|/\\*)(?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)(?=\\s*,)",
+          "captures": {
+            "1": {
+              "name": "keyword.declaration.stable.scala"
+            },
+            "2": {
+              "name": "keyword.declaration.volatile.scala"
+            }
+          }
+        },
+        {
+          "match": "\\b(?:(val)|(var))\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.stable.scala"
@@ -679,7 +690,7 @@
           }
         },
         {
-          "match": "\\b(package)\\s+(object)\\s+([^\\s\\{\\(\\[]+)",
+          "match": "\\b(package)\\s+(object)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
           "captures": {
             "1": {
               "name": "keyword.other.scoping.scala"
@@ -716,24 +727,13 @@
           "name": "meta.package.scala"
         },
         {
-          "match": "\\b(given)\\s+(?:([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)|(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)))?(?=\\s+as\\b|\\(|\\[[^;]+\\s(?:as|<:)\\s)",
+          "match": "\\b(given)\\b\\s*([_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`)?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
             },
             "2": {
-              "name": "entity.name.type.declaration"
-            },
-            "3": {
-              "name": "entity.name.declaration"
-            }
-          }
-        },
-        {
-          "match": "\\b(given)\\b",
-          "captures": {
-            "1": {
-              "name": "keyword.declaration.scala"
+              "name": "entity.name.given.declaration"
             }
           }
         }
@@ -840,7 +840,11 @@
           "name": "storage.modifier.access"
         },
         {
-          "match": "\\b(synchronized|@volatile|abstract|final|lazy|sealed|implicit|opaque |override|@transient|@native)\\b",
+          "match": "\\b(synchronized|@volatile|abstract|final|lazy|sealed|implicit|override|@transient|@native)\\b",
+          "name": "storage.modifier.other"
+        },
+        {
+          "match": "(?<=^|\\s)\\b(transparent|opaque|infix|open|inline)\\b(?=[a-z\\s]*\\b(def|val|var|given|type|class|trait|object|enum)\\b)",
           "name": "storage.modifier.other"
         }
       ]
@@ -1011,7 +1015,7 @@
     "inheritance": {
       "patterns": [
         {
-          "match": "(extends|with|derives)\\s+([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`|(?=\\([^\\)]+=>)|(?=(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))|(?=\"))",
+          "match": "\\b(extends|with|derives)\\b\\s*([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`|(?=\\([^\\)]+=>)|(?=(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))|(?=\"))?",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
