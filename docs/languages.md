@@ -51,6 +51,7 @@ export type Lang =
   | 'haskell'
   | 'hcl'
   | 'hlsl'
+  | 'html-ruby-erb'
   | 'html'
   | 'ini'
   | 'java'

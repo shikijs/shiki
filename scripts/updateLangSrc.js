@@ -21,6 +21,7 @@ const aliases = {
   pug: ['jade'],
   python: ['py'],
   ruby: ['rb'],
+  'html-ruby-erb': ['erb'],
   shaderlab: ['shader'],
   shellscript: ['shell', 'bash', 'sh', 'zsh'],
   stylus: ['styl'],
