@@ -1,9 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
-const themeDir = path.resolve(__dirname, '../packages/themes/data')
-const themePath = path.resolve(__dirname, '../packages/themes/src/theme.ts')
-const readmePath = path.resolve(__dirname, '../packages/themes/README.md')
+const themeDir = path.resolve(__dirname, '../packages/shiki/themes')
+const themePath = path.resolve(__dirname, '../packages/shiki/src/themes.ts')
+const readmePath = path.resolve(__dirname, '../docs/themes.md')
 
 const files = fs.readdirSync(themeDir)
 const themeIds = files.map(f => f.replace('.json', ''))

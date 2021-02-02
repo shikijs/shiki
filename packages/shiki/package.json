@@ -2,24 +2,35 @@
   "name": "shiki",
   "version": "0.2.7",
   "description": "shiki",
+  "author": "Pine Wu <octref@gmail.com>",
+  "homepage": "https://github.com/octref/shiki/tree/master/packages/shiki",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.unpkg.iife.js",
+  "jsdelivr": "dist/index.jsdelivr.iife.js",
   "keywords": [
     "shiki",
     "syntax-highlighter",
     "highlighter"
   ],
-  "author": "Pine Wu <octref@gmail.com>",
-  "homepage": "https://github.com/octref/shiki/tree/master/packages/shiki",
-  "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "languages",
+    "themes"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/octref/shiki.git"
   },
   "dependencies": {
     "onigasm": "^2.2.5",
-    "shiki-languages": "^0.2.7",
-    "shiki-themes": "^0.2.7",
     "vscode-textmate": "^5.2.0"
   }
 }

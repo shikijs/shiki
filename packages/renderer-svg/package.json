@@ -1,20 +1,35 @@
 {
   "name": "shiki-renderer-svg",
-  "version": "0.2.0",
+  "version": "0.2.7",
   "description": "SVG renderer for shiki",
   "author": "Pine Wu <octref@gmail.com>",
   "homepage": "https://github.com/octref/shiki/tree/master/packages/renderer-svg",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shikijs/shiki.git"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "unpkg": "dist/index.iife.min.js",
+  "jsdelivr": "dist/index.iife.min.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
+  },
   "dependencies": {
     "puppeteer": "^5.2.1"
   },
+  "peerDependencies": {
+    "shiki": "^0.2.7"
+  },
   "devDependencies": {
-    "@types/puppeteer": "^3.0.1"
+    "@types/puppeteer": "^3.0.1",
+    "shiki": "^0.2.7"
   }
 }

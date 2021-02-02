@@ -28,8 +28,22 @@ shiki
 // </code></pre>
 ```
 
-- [Themes](./packages/themes/README.md#literal-values)
-- [Languages](./packages/languages/README.md#literal-values)
+```html
+<script src='https://unpkg.com/shiki'></script>
+<script>
+shiki
+  .getHighlighter({
+    theme: 'nord'
+  })
+  .then(highlighter => {
+    const code = highlighter.codeToHtml(`console.log('shiki');`, 'js')
+    document.getElementById('output').innerHTML = code
+  })
+</script>
+```
+
+- [Themes](./docs/themes.md#literal-values)
+- [Languages](./docs/languages.md#literal-values)
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
@@ -48,8 +62,8 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 
 ## Contributing
 
-- [Add a theme](./packages/themes/README.md#add)
-- [Add a language grammar](./packages/languages/README.md#add)
+- [Add a theme](./docs/themes.md#add)
+- [Add a language grammar](./docs/languages.md#add)
 
 ## Credits
 

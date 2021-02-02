@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs'
-import { getHighlighter } from '../../index'
+import { BUNDLED_LANGUAGES, getHighlighter } from '../../index'
 import { resolve } from 'path'
 
 function currentDirPath(p) {

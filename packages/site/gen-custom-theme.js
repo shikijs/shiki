@@ -1,6 +1,7 @@
 const fs = require('fs')
 const markdown = require('markdown-it')
 const shiki = require('shiki')
+const path = require('path')
 
 shiki
   .getHighlighter({
@@ -9,7 +10,7 @@ shiki
       {
         id: 'rockstar',
         scopeName: 'source.rockstar',
-        path: './rockstar.tmLanguage.json',
+        path: path.resolve('./rockstar.tmLanguage.json'),
         aliases: []
       }
     ]
