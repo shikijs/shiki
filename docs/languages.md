@@ -65,7 +65,6 @@ export type Lang =
   | 'latex'
   | 'less'
   | 'lisp'
-  | 'log'
   | 'logo'
   | 'lua'
   | 'makefile'

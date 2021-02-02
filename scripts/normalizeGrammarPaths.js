@@ -20,7 +20,6 @@ const specialNewNames = {
   JavaScriptReact: 'jsx',
   JSON: 'json',
   JSONC: 'jsonc',
-  log: 'log',
   MagicPython: 'python',
   'shell-unix-bash': 'shellscript',
   svelte: 'svelte',
