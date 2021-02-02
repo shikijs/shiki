@@ -177,10 +177,10 @@ function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: stri
    * If there's no global `tokenColor` without `name` or `scope`
    * Use `editor.foreground` and `editor.background`
    */
-  if (!fg && (<any>theme)?.colors['editor.foreground']) {
+  if (!fg && (<any>theme)?.colors?.['editor.foreground']) {
     fg = (<any>theme).colors['editor.foreground']
   }
-  if (!bg && (<any>theme)?.colors['editor.background']) {
+  if (!bg && (<any>theme)?.colors?.['editor.background']) {
     bg = (<any>theme).colors['editor.background']
   }
 
