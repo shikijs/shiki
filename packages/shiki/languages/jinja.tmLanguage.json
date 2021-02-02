@@ -22,14 +22,7 @@
       "name": "comment.block.jinja.raw"
     },
     {
-      "begin": "{#-?",
-      "captures": [
-        {
-          "name": "entity.other.jinja.delimiter.comment"
-        }
-      ],
-      "end": "-?#}",
-      "name": "comment.block.jinja"
+      "include": "#comments"
     },
     {
       "begin": "{{-?",
@@ -63,6 +56,21 @@
     }
   ],
   "repository": {
+    "comments": {
+      "begin": "{#-?",
+      "captures": [
+        {
+          "name": "entity.other.jinja.delimiter.comment"
+        }
+      ],
+      "end": "-?#}",
+      "name": "comment.block.jinja",
+      "patterns": [
+        {
+          "include": "#comments"
+        }
+      ]
+    },
     "escaped_char": {
       "match": "\\\\x[0-9A-F]{2}",
       "name": "constant.character.escape.hex.jinja"

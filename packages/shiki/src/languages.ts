@@ -5,7 +5,9 @@ export type Lang =
   | 'actionscript-3'
   | 'ada'
   | 'apex'
+  | 'applescript'
   | 'asm'
+  | 'asp-net-razor'
   | 'awk'
   | 'bat'
   | 'c'
@@ -20,7 +22,9 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'dockerfile'
+  | 'elixir'
   | 'elm'
+  | 'erlang'
   | 'fortran'
   | 'fsharp'
   | 'git-commit'
@@ -82,6 +86,7 @@ export type Lang =
   | 'shellscript'
   | 'smalltalk'
   | 'sql'
+  | 'ssh-config'
   | 'stylus'
   | 'svelte'
   | 'swift'
@@ -121,9 +126,19 @@ export const languages: ILanguageRegistration[] = [
     path: 'apex.tmLanguage.json'
   },
   {
+    id: 'applescript',
+    scopeName: 'source.applescript',
+    path: 'applescript.tmLanguage.json'
+  },
+  {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: 'asm.tmLanguage.json'
+  },
+  {
+    id: 'asp-net-razor',
+    scopeName: 'text.aspnetcorerazor',
+    path: 'asp-net-razor.tmLanguage.json'
   },
   {
     id: 'awk',
@@ -199,9 +214,19 @@ export const languages: ILanguageRegistration[] = [
     path: 'dockerfile.tmLanguage.json'
   },
   {
+    id: 'elixir',
+    scopeName: 'source.elixir',
+    path: 'elixir.tmLanguage.json'
+  },
+  {
     id: 'elm',
     scopeName: 'source.elm',
     path: 'elm.tmLanguage.json'
+  },
+  {
+    id: 'erlang',
+    scopeName: 'source.erlang',
+    path: 'erlang.tmLanguage.json'
   },
   {
     id: 'fortran',
@@ -528,6 +553,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'sql',
     scopeName: 'source.sql',
     path: 'sql.tmLanguage.json'
+  },
+  {
+    id: 'ssh-config',
+    scopeName: 'source.ssh-config',
+    path: 'ssh-config.tmLanguage.json'
   },
   {
     id: 'stylus',

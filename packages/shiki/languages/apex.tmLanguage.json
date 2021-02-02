@@ -1129,7 +1129,7 @@
       ]
     },
     "soql-functions": {
-      "begin": "\\b(AVG|CALENDAR_MONTH|CALENDAR_QUARTER|CALENDAR_YEAR|convertCurrency|convertTimezone|COUNT|DAY_IN_MONTH|DAY_IN_WEEK|DAY_IN_YEAR|DAY_ONLY|toLabel|INCLUDES|EXCLUDES|FISCAL_MONTH|FISCAL_QUARTER|FISCAL_YEAR|FORMAT|GROUPING|GROUP BY CUBE|GROUP BY ROLLUP|HOUR_IN_DAY|MAX|MIN|SUM|WEEK_IN_MONTH|WEEK_IN_YEAR)\\s*(\\()",
+      "begin": "\\b(AVG|CALENDAR_MONTH|CALENDAR_QUARTER|CALENDAR_YEAR|convertCurrency|convertTimezone|COUNT|COUNT_DISTINCT|DAY_IN_MONTH|DAY_IN_WEEK|DAY_IN_YEAR|DAY_ONLY|toLabel|INCLUDES|EXCLUDES|FISCAL_MONTH|FISCAL_QUARTER|FISCAL_YEAR|FORMAT|GROUPING|GROUP BY CUBE|GROUP BY ROLLUP|HOUR_IN_DAY|MAX|MIN|SUM|WEEK_IN_MONTH|WEEK_IN_YEAR)\\s*(\\()",
       "beginCaptures": {
         "1": {
           "name": "support.function.query.apex"
@@ -1207,7 +1207,7 @@
       }
     },
     "ordering-nulls": {
-      "match": "\\b(?:(NULLS first)|(NULLS last))\\b",
+      "match": "\\b(?:(NULLS FIRST)|(NULLS LAST))\\b",
       "captures": {
         "1": {
           "name": "keyword.operator.query.nullsfirst.apex"

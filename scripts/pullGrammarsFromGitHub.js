@@ -42,7 +42,6 @@ const languageSources = [
   'https://github.com/AdaCore/ada_language_server/blob/master/integration/vscode/ada/advanced/ada.tmLanguage.json',
   'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage',
   'https://github.com/forcedotcom/apex-tmLanguage/blob/main/grammars/apex.tmLanguage',
-  'https://github.com/krvajal/vscode-fortran-support/blob/master/syntaxes/fortran_free-form.tmLanguage.json',
   'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json',
   'https://github.com/wholroyd/vscode-hcl/blob/develop/syntaxes/hcl.json',
   'https://github.com/slackhq/vscode-hack/blob/master/syntaxes/hack.json',
@@ -65,7 +64,9 @@ const languageSources = [
   'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json',
   'https://github.com/elixir-editors/elixir-tmbundle/blob/master/Syntaxes/Elixir.tmLanguage',
   'https://github.com/pgourlain/vscode_erlang/blob/master/syntaxes/erlang.tmLanguage',
-  'https://github.com/textmate/applescript.tmbundle/blob/master/Syntaxes/AppleScript.tmLanguage'
+  'https://github.com/textmate/applescript.tmbundle/blob/master/Syntaxes/AppleScript.tmLanguage',
+  'https://github.com/textmate/ssh-config.tmbundle/blob/master/Syntaxes/SSH-Config.tmLanguage',
+  'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json'
 ]
 
 async function go() {
@@ -74,7 +75,13 @@ async function go() {
     const newFileName = l.endsWith('.json')
       ? path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.json'
       : path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.plist'
-    const content = await get(targetUrl)
+    let content
+    try {
+      content = await get(targetUrl)
+    } catch (e) {
+      console.log(`Failed to download ${newFileName}: ${e}`)
+      continue
+    }
     fs.writeFileSync(path.resolve(LANGUAGE_GRAMMAR_FOLDER_PATH, newFileName), content)
     console.log(`Downloaded ${newFileName}`)
   }
