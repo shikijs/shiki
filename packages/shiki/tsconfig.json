@@ -1,11 +1,10 @@
 {
-  "extends": "../tsconfig.options.json",
   "compilerOptions": {
-    "composite": true,
-    "rootDir": "src",
-    "outDir": "dist"
-  },
-  "references": [
-    { "path": "../themes" }
-  ]
+    "module": "esnext",
+    "target": "es2017",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "lib": ["esnext", "DOM"],
+    "sourceMap": true
+  }
 }

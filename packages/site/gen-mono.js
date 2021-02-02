@@ -2,11 +2,9 @@ const fs = require('fs')
 const markdown = require('markdown-it')
 const shiki = require('shiki')
 
-const t = shiki.loadTheme('./monochrome-dark-subtle.json')
-
 shiki
   .getHighlighter({
-    theme: t
+    theme: JSON.parse(fs.readFileSync('./monochrome-dark-subtle.json', 'utf-8'))
   })
   .then(highlighter => {
     const md = markdown({

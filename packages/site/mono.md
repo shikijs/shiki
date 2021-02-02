@@ -1,9 +1,7 @@
 ```js
 const shiki = require('shiki')
 
-const t = shiki.loadTheme('./monochrome-dark-subtle.json')
-
 shiki.getHighlighter({
-  theme: t
+  theme: JSON.parse(fs.readfileSync('./monochrome-dark-subtle.json', 'utf-8'))
 })
 ```

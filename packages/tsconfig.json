@@ -1,9 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "files": [],
-  "references": [
-    { "path": "languages" },
-    { "path": "shiki" },
-    { "path": "themes" },
-    { "path": "renderer-svg" }
-  ]
+  "references": [{ "path": "./shiki" }, { "path": "./renderer-svg" }]
 }

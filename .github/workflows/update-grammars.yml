@@ -51,11 +51,11 @@ jobs:
 
       - name: Move files
         run: |
-          rm -rf packages/languages/data/*
-          mkdir -p packages/languages/data
-          cp tmp/grammars/*.json packages/languages/data
+          rm -rf packages/shiki/languages*
+          mkdir -p packages/shiki/languages
+          cp tmp/grammars/*.json packages/shiki/languages
 
-      - name: Update `packages/languages` source
+      - name: Update `languages` source
         run: node scripts/updateLangSrc.js
 
       - run: |

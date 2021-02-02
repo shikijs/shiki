@@ -98,7 +98,7 @@ shiki.getHighlighter({
 
 <div id="rockstar"></div>
 
-Over [100 programming languages](https://github.com/shikijs/shiki/tree/master/packages/languages) are supported out of the box, including a traditional Chinese one, [文言](https://wy-lang.org/):
+Over [100 programming languages](https://github.com/shikijs/shiki/tree/master/docs/languages.md) are supported out of the box, including a traditional Chinese one, [文言](https://wy-lang.org/):
 
 <div id="文言"></div>
 
@@ -116,7 +116,7 @@ And you get the above code in [Material Palenight](https://github.com/equinusoci
 
 <!-- <div id="palenight"></div> -->
 
-You can find all bundled themes in [shiki-themes](https://github.com/octref/shiki/tree/master/packages/themes), and use them like:
+You can find all bundled themes in [shiki-themes](https://github.com/octref/shiki/tree/master/docs/themes.md), and use them like:
 
 ```js
 shiki.getHighlighter({

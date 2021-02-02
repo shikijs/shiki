@@ -1,9 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
-const langDir = path.resolve(__dirname, '../packages/languages/data')
-const langPath = path.resolve(__dirname, '../packages/languages/src/lang.ts')
-const readmePath = path.resolve(__dirname, '../packages/languages/README.md')
+const langDir = path.resolve(__dirname, '../packages/shiki/languages')
+const langPath = path.resolve(__dirname, '../packages/shiki/src/languages.ts')
+const readmePath = path.resolve(__dirname, '../docs/languages.md')
 
 const files = fs.readdirSync(langDir)
 const langIds = files.map(f => f.replace('.tmLanguage.json', ''))
@@ -48,21 +48,20 @@ const langRegistrationContent = langIds
       return `  {
     id: '${id}',
     scopeName: '${grammar.scopeName}',
-    path: path.resolve(__dirname, '../data/${id}.tmLanguage.json'),
+    path: '${id}.tmLanguage.json',
     aliases: [${aliasStr}]
   }`
     } else {
       return `  {
     id: '${id}',
     scopeName: '${grammar.scopeName}',
-    path: path.resolve(__dirname, '../data/${id}.tmLanguage.json')
+    path: '${id}.tmLanguage.json'
   }`
     }
   })
   .join(',\n')
 
-const langContent = `import * as path from 'path'
-import { ILanguageRegistration } from './index'
+const langContent = `import { ILanguageRegistration } from './types'
 
 export type Lang =
 ${langIds
