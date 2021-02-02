@@ -2,6 +2,7 @@ const { get, convertGHURLToDownloadURL } = require('./download')
 const fs = require('fs')
 const url = require('url')
 const path = require('path')
+const { format } = require('prettier')
 
 const LANGUAGE_GRAMMAR_FOLDER_PATH = path.join(__dirname, '..', 'tmp/grammars')
 
@@ -83,6 +84,12 @@ async function go() {
       console.log(`Failed to download ${newFileName}: ${e}`)
       continue
     }
+
+    // Format JSON files with prettier ahead of time
+    if (newFileName.endsWith('json')) {
+      content = format(content, { filepath: newFileName })
+    }
+
     fs.writeFileSync(path.resolve(LANGUAGE_GRAMMAR_FOLDER_PATH, newFileName), content)
     console.log(`Downloaded ${newFileName}`)
   }
