@@ -38,6 +38,7 @@ export type Lang =
   | 'haskell'
   | 'hcl'
   | 'hlsl'
+  | 'html-ruby-erb'
   | 'html'
   | 'ini'
   | 'java'
@@ -293,6 +294,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'hlsl',
     scopeName: 'source.hlsl',
     path: 'hlsl.tmLanguage.json'
+  },
+  {
+    id: 'html-ruby-erb',
+    scopeName: 'text.html.erb',
+    path: 'html-ruby-erb.tmLanguage.json',
+    aliases: ['erb']
   },
   {
     id: 'html',
