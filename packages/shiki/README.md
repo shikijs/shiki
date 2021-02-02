@@ -42,11 +42,6 @@ shiki
 </script>
 ```
 
-- [Themes](./docs/themes.md#literal-values)
-- [Languages](./docs/languages.md#literal-values)
-- [SVG Renderer](./packages/renderer-svg/README.md)
-- [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
-
 Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play with Shiki, or try it out on [Repl.it](https://repl.it/@octref/shiki-starter).
 
 ## Seen
