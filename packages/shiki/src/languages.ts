@@ -25,7 +25,6 @@ export type Lang =
   | 'elixir'
   | 'elm'
   | 'erlang'
-  | 'fortran'
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
@@ -53,6 +52,7 @@ export type Lang =
   | 'latex'
   | 'less'
   | 'lisp'
+  | 'log-file'
   | 'logo'
   | 'lua'
   | 'makefile'
@@ -88,7 +88,6 @@ export type Lang =
   | 'sql'
   | 'ssh-config'
   | 'stylus'
-  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
@@ -227,11 +226,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'erlang',
     scopeName: 'source.erlang',
     path: 'erlang.tmLanguage.json'
-  },
-  {
-    id: 'fortran',
-    scopeName: 'source.fortran.free',
-    path: 'fortran.tmLanguage.json'
   },
   {
     id: 'fsharp',
@@ -376,6 +370,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'lisp',
     scopeName: 'source.lisp',
     path: 'lisp.tmLanguage.json'
+  },
+  {
+    id: 'log-file',
+    scopeName: 'text.log',
+    path: 'log-file.tmLanguage.json'
   },
   {
     id: 'logo',
@@ -565,11 +564,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.stylus',
     path: 'stylus.tmLanguage.json',
     aliases: ['styl']
-  },
-  {
-    id: 'svelte',
-    scopeName: 'source.svelte',
-    path: 'svelte.tmLanguage.json'
   },
   {
     id: 'swift',
