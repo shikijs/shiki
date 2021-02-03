@@ -7,7 +7,10 @@
       }
     },
     {
-      "scope": ["meta.embedded", "source.groovy.embedded"],
+      "scope": [
+        "meta.embedded",
+        "source.groovy.embedded"
+      ],
       "settings": {
         "foreground": "#93A1A1"
       }
@@ -43,7 +46,10 @@
     },
     {
       "name": "Variable",
-      "scope": ["variable.language", "variable.other"],
+      "scope": [
+        "variable.language",
+        "variable.other"
+      ],
       "settings": {
         "foreground": "#268BD2"
       }
@@ -92,28 +98,40 @@
     },
     {
       "name": "Embedded code markers",
-      "scope": ["punctuation.section.embedded.begin", "punctuation.section.embedded.end"],
+      "scope": [
+        "punctuation.section.embedded.begin",
+        "punctuation.section.embedded.end"
+      ],
       "settings": {
         "foreground": "#D30102"
       }
     },
     {
       "name": "Built-in constant",
-      "scope": ["constant.language", "meta.preprocessor"],
+      "scope": [
+        "constant.language",
+        "meta.preprocessor"
+      ],
       "settings": {
         "foreground": "#B58900"
       }
     },
     {
       "name": "Support.construct",
-      "scope": ["support.function.construct", "keyword.other.new"],
+      "scope": [
+        "support.function.construct",
+        "keyword.other.new"
+      ],
       "settings": {
         "foreground": "#CB4B16"
       }
     },
     {
       "name": "User-defined constant",
-      "scope": ["constant.character", "constant.other"],
+      "scope": [
+        "constant.character",
+        "constant.other"
+      ],
       "settings": {
         "foreground": "#CB4B16"
       }
@@ -172,7 +190,10 @@
     },
     {
       "name": "Library class/type",
-      "scope": ["support.type", "support.class"],
+      "scope": [
+        "support.type",
+        "support.class"
+      ],
       "settings": {
         "foreground": "#859900"
       }
@@ -198,7 +219,10 @@
     },
     {
       "name": "diff: header",
-      "scope": ["meta.diff", "meta.diff.header"],
+      "scope": [
+        "meta.diff",
+        "meta.diff.header"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "#E0EDDD"
@@ -243,7 +267,10 @@
     },
     {
       "name": "Markup Styling",
-      "scope": ["markup.bold", "markup.italic"],
+      "scope": [
+        "markup.bold",
+        "markup.italic"
+      ],
       "settings": {
         "foreground": "#D33682"
       }

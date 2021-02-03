@@ -1,8 +1,8 @@
 export type Theme =
-  | 'dark-plus'
+  | 'dark-default-dark'
   | 'github-dark'
   | 'github-light'
-  | 'light-plus'
+  | 'light-default-light'
   | 'material-theme-darker'
   | 'material-theme-default'
   | 'material-theme-lighter'
@@ -18,10 +18,10 @@ export type Theme =
   | 'solarized-light'
 
 export const themes = [
-  'dark-plus',
+  'dark-default-dark',
   'github-dark',
   'github-light',
-  'light-plus',
+  'light-default-light',
   'material-theme-darker',
   'material-theme-default',
   'material-theme-lighter',

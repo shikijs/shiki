@@ -101,7 +101,10 @@
       }
     },
     {
-      "scope": ["meta.embedded", "source.groovy.embedded"],
+      "scope": [
+        "meta.embedded",
+        "source.groovy.embedded"
+      ],
       "settings": {
         "foreground": "#F8F8F2"
       }
@@ -122,14 +125,19 @@
     },
     {
       "name": "Template Definition",
-      "scope": ["punctuation.definition.template-expression", "punctuation.section.embedded"],
+      "scope": [
+        "punctuation.definition.template-expression",
+        "punctuation.section.embedded"
+      ],
       "settings": {
         "foreground": "#F92672"
       }
     },
     {
       "name": "Reset JavaScript string interpolation expression",
-      "scope": ["meta.template.expression"],
+      "scope": [
+        "meta.template.expression"
+      ],
       "settings": {
         "foreground": "#F8F8F2"
       }
@@ -423,7 +431,9 @@
     },
     {
       "name": "Markdown List Punctuation",
-      "scope": ["punctuation.definition.list.begin.markdown"],
+      "scope": [
+        "punctuation.definition.list.begin.markdown"
+      ],
       "settings": {
         "foreground": "#A6E22E"
       }
