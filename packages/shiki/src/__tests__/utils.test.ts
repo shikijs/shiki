@@ -13,6 +13,7 @@ test('join', async () => {
   expect(join('abc', 'a', 'b')).toBe('abc/a/b')
   expect(join()).toBe('')
   expect(join('a/', 'b/')).toBe('a/b')
+  expect(join('a', './b')).toBe('a/b')
 })
 
 test('dirname', async () => {

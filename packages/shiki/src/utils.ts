@@ -3,11 +3,16 @@ export function trimEndSlash(str: string) {
   return str
 }
 
+export function trimStartDot(str: string) {
+  if (str.endsWith('./')) return str.slice(2)
+  return str
+}
+
 export function dirname(str: string) {
   const parts = str.split(/[\/\\]/g)
   return parts[parts.length - 2]
 }
 
 export function join(...parts: string[]) {
-  return parts.map(trimEndSlash).join('/')
+  return parts.map(trimEndSlash).map(trimStartDot).join('/')
 }
