@@ -16,8 +16,8 @@ test('join', async () => {
 })
 
 test('dirname', async () => {
-  expect(dirname('a/b/c')).toBe('c')
+  expect(dirname('a/b/c')).toBe('b')
   expect(dirname('a/b/c/')).toBe('c')
-  expect(dirname('a')).toBe('a')
-  expect(dirname('')).toBe('')
+  expect(dirname('a')).toBe(undefined)
+  expect(dirname('')).toBe(undefined)
 })

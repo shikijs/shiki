@@ -4,7 +4,8 @@ export function trimEndSlash(str: string) {
 }
 
 export function dirname(str: string) {
-  return trimEndSlash(str).split(/\/|\\/g).slice(-1)[0]
+  const parts = str.split(/[\/\\]/g)
+  return parts[parts.length - 2]
 }
 
 export function join(...parts: string[]) {
