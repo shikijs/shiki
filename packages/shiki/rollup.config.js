@@ -39,7 +39,6 @@ export default [
         file: 'dist/index.browser.mjs',
         format: 'esm',
         name: 'shiki',
-        extend: true,
         plugins: [
           replace({
             __CDN_ROOT__: ''
