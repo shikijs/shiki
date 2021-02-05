@@ -58,7 +58,15 @@ jobs:
       - name: Update `languages` source
         run: node scripts/updateLangSrc.js
 
-      - run: |
+      - name: Build
+        run: yarn build
+      - name: Test
+        run: yarn test
+        env:
+          CI: true
+
+      - name: Commit
+        run: |
           if [[ `git status --porcelain` ]]; then
             git config user.name "Pine Wu"
             git config user.email octref@gmail.com
