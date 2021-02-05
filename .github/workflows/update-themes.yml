@@ -44,11 +44,6 @@ jobs:
           cp tmp/vscode/extensions/theme-*/themes/monokai*.json tmp/themes/vscode
           cp tmp/vscode/extensions/theme-*/themes/solarized*.json tmp/themes/vscode
 
-          mv tmp/themes/vscode/dark_default_dark.json tmp/themes/vscode/dark_plus.json
-          mv tmp/themes/vscode/light_default_light.json tmp/themes/vscode/light_plus.json
-
-          ls tmp/themes/vscode
-
       # Themes on GitHub
       - run: node scripts/pullThemesFromGitHub.js
 
