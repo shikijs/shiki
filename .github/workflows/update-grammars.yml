@@ -39,9 +39,14 @@ jobs:
           path: tmp/vscode
 
       # Two html file will cause `cp` to fail
+      # Remove log.tmLanguage.json for now
       - run: |
           mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
           cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
+
+          rm tmp/grammars/log.tmLanguage.json
+
+          ls tmp/grammars
 
       # Grammars on GitHub
       - run: node scripts/pullGrammarsFromGitHub.js
