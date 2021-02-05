@@ -1,4 +1,5 @@
-import * as Onigasm from 'onigasm'
+import { dirname, join } from 'path'
+import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import { join, dirname } from './utils'
 import type { IShikiTheme } from './types'
@@ -27,22 +28,22 @@ export async function getOnigasm(): Promise<IOnigLib> {
     let loader: Promise<any>
 
     if (isBrowser) {
-      loader = Onigasm.loadWASM(ONIGASM_WASM || _resolvePath('dist/onigasm.wasm'))
+      loader = loadWASM(ONIGASM_WASM || _resolvePath('dist/wasm'))
     } else {
       const path = require('path')
-      const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')
+      const onigasmPath = path.join(require.resolve('onigasm'), '../wasm')
       const fs = require('fs')
       const wasmBin = fs.readFileSync(onigasmPath).buffer
-      loader = Onigasm.loadWASM(wasmBin)
+      loader = loadWASM(wasmBin)
     }
 
     _onigasmPromise = loader.then(() => {
       return {
         createOnigScanner(patterns: string[]) {
-          return new Onigasm.OnigScanner(patterns)
+          return new OnigScanner(patterns)
         },
         createOnigString(s: string) {
-          return new Onigasm.OnigString(s)
+          return new OnigString(s)
         }
       }
     })
