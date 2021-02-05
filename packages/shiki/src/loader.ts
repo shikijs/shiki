@@ -1,7 +1,7 @@
 import * as Onigasm from 'onigasm'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import { join, dirname } from './utils'
 import type { IShikiTheme } from './types'
-import { dirname, join } from 'path'
 
 export const isBrowser =
   typeof window !== 'undefined' &&

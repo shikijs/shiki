@@ -37,6 +37,15 @@ export default [
     input: 'src/index.ts',
     output: [
       {
+        file: 'dist/index.browser.mjs',
+        format: 'esm',
+        plugins: [
+          replace({
+            __CDN_ROOT__: ''
+          })
+        ]
+      },
+      {
         file: 'dist/index.iife.js',
         format: 'iife',
         name: 'shiki',
