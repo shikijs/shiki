@@ -40,6 +40,7 @@ jobs:
 
       - run: |
           cp tmp/vscode/extensions/theme-*/themes/dark*.json tmp/themes/vscode
+          cp tmp/vscode/extensions/theme-*/themes/*_vs.json tmp/themes/vscode
           cp tmp/vscode/extensions/theme-*/themes/light*.json tmp/themes/vscode
           cp tmp/vscode/extensions/theme-*/themes/monokai*.json tmp/themes/vscode
           cp tmp/vscode/extensions/theme-*/themes/solarized*.json tmp/themes/vscode
