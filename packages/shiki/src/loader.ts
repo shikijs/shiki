@@ -1,7 +1,6 @@
-import { dirname, join } from 'path'
 import { loadWASM, OnigScanner, OnigString } from 'onigasm'
-import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import { join, dirname } from './utils'
+import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import type { IShikiTheme } from './types'
 
 export const isBrowser =
@@ -11,13 +10,28 @@ export const isBrowser =
 
 // to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'
-let ONIGASM_WASM = ''
+let ONIGASM_WASM: string | ArrayBuffer = ''
 
+/**
+ * Set the route for loading the assets
+ * URL should end with `/`
+ *
+ * For example:
+ * ```ts
+ * setCDN('https://unpkg.com/shiki/') // use unpkg
+ * setCDN('/assets/shiki/') // serve by yourself
+ * ```
+ */
 export function setCDN(root: string) {
   CDN_ROOT = root
 }
 
-export function setOnigasmWASM(path: string) {
+/**
+ * Explicitly set the source for loading the OnigasmWASM
+ *
+ * Accepts Url or ArrayBuffer
+ */
+export function setOnigasmWASM(path: string | ArrayBuffer) {
   ONIGASM_WASM = path
 }
 
