@@ -4,11 +4,10 @@ import type {
   ILanguageRegistration,
   IShikiTheme,
   IThemeRegistration,
-  StringLiteralUnion,
-  ThemedTokenizerOptions
+  StringLiteralUnion
 } from './types'
 import { Resolver } from './resolver'
-import { IThemedToken, tokenizeWithTheme } from './themedTokenizer'
+import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
 import { getOnigasm } from './loader'

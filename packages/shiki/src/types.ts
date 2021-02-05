@@ -48,13 +48,20 @@ export interface IHighlighterPaths {
   languages?: string
 }
 
-export interface ILanguageRegistration {
+export type ILanguageRegistration = {
   id: string
   scopeName: string
-  path: string
   aliases?: string[]
-  grammar?: IRawGrammar
-}
+} & (
+  | {
+      path: string
+      grammar?: IRawGrammar
+    }
+  | {
+      path?: string
+      grammar: IRawGrammar
+    }
+)
 
 export type IThemeRegistration = IShikiTheme | StringLiteralUnion<Theme>
 
