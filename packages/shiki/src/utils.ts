@@ -4,7 +4,7 @@ export function trimEndSlash(str: string) {
 }
 
 export function trimStartDot(str: string) {
-  if (str.endsWith('./')) return str.slice(2)
+  if (str.startsWith('./')) return str.slice(2)
   return str
 }
 
