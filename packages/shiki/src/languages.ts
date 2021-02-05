@@ -52,7 +52,6 @@ export type Lang =
   | 'latex'
   | 'less'
   | 'lisp'
-  | 'log-file'
   | 'logo'
   | 'lua'
   | 'makefile'
@@ -370,11 +369,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'lisp',
     scopeName: 'source.lisp',
     path: 'lisp.tmLanguage.json'
-  },
-  {
-    id: 'log-file',
-    scopeName: 'text.log',
-    path: 'log-file.tmLanguage.json'
   },
   {
     id: 'logo',
