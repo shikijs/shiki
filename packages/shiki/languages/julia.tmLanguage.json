@@ -285,7 +285,7 @@
           "match": "(?:\\s*(::|>:|<:)\\s*((?:(?:Union)?\\([^)]*\\)|[[:alpha:]_$∇][[:word:]⁺-ₜ!′\\.]*(?:(?:{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*})|(?:\".+?(?<!\\\\)\"))?)))(?:\\.\\.\\.)?",
           "captures": {
             "1": {
-              "name": "keyword.operator.relation.julia"
+              "name": "keyword.operator.relation.types.julia"
             },
             "2": {
               "name": "support.type.julia"
