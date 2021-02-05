@@ -25,6 +25,7 @@ export default [
     ],
     plugins: [
       replace({
+        __CDN_ROOT__: '',
         __BROWSER__: JSON.stringify(false)
       }),
       typescript(),
