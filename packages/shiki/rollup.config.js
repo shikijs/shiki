@@ -19,7 +19,7 @@ export default [
         format: 'cjs'
       },
       {
-        file: 'dist/index.mjs',
+        file: 'dist/index.esm.js',
         format: 'esm'
       }
     ],
