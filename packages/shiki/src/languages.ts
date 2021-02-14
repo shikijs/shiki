@@ -358,7 +358,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'latex',
     scopeName: 'text.tex.latex',
-    path: 'latex.tmLanguage.json'
+    path: 'latex.tmLanguage.json',
+    aliases: ['tex']
   },
   {
     id: 'less',

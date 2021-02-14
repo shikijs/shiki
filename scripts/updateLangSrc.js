@@ -15,6 +15,7 @@ const aliases = {
   fsharp: ['f#'],
   handlebars: ['hbs'],
   javascript: ['js'],
+  latex: ['tex'],
   markdown: ['md'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
