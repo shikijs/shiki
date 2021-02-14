@@ -70,6 +70,7 @@ export type Lang =
   | 'makefile'
   | 'markdown'
   | 'matlab'
+  | 'mdx'
   | 'nix'
   | 'objective-c'
   | 'ocaml'
