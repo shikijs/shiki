@@ -57,6 +57,7 @@ export type Lang =
   | 'makefile'
   | 'markdown'
   | 'matlab'
+  | 'mdx'
   | 'nix'
   | 'objective-c'
   | 'ocaml'
@@ -396,6 +397,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'matlab',
     scopeName: 'source.matlab',
     path: 'matlab.tmLanguage.json'
+  },
+  {
+    id: 'mdx',
+    scopeName: 'text.html.markdown.jsx',
+    path: 'mdx.tmLanguage.json'
   },
   {
     id: 'nix',
