@@ -14,6 +14,7 @@ export type Lang =
   | 'clojure'
   | 'cobol'
   | 'coffee'
+  | 'cpp.embedded.macro'
   | 'cpp'
   | 'crystal'
   | 'csharp'
@@ -172,8 +173,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'coffee.tmLanguage.json'
   },
   {
-    id: 'cpp',
+    id: 'cpp.embedded.macro',
     scopeName: 'source.cpp.embedded.macro',
+    path: 'cpp.embedded.macro.tmLanguage.json'
+  },
+  {
+    id: 'cpp',
+    scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json'
   },
   {
