@@ -23,6 +23,10 @@ function normalizeGrammarFile(file, newName) {
     } else if (!kebabName && parsedContent.scopeName) {
       kebabName = kebabCase(parsedContent.scopeName.split('.').pop())
     }
+    if (kebabName === 'cpp') {
+      console.log('skip normalization for cpp grammar files')
+      return
+    }
     const newPath = path.resolve(GRAMMAR_FOLDER_PATH, `${kebabName}.tmLanguage.json`)
     parsedContent.name = kebabName
     if (newPath !== oldPath) {
