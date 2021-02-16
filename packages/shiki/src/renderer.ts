@@ -18,17 +18,13 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   html += `<code>`
 
   lines.forEach((l: IThemedToken[]) => {
-    if (l.length === 0) {
-      html += `\n`
-    } else {
-      html += `<span class="line">`
-      l.forEach(token => {
-        html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
-          token.content
-        )}</span>`
-      })
-      html += `</span>\n`
-    }
+    html += `<span class="line">`
+    l.forEach(token => {
+      html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
+        token.content
+      )}</span>`
+    })
+    html += `</span>\n`
   })
   html = html.replace(/\n*$/, '') // Get rid of final new lines
   html += `</code></pre>`
