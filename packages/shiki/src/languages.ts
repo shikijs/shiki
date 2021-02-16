@@ -14,6 +14,7 @@ export type Lang =
   | 'clojure'
   | 'cobol'
   | 'coffee'
+  | 'cpp.embedded.macro'
   | 'cpp'
   | 'crystal'
   | 'csharp'
@@ -57,6 +58,7 @@ export type Lang =
   | 'makefile'
   | 'markdown'
   | 'matlab'
+  | 'mdx'
   | 'nix'
   | 'objective-c'
   | 'ocaml'
@@ -171,8 +173,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'coffee.tmLanguage.json'
   },
   {
-    id: 'cpp',
+    id: 'cpp.embedded.macro',
     scopeName: 'source.cpp.embedded.macro',
+    path: 'cpp.embedded.macro.tmLanguage.json'
+  },
+  {
+    id: 'cpp',
+    scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json'
   },
   {
@@ -358,7 +365,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'latex',
     scopeName: 'text.tex.latex',
-    path: 'latex.tmLanguage.json'
+    path: 'latex.tmLanguage.json',
+    aliases: ['tex']
   },
   {
     id: 'less',
@@ -395,6 +403,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'matlab',
     scopeName: 'source.matlab',
     path: 'matlab.tmLanguage.json'
+  },
+  {
+    id: 'mdx',
+    scopeName: 'text.html.markdown.jsx',
+    path: 'mdx.tmLanguage.json'
   },
   {
     id: 'nix',
