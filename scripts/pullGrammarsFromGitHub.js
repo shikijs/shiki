@@ -69,6 +69,7 @@ const languageSources = [
   'https://github.com/textmate/ruby.tmbundle/blob/master/Syntaxes/HTML%20(Ruby%20-%20ERB).tmLanguage',
   'https://github.com/textmate/ssh-config.tmbundle/blob/master/Syntaxes/SSH-Config.tmLanguage',
   'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json',
+  'https://github.com/MarioSchwalbe/vscode-gnuplot/blob/master/syntaxes/gnuplot.tmLanguage',
   'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json',
   'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.tmLanguage.json',
   'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.embedded.macro.tmLanguage.json'
