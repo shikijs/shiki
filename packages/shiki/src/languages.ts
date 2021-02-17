@@ -29,6 +29,7 @@ export type Lang =
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
+  | 'gnuplot'
   | 'go'
   | 'graphql'
   | 'groovy'
@@ -248,6 +249,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'git-rebase',
     scopeName: 'text.git-rebase',
     path: 'git-rebase.tmLanguage.json'
+  },
+  {
+    id: 'gnuplot',
+    scopeName: 'source.gnuplot',
+    path: 'gnuplot.tmLanguage.json'
   },
   {
     id: 'go',

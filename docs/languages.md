@@ -42,6 +42,7 @@ export type Lang =
   | 'fsharp'
   | 'git-commit'
   | 'git-rebase'
+  | 'gnuplot'
   | 'go'
   | 'graphql'
   | 'groovy'
