@@ -72,7 +72,8 @@ const languageSources = [
   'https://github.com/MarioSchwalbe/vscode-gnuplot/blob/master/syntaxes/gnuplot.tmLanguage',
   'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json',
   'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.tmLanguage.json',
-  'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.embedded.macro.tmLanguage.json'
+  'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.embedded.macro.tmLanguage.json',
+  'https://github.com/kimmolinna/vscode-apl-language'
 ]
 
 async function go() {
