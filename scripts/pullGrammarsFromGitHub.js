@@ -73,7 +73,7 @@ const languageSources = [
   'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json',
   'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.tmLanguage.json',
   'https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/cpp.embedded.macro.tmLanguage.json',
-  'https://github.com/kimmolinna/vscode-apl-language'
+  'https://github.com/kimmolinna/vscode-apl-language/blob/master/syntaxes/apl.tmLanguage.json'
 ]
 
 async function go() {
