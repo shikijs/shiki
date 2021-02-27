@@ -410,7 +410,7 @@
       "end": "(\\\\end\\{\\2\\}(?:\\s*\\n)?)"
     },
     {
-      "begin": "((?:\\s*)\\\\begin\\{((?:pycode|sageblock|sagesilent|sageverbatim|sageexample|sagecommandline)(?:\\*)?)\\}(?:\\[.*\\])?)",
+      "begin": "((?:\\s*)\\\\begin\\{((?:(?:(?:py|pylab|sympy)(?:code|verbatim|block|concode|console|converbatim))|sageblock|sagesilent|sageverbatim|sageexample|sagecommandline)(?:\\*)?)\\}(?:\\[.*\\])?)",
       "captures": {
         "1": {
           "patterns": [
@@ -1411,6 +1411,53 @@
         }
       },
       "match": "((\\\\)[a-z]+inline)((?:\\[[^\\[]*?\\])?)(?:(?:([^a-zA-Z\\{])(.*?)(\\4))|(?:(\\{)(.*?)(\\})))",
+      "name": "meta.function.verb.latex"
+    },
+    {
+      "captures": {
+        "1": {
+          "name": "support.function.verb.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#optional-arg"
+            }
+          ]
+        },
+        "4": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "5": {
+          "name": "source.python",
+          "patterns": [
+            {
+              "include": "source.python"
+            }
+          ]
+        },
+        "6": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "7": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "8": {
+          "name": "source.python",
+          "patterns": [
+            {
+              "include": "source.python"
+            }
+          ]
+        },
+        "9": {
+          "name": "punctuation.definition.verb.latex"
+        }
+      },
+      "match": "((\\\\)(?:py|pycon|pylab|pylabcon|sympy|sympycon)[cv]?)((?:\\[[^\\[]*?\\])?)(?:(?:([^a-zA-Z\\{])(.*?)(\\4))|(?:(\\{)(.*?)(\\})))",
       "name": "meta.function.verb.latex"
     },
     {
