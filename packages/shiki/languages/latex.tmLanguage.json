@@ -1678,7 +1678,7 @@
           "name": "punctuation.definition.arguments.optional.end.latex"
         }
       },
-      "match": "(?:\\s*)((\\\\)(?:begin|end))(\\{)([a-z]*code(?:\\*)?|gnuplot|dot2tex|asy|sage[a-z]*)(\\})(?:(\\[).*(\\]))?"
+      "match": "(?:\\s*)((\\\\)(?:begin|end))(\\{)([a-z]+(?:\\*)?)(\\})(?:(\\[).*(\\]))?"
     },
     "definition-label": {
       "begin": "((\\\\)label)(\\{)",
