@@ -87,7 +87,7 @@
       }
     },
     {
-      "match": "\\s+(78)\\s+([0-9a-zA-Z][a-zA-Z\\-0-9_]+)",
+      "match": "^\\s+(78)\\s+([0-9a-zA-Z][a-zA-Z\\-0-9_]+)",
       "captures": {
         "1": {
           "name": "constant.numeric.cobol"
