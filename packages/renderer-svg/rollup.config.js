@@ -46,6 +46,10 @@ export default [
         extend: true,
         name: 'shiki',
         plugins: [terser()]
+      },
+      {
+        file: 'dist/index.browser.mjs',
+        format: 'esm'
       }
     ],
     plugins: [
