@@ -11,7 +11,7 @@ const themeIds = files.map(f => f.replace('.json', ''))
 const themeContent = `export type Theme =
 ${themeIds.map(id => `  | '${id}'`).join('\n')}
 
-export const themes = [
+export const themes: Theme[] = [
 ${themeIds.map(id => `  '${id}'`).join(',\n')}
 ]
 `

@@ -17,7 +17,7 @@ export type Theme =
   | 'solarized-dark'
   | 'solarized-light'
 
-export const themes = [
+export const themes: Theme[] = [
   'dark-plus',
   'github-dark',
   'github-light',
