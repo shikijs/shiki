@@ -113,12 +113,14 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
     const includedTheme = await fetchTheme(join(dirname(themePath), shikiTheme.include))
 
     if (includedTheme.settings) {
-      shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
+      shikiTheme.settings = includedTheme.settings.concat(shikiTheme.settings)
     }
 
     if (includedTheme.bg && !shikiTheme.bg) {
       shikiTheme.bg = includedTheme.bg
     }
+
+    delete shikiTheme.include
   }
 
   return shikiTheme
@@ -131,7 +133,9 @@ export async function fetchGrammar(filepath: string): Promise<IRawGrammar> {
 
 export function repairTheme(theme: IShikiTheme) {
   // Has the default no-scope setting with fallback colors
-  if (theme.settings[0].settings && !theme.settings[0].scope) {
+  if (!theme.settings) theme.settings = []
+
+  if (theme.settings[0] && theme.settings[0].settings && !theme.settings[0].scope) {
     return
   }
 
@@ -155,6 +159,7 @@ export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
   }
   if ((<any>rawTheme).tokenColors) {
     shikiTheme.settings = (<any>rawTheme).tokenColors
+    delete (<any>shikiTheme).tokenColors
   }
 
   repairTheme(shikiTheme)
