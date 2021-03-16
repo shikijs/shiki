@@ -1,3 +1,4 @@
+import JSON5 from 'json5'
 import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
@@ -98,7 +99,7 @@ async function _fetchAssets(filepath: string): Promise<string> {
 }
 
 async function _fetchJSONAssets(filepath: string) {
-  return JSON.parse(await _fetchAssets(filepath))
+  return JSON5.parse(await _fetchAssets(filepath))
 }
 
 /**
@@ -127,8 +128,7 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
 }
 
 export async function fetchGrammar(filepath: string): Promise<IRawGrammar> {
-  const content = await _fetchAssets(filepath)
-  return JSON.parse(content)
+  return await _fetchJSONAssets(filepath)
 }
 
 export function repairTheme(theme: IShikiTheme) {
