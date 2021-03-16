@@ -25,6 +25,12 @@ export interface Highlighter {
     lang?: StringLiteralUnion<Lang>,
     theme?: StringLiteralUnion<Theme>
   ): string
+  getTheme(
+    theme: IThemeRegistration
+  ): {
+    _theme: IShikiTheme
+    _colorMap: string[]
+  }
   loadTheme(theme: IThemeRegistration): Promise<void>
   loadLanguage(lang: ILanguageRegistration | Lang): Promise<void>
 

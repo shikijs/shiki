@@ -129,6 +129,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   return {
     codeToThemedTokens,
     codeToHtml,
+    getTheme,
     loadTheme,
     loadLanguage,
     getBackgroundColor,
