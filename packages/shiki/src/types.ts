@@ -106,6 +106,11 @@ export interface IShikiTheme extends IRawTheme {
    * @description relative path of included theme
    */
   include?: string
+
+  /**
+   * @description color map of the theme file
+   */
+  colors?: Record<string, string>
 }
 
 /**

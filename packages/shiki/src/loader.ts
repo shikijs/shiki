@@ -121,6 +121,10 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
       shikiTheme.bg = includedTheme.bg
     }
 
+    if (includedTheme.colors) {
+      shikiTheme.colors = { ...includedTheme.colors, ...shikiTheme.colors }
+    }
+
     delete shikiTheme.include
   }
 
