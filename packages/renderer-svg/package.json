@@ -24,11 +24,12 @@
     "watch": "rollup -c -w"
   },
   "peerDependencies": {
-    "puppeteer": "^5.2.1",
-    "shiki": "^0.2.7"
+    "playwright": "^1.9.2",
+    "shiki": "^0.9.3"
   },
   "devDependencies": {
-    "@types/puppeteer": "^3.0.1",
+    "@types/node": "^14.14.35",
+    "playwright": "^1.9.2",
     "shiki": "^0.2.7"
   }
 }

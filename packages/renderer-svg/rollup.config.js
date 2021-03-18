@@ -5,7 +5,7 @@ import typescript from 'rollup-plugin-typescript2'
 import replace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
 
-const external = ['shiki', 'puppeteer']
+const external = ['shiki', 'playwright']
 
 export default [
   {

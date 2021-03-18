@@ -1,4 +1,4 @@
-function measureFont(fontName: string, fontSize: number) {
+function measureFont([fontName, fontSize]: [string, number]) {
   /**
    * Measure `M` for width
    */
@@ -49,12 +49,14 @@ export async function measureMonospaceTypeface(
   fontSize: number
 ): Promise<{ width: number; height: number }> {
   if (__BROWSER__) {
-    return measureFont(fontName, fontSize)
+    return measureFont([fontName, fontSize])
   } else {
-    const puppeteer = require('puppeteer') as typeof import('puppeteer')
-    const browser = await puppeteer.launch({ headless: true })
+    const playwright = require('playwright') as typeof import('playwright')
+    const browser = await playwright.chromium.launch({ headless: true })
+
     const page = await browser.newPage()
-    const measurement = await page.evaluate(measureFont, fontName, fontSize)
+    const measurement = await page.evaluate(measureFont, [fontName, fontSize])
+
     await browser.close()
     return measurement
   }
