@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
 
+:root {
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -21,7 +25,7 @@ pre {
 }
 pre code {
   white-space: pre-wrap;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 14px;
 }
 h1, h2 {
@@ -34,7 +38,7 @@ p img {
   margin-bottom: 3rem;
 }
 p code {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 @media (max-width: 720px) {

@@ -44,20 +44,50 @@ function measureFont([fontName, fontSize]: [string, number]) {
   }
 }
 
+const getDocument = (fontName: string, url: string) => {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    @import url(${url});
+    body { font-family: '${fontName}'; }
+  </style>
+</head>
+<body>
+<p>Test</p>
+</body>
+</html>
+`
+}
+
 export async function measureMonospaceTypeface(
-  fontName: string,
-  fontSize: number
+  fontNameStr: string,
+  fontSize: number,
+  remoteFontCSSURL?: string
 ): Promise<{ width: number; height: number }> {
   if (__BROWSER__) {
-    return measureFont([fontName, fontSize])
+    return measureFont([fontNameStr, fontSize])
   } else {
     const playwright = require('playwright') as typeof import('playwright')
     const browser = await playwright.chromium.launch({ headless: true })
 
     const page = await browser.newPage()
-    const measurement = await page.evaluate(measureFont, [fontName, fontSize])
 
-    await browser.close()
-    return measurement
+    if (remoteFontCSSURL) {
+      await page.goto('data:text/html,' + getDocument(fontNameStr, remoteFontCSSURL), {
+        waitUntil: 'networkidle'
+      })
+
+      const measurement = await page.evaluate(measureFont, [fontNameStr, fontSize])
+      await browser.close()
+      return measurement
+    } else {
+      const measurement = await page.evaluate(measureFont, [fontNameStr, fontSize])
+
+      await browser.close()
+
+      return measurement
+    }
   }
 }

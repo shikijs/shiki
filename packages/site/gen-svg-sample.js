@@ -10,14 +10,13 @@ const { getSVGRenderer } = require('shiki-renderer-svg')
   const svgRenderer = await getSVGRenderer({
     bg: '#2E3440',
     fontFamily: {
-      name: 'IBM Plex Mono',
-      cssURL:
-        'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap'
+      name: 'Inconsolata',
+      cssURL: 'https://fonts.googleapis.com/css2?family=Inconsolata&display=swap'
     },
     fontSize: 14
   })
 
-  const code = fs.readFileSync('gen-svg-sample.js', 'utf-8')
+  const code = fs.readFileSync('gen-svg.js', 'utf-8')
 
   const tokens = highlighter.codeToThemedTokens(code, 'js')
   const out = svgRenderer.renderToSVG(tokens)

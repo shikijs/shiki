@@ -1,11 +1,38 @@
 import type { IThemedToken } from 'shiki'
 import { measureMonospaceTypeface } from './measureMonospaceTypeface'
 
+interface RemoteFontFamily {
+  /**
+   * Name of the font
+   */
+  name: string
+  /**
+   * URL pointing to the CSS that loads the font
+   */
+  cssURL: string
+}
+
 interface SVGRendererOptions {
   /**
    * A monospace font.
+   *
+   * If using in Node context and the font is not available in the host machine,
+   * provide `cssURL` that loads the font remotely.
+   * If using in the browser context, make sure the font is available in the webpage.
+   *
+   * ```js
+   * getSVGRenderer({ fontFamily: 'SF Mono Regular' })
+   *
+   * getSVGRenderer({ fontFamily: {
+   *   name: 'Inconsolata',
+   *   cssURL: 'https://fonts.googleapis.com/css2?family=Inconsolata&display=swap'
+   * }})
    */
-  fontFamily: string
+  fontFamily: string | RemoteFontFamily
+  /**
+   * URL of the CSS that loads the `fontFamily` font remotely.
+   */
+  remoteFontCSSURL?: string
   /**
    * Default to 16px.
    */
@@ -35,7 +62,10 @@ interface SVGRendererOptions {
 }
 
 export async function getSVGRenderer(options: SVGRendererOptions) {
-  const fontFamily = options.fontFamily
+  const fontNameStr =
+    typeof options.fontFamily === 'string' ? options.fontFamily : options.fontFamily.name
+  const remoteFontCSSURL =
+    typeof options.fontFamily === 'string' ? undefined : options.fontFamily.cssURL
   const fontSize = options.fontSize || 16
   const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio || 1.4
   const _bg = options.bg || '#fff'
@@ -43,7 +73,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
   const bgSideCharPadding = options.bgSideCharPadding || 4
   const bgVerticalCharPadding = options.bgVerticalCharPadding || 2
 
-  const measurement = await measureMonospaceTypeface(fontFamily, fontSize)
+  const measurement = await measureMonospaceTypeface(fontNameStr, fontSize, remoteFontCSSURL)
 
   const lineheight = measurement.height * lineHeightToFontSizeRatio
 
@@ -82,7 +112,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
         if (l.length === 0) {
           svg += `\n`
         } else {
-          svg += `<text font-family="${fontFamily}" font-size="${fontSize}" y="${
+          svg += `<text font-family="${fontNameStr}" font-size="${fontSize}" y="${
             lineheight * (index + 1)
           }">\n`
 
