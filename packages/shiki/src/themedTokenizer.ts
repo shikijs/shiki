@@ -4,7 +4,7 @@
 'use strict'
 
 import { IGrammar, StackElement, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
-import { StackElementMetadata } from './stackElementMetadata'
+import { FontStyle, StackElementMetadata } from './stackElementMetadata'
 
 export interface IThemedTokenScopeExplanation {
   scopeName: string
@@ -79,6 +79,10 @@ export interface IThemedToken {
    */
   color?: string
   /**
+   * Font style of token. Can be None/Italic/Bold/Underline
+   */
+  fontStyle?: FontStyle
+  /**
    * Explanation of
    *
    * - token text's matching scopes
@@ -124,6 +128,7 @@ export function tokenizeWithTheme(
       let metadata = result.tokens[2 * j + 1]
       let foreground = StackElementMetadata.getForeground(metadata)
       let foregroundColor = colorMap[foreground]
+      let fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
       let explanation: IThemedTokenExplanation[] = []
       if (options.includeExplanation) {
@@ -148,6 +153,7 @@ export function tokenizeWithTheme(
       actual.push({
         content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
+        fontStyle,
         explanation: explanation
       })
     }

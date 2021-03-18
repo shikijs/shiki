@@ -1,9 +1,16 @@
+import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
 
 export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
+}
+
+const FONT_STYLE_TO_CSS = {
+  [FontStyle.Italic]: 'font-style: italic',
+  [FontStyle.Bold]: 'font-weight: bold',
+  [FontStyle.Underline]: 'text-decoration: underline'
 }
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
@@ -19,10 +26,13 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
 
   lines.forEach((l: IThemedToken[]) => {
     html += `<span class="line">`
+
     l.forEach(token => {
-      html += `<span style="color: ${token.color || options.fg}">${escapeHtml(
-        token.content
-      )}</span>`
+      const cssDeclarations = [`color: ${token.color || options.fg}`]
+      if (token.fontStyle > FontStyle.None) {
+        cssDeclarations.push(FONT_STYLE_TO_CSS[token.fontStyle])
+      }
+      html += `<span style="${cssDeclarations.join('; ')}">${escapeHtml(token.content)}</span>`
     })
     html += `</span>\n`
   })
