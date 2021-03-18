@@ -133,22 +133,6 @@ export function tokenizeWithTheme(
       }
       let metadata = result.tokens[2 * j + 1]
       let foreground = StackElementMetadata.getForeground(metadata)
-      let fontStyle = StackElementMetadata.getFontStyle(metadata)
-      let fontStyleText
-      switch (fontStyle) {
-        case 1: {
-          fontStyleText = 'italic'
-          break
-        }
-        case 2: {
-          fontStyleText = 'bold'
-          break
-        }
-        case 3: {
-          fontStyleText = 'underline'
-          break
-        }
-      }
       let foregroundColor = colorMap[foreground]
       let fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
@@ -172,16 +156,12 @@ export function tokenizeWithTheme(
         }
       }
 
-      let token: IThemedToken = {
+      actual.push({
         content: line.substring(startIndex, nextStartIndex),
         color: foregroundColor,
         fontStyle,
         explanation: explanation
-      }
-      if (fontStyleText) {
-        token.style = fontStyleText
-      }
-      actual.push(token)
+      })
     }
     final.push(actual)
     actual = []
