@@ -369,7 +369,7 @@
           "name": "punctuation.definition.symbol.begin.crystal"
         }
       },
-      "comment": "symbol literal with '' delimitor",
+      "comment": "symbol literal with '' delimiter",
       "end": "'",
       "endCaptures": {
         "0": {
@@ -391,7 +391,7 @@
           "name": "punctuation.section.symbol.begin.crystal"
         }
       },
-      "comment": "symbol literal with \"\" delimitor",
+      "comment": "symbol literal with \"\" delimiter",
       "end": "\"",
       "endCaptures": {
         "0": {
@@ -409,7 +409,7 @@
       ]
     },
     {
-      "comment": "Needs higher precidence than regular expressions.",
+      "comment": "Needs higher precedence than regular expressions.",
       "match": "(?<!\\()/=",
       "name": "keyword.operator.assignment.augmented.crystal"
     },
@@ -420,7 +420,7 @@
           "name": "punctuation.definition.string.begin.crystal"
         }
       },
-      "comment": "string literal with '' delimitor",
+      "comment": "string literal with '' delimiter",
       "end": "'",
       "endCaptures": {
         "0": {
@@ -442,7 +442,7 @@
           "name": "punctuation.definition.string.begin.crystal"
         }
       },
-      "comment": "string literal with interpolation and \"\" delimitor",
+      "comment": "string literal with interpolation and \"\" delimiter",
       "end": "\"",
       "endCaptures": {
         "0": {
@@ -1000,7 +1000,7 @@
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
-          "comment": "Cant be named because its not neccesarily an escape.",
+          "comment": "Cant be named because its not necessarily an escape.",
           "match": "\\\\."
         }
       ]

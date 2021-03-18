@@ -17,6 +17,9 @@
       "include": "#interface"
     },
     {
+      "include": "#namespace_declaration"
+    },
+    {
       "include": "#import"
     },
     {
@@ -181,6 +184,18 @@
           "include": "#object_literal"
         }
       ]
+    },
+    "namespace_declaration": {
+      "captures": {
+        "2": {
+          "name": "storage.modifier.actionscript.3"
+        },
+        "3": {
+          "name": "storage.modifier.actionscript.3"
+        }
+      },
+      "match": "(?x) ((\\w+)\\s+)? (namespace) \\s+ (?:[A-Za-z0-9_\\$]+)",
+      "name": "meta.namespace_declaration.actionscript.3"
     },
     "class_declaration": {
       "begin": "(?x) \\b(class)\\b \\s+ ([\\.\\w]+|\\*)",
@@ -603,6 +618,9 @@
           "include": "#class"
         },
         {
+          "include": "#namespace_declaration"
+        },
+        {
           "include": "#use_namespace"
         },
         {
@@ -782,6 +800,9 @@
         },
         {
           "include": "#interface"
+        },
+        {
+          "include": "#namespace_declaration"
         }
       ]
     },
