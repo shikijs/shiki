@@ -657,7 +657,7 @@
           "name": "keyword.other.verb.cobol"
         },
         "2": {
-          "name": "meta.symbol.cobol"
+          "name": "support.variable.cobol"
         }
       },
       "comment": "operator-id ssss "
@@ -867,25 +867,25 @@
       "match": "(\\()([0-9]*)(:)([0-9]*)(\\))",
       "captures": {
         "1": {
-          "name": "meta.symbol.cobol"
+          "name": "support.variable.cobol"
         },
         "2": {
           "name": "constant.numeric.integer"
         },
         "3": {
-          "name": "meta.symbol.cobol"
+          "name": "support.variable.cobol"
         },
         "4": {
           "name": "constant.numeric.integer"
         },
         "5": {
-          "name": "meta.symbol.cobol"
+          "name": "support.variable.cobol"
         }
       }
     },
     {
       "match": "([0-9a-zA-Z][a-zA-Z\\-0-9_]+)",
-      "name": "meta.symbol.cobol"
+      "name": "support.variable.cobol"
     }
   ],
   "scopeName": "source.cobol"
