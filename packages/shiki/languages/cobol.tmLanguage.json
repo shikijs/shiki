@@ -571,7 +571,7 @@
       "name": "keyword.identifiers.cobol"
     },
     {
-      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|method|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.\\s+|\\s+]([a-zA-Z0-9_]*)",
+      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|method|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.]*[\\s]+([a-zA-Z0-9_]*)",
       "captures": {
         "1": {
           "name": "keyword.verb.cobol"
@@ -657,7 +657,7 @@
           "name": "keyword.other.verb.cobol"
         },
         "2": {
-          "name": "support.variable.cobol"
+          "name": "meta.symbol.cobol"
         }
       },
       "comment": "operator-id ssss "
@@ -785,7 +785,7 @@
       "name": "keyword.operator.cobol"
     },
     {
-      "match": "(?i:not\\s+at\\s+end)",
+      "match": "(?i:not\\s+at\\s+end)(?![0-9A-Za-z_-])",
       "name": "keyword.verbs.cobol"
     },
     {
@@ -867,25 +867,25 @@
       "match": "(\\()([0-9]*)(:)([0-9]*)(\\))",
       "captures": {
         "1": {
-          "name": "support.variable.cobol"
+          "name": "meta.symbol.cobol"
         },
         "2": {
           "name": "constant.numeric.integer"
         },
         "3": {
-          "name": "support.variable.cobol"
+          "name": "meta.symbol.cobol"
         },
         "4": {
           "name": "constant.numeric.integer"
         },
         "5": {
-          "name": "support.variable.cobol"
+          "name": "meta.symbol.cobol"
         }
       }
     },
     {
       "match": "([0-9a-zA-Z][a-zA-Z\\-0-9_]+)",
-      "name": "support.variable.cobol"
+      "name": "meta.symbol.cobol"
     }
   ],
   "scopeName": "source.cobol"
