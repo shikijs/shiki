@@ -112,13 +112,19 @@ export function tokenizeWithTheme(
       continue
     }
 
-    let resultWithScopes = grammar.tokenizeLine(line, ruleStack)
-    let tokensWithScopes = resultWithScopes.tokens
+    let resultWithScopes
+    let tokensWithScopes
+    let tokensWithScopesIndex
+
+    if (options.includeExplanation) {
+      resultWithScopes = grammar.tokenizeLine(line, ruleStack)
+      tokensWithScopes = resultWithScopes.tokens
+      tokensWithScopesIndex = 0
+    }
 
     let result = grammar.tokenizeLine2(line, ruleStack)
 
     let tokensLength = result.tokens.length / 2
-    let tokensWithScopesIndex = 0
     for (let j = 0; j < tokensLength; j++) {
       let startIndex = result.tokens[2 * j]
       let nextStartIndex = j + 1 < tokensLength ? result.tokens[2 * j + 2] : line.length
