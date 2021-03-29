@@ -3,12 +3,13 @@ import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
 import { fetchTheme, toShikiTheme } from './loader'
 import { Theme } from './themes'
 import { Resolver } from './resolver'
+import { Lang } from './languages'
 
 export class Registry extends TextMateRegistry {
   public themesPath: string = 'themes/'
 
   private _resolvedThemes: Record<string, IShikiTheme> = {}
-  private _resolvedGammer: Record<string, IGrammar> = {}
+  private _resolvedGrammars: Record<string, IGrammar> = {}
 
   constructor(private _resolver: Resolver) {
     super(_resolver)
@@ -41,16 +42,20 @@ export class Registry extends TextMateRegistry {
     return await Promise.all(themes.map(theme => this.loadTheme(theme)))
   }
 
+  public getLoadedThemes() {
+    return Object.keys(this._resolvedThemes) as Theme[]
+  }
+
   public getGrammer(name: string) {
-    return this._resolvedGammer[name]
+    return this._resolvedGrammars[name]
   }
 
   public async loadLanguage(lang: ILanguageRegistration) {
     const g = await this.loadGrammar(lang.scopeName)
-    this._resolvedGammer[lang.id] = g
+    this._resolvedGrammars[lang.id] = g
     if (lang.aliases) {
       lang.aliases.forEach(la => {
-        this._resolvedGammer[la] = g
+        this._resolvedGrammars[la] = g
       })
     }
   }
@@ -62,5 +67,9 @@ export class Registry extends TextMateRegistry {
     for (const lang of langs) {
       await this.loadLanguage(lang)
     }
+  }
+
+  public getLoadedLanguages() {
+    return Object.keys(this._resolvedGrammars) as Lang[]
   }
 }

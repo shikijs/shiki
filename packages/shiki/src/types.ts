@@ -26,7 +26,10 @@ export interface Highlighter {
     theme?: StringLiteralUnion<Theme>
   ): string
   loadTheme(theme: IThemeRegistration): Promise<void>
-  loadLanguage(theme: ILanguageRegistration | Lang): Promise<void>
+  loadLanguage(lang: ILanguageRegistration | Lang): Promise<void>
+
+  getLoadedThemes(): Theme[]
+  getLoadedLanguages(): Lang[]
 
   getForegroundColor(theme?: StringLiteralUnion<Theme>): string
   getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
@@ -52,6 +55,7 @@ export type ILanguageRegistration = {
   id: string
   scopeName: string
   aliases?: string[]
+  samplePath?: string
 } & (
   | {
       path: string

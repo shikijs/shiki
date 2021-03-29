@@ -155,7 +155,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'c',
     scopeName: 'source.c',
-    path: 'c.tmLanguage.json'
+    path: 'c.tmLanguage.json',
+    samplePath: 'sample.c'
   },
   {
     id: 'clojure',
@@ -197,7 +198,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'css',
     scopeName: 'source.css',
-    path: 'css.tmLanguage.json'
+    path: 'css.tmLanguage.json',
+    samplePath: 'sample.css'
   },
   {
     id: 'd',
@@ -258,7 +260,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'go',
     scopeName: 'source.go',
-    path: 'go.tmLanguage.json'
+    path: 'go.tmLanguage.json',
+    samplePath: 'sample.go'
   },
   {
     id: 'graphql',
@@ -310,7 +313,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'html',
     scopeName: 'text.html.basic',
-    path: 'html.tmLanguage.json'
+    path: 'html.tmLanguage.json',
+    samplePath: 'sample.html'
   },
   {
     id: 'ini',
@@ -320,12 +324,14 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'java',
     scopeName: 'source.java',
-    path: 'java.tmLanguage.json'
+    path: 'java.tmLanguage.json',
+    samplePath: 'sample.java'
   },
   {
     id: 'javascript',
     scopeName: 'source.js',
     path: 'javascript.tmLanguage.json',
+    samplePath: 'sample.tsx',
     aliases: ['js']
   },
   {
@@ -497,6 +503,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'python',
     scopeName: 'source.python',
     path: 'python.tmLanguage.json',
+    samplePath: 'sample.py',
     aliases: ['py']
   },
   {
@@ -513,6 +520,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'ruby',
     scopeName: 'source.ruby',
     path: 'ruby.tmLanguage.json',
+    samplePath: 'sample.rb',
     aliases: ['rb']
   },
   {
@@ -596,17 +604,20 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'ts',
     scopeName: 'documentation.injection.ts',
-    path: 'ts.tmLanguage.json'
+    path: 'ts.tmLanguage.json',
+    samplePath: 'sample.tsx'
   },
   {
     id: 'tsx',
     scopeName: 'source.tsx',
-    path: 'tsx.tmLanguage.json'
+    path: 'tsx.tmLanguage.json',
+    samplePath: 'sample.tsx'
   },
   {
     id: 'typescript',
     scopeName: 'source.ts',
     path: 'typescript.tmLanguage.json',
+    samplePath: 'sample.tsx',
     aliases: ['ts']
   },
   {
