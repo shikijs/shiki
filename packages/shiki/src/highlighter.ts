@@ -108,6 +108,14 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     await _registry.loadLanguage(_lang)
   }
 
+  function getLoadedThemes() {
+    return _registry.getLoadedThemes()
+  }
+
+  function getLoadedLanguages() {
+    return _registry.getLoadedLanguages()
+  }
+
   function getBackgroundColor(theme?: StringLiteralUnion<Theme>) {
     const { _theme } = getTheme(theme)
     return _theme.bg
@@ -124,7 +132,9 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     loadTheme,
     loadLanguage,
     getBackgroundColor,
-    getForegroundColor
+    getForegroundColor,
+    getLoadedThemes,
+    getLoadedLanguages
   }
 }
 
