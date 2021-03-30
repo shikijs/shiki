@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const langDir = path.resolve(__dirname, '../packages/shiki/languages')
+const sampleDir = path.resolve(__dirname, '../packages/shiki/samples')
 const langPath = path.resolve(__dirname, '../packages/shiki/src/languages.ts')
 const readmePath = path.resolve(__dirname, '../docs/languages.md')
 
@@ -43,25 +44,31 @@ const excludeLanguages = [
 ]
 
 const langRegistrationContent = langIds
+  .filter(id => !excludeLanguages.includes(id))
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
     const grammar = JSON.parse(fs.readFileSync(grammarPath, 'utf-8'))
 
+    let regContent = `  {
+    id: '${id}',
+    scopeName: '${grammar.scopeName}',
+    path: '${id}.tmLanguage.json'`
+
+    if (fs.existsSync(path.resolve(sampleDir, `${id}.sample`))) {
+      regContent += `,
+    samplePath: '${id}.sample'`
+    }
+
     if (aliases[id]) {
       const aliasStr = aliases[id].map(a => `'` + a + `'`).join(', ')
-      return `  {
-    id: '${id}',
-    scopeName: '${grammar.scopeName}',
-    path: '${id}.tmLanguage.json',
-    aliases: [${aliasStr}]
-  }`
-    } else {
-      return `  {
-    id: '${id}',
-    scopeName: '${grammar.scopeName}',
-    path: '${id}.tmLanguage.json'
-  }`
+      regContent += `,
+    aliases: [${aliasStr}]`
     }
+
+    regContent += `
+  }`
+
+    return regContent
   })
   .join(',\n')
 
