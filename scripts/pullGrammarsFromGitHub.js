@@ -37,7 +37,6 @@ const languageSources = [
   'https://github.com/mathiasfrohlich/vscode-kotlin/blob/master/syntaxes/Kotlin.tmLanguage',
   'https://github.com/scala/vscode-scala-syntax/blob/master/syntaxes/Scala.tmLanguage.json',
   'https://github.com/pvl/abap.tmbundle/blob/master/Syntaxes/ABAP.tmLanguage',
-  'https://github.com/julia-vscode/julia-vscode/blob/master/syntaxes/julia.json',
   'https://github.com/sjhuangx/vscode-scheme/blob/master/syntaxes/scheme.tmLanguage',
   'https://github.com/arthwang/vsc-prolog/blob/master/syntaxes/prolog.swi.tmLanguage.json',
   'https://github.com/AdaCore/ada_language_server/blob/master/integration/vscode/ada/advanced/ada.tmLanguage.json',

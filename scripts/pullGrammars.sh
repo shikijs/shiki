@@ -10,6 +10,7 @@ if [ ! -d tmp/vscode ]; then
 else
   (cd tmp/vscode && git pull)
 fi
+
 cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 echo "> Done getting VS Code grammars"
 

@@ -14,7 +14,6 @@ export type Lang =
   | 'clojure'
   | 'cobol'
   | 'coffee'
-  | 'cpp.embedded.macro'
   | 'cpp'
   | 'crystal'
   | 'csharp'

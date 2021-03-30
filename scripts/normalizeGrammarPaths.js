@@ -4,7 +4,15 @@ const { GRAMMAR_FOLDER_PATH, normalizeGrammarFile } = require('./normalizeGramma
 
 const files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
 
-const toRemove = ['html-derivative', 'ignore', 'MagicRegExp', 'platform', 'sassdoc', 'searchResult']
+const toRemove = [
+  'html-derivative',
+  'ignore',
+  'MagicRegExp',
+  'platform',
+  'sassdoc',
+  'searchResult',
+  'log'
+]
 
 const specialNewNames = {
   'asp-vb-net': 'vb',

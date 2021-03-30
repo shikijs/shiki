@@ -37,7 +37,9 @@ const excludeLanguages = [
   // `jinja-html` instead
   'jinja',
   // `php` instead
-  'php-html'
+  'php-html',
+  // embedded by `cpp`
+  'cpp.embedded.macro'
 ]
 
 const langRegistrationContent = langIds
