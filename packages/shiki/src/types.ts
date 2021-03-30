@@ -28,7 +28,13 @@ export interface Highlighter {
   loadTheme(theme: IThemeRegistration): Promise<void>
   loadLanguage(lang: ILanguageRegistration | Lang): Promise<void>
 
+  /**
+   * Get all loaded themes
+   */
   getLoadedThemes(): Theme[]
+  /**
+   * Get all loaded languages
+   */
   getLoadedLanguages(): Lang[]
 
   getForegroundColor(theme?: StringLiteralUnion<Theme>): string
