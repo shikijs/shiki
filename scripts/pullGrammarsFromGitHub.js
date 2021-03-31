@@ -58,7 +58,7 @@ const languageSources = [
   'https://github.com/bbenoist/vscode-nix/blob/master/syntaxes/nix.tmLanguage',
   'https://github.com/elm-tooling/elm-language-client-vscode/blob/master/syntaxes/elm-syntax.json',
   'https://github.com/nwolverson/vscode-language-purescript/blob/master/syntaxes/purescript.json',
-  'https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/syntaxes/svelte.tmLanguage.json',
+  'https://github.com/sveltejs/language-tools/blob/master/packages/svelte-vscode/syntaxes/svelte.tmLanguage.src.yaml',
   'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json',
   'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json',
   'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json',
@@ -77,9 +77,17 @@ const languageSources = [
 async function go() {
   for (let l of languageSources) {
     const targetUrl = convertGHURLToDownloadURL(l)
-    const newFileName = l.endsWith('.json')
-      ? path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.json'
-      : path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + '.tmLanguage.plist'
+
+    const newFileSuffix =
+      l.endsWith('.yml') || l.endsWith('.yaml')
+        ? '.tmLanguage.yml'
+        : l.endsWith('.json')
+        ? '.tmLanguage.json'
+        : '.tmLanguage.plist'
+
+    const newFileName =
+      path.parse(url.parse(l).path).name.replace('.tmLanguage', '') + newFileSuffix
+
     let content
     try {
       content = await get(targetUrl)

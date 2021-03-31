@@ -90,6 +90,7 @@ export type Lang =
   | 'sql'
   | 'ssh-config'
   | 'stylus'
+  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
@@ -575,6 +576,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.stylus',
     path: 'stylus.tmLanguage.json',
     aliases: ['styl']
+  },
+  {
+    id: 'svelte',
+    scopeName: 'source.svelte',
+    path: 'svelte.tmLanguage.json'
   },
   {
     id: 'swift',

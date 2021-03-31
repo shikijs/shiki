@@ -103,6 +103,7 @@ export type Lang =
   | 'sql'
   | 'ssh-config'
   | 'stylus'
+  | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'

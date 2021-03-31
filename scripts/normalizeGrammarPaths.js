@@ -1,9 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 const { GRAMMAR_FOLDER_PATH, normalizeGrammarFile } = require('./normalizeGrammarFile')
+const yaml = require('js-yaml')
 
-const files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
-
+/**
+ * Remove these grammars
+ */
 const toRemove = [
   'html-derivative',
   'ignore',
@@ -11,7 +13,8 @@ const toRemove = [
   'platform',
   'sassdoc',
   'searchResult',
-  'log'
+  'log',
+  'cuda-cpp'
 ]
 
 const specialNewNames = {
@@ -46,8 +49,29 @@ const specialNewNames = {
   wenyan: '文言'
 }
 
+let files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
+
+/**
+ * Convert yml to json
+ */
+for (let f of files) {
+  if (f.split('.').pop() === 'yml') {
+    const fpath = path.resolve(GRAMMAR_FOLDER_PATH, f)
+    const newPath = path.resolve(GRAMMAR_FOLDER_PATH, f.replace(/yml$/, 'json'))
+    const newContent = yaml.load(fs.readFileSync(fpath, 'utf-8'))
+    fs.unlinkSync(fpath)
+    fs.writeFileSync(newPath, JSON.stringify(newContent, null, 2))
+    console.log(`rewrote yml at ${fpath} to json at ${newPath}`)
+  }
+}
+
+files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
+/**
+ * Remove unneeded grammars
+ */
 for (let f of files) {
   const [fbase] = f.split('.')
+
   if (toRemove.includes(fbase)) {
     const fpath = path.resolve(GRAMMAR_FOLDER_PATH, f)
     fs.unlinkSync(fpath)
