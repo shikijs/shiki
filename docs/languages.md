@@ -31,6 +31,7 @@ export type Lang =
   | 'crystal'
   | 'csharp'
   | 'css'
+  | 'cuda-c'
   | 'd'
   | 'dart'
   | 'diff'
