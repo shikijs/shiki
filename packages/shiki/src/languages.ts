@@ -18,7 +18,6 @@ export type Lang =
   | 'crystal'
   | 'csharp'
   | 'css'
-  | 'cuda-c'
   | 'd'
   | 'dart'
   | 'diff'
@@ -196,11 +195,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.css',
     path: 'css.tmLanguage.json',
     samplePath: 'css.sample'
-  },
-  {
-    id: 'cuda-c',
-    scopeName: 'source.cuda-cpp',
-    path: 'cuda-c.tmLanguage.json'
   },
   {
     id: 'd',
