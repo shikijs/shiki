@@ -1,16 +1,22 @@
 # shiki-languages
 
-Languages & grammars for Shiki.
-
-## Collections
+TextMate grammars for Shiki. Grammars are collected from two sources:
 
 - [VS Code](https://github.com/microsoft/vscode)
+- A [handpicked list](/scripts/pullGrammarsFromGitHub.js) from GitHub
 
-## Extras
+A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammars from the upstream sources.
 
-See [/scripts/pullGrammarsFromGitHub.js](/scripts/pullGrammarsFromGitHub.js)
+## Adding Grammar
 
-## Literal Values
+- Add your grammar to [/scripts/pullGrammarsFromGitHub.js](/scripts/pullGrammarsFromGitHub.js)
+- Run `yarn update:grammars`
+- In [/packages/shiki/samples/](/packages/shiki/samples/), add a code sample file `<id>.sample` for your language.
+  - Space indentation
+  - < 100 columns wide if possible
+  - Link to source in the last line, for example `# From https://poignant.guide/book/chapter-5.html`
+
+## All Languages
 
 ```ts
 export type Lang =
@@ -118,8 +124,3 @@ export type Lang =
   | 'yaml'
   | '文言'
 ```
-
-## Add
-
-- [/scripts/pullGrammarsFromGitHub.js](/scripts/pullGrammarsFromGitHub.js)
-- `yarn update:grammars`

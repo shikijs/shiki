@@ -95,8 +95,8 @@ ${langIds
 `
 
 const readmeSrc = fs.readFileSync(readmePath, 'utf-8')
-const newReadmeSrc = readmeSrc.replace(/## Literal Values\n\n```ts([^`]+)```/, (_match, langs) => {
-  return '## Literal Values\n\n```ts\n' + readmeReplaceContent + '```'
+const newReadmeSrc = readmeSrc.replace(/## All Languages\n\n```ts([^`]+)```/, (_match, langs) => {
+  return '## All Languages\n\n```ts\n' + readmeReplaceContent + '```'
 })
 
 fs.writeFileSync(readmePath, newReadmeSrc)
