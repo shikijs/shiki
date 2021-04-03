@@ -4,6 +4,7 @@ export type Lang =
   | 'abap'
   | 'actionscript-3'
   | 'ada'
+  | 'apache-conf'
   | 'apex'
   | 'apl'
   | 'applescript'
@@ -68,6 +69,8 @@ export type Lang =
   | 'md'
   | 'matlab'
   | 'mdx'
+  | 'nginx'
+  | 'nim'
   | 'nix'
   | 'objective-c'
   | 'objc'
@@ -92,6 +95,7 @@ export type Lang =
   | 'raku'
   | 'perl6'
   | 'razor'
+  | 'riscv-assembler'
   | 'ruby'
   | 'rb'
   | 'rust'
@@ -108,12 +112,14 @@ export type Lang =
   | 'sh'
   | 'zsh'
   | 'smalltalk'
+  | 'solidity'
   | 'sql'
   | 'ssh-config'
   | 'stylus'
   | 'styl'
   | 'svelte'
   | 'swift'
+  | 'systemverilog'
   | 'tcl'
   | 'toml'
   | 'tsx'
@@ -145,6 +151,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'ada',
     scopeName: 'source.ada',
     path: 'ada.tmLanguage.json'
+  },
+  {
+    id: 'apache-conf',
+    scopeName: 'source.apacheconf',
+    path: 'apache-conf.tmLanguage.json'
   },
   {
     id: 'apex',
@@ -266,6 +277,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     aliases: ['f#']
+  },
+  {
+    id: 'gherkin',
+    scopeName: 'text.gherkin.feature',
+    path: 'gherkin.tmLanguage.json'
   },
   {
     id: 'git-commit',
@@ -437,6 +453,16 @@ export const languages: ILanguageRegistration[] = [
     path: 'mdx.tmLanguage.json'
   },
   {
+    id: 'nginx',
+    scopeName: 'source.nginx',
+    path: 'nginx.tmLanguage.json'
+  },
+  {
+    id: 'nim',
+    scopeName: 'source.nim',
+    path: 'nim.tmLanguage.json'
+  },
+  {
     id: 'nix',
     scopeName: 'source.nix',
     path: 'nix.tmLanguage.json'
@@ -533,6 +559,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'razor.tmLanguage.json'
   },
   {
+    id: 'riscv-assembler',
+    scopeName: 'source.riscv',
+    path: 'riscv-assembler.tmLanguage.json'
+  },
+  {
     id: 'ruby',
     scopeName: 'source.ruby',
     path: 'ruby.tmLanguage.json',
@@ -587,6 +618,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'smalltalk.tmLanguage.json'
   },
   {
+    id: 'solidity',
+    scopeName: 'source.solidity',
+    path: 'solidity.tmLanguage.json'
+  },
+  {
     id: 'sql',
     scopeName: 'source.sql',
     path: 'sql.tmLanguage.json'
@@ -611,6 +647,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'swift',
     scopeName: 'source.swift',
     path: 'swift.tmLanguage.json'
+  },
+  {
+    id: 'systemverilog',
+    scopeName: 'source.systemverilog',
+    path: 'systemverilog.tmLanguage.json'
   },
   {
     id: 'tcl',
@@ -639,6 +680,16 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.asp.vb.net',
     path: 'vb.tmLanguage.json',
     aliases: ['cmd']
+  },
+  {
+    id: 'verilog',
+    scopeName: 'source.verilog',
+    path: 'verilog.tmLanguage.json'
+  },
+  {
+    id: 'vhdl',
+    scopeName: 'source.vhdl',
+    path: 'vhdl.tmLanguage.json'
   },
   {
     id: 'viml',
