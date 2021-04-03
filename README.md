@@ -63,7 +63,7 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 ## Contributing
 
 - [Add a theme](./docs/themes.md#add)
-- [Add a language grammar](./docs/languages.md#add)
+- [Add a language grammar](./docs/languages.md#adding-grammar)
 
 ## Credits
 
