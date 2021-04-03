@@ -279,11 +279,6 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['f#']
   },
   {
-    id: 'gherkin',
-    scopeName: 'text.gherkin.feature',
-    path: 'gherkin.tmLanguage.json'
-  },
-  {
     id: 'git-commit',
     scopeName: 'text.git-commit',
     path: 'git-commit.tmLanguage.json'
