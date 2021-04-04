@@ -1,7 +1,12 @@
-const https = require('https')
-const url = require('url')
+import { parse as plistParse } from 'fast-plist'
+import fs from 'fs'
+import https from 'https'
+import yaml from 'js-yaml'
+import kebabCase from 'lodash.kebabcase'
+import path from 'path'
+import url from 'url'
 
-async function get(url) {
+export async function get(url: string): Promise<string> {
   return new Promise((r, reject) => {
     https
       .get(url, res => {
@@ -26,14 +31,4 @@ async function get(url) {
         reject('get failed')
       })
   })
-}
-
-function convertGHURLToDownloadURL(ghURL) {
-  const oldPath = url.parse(ghURL).path
-  return 'https://raw.githubusercontent.com' + oldPath.replace('/blob/', '/')
-}
-
-module.exports = {
-  get,
-  convertGHURLToDownloadURL
 }

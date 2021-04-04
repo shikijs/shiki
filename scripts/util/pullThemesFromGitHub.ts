@@ -1,7 +1,7 @@
-const { get, convertGHURLToDownloadURL } = require('./download')
-const fs = require('fs')
-const url = require('url')
-const path = require('path')
+import { get, convertGHURLToDownloadURL } from './download'
+import fs from 'fs'
+import url from 'url'
+import path from 'path'
 
 const THEME_FOLDER_PATH = path.join(__dirname, '..', 'tmp/themes')
 

@@ -7,25 +7,29 @@ export type Lang =
   | 'apex'
   | 'applescript'
   | 'asm'
-  | 'asp-net-razor'
   | 'awk'
   | 'bat'
+  | 'batch'
   | 'c'
   | 'clojure'
+  | 'clj'
   | 'cobol'
   | 'coffee'
   | 'cpp'
   | 'crystal'
   | 'csharp'
+  | 'c#'
   | 'css'
   | 'd'
   | 'dart'
   | 'diff'
-  | 'dockerfile'
+  | 'docker'
   | 'elixir'
   | 'elm'
+  | 'erb'
   | 'erlang'
   | 'fsharp'
+  | 'f#'
   | 'git-commit'
   | 'git-rebase'
   | 'gnuplot'
@@ -35,14 +39,15 @@ export type Lang =
   | 'hack'
   | 'haml'
   | 'handlebars'
+  | 'hbs'
   | 'haskell'
   | 'hcl'
   | 'hlsl'
-  | 'html-ruby-erb'
   | 'html'
   | 'ini'
   | 'java'
   | 'javascript'
+  | 'js'
   | 'jinja-html'
   | 'json'
   | 'jsonc'
@@ -51,32 +56,43 @@ export type Lang =
   | 'julia'
   | 'kotlin'
   | 'latex'
+  | 'tex'
   | 'less'
   | 'lisp'
   | 'logo'
   | 'lua'
+  | 'make'
   | 'makefile'
   | 'markdown'
+  | 'md'
   | 'matlab'
   | 'mdx'
   | 'nix'
   | 'objective-c'
+  | 'objc'
+  | 'objective-cpp'
   | 'ocaml'
   | 'pascal'
   | 'perl'
-  | 'perl6'
   | 'php'
-  | 'pls'
+  | 'plsql'
   | 'postcss'
   | 'powershell'
+  | 'ps'
+  | 'ps1'
   | 'prolog'
   | 'pug'
+  | 'jade'
   | 'puppet'
   | 'purescript'
   | 'python'
+  | 'py'
   | 'r'
+  | 'raku'
+  | 'perl6'
   | 'razor'
   | 'ruby'
+  | 'rb'
   | 'rust'
   | 'sas'
   | 'sass'
@@ -84,26 +100,34 @@ export type Lang =
   | 'scheme'
   | 'scss'
   | 'shaderlab'
+  | 'shader'
   | 'shellscript'
+  | 'shell'
+  | 'bash'
+  | 'sh'
+  | 'zsh'
   | 'smalltalk'
   | 'sql'
   | 'ssh-config'
   | 'stylus'
+  | 'styl'
   | 'svelte'
   | 'swift'
   | 'tcl'
   | 'toml'
-  | 'ts'
   | 'tsx'
   | 'typescript'
+  | 'ts'
   | 'vb'
+  | 'cmd'
   | 'viml'
   | 'vue'
   | 'wasm'
+  | 'wenyan'
+  | '文言'
   | 'xml'
   | 'xsl'
   | 'yaml'
-  | '文言'
 
 export const languages: ILanguageRegistration[] = [
   {
@@ -135,11 +159,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: 'asm.tmLanguage.json'
-  },
-  {
-    id: 'asp-net-razor',
-    scopeName: 'text.aspnetcorerazor',
-    path: 'asp-net-razor.tmLanguage.json'
   },
   {
     id: 'awk',
@@ -212,9 +231,9 @@ export const languages: ILanguageRegistration[] = [
     path: 'diff.tmLanguage.json'
   },
   {
-    id: 'dockerfile',
+    id: 'docker',
     scopeName: 'source.dockerfile',
-    path: 'dockerfile.tmLanguage.json'
+    path: 'docker.tmLanguage.json'
   },
   {
     id: 'elixir',
@@ -225,6 +244,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'elm',
     scopeName: 'source.elm',
     path: 'elm.tmLanguage.json'
+  },
+  {
+    id: 'erb',
+    scopeName: 'text.html.erb',
+    path: 'erb.tmLanguage.json'
   },
   {
     id: 'erlang',
@@ -300,12 +324,6 @@ export const languages: ILanguageRegistration[] = [
     path: 'hlsl.tmLanguage.json'
   },
   {
-    id: 'html-ruby-erb',
-    scopeName: 'text.html.erb',
-    path: 'html-ruby-erb.tmLanguage.json',
-    aliases: ['erb']
-  },
-  {
     id: 'html',
     scopeName: 'text.html.basic',
     path: 'html.tmLanguage.json',
@@ -351,7 +369,7 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'jsx',
-    scopeName: 'documentation.injection.js.jsx',
+    scopeName: 'source.js.jsx',
     path: 'jsx.tmLanguage.json'
   },
   {
@@ -391,9 +409,10 @@ export const languages: ILanguageRegistration[] = [
     path: 'lua.tmLanguage.json'
   },
   {
-    id: 'makefile',
+    id: 'make',
     scopeName: 'source.makefile',
-    path: 'makefile.tmLanguage.json'
+    path: 'make.tmLanguage.json',
+    aliases: ['makefile']
   },
   {
     id: 'markdown',
@@ -418,9 +437,14 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'objective-c',
-    scopeName: 'source.objcpp',
+    scopeName: 'source.objc',
     path: 'objective-c.tmLanguage.json',
     aliases: ['objc']
+  },
+  {
+    id: 'objective-cpp',
+    scopeName: 'source.objcpp',
+    path: 'objective-cpp.tmLanguage.json'
   },
   {
     id: 'ocaml',
@@ -438,19 +462,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'perl.tmLanguage.json'
   },
   {
-    id: 'perl6',
-    scopeName: 'source.perl.6',
-    path: 'perl6.tmLanguage.json'
-  },
-  {
     id: 'php',
     scopeName: 'source.php',
     path: 'php.tmLanguage.json'
   },
   {
-    id: 'pls',
+    id: 'plsql',
     scopeName: 'source.plsql.oracle',
-    path: 'pls.tmLanguage.json'
+    path: 'plsql.tmLanguage.json'
   },
   {
     id: 'postcss',
@@ -497,8 +516,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'r.tmLanguage.json'
   },
   {
+    id: 'raku',
+    scopeName: 'source.perl.6',
+    path: 'raku.tmLanguage.json',
+    aliases: ['perl6']
+  },
+  {
     id: 'razor',
-    scopeName: 'text.html.cshtml',
+    scopeName: 'text.aspnetcorerazor',
     path: 'razor.tmLanguage.json'
   },
   {
@@ -592,11 +617,6 @@ export const languages: ILanguageRegistration[] = [
     path: 'toml.tmLanguage.json'
   },
   {
-    id: 'ts',
-    scopeName: 'documentation.injection.ts',
-    path: 'ts.tmLanguage.json'
-  },
-  {
     id: 'tsx',
     scopeName: 'source.tsx',
     path: 'tsx.tmLanguage.json',
@@ -630,6 +650,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'wasm.tmLanguage.json'
   },
   {
+    id: 'wenyan',
+    scopeName: 'source.wenyan',
+    path: 'wenyan.tmLanguage.json',
+    aliases: ['文言']
+  },
+  {
     id: 'xml',
     scopeName: 'text.xml',
     path: 'xml.tmLanguage.json'
@@ -643,11 +669,5 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: 'yaml.tmLanguage.json'
-  },
-  {
-    id: '文言',
-    scopeName: 'source.wenyan',
-    path: '文言.tmLanguage.json',
-    aliases: ['wenyan']
   }
 ]

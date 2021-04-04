@@ -1,9 +1,5 @@
 {
-  "fileTypes": [
-    "erb",
-    "rhtml",
-    "html.erb"
-  ],
+  "fileTypes": ["erb", "rhtml", "html.erb"],
   "injections": {
     "text.html.erb - (meta.embedded.block.erb | meta.embedded.line.erb | comment)": {
       "patterns": [
@@ -55,7 +51,7 @@
     }
   },
   "keyEquivalent": "^~H",
-  "name": "html-ruby-erb",
+  "name": "erb",
   "patterns": [
     {
       "include": "text.html.basic"

@@ -1528,6 +1528,11 @@
     jest-diff "^26.0.0"
     pretty-format "^26.0.0"
 
+"@types/js-yaml@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.0.tgz#d1a11688112091f2c711674df3a65ea2f47b5dfb"
+  integrity sha512-4vlpCM5KPCL5CfGmTbpjwVKbISRYhduEJvvUWsH5EB7QInhEj94XPZ3ts/9FPiLZFqYO0xoW4ZL8z2AabTGgJA==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -3021,10 +3026,23 @@ es6-promisify@^5.0.0:
   dependencies:
     es6-promise "^4.0.3"
 
+esbuild-register@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/esbuild-register/-/esbuild-register-2.3.0.tgz#c7c6e2cabdce0e7aa5f30be774302d3fc1ebd02e"
+  integrity sha512-uT3WXEQGAqzrI0SLy1Jz39BzIBiLWd5La9zFZ+FUSCPGqJbE+ZJHUTE8yHP1GVfyHKrrAFCZqLieaHkSprIRDQ==
+  dependencies:
+    esbuild "^0.9.2"
+    jsonc-parser "^3.0.0"
+
 esbuild@^0.8.16:
   version "0.8.22"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.22.tgz#d558dd8579eb824a10ca04daa7be712379cae759"
   integrity sha512-7cgcJwjff5pw6JLTpUyN3QZ6raOYamfvBt7ry0tyGZwZJ/W8mJrHuv+VC5rbNEO4Mz8s8ElmcavKc7R2g1HWow==
+
+esbuild@^0.9.2:
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.9.7.tgz#ea0d639cbe4b88ec25fbed4d6ff00c8d788ef70b"
+  integrity sha512-VtUf6aQ89VTmMLKrWHYG50uByMF4JQlVysb8dmg6cOgW8JnFCipmz7p+HNBl+RR3LLCuBxFGVauAe2wfnF9bLg==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -3047,6 +3065,14 @@ escodegen@^1.14.1:
     optionator "^0.8.1"
   optionalDependencies:
     source-map "~0.6.1"
+
+esno@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/esno/-/esno-0.5.0.tgz#49849227d5cecc29b0fc1705fc575721af8485b2"
+  integrity sha512-r0tsflar7RB918JCjTNyU2QWfgyH2jgfAzHK1tABr3A5y84ruS86JanVHc6wove/V5I98soLZbg8Foso1dqCMA==
+  dependencies:
+    esbuild "^0.9.2"
+    esbuild-register "^2.2.0"
 
 esprima@^4.0.0, esprima@^4.0.1:
   version "4.0.1"
@@ -4861,6 +4887,11 @@ json5@^2.1.0:
   integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
   dependencies:
     minimist "^1.2.5"
+
+jsonc-parser@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.0.0.tgz#abdd785701c7e7eaca8a9ec8cf070ca51a745a22"
+  integrity sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==
 
 jsonfile@^4.0.0:
   version "4.0.0"
