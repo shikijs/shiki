@@ -4,7 +4,7 @@ export type Lang =
   | 'abap'
   | 'actionscript-3'
   | 'ada'
-  | 'apache-conf'
+  | 'apache'
   | 'apex'
   | 'apl'
   | 'applescript'
@@ -32,6 +32,7 @@ export type Lang =
   | 'erlang'
   | 'fsharp'
   | 'f#'
+  | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
   | 'gnuplot'
@@ -95,7 +96,7 @@ export type Lang =
   | 'raku'
   | 'perl6'
   | 'razor'
-  | 'riscv-assembler'
+  | 'riscv'
   | 'ruby'
   | 'rb'
   | 'rust'
@@ -119,14 +120,17 @@ export type Lang =
   | 'styl'
   | 'svelte'
   | 'swift'
-  | 'systemverilog'
+  | 'system-verilog'
   | 'tcl'
   | 'toml'
   | 'tsx'
+  | 'twig'
   | 'typescript'
   | 'ts'
   | 'vb'
   | 'cmd'
+  | 'verilog'
+  | 'vhdl'
   | 'viml'
   | 'vue'
   | 'wasm'
@@ -153,9 +157,9 @@ export const languages: ILanguageRegistration[] = [
     path: 'ada.tmLanguage.json'
   },
   {
-    id: 'apache-conf',
+    id: 'apache',
     scopeName: 'source.apacheconf',
-    path: 'apache-conf.tmLanguage.json'
+    path: 'apache.tmLanguage.json'
   },
   {
     id: 'apex',
@@ -277,6 +281,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     aliases: ['f#']
+  },
+  {
+    id: 'gherkin',
+    scopeName: 'text.gherkin.feature',
+    path: 'gherkin.tmLanguage.json'
   },
   {
     id: 'git-commit',
@@ -554,9 +563,9 @@ export const languages: ILanguageRegistration[] = [
     path: 'razor.tmLanguage.json'
   },
   {
-    id: 'riscv-assembler',
+    id: 'riscv',
     scopeName: 'source.riscv',
-    path: 'riscv-assembler.tmLanguage.json'
+    path: 'riscv.tmLanguage.json'
   },
   {
     id: 'ruby',
@@ -644,9 +653,9 @@ export const languages: ILanguageRegistration[] = [
     path: 'swift.tmLanguage.json'
   },
   {
-    id: 'systemverilog',
+    id: 'system-verilog',
     scopeName: 'source.systemverilog',
-    path: 'systemverilog.tmLanguage.json'
+    path: 'system-verilog.tmLanguage.json'
   },
   {
     id: 'tcl',
@@ -663,6 +672,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.tsx',
     path: 'tsx.tmLanguage.json',
     samplePath: 'tsx.sample'
+  },
+  {
+    id: 'twig',
+    scopeName: 'text.html.twig',
+    path: 'twig.tmLanguage.json'
   },
   {
     id: 'typescript',

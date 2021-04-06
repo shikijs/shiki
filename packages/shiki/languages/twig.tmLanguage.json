@@ -4,7 +4,7 @@
   "foldingStartMarker": "(?x)\r\n        (<(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)\\b.*?>\r\n        |<!--(?!.*--\\s*>)\r\n        |^<!--\\ \\#tminclude\\ (?>.*?-->)$\r\n        |\\{%\\s+(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\r\n        )",
   "foldingStopMarker": "(?x)\r\n        (</(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)>\r\n        |^(?!.*?<!--).*?--\\s*>\r\n        |^<!--\\ end\\ tminclude\\ -->$\r\n        |\\{%\\s+end(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\r\n        )",
   "keyEquivalent": "^~T",
-  "name": "html-twig",
+  "name": "twig",
   "patterns": [
     {
       "begin": "(<)([a-zA-Z0-9:]++)(?=[^>]*></\\2>)",
