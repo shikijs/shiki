@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import json5 from 'json5'
 import { vscodeGrammarsToRemove, vscodeGrammarsToRename } from '../grammarSources'
+import chalk from 'chalk'
+import json5 from 'json5'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
@@ -15,7 +16,7 @@ for (let f of files) {
   if (vscodeGrammarsToRemove.includes(fName)) {
     const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
     fs.unlinkSync(fPath)
-    console.log(`removed ${fPath}`)
+    console.log(`${chalk.red('removed')} ${chalk.blue(fPath)}`)
   }
 }
 
@@ -32,7 +33,11 @@ for (let f of files) {
       vscodeGrammarsToRename[fName] + '.tmLanguage.json'
     )
     fs.renameSync(fPath, fNewPath)
-    console.log(`renamed ${f} to ${vscodeGrammarsToRename[fName]}.tmLanguage.json`)
+    console.log(
+      `${chalk.red('renamed')} ${chalk.blue(f)} to ${chalk.blue(
+        vscodeGrammarsToRename[fName] + '.tmLanguage.json'
+      )}`
+    )
   }
 }
 
@@ -55,7 +60,7 @@ export function normalizeGrammarFile(f: string) {
     if (parsedContent.name !== fName) {
       parsedContent.name = fName
       fs.writeFileSync(fPath, JSON.stringify(parsedContent, null, 2))
-      console.log(`normalized ${f}'s \`name\` as ${fName}`)
+      console.log(`${chalk.red('normalized')} ${f}'s \`name\` to ${chalk.yellow(fName)}`)
     }
     if (fNameWithoutSuffix !== fNameWithoutSuffix.toLowerCase()) {
       const fNewPath = path.resolve(
@@ -63,7 +68,7 @@ export function normalizeGrammarFile(f: string) {
         fNameWithoutSuffix.toLowerCase() + '.tmLanguage.json'
       )
       fs.renameSync(fPath, fNewPath)
-      console.log(`renamed ${f} as ${f.toLowerCase()}`)
+      console.log(`${chalk.red('renamed')} ${chalk.blue(f)} to ${chalk.blue(f.toLowerCase())}`)
     }
   }
 }

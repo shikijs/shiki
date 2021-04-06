@@ -4,6 +4,7 @@ import kebabCase from 'lodash.kebabcase'
 import path from 'path'
 import { githubThemeSources } from '../themeSources'
 import { convertGHURLToDownloadURL, get } from '../util/download'
+import chalk from 'chalk'
 
 const THEME_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/themes')
 
@@ -47,5 +48,5 @@ async function downloadThemeFromGH(urlOrNameWithUrl: string | [string, string]) 
     path.resolve(THEME_FOLDER_PATH, newFileName),
     JSON.stringify(contentObj, null, 2)
   )
-  console.log(`Downloaded theme: ${newFileName}`)
+  console.log(`Downloaded theme: ${chalk.blue(newFileName)}`)
 }

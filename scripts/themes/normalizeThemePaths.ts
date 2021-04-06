@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import json5 from 'json5'
-import kebabCase from 'lodash.kebabcase'
 import { vscodeThemesToRename, vscodeThemesToRemove } from '../themeSources'
+import chalk from 'chalk'
 
 const THEME_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/themes')
 
@@ -16,7 +16,7 @@ for (let f of files) {
   if (vscodeThemesToRemove.includes(fName)) {
     const fPath = path.resolve(THEME_FOLDER_PATH, f)
     fs.unlinkSync(fPath)
-    console.log(`removed ${fPath}`)
+    console.log(`${chalk.red('removed')} ${chalk.blue(fPath)}`)
   }
 }
 
@@ -30,7 +30,11 @@ for (let f of files) {
   if (vscodeThemesToRename[fName]) {
     const fNewPath = path.resolve(THEME_FOLDER_PATH, vscodeThemesToRename[fName] + '.json')
     fs.renameSync(fPath, fNewPath)
-    console.log(`renamed ${f} to ${vscodeThemesToRename[fName]}.json`)
+    console.log(
+      `${chalk.red('renamed')} ${chalk.blue(f)} to ${chalk.blue(
+        vscodeThemesToRename[fName] + '.json'
+      )}`
+    )
   }
 }
 
@@ -56,7 +60,7 @@ export function normalizeThemeFile(f: string) {
     if (!parsedContent.name || parsedContent.name !== fName) {
       parsedContent.name = fName
       fs.writeFileSync(fPath, JSON.stringify(parsedContent, null, 2))
-      console.log(`normalized ${f}'s \`name\` as ${fName}`)
+      console.log(`${chalk.red('normalized')} ${f}'s \`name\` to ${chalk.yellow(fName)}`)
     }
   }
 }

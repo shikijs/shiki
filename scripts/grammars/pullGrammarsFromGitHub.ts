@@ -6,6 +6,7 @@ import path from 'path'
 import { githubGrammarSources } from '../grammarSources'
 import { convertGHURLToDownloadURL, get } from '../util/download'
 import json5 from 'json5'
+import chalk from 'chalk'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
@@ -64,5 +65,5 @@ async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, string]
     path.resolve(GRAMMAR_FOLDER_PATH, newFileName),
     JSON.stringify(contentObj, null, 2)
   )
-  console.log(`Downloaded grammar: ${newFileName}`)
+  console.log(`Downloaded grammar: ${chalk.blue(newFileName)}`)
 }

@@ -2,6 +2,7 @@ import { get } from '../util/download'
 import fs from 'fs'
 import unzipper from 'unzipper'
 import { marketplaceThemeSources } from '../themeSources'
+import chalk from 'chalk'
 
 go()
 
@@ -34,7 +35,9 @@ async function go() {
         const fName = typeof match[0] === 'string' ? entry.path.split('/').pop() : match[0][0]
 
         entry.pipe(fs.createWriteStream(`tmp/themes/${fName}`))
-        console.log(`from ${extFullId} extracted ${fName}`)
+        console.log(
+          `${chalk.red('extracted')} ${chalk.blue(fName)} from ${chalk.yellow(extFullId)}`
+        )
       } else {
         entry.autodrain()
       }
