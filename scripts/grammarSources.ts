@@ -120,7 +120,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json'
   ],
   'https://github.com/MarioSchwalbe/vscode-gnuplot/blob/master/syntaxes/gnuplot.tmLanguage',
-  'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json'
+  'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json',
+  'https://github.com/kimmolinna/vscode-apl-language/blob/master/syntaxes/apl.tmLanguage.json'
 ]
 
 /**

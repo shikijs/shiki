@@ -25,6 +25,7 @@ export type Lang =
   | 'actionscript-3'
   | 'ada'
   | 'apex'
+  | 'apl'
   | 'applescript'
   | 'asm'
   | 'awk'
