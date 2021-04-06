@@ -121,7 +121,26 @@ export const githubGrammarSources: (string | [string, string])[] = [
   ],
   'https://github.com/MarioSchwalbe/vscode-gnuplot/blob/master/syntaxes/gnuplot.tmLanguage',
   'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json',
-  'https://github.com/kimmolinna/vscode-apl-language/blob/master/syntaxes/apl.tmLanguage.json'
+  'https://github.com/kimmolinna/vscode-apl-language/blob/master/syntaxes/apl.tmLanguage.json',
+  ['apache', 'https://github.com/colinta/ApacheConf.tmLanguage/blob/master/ApacheConf.tmLanguage'],
+  'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/verilog.tmLanguage',
+  [
+    'system-verilog',
+    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/systemverilog.tmLanguage'
+  ],
+  'https://github.com/jonasjj/awesome-vhdl/blob/master/syntaxes/vhdl.tmLanguage',
+  'https://github.com/juanfranblanco/vscode-solidity/blob/master/syntaxes/solidity.json',
+  [
+    'riscv',
+    'https://github.com/zhuanhao-wu/vscode-riscv-support/blob/master/syntaxes/riscv.tmLanguage'
+  ],
+  [
+    'gherkin',
+    'https://github.com/alexkrechik/VSCucumberAutoComplete/blob/master/gclient/syntaxes/feature.tmLanguage'
+  ],
+  'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/syntaxes/nginx.tmLanguage',
+  'https://github.com/pragmagic/vscode-nim/blob/master/syntaxes/nim.json',
+  ['twig', 'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage']
 ]
 
 /**

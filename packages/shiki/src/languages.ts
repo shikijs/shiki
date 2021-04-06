@@ -4,6 +4,7 @@ export type Lang =
   | 'abap'
   | 'actionscript-3'
   | 'ada'
+  | 'apache'
   | 'apex'
   | 'apl'
   | 'applescript'
@@ -26,7 +27,9 @@ export type Lang =
   | 'elm'
   | 'erb'
   | 'erlang'
-  | 'fsharp' | 'f#'
+  | 'fsharp'
+  | 'f#'
+  | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
   | 'gnuplot'
@@ -59,6 +62,8 @@ export type Lang =
   | 'markdown' | 'md'
   | 'matlab'
   | 'mdx'
+  | 'nginx'
+  | 'nim'
   | 'nix'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
@@ -77,7 +82,9 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
-  | 'ruby' | 'rb'
+  | 'riscv'
+  | 'ruby'
+  | 'rb'
   | 'rust'
   | 'sas'
   | 'sass'
@@ -87,16 +94,23 @@ export type Lang =
   | 'shaderlab' | 'shader'
   | 'shellscript' | 'shell' | 'bash' | 'sh' | 'zsh'
   | 'smalltalk'
+  | 'solidity'
   | 'sql'
   | 'ssh-config'
   | 'stylus' | 'styl'
   | 'svelte'
   | 'swift'
+  | 'system-verilog'
   | 'tcl'
   | 'toml'
   | 'tsx'
-  | 'typescript' | 'ts'
-  | 'vb' | 'cmd'
+  | 'twig'
+  | 'typescript'
+  | 'ts'
+  | 'vb'
+  | 'cmd'
+  | 'verilog'
+  | 'vhdl'
   | 'viml'
   | 'vue'
   | 'wasm'
@@ -120,6 +134,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'ada',
     scopeName: 'source.ada',
     path: 'ada.tmLanguage.json'
+  },
+  {
+    id: 'apache',
+    scopeName: 'source.apacheconf',
+    path: 'apache.tmLanguage.json'
   },
   {
     id: 'apex',
@@ -241,6 +260,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     aliases: ['f#']
+  },
+  {
+    id: 'gherkin',
+    scopeName: 'text.gherkin.feature',
+    path: 'gherkin.tmLanguage.json'
   },
   {
     id: 'git-commit',
@@ -412,6 +436,16 @@ export const languages: ILanguageRegistration[] = [
     path: 'mdx.tmLanguage.json'
   },
   {
+    id: 'nginx',
+    scopeName: 'source.nginx',
+    path: 'nginx.tmLanguage.json'
+  },
+  {
+    id: 'nim',
+    scopeName: 'source.nim',
+    path: 'nim.tmLanguage.json'
+  },
+  {
     id: 'nix',
     scopeName: 'source.nix',
     path: 'nix.tmLanguage.json'
@@ -508,6 +542,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'razor.tmLanguage.json'
   },
   {
+    id: 'riscv',
+    scopeName: 'source.riscv',
+    path: 'riscv.tmLanguage.json'
+  },
+  {
     id: 'ruby',
     scopeName: 'source.ruby',
     path: 'ruby.tmLanguage.json',
@@ -562,6 +601,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'smalltalk.tmLanguage.json'
   },
   {
+    id: 'solidity',
+    scopeName: 'source.solidity',
+    path: 'solidity.tmLanguage.json'
+  },
+  {
     id: 'sql',
     scopeName: 'source.sql',
     path: 'sql.tmLanguage.json'
@@ -588,6 +632,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'swift.tmLanguage.json'
   },
   {
+    id: 'system-verilog',
+    scopeName: 'source.systemverilog',
+    path: 'system-verilog.tmLanguage.json'
+  },
+  {
     id: 'tcl',
     scopeName: 'source.tcl',
     path: 'tcl.tmLanguage.json'
@@ -604,6 +653,11 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'tsx.sample'
   },
   {
+    id: 'twig',
+    scopeName: 'text.html.twig',
+    path: 'twig.tmLanguage.json'
+  },
+  {
     id: 'typescript',
     scopeName: 'source.ts',
     path: 'typescript.tmLanguage.json',
@@ -614,6 +668,16 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.asp.vb.net',
     path: 'vb.tmLanguage.json',
     aliases: ['cmd']
+  },
+  {
+    id: 'verilog',
+    scopeName: 'source.verilog',
+    path: 'verilog.tmLanguage.json'
+  },
+  {
+    id: 'vhdl',
+    scopeName: 'source.vhdl',
+    path: 'vhdl.tmLanguage.json'
   },
   {
     id: 'viml',

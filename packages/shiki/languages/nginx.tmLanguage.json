@@ -1,0 +1,179 @@
+{
+  "fileTypes": ["conf"],
+  "foldingStartMarker": "\\{\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "keyEquivalent": "^~N",
+  "name": "nginx",
+  "patterns": [
+    {
+      "match": "\\#.*",
+      "name": "comment"
+    },
+    {
+      "match": "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b",
+      "name": "constant.numeric"
+    },
+    {
+      "match": "\\b\\d+\\w+\\b",
+      "name": "constant.numeric"
+    },
+    {
+      "match": "\\{|\\}",
+      "name": "constant.character.brace"
+    },
+    {
+      "match": "\\;",
+      "name": "constant.character.end"
+    },
+    {
+      "match": "\\(|\\)",
+      "name": "constant.character.paren"
+    },
+    {
+      "match": "\\\"",
+      "name": "constant.character.quote"
+    },
+    {
+      "match": "\\\\.*\\ |\\~|\\~\\*|\\!\\~|\\!\\~\\*",
+      "name": "string.regexp"
+    },
+    {
+      "match": "\\\"(.*)\\\"",
+      "name": "string.quoted"
+    },
+    {
+      "match": "\\'(.*)\\'",
+      "name": "string.quoted"
+    },
+    {
+      "match": "\\b(events)\\b",
+      "name": "constant.language.module.events"
+    },
+    {
+      "match": "\\b^(http)\\b",
+      "name": "constant.language.module.http"
+    },
+    {
+      "match": "\\b(daemon|env|debug_points|error_log|log_not_found|include|lock_file|master_process|pid|ssl_engine|timer_resolution|types_hash_max_size|user|worker_cpu_affinity|worker_priority|worker_processes|worker_rlimit_core|worker_rlimit_nofile|worker_rlimit_sigpending|working_directory|try_files)\\b",
+      "name": "constant.language.directive.module.main"
+    },
+    {
+      "match": "\\b(accept_mutex|accept_mutex_delay|debug_connection|devpoll_changes|devpoll_events|epoll_events|kqueue_changes|kqueue_events|multi_accept|rtsig_signo|rtsig_overflow_events|rtsig_overflow_test|rtsig_overflow_threshold|use|worker_connections)\\b",
+      "name": "constant.language.directive.module.events"
+    },
+    {
+      "match": "\\b(alias|chunked_transfer_encoding|client_body_in_file_only|client_body_buffer_size|client_body_temp_path|client_body_timeout|client_header_buffer_size|client_header_timeout|client_max_body_size|default_type|error_page|index\\ |internal|keepalive_timeout|keepalive_requests|large_client_header_buffers|limit_except|limit_rate|listen|location|msie_padding|msie_refresh|optimize_server_names|port_in_redirect|recursive_error_pages|reset_timedout_connection|resolver|resolver_timeout|root|satisfy_any|send_timeout|sendfile|server|server_name|server_names_hash_max_size|server_names_hash_bucket_size|tcp_nodelay|tcp_nopush|types\\ |try_files)\\b",
+      "name": "constant.language.directive.module.http"
+    },
+    {
+      "match": "\\b(add_before_body|add_after_body|addition_types)\\b",
+      "name": "constant.language.module.http.addition"
+    },
+    {
+      "match": "\\b(allow|deny)\\b",
+      "name": "constant.language.module.http.access"
+    },
+    {
+      "match": "\\b(auth_basic|auth_basic_user_file)\\b",
+      "name": "constant.language.module.http.auth_basic"
+    },
+    {
+      "match": "\\b(auth_jwt|auth_jwt_header_set|auth_jwt_claim_set|auth_jwt_key_file)\\b",
+      "name": "constant.language.module.http.auth_jwt"
+    },
+    {
+      "match": "\\b(autoindex|autoindex_exact_size|autoindex_format|autoindex_localtime)\\b",
+      "name": "constant.language.module.http.autoindex"
+    },
+    {
+      "match": "\\b(ancient_browser|ancient_browser_value|modern_browser|modern_browser_value)\\b",
+      "name": "constant.language.module.http.browser"
+    },
+    {
+      "match": "\\b(charset|charset_map|override_charset|source_charset)\\b",
+      "name": "constant.language.module.http.charset"
+    },
+    {
+      "match": "\\b(empty_gif)\\b",
+      "name": "constant.language.module.http.empty_gif"
+    },
+    {
+      "match": "\\b(fastcgi_index|fastcgi_hide_header|fastcgi_ignore_client_abort|fastcgi_intercept_errors|fastcgi_param|fastcgi_pass|fastcgi_pass_header|fastcgi_read_timeout|fastcgi_redirect_errors|fa|stcgi_storefastcgi_store_access|fastcgi_buffers|fastcgi_buffers_size|fastcgi_temp_path|fastcgi_buffer_size|fastcgi_connect_timeout|fastcgi_send_timeout|fastcgi_split_path_info)\\b",
+      "name": "constant.language.module.http.fastcgi"
+    },
+    {
+      "match": "\\b(geo)\\b",
+      "name": "constant.language.module.http.geo"
+    },
+    {
+      "match": "\\b(gzip|gzip_buffers|gzip_comp_level|gzip_disable|gzip_http.version|gzip_min_length|gzip_proxied|gzip_types|gzip_vary)\\b",
+      "name": "constant.language.module.http.gzip"
+    },
+    {
+      "match": "\\b(add_header|expires|server_tokens)\\b",
+      "name": "constant.language.module.http.headers"
+    },
+    {
+      "match": "\\b(valid_referers)\\b",
+      "name": "constant.language.module.http.referer"
+    },
+    {
+      "match": "\\b(limit_zone|limit_conn)\\b",
+      "name": "constant.language.module.http.limit_zone"
+    },
+    {
+      "match": "\\b(limit_req|limit_req_log_level|limit_req_status|limit_req_zone)\\b",
+      "name": "constant.language.module.http.limit_req"
+    },
+    {
+      "match": "\\b(access_log|log_format)\\b",
+      "name": "constant.language.module.http.log"
+    },
+    {
+      "match": "\\b(map|map_hash_max_size|map_hash_bucket_size)\\b",
+      "name": "constant.language.module.http.map"
+    },
+    {
+      "match": "\\b(memcached_pass|memcached_connect_timeout|memcached_send_timeout|memcached_read_timeout|memcached_buffer_size|memcached_next_upstream)\\b",
+      "name": "constant.language.module.http.memcached"
+    },
+    {
+      "match": "\\b(proxy_buffer_size|proxy_buffering|proxy_buffers|proxy_busy_buffers_size|proxy_cache|proxy_cache_background_update|proxy_cache_bypass|proxy_cache_convert_head|proxy_cache_key|proxy_cache_lock|proxy_cache_lock_age|proxy_cache_lock_timeout|proxy_cache_max_range_offset|proxy_cache_methods|proxy_cache_min_uses|proxy_cache_path|proxy_cache_purge|proxy_cache_revalidate|proxy_cache_use_stale|proxy_cache_valid|proxy_connect_timeout|proxy_headers_hash_bucket_size|proxy_headers_hash_max_size|proxy_hide_header|proxy_http_version|proxy_ignore_client_abort|proxy_intercept_errors|proxy_max_temp_file_size|proxy_method|proxy_next_upstream|proxy_next_upstream_tries|proxy_next_upstream_timeout|proxy_pass|proxy_pass_header|proxy_pass_request_body|proxy_pass_request_headers|proxy_read_timeout|proxy_redirect|proxy_redirect_errors|proxy_send_lowat|proxy_send_timeout|proxy_set_body|proxy_set_header|proxy_store|proxy_store_access|proxy_temp_file_write_size|proxy_t|emp_pathproxy_upstream_fail_timeout|proxy_upstream_max_fails)\\b",
+      "name": "constant.language.module.http.proxy"
+    },
+    {
+      "match": "\\b(set_real_ip_from|real_ip_header|real_ip_recursive)\\b",
+      "name": "constant.language.module.http.realip"
+    },
+    {
+      "match": "\\b(break|if|return|reqrite|set|uninitialized_variable_warn)\\b",
+      "name": "constant.language.module.http.rewrite"
+    },
+    {
+      "match": "\\b(ssi|ssi_silent_errors|ssi_types|ssi_value_length)\\b",
+      "name": "constant.language.module.http.ssi"
+    },
+    {
+      "match": "\\b(ip_hash|upstream|server)\\b",
+      "name": "constant.language.module.http.upstream"
+    },
+    {
+      "match": "\\b(userid|userid_domain|userid_expires|userid_name|userid_p3p|userid_path|userid_service)\\b",
+      "name": "constant.language.module.http.userid"
+    },
+    {
+      "match": "\\b(uwsgi_bind|uwsgi_buffer_size|uwsgi_buffering|uwsgi_buffers|uwsgi_busy_buffers_size|uwsgi_cache|uwsgi_cache_background_update|uwsgi_cache_bypass|uwsgi_cache_key|uwsgi_cache_lock|uwsgi_cache_lock_age|uwsgi_cache_lock_timeout|uwsgi_cache_max_range_offset|uwsgi_cache_methods|uwsgi_cache_min_uses|uwsgi_cache_path|uwsgi_cache_purge|uwsgi_cache_revalidate|uwsgi_cache_use_stale|uwsgi_cache_valid|uwsgi_connect_timeout|uwsgi_force_ranges|uwsgi_hide_header|uwsgi_ignore_client_abort|uwsgi_ignore_headers|uwsgi_intercept_errors|uwsgi_limit_rate|uwsgi_max_temp_file_size|uwsgi_modifier1|uwsgi_modifier2|uwsgi_next_upstream|uwsgi_next_upstream_timeout|uwsgi_next_upstream_tries|uwsgi_no_cache|uwsgi_param|uwsgi_pass|uwsgi_pass_header|uwsgi_pass_request_body|uwsgi_pass_request_headers|uwsgi_read_timeout|uwsgi_request_buffering|uwsgi_send_timeout|uwsgi_ssl_certificate|uwsgi_ssl_certificate_key|uwsgi_ssl_ciphers|uwsgi_ssl_crl|uwsgi_ssl_name|uwsgi_ssl_password_file|uwsgi_ssl_protocols|uwsgi_ssl_server_name|uwsgi_ssl_session_reuse|uwsgi_ssl_trusted_certificate|uwsgi_ssl_verify|uwsgi_ssl_verify_depth|uwsgi_store|uwsgi_store_access|uwsgi_temp_file_write_size|uwsgi_temp_path)\\b",
+      "name": "constant.language.module.http.uwsgi"
+    },
+    {
+      "match": "\\b(ssl|ssl_buffer_size|ssl_certificate|ssl_certificate_key|ssl_ciphers|ssl_client_certificate|ssl_crl|ssl_dhparam|ssl_ecdh_curve|ssl_password_file|ssl_prefer_server_ciphers|ssl_protocols|ssl_session_cache|ssl_session_ticket_key|ssl_session_tickets|ssl_session_timeout|ssl_stapling|ssl_stapling_file|ssl_stapling_responder|ssl_stapling_verify|ssl_trusted_certificate|ssl_verify_client|ssl_verify_depth)\\b",
+      "name": "constant.language.directive.module.http"
+    },
+    {
+      "match": "\\$\\w+",
+      "name": "variable"
+    }
+  ],
+  "scopeName": "source.nginx",
+  "uuid": "0C04066A-12D2-43CA-8238-00A12CE4C12D"
+}
