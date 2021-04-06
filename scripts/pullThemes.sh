@@ -1,13 +1,27 @@
 # clean up
-rm -rf tmp
+rm -rf tmp/themes
 mkdir -p tmp/themes
 
+echo "> Getting VS Code themes"
+if [ ! -d tmp/vscode ]; then
+  git clone git@github.com:microsoft/vscode.git tmp/vscode --depth=1
+else
+  (cd tmp/vscode && git checkout . && git pull)
+fi
+cp tmp/vscode/extensions/theme-*/themes/*.json tmp/themes
+npx esno scripts/themes/normalizeVSCThemePaths.ts
+echo "> Done getting VS Code themes"
+
 echo "> Getting themes from GitHub"
-node scripts/pullThemesFromGitHub.js
+npx esno scripts/themes/pullThemesFromGitHub.ts
 echo "> Done getting themes from GitHub"
 
+echo "> Getting themes from VS Code marketplace"
+npx esno scripts/themes/pullThemesFromMarketplace.ts
+echo "> Done getting themes from VS Code marketplace"
+
 echo "> Normalizing themes"
-node scripts/normalizeThemePaths.js
+npx esno scripts/themes/normalizeThemePaths.ts
 echo "> Done normalizing themes"
 
 echo "> Copying themes"
@@ -15,7 +29,7 @@ cp tmp/themes/*.json packages/shiki/themes
 echo "> Done copying themes"
 
 echo "> Updating source files"
-node scripts/updateThemeSrc.js
+npx esno scripts/themes/updateThemeSrc.ts
 echo "> Done updating source files"
 
 echo "> All done"

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import json5 from 'json5'
 import { embeddedLanguagesToExclude, languageAliases } from '../grammarSources'
 
 const langDir = path.resolve(__dirname, '../../packages/shiki/languages')
@@ -14,7 +15,7 @@ const langRegistrationContent = langIds
   .filter(id => !embeddedLanguagesToExclude.includes(id))
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
-    const grammar = JSON.parse(fs.readFileSync(grammarPath, 'utf-8'))
+    const grammar = json5.parse(fs.readFileSync(grammarPath, 'utf-8'))
 
     let regContent = `  {
     id: '${id}',

@@ -5,11 +5,10 @@ import { vscodeGrammarsToRemove, vscodeGrammarsToRename } from '../grammarSource
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
-let files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
-
 /**
  * Remove unneeded grammars
  */
+let files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
 for (let f of files) {
   const fName = f.replace(/\.tmLanguage.json$/i, '')
 
@@ -20,11 +19,10 @@ for (let f of files) {
   }
 }
 
-files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
-
 /**
- * - Make sure each grammar's file name matches its `name` key
+ * Rename some grammars
  */
+files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
 for (let f of files) {
   const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
   const fName = f.replace(/\.tmLanguage.json$/i, '')
@@ -38,8 +36,10 @@ for (let f of files) {
   }
 }
 
+/**
+ * - Make sure each grammar's file name matches its `name` key
+ */
 files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
-
 for (let f of files) {
   normalizeGrammarFile(f)
 }

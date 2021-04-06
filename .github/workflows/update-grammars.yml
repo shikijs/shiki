@@ -30,38 +30,7 @@ jobs:
 
       - run: yarn install
 
-      - run: mkdir -p tmp/grammars
-
-      # Grammars in VS Code
-      - uses: actions/checkout@v2
-        with:
-          repository: microsoft/vscode
-          path: tmp/vscode
-
-      # Two html file will cause `cp` to fail
-      # Remove log.tmLanguage.json for now
-      - run: |
-          mv tmp/vscode/extensions/php/syntaxes/html.tmLanguage.json tmp/vscode/extensions/php/syntaxes/php-html.tmLanguage.json
-          cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
-
-          rm tmp/grammars/log.tmLanguage.json
-
-          ls tmp/grammars
-
-      # Grammars on GitHub
-      - run: node scripts/pullGrammarsFromGitHub.js
-
-      - name: Normalize paths
-        run: node scripts/normalizeGrammarPaths.js
-
-      - name: Move files
-        run: |
-          rm -rf packages/shiki/languages*
-          mkdir -p packages/shiki/languages
-          cp tmp/grammars/*.json packages/shiki/languages
-
-      - name: Update `languages` source
-        run: node scripts/updateLangSrc.js
+      - run: yarn run update:grammars
 
       - name: Build
         run: yarn build

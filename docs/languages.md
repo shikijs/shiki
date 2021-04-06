@@ -3,7 +3,7 @@
 TextMate grammars for Shiki. Grammars are collected from two sources:
 
 - [VS Code](https://github.com/microsoft/vscode)
-- A [handpicked list](/scripts/pullGrammarsFromGitHub.js) from GitHub
+- A [handpicked list](/scripts/grammarSources.ts) from GitHub
 
 A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammars from the upstream sources.
 

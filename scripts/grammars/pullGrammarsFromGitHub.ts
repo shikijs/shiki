@@ -3,9 +3,9 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 import kebabCase from 'lodash.kebabcase'
 import path from 'path'
-import url from 'url'
 import { githubGrammarSources } from '../grammarSources'
-import { get } from '../util/download'
+import { convertGHURLToDownloadURL, get } from '../util/download'
+import json5 from 'json5'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
@@ -17,10 +17,7 @@ async function go() {
 
 go()
 
-export async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, string]) {
-  /**
-   * Download and convert content to JS object
-   */
+async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, string]) {
   const ghUrl = typeof urlOrNameWithUrl === 'string' ? urlOrNameWithUrl : urlOrNameWithUrl[1]
   const targetUrl = convertGHURLToDownloadURL(ghUrl)
 
@@ -33,14 +30,14 @@ export async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, 
 
   let contentObj
   if (ghUrl.endsWith('.json')) {
-    contentObj = JSON.parse(content)
+    contentObj = json5.parse(content)
   } else if (ghUrl.endsWith('.plist')) {
     contentObj = plistParse(content)
   } else if (ghUrl.endsWith('.yml') || ghUrl.endsWith('.yaml')) {
     contentObj = yaml.load(content)
   } else {
     if (content[0] === '{') {
-      contentObj = JSON.parse(content)
+      contentObj = json5.parse(content)
     } else if (content[0] === '<') {
       contentObj = plistParse(content)
     } else {
@@ -67,10 +64,5 @@ export async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, 
     path.resolve(GRAMMAR_FOLDER_PATH, newFileName),
     JSON.stringify(contentObj, null, 2)
   )
-  console.log(`Downloaded ${newFileName}`)
-}
-
-export function convertGHURLToDownloadURL(ghURL) {
-  const oldPath = url.parse(ghURL).path
-  return 'https://raw.githubusercontent.com' + oldPath.replace('/blob/', '/')
+  console.log(`Downloaded grammar: ${newFileName}`)
 }

@@ -42,8 +42,8 @@ shiki
 </script>
 ```
 
-- [Themes](./docs/themes.md#literal-values)
-- [Languages](./docs/languages.md#literal-values)
+- [Themes](./docs/themes.md)
+- [Languages](./docs/languages.md)
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 

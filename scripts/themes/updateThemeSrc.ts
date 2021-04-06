@@ -1,9 +1,9 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-const themeDir = path.resolve(__dirname, '../packages/shiki/themes')
-const themePath = path.resolve(__dirname, '../packages/shiki/src/themes.ts')
-const readmePath = path.resolve(__dirname, '../docs/themes.md')
+const themeDir = path.resolve(__dirname, '../../packages/shiki/themes')
+const themePath = path.resolve(__dirname, '../../packages/shiki/src/themes.ts')
+const readmePath = path.resolve(__dirname, '../../docs/themes.md')
 
 const files = fs.readdirSync(themeDir)
 const themeIds = files.map(f => f.replace('.json', ''))
@@ -23,8 +23,8 @@ ${themeIds.map(id => `  | '${id}'`).join('\n')}
 `
 
 const readmeSrc = fs.readFileSync(readmePath, 'utf-8')
-const newReadmeSrc = readmeSrc.replace(/## Literal Values\n\n```ts([^`]+)```/, (_match, langs) => {
-  return '## Literal Values\n\n```ts\n' + readmeReplaceContent + '```'
+const newReadmeSrc = readmeSrc.replace(/## All Themes\n\n```ts([^`]+)```/, (_match, langs) => {
+  return '## All Themes\n\n```ts\n' + readmeReplaceContent + '```'
 })
 
 fs.writeFileSync(readmePath, newReadmeSrc)

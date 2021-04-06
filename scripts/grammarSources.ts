@@ -46,8 +46,8 @@ export const vscodeGrammarsToRename = {
  * - Add the URL to the end
  * - Run `yarn update:grammars`, examine the changes
  *
- * The grammar id is normalized from the `name` key on the grammar.
- * When the grammar provides an undesirable name, for example `x86 and x86_64 Assembly` at
+ * The grammar id is normalized from the `name` key of the grammar json file.
+ * When the grammar provides an undesirable name (or no `name` key), for example `x86 and x86_64 Assembly` at
  * https://github.com/13xforever/x86_64-assembly-vscode/blob/face834a56e416230c2d20939f9fa77c25344865/syntaxes/language-x86_64-assembly.tmLanguage#L13-L14,
  * provide an array like `['asm', '<url>']` to name the language `asm`
  */

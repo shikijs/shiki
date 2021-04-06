@@ -1,41 +1,21 @@
 # shiki-themes
 
-## Collections
+TextMate/vscode themes for Shiki. Themes are collected from three sources:
 
-- [vscode](https://github.com/Microsoft/vscode/tree/master/extensions)
-- [material](https://github.com/equinusocio/vsc-material-theme)
+- [VS Code](https://github.com/microsoft/vscode)
+- A [handpicked list](/scripts/themeSources.ts) from GitHub
+- A [handpicked list](/scripts/themeSources.ts) from VS Code marketplace
 
-## Good ones
+A [build script](/scripts/pullThemes.sh) runs every day to pull latest themes from the upstream sources.
 
-- [nord](https://github.com/arcticicestudio/nord-visual-studio-code)
-- [min](https://github.com/misolori/min-theme)
+## Adding Theme
 
-## Literal Values
+- Find your theme's repository
+- If it has a compiled JSON theme, add its link to `githubThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
+- If it has a precompilation step, add its link to `marketplaceThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
+- Run `yarn update:themes`
 
-```ts
-export type Theme =
-  | 'dark-plus'
-  | 'github-dark'
-  | 'github-light'
-  | 'light-plus'
-  | 'material-theme-darker'
-  | 'material-theme-default'
-  | 'material-theme-lighter'
-  | 'material-theme-ocean'
-  | 'material-theme-palenight'
-  | 'min-dark'
-  | 'min-light'
-  | 'monokai'
-  | 'nord'
-  | 'slack-theme-dark-mode'
-  | 'slack-theme-ochin'
-  | 'solarized-dark'
-  | 'solarized-light'
-```
-
-You can preview some of these themes on https://vscodethemes.com/.
-
-## Yours
+## Loading Theme
 
 ```js
 const shiki = require('shiki')
@@ -47,14 +27,27 @@ shiki.getHighlighter({
 })
 ```
 
-## Add
+## All Themes
 
-First, please open an issue to discuss including a new theme.
+```ts
+export type Theme =
+  | 'dark-plus'
+  | 'github-dark'
+  | 'github-light'
+  | 'light-plus'
+  | 'material-darker'
+  | 'material-default'
+  | 'material-lighter'
+  | 'material-ocean'
+  | 'material-palenight'
+  | 'min-dark'
+  | 'min-light'
+  | 'monokai'
+  | 'nord'
+  | 'slack-dark'
+  | 'slack-ochin'
+  | 'solarized-dark'
+  | 'solarized-light'
+```
 
-Here are the places you need to change:
-
-- [/scripts/pullThemesFromGitHub.js](/scripts/pullThemesFromGitHub.js)
-- `yarn update:themes`
-- [./src/index.ts](./src/index.ts)
-- [./src/types.ts](./src/types.ts)
-- [Literal Values](./README.md#literal-values)
+You can preview some of these themes on https://vscodethemes.com/.
