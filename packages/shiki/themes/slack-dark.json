@@ -55,7 +55,10 @@
   },
   "tokenColors": [
     {
-      "scope": ["meta.embedded", "source.groovy.embedded"],
+      "scope": [
+        "meta.embedded",
+        "source.groovy.embedded"
+      ],
       "settings": {
         "foreground": "#D4D4D4"
       }
@@ -91,7 +94,9 @@
       }
     },
     {
-      "scope": ["constant.numeric"],
+      "scope": [
+        "constant.numeric"
+      ],
       "settings": {
         "foreground": "#b5cea8"
       }
@@ -296,7 +301,9 @@
     },
     {
       "name": "Reset JavaScript string interpolation expression",
-      "scope": ["meta.template.expression"],
+      "scope": [
+        "meta.template.expression"
+      ],
       "settings": {
         "foreground": "#d4d4d4"
       }
@@ -352,7 +359,10 @@
       }
     },
     {
-      "scope": ["punctuation.section.embedded.begin.php", "punctuation.section.embedded.end.php"],
+      "scope": [
+        "punctuation.section.embedded.begin.php",
+        "punctuation.section.embedded.end.php"
+      ],
       "settings": {
         "foreground": "#569cd6"
       }
@@ -389,7 +399,11 @@
     },
     {
       "name": "Function declarations",
-      "scope": ["entity.name.function", "support.function", "support.constant.handlebars"],
+      "scope": [
+        "entity.name.function",
+        "support.function",
+        "support.constant.handlebars"
+      ],
       "settings": {
         "foreground": "#DCDCAA"
       }
@@ -467,7 +481,9 @@
     },
     {
       "name": "Object keys, TS grammar specific",
-      "scope": ["meta.object-literal.key"],
+      "scope": [
+        "meta.object-literal.key"
+      ],
       "settings": {
         "foreground": "#9CDCFE"
       }
@@ -514,7 +530,10 @@
       }
     },
     {
-      "scope": ["keyword.operator.or.regexp", "keyword.control.anchor.regexp"],
+      "scope": [
+        "keyword.operator.or.regexp",
+        "keyword.control.anchor.regexp"
+      ],
       "settings": {
         "foreground": "#DCDCAA"
       }
