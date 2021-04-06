@@ -46,7 +46,7 @@ jobs:
             git config user.email octref@gmail.com
             git status
             git add -A
-            git commit -m "Update grammars"
+            git commit -m "chore: update grammars"
             git push
           else
             echo "no changes"
