@@ -9,7 +9,7 @@ else
   (cd tmp/vscode && git checkout . && git pull)
 fi
 cp tmp/vscode/extensions/theme-*/themes/*.json tmp/themes
-npx esno scripts/themes/normalizeVSCThemePaths.ts
+npx esno scripts/themes/processVSCThemes.ts
 echo "> Done getting VS Code themes"
 
 echo "> Getting themes from GitHub"
