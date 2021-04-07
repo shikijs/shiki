@@ -4,9 +4,25 @@ import { IThemedToken } from './themedTokenizer'
 import { Theme } from './themes'
 
 export interface HighlighterOptions {
+  /**
+   * The theme to laod upfront.
+   */
   theme?: IThemeRegistration
-  langs?: (Lang | ILanguageRegistration)[]
+
+  /**
+   * A list of themes to load upfront.
+   *
+   * Default to: `['dark-plus', 'light-plus']`
+   */
   themes?: IThemeRegistration[]
+
+  /**
+   * A list of langauges to load upfront.
+   *
+   * Default to `['html', 'css', 'javascript']`
+   */
+  langs?: (Lang | ILanguageRegistration)[]
+
   /**
    * Paths for loading themes and langs. Relative to the package's root.
    */
@@ -14,31 +30,62 @@ export interface HighlighterOptions {
 }
 
 export interface Highlighter {
+  /**
+   * Convert code to HTML tokens.
+   * `lang` and `theme` must have been loaded.
+   */
+  codeToHtml(
+    code: string,
+    lang?: StringLiteralUnion<Lang>,
+    theme?: StringLiteralUnion<Theme>
+  ): string
+
+  /**
+   * Convert code to themed tokens for custom processing.
+   * `lang` and `theme` must have been loaded.
+   * You may customize the bundled HTML / SVG renderer or write your own
+   * renderer for another render target.
+   */
   codeToThemedTokens(
     code: string,
     lang?: StringLiteralUnion<Lang>,
     theme?: StringLiteralUnion<Theme>,
     options?: ThemedTokenizerOptions
   ): IThemedToken[][]
-  codeToHtml(
-    code: string,
-    lang?: StringLiteralUnion<Lang>,
-    theme?: StringLiteralUnion<Theme>
-  ): string
+
+  /**
+   * Get the loaded theme
+   */
   getTheme(theme: IThemeRegistration): IShikiTheme
+
+  /**
+   * Load a theme
+   */
   loadTheme(theme: IThemeRegistration): Promise<void>
+
+  /**
+   * Load a language
+   */
   loadLanguage(lang: ILanguageRegistration | Lang): Promise<void>
 
   /**
    * Get all loaded themes
    */
   getLoadedThemes(): Theme[]
+
   /**
    * Get all loaded languages
    */
   getLoadedLanguages(): Lang[]
 
+  /**
+   * Get the foreground color for theme. Can be used for CSS `color`.
+   */
   getForegroundColor(theme?: StringLiteralUnion<Theme>): string
+
+  /**
+   * Get the background color for theme. Can be used for CSS `background-color`.
+   */
   getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
 
   // codeToRawHtml?(code: string): string
@@ -52,6 +99,7 @@ export interface IHighlighterPaths {
    * @default 'themes/'
    */
   themes?: string
+
   /**
    * @default 'languages/'
    */
@@ -83,7 +131,7 @@ export interface IShikiTheme extends IRawTheme {
   name?: string
 
   /**
-   * tokenColors of the theme file
+   * @description tokenColors of the theme file
    */
   settings: IRawThemeSetting[]
 
@@ -103,23 +151,24 @@ export interface IShikiTheme extends IRawTheme {
   include?: string
 
   /**
-   * @private
-   * Make public with API to consume `colorMap`
+   * @private Make public with API to consume `colorMap`
+   *
    * @description color map of the theme file
    */
   colors?: Record<string, string>
 }
 
 /**
+ * type StringLiteralUnion<'foo'> = 'foo' | string
+ * This has auto completion whereas `'foo' | string` doesn't
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
- * Since `string | 'foo'` doesn't offer auto completion
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 
 export interface ThemedTokenizerOptions {
   /**
-   * Whether to include explanation of each token's matching scopes
-   * and why it's given its color. Default to false.
+   * Whether to include explanation of each token's matching scopes and
+   * why it's given its color. Default to false to reduce output verbosity.
    */
   includeExplanation?: boolean
 }
