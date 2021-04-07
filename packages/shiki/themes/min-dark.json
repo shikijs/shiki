@@ -110,20 +110,14 @@
       }
     },
     {
-      "scope": [
-        "strong",
-        "markup.heading.markdown",
-        "markup.bold.markdown"
-      ],
+      "scope": ["strong", "markup.heading.markdown", "markup.bold.markdown"],
       "settings": {
         "fontStyle": "bold",
         "foreground": "#FF7A84"
       }
     },
     {
-      "scope": [
-        "markup.italic.markdown"
-      ],
+      "scope": ["markup.italic.markdown"],
       "settings": {
         "fontStyle": "italic"
       }
@@ -136,19 +130,13 @@
       }
     },
     {
-      "scope": [
-        "string",
-        "markup.fenced_code",
-        "markup.inline"
-      ],
+      "scope": ["string", "markup.fenced_code", "markup.inline"],
       "settings": {
         "foreground": "#9db1c5"
       }
     },
     {
-      "scope": [
-        "comment"
-      ],
+      "scope": ["comment"],
       "settings": {
         "foreground": "#4e5761"
       }
@@ -266,9 +254,7 @@
     },
     {
       "name": "[Custom] Markdown list",
-      "scope": [
-        "beginning.punctuation.definition.list.markdown"
-      ],
+      "scope": ["beginning.punctuation.definition.list.markdown"],
       "settings": {
         "foreground": "#FF7A84"
       }

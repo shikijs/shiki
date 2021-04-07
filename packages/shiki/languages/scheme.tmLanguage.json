@@ -1,11 +1,6 @@
 {
   "comment": "\n\t\tThe foldings do not currently work the way I want them to. This\n\t\tmay be a limitation of the way they are applied rather than the\n\t\tregexps in use. Nonetheless, the foldings will end on the last\n\t\tidentically indented blank line following an s-expression. Not\n\t\tideal perhaps, but it works. Also, the #illegal pattern never\n\t\tmatches an unpaired ( as being illegal. Why?! -- Rob Rix\n\t\t\n\t\tOk, hopefully this grammar works better on quoted stuff now.  It\n\t\tmay break for fancy macros, but should generally work pretty\n\t\tsmoothly.  -- Jacob Rus\n\t\t\n\t\tI have attempted to get this under control but because of the way folding\n\t\tand indentation interact in Textmate, I am not sure if it is possible. In the\n\t\tmeantime, I have implemented Python-style folding anchored at newlines.\n\t\tAdditionally, I have made some minor improvements to the numeric constant\n\t\thighlighting. Next up is square bracket expressions, I guess, but that\n\t\tshould be trivial. -- ozy`\n\t",
-  "fileTypes": [
-    "scm",
-    "ss",
-    "sch",
-    "rkt"
-  ],
+  "fileTypes": ["scm", "ss", "sch", "rkt"],
   "keyEquivalent": "^~S",
   "name": "scheme",
   "patterns": [

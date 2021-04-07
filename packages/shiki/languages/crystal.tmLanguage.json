@@ -5,9 +5,7 @@
   "version": "https://github.com/Microsoft/vscode/blob/3f1f36333d3453f67a36b6bfb1206e9159e9c4f0/extensions/ruby/syntaxes/ruby.tmLanguage.json",
   "name": "crystal",
   "scopeName": "source.crystal",
-  "fileTypes": [
-    "cr"
-  ],
+  "fileTypes": ["cr"],
   "firstLineMatch": "^#!/.*\\bcrystal",
   "foldingStartMarker": "(?x)^(\\s*+(annotation|module|class|struct|union|enum|def(?!.*\\bend\\s*$)|unless|if|case|begin|for|while|until|^=begin|(\"(\\\\.|[^\"])*+\"|'(\\\\.|[^'])*+'|[^#\"'])*(\\s(do|begin|case)|(?<!\\$)[-+=&|*/~%^<>~]\\s*+(if|unless)))\\b(?![^;]*+;.*?\\bend\\b)|(\"(\\\\.|[^\"])*+\"|'(\\\\.|[^'])*+'|[^#\"'])*(\\{(?![^}]*+\\})|\\[(?![^\\]]*+\\]))).*$|[#].*?\\(fold\\)\\s*+$",
   "foldingStopMarker": "(?x)((^|;)\\s*+end\\s*+([#].*)?$|(^|;)\\s*+end\\..*$|^\\s*+[}\\]] ,?\\s*+([#].*)?$|[#].*?\\(end\\)\\s*+$|^=end)",
