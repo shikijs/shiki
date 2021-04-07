@@ -11,11 +11,11 @@ A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammar
 
 - Find grammar for a language by searching `<lang> textmate` on GitHub or searching `<lang>` on VS Code Marketplace
 - Add your grammar to [/scripts/grammarSources.ts](/scripts/grammarSources.ts)
-- Run `yarn update:grammars`
 - In [/packages/shiki/samples/](/packages/shiki/samples/), add a code sample file `<id>.sample` for your language. Format requirements:
   - Space for indentation
   - Less than 100 columns if possible
   - Link to source in the last line, for example `# From https://poignant.guide/book/chapter-5.html`
+- Run `yarn update:grammars`
 
 ## All Languages
 
