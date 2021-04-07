@@ -29,4 +29,8 @@ echo "> Updating source files"
 npx esno scripts/grammars/updateGrammarSourceFiles.ts
 echo "> Done updating source files"
 
+echo "> Formatting grammar files"
+npx prettier --write packages/shiki/languages/*
+echo "> Done formatting grammar files"
+
 echo "> All done"

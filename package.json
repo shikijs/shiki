@@ -6,7 +6,7 @@
   "scripts": {
     "build": "lerna run build --include-dependencies",
     "watch": "lerna run watch --parallel",
-    "fmt": "prettier --parser=typescript --write packages/**/*.ts",
+    "fmt": "prettier --write packages/**/*.ts",
     "test": "jest --colors --clearCache",
     "gen": "yarn workspace shiki-site gen",
     "release": "lerna publish",

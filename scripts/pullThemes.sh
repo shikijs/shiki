@@ -32,4 +32,8 @@ echo "> Updating source files"
 npx esno scripts/themes/updateThemeSrc.ts
 echo "> Done updating source files"
 
+echo "> Formatting theme files"
+npx prettier --write packages/shiki/themes/*
+echo "> Done formatting theme files"
+
 echo "> All done"
