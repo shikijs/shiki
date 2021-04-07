@@ -1,3 +1,4 @@
+import JSON5 from 'json5'
 import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
@@ -98,7 +99,7 @@ async function _fetchAssets(filepath: string): Promise<string> {
 }
 
 async function _fetchJSONAssets(filepath: string) {
-  return JSON.parse(await _fetchAssets(filepath))
+  return JSON5.parse(await _fetchAssets(filepath))
 }
 
 /**
@@ -113,25 +114,32 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
     const includedTheme = await fetchTheme(join(dirname(themePath), shikiTheme.include))
 
     if (includedTheme.settings) {
-      shikiTheme.settings = shikiTheme.settings.concat(includedTheme.settings)
+      shikiTheme.settings = includedTheme.settings.concat(shikiTheme.settings)
     }
 
     if (includedTheme.bg && !shikiTheme.bg) {
       shikiTheme.bg = includedTheme.bg
     }
+
+    if (includedTheme.colors) {
+      shikiTheme.colors = { ...includedTheme.colors, ...shikiTheme.colors }
+    }
+
+    delete shikiTheme.include
   }
 
   return shikiTheme
 }
 
 export async function fetchGrammar(filepath: string): Promise<IRawGrammar> {
-  const content = await _fetchAssets(filepath)
-  return JSON.parse(content)
+  return await _fetchJSONAssets(filepath)
 }
 
 export function repairTheme(theme: IShikiTheme) {
   // Has the default no-scope setting with fallback colors
-  if (theme.settings[0].settings && !theme.settings[0].scope) {
+  if (!theme.settings) theme.settings = []
+
+  if (theme.settings[0] && theme.settings[0].settings && !theme.settings[0].scope) {
     return
   }
 
@@ -155,6 +163,7 @@ export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
   }
   if ((<any>rawTheme).tokenColors) {
     shikiTheme.settings = (<any>rawTheme).tokenColors
+    delete (<any>shikiTheme).tokenColors
   }
 
   repairTheme(shikiTheme)

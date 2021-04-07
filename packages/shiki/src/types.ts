@@ -25,6 +25,7 @@ export interface Highlighter {
     lang?: StringLiteralUnion<Lang>,
     theme?: StringLiteralUnion<Theme>
   ): string
+  getTheme(theme: IThemeRegistration): IShikiTheme
   loadTheme(theme: IThemeRegistration): Promise<void>
   loadLanguage(lang: ILanguageRegistration | Lang): Promise<void>
 
@@ -100,6 +101,13 @@ export interface IShikiTheme extends IRawTheme {
    * @description relative path of included theme
    */
   include?: string
+
+  /**
+   * @private
+   * Make public with API to consume `colorMap`
+   * @description color map of the theme file
+   */
+  colors?: Record<string, string>
 }
 
 /**
