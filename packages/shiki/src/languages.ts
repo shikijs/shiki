@@ -93,6 +93,7 @@ export type Lang =
   | 'shellscript' | 'shell' | 'bash' | 'sh' | 'zsh'
   | 'smalltalk'
   | 'solidity'
+  | 'sparql'
   | 'sql'
   | 'ssh-config'
   | 'stylus' | 'styl'
@@ -102,6 +103,7 @@ export type Lang =
   | 'tcl'
   | 'toml'
   | 'tsx'
+  | 'turtle'
   | 'twig'
   | 'typescript' | 'ts'
   | 'vb' | 'cmd'
@@ -602,6 +604,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'solidity.tmLanguage.json'
   },
   {
+    id: 'sparql',
+    scopeName: 'source.sparql',
+    path: 'sparql.tmLanguage.json',
+    samplePath: 'sparql.sample'
+  },
+  {
     id: 'sql',
     scopeName: 'source.sql',
     path: 'sql.tmLanguage.json'
@@ -647,6 +655,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.tsx',
     path: 'tsx.tmLanguage.json',
     samplePath: 'tsx.sample'
+  },
+  {
+    id: 'turtle',
+    scopeName: 'source.turtle',
+    path: 'turtle.tmLanguage.json',
+    samplePath: 'turtle.sample'
   },
   {
     id: 'twig',

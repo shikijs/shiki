@@ -140,7 +140,12 @@ export const githubGrammarSources: (string | [string, string])[] = [
   ],
   'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/syntaxes/nginx.tmLanguage',
   'https://github.com/pragmagic/vscode-nim/blob/master/syntaxes/nim.json',
-  ['twig', 'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage']
+  [
+    'twig',
+    'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage'
+  ],
+  'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/turtle.tmLanguage.json',
+  'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json'
 ]
 
 /**
