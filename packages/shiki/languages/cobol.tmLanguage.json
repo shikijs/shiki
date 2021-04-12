@@ -113,13 +113,13 @@
       "name": "comment.line.cobol.fixed"
     },
     {
-      "match": "(?:^|\\s+)(?i:\\$\\s*set\\s+)(ilusing.*)$",
+      "match": "(?:^|\\s+)(?i:\\$\\s*set\\s+)(ilusing)(.*)$",
       "captures": {
         "0": {
           "name": "comment.line.set.cobol"
         },
         "1": {
-          "name": "keyword.control.import"
+          "name": "storage.modifier.import.cobol"
         },
         "2": {
           "name": "comment.line.set.cobol"
@@ -147,7 +147,7 @@
           "name": "comment.line.set.cobol"
         },
         "1": {
-          "name": "variable.cobol"
+          "name": "entity.other.attribute-name.set.cobol"
         },
         "2": {
           "name": "comment.line.set.cobol"
