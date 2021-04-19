@@ -43,10 +43,6 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   const _resolver = new Resolver(getOnigasm(), 'onigasm')
   const _registry = new Registry(_resolver)
 
-  const themes = await _registry.loadThemes(_themes)
-  const _defaultTheme = themes[0]
-  await _registry.loadLanguages(_languages)
-
   if (options.paths?.themes) {
     _registry.themesPath = options.paths.themes
   }
@@ -54,6 +50,10 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   if (options.paths?.languages) {
     _resolver.languagesPath = options.paths.languages
   }
+
+  const themes = await _registry.loadThemes(_themes)
+  const _defaultTheme = themes[0]
+  await _registry.loadLanguages(_languages)
 
   function getTheme(theme: IThemeRegistration) {
     const _theme = theme ? _registry.getTheme(theme) : _defaultTheme
