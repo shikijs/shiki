@@ -743,6 +743,49 @@
       ]
     },
     {
+      "begin": "(<)(style)\\b(?=[^>]*lang=(['\"]sss['\"]))(?![^/>]*/>\\s*$)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.html"
+        },
+        "2": {
+          "name": "entity.name.tag.style.html"
+        }
+      },
+      "end": "(</)(style)(>)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.html"
+        },
+        "2": {
+          "name": "entity.name.tag.style.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.html"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        },
+        {
+          "contentName": "source.css.sugarss",
+          "begin": "(>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.end.html"
+            }
+          },
+          "end": "(?=</style>)",
+          "patterns": [
+            {
+              "include": "source.css.sugarss"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "begin": "(<)(style)(?![^/>]*/>\\s*$)",
       "beginCaptures": {
         "1": {
