@@ -1312,7 +1312,7 @@
       "include": "#definition-label"
     },
     {
-      "begin": "((\\\\)verb[\\*]?)\\s*((\\\\)scantokens)(\\{)",
+      "begin": "((\\\\)[vV]erb[\\*]?)\\s*((\\\\)scantokens)(\\{)",
       "beginCaptures": {
         "1": {
           "name": "support.function.verb.latex"
@@ -1362,7 +1362,7 @@
           "name": "punctuation.definition.verb.latex"
         }
       },
-      "match": "((\\\\)verb[\\*]?)\\s*((?<=\\s)\\S|[^a-zA-Z])(.*?)(\\3|$)",
+      "match": "((\\\\)[vV]erb[\\*]?)\\s*((?<=\\s)\\S|[^a-zA-Z])(.*?)(\\3|$)",
       "name": "meta.function.verb.latex"
     },
     {
