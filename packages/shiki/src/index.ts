@@ -1,6 +1,8 @@
 export { themes as BUNDLED_THEMES, Theme } from './themes'
 export { languages as BUNDLED_LANGUAGES, Lang } from './languages'
 
+export { FontStyle } from './stackElementMetadata'
+
 export { getHighlighter } from './highlighter'
 export { renderToHtml, HtmlRendererOptions } from './renderer'
 export { IThemedToken } from './themedTokenizer'

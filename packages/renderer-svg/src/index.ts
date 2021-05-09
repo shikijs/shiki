@@ -1,5 +1,6 @@
 import type { IThemedToken } from 'shiki'
 import { measureMonospaceTypeface } from './measureMonospaceTypeface'
+import { FontStyle } from 'shiki'
 
 interface RemoteFontFamily {
   /**
@@ -119,7 +120,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
           let indent = 0
 
           l.forEach(token => {
-            const tokenAttributes = tokenColorToSVGAttributes(token.color)
+            const tokenAttributes = getTokenSVGAttributes(token)
             /**
              * SVG rendering in Sketch/Affinity Photos: `<tspan>` with leading whitespace will render without whitespace
              * Need to manually offset `x`
@@ -171,14 +172,36 @@ function escapeHtml(html: string) {
   return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
 }
 
-function tokenColorToSVGAttributes(color: string) {
-  if (color.slice(1).length <= 6) {
-    return `fill="${color}"`
-  } else if (color.slice(1).length === 8) {
-    const opacity = parseInt(color.slice(1 + 6), 16) / 255
-    const roughRoundedOpacity = Math.floor(opacity * 100) / 100
-    return `fill="${color.slice(0, 1 + 6)}" opacity="${roughRoundedOpacity}"`
+function getTokenSVGAttributes(token: IThemedToken) {
+  const options = {
+    fill: '#fff',
+    opacity: undefined,
+    'font-weight': undefined,
+    'font-style': undefined
   }
 
-  return `fill="#fff"`
+  if (token.color.slice(1).length <= 6) {
+    options.fill = token.color
+  } else if (token.color.slice(1).length === 8) {
+    const opacity = parseInt(token.color.slice(1 + 6), 16) / 255
+    const roughRoundedOpacity = Math.floor(opacity * 100) / 100
+    options.fill = token.color.slice(0, 1 + 6)
+    options.opacity = roughRoundedOpacity
+  }
+
+  if (token.fontStyle === FontStyle.Bold) {
+    options['font-weight'] = 'bold'
+  }
+  if (token.fontStyle === FontStyle.Italic) {
+    options['font-style'] = 'italic'
+  }
+
+  let attrStrs = []
+  for (let o in options) {
+    if (options[o]) {
+      attrStrs.push(`${o}="${options[o]}"`)
+    }
+  }
+
+  return attrStrs.join(' ')
 }
