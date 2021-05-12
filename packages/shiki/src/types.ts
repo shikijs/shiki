@@ -131,6 +131,11 @@ export interface IShikiTheme extends IRawTheme {
   name?: string
 
   /**
+   * @description light/dark theme
+   */
+  type: 'light' | 'dark'
+
+  /**
    * @description tokenColors of the theme file
    */
   settings: IRawThemeSetting[]
@@ -151,7 +156,6 @@ export interface IShikiTheme extends IRawTheme {
   include?: string
 
   /**
-   * @private Make public with API to consume `colorMap`
    *
    * @description color map of the theme file
    */
