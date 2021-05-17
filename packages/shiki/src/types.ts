@@ -56,7 +56,7 @@ export interface Highlighter {
   /**
    * Get the loaded theme
    */
-  getTheme(theme: IThemeRegistration): IShikiTheme
+  getTheme(theme?: IThemeRegistration): IShikiTheme
 
   /**
    * Load a theme

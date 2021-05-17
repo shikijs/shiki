@@ -56,7 +56,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   let _currentTheme: IShikiTheme | undefined
   await _registry.loadLanguages(_languages)
 
-  function getTheme(theme: IThemeRegistration) {
+  function getTheme(theme?: IThemeRegistration) {
     const _theme = theme ? _registry.getTheme(theme) : _defaultTheme
     if (!_theme) {
       throw Error(`No theme registration for ${theme}`)
