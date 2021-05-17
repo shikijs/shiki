@@ -153,7 +153,7 @@ export function repairTheme(theme: IShikiTheme) {
 }
 
 export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
-  const type = rawTheme.type || 'dark'
+  const type = (<any>rawTheme).type || 'dark'
 
   const shikiTheme: IShikiTheme = {
     type,
