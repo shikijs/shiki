@@ -5,7 +5,7 @@ import { Theme } from './themes'
 
 export interface HighlighterOptions {
   /**
-   * The theme to laod upfront.
+   * The theme to load upfront.
    */
   theme?: IThemeRegistration
 
@@ -17,7 +17,7 @@ export interface HighlighterOptions {
   themes?: IThemeRegistration[]
 
   /**
-   * A list of langauges to load upfront.
+   * A list of languages to load upfront.
    *
    * Default to `['html', 'css', 'javascript']`
    */
