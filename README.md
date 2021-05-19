@@ -59,6 +59,7 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 - [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 - [Fatih Kalifa's website](https://fatihkalifa.com/typescript-twoslash)
 - [Blockstack Documentation](https://docs.blockstack.org/)
+- [VPC Shiki](https://github.com/Vap0r1ze/vpc-shiki), Shiki codeblocks on Discord. Powered by [Powercord](http://powercord.dev/)
 
 ## Contributing
 
