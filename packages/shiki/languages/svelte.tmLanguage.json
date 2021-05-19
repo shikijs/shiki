@@ -930,7 +930,7 @@
       "name": "meta.$1.svelte",
       "patterns": [
         {
-          "begin": "\\G(?=\\s*(type|lang)\\s*=\\s*(['\"]|)(?:text/)?(\\w+)\\2)",
+          "begin": "\\G(?=\\s*[^>]*?(type|lang)\\s*=\\s*(['\"]|)(?:text/)?(\\w+)\\2)",
           "end": "(?=</|/>)",
           "name": "meta.lang.$3.svelte",
           "patterns": [

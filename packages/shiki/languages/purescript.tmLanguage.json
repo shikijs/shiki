@@ -35,7 +35,7 @@
     },
     {
       "name": "meta.declaration.module.purescript",
-      "begin": "\\b(module)(?!')\\b",
+      "begin": "^\\s*\\b(module)(?!')\\b",
       "end": "(where)",
       "beginCaptures": {
         "1": {
@@ -65,7 +65,7 @@
     },
     {
       "name": "meta.declaration.typeclass.purescript",
-      "begin": "\\b(class)(?!')\\b",
+      "begin": "^\\s*\\b(class)(?!')\\b",
       "end": "\\b(where)\\b|$",
       "beginCaptures": {
         "1": {
@@ -85,7 +85,7 @@
     },
     {
       "name": "meta.declaration.instance.purescript",
-      "begin": "\\b(else\\s+)?(instance)(?!')\\b",
+      "begin": "^\\s*\\b(else\\s+)?(derive\\s+)?(newtype\\s+)?(instance)(?!')\\b",
       "end": "\\b(where)\\b|$",
       "contentName": "meta.type-signature.purescript",
       "beginCaptures": {
@@ -93,6 +93,12 @@
           "name": "keyword.other.purescript"
         },
         "2": {
+          "name": "keyword.other.purescript"
+        },
+        "3": {
+          "name": "keyword.other.purescript"
+        },
+        "4": {
           "name": "keyword.other.purescript"
         }
       },
@@ -165,7 +171,7 @@
     },
     {
       "name": "meta.import.purescript",
-      "begin": "\\b(import)(?!')\\b",
+      "begin": "^\\s*\\b(import)(?!')\\b",
       "end": "($|(?=--))",
       "beginCaptures": {
         "1": {
@@ -291,7 +297,7 @@
     },
     {
       "name": "keyword.other.purescript",
-      "match": "\\b(derive|where|data|type|newtype|infix[lr]?|foreign)(?!')\\b"
+      "match": "^\\s*\\b(derive|where|data|type|newtype|infix[lr]?|foreign(\\s+import)?(\\s+data)?)(?!')\\b"
     },
     {
       "name": "entity.name.function.typed-hole.purescript",
@@ -299,11 +305,11 @@
     },
     {
       "name": "storage.type.purescript",
-      "match": "\\b(data|type|newtype)(?!')\\b"
+      "match": "^\\s*\\b(data|type|newtype)(?!')\\b"
     },
     {
       "name": "keyword.control.purescript",
-      "match": "\\b(do|ado|if|then|else|case|of|let|in)(?!')\\b"
+      "match": "\\b(do|ado|if|then|else|case|of|let|in)(?!('|\\s*(:|=)))\\b"
     },
     {
       "name": "constant.numeric.hex.purescript",
