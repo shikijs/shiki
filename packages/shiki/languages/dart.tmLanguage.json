@@ -1,14 +1,16 @@
 {
+  "name": "dart",
   "fileTypes": ["dart"],
+  "scopeName": "source.dart",
   "foldingStartMarker": "\\{\\s*$",
   "foldingStopMarker": "^\\s*\\}",
-  "name": "dart",
   "patterns": [
     {
-      "match": "^(#!.*)$",
-      "name": "meta.preprocessor.script.dart"
+      "name": "meta.preprocessor.script.dart",
+      "match": "^(#!.*)$"
     },
     {
+      "name": "meta.declaration.dart",
       "begin": "^\\w*\\b(library|import|part of|part|export)\\b",
       "beginCaptures": {
         "0": {
@@ -21,7 +23,6 @@
           "name": "punctuation.terminator.dart"
         }
       },
-      "name": "meta.declaration.dart",
       "patterns": [
         {
           "include": "#strings"
@@ -30,8 +31,8 @@
           "include": "#comments"
         },
         {
-          "match": "\\b(as|show|hide)\\b",
-          "name": "keyword.other.import.dart"
+          "name": "keyword.other.import.dart",
+          "match": "\\b(as|show|hide)\\b"
         }
       ]
     },
@@ -74,9 +75,9 @@
           }
         },
         {
+          "contentName": "variable.other.source.dart",
           "begin": "```.*?$",
-          "end": "```",
-          "contentName": "variable.other.source.dart"
+          "end": "```"
         },
         {
           "match": "(`.*?`)",
@@ -110,13 +111,13 @@
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.empty.dart",
+          "match": "/\\*\\*/",
           "captures": {
             "0": {
               "name": "punctuation.definition.comment.dart"
             }
-          },
-          "match": "/\\*\\*/",
-          "name": "comment.block.empty.dart"
+          }
         },
         {
           "include": "#comments-doc-oldschool"
@@ -132,9 +133,9 @@
     "comments-doc-oldschool": {
       "patterns": [
         {
+          "name": "comment.block.documentation.dart",
           "begin": "/\\*\\*",
           "end": "\\*/",
-          "name": "comment.block.documentation.dart",
           "patterns": [
             {
               "include": "#comments-doc-oldschool"
@@ -152,14 +153,14 @@
     "comments-doc": {
       "patterns": [
         {
+          "name": "comment.block.documentation.dart",
           "begin": "///",
           "while": "^\\s*///",
           "patterns": [
             {
               "include": "#dartdoc"
             }
-          ],
-          "name": "comment.block.documentation.dart"
+          ]
         }
       ]
     },
@@ -169,21 +170,21 @@
           "include": "#comments-block"
         },
         {
+          "match": "((//).*)$",
           "captures": {
             "1": {
               "name": "comment.line.double-slash.dart"
             }
-          },
-          "match": "((//).*)$"
+          }
         }
       ]
     },
     "comments-block": {
       "patterns": [
         {
+          "name": "comment.block.dart",
           "begin": "/\\*",
           "end": "\\*/",
-          "name": "comment.block.dart",
           "patterns": [
             {
               "include": "#comments-block"
@@ -195,28 +196,28 @@
     "annotations": {
       "patterns": [
         {
-          "match": "@[a-zA-Z]+",
-          "name": "storage.type.annotation.dart"
+          "name": "storage.type.annotation.dart",
+          "match": "@[a-zA-Z]+"
         }
       ]
     },
     "constants-and-special-vars": {
       "patterns": [
         {
-          "match": "(?<!\\$)\\b(true|false|null)\\b(?!\\$)",
-          "name": "constant.language.dart"
+          "name": "constant.language.dart",
+          "match": "(?<!\\$)\\b(true|false|null)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(this|super)\\b(?!\\$)",
-          "name": "variable.language.dart"
+          "name": "variable.language.dart",
+          "match": "(?<!\\$)\\b(this|super)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)",
-          "name": "constant.numeric.dart"
+          "name": "constant.numeric.dart",
+          "match": "(?<!\\$)\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)\\b(?!\\$)"
         },
         {
-          "match": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*|bool\\b|num\\b|int\\b|double\\b|dynamic\\b)",
-          "name": "support.class.dart"
+          "name": "support.class.dart",
+          "match": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*|bool\\b|num\\b|int\\b|double\\b|dynamic\\b)"
         },
         {
           "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<|\\(|\\s+=>)",
@@ -231,90 +232,91 @@
     "keywords": {
       "patterns": [
         {
-          "match": "(?<!\\$)\\bas\\b(?!\\$)",
-          "name": "keyword.cast.dart"
+          "name": "keyword.cast.dart",
+          "match": "(?<!\\$)\\bas\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(try|on|catch|finally|throw|rethrow)\\b(?!\\$)",
-          "name": "keyword.control.catch-exception.dart"
+          "name": "keyword.control.catch-exception.dart",
+          "match": "(?<!\\$)\\b(try|on|catch|finally|throw|rethrow)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while)\\b(?!\\$)",
-          "name": "keyword.control.dart"
+          "name": "keyword.control.dart",
+          "match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(sync(\\*)?|async(\\*)?|await|yield(\\*)?)\\b(?!\\$)",
-          "name": "keyword.control.dart"
+          "name": "keyword.control.dart",
+          "match": "(?<!\\$)\\b(sync(\\*)?|async(\\*)?|await|yield(\\*)?)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\bassert\\b(?!\\$)",
-          "name": "keyword.control.dart"
+          "name": "keyword.control.dart",
+          "match": "(?<!\\$)\\bassert\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(new)\\b(?!\\$)",
-          "name": "keyword.control.new.dart"
+          "name": "keyword.control.new.dart",
+          "match": "(?<!\\$)\\b(new)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get|mixin|native|operator|set|typedef|with|covariant)\\b(?!\\$)",
-          "name": "keyword.declaration.dart"
+          "name": "keyword.declaration.dart",
+          "match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get|mixin|native|operator|set|typedef|with|covariant)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(is\\!?)\\b(?!\\$)",
-          "name": "keyword.operator.dart"
+          "name": "keyword.operator.dart",
+          "match": "(?<!\\$)\\b(is\\!?)\\b(?!\\$)"
         },
         {
-          "match": "\\?|:",
-          "name": "keyword.operator.ternary.dart"
+          "name": "keyword.operator.ternary.dart",
+          "match": "\\?|:"
         },
         {
-          "match": "(<<|>>>?|~|\\^|\\||&)",
-          "name": "keyword.operator.bitwise.dart"
+          "name": "keyword.operator.bitwise.dart",
+          "match": "(<<|>>>?|~|\\^|\\||&)"
         },
         {
-          "match": "((&|\\^|\\||<<|>>>?)=)",
-          "name": "keyword.operator.assignment.bitwise.dart"
+          "name": "keyword.operator.assignment.bitwise.dart",
+          "match": "((&|\\^|\\||<<|>>>?)=)"
         },
         {
-          "match": "(=>)",
-          "name": "keyword.operator.closure.dart"
+          "name": "keyword.operator.closure.dart",
+          "match": "(=>)"
         },
         {
-          "match": "(==|!=|<=?|>=?)",
-          "name": "keyword.operator.comparison.dart"
+          "name": "keyword.operator.comparison.dart",
+          "match": "(==|!=|<=?|>=?)"
         },
         {
-          "match": "(([+*/%-]|\\~)=)",
-          "name": "keyword.operator.assignment.arithmetic.dart"
+          "name": "keyword.operator.assignment.arithmetic.dart",
+          "match": "(([+*/%-]|\\~)=)"
         },
         {
-          "match": "(=)",
-          "name": "keyword.operator.assignment.dart"
+          "name": "keyword.operator.assignment.dart",
+          "match": "(=)"
         },
         {
-          "match": "(\\-\\-|\\+\\+)",
-          "name": "keyword.operator.increment-decrement.dart"
+          "name": "keyword.operator.increment-decrement.dart",
+          "match": "(\\-\\-|\\+\\+)"
         },
         {
-          "match": "(\\-|\\+|\\*|\\/|\\~\\/|%)",
-          "name": "keyword.operator.arithmetic.dart"
+          "name": "keyword.operator.arithmetic.dart",
+          "match": "(\\-|\\+|\\*|\\/|\\~\\/|%)"
         },
         {
-          "match": "(!|&&|\\|\\|)",
-          "name": "keyword.operator.logical.dart"
+          "name": "keyword.operator.logical.dart",
+          "match": "(!|&&|\\|\\|)"
         },
         {
-          "match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)",
-          "name": "storage.modifier.dart"
+          "name": "storage.modifier.dart",
+          "match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)"
         },
         {
-          "match": "(?<!\\$)\\b(?:void|var)\\b(?!\\$)",
-          "name": "storage.type.primitive.dart"
+          "name": "storage.type.primitive.dart",
+          "match": "(?<!\\$)\\b(?:void|var)\\b(?!\\$)"
         }
       ]
     },
     "string-interp": {
       "patterns": [
         {
+          "match": "\\$(([a-zA-Z0-9_]+)|\\{([^{}]+)\\})",
           "captures": {
             "2": {
               "name": "variable.parameter.dart"
@@ -322,21 +324,20 @@
             "3": {
               "name": "variable.parameter.dart"
             }
-          },
-          "match": "\\$(([a-zA-Z0-9_]+)|\\{([^{}]+)\\})"
+          }
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.dart"
+          "name": "constant.character.escape.dart",
+          "match": "\\\\."
         }
       ]
     },
     "strings": {
       "patterns": [
         {
+          "name": "string.interpolated.triple.double.dart",
           "begin": "(?<!r)\"\"\"",
           "end": "\"\"\"(?!\")",
-          "name": "string.interpolated.triple.double.dart",
           "patterns": [
             {
               "include": "#string-interp"
@@ -344,9 +345,9 @@
           ]
         },
         {
+          "name": "string.interpolated.triple.single.dart",
           "begin": "(?<!r)'''",
           "end": "'''(?!')",
-          "name": "string.interpolated.triple.single.dart",
           "patterns": [
             {
               "include": "#string-interp"
@@ -354,23 +355,23 @@
           ]
         },
         {
+          "name": "string.quoted.triple.double.dart",
           "begin": "r\"\"\"",
-          "end": "\"\"\"(?!\")",
-          "name": "string.quoted.triple.double.dart"
+          "end": "\"\"\"(?!\")"
         },
         {
+          "name": "string.quoted.triple.single.dart",
           "begin": "r'''",
-          "end": "'''(?!')",
-          "name": "string.quoted.triple.single.dart"
+          "end": "'''(?!')"
         },
         {
+          "name": "string.interpolated.double.dart",
           "begin": "(?<!\\|r)\"",
           "end": "\"",
-          "name": "string.interpolated.double.dart",
           "patterns": [
             {
-              "match": "\\n",
-              "name": "invalid.string.newline"
+              "name": "invalid.string.newline",
+              "match": "\\n"
             },
             {
               "include": "#string-interp"
@@ -378,24 +379,24 @@
           ]
         },
         {
+          "name": "string.quoted.double.dart",
           "begin": "r\"",
           "end": "\"",
-          "name": "string.quoted.double.dart",
           "patterns": [
             {
-              "match": "\\n",
-              "name": "invalid.string.newline"
+              "name": "invalid.string.newline",
+              "match": "\\n"
             }
           ]
         },
         {
+          "name": "string.interpolated.single.dart",
           "begin": "(?<!\\|r)'",
           "end": "'",
-          "name": "string.interpolated.single.dart",
           "patterns": [
             {
-              "match": "\\n",
-              "name": "invalid.string.newline"
+              "name": "invalid.string.newline",
+              "match": "\\n"
             },
             {
               "include": "#string-interp"
@@ -403,13 +404,13 @@
           ]
         },
         {
+          "name": "string.quoted.single.dart",
           "begin": "r'",
           "end": "'",
-          "name": "string.quoted.single.dart",
           "patterns": [
             {
-              "match": "\\n",
-              "name": "invalid.string.newline"
+              "name": "invalid.string.newline",
+              "match": "\\n"
             }
           ]
         }
@@ -418,19 +419,18 @@
     "punctuation": {
       "patterns": [
         {
-          "match": ",",
-          "name": "punctuation.comma.dart"
+          "name": "punctuation.comma.dart",
+          "match": ","
         },
         {
-          "match": ";",
-          "name": "punctuation.terminator.dart"
+          "name": "punctuation.terminator.dart",
+          "match": ";"
         },
         {
-          "match": "\\.",
-          "name": "punctuation.dot.dart"
+          "name": "punctuation.dot.dart",
+          "match": "\\."
         }
       ]
     }
-  },
-  "scopeName": "source.dart"
+  }
 }
