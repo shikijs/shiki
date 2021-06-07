@@ -274,6 +274,25 @@
           "end": "(\\\\end\\{minted\\})"
         },
         {
+          "begin": "(\\\\begin\\{minted\\}(?:\\[.*\\])?\\{(julia)\\})",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "include": "#env-mandatory-arg"
+                }
+              ]
+            }
+          },
+          "contentName": "source.julia",
+          "patterns": [
+            {
+              "include": "source.julia"
+            }
+          ],
+          "end": "(\\\\end\\{minted\\})"
+        },
+        {
           "begin": "(\\\\begin\\{minted\\}(?:\\[.*\\])?\\{(ruby)\\})",
           "captures": {
             "1": {
@@ -403,6 +422,25 @@
       "patterns": [
         {
           "include": "source.lua"
+        }
+      ],
+      "end": "(\\\\end\\{\\2\\}(?:\\s*\\n)?)"
+    },
+    {
+      "begin": "((?:\\s*)\\\\begin\\{((?:julia|jl)code(?:\\*)?)\\}(?:\\[.*\\])?)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#code-env"
+            }
+          ]
+        }
+      },
+      "contentName": "source.julia",
+      "patterns": [
+        {
+          "include": "source.julia"
         }
       ],
       "end": "(\\\\end\\{\\2\\}(?:\\s*\\n)?)"
@@ -1490,6 +1528,53 @@
         }
       },
       "match": "((\\\\)(?:py|pycon|pylab|pylabcon|sympy|sympycon)[cv]?)((?:\\[[^\\[]*?\\])?)(?:(?:([^a-zA-Z\\{])(.*?)(\\4))|(?:(\\{)(.*?)(\\})))",
+      "name": "meta.function.verb.latex"
+    },
+    {
+      "captures": {
+        "1": {
+          "name": "support.function.verb.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#optional-arg"
+            }
+          ]
+        },
+        "4": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "5": {
+          "name": "source.julia",
+          "patterns": [
+            {
+              "include": "source.julia"
+            }
+          ]
+        },
+        "6": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "7": {
+          "name": "punctuation.definition.verb.latex"
+        },
+        "8": {
+          "name": "source.julia",
+          "patterns": [
+            {
+              "include": "source.julia"
+            }
+          ]
+        },
+        "9": {
+          "name": "punctuation.definition.verb.latex"
+        }
+      },
+      "match": "((\\\\)(?:jl|julia)[cv]?)((?:\\[[^\\[]*?\\])?)(?:(?:([^a-zA-Z\\{])(.*?)(\\4))|(?:(\\{)(.*?)(\\})))",
       "name": "meta.function.verb.latex"
     },
     {
