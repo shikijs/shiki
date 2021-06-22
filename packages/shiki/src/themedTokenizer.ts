@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 'use strict'
 
-import { IGrammar, StackElement, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
+import { IGrammar, INITIAL, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
 import { FontStyle, StackElementMetadata } from './stackElementMetadata'
 
 export interface IThemedTokenScopeExplanation {
@@ -100,7 +100,7 @@ export function tokenizeWithTheme(
 ): IThemedToken[][] {
   let lines = fileContents.split(/\r\n|\r|\n/)
 
-  let ruleStack: StackElement = null
+  let ruleStack = INITIAL
   let actual: IThemedToken[] = []
   let final: IThemedToken[][] = []
 
