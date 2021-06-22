@@ -1,5 +1,5 @@
 import JSON5 from 'json5'
-import { loadWASM, OnigScanner, OnigString } from 'vscode-oniguruma'
+import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import type { IShikiTheme } from './types'
@@ -43,11 +43,10 @@ export async function getOnigasm(): Promise<IOnigLib> {
     let loader: Promise<any>
 
     if (isBrowser) {
-      const response = await fetch((ONIGASM_WASM as string) || _resolvePath('dist/onigasm.wasm'))
-      loader = loadWASM(response)
+      loader = loadWASM(ONIGASM_WASM || _resolvePath('dist/onigasm.wasm'))
     } else {
       const path = require('path')
-      const onigasmPath = path.join(require.resolve('vscode-oniguruma'), '../onig.wasm')
+      const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')
       const fs = require('fs')
       const wasmBin = fs.readFileSync(onigasmPath).buffer
       loader = loadWASM(wasmBin)
