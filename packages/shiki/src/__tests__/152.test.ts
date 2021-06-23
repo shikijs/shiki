@@ -10,6 +10,5 @@ test('Correctly highlights LaTeX', async () => {
   const out = highlighter.codeToThemedTokens(`%\\usepackage{pkg}`, 'latex', 'nord', {
     includeExplanation: true
   })
-  console.log(JSON.stringify(out, null, 2))
   expect(out).toMatchSnapshot()
 })
