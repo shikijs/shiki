@@ -111,6 +111,12 @@ export type ILanguageRegistration = {
   scopeName: string
   aliases?: string[]
   samplePath?: string
+  /**
+   * A list of languages the current language embeds.
+   * If manually specifying languages to load, make sure to load the embedded
+   * languages for each parent language.
+   */
+  embeddedLangs?: Lang[]
 } & (
   | {
       path: string

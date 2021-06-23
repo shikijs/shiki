@@ -8,14 +8,28 @@ const sampleDir = path.resolve(__dirname, '../../packages/shiki/samples')
 const langPath = path.resolve(__dirname, '../../packages/shiki/src/languages.ts')
 const readmePath = path.resolve(__dirname, '../../docs/languages.md')
 
+// Regex to quickly see if a grammar uses `include` keys to embed other languages
+const INCLUDE_REGEX = /"include": "([^#$].+)"/g
+
 const files = fs.readdirSync(langDir)
 const langIds = files.map(f => f.replace('.tmLanguage.json', ''))
+const scopeToIdMap = {}
+langIds
+  .filter(id => !embeddedLanguagesToExclude.includes(id))
+  .forEach(id => {
+    const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
+    const grammarSrc = fs.readFileSync(grammarPath, 'utf-8')
+    const grammar = json5.parse(grammarSrc)
+
+    scopeToIdMap[grammar.scopeName] = id
+  })
 
 const langRegistrationContent = langIds
   .filter(id => !embeddedLanguagesToExclude.includes(id))
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
-    const grammar = json5.parse(fs.readFileSync(grammarPath, 'utf-8'))
+    const grammarSrc = fs.readFileSync(grammarPath, 'utf-8')
+    const grammar = json5.parse(grammarSrc)
 
     let regContent = `  {
     id: '${id}',
@@ -31,6 +45,20 @@ const langRegistrationContent = langIds
       const aliasStr = languageAliases[id].map(a => `'` + a + `'`).join(', ')
       regContent += `,
     aliases: [${aliasStr}]`
+    }
+
+    const embeddedLangs = new Set()
+    ;[...grammarSrc.matchAll(INCLUDE_REGEX)].forEach(([full, captured]) => {
+      const scope = captured.split('#')[0]
+      if (!grammar.scopeName || (grammar.scopeName && scope !== grammar.scopeName)) {
+        if (scopeToIdMap[scope]) {
+          embeddedLangs.add(scopeToIdMap[scope])
+        }
+      }
+    })
+    if (embeddedLangs.size > 0) {
+      regContent += `,
+    embeddedLangs: [${[...embeddedLangs].map(id => `'` + id + `'`).join(', ')}]`
     }
 
     regContent += `

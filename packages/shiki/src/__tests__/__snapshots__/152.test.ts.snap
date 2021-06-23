@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correctly highlights LaTeX 1`] = `
+Array [
+  Array [
+    Object {
+      "color": "#616E88",
+      "content": "%\\\\usepackage{pkg}",
+      "explanation": Array [
+        Object {
+          "content": "%",
+          "scopes": Array [
+            Object {
+              "scopeName": "text.tex.latex",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "comment.line.percentage.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Comment",
+                  "scope": "comment",
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+            Object {
+              "scopeName": "punctuation.definition.comment.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Punctuation",
+                  "scope": "punctuation",
+                  "settings": Object {
+                    "foreground": "#ECEFF4",
+                  },
+                },
+                Object {
+                  "name": "Punctuation Definition Comment",
+                  "scope": Array [
+                    "punctuation.definition.comment",
+                    "punctuation.end.definition.comment",
+                    "punctuation.start.definition.comment",
+                  ],
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        Object {
+          "content": "\\\\usepackage{pkg}",
+          "scopes": Array [
+            Object {
+              "scopeName": "text.tex.latex",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "comment.line.percentage.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Comment",
+                  "scope": "comment",
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+  ],
+]
+`;

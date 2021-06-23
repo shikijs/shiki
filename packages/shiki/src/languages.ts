@@ -52,7 +52,7 @@ export type Lang =
   | 'jsx'
   | 'julia'
   | 'kotlin'
-  | 'latex' | 'tex'
+  | 'latex'
   | 'less'
   | 'lisp'
   | 'logo'
@@ -104,6 +104,7 @@ export type Lang =
   | 'swift'
   | 'system-verilog'
   | 'tcl'
+  | 'tex'
   | 'toml'
   | 'tsx'
   | 'turtle'
@@ -149,7 +150,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'apl',
     scopeName: 'source.apl',
-    path: 'apl.tmLanguage.json'
+    path: 'apl.tmLanguage.json',
+    embeddedLangs: ['html', 'xml', 'css', 'javascript', 'json']
   },
   {
     id: 'applescript',
@@ -187,22 +189,26 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'cobol',
     scopeName: 'source.cobol',
-    path: 'cobol.tmLanguage.json'
+    path: 'cobol.tmLanguage.json',
+    embeddedLangs: ['sql', 'html', 'java']
   },
   {
     id: 'coffee',
     scopeName: 'source.coffee',
-    path: 'coffee.tmLanguage.json'
+    path: 'coffee.tmLanguage.json',
+    embeddedLangs: ['javascript']
   },
   {
     id: 'cpp',
     scopeName: 'source.cpp',
-    path: 'cpp.tmLanguage.json'
+    path: 'cpp.tmLanguage.json',
+    embeddedLangs: ['sql']
   },
   {
     id: 'crystal',
     scopeName: 'source.crystal',
-    path: 'crystal.tmLanguage.json'
+    path: 'crystal.tmLanguage.json',
+    embeddedLangs: ['html', 'sql', 'css', 'c', 'javascript', 'shellscript']
   },
   {
     id: 'csharp',
@@ -239,7 +245,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'elixir',
     scopeName: 'source.elixir',
-    path: 'elixir.tmLanguage.json'
+    path: 'elixir.tmLanguage.json',
+    embeddedLangs: ['html']
   },
   {
     id: 'elm',
@@ -249,7 +256,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'erb',
     scopeName: 'text.html.erb',
-    path: 'erb.tmLanguage.json'
+    path: 'erb.tmLanguage.json',
+    embeddedLangs: ['html', 'ruby']
   },
   {
     id: 'erlang',
@@ -260,7 +268,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'fsharp',
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
-    aliases: ['f#']
+    aliases: ['f#'],
+    embeddedLangs: ['markdown']
   },
   {
     id: 'gherkin',
@@ -270,12 +279,14 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'git-commit',
     scopeName: 'text.git-commit',
-    path: 'git-commit.tmLanguage.json'
+    path: 'git-commit.tmLanguage.json',
+    embeddedLangs: ['diff']
   },
   {
     id: 'git-rebase',
     scopeName: 'text.git-rebase',
-    path: 'git-rebase.tmLanguage.json'
+    path: 'git-rebase.tmLanguage.json',
+    embeddedLangs: ['shellscript']
   },
   {
     id: 'gnuplot',
@@ -291,7 +302,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'graphql',
     scopeName: 'source.graphql',
-    path: 'graphql.tmLanguage.json'
+    path: 'graphql.tmLanguage.json',
+    embeddedLangs: ['javascript', 'typescript', 'jsx', 'tsx']
   },
   {
     id: 'groovy',
@@ -301,18 +313,21 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'hack',
     scopeName: 'source.hack',
-    path: 'hack.tmLanguage.json'
+    path: 'hack.tmLanguage.json',
+    embeddedLangs: ['html', 'sql']
   },
   {
     id: 'haml',
     scopeName: 'text.haml',
-    path: 'haml.tmLanguage.json'
+    path: 'haml.tmLanguage.json',
+    embeddedLangs: ['ruby', 'javascript', 'sass', 'coffee', 'markdown', 'css']
   },
   {
     id: 'handlebars',
     scopeName: 'text.html.handlebars',
     path: 'handlebars.tmLanguage.json',
-    aliases: ['hbs']
+    aliases: ['hbs'],
+    embeddedLangs: ['html', 'css', 'javascript', 'yaml']
   },
   {
     id: 'haskell',
@@ -333,7 +348,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'html',
     scopeName: 'text.html.basic',
     path: 'html.tmLanguage.json',
-    samplePath: 'html.sample'
+    samplePath: 'html.sample',
+    embeddedLangs: ['javascript', 'css']
   },
   {
     id: 'ini',
@@ -356,7 +372,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'jinja-html',
     scopeName: 'text.html.jinja',
-    path: 'jinja-html.tmLanguage.json'
+    path: 'jinja-html.tmLanguage.json',
+    embeddedLangs: ['html']
   },
   {
     id: 'json',
@@ -381,7 +398,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'julia',
     scopeName: 'source.julia',
-    path: 'julia.tmLanguage.json'
+    path: 'julia.tmLanguage.json',
+    embeddedLangs: ['cpp', 'python', 'javascript', 'r', 'sql']
   },
   {
     id: 'kotlin',
@@ -392,12 +410,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'latex',
     scopeName: 'text.tex.latex',
     path: 'latex.tmLanguage.json',
-    aliases: ['tex']
+    embeddedLangs: ['tex', 'css', 'html', 'java', 'javascript', 'typescript', 'lua', 'python', 'julia', 'ruby', 'xml', 'yaml', 'cpp', 'haskell', 'scala', 'gnuplot']
   },
   {
     id: 'less',
     scopeName: 'source.css.less',
-    path: 'less.tmLanguage.json'
+    path: 'less.tmLanguage.json',
+    embeddedLangs: ['css']
   },
   {
     id: 'lisp',
@@ -412,7 +431,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'lua',
     scopeName: 'source.lua',
-    path: 'lua.tmLanguage.json'
+    path: 'lua.tmLanguage.json',
+    embeddedLangs: ['c']
   },
   {
     id: 'make',
@@ -424,7 +444,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'markdown',
     scopeName: 'text.html.markdown',
     path: 'markdown.tmLanguage.json',
-    aliases: ['md']
+    aliases: ['md'],
+    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir']
   },
   {
     id: 'matlab',
@@ -434,12 +455,14 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'md-math-block',
     scopeName: 'markdown.math.block',
-    path: 'md-math-block.tmLanguage.json'
+    path: 'md-math-block.tmLanguage.json',
+    embeddedLangs: ['md-math']
   },
   {
     id: 'md-math-inline',
     scopeName: 'markdown.math.inline',
-    path: 'md-math-inline.tmLanguage.json'
+    path: 'md-math-inline.tmLanguage.json',
+    embeddedLangs: ['md-math']
   },
   {
     id: 'md-math',
@@ -449,7 +472,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'mdx',
     scopeName: 'text.html.markdown.jsx',
-    path: 'mdx.tmLanguage.json'
+    path: 'mdx.tmLanguage.json',
+    embeddedLangs: ['jsx', 'markdown']
   },
   {
     id: 'nginx',
@@ -459,7 +483,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'nim',
     scopeName: 'source.nim',
-    path: 'nim.tmLanguage.json'
+    path: 'nim.tmLanguage.json',
+    embeddedLangs: ['c', 'html', 'xml', 'javascript', 'css', 'markdown']
   },
   {
     id: 'nix',
@@ -490,12 +515,14 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'perl',
     scopeName: 'source.perl',
-    path: 'perl.tmLanguage.json'
+    path: 'perl.tmLanguage.json',
+    embeddedLangs: ['html', 'xml', 'css', 'javascript', 'sql']
   },
   {
     id: 'php',
     scopeName: 'source.php',
-    path: 'php.tmLanguage.json'
+    path: 'php.tmLanguage.json',
+    embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
     id: 'plsql',
@@ -522,7 +549,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'pug',
     scopeName: 'text.pug',
     path: 'pug.tmLanguage.json',
-    aliases: ['jade']
+    aliases: ['jade'],
+    embeddedLangs: ['javascript', 'css', 'sass', 'stylus', 'coffee', 'html']
   },
   {
     id: 'puppet',
@@ -555,7 +583,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'razor',
     scopeName: 'text.aspnetcorerazor',
-    path: 'razor.tmLanguage.json'
+    path: 'razor.tmLanguage.json',
+    embeddedLangs: ['html', 'csharp']
   },
   {
     id: 'riscv',
@@ -567,7 +596,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.ruby',
     path: 'ruby.tmLanguage.json',
     samplePath: 'ruby.sample',
-    aliases: ['rb']
+    aliases: ['rb'],
+    embeddedLangs: ['html', 'xml', 'sql', 'css', 'c', 'javascript', 'shellscript', 'lua']
   },
   {
     id: 'rust',
@@ -577,7 +607,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'sas',
     scopeName: 'source.sas',
-    path: 'sas.tmLanguage.json'
+    path: 'sas.tmLanguage.json',
+    embeddedLangs: ['sql']
   },
   {
     id: 'sass',
@@ -597,19 +628,22 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'scss',
     scopeName: 'source.css.scss',
-    path: 'scss.tmLanguage.json'
+    path: 'scss.tmLanguage.json',
+    embeddedLangs: ['css']
   },
   {
     id: 'shaderlab',
     scopeName: 'source.shaderlab',
     path: 'shaderlab.tmLanguage.json',
-    aliases: ['shader']
+    aliases: ['shader'],
+    embeddedLangs: ['hlsl']
   },
   {
     id: 'shellscript',
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh', 'zsh']
+    aliases: ['shell', 'bash', 'sh', 'zsh'],
+    embeddedLangs: ['ruby', 'python', 'applescript', 'html', 'markdown']
   },
   {
     id: 'smalltalk',
@@ -625,7 +659,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'sparql',
     scopeName: 'source.sparql',
     path: 'sparql.tmLanguage.json',
-    samplePath: 'sparql.sample'
+    samplePath: 'sparql.sample',
+    embeddedLangs: ['turtle']
   },
   {
     id: 'sql',
@@ -646,7 +681,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'svelte',
     scopeName: 'source.svelte',
-    path: 'svelte.tmLanguage.json'
+    path: 'svelte.tmLanguage.json',
+    embeddedLangs: ['javascript', 'typescript', 'coffee', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'pug', 'markdown']
   },
   {
     id: 'swift',
@@ -662,6 +698,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'tcl',
     scopeName: 'source.tcl',
     path: 'tcl.tmLanguage.json'
+  },
+  {
+    id: 'tex',
+    scopeName: 'text.tex',
+    path: 'tex.tmLanguage.json',
+    embeddedLangs: ['r']
   },
   {
     id: 'toml',
@@ -683,7 +725,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'twig',
     scopeName: 'text.html.twig',
-    path: 'twig.tmLanguage.json'
+    path: 'twig.tmLanguage.json',
+    embeddedLangs: ['css', 'javascript', 'php', 'python', 'ruby']
   },
   {
     id: 'typescript',
@@ -715,7 +758,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'vue',
     scopeName: 'source.vue',
-    path: 'vue.tmLanguage.json'
+    path: 'vue.tmLanguage.json',
+    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
   },
   {
     id: 'wasm',
@@ -731,12 +775,14 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'xml',
     scopeName: 'text.xml',
-    path: 'xml.tmLanguage.json'
+    path: 'xml.tmLanguage.json',
+    embeddedLangs: ['java']
   },
   {
     id: 'xsl',
     scopeName: 'text.xml.xsl',
-    path: 'xsl.tmLanguage.json'
+    path: 'xsl.tmLanguage.json',
+    embeddedLangs: ['xml']
   },
   {
     id: 'yaml',
