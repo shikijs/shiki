@@ -16,7 +16,10 @@ export const vscodeGrammarsToRemove = [
   'cuda-cpp',
   'cshtml',
   'jsdoc.js.injection',
-  'jsdoc.ts.injection'
+  'jsdoc.ts.injection',
+  'md-math',
+  'md-math-inline',
+  'md-math-block'
 ]
 
 /**

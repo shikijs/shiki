@@ -60,9 +60,6 @@ export type Lang =
   | 'make' | 'makefile'
   | 'markdown' | 'md'
   | 'matlab'
-  | 'md-math-block'
-  | 'md-math-inline'
-  | 'md-math'
   | 'mdx'
   | 'nginx'
   | 'nim'
@@ -451,23 +448,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'matlab',
     scopeName: 'source.matlab',
     path: 'matlab.tmLanguage.json'
-  },
-  {
-    id: 'md-math-block',
-    scopeName: 'markdown.math.block',
-    path: 'md-math-block.tmLanguage.json',
-    embeddedLangs: ['md-math']
-  },
-  {
-    id: 'md-math-inline',
-    scopeName: 'markdown.math.inline',
-    path: 'md-math-inline.tmLanguage.json',
-    embeddedLangs: ['md-math']
-  },
-  {
-    id: 'md-math',
-    scopeName: 'text.html.markdown.math',
-    path: 'md-math.tmLanguage.json'
   },
   {
     id: 'mdx',
