@@ -7,7 +7,7 @@
     "build": "lerna run build --include-dependencies",
     "watch": "lerna run watch --parallel",
     "fmt": "prettier --write packages/**/*.ts",
-    "pretest": "jest --clearCache",
+    "ci": "jest --clearCache",
     "test": "jest --colors",
     "gen": "yarn workspace shiki-site gen",
     "release": "lerna publish",
