@@ -156,6 +156,7 @@ export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
   const type = (<any>rawTheme).type || 'dark'
 
   const shikiTheme: IShikiTheme = {
+    name: rawTheme.name!,
     type,
     ...rawTheme,
     ...getThemeDefaultColors(rawTheme)
