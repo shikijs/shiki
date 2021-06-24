@@ -61,7 +61,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     if (!_theme) {
       throw Error(`No theme registration for ${theme}`)
     }
-    if (_currentTheme.name !== _theme.name) {
+    if (!_currentTheme || _currentTheme.name !== _theme.name) {
       _registry.setTheme(_theme)
       _currentTheme = _theme
     }
