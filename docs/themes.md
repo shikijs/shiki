@@ -44,6 +44,7 @@ export type Theme =
   | 'min-light'
   | 'monokai'
   | 'nord'
+  | 'poimandres'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'
