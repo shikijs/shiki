@@ -73,6 +73,7 @@ export type Lang =
   | 'plsql'
   | 'postcss'
   | 'powershell' | 'ps' | 'ps1'
+  | 'prisma'
   | 'prolog'
   | 'pug' | 'jade'
   | 'puppet'
@@ -519,6 +520,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.powershell',
     path: 'powershell.tmLanguage.json',
     aliases: ['ps', 'ps1']
+  },
+  {
+    id: 'prisma',
+    scopeName: 'source.prisma',
+    path: 'prisma.tmLanguage.json',
+    samplePath: 'prisma.sample'
   },
   {
     id: 'prolog',

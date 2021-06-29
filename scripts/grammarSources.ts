@@ -149,7 +149,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage'
   ],
   'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/turtle.tmLanguage.json',
-  'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json'
+  'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json',
+  'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json'
 ]
 
 /**

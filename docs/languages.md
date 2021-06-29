@@ -93,6 +93,7 @@ export type Lang =
   | 'plsql'
   | 'postcss'
   | 'powershell' | 'ps' | 'ps1'
+  | 'prisma'
   | 'prolog'
   | 'pug' | 'jade'
   | 'puppet'
