@@ -303,7 +303,7 @@
       "name": "storage.type.modifier.extendedscope"
     },
     "number-decimal": {
-      "match": "\\b(\\d+(\\.\\d+)?)\\b",
+      "match": "\\b([0-9_]+(\\.[0-9_]+)?)\\b",
       "name": "constant.numeric.decimal"
     },
     "number-hex": {
@@ -311,7 +311,7 @@
       "name": "constant.numeric.hexadecimal"
     },
     "number-scientific": {
-      "match": "\\b(?:0\\.(?:0[1-9]|[1-9]\\d?)|[1-9]\\d*(?:\\.\\d{1,2})?)(?:e[+-]?\\d+)?",
+      "match": "\\b(?:0\\.(?:0[1-9]|[1-9][0-9_]?)|[1-9][0-9_]*(?:\\.\\d{1,2})?)(?:e[+-]?[0-9_]+)?",
       "name": "constant.numeric.scientific"
     },
     "string": {
@@ -352,9 +352,6 @@
         },
         {
           "include": "#constant-currency"
-        },
-        {
-          "include": "#constant-ucase"
         }
       ]
     },
@@ -369,10 +366,6 @@
     "constant-currency": {
       "match": "\\b(ether|wei|finney|szabo)\\b",
       "name": "constant.language.currency"
-    },
-    "constant-ucase": {
-      "match": "\\b([A-Z09_]+)\\b",
-      "name": "constant.language.ucase"
     },
     "assembly": {
       "patterns": [
@@ -780,22 +773,47 @@
           "patterns": [
             {
               "match": "\\b(\\w+)\\b",
-              "name": "entity.name.type.contract"
+              "name": "entity.name.type.contract.extend"
             }
           ]
         }
       ]
     },
     "declaration-interface": {
-      "match": "\\b(interface)\\s+(\\w+)\\b",
-      "captures": {
-        "1": {
-          "name": "storage.type.interface"
+      "patterns": [
+        {
+          "match": "\\b(interface)\\b\\s+(\\w+)\\b\\s*(?=\\{)",
+          "captures": {
+            "1": {
+              "name": "storage.type.interface"
+            },
+            "2": {
+              "name": "entity.name.type.interface"
+            }
+          }
         },
-        "2": {
-          "name": "entity.name.type.interface"
+        {
+          "begin": "\\b(interface)\\b\\s+(\\w+)\\b\\s+\\b(is)\\b\\s+",
+          "end": "(?=\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.interface"
+            },
+            "2": {
+              "name": "entity.name.type.interface"
+            },
+            "3": {
+              "name": "storage.modifier.is"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\b(\\w+)\\b",
+              "name": "entity.name.type.interface.extend"
+            }
+          ]
         }
-      }
+      ]
     },
     "declaration-library": {
       "match": "\\b(library)\\s+(\\w+)\\b",
@@ -831,6 +849,9 @@
         },
         {
           "include": "#punctuation"
+        },
+        {
+          "include": "#comment"
         }
       ]
     },
@@ -844,7 +865,7 @@
           "name": "entity.name.function"
         }
       },
-      "end": "(?=\\{)",
+      "end": "(?=\\{|;)",
       "patterns": [
         {
           "include": "#natspec"
