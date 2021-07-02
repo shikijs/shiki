@@ -432,7 +432,7 @@
         },
         {
           "begin": "(?xi)\n\\s*(&)?      # Reference\n\\s*((\\$+)[a-z_\\x{7f}-\\x{ff}][a-z0-9_\\x{7f}-\\x{ff}]*)  # The variable name",
-          "end": "(?xi)\n\\s*(?=,|\\)|/[/*]|\\#|$) # A closing parentheses (end of argument list) or a comma or a comment",
+          "end": "(?xi)\n\\s*(?=,|\\)|$) # A closing parentheses (end of argument list) or a comma",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.reference.php"
@@ -446,11 +446,18 @@
           },
           "patterns": [
             {
-              "match": "=",
-              "name": "keyword.operator.assignment.php"
-            },
-            {
-              "include": "#language"
+              "begin": "(=)",
+              "end": "(?=,|\\))",
+              "beginCaptures": {
+                "1": {
+                  "name": "keyword.operator.assignment.php"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#language"
+                }
+              ]
             }
           ]
         }
@@ -799,15 +806,18 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(abstract|final)?\\s*(class)\\s+([a-z0-9_]+)\\s*",
+          "begin": "(?i)^\\s*(abstract|final)?\\s*(abstract|final)?\\s*(class)\\s+([a-z0-9_]+)\\s*",
           "beginCaptures": {
             "1": {
-              "name": "storage.modifier.abstract.php"
+              "name": "storage.modifier.php"
             },
             "2": {
-              "name": "storage.type.class.php"
+              "name": "storage.modifier.php"
             },
             "3": {
+              "name": "storage.type.class.php"
+            },
+            "4": {
               "name": "entity.name.type.class.php"
             }
           },
