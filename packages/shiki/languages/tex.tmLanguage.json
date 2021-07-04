@@ -128,6 +128,35 @@
     "math": {
       "patterns": [
         {
+          "begin": "((\\\\)(?:text|mbox))(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "constant.other.math.tex"
+            },
+            "2": {
+              "name": "punctuation.definition.function.tex"
+            },
+            "3": {
+              "name": "punctuation.definition.arguments.begin.tex meta.text.normal.tex"
+            }
+          },
+          "contentName": "meta.text.normal.tex",
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.arguments.end.tex meta.text.normal.tex"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#math"
+            },
+            {
+              "include": "$base"
+            }
+          ]
+        },
+        {
           "captures": {
             "1": {
               "name": "punctuation.definition.constant.math.tex"
