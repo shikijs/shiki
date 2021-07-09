@@ -1287,6 +1287,17 @@
       "name": "meta.citation.latex",
       "patterns": [
         {
+          "captures": {
+            "1": {
+              "name": "comment.line.percentage.tex"
+            },
+            "2": {
+              "name": "punctuation.definition.comment.tex"
+            }
+          },
+          "match": "((%).*)$"
+        },
+        {
           "match": "[\\w:.]+",
           "name": "constant.other.reference.citation.latex"
         }
