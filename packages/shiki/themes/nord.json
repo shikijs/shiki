@@ -1097,6 +1097,37 @@
       }
     },
     {
+      "name": "[Markdown] Markup Math Constant",
+      "scope": "text.html.markdown constant.character.math.tex",
+      "settings": {
+        "foreground": "#81A1C1"
+      }
+    },
+    {
+      "name": "[Markdown] Markup Math Definition Marker",
+      "scope": [
+        "text.html.markdown punctuation.definition.math.begin",
+        "text.html.markdown punctuation.definition.math.end"
+      ],
+      "settings": {
+        "foreground": "#5E81AC"
+      }
+    },
+    {
+      "name": "[Markdown] Markup Math Function Definition Marker",
+      "scope": "text.html.markdown punctuation.definition.function.math.tex",
+      "settings": {
+        "foreground": "#88C0D0"
+      }
+    },
+    {
+      "name": "[Markdown] Markup Math Operator",
+      "scope": "text.html.markdown punctuation.math.operator.latex",
+      "settings": {
+        "foreground": "#81A1C1"
+      }
+    },
+    {
       "name": "[Markdown] Punctuation Definition Heading",
       "scope": "text.html.markdown punctuation.definition.heading",
       "settings": {
