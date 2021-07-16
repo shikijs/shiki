@@ -106,7 +106,9 @@
     "symbolIcon.fieldForeground": "#1976D2",
     "symbolIcon.interfaceForeground": "#1976D2",
     "symbolIcon.variableForeground": "#1976D2",
-    "symbolIcon.enumeratorMemberForeground": "#1976D2"
+    "symbolIcon.enumeratorMemberForeground": "#1976D2",
+    "diffEditor.removedTextBackground": "#e597af52",
+    "diffEditor.insertedTextBackground": "#b7e7a44b"
   },
   "tokenColors": [
     {
@@ -157,7 +159,7 @@
       }
     },
     {
-      "scope": ["comment"],
+      "scope": ["comment", "string.quoted.docstring.multi"],
       "settings": {
         "foreground": "#c2c3c5"
       }
@@ -260,6 +262,17 @@
       "scope": ["strong", "markup.heading.markdown", "markup.bold.markdown"],
       "settings": {
         "foreground": "#6f42c1"
+      }
+    },
+    {
+      "scope": [
+        "punctuation.definition.arguments",
+        "punctuation.definition.dict",
+        "punctuation.separator",
+        "meta.function-call.arguments"
+      ],
+      "settings": {
+        "foreground": "#212121"
       }
     },
     {
