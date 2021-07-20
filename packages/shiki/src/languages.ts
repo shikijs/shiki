@@ -123,7 +123,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'abap',
     scopeName: 'source.abap',
-    path: 'abap.tmLanguage.json'
+    path: 'abap.tmLanguage.json',
+    samplePath: 'abap.sample'
   },
   {
     id: 'actionscript-3',
