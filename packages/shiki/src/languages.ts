@@ -129,7 +129,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'actionscript-3',
     scopeName: 'source.actionscript.3',
-    path: 'actionscript-3.tmLanguage.json'
+    path: 'actionscript-3.tmLanguage.json',
+    samplePath: 'actionscript-3.sample'
   },
   {
     id: 'ada',
