@@ -8,7 +8,7 @@
           "name": "punctuation.definition.keyword.tex"
         }
       },
-      "match": "(\\\\)(backmatter|else|fi|frontmatter|mainmatter|if(case|cat|dim|eof|false|hbox|hmode|inner|mmode|num|odd|true|undefined|vbox|vmode|void|x)?)\\b",
+      "match": "(\\\\)(backmatter|else|fi|frontmatter|mainmatter|if(case|cat|dim|eof|false|hbox|hmode|inner|mmode|num|odd|true|undefined|vbox|vmode|void|x)?)(?![a-zA-Z@])",
       "name": "keyword.control.tex"
     },
     {
