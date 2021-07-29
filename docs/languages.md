@@ -49,6 +49,7 @@ export type Lang =
   | 'elm'
   | 'erb'
   | 'erlang'
+  | 'fish'
   | 'fsharp' | 'f#'
   | 'gherkin'
   | 'git-commit'

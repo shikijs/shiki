@@ -28,6 +28,7 @@ export type Lang =
   | 'elm'
   | 'erb'
   | 'erlang'
+  | 'fish'
   | 'fsharp' | 'f#'
   | 'gherkin'
   | 'git-commit'
@@ -270,6 +271,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'erlang',
     scopeName: 'source.erlang',
     path: 'erlang.tmLanguage.json'
+  },
+  {
+    id: 'fish',
+    scopeName: 'source.fish',
+    path: 'fish.tmLanguage.json'
   },
   {
     id: 'fsharp',
