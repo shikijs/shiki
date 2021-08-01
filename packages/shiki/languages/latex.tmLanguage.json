@@ -108,6 +108,40 @@
       ]
     },
     {
+      "name": "meta.function.environment.songs.latex",
+      "begin": "((?:\\s*)\\\\begin\\{songs\\}\\{.*\\})",
+      "end": "(\\\\end\\{songs\\}(?:\\s*\\n)?)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#env-mandatory-arg"
+            }
+          ]
+        }
+      },
+      "contentName": "meta.data.environment.songs.latex",
+      "patterns": [
+        {
+          "name": "meta.chord.block.latex support.class.chord.block.environment.latex",
+          "begin": "\\\\\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "$base"
+            }
+          ]
+        },
+        {
+          "name": "meta.chord.block.latex support.class.chord.block.environment.latex",
+          "match": "\\^"
+        },
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
       "begin": "(^\\s*)?(?=\\\\begin\\{(lstlisting|minted|pyglist)\\})",
       "beginCaptures": {
         "0": {

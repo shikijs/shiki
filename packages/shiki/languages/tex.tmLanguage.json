@@ -111,7 +111,7 @@
           "name": "punctuation.definition.function.tex"
         }
       },
-      "match": "(\\\\)[A-Za-z@,;]+",
+      "match": "(\\\\)(?:[A-Za-z@]+|[,;])",
       "name": "support.function.general.tex"
     },
     {
