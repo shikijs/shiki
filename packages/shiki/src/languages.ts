@@ -49,6 +49,7 @@ export type Lang =
   | 'json'
   | 'jsonc'
   | 'jsonnet'
+  | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
   | 'kotlin'
@@ -387,6 +388,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsonnet',
     scopeName: 'source.jsonnet',
     path: 'jsonnet.tmLanguage.json'
+  },
+  {
+    id: 'jssm',
+    scopeName: 'source.jssm',
+    path: 'jssm.tmLanguage.json',
+    samplePath: 'jssm.sample',
+    aliases: ['fsl']
   },
   {
     id: 'jsx',
