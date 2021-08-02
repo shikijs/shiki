@@ -5,7 +5,7 @@ import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import type { IShikiTheme } from './types'
 
 export const isWebWorker =
-  typeof self !== 'undefined'&&
+  typeof self !== 'undefined' &&
   typeof self.WorkerGlobalScope !== 'undefined'
 
 export const isBrowser =
