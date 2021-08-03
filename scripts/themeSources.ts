@@ -81,6 +81,10 @@ export const marketplaceThemeSources: { [extPublisherAndId: string]: (string | s
     ['material-ocean.json', 'extension/build/themes/Material-Theme-Ocean.json'],
     ['material-palenight.json', 'extension/build/themes/Material-Theme-Palenight.json']
   ],
+  'dracula-theme.theme-dracula': [
+    ['dracula.json', 'extension/theme/dracula.json'],
+    ['dracula-soft.json', 'extension/theme/dracula-soft.json']
+  ],
   'GitHub.github-vscode-theme': [
     ['github-dark.json', 'extension/themes/dark.json'],
     ['github-light.json', 'extension/themes/light.json']
