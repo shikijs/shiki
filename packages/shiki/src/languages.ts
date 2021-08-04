@@ -242,6 +242,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'docker.tmLanguage.json'
   },
   {
+    id: 'dream-maker',
+    scopeName: 'source.dm',
+    path: 'dream-maker.tmLanguage.json'
+  },
+  {
     id: 'elixir',
     scopeName: 'source.elixir',
     path: 'elixir.tmLanguage.json',
