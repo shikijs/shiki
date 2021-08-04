@@ -51,6 +51,8 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'vitesse-dark'
+  | 'vitesse-light'
 ```
 
 You can preview some of these themes on https://vscodethemes.com/.
