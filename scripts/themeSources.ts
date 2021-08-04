@@ -88,5 +88,9 @@ export const marketplaceThemeSources: { [extPublisherAndId: string]: (string | s
   'GitHub.github-vscode-theme': [
     ['github-dark.json', 'extension/themes/dark.json'],
     ['github-light.json', 'extension/themes/light.json']
+  ],
+  'antfu.theme-vitesse': [
+    ['vitesse-dark.json', 'themes/vitesse-dark.json'],
+    ['vitesse-light.json', 'themes/vitesse-light.json']
   ]
 }
