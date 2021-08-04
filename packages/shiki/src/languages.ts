@@ -135,7 +135,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'ada',
     scopeName: 'source.ada',
-    path: 'ada.tmLanguage.json'
+    path: 'ada.tmLanguage.json',
+    samplePath: 'ada.sample'
   },
   {
     id: 'apache',
