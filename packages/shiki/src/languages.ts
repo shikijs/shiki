@@ -146,7 +146,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'apex',
     scopeName: 'source.apex',
-    path: 'apex.tmLanguage.json'
+    path: 'apex.tmLanguage.json',
+    samplePath: 'apex.sample'
   },
   {
     id: 'apl',
