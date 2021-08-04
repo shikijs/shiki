@@ -158,7 +158,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'applescript',
     scopeName: 'source.applescript',
-    path: 'applescript.tmLanguage.json'
+    path: 'applescript.tmLanguage.json',
+    samplePath: 'applescript.sample'
   },
   {
     id: 'asm',
