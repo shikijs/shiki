@@ -1,0 +1,24 @@
+name: Deploy npm modules
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '15.x'
+          registry-url: 'https://registry.npmjs.org/'
+
+      - run: yarn install
+      - run: yarn build
+      - run: yarn update
+
+      - name: Deploy npm Packages
+        run: npx pleb publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
