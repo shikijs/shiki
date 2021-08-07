@@ -74,6 +74,7 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
+  | 'jupyter'
   | 'kotlin'
   | 'latex'
   | 'less'

@@ -53,6 +53,7 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
+  | 'jupyter'
   | 'kotlin'
   | 'latex'
   | 'less'
@@ -412,6 +413,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.julia',
     path: 'julia.tmLanguage.json',
     embeddedLangs: ['cpp', 'python', 'javascript', 'r', 'sql']
+  },
+  {
+    id: 'jupyter',
+    scopeName: 'source.jupyter',
+    path: 'jupyter.tmLanguage.json',
+    embeddedLangs: ['json']
   },
   {
     id: 'kotlin',
