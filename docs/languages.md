@@ -16,7 +16,6 @@ A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammar
   - Less than 100 columns if possible
   - Link to source in the last line, for example `# From https://poignant.guide/book/chapter-5.html`
 - Run `yarn update:grammars`
-- Add your language to the language list, below
 
 ## All Languages
 
