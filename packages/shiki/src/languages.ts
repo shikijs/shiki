@@ -116,6 +116,7 @@ export type Lang =
   | 'vhdl'
   | 'viml'
   | 'vue'
+  | 'vue-html'
   | 'wasm'
   | 'wenyan' | '文言'
   | 'xml'
@@ -768,6 +769,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
     embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
+  },
+  {
+    id: 'vue-html',
+    scopeName: 'text.html.vue-html',
+    path: 'vue-html.tmLanguage.json'
   },
   {
     id: 'wasm',
