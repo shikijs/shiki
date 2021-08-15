@@ -40,7 +40,7 @@ export const enum TemporaryStandardTokenType {
   MetaEmbedded = 8
 }
 
-export const enum FontStyle {
+export enum FontStyle {
   NotSet = -1,
   None = 0,
   Italic = 1,
