@@ -60,6 +60,7 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 - [Fatih Kalifa's website](https://fatihkalifa.com/typescript-twoslash)
 - [Blockstack Documentation](https://docs.blockstack.org/)
 - [VPC Shiki](https://github.com/Vap0r1ze/vpc-shiki), Shiki codeblocks on Discord. Powered by [Powercord](http://powercord.dev/)
+- [Torchlight](https://torchlight.dev/), a syntax highlighting API powered by the Shiki tokenizer.
 
 ## Contributing
 
