@@ -4,10 +4,16 @@ import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
 import type { IShikiTheme } from './types'
 
+export const isWebWorker =
+  typeof self !== 'undefined' &&
+  typeof self.WorkerGlobalScope !== 'undefined'
+
 export const isBrowser =
-  typeof window !== 'undefined' &&
-  typeof window.document !== 'undefined' &&
-  typeof fetch !== 'undefined'
+  isWebWorker || (
+    typeof window !== 'undefined' &&
+    typeof window.document !== 'undefined' &&
+    typeof fetch !== 'undefined'
+  )
 
 // to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'

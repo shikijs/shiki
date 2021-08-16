@@ -1,5 +1,7 @@
 export type Theme =
   | 'dark-plus'
+  | 'dracula-soft'
+  | 'dracula'
   | 'github-dark'
   | 'github-light'
   | 'light-plus'
@@ -17,9 +19,13 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'vitesse-dark'
+  | 'vitesse-light'
 
 export const themes: Theme[] = [
   'dark-plus',
+  'dracula-soft',
+  'dracula',
   'github-dark',
   'github-light',
   'light-plus',
@@ -36,5 +42,7 @@ export const themes: Theme[] = [
   'slack-dark',
   'slack-ochin',
   'solarized-dark',
-  'solarized-light'
+  'solarized-light',
+  'vitesse-dark',
+  'vitesse-light'
 ]

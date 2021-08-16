@@ -32,6 +32,8 @@ shiki.getHighlighter({
 ```ts
 export type Theme =
   | 'dark-plus'
+  | 'dracula-soft'
+  | 'dracula'
   | 'github-dark'
   | 'github-light'
   | 'light-plus'
@@ -49,6 +51,8 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'vitesse-dark'
+  | 'vitesse-light'
 ```
 
 You can preview some of these themes on https://vscodethemes.com/.

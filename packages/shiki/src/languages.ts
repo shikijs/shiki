@@ -23,10 +23,12 @@ export type Lang =
   | 'dart'
   | 'diff'
   | 'docker'
+  | 'dream-maker'
   | 'elixir'
   | 'elm'
   | 'erb'
   | 'erlang'
+  | 'fish'
   | 'fsharp' | 'f#'
   | 'gherkin'
   | 'git-commit'
@@ -49,8 +51,10 @@ export type Lang =
   | 'json'
   | 'jsonc'
   | 'jsonnet'
+  | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
+  | 'jupyter'
   | 'kotlin'
   | 'latex'
   | 'less'
@@ -246,6 +250,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'docker.tmLanguage.json'
   },
   {
+    id: 'dream-maker',
+    scopeName: 'source.dm',
+    path: 'dream-maker.tmLanguage.json'
+  },
+  {
     id: 'elixir',
     scopeName: 'source.elixir',
     path: 'elixir.tmLanguage.json',
@@ -266,6 +275,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'erlang',
     scopeName: 'source.erlang',
     path: 'erlang.tmLanguage.json'
+  },
+  {
+    id: 'fish',
+    scopeName: 'source.fish',
+    path: 'fish.tmLanguage.json',
+    samplePath: 'fish.sample'
   },
   {
     id: 'fsharp',
@@ -394,6 +409,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'jsonnet.tmLanguage.json'
   },
   {
+    id: 'jssm',
+    scopeName: 'source.jssm',
+    path: 'jssm.tmLanguage.json',
+    samplePath: 'jssm.sample',
+    aliases: ['fsl']
+  },
+  {
     id: 'jsx',
     scopeName: 'source.js.jsx',
     path: 'jsx.tmLanguage.json'
@@ -403,6 +425,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.julia',
     path: 'julia.tmLanguage.json',
     embeddedLangs: ['cpp', 'python', 'javascript', 'r', 'sql']
+  },
+  {
+    id: 'jupyter',
+    scopeName: 'source.jupyter',
+    path: 'jupyter.tmLanguage.json',
+    embeddedLangs: ['json']
   },
   {
     id: 'kotlin',

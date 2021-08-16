@@ -1,9 +1,9 @@
 {
   "name": "shiki",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "shiki",
   "author": "Pine Wu <octref@gmail.com>",
-  "homepage": "https://github.com/octref/shiki/tree/master/packages/shiki",
+  "homepage": "https://github.com/octref/shiki/tree/main/packages/shiki",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -34,5 +34,9 @@
     "json5": "^2.2.0",
     "onigasm": "^2.2.5",
     "vscode-textmate": "5.2.0"
+  },
+  "browser": {
+    "fs": false,
+    "path": false
   }
 }

@@ -320,15 +320,30 @@
     "string-interp": {
       "patterns": [
         {
-          "match": "\\$(([a-zA-Z0-9_]+)|\\{([^{}]+)\\})",
+          "match": "\\$([a-zA-Z0-9_]+)",
           "captures": {
-            "2": {
-              "name": "variable.parameter.dart"
-            },
-            "3": {
+            "1": {
               "name": "variable.parameter.dart"
             }
           }
+        },
+        {
+          "name": "string.interpolated.expression.dart",
+          "begin": "\\$\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#constants-and-special-vars",
+              "name": "variable.parameter.dart"
+            },
+            {
+              "include": "#strings"
+            },
+            {
+              "name": "variable.parameter.dart",
+              "match": "[a-zA-Z0-9_]+"
+            }
+          ]
         },
         {
           "name": "constant.character.escape.dart",

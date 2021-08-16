@@ -108,6 +108,40 @@
       ]
     },
     {
+      "name": "meta.function.environment.songs.latex",
+      "begin": "((?:\\s*)\\\\begin\\{songs\\}\\{.*\\})",
+      "end": "(\\\\end\\{songs\\}(?:\\s*\\n)?)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#env-mandatory-arg"
+            }
+          ]
+        }
+      },
+      "contentName": "meta.data.environment.songs.latex",
+      "patterns": [
+        {
+          "name": "meta.chord.block.latex support.class.chord.block.environment.latex",
+          "begin": "\\\\\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "$base"
+            }
+          ]
+        },
+        {
+          "name": "meta.chord.block.latex support.class.chord.block.environment.latex",
+          "match": "\\^"
+        },
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    {
       "begin": "(^\\s*)?(?=\\\\begin\\{(lstlisting|minted|pyglist)\\})",
       "beginCaptures": {
         "0": {
@@ -601,7 +635,7 @@
       "end": "\\s*(\\};)"
     },
     {
-      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:fboxv|boxedv|V|v)erbatim\\*?)(\\})",
+      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:fboxv|boxedv|V|v|spv)erbatim\\*?)(\\})",
       "captures": {
         "1": {
           "name": "support.function.be.latex"
@@ -1361,7 +1395,7 @@
       "include": "#definition-label"
     },
     {
-      "begin": "((\\\\)[vV]erb[\\*]?)\\s*((\\\\)scantokens)(\\{)",
+      "begin": "((\\\\)(?:verb|Verb|spverb)\\*?)\\s*((\\\\)scantokens)(\\{)",
       "beginCaptures": {
         "1": {
           "name": "support.function.verb.latex"
@@ -1411,7 +1445,7 @@
           "name": "punctuation.definition.verb.latex"
         }
       },
-      "match": "((\\\\)[vV]erb[\\*]?)\\s*((?<=\\s)\\S|[^a-zA-Z])(.*?)(\\3|$)",
+      "match": "((\\\\)(?:verb|Verb|spverb)\\*?)\\s*((?<=\\s)\\S|[^a-zA-Z])(.*?)(\\3|$)",
       "name": "meta.function.verb.latex"
     },
     {

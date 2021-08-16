@@ -150,7 +150,10 @@ export const githubGrammarSources: (string | [string, string])[] = [
   ],
   'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/turtle.tmLanguage.json',
   'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json',
-  'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json'
+  'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json',
+  'https://github.com/StoneCypher/sublime-jssm/blob/master/jssm.tmLanguage',
+  'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json',
+  'https://github.com/bmalehorn/vscode-fish/blob/master/syntaxes/fish.tmLanguage.json'
 ]
 
 /**
@@ -164,6 +167,7 @@ export const languageAliases = {
   fsharp: ['f#'],
   handlebars: ['hbs'],
   javascript: ['js'],
+  jssm: ['fsl'],
   make: ['makefile'],
   markdown: ['md'],
   'objective-c': ['objc'],
