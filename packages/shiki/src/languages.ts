@@ -168,7 +168,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
-    path: 'asm.tmLanguage.json'
+    path: 'asm.tmLanguage.json',
+    samplePath: 'asm.sample'
   },
   {
     id: 'awk',
