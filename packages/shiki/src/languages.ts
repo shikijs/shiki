@@ -194,6 +194,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'clojure',
     scopeName: 'source.clojure',
     path: 'clojure.tmLanguage.json',
+    samplePath: 'clojure.sample',
     aliases: ['clj']
   },
   {
