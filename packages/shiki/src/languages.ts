@@ -181,6 +181,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'bat',
     scopeName: 'source.batchfile',
     path: 'bat.tmLanguage.json',
+    samplePath: 'bat.sample',
     aliases: ['batch']
   },
   {
