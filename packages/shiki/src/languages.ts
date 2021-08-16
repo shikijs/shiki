@@ -174,7 +174,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'awk',
     scopeName: 'source.awk',
-    path: 'awk.tmLanguage.json'
+    path: 'awk.tmLanguage.json',
+    samplePath: 'awk.sample'
   },
   {
     id: 'bat',
