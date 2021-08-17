@@ -271,6 +271,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'elixir',
     scopeName: 'source.elixir',
     path: 'elixir.tmLanguage.json',
+    samplePath: 'elixir.sample',
     embeddedLangs: ['html']
   },
   {
