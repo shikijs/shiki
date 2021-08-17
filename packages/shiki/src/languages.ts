@@ -259,7 +259,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'docker',
     scopeName: 'source.dockerfile',
-    path: 'docker.tmLanguage.json'
+    path: 'docker.tmLanguage.json',
+    samplePath: 'docker.sample'
   },
   {
     id: 'dream-maker',
