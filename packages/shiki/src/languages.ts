@@ -247,7 +247,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'dart',
     scopeName: 'source.dart',
-    path: 'dart.tmLanguage.json'
+    path: 'dart.tmLanguage.json',
+    samplePath: 'dart.sample'
   },
   {
     id: 'diff',
