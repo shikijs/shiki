@@ -290,7 +290,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'erlang',
     scopeName: 'source.erlang',
-    path: 'erlang.tmLanguage.json'
+    path: 'erlang.tmLanguage.json',
+    samplePath: 'erlang.sample'
   },
   {
     id: 'fish',
