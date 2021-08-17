@@ -253,7 +253,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'diff',
     scopeName: 'source.diff',
-    path: 'diff.tmLanguage.json'
+    path: 'diff.tmLanguage.json',
+    samplePath: 'diff.sample'
   },
   {
     id: 'docker',
