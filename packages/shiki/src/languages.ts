@@ -208,6 +208,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'coffee',
     scopeName: 'source.coffee',
     path: 'coffee.tmLanguage.json',
+    samplePath: 'coffee.sample',
     embeddedLangs: ['javascript']
   },
   {
