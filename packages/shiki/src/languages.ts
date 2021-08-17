@@ -222,6 +222,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'crystal',
     scopeName: 'source.crystal',
     path: 'crystal.tmLanguage.json',
+    samplePath: 'crystal.sample',
     embeddedLangs: ['html', 'sql', 'css', 'c', 'javascript', 'shellscript']
   },
   {
