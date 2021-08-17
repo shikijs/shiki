@@ -303,6 +303,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'fsharp',
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
+    samplePath: 'fsharp.sample',
     aliases: ['f#'],
     embeddedLangs: ['markdown']
   },
