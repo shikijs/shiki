@@ -277,7 +277,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'elm',
     scopeName: 'source.elm',
-    path: 'elm.tmLanguage.json'
+    path: 'elm.tmLanguage.json',
+    samplePath: 'elm.sample'
   },
   {
     id: 'erb',
