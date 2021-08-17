@@ -229,6 +229,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'csharp',
     scopeName: 'source.cs',
     path: 'csharp.tmLanguage.json',
+    samplePath: 'csharp.sample',
     aliases: ['c#']
   },
   {
