@@ -201,6 +201,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'cobol',
     scopeName: 'source.cobol',
     path: 'cobol.tmLanguage.json',
+    samplePath: 'cobol.sample',
     embeddedLangs: ['sql', 'html', 'java']
   },
   {
