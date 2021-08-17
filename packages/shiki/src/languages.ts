@@ -215,6 +215,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'cpp',
     scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json',
+    samplePath: 'cpp.sample',
     embeddedLangs: ['sql']
   },
   {
