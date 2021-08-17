@@ -284,6 +284,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'erb',
     scopeName: 'text.html.erb',
     path: 'erb.tmLanguage.json',
+    samplePath: 'erb.sample',
     embeddedLangs: ['html', 'ruby']
   },
   {
