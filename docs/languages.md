@@ -136,6 +136,7 @@ export type Lang =
   | 'verilog'
   | 'vhdl'
   | 'viml'
+  | 'vue-html'
   | 'vue'
   | 'wasm'
   | 'wenyan' | '文言'

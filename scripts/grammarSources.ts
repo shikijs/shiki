@@ -190,8 +190,6 @@ export const languageAliases = {
  * Users should use languages that embed them
  */
 export const embeddedLanguagesToExclude = [
-  // `vue` or `html` instead
-  'vue-html',
   // `jinja-html` instead
   'jinja',
   // `php` instead
