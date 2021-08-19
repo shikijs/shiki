@@ -128,17 +128,20 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'abap',
     scopeName: 'source.abap',
-    path: 'abap.tmLanguage.json'
+    path: 'abap.tmLanguage.json',
+    samplePath: 'abap.sample'
   },
   {
     id: 'actionscript-3',
     scopeName: 'source.actionscript.3',
-    path: 'actionscript-3.tmLanguage.json'
+    path: 'actionscript-3.tmLanguage.json',
+    samplePath: 'actionscript-3.sample'
   },
   {
     id: 'ada',
     scopeName: 'source.ada',
-    path: 'ada.tmLanguage.json'
+    path: 'ada.tmLanguage.json',
+    samplePath: 'ada.sample'
   },
   {
     id: 'apache',
@@ -148,7 +151,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'apex',
     scopeName: 'source.apex',
-    path: 'apex.tmLanguage.json'
+    path: 'apex.tmLanguage.json',
+    samplePath: 'apex.sample'
   },
   {
     id: 'apl',
@@ -159,22 +163,26 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'applescript',
     scopeName: 'source.applescript',
-    path: 'applescript.tmLanguage.json'
+    path: 'applescript.tmLanguage.json',
+    samplePath: 'applescript.sample'
   },
   {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
-    path: 'asm.tmLanguage.json'
+    path: 'asm.tmLanguage.json',
+    samplePath: 'asm.sample'
   },
   {
     id: 'awk',
     scopeName: 'source.awk',
-    path: 'awk.tmLanguage.json'
+    path: 'awk.tmLanguage.json',
+    samplePath: 'awk.sample'
   },
   {
     id: 'bat',
     scopeName: 'source.batchfile',
     path: 'bat.tmLanguage.json',
+    samplePath: 'bat.sample',
     aliases: ['batch']
   },
   {
@@ -187,36 +195,42 @@ export const languages: ILanguageRegistration[] = [
     id: 'clojure',
     scopeName: 'source.clojure',
     path: 'clojure.tmLanguage.json',
+    samplePath: 'clojure.sample',
     aliases: ['clj']
   },
   {
     id: 'cobol',
     scopeName: 'source.cobol',
     path: 'cobol.tmLanguage.json',
+    samplePath: 'cobol.sample',
     embeddedLangs: ['sql', 'html', 'java']
   },
   {
     id: 'coffee',
     scopeName: 'source.coffee',
     path: 'coffee.tmLanguage.json',
+    samplePath: 'coffee.sample',
     embeddedLangs: ['javascript']
   },
   {
     id: 'cpp',
     scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json',
+    samplePath: 'cpp.sample',
     embeddedLangs: ['sql']
   },
   {
     id: 'crystal',
     scopeName: 'source.crystal',
     path: 'crystal.tmLanguage.json',
+    samplePath: 'crystal.sample',
     embeddedLangs: ['html', 'sql', 'css', 'c', 'javascript', 'shellscript']
   },
   {
     id: 'csharp',
     scopeName: 'source.cs',
     path: 'csharp.tmLanguage.json',
+    samplePath: 'csharp.sample',
     aliases: ['c#']
   },
   {
@@ -228,22 +242,26 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'd',
     scopeName: 'source.d',
-    path: 'd.tmLanguage.json'
+    path: 'd.tmLanguage.json',
+    samplePath: 'd.sample'
   },
   {
     id: 'dart',
     scopeName: 'source.dart',
-    path: 'dart.tmLanguage.json'
+    path: 'dart.tmLanguage.json',
+    samplePath: 'dart.sample'
   },
   {
     id: 'diff',
     scopeName: 'source.diff',
-    path: 'diff.tmLanguage.json'
+    path: 'diff.tmLanguage.json',
+    samplePath: 'diff.sample'
   },
   {
     id: 'docker',
     scopeName: 'source.dockerfile',
-    path: 'docker.tmLanguage.json'
+    path: 'docker.tmLanguage.json',
+    samplePath: 'docker.sample'
   },
   {
     id: 'dream-maker',
@@ -254,23 +272,27 @@ export const languages: ILanguageRegistration[] = [
     id: 'elixir',
     scopeName: 'source.elixir',
     path: 'elixir.tmLanguage.json',
+    samplePath: 'elixir.sample',
     embeddedLangs: ['html']
   },
   {
     id: 'elm',
     scopeName: 'source.elm',
-    path: 'elm.tmLanguage.json'
+    path: 'elm.tmLanguage.json',
+    samplePath: 'elm.sample'
   },
   {
     id: 'erb',
     scopeName: 'text.html.erb',
     path: 'erb.tmLanguage.json',
+    samplePath: 'erb.sample',
     embeddedLangs: ['html', 'ruby']
   },
   {
     id: 'erlang',
     scopeName: 'source.erlang',
-    path: 'erlang.tmLanguage.json'
+    path: 'erlang.tmLanguage.json',
+    samplePath: 'erlang.sample'
   },
   {
     id: 'fish',
@@ -282,6 +304,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'fsharp',
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
+    samplePath: 'fsharp.sample',
     aliases: ['f#'],
     embeddedLangs: ['markdown']
   },
