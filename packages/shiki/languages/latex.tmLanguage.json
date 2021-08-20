@@ -853,7 +853,7 @@
       ]
     },
     {
-      "begin": "(\\\\begin\\{empheq\\}(?:\\[.*\\])?)",
+      "begin": "(?:\\s*)(\\\\begin\\{empheq\\}(?:\\[.*\\])?)",
       "captures": {
         "1": {
           "patterns": [
@@ -864,7 +864,7 @@
         }
       },
       "contentName": "meta.math.block.latex support.class.math.block.environment.latex",
-      "end": "(\\\\end\\{empheq\\})",
+      "end": "(?:\\s*)(\\\\end\\{empheq\\})",
       "name": "meta.function.environment.math.latex",
       "patterns": [
         {
