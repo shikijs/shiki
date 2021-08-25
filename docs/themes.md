@@ -34,6 +34,7 @@ export type Theme =
   | 'dark-plus'
   | 'dracula-soft'
   | 'dracula'
+  | 'github-dark-dimmed'
   | 'github-dark'
   | 'github-light'
   | 'light-plus'
