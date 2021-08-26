@@ -86,8 +86,9 @@ export const marketplaceThemeSources: { [extPublisherAndId: string]: (string | s
     ['dracula-soft.json', 'extension/theme/dracula-soft.json']
   ],
   'GitHub.github-vscode-theme': [
-    ['github-dark.json', 'extension/themes/dark.json'],
-    ['github-light.json', 'extension/themes/light.json']
+    ['github-dark-dimmed.json', 'extension/themes/dark-dimmed.json'],
+    ['github-dark.json', 'extension/themes/dark-default.json'],
+    ['github-light.json', 'extension/themes/light-default.json']
   ],
   'antfu.theme-vitesse': [
     ['vitesse-dark.json', 'themes/vitesse-dark.json'],
