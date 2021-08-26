@@ -29,6 +29,7 @@ export type Lang =
   | 'apl'
   | 'applescript'
   | 'asm'
+  | 'astro'
   | 'awk'
   | 'bat' | 'batch'
   | 'c'

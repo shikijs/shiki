@@ -9,6 +9,7 @@ export type Lang =
   | 'apl'
   | 'applescript'
   | 'asm'
+  | 'astro'
   | 'awk'
   | 'bat' | 'batch'
   | 'c'
@@ -171,6 +172,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.asm.x86_64',
     path: 'asm.tmLanguage.json',
     samplePath: 'asm.sample'
+  },
+  {
+    id: 'astro',
+    scopeName: 'text.html.astro',
+    path: 'astro.tmLanguage.json',
+    embeddedLangs: ['css', 'sass', 'scss', 'tsx']
   },
   {
     id: 'awk',
