@@ -91,7 +91,8 @@ export const marketplaceThemeSources: { [extPublisherAndId: string]: (string | s
     ['github-light.json', 'extension/themes/light-default.json']
   ],
   'antfu.theme-vitesse': [
-    ['vitesse-dark.json', 'themes/vitesse-dark.json'],
-    ['vitesse-light.json', 'themes/vitesse-light.json']
-  ]
+    ['vitesse-dark.json', 'extension/themes/vitesse-dark.json'],
+    ['vitesse-light.json', 'extension/themes/vitesse-light.json']
+  ],
+  'zhuangtongfa.material-theme': [['one-dark-pro.json', 'extension/themes/OneDark-Pro.json']]
 }
