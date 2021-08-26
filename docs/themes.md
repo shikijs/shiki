@@ -26,7 +26,65 @@ shiki.getHighlighter({
   theme: t
 })
 ```
+## Dark Mode Support
 
+Because Shiki generates themes at build time, client-side theme switching support is not built in. There are two popular two options for supporting something like Dark Mode with Shiki.
+
+#### 1. Use the "css-variables" theme.
+
+This gives you access to CSS variable styling, which you can control across Dark and Light mode. See the [Theming with CSS Variables](#theming-with-css-variables) section below for more details.
+#### 2. Generate two Shiki code blocks, one for each theme.
+
+```css
+@media (prefers-color-scheme: light) {
+  .shiki.dark-plus {
+    display: none;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .shiki.light-plus {
+    display: none;
+  }
+}
+```
+
+## Theming with CSS Variables
+
+Shiki handles all theme logic at build-time, so that the browser only ever sees already-computed `style="color: #XXXXXX"` attributes. This allows more granular theme support in a way that doesn't require any additional steps to add global CSS to your page.
+
+In some cases, a user may require custom client-side theming via CSS. To support this, you may use the `css-variables` theme with Shiki. This is a special theme that uses CSS variables for colors instead of hardcoded values. Each token in your code block is given an attribute of `style="color: var(--code-block-XXX)"` which you can use to style your code blocks using CSS.
+
+
+```js
+const shiki = require('shiki')
+shiki.getHighlighter({theme: 'css-variables'})
+```
+
+Note that this client-side theme is less granular than most other supported VSCode themes. Also, be aware that this will generate unstyled code if you do not define these CSS variables somewhere else on your page:
+
+```html
+<style>
+  :root {
+    --code-foreground: #123456;
+    --code-background: #ABCDEF;
+    --code-token-default: #123456;
+    --code-token-constant: #123456;
+    --code-token-string: #123456;
+    --code-token-comment: #123456;
+    --code-token-keyword: #123456;
+    --code-token-parameter: #123456;
+    --code-token-function: #123456;
+    --code-token-string-expression: #123456;
+    --code-token-info: #123456;
+    --code-token-warn: #123456;
+    --code-token-warn: #123456;
+    --code-token-debug: #123456;
+    --code-token-strong: #123456;
+    --code-token-punctuation: #123456;
+    --code-token-link: #123456;
+  }
+</style>
+```
 ## All Themes
 
 ```ts

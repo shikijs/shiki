@@ -1,0 +1,200 @@
+{
+  "name": "css-variables",
+  "type": "light",
+  "colors": {
+    "editor.foreground": "var(--code-foreground)",
+    "editor.background": "var(--code-background)"
+  },
+  "tokenColors": [
+    {
+      "settings": {
+        "foreground": "var(--code-token-default)"
+      }
+    },
+    {
+      "scope": [
+        "keyword.operator.accessor",
+        "meta.group.braces.round.function.arguments",
+        "meta.template.expression",
+        "markup.fenced_code meta.embedded.block"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-default)"
+      }
+    },
+    {
+      "scope": "emphasis",
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": ["strong", "markup.heading.markdown", "markup.bold.markdown"],
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "scope": ["markup.italic.markdown"],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "meta.link.inline.markdown",
+      "settings": {
+        "fontStyle": "underline",
+        "foreground": "var(--code-token-constant)"
+      }
+    },
+    {
+      "scope": ["string", "markup.fenced_code", "markup.inline"],
+      "settings": {
+        "foreground": "var(--code-token-string)"
+      }
+    },
+    {
+      "scope": ["comment", "string.quoted.docstring.multi"],
+      "settings": {
+        "foreground": "var(--code-token-comment)"
+      }
+    },
+    {
+      "scope": [
+        "constant.numeric",
+        "constant.language",
+        "constant.other.placeholder",
+        "constant.character.format.placeholder",
+        "variable.language.this",
+        "variable.other.object",
+        "variable.other.class",
+        "variable.other.constant",
+        "meta.property-name",
+        "meta.property-value",
+        "support"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-constant)"
+      }
+    },
+    {
+      "scope": [
+        "keyword",
+        "storage.modifier",
+        "storage.type",
+        "storage.control.clojure",
+        "entity.name.function.clojure",
+        "entity.name.tag.yaml",
+        "support.function.node",
+        "support.type.property-name.json",
+        "punctuation.separator.key-value",
+        "punctuation.definition.template-expression"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-keyword)"
+      }
+    },
+    {
+      "scope": "variable.parameter.function",
+      "settings": {
+        "foreground": "var(--code-token-parameter)"
+      }
+    },
+    {
+      "scope": [
+        "support.function",
+        "entity.name.type",
+        "entity.other.inherited-class",
+        "meta.function-call",
+        "meta.instance.constructor",
+        "entity.other.attribute-name",
+        "entity.name.function",
+        "constant.keyword.clojure"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-function)"
+      }
+    },
+    {
+      "scope": [
+        "entity.name.tag",
+        "string.quoted",
+        "string.regexp",
+        "string.interpolated",
+        "string.template",
+        "string.unquoted.plain.out.yaml",
+        "keyword.other.template"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-string-expression)"
+      }
+    },
+    {
+      "scope": "token.info-token",
+      "settings": {
+        "foreground": "var(--code-token-info)"
+      }
+    },
+    {
+      "scope": "token.warn-token",
+      "settings": {
+        "foreground": "var(--code-token-warn)"
+      }
+    },
+    {
+      "scope": "token.error-token",
+      "settings": {
+        "foreground": "var(--code-token-warn)"
+      }
+    },
+    {
+      "scope": "token.debug-token",
+      "settings": {
+        "foreground": "var(--code-token-debug)"
+      }
+    },
+    {
+      "scope": ["strong", "markup.heading.markdown", "markup.bold.markdown"],
+      "settings": {
+        "foreground": "var(--code-token-strong)"
+      }
+    },
+    {
+      "scope": [
+        "punctuation.definition.arguments",
+        "punctuation.definition.dict",
+        "punctuation.separator",
+        "meta.function-call.arguments"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-punctuation)"
+      }
+    },
+    {
+      "name": "[Custom] Markdown links",
+      "scope": ["markup.underline.link", "punctuation.definition.metadata.markdown"],
+      "settings": {
+        "foreground": "var(--code-token-link)"
+      }
+    },
+    {
+      "name": "[Custom] Markdown list",
+      "scope": ["beginning.punctuation.definition.list.markdown"],
+      "settings": {
+        "foreground": "var(--code-token-string)"
+      }
+    },
+    {
+      "name": "[Custom] Markdown punctuation definition brackets",
+      "scope": [
+        "punctuation.definition.string.begin.markdown",
+        "punctuation.definition.string.end.markdown",
+        "string.other.link.title.markdown",
+        "string.other.link.description.markdown"
+      ],
+      "settings": {
+        "foreground": "var(--code-token-keyword)"
+      }
+    }
+  ]
+}
