@@ -620,13 +620,13 @@
     "at_rule": {
       "patterns": [
         {
-          "begin": "\\s*(@)(import|require)\\b\\s*",
+          "begin": "\\s*((@)(import|require))\\b\\s*",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.import.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.import.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "end": "\\s*((?=;|$|\\n))",
@@ -643,13 +643,13 @@
           ]
         },
         {
-          "begin": "\\s*(@)(extend[s]?)\\b\\s*",
+          "begin": "\\s*((@)(extend[s]?)\\b)\\s*",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.extend.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.extend.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "end": "\\s*((?=;|$|\\n))",
@@ -666,37 +666,37 @@
           ]
         },
         {
-          "match": "^\\s*(@)(font-face)\\b",
+          "match": "^\\s*((@)font-face)\\b",
           "captures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.fontface.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.fontface.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "name": "meta.at-rule.fontface.stylus"
         },
         {
-          "match": "^\\s*(@)(css)\\b",
+          "match": "^\\s*((@)css)\\b",
           "captures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.css.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.css.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "name": "meta.at-rule.css.stylus"
         },
         {
-          "begin": "\\s*(@)(charset)\\b\\s*",
+          "begin": "\\s*((@)charset)\\b\\s*",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.charset.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.charset.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "end": "\\s*((?=;|$|\\n))",
@@ -708,13 +708,13 @@
           ]
         },
         {
-          "begin": "\\s*(@)(keyframes)\\b\\s+([a-zA-Z_-][a-zA-Z0-9_-]*)",
+          "begin": "\\s*((@)keyframes)\\b\\s+([a-zA-Z_-][a-zA-Z0-9_-]*)",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.keyframes.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.keyframes.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             },
             "3": {
               "name": "entity.name.function.keyframe.stylus"
@@ -735,13 +735,13 @@
           ]
         },
         {
-          "match": "^\\s*(@)(media)\\b",
+          "match": "^\\s*((@)media)\\b",
           "captures": {
             "1": {
-              "name": "punctuation.definition.keyword.stylus"
+              "name": "keyword.control.at-rule.media.stylus"
             },
             "2": {
-              "name": "keyword.control.at-rule.media.stylus"
+              "name": "punctuation.definition.keyword.stylus"
             }
           },
           "name": "meta.at-rule.media.stylus"
