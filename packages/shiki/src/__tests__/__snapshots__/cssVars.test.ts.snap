@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The theme with css-variables renders correctly 1`] = `
+"<pre class=\\"shiki\\" style=\\"background-color: var(--code-background)\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">import { getHighlighter } from </span><span style=\\"color: #000000\\">&#39;../index&#39;</span></span>
+<span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">test(</span><span style=\\"color: #000000\\">&#39;The theme with css-variables renders correctly&#39;</span><span style=\\"color: #000000\\">, async () =&gt; {</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">  const highlighter = await getHighlighter({</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">    theme: </span><span style=\\"color: #000000\\">&#39;css-variables&#39;</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">  })</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">  const out = highlighter.codeToHtml(</span><span style=\\"color: #000000\\">&quot;console.log(&#39;shiki&#39;);&quot;</span><span style=\\"color: #000000\\">, </span><span style=\\"color: #000000\\">&#39;js&#39;</span><span style=\\"color: #000000\\">)</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">  expect(out).toMatchSnapshot()</span></span>
+<span class=\\"line\\"><span style=\\"color: #000000\\">})</span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
