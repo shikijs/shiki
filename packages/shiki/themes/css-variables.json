@@ -2,13 +2,13 @@
   "name": "css-variables",
   "type": "light",
   "colors": {
-    "editor.foreground": "var(--code-foreground)",
-    "editor.background": "var(--code-background)"
+    "editor.foreground": "#000001",
+    "editor.background": "#000002"
   },
   "tokenColors": [
     {
       "settings": {
-        "foreground": "var(--code-token-default)"
+        "foreground": "#000001"
       }
     },
     {
@@ -19,7 +19,7 @@
         "markup.fenced_code meta.embedded.block"
       ],
       "settings": {
-        "foreground": "var(--code-token-default)"
+        "foreground": "#000001"
       }
     },
     {
@@ -44,19 +44,19 @@
       "scope": "meta.link.inline.markdown",
       "settings": {
         "fontStyle": "underline",
-        "foreground": "var(--code-token-constant)"
+        "foreground": "#000004"
       }
     },
     {
       "scope": ["string", "markup.fenced_code", "markup.inline"],
       "settings": {
-        "foreground": "var(--code-token-string)"
+        "foreground": "#000005"
       }
     },
     {
       "scope": ["comment", "string.quoted.docstring.multi"],
       "settings": {
-        "foreground": "var(--code-token-comment)"
+        "foreground": "#000006"
       }
     },
     {
@@ -74,7 +74,7 @@
         "support"
       ],
       "settings": {
-        "foreground": "var(--code-token-constant)"
+        "foreground": "#000004"
       }
     },
     {
@@ -91,13 +91,13 @@
         "punctuation.definition.template-expression"
       ],
       "settings": {
-        "foreground": "var(--code-token-keyword)"
+        "foreground": "#000007"
       }
     },
     {
       "scope": "variable.parameter.function",
       "settings": {
-        "foreground": "var(--code-token-parameter)"
+        "foreground": "#000008"
       }
     },
     {
@@ -112,7 +112,7 @@
         "constant.keyword.clojure"
       ],
       "settings": {
-        "foreground": "var(--code-token-function)"
+        "foreground": "#000009"
       }
     },
     {
@@ -126,37 +126,7 @@
         "keyword.other.template"
       ],
       "settings": {
-        "foreground": "var(--code-token-string-expression)"
-      }
-    },
-    {
-      "scope": "token.info-token",
-      "settings": {
-        "foreground": "var(--code-token-info)"
-      }
-    },
-    {
-      "scope": "token.warn-token",
-      "settings": {
-        "foreground": "var(--code-token-warn)"
-      }
-    },
-    {
-      "scope": "token.error-token",
-      "settings": {
-        "foreground": "var(--code-token-warn)"
-      }
-    },
-    {
-      "scope": "token.debug-token",
-      "settings": {
-        "foreground": "var(--code-token-debug)"
-      }
-    },
-    {
-      "scope": ["strong", "markup.heading.markdown", "markup.bold.markdown"],
-      "settings": {
-        "foreground": "var(--code-token-strong)"
+        "foreground": "#000010"
       }
     },
     {
@@ -167,21 +137,21 @@
         "meta.function-call.arguments"
       ],
       "settings": {
-        "foreground": "var(--code-token-punctuation)"
+        "foreground": "#000011"
       }
     },
     {
       "name": "[Custom] Markdown links",
       "scope": ["markup.underline.link", "punctuation.definition.metadata.markdown"],
       "settings": {
-        "foreground": "var(--code-token-link)"
+        "foreground": "#000012"
       }
     },
     {
       "name": "[Custom] Markdown list",
       "scope": ["beginning.punctuation.definition.list.markdown"],
       "settings": {
-        "foreground": "var(--code-token-string)"
+        "foreground": "#000005"
       }
     },
     {
@@ -193,7 +163,7 @@
         "string.other.link.description.markdown"
       ],
       "settings": {
-        "foreground": "var(--code-token-keyword)"
+        "foreground": "#000007"
       }
     }
   ]

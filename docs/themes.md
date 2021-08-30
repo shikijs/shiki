@@ -52,7 +52,7 @@ This gives you access to CSS variable styling, which you can control across Dark
 
 Shiki handles all theme logic at build-time, so that the browser only ever sees already-computed `style="color: #XXXXXX"` attributes. This allows more granular theme support in a way that doesn't require any additional steps to add global CSS to your page.
 
-In some cases, a user may require custom client-side theming via CSS. To support this, you may use the `css-variables` theme with Shiki. This is a special theme that uses CSS variables for colors instead of hardcoded values. Each token in your code block is given an attribute of `style="color: var(--code-block-XXX)"` which you can use to style your code blocks using CSS.
+In some cases, a user may require custom client-side theming via CSS. To support this, you may use the `css-variables` theme with Shiki. This is a special theme that uses CSS variables for colors instead of hardcoded values. Each token in your code block is given an attribute of `style="color: var(--shiki-XXX)"` which you can use to style your code blocks using CSS.
 
 
 ```js
@@ -65,23 +65,17 @@ Note that this client-side theme is less granular than most other supported VSCo
 ```html
 <style>
   :root {
-    --code-foreground: #123456;
-    --code-background: #ABCDEF;
-    --code-token-default: #123456;
-    --code-token-constant: #123456;
-    --code-token-string: #123456;
-    --code-token-comment: #123456;
-    --code-token-keyword: #123456;
-    --code-token-parameter: #123456;
-    --code-token-function: #123456;
-    --code-token-string-expression: #123456;
-    --code-token-info: #123456;
-    --code-token-warn: #123456;
-    --code-token-warn: #123456;
-    --code-token-debug: #123456;
-    --code-token-strong: #123456;
-    --code-token-punctuation: #123456;
-    --code-token-link: #123456;
+    --shiki-color-text: #EEEEEE;
+    --shiki-color-background: #333333;
+    --shiki-token-constant: #660000;
+    --shiki-token-string: #770000;
+    --shiki-token-comment: #880000;
+    --shiki-token-keyword: #990000;
+    --shiki-token-parameter: #AA0000;
+    --shiki-token-function: #BB0000;
+    --shiki-token-string-expression: #CC0000;
+    --shiki-token-punctuation: #DD0000;
+    --shiki-token-link: #EE0000;
   }
 </style>
 ```
@@ -89,6 +83,7 @@ Note that this client-side theme is less granular than most other supported VSCo
 
 ```ts
 export type Theme =
+  | 'css-variables'
   | 'dark-plus'
   | 'dracula-soft'
   | 'dracula'
