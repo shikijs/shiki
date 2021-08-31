@@ -56,6 +56,33 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   let _currentTheme: IShikiTheme | undefined
   await _registry.loadLanguages(_languages)
 
+  /**
+   * Shiki was designed for VSCode, so CSS variables are not currently supported.
+   * See: https://github.com/shikijs/shiki/pull/212#issuecomment-906924986
+   *
+   * Instead, we work around this by using valid hex color codes as lookups in a
+   * final "repair" step which translates those codes to the correct CSS variables.
+   */
+  const COLOR_REPLACEMENTS: Record<string, string> = {
+    '#000001': 'var(--shiki-color-text)',
+    '#000002': 'var(--shiki-color-background)',
+    '#000004': 'var(--shiki-token-constant)',
+    '#000005': 'var(--shiki-token-string)',
+    '#000006': 'var(--shiki-token-comment)',
+    '#000007': 'var(--shiki-token-keyword)',
+    '#000008': 'var(--shiki-token-parameter)',
+    '#000009': 'var(--shiki-token-function)',
+    '#000010': 'var(--shiki-token-string-expression)',
+    '#000011': 'var(--shiki-token-punctuation)',
+    '#000012': 'var(--shiki-token-link)'
+  }
+
+  function fixCssVariablesColorMap(colorMap: string[]) {
+    colorMap.forEach((val, i) => {
+      colorMap[i] = COLOR_REPLACEMENTS[val] || val
+    })
+  }
+
   function getTheme(theme?: IThemeRegistration) {
     const _theme = theme ? _registry.getTheme(theme) : _defaultTheme
     if (!_theme) {
@@ -66,6 +93,9 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
       _currentTheme = _theme
     }
     const _colorMap = _registry.getColorMap()
+    if (_theme.name === 'css-variables') {
+      fixCssVariablesColorMap(_colorMap)
+    }
     return { _theme, _colorMap }
   }
 
