@@ -77,7 +77,9 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     '#000012': 'var(--shiki-token-link)'
   }
 
-  function fixCssVariablesColorMap(colorMap: string[]) {
+  function fixCssVariablesTheme(theme: IShikiTheme, colorMap: string[]) {
+    theme.bg = COLOR_REPLACEMENTS[theme.bg] || theme.bg
+    theme.fg = COLOR_REPLACEMENTS[theme.fg] || theme.fg
     colorMap.forEach((val, i) => {
       colorMap[i] = COLOR_REPLACEMENTS[val] || val
     })
@@ -94,7 +96,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     }
     const _colorMap = _registry.getColorMap()
     if (_theme.name === 'css-variables') {
-      fixCssVariablesColorMap(_colorMap)
+      fixCssVariablesTheme(_theme, _colorMap)
     }
     return { _theme, _colorMap }
   }
