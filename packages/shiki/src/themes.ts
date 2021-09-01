@@ -1,4 +1,5 @@
 export type Theme =
+  | 'css-variables'
   | 'dark-plus'
   | 'dracula-soft'
   | 'dracula'
@@ -25,6 +26,7 @@ export type Theme =
   | 'vitesse-light'
 
 export const themes: Theme[] = [
+  'css-variables',
   'dark-plus',
   'dracula-soft',
   'dracula',
