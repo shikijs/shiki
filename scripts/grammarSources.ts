@@ -155,7 +155,11 @@ export const githubGrammarSources: (string | [string, string])[] = [
   'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json',
   'https://github.com/bmalehorn/vscode-fish/blob/master/syntaxes/fish.tmLanguage.json',
   'https://github.com/snowpackjs/astro/blob/main/tools/vscode/syntaxes/astro.tmLanguage.json',
-  ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage']
+  ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage'],
+  [
+    'ballerina',
+    'https://github.com/ballerina-platform/ballerina-grammar/blob/master/syntaxes/ballerina.tmLanguage'
+  ]
 ]
 
 /**
