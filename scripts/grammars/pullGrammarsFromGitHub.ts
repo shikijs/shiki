@@ -5,8 +5,8 @@ import kebabCase from 'lodash.kebabcase'
 import path from 'path'
 import { githubGrammarSources } from '../grammarSources'
 import { convertGHURLToDownloadURL, get } from '../util/download'
-import json5 from 'json5'
 import chalk from 'chalk'
+import { parseJson } from '../util/parse'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
@@ -31,14 +31,14 @@ async function downloadGrammarFromGH(urlOrNameWithUrl: string | [string, string]
 
   let contentObj
   if (ghUrl.endsWith('.json')) {
-    contentObj = json5.parse(content)
+    contentObj = parseJson(content)
   } else if (ghUrl.endsWith('.plist')) {
     contentObj = plistParse(content)
   } else if (ghUrl.endsWith('.yml') || ghUrl.endsWith('.yaml')) {
     contentObj = yaml.load(content)
   } else {
     if (content[0] === '{') {
-      contentObj = json5.parse(content)
+      contentObj = parseJson(content)
     } else if (content[0] === '<') {
       contentObj = plistParse(content)
     } else {

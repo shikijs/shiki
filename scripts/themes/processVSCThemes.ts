@@ -1,16 +1,16 @@
 import fs from 'fs'
 import path from 'path'
-import json5 from 'json5'
+import { parseJson } from '../util/parse'
 
 const THEME_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/themes')
 
-function readJson5(f) {
+function readJsonC(f: string) {
   const p = path.resolve(THEME_FOLDER_PATH, f)
   if (!fs.existsSync(p)) {
     return undefined
   }
 
-  return json5.parse(fs.readFileSync(p, 'utf-8'))
+  return parseJson(fs.readFileSync(p, 'utf-8'))
 }
 
 /**
@@ -21,8 +21,8 @@ function readJson5(f) {
  * - Unshift `editor.foreground` and `editor.background` to beginning of `tokenColors`.
  * - Remove dark_vs and light_vs
  */
-const darkVSContent = readJson5('dark_vs.json')
-const darkPlusContent = readJson5('dark_plus.json')
+const darkVSContent = readJsonC('dark_vs.json')
+const darkPlusContent = readJsonC('dark_plus.json')
 
 if (darkVSContent && darkPlusContent) {
   delete darkPlusContent['include']
@@ -49,8 +49,8 @@ if (darkVSContent && darkPlusContent) {
   )
 }
 
-const lightVSContent = readJson5('light_vs.json')
-const lightPlusContent = readJson5('light_plus.json')
+const lightVSContent = readJsonC('light_vs.json')
+const lightPlusContent = readJsonC('light_plus.json')
 
 if (lightVSContent && lightPlusContent) {
   delete lightPlusContent['include']

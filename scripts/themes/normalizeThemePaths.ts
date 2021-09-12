@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import json5 from 'json5'
 import { vscodeThemesToRename, vscodeThemesToRemove } from '../themeSources'
 import chalk from 'chalk'
+import { parseJson } from '../util/parse'
 
 const THEME_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/themes')
 
@@ -55,7 +55,7 @@ export function normalizeThemeFile(f: string) {
   const fName = fNameWithoutSuffix.toLowerCase()
 
   if (fs.existsSync(fPath)) {
-    const parsedContent = json5.parse(fs.readFileSync(fPath, 'utf-8'))
+    const parsedContent = parseJson(fs.readFileSync(fPath, 'utf-8'))
 
     if (!parsedContent.name || parsedContent.name !== fName) {
       parsedContent.name = fName

@@ -1,7 +1,7 @@
-import JSON5 from 'json5'
 import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import { parse, ParseError } from 'jsonc-parser'
 import type { IShikiTheme } from './types'
 
 export const isWebWorker =
@@ -103,7 +103,16 @@ async function _fetchAssets(filepath: string): Promise<string> {
 }
 
 async function _fetchJSONAssets(filepath: string) {
-  return JSON5.parse(await _fetchAssets(filepath))
+  const errors: ParseError[] = []
+  const rawTheme = parse(await _fetchAssets(filepath), errors, {
+    allowTrailingComma: true
+  })
+
+  if (errors.length) {
+    throw errors[0]
+  }
+
+  return rawTheme
 }
 
 /**

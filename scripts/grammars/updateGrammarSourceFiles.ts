@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import json5 from 'json5'
 import { embeddedLanguagesToExclude, languageAliases } from '../grammarSources'
+import { parseJson } from '../util/parse'
 
 const langDir = path.resolve(__dirname, '../../packages/shiki/languages')
 const sampleDir = path.resolve(__dirname, '../../packages/shiki/samples')
@@ -19,7 +19,7 @@ langIds
   .forEach(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
     const grammarSrc = fs.readFileSync(grammarPath, 'utf-8')
-    const grammar = json5.parse(grammarSrc)
+    const grammar = parseJson(grammarSrc)
 
     scopeToIdMap[grammar.scopeName] = id
   })
@@ -29,7 +29,7 @@ const langRegistrationContent = langIds
   .map(id => {
     const grammarPath = path.resolve(langDir, `${id}.tmLanguage.json`)
     const grammarSrc = fs.readFileSync(grammarPath, 'utf-8')
-    const grammar = json5.parse(grammarSrc)
+    const grammar = parseJson(grammarSrc)
 
     let regContent = `  {
     id: '${id}',
