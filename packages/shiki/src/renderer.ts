@@ -7,12 +7,6 @@ export interface HtmlRendererOptions {
   bg?: string
 }
 
-const FONT_STYLE_TO_CSS = {
-  [FontStyle.Italic]: 'font-style: italic',
-  [FontStyle.Bold]: 'font-weight: bold',
-  [FontStyle.Underline]: 'text-decoration: underline'
-}
-
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
 
@@ -29,8 +23,14 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
 
     l.forEach(token => {
       const cssDeclarations = [`color: ${token.color || options.fg}`]
-      if (token.fontStyle > FontStyle.None) {
-        cssDeclarations.push(FONT_STYLE_TO_CSS[token.fontStyle])
+      if (token.fontStyle & FontStyle.Italic) {
+        cssDeclarations.push('font-style: italic')
+      }
+      if (token.fontStyle & FontStyle.Bold) {
+        cssDeclarations.push('font-weight: bold')
+      }
+      if (token.fontStyle & FontStyle.Underline) {
+        cssDeclarations.push('text-decoration: underline')
       }
       html += `<span style="${cssDeclarations.join('; ')}">${escapeHtml(token.content)}</span>`
     })
