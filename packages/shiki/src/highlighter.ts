@@ -57,7 +57,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   await _registry.loadLanguages(_languages)
 
   /**
-   * Shiki was designed for VSCode, so CSS variables are not currently supported.
+   * Shiki was designed for VS Code, so CSS variables are not currently supported.
    * See: https://github.com/shikijs/shiki/pull/212#issuecomment-906924986
    *
    * Instead, we work around this by using valid hex color codes as lookups in a
