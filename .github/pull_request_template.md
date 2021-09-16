@@ -1,3 +1,6 @@
+- [ ] Add a test if possible
+- [ ] Format all commit messages with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
 <!-- If fixing a bug -->
 
 - [ ] This PR fixes #
