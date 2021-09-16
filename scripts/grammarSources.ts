@@ -155,11 +155,7 @@ export const githubGrammarSources: (string | [string, string])[] = [
   'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json',
   'https://github.com/bmalehorn/vscode-fish/blob/master/syntaxes/fish.tmLanguage.json',
   'https://github.com/snowpackjs/astro/blob/main/tools/vscode/syntaxes/astro.tmLanguage.json',
-  // Temporary fix for https://github.com/shikijs/shiki/issues/219#issuecomment-921245374
-  [
-    'csharp',
-    'https://github.com/microsoft/vscode/blob/bd2493499dab8aafe8d216dfa4de7dafd04b4c94/extensions/csharp/syntaxes/csharp.tmLanguage.json'
-  ]
+  ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage']
 ]
 
 /**
