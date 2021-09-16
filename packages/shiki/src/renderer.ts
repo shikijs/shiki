@@ -5,6 +5,7 @@ export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
+  wrapperClasses?: string[]
 }
 
 const FONT_STYLE_TO_CSS = {
@@ -15,10 +16,15 @@ const FONT_STYLE_TO_CSS = {
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const classes = options.wrapperClasses || ['shiki']
 
   let html = ''
 
-  html += `<pre class="shiki" style="background-color: ${bg}">`
+  html += '<pre '
+  if (classes.length) {
+    html += `class="${classes.join(' ')}" `
+  }
+  html += `style="background-color: ${bg}">`
   if (options.langId) {
     html += `<div class="language-id">${options.langId}</div>`
   }

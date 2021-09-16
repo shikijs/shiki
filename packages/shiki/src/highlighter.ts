@@ -123,14 +123,20 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return tokenizeWithTheme(_theme, _colorMap, code, _grammer, options)
   }
 
-  function codeToHtml(code: string, lang = 'text', theme?: StringLiteralUnion<Theme>) {
+  function codeToHtml(
+    code: string,
+    lang = 'text',
+    theme?: StringLiteralUnion<Theme>,
+    wrapperClasses?: string[]
+  ) {
     const tokens = codeToThemedTokens(code, lang, theme, {
       includeExplanation: false
     })
     const { _theme } = getTheme(theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
-      bg: _theme.bg
+      bg: _theme.bg,
+      wrapperClasses
     })
   }
 

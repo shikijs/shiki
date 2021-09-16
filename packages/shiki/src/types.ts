@@ -33,11 +33,13 @@ export interface Highlighter {
   /**
    * Convert code to HTML tokens.
    * `lang` and `theme` must have been loaded.
+   * `wrapperClasses` defaults to ['shiki].
    */
   codeToHtml(
     code: string,
     lang?: StringLiteralUnion<Lang>,
-    theme?: StringLiteralUnion<Theme>
+    theme?: StringLiteralUnion<Theme>,
+    wrapperClasses?: string[]
   ): string
 
   /**
