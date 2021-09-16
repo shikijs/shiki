@@ -11,6 +11,7 @@ export type Lang =
   | 'asm'
   | 'astro'
   | 'awk'
+  | 'ballerina' | 'bal'
   | 'bat' | 'batch'
   | 'c'
   | 'clojure' | 'clj'
@@ -184,6 +185,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.awk',
     path: 'awk.tmLanguage.json',
     samplePath: 'awk.sample'
+  },
+  {
+    id: 'ballerina',
+    scopeName: 'source.ballerina',
+    path: 'ballerina.tmLanguage.json',
+    samplePath: 'ballerina.sample',
+    aliases: ['bal']
   },
   {
     id: 'bat',

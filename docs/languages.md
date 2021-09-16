@@ -31,6 +31,7 @@ export type Lang =
   | 'asm'
   | 'astro'
   | 'awk'
+  | 'ballerina' | 'bal'
   | 'bat' | 'batch'
   | 'c'
   | 'clojure' | 'clj'
