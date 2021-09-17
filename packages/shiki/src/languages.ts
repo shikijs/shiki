@@ -11,7 +11,7 @@ export type Lang =
   | 'asm'
   | 'astro'
   | 'awk'
-  | 'ballerina' | 'bal'
+  | 'ballerina'
   | 'bat' | 'batch'
   | 'c'
   | 'clojure' | 'clj'
@@ -178,6 +178,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'astro',
     scopeName: 'text.html.astro',
     path: 'astro.tmLanguage.json',
+    samplePath: 'astro.sample',
     embeddedLangs: ['css', 'sass', 'scss', 'tsx']
   },
   {
@@ -190,8 +191,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'ballerina',
     scopeName: 'source.ballerina',
     path: 'ballerina.tmLanguage.json',
-    samplePath: 'ballerina.sample',
-    aliases: ['bal']
+    samplePath: 'ballerina.sample'
   },
   {
     id: 'bat',
