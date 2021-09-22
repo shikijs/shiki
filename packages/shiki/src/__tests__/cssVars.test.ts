@@ -2,7 +2,8 @@ import { getHighlighter } from '../index'
 
 test('The theme with css-variables renders correctly', async () => {
   const highlighter = await getHighlighter({
-    theme: 'css-variables'
+    theme: 'css-variables',
+    langs: ['js']
   })
 
   const kindOfAQuine = `
