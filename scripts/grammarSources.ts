@@ -159,7 +159,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
   [
     'ballerina',
     'https://github.com/ballerina-platform/ballerina-grammar/blob/master/syntaxes/ballerina.tmLanguage'
-  ]
+  ],
+  'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json'
 ]
 
 /**

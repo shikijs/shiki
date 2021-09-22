@@ -107,6 +107,7 @@ export type Lang =
   | 'svelte'
   | 'swift'
   | 'system-verilog'
+  | 'tasl'
   | 'tcl'
   | 'tex'
   | 'toml'
@@ -747,6 +748,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'system-verilog',
     scopeName: 'source.systemverilog',
     path: 'system-verilog.tmLanguage.json'
+  },
+  {
+    id: 'tasl',
+    scopeName: 'source.tasl',
+    path: 'tasl.tmLanguage.json',
+    samplePath: 'tasl.sample'
   },
   {
     id: 'tcl',

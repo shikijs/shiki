@@ -127,6 +127,7 @@ export type Lang =
   | 'svelte'
   | 'swift'
   | 'system-verilog'
+  | 'tasl'
   | 'tcl'
   | 'tex'
   | 'toml'
