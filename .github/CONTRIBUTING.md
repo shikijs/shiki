@@ -4,8 +4,8 @@ Thanks for lending a hand 👋
 
 Here are a few ways to contribute:
 
-- [Add a theme](./docs/themes.md#adding-theme)
-- [Add a language grammar](./docs/languages.md#adding-grammar)
+- [Add a theme](../docs/themes.md#adding-theme)
+- [Add a language grammar](../docs/languages.md#adding-grammar)
 - Fix a bug
 
 ## Coding conventions
