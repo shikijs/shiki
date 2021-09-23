@@ -1026,6 +1026,33 @@
       "name": "meta.function.environment.latex.mpost"
     },
     {
+      "begin": "(?:\\s*)?((\\\\)begin(\\{)(markdown)\\})",
+      "captures": {
+        "1": {
+          "name": "support.function.be.latex"
+        },
+        "2": {
+          "name": "punctuation.definition.function.latex"
+        },
+        "3": {
+          "name": "punctuation.definition.arguments.begin.latex"
+        },
+        "4": {
+          "name": "variable.parameter.function.latex"
+        },
+        "5": {
+          "name": "punctuation.definition.arguments.end.latex"
+        }
+      },
+      "end": "((\\\\)end)(\\{)(markdown)(\\})",
+      "contentName": "meta.embedded.markdown_latex_combined",
+      "patterns": [
+        {
+          "include": "text.tex.markdown_latex_combined"
+        }
+      ]
+    },
+    {
       "begin": "(?:\\s*)((\\\\)begin)(\\{)(\\w+[*]?)(\\})",
       "captures": {
         "1": {
