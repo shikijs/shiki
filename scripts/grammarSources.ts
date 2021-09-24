@@ -87,6 +87,7 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'prolog',
     'https://github.com/arthwang/vsc-prolog/blob/master/syntaxes/prolog.swi.tmLanguage.json'
   ],
+  ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   'https://github.com/AdaCore/ada_language_server/blob/master/integration/vscode/ada/advanced/ada.tmLanguage.json',
   'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage',
   'https://github.com/forcedotcom/apex-tmLanguage/blob/main/grammars/apex.tmLanguage',

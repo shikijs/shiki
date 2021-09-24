@@ -23,6 +23,7 @@ export type Lang =
   | 'crystal'
   | 'csharp' | 'c#'
   | 'css'
+  | 'cue'
   | 'd'
   | 'dart'
   | 'diff'
@@ -268,6 +269,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.css',
     path: 'css.tmLanguage.json',
     samplePath: 'css.sample'
+  },
+  {
+    id: 'cue',
+    scopeName: 'source.cue',
+    path: 'cue.tmLanguage.json',
+    samplePath: 'cue.sample'
   },
   {
     id: 'd',
