@@ -585,7 +585,7 @@
       }
     },
     "page-directive": {
-      "name": "meta.directive.page.cshtml",
+      "name": "meta.directive",
       "match": "(@)(page)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -608,7 +608,7 @@
       }
     },
     "addTagHelper-directive": {
-      "name": "meta.directive.addTagHelper.razor",
+      "name": "meta.directive",
       "match": "(@)(addTagHelper)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -631,7 +631,7 @@
       }
     },
     "removeTagHelper-directive": {
-      "name": "meta.directive.removeTagHelper.razor",
+      "name": "meta.directive",
       "match": "(@)(removeTagHelper)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -654,7 +654,7 @@
       }
     },
     "tagHelperPrefix-directive": {
-      "name": "meta.directive.tagHelperPrefix.razor",
+      "name": "meta.directive",
       "match": "(@)(tagHelperPrefix)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -691,7 +691,7 @@
       "match": "[^$]+"
     },
     "model-directive": {
-      "name": "meta.directive.model.cshtml",
+      "name": "meta.directive",
       "match": "(@)(model)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -714,7 +714,7 @@
       }
     },
     "inherits-directive": {
-      "name": "meta.directive.inherits.cshtml",
+      "name": "meta.directive",
       "match": "(@)(inherits)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -737,7 +737,7 @@
       }
     },
     "implements-directive": {
-      "name": "meta.directive.implements.razor",
+      "name": "meta.directive",
       "match": "(@)(implements)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -760,7 +760,7 @@
       }
     },
     "layout-directive": {
-      "name": "meta.directive.layout.razor",
+      "name": "meta.directive",
       "match": "(@)(layout)\\s+([^$]+)?",
       "captures": {
         "1": {
@@ -783,7 +783,7 @@
       }
     },
     "namespace-directive": {
-      "name": "meta.directive.namespace.razor",
+      "name": "meta.directive",
       "match": "(@)(namespace)\\s+([^\\s]+)?",
       "captures": {
         "1": {
@@ -817,7 +817,7 @@
       }
     },
     "inject-directive": {
-      "name": "meta.directive.inject.cshtml",
+      "name": "meta.directive",
       "match": "(@)(inject)\\s*([\\S\\s]+?)?\\s*([_[:alpha:]][_[:alnum:]]*)?\\s*(?=$)",
       "captures": {
         "1": {
@@ -843,7 +843,7 @@
       }
     },
     "attribute-directive": {
-      "name": "meta.directive.attribute.razor",
+      "name": "meta.directive",
       "begin": "(@)(attribute)\\b\\s+",
       "beginCaptures": {
         "1": {
@@ -865,7 +865,7 @@
       "end": "(?<=\\])|$"
     },
     "section-directive": {
-      "name": "meta.directive.section.razor",
+      "name": "meta.directive.block",
       "begin": "(@)(section)\\b\\s+([_[:alpha:]][_[:alnum:]]*)?",
       "beginCaptures": {
         "1": {
@@ -910,7 +910,7 @@
       }
     },
     "using-directive": {
-      "name": "meta.directive.using.cshtml",
+      "name": "meta.directive",
       "match": "(@)(using)\\b\\s+(?!\\(|\\s)(.+?)?(;)?$",
       "captures": {
         "1": {
