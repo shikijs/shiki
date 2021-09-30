@@ -876,7 +876,7 @@
       "name": "punctuation.definition.list.begin.markdown",
       "scope": "punctuation.definition.list.begin.markdown",
       "settings": {
-        "foreground": "#e06c75"
+        "foreground": "#e5c07b"
       }
     },
     {
@@ -908,10 +908,17 @@
       }
     },
     {
+      "name": "[VSCODE-CUSTOM] Markdown Inline Raw punctuation",
+      "scope": "punctuation.definition.raw.markdown",
+      "settings": {
+        "foreground": "#e5c07b"
+      }
+    },
+    {
       "name": "[VSCODE-CUSTOM] Markdown List Punctuation Definition",
       "scope": "punctuation.definition.list.markdown",
       "settings": {
-        "foreground": "#e06c75"
+        "foreground": "#e5c07b"
       }
     },
     {
@@ -949,6 +956,41 @@
     {
       "name": "[VSCODE-CUSTOM] Markdown Link Title/Description",
       "scope": "string.other.link.title.markdown,string.other.link.description.markdown",
+      "settings": {
+        "foreground": "#61afef"
+      }
+    },
+    {
+      "name": "[VSCODE-CUSTOM] Asciidoc Inline Raw",
+      "scope": "markup.raw.monospace.asciidoc",
+      "settings": {
+        "foreground": "#98c379"
+      }
+    },
+    {
+      "name": "[VSCODE-CUSTOM] Asciidoc Inline Raw Punctuation Definition",
+      "scope": "punctuation.definition.asciidoc",
+      "settings": {
+        "foreground": "#e5c07b"
+      }
+    },
+    {
+      "name": "[VSCODE-CUSTOM] Asciidoc List Punctuation Definition",
+      "scope": "markup.list.asciidoc",
+      "settings": {
+        "foreground": "#e5c07b"
+      }
+    },
+    {
+      "name": "[VSCODE-CUSTOM] Asciidoc underline link",
+      "scope": "markup.link.asciidoc,markup.other.url.asciidoc",
+      "settings": {
+        "foreground": "#c678dd"
+      }
+    },
+    {
+      "name": "[VSCODE-CUSTOM] Asciidoc link name",
+      "scope": "string.unquoted.asciidoc,markup.other.url.asciidoc",
       "settings": {
         "foreground": "#61afef"
       }
