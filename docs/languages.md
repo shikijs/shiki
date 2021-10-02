@@ -58,6 +58,7 @@ export type Lang =
   | 'ballerina'
   | 'bat' | 'batch'
   | 'bibtex'
+  | 'bicep'
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'
