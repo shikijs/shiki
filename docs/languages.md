@@ -7,9 +7,9 @@ TextMate grammars for Shiki. Grammars are collected from two sources:
 
 A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammars from the upstream sources.
 
-## Supporting your own langauges with Shiki 
+## Supporting your own languages with Shiki 
 
-You can add a new langauge to your shiki instance by using the JSON version of your tmLanguage files with the `langs` param in your config:
+You can add a new language to your shiki instance by using the JSON version of your `tmLanguage` files with the `langs` param in your config:
 
 ```ts
 import shiki from "shiki"
