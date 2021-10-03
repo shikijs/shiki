@@ -7,6 +7,23 @@ TextMate grammars for Shiki. Grammars are collected from two sources:
 
 A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammars from the upstream sources.
 
+## Supporting your own languages with Shiki 
+
+You can add a new language to your shiki instance by using the JSON version of your `tmLanguage` files with the `langs` param in your config:
+
+```ts
+import shiki from "shiki"
+import {readFileSync} from "fs"
+
+const myLanguage = JSON.parse(readFileSync("./path/to/lang.tmLanguage.json"))
+
+shiki.getHighlighter({
+    langs: [...shiki.BUNDLED_LANGUAGES, myLanguage]
+})
+```
+
+If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=Togusa09.tmlanguage) can help.
+
 ## Adding Grammar
 
 - Find grammar for a language by searching `<lang> textmate` on GitHub or searching `<lang>` on VS Code Marketplace
