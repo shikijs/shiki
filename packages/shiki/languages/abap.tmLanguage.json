@@ -41,7 +41,7 @@
     },
     {
       "begin": "(?<!\\\\)(\\|)(.*?)",
-      "end": "(?<!\\\\)(\\|)",
+      "end": "(?<!\\\\)(\\||(\\\\\\\\\\|))",
       "name": "string.interpolated.abap",
       "beginCaptures": {
         "1": {
