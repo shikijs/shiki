@@ -526,7 +526,7 @@
           "name": "keyword.other.namespace.cs"
         }
       },
-      "end": "(?<=\\})",
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
           "include": "#comment"
