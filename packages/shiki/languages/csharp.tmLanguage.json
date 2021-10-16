@@ -3072,26 +3072,26 @@
           "include": "#tuple-literal-element"
         },
         {
+          "include": "#expression"
+        },
+        {
           "include": "#punctuation-comma"
         }
       ]
     },
     "tuple-literal-element": {
-      "begin": "(?x)\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*(:)\\s*)?\n(?![,)])",
+      "begin": "(?x)\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*\n(?=:)",
       "beginCaptures": {
-        "0": {
-          "name": "entity.name.variable.tuple-element.cs"
-        },
         "1": {
-          "name": "punctuation.separator.colon.cs"
+          "name": "entity.name.variable.tuple-element.cs"
         }
       },
-      "end": "(?=[,)])",
-      "patterns": [
-        {
-          "include": "#expression"
+      "end": "(:)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.separator.colon.cs"
         }
-      ]
+      }
     },
     "expression-operators": {
       "patterns": [
