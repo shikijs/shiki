@@ -260,7 +260,7 @@
       "end": "(?=((?<![-_])(?i:remarks|author|date-written|source-computer|object-computer|installation|date-compiled|special-names|security|environment\\s+division|data\\s+division|working-storage\\s+section|input-output\\s+section|linkage\\s+section|procedure\\s+division|local-storage\\s+section)|^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*]\\*.*$|^\\+$|^$))"
     },
     {
-      "match": "(?<=(\\(|\\[))((\\-\\+)*[0-9 ,\\.\\+\\-\\*\\/]+)(?=(\\)|\\]))",
+      "match": "(?<=(\\(|\\[))((\\-\\+)*\\s*[0-9 ,\\.\\+\\-\\*\\/]+)(?=(\\)|\\]))",
       "name": "constant.numeric.cobol",
       "captures": {
         "1": {
