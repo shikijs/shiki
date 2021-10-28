@@ -98,6 +98,20 @@
       }
     },
     {
+      "match": "^\\s+([0-9]+)\\s+([0-9a-zA-Z][a-zA-Z\\-0-9_]+)\\s+((?i:constant))",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.cobol"
+        },
+        "2": {
+          "name": "variable.other.constant"
+        },
+        "3": {
+          "name": "keyword.identifers.cobol"
+        }
+      }
+    },
+    {
       "match": "(^[0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@][0-9a-zA-Z\\s\\$#%\\.@])(\\/.*$)",
       "captures": {
         "1": {
