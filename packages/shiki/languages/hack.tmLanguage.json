@@ -263,21 +263,6 @@
         }
       ]
     },
-    "expression-trees": {
-      "begin": "(?=[a-zA-Z_0-9\\\\]*[A-Z_][a-zA-Z0-9_]*`)",
-      "end": "([A-Z_][a-zA-Z0-9_]*)`",
-      "comment": "match \\foo\\bar\\MyClass`baz` without capturing, then capture MyClass as a class name.",
-      "endCaptures": {
-        "1": {
-          "name": "support.class.php.expression-tree"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#namespace"
-        }
-      ]
-    },
     "constants": {
       "patterns": [
         {
@@ -1319,9 +1304,6 @@
               "include": "#language"
             }
           ]
-        },
-        {
-          "include": "#expression-trees"
         },
         {
           "include": "#constants"

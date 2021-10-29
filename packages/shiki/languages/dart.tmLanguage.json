@@ -227,7 +227,7 @@
     "class-identifier": {
       "patterns": [
         {
-          "match": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*(<(?:[a-zA-Z0-9_$<>]|, )+>)?|bool\\b|num\\b|int\\b|double\\b|dynamic\\b)",
+          "match": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*(<(?:[a-zA-Z0-9_$<>]|, )+>)?|bool\\b|num\\b|int\\b|double\\b|dynamic\\b|(void)\\b)",
           "captures": {
             "1": {
               "name": "support.class.dart"
@@ -238,6 +238,9 @@
                   "include": "#type-args"
                 }
               ]
+            },
+            "3": {
+              "name": "storage.type.primitive.dart"
             }
           }
         }
