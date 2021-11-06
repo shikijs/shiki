@@ -152,12 +152,12 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return _registry.getLoadedLanguages()
   }
 
-  function getBackgroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getBackgroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.bg
   }
 
-  function getForegroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getForegroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.fg
   }
