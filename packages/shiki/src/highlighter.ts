@@ -140,6 +140,11 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
 
   async function loadLanguage(lang: ILanguageRegistration | Lang) {
     const _lang = resolveLang(lang)
+
+    const notLoaded = (_lang.embeddedLangs ?? []).filter(l => !getLoadedLanguages().includes(l))
+
+    await Promise.all(notLoaded.map(async l => await loadLanguage(l)))
+
     _resolver.addLanguage(_lang)
     await _registry.loadLanguage(_lang)
   }

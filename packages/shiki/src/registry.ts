@@ -64,9 +64,8 @@ export class Registry extends TextMateRegistry {
     for (const lang of langs) {
       this._resolver.addLanguage(lang)
     }
-    for (const lang of langs) {
-      await this.loadLanguage(lang)
-    }
+
+    return Promise.all(langs.map(async l => await this.loadLanguage(l)))
   }
 
   public getLoadedLanguages() {
