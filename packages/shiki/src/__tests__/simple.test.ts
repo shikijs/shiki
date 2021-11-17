@@ -18,15 +18,7 @@ test('Highlighter can load languages', async () => {
   await highlighter.loadLanguage('php')
   await highlighter.loadLanguage('css')
 
-  expect(highlighter.getLoadedLanguages()).toEqual([
-    'javascript',
-    'js',
-    'json',
-    'sql',
-    'java',
-    'css',
-    'xml',
-    'html',
-    'php'
-  ])
+  expect(highlighter.getLoadedLanguages()).toEqual(
+    expect.arrayContaining(['javascript', 'js', 'json', 'sql', 'java', 'css', 'xml', 'html', 'php'])
+  )
 })
