@@ -51,8 +51,12 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: ILanguageRegistration) {
+    this.addGrammar(await this._resolver.loadGrammar(lang.scopeName))
+
     const g = await this.loadGrammar(lang.scopeName)
+
     this._resolvedGrammars[lang.id] = g
+
     if (lang.aliases) {
       lang.aliases.forEach(la => {
         this._resolvedGrammars[la] = g
