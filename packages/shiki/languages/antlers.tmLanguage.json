@@ -1,0 +1,280 @@
+{
+  "fileTypes": ["antlers.html", "html", "htm", "xhtml"],
+  "name": "Antlers (Statamic Syntax)",
+  "scopeName": "text.html.statamic",
+  "injections": {
+    "text.html.statamic - (meta.embedded | meta.tag | comment.block.statamic), L:(text.html.statamic meta.tag - (comment.block.statamic | meta.embedded.statamic))": {
+      "patterns": [
+        {
+          "include": "#statamic-comments"
+        },
+        {
+          "include": "#statamic-overall-tags"
+        },
+        {
+          "comment": "This is set to use XHTML standards, but you can change that by changing .strict to .basic for HTML standards",
+          "include": "text.html.basic"
+        }
+      ]
+    }
+  },
+  "repository": {
+    "statamic-comments": {
+      "begin": "{{#",
+      "end": "#}}",
+      "name": "comment.block.statamic"
+    },
+    "statamic-overall-tags": {
+      "begin": "(?<!@){{(\\s?)",
+      "end": "(\\s?)}}",
+      "name": "meta.embedded.block.statamic",
+      "patterns": [
+        {
+          "include": "#statamic-tag-addon-builtin"
+        },
+        {
+          "include": "#statamic-tag-parameter-variable"
+        },
+        {
+          "include": "#statamic-tag-conditional"
+        },
+        {
+          "include": "#tag-stuff"
+        }
+      ]
+    },
+    "statamic-tag-addon-builtin": {
+      "match": "(404 |/?asset(:)? |/?assets(:)? |/?cache |/?can:cp:([a-zA-Z0-9-_:]+) |/?collection(:([a-zA-Z0-9-_:]+))? |control_panel_edit_url |count |current_date |date_groups |dump |/?email_form |/?entries(:)?(listing|pagination|map|previous|next|meld)? |exists |/?foreach(:([a-zA-Z0-9-_:]+))? |get:[a-zA-Z0-9-_/\\:]+ |/?get_content(:([a-zA-Z0-9-_:]+))? |/?get_files(:([a-zA-Z0-9-_:]+))? |get_post:[a-zA-Z0-9-_:]+ |get_value:[a-zA-Z0-9-_:]+ |glide(:batch)? |/?in:[a-zA-Z0-9-_:]+ |/?is:[a-zA-Z0-9-_:]+ |/?items |link(?=[\\s:]) |/?locales(:([a-zA-Z0-9-_:]+))? |/?location(:(map_listing|map_url))? |log(:(debug|info|warn|error|fatal))?(?=[\\s:]) |login |login_form |logout |logout_url |/?loop |markdown(:indent)? |/?member(:(forgot_password_form|listing|pagination|profile|profile_form|register_form|reset_password_form))? |mix(:([a-zA-Z0-9-_:]+))? |/?nav(:(exists|count|breadcrumbs))? |oauth(:([a-zA-Z0-9-_:]+))? |/?obfuscate |old:[a-zA-Z0-9-_\\-:]+ |/?pages(:([a-zA-Z0-9-_:]+))? |path |post:[a-zA-Z0-9-_:]+ |/?parent:[a-zA-Z0-9-_:]+ |/?partial |/?partial:[a-zA-Z0-9-_/\\:]+ |/?protect:(password_form) |redirect |/?relate:[a-zA-Z0-9-_:]+ |route(:([a-zA-Z0-9-_:\\.]+))? |/?search:results |/?section(:([a-zA-Z0-9-_:]+))? |session(:([a-zA-Z0-9-_:]+))? |svg |switch |/?query:[a-zA-Z0-9-_]+ |/?taxonomy:[a-zA-Z0-9-_:]+ |/?taxonomy:listing|theme(:([a-zA-Z0-9-_:]+))? |trans_choice(:([a-zA-Z0-9-_:\\.]+))? |trans(:([a-zA-Z0-9-_:\\.]+))? |transform |/?user(:(can|forgot_password_form|in|is|login_form|logout|logout_url|profile|register_form|reset_password_form))? |/?users |/?var\\b(:([a-zA-Z0-9-_:]+))? |yield(:([a-zA-Z0-9-_:]+))? |template_content)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "match": "(/?[a-zA-Z0-9-_/\\:]+(:cp)?)((:)([a-zA-Z0-9-_/\\:]+))?",
+              "captures": {
+                "1": {
+                  "name": "support.class.builtin.tag.statamic"
+                },
+                "4": {
+                  "name": "punctuation.definition.parameters.begin.statamic"
+                },
+                "5": {
+                  "name": "variable.parameter.statamic"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "statamic-tag-parameter-variable": {
+      "match": "(:?(\\S+?)(=)('|\")([^\\4]*?)(\\4))",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "match": ":(\\S+?)(=)('|\")(.*?)(\\3)",
+              "captures": {
+                "1": {
+                  "name": "entity.other.attribute-name",
+                  "patterns": [
+                    {
+                      "match": "\\b(absolute|action|add|allow_request_redirect|allow_request_return|ampersand_list|as|ascii|at|attr|backspace|bcc|between|blur|brightness|by|cache_bust|camelize|cc|cdata|ceil|center_point|class|clusters|collapse|collapse_whitespace|collection|conditions|console_log|container|contains|contains_all|contains_any|contrast|count|count_substring|crop|current|current_first|dashify|days_ago|decode|depth|deslugify|destination|divide|dl|do|dont_use|dpr|dump|email|ends_with|ensure_left|ensure_right|entities|error_redirect|exclude|explode|ext|extension|favicon|field|fields|file|file_date|file_size|filename|filter|first|fit|flatten|flip|floor|folder|folders_only|for|form|format|format_localized|formset|from|full_urls|gamma|gravatar|greyscale|group|group_by|group_by_date|groups|handle|has_lower_case|has_upper_case|height|honeypot|hours_ago|id|image|in|include_content|include_entries|include_home|index|insert|is|is_after|is_alpha|is_alphanumeric|is_before|is_between|is_empty|is_future|is_json|is_leap_year|is_lowercase|is_numberwang|is_numeric|is_past|is_today|is_uppercase|is_weekday|is_weekend|is_yesterday|join|key|last|lcfirst|length|limit|link|links|locale|locate_with|logged_in_redirect|lower|macro|mailto|map_id|markdown|match|max_depth|member|message|min_count|minutes_ago|mod|months_ago|msg_footer|msg_header|multiply|name|nl2br|not_folder|not_from|not_in|obfuscate|obfuscate_email|offset|ol|open_popup|orient|page|paginate|param|partial|permission|pixelate|plural|pos_x|pos_y|precision|provider|quality|query|query_scope|ratio|rawurlencode|read_time|recursive|redirect|redirects|regex_replace|relative|remove_left|remove_right|repeat|replace|required|reset_return|reset_url|response|return|reverse|role|roles|rotate|round|safe_truncate|sanitize|scope|seconds_ago|segment|sentence_list|sharpen|show_future|show_hidden|show_past|show_published|show_unpublished|shuffle|since|singular|slugify|smartypants|sort|sort_by|sort_dir|specifically|square|src|starts_with|strip_tags|subject|substr|subtract|sum|supplement_data|surround|swap_case|tag|taxonomy|textile|tidy|times|title|to|to_json|to_spaces|to_tabs|trim|truncate|type|ucfirst|ul|underscored|unique|until|upper|upsize|url|urldecode|urlencode|use|use_context|username|version|watermark|weeks_ago|what|widont|width|word_count|wrap|years_ago|zoom)\\b",
+                      "name": "support.function.attribute.statamic"
+                    }
+                  ]
+                },
+                "2": {
+                  "name": "keyword.operator.assignment.statamic"
+                },
+                "3": {
+                  "name": "punctuation.definition.parameters.begin.quote.double.statamic"
+                },
+                "4": {
+                  "patterns": [
+                    {
+                      "include": "#expression-valid"
+                    }
+                  ]
+                },
+                "5": {
+                  "name": "punctuation.definition.parameters.end.quote.double.statamic"
+                }
+              }
+            },
+            {
+              "match": "([^:]+?)(=)(('|\")(.*?)(\\4))",
+              "captures": {
+                "1": {
+                  "name": "entity.other.attribute-name",
+                  "patterns": [
+                    {
+                      "match": "\\b(absolute|action|add|allow_request_redirect|allow_request_return|ampersand_list|as|ascii|at|attr|backspace|bcc|between|blur|brightness|by|cache_bust|camelize|cc|cdata|ceil|center_point|class|clusters|collapse|collapse_whitespace|collection|conditions|console_log|container|contains|contains_all|contains_any|contrast|count|count_substring|crop|current|current_first|dashify|days_ago|decode|depth|deslugify|destination|divide|dl|do|dont_use|dpr|dump|email|ends_with|ensure_left|ensure_right|entities|error_redirect|exclude|explode|ext|extension|favicon|field|fields|file|file_date|file_size|filename|filter|first|fit|flatten|flip|floor|folder|folders_only|for|form|format|format_localized|formset|from|full_urls|gamma|gravatar|greyscale|group|group_by|group_by_date|groups|handle|has_lower_case|has_upper_case|height|honeypot|hours_ago|id|image|in|include_content|include_entries|include_home|index|insert|is|is_after|is_alpha|is_alphanumeric|is_before|is_between|is_empty|is_future|is_json|is_leap_year|is_lowercase|is_numberwang|is_numeric|is_past|is_today|is_uppercase|is_weekday|is_weekend|is_yesterday|join|key|last|lcfirst|length|limit|link|links|locale|locate_with|logged_in_redirect|lower|macro|mailto|map_id|markdown|match|max_depth|member|message|min_count|minutes_ago|mod|months_ago|msg_footer|msg_header|multiply|name|nl2br|not_folder|not_from|not_in|obfuscate|obfuscate_email|offset|ol|open_popup|orient|page|paginate|param|partial|permission|pixelate|plural|pos_x|pos_y|precision|provider|quality|query|query_scope|ratio|rawurlencode|read_time|recursive|redirect|redirects|regex_replace|relative|remove_left|remove_right|repeat|replace|required|reset_return|reset_url|response|return|reverse|role|roles|rotate|round|safe_truncate|sanitize|scope|seconds_ago|segment|sentence_list|sharpen|show_future|show_hidden|show_past|show_published|show_unpublished|shuffle|since|singular|slugify|smartypants|sort|sort_by|sort_dir|specifically|square|src|starts_with|strip_tags|subject|substr|subtract|sum|supplement_data|surround|swap_case|tag|taxonomy|textile|tidy|times|title|to|to_json|to_spaces|to_tabs|trim|truncate|type|ucfirst|ul|underscored|unique|until|upper|upsize|url|urldecode|urlencode|use|use_context|username|version|watermark|weeks_ago|what|widont|width|word_count|wrap|years_ago|zoom)\\b",
+                      "name": "support.function.attribute.statamic"
+                    }
+                  ]
+                },
+                "2": {
+                  "name": "keyword.operator.assignment.statamic"
+                },
+                "3": {
+                  "patterns": [
+                    {
+                      "include": "#statamic-string-single-quoted"
+                    },
+                    {
+                      "include": "#statamic-string-double-quoted"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "statamic-string-interpolation-expression": {
+      "begin": "(?<!@){",
+      "end": "}",
+      "patterns": [
+        {
+          "include": "#expression-valid"
+        }
+      ]
+    },
+    "statamic-tag-native-variable": {
+      "match": "(\\G|\\s|\\b)(_is_draft|_is_hidden|_site_name|_site_url|recursive\\schildren|alt|basename|/?children|collection|content|count|current_uri|current_url|date|date_group|datestamp|email_sent|environment|error|/?errors|expired|extension|field_errors:[a-zA-Z0-9-_:]+|file|filename|first|get|get_post|grouped_date|has_entries|has_next|has_previous|homepage|id|index|is_[a-zA-Z0-9-_:]+|is_admin|is_current|is_entry|is_image|is_page|is_parent|is_published|is_\\[role\\]|in_\\[group\\]|last_modified_instance|last_modified_timestamp|last_modified|last_segment|last|layout_content|locale|logged_in|name|prev_page|next_page|next|no_results|now|old_values:[a-zA-Z0-9-_:]+|page_url|paginate|parent|path|permalink|post|prev|previous_page|previous|response_code|results|search_score|segment_[0-9]+|site_url|size_b|size_bytes|size_gb|size_gigabytes|size_kb|size_kilobytes|size_mb|size_megabytes|size|slug|success|taxonomy_name|taxonomy_slug|theme_path|title|total_found|total_results|url_invalid|url|username|zero_index)\\b(?![\\=\\-\\:])",
+      "captures": {
+        "2": {
+          "name": "variable.language.statamic"
+        }
+      }
+    },
+    "statamic-variable": {
+      "match": "(/?\\w+)(:)?(\\w+)?",
+      "captures": {
+        "1": {
+          "name": "variable.other.statamic"
+        },
+        "2": {
+          "name": "keyword.operator.other.statamic"
+        },
+        "3": {
+          "name": "variable.other.property.statamic"
+        }
+      }
+    },
+    "statamic-var-modifiers": {
+      "match": "(\\s)?(\\|)(\\s)?(\\w+((:([a-zA-Z0-9-_/-@]+)){1,2})?|((-|\\+|\\*|/|\\^|\\%):(\\d*)?\\.?(\\d+)))+",
+      "captures": {
+        "2": {
+          "name": "keyword.operator.other.statamic"
+        },
+        "4": {
+          "name": "support.function.statamic"
+        }
+      }
+    },
+    "statamic-tag-conditional": {
+      "match": "(/?else|/?elseif|/?if|/?unless|endif|endunless|unlesselse)",
+      "name": "keyword.control.statamic"
+    },
+    "statamic-tag-operator": {
+      "match": "(\\(|\\)|or|OR|and|AND|&&|<=|>=|<>|<|>|=|!=|==|===|!==|~|\\|\\|)",
+      "name": "keyword.operator.logical.statamic"
+    },
+    "statamic-constant-language": {
+      "match": "(\\G|\\s|\\b)(true|TRUE|false|FALSE|yes|YES|no|NO)\\s",
+      "captures": {
+        "2": {
+          "name": "constant.language.statamic"
+        }
+      }
+    },
+    "statamic-constant-numbers": {
+      "match": "(\\d*)?\\.?(\\d+)",
+      "name": "constant.numeric.statamic"
+    },
+    "statamic-modifier-pipe": {
+      "match": "(\\|)",
+      "name": "keyword.operator.other.statamic"
+    },
+    "statamic-not-operator": {
+      "match": "(\\s|^)(!)",
+      "captures": {
+        "2": {
+          "name": "keyword.operator.other.statamic"
+        }
+      }
+    },
+    "statamic-string-double-quoted": {
+      "begin": "\"",
+      "end": "\"",
+      "name": "string.quoted.double.statamic",
+      "patterns": [
+        {
+          "include": "#statamic-string-interpolation-expression"
+        }
+      ]
+    },
+    "statamic-string-single-quoted": {
+      "begin": "'",
+      "end": "'",
+      "name": "string.quoted.single.statamic",
+      "patterns": [
+        {
+          "include": "#statamic-string-interpolation-expression"
+        }
+      ]
+    },
+    "expression-valid": {
+      "patterns": [
+        {
+          "include": "#statamic-constant-numbers"
+        },
+        {
+          "include": "#statamic-constant-language"
+        },
+        {
+          "include": "#statamic-tag-native-variable"
+        },
+        {
+          "include": "#statamic-variable"
+        },
+        {
+          "include": "#statamic-var-modifiers"
+        }
+      ]
+    },
+    "tag-stuff": {
+      "patterns": [
+        {
+          "include": "#statamic-constant-numbers"
+        },
+        {
+          "include": "#statamic-constant-language"
+        },
+        {
+          "include": "#statamic-tag-operator"
+        },
+        {
+          "include": "#statamic-not-operator"
+        },
+        {
+          "include": "#statamic-tag-native-variable"
+        },
+        {
+          "include": "#statamic-variable"
+        },
+        {
+          "include": "#statamic-var-modifiers"
+        },
+        {
+          "include": "#statamic-string-double-quoted"
+        },
+        {
+          "include": "#statamic-string-single-quoted"
+        }
+      ]
+    }
+  }
+}

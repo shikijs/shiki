@@ -1,9 +1,9 @@
 {
-  "name": "shiki",
+  "name": "@stevebauman/shiki",
   "version": "0.9.12",
   "description": "shiki",
   "author": "Pine Wu <octref@gmail.com>",
-  "homepage": "https://github.com/octref/shiki/tree/main/packages/shiki",
+  "homepage": "https://github.com/stevebauman/shiki",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/octref/shiki.git"
+    "url": "git+https://github.com/stevebauman/shiki.git"
   },
   "dependencies": {
     "jsonc-parser": "^3.0.0",
@@ -41,5 +41,8 @@
   "browser": {
     "fs": false,
     "path": false
+  },
+  "bugs": {
+    "url": "https://github.com/stevebauman/shiki/issues"
   }
 }
