@@ -17,7 +17,7 @@
 <span class="line"><span style="color: #616E88">//   &lt;!-- Highlighted Code --&gt;</span></span>
 <span class="line"><span style="color: #616E88">// &lt;/code&gt;&lt;/pre&gt;</span></span>
 <span class="line"></span></code></pre>
-<p>Here's me using Shiki and <a href="https://github.com/markdown-it/markdown-it">markdown-it</a> to <a href="https://github.com/octref/shiki/blob/master/packages/site/gen-index.js">generate</a> this page:</p>
+<p>Here's me using Shiki and <a href="https://github.com/markdown-it/markdown-it">markdown-it</a> to <a href="https://github.com/octref/shiki/blob/main/packages/site/gen-index.js">generate</a> this page:</p>
 <pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">fs</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #88C0D0">require</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">fs</span><span style="color: #ECEFF4">&#39;</span><span style="color: #D8DEE9FF">)</span></span>
 <span class="line"><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">markdown</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #88C0D0">require</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">markdown-it</span><span style="color: #ECEFF4">&#39;</span><span style="color: #D8DEE9FF">)</span></span>
 <span class="line"><span style="color: #81A1C1">const</span><span style="color: #D8DEE9FF"> </span><span style="color: #D8DEE9">shiki</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">=</span><span style="color: #D8DEE9FF"> </span><span style="color: #88C0D0">require</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">&#39;</span><span style="color: #A3BE8C">shiki</span><span style="color: #ECEFF4">&#39;</span><span style="color: #D8DEE9FF">)</span></span>
@@ -85,7 +85,7 @@
 <span class="line"><span style="color: #ECEFF4">}</span><span style="color: #D8DEE9FF">)</span></span>
 <span class="line"></span></code></pre>
 <div id="rockstar"></div>
-<p>Over <a href="https://github.com/shikijs/shiki/tree/master/docs/languages.md">100 programming languages</a> are supported out of the box, including a traditional Chinese one, <a href="https://wy-lang.org/">文言</a>:</p>
+<p>Over <a href="https://github.com/shikijs/shiki/tree/main/docs/languages.md">100 programming languages</a> are supported out of the box, including a traditional Chinese one, <a href="https://wy-lang.org/">文言</a>:</p>
 <div id="文言"></div>
 <p>Shiki can load any VS Code themes. Just change this line:</p>
 <pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #D8DEE9">shiki</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">getHighlighter</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
@@ -95,7 +95,7 @@
 <p>And you get the above code in <a href="https://github.com/equinusocio/vsc-material-theme">Material Palenight</a>.</p>
 <div id="palenight"></div>
 <!-- <div id="palenight"></div> -->
-<p>You can find all bundled themes in <a href="https://github.com/octref/shiki/tree/master/docs/themes.md">shiki-themes</a>, and use them like:</p>
+<p>You can find all bundled themes in <a href="https://github.com/octref/shiki/tree/main/docs/themes.md">shiki-themes</a>, and use them like:</p>
 <pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #D8DEE9">shiki</span><span style="color: #ECEFF4">.</span><span style="color: #88C0D0">getHighlighter</span><span style="color: #D8DEE9FF">(</span><span style="color: #ECEFF4">{</span></span>
 <span class="line"><span style="color: #ECEFF4">  </span><span style="color: #616E88">// &#39;dark-plus&#39;   | &#39;light-plus&#39;     =&gt; for the classic VS Code feel</span></span>
 <span class="line"><span style="color: #ECEFF4">  </span><span style="color: #616E88">// &#39;github-dark&#39; | &#39;github-light&#39;   =&gt; for the GitHub feel</span></span>
@@ -107,11 +107,11 @@
 <p>But really, any VS Code theme will do. Here's <a href="https://github.com/anotherglitchinthematrix/monochrome">anotherglitchinthematrix/monochrome</a>:</p>
 <div id="mono"></div>
 <p>Embedded language like Vue works great, too:</p>
-<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">&lt;template</span><span style="color: #D8DEE9FF">&gt;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  &lt;</span><span style="color: #8FBCBB">div</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">id</span><span style="color: #ECEFF4">=</span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">app</span><span style="color: #ECEFF4">&quot;</span><span style="color: #D8DEE9FF">&gt;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    &lt;</span><span style="color: #8FBCBB">h</span><span style="color: #D8DEE9FF">1&gt;</span><span style="color: #8FBCBB">My</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">Todo</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">App</span><span style="color: #D8DEE9FF">!&lt;/</span><span style="color: #8FBCBB">h</span><span style="color: #D8DEE9FF">1&gt;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">    &lt;</span><span style="color: #8FBCBB">TodoList</span><span style="color: #D8DEE9FF">/&gt;</span></span>
-<span class="line"><span style="color: #D8DEE9FF">  &lt;/</span><span style="color: #8FBCBB">div</span><span style="color: #D8DEE9FF">&gt;</span></span>
+<pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">&lt;template&gt;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">&lt;div</span><span style="color: #D8DEE9FF"> </span><span style="color: #8FBCBB">id</span><span style="color: #ECEFF4">=</span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">app</span><span style="color: #ECEFF4">&quot;</span><span style="color: #81A1C1">&gt;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">&lt;h1&gt;</span><span style="color: #D8DEE9FF">My Todo App!</span><span style="color: #81A1C1">&lt;/h1&gt;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">    </span><span style="color: #81A1C1">&lt;</span><span style="color: #8FBCBB">TodoList</span><span style="color: #D8DEE9FF">/</span><span style="color: #81A1C1">&gt;</span></span>
+<span class="line"><span style="color: #D8DEE9FF">  </span><span style="color: #81A1C1">&lt;/div&gt;</span></span>
 <span class="line"><span style="color: #81A1C1">&lt;/template&gt;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color: #81A1C1">&lt;script&gt;</span></span>
