@@ -133,7 +133,19 @@ describe('Path Renderer', () => {
 
   const fontFilePath = path.join(__dirname, 'Fira Code.woff')
 
-  test('Path renderer should generate same SVG with different loading font ways', async () => {
+  it.skip('should generate a svg', async () => {
+    const renderer = await getPathRenderer({
+      fontFile: fontFilePath,
+      fontSize: 14,
+      bg: '#000'
+    })
+
+    const out = renderer.renderToSVG(tokens)
+
+    fs.writeFileSync(path.join(__dirname, 'out.svg'), out)
+  })
+
+  it('should generate same SVG with different loading font ways', async () => {
     const renderer = await getPathRenderer({
       fontFile: fontFilePath,
       fontSize: 14,
@@ -149,8 +161,20 @@ describe('Path Renderer', () => {
     const out = renderer.renderToSVG(tokens)
     const out2 = rendererByBuffer.renderToSVG(tokens)
 
-    expect(out).toContain('<path')
-
     expect(out).toBe(out2)
+  })
+
+  it('should generate tokens to paths', async () => {
+    const renderer = await getPathRenderer({
+      fontFile: fontFilePath,
+      fontSize: 14,
+      bg: '#000'
+    })
+
+    const out = renderer.renderToSVG(tokens)
+
+    const tokensCount = tokens.flat().length
+
+    expect(out.match(/<path/g)).toHaveLength(tokensCount)
   })
 })

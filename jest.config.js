@@ -7,7 +7,8 @@ module.exports = {
     __BROWSER__: false,
     'ts-jest': {
       tsconfig: {
-        downlevelIteration: true
+        target: 'esnext',
+        lib: ['ESNext', 'DOM', 'WebWorker']
       }
     }
   }
