@@ -1,14 +1,18 @@
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
+import { LineOption } from './types'
+import { groupBy } from './utils'
 
 export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
+  lineOptions?: LineOption[]
 }
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
 
   let html = ''
 
@@ -18,8 +22,12 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   }
   html += `<code>`
 
-  lines.forEach((l: IThemedToken[]) => {
-    html += `<span class="line">`
+  lines.forEach((l: IThemedToken[], lineIndex: number) => {
+    const lineNumber = lineIndex + 1
+    const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
+    const lineClasses = getLineClasses(lineOptions).join(' ')
+
+    html += `<span class="${lineClasses}">`
 
     l.forEach(token => {
       const cssDeclarations = [`color: ${token.color || options.fg}`]
@@ -52,4 +60,14 @@ const htmlEscapes = {
 
 function escapeHtml(html: string) {
   return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
+}
+
+function getLineClasses(lineOptions: LineOption[]): string[] {
+  const lineClasses = new Set(['line'])
+  for (const lineOption of lineOptions) {
+    for (const lineClass of lineOption.classes ?? []) {
+      lineClasses.add(lineClass)
+    }
+  }
+  return Array.from(lineClasses)
 }

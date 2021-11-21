@@ -38,7 +38,8 @@ export interface Highlighter {
   codeToHtml(
     code: string,
     lang?: StringLiteralUnion<Lang>,
-    theme?: StringLiteralUnion<Theme>
+    theme?: StringLiteralUnion<Theme>,
+    options?: HtmlOptions
   ): string
 
   /**
@@ -185,6 +186,12 @@ export type StringLiteralUnion<T extends U, U = string> = T | (U & {})
 export interface HtmlOptions {
   lang?: StringLiteralUnion<Lang>
   theme?: StringLiteralUnion<Theme>
+  lineOptions?: LineOption[]
+}
+
+export interface LineOption {
+  line: number
+  classes?: string[]
 }
 
 export interface ThemedTokenizerOptions {
