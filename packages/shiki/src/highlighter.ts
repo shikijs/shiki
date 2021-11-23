@@ -101,12 +101,12 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return { _theme, _colorMap }
   }
 
-  function getGrammer(lang: string) {
-    const _grammer = _registry.getGrammer(lang)
-    if (!_grammer) {
+  function getGrammar(lang: string) {
+    const _grammar = _registry.getGrammar(lang)
+    if (!_grammar) {
       throw Error(`No language registration for ${lang}`)
     }
-    return { _grammer }
+    return { _grammar }
   }
 
   function codeToThemedTokens(
@@ -118,9 +118,9 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     if (isPlaintext(lang)) {
       return [[{ content: code }]]
     }
-    const { _grammer } = getGrammer(lang)
+    const { _grammar } = getGrammar(lang)
     const { _theme, _colorMap } = getTheme(theme)
-    return tokenizeWithTheme(_theme, _colorMap, code, _grammer, options)
+    return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
   function codeToHtml(code: string, lang = 'text', theme?: StringLiteralUnion<Theme>) {
