@@ -18,7 +18,7 @@ shiki
   .then(highlighter => {
     const md = markdown({
       highlight: (code, lang) => {
-        return highlighter.codeToHtml(code, lang)
+        return highlighter.codeToHtml(code, { lang })
       }
     })
 

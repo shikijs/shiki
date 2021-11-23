@@ -20,7 +20,7 @@ shiki
     theme: 'nord'
   })
   .then(highlighter => {
-    console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))
+    console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
   })
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
@@ -36,7 +36,7 @@ shiki
       theme: 'nord'
     })
     .then(highlighter => {
-      const code = highlighter.codeToHtml(`console.log('shiki');`, 'js')
+      const code = highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' })
       document.getElementById('output').innerHTML = code
     })
 </script>

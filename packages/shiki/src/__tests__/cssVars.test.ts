@@ -18,6 +18,6 @@ test('The theme with css-variables renders correctly', async () => {
 })
 `
 
-  const out = highlighter.codeToHtml(kindOfAQuine, 'js')
+  const out = highlighter.codeToHtml(kindOfAQuine, { lang: 'js' })
   expect(out).toMatchSnapshot()
 })

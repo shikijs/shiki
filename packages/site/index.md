@@ -12,7 +12,7 @@ const shiki = require('shiki')
 shiki.getHighlighter({
   theme: 'nord'
 }).then(highlighter => {
-  console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))
+  console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
 })
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
@@ -33,7 +33,7 @@ shiki.getHighlighter({
   const md = markdown({
     html: true,
     highlight: (code, lang) => {
-      return highlighter.codeToHtml(code, lang)
+      return highlighter.codeToHtml(code, { lang })
     }
   })
 
@@ -92,7 +92,7 @@ shiki.getHighlighter({
     }
   ]
 }).then(highlighter => {
-  highlighter.codeToHtml('Shout Rockstar', 'rockstar')
+  highlighter.codeToHtml('Shout Rockstar', { lang: 'rockstar' })
 })
 ```
 

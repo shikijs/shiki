@@ -20,7 +20,7 @@ test('Highlights custom language - Rockstar', async () => {
   })
 
   const code = readFileSync(currentDirPath('rockstar.rock'), 'utf-8')
-  const out = highlighter.codeToHtml(code, 'rockstar')
+  const out = highlighter.codeToHtml(code, { lang: 'rockstar' })
   expect(out).toMatchSnapshot()
 })
 
@@ -44,7 +44,7 @@ test('Multiple custom language registrations should use last one', async () => {
   })
 
   const code = readFileSync(currentDirPath('rockstar.rock'), 'utf-8')
-  const out = highlighter.codeToHtml(code, 'rockstar')
+  const out = highlighter.codeToHtml(code, { lang: 'rockstar' })
   expect(out).toMatchSnapshot()
 })
 
@@ -62,6 +62,6 @@ test('Custom language registration can override builtin language', async () => {
   })
 
   const code = readFileSync(currentDirPath('rockstar.rock'), 'utf-8')
-  const out = highlighter.codeToHtml(code, 'html')
+  const out = highlighter.codeToHtml(code, { lang: 'html' })
   expect(out).toMatchSnapshot('rockstar')
 })

@@ -8,7 +8,7 @@ const shiki = require('shiki')
 
   const code = fs.readFileSync('beer.wy', 'utf-8')
 
-  const html = highlighter.codeToHtml(code, '文言')
+  const html = highlighter.codeToHtml(code, { lang: '文言' })
 
   fs.writeFileSync('文言.html', html)
 

@@ -10,7 +10,7 @@ shiki
     const md = markdown({
       html: true,
       highlight: (code, lang) => {
-        return highlighter.codeToHtml(code, lang)
+        return highlighter.codeToHtml(code, { lang })
       }
     })
 
