@@ -46,7 +46,7 @@ export class Registry extends TextMateRegistry {
     return Object.keys(this._resolvedThemes) as Theme[]
   }
 
-  public getGrammer(name: string) {
+  public getGrammar(name: string) {
     return this._resolvedGrammars[name]
   }
 
