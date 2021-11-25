@@ -1,6 +1,6 @@
-import { loadWASM, OnigScanner, OnigString } from 'onigasm'
 import { join, dirname } from './utils'
 import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import { loadWASM, createOnigScanner, createOnigString } from 'vscode-oniguruma'
 import { parse, ParseError } from 'jsonc-parser'
 import type { IShikiTheme } from './types'
 
@@ -15,7 +15,7 @@ export const isBrowser =
 
 // to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'
-let ONIGASM_WASM: string | ArrayBuffer = ''
+let WASM: string | ArrayBuffer = ''
 
 /**
  * Set the route for loading the assets
@@ -32,42 +32,48 @@ export function setCDN(root: string) {
 }
 
 /**
- * Explicitly set the source for loading the OnigasmWASM
+ * Explicitly set the source for loading the oniguruma web assembly module.
  *
  * Accepts Url or ArrayBuffer
  */
-export function setOnigasmWASM(path: string | ArrayBuffer) {
-  ONIGASM_WASM = path
+export function setWasm(path: string | ArrayBuffer) {
+  WASM = path
 }
 
-let _onigasmPromise: Promise<IOnigLib> = null
+let _onigurumaPromise: Promise<IOnigLib> = null
 
-export async function getOnigasm(): Promise<IOnigLib> {
-  if (!_onigasmPromise) {
-    let loader: Promise<any>
+export async function getOniguruma(): Promise<IOnigLib> {
+  if (!_onigurumaPromise) {
+    let loader: Promise<void>
 
     if (isBrowser) {
-      loader = loadWASM(ONIGASM_WASM || _resolvePath('dist/onigasm.wasm'))
+      if (typeof WASM === 'string') {
+        loader = loadWASM({
+          data: await fetch(_resolvePath('dist/onig.wasm')).then(r => r.arrayBuffer())
+        })
+      } else {
+        loader = loadWASM(WASM)
+      }
     } else {
-      const path = require('path')
-      const onigasmPath = path.join(require.resolve('onigasm'), '../onigasm.wasm')
-      const fs = require('fs')
-      const wasmBin = fs.readFileSync(onigasmPath).buffer
+      const path: typeof import('path') = require('path')
+      const wasmPath = path.join(require.resolve('vscode-oniguruma'), '../onig.wasm')
+      const fs: typeof import('fs') = require('fs')
+      const wasmBin = fs.readFileSync(wasmPath).buffer
       loader = loadWASM(wasmBin)
     }
 
-    _onigasmPromise = loader.then(() => {
+    _onigurumaPromise = loader.then(() => {
       return {
         createOnigScanner(patterns: string[]) {
-          return new OnigScanner(patterns)
+          return createOnigScanner(patterns)
         },
         createOnigString(s: string) {
-          return new OnigString(s)
+          return createOnigString(s)
         }
       }
     })
   }
-  return _onigasmPromise
+  return _onigurumaPromise
 }
 
 function _resolvePath(filepath: string) {

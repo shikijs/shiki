@@ -10,7 +10,7 @@ import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getOnigasm } from './loader'
+import { getOniguruma } from './loader'
 import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'
 import { Theme } from './themes'
@@ -40,7 +40,7 @@ function resolveOptions(options: HighlighterOptions) {
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
   const { _languages, _themes } = resolveOptions(options)
-  const _resolver = new Resolver(getOnigasm(), 'onigasm')
+  const _resolver = new Resolver(getOniguruma(), 'vscode-oniguruma')
   const _registry = new Registry(_resolver)
 
   if (options.paths?.themes) {
