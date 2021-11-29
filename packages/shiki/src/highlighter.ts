@@ -112,7 +112,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   function codeToThemedTokens(
     code: string,
     lang = 'text',
-    theme?: StringLiteralUnion<Theme>,
+    theme?: IThemeRegistration,
     options = { includeExplanation: true }
   ) {
     if (isPlaintext(lang)) {
@@ -123,7 +123,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
-  function codeToHtml(code: string, lang = 'text', theme?: StringLiteralUnion<Theme>) {
+  function codeToHtml(code: string, lang = 'text', theme?: IThemeRegistration) {
     const tokens = codeToThemedTokens(code, lang, theme, {
       includeExplanation: false
     })
@@ -152,12 +152,12 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return _registry.getLoadedLanguages()
   }
 
-  function getBackgroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getBackgroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.bg
   }
 
-  function getForegroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getForegroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.fg
   }
