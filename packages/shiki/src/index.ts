@@ -6,7 +6,8 @@ export { FontStyle } from './stackElementMetadata'
 export { getHighlighter } from './highlighter'
 export { renderToHtml, HtmlRendererOptions } from './renderer'
 export { IThemedToken } from './themedTokenizer'
-export { setCDN, setWasm, fetchTheme as loadTheme } from './loader'
+
+export { setCDN, setWasm, fetchTheme as loadTheme, toShikiTheme } from './loader'
 
 import { setWasm } from './loader'
 
@@ -14,7 +15,6 @@ import { setWasm } from './loader'
 export function setOnigasmWASM(path: string | ArrayBuffer) {
   setWasm(path)
 }
-
 export {
   ILanguageRegistration,
   IShikiTheme,
