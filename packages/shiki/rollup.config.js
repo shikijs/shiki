@@ -7,7 +7,7 @@ import replace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
 import { version } from './package.json'
 
-const external = ['onigasm', 'vscode-textmate']
+const external = ['vscode-oniguruma', 'vscode-textmate']
 
 export default [
   {
@@ -100,7 +100,7 @@ export default [
     plugins: [
       dts(),
       copy({
-        targets: [{ src: '../../node_modules/onigasm/lib/onigasm.wasm', dest: 'dist' }]
+        targets: [{ src: '../../node_modules/vscode-oniguruma/release/onig.wasm', dest: 'dist' }]
       })
     ],
     onwarn: (msg, warn) => {

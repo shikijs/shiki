@@ -10,7 +10,7 @@ import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getOnigasm } from './loader'
+import { getOniguruma } from './loader'
 import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'
 import { Theme } from './themes'
@@ -40,7 +40,7 @@ function resolveOptions(options: HighlighterOptions) {
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
   const { _languages, _themes } = resolveOptions(options)
-  const _resolver = new Resolver(getOnigasm(), 'onigasm')
+  const _resolver = new Resolver(getOniguruma(), 'vscode-oniguruma')
   const _registry = new Registry(_resolver)
 
   if (options.paths?.themes) {
@@ -101,29 +101,29 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return { _theme, _colorMap }
   }
 
-  function getGrammer(lang: string) {
-    const _grammer = _registry.getGrammer(lang)
-    if (!_grammer) {
+  function getGrammar(lang: string) {
+    const _grammar = _registry.getGrammar(lang)
+    if (!_grammar) {
       throw Error(`No language registration for ${lang}`)
     }
-    return { _grammer }
+    return { _grammar }
   }
 
   function codeToThemedTokens(
     code: string,
     lang = 'text',
-    theme?: StringLiteralUnion<Theme>,
+    theme?: IThemeRegistration,
     options = { includeExplanation: true }
   ) {
     if (isPlaintext(lang)) {
       return [[{ content: code }]]
     }
-    const { _grammer } = getGrammer(lang)
+    const { _grammar } = getGrammar(lang)
     const { _theme, _colorMap } = getTheme(theme)
-    return tokenizeWithTheme(_theme, _colorMap, code, _grammer, options)
+    return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
-  function codeToHtml(code: string, lang = 'text', theme?: StringLiteralUnion<Theme>) {
+  function codeToHtml(code: string, lang = 'text', theme?: IThemeRegistration) {
     const tokens = codeToThemedTokens(code, lang, theme, {
       includeExplanation: false
     })
@@ -152,12 +152,12 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return _registry.getLoadedLanguages()
   }
 
-  function getBackgroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getBackgroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.bg
   }
 
-  function getForegroundColor(theme?: StringLiteralUnion<Theme>) {
+  function getForegroundColor(theme?: IThemeRegistration) {
     const { _theme } = getTheme(theme)
     return _theme.fg
   }

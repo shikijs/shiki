@@ -27,7 +27,7 @@
           "include": "#comments"
         },
         {
-          "match": "given",
+          "match": "\\b(given)\\b",
           "name": "keyword.other.import.given.scala"
         },
         {
@@ -75,7 +75,7 @@
               }
             },
             {
-              "match": "given",
+              "match": "\\b(given)\\b",
               "name": "keyword.other.import.given.scala"
             },
             {
@@ -306,8 +306,41 @@
           "name": "string.quoted.triple.scala"
         },
         {
-          "begin": "\\b([A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}]+)(\"\"\")",
-          "end": "\"\"\"(?!\")",
+          "begin": "\\b(raw)(\"\"\")",
+          "end": "(\"\"\")(?!\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.interpolation.scala"
+            },
+            "2": {
+              "name": "string.quoted.triple.interpolated.scala punctuation.definition.string.begin.scala"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\$[\\$\"]",
+              "name": "constant.character.escape.scala"
+            },
+            {
+              "include": "#string-interpolation"
+            },
+            {
+              "match": ".",
+              "name": "string.quoted.triple.interpolated.scala"
+            }
+          ],
+          "endCaptures": {
+            "1": {
+              "name": "string.quoted.triple.interpolated.scala punctuation.definition.string.end.scala"
+            },
+            "2": {
+              "name": "invalid.illegal.unrecognized-string-escape.scala"
+            }
+          }
+        },
+        {
+          "begin": "\\b((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(\"\"\")",
+          "end": "(\"\"\")(?!\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
           "beginCaptures": {
             "1": {
               "name": "keyword.interpolation.scala"
@@ -330,8 +363,11 @@
             }
           ],
           "endCaptures": {
-            "0": {
+            "1": {
               "name": "string.quoted.triple.interpolated.scala punctuation.definition.string.end.scala"
+            },
+            "2": {
+              "name": "invalid.illegal.unrecognized-string-escape.scala"
             }
           }
         },
@@ -361,8 +397,8 @@
           "name": "string.quoted.double.scala"
         },
         {
-          "begin": "\\b([A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}]+)(\")",
-          "end": "\"",
+          "begin": "\\b(raw)(\")",
+          "end": "(\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
           "beginCaptures": {
             "1": {
               "name": "keyword.interpolation.scala"
@@ -372,6 +408,43 @@
             }
           },
           "patterns": [
+            {
+              "match": "\\$[\\$\"]",
+              "name": "constant.character.escape.scala"
+            },
+            {
+              "include": "#string-interpolation"
+            },
+            {
+              "match": ".",
+              "name": "string.quoted.double.interpolated.scala"
+            }
+          ],
+          "endCaptures": {
+            "1": {
+              "name": "string.quoted.double.interpolated.scala punctuation.definition.string.end.scala"
+            },
+            "2": {
+              "name": "invalid.illegal.unrecognized-string-escape.scala"
+            }
+          }
+        },
+        {
+          "begin": "\\b((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(\")",
+          "end": "(\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.interpolation.scala"
+            },
+            "2": {
+              "name": "string.quoted.double.interpolated.scala punctuation.definition.string.begin.scala"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\$[\\$\"]",
+              "name": "constant.character.escape.scala"
+            },
             {
               "include": "#string-interpolation"
             },
@@ -389,8 +462,11 @@
             }
           ],
           "endCaptures": {
-            "0": {
+            "1": {
               "name": "string.quoted.double.interpolated.scala punctuation.definition.string.end.scala"
+            },
+            "2": {
+              "name": "invalid.illegal.unrecognized-string-escape.scala"
             }
           }
         }
@@ -399,7 +475,7 @@
     "using": {
       "patterns": [
         {
-          "match": "(?<=\\()\\s*(using)\\s+(?=[\\w\\d\\(\\.\\(\\{'\"])",
+          "match": "(?<=\\()\\s*(using)\\s",
           "captures": {
             "1": {
               "name": "keyword.declaration.scala"
@@ -416,7 +492,7 @@
         },
         {
           "name": "meta.template.expression.scala",
-          "match": "(\\$)([A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][[A-Z\\p{Lt}\\p{Lu}_a-z\\p{Lo}\\p{Nl}\\p{Ll}0-9]]*)",
+          "match": "(\\$)([A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\p{Lo}\\p{Nl}\\p{Ll}0-9]*)",
           "captures": {
             "1": {
               "name": "punctuation.definition.template-expression.begin.scala"
@@ -506,6 +582,14 @@
           "name": "keyword.control.flow.end.scala"
         },
         {
+          "match": "^\\s*(end)\\s+(val)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+          "name": "keyword.declaration.stable.end.scala"
+        },
+        {
+          "match": "^\\s*(end)\\s+(var)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+          "name": "keyword.declaration.volatile.end.scala"
+        },
+        {
           "match": "^\\s*(end)\\s+(?:(new|extension)|([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
           "captures": {
             "1": {
@@ -543,7 +627,7 @@
           "name": "keyword.operator.arithmetic.scala"
         },
         {
-          "match": "(!|&&|\\|\\|)",
+          "match": "(?<![!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]|_)(!|&&|\\|\\|)(?![!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}])",
           "name": "keyword.operator.logical.scala"
         },
         {
@@ -823,7 +907,7 @@
       "comment": "For themes: Brackets look nice when colored."
     },
     "qualifiedClassName": {
-      "match": "(\\b([A-Z][\\w]*))",
+      "match": "(\\b([A-Z][\\w]*)(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)",
       "captures": {
         "1": {
           "name": "entity.name.class"
