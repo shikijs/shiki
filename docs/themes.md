@@ -83,6 +83,7 @@ Note that this client-side theme is less granular than most other supported VSCo
 
 ```ts
 export type Theme =
+  | 'alternight'
   | 'css-variables'
   | 'dark-plus'
   | 'dracula-soft'
@@ -106,6 +107,7 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'spaceinvadev'
   | 'vitesse-dark'
   | 'vitesse-light'
 ```
