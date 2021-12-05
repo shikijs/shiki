@@ -33,12 +33,19 @@ export interface Highlighter {
   /**
    * Convert code to HTML tokens.
    * `lang` and `theme` must have been loaded.
+   * @deprecated Please use the `codeToHtml(code, options?)` overload instead.
    */
   codeToHtml(
     code: string,
     lang?: StringLiteralUnion<Lang>,
     theme?: StringLiteralUnion<Theme>
   ): string
+
+  /**
+   * Convert code to HTML tokens.
+   * `lang` and `theme` must have been loaded.
+   */
+  codeToHtml(code: string, options?: HtmlOptions): string
 
   /**
    * Convert code to themed tokens for custom processing.
@@ -174,6 +181,11 @@ export interface IShikiTheme extends IRawTheme {
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & {})
+
+export interface HtmlOptions {
+  lang?: StringLiteralUnion<Lang>
+  theme?: StringLiteralUnion<Theme>
+}
 
 export interface ThemedTokenizerOptions {
   /**

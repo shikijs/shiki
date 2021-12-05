@@ -1,6 +1,7 @@
 import type {
   Highlighter,
   HighlighterOptions,
+  HtmlOptions,
   ILanguageRegistration,
   IShikiTheme,
   IThemeRegistration,
@@ -123,11 +124,35 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
-  function codeToHtml(code: string, lang = 'text', theme?: IThemeRegistration) {
-    const tokens = codeToThemedTokens(code, lang, theme, {
+  function codeToHtml(code: string, options?: HtmlOptions): string
+  function codeToHtml(
+    code: string,
+    lang?: StringLiteralUnion<Lang>,
+    theme?: StringLiteralUnion<Theme>
+  ): string
+  function codeToHtml(
+    code: string,
+    arg1: StringLiteralUnion<Lang> | HtmlOptions = 'text',
+    arg2?: StringLiteralUnion<Theme>
+  ) {
+    let options: HtmlOptions
+
+    // codeToHtml(code, options?) overload
+    if (typeof arg1 === 'object') {
+      options = arg1
+    }
+    // codeToHtml(code, lang?, theme?) overload
+    else {
+      options = {
+        lang: arg1,
+        theme: arg2
+      }
+    }
+
+    const tokens = codeToThemedTokens(code, options.lang, options.theme, {
       includeExplanation: false
     })
-    const { _theme } = getTheme(theme)
+    const { _theme } = getTheme(options.theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg

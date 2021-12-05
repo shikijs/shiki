@@ -16,7 +16,7 @@ module.exports = (options, ctx) => {
         if (!lang) {
           return `<pre><code>${escapeHtml(code)}</code></pre>`
         }
-        return h.codeToHtml(code, lang)
+        return h.codeToHtml(code, { lang })
       })
     }
   }

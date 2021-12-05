@@ -5,6 +5,6 @@ test(`Token with no color shouldn't generate color: undefined`, async () => {
     theme: 'monokai',
     langs: ['js']
   })
-  const out = highlighter.codeToHtml(`whatever`, 'txt')
+  const out = highlighter.codeToHtml(`whatever`, { lang: 'txt' })
   expect(out).not.toContain('undefined')
 })
