@@ -62,6 +62,10 @@ export const githubThemeSources: (string | [string, string])[] = [
     'https://github.com/drcmda/poimandres-theme/blob/main/themes/poimandres-color-theme.json'
   ],
   [
+    'spaceinvadev',
+    'https://github.com/spaceinvadev/minimus-vscode-theme/blob/main/themes/minimus-color-theme.json'
+  ],
+  [
     'alternight',
     'https://github.com/spaceinvadev/alternight-vscode-theme/blob/main/themes/alternight-color-theme.json'
   ]
