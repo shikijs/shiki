@@ -160,7 +160,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'ballerina',
     'https://github.com/ballerina-platform/ballerina-grammar/blob/master/syntaxes/ballerina.tmLanguage'
   ],
-  'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json'
+  'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json',
+  ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json']
 ]
 
 /**
@@ -189,7 +190,8 @@ export const languageAliases = {
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
-  wenyan: ['文言']
+  wenyan: ['文言'],
+  codeql: ['ql']
 }
 
 /**
