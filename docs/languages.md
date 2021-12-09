@@ -53,6 +53,7 @@ export type Lang =
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'
+  | 'codeql' | 'ql'
   | 'coffee'
   | 'cpp'
   | 'crystal'

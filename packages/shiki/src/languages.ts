@@ -16,6 +16,7 @@ export type Lang =
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'
+  | 'codeql' | 'ql'
   | 'coffee'
   | 'cpp'
   | 'crystal'
@@ -220,6 +221,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'cobol.tmLanguage.json',
     samplePath: 'cobol.sample',
     embeddedLangs: ['sql', 'html', 'java']
+  },
+  {
+    id: 'codeql',
+    scopeName: 'source.ql',
+    path: 'codeql.tmLanguage.json',
+    samplePath: 'codeql.sample',
+    aliases: ['ql']
   },
   {
     id: 'coffee',
