@@ -62,7 +62,7 @@ export const githubThemeSources: (string | [string, string])[] = [
     'https://github.com/drcmda/poimandres-theme/blob/main/themes/poimandres-color-theme.json'
   ],
   [
-    'spaceinvadev',
+    'minimus',
     'https://github.com/spaceinvadev/minimus-vscode-theme/blob/main/themes/minimus-color-theme.json'
   ],
   [

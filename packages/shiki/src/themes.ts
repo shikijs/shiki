@@ -15,6 +15,7 @@ export type Theme =
   | 'material-palenight'
   | 'min-dark'
   | 'min-light'
+  | 'minimus'
   | 'monokai'
   | 'nord'
   | 'one-dark-pro'
@@ -23,7 +24,6 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
-  | 'spaceinvadev'
   | 'vitesse-dark'
   | 'vitesse-light'
 
@@ -44,6 +44,7 @@ export const themes: Theme[] = [
   'material-palenight',
   'min-dark',
   'min-light',
+  'minimus',
   'monokai',
   'nord',
   'one-dark-pro',
@@ -52,7 +53,6 @@ export const themes: Theme[] = [
   'slack-ochin',
   'solarized-dark',
   'solarized-light',
-  'spaceinvadev',
   'vitesse-dark',
   'vitesse-light'
 ]
