@@ -166,7 +166,7 @@ export const githubGrammarSources: (string | [string, string])[] = [
   'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json',
   ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json'],
   ['bicep', 'https://github.com/Azure/bicep/blob/main/src/textmate/bicep.tmlanguage'],
-  ['berry', 'https://github.com/Skiars/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json']
+  ['berry', 'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json']
 ]
 
 /**
