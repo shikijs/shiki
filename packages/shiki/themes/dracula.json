@@ -215,17 +215,6 @@
     "titleBar.activeForeground": "#F8F8F2",
     "titleBar.inactiveBackground": "#191A21",
     "titleBar.inactiveForeground": "#6272A4",
-    "notification.background": "#282A36",
-    "notification.foreground": "#F8F8F2",
-    "notification.buttonBackground": "#44475A",
-    "notification.buttonForeground": "#F8F8F2",
-    "notification.buttonHoverBackground": "#44475A75",
-    "notification.errorBackground": "#FF5555",
-    "notification.errorForeground": "#F8F8F2",
-    "notification.infoBackground": "#8BE9FD",
-    "notification.infoForeground": "#282A36",
-    "notification.warningBackground": "#FFB86C",
-    "notification.warningForeground": "#282A36",
     "extensionButton.prominentForeground": "#F8F8F2",
     "extensionButton.prominentBackground": "#50FA7B90",
     "extensionButton.prominentHoverBackground": "#50FA7B60",
@@ -234,7 +223,6 @@
     "debugToolBar.background": "#21222C",
     "walkThrough.embeddedEditorBackground": "#21222C",
     "settings.headerForeground": "#F8F8F2",
-    "settings.modifiedItemForeground": "#FFB86C",
     "settings.modifiedItemIndicator": "#FFB86C",
     "settings.dropdownBackground": "#21222C",
     "settings.dropdownForeground": "#F8F8F2",
@@ -1038,6 +1026,22 @@
       "scope": ["meta.preprocessor.haskell"],
       "settings": {
         "foreground": "#6272A4"
+      }
+    },
+    {
+      "name": "Log file error",
+      "scope": ["log.error"],
+      "settings": {
+        "foreground": "#FF5555",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Log file warning",
+      "scope": ["log.warning"],
+      "settings": {
+        "foreground": "#F1FA8C",
+        "fontStyle": "bold"
       }
     }
   ]
