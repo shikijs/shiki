@@ -161,7 +161,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'https://github.com/ballerina-platform/ballerina-grammar/blob/master/syntaxes/ballerina.tmLanguage'
   ],
   'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json',
-  ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json']
+  ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json'],
+  ['berry', 'https://github.com/Skiars/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json']
 ]
 
 /**
@@ -170,6 +171,7 @@ export const githubGrammarSources: (string | [string, string])[] = [
  */
 export const languageAliases = {
   bat: ['batch'],
+  berry: ['be'],
   clojure: ['clj'],
   csharp: ['c#'],
   fsharp: ['f#'],
