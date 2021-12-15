@@ -50,6 +50,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'bibtex'
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'

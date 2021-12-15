@@ -19,7 +19,9 @@ export const vscodeGrammarsToRemove = [
   'jsdoc.ts.injection',
   'md-math',
   'md-math-inline',
-  'md-math-block'
+  'md-math-block',
+  'cpp-grammar-bailout',
+  'markdown-latex-combined'
 ]
 
 /**
@@ -142,7 +144,7 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'gherkin',
     'https://github.com/alexkrechik/VSCucumberAutoComplete/blob/master/gclient/syntaxes/feature.tmLanguage'
   ],
-  'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/syntaxes/nginx.tmLanguage',
+  'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/src/syntax/nginx.tmLanguage',
   'https://github.com/pragmagic/vscode-nim/blob/master/syntaxes/nim.json',
   [
     'twig',

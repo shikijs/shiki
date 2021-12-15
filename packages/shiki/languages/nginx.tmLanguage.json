@@ -1,179 +1,2122 @@
 {
-  "fileTypes": ["conf", "nginx"],
+  "fileTypes": [
+    "conf.erb",
+    "conf",
+    "ngx",
+    "nginx.conf",
+    "mime.types",
+    "fastcgi_params",
+    "scgi_params",
+    "uwsgi_params"
+  ],
   "foldingStartMarker": "\\{\\s*$",
   "foldingStopMarker": "^\\s*\\}",
   "keyEquivalent": "^~N",
   "name": "nginx",
   "patterns": [
     {
-      "match": "\\#.*",
-      "name": "comment"
+      "name": "comment.line.number-sign",
+      "match": "\\#.*"
     },
     {
-      "match": "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b",
-      "name": "constant.numeric"
+      "name": "meta.context.lua.nginx",
+      "begin": "\\b((?:content|rewrite|access|init_worker|init|set|log|balancer|ssl_(?:client_hello|session_fetch|certificate))_by_lua(?:_block)?)\\s*\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "contentName": "meta.embedded.block.lua",
+      "patterns": [
+        {
+          "include": "source.lua"
+        }
+      ]
     },
     {
-      "match": "\\b\\d+\\w+\\b",
-      "name": "constant.numeric"
+      "name": "meta.context.lua.nginx",
+      "begin": "\\b((?:content|rewrite|access|init_worker|init|set|log|balancer|ssl_(?:client_hello|session_fetch|certificate))_by_lua)\\s*'",
+      "end": "'",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "contentName": "meta.embedded.block.lua",
+      "patterns": [
+        {
+          "include": "source.lua"
+        }
+      ]
     },
     {
-      "match": "\\{|\\}",
-      "name": "constant.character.brace"
+      "name": "meta.context.events.nginx",
+      "begin": "\\b(events) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\;",
-      "name": "constant.character.end"
+      "name": "meta.context.http.nginx",
+      "begin": "\\b(http) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\(|\\)",
-      "name": "constant.character.paren"
+      "name": "meta.context.mail.nginx",
+      "begin": "\\b(mail) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\\"",
-      "name": "constant.character.quote"
+      "name": "meta.context.stream.nginx",
+      "begin": "\\b(stream) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\\\.*\\ |\\~|\\~\\*|\\!\\~|\\!\\~\\*",
-      "name": "string.regexp"
+      "name": "meta.context.server.nginx",
+      "begin": "\\b(server) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\\"(.*)\\\"",
-      "name": "string.quoted"
+      "name": "meta.context.location.nginx",
+      "begin": "\\b(location) +([\\^]?~[\\*]?|=) +(.*?)\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        },
+        "2": {
+          "name": "keyword.operator.nginx"
+        },
+        "3": {
+          "name": "string.regexp.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\'(.*)\\'",
-      "name": "string.quoted"
+      "name": "meta.context.location.nginx",
+      "begin": "\\b(location) +(.*?)\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        },
+        "2": {
+          "name": "entity.name.context.location.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\b(events)\\b",
-      "name": "constant.language.module.events"
+      "name": "meta.context.limit_except.nginx",
+      "begin": "\\b(limit_except) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\b^(http)\\b",
-      "name": "constant.language.module.http"
+      "name": "meta.context.if.nginx",
+      "begin": "\\b(if) +\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#if_condition"
+        }
+      ]
     },
     {
-      "match": "\\b(daemon|env|debug_points|error_log|log_not_found|include|lock_file|master_process|pid|ssl_engine|timer_resolution|types_hash_max_size|user|worker_cpu_affinity|worker_priority|worker_processes|worker_rlimit_core|worker_rlimit_nofile|worker_rlimit_sigpending|working_directory|try_files)\\b",
-      "name": "constant.language.directive.module.main"
+      "name": "meta.context.upstream.nginx",
+      "begin": "\\b(upstream) +(.*?)\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        },
+        "2": {
+          "name": "entity.name.context.location.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\b(accept_mutex|accept_mutex_delay|debug_connection|devpoll_changes|devpoll_events|epoll_events|kqueue_changes|kqueue_events|multi_accept|rtsig_signo|rtsig_overflow_events|rtsig_overflow_test|rtsig_overflow_threshold|use|worker_connections)\\b",
-      "name": "constant.language.directive.module.events"
+      "name": "meta.context.types.nginx",
+      "begin": "\\b(types) +\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\b(alias|chunked_transfer_encoding|client_body_in_file_only|client_body_buffer_size|client_body_temp_path|client_body_timeout|client_header_buffer_size|client_header_timeout|client_max_body_size|default_type|error_page|index\\ |internal|keepalive_timeout|keepalive_requests|large_client_header_buffers|limit_except|limit_rate|listen|location|msie_padding|msie_refresh|optimize_server_names|port_in_redirect|recursive_error_pages|reset_timedout_connection|resolver|resolver_timeout|root|satisfy_any|send_timeout|sendfile|server|server_name|server_names_hash_max_size|server_names_hash_bucket_size|tcp_nodelay|tcp_nopush|types\\ |try_files)\\b",
-      "name": "constant.language.directive.module.http"
+      "name": "meta.context.map.nginx",
+      "begin": "\\b(map) +(\\$)([A-Za-z0-9\\_]+) +(\\$)([A-Za-z0-9\\_]+) *\\{",
+      "end": "\\}",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.directive.context.nginx"
+        },
+        "2": {
+          "name": "punctuation.definition.variable.nginx"
+        },
+        "3": {
+          "name": "variable.parameter.nginx"
+        },
+        "4": {
+          "name": "punctuation.definition.variable.nginx"
+        },
+        "5": {
+          "name": "variable.other.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        },
+        {
+          "name": "punctuation.terminator.nginx",
+          "match": ";"
+        },
+        {
+          "name": "comment.line.number-sign",
+          "match": "\\#.*"
+        }
+      ]
     },
     {
-      "match": "\\b(add_before_body|add_after_body|addition_types)\\b",
-      "name": "constant.language.module.http.addition"
+      "name": "meta.block.nginx",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
     },
     {
-      "match": "\\b(allow|deny)\\b",
-      "name": "constant.language.module.http.access"
+      "begin": "\\b(return)\\b",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(auth_basic|auth_basic_user_file)\\b",
-      "name": "constant.language.module.http.auth_basic"
+      "begin": "\\b(rewrite)\\s+",
+      "end": "(last|break|redirect|permanent)?(;)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.nginx"
+        },
+        "2": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(auth_jwt|auth_jwt_header_set|auth_jwt_claim_set|auth_jwt_key_file)\\b",
-      "name": "constant.language.module.http.auth_jwt"
+      "begin": "\\b(server)\\s+",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#server_parameters"
+        }
+      ]
     },
     {
-      "match": "\\b(autoindex|autoindex_exact_size|autoindex_format|autoindex_localtime)\\b",
-      "name": "constant.language.module.http.autoindex"
+      "begin": "\\b(internal|empty_gif|f4f|flv|hls|mp4|break|status|stub_status|ip_hash|ntlm|least_conn|upstream_conf|least_conn|zone_sync)\\b",
+      "end": "(;|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.nginx"
+        }
+      }
     },
     {
-      "match": "\\b(ancient_browser|ancient_browser_value|modern_browser|modern_browser_value)\\b",
-      "name": "constant.language.module.http.browser"
+      "begin": "([\"'\\s]|^)(accept_)(mutex|mutex_delay)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(charset|charset_map|override_charset|source_charset)\\b",
-      "name": "constant.language.module.http.charset"
+      "begin": "([\"'\\s]|^)(debug_)(connection|points)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(empty_gif)\\b",
-      "name": "constant.language.module.http.empty_gif"
+      "begin": "([\"'\\s]|^)(error_)(log|page)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(fastcgi_index|fastcgi_hide_header|fastcgi_ignore_client_abort|fastcgi_intercept_errors|fastcgi_param|fastcgi_pass|fastcgi_pass_header|fastcgi_read_timeout|fastcgi_redirect_errors|fa|stcgi_storefastcgi_store_access|fastcgi_buffers|fastcgi_buffers_size|fastcgi_temp_path|fastcgi_buffer_size|fastcgi_connect_timeout|fastcgi_send_timeout|fastcgi_split_path_info)\\b",
-      "name": "constant.language.module.http.fastcgi"
+      "begin": "([\"'\\s]|^)(ssl_)(engine|buffer_size|certificate|certificate_key|ciphers|client_certificate|conf_command|crl|dhparam|early_data|ecdh_curve|ocsp|ocsp_cache|ocsp_responder|password_file|prefer_server_ciphers|protocols|reject_handshake|session_cache|session_ticket_key|session_tickets|session_timeout|stapling|stapling_file|stapling_responder|stapling_verify|trusted_certificate|verify_client|verify_depth|alpn|handshake_timeout|preread)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(geo)\\b",
-      "name": "constant.language.module.http.geo"
+      "begin": "([\"'\\s]|^)(worker_)(aio_requests|connections|cpu_affinity|priority|processes|rlimit_core|rlimit_nofile|shutdown_timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(gzip|gzip_buffers|gzip_comp_level|gzip_disable|gzip_http.version|gzip_min_length|gzip_proxied|gzip_types|gzip_vary)\\b",
-      "name": "constant.language.module.http.gzip"
+      "begin": "([\"'\\s]|^)(auth_)(delay|basic|basic_user_file|jwt|jwt_claim_set|jwt_header_set|jwt_key_file|jwt_key_request|jwt_leeway|jwt_type|jwt_require|request|request_set|http|http_header|http_pass_client_cert|http_timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(add_header|expires|server_tokens)\\b",
-      "name": "constant.language.module.http.headers"
+      "begin": "([\"'\\s]|^)(client_)(body_buffer_size|body_in_file_only|body_in_single_buffer|body_temp_path|body_timeout|header_buffer_size|header_timeout|max_body_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(valid_referers)\\b",
-      "name": "constant.language.module.http.referer"
+      "begin": "([\"'\\s]|^)(keepalive_)(disable|requests|time|timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(limit_zone|limit_conn)\\b",
-      "name": "constant.language.module.http.limit_zone"
+      "begin": "([\"'\\s]|^)(limit_)(rate|rate_after|conn|conn_dry_run|conn_log_level|conn_status|conn_zone|zone|req|req_dry_run|req_log_level|req_status|req_zone)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(limit_req|limit_req_log_level|limit_req_status|limit_req_zone)\\b",
-      "name": "constant.language.module.http.limit_req"
+      "begin": "([\"'\\s]|^)(lingering_)(close|time|timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(access_log|log_format)\\b",
-      "name": "constant.language.module.http.log"
+      "begin": "([\"'\\s]|^)(log_)(not_found|subrequest|format)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(map|map_hash_max_size|map_hash_bucket_size)\\b",
-      "name": "constant.language.module.http.map"
+      "begin": "([\"'\\s]|^)(max_)(ranges|errors)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(memcached_pass|memcached_connect_timeout|memcached_send_timeout|memcached_read_timeout|memcached_buffer_size|memcached_next_upstream)\\b",
-      "name": "constant.language.module.http.memcached"
+      "begin": "([\"'\\s]|^)(msie_)(padding|refresh)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(proxy_buffer_size|proxy_buffering|proxy_buffers|proxy_busy_buffers_size|proxy_cache|proxy_cache_background_update|proxy_cache_bypass|proxy_cache_convert_head|proxy_cache_key|proxy_cache_lock|proxy_cache_lock_age|proxy_cache_lock_timeout|proxy_cache_max_range_offset|proxy_cache_methods|proxy_cache_min_uses|proxy_cache_path|proxy_cache_purge|proxy_cache_revalidate|proxy_cache_use_stale|proxy_cache_valid|proxy_connect_timeout|proxy_headers_hash_bucket_size|proxy_headers_hash_max_size|proxy_hide_header|proxy_http_version|proxy_ignore_client_abort|proxy_intercept_errors|proxy_max_temp_file_size|proxy_method|proxy_next_upstream|proxy_next_upstream_tries|proxy_next_upstream_timeout|proxy_pass|proxy_pass_header|proxy_pass_request_body|proxy_pass_request_headers|proxy_read_timeout|proxy_redirect|proxy_redirect_errors|proxy_send_lowat|proxy_send_timeout|proxy_set_body|proxy_set_header|proxy_store|proxy_store_access|proxy_temp_file_write_size|proxy_t|emp_pathproxy_upstream_fail_timeout|proxy_upstream_max_fails|proxy_no_cache)\\b",
-      "name": "constant.language.module.http.proxy"
+      "begin": "([\"'\\s]|^)(open_)(file_cache|file_cache_errors|file_cache_min_uses|file_cache_valid|log_file_cache)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(set_real_ip_from|real_ip_header|real_ip_recursive)\\b",
-      "name": "constant.language.module.http.realip"
+      "begin": "([\"'\\s]|^)(send_)(lowat|timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(break|if|return|reqrite|set|uninitialized_variable_warn)\\b",
-      "name": "constant.language.module.http.rewrite"
+      "begin": "([\"'\\s]|^)(server_)(name|name_in_redirect|names_hash_bucket_size|names_hash_max_size|tokens)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(ssi|ssi_silent_errors|ssi_types|ssi_value_length)\\b",
-      "name": "constant.language.module.http.ssi"
+      "begin": "([\"'\\s]|^)(tcp_)(nodelay|nopush)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(ip_hash|upstream|server)\\b",
-      "name": "constant.language.module.http.upstream"
+      "begin": "([\"'\\s]|^)(types_)(hash_bucket_size|hash_max_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(userid|userid_domain|userid_expires|userid_name|userid_p3p|userid_path|userid_service)\\b",
-      "name": "constant.language.module.http.userid"
+      "begin": "([\"'\\s]|^)(variables_)(hash_bucket_size|hash_max_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(uwsgi_bind|uwsgi_buffer_size|uwsgi_buffering|uwsgi_buffers|uwsgi_busy_buffers_size|uwsgi_cache|uwsgi_cache_background_update|uwsgi_cache_bypass|uwsgi_cache_key|uwsgi_cache_lock|uwsgi_cache_lock_age|uwsgi_cache_lock_timeout|uwsgi_cache_max_range_offset|uwsgi_cache_methods|uwsgi_cache_min_uses|uwsgi_cache_path|uwsgi_cache_purge|uwsgi_cache_revalidate|uwsgi_cache_use_stale|uwsgi_cache_valid|uwsgi_connect_timeout|uwsgi_force_ranges|uwsgi_hide_header|uwsgi_ignore_client_abort|uwsgi_ignore_headers|uwsgi_intercept_errors|uwsgi_limit_rate|uwsgi_max_temp_file_size|uwsgi_modifier1|uwsgi_modifier2|uwsgi_next_upstream|uwsgi_next_upstream_timeout|uwsgi_next_upstream_tries|uwsgi_no_cache|uwsgi_param|uwsgi_pass|uwsgi_pass_header|uwsgi_pass_request_body|uwsgi_pass_request_headers|uwsgi_read_timeout|uwsgi_request_buffering|uwsgi_send_timeout|uwsgi_ssl_certificate|uwsgi_ssl_certificate_key|uwsgi_ssl_ciphers|uwsgi_ssl_crl|uwsgi_ssl_name|uwsgi_ssl_password_file|uwsgi_ssl_protocols|uwsgi_ssl_server_name|uwsgi_ssl_session_reuse|uwsgi_ssl_trusted_certificate|uwsgi_ssl_verify|uwsgi_ssl_verify_depth|uwsgi_store|uwsgi_store_access|uwsgi_temp_file_write_size|uwsgi_temp_path)\\b",
-      "name": "constant.language.module.http.uwsgi"
+      "begin": "([\"'\\s]|^)(add_)(before_body|after_body|header|trailer)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\b(ssl|ssl_buffer_size|ssl_certificate|ssl_certificate_key|ssl_ciphers|ssl_client_certificate|ssl_crl|ssl_dhparam|ssl_ecdh_curve|ssl_password_file|ssl_prefer_server_ciphers|ssl_protocols|ssl_session_cache|ssl_session_ticket_key|ssl_session_tickets|ssl_session_timeout|ssl_stapling|ssl_stapling_file|ssl_stapling_responder|ssl_stapling_verify|ssl_trusted_certificate|ssl_verify_client|ssl_verify_depth)\\b",
-      "name": "constant.language.directive.module.http"
+      "begin": "([\"'\\s]|^)(status_)(zone|format)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     },
     {
-      "match": "\\$\\w+",
-      "name": "variable"
+      "begin": "([\"'\\s]|^)(autoindex_)(exact_size|format|localtime)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(ancient_)(browser|browser_value)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(modern_)(browser|browser_value)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(charset_)(map|types)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(dav_)(access|methods)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(fastcgi_)(bind|buffer_size|buffering|buffers|busy_buffers_size|cache|cache_background_update|cache_bypass|cache_key|cache_lock|cache_lock_age|cache_lock_timeout|cache_max_range_offset|cache_methods|cache_min_uses|cache_path|cache_purge|cache_revalidate|cache_use_stale|cache_valid|catch_stderr|connect_timeout|force_ranges|hide_header|ignore_client_abort|ignore_headers|index|intercept_errors|keep_conn|limit_rate|max_temp_file_size|next_upstream|next_upstream_timeout|next_upstream_tries|no_cache|param|pass|pass_header|pass_request_body|pass_request_headers|read_timeout|request_buffering|send_lowat|send_timeout|socket_keepalive|split_path_info|store|store_access|temp_file_write_size|temp_path)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(geoip_)(country|city|org|proxy|proxy_recursive)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(grpc_)(bind|buffer_size|connect_timeout|hide_header|ignore_headers|intercept_errors|next_upstream|next_upstream_timeout|next_upstream_tries|pass|pass_header|read_timeout|send_timeout|set_header|socket_keepalive|ssl_certificate|ssl_certificate_key|ssl_ciphers|ssl_conf_command|ssl_crl|ssl_name|ssl_password_file|ssl_protocols|ssl_server_name|ssl_session_reuse|ssl_trusted_certificate|ssl_verify|ssl_verify_depth)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(gzip_)(buffers|comp_level|disable|http_version|min_length|proxied|types|vary|static)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(hls_)(buffers|forward_args|fragment|mp4_buffer_size|mp4_max_buffer_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(image_)(filter|filter_buffer|filter_interlace|filter_jpeg_quality|filter_sharpen|filter_transparency|filter_webp_quality)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(map_)(hash_bucket_size|hash_max_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(memcached_)(bind|buffer_size|connect_timeout|force_ranges|gzip_flag|next_upstream|next_upstream_timeout|next_upstream_tries|pass|read_timeout|send_timeout|socket_keepalive)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(mp4_)(buffer_size|max_buffer_size|limit_rate|limit_rate_after)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(perl_)(modules|require|set)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(proxy_)(bind|buffer_size|buffering|buffers|busy_buffers_size|cache|cache_background_update|cache_bypass|cache_convert_head|cache_key|cache_lock|cache_lock_age|cache_lock_timeout|cache_max_range_offset|cache_methods|cache_min_uses|cache_path|cache_purge|cache_revalidate|cache_use_stale|cache_valid|connect_timeout|cookie_domain|cookie_flags|cookie_path|force_ranges|headers_hash_bucket_size|headers_hash_max_size|hide_header|http_version|ignore_client_abort|ignore_headers|intercept_errors|limit_rate|max_temp_file_size|method|next_upstream|next_upstream_timeout|next_upstream_tries|no_cache|pass|pass_header|pass_request_body|pass_request_headers|read_timeout|redirect|request_buffering|send_lowat|send_timeout|set_body|set_header|socket_keepalive|ssl_certificate|ssl_certificate_key|ssl_ciphers|ssl_conf_command|ssl_crl|ssl_name|ssl_password_file|ssl_protocols|ssl_server_name|ssl_session_reuse|ssl_trusted_certificate|ssl_verify|ssl_verify_depth|store|store_access|temp_file_write_size|temp_path|buffer|pass_error_message|protocol|smtp_auth|timeout|protocol_timeout|download_rate|half_close|requests|responses|session_drop|ssl|upload_rate)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(real_)(ip_header|ip_recursive)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(referer_)(hash_bucket_size|hash_max_size)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(scgi_)(bind|buffer_size|buffering|buffers|busy_buffers_size|cache|cache_background_update|cache_bypass|cache_key|cache_lock|cache_lock_age|cache_lock_timeout|cache_max_range_offset|cache_methods|cache_min_uses|cache_path|cache_purge|cache_revalidate|cache_use_stale|cache_valid|connect_timeout|force_ranges|hide_header|ignore_client_abort|ignore_headers|intercept_errors|limit_rate|max_temp_file_size|next_upstream|next_upstream_timeout|next_upstream_tries|no_cache|param|pass|pass_header|pass_request_body|pass_request_headers|read_timeout|request_buffering|send_timeout|socket_keepalive|store|store_access|temp_file_write_size|temp_path)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(secure_)(link|link_md5|link_secret)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(session_)(log|log_format|log_zone)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(spdy_)(chunk_size|headers_comp)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(ssi_)(last_modified|min_file_chunk|silent_errors|types|value_length)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(sub_)(filter|filter_last_modified|filter_once|filter_types)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(health_)(check|check_timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(userid_)(domain|expires|flags|mark|name|p3p|path|service)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(uwsgi_)(bind|buffer_size|buffering|buffers|busy_buffers_size|cache|cache_background_update|cache_bypass|cache_key|cache_lock|cache_lock_age|cache_lock_timeout|cache_max_range_offset|cache_methods|cache_min_uses|cache_path|cache_purge|cache_revalidate|cache_use_stale|cache_valid|connect_timeout|force_ranges|hide_header|ignore_client_abort|ignore_headers|intercept_errors|limit_rate|max_temp_file_size|modifier1|modifier2|next_upstream|next_upstream_timeout|next_upstream_tries|no_cache|param|pass|pass_header|pass_request_body|pass_request_headers|read_timeout|request_buffering|send_timeout|socket_keepalive|ssl_certificate|ssl_certificate_key|ssl_ciphers|ssl_conf_command|ssl_crl|ssl_name|ssl_password_file|ssl_protocols|ssl_server_name|ssl_session_reuse|ssl_trusted_certificate|ssl_verify|ssl_verify_depth|store|store_access|temp_file_write_size|temp_path)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(http2_)(body_preread_size|chunk_size|idle_timeout|max_concurrent_pushes|max_concurrent_streams|max_field_size|max_header_size|max_requests|push|push_preload|recv_buffer_size|recv_timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(xslt_)(last_modified|param|string_param|stylesheet|types)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(imap_)(auth|capabilities|client_buffer)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(pop3_)(auth|capabilities)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(smtp_)(auth|capabilities|client_buffer|greeting_delay)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(preread_)(buffer_size|timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(zone_)(sync_buffers|sync_connect_retry_interval|sync_connect_timeout|sync_interval|sync_recv_buffer_size|sync_server|sync_ssl|sync_ssl_certificate|sync_ssl_certificate_key|sync_ssl_ciphers|sync_ssl_conf_command|sync_ssl_crl|sync_ssl_name|sync_ssl_password_file|sync_ssl_protocols|sync_ssl_server_name|sync_ssl_trusted_certificate|sync_ssl_verify|sync_ssl_verify_depth|sync_timeout)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(js_)(body_filter|content|fetch_ciphers|fetch_protocols|fetch_trusted_certificate|fetch_verify_depth|header_filter|import|include|path|set|var|access|filter|preread)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        },
+        "4": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "([\"'\\s]|^)(daemon|env|include|pid|use|user|aio|alias|directio|etag|listen|resolver|root|satisfy|sendfile|allow|deny|api|autoindex|charset|geo|gunzip|gzip|expires|index|keyval|mirror|perl|set|slice|ssi|ssl|zone|state|hash|keepalive|queue|random|sticky|match|userid|protocol|timeout|xclient|starttls|load_module|lock_file|master_process|multi_accept|pcre_jit|thread_pool|timer_resolution|working_directory|absolute_redirect|aio_write|chunked_transfer_encoding|connection_pool_size|default_type|directio_alignment|disable_symlinks|if_modified_since|ignore_invalid_headers|large_client_header_buffers|merge_slashes|output_buffers|port_in_redirect|postpone_output|read_ahead|recursive_error_pages|request_pool_size|reset_timedout_connection|resolver_timeout|sendfile_max_chunk|subrequest_output_buffer_size|try_files|underscores_in_headers|addition_types|override_charset|source_charset|create_full_put_path|min_delete_depth|f4f_buffer_size|gunzip_buffers|keyval_zone|access_log|mirror_request_body|random_index|set_real_ip_from|valid_referers|rewrite_log|uninitialized_variable_warn|split_clients|least_time|sticky_cookie_insert|xml_entities|google_perftools_profiles)([\"'\\s]|$)",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.nginx"
+        },
+        "2": {
+          "name": "keyword.directive.nginx"
+        },
+        "3": {
+          "name": "keyword.directive.nginx"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "\\b([a-zA-Z0-9\\_]+)\\s+",
+      "end": "(;|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.directive.unknown.nginx"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    {
+      "begin": "\\b([a-z]+\\/[A-Za-z0-9\\-\\.\\+]+)\\b",
+      "end": "(;)",
+      "beginCaptures": {
+        "1": {
+          "name": "constant.other.mediatype.nginx"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.nginx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#values"
+        }
+      ]
     }
   ],
+  "repository": {
+    "if_condition": {
+      "patterns": [
+        {
+          "include": "#variables"
+        },
+        {
+          "name": "keyword.operator.nginx",
+          "match": "\\!?\\~\\*?\\s"
+        },
+        {
+          "name": "keyword.operator.nginx",
+          "match": "\\!?\\-[fdex]\\s"
+        },
+        {
+          "name": "keyword.operator.nginx",
+          "match": "\\!?=[^=]"
+        },
+        {
+          "include": "#regexp_and_string"
+        }
+      ]
+    },
+    "server_parameters": {
+      "patterns": [
+        {
+          "match": "(?:^|\\s)(weight|max_conn|max_fails|fail_timeout|slow_start)(=)([0-9][0-9\\.]*[bBkKmMgGtTsShHdD]?)(?:\\s|;|$)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.nginx"
+            },
+            "2": {
+              "name": "keyword.operator.nginx"
+            },
+            "3": {
+              "name": "constant.numeric.nginx"
+            }
+          }
+        },
+        {
+          "include": "#values"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "match": "(\\$)([A-Za-z0-9\\_]+)\\b",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.nginx"
+            },
+            "2": {
+              "name": "variable.other.nginx"
+            }
+          }
+        },
+        {
+          "match": "(\\$\\{)([A-Za-z0-9\\_]+)(\\})",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.nginx"
+            },
+            "2": {
+              "name": "variable.other.nginx"
+            },
+            "3": {
+              "name": "punctuation.definition.variable.nginx"
+            }
+          }
+        }
+      ]
+    },
+    "regexp_and_string": {
+      "patterns": [
+        {
+          "name": "string.regexp.nginx",
+          "match": "\\^.*?\\$"
+        },
+        {
+          "name": "string.quoted.double.nginx",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.nginx",
+              "match": "\\\\[\"'nt\\\\]"
+            },
+            {
+              "include": "#variables"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.nginx",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.nginx",
+              "match": "\\\\[\"'nt\\\\]"
+            },
+            {
+              "include": "#variables"
+            }
+          ]
+        }
+      ]
+    },
+    "values": {
+      "patterns": [
+        {
+          "include": "#variables"
+        },
+        {
+          "name": "comment.line.number-sign",
+          "match": "\\#.*"
+        },
+        {
+          "match": "[\\t ](=?[0-9][0-9\\.]*[bBkKmMgGtTsShHdD]?)(?=[\\t ;])",
+          "captures": {
+            "1": {
+              "name": "constant.numeric.nginx"
+            }
+          }
+        },
+        {
+          "name": "constant.language.nginx",
+          "match": "[\\t ](on|off|true|false)(?=[\\t ;])"
+        },
+        {
+          "name": "constant.language.nginx",
+          "match": "[\\t ](kqueue|rtsig|epoll|\\/dev\\/poll|select|poll|eventport|max|all|default_server|default|main|crit|error|debug|warn|notice|last)(?=[\\t ;])"
+        },
+        {
+          "name": "keyword.operator.nginx",
+          "match": "\\\\.*\\ |\\~\\*|\\~|\\!\\~\\*|\\!\\~"
+        },
+        {
+          "include": "#regexp_and_string"
+        }
+      ]
+    }
+  },
   "scopeName": "source.nginx",
   "uuid": "0C04066A-12D2-43CA-8238-00A12CE4C12D"
 }

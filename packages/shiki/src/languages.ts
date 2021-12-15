@@ -13,6 +13,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'bibtex'
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'
@@ -201,6 +202,11 @@ export const languages: ILanguageRegistration[] = [
     path: 'bat.tmLanguage.json',
     samplePath: 'bat.sample',
     aliases: ['batch']
+  },
+  {
+    id: 'bibtex',
+    scopeName: 'text.bibtex',
+    path: 'bibtex.tmLanguage.json'
   },
   {
     id: 'c',
@@ -519,7 +525,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.markdown',
     path: 'markdown.tmLanguage.json',
     aliases: ['md'],
-    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex']
+    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
   },
   {
     id: 'matlab',
@@ -535,7 +541,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'nginx',
     scopeName: 'source.nginx',
-    path: 'nginx.tmLanguage.json'
+    path: 'nginx.tmLanguage.json',
+    embeddedLangs: ['lua']
   },
   {
     id: 'nim',
