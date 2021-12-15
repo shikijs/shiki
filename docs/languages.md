@@ -60,6 +60,7 @@ export type Lang =
   | 'crystal'
   | 'csharp' | 'c#'
   | 'css'
+  | 'cue'
   | 'd'
   | 'dart'
   | 'diff'
