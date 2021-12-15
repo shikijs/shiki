@@ -14,6 +14,7 @@ export type Lang =
   | 'ballerina'
   | 'bat' | 'batch'
   | 'bibtex'
+  | 'bicep'
   | 'c'
   | 'clojure' | 'clj'
   | 'cobol'
@@ -208,6 +209,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'bibtex',
     scopeName: 'text.bibtex',
     path: 'bibtex.tmLanguage.json'
+  },
+  {
+    id: 'bicep',
+    scopeName: 'source.bicep',
+    path: 'bicep.tmLanguage.json',
+    samplePath: 'bicep.sample'
   },
   {
     id: 'c',
