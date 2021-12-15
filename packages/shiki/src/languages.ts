@@ -13,6 +13,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
   | 'c'
@@ -204,6 +205,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'bat.tmLanguage.json',
     samplePath: 'bat.sample',
     aliases: ['batch']
+  },
+  {
+    id: 'berry',
+    scopeName: 'source.berry',
+    path: 'berry.tmLanguage.json',
+    samplePath: 'berry.sample',
+    aliases: ['be']
   },
   {
     id: 'bibtex',

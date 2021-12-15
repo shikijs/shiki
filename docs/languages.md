@@ -57,6 +57,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
   | 'c'
