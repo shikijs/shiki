@@ -14,6 +14,12 @@ A [build script](/scripts/pullThemes.sh) runs every day to pull latest themes fr
 - If it has a compiled JSON theme, add its link to `githubThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
 - If it has a precompilation step, add its link to `marketplaceThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
 - Run `yarn update:themes`
+- Review the diffs in git. You should see:
+  - `docs/themes.md`: Your theme id added
+  - `packages/shiki/themes/<theme>.json`: The theme downloaded
+  - `packages/shiki/src/themes.ts`: Your language added to `type Theme` and `const themes`
+  - `scripts/themeSources.ts`: The theme's id and URL
+- 🚀 Send in the PR!
 
 ## Loading Theme
 

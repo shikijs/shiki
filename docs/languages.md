@@ -33,6 +33,13 @@ If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code e
   - Less than 100 columns if possible
   - Link to source in the last line, for example `# From https://poignant.guide/book/chapter-5.html`
 - Run `yarn update:grammars`
+- Review the diffs in git. You should see:
+  - `docs/languages.md`: Your language id added
+  - `packages/shiki/languages/<lang>.tmLanguage.json`: The grammar downloaded
+  - `packages/shiki/samples/<lang>.sample`: The sample file you added
+  - `packages/shiki/src/languages.ts`: Your language added to `type Lang` and `const languages`
+  - `scripts/grammarSources.ts`: The grammar's id and URL
+- 🚀 Send in the PR!
 
 ## All Languages
 
