@@ -128,13 +128,6 @@
       }
     },
     {
-      "name": "punctuation.definition",
-      "scope": "punctuation.definition.string.begin,punctuation.definition.string.end",
-      "settings": {
-        "foreground": "#98c379"
-      }
-    },
-    {
       "name": "Text",
       "scope": "variable.parameter.function",
       "settings": {
@@ -1838,6 +1831,13 @@
       "scope": "variable.other.readwrite.c",
       "settings": {
         "foreground": "#e06c75"
+      }
+    },
+    {
+      "name": "php scope",
+      "scope": "entity.name.variable.parameter.php,punctuation.separator.colon.php,constant.other.php",
+      "settings": {
+        "foreground": "#abb2bf"
       }
     },
     {
