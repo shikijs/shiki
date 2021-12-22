@@ -155,7 +155,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     const { _theme } = getTheme(options.theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
-      bg: _theme.bg
+      bg: _theme.bg,
+      lineOptions: options?.lineOptions
     })
   }
 
