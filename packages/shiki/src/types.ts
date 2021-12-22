@@ -190,6 +190,9 @@ export interface HtmlOptions {
 }
 
 export interface LineOption {
+  /**
+   * 1-based line number.
+   */
   line: number
   classes?: string[]
 }
