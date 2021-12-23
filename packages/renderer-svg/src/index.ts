@@ -67,12 +67,12 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
     typeof options.fontFamily === 'string' ? options.fontFamily : options.fontFamily.name
   const remoteFontCSSURL =
     typeof options.fontFamily === 'string' ? undefined : options.fontFamily.cssURL
-  const fontSize = options.fontSize || 16
-  const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio || 1.4
-  const _bg = options.bg || '#fff'
-  const bgCornerRadius = options.bgCornerRadius || 4
-  const bgSideCharPadding = options.bgSideCharPadding || 4
-  const bgVerticalCharPadding = options.bgVerticalCharPadding || 2
+  const fontSize = options.fontSize ?? 16
+  const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio ?? 1.4
+  const _bg = options.bg ?? '#fff'
+  const bgCornerRadius = options.bgCornerRadius ?? 4
+  const bgSideCharPadding = options.bgSideCharPadding ?? 4
+  const bgVerticalCharPadding = options.bgVerticalCharPadding ?? 2
 
   const measurement = await measureMonospaceTypeface(fontNameStr, fontSize, remoteFontCSSURL)
 
