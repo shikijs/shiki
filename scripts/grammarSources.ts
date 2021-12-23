@@ -193,6 +193,7 @@ export const languageAliases = {
   python: ['py'],
   raku: ['perl6'],
   ruby: ['rb'],
+  rust: ['rs'],
   'html-ruby-erb': ['erb'],
   shaderlab: ['shader'],
   shellscript: ['shell', 'bash', 'sh', 'zsh'],
