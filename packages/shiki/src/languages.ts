@@ -95,7 +95,7 @@ export type Lang =
   | 'razor'
   | 'riscv'
   | 'ruby' | 'rb'
-  | 'rust'
+  | 'rust' | 'rs'
   | 'sas'
   | 'sass'
   | 'scala'
@@ -123,7 +123,7 @@ export type Lang =
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'
-  | 'viml'
+  | 'viml' | 'vim' | 'vimscript'
   | 'vue-html'
   | 'vue'
   | 'wasm'
@@ -694,7 +694,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'rust',
     scopeName: 'source.rust',
-    path: 'rust.tmLanguage.json'
+    path: 'rust.tmLanguage.json',
+    aliases: ['rs']
   },
   {
     id: 'sas',
@@ -851,7 +852,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'viml',
     scopeName: 'source.viml',
-    path: 'viml.tmLanguage.json'
+    path: 'viml.tmLanguage.json',
+    aliases: ['vim', 'vimscript']
   },
   {
     id: 'vue-html',
