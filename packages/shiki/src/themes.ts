@@ -1,5 +1,4 @@
 export type Theme =
-  | 'alternight'
   | 'css-variables'
   | 'dark-plus'
   | 'dracula-soft'
@@ -15,7 +14,6 @@ export type Theme =
   | 'material-palenight'
   | 'min-dark'
   | 'min-light'
-  | 'minimus'
   | 'monokai'
   | 'nord'
   | 'one-dark-pro'
@@ -28,7 +26,6 @@ export type Theme =
   | 'vitesse-light'
 
 export const themes: Theme[] = [
-  'alternight',
   'css-variables',
   'dark-plus',
   'dracula-soft',
@@ -44,7 +41,6 @@ export const themes: Theme[] = [
   'material-palenight',
   'min-dark',
   'min-light',
-  'minimus',
   'monokai',
   'nord',
   'one-dark-pro',
