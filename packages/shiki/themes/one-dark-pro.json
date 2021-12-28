@@ -121,6 +121,13 @@
       }
     },
     {
+      "name": "keyword.operator",
+      "scope": ["keyword.operator.word"],
+      "settings": {
+        "foreground": "#c678dd"
+      }
+    },
+    {
       "name": "regexp operator.quantifier",
       "scope": "keyword.operator.quantifier.regexp",
       "settings": {
@@ -1838,6 +1845,13 @@
       "scope": "entity.name.variable.parameter.php,punctuation.separator.colon.php,constant.other.php",
       "settings": {
         "foreground": "#abb2bf"
+      }
+    },
+    {
+      "name": "Assembly",
+      "scope": ["constant.numeric.decimal.asm.x86_64"],
+      "settings": {
+        "foreground": "#c678dd"
       }
     },
     {
