@@ -169,7 +169,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
   [
     'berry',
     'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
-  ]
+  ],
+  'https://github.com/kylebarron/language-stata/blob/vscode/grammars/stata.json'
 ]
 
 /**

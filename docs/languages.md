@@ -152,6 +152,7 @@ export type Lang =
   | 'sparql'
   | 'sql'
   | 'ssh-config'
+  | 'stata'
   | 'stylus' | 'styl'
   | 'svelte'
   | 'swift'
