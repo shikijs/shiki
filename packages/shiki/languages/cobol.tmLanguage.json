@@ -764,8 +764,21 @@
       "name": "keyword.control.cobol"
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*\\([0-9]*\\)[vV][-+sS\\*$09aAbBxXpPnNzZ/,\\.]*\\([0-9]*\\)[-|+]",
-      "name": "storage.type.picture10.cobol"
+      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXpPnNzZ/,\\.]*)\\(([0-9]*)\\)[-|+]",
+      "captures": {
+        "1": {
+          "name": "storage.type.picture10.cobol"
+        },
+        "2": {
+          "name": "constant.numeric.cobol"
+        },
+        "3": {
+          "name": "storage.type.picture10.cobol"
+        },
+        "4": {
+          "name": "constant.numeric.cobol"
+        }
+      }
     },
     {
       "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXpPnNzZ/,\\.]*)\\(([0-9]*)\\)",
