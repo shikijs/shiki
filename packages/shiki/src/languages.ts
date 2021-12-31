@@ -108,6 +108,7 @@ export type Lang =
   | 'sparql'
   | 'sql'
   | 'ssh-config'
+  | 'stata'
   | 'stylus' | 'styl'
   | 'svelte'
   | 'swift'
@@ -764,6 +765,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'ssh-config',
     scopeName: 'source.ssh-config',
     path: 'ssh-config.tmLanguage.json'
+  },
+  {
+    id: 'stata',
+    scopeName: 'source.stata',
+    path: 'stata.tmLanguage.json',
+    samplePath: 'stata.sample',
+    embeddedLangs: ['sql']
   },
   {
     id: 'stylus',
