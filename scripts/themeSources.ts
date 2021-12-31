@@ -69,7 +69,9 @@ export const githubThemeSources: (string | [string, string])[] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
-  ]
+  ],
+  ['lucy', 'https://github.com/jul-sh/lucy-vscode-theme/blob/master/dist/lucy.json'],
+  ['lucy-evening', 'https://github.com/jul-sh/lucy-vscode-theme/blob/master/dist/lucy-evening.json']
 ]
 
 /**

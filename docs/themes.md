@@ -97,6 +97,8 @@ export type Theme =
   | 'github-dark'
   | 'github-light'
   | 'light-plus'
+  | 'lucy-evening'
+  | 'lucy'
   | 'material-darker'
   | 'material-default'
   | 'material-lighter'
