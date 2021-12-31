@@ -18,6 +18,9 @@ export type Theme =
   | 'nord'
   | 'one-dark-pro'
   | 'poimandres'
+  | 'rose-pine-dawn'
+  | 'rose-pine-moon'
+  | 'rose-pine'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'
@@ -45,6 +48,9 @@ export const themes: Theme[] = [
   'nord',
   'one-dark-pro',
   'poimandres',
+  'rose-pine-dawn',
+  'rose-pine-moon',
+  'rose-pine',
   'slack-dark',
   'slack-ochin',
   'solarized-dark',

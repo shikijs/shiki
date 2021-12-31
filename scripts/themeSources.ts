@@ -60,6 +60,15 @@ export const githubThemeSources: (string | [string, string])[] = [
   [
     'poimandres',
     'https://github.com/drcmda/poimandres-theme/blob/main/themes/poimandres-color-theme.json'
+  ],
+  ['rose-pine', 'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-color-theme.json'],
+  [
+    'rose-pine-dawn',
+    'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-dawn-color-theme.json'
+  ],
+  [
+    'rose-pine-moon',
+    'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
   ]
 ]
 
