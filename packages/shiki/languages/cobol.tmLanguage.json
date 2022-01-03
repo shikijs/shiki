@@ -208,7 +208,7 @@
       }
     },
     {
-      "match": "((?i:\\$set))\\s+(\\w+)\\s*(\\()(\\w*)(\\))",
+      "match": "((?i:\\$set))\\s+(\\w+)\\s*(\\()(.*)(\\))",
       "captures": {
         "1": {
           "name": "keyword.control.directive.conditional.cobol"
@@ -897,7 +897,7 @@
       "name": "support.function.cbltypes.cobol"
     },
     {
-      "match": "(?<![-_])(?i:computational-1|comp-1|computational-2|comp-2|computational-3|comp-3|computational-4|comp-4|computational-x|comp-x|computational-5|comp-5|computational-6|comp-6|computational-n|comp-n|packed-decimal|index|float|double|signed-short|unsigned-short|signed-int|unsigned-int|signed-long|unsigned-long|comp|computational|usage\\sis\\sdisplay|usage\\sis\\sfont|usage\\s+display|binary|mutex-pointer|data-pointer|thread-pointer|sempahore-pointer|event-pointer|program-pointer|procedure-pointer|pointer|window|subwindow|control-type|thread|menu|variant|layout-manager|occurs|typedef|any|times|display\\s+blank\\s+when|blank\\s+when|blank\\s+screen|blank|usage\\sis|is\\spartial|usage|justified|just|right|signed|trailing\\s+separate|sign|seperate)(?=\\s|\\.|\\))",
+      "match": "(?<![-_])(?i:computational-1|comp-1|computational-2|comp-2|computational-3|comp-3|computational-4|comp-4|computational-x|comp-x|computational-5|comp-5|computational-6|comp-6|computational-n|comp-n|packed-decimal|index|float|double|signed-short|unsigned-short|signed-int|unsigned-int|signed-long|unsigned-long|comp|computational|usage\\sis\\sdisplay|usage\\sis\\sfont|usage\\s+display|binary|mutex-pointer|data-pointer|thread-pointer|sempahore-pointer|event-pointer|program-pointer|procedure-pointer|pointer|window|subwindow|control-type|thread|menu|variant|layout-manager|occurs|typedef|any|times|display\\s+blank\\s+when|blank\\s+when|blank\\s+screen|blank|usage\\sis|is\\spartial|usage|justified|just|right|signed|trailing\\s+separate|sign|seperate|sql)(?=\\s|\\.|\\))",
       "name": "storage.type.picture.cobol"
     },
     {
@@ -990,6 +990,10 @@
     {
       "match": "(?<![-_])(?i:address-of|date|day-of-week|day|debug-content|debug-item|debug-line|debug-item|debug-sub-1|debug-sub-2|debug-sub-3|shift-in|shift-out|sort-control|sort-core-size|sort-file-size|sort-message|sort-return|sort-mode-size|sort-return|tally|time|when-compiled|line-counter|page-counter|return-code|linage-counter|debug-line|debug-name|debug-contents|json-code|json-status|xml-code|xml-event|xml-information|xml-namespace-prefix|xml-namespace|xml-nnamespace-repfix|xml-nnamespace|xml-ntext|jnienvptr)(?![0-9A-Za-z_-])",
       "name": "variable.language"
+    },
+    {
+      "match": "(?<![-_])(?i:shortint1|shortint2|shortint3|shortint4|shortint5|shortint6|shortint7|longint1|longint2|longint3|longint4|longint5|longint6|bigint1|bigint2|blob-locator|clob-locator|dbclob-locator|dbclob-file|blob-file|clob-file|clob|dbclob|blob|varbinary|long-varbinary|time-record|timestamp-record|timestamp-offset-record|timestamp-offset|timestamp|rowid|xml|long-varchar)(?=\\s|\\.|\\)|\\()",
+      "name": "storage.type.sql.picture.cobol"
     },
     {
       "match": "(?<![-_])(?i:self)",
