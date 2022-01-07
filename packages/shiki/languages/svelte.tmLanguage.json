@@ -4,7 +4,7 @@
   "fileTypes": ["svelte"],
   "uuid": "7582b62f-51d9-4a84-8c8d-fc189530faf6",
   "injections": {
-    "L:meta.script.svelte meta.lang.javascript - (meta source)": {
+    "L:(meta.script.svelte | meta.style.svelte) (meta.lang.js | meta.lang.javascript) - (meta source)": {
       "patterns": [
         {
           "begin": "(?<=>)(?!</)",
@@ -19,7 +19,7 @@
         }
       ]
     },
-    "L:meta.script.svelte (meta.lang.ts | meta.lang.typescript) - (meta source)": {
+    "L:(meta.script.svelte | meta.style.svelte) (meta.lang.ts | meta.lang.typescript) - (meta source)": {
       "patterns": [
         {
           "begin": "(?<=>)(?!</)",
@@ -34,7 +34,7 @@
         }
       ]
     },
-    "L:meta.script.svelte meta.lang.coffee - (meta source)": {
+    "L:(meta.script.svelte | meta.style.svelte) meta.lang.coffee - (meta source)": {
       "patterns": [
         {
           "begin": "(?<=>)(?!</)",
@@ -620,40 +620,61 @@
       ]
     },
     "attributes-keyvalue": {
-      "begin": "([_$[:alpha:]][_\\-$[:alnum:]]*)",
+      "begin": "((?:--)?[_$[:alpha:]][_\\-$[:alnum:]]*)",
       "beginCaptures": {
-        "1": {
-          "name": "entity.other.attribute-name.svelte"
+        "0": {
+          "patterns": [
+            {
+              "match": "--.*",
+              "name": "support.type.property-name.svelte"
+            },
+            {
+              "match": ".*",
+              "name": "entity.other.attribute-name.svelte"
+            }
+          ]
         }
       },
       "end": "(?=\\s*+[^=\\s])",
       "name": "meta.attribute.$1.svelte",
       "patterns": [
         {
-          "include": "#attributes-value"
+          "begin": "=",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.separator.key-value.svelte"
+            }
+          },
+          "end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+          "patterns": [
+            {
+              "include": "#attributes-value"
+            }
+          ]
         }
       ]
     },
     "attributes-value": {
-      "begin": "=",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.separator.key-value.svelte"
-        }
-      },
-      "end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
       "patterns": [
         {
           "include": "#interpolation"
         },
         {
-          "match": "([0-9._]+[\\w]{,4})(?=\\s|/?>)",
-          "name": "constant.numeric.decimal.svelte",
-          "patterns": [
-            {
-              "include": "#interpolation"
+          "match": "(?:(['\"])([0-9._]+[\\w%]{,4})(\\1))|(?:([0-9._]+[\\w%]{,4})(?=\\s|/?>))",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.svelte"
+            },
+            "2": {
+              "name": "constant.numeric.decimal.svelte"
+            },
+            "3": {
+              "name": "punctuation.definition.string.end.svelte"
+            },
+            "4": {
+              "name": "constant.numeric.decimal.svelte"
             }
-          ]
+          }
         },
         {
           "match": "([^\\s\"'=<>`/]|/(?!>))+",
@@ -789,7 +810,18 @@
       "name": "meta.directive.$1.svelte",
       "patterns": [
         {
-          "include": "#attributes-value"
+          "begin": "=",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.separator.key-value.svelte"
+            }
+          },
+          "end": "(?<=[^\\s=])(?!\\s*=)|(?=/?>)",
+          "patterns": [
+            {
+              "include": "#attributes-value"
+            }
+          ]
         }
       ]
     },
