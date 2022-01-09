@@ -722,7 +722,7 @@
           "name": "storage.type.svelte"
         },
         {
-          "match": "class",
+          "match": "class|style",
           "name": "entity.other.attribute-name.svelte"
         }
       ]
@@ -742,7 +742,7 @@
           "name": "variable.function.svelte"
         },
         {
-          "match": "(?<=(let|class):).*$",
+          "match": "(?<=(let|class|style):).*$",
           "name": "variable.parameter.svelte"
         }
       ]
@@ -762,12 +762,16 @@
           "name": "entity.other.attribute-name.class.svelte"
         },
         {
+          "match": "(?<=(style):).*$",
+          "name": "support.type.property-name.svelte"
+        },
+        {
           "include": "#attributes-directives-types"
         }
       ]
     },
     "attributes-directives": {
-      "begin": "(?<!<)(on|use|bind|transition|in|out|animate|let|class)(:)(?:([_$[:alpha:]][_\\-$[:alnum:]]*(?=\\s*=))|([_$[:alpha:]][_\\-$[:alnum:]]*))((\\|\\w+)*)",
+      "begin": "(?<!<)(on|use|bind|transition|in|out|animate|let|class|style)(:)(?:((?:--)?[_$[:alpha:]][_\\-$[:alnum:]]*(?=\\s*=))|((?:--)?[_$[:alpha:]][_\\-$[:alnum:]]*))((\\|\\w+)*)",
       "beginCaptures": {
         "1": {
           "patterns": [
