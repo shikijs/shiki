@@ -380,6 +380,10 @@
             {
               "match": "debug",
               "name": "keyword.other.debugger.svelte"
+            },
+            {
+              "match": "const",
+              "name": "storage.type.svelte"
             }
           ]
         }
@@ -394,6 +398,30 @@
           "patterns": [
             {
               "include": "source.ts"
+            }
+          ]
+        },
+        {
+          "begin": "(?<=const.*?)\\G",
+          "end": "(?=})",
+          "patterns": [
+            {
+              "begin": "\\G\\s*([_$[:alpha:]][_$[:alnum:]]+)\\s*",
+              "end": "(?=\\=)",
+              "beginCaptures": {
+                "1": {
+                  "name": "variable.other.constant.svelte"
+                }
+              }
+            },
+            {
+              "begin": "(?=\\=)",
+              "end": "(?=})",
+              "patterns": [
+                {
+                  "include": "source.ts#variable-initializer"
+                }
+              ]
             }
           ]
         },
