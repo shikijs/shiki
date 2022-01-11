@@ -148,41 +148,41 @@
       }
     },
     {
-      "match": "(?:^|\\s+)(?i:\\$\\s*set\\s+)(ilusing)(\\()(.*)(\\))",
+      "match": "((?i:\\$\\s*set\\s+)(ilusing)(\\()(.*)(\\)))",
       "captures": {
-        "0": {
-          "name": "keyword.control.directive.conditional.cobol"
-        },
         "1": {
-          "name": "storage.modifier.import.cobol"
+          "name": "entity.name.function.preprocessor.cobol"
         },
         "2": {
-          "name": "punctuation.begin.bracket.round.cobol"
+          "name": "storage.modifier.import.cobol"
         },
         "3": {
-          "name": "string.quoted.other.cobol"
+          "name": "punctuation.begin.bracket.round.cobol"
         },
         "4": {
+          "name": "string.quoted.other.cobol"
+        },
+        "5": {
           "name": "punctuation.end.bracket.round.cobol"
         }
       }
     },
     {
-      "match": "(?:^|\\s+)(?i:\\$\\s*set\\s+)(ilusing)(\")(.*)(\")",
+      "match": "((?i:\\$\\s*set\\s+)(ilusing)(\")(.*)(\"))",
       "captures": {
-        "0": {
-          "name": "keyword.control.directive.conditional.cobol"
-        },
         "1": {
-          "name": "storage.modifier.import.cobol"
+          "name": "entity.name.function.preprocessor.cobol"
         },
         "2": {
-          "name": "punctuation.definition.string.begin.cobol"
+          "name": "storage.modifier.import.cobol"
         },
         "3": {
-          "name": "string.quoted.other.cobol"
+          "name": "punctuation.definition.string.begin.cobol"
         },
         "4": {
+          "name": "string.quoted.other.cobol"
+        },
+        "5": {
           "name": "punctuation.definition.string.begin.cobol"
         }
       }
@@ -242,20 +242,6 @@
       }
     },
     {
-      "match": "(?:^|\\s+)(?i:\\$set\\s|>>cbl\\s)(`.`*)$",
-      "captures": {
-        "0": {
-          "name": "keyword.control.directive.conditional.cobol"
-        },
-        "1": {
-          "name": "entity.other.attribute-name.set.cobol"
-        },
-        "2": {
-          "name": "comment.line.set.cobol"
-        }
-      }
-    },
-    {
       "match": "(\\$region|\\$end-region)(.*$)",
       "captures": {
         "1": {
@@ -276,7 +262,7 @@
       "name": "invalid.illegal.meta.preprocessor.cobolit"
     },
     {
-      "match": "((((>>|\\*>|\\$)[\\s]*)(?i:if|else|elif|end-if|end-evaluate|end|define|evaluate|when|display|call-convention))(.*$))",
+      "match": "((((>>|\\$)[\\s]*)(?i:if|else|elif|end-if|end-evaluate|end|define|evaluate|when|display|call-convention|set))(.*$))",
       "captures": {
         "1": {
           "name": "keyword.control.directive.conditional.cobol"
