@@ -654,7 +654,7 @@
       "name": "keyword.identifiers.cobol"
     },
     {
-      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|method|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.]*[\\s]+([a-zA-Z0-9_]*)",
+      "match": "(?<![-_])((?i:valuetype-id|operator-id|method-id|method|property-id|attribute-id|enum-id|iterator-id|class-id|program-id|operator-id|end\\s+program|end\\s+valuetype|extension))[\\.]*[\\s]+([a-zA-Z0-9_-]*)",
       "captures": {
         "1": {
           "name": "keyword.verb.cobol"
