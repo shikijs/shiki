@@ -88,6 +88,9 @@
           "include": "#enum-decl"
         },
         {
+          "include": "#source"
+        },
+        {
           "include": "#keywords"
         }
       ]
@@ -1817,7 +1820,7 @@
     "numbers": {
       "patterns": [
         {
-          "match": "\\b0[xX][\\da-f]+\\b|\\b\\d+(?:\\.(?:\\d+|$))?",
+          "match": "\\b0[xX][\\da-fA-F]+\\b|\\b\\d+(?:\\.(?:\\d+|$))?",
           "name": "constant.numeric.decimal.ballerina"
         }
       ]
@@ -2145,7 +2148,7 @@
     "service-decl": {
       "name": "meta.service.declaration.ballerina",
       "begin": "\\bservice\\b",
-      "end": "(?=;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|(?<=\\})",
+      "end": "(?=;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|(?<=\\})|(?<=\\,)",
       "beginCaptures": {
         "0": {
           "name": "keyword.ballerina"
@@ -2385,7 +2388,7 @@
               "name": "storage.modifier.ballerina support.type.primitive.ballerina"
             }
           },
-          "end": "(?!\\b(var))((?=;|}|;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|((?<!^string|[^\\._$[:alnum:]]string|^int|[^\\._$[:alnum:]]int)(?=\\s*$)))",
+          "end": "(?!\\b(var))((?=;|}|;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|((?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?=(if)\\s+))|((?<!^string|[^\\._$[:alnum:]]string|^int|[^\\._$[:alnum:]]int)(?=\\s*$)))",
           "patterns": [
             {
               "begin": "\\b(var)(?=\\s+|\\[|\\?|\\||\\:)",
@@ -2403,6 +2406,9 @@
             {
               "name": "keyword.other.ballerina",
               "match": "\\bin\\b"
+            },
+            {
+              "include": "#comment"
             },
             {
               "include": "#stringTemplate"
@@ -2442,7 +2448,7 @@
         {
           "name": "meta.var.expr.ballerina",
           "begin": "(?=\\b(const(?!\\s+enum\\b)))",
-          "end": "(?!\\b(const(?!\\s+enum\\b)))((?=;|}|;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|((?<!^string|[^\\._$[:alnum:]]string|^int|[^\\._$[:alnum:]]int)(?=\\s*$)))",
+          "end": "(?!\\b(const(?!\\s+enum\\b)))((?=\\bannotation\\b|;|}|;|^\\s*$|(?:^\\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\\b))|((?<!^string|[^\\._$[:alnum:]]string|^int|[^\\._$[:alnum:]]int)(?=\\s*$)))",
           "patterns": [
             {
               "begin": "\\b(const(?!\\s+enum\\b))\\s+",
@@ -2452,6 +2458,9 @@
                 }
               },
               "end": "(?=\\S)"
+            },
+            {
+              "include": "#comment"
             },
             {
               "include": "#stringTemplate"
@@ -2899,6 +2908,22 @@
         }
       ]
     },
+    "source": {
+      "patterns": [
+        {
+          "begin": "(\\bsource\\b)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.ballerina"
+            },
+            "2": {
+              "name": "variable.other.readwrite.ballerina"
+            }
+          },
+          "end": "(?=\\,)|(?=\\;)"
+        }
+      ]
+    },
     "types": {
       "patterns": [
         {
@@ -3145,7 +3170,13 @@
               "include": "#booleans"
             },
             {
+              "include": "#stringTemplate"
+            },
+            {
               "include": "#self-literal"
+            },
+            {
+              "include": "#xml"
             },
             {
               "include": "#call"
