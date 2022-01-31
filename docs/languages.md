@@ -137,6 +137,7 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'rel'
   | 'riscv'
   | 'ruby' | 'rb'
   | 'rust' | 'rs'
