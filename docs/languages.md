@@ -15,11 +15,17 @@ You can add a new language to your shiki instance by using the JSON version of y
 import shiki from "shiki"
 import {readFileSync} from "fs"
 
-const myLanguage = JSON.parse(readFileSync("./path/to/lang.tmLanguage.json"))
+const myLanguageGrammar = JSON.parse(readFileSync("./path/to/lang.tmLanguage.json"))
 
-shiki.getHighlighter({
-    langs: [...shiki.BUNDLED_LANGUAGES, myLanguage]
-})
+const myLanguage = {
+  id: "mylanguage",
+  scopeName: 'source.mylanguage',
+  grammar: myLanguageGrammar,
+  aliases: ['my', 'mylang'],
+}
+
+const highlighter = await shiki.getHighlighter()
+await highlighter.loadLanguage(myLanguage)
 ```
 
 If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=Togusa09.tmlanguage) can help.
