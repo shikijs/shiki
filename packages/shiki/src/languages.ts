@@ -187,7 +187,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.astro',
     path: 'astro.tmLanguage.json',
     samplePath: 'astro.sample',
-    embeddedLangs: ['css', 'sass', 'scss', 'tsx']
+    embeddedLangs: ['css', 'javascript', 'less', 'sass', 'scss', 'stylus', 'typescript', 'tsx']
   },
   {
     id: 'awk',
