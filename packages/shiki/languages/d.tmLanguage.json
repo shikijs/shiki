@@ -273,7 +273,7 @@
       "patterns": [
         {
           "match": "\\^\\^|\\+\\+|--|(?<!/)\\+(?!/)|-|~|(?<!/)\\*(?!/)|(?<![+*/])/(?![+*/])|%",
-          "name": "keyword.operator.add.d"
+          "name": "keyword.operator.numeric.d"
         }
       ]
     },
@@ -1628,7 +1628,7 @@
     "enum-declaration": {
       "patterns": [
         {
-          "begin": "\\b(enum)\\b\\s+",
+          "begin": "\\b(enum)\\b\\s+(?=.*[=;])",
           "end": "([A-Za-z_][\\w_\\d]*)\\s*(?=;|=|\\()(;)?",
           "beginCaptures": {
             "1": {
