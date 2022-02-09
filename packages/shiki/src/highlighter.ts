@@ -117,7 +117,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     options = { includeExplanation: true }
   ) {
     if (isPlaintext(lang)) {
-      return [[{ content: code }]]
+      const lines = code.split(/\r\n|\r|\n/)
+      return [...lines.map(line => [{ content: line }])]
     }
     const { _grammar } = getGrammar(lang)
     const { _theme, _colorMap } = getTheme(theme)

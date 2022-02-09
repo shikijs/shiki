@@ -18,6 +18,23 @@ console.log('line 2');
   expect(html).toMatchSnapshot()
 })
 
+test('splits plaintext into lines', async () => {
+  const highlighter = await getHighlighter({
+    theme: 'css-variables'
+  })
+
+  const code = `
+lorem ipsum
+dolor sit amet
+`.trim()
+
+  const html = highlighter.codeToHtml(code, {
+    lang: 'txt',
+    lineOptions: [{ line: 1, classes: ['highlighted'] }]
+  })
+  expect(html).toMatchSnapshot()
+})
+
 test('applies different classes to different lines', async () => {
   const highlighter = await getHighlighter({
     theme: 'css-variables',
