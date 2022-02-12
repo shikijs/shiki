@@ -972,6 +972,9 @@
             },
             {
               "include": "#modifier-call"
+            },
+            {
+              "include": "#punctuation"
             }
           ]
         },
@@ -1093,10 +1096,13 @@
       }
     },
     "function-call": {
-      "match": "\\b([A-Za-z_]\\w*)\\s*\\(",
+      "match": "\\b([A-Za-z_]\\w*)\\s*(\\()",
       "captures": {
         "1": {
           "name": "entity.name.function"
+        },
+        "2": {
+          "name": "punctuation.parameters.begin"
         }
       }
     },
