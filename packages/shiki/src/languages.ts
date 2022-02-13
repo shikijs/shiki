@@ -70,6 +70,7 @@ export type Lang =
   | 'lua'
   | 'make' | 'makefile'
   | 'markdown' | 'md'
+  | 'marko'
   | 'matlab'
   | 'mdx'
   | 'nginx'
@@ -550,6 +551,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'markdown.tmLanguage.json',
     aliases: ['md'],
     embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
+  },
+  {
+    id: 'marko',
+    scopeName: 'text.marko',
+    path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
+    embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
     id: 'matlab',

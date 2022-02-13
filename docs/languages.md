@@ -120,6 +120,7 @@ export type Lang =
   | 'lua'
   | 'make' | 'makefile'
   | 'markdown' | 'md'
+  | 'marko'
   | 'matlab'
   | 'mdx'
   | 'nginx'
