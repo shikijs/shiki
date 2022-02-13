@@ -183,4 +183,5 @@ export type Lang =
   | 'xml'
   | 'xsl'
   | 'yaml'
+  | 'zenscript'
 ```
