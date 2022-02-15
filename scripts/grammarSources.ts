@@ -171,7 +171,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
     'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
   ],
   'https://github.com/kylebarron/language-stata/blob/vscode/grammars/stata.json',
-  'https://github.com/relationalai-oss/rel_vscode/blob/master/syntaxes/rel.tmLanguage.json'
+  'https://github.com/relationalai-oss/rel_vscode/blob/master/syntaxes/rel.tmLanguage.json',
+  'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'
 ]
 
 /**
