@@ -175,7 +175,8 @@ export const githubGrammarSources: (string | [string, string])[] = [
   [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
-  ]
+  ],
+  'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'
 ]
 
 /**
