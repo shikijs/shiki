@@ -23,3 +23,8 @@ exports[`ignores line numbers out of range 1`] = `
 <span class=\\"line highlighted\\"><span style=\\"color: var(--shiki-token-constant)\\">console</span><span style=\\"color: var(--shiki-token-function)\\">.log</span><span style=\\"color: var(--shiki-color-text)\\">(</span><span style=\\"color: var(--shiki-token-string-expression)\\">&#39;line 2&#39;</span><span style=\\"color: var(--shiki-color-text)\\">);</span></span>
 <span class=\\"line\\"><span style=\\"color: var(--shiki-token-constant)\\">console</span><span style=\\"color: var(--shiki-token-function)\\">.log</span><span style=\\"color: var(--shiki-color-text)\\">(</span><span style=\\"color: var(--shiki-token-string-expression)\\">&#39;line 3&#39;</span><span style=\\"color: var(--shiki-color-text)\\">);</span></span></code></pre>"
 `;
+
+exports[`splits plaintext into lines 1`] = `
+"<pre class=\\"shiki\\" style=\\"background-color: var(--shiki-color-background)\\"><code><span class=\\"line highlighted\\"><span style=\\"color: var(--shiki-color-text)\\">lorem ipsum</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-text)\\">dolor sit amet</span></span></code></pre>"
+`;
