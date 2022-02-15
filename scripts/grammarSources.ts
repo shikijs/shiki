@@ -172,6 +172,10 @@ export const githubGrammarSources: (string | [string, string])[] = [
   ],
   'https://github.com/kylebarron/language-stata/blob/vscode/grammars/stata.json',
   'https://github.com/relationalai-oss/rel_vscode/blob/master/syntaxes/rel.tmLanguage.json',
+  [
+    'zenscript',
+    'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
+  ],
   'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'
 ]
 

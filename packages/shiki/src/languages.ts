@@ -134,6 +134,7 @@ export type Lang =
   | 'xml'
   | 'xsl'
   | 'yaml'
+  | 'zenscript'
 
 export const languages: ILanguageRegistration[] = [
   {
@@ -917,5 +918,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'yaml',
     scopeName: 'source.yaml',
     path: 'yaml.tmLanguage.json'
+  },
+  {
+    id: 'zenscript',
+    scopeName: 'source.zenscript',
+    path: 'zenscript.tmLanguage.json',
+    samplePath: 'zenscript.sample'
   }
 ]
