@@ -17,6 +17,10 @@ echo "> Getting grammars from GitHub"
 npx esno scripts/grammars/pullGrammarsFromGitHub.ts
 echo "> Done getting grammars from GitHub"
 
+echo "> Getting grammars from VS Code marketplace"
+npx esno scripts/grammars/pullGrammarsFromMarketplace.ts
+echo "> Done getting grammars from VS Code marketplace"
+
 echo "> Normalizing grammars"
 npx esno scripts/grammars/normalizeGrammarPaths.ts
 echo "> Done normalizing grammars"

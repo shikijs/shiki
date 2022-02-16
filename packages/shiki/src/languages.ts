@@ -61,7 +61,6 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
-  | 'jupyter'
   | 'kotlin'
   | 'latex'
   | 'less'
@@ -73,6 +72,7 @@ export type Lang =
   | 'marko'
   | 'matlab'
   | 'mdx'
+  | 'mermaid'
   | 'nginx'
   | 'nim'
   | 'nix'
@@ -502,12 +502,6 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['cpp', 'python', 'javascript', 'r', 'sql']
   },
   {
-    id: 'jupyter',
-    scopeName: 'source.jupyter',
-    path: 'jupyter.tmLanguage.json',
-    embeddedLangs: ['json']
-  },
-  {
     id: 'kotlin',
     scopeName: 'source.kotlin',
     path: 'kotlin.tmLanguage.json'
@@ -569,6 +563,11 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.markdown.jsx',
     path: 'mdx.tmLanguage.json',
     embeddedLangs: ['jsx', 'markdown']
+  },
+  {
+    id: 'mermaid',
+    scopeName: 'markdown.mermaid.codeblock',
+    path: 'mermaid.tmLanguage.json'
   },
   {
     id: 'nginx',
