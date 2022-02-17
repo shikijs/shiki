@@ -54,7 +54,7 @@ export const vscodeGrammarsToRename = {
  *       https://github.com/13xforever/x86_64-assembly-vscode/blob/face834a56e416230c2d20939f9fa77c25344865/syntaxes/language-x86_64-assembly.tmLanguage#L13-L14
  *       specify the desired name, for example `asm`
  *   - `url` should be the github URL
- * - Run `yarn update:grammars`, examine the changes
+ * - Run `pnpm update:grammars`, examine the changes
  */
 export const githubGrammarSources: [string, string][] = [
   ['abap', 'https://github.com/pvl/abap.tmbundle/blob/master/Syntaxes/ABAP.tmLanguage'],

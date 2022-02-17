@@ -1,15 +1,10 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "build": "lerna run build --include-dependencies",
-    "watch": "lerna run watch --parallel",
+    "build": "pnpm -r --parallel build",
+    "dev": "pnpm -r  --parallel watch",
     "fmt": "prettier --write packages/**/*.ts",
     "test": "cross-env NODE_OPTIONS=--max-old-space-size=4096 jest --colors",
-    "gen": "yarn workspace shiki-site gen",
-    "release": "lerna publish",
     "update": "npm run update:themes && npm run update:grammars",
     "update:themes": "bash ./scripts/pullThemes.sh",
     "update:grammars": "bash ./scripts/pullGrammars.sh"

@@ -35,7 +35,7 @@ export const vscodeThemesToRename = {
  *
  * To add one:
  * - Insert `[name, url]` to the list sorted by `name`
- * - Run `yarn update:themes`, examine the changes
+ * - Run `pnpm update:themes`, examine the changes
  */
 export const githubThemeSources: [string, string][] = [
   [
