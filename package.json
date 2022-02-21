@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm -r --parallel build",
+    "build": "pnpm -r build",
     "dev": "pnpm -r  --parallel watch",
     "fmt": "prettier --write packages/**/*.ts",
     "test": "cross-env NODE_OPTIONS=--max-old-space-size=4096 jest --colors",
