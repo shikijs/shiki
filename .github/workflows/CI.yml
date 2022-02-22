@@ -40,6 +40,6 @@ jobs:
       - run: pnpm run gen
         working-directory: ./packages/site
 
-      - run: pnmp run test
+      - run: pnpm run test
         env:
           CI: true
