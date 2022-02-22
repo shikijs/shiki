@@ -1,9 +1,17 @@
+//@ts-check
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
-import typescript from 'rollup-plugin-typescript2'
-import replace from '@rollup/plugin-replace'
+import esbuild from 'rollup-plugin-esbuild'
+import rollupReplace from '@rollup/plugin-replace'
 import { terser } from 'rollup-plugin-terser'
+
+const replace = opts => {
+  return rollupReplace({
+    ...opts,
+    preventAssignment: true
+  })
+}
 
 const external = ['shiki']
 
@@ -25,7 +33,7 @@ export default [
       replace({
         __BROWSER__: JSON.stringify(false)
       }),
-      typescript(),
+      esbuild(),
       nodeResolve(),
       commonjs()
     ]
@@ -56,7 +64,7 @@ export default [
       replace({
         __BROWSER__: JSON.stringify(true)
       }),
-      typescript(),
+      esbuild(),
       nodeResolve(),
       commonjs()
     ]
