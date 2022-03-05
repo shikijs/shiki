@@ -64,6 +64,14 @@ export const githubThemeSources: [string, string][] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
+  ],
+  [
+    'search-lights',
+    'https://github.com/finnsjames/search-lights/blob/main/themes/search-lights-color-theme.json'
+  ],
+  [
+    'desert-lights',
+    'https://github.com/finnsjames/search-lights/blob/main/themes/desert-lights-color-theme.json'
   ]
 ]
 

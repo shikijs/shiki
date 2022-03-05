@@ -1,6 +1,7 @@
 export type Theme =
   | 'css-variables'
   | 'dark-plus'
+  | 'desert-lights'
   | 'dracula-soft'
   | 'dracula'
   | 'github-dark-dimmed'
@@ -22,6 +23,7 @@ export type Theme =
   | 'rose-pine-dawn'
   | 'rose-pine-moon'
   | 'rose-pine'
+  | 'search-lights'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'
@@ -32,6 +34,7 @@ export type Theme =
 export const themes: Theme[] = [
   'css-variables',
   'dark-plus',
+  'desert-lights',
   'dracula-soft',
   'dracula',
   'github-dark-dimmed',
@@ -53,6 +56,7 @@ export const themes: Theme[] = [
   'rose-pine-dawn',
   'rose-pine-moon',
   'rose-pine',
+  'search-lights',
   'slack-dark',
   'slack-ochin',
   'solarized-dark',
