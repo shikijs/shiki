@@ -441,6 +441,10 @@
               "end": "$"
             },
             {
+              "match": "(\\b[-\\w]+\\b\\s*)",
+              "name": "variable"
+            },
+            {
               "comment": "(Class)(Node(s))(ClassName)",
               "match": "\\s*(class)\\s+(\\b[-,\\w]+)\\s+(\\b\\w+\\b)",
               "captures": {
