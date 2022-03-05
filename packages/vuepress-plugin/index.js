@@ -12,7 +12,7 @@ module.exports = (options, ctx) => {
 
       // load additional languages
       if (options.additionalLangs) {
-        for (langRegist in additionalLangs) {
+        for (langRegist of options.additionalLangs) {
           await hl.loadLanguage(langRegist)
         }
       }
