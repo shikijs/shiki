@@ -96,6 +96,7 @@ export type Lang =
   | 'razor'
   | 'rel'
   | 'riscv'
+  | 'rst'
   | 'ruby' | 'rb'
   | 'rust' | 'rs'
   | 'sas'
@@ -697,6 +698,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'riscv',
     scopeName: 'source.riscv',
     path: 'riscv.tmLanguage.json'
+  },
+  {
+    id: 'rst',
+    scopeName: 'source.rst',
+    path: 'rst.tmLanguage.json',
+    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'ruby']
   },
   {
     id: 'ruby',

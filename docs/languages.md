@@ -146,6 +146,7 @@ export type Lang =
   | 'razor'
   | 'rel'
   | 'riscv'
+  | 'rst'
   | 'ruby' | 'rb'
   | 'rust' | 'rs'
   | 'sas'
