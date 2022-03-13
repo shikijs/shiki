@@ -335,11 +335,11 @@
       "patterns": [
         {
           "match": "(^[0-9 ][0-9 ][0-9 ][0-9 ][0-9 ][0-9 ])",
-          "name": "constant.numeric.line_number.cobol"
+          "name": "constant.numeric.cobol"
         }
       ],
       "name": "comment.block.cobol.remark",
-      "end": "(?=((?<![-_])(?i:remarks|author|date-written|source-computer|object-computer|installation|date-compiled|special-names|security|environment\\s+division|data\\s+division|working-storage\\s+section|input-output\\s+section|linkage\\s+section|procedure\\s+division|local-storage\\s+section)|^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*]\\*.*$|^\\+$|^$))"
+      "end": "(?=((?<![-_])(?i:remarks|author|date-written|source-computer|object-computer|installation|date-compiled|special-names|security|environment\\s+division|data\\s+division|working-storage\\s+section|input-output\\s+section|linkage\\s+section|procedure\\s+division|local-storage\\s+section)|^[ \\*][ \\*][ \\*][ \\*][ \\*][ \\*]\\*.*$|^\\+$))"
     },
     {
       "match": "(?<=(\\(|\\[))((\\-\\+)*\\s*[0-9 ,\\.\\+\\-\\*\\/]+)(?=(\\)|\\]))",
@@ -991,7 +991,7 @@
     },
     {
       "match": "(^[0-9][0-9][0-9][0-9][0-9][0-9])",
-      "name": "constant.numeric.integer"
+      "name": "constant.numeric.cobol"
     },
     {
       "match": "(\\()([0-9]*)(:)([0-9]*)(\\))",
