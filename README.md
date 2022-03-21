@@ -64,6 +64,8 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 - [CodeChalk](https://github.com/a20185/codechalk), A neat terminal code highlighting tool powered by Shiki tokenizer and Chalk.
 - [shiki-renderer-pdf](https://github.com/sachinraja/shiki-renderer-pdf), a Shiki renderer for PDFs. Used in [pdfc](https://github.com/sachinraja/pdfc) to compile your source code to PDFs.
 - [Code Hike](https://codehike.org/), a collection of components and mods for MDX codeblocks.
+- [Scarbon](https://www.npmjs.com/package/scarbon), an elegant code renderer made using Shiki for highlighting, [Prettier](https://prettier.io/) for formatting, and [Canvas](https://www.npmjs.com/package/canvas) for rendering
+- [shiki-renderer-canvas](https://www.npmjs.com/package/shiki-renderer-canvas), a Canvas renderer for Shiki that works in Node.js and the browser
 
 ## Contributing
 
