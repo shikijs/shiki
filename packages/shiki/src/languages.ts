@@ -40,6 +40,7 @@ export type Lang =
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
+  | 'glsl'
   | 'gnuplot'
   | 'go'
   | 'graphql'
@@ -268,7 +269,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json',
     samplePath: 'cpp.sample',
-    embeddedLangs: ['sql']
+    embeddedLangs: ['glsl', 'sql']
   },
   {
     id: 'crystal',
@@ -336,7 +337,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'elm',
     scopeName: 'source.elm',
     path: 'elm.tmLanguage.json',
-    samplePath: 'elm.sample'
+    samplePath: 'elm.sample',
+    embeddedLangs: ['glsl']
   },
   {
     id: 'erb',
@@ -381,6 +383,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.git-rebase',
     path: 'git-rebase.tmLanguage.json',
     embeddedLangs: ['shellscript']
+  },
+  {
+    id: 'glsl',
+    scopeName: 'source.glsl',
+    path: 'glsl.tmLanguage.json',
+    samplePath: 'glsl.sample',
+    embeddedLangs: ['c']
   },
   {
     id: 'gnuplot',
@@ -580,7 +589,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'nim',
     scopeName: 'source.nim',
     path: 'nim.tmLanguage.json',
-    embeddedLangs: ['c', 'html', 'xml', 'javascript', 'css', 'markdown']
+    embeddedLangs: ['c', 'html', 'xml', 'javascript', 'css', 'glsl', 'markdown']
   },
   {
     id: 'nix',
