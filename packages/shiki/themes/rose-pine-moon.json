@@ -58,10 +58,10 @@
     "descriptionForeground": "#908caa",
     "diffEditor.border": "#393552",
     "diffEditor.diagonalFill": "#817c9c4d",
-    "diffEditor.insertedTextBackground": "#9ccfd814",
-    "diffEditor.insertedTextBorder": "#9ccfd880",
-    "diffEditor.removedTextBackground": "#eb6f9214",
-    "diffEditor.removedTextBorder": "#eb6f9280",
+    "diffEditor.insertedTextBackground": "#9ccfd826",
+    "diffEditor.removedTextBackground": "#eb6f9226",
+    "diffEditorOverview.insertedForeground": "#9ccfd880",
+    "diffEditorOverview.removedForeground": "#eb6f9280",
     "dropdown.background": "#2a273f",
     "dropdown.border": "#817c9c26",
     "dropdown.foreground": "#e0def4",
@@ -517,6 +517,24 @@
       "scope": ["keyword"],
       "settings": {
         "foreground": "#3e8fb0"
+      }
+    },
+    {
+      "scope": ["markup.inserted.diff"],
+      "settings": {
+        "foreground": "#9ccfd8"
+      }
+    },
+    {
+      "scope": ["markup.deleted.diff"],
+      "settings": {
+        "foreground": "#eb6f92"
+      }
+    },
+    {
+      "scope": ["meta.diff.range"],
+      "settings": {
+        "foreground": "#c4a7e7"
       }
     },
     {
