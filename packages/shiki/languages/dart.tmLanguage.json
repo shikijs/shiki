@@ -249,7 +249,7 @@
     "function-identifier": {
       "patterns": [
         {
-          "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?(\\(|\\s+=>)",
+          "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?[!?]?(\\(|\\s+=>)",
           "captures": {
             "1": {
               "name": "entity.name.function.dart"
