@@ -90,6 +90,7 @@ export type Lang =
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
+  | 'glsl'
   | 'gnuplot'
   | 'go'
   | 'graphql'

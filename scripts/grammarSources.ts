@@ -126,6 +126,7 @@ export const githubGrammarSources: [string, string][] = [
     'gherkin',
     'https://github.com/alexkrechik/VSCucumberAutoComplete/blob/master/gclient/syntaxes/feature.tmLanguage'
   ],
+  ['glsl', 'https://github.com/polym0rph/GLSL.tmbundle/blob/master/Syntaxes/GLSL.tmLanguage'],
   [
     'gnuplot',
     'https://github.com/MarioSchwalbe/vscode-gnuplot/blob/master/syntaxes/gnuplot.tmLanguage'
