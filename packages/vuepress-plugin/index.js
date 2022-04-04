@@ -1,14 +1,21 @@
 const shiki = require('shiki')
 
-let h
+let hl
 
 module.exports = (options, ctx) => {
   return {
     async ready() {
-      h = await shiki.getHighlighter({
+      hl = await shiki.getHighlighter({
         theme: options.theme ? options.theme : 'nord',
         langs: options.langs ? options.langs : []
       })
+
+      // load additional languages
+      if (options.additionalLangs) {
+        for (langRegist of options.additionalLangs) {
+          await hl.loadLanguage(langRegist)
+        }
+      }
     },
 
     chainMarkdown(config) {
@@ -16,7 +23,7 @@ module.exports = (options, ctx) => {
         if (!lang) {
           return `<pre><code>${escapeHtml(code)}</code></pre>`
         }
-        return h.codeToHtml(code, { lang })
+        return hl.codeToHtml(code, { lang })
       })
     }
   }
