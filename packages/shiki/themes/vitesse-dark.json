@@ -291,13 +291,25 @@
       }
     },
     {
+      "scope": ["punctuation.support.type.property-name"],
+      "settings": {
+        "foreground": "#b8a965aa"
+      }
+    },
+    {
       "scope": "support",
       "settings": {
         "foreground": "#b8a965"
       }
     },
     {
-      "scope": ["property", "meta.property-name", "meta.object-literal.key", "attribute.name"],
+      "scope": [
+        "property",
+        "meta.property-name",
+        "meta.object-literal.key",
+        "entity.name.tag.yaml",
+        "attribute.name"
+      ],
       "settings": {
         "foreground": "#b8a965"
       }
@@ -431,7 +443,7 @@
       }
     },
     {
-      "scope": "constant.language.boolean",
+      "scope": ["constant.language.boolean", "constant.language"],
       "settings": {
         "foreground": "#4d9375"
       }
@@ -582,6 +594,12 @@
       "scope": ["entity.other.attribute-name.html.vue"],
       "settings": {
         "foreground": "#80a665"
+      }
+    },
+    {
+      "scope": ["invalid.illegal.unrecognized-tag.html"],
+      "settings": {
+        "fontStyle": "normal"
       }
     }
   ],
@@ -759,6 +777,10 @@
       "foreground": "c98a7daa"
     },
     {
+      "token": "punctuation.support.type.property-name",
+      "foreground": "b8a965aa"
+    },
+    {
       "token": "support",
       "foreground": "b8a965"
     },
@@ -772,6 +794,10 @@
     },
     {
       "token": "meta.object-literal.key",
+      "foreground": "b8a965"
+    },
+    {
+      "token": "entity.name.tag.yaml",
       "foreground": "b8a965"
     },
     {
@@ -892,6 +918,10 @@
     },
     {
       "token": "constant.language.boolean",
+      "foreground": "4d9375"
+    },
+    {
+      "token": "constant.language",
       "foreground": "4d9375"
     },
     {
@@ -1037,6 +1067,9 @@
     {
       "token": "entity.other.attribute-name.html.vue",
       "foreground": "80a665"
+    },
+    {
+      "token": "invalid.illegal.unrecognized-tag.html"
     }
   ]
 }
