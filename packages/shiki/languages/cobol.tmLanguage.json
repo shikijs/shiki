@@ -697,6 +697,10 @@
       "name": "support.function.cobol"
     },
     {
+      "match": "(?<![-_])(?i:DFHRESP|DFHVALUE)(?=\\s|\\.|\\(|\\))",
+      "name": "support.function.cics.cobol"
+    },
+    {
       "match": "(?<![-_])(?i:function)(?=\\s|\\.)",
       "name": "keyword.verb.cobol"
     },
