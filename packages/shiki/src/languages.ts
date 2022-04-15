@@ -17,6 +17,7 @@ export type Lang =
   | 'bibtex'
   | 'bicep'
   | 'c'
+  | 'cadence' | 'cdc'
   | 'clojure' | 'clj'
   | 'cobol'
   | 'codeql' | 'ql'
@@ -235,6 +236,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.c',
     path: 'c.tmLanguage.json',
     samplePath: 'c.sample'
+  },
+  {
+    id: 'cadence',
+    scopeName: 'source.cadence',
+    path: 'cadence.tmLanguage.json',
+    samplePath: 'cadence.sample',
+    aliases: ['cdc']
   },
   {
     id: 'clojure',
