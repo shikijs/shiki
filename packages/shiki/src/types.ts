@@ -147,7 +147,7 @@ export interface IShikiTheme extends IRawTheme {
   /**
    * @description light/dark theme
    */
-  type: 'light' | 'dark'
+  type: 'light' | 'dark' | 'css'
 
   /**
    * @description tokenColors of the theme file
