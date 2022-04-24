@@ -77,7 +77,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     '#000011': 'var(--shiki-token-punctuation)',
     '#000012': 'var(--shiki-token-link)'
   }
-  function setColorReplacements(map) {
+  function setColorReplacements(map: Record<string, string>) {
     COLOR_REPLACEMENTS = map
   }
   function fixCssVariablesTheme(theme: IShikiTheme, colorMap: string[]) {
