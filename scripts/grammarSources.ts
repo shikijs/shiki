@@ -155,6 +155,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['latex', 'https://github.com/James-Yu/LaTeX-Workshop/blob/master/syntax/LaTeX.tmLanguage.json'],
   ['lisp', 'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage'],
+  ['liquid', 'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'],
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
   ['marko', 'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'],
   [

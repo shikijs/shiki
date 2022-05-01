@@ -65,6 +65,7 @@ export type Lang =
   | 'kotlin'
   | 'latex'
   | 'less'
+  | 'liquid'
   | 'lisp'
   | 'logo'
   | 'lua'
@@ -529,6 +530,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['css']
   },
   {
+    id: 'liquid',
+    scopeName: 'text.html.liquid',
+    path: 'liquid.tmLanguage.json',
+    samplePath: 'liquid.sample',
+    embeddedLangs: ['html', 'css', 'json', 'javascript']
+  },
+  {
     id: 'lisp',
     scopeName: 'source.lisp',
     path: 'lisp.tmLanguage.json'
@@ -903,7 +911,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue',
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
-    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
+    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'liquid', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
   },
   {
     id: 'wasm',
