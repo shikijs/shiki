@@ -94,6 +94,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
   ],
   ['bicep', 'https://github.com/Azure/bicep/blob/main/src/textmate/bicep.tmlanguage'],
+  [
+    'cadence',
+    'https://github.com/onflow/vscode-cadence/blob/master/syntaxes/cadence.tmGrammar.json'
+  ],
   ['cobol', 'https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json'],
   ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json'],
   [
@@ -271,6 +275,7 @@ export const githubGrammarSources: [string, string][] = [
 export const languageAliases = {
   bat: ['batch'],
   berry: ['be'],
+  cadence: ['cdc'],
   clojure: ['clj'],
   csharp: ['c#'],
   fsharp: ['f#'],

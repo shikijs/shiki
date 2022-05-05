@@ -67,6 +67,7 @@ export type Lang =
   | 'bibtex'
   | 'bicep'
   | 'c'
+  | 'cadence' | 'cdc'
   | 'clojure' | 'clj'
   | 'cobol'
   | 'codeql' | 'ql'
