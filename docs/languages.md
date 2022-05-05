@@ -116,6 +116,7 @@ export type Lang =
   | 'kotlin'
   | 'latex'
   | 'less'
+  | 'liquid'
   | 'lisp'
   | 'logo'
   | 'lua'
