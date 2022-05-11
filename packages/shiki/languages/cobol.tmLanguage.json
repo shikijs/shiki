@@ -689,6 +689,10 @@
       "name": "keyword.otherverb.cobol"
     },
     {
+      "match": "(?i:dynamic)\\s+(?i:length)(?=\\s|\\.)",
+      "name": "storage.type.dynamiclength.cobol"
+    },
+    {
       "match": "(?<![-_])(?i:assign|external|prototype|organization|organisation|indexed|column|plus|line\\*s*sequential|sequential|access|dynamic|relative|label|block|contains|standard|records|record\\s+key|record|is|alternate|duplicates|reel|tape|terminal|disk\\sfilename|disk|disc|recording\\smode|mode|random)(?=\\s|\\.)",
       "name": "keyword.identifers.cobol"
     },
@@ -789,7 +793,7 @@
       "name": "keyword.control.cobol"
     },
     {
-      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXpPnNzZ/,\\.]*)\\(([0-9]*)\\)[-|+]",
+      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXuUpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXuUpPnNzZ/,\\.]*)\\(([0-9]*)\\)[-|+]",
       "captures": {
         "1": {
           "name": "storage.type.picture10.cobol"
@@ -806,7 +810,7 @@
       }
     },
     {
-      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXpPnNzZ/,\\.]*)\\(([0-9]*)\\)",
+      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXuUpPnNzZ/,.]*)\\(([0-9]*)\\)([vV][-+sS\\*$09aAbBxXuUpPnNzZ/,\\.]*)\\(([0-9]*)\\)",
       "captures": {
         "1": {
           "name": "storage.type.picture9.cobol"
@@ -823,7 +827,7 @@
       }
     },
     {
-      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXpPnNzZ/,.]*)\\(([0-9]*)\\)([vV\\.][-+s\\*$09aAbBsSnNxXzZ/,]*[0-9\\.()])*",
+      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBxXuUpPnNzZ/,.]*)\\(([0-9]*)\\)([vV\\.][-+s\\*$09aAbBsSnNxXuUzZ/,]*[0-9\\.()])*",
       "captures": {
         "1": {
           "name": "storage.type.picture8.cobol"
@@ -837,15 +841,15 @@
       }
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxXzZ/,.]*\\([0-9]*\\)[Vv\\.][-+s\\*0$9aAbBsSnNxpPXzZ/,]*",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxXuUzZ/,.]*\\([0-9]*\\)[Vv\\.][-+s\\*0$9aAbBsSnNxpPxXuUzZ/,]*",
       "name": "storage.type.picture7.cobol"
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxXzZ/,.]*\\([0-9]*\\)[-+s\\*0$9aAbBsSnNxpPXzZ/,]*[Vv\\.][-+s\\*0$9aAbBsSnNxpPXzZ/,]*",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxXuUzZ/,.]*\\([0-9]*\\)[-+s\\*0$9aAbBsSnNxpPxXuUzZ/,]*[Vv\\.][-+s\\*0$9aAbBsSnNxpPxXuUzZ/,]*",
       "name": "storage.type.picture6.cobol"
     },
     {
-      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxXzZ/,.]*)\\(([0-9]*)\\)[-+s\\*0$9aAbBsSnNxpPXzZ/,]*",
+      "match": "(?<![-_])((?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpPNxuUXzZ/,.]*)\\(([0-9]*)\\)[-+s\\*0$9aAbBsSnNxpPxXuUzZ/,]*",
       "captures": {
         "1": {
           "name": "storage.type.picture5.cobol"
@@ -856,19 +860,19 @@
       }
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpNNxXzZ/,.]*\\([0-9]*\\)",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+sS\\*$09aAbBsSnpNNxXuUzZ/,.]*\\([0-9]*\\)",
       "name": "storage.type.picture4.cobol"
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[sS]?[9aAbBsSnNxXzZ]*[Vv][9aAxbXzZ]*\\([0-9]*\\)",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[sS]?[9aAbBsSnNxXuUzZ]*[Vv][9aAxbXuUzZ]*\\([0-9]*\\)",
       "name": "storage.type.picture3.cobol"
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[sS]?[9aAbBsSnNxXzZ]*[Vv][9aAxbXzZ]*",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[sS]?[9aAbBsSnNxXuUzZ]*[Vv][9aAxbXuUzZ]*",
       "name": "storage.type.picture2.cobol"
     },
     {
-      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+\\*$9aAbBsSnpPNxXzZ/,.vV]*",
+      "match": "(?<![-_])(?i:picture\\s+is|picture|pic\\s+is|pic)\\s+[-+\\*$9aAbBsSnpPNxXuUzZ/,.vV]*",
       "name": "storage.type.picture1.cobol"
     },
     {
@@ -887,8 +891,12 @@
       "name": "support.function.cbltypes.cobol"
     },
     {
-      "match": "(?<![-_])(?i:computational-1|comp-1|computational-2|comp-2|computational-3|comp-3|computational-4|comp-4|computational-x|comp-x|computational-5|comp-5|computational-6|comp-6|computational-n|comp-n|packed-decimal|index|float|double|signed-short|unsigned-short|signed-int|unsigned-int|signed-long|unsigned-long|comp|computational|usage\\sis\\sdisplay|usage\\sis\\sfont|usage\\s+display|binary|mutex-pointer|data-pointer|thread-pointer|sempahore-pointer|event-pointer|program-pointer|procedure-pointer|pointer|window|subwindow|control-type|thread|menu|variant|layout-manager|occurs|typedef|any|times|display\\s+blank\\s+when|blank\\s+when|blank\\s+screen|blank|usage\\sis|is\\spartial|usage|justified|just|right|signed|trailing\\s+separate|sign|seperate|sql)(?=\\s|\\.|\\))",
+      "match": "(?<![-_])(?i:computational-1|comp-1|computational-2|comp-2|computational-3|comp-3|computational-4|comp-4|computational-x|comp-x|computational-5|comp-5|computational-6|comp-6|computational-n|comp-n|packed-decimal|index|float|double|signed-short|unsigned-short|signed-int|unsigned-int|signed-long|unsigned-long|comp|computational|group-usage|usage\\sis\\sdisplay|usage\\sis\\sfont|usage\\s+display|binary|mutex-pointer|data-pointer|thread-pointer|sempahore-pointer|event-pointer|program-pointer|procedure-pointer|pointer|window|subwindow|control-type|thread|menu|variant|layout-manager|occurs|typedef|any|times|display\\s+blank\\s+when|blank\\s+when|blank\\s+screen|blank|usage\\sis|is\\spartial|usage|justified|just|right|signed|trailing\\s+separate|sign|seperate|sql)(?=\\s|\\.|\\))",
       "name": "storage.type.picture.cobol"
+    },
+    {
+      "match": "(?i:byte-length)\\s+[0-9]+",
+      "name": "storage.type.length.cobol"
     },
     {
       "match": "(?<![-_])(?i:accept|add|address|allocate|cancel|close|commit|compute|continue|delete|disable|display|bell|divide|eject|enable|enter|evaluate|exhibit|named|exit|free|generate|go\\s+to|initialize\\sonly|initialize|initiate|inspect|merge|end-set|set|end-invoke|invoke\\s+run|invoke|move|corresponding|corr|multiply|otherwise|open|sharing|sort-merge|purge|ready|read|kept|receive|release|return|rewrite|rounded|rollback|search|send|sort|collating\\s+sequence|collating|start|service|subtract|suppress|terminate|then|unlock|string|unstring|validate|write|next|statement|sentence)(?![0-9A-Za-z_-])",
