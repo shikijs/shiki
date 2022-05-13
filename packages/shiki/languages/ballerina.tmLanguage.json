@@ -2045,6 +2045,9 @@
           "include": "#string"
         },
         {
+          "include": "#parameters"
+        },
+        {
           "include": "#annotationAttachment"
         },
         {
@@ -2058,10 +2061,6 @@
         },
         {
           "include": "#variable-initializer"
-        },
-        {
-          "name": "punctuation.separator.parameter.ballerina",
-          "match": "\\,"
         },
         {
           "include": "#expression"
@@ -2081,6 +2080,22 @@
               "include": "#code"
             }
           ]
+        }
+      ]
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "name": "keyword.control.flow.ballerina",
+          "match": "\\s*(return|break|continue|check|checkpanic|panic|trap|from|where)\\b"
+        },
+        {
+          "name": "keyword.other.ballerina",
+          "match": "\\s*(let|select)\\b"
+        },
+        {
+          "name": "punctuation.separator.parameter.ballerina",
+          "match": "\\,"
         }
       ]
     },
