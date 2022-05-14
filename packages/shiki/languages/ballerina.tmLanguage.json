@@ -1572,7 +1572,7 @@
               ]
             },
             {
-              "begin": "(?<=\\))",
+              "begin": "(?<=\\))(?=\\s|\\=)",
               "end": "(?=\\{)",
               "patterns": [
                 {
@@ -2426,6 +2426,9 @@
               "include": "#comment"
             },
             {
+              "include": "#string"
+            },
+            {
               "include": "#stringTemplate"
             },
             {
@@ -2478,6 +2481,9 @@
               "include": "#comment"
             },
             {
+              "include": "#string"
+            },
+            {
               "include": "#stringTemplate"
             },
             {
@@ -2522,6 +2528,9 @@
             {
               "match": "\\|",
               "name": "keyword.operator.type.annotation.ballerina"
+            },
+            {
+              "include": "#string"
             },
             {
               "include": "#stringTemplate"
