@@ -68,6 +68,7 @@ export type Lang =
   | 'bicep'
   | 'c'
   | 'cadence' | 'cdc'
+  | 'clarity'
   | 'clojure' | 'clj'
   | 'cobol'
   | 'codeql' | 'ql'
