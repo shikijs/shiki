@@ -98,6 +98,10 @@ export const githubGrammarSources: [string, string][] = [
     'cadence',
     'https://github.com/onflow/vscode-cadence/blob/master/syntaxes/cadence.tmGrammar.json'
   ],
+  [
+    'clarity',
+    'https://github.com/hirosystems/clarity-lsp/blob/develop/syntaxes/clarity.tmLanguage.json'
+  ],
   ['cobol', 'https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json'],
   ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json'],
   [
@@ -159,7 +163,10 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['latex', 'https://github.com/James-Yu/LaTeX-Workshop/blob/master/syntax/LaTeX.tmLanguage.json'],
   ['lisp', 'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage'],
-  ['liquid', 'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'],
+  [
+    'liquid',
+    'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'
+  ],
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
   ['marko', 'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'],
   [

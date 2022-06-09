@@ -18,6 +18,7 @@ export type Lang =
   | 'bicep'
   | 'c'
   | 'cadence' | 'cdc'
+  | 'clarity'
   | 'clojure' | 'clj'
   | 'cobol'
   | 'codeql' | 'ql'
@@ -244,6 +245,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'cadence.tmLanguage.json',
     samplePath: 'cadence.sample',
     aliases: ['cdc']
+  },
+  {
+    id: 'clarity',
+    scopeName: 'source.clar',
+    path: 'clarity.tmLanguage.json',
+    samplePath: 'clarity.sample'
   },
   {
     id: 'clojure',
