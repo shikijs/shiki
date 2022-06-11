@@ -1,24 +1,11 @@
 {
-  "fileTypes": [],
-  "injectionSelector": "L:markup.fenced_code.block.markdown",
+  "fileTypes": ["mermaid"],
   "patterns": [
-    {
-      "include": "#mermaid-code-block"
-    },
     {
       "include": "#mermaid"
     }
   ],
   "repository": {
-    "mermaid-code-block": {
-      "begin": "(?<=[`~])mermaid(\\s+[^`~]*)?$",
-      "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)",
-      "patterns": [
-        {
-          "include": "#mermaid"
-        }
-      ]
-    },
     "mermaid": {
       "patterns": [
         {
@@ -893,6 +880,6 @@
       ]
     }
   },
-  "scopeName": "markdown.mermaid.codeblock",
+  "scopeName": "source.mermaid",
   "name": "mermaid"
 }

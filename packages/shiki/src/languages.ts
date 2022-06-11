@@ -599,7 +599,7 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'mermaid',
-    scopeName: 'markdown.mermaid.codeblock',
+    scopeName: 'source.mermaid',
     path: 'mermaid.tmLanguage.json'
   },
   {
