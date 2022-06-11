@@ -23,19 +23,15 @@ function measureFont([fontName, fontSize]: [string, number]) {
     characters.push(String.fromCharCode(i))
   }
 
-  let highC
-  let lowC
   let highestAscent = 0
   let lowestDescent = 0
   characters.forEach(char => {
     const m = ctx.measureText(char)
     if (m.actualBoundingBoxAscent > highestAscent) {
       highestAscent = m.actualBoundingBoxAscent
-      highC = char
     }
     if (m.actualBoundingBoxDescent > lowestDescent) {
       lowestDescent = m.actualBoundingBoxDescent
-      lowC = char
     }
   })
 
