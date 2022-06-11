@@ -125,7 +125,7 @@
     "editorLineNumber.foreground": "#7b7f8b",
     "editor.selectionBackground": "#44475A",
     "editor.selectionHighlightBackground": "#424450",
-    "editor.foldBackground": "#262626",
+    "editor.foldBackground": "#21222C80",
     "editor.wordHighlightBackground": "#8BE9FD50",
     "editor.wordHighlightStrongBackground": "#50FA7B50",
     "editor.findMatchBackground": "#FFB86C80",
@@ -694,6 +694,7 @@
         "punctuation.definition.type.end",
         "punctuation.section.scope.begin",
         "punctuation.section.scope.end",
+        "punctuation.terminator.expression.php",
         "storage.type.generic.java",
         "string.template meta.brace",
         "string.template punctuation.accessor"
@@ -920,7 +921,6 @@
       "name": "Destructuring / aliasing reference name (LHS)",
       "scope": [
         "meta.import variable.other.readwrite",
-        "meta.object-binding-pattern-variable variable.object.property",
         "meta.variable.assignment.destructured.object.coffee variable"
       ],
       "settings": {

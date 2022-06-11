@@ -120,8 +120,15 @@
       }
     },
     "natspec-tag-return": {
-      "match": "(@return)\\b",
-      "name": "storage.type.return.natspec"
+      "match": "(@return)(\\s+([A-Za-z_]\\w*))?\\b",
+      "captures": {
+        "1": {
+          "name": "storage.type.return.natspec"
+        },
+        "3": {
+          "name": "variable.other.natspec"
+        }
+      }
     },
     "comment": {
       "patterns": [
@@ -653,17 +660,6 @@
     "declaration-contract": {
       "patterns": [
         {
-          "match": "\\b(contract)\\b\\s+(\\w+)\\b\\s*(?=\\{)",
-          "captures": {
-            "1": {
-              "name": "storage.type.contract"
-            },
-            "2": {
-              "name": "entity.name.type.contract"
-            }
-          }
-        },
-        {
           "begin": "\\b(contract)\\b\\s+(\\w+)\\b\\s+\\b(is)\\b\\s+",
           "end": "(?=\\{)",
           "beginCaptures": {
@@ -683,22 +679,22 @@
               "name": "entity.name.type.contract.extend"
             }
           ]
+        },
+        {
+          "match": "\\b(contract)(\\s+([A-Za-z_]\\w*))?\\b",
+          "captures": {
+            "1": {
+              "name": "storage.type.contract"
+            },
+            "2": {
+              "name": "entity.name.type.contract"
+            }
+          }
         }
       ]
     },
     "declaration-interface": {
       "patterns": [
-        {
-          "match": "\\b(interface)\\b\\s+(\\w+)\\b\\s*(?=\\{)",
-          "captures": {
-            "1": {
-              "name": "storage.type.interface"
-            },
-            "2": {
-              "name": "entity.name.type.interface"
-            }
-          }
-        },
         {
           "begin": "\\b(interface)\\b\\s+(\\w+)\\b\\s+\\b(is)\\b\\s+",
           "end": "(?=\\{)",
@@ -719,6 +715,17 @@
               "name": "entity.name.type.interface.extend"
             }
           ]
+        },
+        {
+          "match": "\\b(interface)(\\s+([A-Za-z_]\\w*))?\\b",
+          "captures": {
+            "1": {
+              "name": "storage.type.interface"
+            },
+            "2": {
+              "name": "entity.name.type.interface"
+            }
+          }
         }
       ]
     },
@@ -972,6 +979,9 @@
             },
             {
               "include": "#modifier-call"
+            },
+            {
+              "include": "#punctuation"
             }
           ]
         },
@@ -1093,10 +1103,13 @@
       }
     },
     "function-call": {
-      "match": "\\b([A-Za-z_]\\w*)\\s*\\(",
+      "match": "\\b([A-Za-z_]\\w*)\\s*(\\()",
       "captures": {
         "1": {
           "name": "entity.name.function"
+        },
+        "2": {
+          "name": "punctuation.parameters.begin"
         }
       }
     },

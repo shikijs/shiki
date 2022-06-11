@@ -188,6 +188,12 @@ export interface HtmlOptions {
   theme?: StringLiteralUnion<Theme>
   lineOptions?: LineOption[]
 }
+export interface HtmlRendererOptions {
+  langId?: string
+  fg?: string
+  bg?: string
+  lineOptions?: LineOption[]
+}
 
 export interface LineOption {
   /**

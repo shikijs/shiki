@@ -1,14 +1,7 @@
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
-import { LineOption } from './types'
+import { HtmlRendererOptions, LineOption } from './types'
 import { groupBy } from './utils'
-
-export interface HtmlRendererOptions {
-  langId?: string
-  fg?: string
-  bg?: string
-  lineOptions?: LineOption[]
-}
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'

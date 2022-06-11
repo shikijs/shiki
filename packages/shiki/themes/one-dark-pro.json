@@ -30,6 +30,12 @@
   },
   "tokenColors": [
     {
+      "scope": "meta.embedded",
+      "settings": {
+        "foreground": "#abb2bf"
+      }
+    },
+    {
       "name": "unison punctuation",
       "scope": "punctuation.definition.delayed.unison,punctuation.definition.list.begin.unison,punctuation.definition.list.end.unison,punctuation.definition.ability.begin.unison,punctuation.definition.ability.end.unison,punctuation.operator.assignment.as.unison,punctuation.separator.pipe.unison,punctuation.separator.delimiter.unison,punctuation.definition.hash.unison",
       "settings": {
@@ -1013,13 +1019,6 @@
       }
     },
     {
-      "name": "Escape Characters",
-      "scope": "constant.character.escape",
-      "settings": {
-        "foreground": "#56b6c2"
-      }
-    },
-    {
       "name": "Embedded",
       "scope": "punctuation.section.embedded, variable.interpolation",
       "settings": {
@@ -1048,6 +1047,12 @@
       }
     },
     {
+      "scope": "invalid.illegal.unrecognized-tag.html",
+      "settings": {
+        "foreground": "#e06c75"
+      }
+    },
+    {
       "name": "Broken",
       "scope": "invalid.broken",
       "settings": {
@@ -1059,6 +1064,13 @@
       "scope": "invalid.deprecated",
       "settings": {
         "foreground": "#ffffff"
+      }
+    },
+    {
+      "name": "html Deprecated",
+      "scope": "invalid.deprecated.entity.other.attribute-name.html",
+      "settings": {
+        "foreground": "#d19a66"
       }
     },
     {
@@ -1741,8 +1753,8 @@
       "name": "Comments",
       "scope": "comment, punctuation.definition.comment",
       "settings": {
-        "fontStyle": "italic",
-        "foreground": "#7f848e"
+        "foreground": "#7f848e",
+        "fontStyle": "italic"
       }
     },
     {
@@ -1855,6 +1867,24 @@
       }
     },
     {
+      "scope": ["support.other.parenthesis.regexp"],
+      "settings": {
+        "foreground": "#d19a66"
+      }
+    },
+    {
+      "scope": ["constant.character.escape"],
+      "settings": {
+        "foreground": "#56b6c2"
+      }
+    },
+    {
+      "scope": ["string.regexp"],
+      "settings": {
+        "foreground": "#e06c75"
+      }
+    },
+    {
       "name": "js/ts italic",
       "scope": "entity.other.attribute-name.js,entity.other.attribute-name.ts,entity.other.attribute-name.jsx,entity.other.attribute-name.tsx,variable.parameter,variable.language.super",
       "settings": {
@@ -1870,7 +1900,7 @@
     },
     {
       "name": "Python Keyword Control",
-      "scope": "keyword.control.import.python,keyword.control.flow.python",
+      "scope": "keyword.control.import.python,keyword.control.flow.python,keyword.operator.logical.python",
       "settings": {
         "fontStyle": "italic"
       }
@@ -1903,6 +1933,9 @@
     "editor.findMatchBorder": "#457dff",
     "editor.findMatchHighlightBackground": "#6199ff2f",
     "editor.foreground": "#abb2bf",
+    "editorBracketHighlight.foreground1": "#d19a66",
+    "editorBracketHighlight.foreground2": "#c678dd",
+    "editorBracketHighlight.foreground3": "#56b6c2",
     "editorHoverWidget.highlightForeground": "#61afef",
     "editorInlayHint.foreground": "#abb2bf",
     "editorInlayHint.background": "#2c313c",
@@ -1978,11 +2011,10 @@
     "sideBarSectionHeader.foreground": "#abb2bf",
     "statusBar.background": "#21252b",
     "statusBar.debuggingBackground": "#cc6633",
-    "statusBar.debuggingBorder": "#66017a",
+    "statusBar.debuggingBorder": "#ff000000",
     "statusBar.debuggingForeground": "#ffffff",
     "statusBar.foreground": "#9da5b4",
     "statusBar.noFolderBackground": "#21252b",
-    "statusBarItem.hoverBackground": "#2c313a",
     "statusBarItem.remoteBackground": "#4d78cc",
     "statusBarItem.remoteForeground": "#f8fafd",
     "tab.activeBackground": "#282c34",

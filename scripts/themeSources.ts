@@ -34,21 +34,16 @@ export const vscodeThemesToRename = {
  * All theme sources on github.com.
  *
  * To add one:
- * - Add the URL to the end
- * - Run `yarn update:themes`, examine the changes
- *
- * The theme id is normalized from the `name` key of the theme json file.
- * When the theme provides an undesirable name (or no `name` key), for example `Slack Theme Dark Mode` at
- * https://github.com/slack-theme/visual-studio-code/blob/f4c3c57d35b89874de3c96df551d6809a30a82d7/themes/dark-mode.json#L2
- * provide an array like `['slack-dark', '<url>']` to name the theme `slack-dark`
+ * - Insert `[name, url]` to the list sorted by `name`
+ * - Run `pnpm update:themes`, examine the changes
  */
-export const githubThemeSources: (string | [string, string])[] = [
+export const githubThemeSources: [string, string][] = [
   [
     'nord',
     'https://github.com/arcticicestudio/nord-visual-studio-code/blob/develop/themes/nord-color-theme.json'
   ],
-  'https://github.com/misolori/min-theme/blob/master/themes/min-light.json',
-  'https://github.com/misolori/min-theme/blob/master/themes/min-dark.json',
+  ['min-light', 'https://github.com/misolori/min-theme/blob/master/themes/min-light.json'],
+  ['min-dark', 'https://github.com/misolori/min-theme/blob/master/themes/min-dark.json'],
   [
     'slack-ochin',
     'https://github.com/slack-theme/visual-studio-code/blob/master/themes/ochin.json'
@@ -82,7 +77,7 @@ export const githubThemeSources: (string | [string, string])[] = [
  * If given a single path `extension/foo/bar.json`, extract `bar.json` to `tmp/themes/bar.json`
  * If given ['baz.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/themes/baz.json`
  */
-export const marketplaceThemeSources: { [extPublisherAndId: string]: (string | string[])[] } = {
+export const marketplaceThemeSources: { [extPublisherAndId: string]: [string, string][] } = {
   'equinusocio.vsc-material-theme': [
     ['material-darker.json', 'extension/build/themes/Material-Theme-Darker.json'],
     ['material-default.json', 'extension/build/themes/Material-Theme-Default.json'],

@@ -1102,7 +1102,7 @@
               "name": "meta.arrow.ballerina storage.type.function.arrow.ballerina"
             }
           },
-          "end": "(?=\\;)|(?=\\,)",
+          "end": "(?=\\;)|(?=\\,)|(?=)(?=\\);)",
           "patterns": [
             {
               "include": "#statements"
@@ -1129,7 +1129,7 @@
           "name": "keyword.other.ballerina"
         }
       },
-      "end": "(?<=\\;)|(?<=\\})|(?<=\\,)",
+      "end": "(?<=\\;)|(?<=\\})|(?<=\\,)|(?=)(?=\\);)",
       "patterns": [
         {
           "match": "\\bexternal\\b",
@@ -1174,7 +1174,7 @@
           "include": "#string"
         },
         {
-          "match": "\\s+(\\b(self)|\\b(is|new|isolated|null|function|in)\\b|(string|int|boolean|float|byte|decimal|json|xml)\\b|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))",
+          "match": "\\s+(\\b(self)|\\b(is|new|isolated|null|function|in)\\b|(string|int|boolean|float|byte|decimal|json|xml|anydata)\\b|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))",
           "captures": {
             "2": {
               "name": "variable.language.this.ballerina"
@@ -1264,7 +1264,7 @@
           }
         },
         {
-          "match": "(?x)(?:(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))\\s+)?(?:(\\.\\.\\.)\\s*)?(?<!=|:)(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(this)|(string|int|boolean|float|byte|decimal|json|xml)|\\b(is|new|isolated|null|function|in)\\b|\\b(true|false)\\b|\\b(check|foreach|if|checkpanic)\\b|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))\\s*(\\??)",
+          "match": "(?x)(?:(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))\\s+)?(?:(\\.\\.\\.)\\s*)?(?<!=|:)(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(?:(this)|(string|int|boolean|float|byte|decimal|json|xml|anydata)|\\b(is|new|isolated|null|function|in)\\b|\\b(true|false)\\b|\\b(check|foreach|if|checkpanic)\\b|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))\\s*(\\??)",
           "captures": {
             "2": {
               "name": "keyword.operator.rest.ballerina"
@@ -1572,7 +1572,7 @@
               ]
             },
             {
-              "begin": "(?<=\\))",
+              "begin": "(?<=\\))(?=\\s|\\=)",
               "end": "(?=\\{)",
               "patterns": [
                 {
@@ -1752,7 +1752,7 @@
     "mdDocumentationParamDescription": {
       "patterns": [
         {
-          "begin": "(\\+\\s+)([_$[:alpha:]][_$[:alnum:]]*)(\\s*\\-\\s+)",
+          "begin": "(\\+\\s+)(\\'?[_$[:alpha:]][_$[:alnum:]]*)(\\s*\\-\\s+)",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.ballerina"
@@ -2045,6 +2045,9 @@
           "include": "#string"
         },
         {
+          "include": "#parameters"
+        },
+        {
           "include": "#annotationAttachment"
         },
         {
@@ -2058,10 +2061,6 @@
         },
         {
           "include": "#variable-initializer"
-        },
-        {
-          "name": "punctuation.separator.parameter.ballerina",
-          "match": "\\,"
         },
         {
           "include": "#expression"
@@ -2081,6 +2080,22 @@
               "include": "#code"
             }
           ]
+        }
+      ]
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "name": "keyword.control.flow.ballerina",
+          "match": "\\s*(return|break|continue|check|checkpanic|panic|trap|from|where)\\b"
+        },
+        {
+          "name": "keyword.other.ballerina",
+          "match": "\\s*(let|select)\\b"
+        },
+        {
+          "name": "punctuation.separator.parameter.ballerina",
+          "match": "\\,"
         }
       ]
     },
@@ -2411,6 +2426,9 @@
               "include": "#comment"
             },
             {
+              "include": "#string"
+            },
+            {
               "include": "#stringTemplate"
             },
             {
@@ -2463,6 +2481,9 @@
               "include": "#comment"
             },
             {
+              "include": "#string"
+            },
+            {
               "include": "#stringTemplate"
             },
             {
@@ -2484,7 +2505,7 @@
         },
         {
           "name": "meta.var.expr.ballerina",
-          "begin": "(string|int|boolean|float|byte|decimal|json|xml)(?=\\s+|\\[|\\?|\\||\\:)",
+          "begin": "(string|int|boolean|float|byte|decimal|json|xml|anydata)(?=\\s+|\\[|\\?|\\||\\:)",
           "beginCaptures": {
             "0": {
               "name": "support.type.primitive.ballerina"
@@ -2496,7 +2517,7 @@
               "include": "#xml"
             },
             {
-              "begin": "(string|int|boolean|float|byte|decimal|json|xml)(?=\\s+|\\[|\\?|\\||\\:)",
+              "begin": "(string|int|boolean|float|byte|decimal|json|xml|anydata)(?=\\s+|\\[|\\?|\\||\\:)",
               "beginCaptures": {
                 "0": {
                   "name": "support.type.primitive.ballerina"
@@ -2507,6 +2528,9 @@
             {
               "match": "\\|",
               "name": "keyword.operator.type.annotation.ballerina"
+            },
+            {
+              "include": "#string"
             },
             {
               "include": "#stringTemplate"
@@ -2546,7 +2570,7 @@
       "patterns": [
         {
           "name": "meta.var-single-variable.expr.ballerina",
-          "begin": "((string|int|boolean|float|byte|decimal|json|xml)|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))(?=\\s+|\\;|\\>|\\|)",
+          "begin": "((string|int|boolean|float|byte|decimal|json|xml|anydata)|\\b(readonly|error|map)\\b|([_$[:alpha:]][_$[:alnum:]]*))(?=\\s+|\\;|\\>|\\|)",
           "beginCaptures": {
             "2": {
               "name": "support.type.primitive.ballerina"
@@ -2928,11 +2952,11 @@
       "patterns": [
         {
           "name": "storage.type.ballerina",
-          "match": "\\b(handle|any|anydata|future|typedesc)\\b"
+          "match": "\\b(handle|any|future|typedesc)\\b"
         },
         {
           "name": "support.type.primitive.ballerina",
-          "match": "\\b(boolean|int|string|float|decimal|byte|json|xml)\\b"
+          "match": "\\b(boolean|int|string|float|decimal|byte|json|xml|anydata)\\b"
         },
         {
           "name": "storage.type.ballerina",
@@ -3444,7 +3468,7 @@
     "type-primitive": {
       "patterns": [
         {
-          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(string|int|boolean|float|byte|decimal|json|xml)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))",
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(string|int|boolean|float|byte|decimal|json|xml|anydata)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))",
           "name": "support.type.primitive.ballerina"
         }
       ]

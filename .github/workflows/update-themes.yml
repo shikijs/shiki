@@ -11,42 +11,39 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - uses: actions/cache@v2
-        id: yarn-cache
+      - name: cache pnpm modules
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
 
-      - run: yarn install
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.31.0
+          run_install: true
 
-      - run: yarn run update:themes
+      - run: pnpm run update:themes
 
-      - name: Build
-        run: yarn build
-      - name: Test
-        run: yarn test
+      - run: pnpm build
+      - run: pnpm test
         env:
           CI: true
 
-      - name: Commit
+      - name: commit
         run: |
           if [[ `git status --porcelain` ]]; then
             git config user.name "Pine Wu"
             git config user.email octref@gmail.com
             git status
             git add -A
-            git commit -m "chore: Update themes"
+            git commit -m "🤖: update themes"
             git push
           else
             echo "no changes"
