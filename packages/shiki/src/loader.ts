@@ -6,12 +6,12 @@ import type { IShikiTheme } from './types'
 
 export const isWebWorker =
   typeof self !== 'undefined' && typeof self.WorkerGlobalScope !== 'undefined'
-
-export const isBrowser =
-  isWebWorker ||
-  (typeof window !== 'undefined' &&
-    typeof window.document !== 'undefined' &&
-    typeof fetch !== 'undefined')
+export const isNode =
+  'process' in globalThis &&
+  typeof process !== 'undefined' &&
+  typeof process.release !== 'undefined' &&
+  process.release.name === 'node'
+export const isBrowser = isWebWorker || !isNode
 
 // to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'
