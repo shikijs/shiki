@@ -138,7 +138,7 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml'
+  | 'yaml' | 'yml'
   | 'zenscript'
 
 export const languages: ILanguageRegistration[] = [
@@ -954,7 +954,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'yaml',
     scopeName: 'source.yaml',
-    path: 'yaml.tmLanguage.json'
+    path: 'yaml.tmLanguage.json',
+    aliases: ['yml']
   },
   {
     id: 'zenscript',
