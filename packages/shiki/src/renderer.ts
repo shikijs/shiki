@@ -1,47 +1,7 @@
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
-import { HtmlRendererOptions, LineOption } from './types'
+import { HtmlRendererOptions, LineOption, ElementsOptions } from './types'
 import { groupBy } from './utils'
-
-export interface ElementProps {
-  children: string
-  [key: string]: unknown
-}
-
-export interface PreElementProps extends ElementProps {
-  className: string
-  style: string
-}
-
-export interface CodeElementProps extends ElementProps {}
-
-export interface LineElementProps extends ElementProps {
-  className: string
-  lines: IThemedToken[][]
-  line: IThemedToken[]
-  index: number
-}
-
-export interface TokenElementProps extends ElementProps {
-  style: string
-  tokens: IThemedToken[]
-  token: IThemedToken
-  index: number
-}
-
-export interface ElementsOptions {
-  pre?: (props: PreElementProps) => string
-  code?: (props: CodeElementProps) => string
-  line?: (props: LineElementProps) => string
-  token?: (props: TokenElementProps) => string
-}
-
-export interface HtmlRendererOptions {
-  langId?: string
-  fg?: string
-  bg?: string
-  elements?: ElementsOptions
-}
 
 const defaultElements: ElementsOptions = {
   pre({ className, style, children }) {
