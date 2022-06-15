@@ -1,0 +1,433 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correctly handles variable length lookbehind (#264) 1`] = `
+Array [
+  Array [
+    Object {
+      "color": "#800000",
+      "content": "<div",
+      "explanation": Array [
+        Object {
+          "content": "<",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "punctuation.definition.tag.begin.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "brackets of XML/HTML tags",
+                  "scope": "punctuation.definition.tag",
+                  "settings": Object {
+                    "foreground": "#800000",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        Object {
+          "content": "div",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "entity.name.tag.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "css tags in selectors, xml tags",
+                  "scope": "entity.name.tag",
+                  "settings": Object {
+                    "foreground": "#800000",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#000000",
+      "content": " ",
+      "explanation": Array [
+        Object {
+          "content": " ",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#0000FF",
+      "content": "let",
+      "explanation": Array [
+        Object {
+          "content": "let",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "storage.type.svelte",
+              "themeMatches": Array [
+                Object {
+                  "scope": "storage",
+                  "settings": Object {
+                    "foreground": "#0000ff",
+                  },
+                },
+                Object {
+                  "scope": "storage.type",
+                  "settings": Object {
+                    "foreground": "#0000ff",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#000000",
+      "content": ":",
+      "explanation": Array [
+        Object {
+          "content": ":",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "punctuation.definition.keyword.svelte",
+              "themeMatches": Array [],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#001080",
+      "content": "x",
+      "explanation": Array [
+        Object {
+          "content": "x",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "variable.parameter.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "Variable and parameter name",
+                  "scope": Array [
+                    "variable",
+                    "meta.definition.variable.name",
+                    "support.variable",
+                    "entity.name.variable",
+                    "constant.other.placeholder",
+                  ],
+                  "settings": Object {
+                    "foreground": "#001080",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#000000",
+      "content": "=",
+      "explanation": Array [
+        Object {
+          "content": "=",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "punctuation.separator.key-value.svelte",
+              "themeMatches": Array [],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#A31515",
+      "content": "{a}",
+      "explanation": Array [
+        Object {
+          "content": "{a}",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "string.unquoted.svelte",
+              "themeMatches": Array [
+                Object {
+                  "scope": Array [
+                    "string",
+                    "meta.embedded.assembly",
+                  ],
+                  "settings": Object {
+                    "foreground": "#a31515",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#000000",
+      "content": " ",
+      "explanation": Array [
+        Object {
+          "content": " ",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#800000",
+      "content": "/>",
+      "explanation": Array [
+        Object {
+          "content": "/>",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "punctuation.definition.tag.end.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "brackets of XML/HTML tags",
+                  "scope": "punctuation.definition.tag",
+                  "settings": Object {
+                    "foreground": "#800000",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+  ],
+]
+`;
+
+exports[`Correctly highlights LaTeX (#152) 1`] = `
+Array [
+  Array [
+    Object {
+      "color": "#616E88",
+      "content": "%\\\\usepackage{pkg}",
+      "explanation": Array [
+        Object {
+          "content": "%",
+          "scopes": Array [
+            Object {
+              "scopeName": "text.tex.latex",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "comment.line.percentage.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Comment",
+                  "scope": "comment",
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+            Object {
+              "scopeName": "punctuation.definition.comment.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Punctuation",
+                  "scope": "punctuation",
+                  "settings": Object {
+                    "foreground": "#ECEFF4",
+                  },
+                },
+                Object {
+                  "name": "Punctuation Definition Comment",
+                  "scope": Array [
+                    "punctuation.definition.comment",
+                    "punctuation.end.definition.comment",
+                    "punctuation.start.definition.comment",
+                  ],
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        Object {
+          "content": "\\\\usepackage{pkg}",
+          "scopes": Array [
+            Object {
+              "scopeName": "text.tex.latex",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "comment.line.percentage.tex",
+              "themeMatches": Array [
+                Object {
+                  "name": "Comment",
+                  "scope": "comment",
+                  "settings": Object {
+                    "foreground": "#616E88",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+  ],
+]
+`;

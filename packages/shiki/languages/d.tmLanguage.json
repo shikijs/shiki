@@ -27,6 +27,18 @@
         },
         {
           "include": "#type-ctor"
+        },
+        {
+          "begin": "!\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#type"
+            },
+            {
+              "include": "#expression"
+            }
+          ]
         }
       ]
     },
@@ -44,6 +56,10 @@
     },
     "extended-type": {
       "patterns": [
+        {
+          "match": "\\b((\\.\\s*)?[_\\w][_\\d\\w]*)(\\s*\\.\\s*[_\\w][_\\d\\w]*)*\\b",
+          "name": "entity.name.type.d"
+        },
         {
           "begin": "\\[",
           "beginCaptures": {
@@ -198,7 +214,7 @@
       "patterns": [
         {
           "match": "\\s(\\?|:)\\s",
-          "name": "keyword.operator.expression.d"
+          "name": "keyword.operator.ternary.d"
         }
       ]
     },
@@ -257,7 +273,7 @@
       "patterns": [
         {
           "match": "\\^\\^|\\+\\+|--|(?<!/)\\+(?!/)|-|~|(?<!/)\\*(?!/)|(?<![+*/])/(?![+*/])|%",
-          "name": "keyword.operator.add.d"
+          "name": "keyword.operator.numeric.d"
         }
       ]
     },
@@ -280,21 +296,27 @@
     "cast-expression": {
       "patterns": [
         {
-          "begin": "\\bcast\\s*\\(",
+          "begin": "\\b(cast)\\s*(\\()",
           "beginCaptures": {
-            "0": {
-              "name": "support.type.cast.begin.d"
+            "1": {
+              "name": "keyword.operator.cast.d"
+            },
+            "2": {
+              "name": "keyword.operator.cast.begin.d"
             }
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "support.type.cast.end.d"
+              "name": "keyword.operator.cast.end.d"
             }
           },
           "patterns": [
             {
               "include": "#type"
+            },
+            {
+              "include": "#extended-type"
             }
           ]
         }
@@ -320,20 +342,13 @@
     "function-literal": {
       "patterns": [
         {
-          "include": "#lambda-expression"
-        },
-        {
           "match": "=>",
           "name": "keyword.operator.lambda.d"
         },
         {
           "match": "\\b(function|delegate)\\b",
           "name": "keyword.other.function-literal.d"
-        }
-      ]
-    },
-    "lambda-expression": {
-      "patterns": [
+        },
         {
           "begin": "\\b([_\\w][_\\d\\w]*)\\s*(=>)",
           "end": "(?=[\\);,\\]}])",
@@ -345,6 +360,23 @@
               "name": "meta.lexical.token.symbolic.d"
             }
           },
+          "patterns": [
+            {
+              "include": "source.d"
+            }
+          ]
+        },
+        {
+          "begin": "(?<=\\)|\\()(\\s*)({)",
+          "beginCaptures": {
+            "1": {
+              "name": "source.d"
+            },
+            "2": {
+              "name": "source.d"
+            }
+          },
+          "end": "}",
           "patterns": [
             {
               "include": "source.d"
@@ -519,7 +551,7 @@
     "special-keyword": {
       "patterns": [
         {
-          "match": "\\b(__FILE__|__MODULE__|__LINE__|__FUNCTION__|__PRETTY_FUNCTION__)\\b",
+          "match": "\\b(__FILE__|__FILE_FULL_PATH__|__MODULE__|__LINE__|__FUNCTION__|__PRETTY_FUNCTION__)\\b",
           "name": "constant.language.special-keyword.d"
         }
       ]
@@ -553,6 +585,9 @@
         },
         {
           "include": "#for-statement"
+        },
+        {
+          "include": "#static-foreach"
         },
         {
           "include": "#foreach-statement"
@@ -1337,9 +1372,6 @@
         },
         {
           "include": "#function-prelude"
-        },
-        {
-          "include": "#function-parameters"
         }
       ]
     },
@@ -1348,17 +1380,6 @@
         {
           "match": "(?!typeof|typeid)((\\.\\s*)?[_\\w][_\\d\\w]*)(\\s*\\.\\s*[_\\w][_\\d\\w]*)*\\s*(?=\\()",
           "name": "entity.name.function.d"
-        }
-      ]
-    },
-    "function-parameters": {
-      "begin": "\\((?=.*\\)\\s*(\\{|=>))",
-      "beginCaptures": "entity.name.function.d",
-      "end": "\\)",
-      "endCaptures": "entity.name.function.d",
-      "patterns": [
-        {
-          "include": "#parameters"
         }
       ]
     },
@@ -1384,56 +1405,6 @@
         },
         {
           "include": "#member-function-attribute"
-        }
-      ]
-    },
-    "parameters": {
-      "patterns": [
-        {
-          "match": ",",
-          "name": "keyword.operator.comma.d"
-        },
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#parameter"
-        }
-      ]
-    },
-    "parameter": {
-      "patterns": [
-        {
-          "include": "#in-out"
-        },
-        {
-          "include": "#type"
-        },
-        {
-          "include": "#function-literal"
-        },
-        {
-          "match": "\\.\\.\\.",
-          "name": "support.type.tuple.d"
-        },
-        {
-          "match": "\\b[R-Z]([0-9])?\\b",
-          "name": "variable.parameter.d"
-        },
-        {
-          "match": "\\b(\\.?[_\\w][_\\d\\w]*)+\\b",
-          "name": "variable.parameter.d"
-        },
-        {
-          "include": "#lexical"
-        }
-      ]
-    },
-    "in-out": {
-      "patterns": [
-        {
-          "match": "\\b(auto|final|in|out|lazy|ref|scope)\\b",
-          "name": "storage.type.modifier.inout.d"
         }
       ]
     },
@@ -1547,14 +1518,6 @@
         }
       ]
     },
-    "unit-test": {
-      "patterns": [
-        {
-          "match": "\\bunittest\\b",
-          "name": "entity.name.function.unit-test.d"
-        }
-      ]
-    },
     "shared-static-constructor": {
       "patterns": [
         {
@@ -1665,26 +1628,33 @@
     "enum-declaration": {
       "patterns": [
         {
-          "match": "\\b(enum)(?:\\s+([A-Za-z_][\\w_\\d]*))?\\b",
-          "captures": {
+          "begin": "\\b(enum)\\b\\s+(?=.*[=;])",
+          "end": "([A-Za-z_][\\w_\\d]*)\\s*(?=;|=|\\()(;)?",
+          "beginCaptures": {
             "1": {
               "name": "storage.type.enum.d"
-            },
-            "2": {
-              "name": "entity.name.type.enum.d"
             }
-          }
-        },
-        {
-          "match": "\\b(enum)\\b\\s+([A-Za-z_][\\w_\\d]*)\\s*(?=;|=)",
-          "captures": {
+          },
+          "endCaptures": {
             "1": {
-              "name": "storage.type.enum.d"
+              "name": "entity.name.type.enum.d"
             },
             "2": {
-              "name": "entity.name.type.enum.d"
+              "name": "meta.enum.end.d"
             }
-          }
+          },
+          "patterns": [
+            {
+              "include": "#type"
+            },
+            {
+              "include": "#extended-type"
+            },
+            {
+              "match": "=(?![=>])",
+              "name": "keyword.operator.equal.alias.d"
+            }
+          ]
         }
       ]
     },
@@ -2050,6 +2020,30 @@
         }
       ]
     },
+    "static-foreach": {
+      "patterns": [
+        {
+          "begin": "\\b(static\\s+foreach)\\b\\s*",
+          "captures": {
+            "1": {
+              "name": "keyword.control.static-foreach.d"
+            }
+          },
+          "end": "(?<=\\))",
+          "patterns": [
+            {
+              "begin": "\\(",
+              "end": "\\)",
+              "patterns": [
+                {
+                  "include": "source.d"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "module": {
       "packages": [
         {
@@ -2196,6 +2190,9 @@
         },
         {
           "include": "#integer-literal"
+        },
+        {
+          "include": "#eof"
         },
         {
           "include": "#special-tokens"
@@ -2565,6 +2562,20 @@
         {
           "match": "([_a-zA-Z][_\\d\\w]*)(\\s*\\.\\s*[_a-zA-Z][_\\d\\w]*)*",
           "name": "variable.parameter.import.d"
+        }
+      ]
+    },
+    "eof": {
+      "patterns": [
+        {
+          "begin": "__EOF__",
+          "beginCaptures": {
+            "0": {
+              "name": "comment.block.documentation.eof.start.d"
+            }
+          },
+          "end": "(?!__NEVER_MATCH__)__NEVER_MATCH__",
+          "name": "text.eof.d"
         }
       ]
     },
@@ -3133,7 +3144,7 @@
     "special-tokens": {
       "patterns": [
         {
-          "match": "\\b(__DATE__|__EOF__|__TIME__|__TIMESTAMP__|__VENDOR__|__VERSION__)\\b",
+          "match": "\\b(__DATE__|__TIME__|__TIMESTAMP__|__VENDOR__|__VERSION__)\\b",
           "name": "gfm.markup.raw.special-tokens.d"
         }
       ]

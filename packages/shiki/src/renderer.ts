@@ -1,5 +1,7 @@
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
+import { HtmlRendererOptions, LineOption } from './types'
+import { groupBy } from './utils'
 
 export interface ElementProps {
   children: string
@@ -61,6 +63,7 @@ const defaultElements: ElementsOptions = {
 
 export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
 
   function h(type: string = '', props = {}, children: string[]): string {
@@ -83,10 +86,13 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
       'code',
       {},
       lines.map((line, index) => {
+        const lineNumber = index + 1
+        const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
+        const lineClasses = getLineClasses(lineOptions).join(' ')
         return h(
           'line',
           {
-            className: 'line',
+            className: lineClasses,
             lines,
             line,
             index
@@ -130,4 +136,14 @@ const htmlEscapes = {
 
 function escapeHtml(html: string) {
   return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
+}
+
+function getLineClasses(lineOptions: LineOption[]): string[] {
+  const lineClasses = new Set(['line'])
+  for (const lineOption of lineOptions) {
+    for (const lineClass of lineOption.classes ?? []) {
+      lineClasses.add(lineClass)
+    }
+  }
+  return Array.from(lineClasses)
 }

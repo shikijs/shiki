@@ -6,6 +6,7 @@ export type Theme =
   | 'github-dark-dimmed'
   | 'github-dark'
   | 'github-light'
+  | 'hc_light'
   | 'light-plus'
   | 'material-darker'
   | 'material-default'
@@ -18,6 +19,9 @@ export type Theme =
   | 'nord'
   | 'one-dark-pro'
   | 'poimandres'
+  | 'rose-pine-dawn'
+  | 'rose-pine-moon'
+  | 'rose-pine'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'
@@ -33,6 +37,7 @@ export const themes: Theme[] = [
   'github-dark-dimmed',
   'github-dark',
   'github-light',
+  'hc_light',
   'light-plus',
   'material-darker',
   'material-default',
@@ -45,6 +50,9 @@ export const themes: Theme[] = [
   'nord',
   'one-dark-pro',
   'poimandres',
+  'rose-pine-dawn',
+  'rose-pine-moon',
+  'rose-pine',
   'slack-dark',
   'slack-ochin',
   'solarized-dark',

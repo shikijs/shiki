@@ -1,8 +1,12 @@
 {
-  "fileTypes": ["tex"],
-  "firstLineMatch": "^\\\\documentclass(\\[.*\\])?\\{.*\\}",
-  "keyEquivalent": "^~L",
+  "information_for_contributors": [
+    "This file has been converted from https://github.com/jlelong/vscode-latex-basics/blob/master/syntaxes/LaTeX.tmLanguage.json",
+    "If you want to provide a fix or improvement, please create a pull request against the original repository.",
+    "Once accepted there, we are happy to receive an update request."
+  ],
+  "version": "https://github.com/jlelong/vscode-latex-basics/commit/8f2c528619535333a2ff12e321fb6f6efcba38e4",
   "name": "latex",
+  "scopeName": "text.tex.latex",
   "patterns": [
     {
       "comment": "This scope identifies partially typed commands such as `\\tab`. We use this to trigger “Command Completion” only when it makes sense.",
@@ -396,7 +400,7 @@
           },
           "contentName": "meta.function.embedded.latex",
           "end": "(\\\\end\\{(?:lstlisting|minted|pyglist)\\})",
-          "name": "meta.embedded.block.generic"
+          "name": "meta.embedded.block.generic.latex"
         }
       ]
     },
@@ -461,7 +465,7 @@
       "end": "(\\\\end\\{\\2\\}(?:\\s*\\n)?)"
     },
     {
-      "begin": "((?:\\s*)\\\\begin\\{((?:julia|jl)code(?:\\*)?)\\}(?:\\[.*\\])?)",
+      "begin": "((?:\\s*)\\\\begin\\{((?:julia|jl)(?:code|verbatim|block|concode|console|converbatim)(?:\\*)?)\\}(?:\\[.*\\])?)",
       "captures": {
         "1": {
           "patterns": [
@@ -811,7 +815,7 @@
       "name": "meta.function.end-document.latex"
     },
     {
-      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:array|equation|(?:IEEE)?eqnarray|multline|align|aligned|alignat|flalign|flaligned|flalignat|split|gather|gathered|cases|(?:display)?math|[a-zA-Z]*matrix|(?:(?:arg)?(?:mini|maxi)))(?:\\*|!)?)(\\})(\\s*\\n)?",
+      "begin": "(?:\\s*)((\\\\)begin)(\\{)((?:array|equation|(?:IEEE)?eqnarray|multline|align|aligned|alignat|alignedat|flalign|flaligned|flalignat|split|gather|gathered|cases|(?:display)?math|[a-zA-Z]*matrix|(?:(?:arg)?(?:mini|maxi)))(?:\\*|!)?)(\\})(\\s*\\n)?",
       "captures": {
         "1": {
           "name": "support.function.be.latex"
@@ -887,7 +891,7 @@
       ]
     },
     {
-      "begin": "(?:\\s*)((\\\\)begin)(\\{)(tabular[xy*]?|xltabular|longtable|(?:long)?tabu|tblr)(\\})(\\s*\\n)?",
+      "begin": "(?:\\s*)((\\\\)begin)(\\{)(tabular[xy*]?|xltabular|longtable|(?:long)?tabu|(?:long|tall)?tblr|NiceTabular[X*]?)(\\})(\\s*\\n)?",
       "captures": {
         "1": {
           "name": "support.function.be.latex"
@@ -1308,7 +1312,7 @@
       "name": "meta.scope.item.latex"
     },
     {
-      "begin": "((\\\\)(?:[aA]uto|foot|full|no|short|[tT]ext|[pP]aren|[sS]mart)?[cC]ite(?:al)?(?:p|s|t|author|year(?:par)?|title)?[ANP]*\\*?)((?:(?:\\([^\\)]*\\)){0,2}(?:\\[[^\\]]*\\]){0,2}\\{[\\w:.]*\\})*)(?:(\\[)[^\\]]*(\\]))?(?:(\\[)[^\\]]*(\\]))?(\\{)",
+      "begin": "((\\\\)(?:[aA]uto|foot|full|no|short|[tT]ext|[pP]aren|[sS]mart)?[cC]ite(?:al)?(?:p|s|t|author|year(?:par)?|title)?[ANP]*\\*?)((?:(?:\\([^\\)]*\\)){0,2}(?:\\[[^\\]]*\\]){0,2}\\{[\\w:.]*\\})*)(?:([<\\[])[^\\]<>]*([>\\]]))?(?:(\\[)[^\\]]*(\\]))?(\\{)",
       "captures": {
         "1": {
           "name": "keyword.control.cite.latex"
@@ -1704,6 +1708,33 @@
       ]
     },
     {
+      "begin": "\\$",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.tex"
+        }
+      },
+      "end": "\\$",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.tex"
+        }
+      },
+      "name": "meta.math.block.tex support.class.math.block.tex",
+      "patterns": [
+        {
+          "match": "\\\\\\$",
+          "name": "constant.character.escape.latex"
+        },
+        {
+          "include": "text.tex#math"
+        },
+        {
+          "include": "$base"
+        }
+      ]
+    },
+    {
       "begin": "\\\\\\[",
       "beginCaptures": {
         "0": {
@@ -1877,7 +1908,7 @@
       "match": "(?:\\s*)((\\\\)(?:begin|end))(\\{)([a-z]+(?:\\*)?)(\\})(?:(\\[).*(\\]))?"
     },
     "definition-label": {
-      "begin": "((\\\\)label)(\\{)",
+      "begin": "((\\\\)label)((?:\\[[^\\[]*?\\])*)(\\{)",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.label.latex"
@@ -1886,6 +1917,13 @@
           "name": "punctuation.definition.keyword.latex"
         },
         "3": {
+          "patterns": [
+            {
+              "include": "#optional-arg"
+            }
+          ]
+        },
+        "4": {
           "name": "punctuation.definition.arguments.begin.latex"
         }
       },
@@ -1903,7 +1941,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.tex.latex",
-  "uuid": "3BEEA00C-6B1D-11D9-B8AD-000D93589AF6"
+  }
 }

@@ -1,6 +1,12 @@
 {
-  "fileTypes": ["sty", "cls", "bbx", "cbx", "ltx"],
+  "information_for_contributors": [
+    "This file has been converted from https://github.com/jlelong/vscode-latex-basics/blob/master/syntaxes/TeX.tmLanguage.json",
+    "If you want to provide a fix or improvement, please create a pull request against the original repository.",
+    "Once accepted there, we are happy to receive an update request."
+  ],
+  "version": "https://github.com/jlelong/vscode-latex-basics/commit/b98c2d4911652824fc990f4b26c9c30be59b78a2",
   "name": "tex",
+  "scopeName": "text.tex",
   "patterns": [
     {
       "captures": {
@@ -157,6 +163,14 @@
           ]
         },
         {
+          "match": "\\\\{|\\\\}",
+          "name": "punctuation.math.bracket.pair.tex"
+        },
+        {
+          "match": "\\\\(left|right|((big|bigg|Big|Bigg)[lr]?))([\\(\\[\\<\\>\\]\\)\\.\\|]|\\\\[{}|]|\\\\[lr]?[Vv]ert|\\\\[lr]angle|\\\\\\|)",
+          "name": "punctuation.math.bracket.pair.big.tex"
+        },
+        {
           "captures": {
             "1": {
               "name": "punctuation.definition.constant.math.tex"
@@ -234,19 +248,19 @@
         },
         {
           "match": "(?<!\\\\)\\{",
-          "name": "punctuation.math.begin.bracket.curly"
+          "name": "punctuation.math.begin.bracket.curly.tex"
         },
         {
           "match": "(?<!\\\\)\\}",
-          "name": "punctuation.math.end.bracket.curly"
+          "name": "punctuation.math.end.bracket.curly.tex"
         },
         {
-          "match": "\\(",
-          "name": "punctuation.math.begin.bracket.round"
+          "match": "(?<!\\\\)\\(",
+          "name": "punctuation.math.begin.bracket.round.tex"
         },
         {
-          "match": "\\)",
-          "name": "punctuation.math.end.bracket.round"
+          "match": "(?<!\\\\)\\)",
+          "name": "punctuation.math.end.bracket.round.tex"
         },
         {
           "match": "(([0-9]*[\\.][0-9]+)|[0-9]+)",
@@ -254,7 +268,7 @@
         },
         {
           "match": "[\\+\\*/_\\^-]",
-          "name": "punctuation.math.operator.latex"
+          "name": "punctuation.math.operator.tex"
         }
       ]
     },
@@ -278,7 +292,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.tex",
-  "uuid": "6BC8DE6F-9360-4C7E-AC3C-971385945346"
+  }
 }

@@ -13,7 +13,13 @@ A [build script](/scripts/pullThemes.sh) runs every day to pull latest themes fr
 - Find your theme's repository
 - If it has a compiled JSON theme, add its link to `githubThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
 - If it has a precompilation step, add its link to `marketplaceThemeSources` in [/scripts/themeSources.ts](/scripts/themeSources.ts)
-- Run `yarn update:themes`
+- Run `pnpm update:themes`
+- Review the diffs in git. You should see:
+  - `docs/themes.md`: Your theme id added
+  - `packages/shiki/themes/<theme>.json`: The theme downloaded
+  - `packages/shiki/src/themes.ts`: Your language added to `type Theme` and `const themes`
+  - `scripts/themeSources.ts`: The theme's id and URL
+- 🚀 Send in the PR!
 
 ## Loading Theme
 
@@ -90,6 +96,7 @@ export type Theme =
   | 'github-dark-dimmed'
   | 'github-dark'
   | 'github-light'
+  | 'hc_light'
   | 'light-plus'
   | 'material-darker'
   | 'material-default'
@@ -102,6 +109,9 @@ export type Theme =
   | 'nord'
   | 'one-dark-pro'
   | 'poimandres'
+  | 'rose-pine-dawn'
+  | 'rose-pine-moon'
+  | 'rose-pine'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'

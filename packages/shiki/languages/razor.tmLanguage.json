@@ -118,10 +118,10 @@
       },
       "patterns": [
         {
-          "include": "#balanced-open-close-tag-body"
+          "include": "#wellformed-html"
         },
         {
-          "include": "#wellformed-html"
+          "include": "$self"
         }
       ],
       "end": "(</text>)",
@@ -167,13 +167,13 @@
           "include": "#void-tag"
         },
         {
-          "include": "#balanced-open-close-tag"
+          "include": "#non-void-tag"
         }
       ]
     },
     "void-tag": {
       "name": "meta.tag.structure.$3.void.html",
-      "begin": "(?i)(<)(!?)(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?=\\s|/?>)",
+      "begin": "(?i)(<)(!)?(area|base|br|col|command|embed|hr|img|input|keygen|link|meta|param|source|track|wbr)(?=\\s|/?>)",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.html"
@@ -197,86 +197,65 @@
         }
       }
     },
-    "balanced-open-close-tag": {
-      "begin": "(?=<([^/\\s>]+))",
-      "patterns": [
-        {
-          "include": "#balanced-open-close-tag-start"
-        },
-        {
-          "include": "#balanced-open-close-tag-end"
-        },
-        {
-          "include": "#balanced-open-close-tag-body"
-        }
-      ],
-      "end": "(?<=(</\\1>))|(/>)"
-    },
-    "balanced-open-close-tag-start": {
-      "begin": "(<)(?!(/))([^/\\s>]+)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.definition.tag.begin.html"
-        },
-        "2": {
-          "name": "constant.character.escape.razor.tagHelperOptOut"
-        },
-        "3": {
-          "name": "entity.name.tag.html"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#balanced-open-close-tag-attributes"
-        }
-      ],
-      "end": "/?>",
+    "non-void-tag": {
+      "begin": "(?=<(!)?([^/\\s>]+)(\\s|/?>))",
+      "end": "(</)(\\2)\\s*(>)|(/>)",
       "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.tag.end.html"
-        }
-      }
-    },
-    "balanced-open-close-tag-attributes": {
-      "begin": "(?=\\s)",
-      "patterns": [
-        {
-          "include": "#razor-control-structures"
-        },
-        {
-          "include": "text.html.basic#attribute"
-        }
-      ],
-      "end": "(?=/?>)"
-    },
-    "balanced-open-close-tag-body": {
-      "begin": "(?<=([^/])>)",
-      "patterns": [
-        {
-          "include": "#wellformed-html"
-        },
-        {
-          "include": "$self"
-        }
-      ],
-      "end": "(?=\\</)"
-    },
-    "balanced-open-close-tag-end": {
-      "match": "(</)(!?)([^/\\s>]+)\\s*(>)",
-      "captures": {
         "1": {
           "name": "punctuation.definition.tag.begin.html"
         },
         "2": {
-          "name": "constant.character.escape.razor.tagHelperOptOut"
+          "name": "entity.name.tag.html"
         },
         "3": {
-          "name": "entity.name.tag.html"
+          "name": "punctuation.definition.tag.end.html"
         },
         "4": {
           "name": "punctuation.definition.tag.end.html"
         }
-      }
+      },
+      "patterns": [
+        {
+          "begin": "(<)(!)?([^/\\s>]+)(?=\\s|/?>)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.begin.html"
+            },
+            "2": {
+              "name": "constant.character.escape.razor.tagHelperOptOut"
+            },
+            "3": {
+              "name": "entity.name.tag.html"
+            }
+          },
+          "end": "(?=/?>)",
+          "patterns": [
+            {
+              "include": "#razor-control-structures"
+            },
+            {
+              "include": "text.html.basic#attribute"
+            }
+          ]
+        },
+        {
+          "begin": ">",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.tag.end.html"
+            }
+          },
+          "end": "(?=</)",
+          "patterns": [
+            {
+              "include": "#wellformed-html"
+            },
+            {
+              "include": "$self"
+            }
+          ]
+        }
+      ]
     },
     "explicit-razor-expression": {
       "name": "meta.expression.explicit.cshtml",

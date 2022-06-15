@@ -297,6 +297,20 @@
           ]
         },
         {
+          "begin": "\\s*~H\"\"\"",
+          "comment": "HEEx Sigil",
+          "end": "\\s*\"\"\"",
+          "name": "sigil.heex",
+          "patterns": [
+            {
+              "include": "text.elixir"
+            },
+            {
+              "include": "text.html.basic"
+            }
+          ]
+        },
+        {
           "begin": "@(module|type)?doc (~[a-z])?\"\"\"",
           "comment": "@doc with heredocs is treated as documentation",
           "end": "\\s*\"\"\"",

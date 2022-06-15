@@ -526,7 +526,7 @@
           "name": "keyword.other.namespace.cs"
         }
       },
-      "end": "(?<=\\})",
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
           "include": "#comment"
@@ -993,7 +993,7 @@
           "name": "keyword.other.where.cs"
         },
         "2": {
-          "name": "storage.type.cs"
+          "name": "entity.name.type.type-parameter.cs"
         },
         "3": {
           "name": "punctuation.separator.colon.cs"
@@ -3072,26 +3072,26 @@
           "include": "#tuple-literal-element"
         },
         {
+          "include": "#expression"
+        },
+        {
           "include": "#punctuation-comma"
         }
       ]
     },
     "tuple-literal-element": {
-      "begin": "(?x)\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*(:)\\s*)?\n(?![,)])",
+      "begin": "(?x)\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*\n(?=:)",
       "beginCaptures": {
-        "0": {
-          "name": "entity.name.variable.tuple-element.cs"
-        },
         "1": {
-          "name": "punctuation.separator.colon.cs"
+          "name": "entity.name.variable.tuple-element.cs"
         }
       },
-      "end": "(?=[,)])",
-      "patterns": [
-        {
-          "include": "#expression"
+      "end": "(:)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.separator.colon.cs"
         }
-      ]
+      }
     },
     "expression-operators": {
       "patterns": [
@@ -4116,7 +4116,7 @@
           "match": "(@?[_[:alpha:]][_[:alnum:]]*)\\s*(\\.)",
           "captures": {
             "1": {
-              "name": "storage.type.cs"
+              "name": "entity.name.type.cs"
             },
             "2": {
               "name": "punctuation.accessor.cs"
@@ -4130,12 +4130,12 @@
               "name": "punctuation.accessor.cs"
             },
             "2": {
-              "name": "storage.type.cs"
+              "name": "entity.name.type.cs"
             }
           }
         },
         {
-          "name": "storage.type.cs",
+          "name": "entity.name.type.cs",
           "match": "@?[_[:alpha:]][_[:alnum:]]*"
         }
       ]
