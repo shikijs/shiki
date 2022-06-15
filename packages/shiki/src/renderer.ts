@@ -12,8 +12,8 @@ const defaultElements: ElementsOptions = {
     return `<code>${children}</code>`
   },
 
-  line({ children }) {
-    return `<span class="line">${children}</span>`
+  line({ className, children }) {
+    return `<span class="${className}">${children}</span>`
   },
 
   token({ style, children }) {
