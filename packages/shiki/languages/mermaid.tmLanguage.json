@@ -187,6 +187,86 @@
           "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
         },
         {
+          "comment": "Entity Relationship Diagram",
+          "begin": "\\b(erDiagram)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.mermaid"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\%%.*",
+              "name": "comment"
+            },
+            {
+              "comment": "(entity)",
+              "match": "^\\s*([\\w-]+)$",
+              "name": "variable"
+            },
+            {
+              "comment": "(entity) {",
+              "begin": "\\s+([\\w-]+)\\s+({)",
+              "beginCaptures": {
+                "1": {
+                  "name": "variable"
+                },
+                "2": {
+                  "name": "keyword.control.mermaid"
+                }
+              },
+              "patterns": [
+                {
+                  "comment": "(type) (name) (PK|FK)? (\"comment\")?",
+                  "match": "\\s*([\\w-]+)\\s+([\\w-]+)\\s+(PK|FK)?\\s*(\"[\"\\($&%\\^/#.,?!;:*+=<>\\'\\\\\\-\\w\\s]*\")?\\s*",
+                  "captures": {
+                    "1": {
+                      "name": "storage.type.mermaid"
+                    },
+                    "2": {
+                      "name": "variable"
+                    },
+                    "3": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "4": {
+                      "name": "string"
+                    }
+                  }
+                }
+              ],
+              "end": "(})",
+              "endCaptures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                }
+              }
+            },
+            {
+              "comment": "(entity) (relationship) (entity) : (label)",
+              "match": "\\s*([\\w-]+)\\s+((?:\\|o|\\|\\||}o|}\\|)(?:..|--)(?:o\\||\\|\\||o{|\\|{))\\s+([\\w-]+)\\s+(:)\\s+((?:\"[\\w\\s]*\")|(?:[\\w-]+))",
+              "captures": {
+                "1": {
+                  "name": "variable"
+                },
+                "2": {
+                  "name": "keyword.control.mermaid"
+                },
+                "3": {
+                  "name": "variable"
+                },
+                "4": {
+                  "name": "keyword.control.mermaid"
+                },
+                "5": {
+                  "name": "string"
+                }
+              }
+            }
+          ],
+          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+        },
+        {
           "comment": "Gantt Diagram",
           "begin": "\\b(gantt)",
           "beginCaptures": {
