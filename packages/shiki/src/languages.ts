@@ -25,7 +25,7 @@ export type Lang =
   | 'coffee'
   | 'cpp'
   | 'crystal'
-  | 'csharp' | 'c#' | 'cs'
+  | 'csharp' | 'c#'
   | 'css'
   | 'cue'
   | 'd'
@@ -38,7 +38,7 @@ export type Lang =
   | 'erb'
   | 'erlang'
   | 'fish'
-  | 'fsharp' | 'f#' | 'fs'
+  | 'fsharp' | 'f#'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -299,7 +299,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cs',
     path: 'csharp.tmLanguage.json',
     samplePath: 'csharp.sample',
-    aliases: ['c#', 'cs']
+    aliases: ['c#']
   },
   {
     id: 'css',
@@ -380,7 +380,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     samplePath: 'fsharp.sample',
-    aliases: ['f#', 'fs'],
+    aliases: ['f#'],
     embeddedLangs: ['markdown']
   },
   {
