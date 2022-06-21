@@ -25,3 +25,12 @@ test('Correctly handles variable length lookbehind (#264)', async () => {
   })
   expect(out).toMatchSnapshot()
 })
+
+// https://github.com/shikijs/shiki/issues/326
+test(`Don't preload any language if lang is set to an empty array (#326)`, async () => {
+  const highlighter = await getHighlighter({
+    theme: 'nord',
+    langs: []
+  })
+  expect(highlighter.getLoadedLanguages()).toHaveLength(0)
+})
