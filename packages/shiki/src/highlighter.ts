@@ -26,7 +26,7 @@ function resolveOptions(options: HighlighterOptions) {
   let _languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
   let _themes: IThemeRegistration[] = options.themes || []
 
-  if (options.langs?.length) {
+  if (options.langs) {
     _languages = options.langs.map(resolveLang)
   }
   if (options.theme) {
