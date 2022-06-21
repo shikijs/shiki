@@ -19,7 +19,7 @@ export interface HighlighterOptions {
   /**
    * A list of languages to load upfront.
    *
-   * Default to `['html', 'css', 'javascript']`
+   * Default to all the bundled languages.
    */
   langs?: (Lang | ILanguageRegistration)[]
 
