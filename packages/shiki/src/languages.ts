@@ -20,6 +20,7 @@ export type Lang =
   | 'cadence' | 'cdc'
   | 'clarity'
   | 'clojure' | 'clj'
+  | 'cmake'
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
@@ -258,6 +259,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'clojure.tmLanguage.json',
     samplePath: 'clojure.sample',
     aliases: ['clj']
+  },
+  {
+    id: 'cmake',
+    scopeName: 'source.cmake',
+    path: 'cmake.tmLanguage.json',
+    samplePath: 'cmake.sample'
   },
   {
     id: 'cobol',
@@ -584,6 +591,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
@@ -735,7 +743,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'rst',
     scopeName: 'source.rst',
     path: 'rst.tmLanguage.json',
-    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'ruby']
+    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
   {
     id: 'ruby',

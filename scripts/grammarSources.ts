@@ -102,6 +102,7 @@ export const githubGrammarSources: [string, string][] = [
     'clarity',
     'https://github.com/hirosystems/clarity-lsp/blob/develop/syntaxes/clarity.tmLanguage.json'
   ],
+  ['cmake', 'https://github.com/twxs/vs.language.cmake/blob/master/syntaxes/CMake.tmLanguage'],
   ['cobol', 'https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json'],
   ['codeql', 'https://github.com/github/vscode-codeql/blob/main/syntaxes/ql.tmLanguage.json'],
   [

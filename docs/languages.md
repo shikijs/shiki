@@ -70,6 +70,7 @@ export type Lang =
   | 'cadence' | 'cdc'
   | 'clarity'
   | 'clojure' | 'clj'
+  | 'cmake'
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
