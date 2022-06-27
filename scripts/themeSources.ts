@@ -64,6 +64,14 @@ export const githubThemeSources: [string, string][] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
+  ],
+  [
+    'gruvbox-dark',
+    'https://github.com/jdinhify/vscode-theme-gruvbox/blob/main/themes/gruvbox-dark-hard.json'
+  ],
+  [
+    'gruvbox-light',
+    'https://github.com/jdinhify/vscode-theme-gruvbox/blob/main/themes/gruvbox-light-hard.json'
   ]
 ]
 

@@ -6,6 +6,8 @@ export type Theme =
   | 'github-dark-dimmed'
   | 'github-dark'
   | 'github-light'
+  | 'gruvbox-dark'
+  | 'gruvbox-light'
   | 'hc_light'
   | 'light-plus'
   | 'material-darker'
@@ -37,6 +39,8 @@ export const themes: Theme[] = [
   'github-dark-dimmed',
   'github-dark',
   'github-light',
+  'gruvbox-dark',
+  'gruvbox-light',
   'hc_light',
   'light-plus',
   'material-darker',
