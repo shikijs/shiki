@@ -169,7 +169,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'
   ],
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
-  ['marko', 'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/Marko.tmLanguage'],
+  [
+    'marko',
+    'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/marko.tmLanguage.json'
+  ],
   [
     'matlab',
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
