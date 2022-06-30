@@ -7,6 +7,11 @@ TextMate grammars for Shiki. Grammars are collected from two sources:
 
 A [build script](/scripts/pullGrammars.sh) runs every day to pull latest grammars from the upstream sources.
 
+## Not Actively Adding New Themes
+
+Because all themes are included in npm builds of Shiki, we rarely accept PRs adding new themes. It's very easy to add your own themes via the Shiki [config](https://github.com/shikijs/shiki/blob/main/packages/shiki/src/types.ts#L6)
+
+
 ## Supporting your own languages with Shiki 
 
 You can add a new language to your shiki instance by using the JSON version of your `tmLanguage` files with the `langs` param in your config:
