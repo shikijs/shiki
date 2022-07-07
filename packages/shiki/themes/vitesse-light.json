@@ -185,8 +185,8 @@
   "semanticTokenColors": {
     "namespace": "#b05a78",
     "property": "#998418",
-    "interface": "#2e8c8f",
-    "type": "#2e8c8f",
+    "interface": "#2e8f82",
+    "type": "#2e8f82",
     "class": "#5a6aa6"
   },
   "tokenColors": [
@@ -324,14 +324,15 @@
       }
     },
     {
-      "scope": [
-        "variable",
-        "identifier",
-        "support.type.primitive.ts",
-        "entity.name.type.parameter"
-      ],
+      "scope": ["variable", "identifier"],
       "settings": {
         "foreground": "#b07d48"
+      }
+    },
+    {
+      "scope": ["support.type.primitive", "entity.name.type"],
+      "settings": {
+        "foreground": "#2e808f"
       }
     },
     {
@@ -470,7 +471,7 @@
     {
       "scope": "markup.quote",
       "settings": {
-        "foreground": "#2e8c8f"
+        "foreground": "#2e8f82"
       }
     },
     {
@@ -821,12 +822,12 @@
       "foreground": "b07d48"
     },
     {
-      "token": "support.type.primitive.ts",
-      "foreground": "b07d48"
+      "token": "support.type.primitive",
+      "foreground": "2e808f"
     },
     {
-      "token": "entity.name.type.parameter",
-      "foreground": "b07d48"
+      "token": "entity.name.type",
+      "foreground": "2e808f"
     },
     {
       "token": "namespace",
@@ -942,7 +943,7 @@
     },
     {
       "token": "markup.quote",
-      "foreground": "2e8c8f"
+      "foreground": "2e8f82"
     },
     {
       "token": "markup.italic",
