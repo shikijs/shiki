@@ -80,6 +80,8 @@
     "statusBar.debuggingBackground": "#c93c37",
     "statusBar.debuggingForeground": "#cdd9e5",
     "statusBarItem.prominentBackground": "#2d333b",
+    "statusBarItem.remoteForeground": "#768390",
+    "statusBarItem.remoteBackground": "#22272e",
     "editorGroupHeader.tabsBackground": "#1c2128",
     "editorGroupHeader.tabsBorder": "#444c56",
     "editorGroup.border": "#444c56",
@@ -186,6 +188,7 @@
         "constant",
         "entity.name.constant",
         "variable.other.constant",
+        "variable.other.enummember",
         "variable.language",
         "entity"
       ],
@@ -408,7 +411,13 @@
       }
     },
     {
-      "scope": "markup.raw",
+      "scope": ["markup.underline"],
+      "settings": {
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "scope": "markup.inline.raw",
       "settings": {
         "foreground": "#6cb6ff"
       }
