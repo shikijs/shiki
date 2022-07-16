@@ -109,8 +109,8 @@
     "editor.lineHighlightBackground": "#eaeef280",
     "editorLineNumber.foreground": "#8c959f",
     "editorLineNumber.activeForeground": "#24292f",
-    "editorIndentGuide.background": "#d8dee4",
-    "editorIndentGuide.activeBackground": "#d0d7de",
+    "editorIndentGuide.background": "#24292f1f",
+    "editorIndentGuide.activeBackground": "#24292f3d",
     "editorWhitespace.foreground": "#afb8c1",
     "editorCursor.foreground": "#0969da",
     "editor.findMatchBackground": "#bf8700",
@@ -303,11 +303,7 @@
       }
     },
     {
-      "scope": [
-        "string",
-        "punctuation.definition.string",
-        "string punctuation.section.embedded source"
-      ],
+      "scope": ["string", "string punctuation.section.embedded source"],
       "settings": {
         "foreground": "#0a3069"
       }
@@ -419,6 +415,12 @@
       "scope": "support.variable",
       "settings": {
         "foreground": "#0550ae"
+      }
+    },
+    {
+      "scope": "support.type.property-name.json",
+      "settings": {
+        "foreground": "#116329"
       }
     },
     {
