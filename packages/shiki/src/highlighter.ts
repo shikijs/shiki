@@ -116,6 +116,10 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     theme?: IThemeRegistration,
     options = { includeExplanation: true }
   ) {
+    let _agrammar = _registry.getGrammar(lang)
+    if (!_agrammar) {
+      lang = 'text'
+    }
     if (isPlaintext(lang)) {
       const lines = code.split(/\r\n|\r|\n/)
       return [...lines.map(line => [{ content: line }])]
