@@ -473,6 +473,28 @@
       }
     },
     {
+      "name": "Parameter",
+      "scope": ["variable.parameter"],
+      "settings": {
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Python - Self Parameter",
+      "scope": ["variable.parameter.function.language.special.self.python"],
+      "settings": {
+        "foreground": "#f07178",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Python - Format Placeholder",
+      "scope": ["constant.character.format.placeholder.other.python"],
+      "settings": {
+        "foreground": "#F78C6C"
+      }
+    },
+    {
       "name": "Markdown - Blockquote",
       "scope": ["markup.quote"],
       "settings": {
@@ -707,6 +729,8 @@
     "tab.unfocusedActiveForeground": "#A6ACCD",
     "editorWidget.resizeBorder": "#80CBC4",
     "editorWidget.border": "#80CBC4",
+    "notebook.focusedCellBorder": "#80CBC4",
+    "notebook.inactiveFocusedCellBorder": "#80CBC450",
     "statusBar.border": "#292D3E60",
     "statusBar.foreground": "#676E95",
     "editorBracketMatch.border": "#FFCC0050",

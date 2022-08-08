@@ -45,6 +45,16 @@
       ]
     },
     {
+      "begin": "^(\\s*)%script",
+      "end": "^(?!\\1\\s+|$\\n*)",
+      "name": "js.inline.haml",
+      "patterns": [
+        {
+          "include": "source.js"
+        }
+      ]
+    },
+    {
       "begin": "^(\\s*):ruby$",
       "end": "^(?!\\1\\s+|$\\n*)",
       "name": "source.ruby.embedded.filter.haml",

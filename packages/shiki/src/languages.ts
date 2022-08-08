@@ -17,7 +17,10 @@ export type Lang =
   | 'bibtex'
   | 'bicep'
   | 'c'
+  | 'cadence' | 'cdc'
+  | 'clarity'
   | 'clojure' | 'clj'
+  | 'cmake'
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
@@ -65,6 +68,7 @@ export type Lang =
   | 'kotlin'
   | 'latex'
   | 'less'
+  | 'liquid'
   | 'lisp'
   | 'logo'
   | 'lua'
@@ -191,7 +195,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.astro',
     path: 'astro.tmLanguage.json',
     samplePath: 'astro.sample',
-    embeddedLangs: ['javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus', 'markdown']
+    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus', 'markdown']
   },
   {
     id: 'awk',
@@ -237,11 +241,30 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'c.sample'
   },
   {
+    id: 'cadence',
+    scopeName: 'source.cadence',
+    path: 'cadence.tmLanguage.json',
+    samplePath: 'cadence.sample',
+    aliases: ['cdc']
+  },
+  {
+    id: 'clarity',
+    scopeName: 'source.clar',
+    path: 'clarity.tmLanguage.json',
+    samplePath: 'clarity.sample'
+  },
+  {
     id: 'clojure',
     scopeName: 'source.clojure',
     path: 'clojure.tmLanguage.json',
     samplePath: 'clojure.sample',
     aliases: ['clj']
+  },
+  {
+    id: 'cmake',
+    scopeName: 'source.cmake',
+    path: 'cmake.tmLanguage.json',
+    samplePath: 'cmake.sample'
   },
   {
     id: 'cobol',
@@ -529,6 +552,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['css']
   },
   {
+    id: 'liquid',
+    scopeName: 'text.html.liquid',
+    path: 'liquid.tmLanguage.json',
+    samplePath: 'liquid.sample',
+    embeddedLangs: ['html', 'css', 'json', 'javascript']
+  },
+  {
     id: 'lisp',
     scopeName: 'source.lisp',
     path: 'lisp.tmLanguage.json'
@@ -555,13 +585,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.markdown',
     path: 'markdown.tmLanguage.json',
     aliases: ['md'],
-    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
+    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
   },
   {
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
-    embeddedLangs: ['css', 'less', 'scss', 'javascript']
+    embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
     id: 'matlab',
@@ -576,7 +606,7 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'mermaid',
-    scopeName: 'markdown.mermaid.codeblock',
+    scopeName: 'source.mermaid',
     path: 'mermaid.tmLanguage.json'
   },
   {
@@ -712,7 +742,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'rst',
     scopeName: 'source.rst',
     path: 'rst.tmLanguage.json',
-    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'ruby']
+    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
   {
     id: 'ruby',
@@ -903,7 +933,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue',
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
-    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
+    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'liquid', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
   },
   {
     id: 'wasm',

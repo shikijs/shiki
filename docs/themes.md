@@ -8,6 +8,11 @@ TextMate/vscode themes for Shiki. Themes are collected from three sources:
 
 A [build script](/scripts/pullThemes.sh) runs every day to pull latest themes from the upstream sources.
 
+
+## Not Actively Adding New Themes
+
+Because all themes are included in npm builds of Shiki, we rarely accept PRs adding new themes. It's very easy to add your own themes via the Shiki [config](https://github.com/shikijs/shiki/blob/main/packages/shiki/src/types.ts#L6).
+
 ## Adding Theme
 
 - Find your theme's repository
