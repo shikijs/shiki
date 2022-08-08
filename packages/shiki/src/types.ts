@@ -96,6 +96,8 @@ export interface Highlighter {
    */
   getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
 
+  setColorReplacements(map: Record<string, string>): void
+
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
 
