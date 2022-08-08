@@ -746,8 +746,8 @@
               "name": "comment"
             },
             {
-              "comment": "(title)",
-              "match": "(title)\\s*(:)\\s+(\\s*[\"\\(\\)$&%\\^/#.,?!:*+=<>\\'\\\\\\-\\w\\s]*)",
+              "comment": "(title)(title text)",
+              "match": "(title)\\s*(:)?\\s+(\\s*[\"\\(\\)$&%\\^/#.,?!:*+=<>\\'\\\\\\-\\w\\s]*)",
               "captures": {
                 "1": {
                   "name": "keyword.control.mermaid"
@@ -762,7 +762,7 @@
             },
             {
               "comment": "(participant)(Actor)(as)?(Label)?",
-              "match": "\\s*(participant)\\s+([\"\\(\\)$&%\\^/#.?!*=<>\\'\\\\\\w\\s]+?)(?:\\s+(as))?\\s([\"\\(\\)$&%\\^/#.,?!*=<>\\'\\\\\\w\\s]+)?",
+              "match": "\\s*(participant|actor)\\s+((?:(?! as )[\"\\(\\)$&%\\^/#.?!*=<>\\'\\\\\\w\\s])+)\\s*(as)?\\s([\"\\(\\)$&%\\^/#.,?!*=<>\\'\\\\\\w\\s]+)?",
               "captures": {
                 "1": {
                   "name": "keyword.control.mermaid"
