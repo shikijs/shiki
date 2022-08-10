@@ -16,6 +16,7 @@ export type Lang =
   | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
+  | 'blade'
   | 'c'
   | 'cadence' | 'cdc'
   | 'clarity'
@@ -233,6 +234,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.bicep',
     path: 'bicep.tmLanguage.json',
     samplePath: 'bicep.sample'
+  },
+  {
+    id: 'blade',
+    scopeName: 'text.html.php.blade',
+    path: 'blade.tmLanguage.json',
+    embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
     id: 'c',

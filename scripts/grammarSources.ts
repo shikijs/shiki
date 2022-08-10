@@ -94,6 +94,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
   ],
   ['bicep', 'https://github.com/Azure/bicep/blob/main/src/textmate/bicep.tmlanguage'],
+  ['blade', 'https://github.com/spatie/shiki-php/blob/main/languages/blade.tmLanguage.json'],
   [
     'cadence',
     'https://github.com/onflow/vscode-cadence/blob/master/syntaxes/cadence.tmGrammar.json'
