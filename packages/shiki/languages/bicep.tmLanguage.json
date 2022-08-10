@@ -53,6 +53,23 @@
         }
       ]
     },
+    "directive": {
+      "name": "meta.directive.bicep",
+      "begin": "#\\b[_a-zA-Z-0-9]+\\b",
+      "end": "$",
+      "patterns": [
+        {
+          "include": "#directive-variable"
+        },
+        {
+          "include": "#comments"
+        }
+      ]
+    },
+    "directive-variable": {
+      "name": "keyword.control.declaration.bicep",
+      "match": "\\b[_a-zA-Z-0-9]+\\b"
+    },
     "escape-character": {
       "name": "constant.character.escape.bicep",
       "match": "\\\\(u{[0-9A-Fa-f]+}|n|r|t|\\\\|'|\\${)"
@@ -88,6 +105,12 @@
         },
         {
           "include": "#decorator"
+        },
+        {
+          "include": "#lambda-start"
+        },
+        {
+          "include": "#directive"
         }
       ]
     },
@@ -117,6 +140,24 @@
       "name": "keyword.control.declaration.bicep",
       "match": "\\b(targetScope|resource|module|param|var|output|for|in|if|existing|import|from)\\b"
     },
+    "lambda-start": {
+      "name": "meta.lambda-start.bicep",
+      "begin": "(\\((?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*\\b[_$[:alpha:]][_$[:alnum:]]*\\b(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*(,(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*\\b[_$[:alpha:]][_$[:alnum:]]*\\b(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*)*\\)|\\((?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*\\)|(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*\\b[_$[:alpha:]][_$[:alnum:]]*\\b(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*)(?=(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*=>)",
+      "beginCaptures": {
+        "1": {
+          "name": "meta.undefined.bicep",
+          "patterns": [
+            {
+              "include": "#identifier"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        }
+      },
+      "end": "(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*=>"
+    },
     "line-comment": {
       "name": "comment.line.double-slash.bicep",
       "match": "//.*(?=$)"
@@ -135,49 +176,8 @@
       "end": "}",
       "patterns": [
         {
-          "include": "#object-property"
+          "include": "#object-property-key"
         },
-        {
-          "include": "#comments"
-        }
-      ]
-    },
-    "object-property": {
-      "name": "meta.object-property.bicep",
-      "begin": "(?<=^)(?!(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*})",
-      "end": "(?=$)",
-      "patterns": [
-        {
-          "include": "#object-property-key-identifier"
-        },
-        {
-          "include": "#string-literal"
-        },
-        {
-          "include": "#object-property-end"
-        },
-        {
-          "include": "#comments"
-        }
-      ]
-    },
-    "object-property-end": {
-      "name": "meta.object-property-end.bicep",
-      "begin": ":((?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*)",
-      "beginCaptures": {
-        "1": {
-          "patterns": [
-            {
-              "include": "#line-comment"
-            },
-            {
-              "include": "#block-comment"
-            }
-          ]
-        }
-      },
-      "end": "(?=(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*$)",
-      "patterns": [
         {
           "include": "#expression"
         },
@@ -186,14 +186,9 @@
         }
       ]
     },
-    "object-property-key-identifier": {
-      "name": "meta.object-property-key-identifier.bicep",
-      "match": "(\\b[_$[:alpha:]][_$[:alnum:]]*\\b)",
-      "captures": {
-        "1": {
-          "name": "variable.other.property.bicep"
-        }
-      }
+    "object-property-key": {
+      "name": "variable.other.property.bicep",
+      "match": "\\b[_$[:alpha:]][_$[:alnum:]]*\\b(?=(?:[ \\t\\r\\n]|\\/\\*(?:\\*(?!\\/)|[^*])*\\*\\/)*:)"
     },
     "string-literal": {
       "name": "string.quoted.single.bicep",
