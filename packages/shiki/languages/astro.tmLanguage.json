@@ -8,9 +8,6 @@
   "scopeName": "source.astro",
   "patterns": [
     {
-      "include": "#astro:markdown"
-    },
-    {
       "include": "#astro:expressions"
     },
     {
@@ -654,47 +651,6 @@
               "include": "source.tsx"
             }
           ]
-        }
-      ]
-    },
-    "astro:markdown": {
-      "begin": "(<)(Markdown)",
-      "end": "(</)(Markdown)\\s*(>)|(/>)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.definition.tag.begin.astro"
-        },
-        "2": {
-          "name": "entity.name.tag.astro support.class.component.astro"
-        }
-      },
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.tag.begin.astro"
-        },
-        "2": {
-          "name": "entity.name.tag.astro support.class.component.astro"
-        },
-        "3": {
-          "name": "punctuation.definition.tag.end.astro"
-        },
-        "4": {
-          "name": "punctuation.definition.tag.end.astro"
-        }
-      },
-      "patterns": [
-        {
-          "begin": "(?<=>)(?!</)",
-          "end": "(?=</)",
-          "contentName": "text.html.markdown",
-          "patterns": [
-            {
-              "include": "text.html.markdown"
-            }
-          ]
-        },
-        {
-          "include": "#html:tag-attributes"
         }
       ]
     },
