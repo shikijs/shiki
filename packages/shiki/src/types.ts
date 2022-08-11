@@ -195,6 +195,7 @@ export interface HtmlRendererOptions {
   fg?: string
   bg?: string
   lineOptions?: LineOption[]
+  elements?: ElementsOptions
 }
 
 export interface LineOption {
@@ -203,6 +204,39 @@ export interface LineOption {
    */
   line: number
   classes?: string[]
+}
+
+interface ElementProps {
+  children: string
+  [key: string]: unknown
+}
+
+interface PreElementProps extends ElementProps {
+  className: string
+  style: string
+}
+
+interface CodeElementProps extends ElementProps {}
+
+interface LineElementProps extends ElementProps {
+  className: string
+  lines: IThemedToken[][]
+  line: IThemedToken[]
+  index: number
+}
+
+interface TokenElementProps extends ElementProps {
+  style: string
+  tokens: IThemedToken[]
+  token: IThemedToken
+  index: number
+}
+
+export interface ElementsOptions {
+  pre?: (props: PreElementProps) => string
+  code?: (props: CodeElementProps) => string
+  line?: (props: LineElementProps) => string
+  token?: (props: TokenElementProps) => string
 }
 
 export interface ThemedTokenizerOptions {
