@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SVG can have 0 corner radius 1`] = `
+"<svg viewBox=\\"0 0 156.4921875 101.9921875\\" width=\\"156.4921875\\" height=\\"101.9921875\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"156.4921875\\" height=\\"101.9921875\\" rx=\\"0\\"></rect><g id=\\"tokens\\" transform=\\"translate(56.90625, 40.796875)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"20.3984375\\">
+<tspan x=\\"0\\" fill=\\"#aabbcc\\" opacity=\\"1\\">foo</tspan>
+</text></g>
+</svg>
+"
+`;
+
+exports[`SVG renderer should default to minimal background width correctly 1`] = `
+"<svg viewBox=\\"0 0 180 101.9921875\\" width=\\"180\\" height=\\"101.9921875\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"180\\" height=\\"101.9921875\\" rx=\\"4\\"></rect><g id=\\"tokens\\" transform=\\"translate(56.90625, 40.796875)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"20.3984375\\">
+<tspan x=\\"0\\" fill=\\"#aabbcc\\" opacity=\\"1\\">foo</tspan>
+</text></g>
+</svg>
+"
+`;
+
+exports[`SVG renderer should generate SVG with correct style attributes 1`] = `
+"<svg viewBox=\\"0 0 156.4921875 101.9921875\\" width=\\"156.4921875\\" height=\\"101.9921875\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"156.4921875\\" height=\\"101.9921875\\" rx=\\"4\\"></rect><g id=\\"tokens\\" transform=\\"translate(56.90625, 40.796875)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"20.3984375\\">
+<tspan x=\\"0\\" fill=\\"#aabbcc\\" opacity=\\"1\\">foo</tspan>
+</text></g>
+</svg>
+"
+`;
+
+exports[`SVG renderer should ignore minimal background width when it's own boundaries are above that 1`] = `
+"<svg viewBox=\\"0 0 156.4921875 101.9921875\\" width=\\"156.4921875\\" height=\\"101.9921875\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+<rect id=\\"bg\\" fill=\\"#fff\\" width=\\"156.4921875\\" height=\\"101.9921875\\" rx=\\"4\\"></rect><g id=\\"tokens\\" transform=\\"translate(56.90625, 40.796875)\\"><text font-family=\\"IBM Plex Mono\\" font-size=\\"16\\" y=\\"20.3984375\\">
+<tspan x=\\"0\\" fill=\\"#aabbcc\\" opacity=\\"1\\">foo</tspan>
+</text></g>
+</svg>
+"
+`;
