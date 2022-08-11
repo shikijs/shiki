@@ -96,6 +96,8 @@ export interface Highlighter {
    */
   getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
 
+  setColorReplacements(map: Record<string, string>): void
+
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
 
@@ -147,7 +149,7 @@ export interface IShikiTheme extends IRawTheme {
   /**
    * @description light/dark theme
    */
-  type: 'light' | 'dark'
+  type: 'light' | 'dark' | 'css'
 
   /**
    * @description tokenColors of the theme file
