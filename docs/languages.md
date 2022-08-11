@@ -66,6 +66,7 @@ export type Lang =
   | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
+  | 'blade'
   | 'c'
   | 'cadence' | 'cdc'
   | 'clarity'
