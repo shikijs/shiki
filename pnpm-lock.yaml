@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
@@ -57,10 +57,10 @@ importers:
       prettier: 2.5.1
       rollup: 2.67.2
       rollup-plugin-copy: 3.4.0
-      rollup-plugin-dts: 3.0.2_rollup@2.67.2+typescript@4.5.5
-      rollup-plugin-esbuild: 4.8.2_esbuild@0.14.22+rollup@2.67.2
+      rollup-plugin-dts: 3.0.2_hc5ufp4xth3mqbbjuchs5hxakm
+      rollup-plugin-esbuild: 4.8.2_yuddlnndqng3tblyfi2lpwmmki
       rollup-plugin-terser: 7.0.2_rollup@2.67.2
-      ts-jest: 26.5.6_jest@26.6.3+typescript@4.5.5
+      ts-jest: 26.5.6_iml3gh354yi2jyq3i6mkncucre
       tsup: 4.14.0_typescript@4.5.5
       typescript: 4.5.5
       unzipper: 0.10.11
@@ -293,6 +293,8 @@ packages:
     resolution: {integrity: sha512-7yJPvPV+ESz2IUTPbOL+YkIGyCqOyNIzdguKQuJGnH7bg1WTIifuM21YqokFt/THWh1AkCRn9IgoykTRCBVpzA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.17.0
     dev: true
 
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.17.5:
@@ -460,6 +462,8 @@ packages:
       figgy-pudding: 3.5.2
       get-stream: 4.1.0
       npm-package-arg: 6.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@evocateur/libnpmpublish/1.2.2:
@@ -474,6 +478,8 @@ packages:
       npm-package-arg: 6.1.1
       semver: 5.7.1
       ssri: 6.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@evocateur/npm-registry-fetch/4.0.0:
@@ -486,6 +492,8 @@ packages:
       make-fetch-happen: 5.0.2
       npm-package-arg: 6.1.1
       safe-buffer: 5.2.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@evocateur/pacote/9.6.5:
@@ -510,7 +518,7 @@ packages:
       npm-packlist: 1.4.8
       npm-pick-manifest: 3.0.2
       osenv: 0.1.5
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       promise-retry: 1.1.1
       protoduck: 5.0.1
       rimraf: 2.7.1
@@ -520,6 +528,8 @@ packages:
       tar: 4.4.19
       unique-filename: 1.1.1
       which: 1.3.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@istanbuljs/load-nyc-config/1.1.0:
@@ -755,6 +765,8 @@ packages:
       npm-package-arg: 6.1.1
       p-map: 2.1.0
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/bootstrap/3.21.0:
@@ -784,6 +796,8 @@ packages:
       p-waterfall: 1.0.0
       read-package-tree: 5.3.1
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/changed/3.21.0:
@@ -794,6 +808,8 @@ packages:
       '@lerna/command': 3.21.0
       '@lerna/listable': 3.18.5
       '@lerna/output': 3.13.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/check-working-tree/3.16.5:
@@ -826,6 +842,8 @@ packages:
       p-map: 2.1.0
       p-map-series: 1.0.0
       p-waterfall: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/cli/3.18.5:
@@ -873,6 +891,8 @@ packages:
       execa: 1.0.0
       is-ci: 2.0.0
       npmlog: 4.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/conventional-commits/3.22.0:
@@ -923,6 +943,8 @@ packages:
       validate-npm-package-license: 3.0.4
       validate-npm-package-name: 3.0.0
       whatwg-url: 7.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/describe-ref/3.16.5:
@@ -941,6 +963,8 @@ packages:
       '@lerna/command': 3.21.0
       '@lerna/validation-error': 3.13.0
       npmlog: 4.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/exec/3.21.0:
@@ -954,6 +978,8 @@ packages:
       '@lerna/run-topologically': 3.18.5
       '@lerna/validation-error': 3.13.0
       p-map: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/filter-options/3.20.0:
@@ -1041,6 +1067,8 @@ packages:
       dedent: 0.7.0
       fs-extra: 8.1.0
       p-map-series: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/info/3.21.0:
@@ -1050,6 +1078,8 @@ packages:
       '@lerna/command': 3.21.0
       '@lerna/output': 3.13.0
       envinfo: 7.8.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/init/3.21.0:
@@ -1061,6 +1091,8 @@ packages:
       fs-extra: 8.1.0
       p-map: 2.1.0
       write-json-file: 3.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/link/3.21.0:
@@ -1072,6 +1104,8 @@ packages:
       '@lerna/symlink-dependencies': 3.17.0
       p-map: 2.1.0
       slash: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/list/3.21.0:
@@ -1082,6 +1116,8 @@ packages:
       '@lerna/filter-options': 3.20.0
       '@lerna/listable': 3.18.5
       '@lerna/output': 3.13.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/listable/3.18.5:
@@ -1120,6 +1156,8 @@ packages:
       figgy-pudding: 3.5.2
       npm-package-arg: 6.1.1
       npmlog: 4.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/npm-install/3.16.5:
@@ -1148,6 +1186,8 @@ packages:
       npmlog: 4.1.2
       pify: 4.0.1
       read-package-json: 2.1.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/npm-run-script/3.16.5:
@@ -1240,6 +1280,8 @@ packages:
       p-map: 2.1.0
       resolve-from: 4.0.0
       write-json-file: 3.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/prompt/3.18.5:
@@ -1287,6 +1329,7 @@ packages:
     transitivePeerDependencies:
       - '@octokit/core'
       - encoding
+      - supports-color
     dev: true
 
   /@lerna/pulse-till-done/3.13.0:
@@ -1355,6 +1398,8 @@ packages:
       '@lerna/timer': 3.13.0
       '@lerna/validation-error': 3.13.0
       p-map: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@lerna/symlink-binary/3.17.0:
@@ -1425,6 +1470,7 @@ packages:
     transitivePeerDependencies:
       - '@octokit/core'
       - encoding
+      - supports-color
     dev: true
 
   /@lerna/write-log-file/3.13.0:
@@ -1964,6 +2010,8 @@ packages:
     dependencies:
       micromatch: 3.1.10
       normalize-path: 2.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /anymatch/3.1.2:
@@ -2253,6 +2301,8 @@ packages:
       snapdragon-node: 2.1.1
       split-string: 3.1.0
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /braces/3.0.2:
@@ -2350,7 +2400,7 @@ packages:
       mississippi: 3.0.0
       mkdirp: 0.5.5
       move-concurrently: 1.0.1
-      promise-inflight: 1.0.1
+      promise-inflight: 1.0.1_bluebird@3.7.2
       rimraf: 2.7.1
       ssri: 6.0.2
       unique-filename: 1.1.1
@@ -2964,18 +3014,33 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: true
 
   /debug/3.1.0:
     resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: true
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
     dev: true
@@ -3629,6 +3694,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /expect/26.6.2:
@@ -3683,6 +3750,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /extract-zip/2.0.1:
@@ -3718,6 +3787,8 @@ packages:
       is-glob: 4.0.3
       merge2: 1.4.1
       micromatch: 3.1.10
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /fast-glob/3.2.11:
@@ -3911,7 +3982,7 @@ packages:
     dev: true
 
   /fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=}
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -4171,6 +4242,8 @@ packages:
       ignore: 4.0.6
       pify: 4.0.1
       slash: 2.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /graceful-fs/4.2.9:
@@ -4314,6 +4387,8 @@ packages:
     dependencies:
       agent-base: 4.3.0
       debug: 3.1.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /http-proxy-agent/4.0.1:
@@ -4342,6 +4417,8 @@ packages:
     dependencies:
       agent-base: 4.3.0
       debug: 3.2.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /https-proxy-agent/5.0.0:
@@ -5090,6 +5167,8 @@ packages:
       walker: 1.0.8
     optionalDependencies:
       fsevents: 2.3.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-jasmine2/26.6.3:
@@ -5187,6 +5266,8 @@ packages:
       '@jest/types': 26.6.2
       jest-regex-util: 26.0.0
       jest-snapshot: 26.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-resolve/26.6.2:
@@ -5303,6 +5384,8 @@ packages:
       natural-compare: 1.4.0
       pretty-format: 26.6.2
       semver: 7.3.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-util/26.6.2:
@@ -5555,6 +5638,7 @@ packages:
     transitivePeerDependencies:
       - '@octokit/core'
       - encoding
+      - supports-color
     dev: true
 
   /leven/3.1.0:
@@ -5833,6 +5917,8 @@ packages:
       promise-retry: 1.1.1
       socks-proxy-agent: 4.0.2
       ssri: 6.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /makeerror/1.0.12:
@@ -5957,6 +6043,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /micromatch/4.0.4:
@@ -6154,6 +6242,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /natural-compare/1.4.0:
@@ -6879,8 +6969,15 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /promise-inflight/1.0.1:
+  /promise-inflight/1.0.1_bluebird@3.7.2:
     resolution: {integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=}
+    peerDependencies:
+      bluebird: '*'
+    peerDependenciesMeta:
+      bluebird:
+        optional: true
+    dependencies:
+      bluebird: 3.7.2
     dev: true
 
   /promise-retry/1.1.1:
@@ -7334,7 +7431,7 @@ packages:
       is-plain-object: 3.0.1
     dev: true
 
-  /rollup-plugin-dts/3.0.2_rollup@2.67.2+typescript@4.5.5:
+  /rollup-plugin-dts/3.0.2_hc5ufp4xth3mqbbjuchs5hxakm:
     resolution: {integrity: sha512-hswlsdWu/x7k5pXzaLP6OvKRKcx8Bzprksz9i9mUe72zvt8LvqAb/AZpzs6FkLgmyRaN8B6rUQOVtzA3yEt9Yw==}
     engines: {node: '>=v12.22.1'}
     peerDependencies:
@@ -7348,7 +7445,7 @@ packages:
       '@babel/code-frame': 7.16.7
     dev: true
 
-  /rollup-plugin-esbuild/4.8.2_esbuild@0.14.22+rollup@2.67.2:
+  /rollup-plugin-esbuild/4.8.2_yuddlnndqng3tblyfi2lpwmmki:
     resolution: {integrity: sha512-wsaYNOjzTb6dN1qCIZsMZ7Q0LWiPJklYs2TDI8vJA2LUbvtPUY+17TC8C0vSat3jPMInfR9XWKdA7ttuwkjsGQ==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -7376,8 +7473,6 @@ packages:
       rollup: 2.67.2
       serialize-javascript: 4.0.0
       terser: 5.10.0
-    transitivePeerDependencies:
-      - acorn
     dev: true
 
   /rollup/2.67.2:
@@ -7456,6 +7551,8 @@ packages:
       micromatch: 3.1.10
       minimist: 1.2.5
       walker: 1.0.8
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /saxes/5.0.1:
@@ -7636,6 +7733,8 @@ packages:
       source-map: 0.5.7
       source-map-resolve: 0.5.3
       use: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /socks-proxy-agent/4.0.2:
@@ -8089,12 +8188,11 @@ packages:
     resolution: {integrity: sha512-AMmF99DMfEDiRJfxfY5jj5wNH/bYO09cniSqhfoyxc8sFoYIgkJy86G04UoZU5VjlpnplVu0K6Tx6E9b5+DlHA==}
     engines: {node: '>=10'}
     hasBin: true
-    peerDependencies:
-      acorn: ^8.5.0
     peerDependenciesMeta:
       acorn:
         optional: true
     dependencies:
+      acorn: 8.7.0
       commander: 2.20.3
       source-map: 0.7.3
       source-map-support: 0.5.21
@@ -8269,7 +8367,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest/26.5.6_jest@26.6.3+typescript@4.5.5:
+  /ts-jest/26.5.6_iml3gh354yi2jyq3i6mkncucre:
     resolution: {integrity: sha512-rua+rCP8DxpA8b4DQD/6X2HQS8Zy/xzViVYfEs2OQu68tkCuKLV0Md8pmX55+W24uRIyAsf/BajRfxOs+R2MKA==}
     engines: {node: '>= 10'}
     hasBin: true
