@@ -64,7 +64,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
    * Instead, we work around this by using valid hex color codes as lookups in a
    * final "repair" step which translates those codes to the correct CSS variables.
    */
-  var COLOR_REPLACEMENTS: Record<string, string> = {
+  let COLOR_REPLACEMENTS: Record<string, string> = {
     '#000001': 'var(--shiki-color-text)',
     '#000002': 'var(--shiki-color-background)',
     '#000004': 'var(--shiki-token-constant)',
