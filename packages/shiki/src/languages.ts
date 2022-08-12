@@ -239,6 +239,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'blade',
     scopeName: 'text.html.php.blade',
     path: 'blade.tmLanguage.json',
+    samplePath: 'blade.sample',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
