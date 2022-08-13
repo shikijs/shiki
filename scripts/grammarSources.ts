@@ -97,7 +97,7 @@ export const githubGrammarSources: [string, string][] = [
   ['blade', 'https://github.com/spatie/shiki-php/blob/main/languages/blade.tmLanguage.json'],
   [
     'cadence',
-    'https://github.com/onflow/vscode-cadence/blob/master/syntaxes/cadence.tmGrammar.json'
+    'https://github.com/onflow/vscode-cadence/blob/master/extension/language/syntaxes/cadence.tmGrammar.json'
   ],
   [
     'clarity',
