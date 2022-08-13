@@ -1,15 +1,17 @@
-import JSON5 from 'json5'
+import { parse } from 'jsonc-parser'
 import { fetchTheme } from '../loader'
 
 jest.mock('fs')
-jest.mock('json5')
+jest.mock('jsonc-parser')
 
-const mockedJSON5 = JSON5 as jest.Mocked<typeof JSON5>
+const mockedJsoncParse = parse as jest.MockedFunction<typeof parse>
 
 describe('fetchTheme', () => {
   const MOCK_FILE_INFO = {
-    'c:\\Users\\fakeUser\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\theme-defaults\\themes\\light_plus.json': LIGHT_PLUS_MOCK_FILE,
-    'c:\\Users\\fakeUser\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\theme-defaults\\themes\\light_vs.json': LIGHT_VS_MOCK_FILE
+    'c:\\Users\\fakeUser\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\theme-defaults\\themes\\light_plus.json':
+      LIGHT_PLUS_MOCK_FILE,
+    'c:\\Users\\fakeUser\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\theme-defaults\\themes\\light_vs.json':
+      LIGHT_VS_MOCK_FILE
   }
 
   beforeEach(() => {
@@ -18,7 +20,7 @@ describe('fetchTheme', () => {
   })
 
   test('correctly loads a theme given an absolute directory', async () => {
-    mockedJSON5.parse.mockImplementationOnce(() => Promise.resolve(LIGHT_VS_MOCK_OBJECT))
+    mockedJsoncParse.mockImplementationOnce(() => Promise.resolve(LIGHT_VS_MOCK_OBJECT))
 
     const loadedLightVsShikiTheme = await fetchTheme(
       'c:\\Users\\fakeUser\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\theme-defaults\\themes\\light_vs.json'
@@ -28,7 +30,7 @@ describe('fetchTheme', () => {
   })
 
   test('correctly loads a theme in an absolute directory where the def includes another theme using a relative directory', async () => {
-    mockedJSON5.parse
+    mockedJsoncParse
       .mockImplementationOnce(() => Promise.resolve(LIGHT_PLUS_MOCK_OBJECT))
       .mockImplementationOnce(() => Promise.resolve(LIGHT_VS_MOCK_OBJECT))
 
@@ -40,7 +42,7 @@ describe('fetchTheme', () => {
   })
 })
 
-const LIGHT_PLUS_MOCK_OBJECT = {
+var LIGHT_PLUS_MOCK_OBJECT = {
   $schema: 'vscode://schemas/color-theme',
   name: 'Light+ (default light)',
   include: './light_vs.json',
@@ -235,9 +237,9 @@ const LIGHT_PLUS_MOCK_OBJECT = {
     numberLiteral: '#098658'
   }
 }
-const LIGHT_PLUS_MOCK_FILE = `${LIGHT_PLUS_MOCK_OBJECT}`
+var LIGHT_PLUS_MOCK_FILE = `${LIGHT_PLUS_MOCK_OBJECT}`
 
-const LIGHT_VS_MOCK_OBJECT: object = {
+var LIGHT_VS_MOCK_OBJECT: object = {
   $schema: 'vscode://schemas/color-theme',
   name: 'Light (Visual Studio)',
   colors: {
@@ -640,9 +642,9 @@ const LIGHT_VS_MOCK_OBJECT: object = {
     numberLiteral: '#098658'
   }
 }
-const LIGHT_VS_MOCK_FILE = `${LIGHT_VS_MOCK_OBJECT}`
+var LIGHT_VS_MOCK_FILE = `${LIGHT_VS_MOCK_OBJECT}`
 
-const LIGHT_VS_EXPECTED_SHIKI_THEME_OBJECT = {
+var LIGHT_VS_EXPECTED_SHIKI_THEME_OBJECT = {
   name: 'Light (Visual Studio)',
   type: 'dark',
   $schema: 'vscode://schemas/color-theme',
@@ -1055,7 +1057,7 @@ const LIGHT_VS_EXPECTED_SHIKI_THEME_OBJECT = {
   ]
 }
 
-const LIGHT_PLUS_EXPECTED_SHIKI_THEME_OBJECT = {
+var LIGHT_PLUS_EXPECTED_SHIKI_THEME_OBJECT = {
   name: 'Light+ (default light)',
   type: 'dark',
   $schema: 'vscode://schemas/color-theme',
