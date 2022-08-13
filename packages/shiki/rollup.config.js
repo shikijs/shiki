@@ -118,7 +118,7 @@ export default defineConfig([
     plugins: [
       dts(),
       copy({
-        targets: [{ src: '../../node_modules/vscode-oniguruma/release/onig.wasm', dest: 'dist' }]
+        targets: [{ src: require.resolve('vscode-oniguruma/release/onig.wasm'), dest: 'dist' }]
       })
     ],
     onwarn: (warning, warn) => {
