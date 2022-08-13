@@ -474,6 +474,151 @@
           "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
         },
         {
+          "comment": "Git Graph",
+          "begin": "^\\s*(gitGraph)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.mermaid"
+            }
+          },
+          "patterns": [
+            {
+              "match": "\\%%.*",
+              "name": "comment"
+            },
+            {
+              "comment": "commit",
+              "begin": "\\s*(commit)",
+              "beginCaptures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                }
+              },
+              "patterns": [
+                {
+                  "comment": "(id)(:) (\"id\")",
+                  "match": "\\s*(id)(:)\\s?(\"[^\"\\n]*\")",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "2": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "3": {
+                      "name": "string"
+                    }
+                  }
+                },
+                {
+                  "comment": "(type)(:) (COMMIT_TYPE)",
+                  "match": "\\s*(type)(:)\\s?(NORMAL|REVERSE|HIGHLIGHT)",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "2": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "3": {
+                      "name": "entity.name.function.mermaid"
+                    }
+                  }
+                },
+                {
+                  "comment": "(tag)(:) (\"tag\")",
+                  "match": "\\s*(tag)(:)\\s?(\"[\\($&%\\^/#.,?!;:*+=<>\\'\\\\\\-\\w\\s]*\")",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "2": {
+                      "name": "keyword.control.mermaid"
+                    },
+                    "3": {
+                      "name": "string"
+                    }
+                  }
+                }
+              ],
+              "end": "$"
+            },
+            {
+              "comment": "(checkout) (branch-name)",
+              "match": "\\s*(checkout)\\s*([^\\s\"]*)",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "variable"
+                }
+              }
+            },
+            {
+              "comment": "(branch) (branch-name) (order)?(:) (number)",
+              "match": "\\s*(branch)\\s*([^\\s\"]*)\\s*(?:(order)(:)\\s?(\\d+))?",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "variable"
+                },
+                "3": {
+                  "name": "keyword.control.mermaid"
+                },
+                "4": {
+                  "name": "keyword.control.mermaid"
+                },
+                "5": {
+                  "name": "constant.numeric.decimal.mermaid"
+                }
+              }
+            },
+            {
+              "comment": "(merge) (branch-name) (tag: \"tag-name\")?",
+              "match": "\\s*(merge)\\s*([^\\s\"]*)\\s*(?:(tag)(:)\\s?(\"[^\"\\n]*\"))?",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "variable"
+                },
+                "3": {
+                  "name": "keyword.control.mermaid"
+                },
+                "4": {
+                  "name": "keyword.control.mermaid"
+                },
+                "5": {
+                  "name": "string"
+                }
+              }
+            },
+            {
+              "comment": "(cherry-pick) (id)(:)(\"commit-id\")",
+              "match": "\\s*(cherry-pick)\\s+(id)(:)\\s*(\"[^\"\\n]*\")",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "keyword.control.mermaid"
+                },
+                "3": {
+                  "name": "keyword.control.mermaid"
+                },
+                "4": {
+                  "name": "string"
+                }
+              }
+            }
+          ],
+          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+        },
+        {
           "comment": "Graph",
           "begin": "^\\s*(graph|flowchart)\\s+([A-Za-z\\ 0-9]+)",
           "beginCaptures": {
