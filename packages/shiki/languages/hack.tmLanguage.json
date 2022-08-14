@@ -109,27 +109,6 @@
               "name": "comment.line.double-slash.php"
             }
           ]
-        },
-        {
-          "begin": "(^[ \\t]+)?(?=#)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.whitespace.comment.leading.php"
-            }
-          },
-          "end": "(?!\\G)",
-          "patterns": [
-            {
-              "begin": "#",
-              "beginCaptures": {
-                "0": {
-                  "name": "punctuation.definition.comment.php"
-                }
-              },
-              "end": "\\n|(?=\\?>)",
-              "name": "comment.line.number-sign.php"
-            }
-          ]
         }
       ]
     },
@@ -712,6 +691,52 @@
             {
               "match": "(=)",
               "name": "keyword.operator.assignment.php"
+            },
+            {
+              "include": "#type-annotation"
+            }
+          ]
+        },
+        {
+          "begin": "(?i)^\\s*(enum)\\s*(class)\\s+([a-z0-9_]+)\\s*:?",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.php"
+            },
+            "2": {
+              "name": "storage.type.class.enum.php"
+            },
+            "3": {
+              "name": "entity.name.type.class.enum.php"
+            }
+          },
+          "end": "(?=[{])",
+          "name": "meta.class.enum.php",
+          "patterns": [
+            {
+              "match": "\\b(extends)\\b",
+              "name": "storage.modifier.extends.php"
+            },
+            {
+              "include": "#type-annotation"
+            }
+          ]
+        },
+        {
+          "begin": "(?i)^\\s*(enum)\\s*([a-z0-9_]+)\\s*:?",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.enum.php"
+            },
+            "2": {
+              "name": "entity.name.type.enum.php"
+            }
+          },
+          "end": "\\{",
+          "name": "meta.enum.php",
+          "patterns": [
+            {
+              "include": "#comments"
             },
             {
               "include": "#type-annotation"
