@@ -440,7 +440,13 @@
                 "1": {
                   "name": "punctuation.definition.string.end.clarity"
                 }
-              }
+              },
+              "patterns": [
+                {
+                  "name": "constant.character.escape.quote",
+                  "match": "\\\\."
+                }
+              ]
             }
           ]
         },
