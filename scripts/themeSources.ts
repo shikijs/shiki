@@ -64,6 +64,10 @@ export const githubThemeSources: [string, string][] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
+  ],
+  [
+    'one-monokai',
+    'https://github.com/azemoh/vscode-one-monokai/blob/master/themes/OneMonokai-color-theme.json'
   ]
 ]
 

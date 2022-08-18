@@ -113,6 +113,7 @@ export type Theme =
   | 'monokai'
   | 'nord'
   | 'one-dark-pro'
+  | 'one-monokai'
   | 'poimandres'
   | 'rose-pine-dawn'
   | 'rose-pine-moon'
