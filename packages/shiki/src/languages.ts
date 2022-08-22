@@ -471,7 +471,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'hcl',
     scopeName: 'source.hcl',
-    path: 'hcl.tmLanguage.json'
+    path: 'hcl.tmLanguage.json',
+    samplePath: 'hcl.sample'
   },
   {
     id: 'hlsl',

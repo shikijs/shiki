@@ -145,7 +145,7 @@ export const githubGrammarSources: [string, string][] = [
   ['hack', 'https://github.com/slackhq/vscode-hack/blob/master/syntaxes/hack.json'],
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
-  ['hcl', 'https://github.com/wholroyd/vscode-hcl/blob/develop/syntaxes/hcl.json'],
+  ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
   [
     'jinja',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json'
