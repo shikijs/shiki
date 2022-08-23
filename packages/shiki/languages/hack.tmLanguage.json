@@ -698,7 +698,7 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(enum)\\s*(class)\\s+([a-z0-9_]+)\\s*:?",
+          "begin": "(?i)^\\s*(enum)\\s+(class)\\s+([a-z0-9_]+)\\s*:?",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.php"
@@ -723,7 +723,7 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(enum)\\s*([a-z0-9_]+)\\s*:?",
+          "begin": "(?i)^\\s*(enum)\\s+([a-z0-9_]+)\\s*:?",
           "beginCaptures": {
             "1": {
               "name": "storage.type.enum.php"
