@@ -286,7 +286,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.ql',
     path: 'codeql.tmLanguage.json',
     samplePath: 'codeql.sample',
-    aliases: ['ql']
+    aliases: ['ql'],
+    embeddedLangs: ['markdown']
   },
   {
     id: 'coffee',
