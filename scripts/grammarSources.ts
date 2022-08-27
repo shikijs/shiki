@@ -204,6 +204,7 @@ export const githubGrammarSources: [string, string][] = [
     'purescript',
     'https://github.com/nwolverson/vscode-language-purescript/blob/master/syntaxes/purescript.json'
   ],
+  ['racket', 'https://github.com/Eugleo/magic-racket/blob/master/syntaxes/racket.tmLanguage.json']
   [
     'razor',
     'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json'
@@ -303,6 +304,7 @@ export const languageAliases = {
   powershell: ['ps', 'ps1'],
   pug: ['jade'],
   python: ['py'],
+  racket: ['rkt', 'scrbl'],
   raku: ['perl6'],
   ruby: ['rb'],
   rust: ['rs'],
