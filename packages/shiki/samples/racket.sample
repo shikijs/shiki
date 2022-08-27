@@ -1,0 +1,12 @@
+#lang racket
+(provide foo)
+(require racket/math)
+
+(define (foo a #:b b [c 1])
+  (+ pi a b c))
+
+(module+ test
+  (require rackunit)
+
+  (check-true ((foo 1 #:b 2) . < . 8))
+  (check-true ((foo 1 #:b 2 3) . > . 8)))
