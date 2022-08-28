@@ -38,7 +38,7 @@ export type Lang =
   | 'elixir'
   | 'elm'
   | 'erb'
-  | 'erlang'
+  | 'erlang' | 'erl'
   | 'fish'
   | 'fsharp' | 'f#'
   | 'gherkin'
@@ -52,7 +52,7 @@ export type Lang =
   | 'hack'
   | 'haml'
   | 'handlebars' | 'hbs'
-  | 'haskell'
+  | 'haskell' | 'hs'
   | 'hcl'
   | 'hlsl'
   | 'html'
@@ -383,7 +383,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'erlang',
     scopeName: 'source.erlang',
     path: 'erlang.tmLanguage.json',
-    samplePath: 'erlang.sample'
+    samplePath: 'erlang.sample',
+    aliases: ['erl']
   },
   {
     id: 'fish',
@@ -467,7 +468,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'haskell',
     scopeName: 'source.haskell',
-    path: 'haskell.tmLanguage.json'
+    path: 'haskell.tmLanguage.json',
+    aliases: ['hs']
   },
   {
     id: 'hcl',
