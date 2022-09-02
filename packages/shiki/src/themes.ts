@@ -18,6 +18,8 @@ export type Theme =
   | 'monokai'
   | 'nord'
   | 'one-dark-pro'
+  | 'onelight'
+  | 'onedark'
   | 'poimandres'
   | 'rose-pine-dawn'
   | 'rose-pine-moon'
@@ -49,6 +51,8 @@ export const themes: Theme[] = [
   'monokai',
   'nord',
   'one-dark-pro',
+  'onedark',
+  'onelight',
   'poimandres',
   'rose-pine-dawn',
   'rose-pine-moon',
