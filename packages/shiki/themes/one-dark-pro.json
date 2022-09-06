@@ -736,6 +736,13 @@
       }
     },
     {
+      "name": "[VSCODE-CUSTOM] toml support",
+      "scope": "support.type.property-name.toml, support.type.property-name.table.toml, support.type.property-name.array.toml",
+      "settings": {
+        "foreground": "#e06c75"
+      }
+    },
+    {
       "name": "Support type",
       "scope": "support.constant.property-value",
       "settings": {
@@ -1119,13 +1126,6 @@
     {
       "name": "[VSCODE-CUSTOM] JSON Punctuation for Property Name",
       "scope": "support.type.property-name.json punctuation",
-      "settings": {
-        "foreground": "#e06c75"
-      }
-    },
-    {
-      "name": "[VSCODE-CUSTOM] toml support",
-      "scope": "support.type.property-name.toml, support.type.property-name.table.toml",
       "settings": {
         "foreground": "#e06c75"
       }
