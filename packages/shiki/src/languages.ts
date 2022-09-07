@@ -27,7 +27,7 @@ export type Lang =
   | 'coffee'
   | 'cpp'
   | 'crystal'
-  | 'csharp' | 'c#'
+  | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
   | 'd'
