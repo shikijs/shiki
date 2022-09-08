@@ -350,6 +350,10 @@
       "name": "meta.property-list.css",
       "patterns": [
         {
+          "match": "(?x) (?<![\\w-])\n--\n(?:[-a-zA-Z_]    | [^\\x00-\\x7F])     # First letter\n(?:[-a-zA-Z0-9_] | [^\\x00-\\x7F]      # Remainder of identifier\n  |\\\\(?:[0-9a-fA-F]{1,6}|.)\n)*",
+          "name": "variable.css"
+        },
+        {
           "include": "#language_keywords"
         },
         {
@@ -1119,6 +1123,10 @@
           "end": "(?=\\))",
           "name": "meta.function.stylus",
           "patterns": [
+            {
+              "name": "variable.argument.stylus",
+              "match": "(?x)\n--\n(?:[-a-zA-Z_]    | [^\\x00-\\x7F])     # First letter\n(?:[-a-zA-Z0-9_] | [^\\x00-\\x7F]      # Remainder of identifier\n  |\\\\(?:[0-9a-fA-F]{1,6}|.)\n)*"
+            },
             {
               "match": "\\s*(,)\\s*",
               "name": "punctuation.separator.parameter.css"

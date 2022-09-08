@@ -45,6 +45,16 @@
       ]
     },
     {
+      "begin": "^(\\s*)%script",
+      "end": "^(?!\\1\\s+|$\\n*)",
+      "name": "js.inline.haml",
+      "patterns": [
+        {
+          "include": "source.js"
+        }
+      ]
+    },
+    {
       "begin": "^(\\s*):ruby$",
       "end": "^(?!\\1\\s+|$\\n*)",
       "name": "source.ruby.embedded.filter.haml",
@@ -122,7 +132,7 @@
           "name": "meta.selector.css"
         },
         {
-          "begin": "(?<!\\#)\\{(?=.+(,|(do)|\\{|\\}|\\||(\\#.*))\\s*)",
+          "begin": "(?<!\\#)\\{(?=.*(,|(do)|\\{|\\}|\\||(\\#.*)|\\R)\\s*)",
           "end": "\\s*\\}(?!\\s*\\,)(?!\\s*\\|)(?!\\#\\{.*\\})",
           "name": "meta.section.attributes.haml",
           "patterns": [

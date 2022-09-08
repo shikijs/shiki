@@ -1222,6 +1222,46 @@
       }
     },
     {
+      "name": "[Rust] Entity types",
+      "scope": "source.rust entity.name.type",
+      "settings": {
+        "foreground": "#8FBCBB"
+      }
+    },
+    {
+      "name": "[Rust] Macro",
+      "scope": "source.rust meta.macro entity.name.function",
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "#88C0D0"
+      }
+    },
+    {
+      "name": "[Rust] Attributes",
+      "scope": [
+        "source.rust meta.attribute",
+        "source.rust meta.attribute punctuation",
+        "source.rust meta.attribute keyword.operator"
+      ],
+      "settings": {
+        "foreground": "#5E81AC"
+      }
+    },
+    {
+      "name": "[Rust] Traits",
+      "scope": "source.rust entity.name.type.trait",
+      "settings": {
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "[Rust] Interpolation Bracket Curly",
+      "scope": "source.rust punctuation.definition.interpolation",
+      "settings": {
+        "foreground": "#EBCB8B"
+      }
+    },
+    {
       "name": "[SCSS] Punctuation Definition Interpolation Bracket Curly",
       "scope": [
         "source.css.scss punctuation.definition.interpolation.begin.bracket.curly",

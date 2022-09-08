@@ -125,7 +125,7 @@
     "editorLineNumber.foreground": "#7b7f8b",
     "editor.selectionBackground": "#44475A",
     "editor.selectionHighlightBackground": "#424450",
-    "editor.foldBackground": "#262626",
+    "editor.foldBackground": "#21222C80",
     "editor.wordHighlightBackground": "#8BE9FD50",
     "editor.wordHighlightStrongBackground": "#50FA7B50",
     "editor.findMatchBackground": "#FFB86C80",
@@ -215,17 +215,6 @@
     "titleBar.activeForeground": "#f6f6f4",
     "titleBar.inactiveBackground": "#191A21",
     "titleBar.inactiveForeground": "#7b7f8b",
-    "notification.background": "#282A36",
-    "notification.foreground": "#f6f6f4",
-    "notification.buttonBackground": "#44475A",
-    "notification.buttonForeground": "#f6f6f4",
-    "notification.buttonHoverBackground": "#44475A75",
-    "notification.errorBackground": "#ee6666",
-    "notification.errorForeground": "#f6f6f4",
-    "notification.infoBackground": "#97e1f1",
-    "notification.infoForeground": "#282A36",
-    "notification.warningBackground": "#FFB86C",
-    "notification.warningForeground": "#282A36",
     "extensionButton.prominentForeground": "#f6f6f4",
     "extensionButton.prominentBackground": "#50FA7B90",
     "extensionButton.prominentHoverBackground": "#50FA7B60",
@@ -234,7 +223,6 @@
     "debugToolBar.background": "#262626",
     "walkThrough.embeddedEditorBackground": "#262626",
     "settings.headerForeground": "#f6f6f4",
-    "settings.modifiedItemForeground": "#FFB86C",
     "settings.modifiedItemIndicator": "#FFB86C",
     "settings.dropdownBackground": "#262626",
     "settings.dropdownForeground": "#f6f6f4",
@@ -706,6 +694,7 @@
         "punctuation.definition.type.end",
         "punctuation.section.scope.begin",
         "punctuation.section.scope.end",
+        "punctuation.terminator.expression.php",
         "storage.type.generic.java",
         "string.template meta.brace",
         "string.template punctuation.accessor"
@@ -932,7 +921,6 @@
       "name": "Destructuring / aliasing reference name (LHS)",
       "scope": [
         "meta.import variable.other.readwrite",
-        "meta.object-binding-pattern-variable variable.object.property",
         "meta.variable.assignment.destructured.object.coffee variable"
       ],
       "settings": {
@@ -1038,6 +1026,22 @@
       "scope": ["meta.preprocessor.haskell"],
       "settings": {
         "foreground": "#7b7f8b"
+      }
+    },
+    {
+      "name": "Log file error",
+      "scope": ["log.error"],
+      "settings": {
+        "foreground": "#ee6666",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Log file warning",
+      "scope": ["log.warning"],
+      "settings": {
+        "foreground": "#e7ee98",
+        "fontStyle": "bold"
       }
     }
   ]

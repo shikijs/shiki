@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.10.1
+
+- 🙌: feat: add ZenScript support [#300](https://github.com/shikijs/shiki/pull/300) | **[@jaredlll08](https://github.com/jaredlll08)**
+- 🙌: feat: add marko language [#299](https://github.com/shikijs/shiki/pull/299) | **[@manan-gup](https://github.com/manan-gup)**
+- 🙌: fix: split plaintext into lines [#298](https://github.com/shikijs/shiki/pull/298) | **[@silvenon](https://github.com/silvenon)**
+- 🙌: fix(docs): fixed custom language instructions [#294](https://github.com/shikijs/shiki/pull/294) | **[@JuanM04](https://github.com/JuanM04)**
+- 🙌: fix: updated astro grammar source [#293](https://github.com/shikijs/shiki/pull/293) | **[@JuanM04](https://github.com/JuanM04)**
+- 🙌: feat: add rel lang [#287](https://github.com/shikijs/shiki/pull/287) | **[@robbear](https://github.com/robbear)**
+- 🙌: feat: add rose pine themes [#282](https://github.com/shikijs/shiki/pull/281) | **[@EmeraldSnorlax](https://github.com/EmeraldSnorlax)**
+- 🙌: feat: add stata lang [#281](https://github.com/shikijs/shiki/pull/281) | **[@kylebutts](kylebutts)**
+
+**Full Changelog**: [v0.10.0...v0.10.1](https://github.com/shikijs/shiki/compare/v0.10.0...v0.10.1)
+
+---
+
 ### 0.2.7 | 2020-11-13
 
 - Fix color fallback issues. [#100](https://github.com/shikijs/shiki/issues/100).

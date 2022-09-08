@@ -21,3 +21,20 @@ export function dirpathparts(str: string) {
 export function join(...parts: string[]) {
   return parts.map(trimEndSlash).map(trimStartDot).join('/')
 }
+
+export function groupBy<TElement, TKey>(
+  elements: TElement[],
+  keyGetter: (element: TElement) => TKey
+): Map<TKey, TElement[]> {
+  const map = new Map<TKey, TElement[]>()
+  for (const element of elements) {
+    const key = keyGetter(element)
+    if (map.has(key)) {
+      const group = map.get(key)
+      group.push(element)
+    } else {
+      map.set(key, [element])
+    }
+  }
+  return map
+}

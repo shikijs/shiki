@@ -8,7 +8,7 @@
       }
     },
     {
-      "scope": ["meta.embedded", "source.groovy.embedded"],
+      "scope": ["meta.embedded", "source.groovy.embedded", "string meta.image.inline.markdown"],
       "settings": {
         "foreground": "#D4D4D4"
       }
@@ -123,6 +123,12 @@
       "scope": "markup.italic",
       "settings": {
         "fontStyle": "italic"
+      }
+    },
+    {
+      "scope": "markup.strikethrough",
+      "settings": {
+        "fontStyle": "strikethrough"
       }
     },
     {
@@ -364,7 +370,6 @@
     {
       "name": "Types declaration and references",
       "scope": [
-        "meta.return-type",
         "support.class",
         "support.type",
         "entity.name.type",
@@ -546,7 +551,7 @@
     "activityBarBadge.background": "#007ACC",
     "sideBarTitle.foreground": "#BBBBBB",
     "input.placeholderForeground": "#A6A6A6",
-    "menu.background": "#252526",
+    "menu.background": "#303031",
     "menu.foreground": "#CCCCCC",
     "statusBarItem.remoteForeground": "#FFF",
     "statusBarItem.remoteBackground": "#16825D",
@@ -554,6 +559,7 @@
     "sideBarSectionHeader.background": "#0000",
     "sideBarSectionHeader.border": "#ccc3",
     "tab.lastPinnedBorder": "#ccc3",
-    "list.activeSelectionIconForeground": "#FFF"
+    "list.activeSelectionIconForeground": "#FFF",
+    "terminal.inactiveSelectionBackground": "#3A3D41"
   }
 }

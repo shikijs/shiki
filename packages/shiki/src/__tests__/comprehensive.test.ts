@@ -9,7 +9,7 @@ describe('validates all themes run some JS', () => {
     it(theme, async () => {
       const hl = await highlighter
       await hl.loadTheme(theme)
-      hl.codeToHtml(`console.log('shiki');`, 'js')
+      hl.codeToHtml(`console.log('shiki');`, { lang: 'js' })
     })
   })
 })
@@ -20,7 +20,7 @@ describe('validates all languages can show a hello-world', () => {
   languages.forEach(language => {
     it(language.id, async () => {
       const hl = await highlighter
-      hl.codeToHtml(`console.log('shiki');`, language.id)
+      hl.codeToHtml(`console.log('shiki');`, { lang: language.id })
     })
   })
 })

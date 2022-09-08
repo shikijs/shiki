@@ -2,8 +2,8 @@ function measureFont([fontName, fontSize]: [string, number]) {
   /**
    * Measure `M` for width
    */
-  var c = document.createElement('canvas')
-  var ctx = c.getContext('2d')!
+  const c = document.createElement('canvas')
+  const ctx = c.getContext('2d')!
   ctx.font = `${fontSize}px "${fontName}"`
 
   const capMMeasurement = ctx.measureText('M')
@@ -16,25 +16,22 @@ function measureFont([fontName, fontSize]: [string, number]) {
    * z - 122
    */
   const characters = []
-  for (let i = 65; i <= 90; i++) {
+  for (let i = 65; i <= 90; i += 1) {
     characters.push(String.fromCharCode(i))
   }
-  for (let i = 97; i <= 122; i++) {
+  for (let i = 97; i <= 122; i += 1) {
     characters.push(String.fromCharCode(i))
   }
 
-  let highC, lowC
   let highestAscent = 0
   let lowestDescent = 0
-  characters.forEach(c => {
-    const m = ctx.measureText(c)
+  characters.forEach(char => {
+    const m = ctx.measureText(char)
     if (m.actualBoundingBoxAscent > highestAscent) {
       highestAscent = m.actualBoundingBoxAscent
-      highC = c
     }
     if (m.actualBoundingBoxDescent > lowestDescent) {
       lowestDescent = m.actualBoundingBoxDescent
-      lowC = c
     }
   })
 
@@ -75,19 +72,18 @@ export async function measureMonospaceTypeface(
     const page = await browser.newPage()
 
     if (remoteFontCSSURL) {
-      await page.goto('data:text/html,' + getDocument(fontNameStr, remoteFontCSSURL), {
+      await page.goto(`data:text/html,${getDocument(fontNameStr, remoteFontCSSURL)}`, {
         waitUntil: 'networkidle'
       })
 
       const measurement = await page.evaluate(measureFont, [fontNameStr, fontSize])
       await browser.close()
       return measurement
-    } else {
-      const measurement = await page.evaluate(measureFont, [fontNameStr, fontSize])
-
-      await browser.close()
-
-      return measurement
     }
+    const measurement = await page.evaluate(measureFont, [fontNameStr, fontSize])
+
+    await browser.close()
+
+    return measurement
   }
 }

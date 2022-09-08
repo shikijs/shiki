@@ -15,11 +15,17 @@ You can add a new language to your shiki instance by using the JSON version of y
 import shiki from "shiki"
 import {readFileSync} from "fs"
 
-const myLanguage = JSON.parse(readFileSync("./path/to/lang.tmLanguage.json"))
+const myLanguageGrammar = JSON.parse(readFileSync("./path/to/lang.tmLanguage.json"))
 
-shiki.getHighlighter({
-    langs: [...shiki.BUNDLED_LANGUAGES, myLanguage]
-})
+const myLanguage = {
+  id: "mylanguage",
+  scopeName: 'source.mylanguage',
+  grammar: myLanguageGrammar,
+  aliases: ['my', 'mylang'],
+}
+
+const highlighter = await shiki.getHighlighter()
+await highlighter.loadLanguage(myLanguage)
 ```
 
 If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=Togusa09.tmlanguage) can help.
@@ -32,7 +38,14 @@ If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code e
   - Space for indentation
   - Less than 100 columns if possible
   - Link to source in the last line, for example `# From https://poignant.guide/book/chapter-5.html`
-- Run `yarn update:grammars`
+- Run `pnpm update:grammars`
+- Review the diffs in git. You should see:
+  - `docs/languages.md`: Your language id added
+  - `packages/shiki/languages/<lang>.tmLanguage.json`: The grammar downloaded
+  - `packages/shiki/samples/<lang>.sample`: The sample file you added
+  - `packages/shiki/src/languages.ts`: Your language added to `type Lang` and `const languages`
+  - `scripts/grammarSources.ts`: The grammar's id and URL
+- 🚀 Send in the PR!
 
 ## All Languages
 
@@ -50,14 +63,23 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'berry' | 'be'
+  | 'bibtex'
+  | 'bicep'
+  | 'blade'
   | 'c'
+  | 'cadence' | 'cdc'
+  | 'clarity'
   | 'clojure' | 'clj'
+  | 'cmake'
   | 'cobol'
+  | 'codeql' | 'ql'
   | 'coffee'
   | 'cpp'
   | 'crystal'
   | 'csharp' | 'c#'
   | 'css'
+  | 'cue'
   | 'd'
   | 'dart'
   | 'diff'
@@ -66,12 +88,13 @@ export type Lang =
   | 'elixir'
   | 'elm'
   | 'erb'
-  | 'erlang'
+  | 'erlang' | 'erl'
   | 'fish'
   | 'fsharp' | 'f#'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
+  | 'glsl'
   | 'gnuplot'
   | 'go'
   | 'graphql'
@@ -79,7 +102,7 @@ export type Lang =
   | 'hack'
   | 'haml'
   | 'handlebars' | 'hbs'
-  | 'haskell'
+  | 'haskell' | 'hs'
   | 'hcl'
   | 'hlsl'
   | 'html'
@@ -93,17 +116,19 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
-  | 'jupyter'
   | 'kotlin'
   | 'latex'
   | 'less'
+  | 'liquid'
   | 'lisp'
   | 'logo'
   | 'lua'
   | 'make' | 'makefile'
   | 'markdown' | 'md'
+  | 'marko'
   | 'matlab'
   | 'mdx'
+  | 'mermaid'
   | 'nginx'
   | 'nim'
   | 'nix'
@@ -125,9 +150,11 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'rel'
   | 'riscv'
+  | 'rst'
   | 'ruby' | 'rb'
-  | 'rust'
+  | 'rust' | 'rs'
   | 'sas'
   | 'sass'
   | 'scala'
@@ -140,6 +167,7 @@ export type Lang =
   | 'sparql'
   | 'sql'
   | 'ssh-config'
+  | 'stata'
   | 'stylus' | 'styl'
   | 'svelte'
   | 'swift'
@@ -155,7 +183,7 @@ export type Lang =
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'
-  | 'viml'
+  | 'viml' | 'vim' | 'vimscript'
   | 'vue-html'
   | 'vue'
   | 'wasm'
@@ -163,4 +191,5 @@ export type Lang =
   | 'xml'
   | 'xsl'
   | 'yaml'
+  | 'zenscript'
 ```

@@ -572,7 +572,7 @@
       ]
     },
     "method": {
-      "begin": "(?x) (^|\\s+) ((\\w+)\\s+)? ((\\w+)\\s+)? ((\\w+)\\s+)? (\\w+) (?=\\s+\\bfunction\\b)",
+      "begin": "(?x) (^|\\s+) ((\\w+)\\s+)? ((\\w+)\\s+)? ((\\w+)\\s+)? ((\\w+)\\s+)? (?=\\bfunction\\b)",
       "beginCaptures": {
         "3": {
           "name": "storage.modifier.actionscript.3"

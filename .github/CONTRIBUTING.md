@@ -12,6 +12,8 @@ Here are a few ways to contribute:
 
 - We use [prettier](https://prettier.io). Before you commit, all files will be formatted automatically.
 - We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Please use a prefix. If your PR has multiple commits and some of them don't follow the Conventional Commits rule, we'll do a squash merge.
+  - If adding a language, use `feat(lang)`
+  - If adding a theme, use `feat(theme)`
 
 ## Fix a bug
 

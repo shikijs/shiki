@@ -1,6 +1,7 @@
-import type { IThemedToken } from 'shiki'
-import { measureMonospaceTypeface } from './measureMonospaceTypeface'
 import { FontStyle } from 'shiki'
+import type { IThemedToken } from 'shiki'
+
+import { measureMonospaceTypeface } from './measureMonospaceTypeface'
 
 interface RemoteFontFamily {
   /**
@@ -30,36 +31,109 @@ interface SVGRendererOptions {
    * }})
    */
   fontFamily: string | RemoteFontFamily
+
   /**
    * URL of the CSS that loads the `fontFamily` font remotely.
    */
   remoteFontCSSURL?: string
+
   /**
    * Default to 16px.
    */
   fontSize?: number
+
   /**
    * How high should a line be, in relation to `fontSize`. Default to 1.4.
    * Extra spaces are distributed evenly on top/bottom of each line.
    */
   lineHeightToFontSizeRatio?: number
+
   /**
    * Background color. Default to `#fff`.
    */
   bg?: string
+
   /**
    * Background corner radius. Default to `4px`.
    */
   bgCornerRadius?: number
+
   /**
    * How much padding should be left to the left/right in relation to font width. Default to 4.
    */
+
   bgSideCharPadding?: number
+
   /**
    * How much padding should be left to the top/bottom in relation to
    * line height (`fontSize * lineHeightToFontSizeRatio`). Default to 2.
    */
   bgVerticalCharPadding?: number
+
+  /**
+   * Background minimal width. Default to longest line calculated by font-measurements done by Playwright.
+   */
+  bgMinWidth?: number
+}
+
+interface TokenOptions {
+  fill: string
+  opacity?: string
+  'font-weight'?: string
+  'font-style'?: string
+}
+
+const collectTokenOptions = (options: TokenOptions) => {
+  return Object.entries(options)
+    .reduce(
+      (acc, [key, value]: [string, string | undefined]) =>
+        value ? `${acc}${key}="${value}" ` : acc,
+      ''
+    )
+    .trim()
+}
+
+function getTokenSVGAttributes(token: IThemedToken) {
+  const options: TokenOptions = {
+    fill: '#fff',
+    opacity: undefined,
+    'font-weight': undefined,
+    'font-style': undefined
+  }
+
+  if (token.fontStyle === FontStyle.Bold) {
+    options['font-weight'] = 'bold'
+  }
+  if (token.fontStyle === FontStyle.Italic) {
+    options['font-style'] = 'italic'
+  }
+
+  if (!token.color) {
+    return collectTokenOptions(options)
+  }
+
+  if (token.color.slice(1).length <= 6) {
+    options.fill = token.color
+  } else if (token.color.slice(1).length === 8) {
+    const opacity = parseInt(token.color.slice(1 + 6), 16) / 255
+    const roughRoundedOpacity = String(Math.floor(opacity * 100) / 100)
+    options.fill = token.color.slice(0, 1 + 6)
+    options.opacity = roughRoundedOpacity
+  }
+
+  return collectTokenOptions(options)
+}
+
+const htmlEscapes = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+} as const
+
+function escapeHtml(html: string) {
+  return html.replace(/[&<>"']/g, chr => htmlEscapes[chr as keyof typeof htmlEscapes])
 }
 
 export async function getSVGRenderer(options: SVGRendererOptions) {
@@ -67,12 +141,12 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
     typeof options.fontFamily === 'string' ? options.fontFamily : options.fontFamily.name
   const remoteFontCSSURL =
     typeof options.fontFamily === 'string' ? undefined : options.fontFamily.cssURL
-  const fontSize = options.fontSize || 16
-  const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio || 1.4
-  const _bg = options.bg || '#fff'
-  const bgCornerRadius = options.bgCornerRadius || 4
-  const bgSideCharPadding = options.bgSideCharPadding || 4
-  const bgVerticalCharPadding = options.bgVerticalCharPadding || 2
+  const fontSize = options.fontSize ?? 16
+  const lineHeightToFontSizeRatio = options.lineHeightToFontSizeRatio ?? 1.4
+  const _bg = options.bg ?? '#fff'
+  const bgCornerRadius = options.bgCornerRadius ?? 4
+  const bgSideCharPadding = options.bgSideCharPadding ?? 4
+  const bgVerticalCharPadding = options.bgVerticalCharPadding ?? 2
 
   const measurement = await measureMonospaceTypeface(fontNameStr, fontSize, remoteFontCSSURL)
 
@@ -93,15 +167,16 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
       /**
        * longest line + left/right 4 char width
        */
-      const bgWidth = (longestLineTextLength + bgSideCharPadding * 2) * measurement.width
+      const bgWidth = Math.max(
+        options.bgMinWidth ?? 0,
+        (longestLineTextLength + bgSideCharPadding * 2) * measurement.width
+      )
       /**
        * all rows + 2 rows top/bot
        */
       const bgHeight = (lines.length + bgVerticalCharPadding * 2) * lineheight
 
-      let svg = ''
-
-      svg += `<svg viewBox="0 0 ${bgWidth} ${bgHeight}" width="${bgWidth}" height="${bgHeight}" xmlns="http://www.w3.org/2000/svg">\n`
+      let svg = `<svg viewBox="0 0 ${bgWidth} ${bgHeight}" width="${bgWidth}" height="${bgHeight}" xmlns="http://www.w3.org/2000/svg">\n`
 
       svg += `<rect id="bg" fill="${bg}" width="${bgWidth}" height="${bgHeight}" rx="${bgCornerRadius}"></rect>`
 
@@ -111,7 +186,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
 
       lines.forEach((l: IThemedToken[], index: number) => {
         if (l.length === 0) {
-          svg += `\n`
+          svg += '\n'
         } else {
           svg += `<text font-family="${fontNameStr}" font-size="${fontSize}" y="${
             lineheight * (index + 1)
@@ -144,10 +219,9 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
                 token.content
               )}</tspan>`
             }
-
             indent += token.content.length
           })
-          svg += `\n</text>\n`
+          svg += '\n</text>\n'
         }
       })
       svg = svg.replace(/\n*$/, '') // Get rid of final new lines
@@ -158,50 +232,4 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
       return svg
     }
   }
-}
-
-const htmlEscapes = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#39;'
-}
-
-function escapeHtml(html: string) {
-  return html.replace(/[&<>"']/g, chr => htmlEscapes[chr])
-}
-
-function getTokenSVGAttributes(token: IThemedToken) {
-  const options = {
-    fill: '#fff',
-    opacity: undefined,
-    'font-weight': undefined,
-    'font-style': undefined
-  }
-
-  if (token.color.slice(1).length <= 6) {
-    options.fill = token.color
-  } else if (token.color.slice(1).length === 8) {
-    const opacity = parseInt(token.color.slice(1 + 6), 16) / 255
-    const roughRoundedOpacity = Math.floor(opacity * 100) / 100
-    options.fill = token.color.slice(0, 1 + 6)
-    options.opacity = roughRoundedOpacity
-  }
-
-  if (token.fontStyle === FontStyle.Bold) {
-    options['font-weight'] = 'bold'
-  }
-  if (token.fontStyle === FontStyle.Italic) {
-    options['font-style'] = 'italic'
-  }
-
-  let attrStrs = []
-  for (let o in options) {
-    if (options[o]) {
-      attrStrs.push(`${o}="${options[o]}"`)
-    }
-  }
-
-  return attrStrs.join(' ')
 }

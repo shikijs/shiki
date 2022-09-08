@@ -19,7 +19,7 @@ export interface HighlighterOptions {
   /**
    * A list of languages to load upfront.
    *
-   * Default to `['html', 'css', 'javascript']`
+   * Default to all the bundled languages.
    */
   langs?: (Lang | ILanguageRegistration)[]
 
@@ -33,12 +33,20 @@ export interface Highlighter {
   /**
    * Convert code to HTML tokens.
    * `lang` and `theme` must have been loaded.
+   * @deprecated Please use the `codeToHtml(code, options?)` overload instead.
    */
   codeToHtml(
     code: string,
     lang?: StringLiteralUnion<Lang>,
-    theme?: StringLiteralUnion<Theme>
+    theme?: StringLiteralUnion<Theme>,
+    options?: HtmlOptions
   ): string
+
+  /**
+   * Convert code to HTML tokens.
+   * `lang` and `theme` must have been loaded.
+   */
+  codeToHtml(code: string, options?: HtmlOptions): string
 
   /**
    * Convert code to themed tokens for custom processing.
@@ -87,6 +95,8 @@ export interface Highlighter {
    * Get the background color for theme. Can be used for CSS `background-color`.
    */
   getBackgroundColor(theme?: StringLiteralUnion<Theme>): string
+
+  setColorReplacements(map: Record<string, string>): void
 
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
@@ -139,7 +149,7 @@ export interface IShikiTheme extends IRawTheme {
   /**
    * @description light/dark theme
    */
-  type: 'light' | 'dark'
+  type: 'light' | 'dark' | 'css'
 
   /**
    * @description tokenColors of the theme file
@@ -174,6 +184,60 @@ export interface IShikiTheme extends IRawTheme {
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & {})
+
+export interface HtmlOptions {
+  lang?: StringLiteralUnion<Lang>
+  theme?: StringLiteralUnion<Theme>
+  lineOptions?: LineOption[]
+}
+export interface HtmlRendererOptions {
+  langId?: string
+  fg?: string
+  bg?: string
+  lineOptions?: LineOption[]
+  elements?: ElementsOptions
+}
+
+export interface LineOption {
+  /**
+   * 1-based line number.
+   */
+  line: number
+  classes?: string[]
+}
+
+interface ElementProps {
+  children: string
+  [key: string]: unknown
+}
+
+interface PreElementProps extends ElementProps {
+  className: string
+  style: string
+}
+
+interface CodeElementProps extends ElementProps {}
+
+interface LineElementProps extends ElementProps {
+  className: string
+  lines: IThemedToken[][]
+  line: IThemedToken[]
+  index: number
+}
+
+interface TokenElementProps extends ElementProps {
+  style: string
+  tokens: IThemedToken[]
+  token: IThemedToken
+  index: number
+}
+
+export interface ElementsOptions {
+  pre?: (props: PreElementProps) => string
+  code?: (props: CodeElementProps) => string
+  line?: (props: LineElementProps) => string
+  token?: (props: TokenElementProps) => string
+}
 
 export interface ThemedTokenizerOptions {
   /**

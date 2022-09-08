@@ -158,6 +158,18 @@
               }
             },
             {
+              "include": "#graphql-comment"
+            },
+            {
+              "include": "#graphql-description-docstring"
+            },
+            {
+              "include": "#graphql-description-singleline"
+            },
+            {
+              "include": "#graphql-directive"
+            },
+            {
               "include": "#graphql-ampersand"
             },
             {
@@ -249,6 +261,9 @@
         },
         {
           "include": "#graphql-description-singleline"
+        },
+        {
+          "include": "#graphql-directive"
         },
         {
           "include": "#graphql-variable-definitions"
@@ -353,6 +368,9 @@
           "include": "#graphql-description-singleline"
         },
         {
+          "include": "#graphql-directive"
+        },
+        {
           "include": "#graphql-skip-newlines"
         }
       ]
@@ -450,6 +468,9 @@
         },
         {
           "include": "#graphql-description-singleline"
+        },
+        {
+          "include": "#graphql-directive"
         },
         {
           "include": "#graphql-colon"
@@ -899,6 +920,9 @@
               "include": "#graphql-description-singleline"
             },
             {
+              "include": "#graphql-directive"
+            },
+            {
               "include": "#graphql-value"
             },
             {
@@ -1028,12 +1052,27 @@
               "include": "#graphql-description-singleline"
             },
             {
+              "include": "#graphql-directive"
+            },
+            {
               "include": "#graphql-enum-value"
             },
             {
               "include": "#literal-quasi-embedded"
             }
           ]
+        },
+        {
+          "include": "#graphql-comment"
+        },
+        {
+          "include": "#graphql-description-docstring"
+        },
+        {
+          "include": "#graphql-description-singleline"
+        },
+        {
+          "include": "#graphql-directive"
         }
       ]
     },

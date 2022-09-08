@@ -9,7 +9,6 @@
 
 ```sh
 npm i shiki
-# yarn add shiki
 ```
 
 ```js
@@ -20,7 +19,7 @@ shiki
     theme: 'nord'
   })
   .then(highlighter => {
-    console.log(highlighter.codeToHtml(`console.log('shiki');`, 'js'))
+    console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
   })
 
 // <pre class="shiki" style="background-color: #2e3440"><code>
@@ -29,16 +28,16 @@ shiki
 ```
 
 ```html
-<script src='https://unpkg.com/shiki'></script>
+<script src="https://unpkg.com/shiki"></script>
 <script>
-shiki
-  .getHighlighter({
-    theme: 'nord'
-  })
-  .then(highlighter => {
-    const code = highlighter.codeToHtml(`console.log('shiki');`, 'js')
-    document.getElementById('output').innerHTML = code
-  })
+  shiki
+    .getHighlighter({
+      theme: 'nord'
+    })
+    .then(highlighter => {
+      const code = highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' })
+      document.getElementById('output').innerHTML = code
+    })
 </script>
 ```
 
@@ -62,7 +61,7 @@ Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play 
 
 ## Credits
 
-- Shiki uses [Onigasm](https://github.com/NeekSandhu/onigasm) by [@NeekSandhu](https://github.com/NeekSandhu)
+- Shiki uses [vscode-oniguruma](https://github.com/microsoft/vscode-oniguruma)
 - A lot of code is based on [vscode-textmate](https://github.com/Microsoft/vscode-textmate)
 
 ## Sponsorship
