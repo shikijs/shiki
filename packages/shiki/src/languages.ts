@@ -27,7 +27,7 @@ export type Lang =
   | 'coffee'
   | 'cpp'
   | 'crystal'
-  | 'csharp' | 'c#'
+  | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
   | 'd'
@@ -40,7 +40,7 @@ export type Lang =
   | 'erb'
   | 'erlang' | 'erl'
   | 'fish'
-  | 'fsharp' | 'f#'
+  | 'fsharp' | 'f#' | 'fs'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -315,7 +315,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cs',
     path: 'csharp.tmLanguage.json',
     samplePath: 'csharp.sample',
-    aliases: ['c#']
+    aliases: ['c#', 'cs']
   },
   {
     id: 'css',
@@ -397,7 +397,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     samplePath: 'fsharp.sample',
-    aliases: ['f#'],
+    aliases: ['f#', 'fs'],
     embeddedLangs: ['markdown']
   },
   {
@@ -603,6 +603,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
