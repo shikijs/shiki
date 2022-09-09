@@ -199,6 +199,7 @@ export const githubGrammarSources: [string, string][] = [
     'prolog',
     'https://github.com/arthwang/vsc-prolog/blob/master/syntaxes/prolog.swi.tmLanguage.json'
   ],
+  ['proto', 'https://github.com/zxh0/vscode-proto3/blob/master/syntaxes/proto3.tmLanguage.json'],
   ['puppet', 'https://github.com/octref/puppet-vscode/blob/main/syntaxes/puppet.tmLanguage'],
   [
     'purescript',
