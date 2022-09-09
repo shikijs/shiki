@@ -46,7 +46,7 @@ export async function getOniguruma(): Promise<IOnigLib> {
   if (!_onigurumaPromise) {
     let loader: Promise<void>
 
-    if (isBrowser) {
+    if (isBrowser || WASM) {
       if (typeof WASM === 'string') {
         loader = loadWASM({
           data: await fetch(_resolvePath('dist/onig.wasm')).then(r => r.arrayBuffer())

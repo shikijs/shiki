@@ -23,7 +23,6 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run build",
-    "prepare": "npm run build",
     "build": "rollup -c",
     "watch": "rollup -c -w"
   },
