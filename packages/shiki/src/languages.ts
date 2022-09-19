@@ -93,6 +93,7 @@ export type Lang =
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
+  | 'proto'
   | 'pug' | 'jade'
   | 'puppet'
   | 'purescript'
@@ -697,6 +698,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'prolog',
     scopeName: 'source.prolog',
     path: 'prolog.tmLanguage.json'
+  },
+  {
+    id: 'proto',
+    scopeName: 'source.proto',
+    path: 'proto.tmLanguage.json',
+    samplePath: 'proto.sample'
   },
   {
     id: 'pug',
