@@ -56,6 +56,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'imba'
   | 'ini'
   | 'java'
   | 'javascript' | 'js'
@@ -489,6 +490,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'html.tmLanguage.json',
     samplePath: 'html.sample',
     embeddedLangs: ['javascript', 'css']
+  },
+  {
+    id: 'imba',
+    scopeName: 'source.imba',
+    path: 'imba.tmLanguage.json',
+    samplePath: 'imba.sample',
   },
   {
     id: 'ini',
