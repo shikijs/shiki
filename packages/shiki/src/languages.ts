@@ -495,7 +495,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'imba',
     scopeName: 'source.imba',
     path: 'imba.tmLanguage.json',
-    samplePath: 'imba.sample',
+    samplePath: 'imba.sample'
   },
   {
     id: 'ini',
