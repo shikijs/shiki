@@ -605,7 +605,7 @@
       "name": "meta.function-call.invoke.php"
     },
     "interface": {
-      "begin": "^(?i)\\s*(?:(public|internal)?\\s+)(interface)\\b",
+      "begin": "^(?i)\\s*(?:(public|internal)\\s+)?(interface)\\b",
       "beginCaptures": {
         "1": {
           "name": "storage.modifier.php"
@@ -697,7 +697,7 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(?:(public|internal)?\\s+)(enum)\\s+(class)\\s+([a-z0-9_]+)\\s*:?",
+          "begin": "(?i)^\\s*(?:(public|internal)\\s+)?(enum)\\s+(class)\\s+([a-z0-9_]+)\\s*:?",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.php"
@@ -725,7 +725,7 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(?:(public|internal)?\\s+)(enum)\\s+([a-z0-9_]+)\\s*:?",
+          "begin": "(?i)^\\s*(?:(public|internal)\\s+)?(enum)\\s+([a-z0-9_]+)\\s*:?",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.php"
@@ -749,7 +749,7 @@
           ]
         },
         {
-          "begin": "(?i)^\\s*(?:(public|internal)?\\s+)(trait)\\s+([a-z0-9_]+)\\s*",
+          "begin": "(?i)^\\s*(?:(public|internal)\\s+)?(trait)\\s+([a-z0-9_]+)\\s*",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.php"
@@ -1022,7 +1022,7 @@
           "name": "keyword.control.exception.php"
         },
         {
-          "begin": "(?i)\\s*(?:(public|internal)?\\s+)(function)\\s*(?=\\()",
+          "begin": "(?i)\\s*(?:(public|internal)\\s+)?(function)\\s*(?=\\()",
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.php"
@@ -1543,7 +1543,7 @@
       ]
     },
     "regex-double-quoted": {
-      "begin": "(?x)\n\"/ (?=(\\\\.|[^\"/])++/[imsxeADSUXu]*\")",
+      "begin": "(?x)\n(?<=re)\"/ (?=(\\\\.|[^\"/])++/[imsxeADSUXu]*\")",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.php"
@@ -1599,7 +1599,7 @@
       ]
     },
     "regex-single-quoted": {
-      "begin": "(?x)\n'/ (?=(\\\\.|[^'/])++/[imsxeADSUXu]*')",
+      "begin": "(?x)\n(?<=re)'/ (?=(\\\\.|[^'/])++/[imsxeADSUXu]*')",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.php"
