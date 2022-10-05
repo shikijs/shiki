@@ -563,7 +563,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'latex',
     scopeName: 'text.tex.latex',
     path: 'latex.tmLanguage.json',
-    embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'scala', 'gnuplot']
+    embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot']
   },
   {
     id: 'less',
