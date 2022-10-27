@@ -46,25 +46,23 @@ export async function getOniguruma(): Promise<IOnigLib> {
   if (!_onigurumaPromise) {
     let loader: Promise<void>
 
-    if (WASM && typeof WASM !== "string") {
+    if (WASM && typeof WASM !== 'string') {
       loader = loadWASM(WASM);
     } else if (isBrowser) {
-      if (typeof WASM === "string") {
+      if (typeof WASM === 'string') {
         loader = loadWASM({
-          data: await fetch(_resolvePath("dist/onig.wasm")).then((r) =>
-            r.arrayBuffer()
-          ),
-        });
+          data: await fetch(_resolvePath('dist/onig.wasm')).then(r => r.arrayBuffer())
+        })
       }
     } else {
-      const path: typeof import("path") = require("path");
+      const path: typeof import('path') = require('path')
       const wasmPath =
-        WASM !== ""
+        WASM !== ''
           ? WASM
-          : path.join(require.resolve("vscode-oniguruma"), "../onig.wasm");
-      const fs: typeof import("fs") = require("fs");
-      const wasmBin = fs.readFileSync(wasmPath).buffer;
-      loader = loadWASM(wasmBin);
+          : path.join(require.resolve('vscode-oniguruma'), '../onig.wasm')
+      const fs: typeof import('fs') = require('fs')
+      const wasmBin = fs.readFileSync(wasmPath).buffer
+      loader = loadWASM(wasmBin)
     }
 
     _onigurumaPromise = loader.then(() => {
