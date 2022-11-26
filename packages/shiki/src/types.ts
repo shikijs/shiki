@@ -189,6 +189,7 @@ export interface HtmlOptions {
   lang?: StringLiteralUnion<Lang>
   theme?: StringLiteralUnion<Theme>
   lineOptions?: LineOption[]
+  addThemeNameToClass?: boolean
 }
 export interface HtmlRendererOptions {
   langId?: string
@@ -196,6 +197,7 @@ export interface HtmlRendererOptions {
   bg?: string
   lineOptions?: LineOption[]
   elements?: ElementsOptions
+  themeName?: string
 }
 
 export interface LineOption {

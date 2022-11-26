@@ -9,7 +9,25 @@ describe('validates all themes run some JS', () => {
     it(theme, async () => {
       const hl = await highlighter
       await hl.loadTheme(theme)
-      hl.codeToHtml(`console.log('shiki');`, { lang: 'js' })
+      const result = hl.codeToHtml(`console.log('shiki');`, { lang: 'js', theme })
+      expect(result).toContain(`class=\"shiki\"`)
+    })
+  })
+})
+
+describe('validates all themes run some JS with addThemeNameToClass enabled', () => {
+  const highlighter = getHighlighter({ langs: ['js'] })
+
+  themes.forEach(theme => {
+    it(theme, async () => {
+      const hl = await highlighter
+      await hl.loadTheme(theme)
+      const result = hl.codeToHtml(`console.log('shiki');`, {
+        lang: 'js',
+        theme,
+        addThemeNameToClass: true
+      })
+      expect(result).toContain(`class=\"shiki ${theme}\"`)
     })
   })
 })

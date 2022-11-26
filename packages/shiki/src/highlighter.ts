@@ -159,7 +159,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg,
-      lineOptions: options?.lineOptions
+      lineOptions: options?.lineOptions,
+      themeName: options?.addThemeNameToClass && _theme.name
     })
   }
 
