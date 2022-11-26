@@ -25,6 +25,22 @@ shiki
 // <pre class="shiki" style="background-color: #2e3440"><code>
 //   <!-- Highlighted Code -->
 // </code></pre>
+
+shiki
+  .getHighlighter({
+    theme: 'nord'
+  })
+  .then(highlighter => {
+    console.log(
+      highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js', addThemeNameToClass: true })
+    ) //addThemeNameToClass is optional, and off by default
+  })
+
+// it adds the theme name to the generated html class
+//                   👇
+// <pre class="shiki nord" style="background-color: #2e3440"><code>
+//   <!-- Highlighted Code -->
+// </code></pre>
 ```
 
 ```html
@@ -35,7 +51,10 @@ shiki
       theme: 'nord'
     })
     .then(highlighter => {
-      const code = highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' })
+      const code = highlighter.codeToHtml(`console.log('shiki');`, {
+        lang: 'js',
+        addThemeNameToClass: false
+      }) //see above for addThemeNameToClass explanation
       document.getElementById('output').innerHTML = code
     })
 </script>
