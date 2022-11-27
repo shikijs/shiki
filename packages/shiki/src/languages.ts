@@ -27,7 +27,7 @@ export type Lang =
   | 'coffee'
   | 'cpp'
   | 'crystal'
-  | 'csharp' | 'c#'
+  | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
   | 'd'
@@ -40,7 +40,7 @@ export type Lang =
   | 'erb'
   | 'erlang' | 'erl'
   | 'fish'
-  | 'fsharp' | 'f#'
+  | 'fsharp' | 'f#' | 'fs'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -56,6 +56,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'imba'
   | 'ini'
   | 'java'
   | 'javascript' | 'js'
@@ -316,7 +317,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cs',
     path: 'csharp.tmLanguage.json',
     samplePath: 'csharp.sample',
-    aliases: ['c#']
+    aliases: ['c#', 'cs']
   },
   {
     id: 'css',
@@ -398,7 +399,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
     samplePath: 'fsharp.sample',
-    aliases: ['f#'],
+    aliases: ['f#', 'fs'],
     embeddedLangs: ['markdown']
   },
   {
@@ -491,6 +492,12 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['javascript', 'css']
   },
   {
+    id: 'imba',
+    scopeName: 'source.imba',
+    path: 'imba.tmLanguage.json',
+    samplePath: 'imba.sample'
+  },
+  {
     id: 'ini',
     scopeName: 'source.ini',
     path: 'ini.tmLanguage.json'
@@ -556,7 +563,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'latex',
     scopeName: 'text.tex.latex',
     path: 'latex.tmLanguage.json',
-    embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'scala', 'gnuplot']
+    embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot']
   },
   {
     id: 'less',

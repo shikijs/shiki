@@ -147,6 +147,10 @@ export const githubGrammarSources: [string, string][] = [
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
   [
+    'imba',
+    'https://github.com/familyfriendlymikey/imba-linguist-grammar/blob/main/imba.tmLanguage'
+  ],
+  [
     'jinja',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json'
   ],
@@ -291,9 +295,9 @@ export const languageAliases = {
   berry: ['be'],
   cadence: ['cdc'],
   clojure: ['clj'],
-  csharp: ['c#'],
+  csharp: ['c#', 'cs'],
   erlang: ['erl'],
-  fsharp: ['f#'],
+  fsharp: ['f#', 'fs'],
   haskell: ['hs'],
   handlebars: ['hbs'],
   javascript: ['js'],
