@@ -4,10 +4,11 @@ import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
 import copy from 'rollup-plugin-copy'
-import { terser } from 'rollup-plugin-terser'
-import { version } from './package.json'
+import terser from '@rollup/plugin-terser'
 import rollupReplace from '@rollup/plugin-replace'
 import { defineConfig } from 'rollup'
+import { resolve } from 'path'
+import { readFileSync } from 'fs'
 
 const replace = opts => {
   return rollupReplace({
@@ -15,6 +16,8 @@ const replace = opts => {
     preventAssignment: true
   })
 }
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'))
 
 const external = ['vscode-oniguruma', 'vscode-textmate']
 const globals = {
@@ -78,7 +81,7 @@ export default defineConfig([
     plugins: [
       replace({
         __BROWSER__: JSON.stringify(true),
-        __CDN_ROOT__: `https://unpkg.com/shiki@${version}/`
+        __CDN_ROOT__: `https://unpkg.com/shiki@${pkg.version}/`
       }),
       esbuild(),
       nodeResolve(),
@@ -99,7 +102,7 @@ export default defineConfig([
     plugins: [
       replace({
         __BROWSER__: JSON.stringify(true),
-        __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/shiki@${version}/`
+        __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/shiki@${pkg.version}/`
       }),
       esbuild(),
       nodeResolve(),
@@ -118,7 +121,7 @@ export default defineConfig([
     plugins: [
       dts(),
       copy({
-        targets: [{ src: require.resolve('vscode-oniguruma/release/onig.wasm'), dest: 'dist' }]
+        targets: [{ src: resolve('node_modules/vscode-oniguruma/release/onig.wasm'), dest: 'dist' }]
       })
     ],
     onwarn: (warning, warn) => {

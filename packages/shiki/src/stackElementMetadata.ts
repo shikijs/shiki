@@ -20,16 +20,18 @@
  */
 export const enum MetadataConsts {
   LANGUAGEID_MASK = 0b00000000000000000000000011111111,
-  TOKEN_TYPE_MASK = 0b00000000000000000000011100000000,
+  TOKEN_TYPE_MASK = 0b00000000000000000000001100000000,
+  BALANCED_BRACKETS_MASK = 0b00000000000000000000010000000000,
   FONT_STYLE_MASK = 0b00000000000000000011100000000000,
   FOREGROUND_MASK = 0b00000000011111111100000000000000,
   BACKGROUND_MASK = 0b11111111100000000000000000000000,
 
   LANGUAGEID_OFFSET = 0,
   TOKEN_TYPE_OFFSET = 8,
+  BALANCED_BRACKETS_OFFSET = 10,
   FONT_STYLE_OFFSET = 11,
-  FOREGROUND_OFFSET = 14,
-  BACKGROUND_OFFSET = 23
+  FOREGROUND_OFFSET = 15,
+  BACKGROUND_OFFSET = 24
 }
 
 export const enum TemporaryStandardTokenType {
@@ -100,6 +102,10 @@ export class StackElementMetadata {
     return (metadata & MetadataConsts.BACKGROUND_MASK) >>> MetadataConsts.BACKGROUND_OFFSET
   }
 
+  public static containsBalancedBrackets(metadata: number): boolean {
+    return (metadata & MetadataConsts.BALANCED_BRACKETS_MASK) !== 0
+  }
+
   public static set(
     metadata: number,
     languageId: number,
@@ -113,6 +119,11 @@ export class StackElementMetadata {
     let _fontStyle = StackElementMetadata.getFontStyle(metadata)
     let _foreground = StackElementMetadata.getForeground(metadata)
     let _background = StackElementMetadata.getBackground(metadata)
+    let _containsBalancedBracketsBit: 0 | 1 = StackElementMetadata.containsBalancedBrackets(
+      metadata
+    )
+      ? 1
+      : 0
 
     if (languageId !== 0) {
       _languageId = languageId
@@ -135,6 +146,7 @@ export class StackElementMetadata {
       ((_languageId << MetadataConsts.LANGUAGEID_OFFSET) |
         (_tokenType << MetadataConsts.TOKEN_TYPE_OFFSET) |
         (_fontStyle << MetadataConsts.FONT_STYLE_OFFSET) |
+        (_containsBalancedBracketsBit << MetadataConsts.BALANCED_BRACKETS_OFFSET) |
         (_foreground << MetadataConsts.FOREGROUND_OFFSET) |
         (_background << MetadataConsts.BACKGROUND_OFFSET)) >>>
       0
