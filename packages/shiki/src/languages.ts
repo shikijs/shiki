@@ -62,6 +62,7 @@ export type Lang =
   | 'javascript' | 'js'
   | 'jinja-html'
   | 'json'
+  | 'json5'
   | 'jsonc'
   | 'jsonnet'
   | 'jssm' | 'fsl'
@@ -525,6 +526,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'json',
     scopeName: 'source.json',
     path: 'json.tmLanguage.json'
+  },
+  {
+    id: 'json5',
+    scopeName: 'source.json5',
+    path: 'json5.tmLanguage.json',
+    samplePath: 'json5.sample'
   },
   {
     id: 'jsonc',

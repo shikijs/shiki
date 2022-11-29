@@ -112,6 +112,7 @@ export type Lang =
   | 'javascript' | 'js'
   | 'jinja-html'
   | 'json'
+  | 'json5'
   | 'jsonc'
   | 'jsonnet'
   | 'jssm' | 'fsl'
