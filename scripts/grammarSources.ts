@@ -177,7 +177,7 @@ export const githubGrammarSources: [string, string][] = [
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
   [
     'marko',
-    'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/marko.tmLanguage.json'
+    'https://github.com/marko-js/marko-tmbundle/blob/master/syntaxes/marko.tmLanguage.json'
   ],
   [
     'matlab',
@@ -256,7 +256,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'system-verilog',
-    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/systemverilog.tmLanguage'
+    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/main/syntaxes/systemverilog.tmLanguage.json'
   ],
   ['tasl', 'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json'],
   ['tcl', 'https://github.com/sleutho/tcl/blob/master/syntaxes/tcl.tmLanguage'],
@@ -272,7 +272,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'verilog',
-    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/verilog.tmLanguage'
+    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/main/syntaxes/verilog.tmLanguage.json'
   ],
   ['vhdl', 'https://github.com/jonasjj/awesome-vhdl/blob/master/syntaxes/vhdl.tmLanguage'],
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
