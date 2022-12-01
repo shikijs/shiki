@@ -3,13 +3,18 @@ import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
 import { fetchTheme, toShikiTheme } from './loader'
 import { Theme } from './themes'
 import { Resolver } from './resolver'
-import { Lang } from './languages'
+import { Lang, languages } from './languages'
 
 export class Registry extends TextMateRegistry {
   public themesPath: string = 'themes/'
 
   private _resolvedThemes: Record<string, IShikiTheme> = {}
   private _resolvedGrammars: Record<string, IGrammar> = {}
+  private _langGraph: Map<string, ILanguageRegistration> = new Map()
+  private _langMap = languages.reduce((acc, lang) => {
+    acc[lang.id] = lang
+    return acc
+  }, {} as Record<string, ILanguageRegistration>)
 
   constructor(private _resolver: Resolver) {
     super(_resolver)
@@ -62,14 +67,32 @@ export class Registry extends TextMateRegistry {
 
   public async loadLanguages(langs: ILanguageRegistration[]) {
     for (const lang of langs) {
+      this.buildGraph(lang)
+    }
+
+    const langsGraphArray = Array.from(this._langGraph.values())
+
+    for (const lang of langsGraphArray) {
       this._resolver.addLanguage(lang)
     }
-    for (const lang of langs) {
+    for (const lang of langsGraphArray) {
       await this.loadLanguage(lang)
     }
   }
 
   public getLoadedLanguages() {
     return Object.keys(this._resolvedGrammars) as Lang[]
+  }
+
+  private buildGraph(lang: ILanguageRegistration) {
+    if (!this._langGraph.has(lang.id)) {
+      this._langGraph.set(lang.id, lang)
+    }
+
+    if (lang.embeddedLangs) {
+      for (const embeddedLang of lang.embeddedLangs) {
+        this.buildGraph(this._langMap[embeddedLang])
+      }
+    }
   }
 }
