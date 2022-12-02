@@ -67,7 +67,7 @@ export class Registry extends TextMateRegistry {
 
   public async loadLanguages(langs: ILanguageRegistration[]) {
     for (const lang of langs) {
-      this.buildGraph(lang)
+      this.resolveEmbeddedLanguages(lang)
     }
 
     const langsGraphArray = Array.from(this._langGraph.values())
@@ -84,14 +84,14 @@ export class Registry extends TextMateRegistry {
     return Object.keys(this._resolvedGrammars) as Lang[]
   }
 
-  private buildGraph(lang: ILanguageRegistration) {
+  private resolveEmbeddedLanguages(lang: ILanguageRegistration) {
     if (!this._langGraph.has(lang.id)) {
       this._langGraph.set(lang.id, lang)
     }
 
     if (lang.embeddedLangs) {
       for (const embeddedLang of lang.embeddedLangs) {
-        this.buildGraph(this._langMap[embeddedLang])
+        this._langGraph.set(embeddedLang, this._langMap[embeddedLang])
       }
     }
   }

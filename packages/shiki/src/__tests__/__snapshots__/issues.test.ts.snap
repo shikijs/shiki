@@ -248,11 +248,11 @@ Array [
       "fontStyle": 0,
     },
     Object {
-      "color": "#A31515",
-      "content": "{a}",
+      "color": "#0000FF",
+      "content": "{",
       "explanation": Array [
         Object {
-          "content": "{a}",
+          "content": "{",
           "scopes": Array [
             Object {
               "scopeName": "source.svelte",
@@ -271,15 +271,126 @@ Array [
               "themeMatches": Array [],
             },
             Object {
-              "scopeName": "string.unquoted.svelte",
+              "scopeName": "punctuation.section.embedded.begin.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "String interpolation",
+                  "scope": Array [
+                    "punctuation.definition.template-expression.begin",
+                    "punctuation.definition.template-expression.end",
+                    "punctuation.section.embedded",
+                  ],
+                  "settings": Object {
+                    "foreground": "#0000ff",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#001080",
+      "content": "a",
+      "explanation": Array [
+        Object {
+          "content": "a",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.embedded.expression.svelte",
               "themeMatches": Array [
                 Object {
                   "scope": Array [
-                    "string",
-                    "meta.embedded.assembly",
+                    "meta.embedded",
+                    "source.groovy.embedded",
+                    "string meta.image.inline.markdown",
                   ],
                   "settings": Object {
-                    "foreground": "#a31515",
+                    "foreground": "#000000ff",
+                  },
+                },
+              ],
+            },
+            Object {
+              "scopeName": "source.ts",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "variable.other.readwrite.ts",
+              "themeMatches": Array [
+                Object {
+                  "name": "Variable and parameter name",
+                  "scope": Array [
+                    "variable",
+                    "meta.definition.variable.name",
+                    "support.variable",
+                    "entity.name.variable",
+                    "constant.other.placeholder",
+                  ],
+                  "settings": Object {
+                    "foreground": "#001080",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+    },
+    Object {
+      "color": "#0000FF",
+      "content": "}",
+      "explanation": Array [
+        Object {
+          "content": "}",
+          "scopes": Array [
+            Object {
+              "scopeName": "source.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.scope.tag.div.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.tag.start.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "meta.directive.let.svelte",
+              "themeMatches": Array [],
+            },
+            Object {
+              "scopeName": "punctuation.section.embedded.end.svelte",
+              "themeMatches": Array [
+                Object {
+                  "name": "String interpolation",
+                  "scope": Array [
+                    "punctuation.definition.template-expression.begin",
+                    "punctuation.definition.template-expression.end",
+                    "punctuation.section.embedded",
+                  ],
+                  "settings": Object {
+                    "foreground": "#0000ff",
                   },
                 },
               ],
