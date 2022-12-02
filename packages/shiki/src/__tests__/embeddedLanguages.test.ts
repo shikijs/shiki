@@ -6,6 +6,5 @@ test('Requesting html as language also loads the embedded languages like JavaScr
     langs: ['html']
   })
   const languages = highlighter.getLoadedLanguages()
-  console.log(languages)
   expect(languages.sort()).toEqual(['html', 'css', 'javascript', 'js'].sort())
 })
