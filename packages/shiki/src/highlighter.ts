@@ -3,6 +3,7 @@ import type {
   HighlighterOptions,
   HtmlOptions,
   ILanguageRegistration,
+  IShikiPlugin,
   IShikiTheme,
   IThemeRegistration,
   StringLiteralUnion
@@ -43,6 +44,10 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   const { _languages, _themes } = resolveOptions(options)
   const _resolver = new Resolver(getOniguruma(), 'vscode-oniguruma')
   const _registry = new Registry(_resolver)
+  let _plugins: { config: IShikiPlugin['config']; plugins: IShikiPlugin[] } = {
+    config: {},
+    plugins: []
+  }
 
   if (options.paths?.themes) {
     _registry.themesPath = options.paths.themes
@@ -153,13 +158,16 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     }
 
     const tokens = codeToThemedTokens(code, options.lang, options.theme, {
-      includeExplanation: false
+      includeExplanation: _plugins?.config?.requestExplanation
     })
     const { _theme } = getTheme(options.theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg,
-      lineOptions: options?.lineOptions
+      language: options?.lang,
+      lineOptions: options?.lineOptions,
+      theme: _plugins?.config?.requestTheme ? _theme : _theme.name,
+      plugins: _plugins.plugins
     })
   }
 
@@ -191,6 +199,21 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return _theme.fg
   }
 
+  function usePlugin(plugin: any): Highlighter {
+    let importedPlugin: IShikiPlugin = plugin
+
+    if (typeof plugin === 'function') {
+      importedPlugin = plugin.call(this)
+    }
+
+    _plugins = {
+      config: { ..._plugins.config, ...importedPlugin.config },
+      plugins: [..._plugins.plugins, importedPlugin]
+    }
+
+    return this
+  }
+
   return {
     codeToThemedTokens,
     codeToHtml,
@@ -203,7 +226,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     getForegroundColor,
     getLoadedThemes,
     getLoadedLanguages,
-    setColorReplacements
+    setColorReplacements,
+    usePlugin
   }
 }
 

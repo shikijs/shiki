@@ -98,6 +98,12 @@ export interface Highlighter {
 
   setColorReplacements(map: Record<string, string>): void
 
+  /**
+   * Adds a Shiki plugin as part of the HTML renderer. Multiple plugins can be added,
+   * and they will be executed in the order they are added. May the last one win!
+   */
+  usePlugin(plugin: IShikiPlugin): Highlighter
+
   // codeToRawHtml?(code: string): string
   // getRawCSS?(): string
 
@@ -191,10 +197,12 @@ export interface HtmlOptions {
   lineOptions?: LineOption[]
 }
 export interface HtmlRendererOptions {
-  langId?: string
   fg?: string
   bg?: string
+  language?: string
   lineOptions?: LineOption[]
+  theme?: string | IShikiTheme
+  plugins?: IShikiPlugin[]
   elements?: ElementsOptions
 }
 
@@ -237,6 +245,45 @@ export interface ElementsOptions {
   code?: (props: CodeElementProps) => string
   line?: (props: LineElementProps) => string
   token?: (props: TokenElementProps) => string
+}
+
+export interface ElementPlugin {
+  attributes(context?: IShikiPluginContext): Record<string, string> | Function
+}
+interface PreElementPlugin extends ElementPlugin {
+  classNames(context?: IShikiPluginContext): string[] | Function
+  styles(context?: IShikiPluginContext): Record<string, string> | Function
+}
+
+interface CodeElementPlugin extends ElementPlugin {}
+
+interface LineElementPlugin extends ElementPlugin {
+  classNames(context?: IShikiPluginContext): string[] | Function
+  styles(context?: IShikiPluginContext): Record<string, string> | Function
+}
+
+interface TokenElementPlugin extends ElementPlugin {
+  classNames(context?: IShikiPluginContext): string[] | Function
+  styles(context?: IShikiPluginContext): Record<string, string> | Function
+}
+
+export interface IShikiPlugin {
+  name: string
+  config: {
+    requestExplanation?: boolean
+    requestTheme?: boolean
+  }
+  tags: {
+    pre: PreElementPlugin
+    code: CodeElementPlugin
+    line: LineElementPlugin
+    token: TokenElementPlugin
+  }
+}
+
+export interface IShikiPluginContext {
+  language: string
+  theme: string | IShikiTheme
 }
 
 export interface ThemedTokenizerOptions {

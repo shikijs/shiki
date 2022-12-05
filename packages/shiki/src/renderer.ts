@@ -1,23 +1,24 @@
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
-import { HtmlRendererOptions, LineOption, ElementsOptions } from './types'
+import { HtmlRendererOptions, LineOption, ElementsOptions, IShikiPluginContext } from './types'
 import { groupBy } from './utils'
+import { applyPlugins } from './plugin'
 
 const defaultElements: ElementsOptions = {
-  pre({ className, style, children }) {
-    return `<pre class="${className}" style="${style}">${children}</pre>`
+  pre({ className, style, attributes, children }) {
+    return `<pre class="${className}" style="${style}" ${attributes}>${children}</pre>`
   },
 
-  code({ children }) {
-    return `<code>${children}</code>`
+  code({ attributes, children }) {
+    return `<code ${attributes}>${children}</code>`
   },
 
-  line({ className, children }) {
-    return `<span class="${className}">${children}</span>`
+  line({ className, style, attributes, children }) {
+    return `<span class="${className}" style="${style}" ${attributes}>${children}</span>`
   },
 
-  token({ style, children }) {
-    return `<span style="${style}">${children}</span>`
+  token({ className, style, attributes, children }) {
+    return `<span class="${className}" style="${style}" ${attributes}>${children}</span>`
   }
 }
 
@@ -25,65 +26,85 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   const bg = options.bg || '#fff'
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
+  const plugins = options.plugins || []
+
+  const pluginContext: IShikiPluginContext = {
+    language: options.language || 'text',
+    theme: options.theme
+  }
 
   function h(type: string = '', props = {}, children: string[]): string {
     const element = userElements[type] || defaultElements[type]
+
     if (element) {
       children = children.filter(Boolean)
 
-      return element({
+      props = plugins.length > 0 ? applyPlugins(type, pluginContext, plugins, props) : props
+
+      let el = element({
         ...props,
         children: type === 'code' ? children.join('\n') : children.join('')
       })
+        .replace(/" >/gi, '">')
+        .replace(/ >/gi, '>')
+        .replace(/ [\w.\-_:]*(=""|="undefined")| undefined|/gm, '') // clean HTML from empty attributes
+
+      return el
     }
 
     return ''
   }
 
-  return h('pre', { className: 'shiki', style: `background-color: ${bg}` }, [
-    options.langId ? `<div class="language-id">${options.langId}</div>` : '',
-    h(
-      'code',
-      {},
-      lines.map((line, index) => {
-        const lineNumber = index + 1
-        const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
-        const lineClasses = getLineClasses(lineOptions).join(' ')
-        return h(
-          'line',
-          {
-            className: lineClasses,
-            lines,
-            line,
-            index
-          },
-          line.map((token, index) => {
-            const cssDeclarations = [`color: ${token.color || options.fg}`]
-            if (token.fontStyle & FontStyle.Italic) {
-              cssDeclarations.push('font-style: italic')
-            }
-            if (token.fontStyle & FontStyle.Bold) {
-              cssDeclarations.push('font-weight: bold')
-            }
-            if (token.fontStyle & FontStyle.Underline) {
-              cssDeclarations.push('text-decoration: underline')
-            }
+  return h(
+    'pre',
+    {
+      className: `shiki ${typeof options.theme === 'string' ? options.theme : options.theme.name}`,
+      style: `background-color: ${bg};`
+    },
+    [
+      h(
+        'code',
+        {},
+        lines.map((line, index) => {
+          const lineNumber = index + 1
+          const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
+          const lineClasses = getLineClasses(lineOptions).join(' ')
+          return h(
+            'line',
+            {
+              className: lineClasses,
+              lines,
+              line,
+              index
+            },
+            line.map((token, index) => {
+              const cssDeclarations = [`color: ${token.color || options.fg}`]
+              if (token.fontStyle & FontStyle.Italic) {
+                cssDeclarations.push('font-style: italic')
+              }
+              if (token.fontStyle & FontStyle.Bold) {
+                cssDeclarations.push('font-weight: bold')
+              }
+              if (token.fontStyle & FontStyle.Underline) {
+                cssDeclarations.push('text-decoration: underline')
+              }
 
-            return h(
-              'token',
-              {
-                style: cssDeclarations.join('; '),
-                tokens: line,
-                token,
-                index
-              },
-              [escapeHtml(token.content)]
-            )
-          })
-        )
-      })
-    )
-  ])
+              return h(
+                'token',
+                {
+                  style: cssDeclarations.join('; '),
+                  tokens: line,
+                  token,
+                  index
+                },
+                [escapeHtml(token.content)]
+              )
+            })
+          )
+        })
+      )
+    ]
+  )
 }
 
 const htmlEscapes = {
