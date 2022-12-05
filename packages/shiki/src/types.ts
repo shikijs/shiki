@@ -269,7 +269,7 @@ interface TokenElementPlugin extends ElementPlugin {
 
 export interface IShikiPlugin {
   name: string
-  config: {
+  config?: {
     requestExplanation?: boolean
     requestTheme?: boolean
   }
