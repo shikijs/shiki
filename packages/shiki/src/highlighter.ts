@@ -161,7 +161,7 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
       includeExplanation: _plugins?.config?.requestExplanation
     })
     const { _theme } = getTheme(options.theme)
-    return renderToHtml(tokens, {
+    const html = renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg,
       language: options?.lang,
@@ -169,6 +169,13 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
       theme: _plugins?.config?.requestTheme ? _theme : _theme.name,
       plugins: _plugins.plugins
     })
+
+    _plugins = {
+      config: {},
+      plugins: []
+    }
+
+    return html
   }
 
   async function loadTheme(theme: IShikiTheme | Theme) {
