@@ -22,7 +22,7 @@ shiki
     console.log(highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' }))
   })
 
-// <pre class="shiki" style="background-color: #2e3440"><code>
+// <pre class="shiki nord" style="background-color: #2e3440"><code>
 //   <!-- Highlighted Code -->
 // </code></pre>
 ```
@@ -43,6 +43,7 @@ shiki
 
 - [Themes](./docs/themes.md)
 - [Languages](./docs/languages.md)
+- [Plugins](./docs/plugins.md)
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
