@@ -9,6 +9,7 @@ test('Customize elements - pre', async () => {
   const out = renderToHtml(tokens, {
     fg: highlighter.getForegroundColor('nord'),
     bg: highlighter.getBackgroundColor('nord'),
+    theme: 'nord',
     elements: {
       pre({ className, style, children }) {
         return `<pre tabindex="1" class="${className}" style="${style}">${children}</pre>`
@@ -27,6 +28,7 @@ test('Customize elements - code', async () => {
   const out = renderToHtml(tokens, {
     fg: highlighter.getForegroundColor('nord'),
     bg: highlighter.getBackgroundColor('nord'),
+    theme: 'nord',
     elements: {
       code({ children }) {
         return `<code data-copy-text="hello">${children}</code>`
@@ -45,6 +47,7 @@ test('Customize elements - line', async () => {
   const out = renderToHtml(tokens, {
     fg: highlighter.getForegroundColor('nord'),
     bg: highlighter.getBackgroundColor('nord'),
+    theme: 'nord',
     elements: {
       line({ className, index, children }) {
         return `<span class="${className}"><span class="line-no">${index}</span>${children}</span>`
@@ -63,6 +66,7 @@ test('Customize elements - token', async () => {
   const out = renderToHtml(tokens, {
     fg: highlighter.getForegroundColor('nord'),
     bg: highlighter.getBackgroundColor('nord'),
+    theme: 'nord',
     elements: {
       token({ style, token, children }) {
         return `<span data-color="${token.color || ''}" style="${style}">${children}</span>`
