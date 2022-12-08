@@ -439,23 +439,3 @@ https://github.com/sponsors/octref
 ## License
 
 MIT © [Pine Wu](https://github.com/octref)
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
-
-```
