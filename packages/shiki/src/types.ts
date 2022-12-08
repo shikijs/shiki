@@ -114,6 +114,11 @@ export interface IHighlighterPaths {
    * @default 'languages/'
    */
   languages?: string
+
+  /**
+   * @default 'dist/'
+   */
+  wasm?: string
 }
 
 export type ILanguageRegistration = {

@@ -14,8 +14,9 @@ export const isNode =
 export const isBrowser = isWebWorker || !isNode
 
 // to be replaced by rollup
-let CDN_ROOT = '__CDN_ROOT__'
-let WASM: string | ArrayBuffer = ''
+let CDN_ROOT = '____'
+let WASM: string | ArrayBuffer | Response = ''
+export const WASM_PATH = 'dist/'
 
 /**
  * Set the route for loading the assets
@@ -28,31 +29,32 @@ let WASM: string | ArrayBuffer = ''
  * ```
  */
 export function setCDN(root: string) {
-  CDN_ROOT = root
+  CDN_ROOT = root.endsWith('/') ? root : root + '/'
 }
 
 /**
  * Explicitly set the source for loading the oniguruma web assembly module.
- *
- * Accepts Url or ArrayBuffer
+ *  *
+ * Accepts ArrayBuffer or Response (usage of string is deprecated)
  */
-export function setWasm(path: string | ArrayBuffer) {
-  WASM = path
+export function setWasm(data: string | ArrayBuffer | Response) {
+  WASM = data
 }
 
 let _onigurumaPromise: Promise<IOnigLib> = null
 
-export async function getOniguruma(): Promise<IOnigLib> {
+export async function getOniguruma(wasmPath?: string): Promise<IOnigLib> {
   if (!_onigurumaPromise) {
     let loader: Promise<void>
-
-    if (isBrowser) {
+    if (wasmPath === 'vscode-oniguruma') {
       if (typeof WASM === 'string') {
         loader = loadWASM({
-          data: await fetch(_resolvePath('dist/onig.wasm')).then(r => r.arrayBuffer())
+          data: await fetch(_resolvePath(join(...dirpathparts(wasmPath), 'onig.wasm')))
         })
       } else {
-        loader = loadWASM(WASM)
+        loader = loadWASM({
+          data: WASM
+        })
       }
     } else {
       const path: typeof import('path') = require('path')
@@ -78,11 +80,6 @@ export async function getOniguruma(): Promise<IOnigLib> {
 
 function _resolvePath(filepath: string) {
   if (isBrowser) {
-    if (!CDN_ROOT) {
-      console.warn(
-        '[Shiki] no CDN provider found, use `setCDN()` to specify the CDN for loading the resources before calling `getHighlighter()`'
-      )
-    }
     return `${CDN_ROOT}${filepath}`
   } else {
     const path = require('path') as typeof import('path')
