@@ -8,7 +8,7 @@ module.exports = config => {
   _config = getConfig(config)
 
   return {
-    name: 'pluginAsFunction',
+    name: 'pluginTagAsFunction',
     tags: {
       pre: {
         classNames: [_config.classToAdd]

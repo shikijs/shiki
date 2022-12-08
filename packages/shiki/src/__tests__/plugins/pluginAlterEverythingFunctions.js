@@ -17,7 +17,6 @@ module.exports = {
         }
       }
     },
-
     code: {
       attributes: () => {
         return {
@@ -54,6 +53,30 @@ module.exports = {
         return {
           'background-color': 'grey',
           color: 'red'
+        }
+      }
+    }
+  },
+  hooks: {
+    before: context => {
+      const tokens = context.tokens[0]
+      tokens.forEach(token => {
+        if (token.content && token.content === 'console') {
+          token.content = token.content.replace('console', 'Logger')
+        }
+      })
+      context.tokens[0] = tokens
+      return {
+        tokens: context.tokens,
+        state: {
+          consoleReplaced: true
+        }
+      }
+    },
+    after: context => {
+      if (context.state?.consoleReplaced) {
+        return {
+          html: context.html.replace(/class="shiki/, 'class="highlighter ')
         }
       }
     }

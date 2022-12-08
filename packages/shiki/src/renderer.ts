@@ -2,7 +2,7 @@ import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
 import { HtmlRendererOptions, LineOption, ElementsOptions, IShikiPluginContext } from './types'
 import { groupBy } from './utils'
-import { applyPlugins } from './plugin'
+import { applyPluginHooks, applyPluginTags } from './plugin'
 
 const defaultElements: ElementsOptions = {
   pre({ className, style, attributes, children }) {
@@ -26,20 +26,25 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
   const bg = options.bg || '#fff'
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
-  const plugins = options.plugins || []
+  let plugins = options.plugins || []
 
-  const pluginContext: IShikiPluginContext = {
+  let pluginContext: IShikiPluginContext = {
     language: options.language || 'text',
     theme: options.theme
   }
+
+  ;({ lines, plugins } =
+    plugins?.length > 0
+      ? applyPluginHooks('before', pluginContext, plugins, lines)
+      : { lines, plugins })
 
   function h(type: string = '', props = {}, children: string[]): string {
     const element = userElements[type] || defaultElements[type]
 
     if (element) {
       children = children.filter(Boolean)
-
-      props = plugins.length > 0 ? applyPlugins(type, pluginContext, plugins, props) : props
+      ;({ props, plugins = [] } =
+        plugins?.length > 0 ? applyPluginTags(type, pluginContext, plugins, props) : { props })
 
       let el = element({
         ...props,
@@ -48,6 +53,11 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
         .replace(/" >/gi, '">')
         .replace(/ >/gi, '>')
         .replace(/ [\w.\-_:]*(=""|="undefined")| undefined|/gm, '') // clean HTML from empty attributes
+
+      ;({ el, plugins } =
+        plugins?.length > 0
+          ? applyPluginHooks('after', pluginContext, plugins, el, type)
+          : { el, plugins })
 
       return el
     }

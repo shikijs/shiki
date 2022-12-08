@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'simple',
+  name: 'pluginTagSimple',
   config: { requestExplanation: true },
   tags: {
     pre: {

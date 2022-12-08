@@ -268,22 +268,28 @@ interface TokenElementPlugin extends ElementPlugin {
 }
 
 export interface IShikiPlugin {
+  state?: {} // A place where you can store state for your plugin through the rendering lifecycle
   name: string
   config?: {
     requestExplanation?: boolean
     requestTheme?: boolean
   }
-  tags: {
+  tags?: {
     pre: PreElementPlugin
     code: CodeElementPlugin
     line: LineElementPlugin
     token: TokenElementPlugin
+  }
+  hooks?: {
+    before?: (context: IShikiPluginContext) => any
+    after?: (context: IShikiPluginContext) => any
   }
 }
 
 export interface IShikiPluginContext {
   language: string
   theme: string | IShikiTheme
+  [x: string]: any
 }
 
 export interface ThemedTokenizerOptions {

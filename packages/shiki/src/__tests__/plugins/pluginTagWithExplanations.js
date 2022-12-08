@@ -8,7 +8,7 @@ module.exports = config => {
   _config = getConfig(config)
 
   return {
-    name: 'pluginWithExplanations',
+    name: 'pluginTagWithExplanations',
     config: {
       requestExplanation: true
     },

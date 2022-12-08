@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'pluginAsObject',
+  name: 'pluginTagAsObject',
   tags: {
     pre: {
       classNames: ['plugin-as-object']

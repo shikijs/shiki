@@ -1,19 +1,39 @@
+import { createHook } from 'async_hooks'
 import { IShikiPlugin, IShikiPluginContext } from './types'
 
-export function applyPlugins(
+const TAGS = ['pre', 'code', 'line', 'token']
+const HOOKs = ['before', 'after']
+
+export function applyPluginHooks(
+  hook: string,
+  context: IShikiPluginContext,
+  plugins: IShikiPlugin[],
+  inputs: any,
+  elementType?: string
+): any {
+  if (HOOKs.includes(hook)) {
+    return applyHooks(hook, context, plugins, inputs, elementType)
+  }
+
+  return inputs
+}
+
+export function applyPluginTags(
   type: string,
   context: IShikiPluginContext,
   plugins: IShikiPlugin[],
-  props: any
-): any {
+  inputs: any
+) {
+  if (!TAGS.includes(type)) return inputs
+
   let attributes: Record<string, string | Boolean> = {}
   let attributeString = ''
-  let classNames = props.className || ''
+  let classNames = inputs.className || ''
   let styles: Record<string, string> = {}
   let styleString = ''
 
-  if (props.style) {
-    props.style.split(';').every((styleString: string) => {
+  if (inputs.style) {
+    inputs.style.split(';').every((styleString: string) => {
       if (styleString === '') false
       const [key, value] = styleString.split(':')
       styles[key] = value.replaceAll(';', '')
@@ -22,11 +42,11 @@ export function applyPlugins(
 
   context = {
     ...context,
-    ...{ index: props.index },
-    ...{ line: props.line },
-    ...{ lines: props.lines },
-    ...{ token: props.token },
-    ...{ tokens: props.tokens }
+    ...{ index: inputs.index },
+    ...{ line: inputs.line },
+    ...{ lines: inputs.lines },
+    ...{ token: inputs.token },
+    ...{ tokens: inputs.tokens }
   }
 
   for (const plugin of plugins) {
@@ -56,11 +76,40 @@ export function applyPlugins(
   }
 
   return {
-    ...props,
-    className: classNames,
-    style: styleString.trim(),
-    attributes: attributeString
+    props: {
+      ...inputs,
+      className: classNames,
+      style: styleString.trim(),
+      attributes: attributeString
+    },
+    plugins
   }
+}
+
+function applyHooks(
+  hook: string,
+  context: IShikiPluginContext,
+  plugins: IShikiPlugin[],
+  inputs: any,
+  elementType?: string
+) {
+  let keyIn = `${hook === 'before' ? 'tokens' : 'html'}`
+
+  for (const plugin of plugins) {
+    if (plugin.hooks?.[hook]) {
+      const pluginInput = plugin.hooks[hook]
+      let state = plugin?.state ? plugin.state : {}
+      ;({ state, [keyIn]: inputs } = pluginInput.call(this, {
+        context,
+        state,
+        ...{ elementType, [keyIn]: inputs }
+      }))
+      plugin.state = { ...plugin.state, ...state }
+    }
+  }
+
+  const keyOut = `${hook === 'before' ? 'lines' : 'el'}`
+  return { [keyOut]: inputs, plugins }
 }
 
 function getAttributes(

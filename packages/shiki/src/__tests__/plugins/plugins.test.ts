@@ -1,10 +1,12 @@
 import { getHighlighter } from '../../index'
-import pluginAsObject from './pluginAsObject'
-import pluginAsFunction from './pluginAsFunction'
-import pluginWithExplanationRequest from './pluginWithExplanations'
-import pluginWithThemeRequest from './pluginWithTheme'
-import pluginAlterEverythingWithValues from './pluginAlterEverythingValues'
-import pluginAlterEverythingWithFunctions from './pluginAlterEverythingFunctions'
+import pluginHookAfter from './pluginHookAfter'
+import pluginHookBefore from './pluginHookBefore'
+import pluginTagAsObject from './pluginTagAsObject'
+import pluginTagAsFunction from './pluginTagAsFunction'
+import pluginTagWithExplanationRequest from './pluginTagWithExplanations'
+import pluginTagWithThemeRequest from './pluginTagWithTheme'
+import pluginTagAlterEverythingWithValues from './pluginAlterEverythingValues'
+import pluginTagAlterEverythingWithFunctions from './pluginAlterEverythingFunctions'
 
 test('Loads without element modifications when no plugin is used', async () => {
   const highlighter = await getHighlighter({
@@ -17,65 +19,65 @@ test('Loads without element modifications when no plugin is used', async () => {
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies a plugin that was returned as an object', async () => {
+test('Loads and applies a tag plugin that was returned as an object', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginAsObject)
+  highlighter.usePlugin(pluginTagAsObject)
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies a plugin that was returned as a function', async () => {
+test('Loads and applies a tag plugin that was returned as a function', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginAsFunction({ classToAdd: 'not-the-one-it-should-be' }))
+  highlighter.usePlugin(pluginTagAsFunction({ classToAdd: 'not-the-one-it-should-be' }))
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies a plugin that requests theme information', async () => {
+test('Loads and applies a tag plugin that requests theme information', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginWithThemeRequest())
+  highlighter.usePlugin(pluginTagWithThemeRequest())
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies a plugin that requests token explanations', async () => {
+test('Loads and applies a tag plugin that requests token explanations', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginWithExplanationRequest())
+  highlighter.usePlugin(pluginTagWithExplanationRequest())
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies a plugin that alters everything via values', async () => {
+test('Loads and applies a tag plugin that alters everything via values', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginAlterEverythingWithValues)
+  highlighter.usePlugin(pluginTagAlterEverythingWithValues)
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
@@ -88,22 +90,48 @@ test('Loads and applies a plugin that alters everything via functions', async ()
     langs: ['js']
   })
 
-  highlighter.usePlugin(pluginAlterEverythingWithFunctions)
+  highlighter.usePlugin(pluginTagAlterEverythingWithFunctions)
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 
   expect(out).toMatchSnapshot()
 })
 
-test('Loads and applies multiple plugins with overwriting duplicate keys', async () => {
+test('Loads and applies multiple tag plugins with overwriting duplicate keys', async () => {
   const highlighter = await getHighlighter({
     theme: 'nord',
     langs: ['js']
   })
 
   highlighter
-    .usePlugin(pluginAlterEverythingWithValues)
-    .usePlugin(pluginAlterEverythingWithFunctions)
+    .usePlugin(pluginTagAlterEverythingWithValues)
+    .usePlugin(pluginTagAlterEverythingWithFunctions)
+
+  const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
+
+  expect(out).toMatchSnapshot()
+})
+
+test('Loads and applies a before hook plugin', async () => {
+  const highlighter = await getHighlighter({
+    theme: 'nord',
+    langs: ['js']
+  })
+
+  highlighter.usePlugin(pluginHookBefore)
+
+  const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
+
+  expect(out).toMatchSnapshot()
+})
+
+test('Loads and applies an after hook plugin', async () => {
+  const highlighter = await getHighlighter({
+    theme: 'nord',
+    langs: ['js']
+  })
+
+  highlighter.usePlugin(pluginHookAfter)
 
   const out = highlighter.codeToHtml("console.log('shiki');", { lang: 'js' })
 

@@ -12,7 +12,7 @@ module.exports = config => {
   _config = getConfig(config)
 
   return {
-    name: 'pluginWithTheme',
+    name: 'pluginTagWithTheme',
     config: {
       requestTheme: true
     },
