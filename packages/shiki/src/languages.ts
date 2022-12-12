@@ -132,6 +132,7 @@ export type Lang =
   | 'turtle'
   | 'twig'
   | 'typescript' | 'ts'
+  | 'v'
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'
@@ -611,7 +612,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
-    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -927,6 +927,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.ts',
     path: 'typescript.tmLanguage.json',
     aliases: ['ts']
+  },
+  {
+    id: 'v',
+    scopeName: 'source.v',
+    path: 'v.tmLanguage.json',
+    samplePath: 'v.sample'
   },
   {
     id: 'vb',
