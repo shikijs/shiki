@@ -146,7 +146,7 @@ export const githubGrammarSources: [string, string][] = [
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
-  ['imba', 'https://github.com/familyfriendlymikey/imba-linguist-grammar/blob/main/imba.tmLanguage'],
+  ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json'
@@ -173,7 +173,7 @@ export const githubGrammarSources: [string, string][] = [
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
   [
     'marko',
-    'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/marko.tmLanguage.json'
+    'https://github.com/marko-js/marko-tmbundle/blob/master/syntaxes/marko.tmLanguage.json'
   ],
   [
     'matlab',
@@ -252,7 +252,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'system-verilog',
-    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/systemverilog.tmLanguage'
+    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/main/syntaxes/systemverilog.tmLanguage.json'
   ],
   ['tasl', 'https://github.com/underlay/vscode-tasl/blob/main/syntaxes/tasl.tmLanguage.json'],
   ['tcl', 'https://github.com/sleutho/tcl/blob/master/syntaxes/tcl.tmLanguage'],
@@ -264,11 +264,11 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'twig',
-    'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage'
+    'https://github.com/mblode/vscode-twig-language-2/blob/master/src/syntaxes/twig.tmLanguage'
   ],
   [
     'verilog',
-    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/master/syntaxes/verilog.tmLanguage'
+    'https://github.com/mshr-h/vscode-verilog-hdl-support/blob/main/syntaxes/verilog.tmLanguage.json'
   ],
   ['vhdl', 'https://github.com/jonasjj/awesome-vhdl/blob/master/syntaxes/vhdl.tmLanguage'],
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
@@ -280,7 +280,8 @@ export const githubGrammarSources: [string, string][] = [
   [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
-  ]
+  ],
+  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json']
 ]
 
 /**

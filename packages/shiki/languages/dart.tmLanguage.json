@@ -1,5 +1,6 @@
 {
   "name": "dart",
+  "version": "1.1.0",
   "fileTypes": ["dart"],
   "scopeName": "source.dart",
   "foldingStartMarker": "\\{\\s*$",
@@ -54,6 +55,9 @@
     },
     {
       "include": "#constants-and-special-vars"
+    },
+    {
+      "include": "#operators"
     },
     {
       "include": "#strings"
@@ -227,22 +231,26 @@
     "class-identifier": {
       "patterns": [
         {
-          "match": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?|bool\\b|num\\b|int\\b|double\\b|dynamic\\b|(void)\\b)",
-          "captures": {
+          "match": "bool\\b|num\\b|int\\b|double\\b|dynamic\\b",
+          "name": "support.class.dart"
+        },
+        {
+          "match": "void\\b",
+          "name": "storage.type.primitive.dart"
+        },
+        {
+          "begin": "(?<![a-zA-Z0-9_$])([_$]*[A-Z][a-zA-Z0-9_$]*)\\b",
+          "end": "(?!<)",
+          "beginCaptures": {
             "1": {
               "name": "support.class.dart"
-            },
-            "2": {
-              "patterns": [
-                {
-                  "include": "#type-args"
-                }
-              ]
-            },
-            "3": {
-              "name": "storage.type.primitive.dart"
             }
-          }
+          },
+          "patterns": [
+            {
+              "include": "#type-args"
+            }
+          ]
         }
       ]
     },
@@ -283,7 +291,7 @@
           "include": "#class-identifier"
         },
         {
-          "match": "[\\s,]+"
+          "match": ","
         },
         {
           "name": "keyword.declaration.dart",
@@ -319,8 +327,20 @@
         },
         {
           "name": "keyword.declaration.dart",
-          "match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get|mixin|native|operator|set|typedef|with|covariant)\\b(?!\\$)"
+          "match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get(?!\\()|mixin|native|operator|set(?!\\()|typedef|with|covariant)\\b(?!\\$)"
         },
+        {
+          "name": "storage.modifier.dart",
+          "match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)"
+        },
+        {
+          "name": "storage.type.primitive.dart",
+          "match": "(?<!\\$)\\b(?:void|var)\\b(?!\\$)"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
         {
           "name": "keyword.operator.dart",
           "match": "(?<!\\$)\\b(is\\!?)\\b(?!\\$)"
@@ -364,14 +384,6 @@
         {
           "name": "keyword.operator.logical.dart",
           "match": "(!|&&|\\|\\|)"
-        },
-        {
-          "name": "storage.modifier.dart",
-          "match": "(?<!\\$)\\b(static|final|const|required|late)\\b(?!\\$)"
-        },
-        {
-          "name": "storage.type.primitive.dart",
-          "match": "(?<!\\$)\\b(?:void|var)\\b(?!\\$)"
         }
       ]
     },

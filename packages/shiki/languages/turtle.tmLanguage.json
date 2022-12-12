@@ -1,7 +1,7 @@
 {
   "name": "turtle",
   "scopeName": "source.turtle",
-  "fileTypes": ["turtle", "ttl"],
+  "fileTypes": ["turtle", "ttl", "acl"],
   "patterns": [
     {
       "include": "#rule-constraint"
@@ -79,16 +79,16 @@
     "string": {
       "patterns": [
         {
-          "include": "#single-squote-string-literal"
-        },
-        {
-          "include": "#single-dquote-string-literal"
-        },
-        {
           "include": "#triple-squote-string-literal"
         },
         {
           "include": "#triple-dquote-string-literal"
+        },
+        {
+          "include": "#single-squote-string-literal"
+        },
+        {
+          "include": "#single-dquote-string-literal"
         },
         {
           "include": "#triple-tick-string-literal"

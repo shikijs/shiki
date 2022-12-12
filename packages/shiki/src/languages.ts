@@ -132,6 +132,7 @@ export type Lang =
   | 'turtle'
   | 'twig'
   | 'typescript' | 'ts'
+  | 'v'
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'
@@ -717,7 +718,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.pug',
     path: 'pug.tmLanguage.json',
     aliases: ['jade'],
-    embeddedLangs: ['javascript', 'css', 'sass', 'stylus', 'coffee', 'html']
+    embeddedLangs: ['javascript', 'css', 'sass', 'scss', 'stylus', 'coffee', 'html']
   },
   {
     id: 'puppet',
@@ -926,6 +927,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.ts',
     path: 'typescript.tmLanguage.json',
     aliases: ['ts']
+  },
+  {
+    id: 'v',
+    scopeName: 'source.v',
+    path: 'v.tmLanguage.json',
+    samplePath: 'v.sample'
   },
   {
     id: 'vb',
