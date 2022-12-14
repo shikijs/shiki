@@ -1,6 +1,6 @@
 {
   "name": "dart",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "fileTypes": ["dart"],
   "scopeName": "source.dart",
   "foldingStartMarker": "\\{\\s*$",
@@ -231,11 +231,11 @@
     "class-identifier": {
       "patterns": [
         {
-          "match": "bool\\b|num\\b|int\\b|double\\b|dynamic\\b",
+          "match": "(?<!\\$)\\b(bool|num|int|double|dynamic)\\b(?!\\$)",
           "name": "support.class.dart"
         },
         {
-          "match": "void\\b",
+          "match": "(?<!\\$)\\bvoid\\b(?!\\$)",
           "name": "storage.type.primitive.dart"
         },
         {
