@@ -823,8 +823,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellscript',
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh', 'zsh'],
-    embeddedLangs: ['ruby', 'python', 'applescript', 'html', 'markdown']
+    aliases: ['shell', 'bash', 'sh', 'zsh']
   },
   {
     id: 'smalltalk',
