@@ -3,7 +3,7 @@
  *--------------------------------------------------------*/
 'use strict'
 
-import { IRawGrammar, IOnigLib, RegistryOptions } from 'vscode-textmate'
+import { IOnigLib, RegistryOptions } from 'vscode-textmate'
 import { languages } from './languages'
 
 import { fetchGrammar } from './loader'
@@ -35,7 +35,7 @@ export class Resolver implements RegistryOptions {
     return this.languageMap[langIdOrAlias]
   }
 
-  public async loadGrammar(scopeName: string): Promise<IRawGrammar> {
+  public async loadGrammar(scopeName: string): Promise<any> {
     const lang = this.scopeToLangMap[scopeName]
 
     if (!lang) {
