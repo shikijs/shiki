@@ -127,6 +127,8 @@ export type ILanguageRegistration = {
    * languages for each parent language.
    */
   embeddedLangs?: Lang[]
+  balancedBracketSelectors?: string[]
+  unbalancedBracketSelectors?: string[]
 } & {
   path: string
   grammar?: IGrammar
