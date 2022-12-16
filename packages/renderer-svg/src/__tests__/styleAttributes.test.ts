@@ -42,5 +42,7 @@ test(`SVG renderer should ignore minimal background width when it's own boundari
   })
 
   const out = (await r).renderToSVG([[{ content: 'foo', color: '#aabbccff' }]])
-  expect(out).not.toContain(`<svg viewBox="0 0 150 `)
+  expect(out).toContain(`<svg viewBox="0 0 156`)
+  // expect(out).toMatchSnapshot()
+
 })

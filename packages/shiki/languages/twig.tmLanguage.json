@@ -1,8 +1,8 @@
 {
   "fileTypes": ["twig", "html.twig"],
   "firstLineMatch": "<!(?i:DOCTYPE)|<(?i:html)|<\\?(?i:php)|\\{\\{|\\{%|\\{#",
-  "foldingStartMarker": "(?x)\r\n        (<(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)\\b.*?>\r\n        |<!--(?!.*--\\s*>)\r\n        |^<!--\\ \\#tminclude\\ (?>.*?-->)$\r\n        |\\{%\\s+(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\r\n        )",
-  "foldingStopMarker": "(?x)\r\n        (</(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)>\r\n        |^(?!.*?<!--).*?--\\s*>\r\n        |^<!--\\ end\\ tminclude\\ -->$\r\n        |\\{%\\s+end(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\r\n        )",
+  "foldingStartMarker": "(?x)\n        (<(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)\\b.*?>\n        |<!--(?!.*--\\s*>)\n        |^<!--\\ \\#tminclude\\ (?>.*?-->)$\n        |\\{%\\s+(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\n        )",
+  "foldingStopMarker": "(?x)\n        (</(?i:body|div|dl|fieldset|form|head|li|ol|script|select|style|table|tbody|tfoot|thead|tr|ul)>\n        |^(?!.*?<!--).*?--\\s*>\n        |^<!--\\ end\\ tminclude\\ -->$\n        |\\{%\\s+end(autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)\n        )",
   "keyEquivalent": "^~T",
   "name": "twig",
   "patterns": [
@@ -227,6 +227,28 @@
               "include": "source.js"
             }
           ]
+        }
+      ]
+    },
+    {
+      "begin": "(?ix)   # Enable free spacing mode, case insensitive\n                        # Make sure our opening js tag has word boundaries\n                        (?<=\\{\\%\\sjs\\s\\%\\}|\\{\\%\\sincludejs\\s\\%\\})\n                    ",
+      "comment": "Add JS support to set tags that use the pattern \"css\" in their name",
+      "end": "(?ix)(?=\\{\\%\\sendjs\\s\\%\\}|\\{\\%\\sendincludejs\\s\\%\\})",
+      "name": "source.js.embedded.twig",
+      "patterns": [
+        {
+          "include": "source.js"
+        }
+      ]
+    },
+    {
+      "begin": "(?ix)   # Enable free spacing mode, case insensitive\n                        (?<=\\{\\%\\scss\\s\\%\\}|\\{\\%\\sincludecss\\s\\%\\}|\\{\\%\\sincludehirescss\\s\\%\\})\n                        ",
+      "comment": "Add CSS support to set tags that use the pattern \"css\" in their name",
+      "end": "(?ix)(?=\\{\\%\\sendcss\\s\\%\\}|\\{\\%\\sendincludecss\\s\\%\\}|\\{\\%\\sendincludehirescss\\s\\%\\})",
+      "name": "source.css.embedded.twig",
+      "patterns": [
+        {
+          "include": "source.css"
         }
       ]
     },
@@ -561,7 +583,7 @@
               "name": "keyword.operator.comparison.twig"
             }
           },
-          "match": "(?<=\\s)((?:!|=)=|<=?|>=?|(?:not )?in|is(?: not)?|(?:ends|starts) with|matches)(?=\\s)|%"
+          "match": "(?<=\\s)((?:!|=)=|<=?|>=?|(?:not )?in|is(?: not)?|(?:ends|starts) with|matches)(?=\\s)"
         },
         {
           "captures": {
@@ -608,10 +630,10 @@
               "name": "variable.other.property.twig"
             }
           },
-          "match": "(?x) (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}])\r\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*) (?=[\\.\\s\\|\\[\\)\\]\\}:,])\r\n                        "
+          "match": "(?x)\n                        (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}])\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\n                        (?=[\\.\\s\\|\\[\\)\\]\\}:,])\n                    "
         },
         {
-          "begin": "(?x) (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}])\r\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\r\n                        (\\()\r\n                        ",
+          "begin": "(?x)\n                        (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}])\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\n                        (\\()\n                    ",
           "beginCaptures": {
             "1": {
               "name": "punctuation.separator.property.twig"
@@ -699,7 +721,7 @@
               "name": "punctuation.section.array.end.twig"
             }
           },
-          "match": "(?x) (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}\\]])\r\n                        (?:\r\n                            (\\[)('[a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*')(\\])\r\n                            |(\\[)(\"[a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*\")(\\])\r\n                            |(\\[)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)(\\])\r\n                        )\r\n                        "
+          "match": "(?x)\n                        (?<=[a-zA-Z0-9_\\x{7f}-\\x{ff}\\]])\n                        (?:\n                            (\\[)('[a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*')(\\])\n                            |(\\[)(\"[a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*\")(\\])\n                            |(\\[)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)(\\])\n                        )\n                    "
         }
       ]
     },
@@ -862,11 +884,11 @@
       "name": "meta.hash.twig"
     },
     "twig-keywords": {
-      "match": "(?<=\\s)((?:end)?(?:autoescape|form_theme|humanize|yaml_encode|yaml_dump|abbr_class|abbr_method|format_args|format_args_as_text|absolute_url|relative_path|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)|as|do|else|elseif|extends|flush|from|ignore missing|import|include|only|use|with|path|render|csrf_token|url|controller|form_errors|form_rest|form_start|form_end|form_widget|form_row|asset|encore_entry_link_tags|encore_entry_script_tags)(?=\\s)",
+      "match": "(?<=\\s)((?:end)?(?:autoescape|block|embed|filter|for|if|macro|raw|sandbox|set|spaceless|trans|verbatim)|as|do|else|elseif|extends|flush|from|ignore missing|import|include|only|use|with)(?=\\s)",
       "name": "keyword.control.twig"
     },
     "twig-functions-warg": {
-      "begin": "(?<=[\\s\\(\\[\\{:,])(attribute|form_theme|humanize|yaml_encode|yaml_dump|abbr_class|abbr_method|format_args|format_args_as_text|absolute_url|relative_path|block|constant|cycle|date|divisible by|dump|include|max|min|parent|path|render|csrf_token|url|controller|form_errors|form_rest|form_start|form_end|form_widget|form_row|asset|encore_entry_link_tags|encore_entry_script_tags|random|range|same as|source|template_from_string)(\\()",
+      "begin": "(?<=[\\s\\(\\[\\{:,])(attribute|block|constant|cycle|date|divisible by|dump|include|max|min|parent|random|range|same as|source|template_from_string)(\\()",
       "beginCaptures": {
         "1": {
           "name": "support.function.twig"
@@ -930,7 +952,7 @@
       "match": "(?<=is\\s)(defined|empty|even|iterable|odd)"
     },
     "twig-macros": {
-      "begin": "(?x) (?<=[\\s\\(\\[\\{:,])\r\n                    ([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\r\n                    (?:\r\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\r\n                    )?\r\n                    (\\()\r\n                ",
+      "begin": "(?x)\n                    (?<=[\\s\\(\\[\\{:,])\n                    ([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\n                    (?:\n                        (\\.)([a-zA-Z_\\x{7f}-\\x{ff}][a-zA-Z0-9_\\x{7f}-\\x{ff}]*)\n                    )?\n                    (\\()\n            ",
       "beginCaptures": {
         "1": {
           "name": "meta.function-call.twig"
