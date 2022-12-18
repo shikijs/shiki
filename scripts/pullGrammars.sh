@@ -4,7 +4,7 @@ mkdir -p tmp/grammars
 
 echo "> Getting VS Code grammars"
 if [ ! -d tmp/vscode ]; then
-  git clone https://github.com/microsoft/vscode.git tmp/vscode --depth=1
+  git clone https://github.com/microsoft/vscode.git tmp/vscode --depth=1 --single-branch
 else
   (cd tmp/vscode && git checkout . && git pull)
 fi

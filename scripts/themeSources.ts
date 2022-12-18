@@ -8,8 +8,10 @@
 export const vscodeThemesToRemove = [
   // Included in dark_plus
   'dark_vs',
+  'dark_plus_experimental',
   // Included in light_plus
   'light_vs',
+  'light_plus_experimental',
   'Red-color-theme',
   'dimmed-monokai-color-theme',
   'kimbie-dark-color-theme',

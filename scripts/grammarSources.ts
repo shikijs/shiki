@@ -146,10 +146,7 @@ export const githubGrammarSources: [string, string][] = [
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
-  [
-    'imba',
-    'https://github.com/familyfriendlymikey/imba-linguist-grammar/blob/main/imba.tmLanguage'
-  ],
+  ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja.tmLanguage.json'
@@ -268,7 +265,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'twig',
-    'https://github.com/nalabdou/Symfony-code-snippets/blob/master/syntaxes/twig.tmLanguage'
+    'https://github.com/mblode/vscode-twig-language-2/blob/master/src/syntaxes/twig.tmLanguage'
   ],
   [
     'verilog',
@@ -287,7 +284,8 @@ export const githubGrammarSources: [string, string][] = [
   [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
-  ]
+  ],
+  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json']
 ]
 
 /**

@@ -1,4 +1,4 @@
-import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
+import { IGrammar, IGrammarConfiguration, Registry as TextMateRegistry } from 'vscode-textmate'
 import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
 import { fetchTheme, toShikiTheme } from './loader'
 import { Theme } from './themes'
@@ -51,7 +51,21 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: ILanguageRegistration) {
-    const g = await this.loadGrammar(lang.scopeName)
+    const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
+      if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
+        await this._resolver.loadGrammar(this._resolver.getLangRegistration(l).scopeName)
+        acc[this._resolver.getLangRegistration(l).scopeName] = idx + 2
+        return acc
+      }
+    }, {})
+
+    const grammarConfig: IGrammarConfiguration = {
+      embeddedLanguages,
+      balancedBracketSelectors: lang.balancedBracketSelectors || ['*'],
+      unbalancedBracketSelectors: lang.unbalancedBracketSelectors || []
+    }
+
+    const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
     this._resolvedGrammars[lang.id] = g
     if (lang.aliases) {
       lang.aliases.forEach(la => {
