@@ -40,50 +40,54 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
     return ''
   }
 
-  return h('pre', { className: 'shiki ' + (options.themeName || ""), style: `background-color: ${bg}` }, [
-    options.langId ? `<div class="language-id">${options.langId}</div>` : '',
-    h(
-      'code',
-      {},
-      lines.map((line, index) => {
-        const lineNumber = index + 1
-        const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
-        const lineClasses = getLineClasses(lineOptions).join(' ')
-        return h(
-          'line',
-          {
-            className: lineClasses,
-            lines,
-            line,
-            index
-          },
-          line.map((token, index) => {
-            const cssDeclarations = [`color: ${token.color || options.fg}`]
-            if (token.fontStyle & FontStyle.Italic) {
-              cssDeclarations.push('font-style: italic')
-            }
-            if (token.fontStyle & FontStyle.Bold) {
-              cssDeclarations.push('font-weight: bold')
-            }
-            if (token.fontStyle & FontStyle.Underline) {
-              cssDeclarations.push('text-decoration: underline')
-            }
+  return h(
+    'pre',
+    { className: 'shiki ' + (options.themeName || ''), style: `background-color: ${bg}` },
+    [
+      options.langId ? `<div class="language-id">${options.langId}</div>` : '',
+      h(
+        'code',
+        {},
+        lines.map((line, index) => {
+          const lineNumber = index + 1
+          const lineOptions = optionsByLineNumber.get(lineNumber) ?? []
+          const lineClasses = getLineClasses(lineOptions).join(' ')
+          return h(
+            'line',
+            {
+              className: lineClasses,
+              lines,
+              line,
+              index
+            },
+            line.map((token, index) => {
+              const cssDeclarations = [`color: ${token.color || options.fg}`]
+              if (token.fontStyle & FontStyle.Italic) {
+                cssDeclarations.push('font-style: italic')
+              }
+              if (token.fontStyle & FontStyle.Bold) {
+                cssDeclarations.push('font-weight: bold')
+              }
+              if (token.fontStyle & FontStyle.Underline) {
+                cssDeclarations.push('text-decoration: underline')
+              }
 
-            return h(
-              'token',
-              {
-                style: cssDeclarations.join('; '),
-                tokens: line,
-                token,
-                index
-              },
-              [escapeHtml(token.content)]
-            )
-          })
-        )
-      })
-    )
-  ])
+              return h(
+                'token',
+                {
+                  style: cssDeclarations.join('; '),
+                  tokens: line,
+                  token,
+                  index
+                },
+                [escapeHtml(token.content)]
+              )
+            })
+          )
+        })
+      )
+    ]
+  )
 }
 
 const htmlEscapes = {
