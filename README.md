@@ -9,7 +9,7 @@
 
 ## About
 
-Shiki uses TextMate grammar to tokenize strings, and colors the tokens with VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code, and it works great in your static website generator (or your dynamic website).
+Shiki uses TextMate grammar's to tokenize strings, and colors the tokens via VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code, and it works great in your static website generator (or your dynamic website).
 
 No custom RegEx to maintain, no custom CSS to maintain, no custom HTML to maintain. And as your favorite languages and themes in VS Code evolve - your syntax highlighting will evolve too.
 
@@ -64,7 +64,7 @@ If you don't have a Node.js project, or if you just want to use the build in the
 
 For more custom usage, learn about [Shiki's architecture](#shikis-architecture), and take a look at the [Configuration and Options](#configuration-and-options) section.
 
-And after that you can (and should) check out the docs for adding themes or using dark mode, how to add your custom language, what plugins are, and more:
+And after that you can (and should) check out the reference docs for deeper dives:
 
 - [Themes](./docs/themes.md)
 - [Languages](./docs/languages.md)
@@ -74,64 +74,64 @@ And after that you can (and should) check out the docs for adding themes or usin
 
 ## Shiki's architecture
 
-Shiki has a lot of options to configure it to your needs. You can configure the theme, the languages, the plugins, and more.
+Shiki has a lot of points for customization notably: themes, languages, and custom renderers.
 
-But first, let's settle some basics on how Shiki works.
+Shiki leverages the [TextMate](https://macromates.com/manual/en/language_grammars) grammar system to tokenize code. It uses the [VS Code Oniguruma](https://github.com/vscode-oniguruma/vscode-oniguruma) library to do the heavy lifting of matching the grammar rules to code.
 
-Shiki leverages the [TextMate](https://macromates.com/manual/en/language_grammars) grammar system to tokenize code. It uses the [VS Code Oniguruma](https://github.com/vscode-oniguruma/vscode-oniguruma) library to do the heavy lifting of matching the grammar rules to the code.
+At the core is Shiki's [highlighter](./packages/shiki/src/highlighter.ts). The highlighter is a class which takes a theme and languages, and exposes functions like `codeToHtml` which converts string of arbitrary code and returns a string of HTML for rendering on the web.
 
-At the core is Shiki's [highlighter](./packages/shiki/src/highlighter.ts). The highlighter is a class that takes a theme and a list of languages, and exposes multiple functions like the `codeToHtml` method that takes a string of code and returns a string of HTML.
-
-When you call `getHighlighter`, Shiki will
+When you call `getHighlighter`, Shiki will:
 
 - load the theme and the languages you've requested
 - load the WebAssembly file from Oniguruma
 
-and then it will create a `Highlighter` object.
+and return a `Highlighter` object.
 
 The default locations where the files are loaded from depend on the environment:
 
 - In Node.js:
-  - Languages are loaded from the `node_modules/shiki/languages` folder. Similarly, the themes are loaded from the `node_modules/shiki/themes` folder.
-  - The WebAssembly file is loaded from the `node_modules/vscode-oniguruma/release/onig.wasm`.
+  - Languages are loaded from `node_modules/shiki/languages`. Similarly, the themes are loaded from `node_modules/shiki/themes`.
+  - The Oniguruma WebAssembly file is loaded from the `node_modules/vscode-oniguruma/release/onig.wasm`.
+
 - In the browser:
-  - Languages are loaded from the `/languages` path, relative to your sites root. Similarly, the themes are loaded from the `/themes` path.
-  - The WebAssembly file is loaded from the `/dist/onig.wasm` path.
+  - Languages are loaded from `/languages`, **relative to your site's root**. Similarly, the themes are loaded from `/themes`.
+  - The Oniguruma WebAssembly file is loaded from `/dist/onig.wasm` path **relative to your site's root**.
 
-After that you can use the highlighter to generate HTML using `highlighter.codeToHtml`. For that the to be highlighted code gets first tokenized by the highlighter, and then the tokens are colored using the theme.
+After that you can use the highlighter to generate HTML using `highlighter.codeToHtml`. This works by converting the code into tokens and then rendering the tokens using a default renderer which applies the theme's colors to the tokens.
 
-There are more details, so let's take a look at the [Configuration and Options](#configuration-and-options) section.
+As with all things, there are more details, so let's take a look at the [Configuration and Options](#configuration-and-options) section.
 
 ## Configuration and Options
 
 ### Creating the highlighter
 
-The exported named function `getHighlighter` returns a Promise, choose either the async/await syntax or the `.then` syntax based on your preference.
+The exported named function `getHighlighter` returns a Promise, choose either the async/await syntax or the `.then` syntax based on your preference:
 
 ```js
-// Note that no languages are specified. Which then defaults to load all languages.
-// Which is probably ok in Node.js, but not something you want in the browser).
+// Note no languages are specified. Which then defaults to load all languages.
+// Which is probably ok in Node.js, but not something you want in the browser.
 const highlighter = await getHighlighter({
   theme: 'nord'
 })
 ```
 
-Load the highlighter with a default theme and a list of languages.
+> This async code is 
+
+Load the highlighter with a default theme and a list of languages:
 
 ```js
 // ONLY the languages specified will be loaded. If you need other languages later,
-// you'll need to load them separately (see later below).
+// you'll need to load them separately (see below).
 const highlighter = await getHighlighter({
   theme: 'nord',
   langs: ['javascript', 'python']
 })
 ```
 
-Load the highlighter with a default theme and no languages
+Load the highlighter with a default theme and no languages:
 
 ```js
-// ONLY the languages specified will be loaded. It's an empty array, so Shiki won't
-// preload anything.
+// ONLY the languages specified will be loaded. It's an empty array, so Shiki won't  preload anything.
 // For every language that you need later you'll have to load it separately (see down below).
 const highlighter = await getHighlighter({
   theme: 'nord',
@@ -139,16 +139,18 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Load the highlighter with multiple themes, and a list of languages.
+Load the highlighter with multiple themes, and a list of languages:
 
 ```js
+// The first theme in the list will be the default theme.
+
 const highlighter = await getHighlighter({
-  themes: ['github-light', 'nord'], // The first theme in the list will be the default theme.
+  themes: ['github-light', 'nord'], 
   langs: ['javascript', 'python']
 })
 ```
 
-Load the highlighter with multiple themes, a list of languages, and override the default paths for the languages and themes (most likely you won't need to do this, but you can).
+Load the highlighter with multiple themes, a list of languages, and override the default paths for the languages and themes: 
 
 ```js
 const highlighter = await getHighlighter({
@@ -161,18 +163,20 @@ const highlighter = await getHighlighter({
 })
 ```
 
+> Most likely you won't need to do this, but it's useful to understand the options.
+
 ### Convert code to HTML
 
-The `highlighter` exposes a `codeToHtml` method that takes a string of code, an option object, and returns a string of HTML.
+The `highlighter` exposes a `codeToHtml` method that takes a string of code, an options object, and returns a string of HTML.
 
-Convert code to HTML with the default theme.
+Convert code to HTML with the default theme:
 
 ```js
 const code = `console.log("Here is your code.");`
 const output = highlighter.codeToHtml(code, { lang: 'js' })
 ```
 
-Convert code to HTML with a specific theme.
+Convert code to HTML with a specific theme:
 
 ```js
 const code = `console.log("Here is your code.");`
@@ -181,11 +185,11 @@ const output = highlighter.codeToHtml(code, { lang: 'js', theme: 'nord' })
 
 ### Load languages and themes after the highlighter has been created
 
-You can load languages and themes after the highlighter has been created. For that the highlighter exposes the `getLoadedLanguages()`/`getLoadedThemes()` as well as the `loadLanguage()`/`loadTheme()` methods.
+You can load languages and themes after the highlighter has been created. For that, the highlighter exposes `getLoadedLanguages()`/`getLoadedThemes()` and `loadLanguage()`/`loadTheme()`.
 
 A good practice, especially for browser environments, is to initialize the highlighter with your most used languages and themes, and then load more languages and themes on demand.
 
-You can also access the list of all themes and languages that are bundled with Shiki using `BUNDLED_LANGUAGES` and `BUNDLED_THEMES`.
+You can also access the list of all themes and languages which are bundled using `BUNDLED_LANGUAGES` and `BUNDLED_THEMES`.
 
 ```js
 import { BUNDLED_LANGUAGES, BUNDLED_THEMES, getHighlighter } from 'shiki'
@@ -229,12 +233,12 @@ const output = highlighter.codeToHtml(code, { lang: language, theme: newTheme })
 
 ### Specify a custom root directory
 
-You can specify a custom root directory for the languages and themes. This is useful if you want to use Shiki in a browser environment and want to specify a different host (and/or path) than the current one, or if you want to specify a dedicated directory structure for the current host.
+You can specify a custom root directory for your languages and themes. This is useful if you want to use Shiki in a browser environment and want to specify a different host (and/or path), or if you want to specify a dedicated directory structure for the current host.
 
 > If used, `setCDN` must be invoked before `getHighlighter` is called.
-> You won't have to use `setCDN` if you use the pre-build packages on [unpkg](https://unpkg.com/shiki") or [jsDelivr](https://cdn.jsdelivr.net/npm/shiki).
+> You won't have to use `setCDN` if you use the pre-built packages on [unpkg](https://unpkg.com/shiki") or [jsDelivr](https://cdn.jsdelivr.net/npm/shiki).
 
-Set a custom root path.
+Set a custom root path:
 
 ```js
 import { getHighlighter, setCDN } from 'shiki'
@@ -248,7 +252,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Set a custom host and root path.
+Set a custom host and root path:
 
 ```js
 import { getHighlighter, setCDN } from 'shiki'
@@ -262,7 +266,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Set a custom root path and a custom asset path.
+Set a custom root path and a custom asset path:
 
 ```js
 import { getHighlighter, setCDN } from 'shiki'
@@ -271,6 +275,7 @@ setCDN('/assets/shiki/')
 
 // Languages will be loaded from `/assets/shiki/imported/` instead of `/languages/`.
 // Themes will be loaded from `/assets/shiki/themes/` (as their default is not overridden).
+
 const highlighter = await getHighlighter({
   theme: 'nord',
   langs: ['javascript', 'python']
@@ -288,7 +293,7 @@ For Node.js environments the WASM file is automatically loaded, for browser envi
 
 > If used, `setWASM` must be invoked before `getHighlighter` is called.
 
-Use the default loader (applies to Node.js and browser environments).
+Use the default loader: (applies to Node.js and browser environments)
 
 ```js
 import { getHighlighter } from 'shiki'
@@ -300,7 +305,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Use the default loader, and override the default path for the WASM file.
+Use the default loader, and override the default path for the WASM file:
 
 ```js
 import { getHighlighter } from 'shiki'
@@ -314,7 +319,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Load the WASM file yourself, and provide a Response object.
+Load the WASM file yourself, and provide a `Response` object:
 
 ```js
 import { getHighlighter, setWasm } from 'shiki'
@@ -330,7 +335,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Load the WASM file yourself, and provide an ArrayBuffer.
+Load the WASM file yourself, and provide an `ArrayBuffer`:
 
 ```js
 import { getHighlighter, setWasm } from 'shiki'
@@ -350,11 +355,12 @@ const highlighter = await getHighlighter({
 
 ## Custom rendering of code blocks
 
-The default functionality to render code blocks it use `codeToHtml` from the `Highlighter` instance.
+The default functionality of rendering code blocks would use `codeToHtml` from the `Highlighter` instance.
 
-If you want to render the code blocks yourself, Shiki exposes two methods to do that. In addition to that you can look into utilizing (instead) the [plugin functionality](./docs/plugins.md), which provides similar flexibility and also the option to share your work with the broader developer community.
+If you want to render the tokens into a code yourself, Shiki exposes two key methods to do that.
 
-Shiki exposes a `renderToHTML` function that can be used in combination with `codeToThemedTokens` to render a code block to HTML. `codeToHTML` is an abstraction layer on top of those two functions.
+- `codeToThemedTokens` takes a code string and a language id and returns an array of tokens. A token represents a single part of the code, for example a keyword, a string, a comment, etc.
+- `renderToHTML` takes an array of tokens and returns an HTML string that represents the provided code.
 
 ```js
 import { getHighlighter } from 'shiki'
@@ -371,7 +377,7 @@ const code = `console.log("Here is your code.");`
 const tokens = highlighter.codeToThemedTokens(code, 'javascript')
 
 // This will return an HTML string that represents the provided code.
-let html = highlighter.renderToHTML(tokens)
+const html = highlighter.renderToHTML(tokens)
 ```
 
 Alternatively you can add to `renderToHTML` the desired element shape for `pre`, `code`, `line (span)`, and `token (span)`, and override the theme colors for background and foreground.
@@ -394,32 +400,37 @@ const html = highlighter.renderToHTML(tokens, {
 })
 ```
 
+There are multiple Shiki renderers out there in the wild. You can see a bunch linked below.
+
 ## Multiple Shiki instances on the same page
 
 If you want to use Shiki in a browser multiple times on the same page, you should make sure that there is only a single `Highlighter` instance. Use cases are for example a markdown editor and a preview, or wrapping Shiki within a web component.
 
 Common scenarios are to use the Observable pattern, or to use a singleton pattern.
 
-In both cases you've to ensure that the `Highlighter` instance is only created once, and that it is created before calling any of the exposed functions.
+In both cases you've to ensure that the `Highlighter` instance is only created once, and that it is bootstrapped asynchronously before calling any of the exposed functions. 
 
 ## Seen
 
 - Shiki Docs: https://shiki.matsu.io
-- Shiki Twoslash: https://shikijs.github.io/twoslash/ Playground: https://shikijs.github.io/twoslash/playground
 - Interactive Demo on CodeSandbox (with Next.js): https://codesandbox.io/s/shiki-next-js-cir0y
 - [VS Code website](https://code.visualstudio.com), such as in the [Notebook API page](https://code.visualstudio.com/api/extension-guides/notebook).
 - [TypeScript website](https://www.typescriptlang.org), such as in the [Basic Types documentation page](https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple).
 - [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
-- [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 - [Fatih Kalifa's website](https://fatihkalifa.com/typescript-twoslash)
 - [Blockstack Documentation](https://docs.blockstack.org/)
-- [VPC Shiki](https://github.com/Vap0r1ze/vpc-shiki), Shiki codeblocks on Discord. Powered by [Powercord](http://powercord.dev/)
 - [Torchlight](https://torchlight.dev/), a syntax highlighting API powered by the Shiki tokenizer.
 - [CodeChalk](https://github.com/a20185/codechalk), A neat terminal code highlighting tool powered by Shiki tokenizer and Chalk.
-- [shiki-renderer-pdf](https://github.com/sachinraja/shiki-renderer-pdf), a Shiki renderer for PDFs. Used in [pdfc](https://github.com/sachinraja/pdfc) to compile your source code to PDFs.
 - [Code Hike](https://codehike.org/), a collection of components and mods for MDX codeblocks.
+
+## Custom Renderers
+
+- Shiki Twoslash: https://shikijs.github.io/twoslash/ Playground: https://shikijs.github.io/twoslash/playground
+- [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 - [Scarbon](https://www.npmjs.com/package/scarbon), an elegant code renderer made using Shiki for highlighting, [Prettier](https://prettier.io/) for formatting, and [Canvas](https://www.npmjs.com/package/canvas) for rendering
+- [VPC Shiki](https://github.com/Vap0r1ze/vpc-shiki), Shiki codeblocks on Discord. Powered by [Powercord](http://powercord.dev/)
 - [shiki-renderer-canvas](https://www.npmjs.com/package/shiki-renderer-canvas), a Canvas renderer for Shiki that works in Node.js and the browser
+- [shiki-renderer-pdf](https://github.com/sachinraja/shiki-renderer-pdf), a Shiki renderer for PDFs. Used in [pdfc](https://github.com/sachinraja/pdfc) to compile your source code to PDFs.
 
 ## Contributing
 
