@@ -3,12 +3,12 @@
  *--------------------------------------------------------*/
 'use strict'
 
-import { IGrammar, INITIAL, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
+import { IGrammar, INITIAL, IRawTheme } from 'vscode-textmate'
 import { FontStyle, StackElementMetadata } from './stackElementMetadata'
 
 export interface IThemedTokenScopeExplanation {
   scopeName: string
-  themeMatches: IRawThemeSetting[]
+  themeMatches: any[]
 }
 
 export interface IThemedTokenExplanation {
@@ -217,12 +217,8 @@ function matches(
   return false
 }
 
-function explainThemeScope(
-  theme: IRawTheme,
-  scope: string,
-  parentScopes: string[]
-): IRawThemeSetting[] {
-  let result: IRawThemeSetting[] = [],
+function explainThemeScope(theme: IRawTheme, scope: string, parentScopes: string[]): any[] {
+  let result: any[] = [],
     resultLen = 0
   for (let i = 0, len = theme.settings.length; i < len; i++) {
     let setting = theme.settings[i]
