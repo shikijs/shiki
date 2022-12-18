@@ -155,6 +155,7 @@ export const githubGrammarSources: [string, string][] = [
     'jinja-html',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json'
   ],
+  ['json5', 'https://github.com/mrmlnc/vscode-json5/blob/master/syntaxes/json5.json'],
   [
     'jsonnet',
     'https://github.com/heptio/vscode-jsonnet/blob/master/syntaxes/jsonnet.tmLanguage.json'
@@ -272,7 +273,10 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['vhdl', 'https://github.com/jonasjj/awesome-vhdl/blob/master/syntaxes/vhdl.tmLanguage'],
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
-  ['vue', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-generated.json'],
+  [
+    'vue',
+    'https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/syntaxes/vue.tmLanguage.json'
+  ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
   ['wasm', 'https://github.com/wasmerio/vscode-wasm/blob/master/syntaxes/wat.json'],

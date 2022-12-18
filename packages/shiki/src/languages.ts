@@ -62,6 +62,7 @@ export type Lang =
   | 'javascript' | 'js'
   | 'jinja-html'
   | 'json'
+  | 'json5'
   | 'jsonc'
   | 'jsonnet'
   | 'jssm' | 'fsl'
@@ -528,6 +529,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'json.tmLanguage.json'
   },
   {
+    id: 'json5',
+    scopeName: 'source.json5',
+    path: 'json5.tmLanguage.json',
+    samplePath: 'json5.sample'
+  },
+  {
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: 'jsonc.tmLanguage.json'
@@ -612,6 +619,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -965,7 +973,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue',
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
-    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'liquid', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
+    embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'yaml', 'toml', 'graphql']
   },
   {
     id: 'wasm',
