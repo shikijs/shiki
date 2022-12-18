@@ -14,7 +14,7 @@ export const isNode =
 export const isBrowser = isWebWorker || !isNode
 
 // to be replaced by rollup
-let CDN_ROOT = '____'
+let CDN_ROOT = '__CDN_ROOT__'
 let WASM: string | ArrayBuffer | Response = ''
 export const WASM_PATH = 'dist/'
 
