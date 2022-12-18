@@ -36,6 +36,16 @@ const langRegistrationContent = langIds
     scopeName: '${grammar.scopeName}',
     path: '${id}.tmLanguage.json'`
 
+    if (grammar.balancedBracketScopes) {
+      regContent += `,
+      balancedBracketSelectors: ${JSON.stringify(grammar.balancedBracketScopes)}`
+    }
+
+    if (grammar.unbalancedBracketScopes) {
+      regContent += `,
+      unbalancedBracketSelectors: ${JSON.stringify(grammar.unbalancedBracketScopes)}`
+    }
+
     if (fs.existsSync(path.resolve(sampleDir, `${id}.sample`))) {
       regContent += `,
     samplePath: '${id}.sample'`

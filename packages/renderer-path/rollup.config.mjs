@@ -1,10 +1,16 @@
 //@ts-check
+
+// Re: https://github.com/rollup/plugins/issues/1366
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+global['__filename'] = __filename;
+
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
-import { terser } from 'rollup-plugin-terser'
 import rollupReplace from '@rollup/plugin-replace'
+import terser from '@rollup/plugin-terser'
 
 const replace = opts => {
   return rollupReplace({
@@ -13,10 +19,7 @@ const replace = opts => {
   })
 }
 
-const external = ['shiki', 'playwright']
-const globals = {
-  shiki: 'shiki'
-}
+const external = ['shiki']
 
 export default [
   {
@@ -49,21 +52,18 @@ export default [
         file: 'dist/index.iife.js',
         format: 'iife',
         extend: true,
-        name: 'shiki',
-        globals
+        name: 'shiki'
       },
       {
         file: 'dist/index.iife.min.js',
         format: 'iife',
         extend: true,
         name: 'shiki',
-        plugins: [terser()],
-        globals
+        plugins: [terser()]
       },
       {
         file: 'dist/index.browser.mjs',
-        format: 'esm',
-        globals
+        format: 'esm'
       }
     ],
     plugins: [

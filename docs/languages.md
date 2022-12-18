@@ -182,6 +182,7 @@ export type Lang =
   | 'turtle'
   | 'twig'
   | 'typescript' | 'ts'
+  | 'v'
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'

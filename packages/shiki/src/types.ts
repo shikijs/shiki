@@ -1,4 +1,4 @@
-import { IRawGrammar, IRawTheme, IRawThemeSetting } from 'vscode-textmate'
+import { IGrammar, IRawTheme } from 'vscode-textmate'
 import { Lang } from './languages'
 import { IThemedToken } from './themedTokenizer'
 import { Theme } from './themes'
@@ -132,16 +132,12 @@ export type ILanguageRegistration = {
    * languages for each parent language.
    */
   embeddedLangs?: Lang[]
-} & (
-  | {
-      path: string
-      grammar?: IRawGrammar
-    }
-  | {
-      path?: string
-      grammar: IRawGrammar
-    }
-)
+  balancedBracketSelectors?: string[]
+  unbalancedBracketSelectors?: string[]
+} & {
+  path: string
+  grammar?: IGrammar
+}
 
 export type IThemeRegistration = IShikiTheme | StringLiteralUnion<Theme>
 
@@ -159,7 +155,7 @@ export interface IShikiTheme extends IRawTheme {
   /**
    * @description tokenColors of the theme file
    */
-  settings: IRawThemeSetting[]
+  settings: any[]
 
   /**
    * @description text default foreground color

@@ -1,15 +1,20 @@
-import { IGrammar, Registry as TextMateRegistry } from 'vscode-textmate'
+import { IGrammar, IGrammarConfiguration, Registry as TextMateRegistry } from 'vscode-textmate'
 import { IShikiTheme, IThemeRegistration, ILanguageRegistration } from './types'
 import { fetchTheme, toShikiTheme } from './loader'
 import { Theme } from './themes'
 import { Resolver } from './resolver'
-import { Lang } from './languages'
+import { Lang, languages } from './languages'
 
 export class Registry extends TextMateRegistry {
   public themesPath: string = 'themes/'
 
   private _resolvedThemes: Record<string, IShikiTheme> = {}
   private _resolvedGrammars: Record<string, IGrammar> = {}
+  private _langGraph: Map<string, ILanguageRegistration> = new Map()
+  private _langMap = languages.reduce((acc, lang) => {
+    acc[lang.id] = lang
+    return acc
+  }, {} as Record<string, ILanguageRegistration>)
 
   constructor(private _resolver: Resolver) {
     super(_resolver)
@@ -51,7 +56,21 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: ILanguageRegistration) {
-    const g = await this.loadGrammar(lang.scopeName)
+    const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
+      if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
+        await this._resolver.loadGrammar(this._resolver.getLangRegistration(l).scopeName)
+        acc[this._resolver.getLangRegistration(l).scopeName] = idx + 2
+        return acc
+      }
+    }, {})
+
+    const grammarConfig: IGrammarConfiguration = {
+      embeddedLanguages,
+      balancedBracketSelectors: lang.balancedBracketSelectors || ['*'],
+      unbalancedBracketSelectors: lang.unbalancedBracketSelectors || []
+    }
+
+    const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
     this._resolvedGrammars[lang.id] = g
     if (lang.aliases) {
       lang.aliases.forEach(la => {
@@ -62,14 +81,32 @@ export class Registry extends TextMateRegistry {
 
   public async loadLanguages(langs: ILanguageRegistration[]) {
     for (const lang of langs) {
+      this.resolveEmbeddedLanguages(lang)
+    }
+
+    const langsGraphArray = Array.from(this._langGraph.values())
+
+    for (const lang of langsGraphArray) {
       this._resolver.addLanguage(lang)
     }
-    for (const lang of langs) {
+    for (const lang of langsGraphArray) {
       await this.loadLanguage(lang)
     }
   }
 
   public getLoadedLanguages() {
     return Object.keys(this._resolvedGrammars) as Lang[]
+  }
+
+  private resolveEmbeddedLanguages(lang: ILanguageRegistration) {
+    if (!this._langGraph.has(lang.id)) {
+      this._langGraph.set(lang.id, lang)
+    }
+
+    if (lang.embeddedLangs) {
+      for (const embeddedLang of lang.embeddedLangs) {
+        this._langGraph.set(embeddedLang, this._langMap[embeddedLang])
+      }
+    }
   }
 }
