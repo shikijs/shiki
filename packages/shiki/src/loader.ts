@@ -1,5 +1,5 @@
 import { join, dirpathparts } from './utils'
-import type { IOnigLib, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { IGrammar, IOnigLib, IRawTheme } from 'vscode-textmate'
 import { loadWASM, createOnigScanner, createOnigString } from 'vscode-oniguruma'
 import { parse, ParseError } from 'jsonc-parser'
 import type { IShikiTheme } from './types'
@@ -150,7 +150,7 @@ export async function fetchTheme(themePath: string): Promise<IShikiTheme> {
   return shikiTheme
 }
 
-export async function fetchGrammar(filepath: string): Promise<IRawGrammar> {
+export async function fetchGrammar(filepath: string): Promise<IGrammar> {
   return await _fetchJSONAssets(filepath)
 }
 

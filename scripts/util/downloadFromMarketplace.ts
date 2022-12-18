@@ -20,22 +20,14 @@ export async function downloadFromMarketplace(
   const zipPath = `tmp/${extId}.zip`
   fs.writeFileSync(zipPath, content)
 
-  const zip = fs.createReadStream(zipPath).pipe(unzipper.Parse({ forceStream: true }))
-
-  for await (const entry of zip) {
-    const match = fPaths.filter(([_name, fPath]) => {
-      return entry.path === fPath
+  fs.createReadStream(zipPath)
+    .pipe(unzipper.Extract({ path: `tmp/${extId}` }))
+    .on('close', () => {
+      fs.copyFileSync(`tmp/${extId}/${fPaths[0][1]}`, `tmp/${type}s/${fPaths[0][0]}`)
+      console.log(
+        `${chalk.red('extracted')} ${chalk.blue(fPaths[0])} from ${chalk.yellow(extFullId)}`
+      )
     })
-
-    if (match.length > 0) {
-      const fName = typeof match[0] === 'string' ? entry.path.split('/').pop() : match[0][0]
-
-      entry.pipe(fs.createWriteStream(`tmp/${type}s/${fName}`))
-      console.log(`${chalk.red('extracted')} ${chalk.blue(fName)} from ${chalk.yellow(extFullId)}`)
-    } else {
-      entry.autodrain()
-    }
-  }
 }
 
 function getMarketplaceLink(publisherDotExtId: string) {

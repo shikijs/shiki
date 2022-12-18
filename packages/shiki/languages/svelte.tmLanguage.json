@@ -200,11 +200,11 @@
     "L:(source.ts, source.js, source.coffee)": {
       "patterns": [
         {
-          "match": "(?<![_$[:alnum:]])\\$(?=[_[:alpha:]][_$[:alnum:]]*)",
+          "match": "(?<![_$./'\"[:alnum:]])\\$(?=[_[:alpha:]][_$[:alnum:]]*)",
           "name": "punctuation.definition.variable.svelte"
         },
         {
-          "match": "(?<![_$[:alnum:]])(\\$\\$)(?=props|restProps|slots)",
+          "match": "(?<![_$./'\"[:alnum:]])(\\$\\$)(?=props|restProps|slots)",
           "name": "punctuation.definition.variable.svelte"
         }
       ]
@@ -419,7 +419,7 @@
               "end": "(?=})",
               "patterns": [
                 {
-                  "include": "source.ts#variable-initializer"
+                  "include": "source.ts"
                 }
               ]
             }

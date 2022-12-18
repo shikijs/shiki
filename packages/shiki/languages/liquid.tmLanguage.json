@@ -34,6 +34,9 @@
           "include": "#style_codefence"
         },
         {
+          "include": "#stylesheet_codefence"
+        },
+        {
           "include": "#json_codefence"
         },
         {
@@ -111,6 +114,45 @@
     "style_codefence": {
       "begin": "({%-?)\\s*(style)\\s*(-?%})",
       "end": "({%-?)\\s*(endstyle)\\s*(-?%})",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.tag.metadata.style.start.liquid"
+        },
+        "1": {
+          "name": "punctuation.definition.tag.begin.liquid"
+        },
+        "2": {
+          "name": "entity.name.tag.style.liquid"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.begin.liquid"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "meta.tag.metadata.style.end.liquid"
+        },
+        "1": {
+          "name": "punctuation.definition.tag.end.liquid"
+        },
+        "2": {
+          "name": "entity.name.tag.style.liquid"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.liquid"
+        }
+      },
+      "name": "meta.block.style.liquid",
+      "contentName": "meta.embedded.block.css",
+      "patterns": [
+        {
+          "include": "source.css"
+        }
+      ]
+    },
+    "stylesheet_codefence": {
+      "begin": "({%-?)\\s*(stylesheet)\\s*(-?%})",
+      "end": "({%-?)\\s*(endstylesheet)\\s*(-?%})",
       "beginCaptures": {
         "0": {
           "name": "meta.tag.metadata.style.start.liquid"

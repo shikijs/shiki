@@ -4,12 +4,19 @@ module.exports = {
   testTimeout: 10000,
   testEnvironment: 'node',
   globals: {
-    __BROWSER__: false,
-    'ts-jest': {
-      tsconfig: {
+    __BROWSER__: false
+  },
+  snapshotFormat: {
+    escapeString: true,
+    printBasicPrototype: true
+  },
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
         target: 'esnext',
         lib: ['ESNext', 'DOM', 'WebWorker']
       }
-    }
+    ]
   }
 }
