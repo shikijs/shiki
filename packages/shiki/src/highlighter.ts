@@ -11,7 +11,7 @@ import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 
-import { getOniguruma } from './loader'
+import { getOniguruma, WASM_PATH } from './loader'
 import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'
 import { Theme } from './themes'
@@ -25,6 +25,11 @@ function resolveLang(lang: ILanguageRegistration | Lang) {
 function resolveOptions(options: HighlighterOptions) {
   let _languages: ILanguageRegistration[] = BUNDLED_LANGUAGES
   let _themes: IThemeRegistration[] = options.themes || []
+  let _wasmPath: string = options.paths?.wasm
+    ? options.paths.wasm.endsWith('/')
+      ? options.paths.wasm
+      : options.paths.wasm + '/'
+    : WASM_PATH
 
   if (options.langs) {
     _languages = options.langs.map(resolveLang)
@@ -36,20 +41,24 @@ function resolveOptions(options: HighlighterOptions) {
     _themes = ['nord']
   }
 
-  return { _languages, _themes }
+  return { _languages, _themes, _wasmPath }
 }
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
-  const { _languages, _themes } = resolveOptions(options)
-  const _resolver = new Resolver(getOniguruma(), 'vscode-oniguruma')
+  const { _languages, _themes, _wasmPath } = resolveOptions(options)
+  const _resolver = new Resolver(getOniguruma(_wasmPath), 'vscode-oniguruma')
   const _registry = new Registry(_resolver)
 
   if (options.paths?.themes) {
-    _registry.themesPath = options.paths.themes
+    _registry.themesPath = options.paths.themes.endsWith('/')
+      ? options.paths.themes
+      : options.paths.themes + '/'
   }
 
   if (options.paths?.languages) {
-    _resolver.languagesPath = options.paths.languages
+    _resolver.languagesPath = options.paths.languages.endsWith('/')
+      ? options.paths.languages
+      : options.paths.languages + '/'
   }
 
   const themes = await _registry.loadThemes(_themes)
