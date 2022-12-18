@@ -46,7 +46,7 @@ let _onigurumaPromise: Promise<IOnigLib> = null
 export async function getOniguruma(wasmPath?: string): Promise<IOnigLib> {
   if (!_onigurumaPromise) {
     let loader: Promise<void>
-    if (wasmPath === 'vscode-oniguruma') {
+    if (wasmPath) {
       if (typeof WASM === 'string') {
         loader = loadWASM({
           data: await fetch(_resolvePath(join(...dirpathparts(wasmPath), 'onig.wasm')))
