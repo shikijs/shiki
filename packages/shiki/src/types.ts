@@ -197,6 +197,7 @@ export interface HtmlRendererOptions {
   bg?: string
   lineOptions?: LineOption[]
   elements?: ElementsOptions
+  themeName?: string
 }
 
 export interface LineOption {

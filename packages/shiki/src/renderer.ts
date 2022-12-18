@@ -40,7 +40,7 @@ export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptio
     return ''
   }
 
-  return h('pre', { className: 'shiki', style: `background-color: ${bg}` }, [
+  return h('pre', { className: 'shiki ' + (options.themeName || ""), style: `background-color: ${bg}` }, [
     options.langId ? `<div class="language-id">${options.langId}</div>` : '',
     h(
       'code',
