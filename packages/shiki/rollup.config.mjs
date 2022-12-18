@@ -1,4 +1,10 @@
 //@ts-check
+
+// Re: https://github.com/rollup/plugins/issues/1366
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+global['__filename'] = __filename;
+
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import dts from 'rollup-plugin-dts'
@@ -9,6 +15,8 @@ import rollupReplace from '@rollup/plugin-replace'
 import { defineConfig } from 'rollup'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
+
+
 
 const replace = opts => {
   return rollupReplace({
