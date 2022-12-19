@@ -14,7 +14,7 @@ export const isNode =
 export const isBrowser = isWebWorker || !isNode
 
 // to be replaced by rollup
-let CDN_ROOT = '____'
+let CDN_ROOT = '__CDN_ROOT__'
 let WASM: string | ArrayBuffer | Response = ''
 export const WASM_PATH = 'dist/'
 
@@ -46,7 +46,7 @@ let _onigurumaPromise: Promise<IOnigLib> = null
 export async function getOniguruma(wasmPath?: string): Promise<IOnigLib> {
   if (!_onigurumaPromise) {
     let loader: Promise<void>
-    if (wasmPath === 'vscode-oniguruma') {
+    if (isBrowser) {
       if (typeof WASM === 'string') {
         loader = loadWASM({
           data: await fetch(_resolvePath(join(...dirpathparts(wasmPath), 'onig.wasm')))
