@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Test unpgk</title>
+    <script src="https://unpkg.com/shiki"></script>
+    <script>
+      shiki
+        .getHighlighter({
+          theme: 'nord',
+          langs: ['html']
+        })
+        .then(highlighter => {
+          const code = highlighter.codeToHtml(`<div>My HTML</div>`, { lang: 'html' })
+          document.getElementById('output').innerHTML = code
+        })
+    </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+</html>
