@@ -1,8 +1,6 @@
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 
-import teardown from './scripts/e2e/teardown.mjs'
-
 const PORT = +process.env.PORT || 3000
 
 const config: PlaywrightTestConfig = {
@@ -19,7 +17,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'github' : 'html',
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: `http://127.0.0.1:${PORT}`,
     trace: 'on-first-retry',
     headless: true
   },
