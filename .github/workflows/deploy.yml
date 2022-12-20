@@ -8,26 +8,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: 16
 
       - name: cache pnpm modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
 
-      - uses: pnpm/action-setup@v2.1.0
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2.2.4
         with:
-          version: 6.31.0
+          version: 7.17.0
           run_install: true
 
-      - run: pnpm run build
       - run: pnpm run update
+      - run: pnpm run build
+
+      - run: pnpm run test
+
+      - name: Run E2E tests
+        run: pnpm run test:e2e
 
       - name: Deploy npm Packages
         run: npx pleb publish
