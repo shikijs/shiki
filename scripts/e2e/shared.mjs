@@ -12,6 +12,9 @@ export const DIR_CUSTOM_LANGUAGES = '/custom/langs'
 export const DIR_CUSTOM_THEMES = '/custom/theme'
 export const DIR_CUSTOM_WASM = '/custom/bin'
 
+// Custom root path as "CDN"
+export const DIR_ROOT_CDN = '/assets'
+
 // Source folders with html files
 export const SOURCE_HTML_FIXTURES = join(SHIKI_BASE_DIR, 'src', '__tests__', '__fixtures__')
 // Source folder with JS and WASM files

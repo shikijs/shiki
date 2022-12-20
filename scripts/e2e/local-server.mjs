@@ -1,9 +1,3 @@
-// "main": "dist/index.js",
-// "module": "dist/index.esm.js",
-// "types": "dist/index.d.ts",
-// "unpkg": "dist/index.unpkg.iife.js",
-// "jsdelivr": "dist/index.jsdelivr.iife.js",
-
 import { server } from 'superstatic'
 import {
   DIR_CUSTOM_LANGUAGES,
@@ -12,6 +6,7 @@ import {
   DIR_DEFAULT_LANGUAGES,
   DIR_DEFAULT_THEMES,
   DIR_DEFAULT_WASM,
+  DIR_ROOT_CDN,
   TARGET_WEBSERVER
 } from './shared.mjs'
 
@@ -20,11 +15,15 @@ const PORT = process.env.PORT || 3000
 const app = server({
   cwd: TARGET_WEBSERVER,
   port: PORT,
+  compression: true,
   config: {
     redirects: [
       createRedirectObject(DIR_CUSTOM_LANGUAGES, DIR_DEFAULT_LANGUAGES),
       createRedirectObject(DIR_CUSTOM_THEMES, DIR_DEFAULT_THEMES),
-      createRedirectObject(DIR_CUSTOM_WASM, DIR_DEFAULT_WASM)
+      createRedirectObject(DIR_CUSTOM_WASM, DIR_DEFAULT_WASM),
+      createRedirectObject(DIR_ROOT_CDN + DIR_DEFAULT_LANGUAGES, DIR_DEFAULT_LANGUAGES),
+      createRedirectObject(DIR_ROOT_CDN + DIR_DEFAULT_THEMES, DIR_DEFAULT_THEMES),
+      createRedirectObject(DIR_ROOT_CDN + DIR_DEFAULT_WASM, DIR_DEFAULT_WASM)
     ]
   }
 })
