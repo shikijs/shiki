@@ -2,6 +2,7 @@ import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 
 const PORT = +process.env.PORT || 3000
+const SERVER = `http://127.0.0.1:${PORT}`
 
 const config: PlaywrightTestConfig = {
   timeout: 15 * 1000,
@@ -17,7 +18,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI ? 'github' : 'html',
   use: {
-    baseURL: `http://127.0.0.1:${PORT}`,
+    baseURL: SERVER,
     trace: 'on-first-retry',
     headless: true
   },
@@ -36,13 +37,7 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Chrome']
       }
     }
-  ],
-  webServer: {
-    command: 'node ./scripts/e2e/local-server.mjs',
-    port: PORT,
-    timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI
-  }
+  ]
 }
 
 export default config
