@@ -43,8 +43,6 @@ test.describe('CDN bundle', () => {
 
       await expect(codeLocator).toBeVisible()
 
-      expect(await codeLocator.screenshot()).toMatchSnapshot()
-
       expect(countLanguageRequests).toBeGreaterThan(1)
 
       await browser.close()

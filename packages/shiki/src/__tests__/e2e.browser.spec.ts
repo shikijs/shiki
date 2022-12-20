@@ -18,8 +18,6 @@ test.describe('Browser bundle', async () => {
 
     await expect(codeLocator).toBeVisible()
 
-    expect(await codeLocator.screenshot({ path: '' })).toMatchSnapshot()
-
     expect(countLanguageRequests).toBeGreaterThan(1)
 
     await browser.close()
@@ -40,8 +38,6 @@ test.describe('Browser bundle', async () => {
     const codeLocator = await page.getByRole('code')
 
     await expect(codeLocator).toBeVisible()
-
-    expect(await codeLocator.screenshot()).toMatchSnapshot()
 
     expect(countLanguageRequests).toBeGreaterThan(1)
 
