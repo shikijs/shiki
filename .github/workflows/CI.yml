@@ -17,21 +17,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
 
       - name: pnpm setup
-        uses: pnpm/action-setup@v2.1.0
+        uses: pnpm/action-setup@v2.2.4
         with:
-          version: 6.31.0
+          version: 7.17.0
           run_install: true
 
       - name: Install dependencies
         run: pnpm install
 
       - name: cache pnpm modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
