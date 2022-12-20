@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Install E2E test browsers
+        run: pnpm dlx playwright install --with-deps chromium
+
       - name: cache pnpm modules
         uses: actions/cache@v3
         with:
@@ -47,13 +50,11 @@ jobs:
         env:
           CI: true
 
-      - name: Install Playwright Browsers
-        run: pnpm dlx playwright install --with-deps
-
-      - name: Run Playwright tests
+      - name: Run E2E tests
         run: pnpm run test:e2e
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload E2E results
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: playwright-report
