@@ -216,47 +216,43 @@
       "patterns": [
         {
           "name": "keyword.control.imba",
-          "match": "(if|elif|else|unless|switch|when|then|do|import|export|for own|for|while|until|return|try|catch|await|finally|throw|as|continue|break|extend|augment)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(if|elif|else|unless|switch|when|then|do|import|export|for own|for|while|until|return|try|catch|await|finally|throw|as|continue|break|extend|augment)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "keyword.control.imba",
-          "match": "(?<=export)\\s+(default)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(?<=export\\s+)(default)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "keyword.control.imba",
-          "match": "(?<=import)\\s+(type)(?=\\s+[\\w\\{\\$\\_])"
+          "match": "(?<=import\\s+)(type)(?=\\s+[\\w\\{\\$\\_])"
         },
         {
           "name": "keyword.control.imba",
-          "match": "(extend|global)\\s+(?=class|tag)"
+          "match": "(extend)\\s+(?=class|tag)"
         },
         {
           "name": "keyword.control.imba",
-          "match": "(?<=[\\*\\}\\w\\$])\\s+(from)(?=\\s+[\\\"\\'])"
+          "match": "(?<=[\\*\\}\\w\\$]\\s+)(from)(?=\\s+[\\\"\\'])"
         },
         {
           "name": "storage.type.function.imba",
-          "match": "(def|get|set)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(def|get|set)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "storage.type.class.imba",
-          "match": "(tag|class|struct)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(tag|class|struct)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "storage.type.imba",
-          "match": "(let|const|constructor)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(let|const|constructor)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "storage.type.imba",
-          "match": "(prop|attr)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(prop|attr)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "storage.modifier.imba",
           "match": "(static)\\s+"
-        },
-        {
-          "name": "storage.modifier.imba",
-          "match": "(declare)\\s+"
         },
         {
           "include": "#ops"
@@ -271,7 +267,7 @@
         },
         {
           "name": "keyword.operator.imba",
-          "match": "(of|delete|\\!?isa|typeof|in|new)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(of|delete|\\!?isa|typeof|in|new)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         }
       ]
     },
@@ -314,7 +310,7 @@
         },
         {
           "name": "keyword.operator.logical.imba",
-          "match": "\\!|&&|\\|\\||\\?\\?|or\\b(?=\\s|$)|and\\b(?=\\s|$)|\\@\\b(?=\\s|$)"
+          "match": "\\!|&&|\\|\\||\\?\\?|or\\b(?=\\s|$)|and\\b(?=\\s|$)"
         },
         {
           "name": "keyword.operator.bitwise.imba",
@@ -504,14 +500,12 @@
         }
       ]
     },
-    "css-size-keywords": {
-      "patterns": [
-        {
-          "name": "support.constant.size.property-value.css",
-          "match": "(x+s|sm-|md-|lg-|sm|md|lg|x+l|hg|x+h)(?![\\w-])"
-        }
-      ]
-    },
+    "css-size-keywords": [
+      {
+        "name": "support.constant.size.property-value.css",
+        "match": "(x+s|sm-|md-|lg-|sm|md|lg|x+l|hg|x+h)(?![\\w-])"
+      }
+    ],
     "css-color-keywords": {
       "patterns": [
         {
@@ -857,8 +851,8 @@
     },
     "css-selector": {
       "name": "meta.selector.css",
-      "begin": "(?<=css\\s)(?!(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:)[^\\:])",
-      "end": "(\\s*(?=(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:)[^\\:])|\\s*$|(?=\\s+\\#\\s))",
+      "begin": "(?<=css\\s)(?!(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:))",
+      "end": "(\\s*(?=(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:))|\\s*$|(?=\\s+\\#\\s))",
       "endCaptures": {
         "0": {
           "name": "punctuation.separator.sel-properties.css"
@@ -872,8 +866,8 @@
     },
     "nested-css-selector": {
       "name": "meta.selector.css",
-      "begin": "(^\\t+)(?!(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:)[^\\:])",
-      "end": "(\\s*(?=(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:)[^\\:])|\\s*$|(?=\\s+\\#\\s))",
+      "begin": "(^\\t+)(?!(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:))",
+      "end": "(\\s*(?=(?:[\\@\\.]+[\\!\\<\\>]?)?[\\w\\-\\$]+(?:[\\@\\.]+[\\!\\<\\>]?[\\w\\-\\$]+)*(?:\\s*\\:))|\\s*$|(?=\\s+\\#\\s))",
       "endCaptures": {
         "0": {
           "name": "punctuation.separator.sel-properties.css"
@@ -1019,7 +1013,7 @@
       "patterns": [
         {
           "name": "meta.tag.imba",
-          "begin": "(<)(?=[\\w\\{\\[\\.\\#\\$\\@\\(])",
+          "begin": "(<)(?=[\\w\\{\\[\\.\\#\\$\\@])",
           "beginCaptures": {
             "1": {
               "name": "punctuation.section.tag.open.imba"
@@ -1525,17 +1519,17 @@
       "patterns": [
         {
           "name": "constant.language.boolean.true.imba",
-          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(true|yes)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(true|yes)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "constant.language.boolean.false.imba",
-          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(false|no)(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(false|no)(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         }
       ]
     },
     "null-literal": {
       "name": "constant.language.null.imba",
-      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))null(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))null(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
     },
     "this-literal": {
       "name": "variable.language.this.imba",
@@ -1551,17 +1545,17 @@
     },
     "undefined-literal": {
       "name": "constant.language.undefined.imba",
-      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))undefined(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))undefined(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
     },
     "numericConstant-literal": {
       "patterns": [
         {
           "name": "constant.language.nan.imba",
-          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))NaN(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))NaN(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         },
         {
           "name": "constant.language.infinity.imba",
-          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))Infinity(?![\\?_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))Infinity(?![_\\-$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
         }
       ]
     },

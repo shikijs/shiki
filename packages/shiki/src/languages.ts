@@ -62,6 +62,7 @@ export type Lang =
   | 'javascript' | 'js'
   | 'jinja-html'
   | 'json'
+  | 'json5'
   | 'jsonc'
   | 'jsonnet'
   | 'jssm' | 'fsl'
@@ -132,6 +133,7 @@ export type Lang =
   | 'turtle'
   | 'twig'
   | 'typescript' | 'ts'
+  | 'v'
   | 'vb' | 'cmd'
   | 'verilog'
   | 'vhdl'
@@ -527,6 +529,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'json.tmLanguage.json'
   },
   {
+    id: 'json5',
+    scopeName: 'source.json5',
+    path: 'json5.tmLanguage.json',
+    samplePath: 'json5.sample'
+  },
+  {
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: 'jsonc.tmLanguage.json'
@@ -717,7 +725,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.pug',
     path: 'pug.tmLanguage.json',
     aliases: ['jade'],
-    embeddedLangs: ['javascript', 'css', 'sass', 'stylus', 'coffee', 'html']
+    embeddedLangs: ['javascript', 'css', 'sass', 'scss', 'stylus', 'coffee', 'html']
   },
   {
     id: 'puppet',
@@ -822,8 +830,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellscript',
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh', 'zsh'],
-    embeddedLangs: ['ruby', 'python', 'applescript', 'html', 'markdown']
+    aliases: ['shell', 'bash', 'sh', 'zsh']
   },
   {
     id: 'smalltalk',
@@ -928,6 +935,12 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['ts']
   },
   {
+    id: 'v',
+    scopeName: 'source.v',
+    path: 'v.tmLanguage.json',
+    samplePath: 'v.sample'
+  },
+  {
     id: 'vb',
     scopeName: 'source.asp.vb.net',
     path: 'vb.tmLanguage.json',
@@ -959,7 +972,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue',
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
-    embeddedLangs: ['json', 'markdown', 'pug', 'haml', 'liquid', 'vue-html', 'sass', 'scss', 'less', 'stylus', 'postcss', 'css', 'typescript', 'coffee', 'javascript']
+    embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'yaml', 'toml', 'graphql']
   },
   {
     id: 'wasm',

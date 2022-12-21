@@ -1,7 +1,7 @@
 {
   "private": "true",
   "name": "shiki-renderer-path",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "Path renderer for shiki",
   "author": "Pine Wu <octref@gmail.com>",
   "homepage": "https://github.com/octref/shiki/tree/main/packages/renderer-path",
@@ -25,12 +25,12 @@
     "watch": "rollup -c -w"
   },
   "peerDependencies": {
-    "shiki": "^0.9.3"
+    "shiki": "^0.12.0"
   },
   "devDependencies": {
-    "@types/node": "^14.17.7",
-    "@types/opentype.js": "^1.3.3",
+    "@types/node": "^18.11.15",
+    "@types/opentype.js": "^1.3.4",
     "opentype.js": "^1.3.4",
-    "shiki": "^0.9.7"
+    "shiki": "^0.12.0"
   }
 }

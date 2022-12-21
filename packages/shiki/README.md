@@ -43,21 +43,8 @@ shiki
 
 Clone [shikijs/shiki-starter](https://github.com/shikijs/shiki-starter) to play with Shiki, or try it out on [Repl.it](https://repl.it/@octref/shiki-starter).
 
-## Seen
+Learn more from the GitHub repo: [shikijs/shiki](https://github.com/shikijs/shiki).
 
-- Shiki Docs: https://shiki.matsu.io
-- Interactive Demo on CodeSandbox (with Next.js): https://codesandbox.io/s/shiki-next-js-cir0y
-- [VS Code website](https://code.visualstudio.com), such as in the [Notebook API page](https://code.visualstudio.com/api/extension-guides/notebook).
-- [TypeScript website](https://www.typescriptlang.org), such as in the [Basic Types documentation page](https://www.typescriptlang.org/docs/handbook/basic-types.html#tuple).
-- [Markdown Preview Shiki Highlighting](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-Shiki), a VS Code plugin to use Shiki's highlighting in Markdown preview.
-- [Shiki LaTeX](https://www.npmjs.com/package/shiki-latex), a Shiki renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
-- [Fatih Kalifa's website](https://fatihkalifa.com/typescript-twoslash)
-- [Blockstack Documentation](https://docs.blockstack.org/)
-
-## Contributing
-
-- [Add a theme](./docs/themes.md#add)
-- [Add a language grammar](./docs/languages.md#add)
 
 ## Credits
 
