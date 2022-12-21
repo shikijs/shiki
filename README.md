@@ -313,7 +313,7 @@ import { getHighlighter } from 'shiki'
 const highlighter = await getHighlighter({
   theme: 'nord',
   langs: ['javascript', 'python'],
-  patsh: {
+  paths: {
     wasm: 'your/path/' // If you use `setCDN`, this path will be relative to the CDN root.
   }
 })
