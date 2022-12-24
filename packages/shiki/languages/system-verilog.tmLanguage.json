@@ -208,7 +208,7 @@
       "name": "meta.definition.systemverilog"
     },
     {
-      "match": "\\b(property)\\s+(\\w+)",
+      "match": "\\b(asset|cover)\\s(property)\\s+(\\w+)",
       "captures": {
         "1": {
           "name": "keyword.sva.systemverilog"
@@ -310,7 +310,7 @@
           }
         },
         {
-          "match": "\\b(property)\\s+(\\w+)",
+          "match": "\\b(asset|cover)\\s+(property)\\s+(\\w+)",
           "captures": {
             "1": {
               "name": "keyword.psl.systemverilog"
