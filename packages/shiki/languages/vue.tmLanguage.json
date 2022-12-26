@@ -1173,19 +1173,19 @@
     "vue-interpolations": {
       "patterns": [
         {
-          "begin": "\\{\\{",
-          "beginCaptures": [
-            {
-              "name": "punctuation.definition.tag.begin.html.vue"
+          "begin": "(\\{\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.interpolation.begin.html.vue"
             }
-          ],
-          "end": "\\}\\}",
-          "endCaptures": [
-            {
-              "name": "punctuation.definition.tag.end.html.vue"
+          },
+          "end": "(\\}\\})",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.interpolation.end.html.vue"
             }
-          ],
-          "name": "expression.embbeded.vue",
+          },
+          "name": "expression.embedded.vue",
           "patterns": [
             {
               "begin": "\\G",
