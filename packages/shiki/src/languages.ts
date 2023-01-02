@@ -144,7 +144,7 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml'
+  | 'yaml' | 'yml'
   | 'zenscript'
 
 export const languages: ILanguageRegistration[] = [
@@ -619,6 +619,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -1000,7 +1001,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'yaml',
     scopeName: 'source.yaml',
-    path: 'yaml.tmLanguage.json'
+    path: 'yaml.tmLanguage.json',
+    aliases: ['yml']
   },
   {
     id: 'zenscript',
