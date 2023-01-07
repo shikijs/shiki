@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 importers:
 
@@ -59,9 +59,9 @@ importers:
       prettier: 2.8.1
       rollup: 3.7.4
       rollup-plugin-copy: 3.4.0
-      rollup-plugin-dts: 5.0.0_rollup@3.7.4+typescript@4.9.4
-      rollup-plugin-esbuild: 5.0.0_esbuild@0.16.7+rollup@3.7.4
-      ts-jest: 29.0.3_cf9f36ea9c5cf33909a2f18ecaf7a773
+      rollup-plugin-dts: 5.0.0_fhibmf72xnv5tve6nwed265eae
+      rollup-plugin-esbuild: 5.0.0_zreq6qg4bbimwgrznl6lkl4yue
+      ts-jest: 29.0.3_z6ptn2u4ltztscnc6ghmv55hom
       tsup: 6.5.0_typescript@4.9.4
       typescript: 4.9.4
       unzipper: 0.10.11
@@ -77,7 +77,7 @@ importers:
       '@types/node': 18.11.15
       '@types/opentype.js': 1.3.4
       opentype.js: 1.3.4
-      shiki: link:../shiki
+      shiki: 0.12.1
 
   packages/renderer-svg:
     specifiers:
@@ -87,7 +87,7 @@ importers:
     devDependencies:
       '@types/node': 18.11.15
       playwright: 1.28.1
-      shiki: link:../shiki
+      shiki: 0.12.1
 
   packages/shiki:
     specifiers:
@@ -113,14 +113,14 @@ importers:
       '@types/node': 18.11.15
       markdown-it: 13.0.1
       playwright: 1.28.1
-      shiki: link:../shiki
+      shiki: 0.12.1
       shiki-renderer-svg: link:../renderer-svg
 
   packages/vuepress-plugin:
     specifiers:
       shiki: ^0.12.0
     dependencies:
-      shiki: link:../shiki
+      shiki: 0.12.1
 
 packages:
 
@@ -3094,8 +3094,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      is-text-path: 1.0.1
       JSONStream: 1.3.5
+      is-text-path: 1.0.1
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
@@ -6551,7 +6551,7 @@ packages:
       is-plain-object: 3.0.1
     dev: true
 
-  /rollup-plugin-dts/5.0.0_rollup@3.7.4+typescript@4.9.4:
+  /rollup-plugin-dts/5.0.0_fhibmf72xnv5tve6nwed265eae:
     resolution: {integrity: sha512-OO8ayCvuJCKaQSShyVTARxGurVVk4ulzbuvz+0zFd1f93vlnWFU5pBMT7HFeS6uj7MvvZLx4kUAarGATSU1+Ng==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -6565,7 +6565,7 @@ packages:
       '@babel/code-frame': 7.18.6
     dev: true
 
-  /rollup-plugin-esbuild/5.0.0_esbuild@0.16.7+rollup@3.7.4:
+  /rollup-plugin-esbuild/5.0.0_zreq6qg4bbimwgrznl6lkl4yue:
     resolution: {integrity: sha512-1cRIOHAPh8WQgdQQyyvFdeOdxuiyk+zB5zJ5+YOwrZP4cJ0MT3Fs48pQxrZeyZHcn+klFherytILVfE4aYrneg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     peerDependencies:
@@ -6690,6 +6690,13 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
     dev: true
+
+  /shiki/0.12.1:
+    resolution: {integrity: sha512-aieaV1m349rZINEBkjxh2QbBvFFQOlgqYTNtCal82hHj4dDZ76oMlQIX+C7ryerBTDiga3e5NfH6smjdJ02BbQ==}
+    dependencies:
+      jsonc-parser: 3.2.0
+      vscode-oniguruma: 1.7.0
+      vscode-textmate: 8.0.0
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -7156,7 +7163,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest/29.0.3_cf9f36ea9c5cf33909a2f18ecaf7a773:
+  /ts-jest/29.0.3_z6ptn2u4ltztscnc6ghmv55hom:
     resolution: {integrity: sha512-Ibygvmuyq1qp/z3yTh9QTwVVAbFdDy/+4BtIQR2sp6baF2SJU/8CKK/hhnGIDY2L90Az2jIqTwZPnN2p+BweiQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
@@ -7411,11 +7418,9 @@ packages:
 
   /vscode-oniguruma/1.7.0:
     resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}
-    dev: false
 
   /vscode-textmate/8.0.0:
     resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
-    dev: false
 
   /walk-up-path/1.0.0:
     resolution: {integrity: sha512-hwj/qMDUEjCU5h0xr90KGCf0tg0/LgJbmOWgrWKYlcJZM7XvquvUJZ0G/HMGr7F7OQMOUuPHWP9JpriinkAlkg==}
