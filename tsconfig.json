@@ -1,9 +1,11 @@
 {
+  "compilerOptions": {
+    "esModuleInterop": true
+  },
   "files": [],
   "references": [
     { "path": "packages/shiki" },
     { "path": "packages/renderer-svg" },
-    { "path": "packages/renderer-path" },
-    { "path": "packages/vuepress-plugin" }
+    { "path": "packages/renderer-path" }
   ]
 }
