@@ -58,6 +58,7 @@ export type Lang =
   | 'apex'
   | 'apl'
   | 'applescript'
+  | 'ara'
   | 'asm'
   | 'astro'
   | 'awk'
