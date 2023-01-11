@@ -106,6 +106,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'http'
   | 'imba'
   | 'ini'
   | 'java'

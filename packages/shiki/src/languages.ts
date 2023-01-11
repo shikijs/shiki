@@ -56,6 +56,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'http'
   | 'imba'
   | 'ini'
   | 'java'
@@ -200,7 +201,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.astro',
     path: 'astro.tmLanguage.json',
     samplePath: 'astro.sample',
-    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus']
+    embeddedLangs: ['json', 'javascript', 'typescript', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'tsx']
   },
   {
     id: 'awk',
@@ -494,6 +495,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['javascript', 'css']
   },
   {
+    id: 'http',
+    scopeName: 'source.http',
+    path: 'http.tmLanguage.json',
+    samplePath: 'http.sample',
+    embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
+  },
+  {
     id: 'imba',
     scopeName: 'source.imba',
     path: 'imba.tmLanguage.json',
@@ -619,6 +627,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {

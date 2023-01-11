@@ -1,0 +1,16 @@
+POST /my-endpoint HTTP/1.1
+Host: api.example.com:8767
+Authorization: Bearer my-token-value
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+GET /hello.txt HTTP/1.1
+User-Agent: curl/7.64.1
+Host: www.example.com
+Accept-Language: en, mi
+
+# from various places and https://www.rfc-editor.org/rfc/rfc9110.html#name-example-message-exchange
