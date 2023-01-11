@@ -293,6 +293,8 @@ For Node.js environments the WASM file is automatically loaded, for browser envi
 
 > If used, `setWASM` must be invoked before `getHighlighter` is called.
 
+> If you make use of a reverse proxy like [nginx](https://www.nginx.com/) or [traefik](https://traefik.io/traefik/) you may have to specify in its configuration the MIME type for wasm files.
+
 Use the default loader: (applies to Node.js and browser environments)
 
 ```js
