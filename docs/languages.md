@@ -195,6 +195,6 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml'
+  | 'yaml' | 'yml'
   | 'zenscript'
 ```

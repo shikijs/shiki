@@ -325,7 +325,8 @@ export const languageAliases = {
   vb: ['cmd'],
   viml: ['vim', 'vimscript'],
   wenyan: ['文言'],
-  codeql: ['ql']
+  codeql: ['ql'],
+  yaml: ['yml']
 }
 
 /**
