@@ -71,8 +71,7 @@ export async function getOniguruma(wasmPath?: string): Promise<IOnigLib> {
         })
       }
     } else {
-      const path: typeof import('path') = require('path')
-      const wasmPath = path.join(require.resolve('vscode-oniguruma'), '../onig.wasm')
+      const wasmPath = resolveNodeWasmPath()
       const fs: typeof import('fs') = require('fs')
       const wasmBin = fs.readFileSync(wasmPath).buffer
       loader = loadWASM(wasmBin)
@@ -180,6 +179,18 @@ export function repairTheme(theme: IShikiTheme) {
       background: theme.bg
     }
   })
+}
+
+function resolveNodeWasmPath() {
+  const fs: typeof import('fs') = require('fs')
+  const path: typeof import('path') = require('path')
+  for (const modulePath of module.paths) {
+    const wasmPath = path.resolve(modulePath, 'vscode-oniguruma', 'release', 'onig.wasm')
+    if (fs.existsSync(wasmPath)) {
+      return wasmPath
+    }
+  }
+  return undefined
 }
 
 export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
