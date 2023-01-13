@@ -181,7 +181,7 @@ export function repairTheme(theme: IShikiTheme) {
   })
 }
 
-function resolveNodeWasmPath() {
+function _resolveNodeWasmPath() {
   const fs: typeof import('fs') = require('fs')
   const path: typeof import('path') = require('path')
   for (const modulePath of module.paths) {
