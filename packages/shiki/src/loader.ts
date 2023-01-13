@@ -71,7 +71,7 @@ export async function getOniguruma(wasmPath?: string): Promise<IOnigLib> {
         })
       }
     } else {
-      const wasmPath = resolveNodeWasmPath()
+      const wasmPath = _resolveNodeWasmPath()
       const fs: typeof import('fs') = require('fs')
       const wasmBin = fs.readFileSync(wasmPath).buffer
       loader = loadWASM(wasmBin)
