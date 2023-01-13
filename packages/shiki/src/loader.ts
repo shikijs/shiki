@@ -190,7 +190,7 @@ function _resolveNodeWasmPath() {
       return wasmPath
     }
   }
-  return undefined
+  return path.resolve(process.cwd(), 'node_modules', 'vscode-oniguruma', 'release', 'onig.wasm')
 }
 
 export function toShikiTheme(rawTheme: IRawTheme): IShikiTheme {
