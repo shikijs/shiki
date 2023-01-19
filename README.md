@@ -211,7 +211,7 @@ if (!highlighter.getLoadedLanguages().includes(language)) {
     // Languages are specified by their id, they can also have aliases (i. e. "js" and "javascript")
     return bundle.id === language || bundle.aliases?.includes(language);
   });
-  if (bundles.length > 0)) {
+  if (bundles.length > 0) {
     await highlighter.loadLanguage(language)
   } else {
     // Do some error handling or default to another language or...
