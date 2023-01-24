@@ -8,6 +8,7 @@ export type Lang =
   | 'apex'
   | 'apl'
   | 'applescript'
+  | 'ara'
   | 'asm'
   | 'astro'
   | 'awk'
@@ -189,6 +190,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.applescript',
     path: 'applescript.tmLanguage.json',
     samplePath: 'applescript.sample'
+  },
+  {
+    id: 'ara',
+    scopeName: 'source.ara',
+    path: 'ara.tmLanguage.json',
+    samplePath: 'ara.sample'
   },
   {
     id: 'asm',

@@ -77,6 +77,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/BowlerHatLLC/vscode-as3mxml/blob/master/distribution/src/assembly/syntaxes/AS3.tmLanguage'
   ],
   [
+    'ara',
+    'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'
+  ],
+  [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
   ],
