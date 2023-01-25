@@ -34,7 +34,7 @@ export type Lang =
   | 'd'
   | 'dart'
   | 'diff'
-  | 'docker' | 'dockerfile'
+  | 'docker'
   | 'dream-maker'
   | 'elixir'
   | 'elm'
@@ -363,8 +363,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'docker',
     scopeName: 'source.dockerfile',
     path: 'docker.tmLanguage.json',
-    samplePath: 'docker.sample',
-    aliases: ['dockerfile']
+    samplePath: 'docker.sample'
   },
   {
     id: 'dream-maker',

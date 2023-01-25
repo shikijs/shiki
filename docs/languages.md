@@ -84,7 +84,7 @@ export type Lang =
   | 'd'
   | 'dart'
   | 'diff'
-  | 'docker' | 'dockerfile'
+  | 'docker'
   | 'dream-maker'
   | 'elixir'
   | 'elm'
