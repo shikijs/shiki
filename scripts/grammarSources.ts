@@ -76,10 +76,7 @@ export const githubGrammarSources: [string, string][] = [
     'actionscript-3',
     'https://github.com/BowlerHatLLC/vscode-as3mxml/blob/master/distribution/src/assembly/syntaxes/AS3.tmLanguage'
   ],
-  [
-    'ara',
-    'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'
-  ],
+  ['ara', 'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'],
   [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
@@ -118,6 +115,7 @@ export const githubGrammarSources: [string, string][] = [
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
   ['dart', 'https://github.com/Dart-Code/Dart-Code/blob/master/syntaxes/dart.json'],
+  ['dax', 'https://github.com/huyza/dax-language/blob/master/syntaxes/dax.grammer.json'],
   [
     'dream-maker',
     'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json'
@@ -201,6 +199,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/alefragnani/vscode-language-pascal/blob/master/syntaxes/pascal.tmLanguage'
   ],
   ['plsql', 'https://github.com/zabel-xyz/plsql-language/blob/master/syntaxes/plsql.tmLanguage'],
+  [
+    'powerquery',
+    'https://github.com/microsoft/powerquery-language/blob/master/PowerQuery.tmLanguage.json'
+  ],
   [
     'prisma',
     'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json'

@@ -33,6 +33,7 @@ export type Lang =
   | 'cue'
   | 'd'
   | 'dart'
+  | 'dax'
   | 'diff'
   | 'docker'
   | 'dream-maker'
@@ -94,6 +95,7 @@ export type Lang =
   | 'php'
   | 'plsql'
   | 'postcss'
+  | 'powerquery'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
@@ -352,6 +354,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.dart',
     path: 'dart.tmLanguage.json',
     samplePath: 'dart.sample'
+  },
+  {
+    id: 'dax',
+    scopeName: 'source.dax',
+    path: 'dax.tmLanguage.json',
+    samplePath: 'dax.sample'
   },
   {
     id: 'diff',
@@ -711,6 +719,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'postcss',
     scopeName: 'source.css.postcss',
     path: 'postcss.tmLanguage.json'
+  },
+  {
+    id: 'powerquery',
+    scopeName: 'source.powerquery',
+    path: 'powerquery.tmLanguage.json',
+    samplePath: 'powerquery.sample'
   },
   {
     id: 'powershell',
