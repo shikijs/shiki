@@ -8,7 +8,6 @@ export type Lang =
   | 'apex'
   | 'apl'
   | 'applescript'
-  | 'ara'
   | 'asm'
   | 'astro'
   | 'awk'
@@ -33,6 +32,7 @@ export type Lang =
   | 'cue'
   | 'd'
   | 'dart'
+  | 'dax'
   | 'diff'
   | 'docker'
   | 'dream-maker'
@@ -57,7 +57,6 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
-  | 'http'
   | 'imba'
   | 'ini'
   | 'java'
@@ -94,6 +93,7 @@ export type Lang =
   | 'php'
   | 'plsql'
   | 'postcss'
+  | 'powerquery' | 'm'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
@@ -146,7 +146,7 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml' | 'yml'
+  | 'yaml'
   | 'zenscript'
 
 export const languages: ILanguageRegistration[] = [
@@ -192,12 +192,6 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'applescript.sample'
   },
   {
-    id: 'ara',
-    scopeName: 'source.ara',
-    path: 'ara.tmLanguage.json',
-    samplePath: 'ara.sample'
-  },
-  {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: 'asm.tmLanguage.json',
@@ -205,10 +199,9 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'astro',
-    scopeName: 'source.astro',
+    scopeName: 'undefined',
     path: 'astro.tmLanguage.json',
-    samplePath: 'astro.sample',
-    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus']
+    samplePath: 'astro.sample'
   },
   {
     id: 'awk',
@@ -352,6 +345,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.dart',
     path: 'dart.tmLanguage.json',
     samplePath: 'dart.sample'
+  },
+  {
+    id: 'dax',
+    scopeName: 'source.dax',
+    path: 'dax.tmLanguage.json',
+    samplePath: 'dax.sample'
   },
   {
     id: 'diff',
@@ -502,13 +501,6 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['javascript', 'css']
   },
   {
-    id: 'http',
-    scopeName: 'source.http',
-    path: 'http.tmLanguage.json',
-    samplePath: 'http.sample',
-    embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
-  },
-  {
     id: 'imba',
     scopeName: 'source.imba',
     path: 'imba.tmLanguage.json',
@@ -634,6 +626,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -711,6 +704,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'postcss',
     scopeName: 'source.css.postcss',
     path: 'postcss.tmLanguage.json'
+  },
+  {
+    id: 'powerquery',
+    scopeName: 'source.powerquery',
+    path: 'powerquery.tmLanguage.json',
+    samplePath: 'powerquery.sample',
+    aliases: ['m']
   },
   {
     id: 'powershell',
@@ -1015,8 +1015,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'yaml',
     scopeName: 'source.yaml',
-    path: 'yaml.tmLanguage.json',
-    aliases: ['yml']
+    path: 'yaml.tmLanguage.json'
   },
   {
     id: 'zenscript',
