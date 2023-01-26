@@ -25,7 +25,7 @@
   ],
   "repository": {
     "model_block_definition": {
-      "begin": "^\\s*(model|type)\\s+([A-Za-z][\\w]*)\\s*({)",
+      "begin": "^\\s*(model|type|view)\\s+([A-Za-z][\\w]*)\\s*({)",
       "name": "source.prisma.embedded.source",
       "beginCaptures": {
         "1": {

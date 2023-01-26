@@ -81,10 +81,6 @@ export const githubGrammarSources: [string, string][] = [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
   ],
-  [
-    'astro',
-    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.json'
-  ],
   ['awk', 'https://github.com/luggage66/vscode-awk/blob/master/syntaxes/awk.tmLanguage'],
   [
     'ballerina',
@@ -148,10 +144,6 @@ export const githubGrammarSources: [string, string][] = [
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
-  [
-    'http',
-    'https://github.com/Huachao/vscode-restclient/blob/master/syntaxes/http.tmLanguage.json'
-  ],
   ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
@@ -288,7 +280,7 @@ export const githubGrammarSources: [string, string][] = [
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
   [
     'vue',
-    'https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/syntaxes/vue.tmLanguage.json'
+    'https://github.com/johnsoncodehk/volar/blob/master/vue-language-tools/vscode-vue/syntaxes/vue.tmLanguage.json'
   ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
@@ -310,6 +302,7 @@ export const languageAliases = {
   berry: ['be'],
   cadence: ['cdc'],
   clojure: ['clj'],
+  codeql: ['ql'],
   csharp: ['c#', 'cs'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
@@ -334,7 +327,6 @@ export const languageAliases = {
   vb: ['cmd'],
   viml: ['vim', 'vimscript'],
   wenyan: ['文言'],
-  codeql: ['ql'],
   yaml: ['yml']
 }
 
@@ -358,10 +350,14 @@ export const embeddedLanguagesToExclude = [
  *
  * Key is publisher + extId
  * Value is a list. Each item represents a file to extract from the downloaded VSIX.
+ * For example, if on macOS, an extension is located at `~/.vscode/extensions/<publisher.extId-veresion>/<path-to-ext>
  * If given ['foo.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/grammars/foo.json`
  */
 export const marketplaceGrammarSources: { [extPublisherAndId: string]: [string, string][] } = {
   'bpruitt-goddard.mermaid-markdown-syntax-highlighting': [
     ['mermaid.tmLanguage.json', 'extension/out/mermaid.tmLanguage.json']
+  ],
+  'astro-build.astro-vscode': [
+    ['astro.tmLanguage.json', 'extension/syntaxes/astro.tmLanguage.json']
   ]
 }
