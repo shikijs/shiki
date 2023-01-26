@@ -145,7 +145,7 @@ export type Lang =
   | 'php'
   | 'plsql'
   | 'postcss'
-  | 'powerquery' | 'm'
+  | 'powerquery'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'

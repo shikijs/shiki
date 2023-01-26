@@ -318,7 +318,6 @@ export const languageAliases = {
   markdown: ['md'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
-  powerquery: ['m'],
   pug: ['jade'],
   python: ['py'],
   raku: ['perl6'],

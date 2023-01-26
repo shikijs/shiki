@@ -95,7 +95,7 @@ export type Lang =
   | 'php'
   | 'plsql'
   | 'postcss'
-  | 'powerquery' | 'm'
+  | 'powerquery'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
@@ -642,7 +642,6 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
-    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -725,8 +724,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'powerquery',
     scopeName: 'source.powerquery',
     path: 'powerquery.tmLanguage.json',
-    samplePath: 'powerquery.sample',
-    aliases: ['m']
+    samplePath: 'powerquery.sample'
   },
   {
     id: 'powershell',
