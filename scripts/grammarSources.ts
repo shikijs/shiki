@@ -81,10 +81,6 @@ export const githubGrammarSources: [string, string][] = [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
   ],
-  [
-    'astro',
-    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.src.yaml'
-  ],
   ['awk', 'https://github.com/luggage66/vscode-awk/blob/master/syntaxes/awk.tmLanguage'],
   [
     'ballerina',
@@ -346,10 +342,14 @@ export const embeddedLanguagesToExclude = [
  *
  * Key is publisher + extId
  * Value is a list. Each item represents a file to extract from the downloaded VSIX.
+ * For example, if on macOS, an extension is located at `~/.vscode/extensions/<publisher.extId-veresion>/<path-to-ext>
  * If given ['foo.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/grammars/foo.json`
  */
 export const marketplaceGrammarSources: { [extPublisherAndId: string]: [string, string][] } = {
   'bpruitt-goddard.mermaid-markdown-syntax-highlighting': [
     ['mermaid.tmLanguage.json', 'extension/out/mermaid.tmLanguage.json']
+  ],
+  'astro-build.astro-vscode': [
+    ['astro.tmLanguage.json', 'extension/syntaxes/astro.tmLanguage.json']
   ]
 }
