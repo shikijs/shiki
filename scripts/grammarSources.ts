@@ -76,17 +76,14 @@ export const githubGrammarSources: [string, string][] = [
     'actionscript-3',
     'https://github.com/BowlerHatLLC/vscode-as3mxml/blob/master/distribution/src/assembly/syntaxes/AS3.tmLanguage'
   ],
-  [
-    'ara',
-    'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'
-  ],
+  ['ara', 'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'],
   [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
   ],
   [
     'astro',
-    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.json'
+    'https://github.com/withastro/language-tools/blob/main/packages/vscode/languages/astro-language-configuration.json'
   ],
   ['awk', 'https://github.com/luggage66/vscode-awk/blob/master/syntaxes/awk.tmLanguage'],
   [
@@ -150,10 +147,6 @@ export const githubGrammarSources: [string, string][] = [
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
-  [
-    'http',
-    'https://github.com/Huachao/vscode-restclient/blob/master/syntaxes/http.tmLanguage.json'
-  ],
   ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
@@ -283,7 +276,7 @@ export const githubGrammarSources: [string, string][] = [
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
   [
     'vue',
-    'https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/syntaxes/vue.tmLanguage.json'
+    'https://github.com/johnsoncodehk/volar/blob/master/vue-language-tools/vscode-vue/syntaxes/vue.tmLanguage.json'
   ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
@@ -305,6 +298,7 @@ export const languageAliases = {
   berry: ['be'],
   cadence: ['cdc'],
   clojure: ['clj'],
+  codeql: ['ql'],
   csharp: ['c#', 'cs'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
@@ -329,7 +323,6 @@ export const languageAliases = {
   vb: ['cmd'],
   viml: ['vim', 'vimscript'],
   wenyan: ['文言'],
-  codeql: ['ql'],
   yaml: ['yml']
 }
 

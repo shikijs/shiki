@@ -205,10 +205,9 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'astro',
-    scopeName: 'source.astro',
+    scopeName: 'undefined',
     path: 'astro.tmLanguage.json',
-    samplePath: 'astro.sample',
-    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus']
+    samplePath: 'astro.sample'
   },
   {
     id: 'awk',
@@ -634,6 +633,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
