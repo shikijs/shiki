@@ -83,7 +83,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'astro',
-    'https://github.com/withastro/language-tools/blob/main/packages/vscode/languages/astro-language-configuration.json'
+    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.src.yaml'
   ],
   ['awk', 'https://github.com/luggage66/vscode-awk/blob/master/syntaxes/awk.tmLanguage'],
   [
