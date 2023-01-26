@@ -58,6 +58,7 @@ export type Lang =
   | 'apex'
   | 'apl'
   | 'applescript'
+  | 'ara'
   | 'asm'
   | 'astro'
   | 'awk'
@@ -107,6 +108,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'http'
   | 'imba'
   | 'ini'
   | 'java'
@@ -196,6 +198,6 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml'
+  | 'yaml' | 'yml'
   | 'zenscript'
 ```

@@ -8,6 +8,7 @@ export type Lang =
   | 'apex'
   | 'apl'
   | 'applescript'
+  | 'ara'
   | 'asm'
   | 'astro'
   | 'awk'
@@ -57,6 +58,7 @@ export type Lang =
   | 'hcl'
   | 'hlsl'
   | 'html'
+  | 'http'
   | 'imba'
   | 'ini'
   | 'java'
@@ -146,7 +148,7 @@ export type Lang =
   | 'wenyan' | '文言'
   | 'xml'
   | 'xsl'
-  | 'yaml'
+  | 'yaml' | 'yml'
   | 'zenscript'
 
 export const languages: ILanguageRegistration[] = [
@@ -192,6 +194,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'applescript.sample'
   },
   {
+    id: 'ara',
+    scopeName: 'source.ara',
+    path: 'ara.tmLanguage.json',
+    samplePath: 'ara.sample'
+  },
+  {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
     path: 'asm.tmLanguage.json',
@@ -199,9 +207,10 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'astro',
-    scopeName: 'undefined',
+    scopeName: 'source.astro',
     path: 'astro.tmLanguage.json',
-    samplePath: 'astro.sample'
+    samplePath: 'astro.sample',
+    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus']
   },
   {
     id: 'awk',
@@ -499,6 +508,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'html.tmLanguage.json',
     samplePath: 'html.sample',
     embeddedLangs: ['javascript', 'css']
+  },
+  {
+    id: 'http',
+    scopeName: 'source.http',
+    path: 'http.tmLanguage.json',
+    samplePath: 'http.sample',
+    embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
   },
   {
     id: 'imba',
@@ -1015,7 +1031,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'yaml',
     scopeName: 'source.yaml',
-    path: 'yaml.tmLanguage.json'
+    path: 'yaml.tmLanguage.json',
+    aliases: ['yml']
   },
   {
     id: 'zenscript',
