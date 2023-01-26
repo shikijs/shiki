@@ -1,12 +1,15 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "mdx",
+  "$schema": "https://raw.githubusercontent.com/Septh/tmlanguage/master/tmlanguage.json",
+  "name": "MDX",
   "patterns": [
     {
       "include": "#jsx"
     },
     {
       "include": "#markdown"
+    },
+    {
+      "include": "#jsx-evaluated-code"
     }
   ],
   "repository": {
@@ -17,6 +20,9 @@
         },
         {
           "include": "#jsx-tag"
+        },
+        {
+          "include": "#jsx-evaluated-code"
         }
       ],
       "repository": {
@@ -37,8 +43,22 @@
         "jsx-tag": {
           "patterns": [
             {
-              "begin": "^(?=<([a-z]|[A-Z]))",
+              "begin": "^(?=< *([a-zA-Z]\\w*))",
               "end": "(?<=>)",
+              "contentName": "source.js.jsx",
+              "patterns": [
+                {
+                  "include": "source.js.jsx"
+                }
+              ]
+            }
+          ]
+        },
+        "jsx-evaluated-code": {
+          "patterns": [
+            {
+              "begin": "(?!```$){",
+              "end": "}",
               "contentName": "source.js.jsx",
               "patterns": [
                 {
