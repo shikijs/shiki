@@ -4,6 +4,7 @@
 
 - Improve grammar/theme fetching from marketplace.
 - 🙌 Support CSON grammar sources. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
+- Add a [Next.js 13 example](https://github.com/shikijs/next-shiki).
 
 *Languages*
 
