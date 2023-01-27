@@ -3,6 +3,12 @@
 ### 0.13.0
 
 - Improve grammar/theme fetching from marketplace.
+- 🙌 Support CSON grammar sources. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
+
+*Languages*
+
+- Added `console` as an alias for `shell`. [#389](https://github.com/shikijs/shiki/issues/389).
+- 🙌 Added `jison` and `wgsl` languages. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
 
 *Themes*
 
