@@ -8,6 +8,7 @@ importers:
       '@rollup/plugin-node-resolve': ^15.0.1
       '@rollup/plugin-replace': ^5.0.1
       '@rollup/plugin-terser': ^0.2.0
+      '@types/cson': ^7.20.1
       '@types/fs-extra': ^9.0.13
       '@types/jest': ^29.2.4
       '@types/js-yaml': ^4.0.5
@@ -42,6 +43,7 @@ importers:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       '@rollup/plugin-replace': 5.0.1_rollup@3.7.4
       '@rollup/plugin-terser': 0.2.0_rollup@3.7.4
+      '@types/cson': 7.20.1
       '@types/fs-extra': 9.0.13
       '@types/jest': 29.2.4
       '@types/js-yaml': 4.0.5
@@ -2157,6 +2159,10 @@ packages:
     resolution: {integrity: sha512-FcFaxOr2V5KZCviw1TnutEMVUVsGt4D2hP1TAfXZAMKuHYW3xQhe3jTxNPWutgCJ3/X1c5yX8ZoGVEItxKbwBg==}
     dependencies:
       '@babel/types': 7.20.2
+    dev: true
+
+  /@types/cson/7.20.1:
+    resolution: {integrity: sha512-MSa3Nkti2/dXO+5FZrQTBhs963m4RYCi46dny3OArUH/NOBykNIJ2I02X933Km5Kz1/cwGP8Cq6NidVGyyiXqw==}
     dev: true
 
   /@types/estree/1.0.0:
