@@ -308,6 +308,7 @@ export const languageAliases = {
   fsharp: ['f#', 'fs'],
   haskell: ['hs'],
   handlebars: ['hbs'],
+  ini: ['properties'],
   javascript: ['js'],
   jssm: ['fsl'],
   make: ['makefile'],

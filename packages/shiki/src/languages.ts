@@ -60,7 +60,7 @@ export type Lang =
   | 'html'
   | 'http'
   | 'imba'
-  | 'ini'
+  | 'ini' | 'properties'
   | 'java'
   | 'javascript' | 'js'
   | 'jinja-html'
@@ -525,7 +525,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'ini',
     scopeName: 'source.ini',
-    path: 'ini.tmLanguage.json'
+    path: 'ini.tmLanguage.json',
+    aliases: ['properties']
   },
   {
     id: 'java',

@@ -110,7 +110,7 @@ export type Lang =
   | 'html'
   | 'http'
   | 'imba'
-  | 'ini'
+  | 'ini' | 'properties'
   | 'java'
   | 'javascript' | 'js'
   | 'jinja-html'
