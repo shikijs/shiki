@@ -553,6 +553,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'jison',
     scopeName: 'source.jison',
     path: 'jison.tmLanguage.json',
+    samplePath: 'jison.sample',
     embeddedLangs: ['javascript']
   },
   {
