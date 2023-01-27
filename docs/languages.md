@@ -169,7 +169,7 @@ export type Lang =
   | 'scheme'
   | 'scss'
   | 'shaderlab' | 'shader'
-  | 'shellscript' | 'shell' | 'bash' | 'sh' | 'zsh'
+  | 'shellscript' | 'bash' | 'console' | 'sh' | 'shell' | 'zsh'
   | 'smalltalk'
   | 'solidity'
   | 'sparql'

@@ -119,7 +119,7 @@ export type Lang =
   | 'scheme'
   | 'scss'
   | 'shaderlab' | 'shader'
-  | 'shellscript' | 'shell' | 'bash' | 'sh' | 'zsh'
+  | 'shellscript' | 'bash' | 'console' | 'sh' | 'shell' | 'zsh'
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
@@ -870,7 +870,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellscript',
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh', 'zsh']
+    aliases: ['bash', 'console', 'sh', 'shell', 'zsh']
   },
   {
     id: 'smalltalk',

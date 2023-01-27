@@ -328,7 +328,7 @@ export const languageAliases = {
   rust: ['rs'],
   'html-ruby-erb': ['erb'],
   shaderlab: ['shader'],
-  shellscript: ['shell', 'bash', 'sh', 'zsh'],
+  shellscript: ['bash', 'console', 'sh', 'shell', 'zsh'],
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
