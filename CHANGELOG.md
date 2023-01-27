@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.13.0
+
+- Improve grammar/theme fetching from marketplace.
+
+*Themes*
+
+- Renamed `material-<themeName>` to `material-theme-<themeName>`. For example, `material-ocean` to `material-theme-ocean`. `material-default` is renamed to `material-theme`.
+
+---
+
 ### 0.10.1
 
 - 🙌: feat: add ZenScript support [#300](https://github.com/shikijs/shiki/pull/300) | **[@jaredlll08](https://github.com/jaredlll08)**

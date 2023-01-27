@@ -348,16 +348,13 @@ export const embeddedLanguagesToExclude = [
  * Some grammars have compilation step and do not include the built grammar on GitHub,
  * so pull from VS Code marketplace instead.
  *
- * Key is publisher + extId
- * Value is a list. Each item represents a file to extract from the downloaded VSIX.
- * For example, if on macOS, an extension is located at `~/.vscode/extensions/<publisher.extId-veresion>/<path-to-ext>
- * If given ['foo.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/grammars/foo.json`
+ * Key is the extension's identifier, as can be found in the extension's marketplace URL.
+ * For example, for https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode,
+ * the identifier is `astro-build.astro-vscode`
+ *
+ * Value is a list of language ids, as can be found by F1 -> Change Language Mode. For example `astro`
  */
-export const marketplaceGrammarSources: { [extPublisherAndId: string]: [string, string][] } = {
-  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': [
-    ['mermaid.tmLanguage.json', 'extension/out/mermaid.tmLanguage.json']
-  ],
-  'astro-build.astro-vscode': [
-    ['astro.tmLanguage.json', 'extension/syntaxes/astro.tmLanguage.json']
-  ]
+export const marketplaceGrammarSources: Record<string, string[]> = {
+  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': ['mermaid'],
+  'astro-build.astro-vscode': ['astro']
 }
