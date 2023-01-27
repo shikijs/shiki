@@ -15,6 +15,7 @@ importers:
       '@types/unzipper': ^0.10.5
       chalk: ^5.2.0
       cross-env: ^7.0.3
+      cson: ^7.20.0
       esbuild: ^0.16.7
       esno: ^0.16.3
       fast-plist: ^0.1.3
@@ -48,6 +49,7 @@ importers:
       '@types/unzipper': 0.10.5
       chalk: 5.2.0
       cross-env: 7.0.3
+      cson: 7.20.0
       esno: 0.16.3
       fast-plist: 0.1.3
       fs-extra: 11.1.0
@@ -2925,6 +2927,12 @@ packages:
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
     dev: true
 
+  /coffeescript/1.12.7:
+    resolution: {integrity: sha512-pLXHFxQMPklVoEekowk8b3erNynC+DVJzChxS/LCBBgR6/8AJkHivkm//zbowcfc7BTCAjryuhx6gPqPRfsFoA==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    dev: true
+
   /collect-v8-coverage/1.0.1:
     resolution: {integrity: sha512-iBPtljfCNcTKNAto0KEtDfZ3qzjJvqE3aTGZsbhjSBlorqpXJlaWWtPO35D+ZImoC3KWejX64o+yPGxhWSTzfg==}
     dev: true
@@ -3165,6 +3173,24 @@ packages:
       which: 2.0.2
     dev: true
 
+  /cson-parser/4.0.9:
+    resolution: {integrity: sha512-I79SAcCYquWnEfXYj8hBqOOWKj6eH6zX1hhX3yqmS4K3bYp7jME3UFpHPzu3rUew0oyfc0s8T6IlWGXRAheHag==}
+    engines: {node: '>=10.13'}
+    dependencies:
+      coffeescript: 1.12.7
+    dev: true
+
+  /cson/7.20.0:
+    resolution: {integrity: sha512-K7g/86vC77mJqi6PRFhd3p8U/y0R6SsCeTJb5RpOAaQdApHxCoK5JwfZ8WeJjpOZ6lyyi8tNvh3UuC184H3GWg==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      cson-parser: 4.0.9
+      extract-opts: 4.3.0
+      requirefresh: 4.13.0
+      safefs: 6.16.0
+    dev: true
+
   /dargs/7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
@@ -3302,6 +3328,13 @@ packages:
     resolution: {integrity: sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==}
     dependencies:
       readable-stream: 2.3.7
+    dev: true
+
+  /eachr/4.5.0:
+    resolution: {integrity: sha512-9I664RWp6p8jvcHZIwo7bWaiSaUmA1wNSLKwNZEiaYjqiTARq3cGjyRiIunsopZv4QMmX3T5Hs17QoPAzdYxfg==}
+    engines: {node: '>=8'}
+    dependencies:
+      typechecker: 6.4.0
     dev: true
 
   /eastasianwidth/0.2.0:
@@ -3737,6 +3770,14 @@ packages:
       chardet: 0.7.0
       iconv-lite: 0.4.24
       tmp: 0.0.33
+    dev: true
+
+  /extract-opts/4.3.0:
+    resolution: {integrity: sha512-Dmssi1tgKJkQsVmbP7TgW/kbdc42SAsNf6h9ClweP+dS7O24YYMTXsNwPelxhx0LF15npiWwY5ahKtyQiNgxWA==}
+    engines: {node: '>=8'}
+    dependencies:
+      eachr: 4.5.0
+      typechecker: 6.4.0
     dev: true
 
   /fast-glob/3.2.12:
@@ -6473,6 +6514,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /requirefresh/4.13.0:
+    resolution: {integrity: sha512-APrzWWxqnwE2Bz3ysFepAU0Dc0aYjn8jsDLFIegedn+KVCS9LykAclkf+6YaJXk3ON9l6QAm04rN+bEA89cGIg==}
+    engines: {node: '>=10'}
+    dev: true
+
   /resolve-cwd/3.0.0:
     resolution: {integrity: sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg==}
     engines: {node: '>=8'}
@@ -6614,6 +6660,13 @@ packages:
 
   /safe-buffer/5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+    dev: true
+
+  /safefs/6.16.0:
+    resolution: {integrity: sha512-IUIN5h+r2acNVkbsM5VoBUsRnaSFwQFZnzyvQsiLlgFsncLi7rrtmM4FsEgwv+xDTJzsrp79rd+/GJu2zWcR9w==}
+    engines: {node: '>=10'}
+    dependencies:
+      graceful-fs: 4.2.10
     dev: true
 
   /safer-buffer/2.1.2:
@@ -7284,6 +7337,11 @@ packages:
 
   /type-fest/0.8.1:
     resolution: {integrity: sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==}
+    engines: {node: '>=8'}
+    dev: true
+
+  /typechecker/6.4.0:
+    resolution: {integrity: sha512-EbOu+9szY13mhl0EsvLXnR+pTCa3gTHQQPLdce72ujcC9fRHXlVFBNXtHeRhgzLxLlKUh4zA9C0tezLDgshf+A==}
     engines: {node: '>=8'}
     dev: true
 

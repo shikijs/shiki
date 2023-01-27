@@ -153,6 +153,7 @@ export const githubGrammarSources: [string, string][] = [
     'jinja-html',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json'
   ],
+  ['jison', 'https://github.com/cdibbs/language-jison/blob/master/grammars/jison.cson'],
   ['json5', 'https://github.com/mrmlnc/vscode-json5/blob/master/syntaxes/json5.json'],
   [
     'jsonnet',
@@ -285,6 +286,7 @@ export const githubGrammarSources: [string, string][] = [
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
   ['wasm', 'https://github.com/wasmerio/vscode-wasm/blob/master/syntaxes/wat.json'],
+  ['wgsl', 'https://github.com/PolyMeilex/vscode-wgsl/blob/master/syntaxes/wgsl.tmLanguage.json'],
   ['wenyan', 'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json'],
   [
     'zenscript',
