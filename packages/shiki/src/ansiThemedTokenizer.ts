@@ -24,6 +24,10 @@ export function tokenizeAnsiWithTheme(theme: IShikiTheme, fileContents: string):
     }
   }
 
+  if (currentLine.length > 0) {
+    lines.push(currentLine)
+  }
+
   return lines
 }
 
