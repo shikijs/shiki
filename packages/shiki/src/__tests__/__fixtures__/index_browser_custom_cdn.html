@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Test Browser - Custom CDN</title>
+    <link rel="modulepreload" href="/dist/index.browser.mjs" />
+    <script type="module">
+      import { getHighlighter, setCDN, setWasm } from './dist/index.browser.mjs'
+
+      setCDN('/assets')
+
+      const highlighter = await getHighlighter({
+        theme: 'nord',
+        langs: ['html']
+      })
+
+      const code = highlighter.codeToHtml(`<div>My HTML</div>`, { lang: 'html' })
+      document.getElementById('output').innerHTML = code
+    </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+</html>

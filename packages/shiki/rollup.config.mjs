@@ -57,7 +57,6 @@ export default defineConfig([
   },
   {
     input: 'src/index.ts',
-    external,
     output: {
       file: 'dist/index.browser.mjs',
       format: 'esm',

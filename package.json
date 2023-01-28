@@ -5,6 +5,8 @@
     "dev": "pnpm -r --parallel watch",
     "fmt": "prettier --write packages/**/*.ts",
     "test": "cross-env NODE_OPTIONS=--max-old-space-size=4096 jest --colors",
+    "test:e2e": "npm run test:e2e:localserver & pnpm dlx playwright test",
+    "test:e2e:localserver": "node ./scripts/e2e/local-server.mjs",
     "update": "npm run update:themes && npm run update:grammars",
     "update:themes": "bash ./scripts/pullThemes.sh",
     "update:grammars": "bash ./scripts/pullGrammars.sh"
@@ -21,7 +23,8 @@
     ]
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.7",
+    "@playwright/test": "^1.29.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.2.1",
@@ -47,6 +50,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^5.1.1",
     "rollup-plugin-esbuild": "^5.0.0",
+    "superstatic": "^9.0.0",
     "ts-jest": "^29.0.5",
     "tsup": "^6.5.0",
     "typescript": "^4.9.4",
@@ -55,6 +59,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "esbuild": "^0.16.7"
+    "esbuild": "^0.16.10"
   }
 }

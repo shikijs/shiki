@@ -16,30 +16,47 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: 16
+
+      - name: pnpm setup
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.17.0
+          run_install: true
 
       - name: cache pnpm modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-
 
-      - name: pnpm setup
-        uses: pnpm/action-setup@v2.1.0
-        with:
-          version: 6.31.0
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
 
-      - run: pnpm run build
+      - name: Install E2E test browsers
+        if: runner.os != 'Windows'
+        run: pnpm dlx playwright install --with-deps chromium
+
       - run: pnpm run update
+      - run: pnpm run build
       - run: pnpm run gen
         working-directory: ./packages/site
 
       - run: pnpm run test
-        env:
-          CI: true
+
+      - name: Run E2E tests
+        if: runner.os != 'Windows'
+        run: pnpm run test:e2e
+
+      - name: Upload E2E results
+        uses: actions/upload-artifact@v3
+        if: runner.os != 'Windows'
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
