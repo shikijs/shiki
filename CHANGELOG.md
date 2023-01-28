@@ -1,6 +1,6 @@
 # Changelog
 
-### 0.13.0
+### 0.13.0 | 2023-01-27
 
 - Improve grammar/theme fetching from marketplace.
 - 🙌 Support CSON grammar sources. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
