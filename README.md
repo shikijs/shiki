@@ -1,3 +1,12 @@
+We are working towards 1.0, which means:
+
+- 0.13.0 will be the last minor version
+- No new features, only minor bug fixes
+- Work will happen in `dev` branch
+- If you want to help, or ask for features, comment in [#424](https://github.com/shikijs/shiki/issues/424)
+
+---
+
 <p>
   <h2 align="center">Shiki</h2>
 </p>
