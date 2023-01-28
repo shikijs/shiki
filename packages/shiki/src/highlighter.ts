@@ -181,8 +181,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   }
 
   function ansiToHtml(ansi: string, options?: AnsiToHtmlOptions) {
-    const tokens = ansiToThemedTokens(ansi, options.theme)
-    const { _theme } = getTheme(options.theme)
+    const tokens = ansiToThemedTokens(ansi, options?.theme)
+    const { _theme } = getTheme(options?.theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg,
