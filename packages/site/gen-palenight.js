@@ -4,7 +4,7 @@ const shiki = require('shiki')
 
 shiki
   .getHighlighter({
-    theme: 'material-palenight'
+    theme: 'material-theme-palenight'
   })
   .then(highlighter => {
     const md = markdown({
