@@ -61,7 +61,6 @@ interface SVGRendererOptions {
   /**
    * How much padding should be left to the left/right in relation to font width. Default to 4.
    */
-
   bgSideCharPadding?: number
 
   /**
@@ -74,6 +73,11 @@ interface SVGRendererOptions {
    * Background minimal width. Default to longest line calculated by font-measurements done by Playwright.
    */
   bgMinWidth?: number
+
+  /**
+   * Background fill opactiy. Used for generating transparent background.
+   */
+  bgFillOpacity?: number
 }
 
 interface TokenOptions {
@@ -147,6 +151,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
   const bgCornerRadius = options.bgCornerRadius ?? 4
   const bgSideCharPadding = options.bgSideCharPadding ?? 4
   const bgVerticalCharPadding = options.bgVerticalCharPadding ?? 2
+  const bgFillOpacity = options.bgFillOpacity ?? 1
 
   const measurement = await measureMonospaceTypeface(fontNameStr, fontSize, remoteFontCSSURL)
 
@@ -178,7 +183,7 @@ export async function getSVGRenderer(options: SVGRendererOptions) {
 
       let svg = `<svg viewBox="0 0 ${bgWidth} ${bgHeight}" width="${bgWidth}" height="${bgHeight}" xmlns="http://www.w3.org/2000/svg">\n`
 
-      svg += `<rect id="bg" fill="${bg}" width="${bgWidth}" height="${bgHeight}" rx="${bgCornerRadius}"></rect>`
+      svg += `<rect id="bg" fill="${bg}" width="${bgWidth}" height="${bgHeight}" rx="${bgCornerRadius}" fill-opacity="${bgFillOpacity}"></rect>`
 
       svg += `<g id="tokens" transform="translate(${measurement.width * bgSideCharPadding}, ${
         lineheight * bgVerticalCharPadding

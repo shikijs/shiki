@@ -33,6 +33,7 @@ export type Lang =
   | 'cue'
   | 'd'
   | 'dart'
+  | 'dax'
   | 'diff'
   | 'docker'
   | 'dream-maker'
@@ -59,10 +60,11 @@ export type Lang =
   | 'html'
   | 'http'
   | 'imba'
-  | 'ini'
+  | 'ini' | 'properties'
   | 'java'
   | 'javascript' | 'js'
   | 'jinja-html'
+  | 'jison'
   | 'json'
   | 'json5'
   | 'jsonc'
@@ -94,6 +96,7 @@ export type Lang =
   | 'php'
   | 'plsql'
   | 'postcss'
+  | 'powerquery'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
@@ -116,7 +119,7 @@ export type Lang =
   | 'scheme'
   | 'scss'
   | 'shaderlab' | 'shader'
-  | 'shellscript' | 'shell' | 'bash' | 'sh' | 'zsh'
+  | 'shellscript' | 'bash' | 'console' | 'sh' | 'shell' | 'zsh'
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
@@ -144,6 +147,7 @@ export type Lang =
   | 'vue'
   | 'wasm'
   | 'wenyan' | '文言'
+  | 'wgsl'
   | 'xml'
   | 'xsl'
   | 'yaml' | 'yml'
@@ -208,7 +212,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.astro',
     path: 'astro.tmLanguage.json',
     samplePath: 'astro.sample',
-    embeddedLangs: ['json', 'javascript', 'typescript', 'tsx', 'css', 'less', 'sass', 'scss', 'stylus']
+    embeddedLangs: ['json', 'javascript', 'typescript', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'tsx']
   },
   {
     id: 'awk',
@@ -352,6 +356,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.dart',
     path: 'dart.tmLanguage.json',
     samplePath: 'dart.sample'
+  },
+  {
+    id: 'dax',
+    scopeName: 'source.dax',
+    path: 'dax.tmLanguage.json',
+    samplePath: 'dax.sample'
   },
   {
     id: 'diff',
@@ -517,7 +527,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'ini',
     scopeName: 'source.ini',
-    path: 'ini.tmLanguage.json'
+    path: 'ini.tmLanguage.json',
+    aliases: ['properties']
   },
   {
     id: 'java',
@@ -537,6 +548,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.html.jinja',
     path: 'jinja-html.tmLanguage.json',
     embeddedLangs: ['html']
+  },
+  {
+    id: 'jison',
+    scopeName: 'source.jison',
+    path: 'jison.tmLanguage.json',
+    samplePath: 'jison.sample',
+    embeddedLangs: ['javascript']
   },
   {
     id: 'json',
@@ -634,6 +652,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
@@ -711,6 +730,12 @@ export const languages: ILanguageRegistration[] = [
     id: 'postcss',
     scopeName: 'source.css.postcss',
     path: 'postcss.tmLanguage.json'
+  },
+  {
+    id: 'powerquery',
+    scopeName: 'source.powerquery',
+    path: 'powerquery.tmLanguage.json',
+    samplePath: 'powerquery.sample'
   },
   {
     id: 'powershell',
@@ -845,7 +870,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellscript',
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
-    aliases: ['shell', 'bash', 'sh', 'zsh']
+    aliases: ['bash', 'console', 'sh', 'shell', 'zsh']
   },
   {
     id: 'smalltalk',
@@ -999,6 +1024,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.wenyan',
     path: 'wenyan.tmLanguage.json',
     aliases: ['文言']
+  },
+  {
+    id: 'wgsl',
+    scopeName: 'source.wgsl',
+    path: 'wgsl.tmLanguage.json',
+    samplePath: 'wgsl.sample'
   },
   {
     id: 'xml',

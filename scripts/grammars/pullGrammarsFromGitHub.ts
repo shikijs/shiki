@@ -1,6 +1,7 @@
 import { parse as plistParse } from 'fast-plist'
 import yaml from 'js-yaml'
 import path from 'path'
+import CSON from 'cson'
 import { githubGrammarSources } from '../grammarSources'
 import { parseJson } from '../util/parse'
 import { downloadFromGH } from '../util/downloadFromGitHub'
@@ -15,7 +16,9 @@ async function go() {
       'grammar',
       content => {
         let contentObj
-        if (url.endsWith('.json')) {
+        if (url.endsWith('.cson')) {
+          contentObj = CSON.parseString(content)
+        } else if (url.endsWith('.json')) {
           contentObj = parseJson(content)
         } else if (url.endsWith('.plist')) {
           contentObj = plistParse(content)

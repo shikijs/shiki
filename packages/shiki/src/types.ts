@@ -6,13 +6,13 @@ import { Theme } from './themes'
 export interface HighlighterOptions {
   /**
    * The theme to load upfront.
+   *
+   * Default to: 'nord'
    */
   theme?: IThemeRegistration
 
   /**
    * A list of themes to load upfront.
-   *
-   * Default to: `['dark-plus', 'light-plus']`
    */
   themes?: IThemeRegistration[]
 

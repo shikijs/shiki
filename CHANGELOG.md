@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.13.0 | 2023-01-27
+
+- Improve grammar/theme fetching from marketplace.
+- 🙌 Support CSON grammar sources. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
+- Add a [Next.js 13 example](https://github.com/shikijs/next-shiki).
+- Add a `bgFillOpacity` option for SVG renderer. [#276](https://github.com/shikijs/shiki/issues/276).
+
+*Languages*
+
+- Added `console` as an alias for `shell`. [#389](https://github.com/shikijs/shiki/issues/389).
+- 🙌 Added `jison` and `wgsl` languages. [#413](https://github.com/shikijs/shiki/issues/413). Thanks to contribution from [@muenzpraeger](https://github.com/muenzpraeger)
+
+*Themes*
+
+- Renamed `material-<themeName>` to `material-theme-<themeName>`. For example, `material-ocean` to `material-theme-ocean`. `material-default` is renamed to `material-theme`.
+
+---
+
 ### 0.10.1
 
 - 🙌: feat: add ZenScript support [#300](https://github.com/shikijs/shiki/pull/300) | **[@jaredlll08](https://github.com/jaredlll08)**

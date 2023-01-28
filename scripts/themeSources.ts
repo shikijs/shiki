@@ -74,31 +74,22 @@ export const githubThemeSources: [string, string][] = [
  * Some themes have compilation step and do not include the built theme on GitHub,
  * so pull from VS Code marketplace instead.
  *
- * Key is publisher + extId
- * Value is a list. Each item represents a file to extract from the downloaded VSIX.
- * If given a single path `extension/foo/bar.json`, extract `bar.json` to `tmp/themes/bar.json`
- * If given ['baz.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/themes/baz.json`
+ * Key is the extension's identifier, as can be found in the extension's marketplace URL.
+ * For example, for https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode,
+ * the identifier is `astro-build.astro-vscode`
+ *
+ * Value is a list of themes names, as can be found by F1 -> Preferences: Color Theme
  */
-export const marketplaceThemeSources: { [extPublisherAndId: string]: [string, string][] } = {
+export const marketplaceThemeSources: Record<string, string[]> = {
   'equinusocio.vsc-material-theme': [
-    ['material-darker.json', 'extension/build/themes/Material-Theme-Darker.json'],
-    ['material-default.json', 'extension/build/themes/Material-Theme-Default.json'],
-    ['material-lighter.json', 'extension/build/themes/Material-Theme-Lighter.json'],
-    ['material-ocean.json', 'extension/build/themes/Material-Theme-Ocean.json'],
-    ['material-palenight.json', 'extension/build/themes/Material-Theme-Palenight.json']
+    'Material Theme',
+    'Material Theme Darker',
+    'Material Theme Lighter',
+    'Material Theme Ocean',
+    'Material Theme Palenight'
   ],
-  'dracula-theme.theme-dracula': [
-    ['dracula.json', 'extension/theme/dracula.json'],
-    ['dracula-soft.json', 'extension/theme/dracula-soft.json']
-  ],
-  'GitHub.github-vscode-theme': [
-    ['github-dark-dimmed.json', 'extension/themes/dark-dimmed.json'],
-    ['github-dark.json', 'extension/themes/dark-default.json'],
-    ['github-light.json', 'extension/themes/light-default.json']
-  ],
-  'antfu.theme-vitesse': [
-    ['vitesse-dark.json', 'extension/themes/vitesse-dark.json'],
-    ['vitesse-light.json', 'extension/themes/vitesse-light.json']
-  ],
-  'zhuangtongfa.material-theme': [['one-dark-pro.json', 'extension/themes/OneDark-Pro.json']]
+  'dracula-theme.theme-dracula': ['Dracula', 'Dracula Soft'],
+  'GitHub.github-vscode-theme': ['GitHub Dark', 'GitHub Light', 'GitHub Dark Dimmed'],
+  'antfu.theme-vitesse': ['Vitesse Dark', 'Vitesse Light'],
+  'zhuangtongfa.material-theme': ['One Dark Pro']
 }
