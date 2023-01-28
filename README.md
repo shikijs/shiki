@@ -1,3 +1,12 @@
+We are working towards 1.0, which means:
+
+- 0.13.0 will be the last minor version
+- No new features, only minor bug fixes
+- Work will happen in `dev` branch
+- If you want to help, or ask for features, comment in [#424](https://github.com/shikijs/shiki/issues/424)
+
+---
+
 <p>
   <h2 align="center">Shiki</h2>
 </p>
@@ -68,7 +77,6 @@ And after that you can (and should) check out the reference docs for deeper dive
 
 - [Themes](./docs/themes.md)
 - [Languages](./docs/languages.md)
-- [Plugins](./docs/plugins.md)
 - [SVG Renderer](./packages/renderer-svg/README.md)
 - [vuepress-plugin-shiki](./packages/vuepress-plugin/README.md)
 
@@ -90,6 +98,7 @@ and return a `Highlighter` object.
 The default locations where the files are loaded from depend on the environment:
 
 - In Node.js:
+
   - Languages are loaded from `node_modules/shiki/languages`. Similarly, the themes are loaded from `node_modules/shiki/themes`.
   - The Oniguruma WebAssembly file is loaded from the `node_modules/vscode-oniguruma/release/onig.wasm`.
 
@@ -115,7 +124,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-> This async code is 
+> This async code is
 
 Load the highlighter with a default theme and a list of languages:
 
@@ -145,12 +154,12 @@ Load the highlighter with multiple themes, and a list of languages:
 // The first theme in the list will be the default theme.
 
 const highlighter = await getHighlighter({
-  themes: ['github-light', 'nord'], 
+  themes: ['github-light', 'nord'],
   langs: ['javascript', 'python']
 })
 ```
 
-Load the highlighter with multiple themes, a list of languages, and override the default paths for the languages and themes: 
+Load the highlighter with multiple themes, a list of languages, and override the default paths for the languages and themes:
 
 ```js
 const highlighter = await getHighlighter({
@@ -211,7 +220,7 @@ if (!highlighter.getLoadedLanguages().includes(language)) {
     // Languages are specified by their id, they can also have aliases (i. e. "js" and "javascript")
     return bundle.id === language || bundle.aliases?.includes(language);
   });
-  if (bundles.length > 0)) {
+  if (bundles.length > 0) {
     await highlighter.loadLanguage(language)
   } else {
     // Do some error handling or default to another language or...
@@ -293,6 +302,8 @@ For Node.js environments the WASM file is automatically loaded, for browser envi
 
 > If used, `setWASM` must be invoked before `getHighlighter` is called.
 
+> If you make use of a reverse proxy like [nginx](https://www.nginx.com/) or [traefik](https://traefik.io/traefik/) you may have to specify in its configuration the MIME type for wasm files.
+
 Use the default loader: (applies to Node.js and browser environments)
 
 ```js
@@ -313,7 +324,7 @@ import { getHighlighter } from 'shiki'
 const highlighter = await getHighlighter({
   theme: 'nord',
   langs: ['javascript', 'python'],
-  patsh: {
+  paths: {
     wasm: 'your/path/' // If you use `setCDN`, this path will be relative to the CDN root.
   }
 })
@@ -326,7 +337,7 @@ import { getHighlighter, setWasm } from 'shiki'
 
 // It is recommended to use a Response object. Oniguruma will then use WebAssembly.instantiateStreaming(), which
 // means it can start parsing the file while it's still downloading.
-const wasmResponse = new Response(await fetch('/your/path/onig.wasm'))
+const wasmResponse = await fetch('/your/path/onig.wasm')
 setWasm(wasmResponse)
 
 const highlighter = await getHighlighter({
@@ -363,7 +374,7 @@ If you want to render the tokens into a code yourself, Shiki exposes two key met
 - `renderToHTML` takes an array of tokens and returns an HTML string that represents the provided code.
 
 ```js
-import { getHighlighter } from 'shiki'
+import shiki, { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   theme: 'nord',
@@ -377,7 +388,7 @@ const code = `console.log("Here is your code.");`
 const tokens = highlighter.codeToThemedTokens(code, 'javascript')
 
 // This will return an HTML string that represents the provided code.
-const html = highlighter.renderToHTML(tokens)
+const html = shiki.renderToHTML(tokens)
 ```
 
 Alternatively you can add to `renderToHTML` the desired element shape for `pre`, `code`, `line (span)`, and `token (span)`, and override the theme colors for background and foreground.
@@ -385,7 +396,7 @@ Alternatively you can add to `renderToHTML` the desired element shape for `pre`,
 For more about that, or to build your own renderer, check out the implementation in [shiki](./packages/shiki/src/renderer.ts).
 
 ```js
-const html = highlighter.renderToHTML(tokens, {
+const html = shiki.renderToHTML(tokens, {
   fg: highlighter.getForegroundColor('nord'), // Set a specific foreground color.
   bg: highlighter.getBackgroundColor('nord'), // Set a specific background color.
   // Specified elements override the default elements.
@@ -408,7 +419,7 @@ If you want to use Shiki in a browser multiple times on the same page, you shoul
 
 Common scenarios are to use the Observable pattern, or to use a singleton pattern.
 
-In both cases you've to ensure that the `Highlighter` instance is only created once, and that it is bootstrapped asynchronously before calling any of the exposed functions. 
+In both cases you've to ensure that the `Highlighter` instance is only created once, and that it is bootstrapped asynchronously before calling any of the exposed functions.
 
 ## Seen
 

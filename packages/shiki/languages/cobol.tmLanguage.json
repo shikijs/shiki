@@ -433,6 +433,37 @@
       "end": "(?i:end\\-exec)"
     },
     {
+      "begin": "(?i:exec\\s+dli)",
+      "name": "keyword.verb.cobol",
+      "contentName": "meta.embedded.block.dli",
+      "patterns": [
+        {
+          "match": "(\\()",
+          "name": "meta.symbol.cobol"
+        },
+        {
+          "include": "#dli-keywords"
+        },
+        {
+          "include": "#string-double-quoted-constant"
+        },
+        {
+          "include": "#string-quoted-constant"
+        },
+        {
+          "include": "#number-complex-constant"
+        },
+        {
+          "include": "#number-simple-constant"
+        },
+        {
+          "match": "([a-zA-Z-0-9_]*[a-zA-Z0-9]|([#]?[0-9a-zA-Z]+[a-zA-Z-0-9_]*[a-zA-Z0-9]))",
+          "name": "variable.cobol"
+        }
+      ],
+      "end": "(?i:end\\-exec)"
+    },
+    {
       "begin": "(?i:exec\\s+sqlims)",
       "name": "keyword.verb.cobol",
       "contentName": "meta.embedded.block.sql",
@@ -813,7 +844,7 @@
       }
     },
     {
-      "match": "(?<![-_])(?i:if|else|end-if|exit\\s+iterator|exit\\s+program|exit\\s+method|evaluate|end-evaluate|exit\\s+perform|perform|end-perform|when\\s+other|when|continue|call|end-call|chain|end-chain|invoke|end\\s+invoke|go\\s+to|go|sort|merge|use|xml|parse|stop\\s+run|goback\\s+returning|goback|raise|exit\\s+function|await)(?![0-9A-Za-z_-])",
+      "match": "(?<![-_])(?i:if|else|end-if|exit\\s+iterator|exit\\s+program|exit\\s+method|evaluate|end-evaluate|exit\\s+perform|perform|end-perform|when\\s+other|when|continue|call|end-call|chain|end-chain|invoke|end\\s+invoke|go\\s+to|go|sort|merge|use|xml|parse|stop\\s+run|goback\\s+returning|goback|raise|exit\\s+function|exit\\sparagraph|await)(?![0-9A-Za-z_-])",
       "name": "keyword.control.cobol"
     },
     {
@@ -1058,6 +1089,10 @@
     "cics-keywords": {
       "match": "(?<![\\-\\w])(?i:abcode|abdump|abend|abort|abprogram|abstime|accum|acee|acqactivity|acqprocess|acquactivity|action|activity|activityid|actpartn|add|address|after|aid|alarm|all|allocate|alter|alternate|altscrnht|altscrnwd|and|anykey|aplkybd|apltext|applid|as|asa|asis|asktime|asraintrpt|asrakey|asrapsw|asraregs|asraspc|asrastg|assign|asynchronous|at|attach|attachid|attributes|authenticate|autopage|auxiliary|base64|basicauth|below|bif|binary|bit|bodycharset|bookmark|brdata|brdatalength|brexit|bridge|browsetoken|btrans|buffer|build|burgeability|caddrlength|cancel|card|cbuff|ccsid|certificate|change|changetime|channel|char|characterset|check|chunkend|chunking|chunkno|chunkyes|cicsdatakey|ciphers|class|clear|cliconvert|client|clientaddr|clientaddrnu|clientconv|clientname|clntaddr6nu|clntipfamily|close|closestatus|clrpartn|cmdsec|cnamelength|cnotcompl|codepage|color|commarea|commonname|commonnamlen|comparemax|comparemin|complete|composite|compstatus|condition|confirm|confirmation|connect|consistent|console|container|contexttype|control|convdata|converse|convertst|converttime|convid|copy|counter|country|countrylen|create|critical|ctlchar|current|cursor|cwa|cwaleng|data|data1|data2|datalength|datalenth|dataonly|datapointer|dataset|datastr|datatoxml|datatype|datcontainer|date|dateform|datesep|datestring|day|daycount|dayofmonth|dayofweek|dayofyear|days|daysleft|day-of-week|dcounter|ddmmyy|ddmmyyyy|debkey|debrec|debug-contents|debug-item|debug-line|debug-name|debug-sub-1|debug-sub-2|debug-sub-3|deedit|default|define|defresp|defscrnht|defscrnwd|delay|delete|deleteq|delimiter|deq|destcount|destid|destidleng|detail|detaillength|dfhresp|dfhvalue|digest|digesttype|disconnect|docdelete|docsize|docstatus|doctoken|document|ds3270|dsscs|dump|dumpcode|dumpid|duprec|ecaddr|ecblist|eib|elemname|elemnamelen|elemns|elemnslen|end|endactivity|endbr|endbrowse|endfile|endoutput|enq|enter|entry|entryname|eoc|eods|eprfield|eprfrom|eprinto|eprlength|eprset|eprtype|equal|erase|eraseaup|error|errterm|esmreason|esmresp|event|eventtype|eventual|ewasupp|exception|expect|expirytime|extds|external|extract|facility|facilitytokn|false|faultactlen|faultactor|faultcode|faultcodelen|faultcodestr|faultstring|faultstrlen|fci|fct|field|file|firestatus|flength|fmh|fmhparm|for|force|formattime|formfeed|formfield|free|freekb|freemain|from|fromactivity|fromccsid|fromchannel|fromcodepage|fromdoc|fromflength|fromlength|fromprocess|frset|fulldate|function|gchars|gcodes|gds|generic|get|getmain|getnext|gmmi|groupid|gtec|gteq|handle|head|header|hex|high-value|high-values|hilight|hold|honeom|host|hostcodepage|hostlength|hosttype|hours|httpheader|httpmethod|httprnum|httpversion|httpvnum|ignore|immediate|in|increment|initimg|initparm|initparmlen|inpartn|input|inputevent|inputmsg|inputmsglen|inquire|insert|integer|interval|into|intoccsid|intocodepage|invalidcount|invite|invmpsz|invoke|invokingprog|invpartn|invreq|issue|issuer|item|iutype|journalname|jtypeid|jusfirst|juslast|justify|katakana|keep|keylength|keynumber|l40|l64|l80|label|langinuse|languagecode|last|lastusetime|ldc|ldcmnem|ldcnum|leavekb|length|lengthlist|level|lightpen|linage-counter|line|lineaddr|line-counter|link|list|listlength|llid|load|locality|localitylen|logmessage|logmode|logonlogmode|logonmsg|low-value|low-values|luname|main|map|mapcolumn|mapfail|mapheight|mapline|maponly|mapped|mappingdev|mapset|mapwidth|massinsert|maxdatalen|maxflength|maximum|maxlength|maxlifetime|maxproclen|mcc|mediatype|message|messageid|metadata|metadatalen|method|methodlength|milliseconds|minimum|minutes|mmddyy|mmddyyyy|mode|modename|monitor|month|monthofyear|move|msr|msrcontrol|name|namelength|natlang|natlanginuse|netname|newpassword|newphrase|newphraselen|next|nexttransid|nleom|noautopage|nocc|nocheck|nocliconvert|noclose|nodata|node|nodocdelete|nodump|noedit|noflush|nohandle|noinconvert|none|nooutconert|noqueue|noquiesce|nosrvconvert|nosuspend|note|notpurgeable|notruncate|nowait|nscontainer|null|nulls|numciphers|numevents|numitems|numrec|numroutes|numsegments|numtab|of|oidcard|on|opclass|open|operation|operator|operid|operkeys|operpurge|opid|opsecurity|options|or|orgabcode|organization|organizatlen|orgunit|orgunitlen|outdescr|outline|outpartn|output|owner|pa1|pa2|pa3|page|pagenum|page-counter|paging|parse|partn|partner|partnfail|partnpage|partns|partnset|pass|passbk|password|passwordlen|path|pathlength|pct|pf1|pf10|pf11|pf12|pf13|pf14|pf15|pf16|pf17|pf18|pf19|pf2|pf20|pf21|pf22|pf23|pf24|pf3|pf4|pf5|pf6|pf7|pf8|pf9|pfxleng|phrase|phraselen|piplength|piplist|point|pool|pop|portnumber|portnumnu|post|ppt|predicate|prefix|prepare|princonvid|prinsysid|print|priority|privacy|process|processtype|proclength|procname|profile|program|protect|ps|punch|purge|purgeable|push|put|qname|query|queryparm|querystring|querystrlen|queue|quote|quotes|random|rba|rbn|rdatt|read|readnext|readprev|readq|reattach|receive|receiver|recfm|record|recordlen|recordlength|reduce|refparms|refparmslen|relatesindex|relatestype|relatesuri|release|remove|repeatable|repetable|replace|reply|replylength|reqid|requesttype|resclass|reset|resetbr|resid|residlength|resource|resp|resp2|ressec|restart|restype|result|resume|retain|retcode|retcord|retriece|retrieve|return|returnprog|return-code|rewind|rewrite|ridfld|role|rolelength|rollback|route|routecodes|rprocess|rresource|rrn|rtermid|rtransid|run|saddrlength|scheme|schemename|scope|scopelen|scrnht|scrnwd|seconds|security|segmentlist|send|sender|serialnum|serialnumlen|server|serveraddr|serveraddrnu|serverconv|servername|service|session|sesstoken|set|shared|shift-in|shift-out|sigdata|signal|signoff|signon|sit|snamelength|soapfault|sort-control|sort-core-size|sort-file-size|sort-message|sort-mode-size|sort-return|sosi|space|spaces|spoolclose|spoolopen|spoolread|spoolwrite|srvconvert|srvraddr6nu|srvripfamily|ssltype|start|startbr|startbrowse|startcode|state|statelen|stationid|status|statuscode|statuslen|statustext|storage|strfield|stringformat|subaddr|subcodelen|subcodestr|subevent|subevent1|subevent2|subevent3|subevent4|subevent5|subevent6|subevent7|subevent8|sum|suspend|suspstatus|symbol|symbollist|synchronous|synclevel|synconreturn|syncpoint|sysid|tables|tally|task|taskpriority|tcpip|tcpipservice|tct|tctua|tctualeng|td|tellerid|template|termcode|termid|terminal|termpriority|test|text|textkybd|textlength|textprint|time|timeout|timer|timesep|title|to|toactivity|tochannel|tocontainer|toflength|token|tolength|toprocess|trace|tracenum|trailer|tranpriority|transaction|transform|transid|trigger|trt|true|ts|twa|twaleng|type|typename|typenamelen|typens|typenslen|unattend|uncommitted|unescaped|unexpin|unlock|until|uow|update|uri|urimap|url|urllength|userdatakey|userid|username|usernamelen|userpriority|using|validation|value|valuelength|verify|versionlen|volume|volumeleng|wait|waitcics|web|when-compiled|wpmedia1|wpmedia2|wpmedia3|wpmedia4|wrap|write|writeq|wsacontext|wsaepr|xctl|xmlcontainer|xmltodata|xmltransform|xrba|year|yyddd|yyddmm|yymmdd|yyyyddd|yyyyddmm|yyyymmdd|zero|zeroes|zeros)(?![\\-\\w])",
       "name": "keyword.verb.cics"
+    },
+    "dli-keywords": {
+      "match": "(?<![\\-\\w])(?i:accept|chkp|deq|dlet|gnp|gn|gu|isrt|load|log|pos|query|refresh|repl|retrieve|rolb|roll|rols|schd|sets|setu|symchkp|term|xrst)(?![\\-\\w])",
+      "name": "keyword.verb.dli"
     },
     "string-quoted-constant": {
       "begin": "'",

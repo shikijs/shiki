@@ -8,11 +8,11 @@ export type Theme =
   | 'github-light'
   | 'hc_light'
   | 'light-plus'
-  | 'material-darker'
-  | 'material-default'
-  | 'material-lighter'
-  | 'material-ocean'
-  | 'material-palenight'
+  | 'material-theme-darker'
+  | 'material-theme-lighter'
+  | 'material-theme-ocean'
+  | 'material-theme-palenight'
+  | 'material-theme'
   | 'min-dark'
   | 'min-light'
   | 'monokai'
@@ -39,11 +39,11 @@ export const themes: Theme[] = [
   'github-light',
   'hc_light',
   'light-plus',
-  'material-darker',
-  'material-default',
-  'material-lighter',
-  'material-ocean',
-  'material-palenight',
+  'material-theme-darker',
+  'material-theme-lighter',
+  'material-theme-ocean',
+  'material-theme-palenight',
+  'material-theme',
   'min-dark',
   'min-light',
   'monokai',

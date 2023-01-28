@@ -1,3 +1,5 @@
+/// <reference path="./global.d.ts" />
+
 function measureFont([fontName, fontSize]: [string, number]) {
   /**
    * Measure `M` for width

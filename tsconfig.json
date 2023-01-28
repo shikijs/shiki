@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "ES2020",
-    "declaration": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "lib": ["es2015", "es2016.array.include", "DOM", "WebWorker"],
-    "sourceMap": true
+    "esModuleInterop": true
   },
-  "references": [{ "path": "packages/shiki" }, { "path": "packages/renderer-svg" }]
+  "files": [],
+  "references": [
+    { "path": "packages/shiki" },
+    { "path": "packages/renderer-svg" },
+    { "path": "packages/renderer-path" }
+  ]
 }

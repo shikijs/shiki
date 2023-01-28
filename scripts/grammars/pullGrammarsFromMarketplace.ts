@@ -4,7 +4,7 @@ import { downloadFromMarketplace } from '../util/downloadFromMarketplace'
 go()
 
 async function go() {
-  for (let [extFullId, fPaths] of Object.entries(marketplaceGrammarSources)) {
-    await downloadFromMarketplace(extFullId, fPaths, 'grammar')
+  for (const [extFullId, langs] of Object.entries(marketplaceGrammarSources)) {
+    await downloadFromMarketplace(extFullId, langs, 'grammar')
   }
 }

@@ -53,7 +53,7 @@ export const vscodeGrammarsToRename = {
  *     - When the grammar provides an undesirable name (or no `name` key), for example `x86 and x86_64 Assembly` at
  *       https://github.com/13xforever/x86_64-assembly-vscode/blob/face834a56e416230c2d20939f9fa77c25344865/syntaxes/language-x86_64-assembly.tmLanguage#L13-L14
  *       specify the desired name, for example `asm`
- *   - `url` should be the github URL
+ *   - `url` should be the github URL. Supported suffixes: ['json', 'yml', 'yaml', 'plist', 'cson']
  * - Run `pnpm update:grammars`, examine the changes
  */
 export const githubGrammarSources: [string, string][] = [
@@ -76,13 +76,14 @@ export const githubGrammarSources: [string, string][] = [
     'actionscript-3',
     'https://github.com/BowlerHatLLC/vscode-as3mxml/blob/master/distribution/src/assembly/syntaxes/AS3.tmLanguage'
   ],
+  ['ara', 'https://github.com/ara-lang/highlighting/blob/main/syntaxes/ara.json'],
   [
     'asm',
     'https://github.com/13xforever/x86_64-assembly-vscode/blob/master/syntaxes/language-x86_64-assembly.tmLanguage'
   ],
   [
     'astro',
-    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.json'
+    'https://github.com/withastro/language-tools/blob/main/packages/vscode/syntaxes/astro.tmLanguage.src.yaml'
   ],
   ['awk', 'https://github.com/luggage66/vscode-awk/blob/master/syntaxes/awk.tmLanguage'],
   [
@@ -114,6 +115,7 @@ export const githubGrammarSources: [string, string][] = [
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
   ['dart', 'https://github.com/Dart-Code/Dart-Code/blob/master/syntaxes/dart.json'],
+  ['dax', 'https://github.com/huyza/dax-language/blob/master/syntaxes/dax.grammer.json'],
   [
     'dream-maker',
     'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json'
@@ -155,6 +157,7 @@ export const githubGrammarSources: [string, string][] = [
     'jinja-html',
     'https://github.com/samuelcolvin/jinjahtml-vscode/blob/master/syntaxes/jinja-html.tmLanguage.json'
   ],
+  ['jison', 'https://github.com/cdibbs/language-jison/blob/master/grammars/jison.cson'],
   ['json5', 'https://github.com/mrmlnc/vscode-json5/blob/master/syntaxes/json5.json'],
   [
     'jsonnet',
@@ -180,7 +183,10 @@ export const githubGrammarSources: [string, string][] = [
     'matlab',
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
-  ['mdx', 'https://github.com/silvenon/vscode-mdx/blob/master/syntaxes/mdx.tmLanguage.json'],
+  [
+    'mdx',
+    'https://github.com/mdx-js/vscode-mdx/blob/main/packages/vscode-mdx/syntaxes/mdx.tmLanguage.json'
+  ],
   [
     'nginx',
     'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/src/syntax/nginx.tmLanguage'
@@ -193,6 +199,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/alefragnani/vscode-language-pascal/blob/master/syntaxes/pascal.tmLanguage'
   ],
   ['plsql', 'https://github.com/zabel-xyz/plsql-language/blob/master/syntaxes/plsql.tmLanguage'],
+  [
+    'powerquery',
+    'https://github.com/microsoft/powerquery-language/blob/master/PowerQuery.tmLanguage.json'
+  ],
   [
     'prisma',
     'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json'
@@ -275,11 +285,12 @@ export const githubGrammarSources: [string, string][] = [
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
   [
     'vue',
-    'https://github.com/johnsoncodehk/volar/blob/master/extensions/vscode-vue-language-features/syntaxes/vue.tmLanguage.json'
+    'https://github.com/johnsoncodehk/volar/blob/master/vue-language-tools/vscode-vue/syntaxes/vue.tmLanguage.json'
   ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
   ['wasm', 'https://github.com/wasmerio/vscode-wasm/blob/master/syntaxes/wat.json'],
+  ['wgsl', 'https://github.com/PolyMeilex/vscode-wgsl/blob/master/syntaxes/wgsl.tmLanguage.json'],
   ['wenyan', 'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json'],
   [
     'zenscript',
@@ -297,11 +308,13 @@ export const languageAliases = {
   berry: ['be'],
   cadence: ['cdc'],
   clojure: ['clj'],
+  codeql: ['ql'],
   csharp: ['c#', 'cs'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
   haskell: ['hs'],
   handlebars: ['hbs'],
+  ini: ['properties'],
   javascript: ['js'],
   jssm: ['fsl'],
   make: ['makefile'],
@@ -315,13 +328,13 @@ export const languageAliases = {
   rust: ['rs'],
   'html-ruby-erb': ['erb'],
   shaderlab: ['shader'],
-  shellscript: ['shell', 'bash', 'sh', 'zsh'],
+  shellscript: ['bash', 'console', 'sh', 'shell', 'zsh'],
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
   viml: ['vim', 'vimscript'],
   wenyan: ['文言'],
-  codeql: ['ql']
+  yaml: ['yml']
 }
 
 /**
@@ -342,12 +355,12 @@ export const embeddedLanguagesToExclude = [
  * Some grammars have compilation step and do not include the built grammar on GitHub,
  * so pull from VS Code marketplace instead.
  *
- * Key is publisher + extId
- * Value is a list. Each item represents a file to extract from the downloaded VSIX.
- * If given ['foo.json', `extension/foo/bar.json`], extract `bar.json` to `tmp/grammars/foo.json`
+ * Key is the extension's identifier, as can be found in the extension's marketplace URL.
+ * For example, for https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode,
+ * the identifier is `astro-build.astro-vscode`
+ *
+ * Value is a list of language ids, as can be found by F1 -> Change Language Mode. For example `astro`
  */
-export const marketplaceGrammarSources: { [extPublisherAndId: string]: [string, string][] } = {
-  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': [
-    ['mermaid.tmLanguage.json', 'extension/out/mermaid.tmLanguage.json']
-  ]
+export const marketplaceGrammarSources: Record<string, string[]> = {
+  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': ['mermaid']
 }
