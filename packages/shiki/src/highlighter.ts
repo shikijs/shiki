@@ -1,14 +1,16 @@
 import type {
   Highlighter,
   HighlighterOptions,
-  HtmlOptions,
+  CodeToHtmlOptions,
   ILanguageRegistration,
   IShikiTheme,
   IThemeRegistration,
-  StringLiteralUnion
+  StringLiteralUnion,
+  AnsiToHtmlOptions
 } from './types'
 import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
+import { tokenizeAnsiWithTheme } from './ansiThemedTokenizer'
 import { renderToHtml } from './renderer'
 
 import { getOniguruma, WASM_PATH } from './loader'
@@ -136,7 +138,12 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
     return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
-  function codeToHtml(code: string, options?: HtmlOptions): string
+  function ansiToThemedTokens(ansi: string, theme?: IThemeRegistration) {
+    const { _theme } = getTheme(theme)
+    return tokenizeAnsiWithTheme(_theme, ansi)
+  }
+
+  function codeToHtml(code: string, options?: CodeToHtmlOptions): string
   function codeToHtml(
     code: string,
     lang?: StringLiteralUnion<Lang>,
@@ -144,10 +151,10 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   ): string
   function codeToHtml(
     code: string,
-    arg1: StringLiteralUnion<Lang> | HtmlOptions = 'text',
+    arg1: StringLiteralUnion<Lang> | CodeToHtmlOptions = 'text',
     arg2?: StringLiteralUnion<Theme>
   ) {
-    let options: HtmlOptions
+    let options: CodeToHtmlOptions
 
     // codeToHtml(code, options?) overload
     if (typeof arg1 === 'object') {
@@ -165,6 +172,17 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
       includeExplanation: false
     })
     const { _theme } = getTheme(options.theme)
+    return renderToHtml(tokens, {
+      fg: _theme.fg,
+      bg: _theme.bg,
+      lineOptions: options?.lineOptions,
+      themeName: _theme.name
+    })
+  }
+
+  function ansiToHtml(ansi: string, options?: AnsiToHtmlOptions) {
+    const tokens = ansiToThemedTokens(ansi, options?.theme)
+    const { _theme } = getTheme(options?.theme)
     return renderToHtml(tokens, {
       fg: _theme.fg,
       bg: _theme.bg,
@@ -204,6 +222,8 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
   return {
     codeToThemedTokens,
     codeToHtml,
+    ansiToThemedTokens,
+    ansiToHtml,
     getTheme: (theme: IThemeRegistration) => {
       return getTheme(theme)._theme
     },
