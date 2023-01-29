@@ -1,67 +1,76 @@
-import Anser, { AnserJsonEntry } from 'anser'
+import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
 import { FontStyle } from './stackElementMetadata'
 import { IThemedToken } from './themedTokenizer'
 import { IShikiTheme } from './types'
 
 export function tokenizeAnsiWithTheme(theme: IShikiTheme, fileContents: string): IThemedToken[][] {
-  const ansiTokens = Anser.ansiToJson(fileContents, { use_classes: true })
+  const lines = fileContents.split(/\r?\n/)
 
-  const lines: IThemedToken[][] = []
-  let currentLine: IThemedToken[] = []
+  const colorPalette = createColorPalette(
+    Object.fromEntries(
+      namedColors.map(name => [
+        name,
+        theme.colors[`terminal.ansi${name[0].toUpperCase()}${name.substring(1)}`]
+      ])
+    ) as any
+  )
 
-  for (const ansiToken of ansiTokens) {
-    const ansiTokenLines = ansiToken.content.split('\n')
-    for (let i = 0; i < ansiTokenLines.length; i++) {
-      if (i > 0) {
-        lines.push(currentLine)
-        currentLine = []
+  const parser = createAnsiSequenceParser()
+
+  return lines.map(line =>
+    parser.parse(line).map((token): IThemedToken => {
+      let color: string
+      if (token.decorations.has('reverse')) {
+        color = token.background ? colorPalette.value(token.background) : theme.bg
+      } else {
+        color = token.foreground ? colorPalette.value(token.foreground) : theme.fg
       }
-      currentLine.push({
-        content: ansiTokenLines[i],
-        color: getThemeColor(theme, ansiToken),
-        fontStyle: getFontStyle(ansiToken)
-      })
-    }
-  }
 
-  if (currentLine.length > 0) {
-    lines.push(currentLine)
-  }
+      if (token.decorations.has('dim')) {
+        color = dimColor(color)
+      }
 
-  return lines
-}
-
-function getThemeColor(theme: IShikiTheme, ansiToken: AnserJsonEntry) {
-  const colorType = ansiToken.decorations.includes('reverse') ? 'bg' : 'fg'
-
-  if (ansiToken[colorType] === null) {
-    return theme[colorType]
-  }
-
-  const colorNameCamel = ansiToken[colorType].replace(/-([a-z])/g, g => g[1].toUpperCase())
-  return theme.colors[`terminal.${colorNameCamel}`]
-}
-
-function getFontStyle(ansiToken: AnserJsonEntry): FontStyle {
-  let fontStyle: FontStyle = FontStyle.None
-
-  // TODO: support strikethrough and hidden?
-  for (const decoration of ansiToken.decorations) {
-    switch (decoration) {
-      case 'bold':
+      let fontStyle: FontStyle = FontStyle.None
+      if (token.decorations.has('bold')) {
         fontStyle |= FontStyle.Bold
-        break
-      case 'dim':
-        fontStyle &= ~FontStyle.Bold
-        break
-      case 'italic':
+      }
+      if (token.decorations.has('italic')) {
         fontStyle |= FontStyle.Italic
-        break
-      case 'underline':
+      }
+      if (token.decorations.has('underline')) {
         fontStyle |= FontStyle.Underline
-        break
+      }
+
+      return {
+        content: token.value,
+        color,
+        fontStyle
+      }
+    })
+  )
+}
+
+/**
+ * Adds 50% alpha to a hex color string
+ */
+function dimColor(color: string) {
+  const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/)
+  if (hexMatch) {
+    if (hexMatch[3]) {
+      // convert from #rrggbbaa to #rrggbb(aa/2)
+      const alpha = Math.round(Number.parseInt(hexMatch[3], 16) / 2)
+        .toString(16)
+        .padStart(2, '0')
+      return `#${hexMatch[1]}${hexMatch[2]}${alpha}`
+    } else if (hexMatch[2]) {
+      // convert from #rrggbb to #rrggbb80
+      return `#${hexMatch[1]}${hexMatch[2]}80`
+    } else {
+      // convert from #rgb to #rrggbb80
+      return `#${Array.from(hexMatch[1])
+        .map(x => `${x}${x}`)
+        .join('')}80`
     }
   }
-
-  return fontStyle
+  return color
 }
