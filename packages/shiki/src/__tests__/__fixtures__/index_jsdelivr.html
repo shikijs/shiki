@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Test jsDelivr</title>
+    <script src="https://cdn.jsdelivr.net/npm/shiki"></script>
+    <script>
+      shiki
+        .getHighlighter({
+          theme: 'nord',
+          langs: ['html']
+        })
+        .then(highlighter => {
+          const code = highlighter.codeToHtml(`<div>My HTML</div>`, { lang: 'html' })
+          document.getElementById('output').innerHTML = code
+        })
+    </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Test Browser - Custom Paths</title>
+    <link rel="modulepreload" href="/dist/index.browser.mjs" />
+    <script type="module">
+      import { getHighlighter } from './dist/index.browser.mjs'
+
+      const highlighter = await getHighlighter({
+        theme: 'nord',
+        langs: ['html'],
+        paths: {
+          languages: '/custom/langs',
+          themes: '/custom/theme',
+          wasm: '/custom/bin'
+        }
+      })
+
+      const code = highlighter.codeToHtml(`<div>My HTML</div>`, { lang: 'html' })
+      document.getElementById('output').innerHTML = code
+    </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+</html>
