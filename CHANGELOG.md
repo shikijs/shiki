@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.14.0 | 2023-01-29
+
+- 🙌 ANSI support. [#386](https://github.com/shikijs/shiki/issues/386). Thanks to contribution from [@blake-mealey](https://github.com/blake-mealey).
+
 ### 0.13.0 | 2023-01-27
 
 - Improve grammar/theme fetching from marketplace.
