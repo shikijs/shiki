@@ -5,7 +5,7 @@ import { groupBy } from './utils'
 
 const defaultElements: ElementsOptions = {
   pre({ className, style, children }) {
-    return `<pre class="${className}" style="${style}">${children}</pre>`
+    return `<pre class="${className}" style="${style}" tabindex="0">${children}</pre>`
   },
 
   code({ children }) {
