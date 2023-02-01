@@ -1,13 +1,19 @@
 import url from 'url'
 import https from 'https'
 
+const steps = {
+  Initial: 'Initial fetch',
+  UTF8: 'Parse as UTF-8',
+  Binary: 'Parse as binary'
+}
+
 export async function get(url: string, encoding: BufferEncoding = 'utf-8'): Promise<any> {
   return new Promise((r, reject) => {
     https
       .get(url, res => {
-        const { statusCode } = res
+        const { statusCode, statusMessage } = res
         if (statusCode !== 200) {
-          reject('request failed')
+          reject({ step: steps.Initial, message: `${statusCode} ${statusMessage}` })
         }
 
         res.setEncoding(encoding)
@@ -19,7 +25,7 @@ export async function get(url: string, encoding: BufferEncoding = 'utf-8'): Prom
               r(rawData)
             } catch (e) {
               console.log(e)
-              reject('get failed')
+              reject({ steps: steps.UTF8, message: e.message })
             }
           })
         } else if (encoding === 'binary') {
@@ -28,14 +34,14 @@ export async function get(url: string, encoding: BufferEncoding = 'utf-8'): Prom
           res.on('end', function () {
             r(Buffer.concat(data))
           })
-          res.on('error', function (err) {
-            console.log(err)
-            reject('get failed')
+          res.on('error', function (e) {
+            console.log(e)
+            reject({ steps: steps.Binary, message: e.message })
           })
         }
       })
       .on('error', e => {
-        reject('get failed')
+        reject({ step: steps.Initial, message: e.message })
       })
   })
 }

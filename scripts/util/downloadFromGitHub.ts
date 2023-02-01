@@ -14,11 +14,18 @@ export async function downloadFromGH(
   try {
     content = await get(targetUrl)
   } catch (e) {
-    throw Error(`Failed to download ${type} from ${url}: ${e}`)
+    console.error(`Failed to download ${type} from ${url}: ${e.step} - ${e.message}`)
+    return {
+      ...e,
+      success: false,
+      type,
+      url
+    }
   }
 
   const contentObj = processor(content)
 
   fs.writeFileSync(outPath, JSON.stringify(contentObj, null, 2))
   console.log(`Downloaded ${type}: ${chalk.blue(outPath)}`)
+  return { success: true }
 }

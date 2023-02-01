@@ -1,6 +1,7 @@
 # clean up
 rm -rf tmp/grammars
 mkdir -p tmp/grammars
+rm -f tmp/errors.grammar.json
 
 echo "> Getting VS Code grammars"
 if [ ! -d tmp/vscode ]; then
@@ -14,7 +15,13 @@ cp tmp/vscode/extensions/**/syntaxes/*.json tmp/grammars
 echo "> Done getting VS Code grammars"
 
 echo "> Getting grammars from GitHub"
-npx esno scripts/grammars/pullGrammarsFromGitHub.ts
+if [ "$CI" = false ]; then
+  npx esno scripts/grammars/pullGrammarsFromGitHub.ts
+else
+  npx esno scripts/grammars/pullGrammarsFromGitHub.ts --output-errors
+  scripts/createGitHubIssues.sh
+fi
+
 echo "> Done getting grammars from GitHub"
 
 echo "> Getting grammars from VS Code marketplace"
