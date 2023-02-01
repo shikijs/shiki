@@ -1,6 +1,6 @@
 {
   "name": "dart",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "fileTypes": ["dart"],
   "scopeName": "source.dart",
   "foldingStartMarker": "\\{\\s*$",
@@ -257,7 +257,7 @@
     "function-identifier": {
       "patterns": [
         {
-          "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?[!?]?(\\(|\\s+=>)",
+          "match": "([_$]*[a-z][a-zA-Z0-9_$]*)(<(?:[a-zA-Z0-9_$<>?]|,\\s*|\\s+extends\\s+)+>)?[!?]?\\(",
           "captures": {
             "1": {
               "name": "entity.name.function.dart"
@@ -311,7 +311,7 @@
         },
         {
           "name": "keyword.control.dart",
-          "match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while)\\b(?!\\$)"
+          "match": "(?<!\\$)\\b(break|case|continue|default|do|else|for|if|in|return|switch|while|when)\\b(?!\\$)"
         },
         {
           "name": "keyword.control.dart",
@@ -327,7 +327,7 @@
         },
         {
           "name": "keyword.declaration.dart",
-          "match": "(?<!\\$)\\b(abstract|class|enum|extends|extension|external|factory|implements|get(?!\\()|mixin|native|operator|set(?!\\()|typedef|with|covariant)\\b(?!\\$)"
+          "match": "(?<!\\$)\\b(abstract|sealed|base|interface|class|enum|extends|extension|external|factory|implements|get(?!\\()|mixin|native|operator|set(?!\\()|typedef|with|covariant)\\b(?!\\$)"
         },
         {
           "name": "storage.modifier.dart",
