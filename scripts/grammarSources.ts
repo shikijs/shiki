@@ -168,6 +168,10 @@ export const githubGrammarSources: [string, string][] = [
     'kotlin',
     'https://github.com/mathiasfrohlich/vscode-kotlin/blob/master/syntaxes/Kotlin.tmLanguage'
   ],
+  [
+    'kusto',
+    'https://github.com/rosshamish/kuskus/blob/master/kusto-syntax-highlighting/syntaxes/kusto.tmLanguage.json'
+  ],
   ['latex', 'https://github.com/James-Yu/LaTeX-Workshop/blob/master/syntax/LaTeX.tmLanguage.json'],
   ['lisp', 'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage'],
   [
@@ -317,6 +321,7 @@ export const languageAliases = {
   ini: ['properties'],
   javascript: ['js'],
   jssm: ['fsl'],
+  kusto: ['kql'],
   make: ['makefile'],
   markdown: ['md'],
   'objective-c': ['objc'],

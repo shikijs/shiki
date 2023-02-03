@@ -73,6 +73,7 @@ export type Lang =
   | 'jsx'
   | 'julia'
   | 'kotlin'
+  | 'kusto' | 'kql'
   | 'latex'
   | 'less'
   | 'liquid'
@@ -599,6 +600,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'kotlin',
     scopeName: 'source.kotlin',
     path: 'kotlin.tmLanguage.json'
+  },
+  {
+    id: 'kusto',
+    scopeName: 'source.kusto',
+    path: 'kusto.tmLanguage.json',
+    samplePath: 'kusto.sample',
+    aliases: ['kql']
   },
   {
     id: 'latex',

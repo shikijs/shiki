@@ -123,6 +123,7 @@ export type Lang =
   | 'jsx'
   | 'julia'
   | 'kotlin'
+  | 'kusto' | 'kql'
   | 'latex'
   | 'less'
   | 'liquid'
