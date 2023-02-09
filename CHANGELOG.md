@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.14.1 | 2023-02-09
+
+- 🙌 Scrollable <pre> elements should be focusable. [#428](https://github.com/shikijs/shiki/issues/428). Thanks to contribution from [@kevinleedrum](https://github.com/kevinleedrum).
 ### 0.14.0 | 2023-01-29
 
 - 🙌 ANSI support. [#386](https://github.com/shikijs/shiki/issues/386). Thanks to contribution from [@blake-mealey](https://github.com/blake-mealey).
