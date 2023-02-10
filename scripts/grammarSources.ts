@@ -113,6 +113,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage'],
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
+  [`cypher`,'https://github.com/jakeboone02/cypher-query-language/blob/main/syntaxes/cypher.tmLanguage'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
   ['dart', 'https://github.com/Dart-Code/Dart-Code/blob/master/syntaxes/dart.json'],
   ['dax', 'https://github.com/huyza/dax-language/blob/master/syntaxes/dax.grammer.json'],

@@ -81,6 +81,7 @@ export type Lang =
   | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
+  | 'cypher'
   | 'd'
   | 'dart'
   | 'dax'

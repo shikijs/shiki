@@ -1,0 +1,14 @@
+MATCH    (actor1:Actor)-[follow:FOLLOW]->(actor2:Actor)-[like1:LIKE]->(movie:Movie) 
+with     actor1,movie 
+OPTIONAL MATCH (actor1)-[like2:LIKE]->(movie) 
+WITH     actor1, movie, like2 
+WHERE    actor1.name = "Drew Barrymore" 
+RETURN   DISTINCT movie.name AS NAME_OF_MOVIE, 
+          CASE 
+          WHEN like2 IS NULL THEN "NOT WATCHED" 
+          ELSE "WATCHED" 
+         END     AS WATCHED, 
+         movie.likes AS NO_OF_LIKE 
+ORDER BY movie.likes DESC
+
+// From https://www.withexample.com/neo4j-samples-simple-complex-queries/

@@ -31,6 +31,7 @@ export type Lang =
   | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
+  | 'cypher'
   | 'd'
   | 'dart'
   | 'dax'
@@ -347,6 +348,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'cue.sample'
   },
   {
+    id: 'cypher',
+    scopeName: 'source.cypher',
+    path: 'cypher.tmLanguage.json',
+    samplePath: 'cypher.sample'
+  },
+  {
     id: 'd',
     scopeName: 'source.d',
     path: 'd.tmLanguage.json',
@@ -660,6 +667,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
