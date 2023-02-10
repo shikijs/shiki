@@ -1,12 +1,5 @@
 {
-  "information_for_contributors": [
-    "This file has been converted from https://github.com/jlelong/vscode-latex-basics/blob/master/syntaxes/LaTeX.tmLanguage.json",
-    "If you want to provide a fix or improvement, please create a pull request against the original repository.",
-    "Once accepted there, we are happy to receive an update request."
-  ],
-  "version": "https://github.com/jlelong/vscode-latex-basics/commit/fcf4cca5b18a4c71ace161cf6af87cf6a50d9abd",
   "name": "latex",
-  "scopeName": "text.tex.latex",
   "patterns": [
     {
       "comment": "This scope identifies partially typed commands such as `\\tab`. We use this to trigger “Command Completion” only when it makes sense.",
@@ -2328,5 +2321,6 @@
         }
       ]
     }
-  }
+  },
+  "scopeName": "text.tex.latex"
 }
