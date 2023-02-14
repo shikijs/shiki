@@ -273,16 +273,13 @@
           "include": "#constants"
         },
         {
-          "include": "#scala-symbol"
-        },
-        {
           "include": "#singleton-type"
         },
         {
           "include": "#inline"
         },
         {
-          "include": "#scala-quoted"
+          "include": "#scala-quoted-or-symbol"
         },
         {
           "include": "#char-literal"
@@ -691,15 +688,30 @@
         }
       ]
     },
-    "scala-quoted": {
+    "scala-quoted-or-symbol": {
       "patterns": [
         {
-          "match": "['$]\\{(?!')",
-          "name": "punctuation.section.block.begin.scala"
+          "match": "(')((?>(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)))(?!')",
+          "captures": {
+            "1": {
+              "name": "keyword.control.flow.staging.scala constant.other.symbol.scala"
+            },
+            "2": {
+              "name": "constant.other.symbol.scala"
+            }
+          }
         },
         {
-          "match": "'\\[(?!')",
-          "name": "meta.bracket.scala"
+          "match": "'(?=\\s*\\{(?!'))",
+          "name": "keyword.control.flow.staging.scala"
+        },
+        {
+          "match": "'(?=\\s*\\[(?!'))",
+          "name": "keyword.control.flow.staging.scala"
+        },
+        {
+          "match": "\\$(?=\\s*\\{)",
+          "name": "keyword.control.flow.staging.scala"
         }
       ]
     },
@@ -895,10 +907,6 @@
           "name": "keyword.declaration.scala"
         }
       }
-    },
-    "scala-symbol": {
-      "match": "(?>'(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))(?!')",
-      "name": "constant.other.symbol.scala"
     },
     "curly-braces": {
       "begin": "\\{",
