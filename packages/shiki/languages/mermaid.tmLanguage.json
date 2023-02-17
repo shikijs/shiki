@@ -309,7 +309,7 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Entity Relationship Diagram",
@@ -389,7 +389,7 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Gantt Diagram",
@@ -471,7 +471,7 @@
               "end": "$"
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Git Graph",
@@ -616,11 +616,11 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Graph",
-          "begin": "^\\s*(graph|flowchart)\\s+([A-Za-z\\ 0-9]+)",
+          "begin": "^\\s*(graph|flowchart)\\s+([\\p{Letter}\\ 0-9]+)",
           "beginCaptures": {
             "1": {
               "name": "keyword.control.mermaid"
@@ -635,7 +635,7 @@
               "name": "comment"
             },
             {
-              "match": "\\b(subgraph)\\s+([A-Za-z\\ 0-9]+)",
+              "match": "\\b(subgraph)\\s+([\\p{Letter}\\ 0-9]+)",
               "captures": {
                 "1": {
                   "name": "keyword.control.mermaid"
@@ -860,7 +860,7 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Pie Chart",
@@ -905,7 +905,7 @@
               "end": "$"
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "Sequence Diagram",
@@ -1047,7 +1047,7 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "State Diagram",
@@ -1255,7 +1255,7 @@
               }
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         },
         {
           "comment": "User Journey",
@@ -1311,7 +1311,7 @@
               "end": "$"
             }
           ],
-          "end": "(^|\\G)(?=\\s*[`~]{3,}\\s*$)"
+          "end": "(^|\\G)(?=\\s*[`:~]{3,}\\s*$)"
         }
       ]
     }
