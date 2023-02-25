@@ -77,4 +77,6 @@ function dimColor(color: string) {
   if (cssVarMatch) {
     return `var(${cssVarMatch[1]}-dim)`
   }
+
+  return color
 }
