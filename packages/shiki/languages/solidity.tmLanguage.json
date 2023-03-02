@@ -393,11 +393,11 @@
     "string": {
       "patterns": [
         {
-          "match": "\\\".*?\\\"",
+          "match": "\\\"(?:\\\\\"|[^\\\"])*\\\"",
           "name": "string.quoted.double"
         },
         {
-          "match": "\\'.*?\\'",
+          "match": "\\'(?:\\\\'|[^\\'])*\\'",
           "name": "string.quoted.single"
         }
       ]
@@ -891,6 +891,9 @@
             },
             {
               "include": "#punctuation"
+            },
+            {
+              "include": "#comment"
             }
           ]
         },
