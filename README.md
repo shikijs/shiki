@@ -84,7 +84,7 @@ And after that you can (and should) check out the reference docs for deeper dive
 
 Shiki has a lot of points for customization notably: themes, languages, and custom renderers.
 
-Shiki leverages the [TextMate](https://macromates.com/manual/en/language_grammars) grammar system to tokenize code. It uses the [VS Code Oniguruma](https://github.com/vscode-oniguruma/vscode-oniguruma) library to do the heavy lifting of matching the grammar rules to code.
+Shiki leverages the [TextMate](https://macromates.com/manual/en/language_grammars) grammar system to tokenize code. It uses the [VS Code Oniguruma](https://github.com/microsoft/vscode-oniguruma) library to do the heavy lifting of matching the grammar rules to code.
 
 At the core is Shiki's [highlighter](./packages/shiki/src/highlighter.ts). The highlighter is a class which takes a theme and languages, and exposes functions like `codeToHtml` which converts string of arbitrary code and returns a string of HTML for rendering on the web.
 
