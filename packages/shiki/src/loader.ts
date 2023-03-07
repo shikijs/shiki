@@ -121,15 +121,21 @@ async function _fetchAssets(filepath: string): Promise<string> {
 
 async function _fetchJSONAssets(filepath: string) {
   const errors: ParseError[] = []
-  const rawTheme = parse(await _fetchAssets(filepath), errors, {
-    allowTrailingComma: true
-  })
+  const assetString = await _fetchAssets(filepath)
+  let rawAsset
+  try {
+    // Try to parse as JSON first, since it's much faster
+    rawAsset = JSON.parse(assetString)
+  } catch (e) {
+    rawAsset = parse(assetString, errors, {
+      allowTrailingComma: true
+    })
 
-  if (errors.length) {
-    throw errors[0]
+    if (errors.length) {
+      throw errors[0]
+    }
   }
-
-  return rawTheme
+  return rawAsset
 }
 
 /**
