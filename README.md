@@ -18,7 +18,7 @@ We are working towards 1.0, which means:
 
 ## About
 
-Shiki uses TextMate grammar's to tokenize strings, and colors the tokens via VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code, and it works great in your static website generator (or your dynamic website).
+Shiki uses TextMate grammars to tokenize strings, and colors the tokens via VS Code themes. In short, Shiki generates HTML that looks exactly like your code in VS Code, and it works great in your static website generator (or your dynamic website).
 
 No custom RegEx to maintain, no custom CSS to maintain, no custom HTML to maintain. And as your favorite languages and themes in VS Code evolve - your syntax highlighting will evolve too.
 
