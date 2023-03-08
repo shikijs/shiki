@@ -6,6 +6,9 @@
       "include": "#natspec"
     },
     {
+      "include": "#declaration-userType"
+    },
+    {
       "include": "#comment"
     },
     {
@@ -89,6 +92,12 @@
         },
         {
           "include": "#natspec-tag-return"
+        },
+        {
+          "include": "#natspec-tag-custom"
+        },
+        {
+          "include": "#natspec-tag-inheritdoc"
         }
       ]
     },
@@ -103,6 +112,14 @@
     "natspec-tag-notice": {
       "match": "(@notice)\\b",
       "name": "storage.type.dev.natspec"
+    },
+    "natspec-tag-custom": {
+      "match": "(@custom:\\w*)\\b",
+      "name": "storage.type.dev.natspec"
+    },
+    "natspec-tag-inheritdoc": {
+      "match": "(@inheritdoc)\\b",
+      "name": "storage.type.author.natspec"
     },
     "natspec-tag-dev": {
       "match": "(@dev)\\b",
@@ -231,7 +248,7 @@
     "control-flow": {
       "patterns": [
         {
-          "match": "\\b(if|else|for|while|do|break|continue|try|catch|finally|throw|return)\\b",
+          "match": "\\b(if|else|for|while|do|break|continue|try|catch|finally|throw|return|global)\\b",
           "name": "keyword.control.flow"
         },
         {
@@ -387,7 +404,7 @@
       "name": "constant.numeric.hexadecimal"
     },
     "number-scientific": {
-      "match": "\\b(?:0\\.(?:0[1-9]|[1-9][0-9_]?)|[1-9][0-9_]*(?:\\.\\d{1,2})?)(?:e[+-]?[0-9_]+)?",
+      "match": "\\b(?:0\\.(?:0[0-9]|[0-9][0-9_]?)|[0-9][0-9_]*(?:\\.\\d{1,2})?)(?:e[+-]?[0-9_]+)?",
       "name": "constant.numeric.scientific"
     },
     "string": {
@@ -576,6 +593,9 @@
           "include": "#declaration-contract"
         },
         {
+          "include": "#declaration-userType"
+        },
+        {
           "include": "#declaration-interface"
         },
         {
@@ -656,6 +676,20 @@
           "include": "#declaration-storage-field"
         }
       ]
+    },
+    "declaration-userType": {
+      "match": "\\b(type)\\b\\s+(\\w+)\\b\\s+\\b(is)\\b",
+      "captures": {
+        "1": {
+          "name": "storage.type.userType"
+        },
+        "2": {
+          "name": "entity.name.type.userType"
+        },
+        "3": {
+          "name": "storage.modifier.is"
+        }
+      }
     },
     "declaration-contract": {
       "patterns": [
