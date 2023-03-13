@@ -590,6 +590,9 @@
           "include": "#static-foreach"
         },
         {
+          "include": "#static-foreach-reverse"
+        },
+        {
           "include": "#foreach-statement"
         },
         {
@@ -781,6 +784,10 @@
               "end": "\\)",
               "patterns": [
                 {
+                  "match": ";",
+                  "name": "keyword.operator.semi-colon.d"
+                },
+                {
                   "include": "source.d"
                 }
               ]
@@ -804,6 +811,10 @@
               "begin": "\\(",
               "end": "\\)",
               "patterns": [
+                {
+                  "match": ";",
+                  "name": "keyword.operator.semi-colon.d"
+                },
                 {
                   "include": "source.d"
                 }
@@ -2036,6 +2047,38 @@
               "end": "\\)",
               "patterns": [
                 {
+                  "match": ";",
+                  "name": "keyword.operator.semi-colon.d"
+                },
+                {
+                  "include": "source.d"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "static-foreach-reverse": {
+      "patterns": [
+        {
+          "begin": "\\b(static\\s+foreach_reverse)\\b\\s*",
+          "captures": {
+            "1": {
+              "name": "keyword.control.static-foreach.d"
+            }
+          },
+          "end": "(?<=\\))",
+          "patterns": [
+            {
+              "begin": "\\(",
+              "end": "\\)",
+              "patterns": [
+                {
+                  "match": ";",
+                  "name": "keyword.operator.semi-colon.d"
+                },
+                {
                   "include": "source.d"
                 }
               ]
@@ -2165,12 +2208,8 @@
     "semi-colon": {
       "patterns": [
         {
-          "match": ";\\s*$",
-          "name": "meta.statement.end.d"
-        },
-        {
           "match": ";",
-          "name": "keyword.operator.semi-colon.d"
+          "name": "meta.statement.end.d"
         }
       ]
     },
