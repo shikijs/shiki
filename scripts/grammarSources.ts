@@ -166,7 +166,7 @@ export const githubGrammarSources: [string, string][] = [
   ['jssm', 'https://github.com/StoneCypher/sublime-jssm/blob/master/jssm.tmLanguage'],
   [
     'kotlin',
-    'https://github.com/mathiasfrohlich/vscode-kotlin/blob/master/syntaxes/Kotlin.tmLanguage'
+    'https://github.com/nishtahir/language-kotlin/blob/master/dist/Kotlin.JSON-tmLanguage'
   ],
   [
     'kusto',
