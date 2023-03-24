@@ -314,6 +314,7 @@ export const languageAliases = {
   clojure: ['clj'],
   codeql: ['ql'],
   csharp: ['c#', 'cs'],
+  docker: ['dockerfile'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
   haskell: ['hs'],
