@@ -189,7 +189,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'mdx',
-    'https://github.com/mdx-js/vscode-mdx/blob/main/packages/vscode-mdx/syntaxes/mdx.tmLanguage.json'
+    'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'
   ],
   [
     'nginx',
