@@ -600,7 +600,8 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'kotlin',
     scopeName: 'source.kotlin',
-    path: 'kotlin.tmLanguage.json'
+    path: 'kotlin.tmLanguage.json',
+    samplePath: 'kotlin.sample'
   },
   {
     id: 'kusto',
@@ -661,6 +662,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'typescript']
   },
   {
