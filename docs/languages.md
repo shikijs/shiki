@@ -151,7 +151,7 @@ export type Lang =
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
-  | 'proto' | 'protobuf'
+  | 'proto'
   | 'pug' | 'jade'
   | 'puppet'
   | 'purescript'
