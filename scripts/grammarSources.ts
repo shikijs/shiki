@@ -135,6 +135,18 @@ export const githubGrammarSources: [string, string][] = [
   ['erlang', 'https://github.com/erlang-ls/grammar/blob/main/Erlang.plist'],
   ['fish', 'https://github.com/bmalehorn/vscode-fish/blob/master/syntaxes/fish.tmLanguage.json'],
   [
+    'gdresource',
+    'https://github.com/godotengine/godot-vscode-plugin/blob/master/syntaxes/GDResource.tmLanguage.json'
+  ],
+  [
+    'gdscript',
+    'https://github.com/godotengine/godot-vscode-plugin/blob/master/syntaxes/GDScript.tmLanguage.json'
+  ],
+  [
+    'gdshader',
+    'https://github.com/godotengine/godot-vscode-plugin/blob/master/syntaxes/GDShader.tmLanguage.json'
+  ],
+  [
     'gherkin',
     'https://github.com/alexkrechik/VSCucumberAutoComplete/blob/master/gclient/syntaxes/feature.tmLanguage'
   ],
