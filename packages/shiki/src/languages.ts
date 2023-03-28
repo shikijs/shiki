@@ -43,6 +43,9 @@ export type Lang =
   | 'erlang' | 'erl'
   | 'fish'
   | 'fsharp' | 'f#' | 'fs'
+  | 'gdresource'
+  | 'gdscript'
+  | 'gdshader'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -425,6 +428,25 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['markdown']
   },
   {
+    id: 'gdresource',
+    scopeName: 'source.gdresource',
+    path: 'gdresource.tmLanguage.json',
+    samplePath: 'gdresource.sample',
+    embeddedLangs: ['gdshader', 'gdscript']
+  },
+  {
+    id: 'gdscript',
+    scopeName: 'source.gdscript',
+    path: 'gdscript.tmLanguage.json',
+    samplePath: 'gdscript.sample'
+  },
+  {
+    id: 'gdshader',
+    scopeName: 'source.gdshader',
+    path: 'gdshader.tmLanguage.json',
+    samplePath: 'gdshader.sample'
+  },
+  {
     id: 'gherkin',
     scopeName: 'text.gherkin.feature',
     path: 'gherkin.tmLanguage.json'
@@ -672,9 +694,9 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'mdx',
-    scopeName: 'text.html.markdown.jsx',
+    scopeName: 'source.mdx',
     path: 'mdx.tmLanguage.json',
-    embeddedLangs: ['jsx', 'markdown']
+    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
