@@ -672,7 +672,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'mdx',
     scopeName: 'source.mdx',
     path: 'mdx.tmLanguage.json',
-    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'cpp', 'csharp', 'css', 'diff', 'go', 'graphql', 'html', 'ini', 'java', 'javascript', 'json', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
+    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
