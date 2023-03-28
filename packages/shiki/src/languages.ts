@@ -661,7 +661,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
-    embeddedLangs: ['css', 'less', 'scss', 'typescript']
+    embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
     id: 'matlab',
@@ -670,9 +670,9 @@ export const languages: ILanguageRegistration[] = [
   },
   {
     id: 'mdx',
-    scopeName: 'text.html.markdown.jsx',
+    scopeName: 'source.mdx',
     path: 'mdx.tmLanguage.json',
-    embeddedLangs: ['jsx', 'markdown']
+    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'cpp', 'csharp', 'css', 'diff', 'go', 'graphql', 'html', 'ini', 'java', 'javascript', 'json', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
