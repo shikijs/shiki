@@ -191,18 +191,12 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'
   ],
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
-  [
-    'marko',
-    'https://github.com/marko-js/marko-tmbundle/blob/master/syntaxes/marko.tmLanguage.json'
-  ],
+  ['marko', 'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/marko.tmLanguage'],
   [
     'matlab',
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
-  [
-    'mdx',
-    'https://github.com/mdx-js/vscode-mdx/blob/main/packages/vscode-mdx/syntaxes/mdx.tmLanguage.json'
-  ],
+  ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
   [
     'nginx',
     'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/src/syntax/nginx.tmLanguage'
@@ -301,7 +295,7 @@ export const githubGrammarSources: [string, string][] = [
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
   [
     'vue',
-    'https://github.com/johnsoncodehk/volar/blob/master/vue-language-tools/vscode-vue/syntaxes/vue.tmLanguage.json'
+    'https://github.com/vuejs/language-tools/blob/master/packages/vscode-vue/syntaxes/vue.tmLanguage.json'
   ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['postcss', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-postcss.json'],
