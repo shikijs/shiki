@@ -178,7 +178,7 @@ export const githubGrammarSources: [string, string][] = [
   ['jssm', 'https://github.com/StoneCypher/sublime-jssm/blob/master/jssm.tmLanguage'],
   [
     'kotlin',
-    'https://github.com/mathiasfrohlich/vscode-kotlin/blob/master/syntaxes/Kotlin.tmLanguage'
+    'https://github.com/fwcd/kotlin-language-server/blob/main/grammars/Kotlin.tmLanguage.json'
   ],
   [
     'kusto',
