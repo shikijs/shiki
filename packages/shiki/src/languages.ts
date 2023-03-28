@@ -43,6 +43,9 @@ export type Lang =
   | 'erlang' | 'erl'
   | 'fish'
   | 'fsharp' | 'f#' | 'fs'
+  | 'gdresource'
+  | 'gdscript'
+  | 'gdshader'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -423,6 +426,25 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'fsharp.sample',
     aliases: ['f#', 'fs'],
     embeddedLangs: ['markdown']
+  },
+  {
+    id: 'gdresource',
+    scopeName: 'source.gdresource',
+    path: 'gdresource.tmLanguage.json',
+    samplePath: 'gdresource.sample',
+    embeddedLangs: ['gdshader', 'gdscript']
+  },
+  {
+    id: 'gdscript',
+    scopeName: 'source.gdscript',
+    path: 'gdscript.tmLanguage.json',
+    samplePath: 'gdscript.sample'
+  },
+  {
+    id: 'gdshader',
+    scopeName: 'source.gdshader',
+    path: 'gdshader.tmLanguage.json',
+    samplePath: 'gdshader.sample'
   },
   {
     id: 'gherkin',
