@@ -162,6 +162,7 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'reg'
   | 'rel'
   | 'riscv'
   | 'rst'

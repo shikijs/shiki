@@ -112,6 +112,7 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'reg'
   | 'rel'
   | 'riscv'
   | 'rst'
@@ -831,6 +832,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.aspnetcorerazor',
     path: 'razor.tmLanguage.json',
     embeddedLangs: ['html', 'csharp']
+  },
+  {
+    id: 'reg',
+    scopeName: 'source.reg',
+    path: 'reg.tmLanguage.json',
+    samplePath: 'reg.sample'
   },
   {
     id: 'rel',
