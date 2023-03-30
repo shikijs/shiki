@@ -520,6 +520,71 @@
               "match": "\\b(?:drop|select)\\b"
             }
           ]
+        },
+        {
+          "comment": "GC Instructions",
+          "patterns": [
+            {
+              "comment": "Reference Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(ref)\\.(?:eq|test|cast)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            },
+            {
+              "comment": "Struct Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(struct)\\.(?:new_canon|new_canon_default|get|get_s|get_u|set)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            },
+            {
+              "comment": "Array Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(array)\\.(?:new_canon|new_canon_default|get|get_s|get_u|set|len|new_canon_fixed|new_canon_data|new_canon_elem)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            },
+            {
+              "comment": "i31 Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(i31)\\.(?:new|get_s|get_u)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            },
+            {
+              "comment": "Branch Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(?:br_on_non_null|br_on_cast|br_on_cast_fail)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            },
+            {
+              "comment": "Reference Instructions [GC]",
+              "name": "keyword.operator.word.wat",
+              "match": "\\b(extern)\\.(?:internalize|externalize)\\b",
+              "captures": {
+                "1": {
+                  "name": "support.class.wat"
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -562,6 +627,36 @@
               "comment": "Type name [mvp]",
               "name": "entity.name.type.wat",
               "match": "\\b(?:i32|i64|f32|f64)\\b(?!\\.)"
+            }
+          ]
+        },
+        {
+          "comment": "GC Types",
+          "patterns": [
+            {
+              "comment": "Type name [GC]",
+              "name": "entity.name.type.wat",
+              "match": "\\b(?:i8|i16|ref|funcref|externref|anyref|eqref|i31ref|nullfuncref|nullexternref|structref|arrayref|nullref)\\b(?!\\.)"
+            }
+          ]
+        },
+        {
+          "comment": "GC Heap Types",
+          "patterns": [
+            {
+              "comment": "Type name [GC]",
+              "name": "entity.name.type.wat",
+              "match": "\\b(?:type|func|extern|any|eq|nofunc|noextern|struct|array|none)\\b(?!\\.)"
+            }
+          ]
+        },
+        {
+          "comment": "GC Structured and sub Types",
+          "patterns": [
+            {
+              "comment": "Type name [GC]",
+              "name": "entity.name.type.wat",
+              "match": "\\b(?:struct|array|sub|final|rec|field|mut)\\b(?!\\.)"
             }
           ]
         }
