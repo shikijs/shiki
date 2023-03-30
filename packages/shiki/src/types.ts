@@ -193,12 +193,14 @@ export interface IShikiTheme extends IRawTheme {
   colors?: Record<string, string>
 }
 
+interface Nothing {}
+
 /**
  * type StringLiteralUnion<'foo'> = 'foo' | string
  * This has auto completion whereas `'foo' | string` doesn't
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
  */
-export type StringLiteralUnion<T extends U, U = string> = T | (U & {})
+export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
 export interface CodeToHtmlOptions {
   lang?: StringLiteralUnion<Lang>
