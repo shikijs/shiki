@@ -26,7 +26,7 @@ export type Lang =
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
-  | 'cpp'
+  | 'cpp' | 'c++'
   | 'crystal'
   | 'csharp' | 'c#' | 'cs'
   | 'css'
@@ -51,7 +51,7 @@ export type Lang =
   | 'git-rebase'
   | 'glsl'
   | 'gnuplot'
-  | 'go'
+  | 'go' | 'golang'
   | 'graphql'
   | 'groovy'
   | 'hack'
@@ -322,7 +322,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json',
     samplePath: 'cpp.sample',
-    embeddedLangs: ['glsl', 'sql']
+    embeddedLangs: ['glsl', 'sql'],
+    aliases: ['c++']
   },
   {
     id: 'crystal',
@@ -480,7 +481,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'go',
     scopeName: 'source.go',
     path: 'go.tmLanguage.json',
-    samplePath: 'go.sample'
+    samplePath: 'go.sample',
+    aliases: ['golang']
   },
   {
     id: 'graphql',
