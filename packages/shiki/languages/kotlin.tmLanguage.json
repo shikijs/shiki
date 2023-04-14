@@ -500,11 +500,11 @@
       ]
     },
     "decimal-literal": {
-      "match": "\\b\\d[\\d_]*(\\.[\\d_]+)?((e|E)\\d+)?(L|F|f)?\\b",
+      "match": "\\b\\d[\\d_]*(\\.[\\d_]+)?((e|E)\\d+)?(u|U)?(L|F|f)?\\b",
       "name": "constant.numeric.decimal.kotlin"
     },
     "hex-literal": {
-      "match": "0(x|X)[A-Fa-f0-9][A-Fa-f0-9_]*",
+      "match": "0(x|X)[A-Fa-f0-9][A-Fa-f0-9_]*(u|U)?",
       "name": "constant.numeric.hex.kotlin"
     },
     "binary-literal": {
