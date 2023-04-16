@@ -1,6 +1,10 @@
 name: 'Update Changelog'
 
 on:
+  push:
+    branches:
+    - main
+    - changelog-gen
   workflow_dispatch:
 
 jobs:
@@ -21,3 +25,7 @@ jobs:
           -d "$(node scripts/changelog/graphql-to-json.js scripts/changelog/query.gql)" \
           https://api.github.com/graphql \
           > tmp/gh_graphql_data.json
+
+      - name: cat
+        run: |
+          cat tmp/gh_graphql_data.json
