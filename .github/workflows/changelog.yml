@@ -22,7 +22,7 @@ jobs:
           curl \
           -X POST \
           -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -d "$(node scripts/changelog/graphql-to-json.js scripts/changelog/query.gql)" \
+          -d "$(node scripts/changelog/graphql-to-json.js scripts/changelog/github.gql)" \
           https://api.github.com/graphql \
           > tmp/gh_graphql_data.json
 
