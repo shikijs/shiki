@@ -1,0 +1,23 @@
+name: 'Update Changelog'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-changelog-diff:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get GH graphql data
+        id: gh-graphql
+        run: |
+          mkdir tmp
+
+          curl \
+          -X POST \
+          -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -d "$(node scripts/changelog/graphql-to-json.js scripts/changelog/query.gql)" \
+          https://api.github.com/graphql \
+          > tmp/gh_graphql_data.json

@@ -1,0 +1,32 @@
+query {
+  repository(owner: "shikijs", name: "shiki") {
+    releases(first: 1) {
+      nodes {
+        tagCommit {
+          history {
+            edges {
+              node {
+                message
+                author {
+                  user {
+                    name
+                    login
+                  }
+                }
+                # Assume no more than 10 PR exists on a commit
+                associatedPullRequests(first: 10) {
+                  nodes {
+                    title
+                    author {
+                      login
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
