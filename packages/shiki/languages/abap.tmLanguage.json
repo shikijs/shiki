@@ -321,7 +321,7 @@
       }
     },
     "keywords_followed_by_braces": {
-      "match": "(?ix)\\b(data|value|field-symbol)\\((<?[a-z_\\/][a-z_0-9\\/]*>?)\\)",
+      "match": "(?ix)\\b(data|value|field-symbol|final)\\((<?[a-z_\\/][a-z_0-9\\/]*>?)\\)",
       "captures": {
         "1": {
           "name": "keyword.control.simple.abap"
