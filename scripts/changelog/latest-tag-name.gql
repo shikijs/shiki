@@ -1,0 +1,11 @@
+query {
+  repository(owner: "shikijs", name: "shiki") {
+    refs(refPrefix: "refs/tags/", last: 1) {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+}

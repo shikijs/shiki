@@ -1,6 +1,24 @@
 # Changelog
 
-- 🙌 Add Kusto Grammars. [#431](https://github.com/shikijs/shiki/pull/431). Thanks to contribution from [@KevinBatdorf](https://github.com/KevinBatdorf).
+## 0.14.2 | 2023-04-20
+
+### 🙌 Contributions
+
+- feat: add kusto grammar (#431) | [#431](https://github.com/shikijs/shiki/pull/431) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- feat: add c++ and golang support | [#459](https://github.com/shikijs/shiki/pull/459) | [@xinconan](https://github.com/xinconan)
+- fix: avoid poisoning global scope | [#457](https://github.com/shikijs/shiki/pull/457) | [@Ayc0](https://github.com/Ayc0)
+- fix(type): `theme` field autocompletion | [#449](https://github.com/shikijs/shiki/pull/449) | [@vaakian](https://github.com/vaakian)
+- feat: add reg grammar | [#455](https://github.com/shikijs/shiki/pull/455) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- Update Kotlin grammar and add a sample | [#445](https://github.com/shikijs/shiki/pull/445) | [@alllex](https://github.com/alllex)
+- fix: marko, mdx, vue | [#452](https://github.com/shikijs/shiki/pull/452) | [@LeoDog896](https://github.com/LeoDog896)
+- feat(gd*): add gdscript family | [#451](https://github.com/shikijs/shiki/pull/451) | [@LeoDog896](https://github.com/LeoDog896)
+- fix: add `protobuf` language id alias | [#446](https://github.com/shikijs/shiki/pull/446) | [@dimitropoulos](https://github.com/dimitropoulos)
+- feat(lang): add alias dockerfile -> docker | [#444](https://github.com/shikijs/shiki/pull/444) | [@ezracelli](https://github.com/ezracelli)
+- fix: faster parsing time for assets | [#443](https://github.com/shikijs/shiki/pull/443) | [@banga](https://github.com/banga)
+- docs: update the src of VS Code Oniguruma repo | [#440](https://github.com/shikijs/shiki/pull/440) | [@donaldxdonald](https://github.com/donaldxdonald)
+- docs: fix grammar of "grammar's" | [#442](https://github.com/shikijs/shiki/pull/442) | [@comex](https://github.com/comex)
+
+---
 
 ### 0.14.1 | 2023-02-09
 
