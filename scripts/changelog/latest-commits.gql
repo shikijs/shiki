@@ -1,0 +1,39 @@
+query {
+  repository(owner: "shikijs", name: "shiki") {
+    defaultBranchRef {
+      target {
+        ... on Commit {
+         	history(first:100) {
+            edges {
+              node {
+                message
+                authoredByCommitter
+                authors(first:100) {
+                  nodes {
+                    user {
+                      login
+                      name
+                    }
+                  }
+                }
+                associatedPullRequests (first:100) {
+                  edges {
+                    node {
+                      id
+                      number
+                      url
+                      author {
+                        login
+                      }
+                      title
+                    }
+                  }
+                }
+              }
+            }
+          } 
+        }
+      }
+    }
+  }
+}
