@@ -11,6 +11,9 @@ const __dirname = dirname(__filename)
 const ROOT_DIR = path.resolve(__dirname, '../../')
 const getFilePath = (p: string) => path.resolve(ROOT_DIR, p)
 
+const FEAT_N_FIX_HEADER = `### 🚀 Features & Fixes`
+const CONTRIB_HEADER = `### 🙌 Contributions`
+
 const readQuery = (filename: string) => {
   return fs.readFileSync(path.resolve(__dirname, `./${filename}`), 'utf-8')
 }
@@ -59,10 +62,10 @@ const generateChangelogMd = (
 ) => {
   const date = new Date().toISOString().split('T')[0]
 
-  let outMd = `### 0.x.x | ${date}\n\n`
+  let outMd = `## 0.x.x | ${date}\n\n`
 
   if (pureCommits.some(c => c.message.startsWith('feat') || c.message.startsWith('fix'))) {
-    outMd += '#### Features & Fixes\n\n'
+    outMd += `${FEAT_N_FIX_HEADER}\n\n`
 
     pureCommits.forEach(c => {
       if (c.message.startsWith('feat') || c.message.startsWith('fix')) {
@@ -85,7 +88,7 @@ const generateChangelogMd = (
   const prs = Object.values(prMap)
 
   if (coauthoredCommits.length + prs.length > 0) {
-    outMd += '#### Contributions\n\n'
+    outMd += `${CONTRIB_HEADER}\n\n`
 
     coauthoredCommits.map(c => {
       outMd += `- ${c.message} | [@${c.authors.nodes[0].user.login}](https://github.com/${c.authors.nodes[0].user.login})\n`
