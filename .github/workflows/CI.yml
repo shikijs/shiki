@@ -47,7 +47,7 @@ jobs:
 
       - name: Install E2E test browsers
         if: runner.os != 'Windows'
-        run: pnpm --package=playwright@1.30.0 dlx playwright install --with-deps chromium
+        run: pnpm playwright install --with-deps chromium
 
       - name: Run E2E tests
         if: runner.os != 'Windows'
