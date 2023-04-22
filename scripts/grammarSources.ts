@@ -304,6 +304,10 @@ export const githubGrammarSources: [string, string][] = [
   ['wgsl', 'https://github.com/PolyMeilex/vscode-wgsl/blob/master/syntaxes/wgsl.tmLanguage.json'],
   ['wenyan', 'https://github.com/wenyan-lang/highlight/blob/master/wenyan.tmLanguage.json'],
   [
+    'wolfram',
+    'https://github.com/WolframResearch/vscode-wolfram/blob/master/syntaxes/wolfram.tmLanguage.json'
+  ],
+  [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
   ],
