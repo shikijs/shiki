@@ -17,6 +17,7 @@ import { getOniguruma, WASM_PATH } from './loader'
 import { Lang, languages as BUNDLED_LANGUAGES } from './languages'
 import { Registry } from './registry'
 import { Theme } from './themes'
+import { namedColors as ansiNamedColors } from 'ansi-sequence-parser'
 
 function resolveLang(lang: ILanguageRegistration | Lang) {
   return typeof lang === 'string'
@@ -44,6 +45,32 @@ function resolveOptions(options: HighlighterOptions) {
   }
 
   return { _languages, _themes, _wasmPath }
+}
+
+function generateDefaultColorReplacements() {
+  const replacements: Record<string, string> = {
+    '#000001': 'var(--shiki-color-text)',
+    '#000002': 'var(--shiki-color-background)',
+    '#000004': 'var(--shiki-token-constant)',
+    '#000005': 'var(--shiki-token-string)',
+    '#000006': 'var(--shiki-token-comment)',
+    '#000007': 'var(--shiki-token-keyword)',
+    '#000008': 'var(--shiki-token-parameter)',
+    '#000009': 'var(--shiki-token-function)',
+    '#000010': 'var(--shiki-token-string-expression)',
+    '#000011': 'var(--shiki-token-punctuation)',
+    '#000012': 'var(--shiki-token-link)'
+  }
+
+  // Generates a color replacement for each ANSI color with the form #A00000, #A00001, etc.
+  // Note that dimmed colors will use variables with the name var(--shiki-color-ansi-<color>-dim)
+  for (let i = 0; i < ansiNamedColors.length; i++) {
+    const code = `#A${i.toString().padStart(5, '0')}`
+    const colorNameKebab = ansiNamedColors[i].replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+    replacements[code] = `var(--shiki-color-ansi-${colorNameKebab})`
+  }
+
+  return replacements
 }
 
 export async function getHighlighter(options: HighlighterOptions): Promise<Highlighter> {
@@ -75,25 +102,18 @@ export async function getHighlighter(options: HighlighterOptions): Promise<Highl
    * Instead, we work around this by using valid hex color codes as lookups in a
    * final "repair" step which translates those codes to the correct CSS variables.
    */
-  let COLOR_REPLACEMENTS: Record<string, string> = {
-    '#000001': 'var(--shiki-color-text)',
-    '#000002': 'var(--shiki-color-background)',
-    '#000004': 'var(--shiki-token-constant)',
-    '#000005': 'var(--shiki-token-string)',
-    '#000006': 'var(--shiki-token-comment)',
-    '#000007': 'var(--shiki-token-keyword)',
-    '#000008': 'var(--shiki-token-parameter)',
-    '#000009': 'var(--shiki-token-function)',
-    '#000010': 'var(--shiki-token-string-expression)',
-    '#000011': 'var(--shiki-token-punctuation)',
-    '#000012': 'var(--shiki-token-link)'
-  }
+  let COLOR_REPLACEMENTS = generateDefaultColorReplacements()
   function setColorReplacements(map: Record<string, string>) {
     COLOR_REPLACEMENTS = map
   }
   function fixCssVariablesTheme(theme: IShikiTheme, colorMap: string[]) {
     theme.bg = COLOR_REPLACEMENTS[theme.bg] || theme.bg
     theme.fg = COLOR_REPLACEMENTS[theme.fg] || theme.fg
+
+    Object.entries(theme.colors).forEach(([key, value]) => {
+      theme.colors[key] = COLOR_REPLACEMENTS[value] || value
+    })
+
     colorMap.forEach((val, i) => {
       colorMap[i] = COLOR_REPLACEMENTS[val] || val
     })

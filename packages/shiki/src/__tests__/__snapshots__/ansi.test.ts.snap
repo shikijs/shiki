@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders ansi to html with css-variables theme 1`] = `
+"<pre class=\\"shiki css-variables\\" style=\\"background-color: var(--shiki-color-background)\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-black)\\">black</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-black-dim)\\">black (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-red)\\">red</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-red-dim)\\">red (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-green)\\">green</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-green-dim)\\">green (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-yellow)\\">yellow</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-yellow-dim)\\">yellow (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-blue)\\">blue</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-blue-dim)\\">blue (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-magenta)\\">magenta</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-magenta-dim)\\">magenta (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-cyan)\\">cyan</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-cyan-dim)\\">cyan (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-white)\\">white</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-white-dim)\\">white (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-black)\\">brightBlack</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-black-dim)\\">brightBlack (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-red)\\">brightRed</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-red-dim)\\">brightRed (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-green)\\">brightGreen</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-green-dim)\\">brightGreen (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-yellow)\\">brightYellow</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-yellow-dim)\\">brightYellow (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-blue)\\">brightBlue</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-blue-dim)\\">brightBlue (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-magenta)\\">brightMagenta</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-magenta-dim)\\">brightMagenta (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-cyan)\\">brightCyan</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-cyan-dim)\\">brightCyan (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-white)\\">brightWhite</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-ansi-bright-white-dim)\\">brightWhite (dim)</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-text); font-weight: bold\\">bold</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-text); font-style: italic\\">italic</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-text); font-style: italic\\">underline</span></span>
+<span class=\\"line\\"><span style=\\"color: var(--shiki-color-text)\\">strikethrough</span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
 exports[`renders ansi to html with default theme 1`] = `
 "<pre class=\\"shiki monokai\\" style=\\"background-color: #272822\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color: #333333\\"> WARN </span><span style=\\"color: #F8F8F2\\"> using --force I sure hope you know what you are doing</span></span>
 <span class=\\"line\\"><span style=\\"color: #F8F8F2\\">Scope: all 6 workspace projects</span></span>

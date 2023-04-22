@@ -51,7 +51,7 @@ export function tokenizeAnsiWithTheme(theme: IShikiTheme, fileContents: string):
 }
 
 /**
- * Adds 50% alpha to a hex color string
+ * Adds 50% alpha to a hex color string or the "-dim" postfix to a CSS variable
  */
 function dimColor(color: string) {
   const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/)
@@ -72,5 +72,11 @@ function dimColor(color: string) {
         .join('')}80`
     }
   }
+
+  const cssVarMatch = color.match(/var\((--shiki-color-ansi-[\w-]+)\)/)
+  if (cssVarMatch) {
+    return `var(${cssVarMatch[1]}-dim)`
+  }
+
   return color
 }
