@@ -4,6 +4,7 @@
 
 ### 🚀 Features & Fixes
 
+- fix: improve changelog generation
 - fix: remove dlx to avoid playwright version mismatch
 - feat: generate changelog. fix #223
 
@@ -24,7 +25,6 @@
 - fix: faster parsing time for assets | [#443](https://github.com/shikijs/shiki/pull/443) | [@banga](https://github.com/banga)
 - docs: update the src of VS Code Oniguruma repo | [#440](https://github.com/shikijs/shiki/pull/440) | [@donaldxdonald](https://github.com/donaldxdonald)
 - docs: fix grammar of "grammar's" | [#442](https://github.com/shikijs/shiki/pull/442) | [@comex](https://github.com/comex)
-
 
 ---
 
