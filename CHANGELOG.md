@@ -1,10 +1,17 @@
 # Changelog
 
-## 0.14.2 | 2023-04-20
+## 0.14.2 | 2023-04-28
+
+### 🚀 Features & Fixes
+
+- fix: remove dlx to avoid playwright version mismatch
+- feat: generate changelog. fix #223
 
 ### 🙌 Contributions
 
-- feat: add kusto grammar (#431) | [#431](https://github.com/shikijs/shiki/pull/431) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- feat: add kusto grammar (#431) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- Add support for the css-variables theme to ansi rendering | [#435](https://github.com/shikijs/shiki/pull/435) | [@blake-mealey](https://github.com/blake-mealey)
+- feat: add wolfram grammar | [#464](https://github.com/shikijs/shiki/pull/464) | [@KevinBatdorf](https://github.com/KevinBatdorf)
 - feat: add c++ and golang support | [#459](https://github.com/shikijs/shiki/pull/459) | [@xinconan](https://github.com/xinconan)
 - fix: avoid poisoning global scope | [#457](https://github.com/shikijs/shiki/pull/457) | [@Ayc0](https://github.com/Ayc0)
 - fix(type): `theme` field autocompletion | [#449](https://github.com/shikijs/shiki/pull/449) | [@vaakian](https://github.com/vaakian)
@@ -17,6 +24,7 @@
 - fix: faster parsing time for assets | [#443](https://github.com/shikijs/shiki/pull/443) | [@banga](https://github.com/banga)
 - docs: update the src of VS Code Oniguruma repo | [#440](https://github.com/shikijs/shiki/pull/440) | [@donaldxdonald](https://github.com/donaldxdonald)
 - docs: fix grammar of "grammar's" | [#442](https://github.com/shikijs/shiki/pull/442) | [@comex](https://github.com/comex)
+
 
 ---
 

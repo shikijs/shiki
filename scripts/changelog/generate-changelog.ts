@@ -14,6 +14,8 @@ const getFilePath = (p: string) => path.resolve(ROOT_DIR, p)
 const FEAT_N_FIX_HEADER = `### 🚀 Features & Fixes`
 const CONTRIB_HEADER = `### 🙌 Contributions`
 
+const MAINTAINER_LOGINS = ['octref', 'orta']
+
 const readQuery = (filename: string) => {
   return fs.readFileSync(path.resolve(__dirname, `./${filename}`), 'utf-8')
 }
@@ -56,45 +58,40 @@ interface Commit {
 }
 
 const generateChangelogMd = (
-  pureCommits: Commit[],
+  maintainerCommits: Commit[],
+  maintainerPRs: PR[],
   coauthoredCommits: Commit[],
-  contributedCommits: Commit[]
+  contributedPRs: PR[]
 ) => {
   const date = new Date().toISOString().split('T')[0]
 
   let outMd = `## 0.x.x | ${date}\n\n`
 
-  if (pureCommits.some(c => c.message.startsWith('feat') || c.message.startsWith('fix'))) {
+  if (
+    maintainerCommits.some(c => c.message.startsWith('feat') || c.message.startsWith('fix')) ||
+    maintainerPRs.length > 0
+  ) {
     outMd += `${FEAT_N_FIX_HEADER}\n\n`
 
-    pureCommits.forEach(c => {
-      if (c.message.startsWith('feat') || c.message.startsWith('fix')) {
-        outMd += `- ${c.message}\n`
-      }
+    maintainerCommits.forEach(c => {
+      outMd += `- ${c.message}\n`
+    })
+
+    maintainerPRs.forEach(pr => {
+      outMd += `- ${pr.title}\n`
     })
 
     outMd += '\n'
   }
 
-  const prMap: { [prId: string]: PR } = {}
-  contributedCommits.forEach(c => {
-    c.associatedPullRequests.edges.forEach(({ node: pr }) => {
-      if (!(pr.id in prMap)) {
-        prMap[pr.id] = pr
-      }
-    })
-  })
-
-  const prs = Object.values(prMap)
-
-  if (coauthoredCommits.length + prs.length > 0) {
+  if (coauthoredCommits.length + contributedPRs.length > 0) {
     outMd += `${CONTRIB_HEADER}\n\n`
 
     coauthoredCommits.map(c => {
       outMd += `- ${c.message} | [@${c.authors.nodes[0].user.login}](https://github.com/${c.authors.nodes[0].user.login})\n`
     })
 
-    prs.map(pr => {
+    contributedPRs.map(pr => {
       outMd += `- ${pr.title} | [#${pr.number}](${pr.url}) | [@${pr.author.login}](https://github.com/${pr.author.login})\n`
     })
   }
@@ -112,12 +109,15 @@ const generateChangelog = (latestTagNameData: any, latestCommitsData: any) => {
   const targetCommitIndex = latestCommits.findIndex(c => c.message === latestTag)
   const commitsSinceLastTag = latestCommits.slice(0, targetCommitIndex)
 
-  let pureCommits: Commit[] = []
+  const maintainerCommits: Commit[] = []
+  const maintainerPRs: PR[] = []
   /**
-   * Commits authored by others and pushed by me
+   * Commits authored by others and pushed by a maintainer through PR
+   * This happens if a PR is merged through squashing commits
    */
-  let coauthoredCommits: Commit[] = []
-  let contributedCommits: Commit[] = []
+  const coauthoredCommits: Commit[] = []
+  const contributedCommits: Commit[] = []
+  const contributedPRs: PR[] = []
 
   commitsSinceLastTag.forEach(c => {
     if (c.message.startsWith('🤖')) {
@@ -126,7 +126,9 @@ const generateChangelog = (latestTagNameData: any, latestCommitsData: any) => {
 
     if (c.associatedPullRequests.edges.length === 0) {
       if (c.authoredByCommitter) {
-        pureCommits.push(c)
+        if (c.message.startsWith('feat') || c.message.startsWith('fix')) {
+          maintainerCommits.push(c)
+        }
       } else {
         coauthoredCommits.push(c)
       }
@@ -134,13 +136,32 @@ const generateChangelog = (latestTagNameData: any, latestCommitsData: any) => {
     }
 
     if (c.associatedPullRequests.edges.length > 0) {
-      contributedCommits.push(c)
+      if (MAINTAINER_LOGINS.includes(c.associatedPullRequests.edges[0].node.author.login)) {
+        maintainerPRs.push(c.associatedPullRequests.edges[0].node)
+      } else {
+        contributedCommits.push(c)
+      }
       return
     }
   })
 
+  const seenPRIds = new Set()
+  contributedCommits.forEach(c => {
+    c.associatedPullRequests.edges.forEach(({ node: pr }) => {
+      if (!seenPRIds.has(pr.id)) {
+        seenPRIds.add(pr.id)
+        contributedPRs.push(pr)
+      }
+    })
+  })
+
   const changelog = fs.readFileSync(getFilePath('CHANGELOG.md'), 'utf-8')
-  const changelogDelta = generateChangelogMd(pureCommits, coauthoredCommits, contributedCommits)
+  const changelogDelta = generateChangelogMd(
+    maintainerCommits,
+    maintainerPRs,
+    coauthoredCommits,
+    contributedPRs
+  )
 
   const newChangelog = changelog.replace('# Changelog', `# Changelog\n\n${changelogDelta}`)
 

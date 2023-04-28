@@ -2,7 +2,7 @@
 
 You can use scripts in this folder to generate a changelog.
 
-- Create an `.env` file with your [GH personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). Only the `repo:public_repo` scope is needed: 
+- Create an `.env` file at the project root folder with your [GH personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). Only the `repo:status` and `repo:public_repo` scopes are needed: 
     ```env
     GITHUB_SECRET=<YOUR_SECRET>
     ```
