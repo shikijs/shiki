@@ -28,7 +28,7 @@
       "name": "comment.line.pragma.abap"
     },
     {
-      "match": "(?i)(?<=(?:\\s|~|-))(?<=(?:->|=>))([a-z_\\/][a-z_0-9\\/]*)(?=\\s+(?:=|\\+=|-=|\\*=|\\/=|&&=)\\s+)",
+      "match": "(?i)(?<=(?:\\s|~|-))(?<=(?:->|=>))([a-z_\\/][a-z_0-9\\/]*)(?=\\s+(?:=|\\+=|-=|\\*=|\\/=|&&=|&=)\\s+)",
       "name": "variable.other.abap"
     },
     {
@@ -104,7 +104,7 @@
       "name": "meta.block.begin.implementation.abap",
       "patterns": [
         {
-          "match": "(?ix)(^|\\s+)(definition|implementation|public|inheriting\\s+from|final|deferred|abstract|shared\\s+memory\\s+enabled|(global|local)*\\s*friends|(create\\s+(public|protected|private))|for\\s+testing|risk\\s+level\\s+(critical|dangerous|harmless))|duration\\s(short|medium|long)(?=\\s+|\\.)",
+          "match": "(?ix)(^|\\s+)(definition|implementation|public|inheriting\\s+from|final|deferred|abstract|shared\\s+memory\\s+enabled|(global|local)*\\s*friends|(create\\s+(public|protected|private))|for\\s+behavior\\s+of|for\\s+testing|risk\\s+level\\s+(critical|dangerous|harmless))|duration\\s(short|medium|long)(?=\\s+|\\.)",
           "name": "storage.modifier.class.abap"
         },
         {
@@ -135,7 +135,7 @@
       "end": "\\s*\\.\\s*\\n?",
       "patterns": [
         {
-          "match": "(?ix)(?<=^|\\s)(BY\\s+DATABASE(\\s+PROCEDURE|\\s+FUNCTION|\\s+GRAPH\\s+WORKSPACE))(?=\\s+|\\.)",
+          "match": "(?ix)(?<=^|\\s)(BY\\s+DATABASE(\\s+PROCEDURE|\\s+FUNCTION|\\s+GRAPH\\s+WORKSPACE)|BY\\s+KERNEL\\s+MODULE)(?=\\s+|\\.)",
           "name": "storage.modifier.method.abap"
         },
         {
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "begin": "(?ix)^\\s*(FORM)\\s([a-z_\\/][a-z_0-9\\/]*)",
+      "begin": "(?ix)^\\s*(FORM)\\s([a-z_\\/][a-z_0-9\\/\\-\\?]*)",
       "beginCaptures": {
         "1": {
           "name": "storage.type.block.abap"
@@ -200,11 +200,14 @@
       "end": "\\s*\\.\\s*\\n?",
       "patterns": [
         {
-          "match": "(?ix)(?<=^|\\s)(USING|TABLES|CHANGING|RAISING)(?=\\s+|\\.)",
+          "match": "(?ix)(?<=^|\\s)(USING|TABLES|CHANGING|RAISING|IMPLEMENTATION|DEFINITION)(?=\\s+|\\.)",
           "name": "storage.modifier.form.abap"
         },
         {
           "include": "#abaptypes"
+        },
+        {
+          "include": "#keywords_followed_by_braces"
         }
       ]
     },
@@ -236,11 +239,17 @@
     },
     {
       "include": "#system_fields"
+    },
+    {
+      "include": "#sql_functions"
+    },
+    {
+      "include": "#sql_types"
     }
   ],
   "repository": {
     "abap_constants": {
-      "match": "(?ix)(?<=\\s)(initial|null|space|abap_true|abap_false|table_line)(?=\\s|\\.|,)",
+      "match": "(?ix)(?<=\\s)(initial|null|space|abap_true|abap_false|abap_undefined|table_line|\n\t\t\t\t%_final|%_hints|%_predefined|col_background|col_group|col_heading|col_key|col_negative|col_normal|col_positive|col_total|\n\t\t\t\tadabas|as400|db2|db6|hdb|oracle|sybase|mssqlnt|pos_low|pos_high)(?=\\s|\\.|,)",
       "name": "constant.language.abap"
     },
     "reserved_names": {
@@ -250,11 +259,11 @@
     "abaptypes": {
       "patterns": [
         {
-          "match": "(?ix)\\s(abap_bool|string|xstring|any|clike|csequence|numeric|xsequence|c|n|i|p|f|d|t|x)(?=\\s|\\.|,)",
+          "match": "(?ix)\\s(abap_bool|string|xstring|any|clike|csequence|numeric|xsequence|decfloat|decfloat16|decfloat34|utclong|simple|int8|c|n|i|p|f|d|t|x)(?=\\s|\\.|,)",
           "name": "support.type.abap"
         },
         {
-          "match": "(?ix)\\s(TYPE|REF|TO|STANDARD|SORTED|HASHED|INDEX|TABLE|WITH|UNIQUE|NON-UNIQUE|SECONDARY|DEFAULT|KEY)(?=\\s|\\.|,)",
+          "match": "(?ix)\\s(TYPE|REF|TO|LIKE|LINE|OF|STRUCTURE|STANDARD|SORTED|HASHED|INDEX|TABLE|WITH|UNIQUE|NON-UNIQUE|SECONDARY|DEFAULT|KEY)(?=\\s|\\.|,)",
           "name": "keyword.control.simple.abap"
         }
       ]
@@ -321,7 +330,7 @@
       }
     },
     "keywords_followed_by_braces": {
-      "match": "(?ix)\\b(data|value|field-symbol|final)\\((<?[a-z_\\/][a-z_0-9\\/]*>?)\\)",
+      "match": "(?ix)\\b(data|value|field-symbol|final|reference|resumable)\\((<?[a-z_\\/][a-z_0-9\\/]*>?)\\)",
       "captures": {
         "1": {
           "name": "keyword.control.simple.abap"
@@ -348,12 +357,20 @@
       ]
     },
     "other_operator": {
-      "match": "(?<=\\s)(&&|\\?=|\\+=|-=|\\/=|\\*=|&&=)(?=\\s)",
+      "match": "(?<=\\s)(&&|&|\\?=|\\+=|-=|\\/=|\\*=|&&=|&=)(?=\\s)",
       "name": "keyword.control.simple.abap"
     },
     "builtin_functions": {
       "match": "(?ix)(?<=\\s)(abs|sign|ceil|floor|trunc|frac|acos|asin|atan|cos|sin|tan|cosh|sinh|tanh|exp|log|log10|sqrt|strlen|xstrlen|charlen|lines|numofchar|dbmaxlen|round|rescale|nmax|nmin|cmax|cmin|boolc|boolx|xsdbool|contains|contains_any_of|contains_any_not_of|matches|line_exists|ipow|char_off|count|count_any_of|count_any_not_of|distance|condense|concat_lines_of|escape|find|find_end|find_any_of|find_any_not_of|insert|match|repeat|replace|reverse|segment|shift_left|shift_right|substring|substring_after|substring_from|substring_before|substring_to|to_upper|to_lower|to_mixed|from_mixed|translate|bit-set|line_index)(?=\\()",
       "name": "entity.name.function.builtin.abap"
+    },
+    "sql_types": {
+      "match": "(?ix)(?<=\\s)(char|clnt|cuky|curr|datn|dats|dec|decfloat16|decfloat34|fltp|int1|int2|int4|int8|lang|numc|quan|raw|sstring|timn|tims|unit|utclong)(?=\\s|\\(|\\))",
+      "name": "entity.name.type.sql.abap"
+    },
+    "sql_functions": {
+      "match": "(?ix)(?<=\\s)(abs|ceil|div|division|floor|mod|round|concat|concat_with_space|instr|left|length|like_regexpr|lower|lpad|ltrim|occurrences_regexpr|replace|replace_regexpr|rigth|rpad|rtrim|substring|upper|coalesce|uuid|bintohex|hextobin|to_clob|to_blob|currency_conversion|datn_days_between|datn_add_days|datn_add_months|dats_is_valid|dats_days_between|dats_add_days|dats_add_months|tims_is_valid|utcl_current|utcl_add_seconds|utcl_seconds_between|tstmp_is_valid|tstmp_current_utctimestamp|tstmp_seconds_between|tstmp_add_seconds|abap_system_timezone|abap_user_timezone|tstmp_to_dats|tstmp_to_tims|tstmp_to_dst|dats_tims_to_tstmp|tstmpl_to_utcl|tstmpl_from_utcl|dats_to_datn|dats_from_datn|tims_to_timn|tims_from_timn|avg|median|max|min|sum|product|stddev|var|corr|corr_spearman|string_agg|count|grouping|allow_precision_loss|over|cast)(?=\\()",
+      "name": "entity.name.function.sql.abap"
     }
   },
   "scopeName": "source.abap",
