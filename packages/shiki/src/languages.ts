@@ -150,6 +150,7 @@ export type Lang =
   | 'viml' | 'vim' | 'vimscript'
   | 'vue-html'
   | 'vue'
+  | 'vyper'
   | 'wasm'
   | 'wenyan' | '文言'
   | 'wgsl'
@@ -686,6 +687,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
@@ -1052,6 +1054,12 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
     embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'json5', 'yaml', 'toml', 'graphql']
+  },
+  {
+    id: 'vyper',
+    scopeName: 'source.vyper',
+    path: 'vyper.tmLanguage.json',
+    samplePath: 'vyper.sample'
   },
   {
     id: 'wasm',
