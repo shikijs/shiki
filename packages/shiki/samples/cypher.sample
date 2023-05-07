@@ -1,0 +1,7 @@
+CREATE (matrix:Movie {title: 'The Matrix', released: 1997})
+CREATE (keanu:Person {name: 'Keanu Reeves', born: 1964})
+CREATE (tom)-[:ACTED_IN {roles: ['Forrest']}]->(forrestGump)
+CREATE (tom)-[:ACTED_IN {roles: ['Zachry']}]->(cloudAtlas)
+CREATE (robert)-[:DIRECTED]->(forrestGump)
+
+// https://neo4j.com/docs/getting-started/cypher-intro/results/
