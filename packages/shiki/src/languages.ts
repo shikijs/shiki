@@ -14,6 +14,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'beancount'
   | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
@@ -238,6 +239,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'bat.tmLanguage.json',
     samplePath: 'bat.sample',
     aliases: ['batch']
+  },
+  {
+    id: 'beancount',
+    scopeName: 'text.beancount',
+    path: 'beancount.tmLanguage.json',
+    samplePath: 'beancount.sample'
   },
   {
     id: 'berry',

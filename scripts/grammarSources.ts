@@ -91,6 +91,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/ballerina-platform/ballerina-grammar/blob/master/syntaxes/ballerina.tmLanguage'
   ],
   [
+    'beancount',
+    'https://github.com/Lencerf/vscode-beancount/blob/master/syntaxes/beancount.tmLanguage'
+  ],
+  [
     'berry',
     'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
   ],

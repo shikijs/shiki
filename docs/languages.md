@@ -64,6 +64,7 @@ export type Lang =
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'beancount'
   | 'berry' | 'be'
   | 'bibtex'
   | 'bicep'
