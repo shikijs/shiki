@@ -191,9 +191,9 @@
   "semanticTokenColors": {
     "namespace": "#db889a",
     "property": "#b8a965",
-    "interface": "#5DA994",
-    "type": "#5DA994",
-    "class": "#6893BF"
+    "interface": "#5d99a9",
+    "type": "#5d99a9",
+    "class": "#7f8ac7"
   },
   "tokenColors": [
     {
@@ -210,7 +210,8 @@
         "keyword.operator.rest",
         "keyword.operator.spread",
         "keyword.operator.type.annotation",
-        "keyword.operator.relational.ts",
+        "keyword.operator.relational",
+        "keyword.operator.assignment",
         "meta.brace",
         "meta.tag.block.any.html",
         "meta.tag.inline.any.html",
@@ -279,7 +280,12 @@
       }
     },
     {
-      "scope": ["storage.modifier.package", "storage.modifier.import", "storage.type.java"],
+      "scope": [
+        "text.html.derivative",
+        "storage.modifier.package",
+        "storage.modifier.import",
+        "storage.type.java"
+      ],
       "settings": {
         "foreground": "#dbd7caee"
       }
@@ -332,7 +338,7 @@
     {
       "scope": ["support.type.primitive", "entity.name.type"],
       "settings": {
-        "foreground": "#5da9a7"
+        "foreground": "#5DA994"
       }
     },
     {
@@ -342,7 +348,7 @@
       }
     },
     {
-      "scope": ["keyword.operator", "meta.var.expr.ts"],
+      "scope": ["keyword.operator", "keyword.operator.assignment.compound", "meta.var.expr.ts"],
       "settings": {
         "foreground": "#cb7676"
       }
@@ -465,7 +471,7 @@
     {
       "scope": "markup.quote",
       "settings": {
-        "foreground": "#5DA994"
+        "foreground": "#5d99a9"
       }
     },
     {
@@ -582,7 +588,7 @@
     {
       "scope": ["type.identifier"],
       "settings": {
-        "foreground": "#6893BF"
+        "foreground": "#7f8ac7"
       }
     },
     {
@@ -636,7 +642,11 @@
       "foreground": "666666"
     },
     {
-      "token": "keyword.operator.relational.ts",
+      "token": "keyword.operator.relational",
+      "foreground": "666666"
+    },
+    {
+      "token": "keyword.operator.assignment",
       "foreground": "666666"
     },
     {
@@ -744,6 +754,10 @@
       "foreground": "cb7676"
     },
     {
+      "token": "text.html.derivative",
+      "foreground": "dbd7caee"
+    },
+    {
       "token": "storage.modifier.package",
       "foreground": "dbd7caee"
     },
@@ -817,11 +831,11 @@
     },
     {
       "token": "support.type.primitive",
-      "foreground": "5da9a7"
+      "foreground": "5DA994"
     },
     {
       "token": "entity.name.type",
-      "foreground": "5da9a7"
+      "foreground": "5DA994"
     },
     {
       "token": "namespace",
@@ -829,6 +843,10 @@
     },
     {
       "token": "keyword.operator",
+      "foreground": "cb7676"
+    },
+    {
+      "token": "keyword.operator.assignment.compound",
       "foreground": "cb7676"
     },
     {
@@ -933,7 +951,7 @@
     },
     {
       "token": "markup.quote",
-      "foreground": "5DA994"
+      "foreground": "5d99a9"
     },
     {
       "token": "markup.italic",
@@ -1053,7 +1071,7 @@
     },
     {
       "token": "type.identifier",
-      "foreground": "6893BF"
+      "foreground": "7f8ac7"
     },
     {
       "token": "entity.other.attribute-name.html.vue",
