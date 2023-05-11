@@ -151,6 +151,7 @@ export type Lang =
   | 'viml' | 'vim' | 'vimscript'
   | 'vue-html'
   | 'vue'
+  | 'vyper' | 'vy'
   | 'wasm'
   | 'wenyan' | '文言'
   | 'wgsl'
@@ -1059,6 +1060,13 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.vue',
     path: 'vue.tmLanguage.json',
     embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'json5', 'yaml', 'toml', 'graphql']
+  },
+  {
+    id: 'vyper',
+    scopeName: 'source.vyper',
+    path: 'vyper.tmLanguage.json',
+    samplePath: 'vyper.sample',
+    aliases: ['vy']
   },
   {
     id: 'wasm',
