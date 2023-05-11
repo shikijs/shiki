@@ -200,7 +200,7 @@ export type Lang =
   | 'viml' | 'vim' | 'vimscript'
   | 'vue-html'
   | 'vue'
-  | 'vyper'
+  | 'vyper' | 'vy'
   | 'wasm'
   | 'wenyan' | '文言'
   | 'wgsl'
