@@ -31,7 +31,7 @@ export type Lang =
   | 'csharp' | 'c#' | 'cs'
   | 'css'
   | 'cue'
-  | 'cypher'
+  | 'cypher' | 'cql'
   | 'd'
   | 'dart'
   | 'dax'
@@ -356,7 +356,8 @@ export const languages: ILanguageRegistration[] = [
     id: 'cypher',
     scopeName: 'source.cypher',
     path: 'cypher.tmLanguage.json',
-    samplePath: 'cypher.sample'
+    samplePath: 'cypher.sample',
+    aliases: ['cql']
   },
   {
     id: 'd',
