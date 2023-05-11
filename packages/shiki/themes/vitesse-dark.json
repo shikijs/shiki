@@ -57,6 +57,7 @@
     "list.activeSelectionBackground": "#181818",
     "list.inactiveFocusBackground": "#121212",
     "list.focusBackground": "#181818",
+    "list.highlightForeground": "#4d9375",
     "tree.indentGuidesStroke": "#2f363d",
     "notificationCenterHeader.foreground": "#959da5",
     "notificationCenterHeader.background": "#121212",
@@ -66,10 +67,11 @@
     "notificationsErrorIcon.foreground": "#cb7676",
     "notificationsWarningIcon.foreground": "#d4976c",
     "notificationsInfoIcon.foreground": "#6394bf",
-    "pickerGroup.border": "#444d56",
+    "pickerGroup.border": "#191919",
     "pickerGroup.foreground": "#dbd7caee",
     "quickInput.background": "#121212",
     "quickInput.foreground": "#dbd7caee",
+    "quickInputList.focusBackground": "#181818",
     "statusBar.foreground": "#bfbaaa",
     "statusBar.background": "#121212",
     "statusBar.border": "#191919",
@@ -217,6 +219,7 @@
         "meta.tag.inline.any.html",
         "meta.tag.structure.input.void.html",
         "meta.type.annotation",
+        "meta.embedded.block.github-actions-expression",
         "storage.type.function.arrow",
         "keyword.operator.type",
         "meta.objectliteral.ts",
@@ -667,6 +670,10 @@
     },
     {
       "token": "meta.type.annotation",
+      "foreground": "666666"
+    },
+    {
+      "token": "meta.embedded.block.github-actions-expression",
       "foreground": "666666"
     },
     {
