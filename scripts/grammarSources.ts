@@ -351,6 +351,7 @@ export const languageAliases = {
   typescript: ['ts'],
   vb: ['cmd'],
   viml: ['vim', 'vimscript'],
+  vyper: ['vy'],
   wenyan: ['文言'],
   yaml: ['yml']
 }
