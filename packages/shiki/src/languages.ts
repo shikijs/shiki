@@ -1257,7 +1257,6 @@ export const languages: (ILanguageRegistration & { displayName: string })[] = [
     id: 'wenyan',
     scopeName: 'source.wenyan',
     displayName: '文言',
-    aliases: ['文言'],
     path: 'wenyan.tmLanguage.json'
   },
   {
