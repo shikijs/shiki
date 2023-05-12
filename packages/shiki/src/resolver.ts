@@ -47,7 +47,9 @@ export class Resolver implements RegistryOptions {
     }
 
     const g = await fetchGrammar(
-      languages.includes(lang) ? `${this.languagesPath}${lang.path}` : lang.path
+      (languages as ILanguageRegistration[]).includes(lang)
+        ? `${this.languagesPath}${lang.path}`
+        : lang.path
     )
     lang.grammar = g
     return g
