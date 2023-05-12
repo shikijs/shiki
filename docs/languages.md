@@ -34,6 +34,9 @@ If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code e
 
 - Find grammar for a language by searching `<lang> textmate` on GitHub or searching `<lang>` on VS Code Marketplace
 - Add your grammar to [/scripts/grammarSources.ts](/scripts/grammarSources.ts)
+  - Edit `githubGrammarSources` for grammars on a GitHub repository
+  - Edit `marketplaceGrammarSources` for grammars found in a VS Code extension. This can be useful when the grammar is compiled and not on GitHub
+  - Edit `languageAliases` to allow aliases. For example `md` can refer to `markdown` language
 - In [/packages/shiki/samples/](/packages/shiki/samples/), add a code sample file `<id>.sample` for your language. A sample should include a variety of language syntaxes and succinctly capture the idiosyncrasy of a language. Format requirements:
   - Space for indentation
   - Less than 100 columns if possible
