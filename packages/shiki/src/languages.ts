@@ -397,6 +397,7 @@ export const languages: (ILanguageRegistration & { displayName: string })[] = [
   {
     id: 'cypher',
     scopeName: 'source.cypher',
+    displayName: 'Cypher',
     path: 'cypher.tmLanguage.json',
     samplePath: 'cypher.sample',
     aliases: ['cql']
@@ -1243,6 +1244,7 @@ export const languages: (ILanguageRegistration & { displayName: string })[] = [
   {
     id: 'vyper',
     scopeName: 'source.vyper',
+    displayName: 'Vyper',
     path: 'vyper.tmLanguage.json',
     samplePath: 'vyper.sample',
     aliases: ['vy']
