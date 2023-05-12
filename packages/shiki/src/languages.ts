@@ -165,7 +165,7 @@ export type Lang =
   | 'yaml' | 'yml'
   | 'zenscript'
 
-export const languages: (ILanguageRegistration & { displayName: string })[] = [
+export const languages: ILanguageRegistration[] = [
   {
     id: 'abap',
     scopeName: 'source.abap',
