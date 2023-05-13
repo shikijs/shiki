@@ -171,142 +171,140 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'abap',
     scopeName: 'source.abap',
-    displayName: 'ABAP',
     path: 'abap.tmLanguage.json',
+    displayName: 'ABAP',
     samplePath: 'abap.sample'
   },
   {
     id: 'actionscript-3',
     scopeName: 'source.actionscript.3',
-    displayName: 'Actionscript 3',
     path: 'actionscript-3.tmLanguage.json',
+    displayName: 'Actionscript 3',
     samplePath: 'actionscript-3.sample'
   },
   {
     id: 'ada',
     scopeName: 'source.ada',
-    displayName: 'Ada',
     path: 'ada.tmLanguage.json',
+    displayName: 'Ada',
     samplePath: 'ada.sample'
   },
   {
     id: 'apache',
     scopeName: 'source.apacheconf',
-    displayName: 'Apache Conf',
-    path: 'apache.tmLanguage.json'
+    path: 'apache.tmLanguage.json',
+    displayName: 'Apache Conf'
   },
   {
     id: 'apex',
     scopeName: 'source.apex',
-    displayName: 'Apex',
     path: 'apex.tmLanguage.json',
+    displayName: 'Apex',
     samplePath: 'apex.sample'
   },
   {
     id: 'apl',
     scopeName: 'source.apl',
-    displayName: 'apl',
     path: 'apl.tmLanguage.json',
     embeddedLangs: ['html', 'xml', 'css', 'javascript', 'json']
   },
   {
     id: 'applescript',
     scopeName: 'source.applescript',
-    displayName: 'AppleScript',
     path: 'applescript.tmLanguage.json',
+    displayName: 'AppleScript',
     samplePath: 'applescript.sample'
   },
   {
     id: 'ara',
     scopeName: 'source.ara',
-    displayName: 'Ara',
     path: 'ara.tmLanguage.json',
+    displayName: 'Ara',
     samplePath: 'ara.sample'
   },
   {
     id: 'asm',
     scopeName: 'source.asm.x86_64',
-    displayName: 'x86 and x86_64 Assembly',
     path: 'asm.tmLanguage.json',
+    displayName: 'x86 and x86_64 Assembly',
     samplePath: 'asm.sample'
   },
   {
     id: 'astro',
     scopeName: 'source.astro',
-    displayName: 'Astro',
     path: 'astro.tmLanguage.json',
+    displayName: 'Astro',
     samplePath: 'astro.sample',
     embeddedLangs: ['json', 'javascript', 'typescript', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'tsx']
   },
   {
     id: 'awk',
     scopeName: 'source.awk',
-    displayName: 'AWK',
     path: 'awk.tmLanguage.json',
+    displayName: 'AWK',
     samplePath: 'awk.sample'
   },
   {
     id: 'ballerina',
     scopeName: 'source.ballerina',
-    displayName: 'Ballerina',
     path: 'ballerina.tmLanguage.json',
+    displayName: 'Ballerina',
     samplePath: 'ballerina.sample'
   },
   {
     id: 'bat',
     scopeName: 'source.batchfile',
-    displayName: 'Batch File',
     path: 'bat.tmLanguage.json',
+    displayName: 'Batch File',
     samplePath: 'bat.sample',
     aliases: ['batch']
   },
   {
     id: 'beancount',
     scopeName: 'text.beancount',
-    displayName: 'Beancount',
     path: 'beancount.tmLanguage.json',
+    displayName: 'Beancount',
     samplePath: 'beancount.sample'
   },
   {
     id: 'berry',
     scopeName: 'source.berry',
-    displayName: 'Berry',
     path: 'berry.tmLanguage.json',
+    displayName: 'Berry',
     samplePath: 'berry.sample',
     aliases: ['be']
   },
   {
     id: 'bibtex',
     scopeName: 'text.bibtex',
-    displayName: 'BibTeX',
-    path: 'bibtex.tmLanguage.json'
+    path: 'bibtex.tmLanguage.json',
+    displayName: 'BibTeX'
   },
   {
     id: 'bicep',
     scopeName: 'source.bicep',
-    displayName: 'Bicep',
     path: 'bicep.tmLanguage.json',
+    displayName: 'Bicep',
     samplePath: 'bicep.sample'
   },
   {
     id: 'blade',
     scopeName: 'text.html.php.blade',
-    displayName: 'Blade',
     path: 'blade.tmLanguage.json',
+    displayName: 'Blade',
     samplePath: 'blade.sample',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
     id: 'c',
     scopeName: 'source.c',
-    displayName: 'C',
     path: 'c.tmLanguage.json',
+    displayName: 'C',
     samplePath: 'c.sample'
   },
   {
     id: 'cadence',
     scopeName: 'source.cadence',
-    displayName: 'cadence',
     path: 'cadence.tmLanguage.json',
     samplePath: 'cadence.sample',
     aliases: ['cdc']
@@ -314,38 +312,37 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'clarity',
     scopeName: 'source.clar',
-    displayName: 'clarity',
     path: 'clarity.tmLanguage.json',
     samplePath: 'clarity.sample'
   },
   {
     id: 'clojure',
     scopeName: 'source.clojure',
-    displayName: 'Clojure',
     path: 'clojure.tmLanguage.json',
+    displayName: 'Clojure',
     samplePath: 'clojure.sample',
     aliases: ['clj']
   },
   {
     id: 'cmake',
     scopeName: 'source.cmake',
-    displayName: 'CMake',
     path: 'cmake.tmLanguage.json',
+    displayName: 'CMake',
     samplePath: 'cmake.sample'
   },
   {
     id: 'cobol',
     scopeName: 'source.cobol',
-    displayName: 'COBOL',
     path: 'cobol.tmLanguage.json',
+    displayName: 'COBOL',
     samplePath: 'cobol.sample',
     embeddedLangs: ['sql', 'html', 'java']
   },
   {
     id: 'codeql',
     scopeName: 'source.ql',
-    displayName: 'QL',
     path: 'codeql.tmLanguage.json',
+    displayName: 'QL',
     samplePath: 'codeql.sample',
     aliases: ['ql'],
     embeddedLangs: ['markdown']
@@ -353,142 +350,139 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'coffee',
     scopeName: 'source.coffee',
-    displayName: 'CoffeeScript',
     path: 'coffee.tmLanguage.json',
+    displayName: 'CoffeeScript',
     samplePath: 'coffee.sample',
     embeddedLangs: ['javascript']
   },
   {
     id: 'cpp',
     scopeName: 'source.cpp',
-    displayName: 'C++',
     path: 'cpp.tmLanguage.json',
+    displayName: 'C++',
     samplePath: 'cpp.sample',
     embeddedLangs: ['glsl', 'sql']
   },
   {
     id: 'crystal',
     scopeName: 'source.crystal',
-    displayName: 'Crystal',
     path: 'crystal.tmLanguage.json',
+    displayName: 'Crystal',
     samplePath: 'crystal.sample',
     embeddedLangs: ['html', 'sql', 'css', 'c', 'javascript', 'shellscript']
   },
   {
     id: 'csharp',
     scopeName: 'source.cs',
-    displayName: 'C#',
     path: 'csharp.tmLanguage.json',
+    displayName: 'C#',
     samplePath: 'csharp.sample',
     aliases: ['c#', 'cs']
   },
   {
     id: 'css',
     scopeName: 'source.css',
-    displayName: 'CSS',
     path: 'css.tmLanguage.json',
+    displayName: 'CSS',
     samplePath: 'css.sample'
   },
   {
     id: 'cue',
     scopeName: 'source.cue',
-    displayName: 'CUE',
     path: 'cue.tmLanguage.json',
+    displayName: 'CUE',
     samplePath: 'cue.sample'
   },
   {
     id: 'cypher',
     scopeName: 'source.cypher',
-    displayName: 'Cypher',
     path: 'cypher.tmLanguage.json',
+    displayName: 'Cypher',
     samplePath: 'cypher.sample',
     aliases: ['cql']
   },
   {
     id: 'd',
     scopeName: 'source.d',
-    displayName: 'D',
     path: 'd.tmLanguage.json',
+    displayName: 'D',
     samplePath: 'd.sample'
   },
   {
     id: 'dart',
     scopeName: 'source.dart',
-    displayName: 'Dart',
     path: 'dart.tmLanguage.json',
+    displayName: 'Dart',
     samplePath: 'dart.sample'
   },
   {
     id: 'dax',
     scopeName: 'source.dax',
-    displayName: 'dax',
     path: 'dax.tmLanguage.json',
     samplePath: 'dax.sample'
   },
   {
     id: 'diff',
     scopeName: 'source.diff',
-    displayName: 'Diff',
     path: 'diff.tmLanguage.json',
+    displayName: 'Diff',
     samplePath: 'diff.sample'
   },
   {
     id: 'docker',
     scopeName: 'source.dockerfile',
-    displayName: 'Dockerfile',
     path: 'docker.tmLanguage.json',
+    displayName: 'Dockerfile',
     samplePath: 'docker.sample',
     aliases: ['dockerfile']
   },
   {
     id: 'dream-maker',
     scopeName: 'source.dm',
-    displayName: 'Dream Maker',
-    path: 'dream-maker.tmLanguage.json'
+    path: 'dream-maker.tmLanguage.json',
+    displayName: 'Dream Maker'
   },
   {
     id: 'elixir',
     scopeName: 'source.elixir',
-    displayName: 'Elixir',
     path: 'elixir.tmLanguage.json',
+    displayName: 'Elixir',
     samplePath: 'elixir.sample',
     embeddedLangs: ['html']
   },
   {
     id: 'elm',
     scopeName: 'source.elm',
-    displayName: 'Elm',
     path: 'elm.tmLanguage.json',
+    displayName: 'Elm',
     samplePath: 'elm.sample',
     embeddedLangs: ['glsl']
   },
   {
     id: 'erb',
     scopeName: 'text.html.erb',
-    displayName: 'HTML (Ruby - ERB)',
     path: 'erb.tmLanguage.json',
+    displayName: 'HTML (Ruby - ERB)',
     samplePath: 'erb.sample',
     embeddedLangs: ['html', 'ruby']
   },
   {
     id: 'erlang',
     scopeName: 'source.erlang',
-    displayName: 'Erlang',
     path: 'erlang.tmLanguage.json',
+    displayName: 'Erlang',
     samplePath: 'erlang.sample',
     aliases: ['erl']
   },
   {
     id: 'fish',
     scopeName: 'source.fish',
-    displayName: 'fish',
     path: 'fish.tmLanguage.json',
     samplePath: 'fish.sample'
   },
   {
     id: 'fsharp',
     scopeName: 'source.fsharp',
-    displayName: 'fsharp',
     path: 'fsharp.tmLanguage.json',
     samplePath: 'fsharp.sample',
     aliases: ['f#', 'fs'],
@@ -497,7 +491,6 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'gdresource',
     scopeName: 'source.gdresource',
-    displayName: 'gdresource',
     path: 'gdresource.tmLanguage.json',
     samplePath: 'gdresource.sample',
     embeddedLangs: ['gdshader', 'gdscript']
@@ -505,105 +498,104 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'gdscript',
     scopeName: 'source.gdscript',
-    displayName: 'GDScript',
     path: 'gdscript.tmLanguage.json',
+    displayName: 'GDScript',
     samplePath: 'gdscript.sample'
   },
   {
     id: 'gdshader',
     scopeName: 'source.gdshader',
-    displayName: 'GDShader',
     path: 'gdshader.tmLanguage.json',
+    displayName: 'GDShader',
     samplePath: 'gdshader.sample'
   },
   {
     id: 'gherkin',
     scopeName: 'text.gherkin.feature',
-    displayName: 'Gherkin',
-    path: 'gherkin.tmLanguage.json'
+    path: 'gherkin.tmLanguage.json',
+    displayName: 'Gherkin'
   },
   {
     id: 'git-commit',
     scopeName: 'text.git-commit',
-    displayName: 'Git Commit Message',
     path: 'git-commit.tmLanguage.json',
+    displayName: 'Git Commit Message',
     embeddedLangs: ['diff']
   },
   {
     id: 'git-rebase',
     scopeName: 'text.git-rebase',
-    displayName: 'Git Rebase Message',
     path: 'git-rebase.tmLanguage.json',
+    displayName: 'Git Rebase Message',
     embeddedLangs: ['shellscript']
   },
   {
     id: 'glsl',
     scopeName: 'source.glsl',
-    displayName: 'GLSL',
     path: 'glsl.tmLanguage.json',
+    displayName: 'GLSL',
     samplePath: 'glsl.sample',
     embeddedLangs: ['c']
   },
   {
     id: 'gnuplot',
     scopeName: 'source.gnuplot',
-    displayName: 'gnuplot',
     path: 'gnuplot.tmLanguage.json'
   },
   {
     id: 'go',
     scopeName: 'source.go',
-    displayName: 'Go',
     path: 'go.tmLanguage.json',
+    displayName: 'Go',
     samplePath: 'go.sample'
   },
   {
     id: 'graphql',
     scopeName: 'source.graphql',
-    displayName: 'GraphQL',
     path: 'graphql.tmLanguage.json',
+    displayName: 'GraphQL',
     embeddedLangs: ['javascript', 'typescript', 'jsx', 'tsx']
   },
   {
     id: 'groovy',
     scopeName: 'source.groovy',
-    displayName: 'Groovy',
-    path: 'groovy.tmLanguage.json'
+    path: 'groovy.tmLanguage.json',
+    displayName: 'Groovy'
   },
   {
     id: 'hack',
     scopeName: 'source.hack',
-    displayName: 'Hack',
     path: 'hack.tmLanguage.json',
+    displayName: 'Hack',
     embeddedLangs: ['html', 'sql']
   },
   {
     id: 'haml',
     scopeName: 'text.haml',
-    displayName: 'Ruby Haml',
     path: 'haml.tmLanguage.json',
+    displayName: 'Ruby Haml',
     embeddedLangs: ['ruby', 'javascript', 'sass', 'coffee', 'markdown', 'css']
   },
   {
     id: 'handlebars',
     scopeName: 'text.html.handlebars',
-    displayName: 'Handlebars',
     path: 'handlebars.tmLanguage.json',
+    displayName: 'Handlebars',
     aliases: ['hbs'],
     embeddedLangs: ['html', 'css', 'javascript', 'yaml']
   },
   {
     id: 'haskell',
     scopeName: 'source.haskell',
-    displayName: 'Haskell',
     path: 'haskell.tmLanguage.json',
+    displayName: 'Haskell',
     aliases: ['hs']
   },
   {
     id: 'hcl',
     scopeName: 'source.hcl',
-    displayName: 'HashiCorp HCL',
     path: 'hcl.tmLanguage.json',
+    displayName: 'HashiCorp HCL',
     samplePath: 'hcl.sample'
   },
   {
@@ -615,21 +607,20 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'hlsl',
     scopeName: 'source.hlsl',
-    displayName: 'HLSL',
-    path: 'hlsl.tmLanguage.json'
+    path: 'hlsl.tmLanguage.json',
+    displayName: 'HLSL'
   },
   {
     id: 'html',
     scopeName: 'text.html.basic',
-    displayName: 'HTML',
     path: 'html.tmLanguage.json',
+    displayName: 'HTML',
     samplePath: 'html.sample',
     embeddedLangs: ['javascript', 'css']
   },
   {
     id: 'http',
     scopeName: 'source.http',
-    displayName: 'http',
     path: 'http.tmLanguage.json',
     samplePath: 'http.sample',
     embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
@@ -637,65 +628,64 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'imba',
     scopeName: 'source.imba',
-    displayName: 'Imba',
     path: 'imba.tmLanguage.json',
+    displayName: 'Imba',
     samplePath: 'imba.sample'
   },
   {
     id: 'ini',
     scopeName: 'source.ini',
-    displayName: 'Ini',
     path: 'ini.tmLanguage.json',
+    displayName: 'Ini',
     aliases: ['properties']
   },
   {
     id: 'java',
     scopeName: 'source.java',
-    displayName: 'Java',
     path: 'java.tmLanguage.json',
+    displayName: 'Java',
     samplePath: 'java.sample'
   },
   {
     id: 'javascript',
     scopeName: 'source.js',
-    displayName: 'JavaScript (with React support)',
     path: 'javascript.tmLanguage.json',
+    displayName: 'JavaScript (with React support)',
     samplePath: 'javascript.sample',
     aliases: ['js']
   },
   {
     id: 'jinja-html',
     scopeName: 'text.html.jinja',
-    displayName: 'jinja-html',
     path: 'jinja-html.tmLanguage.json',
     embeddedLangs: ['html']
   },
   {
     id: 'jison',
     scopeName: 'source.jison',
-    displayName: 'Jison',
     path: 'jison.tmLanguage.json',
+    displayName: 'Jison',
     samplePath: 'jison.sample',
     embeddedLangs: ['javascript']
   },
   {
     id: 'json',
     scopeName: 'source.json',
-    displayName: 'JSON (Javascript Next)',
-    path: 'json.tmLanguage.json'
+    path: 'json.tmLanguage.json',
+    displayName: 'JSON (Javascript Next)'
   },
   {
     id: 'json5',
     scopeName: 'source.json5',
-    displayName: 'JSON5',
     path: 'json5.tmLanguage.json',
+    displayName: 'JSON5',
     samplePath: 'json5.sample'
   },
   {
     id: 'jsonc',
     scopeName: 'source.json.comments',
-    displayName: 'JSON with comments',
-    path: 'jsonc.tmLanguage.json'
+    path: 'jsonc.tmLanguage.json',
+    displayName: 'JSON with comments'
   },
   {
     id: 'jsonl',
@@ -705,126 +695,125 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'jsonnet',
     scopeName: 'source.jsonnet',
-    displayName: 'Jsonnet',
-    path: 'jsonnet.tmLanguage.json'
+    path: 'jsonnet.tmLanguage.json',
+    displayName: 'Jsonnet'
   },
   {
     id: 'jssm',
     scopeName: 'source.jssm',
-    displayName: 'JSSM',
     path: 'jssm.tmLanguage.json',
+    displayName: 'JSSM',
     samplePath: 'jssm.sample',
     aliases: ['fsl']
   },
   {
     id: 'jsx',
     scopeName: 'source.js.jsx',
-    displayName: 'JavaScript (with React support)',
-    path: 'jsx.tmLanguage.json'
+    path: 'jsx.tmLanguage.json',
+    displayName: 'JavaScript (with React support)'
   },
   {
     id: 'julia',
     scopeName: 'source.julia',
-    displayName: 'Julia',
     path: 'julia.tmLanguage.json',
+    displayName: 'Julia',
     embeddedLangs: ['cpp', 'python', 'javascript', 'r', 'sql']
   },
   {
     id: 'kotlin',
     scopeName: 'source.kotlin',
-    displayName: 'Kotlin',
     path: 'kotlin.tmLanguage.json',
+    displayName: 'Kotlin',
     samplePath: 'kotlin.sample'
   },
   {
     id: 'kusto',
     scopeName: 'source.kusto',
-    displayName: 'Kusto',
     path: 'kusto.tmLanguage.json',
+    displayName: 'Kusto',
     samplePath: 'kusto.sample',
     aliases: ['kql']
   },
   {
     id: 'latex',
     scopeName: 'text.tex.latex',
-    displayName: 'LaTeX',
     path: 'latex.tmLanguage.json',
+    displayName: 'LaTeX',
     embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot']
   },
   {
     id: 'less',
     scopeName: 'source.css.less',
-    displayName: 'Less',
     path: 'less.tmLanguage.json',
+    displayName: 'Less',
     embeddedLangs: ['css']
   },
   {
     id: 'liquid',
     scopeName: 'text.html.liquid',
-    displayName: 'Liquid HTML',
     path: 'liquid.tmLanguage.json',
+    displayName: 'Liquid HTML',
     samplePath: 'liquid.sample',
     embeddedLangs: ['html', 'css', 'json', 'javascript']
   },
   {
     id: 'lisp',
     scopeName: 'source.lisp',
-    displayName: 'Lisp',
-    path: 'lisp.tmLanguage.json'
+    path: 'lisp.tmLanguage.json',
+    displayName: 'Lisp'
   },
   {
     id: 'logo',
     scopeName: 'source.logo',
-    displayName: 'Logo',
-    path: 'logo.tmLanguage.json'
+    path: 'logo.tmLanguage.json',
+    displayName: 'Logo'
   },
   {
     id: 'lua',
     scopeName: 'source.lua',
-    displayName: 'Lua',
     path: 'lua.tmLanguage.json',
+    displayName: 'Lua',
     embeddedLangs: ['c']
   },
   {
     id: 'make',
     scopeName: 'source.makefile',
-    displayName: 'Makefile',
     path: 'make.tmLanguage.json',
+    displayName: 'Makefile',
     aliases: ['makefile']
   },
   {
     id: 'markdown',
     scopeName: 'text.html.markdown',
-    displayName: 'Markdown',
     path: 'markdown.tmLanguage.json',
+    displayName: 'Markdown',
     aliases: ['md'],
     embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
   },
   {
     id: 'marko',
     scopeName: 'text.marko',
-    displayName: 'Marko',
     path: 'marko.tmLanguage.json',
+    displayName: 'Marko',
     samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
     id: 'matlab',
     scopeName: 'source.matlab',
-    displayName: 'MATLAB',
-    path: 'matlab.tmLanguage.json'
+    path: 'matlab.tmLanguage.json',
+    displayName: 'MATLAB'
   },
   {
     id: 'mdx',
     scopeName: 'source.mdx',
-    displayName: 'MDX',
     path: 'mdx.tmLanguage.json',
+    displayName: 'MDX',
     embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
     scopeName: 'source.mermaid',
-    displayName: 'mermaid',
     path: 'mermaid.tmLanguage.json'
   },
   {
@@ -837,188 +826,184 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'nginx',
     scopeName: 'source.nginx',
-    displayName: 'nginx',
     path: 'nginx.tmLanguage.json',
     embeddedLangs: ['lua']
   },
   {
     id: 'nim',
     scopeName: 'source.nim',
-    displayName: 'Nim',
     path: 'nim.tmLanguage.json',
+    displayName: 'Nim',
     embeddedLangs: ['c', 'html', 'xml', 'javascript', 'css', 'glsl', 'markdown']
   },
   {
     id: 'nix',
     scopeName: 'source.nix',
-    displayName: 'Nix',
-    path: 'nix.tmLanguage.json'
+    path: 'nix.tmLanguage.json',
+    displayName: 'Nix'
   },
   {
     id: 'objective-c',
     scopeName: 'source.objc',
-    displayName: 'Objective-C',
     path: 'objective-c.tmLanguage.json',
+    displayName: 'Objective-C',
     aliases: ['objc']
   },
   {
     id: 'objective-cpp',
     scopeName: 'source.objcpp',
-    displayName: 'Objective-C++',
-    path: 'objective-cpp.tmLanguage.json'
+    path: 'objective-cpp.tmLanguage.json',
+    displayName: 'Objective-C++'
   },
   {
     id: 'ocaml',
     scopeName: 'source.ocaml',
-    displayName: 'OCaml',
-    path: 'ocaml.tmLanguage.json'
+    path: 'ocaml.tmLanguage.json',
+    displayName: 'OCaml'
   },
   {
     id: 'pascal',
     scopeName: 'source.pascal',
-    displayName: 'Pascal',
-    path: 'pascal.tmLanguage.json'
+    path: 'pascal.tmLanguage.json',
+    displayName: 'Pascal'
   },
   {
     id: 'perl',
     scopeName: 'source.perl',
-    displayName: 'Perl',
     path: 'perl.tmLanguage.json',
+    displayName: 'Perl',
     embeddedLangs: ['html', 'xml', 'css', 'javascript', 'sql']
   },
   {
     id: 'php',
     scopeName: 'source.php',
-    displayName: 'php',
     path: 'php.tmLanguage.json',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
     id: 'plsql',
     scopeName: 'source.plsql.oracle',
-    displayName: 'PL/SQL (Oracle)',
-    path: 'plsql.tmLanguage.json'
+    path: 'plsql.tmLanguage.json',
+    displayName: 'PL/SQL (Oracle)'
   },
   {
     id: 'postcss',
     scopeName: 'source.css.postcss',
-    displayName: 'PostCSS',
-    path: 'postcss.tmLanguage.json'
+    path: 'postcss.tmLanguage.json',
+    displayName: 'PostCSS'
   },
   {
     id: 'powerquery',
     scopeName: 'source.powerquery',
-    displayName: 'powerquery',
     path: 'powerquery.tmLanguage.json',
     samplePath: 'powerquery.sample'
   },
   {
     id: 'powershell',
     scopeName: 'source.powershell',
-    displayName: 'PowerShell',
     path: 'powershell.tmLanguage.json',
+    displayName: 'PowerShell',
     aliases: ['ps', 'ps1']
   },
   {
     id: 'prisma',
     scopeName: 'source.prisma',
-    displayName: 'Prisma',
     path: 'prisma.tmLanguage.json',
+    displayName: 'Prisma',
     samplePath: 'prisma.sample'
   },
   {
     id: 'prolog',
     scopeName: 'source.prolog',
-    displayName: 'SWI-Prolog',
-    path: 'prolog.tmLanguage.json'
+    path: 'prolog.tmLanguage.json',
+    displayName: 'SWI-Prolog'
   },
   {
     id: 'proto',
     scopeName: 'source.proto',
-    displayName: 'Protocol Buffer 3',
     path: 'proto.tmLanguage.json',
+    displayName: 'Protocol Buffer 3',
     samplePath: 'proto.sample'
   },
   {
     id: 'pug',
     scopeName: 'text.pug',
-    displayName: 'Pug',
     path: 'pug.tmLanguage.json',
+    displayName: 'Pug',
     aliases: ['jade'],
     embeddedLangs: ['javascript', 'css', 'sass', 'scss', 'stylus', 'coffee', 'html']
   },
   {
     id: 'puppet',
     scopeName: 'source.puppet',
-    displayName: 'Puppet',
-    path: 'puppet.tmLanguage.json'
+    path: 'puppet.tmLanguage.json',
+    displayName: 'Puppet'
   },
   {
     id: 'purescript',
     scopeName: 'source.purescript',
-    displayName: 'PureScript',
-    path: 'purescript.tmLanguage.json'
+    path: 'purescript.tmLanguage.json',
+    displayName: 'PureScript'
   },
   {
     id: 'python',
     scopeName: 'source.python',
-    displayName: 'MagicPython',
     path: 'python.tmLanguage.json',
+    displayName: 'MagicPython',
     samplePath: 'python.sample',
     aliases: ['py']
   },
   {
     id: 'r',
     scopeName: 'source.r',
-    displayName: 'R',
-    path: 'r.tmLanguage.json'
+    path: 'r.tmLanguage.json',
+    displayName: 'R'
   },
   {
     id: 'raku',
     scopeName: 'source.perl.6',
-    displayName: 'Perl 6',
     path: 'raku.tmLanguage.json',
+    displayName: 'Perl 6',
     aliases: ['perl6']
   },
   {
     id: 'razor',
     scopeName: 'text.aspnetcorerazor',
-    displayName: 'ASP.NET Razor',
     path: 'razor.tmLanguage.json',
+    displayName: 'ASP.NET Razor',
     embeddedLangs: ['html', 'csharp']
   },
   {
     id: 'reg',
     scopeName: 'source.reg',
-    displayName: 'REG',
     path: 'reg.tmLanguage.json',
+    displayName: 'REG',
     samplePath: 'reg.sample'
   },
   {
     id: 'rel',
     scopeName: 'source.rel',
-    displayName: 'Rel',
     path: 'rel.tmLanguage.json',
+    displayName: 'Rel',
     samplePath: 'rel.sample'
   },
   {
     id: 'riscv',
     scopeName: 'source.riscv',
-    displayName: 'RISCV Assembler',
-    path: 'riscv.tmLanguage.json'
+    path: 'riscv.tmLanguage.json',
+    displayName: 'RISCV Assembler'
   },
   {
     id: 'rst',
     scopeName: 'source.rst',
-    displayName: 'rst',
     path: 'rst.tmLanguage.json',
     embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
   {
     id: 'ruby',
     scopeName: 'source.ruby',
-    displayName: 'Ruby',
     path: 'ruby.tmLanguage.json',
+    displayName: 'Ruby',
     samplePath: 'ruby.sample',
     aliases: ['rb'],
     embeddedLangs: ['html', 'xml', 'sql', 'css', 'c', 'javascript', 'shellscript', 'lua']
@@ -1026,285 +1011,282 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'rust',
     scopeName: 'source.rust',
-    displayName: 'Rust',
     path: 'rust.tmLanguage.json',
+    displayName: 'Rust',
     aliases: ['rs']
   },
   {
     id: 'sas',
     scopeName: 'source.sas',
-    displayName: 'SAS Program',
     path: 'sas.tmLanguage.json',
+    displayName: 'SAS Program',
     embeddedLangs: ['sql']
   },
   {
     id: 'sass',
     scopeName: 'source.sass',
-    displayName: 'Sass',
-    path: 'sass.tmLanguage.json'
+    path: 'sass.tmLanguage.json',
+    displayName: 'Sass'
   },
   {
     id: 'scala',
     scopeName: 'source.scala',
-    displayName: 'Scala',
-    path: 'scala.tmLanguage.json'
+    path: 'scala.tmLanguage.json',
+    displayName: 'Scala'
   },
   {
     id: 'scheme',
     scopeName: 'source.scheme',
-    displayName: 'Scheme',
-    path: 'scheme.tmLanguage.json'
+    path: 'scheme.tmLanguage.json',
+    displayName: 'Scheme'
   },
   {
     id: 'scss',
     scopeName: 'source.css.scss',
-    displayName: 'SCSS',
     path: 'scss.tmLanguage.json',
+    displayName: 'SCSS',
     embeddedLangs: ['css']
   },
   {
     id: 'shaderlab',
     scopeName: 'source.shaderlab',
-    displayName: 'ShaderLab',
     path: 'shaderlab.tmLanguage.json',
+    displayName: 'ShaderLab',
     aliases: ['shader'],
     embeddedLangs: ['hlsl']
   },
   {
     id: 'shellscript',
     scopeName: 'source.shell',
-    displayName: 'Shell Script',
     path: 'shellscript.tmLanguage.json',
+    displayName: 'Shell Script',
     aliases: ['bash', 'console', 'sh', 'shell', 'zsh']
   },
   {
     id: 'smalltalk',
     scopeName: 'source.smalltalk',
-    displayName: 'Smalltalk',
-    path: 'smalltalk.tmLanguage.json'
+    path: 'smalltalk.tmLanguage.json',
+    displayName: 'Smalltalk'
   },
   {
     id: 'solidity',
     scopeName: 'source.solidity',
-    displayName: 'Solidity',
-    path: 'solidity.tmLanguage.json'
+    path: 'solidity.tmLanguage.json',
+    displayName: 'Solidity'
   },
   {
     id: 'sparql',
     scopeName: 'source.sparql',
-    displayName: 'SPARQL',
     path: 'sparql.tmLanguage.json',
+    displayName: 'SPARQL',
     samplePath: 'sparql.sample',
     embeddedLangs: ['turtle']
   },
   {
     id: 'sql',
     scopeName: 'source.sql',
-    displayName: 'SQL',
-    path: 'sql.tmLanguage.json'
+    path: 'sql.tmLanguage.json',
+    displayName: 'SQL'
   },
   {
     id: 'ssh-config',
     scopeName: 'source.ssh-config',
-    displayName: 'SSH Config',
-    path: 'ssh-config.tmLanguage.json'
+    path: 'ssh-config.tmLanguage.json',
+    displayName: 'SSH Config'
   },
   {
     id: 'stata',
     scopeName: 'source.stata',
-    displayName: 'Stata',
     path: 'stata.tmLanguage.json',
+    displayName: 'Stata',
     samplePath: 'stata.sample',
     embeddedLangs: ['sql']
   },
   {
     id: 'stylus',
     scopeName: 'source.stylus',
-    displayName: 'Stylus',
     path: 'stylus.tmLanguage.json',
+    displayName: 'Stylus',
     aliases: ['styl']
   },
   {
     id: 'svelte',
     scopeName: 'source.svelte',
-    displayName: 'Svelte Component',
     path: 'svelte.tmLanguage.json',
+    displayName: 'Svelte Component',
     embeddedLangs: ['javascript', 'typescript', 'coffee', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'pug', 'markdown']
   },
   {
     id: 'swift',
     scopeName: 'source.swift',
-    displayName: 'Swift',
-    path: 'swift.tmLanguage.json'
+    path: 'swift.tmLanguage.json',
+    displayName: 'Swift'
   },
   {
     id: 'system-verilog',
     scopeName: 'source.systemverilog',
-    displayName: 'SystemVerilog',
-    path: 'system-verilog.tmLanguage.json'
+    path: 'system-verilog.tmLanguage.json',
+    displayName: 'SystemVerilog'
   },
   {
     id: 'tasl',
     scopeName: 'source.tasl',
-    displayName: 'tasl',
     path: 'tasl.tmLanguage.json',
     samplePath: 'tasl.sample'
   },
   {
     id: 'tcl',
     scopeName: 'source.tcl',
-    displayName: 'Tcl',
-    path: 'tcl.tmLanguage.json'
+    path: 'tcl.tmLanguage.json',
+    displayName: 'Tcl'
   },
   {
     id: 'tex',
     scopeName: 'text.tex',
-    displayName: 'TeX',
     path: 'tex.tmLanguage.json',
+    displayName: 'TeX',
     embeddedLangs: ['r']
   },
   {
     id: 'toml',
     scopeName: 'source.toml',
-    displayName: 'TOML',
-    path: 'toml.tmLanguage.json'
+    path: 'toml.tmLanguage.json',
+    displayName: 'TOML'
   },
   {
     id: 'tsx',
     scopeName: 'source.tsx',
-    displayName: 'TypeScriptReact',
     path: 'tsx.tmLanguage.json',
+    displayName: 'TypeScriptReact',
     samplePath: 'tsx.sample'
   },
   {
     id: 'turtle',
     scopeName: 'source.turtle',
-    displayName: 'Turtle',
     path: 'turtle.tmLanguage.json',
+    displayName: 'Turtle',
     samplePath: 'turtle.sample'
   },
   {
     id: 'twig',
     scopeName: 'text.html.twig',
-    displayName: 'HTML (Twig)',
     path: 'twig.tmLanguage.json',
+    displayName: 'HTML (Twig)',
     embeddedLangs: ['css', 'javascript', 'php', 'python', 'ruby']
   },
   {
     id: 'typescript',
     scopeName: 'source.ts',
-    displayName: 'TypeScript',
     path: 'typescript.tmLanguage.json',
+    displayName: 'TypeScript',
     aliases: ['ts']
   },
   {
     id: 'v',
     scopeName: 'source.v',
-    displayName: 'V',
     path: 'v.tmLanguage.json',
+    displayName: 'V',
     samplePath: 'v.sample'
   },
   {
     id: 'vb',
     scopeName: 'source.asp.vb.net',
-    displayName: 'ASP vb.NET',
     path: 'vb.tmLanguage.json',
+    displayName: 'ASP vb.NET',
     aliases: ['cmd']
   },
   {
     id: 'verilog',
     scopeName: 'source.verilog',
-    displayName: 'Verilog',
-    path: 'verilog.tmLanguage.json'
+    path: 'verilog.tmLanguage.json',
+    displayName: 'Verilog'
   },
   {
     id: 'vhdl',
     scopeName: 'source.vhdl',
-    displayName: 'VHDL',
-    path: 'vhdl.tmLanguage.json'
+    path: 'vhdl.tmLanguage.json',
+    displayName: 'VHDL'
   },
   {
     id: 'viml',
     scopeName: 'source.viml',
-    displayName: 'viml',
     path: 'viml.tmLanguage.json',
     aliases: ['vim', 'vimscript']
   },
   {
     id: 'vue-html',
     scopeName: 'text.html.vue-html',
-    displayName: 'Vue HTML',
     path: 'vue-html.tmLanguage.json',
+    displayName: 'Vue HTML',
     embeddedLangs: ['vue', 'javascript']
   },
   {
     id: 'vue',
     scopeName: 'source.vue',
-    displayName: 'Vue',
     path: 'vue.tmLanguage.json',
+    displayName: 'Vue',
     embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'json5', 'yaml', 'toml', 'graphql']
   },
   {
     id: 'vyper',
     scopeName: 'source.vyper',
-    displayName: 'Vyper',
     path: 'vyper.tmLanguage.json',
+    displayName: 'Vyper',
     samplePath: 'vyper.sample',
     aliases: ['vy']
   },
   {
     id: 'wasm',
     scopeName: 'source.wat',
-    displayName: 'WebAssembly Text Format',
-    path: 'wasm.tmLanguage.json'
+    path: 'wasm.tmLanguage.json',
+    displayName: 'WebAssembly Text Format'
   },
   {
     id: 'wenyan',
     scopeName: 'source.wenyan',
-    displayName: 'wenyan',
     path: 'wenyan.tmLanguage.json',
     aliases: ['文言']
   },
   {
     id: 'wgsl',
     scopeName: 'source.wgsl',
-    displayName: 'WGSL',
     path: 'wgsl.tmLanguage.json',
+    displayName: 'WGSL',
     samplePath: 'wgsl.sample'
   },
   {
     id: 'wolfram',
     scopeName: 'source.wolfram',
-    displayName: 'Wolfram',
     path: 'wolfram.tmLanguage.json',
+    displayName: 'Wolfram',
     samplePath: 'wolfram.sample'
   },
   {
     id: 'xml',
     scopeName: 'text.xml',
-    displayName: 'XML',
     path: 'xml.tmLanguage.json',
+    displayName: 'XML',
     embeddedLangs: ['java']
   },
   {
     id: 'xsl',
     scopeName: 'text.xml.xsl',
-    displayName: 'XSL',
     path: 'xsl.tmLanguage.json',
+    displayName: 'XSL',
     embeddedLangs: ['xml']
   },
   {
     id: 'yaml',
     scopeName: 'source.yaml',
-    displayName: 'YAML',
     path: 'yaml.tmLanguage.json',
+    displayName: 'YAML',
     aliases: ['yml']
   },
   {
     id: 'zenscript',
     scopeName: 'source.zenscript',
-    displayName: 'ZenScript',
     path: 'zenscript.tmLanguage.json',
+    displayName: 'ZenScript',
     samplePath: 'zenscript.sample'
   }
 ]
