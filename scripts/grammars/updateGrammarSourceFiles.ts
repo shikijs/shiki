@@ -34,7 +34,7 @@ const langRegistrationContent = langIds
     let regContent = `  {
     id: '${id}',
     scopeName: '${grammar.scopeName}',
-    displayName: '${grammar.name}',
+    displayName: '${grammar.name || id}',
     path: '${id}.tmLanguage.json'`
 
     if (grammar.balancedBracketScopes) {

@@ -306,7 +306,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'cadence',
     scopeName: 'source.cadence',
-    displayName: 'undefined',
+    displayName: 'cadence',
     path: 'cadence.tmLanguage.json',
     samplePath: 'cadence.sample',
     aliases: ['cdc']
@@ -497,7 +497,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'gdresource',
     scopeName: 'source.gdresource',
-    displayName: 'undefined',
+    displayName: 'gdresource',
     path: 'gdresource.tmLanguage.json',
     samplePath: 'gdresource.sample',
     embeddedLangs: ['gdshader', 'gdscript']
@@ -824,7 +824,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'mermaid',
     scopeName: 'source.mermaid',
-    displayName: 'undefined',
+    displayName: 'mermaid',
     path: 'mermaid.tmLanguage.json'
   },
   {
@@ -889,7 +889,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'php',
     scopeName: 'source.php',
-    displayName: 'undefined',
+    displayName: 'php',
     path: 'php.tmLanguage.json',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
@@ -1010,7 +1010,7 @@ export const languages: ILanguageRegistration[] = [
   {
     id: 'rst',
     scopeName: 'source.rst',
-    displayName: 'undefined',
+    displayName: 'rst',
     path: 'rst.tmLanguage.json',
     embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
