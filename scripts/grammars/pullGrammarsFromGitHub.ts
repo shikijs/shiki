@@ -34,7 +34,6 @@ async function go() {
           }
         }
 
-        contentObj['name'] = name
         return contentObj
       },
       outPath

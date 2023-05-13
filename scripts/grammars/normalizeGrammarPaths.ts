@@ -49,19 +49,12 @@ for (let f of files) {
   normalizeGrammarFile(f)
 }
 
-export function normalizeGrammarFile(f: string) {
+function normalizeGrammarFile(f: string) {
   const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
   const fNameWithoutSuffix = f.replace(/\.tmLanguage.json$/i, '')
   const fName = fNameWithoutSuffix.toLowerCase()
 
   if (fs.existsSync(fPath)) {
-    const parsedContent = parseJson(fs.readFileSync(fPath, 'utf-8'))
-
-    if (parsedContent.name !== fName) {
-      parsedContent.name = fName
-      fs.writeFileSync(fPath, JSON.stringify(parsedContent, null, 2))
-      console.log(`${chalk.red('normalized')} ${f}'s \`name\` to ${chalk.yellow(fName)}`)
-    }
     if (fNameWithoutSuffix !== fNameWithoutSuffix.toLowerCase()) {
       const fNewPath = path.resolve(
         GRAMMAR_FOLDER_PATH,
