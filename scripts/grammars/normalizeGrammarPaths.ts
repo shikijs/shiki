@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import { vscodeGrammarsToRemove, vscodeGrammarsToRename } from '../grammarSources'
 import chalk from 'chalk'
-import { parseJson } from '../util/parse'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
@@ -52,7 +51,6 @@ for (let f of files) {
 function normalizeGrammarFile(f: string) {
   const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
   const fNameWithoutSuffix = f.replace(/\.tmLanguage.json$/i, '')
-  const fName = fNameWithoutSuffix.toLowerCase()
 
   if (fs.existsSync(fPath)) {
     if (fNameWithoutSuffix !== fNameWithoutSuffix.toLowerCase()) {
