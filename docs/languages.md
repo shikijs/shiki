@@ -114,6 +114,7 @@ export type Lang =
   | 'handlebars' | 'hbs'
   | 'haskell' | 'hs'
   | 'hcl'
+  | 'hjson'
   | 'hlsl'
   | 'html'
   | 'http'
