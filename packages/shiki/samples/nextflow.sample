@@ -1,66 +1,63 @@
- 
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+/*
+ * The following pipeline parameters specify the reference genomes
+ * and read pairs and can be provided as command line options
+ */
+params.reads = "$baseDir/data/ggal/ggal_gut_{1,2}.fq"
 params.transcriptome = "$baseDir/data/ggal/ggal_1_48850000_49020000.Ggal71.500bpflank.fa"
-params.outdir = "."
-params.multiqc = "$baseDir/multiqc"
-
-log.info """\
-         R N A S E Q - N F   P I P E L I N E    
-         ===================================
-         transcriptome: ${params.transcriptome}
-         reads        : ${params.reads}
-         outdir       : ${params.outdir}
-         """
-         .stripIndent()
-
-
-transcriptome_file = file(params.transcriptome)
-multiqc_file = file(params.multiqc)
+params.outdir = "results"
  
-
-Channel
-    .fromFilePairs( params.reads )
-    .ifEmpty { error "Cannot find any reads matching: ${params.reads}" }
-    .into { read_pairs_ch }
-  
-process fastqc {
+workflow {
+    read_pairs_ch = channel.fromFilePairs( params.reads, checkIfExists: true )
+ 
+    INDEX(params.transcriptome)
+    FASTQC(read_pairs_ch)
+    QUANT(INDEX.out, read_pairs_ch)
+}
+ 
+process INDEX {
+    tag "$transcriptome.simpleName"
+ 
+    input:
+    path transcriptome
+ 
+    output:
+    path 'index'
+ 
+    script:
+    """
+    salmon index --threads $task.cpus -t $transcriptome -i index
+    """
+}
+ 
+process FASTQC {
     tag "FASTQC on $sample_id"
-
+    publishDir params.outdir
+ 
     input:
-    set sample_id, file(reads) from read_pairs2_ch
-
+    tuple val(sample_id), path(reads)
+ 
     output:
-    file("fastqc_${sample_id}_logs") into fastqc_ch
-
-
+    path "fastqc_${sample_id}_logs"
+ 
     script:
     """
-    mkdir fastqc_${sample_id}_logs
-    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
-    """  
-}  
-  
-  
-process multiqc {
-    publishDir params.outdir, mode:'copy'
-       
-    input:
-    file('*') from fastqc_ch.collect()
-    file(config) from multiqc_file
-    
-    output:
-    file('multiqc_report.html')  
-     
-    script:
-    """
-    cp $config/* .
-    echo "custom_logo: \$PWD/logo.png" >> multiqc_config.yaml
-    multiqc . 
+    fastqc.sh "$sample_id" "$reads"
     """
 }
  
-workflow.onComplete { 
-	println ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
+process QUANT {
+    tag "$pair_id"
+    publishDir params.outdir
+ 
+    input:
+    path index
+    tuple val(pair_id), path(reads)
+ 
+    output:
+    path pair_id
+ 
+    script:
+    """
+    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    """
 }
-
-// From https://github.com/github-linguist/linguist/blob/master/samples/Nextflow/rnaseq.nf
