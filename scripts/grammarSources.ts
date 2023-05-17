@@ -202,6 +202,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
+  ['nextflow', 'https://github.com/nextflow-io/vscode-language-nextflow/blob/master/syntaxes/nextflow.tmLanguage.json'],
   [
     'nginx',
     'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/src/syntax/nginx.tmLanguage'
@@ -343,6 +344,7 @@ export const languageAliases = {
   kusto: ['kql'],
   make: ['makefile'],
   markdown: ['md'],
+  nextflow: ['nf'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
   pug: ['jade'],
