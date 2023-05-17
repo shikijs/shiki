@@ -1,6 +1,6 @@
 {
   "name": "dart",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "fileTypes": ["dart"],
   "scopeName": "source.dart",
   "foldingStartMarker": "\\{\\s*$",
@@ -296,6 +296,9 @@
         {
           "name": "keyword.declaration.dart",
           "match": "extends"
+        },
+        {
+          "include": "#comments"
         }
       ]
     },
