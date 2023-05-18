@@ -53,10 +53,10 @@
     "script-top-level": {
       "patterns": [
         {
-          "include": "#method-declaration"
+          "include": "#statement"
         },
         {
-          "include": "#statement"
+          "include": "#method-declaration"
         },
         {
           "include": "#punctuation-semicolon"
@@ -417,7 +417,7 @@
           ]
         },
         {
-          "begin": "\\b(using)\\s*",
+          "begin": "\\b(using)\\s*(?!\\(|\\s|var)",
           "beginCaptures": {
             "1": {
               "name": "keyword.other.using.cs"

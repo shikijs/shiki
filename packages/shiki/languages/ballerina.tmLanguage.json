@@ -61,6 +61,9 @@
         },
         {
           "include": "#annotationAttachment"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -133,6 +136,9 @@
         },
         {
           "include": "#identifiers"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -164,6 +170,9 @@
         },
         {
           "include": "#paranthesised"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -1155,6 +1164,9 @@
         },
         {
           "include": "#function-body"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -1246,6 +1258,9 @@
         },
         {
           "include": "#identifiers"
+        },
+        {
+          "include": "#regex"
         },
         {
           "name": "punctuation.separator.parameter.ballerina",
@@ -1568,6 +1583,9 @@
                 },
                 {
                   "include": "#paranthesised"
+                },
+                {
+                  "include": "#regex"
                 }
               ]
             },
@@ -2064,6 +2082,9 @@
         },
         {
           "include": "#expression"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -2457,6 +2478,9 @@
             },
             {
               "include": "#type-tuple"
+            },
+            {
+              "include": "#regex"
             }
           ]
         },
@@ -2558,6 +2582,9 @@
             },
             {
               "include": "#type-tuple"
+            },
+            {
+              "include": "#regex"
             }
           ]
         },
@@ -2678,6 +2705,9 @@
             },
             {
               "include": "#punctuation-accessor"
+            },
+            {
+              "include": "#regex"
             }
           ]
         },
@@ -3197,6 +3227,9 @@
               "include": "#stringTemplate"
             },
             {
+              "include": "#regex"
+            },
+            {
               "include": "#self-literal"
             },
             {
@@ -3331,7 +3364,7 @@
         },
         {
           "name": "keyword.other.ballerina",
-          "match": "\\b(limit|outer|equals|order|by|ascending|descending|class|configurable|variable|module|service)\\b"
+          "match": "\\b(limit|outer|equals|order|by|ascending|descending|class|configurable|variable|module|service|group|collect)\\b"
         },
         {
           "name": "meta.arrow.ballerina storage.type.function.arrow.ballerina",
@@ -3462,6 +3495,9 @@
         },
         {
           "include": "#paranthesisedBracket"
+        },
+        {
+          "include": "#regex"
         }
       ]
     },
@@ -3470,6 +3506,277 @@
         {
           "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(string|int|boolean|float|byte|decimal|json|xml|anydata)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))",
           "name": "support.type.primitive.ballerina"
+        }
+      ]
+    },
+    "regex": {
+      "patterns": [
+        {
+          "begin": "(\\bre)(\\s*)(`)",
+          "name": "regexp.template.ballerina",
+          "beginCaptures": {
+            "1": {
+              "name": "support.type.primitive.ballerina"
+            },
+            "3": {
+              "name": "punctuation.definition.regexp.template.begin.ballerina"
+            }
+          },
+          "end": "`",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.regexp.template.end.ballerina"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#template-substitution-element"
+            },
+            {
+              "include": "#regexp"
+            }
+          ]
+        }
+      ]
+    },
+    "regexp": {
+      "patterns": [
+        {
+          "name": "keyword.control.assertion.regexp.ballerina",
+          "match": "\\^|\\$"
+        },
+        {
+          "name": "keyword.operator.quantifier.regexp.ballerina",
+          "match": "[?+*]|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??"
+        },
+        {
+          "name": "keyword.operator.or.regexp.ballerina",
+          "match": "\\|"
+        },
+        {
+          "name": "meta.group.assertion.regexp.ballerina",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.group.regexp.ballerina"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.group.regexp.ballerina"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#template-substitution-element"
+            },
+            {
+              "include": "#regexp"
+            },
+            {
+              "include": "#flags-on-off"
+            },
+            {
+              "include": "#unicode-property-escape"
+            }
+          ]
+        },
+        {
+          "name": "constant.other.character-class.set.regexp.ballerina",
+          "begin": "(\\[)(\\^)?",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.character-class.start.regexp.ballerina"
+            },
+            "2": {
+              "name": "keyword.operator.negation.regexp.ballerina"
+            }
+          },
+          "end": "(\\])",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.character-class.end.regexp.ballerina"
+            }
+          },
+          "patterns": [
+            {
+              "name": "constant.other.character-class.range.regexp.ballerina",
+              "match": "(?:.|(\\\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\\\[^pPu]))\\-(?:[^\\]\\\\]|(\\\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\\\[^pPu]))",
+              "captures": {
+                "1": {
+                  "name": "constant.character.numeric.regexp"
+                },
+                "2": {
+                  "name": "constant.character.escape.backslash.regexp"
+                },
+                "3": {
+                  "name": "constant.character.numeric.regexp"
+                },
+                "4": {
+                  "name": "constant.character.escape.backslash.regexp"
+                }
+              }
+            },
+            {
+              "include": "#regex-character-class"
+            },
+            {
+              "include": "#unicode-values"
+            },
+            {
+              "include": "#unicode-property-escape"
+            }
+          ]
+        },
+        {
+          "include": "#template-substitution-element"
+        },
+        {
+          "include": "#regex-character-class"
+        },
+        {
+          "include": "#unicode-values"
+        },
+        {
+          "include": "#unicode-property-escape"
+        }
+      ]
+    },
+    "regex-character-class": {
+      "patterns": [
+        {
+          "name": "keyword.other.character-class.regexp.ballerina",
+          "match": "\\\\[wWsSdDtrn]|\\."
+        },
+        {
+          "name": "constant.character.escape.backslash.regexp",
+          "match": "\\\\[^pPu]"
+        }
+      ]
+    },
+    "unicode-property-escape": {
+      "patterns": [
+        {
+          "name": "keyword.other.unicode-property.regexp.ballerina",
+          "begin": "(\\\\p|\\\\P)(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.unicode-property.regexp.ballerina"
+            },
+            "2": {
+              "name": "punctuation.other.unicode-property.begin.regexp.ballerina"
+            }
+          },
+          "end": "(\\})",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.other.unicode-property.end.regexp.ballerina"
+            },
+            "patterns": [
+              {
+                "include": "#regex-unicode-properties-general-category"
+              },
+              {
+                "include": "#regex-unicode-property-key"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "regex-unicode-property-key": {
+      "patterns": [
+        {
+          "name": "keyword.other.unicode-property-key.regexp.ballerina",
+          "begin": "(sc=|gc=)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.unicode-property-key.regexp.ballerina"
+            }
+          },
+          "end": "()",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.other.unicode-property.end.regexp.ballerina"
+            },
+            "patterns": [
+              {
+                "include": "#regex-unicode-properties-general-category"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "regex-unicode-properties-general-category": {
+      "patterns": [
+        {
+          "match": "(Lu|Ll|Lt|Lm|Lo|L|Mn|Mc|Me|M|Nd|Nl|No|N|Pc|Pd|Ps|Pe|Pi|Pf|Po|P|Sm|Sc|Sk|So|S|Zs|Zl|Zp|Z|Cf|Cc|Cn|Co|C)",
+          "name": "constant.other.unicode-property-general-category.regexp.ballerina"
+        }
+      ]
+    },
+    "unicode-values": {
+      "patterns": [
+        {
+          "name": "keyword.other.unicode-value.ballerina",
+          "begin": "(\\\\u)(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.unicode-value.regexp.ballerina"
+            },
+            "2": {
+              "name": "punctuation.other.unicode-value.begin.regexp.ballerina"
+            }
+          },
+          "end": "(\\})",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.other.unicode-value.end.regexp.ballerina"
+            },
+            "patterns": [
+              {
+                "match": "([0-9A-Fa-f]{1,6})",
+                "name": "constant.other.unicode-value.regexp.ballerina"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "flags-on-off": {
+      "name": "meta.flags.regexp.ballerina",
+      "patterns": [
+        {
+          "begin": "(\\??)([imsx]*)(-?)([imsx]*)(:)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.other.non-capturing-group-begin.regexp.ballerina"
+            },
+            "2": {
+              "name": "keyword.other.non-capturing-group.flags-on.regexp.ballerina"
+            },
+            "3": {
+              "name": "punctuation.other.non-capturing-group.off.regexp.ballerina"
+            },
+            "4": {
+              "name": "keyword.other.non-capturing-group.flags-off.regexp.ballerina"
+            },
+            "5": {
+              "name": "punctuation.other.non-capturing-group-end.regexp.ballerina"
+            }
+          },
+          "end": "()",
+          "name": "constant.other.flag.regexp.ballerina",
+          "patterns": [
+            {
+              "include": "#regexp"
+            },
+            {
+              "include": "#template-substitution-element"
+            }
+          ]
         }
       ]
     }
