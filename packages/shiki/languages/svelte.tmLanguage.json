@@ -307,6 +307,30 @@
         }
       ]
     },
+    "destructuring-const": {
+      "patterns": [
+        {
+          "begin": "(?={)",
+          "end": "(?<=})",
+          "name": "meta.embedded.expression.svelte source.ts",
+          "patterns": [
+            {
+              "include": "source.ts#object-binding-pattern-const"
+            }
+          ]
+        },
+        {
+          "begin": "(?=\\[)",
+          "end": "(?<=\\])",
+          "name": "meta.embedded.expression.svelte source.ts",
+          "patterns": [
+            {
+              "include": "source.ts#array-binding-pattern-const"
+            }
+          ]
+        }
+      ]
+    },
     "interpolation": {
       "patterns": [
         {
@@ -406,6 +430,9 @@
           "end": "(?=})",
           "patterns": [
             {
+              "include": "#destructuring-const"
+            },
+            {
               "begin": "\\G\\s*([_$[:alpha:]][_$[:alnum:]]+)\\s*",
               "end": "(?=\\=)",
               "beginCaptures": {
@@ -416,6 +443,7 @@
             },
             {
               "begin": "(?=\\=)",
+              "name": "meta.embedded.expression.svelte source.ts",
               "end": "(?=})",
               "patterns": [
                 {
