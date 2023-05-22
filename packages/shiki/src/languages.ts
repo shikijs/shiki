@@ -61,6 +61,7 @@ export type Lang =
   | 'handlebars' | 'hbs'
   | 'haskell' | 'hs'
   | 'hcl'
+  | 'hjson'
   | 'hlsl'
   | 'html'
   | 'http'
@@ -543,6 +544,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'hcl.sample'
   },
   {
+    id: 'hjson',
+    scopeName: 'source.hjson',
+    path: 'hjson.tmLanguage.json',
+    samplePath: 'hjson.sample'
+  },
+  {
     id: 'hlsl',
     scopeName: 'source.hlsl',
     path: 'hlsl.tmLanguage.json'
@@ -703,6 +710,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'marko',
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
