@@ -165,7 +165,7 @@ export const githubGrammarSources: [string, string][] = [
   ['haml', 'https://github.com/karuna/haml-vscode/blob/master/syntaxes/haml.json'],
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
-  ['hjson', 'https://raw.githubusercontent.com/hjson/textmate-hjson/master/Syntaxes/Hjson.tmLanguage'],
+  ['hjson', 'https://github.com/hjson/textmate-hjson/blob/master/Syntaxes/Hjson.tmLanguage'],
   ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
