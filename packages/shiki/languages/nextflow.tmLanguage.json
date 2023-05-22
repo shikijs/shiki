@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "Nextflow",
+  "name": "nextflow",
   "scopeName": "source.nextflow",
   "keyEquivalent": "^~N",
   "patterns": [
@@ -31,17 +31,29 @@
           "begin": "(\\w*\\()",
           "beginCaptures": {
             "1": {
-              "patterns": [{ "include": "source.nextflow-groovy" }]
+              "patterns": [
+                {
+                  "include": "source.nextflow-groovy"
+                }
+              ]
             }
           },
           "end": "\\)",
-          "patterns": [{ "include": "#nfl-rules" }]
+          "patterns": [
+            {
+              "include": "#nfl-rules"
+            }
+          ]
         },
         {
           "comment": "braces",
           "begin": "{",
           "end": "}",
-          "patterns": [{ "include": "#nfl-rules" }]
+          "patterns": [
+            {
+              "include": "#nfl-rules"
+            }
+          ]
         },
         {
           "include": "source.nextflow-groovy"
@@ -88,17 +100,29 @@
           "begin": "(\\w*\\()",
           "beginCaptures": {
             "1": {
-              "patterns": [{ "include": "source.nextflow-groovy" }]
+              "patterns": [
+                {
+                  "include": "source.nextflow-groovy"
+                }
+              ]
             }
           },
           "end": "\\)",
-          "patterns": [{ "include": "#process-body" }]
+          "patterns": [
+            {
+              "include": "#process-body"
+            }
+          ]
         },
         {
           "comment": "braces",
           "begin": "{",
           "end": "}",
-          "patterns": [{ "include": "#process-body" }]
+          "patterns": [
+            {
+              "include": "#process-body"
+            }
+          ]
         },
         {
           "include": "source.nextflow-groovy#comments"
@@ -164,21 +188,33 @@
           "comment": "Channel factory single line",
           "match": "\\b((?:C|c)hannel\\.)((fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
           "captures": {
-            "1": { "name": "keyword.nextflow" },
-            "2": { "name": "entity.name.function.nextflow" }
+            "1": {
+              "name": "keyword.nextflow"
+            },
+            "2": {
+              "name": "entity.name.function.nextflow"
+            }
           }
         },
         {
           "comment": "Channel factory multi-line",
           "begin": "\\b((?:C|c)hannel)\\s*$",
           "beginCaptures": {
-            "1": { "name": "keyword.nextflow" }
+            "1": {
+              "name": "keyword.nextflow"
+            }
           },
           "end": "(^\\s*)(?:(\\.)(fromList|fromPath|fromFilePairs|fromSRA|from|of|empty|value|watchPath)\\W)?",
           "endCaptures": {
-            "1": { "name": "keyword.nextflow" },
-            "2": { "name": "keyword.nextflow" },
-            "3": { "name": "entity.name.function.nextflow" }
+            "1": {
+              "name": "keyword.nextflow"
+            },
+            "2": {
+              "name": "keyword.nextflow"
+            },
+            "3": {
+              "name": "entity.name.function.nextflow"
+            }
           }
         },
         {
@@ -186,17 +222,29 @@
           "begin": "(\\w*\\()",
           "beginCaptures": {
             "1": {
-              "patterns": [{ "include": "source.nextflow-groovy" }]
+              "patterns": [
+                {
+                  "include": "source.nextflow-groovy"
+                }
+              ]
             }
           },
           "end": "\\)",
-          "patterns": [{ "include": "#workflow-body" }]
+          "patterns": [
+            {
+              "include": "#workflow-body"
+            }
+          ]
         },
         {
           "comment": "braces",
           "begin": "{",
           "end": "}",
-          "patterns": [{ "include": "#workflow-body" }]
+          "patterns": [
+            {
+              "include": "#workflow-body"
+            }
+          ]
         },
         {
           "include": "source.nextflow-groovy#comments"
