@@ -3,7 +3,7 @@
   "foldingStartMarker": "(?x:     # turn on extended mode\n    ^    # a line beginning with\n    \\s*    # some optional space\n    [{\\[]  # the start of an object or array\n    (?!    # but not followed by\n    .*   # whatever\n    [}\\]]  # and the close of an object or array\n    ,?   # an optional comma\n    \\s*  # some optional space\n    $    # at the end of the line\n    )\n    |    # ...or...\n    [{\\[]  # the start of an object or array\n    \\s*    # some optional space\n    $    # at the end of the line\n  )",
   "foldingStopMarker": "(?x:   # turn on extended mode\n    ^    # a line beginning with\n    \\s*  # some optional space\n    [}\\]]  # and the close of an object or array\n  )",
   "keyEquivalent": "^~J",
-  "name": "Hjson",
+  "name": "hjson",
   "patterns": [
     {
       "include": "#comments"
