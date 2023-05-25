@@ -62,7 +62,8 @@ If you don't have a Node.js project, or if you just want to use the build in the
 <script>
   shiki
     .getHighlighter({
-      theme: 'nord'
+      theme: 'nord',
+      langs: ['js'],
     })
     .then(highlighter => {
       const code = highlighter.codeToHtml(`console.log('shiki');`, { lang: 'js' })
