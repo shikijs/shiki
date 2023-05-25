@@ -40,7 +40,7 @@ function resolveOptions(options: HighlighterOptions) {
   if (options.theme) {
     _themes.unshift(options.theme)
   }
-  if (!_themes.length) {
+  if (!_themes.length && options.theme !== null && options.themes !== null) {
     _themes = ['nord']
   }
 

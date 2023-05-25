@@ -8,11 +8,17 @@ export interface HighlighterOptions {
    * The theme to load upfront.
    *
    * Default to: 'nord'
+   * 
+   * If `null`, no default theme wil be loaded.
    */
   theme?: IThemeRegistration
 
   /**
    * A list of themes to load upfront.
+   * 
+   * Default to: ['nord']  (even if `themes` is an empty array)
+   * 
+   * If `null`, no default theme wil be loaded.
    */
   themes?: IThemeRegistration[]
 

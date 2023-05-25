@@ -142,9 +142,33 @@ Load the highlighter with a default theme and no languages:
 ```js
 // ONLY the languages specified will be loaded. It's an empty array, so Shiki won't  preload anything.
 // For every language that you need later you'll have to load it separately (see down below).
+// The default theme `nord` will be loaded when `themes` is an empty array, or neither `theme` nor `themes` is specified.
 const highlighter = await getHighlighter({
   theme: 'nord',
   langs: []
+
+  // Or 👇
+  // langs: []
+
+  // Or 👇
+  // themes: [],
+  // langs: []
+})
+```
+
+Load the highlighter with no themes and no languages:
+
+```js
+// ONLY the languages specified will be loaded. It's an empty array, so Shiki won't  preload anything.
+// For every language that you need later you'll have to load it separately (see down below).
+// NO themes will loaded, when `theme`(or `themes`) is `null`, 
+const highlighter = await getHighlighter({
+  theme: null,
+  langs: []
+
+  // Or 👇
+  // themes: null,
+  // langs: []
 })
 ```
 
