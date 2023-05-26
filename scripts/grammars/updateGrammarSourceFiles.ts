@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { embeddedLanguagesToExclude, languageAliases } from '../grammarSources'
+import {
+  embeddedLanguagesToExclude,
+  languageAliases,
+  languageDisplayOverrides
+} from '../grammarSources'
 import { parseJson } from '../util/parse'
 
 const langDir = path.resolve(__dirname, '../../packages/shiki/languages')
@@ -41,9 +45,12 @@ const langRegistrationContent = langIds
     scopeName: '${grammar.scopeName}',
     path: '${id}.tmLanguage.json'`
 
-    if (displayName[grammar.scopeName] && displayName[grammar.scopeName] !== id) {
+    if (
+      languageDisplayOverrides[id] ||
+      (displayName[grammar.scopeName] && displayName[grammar.scopeName] !== id)
+    ) {
       regContent += `,
-    displayName: '${displayName[grammar.scopeName]}'`
+    displayName: '${languageDisplayOverrides[id] ?? displayName[grammar.scopeName]}'`
     }
 
     if (grammar.balancedBracketScopes) {

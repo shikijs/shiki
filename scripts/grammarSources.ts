@@ -203,7 +203,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
-  ['nextflow', 'https://github.com/nextflow-io/vscode-language-nextflow/blob/master/syntaxes/nextflow.tmLanguage.json'],
+  [
+    'nextflow',
+    'https://github.com/nextflow-io/vscode-language-nextflow/blob/master/syntaxes/nextflow.tmLanguage.json'
+  ],
   [
     'nginx',
     'https://github.com/hangxingliu/vscode-nginx-conf-hint/blob/master/src/syntax/nginx.tmLanguage'
@@ -363,6 +366,16 @@ export const languageAliases = {
   vyper: ['vy'],
   wenyan: ['文言'],
   yaml: ['yml']
+}
+
+/**
+ * Override language display name in the `languages.ts` file
+ *
+ * By default, the script will use the name of the grammar file as the `displayName`,
+ * so you usually don't need to add this field.
+ */
+export const languageDisplayOverrides: Record<string, string> = {
+  wasm: 'WebAssembly Binary'
 }
 
 /**

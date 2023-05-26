@@ -1245,7 +1245,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'wasm',
     scopeName: 'source.wat',
     path: 'wasm.tmLanguage.json',
-    displayName: 'WebAssembly Text Format'
+    displayName: 'WebAssembly Binary'
   },
   {
     id: 'wenyan',
