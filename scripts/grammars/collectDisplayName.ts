@@ -7,9 +7,21 @@ const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 const VSCODE_EXTENSION_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/vscode/extensions')
 const DISPLAY_NAME_MAP_PATH = path.join(__dirname, '../..', 'tmp', 'displayNameMap.json')
 
+/**
+ * Collect display names from grammar files
+ *
+ * @example
+ * ```js
+ * const nameList = collectFromGrammarFiles()
+ * [
+ *   { id: 'go', scopeName: 'source.go', name: 'Go' },
+ *   { id: 'lua', scopeName: 'source.lua', name: 'Lua' },
+ * ]
+ * ```
+ */
 async function collectFromGrammarFiles() {
   const files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
-  const nameList: { id: string; scopeName: string; name: string }[] = []
+  const grammarList: { id: string; scopeName: string; name: string }[] = []
   for (let f of files) {
     const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
     if (!fs.existsSync(fPath)) {
@@ -24,13 +36,13 @@ async function collectFromGrammarFiles() {
     if (!('name' in parsedContent)) {
       continue
     }
-    nameList.push({
+    grammarList.push({
       id: f.split('.')[0],
       scopeName: parsedContent.scopeName,
       name: parsedContent.name
     })
   }
-  return nameList
+  return grammarList
 }
 
 type LanguageExtensionJSON = {
@@ -58,6 +70,21 @@ type LanguageExtensionJSON = {
   }
 }
 
+/**
+ * Collect language information from VSCode extensions
+ *
+ * @example
+ * ```js
+ * [
+ *   {
+ *     languageId: 'typescriptreact',
+ *     alias: [ 'TypeScript JSX', 'TypeScript React', 'tsx' ],
+ *     extensions: [ '.tsx' ],
+ *     scopeName: 'source.tsx'
+ *   },
+ * ]
+ * ```
+ */
 async function collectFromVscodeExtensions() {
   const files = fs
     .readdirSync(VSCODE_EXTENSION_FOLDER_PATH)
@@ -66,7 +93,7 @@ async function collectFromVscodeExtensions() {
       const dirPath = path.resolve(VSCODE_EXTENSION_FOLDER_PATH, f, 'syntaxes')
       return fs.existsSync(dirPath) && fs.lstatSync(dirPath).isDirectory()
     })
-  const nameList: {
+  const grammarList: {
     languageId: string
     alias: string[]
     extensions: string[]
@@ -94,7 +121,7 @@ async function collectFromVscodeExtensions() {
         )
         continue
       }
-      nameList.push({
+      grammarList.push({
         languageId: language.id,
         alias: language.aliases,
         extensions: language.extensions,
@@ -102,10 +129,10 @@ async function collectFromVscodeExtensions() {
       })
     }
   }
-  return nameList
+  return grammarList
 }
 
-async function collectDisplayname() {
+async function collectDisplayName() {
   const grammarNames = await collectFromGrammarFiles()
   const languageData = await collectFromVscodeExtensions()
   const displayNameMap: Record<string, string> = {}
@@ -116,10 +143,12 @@ async function collectDisplayname() {
     if (!language.alias || language.alias.length === 0) {
       continue
     }
+    // The first item of `contributes.languages.aliases` in the list
+    // will be used as the human-readable label in the VS Code UI.
     const displayName = language.alias[0]
     if (
       language.scopeName in displayNameMap &&
-      displayNameMap[language.scopeName] !== language.languageId
+      displayNameMap[language.scopeName] !== displayName
     ) {
       console.log(
         'override',
@@ -135,4 +164,4 @@ async function collectDisplayname() {
   fs.writeFileSync(DISPLAY_NAME_MAP_PATH, JSON.stringify(displayNameMap, null, 2))
 }
 
-collectDisplayname()
+collectDisplayName()
