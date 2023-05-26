@@ -74,6 +74,7 @@ export type Lang =
   | 'json'
   | 'json5'
   | 'jsonc'
+  | 'jsonl'
   | 'jsonnet'
   | 'jssm' | 'fsl'
   | 'jsx'
@@ -621,6 +622,11 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: 'jsonc.tmLanguage.json'
+  },
+  {
+    id: 'jsonl',
+    scopeName: 'source.json.lines',
+    path: 'jsonl.tmLanguage.json'
   },
   {
     id: 'jsonnet',

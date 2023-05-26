@@ -885,6 +885,54 @@
         }
       ]
     },
+    "attributes-generics": {
+      "begin": "(generics)(=)([\"'])",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.other.attribute-name.svelte"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.svelte"
+        },
+        "3": {
+          "name": "punctuation.definition.string.begin.svelte"
+        }
+      },
+      "end": "(\\3)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.svelte"
+        }
+      },
+      "contentName": "meta.embedded.expression.svelte source.ts",
+      "patterns": [
+        {
+          "include": "#type-parameters"
+        }
+      ]
+    },
+    "type-parameters": {
+      "name": "meta.type.parameters.ts",
+      "patterns": [
+        {
+          "include": "source.ts#comment"
+        },
+        {
+          "name": "storage.modifier.ts",
+          "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(extends|in|out|const)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))"
+        },
+        {
+          "include": "source.ts#type"
+        },
+        {
+          "include": "source.ts#punctuation-comma"
+        },
+        {
+          "name": "keyword.operator.assignment.ts",
+          "match": "(=)(?!>)"
+        }
+      ]
+    },
     "tags": {
       "patterns": [
         {
@@ -955,6 +1003,9 @@
       },
       "name": "meta.tag.start.svelte",
       "patterns": [
+        {
+          "include": "#attributes-generics"
+        },
         {
           "include": "#attributes"
         }

@@ -3002,7 +3002,7 @@
       "match": "(?<!\\.)\\bnull\\b"
     },
     "numeric-literal": {
-      "match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eE])[+-])*",
+      "match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_]|_)|(?<=[eE])[+-]|\\.\\d)*",
       "captures": {
         "0": {
           "patterns": [
@@ -3148,7 +3148,7 @@
                   }
                 },
                 {
-                  "match": "(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eE])[+-])+",
+                  "match": "(?:(?:[0-9a-zA-Z_]|_)|(?<=[eE])[+-]|\\.\\d)+",
                   "name": "invalid.illegal.constant.numeric.cs"
                 }
               ]

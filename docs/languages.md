@@ -127,6 +127,7 @@ export type Lang =
   | 'json'
   | 'json5'
   | 'jsonc'
+  | 'jsonl'
   | 'jsonnet'
   | 'jssm' | 'fsl'
   | 'jsx'
