@@ -21,9 +21,7 @@ import { namedColors as ansiNamedColors } from 'ansi-sequence-parser'
 
 function resolveLang(lang: ILanguageRegistration | Lang) {
   return typeof lang === 'string'
-    ? BUNDLED_LANGUAGES.find(
-        l => l.id === lang || l.aliases?.includes(lang)
-      )
+    ? BUNDLED_LANGUAGES.find(l => l.id === lang || l.aliases?.includes(lang))
     : lang
 }
 
