@@ -8,6 +8,11 @@ const sampleDir = path.resolve(__dirname, '../../packages/shiki/samples')
 const langPath = path.resolve(__dirname, '../../packages/shiki/src/languages.ts')
 const readmePath = path.resolve(__dirname, '../../docs/languages.md')
 
+const DISPLAY_NAME_MAP_PATH = path.join(__dirname, '../..', 'tmp', 'displayNameMap.json')
+const displayName: Record<string, string> = parseJson(
+  fs.readFileSync(DISPLAY_NAME_MAP_PATH, 'utf-8')
+)
+
 // Regex to quickly see if a grammar uses `include` keys to embed other languages
 const INCLUDE_REGEX = /"include": "([^#$].+)"/g
 
@@ -36,9 +41,9 @@ const langRegistrationContent = langIds
     scopeName: '${grammar.scopeName}',
     path: '${id}.tmLanguage.json'`
 
-    if (grammar.name && grammar.name !== id) {
+    if (displayName[grammar.scopeName] && displayName[grammar.scopeName] !== id) {
       regContent += `,
-    displayName: '${grammar.name}'`
+    displayName: '${displayName[grammar.scopeName]}'`
     }
 
     if (grammar.balancedBracketScopes) {
