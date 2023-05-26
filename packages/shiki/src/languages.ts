@@ -255,7 +255,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'bat',
     scopeName: 'source.batchfile',
     path: 'bat.tmLanguage.json',
-    displayName: 'Batch File',
+    displayName: 'Batch',
     samplePath: 'bat.sample',
     aliases: ['batch']
   },
@@ -432,7 +432,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'docker',
     scopeName: 'source.dockerfile',
     path: 'docker.tmLanguage.json',
-    displayName: 'Dockerfile',
+    displayName: 'Docker',
     samplePath: 'docker.sample',
     aliases: ['dockerfile']
   },
@@ -484,6 +484,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'fsharp',
     scopeName: 'source.fsharp',
     path: 'fsharp.tmLanguage.json',
+    displayName: 'F#',
     samplePath: 'fsharp.sample',
     aliases: ['f#', 'fs'],
     embeddedLangs: ['markdown']
@@ -602,6 +603,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'hjson',
     scopeName: 'source.hjson',
     path: 'hjson.tmLanguage.json',
+    displayName: 'Hjson',
     samplePath: 'hjson.sample'
   },
   {
@@ -636,7 +638,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'ini',
     scopeName: 'source.ini',
     path: 'ini.tmLanguage.json',
-    displayName: 'Ini',
+    displayName: 'Properties',
     aliases: ['properties']
   },
   {
@@ -650,7 +652,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'javascript',
     scopeName: 'source.js',
     path: 'javascript.tmLanguage.json',
-    displayName: 'JavaScript (with React support)',
+    displayName: 'JavaScript',
     samplePath: 'javascript.sample',
     aliases: ['js']
   },
@@ -672,7 +674,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'json',
     scopeName: 'source.json',
     path: 'json.tmLanguage.json',
-    displayName: 'JSON (Javascript Next)'
+    displayName: 'JSON'
   },
   {
     id: 'json5',
@@ -685,12 +687,13 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsonc',
     scopeName: 'source.json.comments',
     path: 'jsonc.tmLanguage.json',
-    displayName: 'JSON with comments'
+    displayName: 'JSON with Comments'
   },
   {
     id: 'jsonl',
     scopeName: 'source.json.lines',
-    path: 'jsonl.tmLanguage.json'
+    path: 'jsonl.tmLanguage.json',
+    displayName: 'JSON Lines'
   },
   {
     id: 'jsonnet',
@@ -710,7 +713,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'jsx',
     scopeName: 'source.js.jsx',
     path: 'jsx.tmLanguage.json',
-    displayName: 'JavaScript (with React support)'
+    displayName: 'JavaScript JSX'
   },
   {
     id: 'julia',
@@ -820,6 +823,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'nextflow',
     scopeName: 'source.nextflow',
     path: 'nextflow.tmLanguage.json',
+    displayName: 'Nextflow',
     samplePath: 'nextflow.sample',
     aliases: ['nf']
   },
@@ -878,6 +882,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'php',
     scopeName: 'source.php',
     path: 'php.tmLanguage.json',
+    displayName: 'PHP',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
@@ -949,7 +954,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'python',
     scopeName: 'source.python',
     path: 'python.tmLanguage.json',
-    displayName: 'MagicPython',
+    displayName: 'Python',
     samplePath: 'python.sample',
     aliases: ['py']
   },
@@ -997,6 +1002,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'rst',
     scopeName: 'source.rst',
     path: 'rst.tmLanguage.json',
+    displayName: 'reStructuredText',
     embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
   {
@@ -1157,7 +1163,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'tsx',
     scopeName: 'source.tsx',
     path: 'tsx.tmLanguage.json',
-    displayName: 'TypeScriptReact',
+    displayName: 'TypeScript JSX',
     samplePath: 'tsx.sample'
   },
   {
@@ -1192,7 +1198,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vb',
     scopeName: 'source.asp.vb.net',
     path: 'vb.tmLanguage.json',
-    displayName: 'ASP vb.NET',
+    displayName: 'Visual Basic',
     aliases: ['cmd']
   },
   {
