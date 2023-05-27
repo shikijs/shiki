@@ -6,6 +6,8 @@
  * Remove these themes bundled in vscode
  */
 export const vscodeThemesToRemove = [
+  'dark_modern',
+  'light_modern',
   // Included in dark_plus
   'dark_vs',
   'dark_plus_experimental',
