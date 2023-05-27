@@ -87,10 +87,10 @@
           "include": "#interface-declaration"
         },
         {
-          "include": "#record-declaration"
+          "include": "#struct-declaration"
         },
         {
-          "include": "#struct-declaration"
+          "include": "#record-declaration"
         },
         {
           "include": "#attribute-section"
@@ -573,26 +573,32 @@
       "match": "(?<!\\.)\\b(new|public|protected|internal|private|abstract|virtual|override|sealed|static|partial|readonly|volatile|const|extern|async|unsafe|ref|required)\\b"
     },
     "class-declaration": {
-      "begin": "(?=\\bclass\\b)",
-      "end": "(?<=\\})",
+      "begin": "(?=(\\brecord\\b\\s+)?\\bclass\\b)",
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
-          "begin": "(?x)\n\\b(class)\\b\\s+\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*",
+          "begin": "(?x)\n(\\b(record)\\b\\s+)?\n\\b(class)\\b\\s+\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*",
           "beginCaptures": {
-            "1": {
+            "2": {
+              "name": "keyword.other.record.cs"
+            },
+            "3": {
               "name": "keyword.other.class.cs"
             },
-            "2": {
+            "4": {
               "name": "entity.name.type.class.cs"
             }
           },
-          "end": "(?=\\{)",
+          "end": "(?=\\{)|(?=;)",
           "patterns": [
             {
               "include": "#comment"
             },
             {
               "include": "#type-parameter-list"
+            },
+            {
+              "include": "#parenthesized-parameter-list"
             },
             {
               "include": "#base-types"
@@ -816,7 +822,7 @@
     },
     "record-declaration": {
       "begin": "(?=\\brecord\\b)",
-      "end": "(?<=\\})",
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
           "begin": "(?x)\n(record)\\b\\s+\n(@?[_[:alpha:]][_[:alnum:]]*)",
@@ -825,16 +831,19 @@
               "name": "keyword.other.record.cs"
             },
             "2": {
-              "name": "entity.name.type.record.cs"
+              "name": "entity.name.type.class.cs"
             }
           },
-          "end": "(?=\\{)",
+          "end": "(?=\\{)|(?=;)",
           "patterns": [
             {
               "include": "#comment"
             },
             {
               "include": "#type-parameter-list"
+            },
+            {
+              "include": "#parenthesized-parameter-list"
             },
             {
               "include": "#base-types"
@@ -872,26 +881,32 @@
       ]
     },
     "struct-declaration": {
-      "begin": "(?=\\bstruct\\b)",
-      "end": "(?<=\\})",
+      "begin": "(?=(\\brecord\\b\\s+)?\\bstruct\\b)",
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
-          "begin": "(?x)\n(struct)\\b\\s+\n(@?[_[:alpha:]][_[:alnum:]]*)",
+          "begin": "(?x)\n(\\b(record)\\b\\s+)?\n(struct)\\b\\s+\n(@?[_[:alpha:]][_[:alnum:]]*)",
           "beginCaptures": {
-            "1": {
+            "2": {
+              "name": "keyword.other.record.cs"
+            },
+            "3": {
               "name": "keyword.other.struct.cs"
             },
-            "2": {
+            "4": {
               "name": "entity.name.type.struct.cs"
             }
           },
-          "end": "(?=\\{)",
+          "end": "(?=\\{)|(?=;)",
           "patterns": [
             {
               "include": "#comment"
             },
             {
               "include": "#type-parameter-list"
+            },
+            {
+              "include": "#parenthesized-parameter-list"
             },
             {
               "include": "#base-types"
@@ -976,7 +991,7 @@
           "name": "punctuation.separator.colon.cs"
         }
       },
-      "end": "(?=\\{|where)",
+      "end": "(?=\\{|where|;)",
       "patterns": [
         {
           "include": "#type"
