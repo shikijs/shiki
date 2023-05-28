@@ -24,10 +24,6 @@ async function collectGrammarNames() {
   const grammarList: { id: string; scopeName: string; name: string }[] = []
   for (let f of files) {
     const fPath = path.resolve(GRAMMAR_FOLDER_PATH, f)
-    if (!fs.existsSync(fPath)) {
-      console.log(`${chalk.red("'file not found in")} ${chalk.blue(f)}`)
-      return
-    }
     const parsedContent = parseJson(fs.readFileSync(fPath, 'utf-8'))
     if (!('scopeName' in parsedContent)) {
       console.log(`${chalk.red("'scopeName' not found in")} ${chalk.blue(f)}`)
