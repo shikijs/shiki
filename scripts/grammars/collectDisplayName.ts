@@ -5,7 +5,7 @@ import { parseJson } from '../util/parse'
 
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 const VSCODE_EXTENSION_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/vscode/extensions')
-const DISPLAY_NAME_MAP_PATH = path.join(__dirname, '../..', 'tmp', 'displayNameMap.json')
+const SCOPE_TO_DISPLAY_NAME_MAP_PATH = path.join(__dirname, '../..', 'tmp', 'displayNameMap.json')
 
 /**
  * Collect display names from grammar files
@@ -19,7 +19,7 @@ const DISPLAY_NAME_MAP_PATH = path.join(__dirname, '../..', 'tmp', 'displayNameM
  * ]
  * ```
  */
-async function collectFromGrammarFiles() {
+async function collectGrammarNames() {
   const files = fs.readdirSync(GRAMMAR_FOLDER_PATH)
   const grammarList: { id: string; scopeName: string; name: string }[] = []
   for (let f of files) {
@@ -85,14 +85,11 @@ type LanguageExtensionJSON = {
  * ]
  * ```
  */
-async function collectFromVscodeExtensions() {
-  const files = fs
-    .readdirSync(VSCODE_EXTENSION_FOLDER_PATH)
-    // .filter(f => fs.lstatSync(path.resolve(VSCODE_EXTENSION_FOLDER_PATH, f)).isDirectory())
-    .filter(f => {
-      const dirPath = path.resolve(VSCODE_EXTENSION_FOLDER_PATH, f, 'syntaxes')
-      return fs.existsSync(dirPath) && fs.lstatSync(dirPath).isDirectory()
-    })
+async function collectVscodeGrammars() {
+  const files = fs.readdirSync(VSCODE_EXTENSION_FOLDER_PATH).filter(f => {
+    const dirPath = path.resolve(VSCODE_EXTENSION_FOLDER_PATH, f, 'syntaxes')
+    return fs.existsSync(dirPath) && fs.lstatSync(dirPath).isDirectory()
+  })
   const grammarList: {
     languageId: string
     alias: string[]
@@ -132,36 +129,36 @@ async function collectFromVscodeExtensions() {
   return grammarList
 }
 
-async function collectDisplayName() {
-  const grammarNames = await collectFromGrammarFiles()
-  const languageData = await collectFromVscodeExtensions()
-  const displayNameMap: Record<string, string> = {}
+async function collectDisplayNames() {
+  const grammarNames = await collectGrammarNames()
+  const vscodeGrammars = await collectVscodeGrammars()
+  const scopeToDisplayNameMap: Record<string, string> = {}
   for (const grammarName of grammarNames) {
-    displayNameMap[grammarName.scopeName] = grammarName.name
+    scopeToDisplayNameMap[grammarName.scopeName] = grammarName.name
   }
-  for (const language of languageData) {
-    if (!language.alias || language.alias.length === 0) {
+  for (const g of vscodeGrammars) {
+    if (!g.alias || g.alias.length === 0) {
       continue
     }
     // The first item of `contributes.languages.aliases` in the list
     // will be used as the human-readable label in the VS Code UI.
-    const displayName = language.alias[0]
+    const displayName = g.alias[0]
     if (
-      language.scopeName in displayNameMap &&
-      displayNameMap[language.scopeName] !== displayName
+      g.scopeName in scopeToDisplayNameMap &&
+      scopeToDisplayNameMap[g.scopeName] !== displayName
     ) {
       console.log(
-        'override',
-        language.scopeName,
+        chalk.red('renamed'),
+        chalk.blue(g.scopeName),
         'from',
-        displayNameMap[language.scopeName],
+        chalk.yellow(scopeToDisplayNameMap[g.scopeName]),
         'to',
-        displayName
+        chalk.yellow(displayName)
       )
     }
-    displayNameMap[language.scopeName] = displayName
+    scopeToDisplayNameMap[g.scopeName] = displayName
   }
-  fs.writeFileSync(DISPLAY_NAME_MAP_PATH, JSON.stringify(displayNameMap, null, 2))
+  fs.writeFileSync(SCOPE_TO_DISPLAY_NAME_MAP_PATH, JSON.stringify(scopeToDisplayNameMap, null, 2))
 }
 
-collectDisplayName()
+collectDisplayNames()

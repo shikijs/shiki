@@ -375,7 +375,30 @@ export const languageAliases = {
  * so you usually don't need to add this field.
  */
 export const languageDisplayOverrides: Record<string, string> = {
-  wasm: 'WebAssembly Binary'
+  'actionscript-3': 'ActionScript',
+  apl: 'APL',
+  asm: 'Assembly',
+  'codeql': 'CodeQL',
+  dax: 'DAX',
+  erb: 'ERB',
+  'gdresource': 'GDResource',
+  http: 'HTTP',
+  ini: 'INI',
+  'jinja-html': 'Jinja',
+  jsx: 'JSX',
+  liquid: 'Liquid',
+  plsql: 'PL/SQL',
+  powerquery: 'PowerQuery',
+  prolog: 'Prolog',
+  reg: 'Windows Registry Script',
+  riscv: 'RISC-V',
+  sas: 'SAS',
+  shellscript: 'Shell',
+  svelte: 'Svelte',
+  tsx: 'TSX',
+  twig: 'Twig',
+  viml: 'Vim Script',
+  wasm: 'WebAssembly'
 }
 
 /**

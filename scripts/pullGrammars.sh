@@ -21,9 +21,9 @@ echo "> Getting grammars from VS Code marketplace"
 npx esno scripts/grammars/pullGrammarsFromMarketplace.ts
 echo "> Done getting grammars from VS Code marketplace"
 
-echo "> Collecting languages dispaly names"
+echo "> Collecting language display names"
 npx esno scripts/grammars/collectDisplayName.ts
-echo "> Done collecting languages dispaly names"
+echo "> Done collecting language display names"
 
 echo "> Normalizing grammars"
 npx esno scripts/grammars/normalizeGrammarPaths.ts
