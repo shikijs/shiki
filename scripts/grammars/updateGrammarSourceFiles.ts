@@ -47,16 +47,15 @@ const langRegistrationContent = langIds
     scopeName: '${grammar.scopeName}',
     path: '${id}.tmLanguage.json'`
 
-    if (
-      languageDisplayOverrides[id] ||
-      (scopeToDisplayNameMap[grammar.scopeName] && scopeToDisplayNameMap[grammar.scopeName] !== id)
-    ) {
-      regContent += `,
-    displayName: '${languageDisplayOverrides[id] ?? scopeToDisplayNameMap[grammar.scopeName]}'`
-    } else {
-      regContent += `,
-    displayName: '${capitalize(id)}'`
+    let displayName = capitalize(id)
+    if (languageDisplayOverrides[id]) {
+      displayName = languageDisplayOverrides[id]
+    } else if (scopeToDisplayNameMap[grammar.scopeName]) {
+      displayName = scopeToDisplayNameMap[grammar.scopeName]
     }
+
+    regContent += `,
+    displayName: '${displayName}'`
 
     if (grammar.balancedBracketScopes) {
       regContent += `,

@@ -369,24 +369,28 @@ export const languageAliases = {
 }
 
 /**
- * Override language display name in the `languages.ts` file
+ * Override language `displayName` in the `languages.ts` file
  *
- * By default, the script will use the name of the grammar file as the `displayName`,
+ * By default, this script will use the name of the grammar file as the `displayName`,
  * so you usually don't need to add this field.
  */
 export const languageDisplayOverrides: Record<string, string> = {
   'actionscript-3': 'ActionScript',
   apl: 'APL',
   asm: 'Assembly',
+  clarity: 'Clarity',
   'codeql': 'CodeQL',
   dax: 'DAX',
   erb: 'ERB',
+  fish: 'Fish',
   'gdresource': 'GDResource',
+  'gnuplot': 'Gnuplot',
   http: 'HTTP',
   ini: 'INI',
   'jinja-html': 'Jinja',
   jsx: 'JSX',
   liquid: 'Liquid',
+  nginx: 'Nginx',
   plsql: 'PL/SQL',
   powerquery: 'PowerQuery',
   prolog: 'Prolog',
@@ -395,10 +399,12 @@ export const languageDisplayOverrides: Record<string, string> = {
   sas: 'SAS',
   shellscript: 'Shell',
   svelte: 'Svelte',
+  tasl: 'Tasl',
   tsx: 'TSX',
   twig: 'Twig',
   viml: 'Vim Script',
-  wasm: 'WebAssembly'
+  wasm: 'WebAssembly',
+  wenyan: 'Wenyan'
 }
 
 /**
