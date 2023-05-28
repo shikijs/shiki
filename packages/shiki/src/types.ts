@@ -138,6 +138,7 @@ export interface IHighlighterPaths {
 export type ILanguageRegistration = {
   id: string
   scopeName: string
+  displayName?: string
   aliases?: string[]
   samplePath?: string
   /**

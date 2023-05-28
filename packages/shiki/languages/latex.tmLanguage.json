@@ -1,12 +1,5 @@
 {
-  "information_for_contributors": [
-    "This file has been converted from https://github.com/jlelong/vscode-latex-basics/blob/master/syntaxes/LaTeX.tmLanguage.json",
-    "If you want to provide a fix or improvement, please create a pull request against the original repository.",
-    "Once accepted there, we are happy to receive an update request."
-  ],
-  "version": "https://github.com/jlelong/vscode-latex-basics/commit/580c019674f82ef887a6dcce7bfc75ab0b58486d",
   "name": "latex",
-  "scopeName": "text.tex.latex",
   "patterns": [
     {
       "comment": "This scope identifies partially typed commands such as `\\tab`. We use this to trigger “Command Completion” only when it makes sense.",
@@ -1205,32 +1198,16 @@
           "name": "punctuation.definition.function.latex"
         },
         "3": {
-          "patterns": [
-            {
-              "include": "#optional-arg"
-            }
-          ]
+          "name": "punctuation.definition.arguments.begin.latex"
         },
         "4": {
-          "name": "punctuation.definition.arguments.begin.latex"
-        },
-        "5": {
           "name": "markup.underline.link.latex"
         },
-        "6": {
-          "name": "punctuation.definition.arguments.end.latex"
-        },
-        "7": {
-          "name": "punctuation.definition.arguments.begin.latex"
-        },
-        "8": {
-          "name": "entity.name.hyperlink.latex"
-        },
-        "9": {
+        "5": {
           "name": "punctuation.definition.arguments.end.latex"
         }
       },
-      "match": "(?:\\s*)((\\\\)(?:url|href|hyperref|hyperimage))(\\[[^\\[]*?\\])?(\\{)([^}]*)(\\})(?:\\{[^}]*\\}){2}?(?:(\\{)([^}]*)(\\}))?",
+      "match": "(?:\\s*)((\\\\)(?:url|href))(\\{)([^}]*)(\\})",
       "name": "meta.function.link.url.latex"
     },
     {
@@ -2071,30 +2048,6 @@
       ]
     },
     {
-      "name": "string.quoted.double.latex",
-      "match": "(?<!\\\\)(\\`\\`)(?:.*?(?<!\\\\))(\\'\\'|\\\")",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.string.begin.latex"
-        },
-        "2": {
-          "name": "punctuation.definition.string.end.latex"
-        }
-      }
-    },
-    {
-      "name": "string.quoted.single.latex",
-      "match": "(?<!\\\\)(\\`)(?:.*?(?<!\\\\))(\\')",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.string.begin.latex"
-        },
-        "2": {
-          "name": "punctuation.definition.string.end.latex"
-        }
-      }
-    },
-    {
       "begin": "\\$\\$",
       "beginCaptures": {
         "0": {
@@ -2370,5 +2323,6 @@
         }
       ]
     }
-  }
+  },
+  "scopeName": "text.tex.latex"
 }

@@ -20,5 +20,5 @@ export async function downloadFromGH(
   const contentObj = processor(content)
 
   fs.writeFileSync(outPath, JSON.stringify(contentObj, null, 2))
-  console.log(`Downloaded ${type}: ${chalk.blue(outPath)}`)
+  console.log(`${chalk.red('downloaded ' + type)}: ${chalk.blue(outPath)}`)
 }
