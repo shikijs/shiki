@@ -68,6 +68,10 @@ export const githubThemeSources: [string, string][] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
+  ],
+  [
+    'shades-of-purple',
+    'https://github.com/ahmadawais/Shades-of-Purple-iTerm2/blob/master/shades-of-purple.iterm2.json'
   ]
 ]
 

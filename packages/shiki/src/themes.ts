@@ -22,6 +22,7 @@ export type Theme =
   | 'rose-pine-dawn'
   | 'rose-pine-moon'
   | 'rose-pine'
+  | 'shades-of-purple'
   | 'slack-dark'
   | 'slack-ochin'
   | 'solarized-dark'
@@ -53,6 +54,7 @@ export const themes: Theme[] = [
   'rose-pine-dawn',
   'rose-pine-moon',
   'rose-pine',
+  'shades-of-purple',
   'slack-dark',
   'slack-ochin',
   'solarized-dark',
