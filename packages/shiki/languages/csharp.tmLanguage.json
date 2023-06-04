@@ -570,7 +570,7 @@
     },
     "storage-modifier": {
       "name": "storage.modifier.cs",
-      "match": "(?<!\\.)\\b(new|public|protected|internal|private|abstract|virtual|override|sealed|static|partial|readonly|volatile|const|extern|async|unsafe|ref|required)\\b"
+      "match": "(?<!\\.)\\b(new|public|protected|internal|private|abstract|virtual|override|sealed|static|partial|readonly|volatile|const|extern|async|unsafe|ref|required|file)\\b"
     },
     "class-declaration": {
       "begin": "(?=(\\brecord\\b\\s+)?\\bclass\\b)",

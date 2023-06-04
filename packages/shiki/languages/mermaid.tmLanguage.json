@@ -405,7 +405,7 @@
               "name": "comment"
             },
             {
-              "match": "(dateFormat)\\s+([\\w-]+)",
+              "match": "(dateFormat)\\s+([\\w\\-\\.]+)",
               "captures": {
                 "1": {
                   "name": "keyword.control.mermaid"
@@ -416,7 +416,7 @@
               }
             },
             {
-              "match": "(axisFormat)\\s+([\\w\\%/-]+)",
+              "match": "(axisFormat)\\s+([\\w\\%\\/\\\\\\-\\.]+)",
               "captures": {
                 "1": {
                   "name": "keyword.control.mermaid"
@@ -438,6 +438,28 @@
               }
             },
             {
+              "match": "(excludes)\\s+((?:[\\d\\-,\\s]+|monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekends)+)",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "string"
+                }
+              }
+            },
+            {
+              "match": "^\\s+(todayMarker)\\s+(.*)$",
+              "captures": {
+                "1": {
+                  "name": "keyword.control.mermaid"
+                },
+                "2": {
+                  "name": "string"
+                }
+              }
+            },
+            {
               "match": "(section)\\s+(\\s*[\"\\(\\)$&%\\^/#.,?!;:*+=<>\\'\\\\\\-\\w\\s]*)",
               "captures": {
                 "1": {
@@ -449,7 +471,7 @@
               }
             },
             {
-              "begin": "\\s(.*)(:)",
+              "begin": "^\\s(.*)(:)",
               "beginCaptures": {
                 "1": {
                   "name": "string"
