@@ -1840,6 +1840,13 @@
       }
     },
     {
+      "name": "Latex variable parameter",
+      "scope": ["variable.parameter.function.latex"],
+      "settings": {
+        "foreground": "#e06c75"
+      }
+    },
+    {
       "name": "variable.other.object",
       "scope": ["variable.other.object"],
       "settings": {
@@ -1939,13 +1946,6 @@
     {
       "name": "comment",
       "scope": "comment.line.double-slash,comment.block.documentation",
-      "settings": {
-        "fontStyle": "italic"
-      }
-    },
-    {
-      "name": "Python Keyword Control",
-      "scope": "keyword.control.import.python,keyword.control.flow.python,keyword.operator.logical.python",
       "settings": {
         "fontStyle": "italic"
       }
