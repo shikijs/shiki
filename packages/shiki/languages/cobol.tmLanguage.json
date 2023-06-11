@@ -1010,21 +1010,6 @@
       "name": "support.type.cobol.acu strong"
     },
     {
-      "begin": "(?<![-_\\*])(?i:remarks)",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.cobol"
-        }
-      },
-      "name": "comment.2.block.cobol.remark",
-      "end": "(?i:end\\-remark|\\*{Bench}end|environment\\s+division|data\\s+division|working-storage\\s+section|file-control)",
-      "endCaptures": {
-        "0": {
-          "name": "keyword.cobol"
-        }
-      }
-    },
-    {
       "match": "(?<![-_])(?i:alter)(?=\\s|\\.)",
       "name": "invalid.illegal.cobol"
     },
