@@ -260,6 +260,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/scala/vscode-scala-syntax/blob/master/syntaxes/Scala.tmLanguage.json'
   ],
   ['scheme', 'https://github.com/sjhuangx/vscode-scheme/blob/master/syntaxes/scheme.tmLanguage'],
+  ['shellsession', 'https://github.com/hronro/sublime-linguist-syntax/blob/master/syntaxes/ShellSession.tmLanguage'],
   [
     'smalltalk',
     'https://github.com/leocamello/vscode-smalltalk/blob/master/syntaxes/smalltalk.tmLanguage.json'
@@ -358,7 +359,8 @@ export const languageAliases = {
   rust: ['rs'],
   'html-ruby-erb': ['erb'],
   shaderlab: ['shader'],
-  shellscript: ['bash', 'console', 'sh', 'shell', 'zsh'],
+  shellscript: ['bash', 'sh', 'shell', 'zsh'],
+  shellsession: ['console'],
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
