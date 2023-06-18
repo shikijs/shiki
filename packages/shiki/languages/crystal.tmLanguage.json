@@ -483,18 +483,18 @@
     },
     {
       "begin": "%x\\{",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "execute string (allow for interpolation)",
       "end": "\\}",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.interpolated.crystal",
       "patterns": [
         {
@@ -510,18 +510,18 @@
     },
     {
       "begin": "%x\\[",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "execute string (allow for interpolation)",
       "end": "\\]",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.interpolated.crystal",
       "patterns": [
         {
@@ -537,18 +537,18 @@
     },
     {
       "begin": "%x\\<",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "execute string (allow for interpolation)",
       "end": "\\>",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.interpolated.crystal",
       "patterns": [
         {
@@ -564,18 +564,18 @@
     },
     {
       "begin": "%x\\(",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "execute string (allow for interpolation)",
       "end": "\\)",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.interpolated.crystal",
       "patterns": [
         {
@@ -591,18 +591,18 @@
     },
     {
       "begin": "%x\\|",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "execute string (allow for interpolation)",
       "end": "\\|",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.interpolated.crystal",
       "patterns": [
         {
@@ -634,18 +634,18 @@
     },
     {
       "begin": "%r\\{",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "regular expressions (literal)",
       "end": "\\}[imsx]*",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.regexp.mod-r.crystal",
       "patterns": [
         {
@@ -658,18 +658,18 @@
     },
     {
       "begin": "%r\\[",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "regular expressions (literal)",
       "end": "\\][imsx]*",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.regexp.mod-r.crystal",
       "patterns": [
         {
@@ -682,18 +682,18 @@
     },
     {
       "begin": "%r\\(",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "regular expressions (literal)",
       "end": "\\)[imsx]*",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.regexp.mod-r.crystal",
       "patterns": [
         {
@@ -706,18 +706,18 @@
     },
     {
       "begin": "%r\\<",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "regular expressions (literal)",
       "end": "\\>[imsx]*",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.regexp.mod-r.crystal",
       "patterns": [
         {
@@ -730,18 +730,18 @@
     },
     {
       "begin": "%r\\|",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "regular expressions (literal)",
       "end": "\\|[imsx]*",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.regexp.mod-r.crystal",
       "patterns": [
         {
@@ -751,18 +751,18 @@
     },
     {
       "begin": "%Q?\\(",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal capable of interpolation ()",
       "end": "\\)",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.upper.crystal",
       "patterns": [
         {
@@ -778,18 +778,18 @@
     },
     {
       "begin": "%Q?\\[",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal capable of interpolation []",
       "end": "\\]",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.upper.crystal",
       "patterns": [
         {
@@ -805,18 +805,18 @@
     },
     {
       "begin": "%Q?\\<",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal capable of interpolation <>",
       "end": "\\>",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.upper.crystal",
       "patterns": [
         {
@@ -832,18 +832,18 @@
     },
     {
       "begin": "%Q?\\{",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal capable of interpolation -- {}",
       "end": "\\}",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.double.crystal.mod",
       "patterns": [
         {
@@ -859,18 +859,18 @@
     },
     {
       "begin": "%Q\\|",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal capable of interpolation -- ||",
       "end": "\\|",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.upper.crystal",
       "patterns": [
         {
@@ -883,18 +883,18 @@
     },
     {
       "begin": "%[qwi]\\(",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal incapable of interpolation -- ()",
       "end": "\\)",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
@@ -908,18 +908,18 @@
     },
     {
       "begin": "%[qwi]\\<",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal incapable of interpolation -- <>",
       "end": "\\>",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
@@ -933,18 +933,18 @@
     },
     {
       "begin": "%[qwi]\\[",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal incapable of interpolation -- []",
       "end": "\\]",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
@@ -958,18 +958,18 @@
     },
     {
       "begin": "%[qwi]\\{",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal incapable of interpolation -- {}",
       "end": "\\}",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
@@ -983,18 +983,18 @@
     },
     {
       "begin": "%[qwi]\\|",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "literal incapable of interpolation -- ||",
       "end": "\\|",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.quoted.other.literal.lower.crystal",
       "patterns": [
         {
@@ -1033,20 +1033,24 @@
       "name": "comment.line.number-sign.crystal"
     },
     {
+      "match": "\\b_([\\w]+[?!]?)",
+      "name": "comment.unused.crystal"
+    },
+    {
       "begin": "(?><<-('?)((?:[_\\w]+_|)HTML)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded HTML and indented terminator",
       "contentName": "text.html.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.html.crystal",
       "patterns": [
         {
@@ -1065,19 +1069,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)SQL)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded SQL and indented terminator",
       "contentName": "text.sql.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.sql.crystal",
       "patterns": [
         {
@@ -1096,19 +1100,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)CSS)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded css and intented terminator",
       "contentName": "text.css.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.css.crystal",
       "patterns": [
         {
@@ -1127,19 +1131,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)CPP)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded c++ and intented terminator",
       "contentName": "text.c++.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.cplusplus.crystal",
       "patterns": [
         {
@@ -1158,19 +1162,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)C)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded c++ and intented terminator",
       "contentName": "text.c.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.c.crystal",
       "patterns": [
         {
@@ -1189,19 +1193,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)(?:JS|JAVASCRIPT))\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded javascript and intented terminator",
       "contentName": "text.js.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.js.crystal",
       "patterns": [
         {
@@ -1220,19 +1224,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)JQUERY)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded javascript and intented terminator",
       "contentName": "text.js.jquery.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.js.jquery.crystal",
       "patterns": [
         {
@@ -1251,19 +1255,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)(?:SH|SHELL))\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded shell and intented terminator",
       "contentName": "text.shell.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.shell.crystal",
       "patterns": [
         {
@@ -1282,19 +1286,19 @@
     },
     {
       "begin": "(?><<-('?)((?:[_\\w]+_|)CRYSTAL)\\b\\1)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with embedded crystal and intented terminator",
       "contentName": "text.crystal.embedded.crystal",
       "end": "\\s*\\2\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.embedded.crystal.crystal",
       "patterns": [
         {
@@ -1313,18 +1317,18 @@
     },
     {
       "begin": "(?><<-'(\\w+)')",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with indented terminator",
       "end": "\\s*\\1\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.heredoc.crystal",
       "patterns": [
         {
@@ -1337,18 +1341,18 @@
     },
     {
       "begin": "(?><<-(\\w+)\\b)",
-      "beginCaptures": [
-        {
+      "beginCaptures": {
+        "0": {
           "name": "punctuation.definition.string.begin.crystal"
         }
-      ],
+      },
       "comment": "heredoc with indented terminator",
       "end": "\\s*\\1\\b",
-      "endCaptures": [
-        {
+      "endCaptures": {
+        "0": {
           "name": "punctuation.definition.string.end.crystal"
         }
-      ],
+      },
       "name": "string.unquoted.heredoc.crystal",
       "patterns": [
         {
@@ -1463,12 +1467,6 @@
       "name": "meta.function-call.crystal",
       "patterns": [
         {
-          "include": "#nest_function_parens"
-        },
-        {
-          "include": "#known_function_names"
-        },
-        {
           "match": "([a-zA-Z0-9_!?]+)(?=\\()",
           "name": "entity.name.function.crystal"
         },
@@ -1581,11 +1579,11 @@
     },
     "nest_brackets": {
       "begin": "\\[",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\]",
       "patterns": [
         {
@@ -1595,11 +1593,11 @@
     },
     "nest_brackets_i": {
       "begin": "\\[",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\]",
       "patterns": [
         {
@@ -1615,11 +1613,11 @@
     },
     "nest_brackets_r": {
       "begin": "\\[",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\]",
       "patterns": [
         {
@@ -1632,11 +1630,11 @@
     },
     "nest_curly": {
       "begin": "\\{",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\}",
       "patterns": [
         {
@@ -1648,11 +1646,11 @@
       "patterns": [
         {
           "begin": "\\{",
-          "captures": [
-            {
+          "captures": {
+            "0": {
               "name": "punctuation.section.scope.crystal"
             }
-          ],
+          },
           "end": "\\}",
           "patterns": [
             {
@@ -1667,11 +1665,11 @@
     },
     "nest_curly_i": {
       "begin": "\\{",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\}",
       "patterns": [
         {
@@ -1687,11 +1685,11 @@
     },
     "nest_curly_r": {
       "begin": "\\{",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\}",
       "patterns": [
         {
@@ -1704,11 +1702,11 @@
     },
     "nest_ltgt": {
       "begin": "\\<",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\>",
       "patterns": [
         {
@@ -1718,11 +1716,11 @@
     },
     "nest_ltgt_i": {
       "begin": "\\<",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\>",
       "patterns": [
         {
@@ -1738,11 +1736,11 @@
     },
     "nest_ltgt_r": {
       "begin": "\\<",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\>",
       "patterns": [
         {
@@ -1755,11 +1753,11 @@
     },
     "nest_parens": {
       "begin": "\\(",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\)",
       "patterns": [
         {
@@ -1769,11 +1767,11 @@
     },
     "nest_parens_i": {
       "begin": "\\(",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\)",
       "patterns": [
         {
@@ -1789,11 +1787,11 @@
     },
     "nest_parens_r": {
       "begin": "\\(",
-      "captures": [
-        {
+      "captures": {
+        "0": {
           "name": "punctuation.section.scope.crystal"
         }
-      ],
+      },
       "end": "\\)",
       "patterns": [
         {
@@ -1841,11 +1839,11 @@
         },
         {
           "begin": "\\(",
-          "captures": [
-            {
+          "captures": {
+            "0": {
               "name": "punctuation.definition.group.crystal"
             }
-          ],
+          },
           "end": "\\)",
           "name": "string.regexp.group.crystal",
           "patterns": [
