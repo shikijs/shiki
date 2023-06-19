@@ -340,6 +340,8 @@ export const languageAliases = {
   docker: ['dockerfile'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
+  'glimmer-js': ['gjs'],
+  'glimmer-ts': ['gts'],
   haskell: ['hs'],
   handlebars: ['hbs'],
   ini: ['properties'],
@@ -432,5 +434,6 @@ export const embeddedLanguagesToExclude = [
  * Value is a list of language ids, as can be found by F1 -> Change Language Mode. For example `astro`
  */
 export const marketplaceGrammarSources: Record<string, string[]> = {
-  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': ['mermaid']
+  'bpruitt-goddard.mermaid-markdown-syntax-highlighting': ['mermaid'],
+  'chiragpat.vscode-glimmer': ['glimmer-js', 'glimmer-ts']
 }
