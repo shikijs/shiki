@@ -348,6 +348,8 @@ export const languageAliases = {
   docker: ['dockerfile'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
+  'glimmer-js': ['gjs'],
+  'glimmer-ts': ['gts'],
   haskell: ['hs'],
   handlebars: ['hbs'],
   ini: ['properties'],
