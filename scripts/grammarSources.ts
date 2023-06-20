@@ -155,6 +155,14 @@ export const githubGrammarSources: [string, string][] = [
     'gherkin',
     'https://github.com/alexkrechik/VSCucumberAutoComplete/blob/master/gclient/syntaxes/feature.tmLanguage'
   ],
+  [
+    'glimmer-js',
+    'https://github.com/IgnaceMaes/glimmer-textmate-grammar/blob/main/glimmer-js.tmLanguage.json'
+  ],
+  [
+    'glimmer-ts',
+    'https://github.com/IgnaceMaes/glimmer-textmate-grammar/blob/main/glimmer-ts.tmLanguage.json'
+  ],
   ['glsl', 'https://github.com/polym0rph/GLSL.tmbundle/blob/master/Syntaxes/GLSL.tmLanguage'],
   [
     'gnuplot',
