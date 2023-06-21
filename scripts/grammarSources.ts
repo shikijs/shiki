@@ -204,6 +204,10 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
   [
+    'narrat',
+    'https://github.com/liana-p/narrat-syntax-highlighting-vscode/blob/main/syntaxes/narrat.tmLanguage.yaml'
+  ],
+  [
     'nextflow',
     'https://github.com/nextflow-io/vscode-language-nextflow/blob/master/syntaxes/nextflow.tmLanguage.json'
   ],
@@ -348,6 +352,7 @@ export const languageAliases = {
   kusto: ['kql'],
   make: ['makefile'],
   markdown: ['md'],
+  narrat: ['nar'],
   nextflow: ['nf'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
@@ -379,12 +384,12 @@ export const languageDisplayOverrides: Record<string, string> = {
   apl: 'APL',
   asm: 'Assembly',
   clarity: 'Clarity',
-  'codeql': 'CodeQL',
+  codeql: 'CodeQL',
   dax: 'DAX',
   erb: 'ERB',
   fish: 'Fish',
-  'gdresource': 'GDResource',
-  'gnuplot': 'Gnuplot',
+  gdresource: 'GDResource',
+  gnuplot: 'Gnuplot',
   http: 'HTTP',
   ini: 'INI',
   'jinja-html': 'Jinja',

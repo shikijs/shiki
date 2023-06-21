@@ -96,6 +96,7 @@ export type Lang =
   | 'matlab'
   | 'mdx'
   | 'mermaid'
+  | 'narrat' | 'nar'
   | 'nextflow' | 'nf'
   | 'nginx'
   | 'nim'
@@ -828,6 +829,14 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.mermaid',
     path: 'mermaid.tmLanguage.json',
     displayName: 'Mermaid'
+  },
+  {
+    id: 'narrat',
+    scopeName: 'source.narrat',
+    path: 'narrat.tmLanguage.json',
+    displayName: 'Narrat Language',
+    samplePath: 'narrat.sample',
+    aliases: ['nar']
   },
   {
     id: 'nextflow',
