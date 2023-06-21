@@ -543,7 +543,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'glimmer-js',
     scopeName: 'source.gjs',
     path: 'glimmer-js.tmLanguage.json',
-    displayName: 'glimmer-js',
+    displayName: 'Glimmer JS',
     aliases: ['gjs'],
     embeddedLangs: ['javascript', 'handlebars']
   },
@@ -551,7 +551,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'glimmer-ts',
     scopeName: 'source.gts',
     path: 'glimmer-ts.tmLanguage.json',
-    displayName: 'glimmer-ts',
+    displayName: 'Glimmer TS',
     aliases: ['gts'],
     embeddedLangs: ['typescript', 'handlebars']
   },
