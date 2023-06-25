@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.14.3 | 2023-06-25
+
+### 🚀 Features & Fixes
+
+- fix: exclude dark/light modern themes for now
+- fix: fix unzipping issue with unzipper. fix #478
+
+### 🙌 Contributions
+
+- feat: add narrat grammar | [#489](https://github.com/shikijs/shiki/pull/489) | [@liana-p](https://github.com/liana-p)
+- feat: add glimmer js/ts language | [#486](https://github.com/shikijs/shiki/pull/486) | [@IgnaceMaes](https://github.com/IgnaceMaes)
+- feat: add `displayName` to `BUNDLED_LANGUAGES` | [#470](https://github.com/shikijs/shiki/pull/470) | [@lawvs](https://github.com/lawvs)
+- Specify langs in browser based example | [#477](https://github.com/shikijs/shiki/pull/477) | [@wesbos](https://github.com/wesbos)
+- feat: add hjson | [#471](https://github.com/shikijs/shiki/pull/471) | [@AkaraChen](https://github.com/AkaraChen)
+- feat: add nextflow grammar | [#472](https://github.com/shikijs/shiki/pull/472) | [@mashehu](https://github.com/mashehu)
+- feat: add cypher grammar | [#465](https://github.com/shikijs/shiki/pull/465) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- feat: add vyper grammar | [#466](https://github.com/shikijs/shiki/pull/466) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- feat: add beancount grammar | [#468](https://github.com/shikijs/shiki/pull/468) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+
+
 ## 0.14.2 | 2023-04-28
 
 ### 🚀 Features & Fixes
