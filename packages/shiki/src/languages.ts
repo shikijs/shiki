@@ -54,6 +54,8 @@ export type Lang =
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
+  | 'glimmer-js' | 'gjs'
+  | 'glimmer-ts' | 'gts'
   | 'glsl'
   | 'gnuplot'
   | 'go'
@@ -536,6 +538,22 @@ export const languages: ILanguageRegistration[] = [
     path: 'git-rebase.tmLanguage.json',
     displayName: 'Git Rebase Message',
     embeddedLangs: ['shellscript']
+  },
+  {
+    id: 'glimmer-js',
+    scopeName: 'source.gjs',
+    path: 'glimmer-js.tmLanguage.json',
+    displayName: 'Glimmer JS',
+    aliases: ['gjs'],
+    embeddedLangs: ['javascript', 'handlebars']
+  },
+  {
+    id: 'glimmer-ts',
+    scopeName: 'source.gts',
+    path: 'glimmer-ts.tmLanguage.json',
+    displayName: 'Glimmer TS',
+    aliases: ['gts'],
+    embeddedLangs: ['typescript', 'handlebars']
   },
   {
     id: 'glsl',
