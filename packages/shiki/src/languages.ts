@@ -828,7 +828,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
     displayName: 'Marko',
-    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
@@ -1114,6 +1113,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.shell-session',
     path: 'shellsession.tmLanguage.json',
     displayName: 'Shell Session',
+    samplePath: 'shellsession.sample',
     aliases: ['console'],
     embeddedLangs: ['shellscript']
   },
