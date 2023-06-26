@@ -135,7 +135,8 @@ export type Lang =
   | 'scheme'
   | 'scss'
   | 'shaderlab' | 'shader'
-  | 'shellscript' | 'bash' | 'console' | 'sh' | 'shell' | 'zsh'
+  | 'shellscript' | 'bash' | 'sh' | 'shell' | 'zsh'
+  | 'shellsession' | 'console'
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
@@ -827,6 +828,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
     displayName: 'Marko',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
@@ -840,7 +842,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.mdx',
     path: 'mdx.tmLanguage.json',
     displayName: 'MDX',
-    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'sql', 'xml', 'swift', 'typescript']
+    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'shellsession', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
@@ -1105,7 +1107,15 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.shell',
     path: 'shellscript.tmLanguage.json',
     displayName: 'Shell',
-    aliases: ['bash', 'console', 'sh', 'shell', 'zsh']
+    aliases: ['bash', 'sh', 'shell', 'zsh']
+  },
+  {
+    id: 'shellsession',
+    scopeName: 'text.shell-session',
+    path: 'shellsession.tmLanguage.json',
+    displayName: 'Shell Session',
+    aliases: ['console'],
+    embeddedLangs: ['shellscript']
   },
   {
     id: 'smalltalk',
