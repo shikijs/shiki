@@ -114,6 +114,9 @@
           "include": "#character"
         },
         {
+          "include": "#lambda-arrow"
+        },
+        {
           "include": "#operators"
         },
         {
@@ -519,9 +522,41 @@
       "match": "\\bnull\\b",
       "name": "constant.language.null.kotlin"
     },
+    "lambda-arrow": {
+      "match": "->",
+      "name": "storage.type.function.arrow.kotlin"
+    },
     "operators": {
-      "match": "<=|>=|===|==|=>|=|\\!==|\\!=|\\+=|\\+\\+|\\+|-=|--|-|\\*=|\\*|/=|/|%=|%|!|\\&\\&|\\&|\\|\\||\\|..",
-      "name": "keyword.operator.kotlin"
+      "patterns": [
+        {
+          "match": "(===?|\\!==?|<=|>=|<|>)",
+          "name": "keyword.operator.comparison.kotlin"
+        },
+        {
+          "match": "([+*/%-]=)",
+          "name": "keyword.operator.assignment.arithmetic.kotlin"
+        },
+        {
+          "match": "(=)",
+          "name": "keyword.operator.assignment.kotlin"
+        },
+        {
+          "match": "([+*/%-])",
+          "name": "keyword.operator.arithmetic.kotlin"
+        },
+        {
+          "match": "(!|&&|\\|\\|)",
+          "name": "keyword.operator.logical.kotlin"
+        },
+        {
+          "match": "(--|\\+\\+)",
+          "name": "keyword.operator.increment-decrement.kotlin"
+        },
+        {
+          "match": "(\\.\\.)",
+          "name": "keyword.operator.range.kotlin"
+        }
+      ]
     },
     "self-reference": {
       "match": "\\b(this|super)(@\\w+)?\\b",
