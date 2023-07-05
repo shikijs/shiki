@@ -13,7 +13,12 @@ export const isNode =
   typeof process !== 'undefined' &&
   typeof process.release !== 'undefined' &&
   process.release.name === 'node'
-export const isBrowser = isWebWorker || !isNode
+export const isBun =
+  'process' in globalThis &&
+  typeof process !== 'undefined' &&
+  typeof process.release !== 'undefined' &&
+  process.release.name === 'bun'
+export const isBrowser = isWebWorker || (!isNode && !isBun)
 
 // to be replaced by rollup
 let CDN_ROOT = '__CDN_ROOT__'
