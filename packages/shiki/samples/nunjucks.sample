@@ -1,0 +1,19 @@
+---
+title: shiki
+---
+
+{% extends "base.html" %}
+
+{% block header %}
+<h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+<ul>
+  {% for name, item in items %}
+  <li>{{ name }}: {{ item }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+{# From https://mozilla.github.io/nunjucks/ #}

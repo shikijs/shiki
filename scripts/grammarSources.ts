@@ -225,6 +225,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['nim', 'https://github.com/pragmagic/vscode-nim/blob/master/syntaxes/nim.json'],
   ['nix', 'https://github.com/bbenoist/vscode-nix/blob/master/syntaxes/nix.tmLanguage'],
+  ['nunjucks', 'https://github.com/edheltzel/nunjucks-for-visual-studio-code/blob/main/src/syntaxes/nunjucks.tmLanguage.json'],
   ['ocaml', 'https://github.com/reasonml-editor/vscode-reasonml/blob/master/syntaxes/ocaml.json'],
   [
     'pascal',
@@ -368,6 +369,7 @@ export const languageAliases = {
   markdown: ['md'],
   narrat: ['nar'],
   nextflow: ['nf'],
+  nunjucks: ['njk'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
   pug: ['jade'],

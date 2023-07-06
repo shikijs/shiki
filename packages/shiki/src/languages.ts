@@ -103,6 +103,7 @@ export type Lang =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'nunjucks' | 'njk'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
   | 'ocaml'
@@ -820,7 +821,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'markdown.tmLanguage.json',
     displayName: 'Markdown',
     aliases: ['md'],
-    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
+    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'nunjucks', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
   },
   {
     id: 'marko',
@@ -883,6 +884,15 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.nix',
     path: 'nix.tmLanguage.json',
     displayName: 'Nix'
+  },
+  {
+    id: 'nunjucks',
+    scopeName: 'source.njk',
+    path: 'nunjucks.tmLanguage.json',
+    displayName: 'Nunjucks',
+    samplePath: 'nunjucks.sample',
+    aliases: ['njk'],
+    embeddedLangs: ['yaml', 'javascript', 'css', 'html']
   },
   {
     id: 'objective-c',

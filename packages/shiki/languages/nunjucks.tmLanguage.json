@@ -1,0 +1,236 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Better Nunjucks Syntax Support",
+  "comment": "Better Nunjucks syntax highlighting support for Visual Studio Code",
+  "scopeName": "source.njk",
+  "injectionSelector": "L:text.html -meta.embedded -comment , text.html.markdown -comment",
+  "fileTypes": ["njk", "nunjucks", "html", "md"],
+  "foldingStartMarker": "^{%-?\\s*(if|for|asyncEach|asyncAll|macro|set|block|filter|raw|call)[^(%})]+-?%}",
+  "foldingStopMarker": "^{%-?\\s*(endif|endfor|endeach|endall|endmacro|endset|endblock|endfilter|endraw|endcall)[^(%})]+-?%}",
+
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#front-matter" },
+    { "include": "#template-tags" },
+    { "include": "#template-vars" }
+  ],
+  "repository": {
+    "template-tags": {
+      "name": "punctuation.tag.njk",
+      "begin": "({%)(-)?",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.njk" },
+        "2": { "name": "keyword.other.whitespace.njk" }
+      },
+      "end": "(-)?(%})",
+      "endCaptures": {
+        "1": { "name": "keyword.other.whitespace.njk" },
+        "2": { "name": "punctuation.definition.tag.end.njk" }
+      },
+      "patterns": [
+        { "include": "#constant-characters" },
+        { "include": "#constant-boolean" },
+        { "include": "#constant-numeric" },
+        { "include": "#constant-boolean" },
+        { "include": "#entity-name-tag" },
+        { "include": "#entity-other-attribute-name" },
+        { "include": "#include-tag" },
+        { "include": "#invalid-ampersand" },
+        { "include": "#invalid-array" },
+        { "include": "#invalid-conditions" },
+        { "include": "#invalid-operators" },
+        { "include": "#keyword-control" },
+        { "include": "#keyword-operators" },
+        { "include": "#keyword-operator-assignment" },
+        { "include": "#string-quoted-double" },
+        { "include": "#string-quoted-single" },
+        { "include": "#support-class" },
+        { "include": "#support-function" },
+        { "include": "#support-variable" },
+        { "include": "#support-constant" },
+        { "include": "#variable-parameter" },
+        { "include": "#variable-other" }
+      ]
+    },
+    "template-vars": {
+      "name": "punctuation.output.njk",
+      "begin": "({{)(-)?",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.njk"
+        },
+        "2": {
+          "name": "keyword.other.whitespace.njk"
+        }
+      },
+      "end": "(-)?(}})",
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.whitespace.njk"
+        },
+        "2": {
+          "name": "punctuation.definition.tag.end.njk"
+        }
+      },
+      "patterns": [
+        { "include": "#constant-characters" },
+        { "include": "#object-properties" },
+        { "include": "#string-quoted-double" },
+        { "include": "#string-quoted-single" },
+        { "include": "#support-class" },
+        { "include": "#support-function" },
+        { "include": "#support-variable" },
+        { "include": "#support-function-with-args" },
+        { "include": "#support-function-without-args" },
+        { "include": "#var-support-variable" },
+        { "include": "#variable-parameter" },
+        { "include": "#variable-other" }
+      ]
+    },
+    "comments": {
+      "name": "comment.block.njk",
+      "begin": "{#",
+      "end": "#}"
+    },
+    "constant-characters": {
+      "name": "constant.character.entity.njk",
+      "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.entity.html"
+        },
+        "3": {
+          "name": "punctuation.definition.entity.html"
+        }
+      }
+    },
+    "constant-boolean": {
+      "name": "constant.language.njk",
+      "match": "(false|true|nil|null|empty|blank)"
+    },
+    "constant-numeric": {
+      "name": "constant.numeric.njk",
+      "match": "(-|\\+)?\\s*[0-9]+(\\.[0-9]+)?"
+    },
+    "entity-name-tag": {
+      "match": "(((?<={%)|(?<={%-))\\s*(\\w+))",
+      "captures": {
+        "1": {
+          "name": "entity.name.tag.njk"
+        }
+      }
+    },
+    "front-matter": {
+      "contentName": "source.yaml",
+      "name": "meta.embedded.block.frontmatter.njk",
+      "begin": "^---[a-zA-Z0-9_-]*(?=\\s*\\n)",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.tag.begin.njk" }
+      },
+      "end": "---(?=\\s*\\n)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.tag.end.njk" }
+      },
+      "patterns": [{ "include": "source.yaml" }]
+    },
+    "include-tag": {
+      "name": "string.quoted.njk",
+      "match": "((?<=include)|(?<=include_relative))\\s[^{,'\"]+?\\s+"
+    },
+    "invalid-ampersand": {
+      "match": "&",
+      "name": "invalid.illegal.bad-ampersand.njk"
+    },
+    "invalid-array": {
+      "match": "(\\[)(\\|)(?=[^\\]]*)(?=\\])",
+      "captures": {
+        "2": {
+          "name": "invalid.illegal.filter.njk"
+        },
+        "3": {
+          "name": "invalid.illegal.filter.njk"
+        }
+      }
+    },
+    "invalid-conditions": {
+      "match": "(?=if|elsif)\\s*[^%}]+\\s(in)\\s",
+      "captures": {
+        "3": {
+          "name": "invalid.illegal.operator.njk"
+        }
+      }
+    },
+    "invalid-operators": {
+      "name": "invalid.illegal.filter.njk",
+      "match": "(?<=\\s)(\\+|\\-|\\/|\\*)(?=\\s)"
+    },
+    "keyword-control": {
+      "name": "keyword.control.njk",
+      "match": "(?<=\\s)(with|offset\\:|limit\\:)(?=\\s)"
+    },
+    "keyword-control-conditional": {
+      "name": "keyword.control.conditional.njk"
+    },
+    "keyword-operators": {
+      "name": "keyword.operator.njk",
+      "match": "\\s+(and|or|not|import|as|with|in|ignore|((\\!|\\=|\\<|\\>)\\=))\\s+"
+    },
+    "keyword-operator-assignment": {
+      "match": "/=",
+      "name": "keyword.operator.assignment.augmented.njk"
+    },
+
+    "object-properties": {
+      "match": "(?<=\\w.)(?<=\\w.)\\b\\w+?\\b\\s+?",
+      "name": "variable.parameter.njk"
+    },
+
+    "string-quoted-single": {
+      "name": "string.quoted.single.njk",
+      "begin": "'",
+      "end": "'"
+    },
+    "string-quoted-double": {
+      "name": "string.quoted.double.njk",
+      "begin": "\"",
+      "end": "\""
+    },
+    "support-class": {
+      "name": "support.class.njk",
+      "comment": "custom filters and common collection keywords for 11ty and other ssgs –– MIGHT REMOVE THIS OR MAKE IT MORE UNIVERSAL",
+      "match": "\\b(site|meta|slugify|log|getPreviousCollectionItem|getNedtCollectionItem|getCollectionItem|addAllPagesToCollections|as|with|article|assets|block|blog|blogs|verbatim|canonical_url|cart|checkout|collection|collections|current|customer|date|discount|form|image|item|items|nunjucks|link|meta|next|page|title|pages|paginate|parent|post|posts|previous|product|products|request|search|site|tags|taxonomy|template|theme|themes|url|variant)\\b"
+    },
+    "support-function": {
+      "name": "support.function.njk",
+      "match": "\\b(abs|batch|capitalize|center|dictsort|dump|escape|float|forceecape|groupby|indent|int|join|length|list|lower|nl2br|random|reject|rejectattr|replace|reverse|round|safe|select|slice|sort|string|striptags|sum|title|trim|truncate|upper|urlize|wordcount|range|joiner|cycler)\\b"
+    },
+    "support-variable": {
+      "name": "support.variable.njk",
+      "match": "\\b(arr|attr|all|reverse|caseSens|import|data|size|alias|filter|resolve|reverse|page|post|collections|url|fileSlug|filePathStem|inputPath|outputPath|outputFileExtension)\\b"
+    },
+    "support-constant": {
+      "name": "support.constant.njk",
+      "match": "\\b(default|d|first|last)\\b"
+    },
+    "support-function-with-args": {
+      "name": "support.function.with-args.njk",
+      "match": "\\|\\s+(?![\\.0-9])[a-zA-Z0-9_-]+\\:\\s+"
+    },
+    "support-function-without-args": {
+      "name": "support.function.without-args.njk",
+      "match": "\\|\\s+(?![\\.0-9])[a-zA-Z0-9_-]+\\s+"
+    },
+    "var-support-variable": {
+      "name": "support.variable.njk",
+      "match": "(?<=\\.)\\w+\\b"
+    },
+    "variable-parameter": {
+      "name": "variable.parameter.njk",
+      "match": "((?<=\\w\\:\\s)\\w+)"
+    },
+    "variable-other": {
+      "name": "variable.other.njk",
+      "match": "\\w+"
+    }
+  }
+}

@@ -153,6 +153,7 @@ export type Lang =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'nunjucks' | 'njk'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
   | 'ocaml'
