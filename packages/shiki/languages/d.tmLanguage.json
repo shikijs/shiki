@@ -672,7 +672,7 @@
     "labeled-statement": {
       "patterns": [
         {
-          "match": "\\b(?!abstract|alias|align|asm|assert|auto|body|bool|break|byte|case|cast|catch|cdouble|cent|cfloat|char|class|const|continue|creal|dchar|debug|default|delegate|delete|deprecated|do|double|else|enum|export|extern|false|final|finally|float|for|foreach|foreach_reverse|function|goto|idouble|if|ifloat|immutable|import|in|inout|int|interface|invariant|ireal|is|lazy|long|macro|mixin|module|new|nothrow|noreturn|null|out|override|package|pragma|private|protected|public|pure|real|ref|return|scope|shared|short|static|struct|super|switch|synchronized|template|this|throw|true|try|typedef|typeid|typeof|ubyte|ucent|uint|ulong|union|unittest|ushort|version|void|volatile|wchar|while|with|__FILE__|__MODULE__|__LINE__|__FUNCTION__|__PRETTY_FUNCTION__|__gshared|__traits|__vector|__parameters)[a-zA-Z_][a-zA-Z_0-9]*\\s*:",
+          "match": "\\b(?!abstract|alias|align|asm|assert|auto|bool|break|byte|case|cast|catch|cdouble|cent|cfloat|char|class|const|continue|creal|dchar|debug|default|delegate|delete|deprecated|do|double|else|enum|export|extern|false|final|finally|float|for|foreach|foreach_reverse|function|goto|idouble|if|ifloat|immutable|import|in|inout|int|interface|invariant|ireal|is|lazy|long|macro|mixin|module|new|nothrow|noreturn|null|out|override|package|pragma|private|protected|public|pure|real|ref|return|scope|shared|short|static|struct|super|switch|synchronized|template|this|throw|true|try|typedef|typeid|typeof|ubyte|ucent|uint|ulong|union|unittest|ushort|version|void|volatile|wchar|while|with|__FILE__|__MODULE__|__LINE__|__FUNCTION__|__PRETTY_FUNCTION__|__gshared|__traits|__vector|__parameters)[a-zA-Z_][a-zA-Z_0-9]*\\s*:",
           "name": "entity.name.d"
         }
       ]
@@ -1447,9 +1447,6 @@
           "include": "#out-statement"
         },
         {
-          "include": "#body-statement"
-        },
-        {
           "include": "#block-statement"
         }
       ]
@@ -1486,14 +1483,6 @@
         {
           "match": "\\bout\\b",
           "name": "keyword.control.out.d"
-        }
-      ]
-    },
-    "body-statement": {
-      "patterns": [
-        {
-          "match": "\\bbody\\b",
-          "name": "keyword.control.body.d"
         }
       ]
     },
@@ -2752,10 +2741,6 @@
         {
           "match": "\\bauto\\b",
           "name": "keyword.token.auto.d"
-        },
-        {
-          "match": "\\bbody\\b",
-          "name": "keyword.token.body.d"
         },
         {
           "match": "\\bbool\\b",
