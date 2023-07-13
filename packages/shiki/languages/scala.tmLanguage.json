@@ -980,29 +980,37 @@
     },
     "using-directive": {
       "end": "\\n",
-      "begin": "^\\s*(//>)\\s*(using)[^\\S\\n]+",
+      "begin": "^\\s*(//>)\\s*(using)[^\\S\\n]+(?:(\\S+))?",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.scala"
         },
         "2": {
           "name": "keyword.other.import.scala"
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "[A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)",
+              "name": "entity.name.import.scala"
+            },
+            {
+              "match": "\\.",
+              "name": "punctuation.definition.import"
+            }
+          ]
         }
       },
       "patterns": [
         {
-          "match": "[A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)",
-          "name": "entity.name.import.scala"
-        },
-        {
-          "match": "\\.",
-          "name": "punctuation.definition.import"
+          "include": "#constants"
         },
         {
           "include": "#strings"
         },
         {
-          "include": "#constants"
+          "match": "[^\\s,]+",
+          "name": "string.quoted.double.scala"
         }
       ],
       "name": "comment.line.shebang.scala"
