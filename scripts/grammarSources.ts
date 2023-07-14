@@ -106,7 +106,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'clarity',
-    'https://github.com/hirosystems/clarity-lsp/blob/develop/syntaxes/clarity.tmLanguage.json'
+    'https://github.com/hirosystems/clarity.tmbundle/blob/main/Syntaxes/clarity.JSON-tmLanguage'
   ],
   ['cmake', 'https://github.com/twxs/vs.language.cmake/blob/master/syntaxes/CMake.tmLanguage'],
   ['cobol', 'https://github.com/spgennard/vscode_cobol/blob/master/syntaxes/COBOL.tmLanguage.json'],
@@ -272,7 +272,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/scala/vscode-scala-syntax/blob/master/syntaxes/Scala.tmLanguage.json'
   ],
   ['scheme', 'https://github.com/sjhuangx/vscode-scheme/blob/master/syntaxes/scheme.tmLanguage'],
-  ['shellsession', 'https://github.com/hronro/sublime-linguist-syntax/blob/master/syntaxes/ShellSession.tmLanguage'],
+  [
+    'shellsession',
+    'https://github.com/hronro/sublime-linguist-syntax/blob/master/syntaxes/ShellSession.tmLanguage'
+  ],
   [
     'smalltalk',
     'https://github.com/leocamello/vscode-smalltalk/blob/master/syntaxes/smalltalk.tmLanguage.json'

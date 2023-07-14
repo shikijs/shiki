@@ -61,7 +61,7 @@
     },
     "keyword": {
       "name": "constant.language.clarity",
-      "match": "\\b(?:block-height|burn-block-height|contract-caller|is-in-regtest|stx-liquid-supply|tx-sender)\\b"
+      "match": "(?<!\\S)(?!-)\\b(?:block-height|burn-block-height|chain-id|contract-caller|is-in-regtest|stx-liquid-supply|tx-sender|tx-sponsor?)\\b(?!\\s*-)"
     },
     "define-function": {
       "begin": "(?x) (\\() \\s* (define-(?:public|private|read-only)) \\s+",
@@ -85,7 +85,7 @@
           "include": "#expression"
         },
         {
-          "begin": "(?x) (\\() \\s* ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s*",
+          "begin": "(?x) (\\() \\s* ([a-zA-Z][\\w\\?\\!\\-]*) \\s*",
           "end": "(\\))",
           "beginCaptures": {
             "1": {
@@ -103,7 +103,7 @@
           "name": "meta.define-function-signature",
           "patterns": [
             {
-              "begin": "(?x) (\\() \\s* ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+              "begin": "(?x) (\\() \\s* ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
               "end": "(\\))",
               "beginCaptures": {
                 "1": {
@@ -126,11 +126,14 @@
               ]
             }
           ]
+        },
+        {
+          "include": "#user-func"
         }
       ]
     },
     "define-fungible-token": {
-      "match": "(?x) (\\() \\s* (define-fungible-token) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) (?:\\s+(u\\d+))?",
+      "match": "(?x) (\\() \\s* (define-fungible-token) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) (?:\\s+(u\\d+))?",
       "captures": {
         "1": {
           "name": "punctuation.define-fungible-token.start.clarity"
@@ -150,7 +153,7 @@
       }
     },
     "define-non-fungible-token": {
-      "begin": "(?x) (\\() \\s* (define-non-fungible-token) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (define-non-fungible-token) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -176,7 +179,7 @@
       ]
     },
     "define-trait": {
-      "begin": "(?x) (\\() \\s* (define-trait) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (define-trait) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -215,14 +218,14 @@
               "include": "#expression"
             },
             {
-              "begin": "(?x) (\\() \\s* ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]+\\??) \\s+",
+              "begin": "(?x) (\\() \\s* ([a-zA-Z][\\w\\!\\?\\-]*) \\s+",
               "end": "(\\))",
               "beginCaptures": {
                 "1": {
                   "name": "punctuation.trait-function.start.clarity"
                 },
                 "2": {
-                  "name": "entity.name.trait-function-name.clarity variable.other.clarity"
+                  "name": "entity.name.function.clarity"
                 }
               },
               "endCaptures": {
@@ -262,7 +265,7 @@
       ]
     },
     "use-trait": {
-      "begin": "(?x) (\\() \\s* (use-trait) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (use-trait) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -288,7 +291,7 @@
       ]
     },
     "define-constant": {
-      "begin": "(?x) (\\() \\s* (define-constant) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (define-constant) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -314,7 +317,7 @@
       ]
     },
     "define-data-var": {
-      "begin": "(?x) (\\() \\s* (define-data-var) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (define-data-var) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -343,7 +346,7 @@
       ]
     },
     "define-map": {
-      "begin": "(?x) (\\() \\s* (define-map) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+      "begin": "(?x) (\\() \\s* (define-map) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -404,23 +407,23 @@
             {
               "comment": "unsigned integers",
               "name": "constant.numeric.uint.clarity",
-              "match": "\\bu\\d+\\b"
+              "match": "(?<!\\S)(?!-)\\bu\\d+\\b(?!\\s*-)"
             },
             {
               "comment": "signed integers",
               "name": "constant.numeric.int.clarity",
-              "match": "\\b\\d+\\b"
+              "match": "(?<!\\S)(?!-)\\b\\d+\\b(?!\\s*-)"
             },
             {
               "comment": "hexadecimals",
               "name": "constant.numeric.hex.clarity",
-              "match": "\\b0x[0-9a-f]*\\b"
+              "match": "(?<!\\S)(?!-)\\b0x[0-9a-f]*\\b(?!\\s*-)"
             }
           ]
         },
         "bool-literal": {
           "name": "constant.language.bool.clarity",
-          "match": "\\b(true|false)\\b"
+          "match": "(?<!\\S)(?!-)\\b(true|false)\\b(?!\\s*-)"
         },
         "string-literal": {
           "patterns": [
@@ -467,7 +470,7 @@
           "patterns": [
             {
               "name": "entity.name.tag.tuple-key.clarity",
-              "match": "([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*)(?=:)"
+              "match": "([a-zA-Z][\\w\\?\\!\\-]*)(?=:)"
             },
             {
               "include": "#expression"
@@ -510,7 +513,7 @@
         "optional-literal": {
           "patterns": [
             {
-              "match": "\\b(none)\\b",
+              "match": "(?<!\\S)(?!-)\\b(none)\\b(?!\\s*-)",
               "name": "constant.language.none.clarity"
             },
             {
@@ -590,16 +593,16 @@
           "match": "(?x) (\\() \\s* (?:(string-ascii|string-utf8)\\s+(\\d+)) \\s* (\\))",
           "captures": {
             "1": {
-              "name": "punctuation.string-def.start.clarity"
+              "name": "punctuation.string_type-def.start.clarity"
             },
             "2": {
-              "name": "entity.name.type.string.clarity"
+              "name": "entity.name.type.string_type.clarity"
             },
             "3": {
-              "name": "constant.numeric.string-len.clarity"
+              "name": "constant.numeric.string_type-len.clarity"
             },
             "4": {
-              "name": "punctuation.string-def.end.clarity"
+              "name": "punctuation.string_type-def.end.clarity"
             }
           }
         },
@@ -712,7 +715,7 @@
           "patterns": [
             {
               "name": "entity.name.tag.tuple-data-type-key.clarity",
-              "match": "([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*)(?=:)"
+              "match": "([a-zA-Z][\\w\\?\\!\\-]*)(?=:)"
             },
             {
               "include": "#data-type"
@@ -722,7 +725,7 @@
       ]
     },
     "built-in-func": {
-      "begin": "(?x) (\\() \\s* (\\-|\\+|<\\=|>\\=|<|>|\\*|/|and|append|as-contract|as-max-len\\?|asserts!|at-block|begin|concat|contract-call\\?|contract-of|default-to|element-at|filter|fold|ft-burn\\?|ft-get-balance|ft-get-supply|ft-mint\\?|ft-transfer\\?|get-block-info\\?|hash160|if|impl-trait|index-of|is-eq|is-err|is-none|is-ok|is-some|keccak256|len|log2|map|match|merge|mod|nft-burn\\?|nft-get-owner\\?|nft-mint\\?|nft-transfer\\?|not|or|pow|principal-of\\?|print|secp256k1-recover\\?|secp256k1-verify|sha256|sha512|sha512/256|sqrti|stx-burn\\?|stx-get-balance|stx-transfer\\?|to-int|to-uint|try!|unwrap-err-panic|unwrap-err!|unwrap-panic|unwrap!|xor) \\s+",
+      "begin": "(?x) (\\() \\s* (\\-|\\+|<\\=|>\\=|<|>|\\*|/|and|append|as-contract|as-max-len\\?|asserts!|at-block|begin|bit-and|bit-not|bit-or|bit-shift-left|bit-shift-right|bit-xor|buff-to-int-be|buff-to-int-le|buff-to-uint-be|buff-to-uint-le|concat|contract-call\\?|contract-of|default-to|element-at|element-at\\?|filter|fold|from-consensus-buff\\?|ft-burn\\?|ft-get-balance|ft-get-supply|ft-mint\\?|ft-transfer\\?|get-block-info\\?|get-burn-block-info\\?|hash160|if|impl-trait|index-of|index-of\\?|int-to-ascii|int-to-utf8|is-eq|is-err|is-none|is-ok|is-some|is-standard|keccak256|len|log2|map|match|merge|mod|nft-burn\\?|nft-get-owner\\?|nft-mint\\?|nft-transfer\\?|not|or|pow|principal-construct\\?|principal-destruct\\?|principal-of\\?|print|replace-at\\?|secp256k1-recover\\?|secp256k1-verify|sha256|sha512|sha512/256|slice\\?|sqrti|string-to-int\\?|string-to-uint\\?|stx-account|stx-burn\\?|stx-get-balance|stx-transfer-memo\\?|stx-transfer\\?|to-consensus-buff\\?|to-int|to-uint|try!|unwrap!|unwrap-err!|unwrap-err-panic|unwrap-panic|xor) \\s+",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -749,7 +752,7 @@
     },
     "get-set-func": {
       "name": "meta.get-set-func",
-      "begin": "(?x) (\\() \\s* (var-get|var-set|map-get\\?|map-set|map-insert|map-delete|get) \\s+ ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s*",
+      "begin": "(?x) (\\() \\s* (var-get|var-set|map-get\\?|map-set|map-insert|map-delete|get) \\s+ ([a-zA-Z][\\w\\?\\!\\-]*) \\s*",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
@@ -813,7 +816,7 @@
           "name": "meta.let-var",
           "patterns": [
             {
-              "begin": "(?x) (\\() ([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*) \\s+",
+              "begin": "(?x) (\\() ([a-zA-Z][\\w\\?\\!\\-]*) \\s+",
               "end": "(\\))",
               "beginCaptures": {
                 "1": {
@@ -846,7 +849,7 @@
       ]
     },
     "user-func": {
-      "begin": "(?x) (\\() \\s* (([a-zA-Z][a-zA-Z0-9_\\-\\!\\?]*)) \\s*",
+      "begin": "(?x) (\\() \\s* (([a-zA-Z][\\w\\?\\!\\-]*)) \\s*",
       "end": "(\\))",
       "beginCaptures": {
         "1": {
