@@ -412,6 +412,7 @@ export const languageDisplayOverrides: Record<string, string> = {
   'jinja-html': 'Jinja',
   jsx: 'JSX',
   liquid: 'Liquid',
+  nunjucks: 'Nunjucks',
   nginx: 'Nginx',
   plsql: 'PL/SQL',
   powerquery: 'PowerQuery',
