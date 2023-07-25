@@ -46,11 +46,54 @@
       "patterns": [
         {
           "name": "string.quoted.double.berry",
-          "match": "\"(\\\\.|[^\"])*\""
+          "begin": "(\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.berry",
+              "match": "(\\\\x[\\h]{2})|(\\\\[0-7]{3})|(\\\\\\\\)|(\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)"
+            }
+          ]
         },
         {
-          "name": "string.quoted.single.berry",
-          "match": "'(\\\\.|[^'])*'"
+          "name": "string.quoted.other.berry",
+          "begin": "f(\"|')",
+          "end": "\\1",
+          "patterns": [
+            {
+              "name": "constant.character.escape.berry",
+              "match": "(\\\\x[\\h]{2})|(\\\\[0-7]{3})|(\\\\\\\\)|(\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)"
+            },
+            {
+              "name": "string.quoted.other.berry",
+              "match": "\\{\\{[^\\}]*\\}\\}"
+            },
+            {
+              "name": "keyword.other.unit.berry",
+              "begin": "\\{",
+              "end": "\\}",
+              "patterns": [
+                {
+                  "include": "#keywords"
+                },
+                {
+                  "include": "#numbers"
+                },
+                {
+                  "include": "#identifier"
+                },
+                {
+                  "include": "#operator"
+                },
+                {
+                  "include": "#member"
+                },
+                {
+                  "include": "#function"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -70,7 +113,7 @@
       "patterns": [
         {
           "name": "keyword.berry",
-          "match": "\\b(var|static|def|class|true|false|nil|self|super|import|as)\\b"
+          "match": "\\b(var|static|def|class|true|false|nil|self|super|import|as|_class)\\b"
         }
       ]
     },

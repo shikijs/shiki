@@ -98,6 +98,7 @@ export type Lang =
   | 'matlab'
   | 'mdx'
   | 'mermaid'
+  | 'mojo'
   | 'narrat' | 'nar'
   | 'nextflow' | 'nf'
   | 'nginx'
@@ -335,14 +336,14 @@ export const languages: ILanguageRegistration[] = [
     id: 'cmake',
     scopeName: 'source.cmake',
     path: 'cmake.tmLanguage.json',
-    displayName: 'Cmake',
+    displayName: 'CMake',
     samplePath: 'cmake.sample'
   },
   {
     id: 'cobol',
     scopeName: 'source.cobol',
     path: 'cobol.tmLanguage.json',
-    displayName: 'Cobol',
+    displayName: 'COBOL',
     samplePath: 'cobol.sample',
     embeddedLangs: ['sql', 'html', 'java']
   },
@@ -397,7 +398,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'cue',
     scopeName: 'source.cue',
     path: 'cue.tmLanguage.json',
-    displayName: 'Cue',
+    displayName: 'CUE',
     samplePath: 'cue.sample'
   },
   {
@@ -448,7 +449,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'dream-maker',
     scopeName: 'source.dm',
     path: 'dream-maker.tmLanguage.json',
-    displayName: 'Dream-maker'
+    displayName: 'Dream Maker'
   },
   {
     id: 'elixir',
@@ -510,14 +511,14 @@ export const languages: ILanguageRegistration[] = [
     id: 'gdscript',
     scopeName: 'source.gdscript',
     path: 'gdscript.tmLanguage.json',
-    displayName: 'Gdscript',
+    displayName: 'GDScript',
     samplePath: 'gdscript.sample'
   },
   {
     id: 'gdshader',
     scopeName: 'source.gdshader',
     path: 'gdshader.tmLanguage.json',
-    displayName: 'Gdshader',
+    displayName: 'GDShader',
     samplePath: 'gdshader.sample'
   },
   {
@@ -544,7 +545,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'glimmer-js',
     scopeName: 'source.gjs',
     path: 'glimmer-js.tmLanguage.json',
-    displayName: 'Glimmer-js',
+    displayName: 'Glimmer JS',
     aliases: ['gjs'],
     embeddedLangs: ['javascript', 'handlebars']
   },
@@ -552,7 +553,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'glimmer-ts',
     scopeName: 'source.gts',
     path: 'glimmer-ts.tmLanguage.json',
-    displayName: 'Glimmer-ts',
+    displayName: 'Glimmer TS',
     aliases: ['gts'],
     embeddedLangs: ['typescript', 'handlebars']
   },
@@ -560,7 +561,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'glsl',
     scopeName: 'source.glsl',
     path: 'glsl.tmLanguage.json',
-    displayName: 'Glsl',
+    displayName: 'GLSL',
     samplePath: 'glsl.sample',
     embeddedLangs: ['c']
   },
@@ -581,7 +582,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'graphql',
     scopeName: 'source.graphql',
     path: 'graphql.tmLanguage.json',
-    displayName: 'Graphql',
+    displayName: 'GraphQL',
     embeddedLangs: ['javascript', 'typescript', 'jsx', 'tsx']
   },
   {
@@ -601,7 +602,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'haml',
     scopeName: 'text.haml',
     path: 'haml.tmLanguage.json',
-    displayName: 'Haml',
+    displayName: 'Ruby Haml',
     embeddedLangs: ['ruby', 'javascript', 'sass', 'coffee', 'markdown', 'css']
   },
   {
@@ -623,7 +624,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'hcl',
     scopeName: 'source.hcl',
     path: 'hcl.tmLanguage.json',
-    displayName: 'Hcl',
+    displayName: 'HashiCorp HCL',
     samplePath: 'hcl.sample'
   },
   {
@@ -709,7 +710,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'json5',
     scopeName: 'source.json5',
     path: 'json5.tmLanguage.json',
-    displayName: 'Json5',
+    displayName: 'JSON5',
     samplePath: 'json5.sample'
   },
   {
@@ -734,7 +735,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'jssm',
     scopeName: 'source.jssm',
     path: 'jssm.tmLanguage.json',
-    displayName: 'Jssm',
+    displayName: 'JSSM',
     samplePath: 'jssm.sample',
     aliases: ['fsl']
   },
@@ -827,19 +828,20 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
     displayName: 'Marko',
+    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
     id: 'matlab',
     scopeName: 'source.matlab',
     path: 'matlab.tmLanguage.json',
-    displayName: 'Matlab'
+    displayName: 'MATLAB'
   },
   {
     id: 'mdx',
     scopeName: 'source.mdx',
     path: 'mdx.tmLanguage.json',
-    displayName: 'Mdx',
+    displayName: 'MDX',
     embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'shellsession', 'sql', 'xml', 'swift', 'typescript']
   },
   {
@@ -849,10 +851,17 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Mermaid'
   },
   {
+    id: 'mojo',
+    scopeName: 'source.mojo',
+    path: 'mojo.tmLanguage.json',
+    displayName: 'MagicPython',
+    samplePath: 'mojo.sample'
+  },
+  {
     id: 'narrat',
     scopeName: 'source.narrat',
     path: 'narrat.tmLanguage.json',
-    displayName: 'Narrat',
+    displayName: 'Narrat Language',
     samplePath: 'narrat.sample',
     aliases: ['nar']
   },
@@ -901,7 +910,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'ocaml',
     scopeName: 'source.ocaml',
     path: 'ocaml.tmLanguage.json',
-    displayName: 'Ocaml'
+    displayName: 'OCaml'
   },
   {
     id: 'pascal',
@@ -933,7 +942,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'postcss',
     scopeName: 'source.css.postcss',
     path: 'postcss.tmLanguage.json',
-    displayName: 'Postcss'
+    displayName: 'PostCSS'
   },
   {
     id: 'powerquery',
@@ -966,7 +975,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'proto',
     scopeName: 'source.proto',
     path: 'proto.tmLanguage.json',
-    displayName: 'Proto',
+    displayName: 'Protocol Buffer 3',
     samplePath: 'proto.sample'
   },
   {
@@ -987,7 +996,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'purescript',
     scopeName: 'source.purescript',
     path: 'purescript.tmLanguage.json',
-    displayName: 'Purescript'
+    displayName: 'PureScript'
   },
   {
     id: 'python',
@@ -1014,7 +1023,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'razor',
     scopeName: 'text.aspnetcorerazor',
     path: 'razor.tmLanguage.json',
-    displayName: 'Razor',
+    displayName: 'ASP.NET Razor',
     embeddedLangs: ['html', 'csharp']
   },
   {
@@ -1111,7 +1120,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'shellsession',
     scopeName: 'text.shell-session',
     path: 'shellsession.tmLanguage.json',
-    displayName: 'Shellsession',
+    displayName: 'Shell Session',
     samplePath: 'shellsession.sample',
     aliases: ['console'],
     embeddedLangs: ['shellscript']
@@ -1132,7 +1141,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'sparql',
     scopeName: 'source.sparql',
     path: 'sparql.tmLanguage.json',
-    displayName: 'Sparql',
+    displayName: 'SPARQL',
     samplePath: 'sparql.sample',
     embeddedLangs: ['turtle']
   },
@@ -1146,7 +1155,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'ssh-config',
     scopeName: 'source.ssh-config',
     path: 'ssh-config.tmLanguage.json',
-    displayName: 'Ssh-config'
+    displayName: 'SSH Config'
   },
   {
     id: 'stata',
@@ -1180,7 +1189,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'system-verilog',
     scopeName: 'source.systemverilog',
     path: 'system-verilog.tmLanguage.json',
-    displayName: 'System-verilog'
+    displayName: 'SystemVerilog'
   },
   {
     id: 'tasl',
@@ -1206,7 +1215,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'toml',
     scopeName: 'source.toml',
     path: 'toml.tmLanguage.json',
-    displayName: 'Toml'
+    displayName: 'TOML'
   },
   {
     id: 'tsx',
@@ -1260,7 +1269,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vhdl',
     scopeName: 'source.vhdl',
     path: 'vhdl.tmLanguage.json',
-    displayName: 'Vhdl'
+    displayName: 'VHDL'
   },
   {
     id: 'viml',
@@ -1273,7 +1282,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'vue-html',
     scopeName: 'text.html.vue-html',
     path: 'vue-html.tmLanguage.json',
-    displayName: 'Vue-html',
+    displayName: 'Vue HTML',
     embeddedLangs: ['vue', 'javascript']
   },
   {
@@ -1308,7 +1317,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'wgsl',
     scopeName: 'source.wgsl',
     path: 'wgsl.tmLanguage.json',
-    displayName: 'Wgsl',
+    displayName: 'WGSL',
     samplePath: 'wgsl.sample'
   },
   {
@@ -1343,7 +1352,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'zenscript',
     scopeName: 'source.zenscript',
     path: 'zenscript.tmLanguage.json',
-    displayName: 'Zenscript',
+    displayName: 'ZenScript',
     samplePath: 'zenscript.sample'
   }
 ]

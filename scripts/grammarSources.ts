@@ -96,7 +96,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'berry',
-    'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-0.1.0/syntaxes/berry.json'
+    'https://github.com/berry-lang/berry/blob/master/tools/plugins/vscode/skiars.berry-1.1.0/syntaxes/berry.json'
   ],
   ['bicep', 'https://github.com/Azure/bicep/blob/main/src/textmate/bicep.tmlanguage'],
   ['blade', 'https://github.com/spatie/shiki-php/blob/main/languages/blade.tmLanguage.json'],
@@ -211,6 +211,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
+  ['mojo', 'https://github.com/modularml/mojo-syntax/blob/main/syntaxes/mojo.syntax.json'],
   [
     'narrat',
     'https://github.com/liana-p/narrat-syntax-highlighting-vscode/blob/main/syntaxes/narrat.tmLanguage.yaml'
