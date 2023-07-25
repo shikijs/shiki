@@ -148,6 +148,7 @@ export type Lang =
   | 'matlab'
   | 'mdx'
   | 'mermaid'
+  | 'mojo'
   | 'narrat' | 'nar'
   | 'nextflow' | 'nf'
   | 'nginx'
