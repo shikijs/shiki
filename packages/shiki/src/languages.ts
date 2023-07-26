@@ -828,7 +828,6 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'text.marko',
     path: 'marko.tmLanguage.json',
     displayName: 'Marko',
-    samplePath: 'marko.sample',
     embeddedLangs: ['css', 'less', 'scss', 'javascript']
   },
   {
