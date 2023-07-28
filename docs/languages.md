@@ -54,6 +54,7 @@ If you just have a `.tmLanguage` and need to convert it to JSON, [this VS Code e
 
 ```ts
 export type Lang =
+  | 'Zig'
   | 'abap'
   | 'actionscript-3'
   | 'ada'
@@ -189,6 +190,7 @@ export type Lang =
   | 'shellscript' | 'bash' | 'sh' | 'shell' | 'zsh'
   | 'shellsession' | 'console'
   | 'smalltalk'
+  | 'snippets'
   | 'solidity'
   | 'sparql'
   | 'sql'

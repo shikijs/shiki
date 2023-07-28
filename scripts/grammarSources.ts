@@ -339,7 +339,11 @@ export const githubGrammarSources: [string, string][] = [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
   ],
-  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json']
+  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json'],
+  [
+    'zig',
+    'https://github.com/ziglang/sublime-zig-language/blob/master/Syntaxes/Zig.tmLanguage.json'
+  ]
 ]
 
 /**
@@ -386,7 +390,8 @@ export const languageAliases = {
   viml: ['vim', 'vimscript'],
   vyper: ['vy'],
   wenyan: ['文言'],
-  yaml: ['yml']
+  yaml: ['yml'],
+  zig: ['Zig', 'ziglang']
 }
 
 /**
@@ -425,7 +430,7 @@ export const languageDisplayOverrides: Record<string, string> = {
   twig: 'Twig',
   viml: 'Vim Script',
   wasm: 'WebAssembly',
-  wenyan: 'Wenyan'
+  wenyan: 'Wenyan',
 }
 
 /**
