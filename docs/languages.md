@@ -222,4 +222,5 @@ export type Lang =
   | 'xsl'
   | 'yaml' | 'yml'
   | 'zenscript'
+  | 'zig' | 'Zig' | 'ziglang'
 ```
