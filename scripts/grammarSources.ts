@@ -341,7 +341,8 @@ export const githubGrammarSources: [string, string][] = [
     'zenscript',
     'https://github.com/CraftTweaker/ZenScript-tmLanguage/blob/master/zenscript.tmLanguage.json'
   ],
-  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json']
+  ['v', 'https://github.com/vlang/vscode-vlang/blob/master/syntaxes/v.tmLanguage.json'],
+  ['zig', 'https://github.com/ziglang/vscode-zig/blob/master/syntaxes/zig.tmLanguage.json']
 ]
 
 /**
