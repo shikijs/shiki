@@ -1,5 +1,15 @@
 /// <reference path="./global.d.ts" />
 
+// This is declared here rather than in global.d.ts because it is part of our
+// public api due to setWasm. We need it because it won't be defined otherwise
+// for Node users without "DOM" in their lib.
+declare global {
+  interface Response {
+    json(): Promise<any>
+    text(): Promise<any>
+  }
+}
+
 import { join, dirpathparts } from './utils'
 import type { IGrammar, IOnigLib, IRawTheme } from 'vscode-textmate'
 import { loadWASM, createOnigScanner, createOnigString } from 'vscode-oniguruma'
