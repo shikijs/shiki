@@ -21,7 +21,9 @@ export const vscodeGrammarsToRemove = [
   'md-math-inline',
   'md-math-block',
   'cpp-grammar-bailout',
-  'markdown-latex-combined'
+  'markdown-latex-combined',
+  // vscode specific snippets
+  'snippets'
 ]
 
 /**
