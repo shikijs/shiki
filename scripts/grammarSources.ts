@@ -292,6 +292,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json'
   ],
   [
+    'splunk',
+    'https://github.com/arcsector/vscode-splunk-search-syntax/blob/master/syntaxes/splunk_search.tmLanguage'
+  ],
+  [
     'ssh-config',
     'https://github.com/textmate/ssh-config.tmbundle/blob/master/Syntaxes/SSH-Config.tmLanguage'
   ],
@@ -383,6 +387,7 @@ export const languageAliases = {
   shaderlab: ['shader'],
   shellscript: ['bash', 'sh', 'shell', 'zsh'],
   shellsession: ['console'],
+  splunk: ['spl'],
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
