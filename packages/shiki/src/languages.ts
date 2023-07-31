@@ -141,6 +141,7 @@ export type Lang =
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
+  | 'splunk' | 'spl'
   | 'sql'
   | 'ssh-config'
   | 'stata'
@@ -1145,6 +1146,14 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'SPARQL',
     samplePath: 'sparql.sample',
     embeddedLangs: ['turtle']
+  },
+  {
+    id: 'splunk',
+    scopeName: 'source.splunk_search',
+    path: 'splunk.tmLanguage.json',
+    displayName: 'Splunk Query Language',
+    samplePath: 'splunk.sample',
+    aliases: ['spl']
   },
   {
     id: 'sql',

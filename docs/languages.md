@@ -191,6 +191,7 @@ export type Lang =
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
+  | 'splunk' | 'spl'
   | 'sql'
   | 'ssh-config'
   | 'stata'
