@@ -10,10 +10,6 @@ declare global {
 
   var self: Window & typeof globalThis
   function fetch(url: string): Promise<Response>
-  interface Response {
-    json(): Promise<any>
-    text(): Promise<any>
-  }
 }
 
 // This export is here so that all variables above would be added to the global scope
