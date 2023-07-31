@@ -121,7 +121,7 @@
           "name": "entity.name.section"
         },
         {
-          "match": "^\\.?(globa?l|extern)\\b",
+          "match": "^\\.?(globa?l|extern|required)\\b",
           "name": "entity.directive"
         },
         {
@@ -226,6 +226,12 @@
           "include": "#mnemonics-tsx"
         },
         {
+          "include": "#mnemonics-sha"
+        },
+        {
+          "include": "#mnemonics-avx512"
+        },
+        {
           "include": "#mnemonics-system"
         },
         {
@@ -238,13 +244,31 @@
           "include": "#mnemonics-smx"
         },
         {
-          "include": "#mnemonics-intel-isa-sgx"
+          "include": "#mnemonics-mpx"
         },
         {
-          "include": "#mnemonics-intel-isa-mpx"
+          "include": "#mnemonics-sgx"
         },
         {
-          "include": "#mnemonics-intel-isa-sha"
+          "include": "#mnemonics-cet"
+        },
+        {
+          "include": "#mnemonics-amx"
+        },
+        {
+          "include": "#mnemonics-uirq"
+        },
+        {
+          "include": "#mnemonics-esi"
+        },
+        {
+          "include": "#mnemonics-intel-manual-listing"
+        },
+        {
+          "include": "#mnemonics-intel-isa-xeon-phi"
+        },
+        {
+          "include": "#mnemonics-intel-isa-keylocker"
         },
         {
           "include": "#mnemonics-supplemental-amd"
@@ -279,6 +303,14 @@
         {
           "match": "(?i)\\b(aes((dec|enc)(last)?|imc|keygenassist)|pclmulqdq)\\b",
           "name": "keyword.operator.word.mnemonic.aesni"
+        }
+      ]
+    },
+    "mnemonics-amx": {
+      "patterns": [
+        {
+          "match": "(?i)\\b((ld|st)tilecfg|tdpb(f16ps|[su]{2}d)|tile(loadd(t1)?|release|stored|zero))\\b",
+          "name": "keyword.operator.word.mnemonic.amx"
         }
       ]
     },
@@ -398,6 +430,215 @@
         }
       ]
     },
+    "mnemonics-avx512": {
+      "patterns": [
+        {
+          "include": "#mnemonics-avx512f"
+        },
+        {
+          "include": "#mnemonics-avx512dq"
+        },
+        {
+          "include": "#mnemonics-avx512bw"
+        },
+        {
+          "include": "#mnemonics-avx512-opmask"
+        },
+        {
+          "include": "#mnemonics-avx512er"
+        },
+        {
+          "include": "#mnemonics-avx512pf"
+        },
+        {
+          "include": "#mnemonics-avx512fp16"
+        }
+      ]
+    },
+    "mnemonics-avx512-opmask": {
+      "patterns": [
+        {
+          "match": "(?i)\\bk(add|andn?|mov|not|or(test)?|shift[lr]|test|xn?or)[bdqw]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.opmask"
+        },
+        {
+          "match": "(?i)\\bkunpck(bw|wd|dq)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.opmask.unpack"
+        }
+      ]
+    },
+    "mnemonics-avx512bw": {
+      "patterns": [
+        {
+          "match": "(?i)\\bv(dbpsadbw|movdqu(8|16))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.dbpsad"
+        },
+        {
+          "match": "(?i)\\bvp(blendm|cmpu?|movm2)[bw]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.pblend"
+        },
+        {
+          "match": "(?i)\\bvperm(w|i2[bw])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.perpmi2"
+        },
+        {
+          "match": "(?i)\\bvp(mov([bw]2m|u?swb))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.pmov"
+        },
+        {
+          "match": "(?i)\\bvp(s(ll|ra|rl)vw|testn?m[bw])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.psll"
+        },
+        {
+          "match": "(?i)\\bvp(broadcastm(b2q|w2d)|(conflict|lzcnt)[dq])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.bw.broadcast"
+        }
+      ]
+    },
+    "mnemonics-avx512dq": {
+      "patterns": [
+        {
+          "match": "(?i)\\bvcvt(t?p[ds]2u?qq|uqq2p[ds])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.dq.cvt"
+        },
+        {
+          "match": "(?i)\\bv((extract|insert)[fi]64x2|(fpclass|range|reduce)[ps][ds])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.dq.extract"
+        },
+        {
+          "match": "(?i)\\bvp(mov(m2[dq]|b2d|q2m)|mullq)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.dq.pmov"
+        }
+      ]
+    },
+    "mnemonics-avx512er": {
+      "patterns": [
+        {
+          "match": "(?i)\\bv(exp2|rcp28|rsqrt28)[ps][ds]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.er"
+        }
+      ]
+    },
+    "mnemonics-avx512f": {
+      "patterns": [
+        {
+          "match": "(?i)\\bv(align[dq]|(blendm|compress)p[ds])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.align"
+        },
+        {
+          "match": "(?i)\\bv(cvtt?[ps][ds]2u(dq|si))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.cvtt"
+        },
+        {
+          "match": "(?i)\\bv(cvt((q|ud)q2p|usi2s)[ds])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.cvt"
+        },
+        {
+          "match": "(?i)\\bv(expandp[ds]|extract[fi](32|64)x4|fixupimm[ps][ds])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.expand"
+        },
+        {
+          "match": "(?i)\\bv(get(exp|mant)[ps][ds]|insertf(32|64)x4|movdq[au](32|64))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.getexp"
+        },
+        {
+          "match": "(?i)\\bvp(blendm[dq]|cmpu?[dq]|compress[dq])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.pblend"
+        },
+        {
+          "match": "(?i)\\bvp(erm[it]2(d|q|p[ds])|expand[dq]|(max|min)[su]q|movu?s(q[bdw]|d[bw]))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.permi"
+        },
+        {
+          "match": "(?i)\\bvp(rolv?|rorr?|scatter[dq]|testn?m|terlog)[dq]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.prol"
+        },
+        {
+          "match": "(?i)\\bvpsravq\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.sravq"
+        },
+        {
+          "match": "(?i)\\bv(rcp14|(rnd)?scale|rsqrt14)[ps][ds]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.rcp"
+        },
+        {
+          "match": "(?i)\\bv(scatter[dq]{2}|shuf[fi](32|64)x[24])\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.f.scatter"
+        }
+      ]
+    },
+    "mnemonics-avx512fp16": {
+      "patterns": [
+        {
+          "match": "(?i)\\bv((add|cmp|div|fc?(madd|mul)c|fpclass|get(exp|mant)|mul|rcp|reduce|(rnd)?scale|r?sqrt|sub)[ps]h|u?comish)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.add"
+        },
+        {
+          "match": "(?i)\\bvcvt(u?([dq]q|w)|pd)2ph\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvtx2ph"
+        },
+        {
+          "match": "(?i)\\bvcvtph2(u?([dq]q|w)|pd)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvtph2x"
+        },
+        {
+          "match": "(?i)\\bvcvt(ph2psx|ps2phx)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvtx"
+        },
+        {
+          "match": "(?i)\\bvcvt(s[dsi]|usi)2sh\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvtx2sh"
+        },
+        {
+          "match": "(?i)\\bvcvtsh2(s[dsi]|usi)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvtsh2x"
+        },
+        {
+          "match": "(?i)\\bvcvtt(ph2(u?(dq|qq|w))|sh2u?si)\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.cvttph2x"
+        },
+        {
+          "match": "(?i)\\bvfn?m((add|sub)(132|213|231))[ps]h\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.fmadd"
+        },
+        {
+          "match": "(?i)\\bvfm(addsub|subadd)(132|213|231)ph\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.fmaddsub"
+        },
+        {
+          "match": "(?i)\\bv((min|max)ph|mov(sh|w))\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.fp16.max"
+        }
+      ]
+    },
+    "mnemonics-avx512pf": {
+      "patterns": [
+        {
+          "match": "(?i)\\bv(gather|scatter)pf[01][dq]p[ds]\\b",
+          "name": "keyword.operator.word.mnemonic.avx512.pf"
+        }
+      ]
+    },
+    "mnemonics-cet": {
+      "patterns": [
+        {
+          "match": "(?i)\\b((inc|save(prev)?|rstor|rd)ssp|wru?ss|(set|clr)ssbsy|endbr(32|64))\\b",
+          "name": "keyword.operator.word.mnemonic.cet"
+        },
+        {
+          "match": "(?i)\\bendbranch\\b",
+          "name": "keyword.operator.word.mnemonic.cet.misc"
+        }
+      ]
+    },
+    "mnemonics-esi": {
+      "patterns": [
+        {
+          "match": "(?i)\\benqcmds?\\b",
+          "name": "keyword.operator.word.mnemonic.esi"
+        }
+      ]
+    },
     "mnemonics-fpu": {
       "patterns": [
         {
@@ -441,104 +682,27 @@
     "mnemonics-future-intel": {
       "patterns": [
         {
-          "include": "#mnemonics-future-intel-avx512"
-        },
-        {
-          "include": "#mnemonics-future-intel-opmask"
-        },
-        {
-          "include": "#mnemonics-future-intel-cet"
-        },
-        {
-          "include": "#mnemonics-future-intel-other"
+          "include": "#mnemonics-future-intel-apx"
         }
       ]
     },
-    "mnemonics-future-intel-avx512": {
+    "mnemonics-future-intel-apx": {
       "patterns": [
         {
-          "match": "(?i)\\b(vblendm(pd|ps)|vpblendm[bdqw])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.blend"
+          "match": "(?i)\\b(c(cmp|test)(n?[bl]e?|[ft]|n?[osz]))\\b",
+          "name": "keyword.operator.word.mnemonic.apx.ccmp_test"
         },
         {
-          "match": "(?i)\\b(vbroadcast[fi](32x[248]|64x[24])|v(extract|insert)[fi](32x[48]|64x[24])|vshuf[fi](32x4|64x2)|vpbroadcastm(b2q|w2d))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.bits-mov"
+          "match": "(?i)\\b(cfcmovn?([bl]e?|[opsz]))\\b",
+          "name": "keyword.operator.word.mnemonic.apx.cfcmov"
         },
         {
-          "match": "(?i)\\b(v(compress|expand)p[ds]|vp(compress|expand|conflict)[dq])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.compress"
+          "match": "(?i)\\b(cmpn?([bl]e?|[opsz])xadd)\\b",
+          "name": "keyword.operator.word.mnemonic.apx.cmpxadd"
         },
         {
-          "match": "(?i)\\b(vcvt(t?p[sd]2(udq|u?qq)|(udq|u?qq)2p[ds]|t?s[ds]2usi|usi2s[ds]))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.conversion"
-        },
-        {
-          "match": "(?i)\\b(v(fixupimm|fpclass|get(exp|mant)|range|(rcp|rsqrt)(14|28)|reduce|rndscale|scalef)([ps][ds]))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.math"
-        },
-        {
-          "match": "(?i)\\b(v(exp2p[ds]|(scatter|(gather|scatter)pf[01])[dq]p[ds]))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.math"
-        },
-        {
-          "match": "(?i)\\b(vmovdq(a(32|64)|u(8|16|32|64)))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.simd-integer"
-        },
-        {
-          "match": "(?i)\\b(vp(andn?|x?or)[dq])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.logical"
-        },
-        {
-          "match": "(?i)\\b(vpcmpu?[dqw])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.packed-comparison"
-        },
-        {
-          "match": "(?i)\\b(vp(absq|(lzcnt|ternlog)[dq]|madd52[lh]uq|(max|min)[su]q|mullq))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.packed-math"
-        },
-        {
-          "match": "(?i)\\b(vpmov(m2[bdqw]|[bdqw]2m|(u?s)?([qd][bw]|qd|wb)))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.packed-mov"
-        },
-        {
-          "match": "(?i)\\b(vp(ro[rl]v?[dq]|scatter[dq][dq]))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.packed-shift"
-        },
-        {
-          "match": "(?i)\\b(vptestn?m[bdqw])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.packed-test"
-        },
-        {
-          "match": "(?i)\\b(vperm([bdw]|[it]2([bdwq]|p[ds])))\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.permutations"
-        },
-        {
-          "match": "(?i)\\b(valign[dq]|vdbpsadbw|vpmultishiftqb|vpsrav[dqw])\\b",
-          "name": "keyword.operator.word.mnemonic.avx512.other"
-        }
-      ]
-    },
-    "mnemonics-future-intel-cet": {
-      "patterns": [
-        {
-          "match": "(?i)\\b((inc|save|rstor)ssp|wru?ss|(set|clr)ssbsy|endbranch|endbr(32|64))\\b",
-          "name": "keyword.operator.word.mnemonic.cet"
-        }
-      ]
-    },
-    "mnemonics-future-intel-opmask": {
-      "patterns": [
-        {
-          "match": "(?i)\\b(k(add|andn?|(xn?)?or|mov|not|(or)?test|shift[lr])[bdqw]|kunpck(bw|wd|dq))\\b",
-          "name": "keyword.operator.word.mnemonic.opmask"
-        }
-      ]
-    },
-    "mnemonics-future-intel-other": {
-      "patterns": [
-        {
-          "match": "(?i)\\b(clflushopt|clwb|pcommit)\\b",
-          "name": "keyword.operator.word.mnemonic.other"
+          "match": "(?i)\\b(jmpabs|(push|pop)2p?)\\b",
+          "name": "keyword.operator.word.mnemonic.apx.other"
         }
       ]
     },
@@ -605,8 +769,12 @@
           "name": "keyword.operator.word.mnemonic.general-purpose.segment-registers"
         },
         {
-          "match": "(?i)\\b(lea|nop|ud2|xlatb?|cpuid|movbe)\\b",
+          "match": "(?i)\\b(lea|nop|ud2?|xlatb?|cpuid|movbe)\\b",
           "name": "keyword.operator.word.mnemonic.general-purpose.misc"
+        },
+        {
+          "match": "(?i)\\b(cl(flush(opt)?|demote|wb)|pcommit)\\b",
+          "name": "keyword.operator.word.mnemonic.general-purpose.cache-control"
         },
         {
           "match": "(?i)\\b(rdrand|rdseed)\\b",
@@ -618,39 +786,139 @@
         }
       ]
     },
-    "mnemonics-intel-isa-mpx": {
+    "mnemonics-intel-isa-keylocker": {
       "patterns": [
         {
-          "match": "(?i)\\b(bnd(mk|c[lnu]|mov|ldx|stx))\\b",
-          "name": "keyword.operator.word.mnemonic.mpx"
+          "match": "(?i)\\b(aes(enc|dec)(wide)?(128|256)kl|encodekey(128|256)|loadiwkey)\\b",
+          "name": "keyword.operator.word.mnemonic.keylocker"
         }
       ]
     },
-    "mnemonics-intel-isa-sgx": {
+    "mnemonics-intel-isa-xeon-phi": {
       "patterns": [
         {
-          "match": "(?i)\\be(add|block|create|dbg(rd|wr)|extend|init|ld[bu]|pa|remove|track|wb)\\b",
-          "name": "keyword.operator.word.mnemonic.sgx1.supervisor"
-        },
-        {
-          "match": "(?i)\\be(enter|exit|getkey|report|resume)\\b",
-          "name": "keyword.operator.word.mnemonic.sgx1.user"
-        },
-        {
-          "match": "(?i)\\be(aug|mod(pr|t))\\b",
-          "name": "keyword.operator.word.mnemonic.sgx2.supervisor"
-        },
-        {
-          "match": "(?i)\\be(accept(copy)?|modpe)\\b",
-          "name": "keyword.operator.word.mnemonic.sgx2.user"
+          "match": "(?i)\\bv(4fn?(madd)[ps]s|p4dpwssds?)\\b",
+          "name": "keyword.operator.word.mnemonic.xeon-phi"
         }
       ]
     },
-    "mnemonics-intel-isa-sha": {
+    "mnemonics-intel-manual-listing": {
       "patterns": [
         {
-          "match": "(?i)\\b(sha(1rnds4|256rnds2|1nexte|(1|256)msg[12]))\\b",
-          "name": "keyword.operator.word.mnemonic.sha"
+          "match": "(?i)\\bcvtt?pd1pi\\b",
+          "name": "keyword.operator.word.mnemonic.other.c"
+        },
+        {
+          "match": "(?i)\\bv?gf2p8(affine(inv)?q|mul)b\\b",
+          "name": "keyword.operator.word.mnemonic.other.g"
+        },
+        {
+          "match": "(?i)\\bhreset\\b",
+          "name": "keyword.operator.word.mnemonic.other.h"
+        },
+        {
+          "match": "(?i)\\bincssp[dq]\\b",
+          "name": "keyword.operator.word.mnemonic.other.i"
+        },
+        {
+          "match": "(?i)\\bmovdir(i|64b)\\b",
+          "name": "keyword.operator.word.mnemonic.other.m"
+        },
+        {
+          "match": "(?i)\\bp((abs|(max|min)[su]?|mull|sra)q|config|twrite)\\b",
+          "name": "keyword.operator.word.mnemonic.other.p"
+        },
+        {
+          "match": "(?i)\\brd(pid|ssp[dq])\\b",
+          "name": "keyword.operator.word.mnemonic.other.r"
+        },
+        {
+          "match": "(?i)\\bserialize\\b",
+          "name": "keyword.operator.word.mnemonic.other.s"
+        },
+        {
+          "match": "(?i)\\btpause\\b",
+          "name": "keyword.operator.word.mnemonic.other.t"
+        },
+        {
+          "match": "(?i)\\bu(monitor|mwait)\\b",
+          "name": "keyword.operator.word.mnemonic.other.u"
+        },
+        {
+          "match": "(?i)\\bvbroadcast[fi](32x[248]|64x[24])\\b",
+          "name": "keyword.operator.word.mnemonic.other.vb"
+        },
+        {
+          "match": "(?i)\\bv(compressw|cvtne2?ps2bf16)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vc"
+        },
+        {
+          "match": "(?i)\\bvdpbf16ps\\b",
+          "name": "keyword.operator.word.mnemonic.other.vd"
+        },
+        {
+          "match": "(?i)\\bvextract[fi]32x8\\b",
+          "name": "keyword.operator.word.mnemonic.other.ve"
+        },
+        {
+          "match": "(?i)\\bv(insert([fi]32x8|i(32|64)x4))\\b",
+          "name": "keyword.operator.word.mnemonic.other.vi"
+        },
+        {
+          "match": "(?i)\\bv(maskmov|(max|min)sh)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vm"
+        },
+        {
+          "match": "(?i)\\bvp((2intersect|andn?)[dq]|absq)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpa"
+        },
+        {
+          "match": "(?i)\\bvpbroadcasti32x4\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpb"
+        },
+        {
+          "match": "(?i)\\bvpcompress[bw]\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpc"
+        },
+        {
+          "match": "(?i)\\bvp(dp(bu|ws)sds?)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpd"
+        },
+        {
+          "match": "(?i)\\b(vperm(b|t2[bw])|vp(expand[bw]|extrtd))\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpe"
+        },
+        {
+          "match": "(?i)\\bvp(madd52[hl]uq|mov(d(2m|[bw])|q[bdw]|wb)|mpov[bdqw]2m|multishiftqb)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpm"
+        },
+        {
+          "match": "(?i)\\b(vpopcnt[bdqw]|vpor[dq])\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpo"
+        },
+        {
+          "match": "(?i)\\bvprorv[dq]\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpr"
+        },
+        {
+          "match": "(?i)\\bvp(sh[lr]dv?[dqw]|shufbitqmb|shufps)\\b",
+          "name": "keyword.operator.word.mnemonic.other.vps"
+        },
+        {
+          "match": "(?i)\\bvpternlog[dq]\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpt"
+        },
+        {
+          "match": "(?i)\\bvpxor[dq]\\b",
+          "name": "keyword.operator.word.mnemonic.other.vpx"
+        },
+        {
+          "match": "(?i)\\bv(scalef[ps][dhs]|scatter[dq]p[ds])\\b",
+          "name": "keyword.operator.word.mnemonic.other.vs"
+        },
+        {
+          "match": "(?i)\\b(wbnoinvd|wru?ss[dq])\\b",
+          "name": "keyword.operator.word.mnemonic.other.w"
         }
       ]
     },
@@ -713,23 +981,71 @@
         }
       ]
     },
+    "mnemonics-mpx": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(bnd(mk|c[lnu]|mov|ldx|stx))\\b",
+          "name": "keyword.operator.word.mnemonic.mpx"
+        }
+      ]
+    },
     "mnemonics-pseudo-ops": {
       "patterns": [
         {
           "match": "(?i)\\b(cmp(n?(eq|lt|le)|(un)?ord)[ps][ds])\\b",
-          "name": "keyword.pseudo-mnemonic.sse2.compare"
+          "name": "keyword.operator.word.pseudo-mnemonic.sse2.compare"
         },
         {
           "match": "(?i)\\b(v?pclmul([hl]q[hl]q|[hl]qh)dq)\\b",
-          "name": "keyword.pseudo-mnemonic.avx.promoted.aes"
+          "name": "keyword.operator.word.pseudo-mnemonic.avx.promoted.aes"
         },
         {
           "match": "(?i)\\b(vcmp(eq(_(os|uq|us))?|neq(_(oq|os|us))?|[gl][et](_oq)?|n[gl][et](_uq)?|(un)?ord(_s)?|false(_os)?|true(_us)?)[ps][ds])\\b",
-          "name": "keyword.pseudo-mnemonic.avx.promoted.comparison"
+          "name": "keyword.operator.word.pseudo-mnemonic.avx.promoted.comparison"
+        },
+        {
+          "match": "(?i)\\bvp(cmpn?(eq|le|lt))\\b",
+          "name": "keyword.operator.word.pseudo-mnemonic.avx512.compare"
         },
         {
           "match": "(?i)\\b(vpcom(n?eq|[gl][et]|false|true)(b|uw))\\b",
-          "name": "keyword.pseudo-mnemonic.supplemental.amd.xop.simd"
+          "name": "keyword.operator.word.pseudo-mnemonic.supplemental.amd.xop.simd"
+        }
+      ]
+    },
+    "mnemonics-sgx": {
+      "patterns": [
+        {
+          "match": "(?i)\\bencl[su]\\b",
+          "name": "keyword.operator.word.mnemonic.sgx"
+        },
+        {
+          "match": "(?i)\\be(add|block|create|dbg(rd|wr)|extend|init|ld[bu]|pa|remove|track|wb)\\b",
+          "name": "support.constant.sgx1.supervisor"
+        },
+        {
+          "match": "(?i)\\be(add|block|create|dbg(rd|wr)|extend|init|ld[bu]|pa|remove|track|wb)\\b",
+          "name": "support.constant.sgx1.supervisor"
+        },
+        {
+          "match": "(?i)\\be(enter|exit|getkey|report|resume)\\b",
+          "name": "support.constant.sgx1.user"
+        },
+        {
+          "match": "(?i)\\be(aug|mod(pr|t))\\b",
+          "name": "support.constant.sgx2.supervisor"
+        },
+        {
+          "match": "(?i)\\be(accept(copy)?|modpe)\\b",
+          "name": "support.constant.sgx2.user"
+        }
+      ]
+    },
+    "mnemonics-sha": {
+      "patterns": [
+        {
+          "match": "(?i)\\b(sha(1rnds4|256rnds2|1nexte|(1|256)msg[12]))\\b",
+          "name": "keyword.operator.word.mnemonic.sha"
         }
       ]
     },
@@ -741,7 +1057,7 @@
         },
         {
           "match": "(?i)\\b(capabilities|enteraccs|exitac|senter|sexit|parameters|smctrl|wakeup)\\b",
-          "name": "support.constant"
+          "name": "support.constant.smx"
         }
       ]
     },
@@ -828,7 +1144,7 @@
           "name": "keyword.operator.word.mnemonic.sse2.simd-integer.other"
         },
         {
-          "match": "(?i)\\b(clflush|[lm]fence|pause|maskmovdqu|movnt(dq|i|pd))\\b",
+          "match": "(?i)\\b([lm]fence|pause|maskmovdqu|movnt(dq|i|pd))\\b",
           "name": "keyword.operator.word.mnemonic.sse2.cacheability-control"
         }
       ]
@@ -984,8 +1300,16 @@
     "mnemonics-tsx": {
       "patterns": [
         {
-          "match": "(?i)\\b(x(abort|acquire|release|begin|end|test))\\b",
+          "match": "(?i)\\b(x(abort|begin|end|test|(res|sus)ldtrk))\\b",
           "name": "keyword.operator.word.mnemonic.tsx"
+        }
+      ]
+    },
+    "mnemonics-uirq": {
+      "patterns": [
+        {
+          "match": "(?i)\\b((cl|st|test)ui|senduipi|uiret)\\b",
+          "name": "keyword.operator.word.mnemonic.uirq"
         }
       ]
     },
@@ -1070,7 +1394,7 @@
           ]
         },
         {
-          "begin": "^\\s*[%#]\\s*((xi?)?define|defined|elif(def)?|else|if(macro|ctx|idni?|num|str)?|ifn?def|line|(end)?macro|pragma|undef|endif)\\b",
+          "begin": "^\\s*[%#]\\s*(i?x?define|defined|elif(def)?|else|i[fs]n?(?:def|macro|ctx|idni?|id|num|str|token|empty|env)?|line|(i|end|uni?)?macro|pragma|endif)\\b",
           "captures": {
             "1": {
               "name": "keyword.control.import.c"
@@ -1082,11 +1406,14 @@
             {
               "match": "(?>\\\\\\s*\\n)",
               "name": "punctuation.separator.continuation.c"
+            },
+            {
+              "include": "#preprocessor-functions"
             }
           ]
         },
         {
-          "begin": "^\\s*[#%]\\s*(assign|strlen|substr|(end|exit)?rep|push|pop)\\b",
+          "begin": "^\\s*[#%]\\s*(assign|strlen|substr|(end|exit)?rep|push|pop|rotate|use|ifusing|ifusable|def(?:ailas|str|tok)|undef(?:alias)?)\\b",
           "captures": {
             "1": {
               "name": "keyword.control"
@@ -1098,6 +1425,28 @@
             {
               "match": "(?>\\\\\\s*\\n)",
               "name": "punctuation.separator.continuation.c"
+            },
+            {
+              "include": "#preprocessor-functions"
+            }
+          ]
+        }
+      ]
+    },
+    "preprocessor-functions": {
+      "patterns": [
+        {
+          "begin": "((%)(?:(abs|cond|count|eval|isn?(?:def|macro|ctx|idni?|id|num|str|token|empty|env)?|num|sel|str(?:cat|len)?|substr|tok)\\s*(\\()))",
+          "captures": {
+            "3": {
+              "name": "support.function.preprocessor.asm.x86_64"
+            }
+          },
+          "end": "(\\))|$",
+          "name": "meta.preprocessor.function.asm.x86_64",
+          "patterns": [
+            {
+              "include": "#preprocessor-functions"
             }
           ]
         }
@@ -1243,7 +1592,7 @@
           "name": "storage.type.asm.x86_64"
         },
         {
-          "match": "(?i)\\b(?:incbin|equ|times)\\b",
+          "match": "(?i)\\b(?:incbin|equ|times|dup)\\b",
           "name": "support.function.asm.x86_64"
         },
         {
@@ -1264,7 +1613,7 @@
               "name": "storage.modifier.prefix.vex.asm.x86_64"
             }
           },
-          "match": "{(vex[23]|evex)}"
+          "match": "{(vex[23]?|evex|rex)}"
         },
         {
           "captures": {
@@ -1295,8 +1644,44 @@
           "name": "support.constant.asm.x86_64"
         },
         {
-          "match": "\\b__(?:utf(?:(?:16|32)(?:[lb]e)?)|float(?:8|16|32|64|80[me]|128[lh])|Infinity|[QS]?NaN)__\\b",
+          "match": "\\b__\\?(?:utf(?:(?:16|32)(?:[lb]e)?)|float(?:8|16|32|64|80[me]|128[lh])|bfloat16|Infinity|[QS]?NaN)\\?__\\b",
           "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b__(?:utf(?:(?:16|32)(?:[lb]e)?)|float(?:8|16|32|64|80[me]|128[lh])|bfloat16|Infinity|[QS]?NaN)__\\b",
+          "name": "support.function.legacy.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?NASM_(?:MAJOR|(?:SUB)?MINOR|SNAPSHOT|VER(?:SION_ID)?)\\?__\\b",
+          "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b___\\?NASM_PATCHLEVEL\\?__\\b",
+          "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?(?:FILE|LINE|BITS|OUTPUT_FORMAT|DEBUG_FORMAT)\\?__\\b",
+          "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?(?:(?:UTC_)?(?:DATE|TIME)(?:_NUM)?|POSIX_TIME)\\?__\\b",
+          "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?USE_(?:\\w+)\\?__\\b",
+          "name": "support.function.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?PASS\\?__\\b",
+          "name": "invalid.deprecated.support.constant.altreg.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?ALIGNMODE\\?__\\b",
+          "name": "support.constant.smartalign.asm.x86_64"
+        },
+        {
+          "match": "\\b__\\?ALIGN_(\\w+)\\?__\\b",
+          "name": "support.function.smartalign.asm.x86_64"
         },
         {
           "match": "\\b__NASM_(?:MAJOR|(?:SUB)?MINOR|SNAPSHOT|VER(?:SION_ID)?)__\\b",
@@ -1307,7 +1692,7 @@
           "name": "support.function.asm.x86_64"
         },
         {
-          "match": "\\b__(?:FILE|LINE|BITS|OUTPUT_FORMAT)__\\b",
+          "match": "\\b__(?:FILE|LINE|BITS|OUTPUT_FORMAT|DEBUG_FORMAT)__\\b",
           "name": "support.function.asm.x86_64"
         },
         {
@@ -1315,7 +1700,7 @@
           "name": "support.function.asm.x86_64"
         },
         {
-          "match": "\\b__USE_(?:ALTREG|SMARTALIGN|FP|IFUNC)__\\b",
+          "match": "\\b__USE_(?:\\w+)__\\b",
           "name": "support.function.asm.x86_64"
         },
         {
@@ -1325,6 +1710,10 @@
         {
           "match": "\\b__ALIGNMODE__\\b",
           "name": "support.constant.smartalign.asm.x86_64"
+        },
+        {
+          "match": "\\b__ALIGN_(\\w+)__\\b",
+          "name": "support.function.smartalign.asm.x86_64"
         },
         {
           "match": "\\b(?:Inf|[QS]?NaN)\\b",
