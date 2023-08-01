@@ -4378,7 +4378,7 @@
       }
     },
     "type-builtin": {
-      "match": "\\b(bool|byte|char|decimal|double|float|int|long|object|sbyte|short|string|uint|ulong|ushort|void|dynamic)\\b",
+      "match": "\\b(bool|s?byte|u?short|n?u?int|u?long|float|double|decimal|char|string|object|void|dynamic)\\b",
       "captures": {
         "1": {
           "name": "keyword.type.cs"
