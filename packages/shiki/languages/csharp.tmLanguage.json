@@ -307,6 +307,9 @@
           "include": "#switch-expression"
         },
         {
+          "include": "#with-expression"
+        },
+        {
           "include": "#conditional-operator"
         },
         {
@@ -1464,7 +1467,7 @@
       ]
     },
     "operator-declaration": {
-      "begin": "(?x)\n(?<type_name>\n  (?:\n    (?:ref\\s+(?:readonly\\s+)?)?   # ref return\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      \\s*\n      (?:\\?)? # arrays can be nullable reference types\n      \\s*\n    )*\n  )\n)\\s*\n(?<operator_keyword>(?:\\b(?:operator)))\\s*\n(?<operator>(?:\\+|-|\\*|/|%|&|\\||\\^|\\<\\<|\\>\\>|==|!=|\\>|\\<|\\>=|\\<=|!|~|\\+\\+|--|true|false))\\s*\n(?=\\()",
+      "begin": "(?x)\n(?<type_name>\n  (?:\n    (?:ref\\s+(?:readonly\\s+)?)?   # ref return\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      \\s*\n      (?:\\?)? # arrays can be nullable reference types\n      \\s*\n    )*\n  )\n)\\s*\n\\b(?<operator_keyword>operator)\\b\\s*\n(?<operator>[+\\-*/%&|\\^!=~<>]+|true|false)\\s*\n(?=\\()",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -1882,6 +1885,20 @@
               "include": "#punctuation-comma"
             }
           ]
+        }
+      ]
+    },
+    "with-expression": {
+      "begin": "(?<!\\.)\\b(with)\\b\\s*(?=\\{|$)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.with.cs"
+        }
+      },
+      "end": "(?<=\\})",
+      "patterns": [
+        {
+          "include": "#initializer-expression"
         }
       ]
     },
@@ -3387,11 +3404,11 @@
         },
         {
           "name": "keyword.operator.assignment.compound.bitwise.cs",
-          "match": "\\&=|\\^=|<<=|>>=|\\|="
+          "match": "\\&=|\\^=|<<=|>>>?=|\\|="
         },
         {
           "name": "keyword.operator.bitwise.shift.cs",
-          "match": "<<|>>"
+          "match": "<<|>>>?"
         },
         {
           "name": "keyword.operator.comparison.cs",
@@ -3423,11 +3440,15 @@
         },
         {
           "name": "keyword.operator.arithmetic.cs",
-          "match": "%|\\*|/|-|\\+"
+          "match": "\\+|-(?!>)|\\*|/|%"
         },
         {
           "name": "keyword.operator.null-coalescing.cs",
           "match": "\\?\\?"
+        },
+        {
+          "name": "keyword.operator.range.cs",
+          "match": "\\.\\."
         }
       ]
     },
@@ -3579,7 +3600,7 @@
       }
     },
     "invocation-expression": {
-      "begin": "(?x)\n(?:(\\?)\\s*)?                                     # preceding null-conditional operator?\n(?:(\\.)\\s*)?                                     # preceding dot?\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                   # method name\n(?<type_args>\\s*<([^<>]|\\g<type_args>)+>\\s*)?\\s* # type arguments\n(?=\\()                                           # open paren of argument list",
+      "begin": "(?x)\n(?:\n  (?:(\\?)\\s*)?                                    # preceding null-conditional operator?\n  (\\.)\\s*|                                        # preceding dot?\n  (->)\\s*                                         # preceding pointer arrow?\n)?\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                  # method name\n(?<type_args>\\s*<([^<>]|\\g<type_args>)+>\\s*)?\\s*  # type arguments\n(?=\\()                                            # open paren of argument list",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.null-conditional.cs"
@@ -3588,9 +3609,12 @@
           "name": "punctuation.accessor.cs"
         },
         "3": {
-          "name": "entity.name.function.cs"
+          "name": "punctuation.accessor.pointer.cs"
         },
         "4": {
+          "name": "entity.name.function.cs"
+        },
+        "5": {
           "patterns": [
             {
               "include": "#type-arguments"
@@ -3606,7 +3630,7 @@
       ]
     },
     "element-access-expression": {
-      "begin": "(?x)\n(?:(\\?)\\s*)?                        # preceding null-conditional operator?\n(?:(\\.)\\s*)?                        # preceding dot?\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*)? # property name\n(?:(\\?)\\s*)?                        # null-conditional operator?\n(?=\\[)                              # open bracket of argument list",
+      "begin": "(?x)\n(?:\n  (?:(\\?)\\s*)?  # preceding null-conditional operator?\n  (\\.)\\s*|      # preceding dot?\n  (->)\\s*       # preceding pointer arrow?\n)?\n(?:(@?[_[:alpha:]][_[:alnum:]]*)\\s*)? # property name\n(?:(\\?)\\s*)?                        # null-conditional operator?\n(?=\\[)                              # open bracket of argument list",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.null-conditional.cs"
@@ -3615,9 +3639,12 @@
           "name": "punctuation.accessor.cs"
         },
         "3": {
-          "name": "variable.other.object.property.cs"
+          "name": "punctuation.accessor.pointer.cs"
         },
         "4": {
+          "name": "variable.other.object.property.cs"
+        },
+        "5": {
           "name": "keyword.operator.null-conditional.cs"
         }
       },
@@ -3631,7 +3658,7 @@
     "member-access-expression": {
       "patterns": [
         {
-          "match": "(?x)\n(?:(\\?)\\s*)?                   # preceding null-conditional operator?\n(\\.)\\s*                        # preceding dot\n(@?[_[:alpha:]][_[:alnum:]]*)\\s* # property name\n(?![_[:alnum:]]|\\(|(\\?)?\\[|<)  # next character is not alpha-numeric, nor a (, [, or <. Also, test for ?[",
+          "match": "(?x)\n(?:\n  (?:(\\?)\\s*)?                    # preceding null-conditional operator?\n  (\\.)\\s*|                        # preceding dot?\n  (->)\\s*                         # preceding pointer arrow?\n)\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*  # property name\n(?![_[:alnum:]]|\\(|(\\?)?\\[|<)     # next character is not alpha-numeric, nor a (, [, or <. Also, test for ?[",
           "captures": {
             "1": {
               "name": "keyword.operator.null-conditional.cs"
@@ -3640,6 +3667,9 @@
               "name": "punctuation.accessor.cs"
             },
             "3": {
+              "name": "punctuation.accessor.pointer.cs"
+            },
+            "4": {
               "name": "variable.other.object.property.cs"
             }
           }
@@ -3663,7 +3693,7 @@
           }
         },
         {
-          "match": "(?x)\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?=\n  (\\s*\\?)?\n  \\s*\\.\\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
+          "match": "(?x)\n(@?[_[:alpha:]][_[:alnum:]]*)\n(?=\n  \\s*(?:(?:\\?\\s*)?\\.|->)\n  \\s*@?[_[:alpha:]][_[:alnum:]]*\n)",
           "captures": {
             "1": {
               "name": "variable.other.object.cs"
