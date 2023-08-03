@@ -1111,7 +1111,7 @@
       ]
     },
     "property-declaration": {
-      "begin": "(?x)\n\n# The negative lookahead below ensures that we don't match nested types\n# or other declarations as properties.\n(?![[:word:][:space:]]*\\b(?:class|interface|struct|enum|event)\\b)\n\n(?<return_type>\n  (?<type_name>\n    (?:\n      (?:ref\\s+(?:readonly\\s+)?)?   # ref return\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name_and_type_args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s* # array suffix?\n        \\[\n          (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n        \\]\n        \\s*\n        (?:\\?)? # arrays can be nullable reference types\n        \\s*\n      )*\n    )\n  )\\s+\n)\n(?<interface_name>\\g<type_name>\\s*\\.\\s*)?\n(?<property_name>\\g<identifier>)\\s*\n(?=\\{|=>|$)",
+      "begin": "(?x)\n\n# The negative lookahead below ensures that we don't match nested types\n# or other declarations as properties.\n(?![[:word:][:space:]]*\\b(?:class|interface|struct|enum|event)\\b)\n\n(?<return_type>\n  (?<type_name>\n    (?:\n      (?:ref\\s+(?:readonly\\s+)?)?   # ref return\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name_and_type_args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s* # array suffix?\n        \\[\n          (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n        \\]\n        \\s*\n        (?:\\?)? # arrays can be nullable reference types\n        \\s*\n      )*\n    )\n  )\\s+\n)\n(?<interface_name>\\g<type_name>\\s*\\.\\s*)?\n(?<property_name>\\g<identifier>)\\s*\n(?=\\{|=>|//|/\\*|$)",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -1197,7 +1197,7 @@
       ]
     },
     "event-declaration": {
-      "begin": "(?x)\n\\b(event)\\b\\s*\n(?<return_type>\n  (?<type_name>\n    (?:\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name_and_type_args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s* # array suffix?\n        \\[\n          (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n        \\]\n        \\s*\n        (?:\\?)? # arrays can be nullable reference types\n        \\s*\n      )*\n    )\n  )\\s+\n)\n(?<interface_name>\\g<type_name>\\s*\\.\\s*)?\n(?<event_names>\\g<identifier>(?:\\s*,\\s*\\g<identifier>)*)\\s*\n(?=\\{|;|$)",
+      "begin": "(?x)\n\\b(event)\\b\\s*\n(?<return_type>\n  (?<type_name>\n    (?:\n      (?:\n        (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n        (?<name_and_type_args> # identifier + type arguments (if any)\n          \\g<identifier>\\s*\n          (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n        )\n        (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n        (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n      )\n      (?:\\s*\\?\\s*)? # nullable suffix?\n      (?:\\s* # array suffix?\n        \\[\n          (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n        \\]\n        \\s*\n        (?:\\?)? # arrays can be nullable reference types\n        \\s*\n      )*\n    )\n  )\\s+\n)\n(?<interface_name>\\g<type_name>\\s*\\.\\s*)?\n(\\g<identifier>)\\s* # first event name\n(?=\\{|;|,|=|//|/\\*|$)",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.event.cs"
@@ -1220,15 +1220,7 @@
           ]
         },
         "9": {
-          "patterns": [
-            {
-              "name": "entity.name.variable.event.cs",
-              "match": "@?[_[:alpha:]][_[:alnum:]]*"
-            },
-            {
-              "include": "#punctuation-comma"
-            }
-          ]
+          "name": "entity.name.variable.event.cs"
         }
       },
       "end": "(?<=\\})|(?=;)",
@@ -1240,7 +1232,28 @@
           "include": "#event-accessors"
         },
         {
+          "name": "entity.name.variable.event.cs",
+          "match": "@?[_[:alpha:]][_[:alnum:]]*"
+        },
+        {
           "include": "#punctuation-comma"
+        },
+        {
+          "begin": "=",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.operator.assignment.cs"
+            }
+          },
+          "end": "(?<=,)|(?=;)",
+          "patterns": [
+            {
+              "include": "#expression"
+            },
+            {
+              "include": "#punctuation-comma"
+            }
+          ]
         }
       ]
     },
@@ -1889,7 +1902,7 @@
       ]
     },
     "with-expression": {
-      "begin": "(?<!\\.)\\b(with)\\b\\s*(?=\\{|$)",
+      "begin": "(?<!\\.)\\b(with)\\b\\s*(?=\\{|//|/\\*|$)",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.with.cs"
@@ -1897,6 +1910,9 @@
       },
       "end": "(?<=\\})",
       "patterns": [
+        {
+          "include": "#comment"
+        },
         {
           "include": "#initializer-expression"
         }
@@ -3734,7 +3750,7 @@
       ]
     },
     "object-creation-expression-with-no-parameters": {
-      "match": "(?x)\n(new)\\s+\n(?<type_name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      \\s*\n      (?:\\?)? # arrays can be nullable reference types\n      \\s*\n    )*\n  )\n)\\s*\n(?=\\{|$)",
+      "match": "(?x)\n(new)\\s+\n(?<type_name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      \\s*\n      (?:\\?)? # arrays can be nullable reference types\n      \\s*\n    )*\n  )\n)\\s*\n(?=\\{|//|/\\*|$)",
       "captures": {
         "1": {
           "name": "keyword.other.new.cs"
@@ -3770,7 +3786,7 @@
       ]
     },
     "anonymous-object-creation-expression": {
-      "begin": "\\b(new)\\b\\s*(?=\\{|$)",
+      "begin": "\\b(new)\\b\\s*(?=\\{|//|/\\*|$)",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.new.cs"
@@ -3778,6 +3794,9 @@
       },
       "end": "(?<=\\})",
       "patterns": [
+        {
+          "include": "#comment"
+        },
         {
           "include": "#initializer-expression"
         }
