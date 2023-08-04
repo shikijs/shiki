@@ -56,6 +56,7 @@ export const githubThemeSources: [string, string][] = [
     'slack-dark',
     'https://github.com/slack-theme/visual-studio-code/blob/master/themes/dark-mode.json'
   ],
+  ['plastic', 'https://github.com/will-stone/plastic/blob/main/themes/vscode/themes/main.json'],
   [
     'poimandres',
     'https://github.com/drcmda/poimandres-theme/blob/main/themes/poimandres-color-theme.json'
