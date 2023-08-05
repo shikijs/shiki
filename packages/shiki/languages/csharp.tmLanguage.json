@@ -301,7 +301,7 @@
           "include": "#type-builtin"
         },
         {
-          "include": "#this-or-base-expression"
+          "include": "#language-variable"
         },
         {
           "include": "#switch-expression"
@@ -1143,7 +1143,7 @@
           "include": "#property-accessors"
         },
         {
-          "include": "#expression-body"
+          "include": "#accessor-getter-expression"
         },
         {
           "include": "#variable-initializer"
@@ -1174,7 +1174,7 @@
           ]
         },
         "8": {
-          "name": "keyword.other.this.cs"
+          "name": "variable.language.this.cs"
         }
       },
       "end": "(?<=\\})|(?=;)",
@@ -1189,7 +1189,7 @@
           "include": "#property-accessors"
         },
         {
-          "include": "#expression-body"
+          "include": "#accessor-getter-expression"
         },
         {
           "include": "#variable-initializer"
@@ -1272,35 +1272,42 @@
       },
       "patterns": [
         {
-          "name": "storage.modifier.cs",
-          "match": "\\b(private|protected|internal)\\b"
-        },
-        {
-          "name": "keyword.other.get.cs",
-          "match": "\\b(get)\\b"
-        },
-        {
-          "name": "keyword.other.set.cs",
-          "match": "\\b(set)\\b"
-        },
-        {
-          "name": "keyword.other.init.cs",
-          "match": "\\b(init)\\b"
-        },
-        {
           "include": "#comment"
         },
         {
           "include": "#attribute-section"
         },
         {
-          "include": "#expression-body"
+          "name": "storage.modifier.cs",
+          "match": "\\b(private|protected|internal)\\b"
         },
         {
-          "include": "#block"
+          "begin": "\\b(get)\\b\\s*(?=\\{|;|=>|//|/\\*|$)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.$1.cs"
+            }
+          },
+          "end": "(?<=\\}|;)|(?=\\})",
+          "patterns": [
+            {
+              "include": "#accessor-getter"
+            }
+          ]
         },
         {
-          "include": "#punctuation-semicolon"
+          "begin": "\\b(set|init)\\b\\s*(?=\\{|;|=>|//|/\\*|$)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.$1.cs"
+            }
+          },
+          "end": "(?<=\\}|;)|(?=\\})",
+          "patterns": [
+            {
+              "include": "#accessor-setter"
+            }
+          ]
         }
       ]
     },
@@ -1319,24 +1326,114 @@
       },
       "patterns": [
         {
-          "name": "keyword.other.add.cs",
-          "match": "\\b(add)\\b"
-        },
-        {
-          "name": "keyword.other.remove.cs",
-          "match": "\\b(remove)\\b"
-        },
-        {
           "include": "#comment"
         },
         {
           "include": "#attribute-section"
         },
         {
-          "include": "#expression-body"
+          "begin": "\\b(add|remove)\\b\\s*(?=\\{|;|=>|//|/\\*|$)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.$1.cs"
+            }
+          },
+          "end": "(?<=\\}|;)|(?=\\})",
+          "patterns": [
+            {
+              "include": "#accessor-setter"
+            }
+          ]
+        }
+      ]
+    },
+    "accessor-getter": {
+      "patterns": [
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.cs"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.cs"
+            }
+          },
+          "contentName": "meta.accessor.getter.cs",
+          "patterns": [
+            {
+              "include": "#statement"
+            }
+          ]
         },
         {
-          "include": "#block"
+          "include": "#accessor-getter-expression"
+        },
+        {
+          "include": "#punctuation-semicolon"
+        }
+      ]
+    },
+    "accessor-getter-expression": {
+      "begin": "=>",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.operator.arrow.cs"
+        }
+      },
+      "end": "(?=;|\\})",
+      "contentName": "meta.accessor.getter.cs",
+      "patterns": [
+        {
+          "include": "#ref-modifier"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "accessor-setter": {
+      "patterns": [
+        {
+          "begin": "\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.open.cs"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.curlybrace.close.cs"
+            }
+          },
+          "contentName": "meta.accessor.setter.cs",
+          "patterns": [
+            {
+              "include": "#statement"
+            }
+          ]
+        },
+        {
+          "begin": "=>",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.operator.arrow.cs"
+            }
+          },
+          "end": "(?=;|\\})",
+          "contentName": "meta.accessor.setter.cs",
+          "patterns": [
+            {
+              "include": "#ref-modifier"
+            },
+            {
+              "include": "#expression"
+            }
+          ]
         },
         {
           "include": "#punctuation-semicolon"
@@ -1437,13 +1534,10 @@
       ]
     },
     "constructor-initializer": {
-      "begin": "\\b(?:(base)|(this))\\b\\s*(?=\\()",
+      "begin": "\\b(base|this)\\b\\s*(?=\\()",
       "beginCaptures": {
         "1": {
-          "name": "keyword.other.base.cs"
-        },
-        "2": {
-          "name": "keyword.other.this.cs"
+          "name": "variable.language.$1.cs"
         }
       },
       "end": "(?<=\\))",
@@ -3604,16 +3698,17 @@
         }
       }
     },
-    "this-or-base-expression": {
-      "match": "\\b(?:(base)|(this))\\b",
-      "captures": {
-        "1": {
-          "name": "keyword.other.base.cs"
+    "language-variable": {
+      "patterns": [
+        {
+          "name": "variable.language.$1.cs",
+          "match": "\\b(base|this)\\b"
         },
-        "2": {
-          "name": "keyword.other.this.cs"
+        {
+          "name": "variable.other.$1.cs",
+          "match": "\\b(value)\\b"
         }
-      }
+      ]
     },
     "invocation-expression": {
       "begin": "(?x)\n(?:\n  (?:(\\?)\\s*)?                                    # preceding null-conditional operator?\n  (\\.)\\s*|                                        # preceding dot?\n  (->)\\s*                                         # preceding pointer arrow?\n)?\n(@?[_[:alpha:]][_[:alnum:]]*)\\s*                  # method name\n(?<type_args>\\s*<([^<>]|\\g<type_args>)+>\\s*)?\\s*  # type arguments\n(?=\\()                                            # open paren of argument list",
