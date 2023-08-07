@@ -98,7 +98,7 @@ export type Lang =
   | 'matlab'
   | 'mdx'
   | 'mermaid'
-  | 'mipsasm' | 'mips'
+  | 'mips' | 'mipsasm'
   | 'mojo'
   | 'narrat' | 'nar'
   | 'nextflow' | 'nf'
@@ -854,12 +854,12 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Mermaid'
   },
   {
-    id: 'mipsasm',
+    id: 'mips',
     scopeName: 'source.mips',
-    path: 'mipsasm.tmLanguage.json',
+    path: 'mips.tmLanguage.json',
     displayName: 'MIPS Assembler',
-    samplePath: 'mipsasm.sample',
-    aliases: ['mips']
+    samplePath: 'mips.sample',
+    aliases: ['mipsasm']
   },
   {
     id: 'mojo',
