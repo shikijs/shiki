@@ -213,6 +213,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/mathworks/MATLAB-Language-grammar/blob/40d9a0cd3b628f80cdcf948bbe1747a527ed5dd5/Matlab.tmbundle/Syntaxes/MATLAB.tmLanguage'
   ],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
+  ['mipsasm', 'https://github.com/textmate/mips.tmbundle/blob/master/Syntaxes/MIPS.tmLanguage'],
   ['mojo', 'https://github.com/modularml/mojo-syntax/blob/main/syntaxes/mojo.syntax.json'],
   [
     'narrat',
@@ -374,6 +375,7 @@ export const languageAliases = {
   kusto: ['kql'],
   make: ['makefile'],
   markdown: ['md'],
+  mipsasm: ['mips'],
   narrat: ['nar'],
   nextflow: ['nf'],
   'objective-c': ['objc'],
