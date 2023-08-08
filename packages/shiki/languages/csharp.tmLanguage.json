@@ -1716,7 +1716,7 @@
           "name": "keyword.control.goto.cs"
         }
       },
-      "end": "(?=;)",
+      "end": "(?=[;}])",
       "patterns": [
         {
           "begin": "\\b(case)\\b",
@@ -1725,7 +1725,7 @@
               "name": "keyword.control.case.cs"
             }
           },
-          "end": "(?=;)",
+          "end": "(?=[;}])",
           "patterns": [
             {
               "include": "#expression"
@@ -1753,7 +1753,7 @@
           "name": "keyword.control.flow.return.cs"
         }
       },
-      "end": "(?=;)",
+      "end": "(?=[;}])",
       "patterns": [
         {
           "include": "#ref-modifier"
@@ -1781,7 +1781,7 @@
           "name": "keyword.control.flow.throw.cs"
         }
       },
-      "end": "(?=;)",
+      "end": "(?=[;}])",
       "patterns": [
         {
           "include": "#expression"
@@ -1808,7 +1808,7 @@
           "name": "keyword.control.flow.return.cs"
         }
       },
-      "end": "(?=;)",
+      "end": "(?=[;}])",
       "patterns": [
         {
           "include": "#expression"
@@ -1833,7 +1833,7 @@
           "name": "keyword.other.await.cs"
         }
       },
-      "end": "(?=;)",
+      "end": "(?=[;}])",
       "patterns": [
         {
           "include": "#statement"
@@ -2057,6 +2057,17 @@
         }
       },
       "patterns": [
+        {
+          "match": "(@?[_[:alpha:]][_[:alnum:]]*)\\s*(:)",
+          "captures": {
+            "1": {
+              "name": "variable.other.object.property.cs"
+            },
+            "2": {
+              "name": "punctuation.separator.colon.cs"
+            }
+          }
+        },
         {
           "include": "#expression"
         },
@@ -2640,9 +2651,49 @@
       ]
     },
     "local-function-declaration": {
+      "begin": "(?x)\n\\b((?:(?:async|unsafe|static|extern)\\s+)*)\n(?<type_name>\n  (?:ref\\s+(?:readonly\\s+)?)?   # ref return\n  (?:\n    (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n    (?<name_and_type_args> # identifier + type arguments (if any)\n      \\g<identifier>\\s*\n      (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n    )\n    (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n    (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n  )\n  (?:\\s*\\?)? # nullable suffix?\n  (?:\\s* # array suffix?\n    \\[\n      \\s*(?:,\\s*)* # commata for multi-dimensional arrays\n    \\]\n    (?:\\s*\\?)? # arrays can be nullable reference types\n  )*\n)\\s+\n(\\g<identifier>)\\s*\n(<[^<>]+>)?\\s*\n(?=\\()",
+      "beginCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#storage-modifier"
+            }
+          ]
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        "7": {
+          "name": "entity.name.function.cs"
+        },
+        "8": {
+          "patterns": [
+            {
+              "include": "#type-parameter-list"
+            }
+          ]
+        }
+      },
+      "end": "(?<=\\})|(?=;)",
       "patterns": [
         {
-          "include": "#method-declaration"
+          "include": "#comment"
+        },
+        {
+          "include": "#parenthesized-parameter-list"
+        },
+        {
+          "include": "#generic-constraints"
+        },
+        {
+          "include": "#expression-body"
+        },
+        {
+          "include": "#block"
         }
       ]
     },
@@ -3583,27 +3634,20 @@
       ]
     },
     "conditional-operator": {
-      "begin": "\\?(?!\\s*[?.\\[]|\\s*$)",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.operator.conditional.question-mark.cs"
-        }
-      },
-      "end": ":",
-      "endCaptures": {
-        "0": {
-          "name": "keyword.operator.conditional.colon.cs"
-        }
-      },
       "patterns": [
         {
-          "include": "#expression"
+          "name": "keyword.operator.conditional.question-mark.cs",
+          "match": "\\?(?!\\?|\\s*[.\\[])"
+        },
+        {
+          "name": "keyword.operator.conditional.colon.cs",
+          "match": ":"
         }
       ]
     },
     "await-expression": {
       "name": "keyword.other.await.cs",
-      "match": "(?!\\.)\\b(await)\\b"
+      "match": "(?<!\\.)\\b(await)\\b"
     },
     "parenthesized-expression": {
       "begin": "\\(",
@@ -3669,7 +3713,7 @@
       }
     },
     "as-expression": {
-      "match": "(?x)\n(?<!\\.)\\b(as)\\b\\s*\n(?<type_name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        (?:\\s*,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      \\s*\n      (?:\\?)? # arrays can be nullable reference types\n      \\s*\n    )*\n  )\n)?",
+      "match": "(?x)\n(?<!\\.)\\b(as)\\b\\s*\n(?<type_name>\n  (?:\n    (?:\n      (?:(?<identifier>@?[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name_and_type_args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type_args>\\s*<(?:[^<>]|\\g<type_args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name_and_type_args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\?(?!\\?))? # nullable suffix?\n    (?:\\s* # array suffix?\n      \\[\n        \\s*(?:,\\s*)* # commata for multi-dimensional arrays\n      \\]\n      (?:\\s*\\?(?!\\?))? # arrays can be nullable reference types\n    )*\n  )\n)?",
       "captures": {
         "1": {
           "name": "keyword.other.as.cs"
