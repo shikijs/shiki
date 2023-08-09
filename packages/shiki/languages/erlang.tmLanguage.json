@@ -647,6 +647,29 @@
               "include": "#everything-else"
             }
           ]
+        },
+        {
+          "begin": "\\b(maybe)\\b",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.maybe.erlang"
+            }
+          },
+          "end": "\\b(end)\\b",
+          "endCaptures": {
+            "1": {
+              "name": "keyword.control.end.erlang"
+            }
+          },
+          "name": "meta.expression.maybe.erlang",
+          "patterns": [
+            {
+              "include": "#internal-expression-punctuation"
+            },
+            {
+              "include": "#everything-else"
+            }
+          ]
         }
       ]
     },
@@ -1023,7 +1046,7 @@
       ]
     },
     "keyword": {
-      "match": "\\b(after|begin|case|catch|cond|end|fun|if|let|of|try|receive|when)\\b",
+      "match": "\\b(after|begin|case|catch|cond|end|fun|if|let|of|try|receive|when|maybe|else)\\b",
       "name": "keyword.control.erlang"
     },
     "language-constant": {
@@ -1682,7 +1705,7 @@
       ]
     },
     "symbolic-operator": {
-      "match": "\\+\\+|\\+|--|-|\\*|/=|/|=/=|=:=|==|=<|=|<-|<|>=|>|!|::",
+      "match": "\\+\\+|\\+|--|-|\\*|/=|/|=/=|=:=|==|=<|=|<-|<|>=|>|!|::|\\?=",
       "name": "keyword.operator.symbolic.erlang"
     },
     "textual-operator": {
