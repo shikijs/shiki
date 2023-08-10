@@ -22,7 +22,10 @@ const plugins = [
 
 export default defineConfig([
   {
-    input: 'src/index.ts',
+    input: [
+      'src/index.ts',
+      'src/core.ts',
+    ],
     output: {
       dir: 'dist',
       format: 'esm',
@@ -32,7 +35,9 @@ export default defineConfig([
           return `languages/${f.name.replace('.tmLanguage', '')}.mjs`
         else if (f.moduleIds.some(i => i.includes('/themes')))
           return 'themes/[name].mjs'
-        return '[name].mjs'
+        else if (f.name === 'onig')
+          return 'onig.mjs'
+        return 'chunks/[name].mjs'
       },
     },
     plugins: [
@@ -40,13 +45,16 @@ export default defineConfig([
     ],
   },
   {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: 'dist/index.d.ts',
-        format: 'es',
-      },
+    input: [
+      'src/core.ts',
+      'src/index.ts',
     ],
+    output: {
+      dir: 'dist',
+      format: 'esm',
+      chunkFileNames: 'chunks/[name].d.ts',
+      entryFileNames: f => `${f.name.replace('src/', '')}.d.ts`,
+    },
     plugins: [
       dts({
         respectExternal: true,

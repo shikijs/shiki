@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/shikiji?color=a1b858&label=)](https://www.npmjs.com/package/shikiji)
 
-An ESM focused rewrites of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammar.
+An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammar.
 
 ## Changes
 
