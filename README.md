@@ -6,10 +6,12 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 
 ## Changes
 
-- All assets served as ESM, no more assets, no more CDN
-- Drop CJS and IIFE build, ESM-only
-- Minimal custom bundles
+- All assets served as pure ESM, no assets, no CDN, no Node.js APIs.
+- Drop CJS and IIFE build, focus on ESM
+- Bundles languages/themes on-demand
 - API simplified
+
+// WIP, documents will be updated later.
 
 ## License
 
