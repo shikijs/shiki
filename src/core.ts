@@ -1,4 +1,5 @@
-import type { IOnigLib } from 'vscode-textmate'
+import type { IOptions } from 'vscode-oniguruma'
+import { createOnigScanner, createOnigString, loadWASM } from 'vscode-oniguruma'
 import { Registry } from './registry'
 import type { CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { Resolver } from './resolver'
@@ -9,14 +10,28 @@ import { toShikiTheme } from './normalize'
 export interface CoreHighlighterOptions {
   themes: ThemeInput[]
   langs: LanguageInput[]
-  getOniguruma: () => Promise<IOnigLib>
+  getOnigurumaWasm: () => Promise<IOptions>
 }
 
 export async function getHighlighter(options: CoreHighlighterOptions) {
-  const themes = await Promise.all(options.themes.map(async t => toShikiTheme(typeof t === 'function' ? await t() : t)))
-  const langs = await Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t))
+  const [
+    themes,
+    langs,
+  ] = await Promise.all([
+    Promise.all(options.themes.map(async t => toShikiTheme(typeof t === 'function' ? await t() : t))),
+    Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t)),
+    options.getOnigurumaWasm().then(r => loadWASM(r)),
+  ] as const)
 
-  const resolver = new Resolver(options.getOniguruma(), 'vscode-oniguruma', langs)
+  const resolver = new Resolver(Promise.resolve({
+    createOnigScanner(patterns) {
+      return createOnigScanner(patterns)
+    },
+    createOnigString(s) {
+      return createOnigString(s)
+    },
+  }), 'vscode-oniguruma', langs)
+
   const registry = new Registry(resolver, themes, langs)
 
   await registry.loadLanguages(langs)

@@ -1,5 +1,3 @@
-import { createOnigScanner, createOnigString, loadWASM } from 'vscode-oniguruma'
-import type { IOnigLib } from 'vscode-textmate'
 import type { BuiltinLanguages, BuiltinThemes, LanguageInput, ThemeInput } from './types'
 import { themes } from './vendor/themes'
 import { languages } from './vendor/langs'
@@ -10,22 +8,12 @@ export interface HighlighterOptions {
   langs?: (LanguageInput | BuiltinLanguages)[]
 }
 
-let _onigurumaPromise: Promise<IOnigLib> | null = null
-export async function getOniguruma(): Promise<IOnigLib> {
+let _onigurumaPromise: Promise<{ data: ArrayBuffer }> | null = null
+export async function getOnigurumaInlined(): Promise<{ data: ArrayBuffer }> {
   if (!_onigurumaPromise) {
     // @ts-expect-error anyway
     _onigurumaPromise = import('vscode-oniguruma/release/onig.wasm')
-      .then(r => loadWASM({ data: r.default as ArrayBuffer }))
-      .then(() => {
-        return {
-          createOnigScanner(patterns) {
-            return createOnigScanner(patterns)
-          },
-          createOnigString(s) {
-            return createOnigString(s)
-          },
-        }
-      })
+      .then(r => ({ data: r.default as ArrayBuffer }))
   }
   return _onigurumaPromise
 }
@@ -48,6 +36,6 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     ...options,
     themes: _themes,
     langs,
-    getOniguruma,
+    getOnigurumaWasm: getOnigurumaInlined,
   })
 }
