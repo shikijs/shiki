@@ -1,25 +1,28 @@
 {
-  "name": "shikijo",
+  "name": "shikiji",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@8.6.12",
-  "description": "",
+  "description": "An ESM focused rewrites of shiki",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/antfu/shikijo#readme",
+  "homepage": "https://github.com/antfu/shikiji#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/shikijo.git"
+    "url": "git+https://github.com/antfu/shikiji.git"
   },
-  "bugs": "https://github.com/antfu/shikijo/issues",
-  "keywords": [],
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
       "import": "./dist/index.mjs"
-    }
+    },
+    "./dist/*": "./dist/*",
+    "./*": "./dist/*"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -36,12 +39,11 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -cw",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
@@ -54,16 +56,23 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.3",
+    "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.4.9",
+    "rollup-plugin-esbuild": "^5.0.0",
     "ansi-sequence-parser": "^1.1.1",
     "bumpp": "^9.1.1",
     "eslint": "^8.46.0",
     "esno": "^0.17.0",
+    "fast-glob": "^3.3.1",
+    "fs-extra": "^11.1.1",
     "jsonc-parser": "^3.2.0",
     "lint-staged": "^13.2.3",
     "pnpm": "^8.6.12",
+    "prettier": "^3.0.1",
     "rimraf": "^5.0.1",
     "rollup": "^3.28.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-dts": "^5.3.1",
     "shiki": "^0.14.3",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.1.6",
