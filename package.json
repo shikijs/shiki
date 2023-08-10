@@ -1,0 +1,82 @@
+{
+  "name": "shikijo",
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@8.6.12",
+  "description": "",
+  "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikijo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikijo.git"
+  },
+  "bugs": "https://github.com/antfu/shikijo/issues",
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.40.2",
+    "@antfu/ni": "^0.21.5",
+    "@antfu/utils": "^0.7.5",
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@types/node": "^20.4.9",
+    "ansi-sequence-parser": "^1.1.1",
+    "bumpp": "^9.1.1",
+    "eslint": "^8.46.0",
+    "esno": "^0.17.0",
+    "jsonc-parser": "^3.2.0",
+    "lint-staged": "^13.2.3",
+    "pnpm": "^8.6.12",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.28.0",
+    "shiki": "^0.14.3",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.1.6",
+    "unbuild": "^1.2.1",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.1",
+    "vscode-oniguruma": "^1.7.0",
+    "vscode-textmate": "^9.0.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
