@@ -1,12 +1,9 @@
 import { getHighlighter, loadWasm } from '../src/core'
 
-// @ts-expect-error no-types
 import nord from '../dist/themes/nord.mjs'
-
-// @ts-expect-error no-types
 import js from '../dist/languages/javascript.mjs'
 
-// @ts-expect-error no-types
+// @ts-expect-error anyway
 import wasm from '../dist/onig.wasm'
 
 await loadWasm(obj => WebAssembly.instantiate(wasm, obj))

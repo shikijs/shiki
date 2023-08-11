@@ -3,6 +3,8 @@ import { themes } from './vendor/themes'
 import { languages } from './vendor/langs'
 import { getHighlighter as getCoreHighlighter } from './core'
 
+export * from './types'
+
 export interface HighlighterOptions {
   themes?: (ThemeInput | BuiltinThemes)[]
   langs?: (LanguageInput | BuiltinLanguages)[]

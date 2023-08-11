@@ -7,6 +7,8 @@ import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
 import { toShikiTheme } from './normalize'
 
+export * from './types'
+
 export interface CoreHighlighterOptions {
   themes: ThemeInput[]
   langs: LanguageInput[]

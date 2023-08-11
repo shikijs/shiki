@@ -9,7 +9,7 @@ export type BuiltinThemes = keyof typeof themes
 export type Awaitable<T> = T | Promise<T>
 export type MaybeGetter<T> = T | (() => Awaitable<T>)
 
-export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisteration>
+export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
 export type LanguageInput = MaybeGetter<LanguageRegistration>
 
 export interface LanguageRegistration {
