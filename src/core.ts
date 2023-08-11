@@ -1,5 +1,5 @@
 import type { IOptions } from 'vscode-oniguruma'
-import { createOnigScanner, createOnigString, loadWASM } from 'vscode-oniguruma'
+import { createOnigScanner, createOnigString, loadWASM } from './oniguruma'
 import { Registry } from './registry'
 import type { CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { Resolver } from './resolver'

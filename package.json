@@ -43,6 +43,7 @@
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "test": "vitest",
+    "test:cf": "wrangler dev test/cf.ts --port 60001",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -56,7 +57,6 @@
     "@rollup/plugin-terser": "^0.4.3",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^20.4.9",
-    "rollup-plugin-esbuild": "^5.0.0",
     "ansi-sequence-parser": "^1.1.1",
     "bumpp": "^9.1.1",
     "eslint": "^8.46.0",
@@ -71,6 +71,7 @@
     "rollup": "^3.28.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^5.3.1",
+    "rollup-plugin-esbuild": "^5.0.0",
     "shiki": "^0.14.3",
     "simple-git-hooks": "^2.9.0",
     "typescript": "^5.1.6",
@@ -78,7 +79,8 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.1",
     "vscode-oniguruma": "^1.7.0",
-    "vscode-textmate": "^9.0.0"
+    "vscode-textmate": "^9.0.0",
+    "wrangler": "^3.5.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
