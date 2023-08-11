@@ -6,14 +6,13 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 
 ## Changes
 
-- All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets
-- Portable. No Node.js APIs, works in Cloudflare Workers
-- Drop CJS and IIFE build, focus on ESM
-- Bundles languages/themes on-demand
-- API simplified
+- All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets.
+- Portable. Does not rely on Node.js APIs or the filesystem, works in any JavaScript runtime.
+- Drop CJS and IIFE build, focus on ESM (or use bundlers).
+- Bundles languages/themes composedly.
+- Zero dependencies.
+- Simplified API.
 - Please don't hate me Pine 😜
-
-// WIP, documents will be updated later.
 
 ## Install
 
@@ -41,8 +40,13 @@ const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you really want to control what to bundle, you can use the core and compose your own bundle.
 
 ```js
+// `shikiji/core` entry does not include any themes or languages or the wasm binary.
 import { getHighlighter } from 'shikiji/core'
+
+// `shikiji/wasm` contains the wasm binary inlined as base64 string.
 import { getWasmInlined } from 'shikiji/wasm'
+
+// directly import the theme and language modules, only the ones you imported will be bundled.
 import nord from 'shikiji/themes/nord.mjs'
 
 const shiki = await getHighlighter({
@@ -55,19 +59,44 @@ const shiki = await getHighlighter({
   loadWasm: getWasmInlined
 })
 
+// optionally, load themes and languages after creation
+await shiki.loadTheme(() => import('shikiji/themes/vitesse-light.mjs').then(m => m.default))
+
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
 
-The `shikiji/core` entry does not include any themes or languages or the wasm binary.
-
 ### Cloudflare Workers
 
-// TODO:
+Cloudflare Workers [does not support initializing WebAssembly from binary data](https://community.cloudflare.com/t/fixed-cloudflare-workers-slow-with-moderate-sized-webassembly-bindings/184668/3), so the default wasm build won't work. You need to upload the wasm as assets and import it directly.
+
+Meanwhile, it's also recommended to use the [Fine-grained Bundling](#fine-grained-bundling) approach to reduce the bundle size.
+
+```ts
+import { getHighlighterCore, loadWasm } from 'shikiji/core'
+import nord from 'shikiji/themes/nord.mjs'
+import js from 'shikiji/languages/javascript.mjs'
+
+// Import wasm as assets
+import wasm from 'shikiji/onig.wasm'
+
+// Load wasm outside of `fetch` so it can be reused
+await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
+
+export default {
+  async fetch() {
+    const highlighter = await getHighlighterCore({
+      themes: [nord],
+      langs: [js],
+    })
+
+    return new Response(highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }))
+  },
+}
+```
 
 ## TODO
 
 - [ ] Port more Shiki API
-- [ ] Load new themes and languages after creation
 
 ## License
 
