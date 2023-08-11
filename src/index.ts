@@ -1,15 +1,15 @@
 import type { BuiltinLanguages, BuiltinThemes, LanguageInput, ThemeInput } from './types'
-import { themes } from './vendor/themes'
-import { languages } from './vendor/langs'
-import { getHighlighter as getCoreHighlighter } from './core'
-import { loadWasm } from './oniguruma'
+import { bundledThemes } from './vendor/themes'
+import { bundledLanguages } from './vendor/langs'
+import { getHighlighterCore } from './core'
 import { getWasmInlined } from './wasm'
 
-export * from './types'
+export * from './core'
 
 export {
-  loadWasm,
   getWasmInlined,
+  bundledLanguages,
+  bundledThemes,
 }
 
 export interface HighlighterOptions {
@@ -20,18 +20,18 @@ export interface HighlighterOptions {
 export async function getHighlighter(options: HighlighterOptions = {}) {
   const _themes = (options.themes ?? ['nord']).map((i) => {
     if (typeof i === 'string')
-      return themes[i]
+      return bundledThemes[i]
     return i
   }) as ThemeInput[]
 
-  const langs = (options.langs ?? Object.keys(languages) as BuiltinLanguages[])
+  const langs = (options.langs ?? Object.keys(bundledLanguages) as BuiltinLanguages[])
     .map((i) => {
       if (typeof i === 'string')
-        return languages[i]
+        return bundledLanguages[i]
       return i
     })
 
-  return getCoreHighlighter({
+  return getHighlighterCore({
     ...options,
     themes: _themes,
     langs,

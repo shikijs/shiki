@@ -3,8 +3,6 @@ import type { IOnigLib, RegistryOptions } from 'vscode-textmate'
 import type { LanguageRegistration } from './types'
 
 export class Resolver implements RegistryOptions {
-  public languagesPath: string = 'languages/'
-
   private readonly languageMap: { [langIdOrAlias: string]: LanguageRegistration } = {}
   private readonly scopeToLangMap: { [scope: string]: LanguageRegistration } = {}
 
@@ -31,19 +29,11 @@ export class Resolver implements RegistryOptions {
   }
 
   public async loadGrammar(scopeName: string): Promise<any> {
-    const lang = this.scopeToLangMap[scopeName]
-
-    if (!lang)
-      return null
-
-    if (lang.grammar)
-      return lang.grammar
-
-    return null
+    return this.scopeToLangMap[scopeName]
   }
 
   public addLanguage(l: LanguageRegistration) {
-    this.languageMap[l.id] = l
+    this.languageMap[l.name] = l
     if (l.aliases) {
       l.aliases.forEach((a) => {
         this.languageMap[a] = l

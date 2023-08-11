@@ -1,4 +1,4 @@
-import type { IOptions } from 'vscode-oniguruma'
+import type { OnigurumaLoadOptions } from './oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import type { CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
@@ -9,17 +9,17 @@ import { toShikiTheme } from './normalize'
 
 export * from './types'
 
-export interface CoreHighlighterOptions {
+export interface HighlighterCoreOptions {
   themes: ThemeInput[]
   langs: LanguageInput[]
-  loadWasm?: IOptions | (() => Promise<IOptions>)
+  loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
 }
 
 export {
   loadWasm,
 }
 
-export async function getHighlighter(options: CoreHighlighterOptions) {
+export async function getHighlighterCore(options: HighlighterCoreOptions) {
   const [
     themes,
     langs,

@@ -1,4 +1,4 @@
-import { getHighlighter, loadWasm } from '../src/core'
+import { getHighlighterCore, loadWasm } from '../src/core'
 
 import nord from '../dist/themes/nord.mjs'
 import js from '../dist/languages/javascript.mjs'
@@ -10,7 +10,7 @@ await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
 
 export default {
   async fetch() {
-    const highlighter = await getHighlighter({
+    const highlighter = await getHighlighterCore({
       themes: [nord],
       langs: [js],
     })

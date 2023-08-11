@@ -22,7 +22,7 @@ export class Registry extends TextMateRegistry {
       _themes.map(i => [i.name, i]),
     )
     this._langMap = Object.fromEntries(
-      _langs.map(i => [i.id, i]),
+      _langs.map(i => [i.name, i]),
     )
   }
 
@@ -57,7 +57,7 @@ export class Registry extends TextMateRegistry {
     }
 
     const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
-    this._resolvedGrammars[lang.id] = g!
+    this._resolvedGrammars[lang.name] = g!
     if (lang.aliases) {
       lang.aliases.forEach((la) => {
         this._resolvedGrammars[la] = g!
@@ -83,8 +83,8 @@ export class Registry extends TextMateRegistry {
   }
 
   private resolveEmbeddedLanguages(lang: LanguageRegistration) {
-    if (!this._langGraph.has(lang.id))
-      this._langGraph.set(lang.id, lang)
+    if (!this._langGraph.has(lang.name))
+      this._langGraph.set(lang.name, lang)
 
     if (lang.embeddedLangs) {
       for (const embeddedLang of lang.embeddedLangs)

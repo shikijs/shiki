@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getHighlighter } from '../src/core'
+import { getHighlighterCore } from '../src/core'
 
 import js from '../dist/languages/javascript.mjs'
 import nord from '../dist/themes/nord.mjs'
@@ -9,7 +9,7 @@ import onig from '../dist/onig.mjs'
 
 describe('should', () => {
   it('exported', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await getHighlighterCore({
       themes: [nord],
       langs: [js],
       loadWasm: {

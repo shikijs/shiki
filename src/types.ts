@@ -1,10 +1,10 @@
-import type { IGrammar, IRawTheme } from 'vscode-textmate'
-import type { languages } from './vendor/langs'
-import type { themes } from './vendor/themes'
+import type { IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { bundledLanguages } from './vendor/langs'
+import type { bundledThemes } from './vendor/themes'
 import type { IThemedToken } from './themedTokenizer'
 
-export type BuiltinLanguages = keyof typeof languages
-export type BuiltinThemes = keyof typeof themes
+export type BuiltinLanguages = keyof typeof bundledLanguages
+export type BuiltinThemes = keyof typeof bundledThemes
 
 export type Awaitable<T> = T | Promise<T>
 export type MaybeGetter<T> = T | (() => Awaitable<T>)
@@ -12,8 +12,8 @@ export type MaybeGetter<T> = T | (() => Awaitable<T>)
 export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
 export type LanguageInput = MaybeGetter<LanguageRegistration>
 
-export interface LanguageRegistration {
-  id: string
+export interface LanguageRegistration extends IRawGrammar {
+  name: string
   scopeName: string
   displayName?: string
   aliases?: string[]
@@ -25,7 +25,6 @@ export interface LanguageRegistration {
   embeddedLangs?: string[]
   balancedBracketSelectors?: string[]
   unbalancedBracketSelectors?: string[]
-  grammar?: IGrammar
 }
 
 export interface CodeToHtmlOptions {
@@ -125,3 +124,5 @@ interface TokenElementProps extends ElementProps {
   token: IThemedToken
   index: number
 }
+
+export {}

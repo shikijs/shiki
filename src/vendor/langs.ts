@@ -1,6 +1,6 @@
 import type { LanguageRegistration } from '../types'
 
-export const languages = {
+export const bundledLanguages = {
   'abap': () => import('./languages/abap.json').then(r => r.default as unknown as LanguageRegistration),
   'actionscript-3': () => import('./languages/actionscript-3.json').then(r => r.default as unknown as LanguageRegistration),
   'ada': () => import('./languages/ada.json').then(r => r.default as unknown as LanguageRegistration),

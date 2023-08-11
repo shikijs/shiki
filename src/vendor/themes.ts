@@ -1,6 +1,6 @@
 import type { ThemeRegisterationRaw } from '../types'
 
-export const themes = {
+export const bundledThemes = {
   'css-variables': () => import('shiki/themes/css-variables.json').then(r => r.default as unknown as ThemeRegisterationRaw),
   'dark-plus': () => import('shiki/themes/dark-plus.json').then(r => r.default as unknown as ThemeRegisterationRaw),
   'dracula-soft': () => import('shiki/themes/dracula-soft.json').then(r => r.default as unknown as ThemeRegisterationRaw),

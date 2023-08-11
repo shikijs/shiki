@@ -20,12 +20,15 @@ for (const file of files) {
   }
 
   await fs.writeJSON(`./src/vendor/languages/${lang.id}.json`, {
-    ...lang,
-    samplePath: undefined,
-    path: undefined,
-    displayName: undefined,
-    grammar: content,
-  })
+    ...content,
+    name: content.name || lang.id,
+    scopeName: content.scopeName || lang.scopeName,
+    displayName: lang.displayName,
+    aliases: lang.aliases,
+    embeddedLangs: lang.embeddedLangs,
+    balancedBracketSelectors: lang.balancedBracketSelectors,
+    unbalancedBracketSelectors: lang.unbalancedBracketSelectors,
+  }, { spaces: 2 })
 }
 
 const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__()=>import('./languages/${i.id}.json').then(r=>r.default as unknown as LanguageRegistration)__`]))
@@ -36,7 +39,7 @@ await fs.writeFile(
   'src/vendor/langs.ts',
   `import type { LanguageRegistration } from '../types'
 
-export const languages = ${JSON.stringify(languages, null, 2).replace(/"__|__"/g, '')}`,
+export const bundledLanguages = ${JSON.stringify(languages, null, 2).replace(/"__|__"/g, '')}`,
   'utf-8',
 )
 
@@ -44,6 +47,6 @@ await fs.writeFile(
   'src/vendor/themes.ts',
   `import type { ThemeRegisterationRaw } from '../types'
 
-export const themes = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}`,
+export const bundledThemes = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}`,
   'utf-8',
 )

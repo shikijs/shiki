@@ -25,6 +25,18 @@
       "types": "./dist/core.d.mts",
       "import": "./dist/core.mjs"
     },
+    "./wasm": {
+      "types": "./dist/wasm.d.mts",
+      "import": "./dist/wasm.mjs"
+    },
+    "./languages": {
+      "types": "./dist/languages.d.mts",
+      "import": "./dist/languages.mjs"
+    },
+    "./themes": {
+      "types": "./dist/themes.d.mts",
+      "import": "./dist/themes.mjs"
+    },
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
   },

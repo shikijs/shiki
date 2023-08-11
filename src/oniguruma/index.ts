@@ -361,7 +361,7 @@ interface IInstantiatorOptions extends ICommonOptions {
 interface IDataOptions extends ICommonOptions {
   data: ArrayBufferView | ArrayBuffer | Response
 }
-export type IOptions = IInstantiatorOptions | IDataOptions
+export type OnigurumaLoadOptions = IInstantiatorOptions | IDataOptions
 
 async function _loadWasm(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined): Promise<void> {
   onigBinding = await OnigasmModuleFactory({
@@ -379,15 +379,15 @@ async function _loadWasm(loader: WebAssemblyInstantiator, print: ((str: string) 
   })
 }
 
-function isInstantiatorOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IOptions): dataOrOptions is IInstantiatorOptions {
+function isInstantiatorOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is IInstantiatorOptions {
   return (typeof (<IInstantiatorOptions>dataOrOptions).instantiator === 'function')
 }
 
-function isDataOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IOptions): dataOrOptions is IDataOptions {
+function isDataOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is IDataOptions {
   return (typeof (<IDataOptions>dataOrOptions).data !== 'undefined')
 }
 
-function isResponse(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IOptions): dataOrOptions is Response {
+function isResponse(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is Response {
   return (typeof Response !== 'undefined' && dataOrOptions instanceof Response)
 }
 
@@ -395,9 +395,9 @@ let initCalled = false
 let initPromise: Promise<void> | null = null
 
 export function loadWasm(loader: WebAssemblyInstantiator): Promise<void>
-export function loadWasm(options: IOptions): Promise<void>
+export function loadWasm(options: OnigurumaLoadOptions): Promise<void>
 export function loadWasm(data: ArrayBufferView | ArrayBuffer | Response): Promise<void>
-export function loadWasm(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | IOptions): Promise<void> {
+export function loadWasm(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): Promise<void> {
   if (initCalled) {
     // Already initialized
     return initPromise!

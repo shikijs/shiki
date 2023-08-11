@@ -6,15 +6,12 @@ const defaultElements: ElementsOptions = {
   pre({ className, style, children }) {
     return `<pre class="${className}" style="${style}" tabindex="0">${children}</pre>`
   },
-
   code({ children }) {
     return `<code>${children}</code>`
   },
-
   line({ className, children }) {
     return `<span class="${className}">${children}</span>`
   },
-
   token({ style, children }) {
     return `<span style="${style}">${children}</span>`
   },

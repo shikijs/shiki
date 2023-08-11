@@ -11,6 +11,15 @@ import fs from 'fs-extra'
 import fg from 'fast-glob'
 import { wasmPlugin } from './build/wasm.mjs'
 
+const entries = [
+  'src/index.ts',
+  'src/core.ts',
+  'src/types.ts',
+  'src/themes.ts',
+  'src/languages.ts',
+  'src/wasm.ts',
+]
+
 const plugins = [
   esbuild(),
   nodeResolve(),
@@ -25,11 +34,7 @@ const plugins = [
 
 export default defineConfig([
   {
-    input: [
-      'src/index.ts',
-      'src/core.ts',
-      'src/wasm.ts',
-    ],
+    input: entries,
     output: {
       dir: 'dist',
       format: 'esm',
@@ -49,12 +54,7 @@ export default defineConfig([
     ],
   },
   {
-    input: [
-      'src/core.ts',
-      'src/index.ts',
-      'src/wasm.ts',
-      'src/types.ts',
-    ],
+    input: entries,
     output: {
       dir: 'dist',
       format: 'esm',
