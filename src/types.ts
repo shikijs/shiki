@@ -12,6 +12,15 @@ export type MaybeGetter<T> = T | (() => Awaitable<T>)
 export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
 export type LanguageInput = MaybeGetter<LanguageRegistration>
 
+interface Nothing {}
+
+/**
+ * type StringLiteralUnion<'foo'> = 'foo' | string
+ * This has auto completion whereas `'foo' | string` doesn't
+ * Adapted from https://github.com/microsoft/TypeScript/issues/29729
+ */
+export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
+
 export interface LanguageRegistration extends IRawGrammar {
   name: string
   scopeName: string
@@ -27,9 +36,9 @@ export interface LanguageRegistration extends IRawGrammar {
   unbalancedBracketSelectors?: string[]
 }
 
-export interface CodeToHtmlOptions {
-  lang?: string
-  theme?: string
+export interface CodeToHtmlOptions<Languages = string, Themes = string> {
+  lang?: Languages
+  theme?: Themes
   lineOptions?: LineOption[]
 }
 

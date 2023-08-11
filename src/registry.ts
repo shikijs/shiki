@@ -1,7 +1,8 @@
 import type { IGrammar, IGrammarConfiguration } from 'vscode-textmate'
 import { Registry as TextMateRegistry } from 'vscode-textmate'
-import type { LanguageRegistration, ThemeRegisteration } from './types'
+import type { LanguageRegistration, ThemeRegisteration, ThemeRegisterationRaw } from './types'
 import type { Resolver } from './resolver'
+import { toShikiTheme } from './normalize'
 
 export class Registry extends TextMateRegistry {
   public themesPath: string = 'themes/'
@@ -13,17 +14,13 @@ export class Registry extends TextMateRegistry {
 
   constructor(
     private _resolver: Resolver,
-    public _themes: ThemeRegisteration[],
+    public _themes: (ThemeRegisteration | ThemeRegisterationRaw)[],
     public _langs: LanguageRegistration[],
   ) {
     super(_resolver)
 
-    this._resolvedThemes = Object.fromEntries(
-      _themes.map(i => [i.name, i]),
-    )
-    this._langMap = Object.fromEntries(
-      _langs.map(i => [i.name, i]),
-    )
+    _themes.forEach(t => this.loadTheme(t))
+    _langs.forEach(l => this.loadLanguage(l))
   }
 
   public getTheme(theme: ThemeRegisteration | string) {
@@ -31,6 +28,13 @@ export class Registry extends TextMateRegistry {
       return this._resolvedThemes[theme]
     else
       return theme
+  }
+
+  public loadTheme(theme: ThemeRegisteration | ThemeRegisterationRaw) {
+    const _theme = toShikiTheme(theme)
+    if (_theme.name)
+      this._resolvedThemes[_theme.name] = _theme
+    return theme
   }
 
   public getLoadedThemes() {
@@ -42,6 +46,7 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: LanguageRegistration) {
+    this._resolver.addLanguage(lang)
     const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
       if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
         await this._resolver.loadGrammar(this._resolver.getLangRegistration(l).scopeName)
@@ -65,6 +70,11 @@ export class Registry extends TextMateRegistry {
     }
   }
 
+  async init() {
+    this._themes.map(t => this.loadTheme(t))
+    await this.loadLanguages(this._langs)
+  }
+
   public async loadLanguages(langs: LanguageRegistration[]) {
     for (const lang of langs)
       this.resolveEmbeddedLanguages(lang)
@@ -83,9 +93,9 @@ export class Registry extends TextMateRegistry {
   }
 
   private resolveEmbeddedLanguages(lang: LanguageRegistration) {
+    this._langMap[lang.name] = lang
     if (!this._langGraph.has(lang.name))
       this._langGraph.set(lang.name, lang)
-
     if (lang.embeddedLangs) {
       for (const embeddedLang of lang.embeddedLangs)
         this._langGraph.set(embeddedLang, this._langMap[embeddedLang])

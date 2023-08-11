@@ -1,4 +1,4 @@
-import type { BuiltinLanguages, BuiltinThemes, LanguageInput, ThemeInput } from './types'
+import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { bundledThemes } from './vendor/themes'
 import { bundledLanguages } from './vendor/langs'
 import { getHighlighterCore } from './core'
@@ -18,23 +18,48 @@ export interface HighlighterOptions {
 }
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
-  const _themes = (options.themes ?? ['nord']).map((i) => {
-    if (typeof i === 'string')
-      return bundledThemes[i]
-    return i
-  }) as ThemeInput[]
+  function resolveLang(lang: LanguageInput | BuiltinLanguages): LanguageInput {
+    if (typeof lang === 'string') {
+      const bundle = bundledLanguages[lang]
+      if (!bundle)
+        throw new Error(`[shikiji] Unknown language: ${lang}`)
+      return bundle
+    }
+    return lang
+  }
+
+  function resolveTheme(theme: ThemeInput | BuiltinThemes): ThemeInput {
+    if (typeof theme === 'string') {
+      const bundle = bundledThemes[theme]
+      if (!bundle)
+        throw new Error(`[shikiji] Unknown theme: ${theme}`)
+      return bundle
+    }
+    return theme
+  }
+
+  const _themes = (options.themes ?? ['nord']).map(resolveTheme) as ThemeInput[]
 
   const langs = (options.langs ?? Object.keys(bundledLanguages) as BuiltinLanguages[])
-    .map((i) => {
-      if (typeof i === 'string')
-        return bundledLanguages[i]
-      return i
-    })
+    .map(resolveLang)
 
-  return getHighlighterCore({
+  const core = await getHighlighterCore({
     ...options,
     themes: _themes,
     langs,
     loadWasm: getWasmInlined,
   })
+
+  return {
+    ...core,
+    codeToHtml(code: string, options: CodeToHtmlOptions<BuiltinLanguages, BuiltinThemes> = {}) {
+      return core.codeToHtml(code, options)
+    },
+    loadLanguage(...langs: (LanguageInput | BuiltinLanguages)[]) {
+      return core.loadLanguage(...langs.map(resolveLang))
+    },
+    loadTheme(...themes: (ThemeInput | BuiltinThemes)[]) {
+      return core.loadTheme(...themes.map(resolveTheme))
+    },
+  }
 }

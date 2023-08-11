@@ -1,11 +1,10 @@
+import type { CodeToHtmlOptions, LanguageInput, MaybeGetter, ThemeInput } from './types'
 import type { OnigurumaLoadOptions } from './oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
-import type { CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
-import { toShikiTheme } from './normalize'
 
 export * from './types'
 
@@ -24,7 +23,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     themes,
     langs,
   ] = await Promise.all([
-    Promise.all(options.themes.map(async t => toShikiTheme(typeof t === 'function' ? await t() : t))),
+    Promise.all(options.themes.map(async t => typeof t === 'function' ? await t() : t)),
     Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t)),
     typeof options.loadWasm === 'function'
       ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
@@ -43,14 +42,14 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }), 'vscode-oniguruma', langs)
 
   const registry = new Registry(resolver, themes, langs)
-
-  await registry.loadLanguages(langs)
+  await registry.init()
 
   const defaultTheme = themes[0].name
+  const defaultLang = registry.getLoadedLanguages()[0] || 'text'
 
   function codeToThemedTokens(
     code: string,
-    lang = 'text',
+    lang = defaultLang,
     theme = defaultTheme,
     options = { includeExplanation: true },
   ) {
@@ -64,7 +63,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }
 
   function getTheme(name = defaultTheme) {
-    const _theme = themes.find(i => i.name === name)!
+    const _theme = registry.getTheme(name!)
     registry.setTheme(_theme)
     const _colorMap = registry.getColorMap()
     return {
@@ -86,12 +85,36 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     })
   }
 
+  async function loadLanguage(...langs: LanguageInput[]) {
+    await Promise.all(
+      langs.map(async lang =>
+        registry.loadLanguage(await normalizeGetter(lang)),
+      ),
+    )
+  }
+
+  async function loadTheme(...themes: ThemeInput[]) {
+    await Promise.all(
+      themes.map(async theme =>
+        registry.loadTheme(await normalizeGetter(theme)),
+      ),
+    )
+  }
+
   return {
     codeToThemedTokens,
     codeToHtml,
+    loadLanguage,
+    loadTheme,
+    getLoadedThemes: () => registry.getLoadedThemes(),
+    getLoadedLanguages: () => registry.getLoadedLanguages(),
   }
 }
 
 function isPlaintext(lang: string | null | undefined) {
   return !lang || ['plaintext', 'txt', 'text'].includes(lang)
+}
+
+async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
+  return typeof p === 'function' ? (p as any)() : p
 }
