@@ -31,9 +31,9 @@ for (const file of files) {
   }, { spaces: 2 })
 }
 
-const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__()=>import('./languages/${i.id}.json').then(r=>r.default as unknown as LanguageRegistration)__`]))
+const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__() => import('./languages/${i.id}.json') as unknown as Promise<{ default: LanguageRegistration }>__`]))
 
-const themes = Object.fromEntries(BUNDLED_THEMES.map(i => [i, `__()=>import('shiki/themes/${i}.json').then(r=>r.default as unknown as ThemeRegisterationRaw)__`]))
+const themes = Object.fromEntries(BUNDLED_THEMES.map(i => [i, `__() => import('shiki/themes/${i}.json') as unknown as Promise<{ default: ThemeRegisterationRaw }>__`]))
 
 await fs.writeFile(
   'src/vendor/langs.ts',

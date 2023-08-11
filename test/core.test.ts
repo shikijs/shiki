@@ -30,7 +30,7 @@ describe('should', () => {
       },
     })
 
-    await shiki.loadLanguage(() => import('../dist/languages/python.mjs').then(m => m.default))
+    await shiki.loadLanguage(() => import('../dist/languages/python.mjs'))
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))

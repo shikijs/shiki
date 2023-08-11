@@ -54,13 +54,13 @@ const shiki = await getHighlighter({
   themes: [nord],
   langs: [
     // Or a getter if you want to do chunk splitting
-    () => import('shikiji/languages/javascript.mjs').then(m => m.default),
+    () => import('shikiji/languages/javascript.mjs')
   ],
   loadWasm: getWasmInlined
 })
 
 // optionally, load themes and languages after creation
-await shiki.loadTheme(() => import('shikiji/themes/vitesse-light.mjs').then(m => m.default))
+await shiki.loadTheme(() => import('shikiji/themes/vitesse-light.mjs'))
 
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```

@@ -7,7 +7,8 @@ export type BuiltinLanguages = keyof typeof bundledLanguages
 export type BuiltinThemes = keyof typeof bundledThemes
 
 export type Awaitable<T> = T | Promise<T>
-export type MaybeGetter<T> = T | (() => Awaitable<T>)
+export type MaybeGetter<T> = T | (() => Awaitable<MaybeModule<T>>)
+export type MaybeModule<T> = T | { default: T }
 
 export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
 export type LanguageInput = MaybeGetter<LanguageRegistration>

@@ -23,8 +23,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     themes,
     langs,
   ] = await Promise.all([
-    Promise.all(options.themes.map(async t => typeof t === 'function' ? await t() : t)),
-    Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t)),
+    Promise.all(options.themes.map(normalizeGetter)),
+    Promise.all(options.langs.map(normalizeGetter)),
     typeof options.loadWasm === 'function'
       ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
       : options.loadWasm
@@ -116,5 +116,5 @@ function isPlaintext(lang: string | null | undefined) {
 }
 
 async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
-  return typeof p === 'function' ? (p as any)() : p
+  return typeof p === 'function' ? Promise.resolve((p as any)()).then(r => r.default || r) : p
 }
