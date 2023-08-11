@@ -1,9 +1,9 @@
-import { getHighlighterCore, loadWasm } from '../src/core'
+import { getHighlighterCore, loadWasm } from 'shikiji/core'
 
-import nord from '../dist/themes/nord.mjs'
-import js from '../dist/languages/javascript.mjs'
+import nord from 'shikiji/themes/nord.mjs'
+import js from 'shikiji/languages/javascript.mjs'
 
-// @ts-expect-error anyway
+// @ts-expect-error no types
 import wasm from '../dist/onig.wasm'
 
 await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
@@ -15,6 +15,12 @@ export default {
       langs: [js],
     })
 
-    return new Response(highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }))
+    return new Response(
+      highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }),
+      {
+        headers: {
+          'content-type': 'text/html;charset=UTF-8',
+        },
+      })
   },
 }

@@ -11,7 +11,7 @@ describe('should', () => {
   it('works', async () => {
     const shiki = await getHighlighterCore({
       themes: [nord],
-      langs: [js],
+      langs: [js as any],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
@@ -24,13 +24,13 @@ describe('should', () => {
   it('dynamic load theme and lang', async () => {
     const shiki = await getHighlighterCore({
       themes: [nord],
-      langs: [js],
+      langs: [js as any],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
     })
 
-    await shiki.loadLanguage(() => import('../dist/languages/python.mjs'))
+    await shiki.loadLanguage(() => import('../src/vendor/languages/python.json') as any)
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))
