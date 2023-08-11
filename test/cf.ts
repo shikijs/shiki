@@ -1,7 +1,7 @@
 import { getHighlighterCore, loadWasm } from 'shikiji/core'
 
 import nord from 'shikiji/themes/nord.mjs'
-import js from 'shikiji/languages/javascript.mjs'
+import js from 'shikiji/langs/javascript.mjs'
 
 // @ts-expect-error no types
 import wasm from '../dist/onig.wasm'

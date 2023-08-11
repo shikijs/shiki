@@ -22,7 +22,7 @@ npm install -D shikiji
 
 ## Usage
 
-Basic usage is pretty much the same as shiki, only that some APIs like singular `theme` options are dropped. Each theme and language file are dynamically imported ES modules, it would be the best to list the languages and themes explicitly to have the best performance.
+Basic usage is pretty much the same as `shiki`, only that some APIs are dropped, (for example, the singular `theme` options). Each theme and language file are dynamically imported ES modules, it would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -37,7 +37,7 @@ const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 
 ### Fine-grained Bundling
 
-When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you really want to control what to bundle, you can use the core and compose your own bundle.
+When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you want to control what to bundle size, you can use the core and compose your own bundle.
 
 ```js
 // `shikiji/core` entry does not include any themes or languages or the wasm binary.
@@ -50,17 +50,24 @@ import { getWasmInlined } from 'shikiji/wasm'
 import nord from 'shikiji/themes/nord.mjs'
 
 const shiki = await getHighlighterCore({
-  // instead of strings, you need to pass the imported module
-  themes: [nord],
+  themes: [
+    // instead of strings, you need to pass the imported module
+    nord,
+    // or a dynamic import if you want to do chunk splitting
+    import('shikiji/themes/vitesse-light.mjs')
+  ],
   langs: [
-    // Or a getter if you want to do chunk splitting
-    import('shikiji/langs/javascript.mjs')
+    import('shikiji/langs/javascript.mjs'),
+    // shikiji will try to interop the module with the default export
+    () => import('shikiji/langs/css.mjs'),
+    // or a getter that returns custom grammar
+    async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))
   ],
   loadWasm: getWasmInlined
 })
 
 // optionally, load themes and languages after creation
-await shiki.loadTheme(() => import('shikiji/themes/vitesse-light.mjs'))
+await shiki.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
 
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
@@ -76,10 +83,10 @@ import { getHighlighterCore, loadWasm } from 'shikiji/core'
 import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'
 
-// Import wasm as assets
+// import wasm as assets
 import wasm from 'shikiji/onig.wasm'
 
-// Load wasm outside of `fetch` so it can be reused
+// load wasm outside of `fetch` so it can be reused
 await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
 
 export default {
