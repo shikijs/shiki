@@ -15,10 +15,8 @@ describe('should', () => {
     const shiki = await getHighlighter({
       themes: [nord as any],
       langs: [js as any],
-      async getOnigurumaWasm() {
-        return {
-          instantiator: importObject => WebAssembly.instantiate(onig, importObject) as any,
-        }
+      loadWasm: {
+        instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
     })
 

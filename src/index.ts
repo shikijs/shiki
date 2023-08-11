@@ -9,7 +9,7 @@ export interface HighlighterOptions {
 }
 
 let _onigurumaPromise: Promise<{ data: ArrayBuffer }> | null = null
-export async function getOnigurumaInlined(): Promise<{ data: ArrayBuffer }> {
+export async function getWasmInlined(): Promise<{ data: ArrayBuffer }> {
   if (!_onigurumaPromise) {
     // @ts-expect-error anyway
     _onigurumaPromise = import('vscode-oniguruma/release/onig.wasm')
@@ -36,6 +36,6 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     ...options,
     themes: _themes,
     langs,
-    getOnigurumaWasm: getOnigurumaInlined,
+    loadWasm: getWasmInlined,
   })
 }

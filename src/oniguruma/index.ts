@@ -192,7 +192,7 @@ export class OnigString implements IOnigString {
 
   constructor(str: string) {
     if (!onigBinding)
-      throw new Error('Must invoke loadWASM first.')
+      throw new Error('Must invoke loadWasm first.')
 
     this._onigBinding = onigBinding
     this.content = str
@@ -256,7 +256,7 @@ export class OnigScanner implements IOnigScanner {
 
   constructor(patterns: string[]) {
     if (!onigBinding)
-      throw new Error('Must invoke loadWASM first.')
+      throw new Error('Must invoke loadWasm first.')
 
     const strPtrsArr: Pointer[] = []
     const strLenArr: number[] = []
@@ -363,7 +363,7 @@ interface IDataOptions extends ICommonOptions {
 }
 export type IOptions = IInstantiatorOptions | IDataOptions
 
-async function _loadWASM(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined): Promise<void> {
+async function _loadWasm(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined): Promise<void> {
   onigBinding = await OnigasmModuleFactory({
     print,
     instantiateWasm: (importObject) => {
@@ -394,10 +394,10 @@ function isResponse(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IO
 let initCalled = false
 let initPromise: Promise<void> | null = null
 
-export function loadWASM(loader: WebAssemblyInstantiator): Promise<void>
-export function loadWASM(options: IOptions): Promise<void>
-export function loadWASM(data: ArrayBufferView | ArrayBuffer | Response): Promise<void>
-export function loadWASM(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | IOptions): Promise<void> {
+export function loadWasm(loader: WebAssemblyInstantiator): Promise<void>
+export function loadWasm(options: IOptions): Promise<void>
+export function loadWasm(data: ArrayBufferView | ArrayBuffer | Response): Promise<void>
+export function loadWasm(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | IOptions): Promise<void> {
   if (initCalled) {
     // Already initialized
     return initPromise!
@@ -436,7 +436,7 @@ export function loadWASM(dataOrOptions: WebAssemblyInstantiator | ArrayBufferVie
     }
   }
 
-  initPromise = _loadWASM(loader, print)
+  initPromise = _loadWasm(loader, print)
   return initPromise
 }
 

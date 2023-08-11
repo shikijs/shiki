@@ -1,5 +1,5 @@
 import type { IOptions } from 'vscode-oniguruma'
-import { createOnigScanner, createOnigString, loadWASM } from './oniguruma'
+import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import type { CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { Resolver } from './resolver'
@@ -10,11 +10,11 @@ import { toShikiTheme } from './normalize'
 export interface CoreHighlighterOptions {
   themes: ThemeInput[]
   langs: LanguageInput[]
-  getOnigurumaWasm: (() => Promise<IOptions>) | false
+  loadWasm?: IOptions | (() => Promise<IOptions>)
 }
 
 export {
-  loadWASM,
+  loadWasm,
 }
 
 export async function getHighlighter(options: CoreHighlighterOptions) {
@@ -24,9 +24,11 @@ export async function getHighlighter(options: CoreHighlighterOptions) {
   ] = await Promise.all([
     Promise.all(options.themes.map(async t => toShikiTheme(typeof t === 'function' ? await t() : t))),
     Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t)),
-    typeof options.getOnigurumaWasm === 'function'
-      ? options.getOnigurumaWasm().then(r => loadWASM(r))
-      : undefined,
+    typeof options.loadWasm === 'function'
+      ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
+      : options.loadWasm
+        ? loadWasm(options.loadWasm)
+        : undefined,
   ] as const)
 
   const resolver = new Resolver(Promise.resolve({
