@@ -40,9 +40,9 @@ export default defineConfig([
       format: 'esm',
       entryFileNames: '[name].mjs',
       chunkFileNames: (f) => {
-        if (f.moduleIds.some(i => i.includes('/languages')))
+        if (f.moduleIds.some(i => i.match(/[\\\/]languages[\\\/]/)))
           return `languages/${f.name.replace('.tmLanguage', '')}.mjs`
-        else if (f.moduleIds.some(i => i.includes('/themes')))
+        else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
           return 'themes/[name].mjs'
         else if (f.name === 'onig')
           return 'onig.mjs'
@@ -59,7 +59,7 @@ export default defineConfig([
       dir: 'dist',
       format: 'esm',
       chunkFileNames: 'types/[name].d.mts',
-      entryFileNames: f => `${f.name.replace('src/', '')}.d.mts`,
+      entryFileNames: f => `${f.name.replace(/src[\\\/]/, '')}.d.mts`,
     },
     plugins: [
       dts({
