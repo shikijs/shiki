@@ -35,6 +35,7 @@
     "dist"
   ],
   "scripts": {
+    "prepare": "esno scripts/prepare.ts",
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -cw",
     "lint": "eslint .",

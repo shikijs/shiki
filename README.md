@@ -2,15 +2,16 @@
 
 [![NPM version](https://img.shields.io/npm/v/shikiji?color=a1b858&label=)](https://www.npmjs.com/package/shikiji)
 
-An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammar.
+An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammars.
 
 ## Changes
 
-- All assets served as pure-ESM, no more CDN, no more assets
+- All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets
 - Portable. No Node.js APIs, works in Cloudflare Workers
 - Drop CJS and IIFE build, focus on ESM
 - Bundles languages/themes on-demand
 - API simplified
+- Please don't hate me Pine 😜
 
 // WIP, documents will be updated later.
 
@@ -66,7 +67,7 @@ The `shikiji/core` entry does not include any themes or languages or the wasm bi
 ## TODO
 
 - [ ] Port more Shiki API
-- [ ] Load new themes and languages after creatation
+- [ ] Load new themes and languages after creation
 
 ## License
 
