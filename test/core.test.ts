@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getHighlighterCore } from '../src/core'
 
-import js from '../dist/languages/javascript.mjs'
+import js from '../dist/langs/javascript.mjs'
 import nord from '../dist/themes/nord.mjs'
 
 // @ts-expect-error no-types
@@ -24,7 +24,10 @@ describe('should', () => {
   it('dynamic load theme and lang', async () => {
     const shiki = await getHighlighterCore({
       themes: [nord],
-      langs: [js as any],
+      langs: [
+        js as any,
+        import('../dist/langs/c.mjs'),
+      ],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
@@ -33,7 +36,72 @@ describe('should', () => {
     await shiki.loadLanguage(() => import('../src/vendor/languages/python.json') as any)
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
+    expect(shiki.getLoadedLanguages())
+      .toMatchInlineSnapshot(`
+        [
+          "javascript",
+          "js",
+          "c",
+          "python",
+          "py",
+        ]
+      `)
+    expect(shiki.getLoadedThemes())
+      .toMatchInlineSnapshot(`
+        [
+          "nord",
+          "vitesse-light",
+        ]
+      `)
+
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))
       .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color: #ffffff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color: #998418\\">print</span><span style=\\"color: #393A34\\"> </span><span style=\\"color: #2F798A\\">1</span></span></code></pre>"')
+  })
+})
+
+describe('errors', () => {
+  it('throw on invalid theme', async () => {
+    const shiki = await getHighlighterCore({
+      themes: [nord],
+      langs: [js as any],
+    })
+
+    await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'invalid' }))
+      .toThrowErrorMatchingInlineSnapshot('"[shiki] Theme `invalid` not found"')
+  })
+
+  it('throw on invalid lang', async () => {
+    const shiki = await getHighlighterCore({
+      themes: [nord],
+      langs: [js as any],
+    })
+
+    await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
+      .toThrowErrorMatchingInlineSnapshot('"[shiki] Language `abc` not found"')
+  })
+
+  it('requires nested lang', async () => {
+    await expect(
+      () => getHighlighterCore({
+        themes: [nord],
+        langs: [
+          import('../dist/langs/cpp.mjs') as any,
+        ],
+      }),
+    )
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shiki] Missing languages `glsl`, `sql`, required by `cpp`"')
+  })
+
+  it('requires nested lang should work', async () => {
+    await getHighlighterCore({
+      themes: [nord],
+      langs: [
+        import('../dist/langs/cpp.mjs') as any,
+        import('../dist/langs/sql.mjs') as any,
+        import('../dist/langs/glsl.mjs') as any,
+        import('../dist/langs/c.mjs') as any,
+      ],
+    })
   })
 })

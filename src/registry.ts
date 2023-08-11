@@ -46,6 +46,9 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: LanguageRegistration) {
+    if (this._resolvedGrammars[lang.name])
+      return
+
     this._resolver.addLanguage(lang)
     const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
       if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
@@ -79,12 +82,20 @@ export class Registry extends TextMateRegistry {
     for (const lang of langs)
       this.resolveEmbeddedLanguages(lang)
 
-    const langsGraphArray = Array.from(this._langGraph.values())
+    const langsGraphArray = Array.from(this._langGraph.entries())
 
-    for (const lang of langsGraphArray)
+    const missingLangs = langsGraphArray.filter(([_, lang]) => !lang)
+    if (missingLangs.length) {
+      const dependents = langsGraphArray
+        .filter(([_, lang]) => lang && lang.embeddedLangs?.some(l => missingLangs.map(([name]) => name).includes(l)))
+        .filter(lang => !missingLangs.includes(lang))
+      throw new Error(`[shiki] Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
+    }
+
+    for (const [_, lang] of langsGraphArray)
       this._resolver.addLanguage(lang)
 
-    for (const lang of langsGraphArray)
+    for (const [_, lang] of langsGraphArray)
       await this.loadLanguage(lang)
   }
 
@@ -94,8 +105,7 @@ export class Registry extends TextMateRegistry {
 
   private resolveEmbeddedLanguages(lang: LanguageRegistration) {
     this._langMap[lang.name] = lang
-    if (!this._langGraph.has(lang.name))
-      this._langGraph.set(lang.name, lang)
+    this._langGraph.set(lang.name, lang)
     if (lang.embeddedLangs) {
       for (const embeddedLang of lang.embeddedLangs)
         this._langGraph.set(embeddedLang, this._langMap[embeddedLang])

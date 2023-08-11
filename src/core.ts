@@ -43,15 +43,14 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     },
   }), 'vscode-oniguruma', langs)
 
-  const registry = new Registry(resolver, themes, langs)
-  await registry.init()
+  const _registry = new Registry(resolver, themes, langs)
+  await _registry.init()
 
   const defaultTheme = themes[0].name
-  const defaultLang = registry.getLoadedLanguages()[0] || 'text'
 
   function codeToThemedTokens(
     code: string,
-    lang = defaultLang,
+    lang = 'text',
     theme = defaultTheme,
     options = { includeExplanation: true },
   ) {
@@ -59,15 +58,24 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
       const lines = code.split(/\r\n|\r|\n/)
       return [...lines.map(line => [{ content: line }])]
     }
-    const _grammar = registry.getGrammar(lang)
+    const _grammar = getLang(lang)
     const { _theme, _colorMap } = getTheme(theme)
     return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
   }
 
+  function getLang(name: string) {
+    const _lang = _registry.getGrammar(name)
+    if (!_lang)
+      throw new Error(`[shiki] Language \`${name}\` not found`)
+    return _lang
+  }
+
   function getTheme(name = defaultTheme) {
-    const _theme = registry.getTheme(name!)
-    registry.setTheme(_theme)
-    const _colorMap = registry.getColorMap()
+    const _theme = _registry.getTheme(name!)
+    if (!_theme)
+      throw new Error(`[shiki] Theme \`${name}\` not found`)
+    _registry.setTheme(_theme)
+    const _colorMap = _registry.getColorMap()
     return {
       _theme,
       _colorMap,
@@ -88,7 +96,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }
 
   async function loadLanguage(...langs: LanguageInput[]) {
-    await registry.loadLanguages(
+    await _registry.loadLanguages(
       await Promise.all(
         langs.map(async lang => await normalizeGetter(lang)),
       ),
@@ -98,7 +106,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   async function loadTheme(...themes: ThemeInput[]) {
     await Promise.all(
       themes.map(async theme =>
-        registry.loadTheme(await normalizeGetter(theme)),
+        _registry.loadTheme(await normalizeGetter(theme)),
       ),
     )
   }
@@ -108,8 +116,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     codeToHtml,
     loadLanguage,
     loadTheme,
-    getLoadedThemes: () => registry.getLoadedThemes(),
-    getLoadedLanguages: () => registry.getLoadedLanguages(),
+    getLoadedThemes: () => _registry.getLoadedThemes(),
+    getLoadedLanguages: () => _registry.getLoadedLanguages(),
   }
 }
 
@@ -118,5 +126,5 @@ function isPlaintext(lang: string | null | undefined) {
 }
 
 async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
-  return typeof p === 'function' ? Promise.resolve((p as any)()).then(r => r.default || r) : p
+  return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
 }
