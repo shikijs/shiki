@@ -54,7 +54,7 @@ const shiki = await getHighlighterCore({
   themes: [nord],
   langs: [
     // Or a getter if you want to do chunk splitting
-    () => import('shikiji/languages/javascript.mjs')
+    import('shikiji/langs/javascript.mjs')
   ],
   loadWasm: getWasmInlined
 })
@@ -74,7 +74,7 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundling](#fine-graine
 ```ts
 import { getHighlighterCore, loadWasm } from 'shikiji/core'
 import nord from 'shikiji/themes/nord.mjs'
-import js from 'shikiji/languages/javascript.mjs'
+import js from 'shikiji/langs/javascript.mjs'
 
 // Import wasm as assets
 import wasm from 'shikiji/onig.wasm'

@@ -16,7 +16,7 @@ const entries = [
   'src/core.ts',
   'src/types.ts',
   'src/themes.ts',
-  'src/languages.ts',
+  'src/langs.ts',
   'src/wasm.ts',
 ]
 
@@ -41,7 +41,7 @@ export default defineConfig([
       entryFileNames: '[name].mjs',
       chunkFileNames: (f) => {
         if (f.moduleIds.some(i => i.match(/[\\\/]languages[\\\/]/)))
-          return `languages/${f.name.replace('.tmLanguage', '')}.mjs`
+          return `langs/${f.name.replace('.tmLanguage', '')}.mjs`
         else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
           return 'themes/[name].mjs'
         else if (f.name === 'onig')
@@ -72,7 +72,7 @@ export default defineConfig([
         name: 'post',
         async buildEnd() {
           await fs.writeFile('dist/onig.d.ts', 'declare const binary: ArrayBuffer; export default binary;', 'utf-8')
-          const langs = await fg('dist/languages/*.mjs', { absolute: true })
+          const langs = await fg('dist/langs/*.mjs', { absolute: true })
           await Promise.all(
             langs.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
