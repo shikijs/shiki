@@ -14,6 +14,8 @@ export interface HighlighterCoreOptions {
   loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
 }
 
+export type HighlighterCore = ReturnType<typeof getHighlighterCore>
+
 export {
   loadWasm,
 }

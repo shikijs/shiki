@@ -1,6 +1,6 @@
 import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
 import { bundledThemes } from './vendor/themes'
-import { bundledLanguages } from './vendor/langs'
+import { bundledLanguages, bundledLanguagesBase } from './vendor/langs'
 import { getHighlighterCore } from './core'
 import { getWasmInlined } from './wasm'
 
@@ -16,6 +16,8 @@ export interface HighlighterOptions {
   themes?: (ThemeInput | BuiltinThemes)[]
   langs?: (LanguageInput | BuiltinLanguages)[]
 }
+
+export type Highlighter = ReturnType<typeof getHighlighter>
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   function resolveLang(lang: LanguageInput | BuiltinLanguages): LanguageInput {
@@ -40,7 +42,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
 
   const _themes = (options.themes ?? ['nord']).map(resolveTheme) as ThemeInput[]
 
-  const langs = (options.langs ?? Object.keys(bundledLanguages) as BuiltinLanguages[])
+  const langs = (options.langs ?? Object.keys(bundledLanguagesBase) as BuiltinLanguages[])
     .map(resolveLang)
 
   const core = await getHighlighterCore({
