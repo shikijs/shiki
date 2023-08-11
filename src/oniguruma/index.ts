@@ -349,8 +349,9 @@ export class OnigScanner implements IOnigScanner {
 }
 
 export interface WebAssemblyInstantiator {
-  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssembly.WebAssemblyInstantiatedSource>
+  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance>
 }
+
 interface ICommonOptions {
   print?(str: string): void
 }
@@ -362,22 +363,19 @@ interface IDataOptions extends ICommonOptions {
 }
 export type IOptions = IInstantiatorOptions | IDataOptions
 
-function _loadWASM(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined, resolve: () => void, reject: (err: any) => void): void {
-  OnigasmModuleFactory({
+async function _loadWASM(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined): Promise<void> {
+  onigBinding = await OnigasmModuleFactory({
     print,
-    instantiateWasm: (importObject, callback) => {
+    instantiateWasm: (importObject) => {
       if (typeof performance === 'undefined') {
         // performance.now() is not available in this environment, so use Date.now()
         const get_now = () => Date.now();
         (<any>importObject).env.emscripten_get_now = get_now;
         (<any>importObject).wasi_snapshot_preview1.emscripten_get_now = get_now
       }
-      loader(importObject).then(instantiatedSource => callback(instantiatedSource.instance), reject)
-      return {} // indicate async instantiation
+      // @ts-expect-error Can be a instantiator, or a instance
+      return loader(importObject).then(instantiatedSource => instantiatedSource.instance || instantiatedSource)
     },
-  }).then((binding) => {
-    onigBinding = binding
-    resolve()
   })
 }
 
@@ -396,9 +394,10 @@ function isResponse(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IO
 let initCalled = false
 let initPromise: Promise<void> | null = null
 
+export function loadWASM(loader: WebAssemblyInstantiator): Promise<void>
 export function loadWASM(options: IOptions): Promise<void>
 export function loadWASM(data: ArrayBufferView | ArrayBuffer | Response): Promise<void>
-export function loadWASM(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | IOptions): Promise<void> {
+export function loadWASM(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | IOptions): Promise<void> {
   if (initCalled) {
     // Already initialized
     return initPromise!
@@ -408,7 +407,10 @@ export function loadWASM(dataOrOptions: ArrayBufferView | ArrayBuffer | Response
   let loader: WebAssemblyInstantiator
   let print: ((str: string) => void) | undefined
 
-  if (isInstantiatorOptionsObject(dataOrOptions)) {
+  if (typeof dataOrOptions === 'function') {
+    loader = dataOrOptions
+  }
+  else if (isInstantiatorOptionsObject(dataOrOptions)) {
     loader = dataOrOptions.instantiator
     print = dataOrOptions.print
   }
@@ -434,15 +436,7 @@ export function loadWASM(dataOrOptions: ArrayBufferView | ArrayBuffer | Response
     }
   }
 
-  let resolve: () => void
-  let reject: (err: any) => void
-  initPromise = new Promise<void>((_resolve, _reject) => {
-    resolve = _resolve
-    reject = _reject
-  })
-
-  _loadWASM(loader, print, resolve!, reject!)
-
+  initPromise = _loadWASM(loader, print)
   return initPromise
 }
 

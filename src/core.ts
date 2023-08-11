@@ -10,7 +10,11 @@ import { toShikiTheme } from './normalize'
 export interface CoreHighlighterOptions {
   themes: ThemeInput[]
   langs: LanguageInput[]
-  getOnigurumaWasm: () => Promise<IOptions>
+  getOnigurumaWasm: (() => Promise<IOptions>) | false
+}
+
+export {
+  loadWASM,
 }
 
 export async function getHighlighter(options: CoreHighlighterOptions) {
@@ -20,7 +24,9 @@ export async function getHighlighter(options: CoreHighlighterOptions) {
   ] = await Promise.all([
     Promise.all(options.themes.map(async t => toShikiTheme(typeof t === 'function' ? await t() : t))),
     Promise.all(options.langs.map(async t => typeof t === 'function' ? await t() : t)),
-    options.getOnigurumaWasm().then(r => loadWASM(r)),
+    typeof options.getOnigurumaWasm === 'function'
+      ? options.getOnigurumaWasm().then(r => loadWASM(r))
+      : undefined,
   ] as const)
 
   const resolver = new Resolver(Promise.resolve({
