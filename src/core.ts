@@ -86,9 +86,9 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }
 
   async function loadLanguage(...langs: LanguageInput[]) {
-    await Promise.all(
-      langs.map(async lang =>
-        registry.loadLanguage(await normalizeGetter(lang)),
+    await registry.loadLanguages(
+      await Promise.all(
+        langs.map(async lang => await normalizeGetter(lang)),
       ),
     )
   }
