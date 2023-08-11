@@ -2,22 +2,19 @@ import type { BuiltinLanguages, BuiltinThemes, LanguageInput, ThemeInput } from 
 import { themes } from './vendor/themes'
 import { languages } from './vendor/langs'
 import { getHighlighter as getCoreHighlighter } from './core'
+import { loadWasm } from './oniguruma'
+import { getWasmInlined } from './wasm'
 
 export * from './types'
+
+export {
+  loadWasm,
+  getWasmInlined,
+}
 
 export interface HighlighterOptions {
   themes?: (ThemeInput | BuiltinThemes)[]
   langs?: (LanguageInput | BuiltinLanguages)[]
-}
-
-let _onigurumaPromise: Promise<{ data: ArrayBuffer }> | null = null
-export async function getWasmInlined(): Promise<{ data: ArrayBuffer }> {
-  if (!_onigurumaPromise) {
-    // @ts-expect-error anyway
-    _onigurumaPromise = import('vscode-oniguruma/release/onig.wasm')
-      .then(r => ({ data: r.default as ArrayBuffer }))
-  }
-  return _onigurumaPromise
 }
 
 export async function getHighlighter(options: HighlighterOptions = {}) {

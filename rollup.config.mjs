@@ -28,6 +28,7 @@ export default defineConfig([
     input: [
       'src/index.ts',
       'src/core.ts',
+      'src/wasm.ts',
     ],
     output: {
       dir: 'dist',
@@ -51,13 +52,14 @@ export default defineConfig([
     input: [
       'src/core.ts',
       'src/index.ts',
+      'src/wasm.ts',
       'src/types.ts',
     ],
     output: {
       dir: 'dist',
       format: 'esm',
-      chunkFileNames: 'types/[name].d.ts',
-      entryFileNames: f => `${f.name.replace('src/', '')}.d.ts`,
+      chunkFileNames: 'types/[name].d.mts',
+      entryFileNames: f => `${f.name.replace('src/', '')}.d.mts`,
     },
     plugins: [
       dts({
@@ -74,7 +76,7 @@ export default defineConfig([
           await Promise.all(
             langs.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { LanguageRegistration } from \'../types\';declare const reg: LanguageRegistration;export default reg',
+              'import { LanguageRegistration } from \'../types.mjs\';declare const reg: LanguageRegistration;export default reg',
               'utf-8',
             )),
           )
@@ -82,7 +84,7 @@ export default defineConfig([
           await Promise.all(
             themes.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { ThemeRegisterationRaw } from \'../types\';declare const reg: ThemeRegisterationRaw;export default reg',
+              'import { ThemeRegisterationRaw } from \'../types.mjs\';declare const reg: ThemeRegisterationRaw;export default reg',
               'utf-8',
             )),
           )

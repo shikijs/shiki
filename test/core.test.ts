@@ -1,10 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getHighlighter } from '../src/core'
 
-// @ts-expect-error no-types
 import js from '../dist/languages/javascript.mjs'
-
-// @ts-expect-error no-types
 import nord from '../dist/themes/nord.mjs'
 
 // @ts-expect-error no-types
@@ -13,8 +10,8 @@ import onig from '../dist/onig.mjs'
 describe('should', () => {
   it('exported', async () => {
     const shiki = await getHighlighter({
-      themes: [nord as any],
-      langs: [js as any],
+      themes: [nord],
+      langs: [js],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
