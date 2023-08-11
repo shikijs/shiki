@@ -7,11 +7,11 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 ## Changes
 
 - All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets.
-- Portable. Does not rely on Node.js APIs or the filesystem, works in any JavaScript runtime.
+- Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - Drop CJS and IIFE build, focus on ESM (or use bundlers).
 - Bundles languages/themes composedly.
-- Zero dependencies.
-- Simplified API.
+- Zero-dependencies.
+- Simplified APIs.
 - Please don't hate me Pine 😜
 
 ## Install
@@ -41,7 +41,7 @@ When importing `shikiji`, all the themes and languages are bundled as async chun
 
 ```js
 // `shikiji/core` entry does not include any themes or languages or the wasm binary.
-import { getHighlighter } from 'shikiji/core'
+import { getHighlighterCore } from 'shikiji/core'
 
 // `shikiji/wasm` contains the wasm binary inlined as base64 string.
 import { getWasmInlined } from 'shikiji/wasm'
@@ -49,7 +49,7 @@ import { getWasmInlined } from 'shikiji/wasm'
 // directly import the theme and language modules, only the ones you imported will be bundled.
 import nord from 'shikiji/themes/nord.mjs'
 
-const shiki = await getHighlighter({
+const shiki = await getHighlighterCore({
   // instead of strings, you need to pass the imported module
   themes: [nord],
   langs: [
@@ -93,10 +93,6 @@ export default {
   },
 }
 ```
-
-## TODO
-
-- [ ] Port more Shiki API
 
 ## License
 
