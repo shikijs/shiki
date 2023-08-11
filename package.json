@@ -17,8 +17,14 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": "./dist/index.mjs",
-    "./core": "./dist/core.mjs",
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./core": {
+      "import": "./dist/core.mjs",
+      "types": "./dist/core.d.ts"
+    },
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
   },
