@@ -43,6 +43,26 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "core": [
+        "./dist/core.d.mts"
+      ],
+      "wasm": [
+        "./dist/wasm.d.mts"
+      ],
+      "languages": [
+        "./dist/languages.d.mts"
+      ],
+      "themes": [
+        "./dist/themes.d.mts"
+      ],
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
