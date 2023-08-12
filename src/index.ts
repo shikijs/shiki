@@ -17,7 +17,7 @@ export interface HighlighterOptions {
   langs?: (LanguageInput | BuiltinLanguages)[]
 }
 
-export type Highlighter = ReturnType<typeof getHighlighter>
+export type Highlighter = Awaited<ReturnType<typeof getHighlighter>>
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   function resolveLang(lang: LanguageInput | BuiltinLanguages): LanguageInput {
