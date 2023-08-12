@@ -33,7 +33,7 @@ describe('should', () => {
       },
     })
 
-    await shiki.loadLanguage(() => import('../src/vendor/languages/python.json') as any)
+    await shiki.loadLanguage(() => import('../src/vendor/languages/python') as any)
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())
@@ -57,6 +57,25 @@ describe('should', () => {
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))
       .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color: #ffffff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color: #998418\\">print</span><span style=\\"color: #393A34\\"> </span><span style=\\"color: #2F798A\\">1</span></span></code></pre>"')
   })
+
+  it('requires nested lang', async () => {
+    const shiki = await getHighlighterCore({
+      themes: [nord],
+      langs: [
+        import('../dist/langs/cpp.mjs') as any,
+      ],
+    })
+
+    expect(shiki.getLoadedLanguages())
+      .toMatchInlineSnapshot(`
+        [
+          "sql",
+          "c",
+          "glsl",
+          "cpp",
+        ]
+      `)
+  })
 })
 
 describe('errors', () => {
@@ -78,30 +97,5 @@ describe('errors', () => {
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
       .toThrowErrorMatchingInlineSnapshot('"[shiki] Language `abc` not found"')
-  })
-
-  it('requires nested lang', async () => {
-    await expect(
-      () => getHighlighterCore({
-        themes: [nord],
-        langs: [
-          import('../dist/langs/cpp.mjs') as any,
-        ],
-      }),
-    )
-      .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shiki] Missing languages `glsl`, `sql`, required by `cpp`"')
-  })
-
-  it('requires nested lang should work', async () => {
-    await getHighlighterCore({
-      themes: [nord],
-      langs: [
-        import('../dist/langs/cpp.mjs') as any,
-        import('../dist/langs/sql.mjs') as any,
-        import('../dist/langs/glsl.mjs') as any,
-        import('../dist/langs/c.mjs') as any,
-      ],
-    })
   })
 })

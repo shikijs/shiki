@@ -21,12 +21,18 @@ export {
 }
 
 export async function getHighlighterCore(options: HighlighterCoreOptions) {
+  async function resolveLangs(langs: LanguageInput[]) {
+    return Array.from(new Set((await Promise.all(
+      langs.map(async lang => await normalizeGetter(lang).then(r => Array.isArray(r) ? r : [r])),
+    )).flat()))
+  }
+
   const [
     themes,
     langs,
   ] = await Promise.all([
     Promise.all(options.themes.map(normalizeGetter)),
-    Promise.all(options.langs.map(normalizeGetter)),
+    resolveLangs(options.langs),
     typeof options.loadWasm === 'function'
       ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
       : options.loadWasm
@@ -96,11 +102,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }
 
   async function loadLanguage(...langs: LanguageInput[]) {
-    await _registry.loadLanguages(
-      await Promise.all(
-        langs.map(async lang => await normalizeGetter(lang)),
-      ),
-    )
+    await _registry.loadLanguages(await resolveLangs(langs))
   }
 
   async function loadTheme(...themes: ThemeInput[]) {

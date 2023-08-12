@@ -43,4 +43,45 @@ describe('should', () => {
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'min-dark' }))
       .toMatchInlineSnapshot('"<pre class=\\"shiki min-dark\\" style=\\"background-color: #1f1f1f\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color: #B392F0\\">print </span><span style=\\"color: #F8F8F8\\">1</span></span></code></pre>"')
   })
+
+  it('requires nested lang', async () => {
+    const shiki = await getHighlighter({
+      themes: ['nord'],
+      langs: [
+        'vue',
+      ],
+    })
+
+    expect(shiki.getLoadedLanguages())
+      .toMatchInlineSnapshot(`
+        [
+          "javascript",
+          "js",
+          "css",
+          "sass",
+          "stylus",
+          "styl",
+          "typescript",
+          "ts",
+          "jsx",
+          "tsx",
+          "json",
+          "jsonc",
+          "json5",
+          "yaml",
+          "yml",
+          "toml",
+          "html",
+          "scss",
+          "coffee",
+          "less",
+          "graphql",
+          "markdown",
+          "md",
+          "pug",
+          "jade",
+          "vue",
+        ]
+      `)
+  })
 })

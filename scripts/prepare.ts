@@ -21,7 +21,7 @@ for (const file of files) {
     continue
   }
 
-  await fs.writeJSON(`./src/vendor/languages/${lang.id}.json`, {
+  const json = {
     ...content,
     name: content.name || lang.id,
     scopeName: content.scopeName || lang.scopeName,
@@ -30,10 +30,34 @@ for (const file of files) {
     embeddedLangs: lang.embeddedLangs,
     balancedBracketSelectors: lang.balancedBracketSelectors,
     unbalancedBracketSelectors: lang.unbalancedBracketSelectors,
-  }, { spaces: 2 })
+  }
+
+  // Do not include everything for markdown
+  if (lang.id === 'markdown')
+    json.embeddedLangs = []
+
+  const embedded = (json.embeddedLangs || []) as string[]
+
+  await fs.writeFile(`./src/vendor/languages/${lang.id}.ts`,
+    `
+import { LanguageRegistration } from '../../types'
+
+${embedded.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
+
+const lang = Object.freeze(${JSON.stringify(json)}) as unknown as LanguageRegistration
+
+export default [
+${[
+  ...embedded.map(i => `  ...${i.replace(/[^\w]/g, '_')}`),
+  '  lang',
+].join(',\n') || ''}
+]
+`,
+    'utf-8',
+  )
 }
 
-const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__(() => import('./languages/${i.id}.json')) as unknown as DynamicLangReg__`]))
+const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__(() => import('./languages/${i.id}')) as unknown as DynamicLangReg__`]))
 
 const langAlias = Object.fromEntries(BUNDLED_LANGUAGES.flatMap(i =>
   (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
@@ -45,7 +69,7 @@ await fs.writeFile(
   'src/vendor/langs.ts',
   `import type { LanguageRegistration } from '../types'
 
-type DynamicLangReg = () => Promise<{ default: LanguageRegistration }>
+type DynamicLangReg = () => Promise<{ default: LanguageRegistration[] }>
 
 export const bundledLanguagesBase = ${JSON.stringify(languages, null, 2).replace(/"__|__"/g, '')}
 

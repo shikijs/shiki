@@ -27,7 +27,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
         throw new Error(`[shikiji] Unknown language: ${lang}`)
       return bundle
     }
-    return lang
+    return lang as LanguageInput
   }
 
   function resolveTheme(theme: ThemeInput | BuiltinThemes): ThemeInput {
@@ -55,7 +55,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
   return {
     ...core,
     codeToHtml(code: string, options: CodeToHtmlOptions<BuiltinLanguages, BuiltinThemes> = {}) {
-      return core.codeToHtml(code, options)
+      return core.codeToHtml(code, options as CodeToHtmlOptions)
     },
     loadLanguage(...langs: (LanguageInput | BuiltinLanguages)[]) {
       return core.loadLanguage(...langs.map(resolveLang))
