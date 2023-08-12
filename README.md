@@ -101,6 +101,18 @@ export default {
 }
 ```
 
+## Bundle Size
+
+You can inspect the bundle size in detail on [pkg-size.dev/shikiji](https://pkg-size.dev/shikiji).
+
+As of `v0.2.2`, measured at 12th, August 2023:
+
+| Bundle | Size (minified) | Size (gzip) | Notes |
+| --- | ---: | ---: | --- |
+| `shikiji` | 5.9 MB | 1.2 MB | includes all themes and languages |
+| `shikiji/core` | 75 KB | 23 KB | no themes or languages, compose on your own |
+| `shikiji/wasm` | 623 KB | 231 KB | wasm binary inlined as base64 string |
+
 ## License
 
 [MIT](./LICENSE)
