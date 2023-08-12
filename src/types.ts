@@ -38,7 +38,7 @@ export interface LanguageRegistration extends IRawGrammar {
 }
 
 export interface CodeToHtmlOptions<Languages = string, Themes = string> {
-  lang?: Languages
+  lang?: Languages | 'text' | 'plaintext' | 'txt'
   theme?: Themes
   lineOptions?: LineOption[]
 }
