@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getHighlighterCore } from '../src/core'
 
-import js from '../dist/langs/javascript.mjs'
+import js from '../src/assets/langs/javascript'
 import nord from '../dist/themes/nord.mjs'
 
 // @ts-expect-error no-types
@@ -25,15 +25,15 @@ describe('should', () => {
     const shiki = await getHighlighterCore({
       themes: [nord],
       langs: [
-        js as any,
-        import('../dist/langs/c.mjs'),
+        js,
+        import('../src/assets/langs/c'),
       ],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(onig, obj),
       },
     })
 
-    await shiki.loadLanguage(() => import('../src/vendor/languages/python') as any)
+    await shiki.loadLanguage(() => import('../src/assets/langs/python'))
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())
@@ -62,7 +62,7 @@ describe('should', () => {
     const shiki = await getHighlighterCore({
       themes: [nord],
       langs: [
-        import('../dist/langs/cpp.mjs') as any,
+        import('../src/assets/langs/cpp'),
       ],
     })
 

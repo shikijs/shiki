@@ -155,7 +155,7 @@ As of `v0.2.2`, measured at 12th, August 2023:
 
 ## What's Next?
 
-Shikiji is a usable exploration of improving the experience of using `shiki` in various of scenarios. It's intended to push some of the ideas back to `shiki`, and eventually, this package might not be needed. Before that, you can use it as a replacement for `shiki` if you have similar requirements. It would be great to hear your feedbacks and suggestions in the meantime!
+Shikiji is a usable exploration of improving the experience of using `shiki` in various of scenarios. It's intended to [push some of the ideas back to `shiki`](https://github.com/shikijs/shiki/issues/510), and eventually, this package might not be needed. Before that, you can use it as a replacement for `shiki` if you have similar requirements. It would be great to hear your feedback and suggestions in the meantime!
 
 ## License
 

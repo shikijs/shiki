@@ -40,7 +40,7 @@ export default defineConfig([
       format: 'esm',
       entryFileNames: '[name].mjs',
       chunkFileNames: (f) => {
-        if (f.moduleIds.some(i => i.match(/[\\\/]languages[\\\/]/)))
+        if (f.moduleIds.some(i => i.match(/[\\\/]langs[\\\/]/)))
           return `langs/${f.name.replace('.tmLanguage', '')}.mjs`
         else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
           return 'themes/[name].mjs'
@@ -76,7 +76,7 @@ export default defineConfig([
           await Promise.all(
             langs.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { LanguageRegistration } from \'../types.mjs\';declare const reg: LanguageRegistration;export default reg',
+              'import { LanguageRegistration } from \'../types.mjs\';declare const reg: LanguageRegistration[];export default reg',
               'utf-8',
             )),
           )

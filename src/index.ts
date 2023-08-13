@@ -1,6 +1,6 @@
 import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
-import { bundledThemes } from './vendor/themes'
-import { bundledLanguages, bundledLanguagesBase } from './vendor/langs'
+import { bundledThemes } from './assets/themes'
+import { bundledLanguages, bundledLanguagesBase } from './assets/langs'
 import { getHighlighterCore } from './core'
 import { getWasmInlined } from './wasm'
 

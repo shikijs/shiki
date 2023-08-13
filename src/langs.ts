@@ -1,1 +1,1 @@
-export * from './vendor/langs'
+export * from './assets/langs'

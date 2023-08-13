@@ -1,6 +1,6 @@
 import type { IRawGrammar, IRawTheme } from 'vscode-textmate'
-import type { bundledLanguages } from './vendor/langs'
-import type { bundledThemes } from './vendor/themes'
+import type { bundledLanguages } from './assets/langs'
+import type { bundledThemes } from './assets/themes'
 import type { IThemedToken } from './themedTokenizer'
 
 export type BuiltinLanguages = keyof typeof bundledLanguages
