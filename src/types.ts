@@ -1,7 +1,7 @@
 import type { IRawGrammar, IRawTheme } from 'vscode-textmate'
-import type { bundledLanguages } from './assets/langs'
-import type { bundledThemes } from './assets/themes'
-import type { IThemedToken } from './themedTokenizer'
+import type { bundledLanguages } from './langs'
+import type { bundledThemes } from './themes'
+import type { FontStyle } from './core/stackElementMetadata'
 
 export type BuiltinLanguages = keyof typeof bundledLanguages
 export type BuiltinThemes = keyof typeof bundledThemes
@@ -124,16 +124,101 @@ interface CodeElementProps extends ElementProps {}
 
 interface LineElementProps extends ElementProps {
   className: string
-  lines: IThemedToken[][]
-  line: IThemedToken[]
+  lines: ThemedToken[][]
+  line: ThemedToken[]
   index: number
 }
 
 interface TokenElementProps extends ElementProps {
   style: string
-  tokens: IThemedToken[]
-  token: IThemedToken
+  tokens: ThemedToken[]
+  token: ThemedToken
   index: number
+}
+
+export interface ThemedTokenScopeExplanation {
+  scopeName: string
+  themeMatches: any[]
+}
+
+export interface ThemedTokenExplanation {
+  content: string
+  scopes: ThemedTokenScopeExplanation[]
+}
+
+/**
+ * A single token with color, and optionally with explanation.
+ *
+ * For example:
+ *
+ * {
+ *   "content": "shiki",
+ *   "color": "#D8DEE9",
+ *   "explanation": [
+ *     {
+ *       "content": "shiki",
+ *       "scopes": [
+ *         {
+ *           "scopeName": "source.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.objectliteral.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.object.member.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "meta.array.literal.js",
+ *           "themeMatches": []
+ *         },
+ *         {
+ *           "scopeName": "variable.other.object.js",
+ *           "themeMatches": [
+ *             {
+ *               "name": "Variable",
+ *               "scope": "variable.other",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             },
+ *             {
+ *               "name": "[JavaScript] Variable Other Object",
+ *               "scope": "source.js variable.other.object",
+ *               "settings": {
+ *                 "foreground": "#D8DEE9"
+ *               }
+ *             }
+ *           ]
+ *         }
+ *       ]
+ *     }
+ *   ]
+ * }
+ *
+ */
+export interface ThemedToken {
+  /**
+   * The content of the token
+   */
+  content: string
+  /**
+   * 6 or 8 digit hex code representation of the token's color
+   */
+  color?: string
+  /**
+   * Font style of token. Can be None/Italic/Bold/Underline
+   */
+  fontStyle?: FontStyle
+  /**
+   * Explanation of
+   *
+   * - token text's matching scopes
+   * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
+   */
+  explanation?: ThemedTokenExplanation[]
 }
 
 export {}

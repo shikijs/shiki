@@ -1,6 +1,6 @@
 import type { IOnigLib, RegistryOptions } from 'vscode-textmate'
 
-import type { LanguageRegistration } from './types'
+import type { LanguageRegistration } from '../types'
 
 export class Resolver implements RegistryOptions {
   private readonly languageMap: { [langIdOrAlias: string]: LanguageRegistration } = {}

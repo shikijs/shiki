@@ -1,6 +1,6 @@
 import type { IGrammar, IGrammarConfiguration } from 'vscode-textmate'
 import { Registry as TextMateRegistry } from 'vscode-textmate'
-import type { LanguageRegistration, ThemeRegisteration, ThemeRegisterationRaw } from './types'
+import type { LanguageRegistration, ThemeRegisteration, ThemeRegisterationRaw } from '../types'
 import type { Resolver } from './resolver'
 import { toShikiTheme } from './normalize'
 

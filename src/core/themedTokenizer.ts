@@ -5,93 +5,9 @@
 
 import type { IGrammar, IRawTheme } from 'vscode-textmate'
 import { INITIAL } from 'vscode-textmate'
+import type { ThemedToken, ThemedTokenExplanation, ThemedTokenScopeExplanation } from '../types'
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
-
-export interface IThemedTokenScopeExplanation {
-  scopeName: string
-  themeMatches: any[]
-}
-
-export interface IThemedTokenExplanation {
-  content: string
-  scopes: IThemedTokenScopeExplanation[]
-}
-
-/**
- * A single token with color, and optionally with explanation.
- *
- * For example:
- *
- * {
- *   "content": "shiki",
- *   "color": "#D8DEE9",
- *   "explanation": [
- *     {
- *       "content": "shiki",
- *       "scopes": [
- *         {
- *           "scopeName": "source.js",
- *           "themeMatches": []
- *         },
- *         {
- *           "scopeName": "meta.objectliteral.js",
- *           "themeMatches": []
- *         },
- *         {
- *           "scopeName": "meta.object.member.js",
- *           "themeMatches": []
- *         },
- *         {
- *           "scopeName": "meta.array.literal.js",
- *           "themeMatches": []
- *         },
- *         {
- *           "scopeName": "variable.other.object.js",
- *           "themeMatches": [
- *             {
- *               "name": "Variable",
- *               "scope": "variable.other",
- *               "settings": {
- *                 "foreground": "#D8DEE9"
- *               }
- *             },
- *             {
- *               "name": "[JavaScript] Variable Other Object",
- *               "scope": "source.js variable.other.object",
- *               "settings": {
- *                 "foreground": "#D8DEE9"
- *               }
- *             }
- *           ]
- *         }
- *       ]
- *     }
- *   ]
- * }
- *
- */
-export interface IThemedToken {
-  /**
-   * The content of the token
-   */
-  content: string
-  /**
-   * 6 or 8 digit hex code representation of the token's color
-   */
-  color?: string
-  /**
-   * Font style of token. Can be None/Italic/Bold/Underline
-   */
-  fontStyle?: FontStyle
-  /**
-   * Explanation of
-   *
-   * - token text's matching scopes
-   * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
-   */
-  explanation?: IThemedTokenExplanation[]
-}
 
 export function tokenizeWithTheme(
   theme: IRawTheme,
@@ -99,12 +15,12 @@ export function tokenizeWithTheme(
   fileContents: string,
   grammar: IGrammar,
   options: { includeExplanation?: boolean },
-): IThemedToken[][] {
+): ThemedToken[][] {
   const lines = fileContents.split(/\r\n|\r|\n/)
 
   let ruleStack = INITIAL
-  let actual: IThemedToken[] = []
-  const final: IThemedToken[][] = []
+  let actual: ThemedToken[] = []
+  const final: ThemedToken[][] = []
 
   for (let i = 0, len = lines.length; i < len; i++) {
     const line = lines[i]
@@ -138,7 +54,7 @@ export function tokenizeWithTheme(
       const foregroundColor = colorMap[foreground]
       const fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
-      const explanation: IThemedTokenExplanation[] = []
+      const explanation: ThemedTokenExplanation[] = []
       if (options.includeExplanation) {
         let offset = 0
         while (startIndex + offset < nextStartIndex) {
@@ -173,8 +89,8 @@ export function tokenizeWithTheme(
   return final
 }
 
-function explainThemeScopes(theme: IRawTheme, scopes: string[]): IThemedTokenScopeExplanation[] {
-  const result: IThemedTokenScopeExplanation[] = []
+function explainThemeScopes(theme: IRawTheme, scopes: string[]): ThemedTokenScopeExplanation[] {
+  const result: ThemedTokenScopeExplanation[] = []
   for (let i = 0, len = scopes.length; i < len; i++) {
     const parentScopes = scopes.slice(0, i)
     const scope = scopes[i]

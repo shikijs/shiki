@@ -1,5 +1,5 @@
 import type { IRawTheme } from 'vscode-textmate'
-import type { ThemeRegisteration, ThemeRegisterationRaw } from './types'
+import type { ThemeRegisteration, ThemeRegisterationRaw } from '../types'
 
 export function toShikiTheme(rawTheme: ThemeRegisterationRaw | ThemeRegisteration): ThemeRegisteration {
   const type = (<any>rawTheme).type || 'dark'

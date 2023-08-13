@@ -1,6 +1,5 @@
+import type { ElementsOptions, HtmlRendererOptions, LineOption, ThemedToken } from '../types'
 import { FontStyle } from './stackElementMetadata'
-import type { IThemedToken } from './themedTokenizer'
-import type { ElementsOptions, HtmlRendererOptions, LineOption } from './types'
 
 const defaultElements: ElementsOptions = {
   pre({ className, style, children }) {
@@ -17,7 +16,7 @@ const defaultElements: ElementsOptions = {
   },
 }
 
-export function renderToHtml(lines: IThemedToken[][], options: HtmlRendererOptions = {}) {
+export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
