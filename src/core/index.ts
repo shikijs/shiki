@@ -1,11 +1,12 @@
-import type { CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput } from '../types'
+import type { CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput, ThemedToken } from '../types'
 import type { OnigurumaLoadOptions } from '../oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
-import { renderToHtml } from './renderer'
+import { renderToHtml } from './renderer-html'
 import { isPlaintext } from './utils'
+import { renderToHtmlDualThemes } from './renderer-html-dual-themes'
 
 export interface HighlighterCoreOptions {
   themes: ThemeInput[]
@@ -56,7 +57,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   function codeToThemedTokens(
     code: string,
     options: CodeToThemedTokensOptions = {},
-  ) {
+  ): ThemedToken[][] {
     const {
       lang = 'text',
       theme = defaultTheme,
@@ -107,6 +108,35 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     })
   }
 
+  function codeToHtmlDualThemes(code: string, options: CodeToHtmlDualThemesOptions): string {
+    const {
+      defaultColor = 'light',
+      cssVariableName = '--shiki-dark',
+    } = options
+
+    const tokens1 = codeToThemedTokens(code, {
+      ...options,
+      theme: defaultColor === 'light' ? options.theme.light : options.theme.dark,
+      includeExplanation: false,
+    })
+
+    const tokens2 = codeToThemedTokens(code, {
+      ...options,
+      theme: defaultColor === 'light' ? options.theme.dark : options.theme.light,
+      includeExplanation: false,
+    })
+
+    const { _theme: _theme1 } = getTheme(defaultColor === 'light' ? options.theme.light : options.theme.dark)
+    const { _theme: _theme2 } = getTheme(defaultColor === 'light' ? options.theme.dark : options.theme.light)
+
+    return renderToHtmlDualThemes(tokens1, tokens2, cssVariableName, {
+      fg: `${_theme1.fg};${cssVariableName}:${_theme2.fg}`,
+      bg: `${_theme1.bg};${cssVariableName}-bg:${_theme2.bg}`,
+      lineOptions: options?.lineOptions,
+      themeName: `shiki-dual-themes ${_theme1.name}--${_theme2.name}`,
+    })
+  }
+
   async function loadLanguage(...langs: LanguageInput[]) {
     await _registry.loadLanguages(await resolveLangs(langs))
   }
@@ -122,6 +152,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   return {
     codeToThemedTokens,
     codeToHtml,
+    codeToHtmlDualThemes,
     loadLanguage,
     loadTheme,
     getLoadedThemes: () => _registry.getLoadedThemes(),

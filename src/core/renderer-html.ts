@@ -18,6 +18,7 @@ const defaultElements: ElementsOptions = {
 
 export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOptions = {}) {
   const bg = options.bg || '#fff'
+  const fg = options.bg || '#000'
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
 
@@ -38,7 +39,7 @@ export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOption
 
   return h(
     'pre',
-    { className: `shiki ${options.themeName || ''}`, style: `background-color: ${bg}` },
+    { className: `shiki ${options.themeName || ''}`, style: `background-color: ${bg}; color: ${fg}` },
     [
       options.langId ? `<div class="language-id">${options.langId}</div>` : '',
       h(

@@ -47,6 +47,23 @@ export interface CodeToHtmlOptions<Languages = string, Themes = string> {
   lineOptions?: LineOption[]
 }
 
+export interface CodeToHtmlDualThemesOptions<Languages = string, Themes = string> {
+  lang?: Languages | PlainTextLanguage
+  theme: {
+    light: Themes
+    dark: Themes
+  }
+  /**
+   * @default 'light'
+   */
+  defaultColor?: 'light' | 'dark'
+  /**
+   * @default '--shiki-dark'
+   */
+  cssVariableName?: string
+  lineOptions?: LineOption[]
+}
+
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
   lang?: Languages | PlainTextLanguage
   theme?: Themes

@@ -10,6 +10,7 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - Drop CJS and IIFE build, focus on ESM (or you can use bundlers).
 - Bundles languages/themes composedly.
+- Light/Dark dual themes support.
 - Zero-dependencies.
 - Simplified APIs.
 - Please don't hate me Pine 😜 ([What's Next?](#whats-next))
@@ -51,6 +52,12 @@ import { codeToHtml } from 'shikiji'
 const code1 = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
 const code2 = await codeToHtml('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
 ```
+
+Currently supports:
+
+- `codeToThemedTokens`
+- `codeToHtml`
+- `codeToHtmlDualThemes`
 
 Internally they maintains a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
 
@@ -153,6 +160,82 @@ export default {
 
     return new Response(highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }))
   },
+}
+```
+
+## Additional Features
+
+### Light/Dark Dual Themes
+
+`shikiji` added an experimental light/dark dual themes support. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, `shikiji`'s dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
+
+Use `codeToHtmlDualThemes` to render the code with dual themes:
+
+```js
+import { getHighlighter } from 'shikiji'
+
+const shiki = await getHighlighter({
+  themes: ['nord', 'min-light'],
+  langs: ['javascript'],
+})
+
+const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
+  lang: 'javascript',
+  theme: {
+    light: 'min-light',
+    dark: 'nord',
+  }
+})
+```
+
+The following HTML will be generated:
+
+```html
+<pre
+  class="shiki shiki-dual-themes min-light--nord"
+  style="background-color: #ffffff;--shiki-dark-bg:#2e3440ff;color: #ffffff;--shiki-dark-bg:#2e3440ff"
+  tabindex="0"
+>
+  <code>
+    <span class="line">
+      <span style="color:#1976D2;--shiki-dark:#D8DEE9">console</span>
+      <span style="color:#6F42C1;--shiki-dark:#ECEFF4">.</span>
+      <span style="color:#6F42C1;--shiki-dark:#88C0D0">log</span>
+      <span style="color:#24292EFF;--shiki-dark:#D8DEE9FF">(</span>
+      <span style="color:#22863A;--shiki-dark:#ECEFF4">&quot;</span>
+      <span style="color:#22863A;--shiki-dark:#A3BE8C">hello</span>
+      <span style="color:#22863A;--shiki-dark:#ECEFF4">&quot;</span>
+      <span style="color:#24292EFF;--shiki-dark:#D8DEE9FF">)</span>
+    </span>
+  </code>
+</pre>
+```
+
+To make it reactive to your site's theme, you need to add a short CSS snippet:
+
+###### Query-based Dark Mode
+
+```css
+@media (prefers-color-scheme: dark) {
+  .shiki {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
+  }
+  .shiki span {
+    color: var(--shiki-dark) !important;
+  }
+}
+```
+
+###### Class-based Dark Mode
+
+```css
+html.dark .shiki {
+  background-color: var(--shiki-dark-bg) !important;
+  color: var(--shiki-dark) !important;
+}
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
 }
 ```
 

@@ -1,4 +1,4 @@
-import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlOptions, CodeToThemedTokensOptions, PlainTextLanguage, RequireKeys } from '../types'
+import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, PlainTextLanguage, RequireKeys } from '../types'
 import { getHighlighter } from './highlighter'
 import type { Highlighter } from './highlighter'
 
@@ -42,4 +42,16 @@ export async function codeToHtml(code: string, options: RequireKeys<CodeToHtmlOp
 export async function codeToThemedTokens(code: string, options: RequireKeys<CodeToThemedTokensOptions<BuiltinLanguages, BuiltinThemes>, 'theme' | 'lang'>) {
   const shiki = await getShikiWithThemeLang(options)
   return shiki.codeToThemedTokens(code, options)
+}
+
+/**
+ * Shorthand for `codeToHtmlDualThemes` with auto-loaded theme and language.
+ * A singleton highlighter it maintained internally.
+ *
+ * Differences from `shiki.codeToHtmlDualThemes()`, this function is async.
+ */
+export async function codeToHtmlDualThemes(code: string, options: RequireKeys<CodeToHtmlDualThemesOptions<BuiltinLanguages, BuiltinThemes>, 'theme' | 'lang'>) {
+  const shiki = await getShikiWithThemeLang({ lang: options.lang, theme: options.theme.light })
+  await shiki.loadTheme(options.theme.dark)
+  return shiki.codeToHtmlDualThemes(code, options)
 }
