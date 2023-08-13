@@ -1,4 +1,4 @@
-import type { HtmlRendererOptions, ThemedToken } from '../types'
+import type { HtmlRendererOptions, ThemeRegisteration, ThemedToken } from '../types'
 import { renderToHtml } from './renderer-html'
 
 /**
@@ -55,28 +55,31 @@ export function _syncThemedTokens(...themes: ThemedToken[][][]) {
 }
 
 export function renderToHtmlDualThemes(
-  tokens1: ThemedToken[][],
-  tokens2: ThemedToken[][],
-  cssName = '--shiki-dark',
+  themes: [string, ThemedToken[][], ThemeRegisteration][],
+  cssVariablePrefix = '--shiki-',
   options: HtmlRendererOptions = {},
 ) {
-  const [synced1, synced2] = _syncThemedTokens(tokens1, tokens2)
+  const synced = _syncThemedTokens(...themes.map(t => t[1]))
 
   const merged: ThemedToken[][] = []
-  for (let i = 0; i < synced1.length; i++) {
-    const line1 = synced1[i]
-    const line2 = synced2[i]
+  for (let i = 0; i < synced[0].length; i++) {
+    const lines = synced.map(t => t[i])
     const lineout: any[] = []
     merged.push(lineout)
-    for (let j = 0; j < line1.length; j++) {
-      const token1 = line1[j]
-      const token2 = line2[j]
+    for (let j = 0; j < lines[0].length; j++) {
+      const tokens = lines.map(t => t[j])
+      const colors = tokens.map((t, idx) => `${idx === 0 ? '' : `${cssVariablePrefix + themes[idx][0]}:`}${t.color || 'inherit'}`).join(';')
       lineout.push({
-        ...token1,
-        color: `${token1.color || 'inherit'};${cssName}: ${token2.color || 'inherit'}`,
+        ...tokens[0],
+        color: colors,
       })
     }
   }
 
-  return renderToHtml(merged, options)
+  return renderToHtml(merged, {
+    ...options,
+    fg: themes.map((t, idx) => (idx === 0 ? '' : `${cssVariablePrefix + t[0]}:`) + t[2].fg).join(';'),
+    bg: themes.map((t, idx) => (idx === 0 ? '' : `${cssVariablePrefix + t[0]}-bg:`) + t[2].bg).join(';'),
+    themeName: `shiki-dual-themes ${themes.map(t => t[2].name).join(' ')}`,
+  })
 }

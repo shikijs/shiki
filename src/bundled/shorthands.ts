@@ -51,10 +51,10 @@ export async function codeToThemedTokens(code: string, options: RequireKeys<Code
  *
  * Differences from `shiki.codeToHtmlDualThemes()`, this function is async.
  */
-export async function codeToHtmlDualThemes(code: string, options: RequireKeys<CodeToHtmlDualThemesOptions<BuiltinLanguages, BuiltinThemes>, 'theme' | 'lang'>) {
+export async function codeToHtmlDualThemes(code: string, options: RequireKeys<CodeToHtmlDualThemesOptions<BuiltinLanguages, BuiltinThemes>, 'themes' | 'lang'>) {
   const shiki = await getShikiWithThemeLang({
     lang: options.lang,
-    theme: [options.theme.light, options.theme.dark],
+    theme: Object.values(options.themes).filter(Boolean) as BuiltinThemes[],
   })
   return shiki.codeToHtmlDualThemes(code, options)
 }

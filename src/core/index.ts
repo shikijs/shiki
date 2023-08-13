@@ -1,4 +1,4 @@
-import type { CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput, ThemedToken } from '../types'
+import type { CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput, ThemeRegisteration, ThemedToken } from '../types'
 import type { OnigurumaLoadOptions } from '../oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
@@ -111,29 +111,25 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   function codeToHtmlDualThemes(code: string, options: CodeToHtmlDualThemesOptions): string {
     const {
       defaultColor = 'light',
-      cssVariableName = '--shiki-dark',
+      cssVariablePrefix = '--shiki-',
     } = options
 
-    const tokens1 = codeToThemedTokens(code, {
-      ...options,
-      theme: defaultColor === 'light' ? options.theme.light : options.theme.dark,
-      includeExplanation: false,
-    })
+    const themes = Object.entries(options.themes)
+      .filter(i => i[1])
+      .sort(a => a[0] === defaultColor ? -1 : 1)
 
-    const tokens2 = codeToThemedTokens(code, {
-      ...options,
-      theme: defaultColor === 'light' ? options.theme.dark : options.theme.light,
-      includeExplanation: false,
-    })
+    const tokens = themes.map(([color, theme]) => [
+      color,
+      codeToThemedTokens(code, {
+        ...options,
+        theme,
+        includeExplanation: false,
+      }),
+      getTheme(theme)._theme,
+    ] as [string, ThemedToken[][], ThemeRegisteration])
 
-    const { _theme: _theme1 } = getTheme(defaultColor === 'light' ? options.theme.light : options.theme.dark)
-    const { _theme: _theme2 } = getTheme(defaultColor === 'light' ? options.theme.dark : options.theme.light)
-
-    return renderToHtmlDualThemes(tokens1, tokens2, cssVariableName, {
-      fg: `${_theme1.fg};${cssVariableName}:${_theme2.fg}`,
-      bg: `${_theme1.bg};${cssVariableName}-bg:${_theme2.bg}`,
+    return renderToHtmlDualThemes(tokens, cssVariablePrefix, {
       lineOptions: options?.lineOptions,
-      themeName: `shiki-dual-themes ${_theme1.name}--${_theme2.name}`,
     })
   }
 

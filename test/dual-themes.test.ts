@@ -48,11 +48,11 @@ describe('syncThemedTokens', () => {
   })
 })
 
-describe('should', () => {
-  it('codeToHtmlDualThemes', async () => {
+describe('codeToHtmlDualThemes', () => {
+  it('dual themes', async () => {
     const code = await codeToHtmlDualThemes('console.log("hello")', {
       lang: 'js',
-      theme: {
+      themes: {
         dark: 'nord',
         light: 'min-light',
       },
@@ -73,5 +73,71 @@ describe('should', () => {
 
     expect(snippet + code)
       .toMatchFileSnapshot('./out/dual-themes.html')
+  })
+
+  it('multiple themes', async () => {
+    const code = await codeToHtmlDualThemes('console.log("hello")', {
+      lang: 'js',
+      themes: {
+        'light': 'vitesse-light',
+        'dark': 'vitesse-dark',
+        'nord': 'nord',
+        'min-dark': 'min-dark',
+        'min-light': 'min-light',
+      },
+      cssVariablePrefix: '--s-',
+    })
+
+    const snippet = `
+<style>
+.shiki {
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+[data-theme="dark"] .shiki {
+  background-color: var(--s-dark-bg) !important;
+  color: var(--s-dark) !important;
+}
+[data-theme="dark"] .shiki span {
+  color: var(--s-dark) !important;
+}
+
+[data-theme="nord"] .shiki {
+  background-color: var(--s-nord-bg) !important;
+  color: var(--s-nord) !important;
+}
+[data-theme="nord"] .shiki span {
+  color: var(--s-nord) !important;
+}
+
+[data-theme="min-dark"] .shiki {
+  background-color: var(--s-min-dark-bg) !important;
+  color: var(--s-min-dark) !important;
+}
+[data-theme="min-dark"] .shiki span {
+  color: var(--s-min-dark) !important;
+}
+
+[data-theme="min-light"] .shiki {
+  background-color: var(--s-min-light-bg) !important;
+  color: var(--s-min-light) !important;
+}
+[data-theme="min-light"] .shiki span {
+  color: var(--s-min-light) !important;
+}
+</style>
+<script>
+const themes = ['light', 'dark', 'nord', 'min-dark', 'min-light']
+
+function toggleTheme() {
+  document.body.dataset.theme = themes[(Math.max(themes.indexOf(document.body.dataset.theme), 0) + 1) % themes.length]
+}
+</script>
+<button onclick="toggleTheme()">Toggle theme</button>
+`
+
+    expect(snippet + code)
+      .toMatchFileSnapshot('./out/multiple-themes.html')
   })
 })

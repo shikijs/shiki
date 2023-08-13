@@ -49,18 +49,49 @@ export interface CodeToHtmlOptions<Languages = string, Themes = string> {
 
 export interface CodeToHtmlDualThemesOptions<Languages = string, Themes = string> {
   lang?: Languages | PlainTextLanguage
-  theme: {
+
+  /**
+   * A map of color names to themes.
+   *
+   * `light` and `dark` are required, and arbitrary color names can be added.
+   *
+   * @example
+   * ```ts
+   * themes: {
+   *   light: 'vitesse-light',
+   *   dark: 'vitesse-dark',
+   *   soft: 'nord',
+   *   // custom colors
+   * }
+   * ```
+   */
+  themes: {
     light: Themes
     dark: Themes
-  }
+  } & Partial<Record<string, Themes>>
+
   /**
+   * The default theme applied to the code (via inline `color` style).
+   * The rest of the themes are applied via CSS variables, and toggled by CSS overrides.
+   *
+   * For example, if `defaultColor` is `light`, then `light` theme is applied to the code,
+   * and the `dark` theme and other custom themes are applied via CSS variables.
+   *
+   * ```html
+   * <span style="color:#{light};--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
+   * ```
+   *
    * @default 'light'
    */
-  defaultColor?: 'light' | 'dark'
+  defaultColor?: StringLiteralUnion<'light' | 'dark'>
+
   /**
-   * @default '--shiki-dark'
+   * Prefix of CSS variables used to store the color of the other theme.
+   *
+   * @default '--shiki-'
    */
-  cssVariableName?: string
+  cssVariablePrefix?: string
+
   lineOptions?: LineOption[]
 }
 

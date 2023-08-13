@@ -227,14 +227,14 @@ const shiki = await getHighlighter({
 
 const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
   lang: 'javascript',
-  theme: {
-    light: 'min-light',
+  themes: {
+    light: 'vitesse-light',
     dark: 'nord',
   }
 })
 ```
 
-The following HTML will be generated ([preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/test/out/dual-themes.html)):
+The following HTML will be generated ([demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/test/out/dual-themes.html)):
 
 ```html
 <pre
@@ -284,6 +284,36 @@ html.dark .shiki span {
   color: var(--shiki-dark) !important;
 }
 ```
+
+#### Multiple Themes
+
+It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
+
+```js
+const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
+  lang: 'javascript',
+  themes: {
+    light: 'github-light',
+    dark: 'github-dark',
+    dim: 'github-dimmed',
+    // any number of themes
+  },
+
+  // optional customizations
+  defaultColor: 'light',
+  cssVariablePrefix: '--shiki-'
+})
+```
+
+Token would be generated like:
+
+```html
+<span style="color:#1976D2;--shiki-dark:#D8DEE9;--shiki-dim:#566575">console</span>
+```
+
+And then update your CSS snippet to control then each theme taking effect. Here is an example:
+
+[Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/test/out/multiple-themes.html)
 
 ## Bundle Size
 
