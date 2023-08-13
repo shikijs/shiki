@@ -42,6 +42,33 @@ await shiki.loadLanguage('css')
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
 
+Unlike `shiki`, `shikiji` does not load any themes or languages when not specified.
+
+```js
+import { getHighlighter } from 'shikiji'
+
+const shiki = await getHighlighter()
+
+shiki.codeToHtml('const a = 1', { lang: 'javascript' }) // throws error, `javascript` is not loaded
+
+await shiki.loadLanguage('javascript') // load the language
+```
+
+If you want to load all themes and languages (not recommended), you can iterate all keys from `bundledLanguages` and `bundledThemes`.
+
+```js
+import { bundledLanguages, bundledThemes, getHighlighter } from 'shikiji'
+
+const shiki = await getHighlighter({
+  themes: Object.keys(bundledThemes),
+  langs: Object.keys(bundledLanguages),
+})
+
+shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+```
+
+Or if your usage can be async, you can try the [shorthands](#shorthands) which will load the theme/language on demand.
+
 ### Fine-grained Bundle
 
 When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you want to control what to bundle size, you can use the core and compose your own bundle.
@@ -151,10 +178,10 @@ export default {
 In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simpler usage.
 
 ```js
-import { codeToHtml } from 'shikiji'
+import { codeToHtml, codeToThemedTokens } from 'shikiji'
 
-const code1 = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
-const code2 = await codeToHtml('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
+const code = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
+const tokens = await codeToThemedTokens('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
 ```
 
 Currently supports:
