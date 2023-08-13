@@ -142,6 +142,23 @@ async function main() {
 }
 ```
 
+### CDN Usage
+
+To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) from [jsDelivr](https://www.jsdelivr.com/).
+
+```html
+<body>
+  <div id="foo"></div>
+
+  <script type="module">
+    import { codeToHtml } from 'https://esm.run/shikiji@0.3' // be sure to specify the exact version
+
+    const foo = document.getElementById('foo')
+    foo.innerHTML = await codeToHtml('console.log("Hi")', { lang: 'js', theme: 'vitesse-light' })
+  </script>
+</body>
+```
+
 ### Cloudflare Workers
 
 Cloudflare Workers [does not support initializing WebAssembly from binary data](https://community.cloudflare.com/t/fixed-cloudflare-workers-slow-with-moderate-sized-webassembly-bindings/184668/3), so the default wasm build won't work. You need to upload the wasm as assets and import it directly.
