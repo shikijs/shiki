@@ -6,13 +6,13 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 
 ## Changes
 
-- All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets.
+- All grammars/themes/wasm served as pure-ESM, no more [CDN](https://github.com/shikijs/shiki#specify-a-custom-root-directory), no more [assets](https://github.com/shikijs/shiki#specify-how-to-load-webassembly).
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - Drop CJS and IIFE build, focus on ESM (or you can use bundlers).
 - Bundles languages/themes composedly.
 - Zero-dependencies.
 - Simplified APIs.
-- Please don't hate me Pine 😜
+- Please don't hate me Pine 😜 ([What's Next?](#whats-next))
 
 ## Install
 
