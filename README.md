@@ -188,7 +188,7 @@ const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
 })
 ```
 
-The following HTML will be generated:
+The following HTML will be generated ([preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/test/out/dual-themes.html)):
 
 ```html
 <pre
