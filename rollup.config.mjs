@@ -1,15 +1,14 @@
 // @ts-check
 import { basename, dirname, join } from 'node:path'
+import { defineConfig } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import copy from 'rollup-plugin-copy'
 import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
 import json from '@rollup/plugin-json'
-import { defineConfig } from 'rollup'
 import fs from 'fs-extra'
 import fg from 'fast-glob'
-import { wasmPlugin } from './build/wasm.mjs'
 
 const entries = [
   'src/index.ts',
@@ -29,7 +28,7 @@ const plugins = [
     preferConst: true,
     compact: true,
   }),
-  wasmPlugin,
+  wasmPlugin(),
 ]
 
 export default defineConfig([
@@ -97,3 +96,16 @@ export default defineConfig([
     },
   },
 ])
+
+export function wasmPlugin() {
+  return {
+    name: 'wasm',
+    async load(id) {
+      if (!id.endsWith('.wasm'))
+        return
+      const binary = await fs.readFile(id)
+      const base64 = binary.toString('base64')
+      return `export default Uint8Array.from(atob(${JSON.stringify(base64)}), c => c.charCodeAt(0))`
+    },
+  }
+}
