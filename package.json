@@ -19,23 +19,23 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs"
+      "default": "./dist/index.mjs"
     },
     "./core": {
       "types": "./dist/core.d.mts",
-      "import": "./dist/core.mjs"
+      "default": "./dist/core.mjs"
     },
     "./wasm": {
       "types": "./dist/wasm.d.mts",
-      "import": "./dist/wasm.mjs"
+      "default": "./dist/wasm.mjs"
     },
     "./langs": {
       "types": "./dist/langs.d.mts",
-      "import": "./dist/langs.mjs"
+      "default": "./dist/langs.mjs"
     },
     "./themes": {
       "types": "./dist/themes.d.mts",
-      "import": "./dist/themes.mjs"
+      "default": "./dist/themes.mjs"
     },
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
@@ -51,8 +51,8 @@
       "wasm": [
         "./dist/wasm.d.mts"
       ],
-      "languages": [
-        "./dist/languages.d.mts"
+      "langs": [
+        "./dist/langs.d.mts"
       ],
       "themes": [
         "./dist/themes.d.mts"
