@@ -39,7 +39,10 @@ export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOption
 
   return h(
     'pre',
-    { className: `shiki ${options.themeName || ''}`, style: `background-color: ${bg}; color: ${fg}` },
+    {
+      className: `shiki ${options.themeName || ''}`,
+      style: options.rootStyle || `background-color:${bg};color:${fg}`,
+    },
     [
       options.langId ? `<div class="language-id">${options.langId}</div>` : '',
       h(
@@ -58,16 +61,14 @@ export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOption
               index,
             },
             line.map((token, index) => {
-              const cssDeclarations = [`color: ${token.color || options.fg}`]
+              const cssDeclarations = [token.htmlStyle || `color:${token.color || options.fg}`]
               if (token.fontStyle) {
                 if (token.fontStyle & FontStyle.Italic)
-                  cssDeclarations.push('font-style: italic')
-
+                  cssDeclarations.push('font-style:italic')
                 if (token.fontStyle & FontStyle.Bold)
-                  cssDeclarations.push('font-weight: bold')
-
+                  cssDeclarations.push('font-weight:bold')
                 if (token.fontStyle & FontStyle.Underline)
-                  cssDeclarations.push('text-decoration: underline')
+                  cssDeclarations.push('text-decoration:underline')
               }
 
               return h(

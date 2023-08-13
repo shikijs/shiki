@@ -140,4 +140,79 @@ function toggleTheme() {
     expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes.html')
   })
+
+  it('multiple themes without default', async () => {
+    const code = await codeToHtmlDualThemes('console.log("hello")', {
+      lang: 'js',
+      themes: {
+        'light': 'vitesse-light',
+        'dark': 'vitesse-dark',
+        'nord': 'nord',
+        'min-dark': 'min-dark',
+        'min-light': 'min-light',
+      },
+      defaultColor: false,
+      cssVariablePrefix: '--s-',
+    })
+
+    const snippet = `
+<style>
+.shiki {
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+.shiki {
+  background-color: var(--s-light-bg);
+  color: var(--s-light);
+}
+.shiki span {
+  color: var(--s-light)
+}
+
+[data-theme="dark"] .shiki {
+  background-color: var(--s-dark-bg);
+  color: var(--s-dark);
+}
+[data-theme="dark"] .shiki span {
+  color: var(--s-dark);
+}
+
+[data-theme="nord"] .shiki {
+  background-color: var(--s-nord-bg);
+  color: var(--s-nord);
+}
+[data-theme="nord"] .shiki span {
+  color: var(--s-nord);
+}
+
+[data-theme="min-dark"] .shiki {
+  background-color: var(--s-min-dark-bg);
+  color: var(--s-min-dark);
+}
+[data-theme="min-dark"] .shiki span {
+  color: var(--s-min-dark);
+}
+
+[data-theme="min-light"] .shiki {
+  background-color: var(--s-min-light-bg);
+  color: var(--s-min-light);
+}
+[data-theme="min-light"] .shiki span {
+  color: var(--s-min-light);
+}
+</style>
+<script>
+const themes = ['light', 'dark', 'nord', 'min-dark', 'min-light']
+
+function toggleTheme() {
+  document.body.dataset.theme = themes[(Math.max(themes.indexOf(document.body.dataset.theme), 0) + 1) % themes.length]
+}
+</script>
+<button onclick="toggleTheme()">Toggle theme</button>
+`
+
+    expect(snippet + code)
+      .toMatchFileSnapshot('./out/multiple-themes-no-default.html')
+  })
 })

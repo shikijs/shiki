@@ -128,9 +128,12 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
       getTheme(theme)._theme,
     ] as [string, ThemedToken[][], ThemeRegisteration])
 
-    return renderToHtmlDualThemes(tokens, cssVariablePrefix, {
-      lineOptions: options?.lineOptions,
-    })
+    return renderToHtmlDualThemes(
+      tokens,
+      cssVariablePrefix,
+      defaultColor !== false,
+      options,
+    )
   }
 
   async function loadLanguage(...langs: LanguageInput[]) {

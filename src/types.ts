@@ -75,15 +75,22 @@ export interface CodeToHtmlDualThemesOptions<Languages = string, Themes = string
    * The rest of the themes are applied via CSS variables, and toggled by CSS overrides.
    *
    * For example, if `defaultColor` is `light`, then `light` theme is applied to the code,
-   * and the `dark` theme and other custom themes are applied via CSS variables.
+   * and the `dark` theme and other custom themes are applied via CSS variables:
    *
    * ```html
    * <span style="color:#{light};--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
    * ```
    *
+   * When set to `false`, no default styles will be applied, and totally up to users to apply the styles:
+   *
+   * ```html
+   * <span style="--shiki-light:#{light};--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
+   * ```
+   *
+   *
    * @default 'light'
    */
-  defaultColor?: StringLiteralUnion<'light' | 'dark'>
+  defaultColor?: StringLiteralUnion<'light' | 'dark'> | false
 
   /**
    * Prefix of CSS variables used to store the color of the other theme.
@@ -163,6 +170,11 @@ export interface HtmlRendererOptions {
   lineOptions?: LineOption[]
   elements?: ElementsOptions
   themeName?: string
+  /**
+   * Custom style string to be applied to the root `<pre>` element.
+   * When specified, `fg` and `bg` will be ignored.
+   */
+  rootStyle?: string
 }
 
 export interface ElementsOptions {
@@ -270,6 +282,11 @@ export interface ThemedToken {
    * 6 or 8 digit hex code representation of the token's color
    */
   color?: string
+  /**
+   * Override with custom inline style for HTML renderer.
+   * When specified, `color` will be ignored.
+   */
+  htmlStyle?: string
   /**
    * Font style of token. Can be None/Italic/Bold/Underline
    */
