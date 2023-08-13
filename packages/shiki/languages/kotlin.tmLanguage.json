@@ -170,11 +170,22 @@
           "name": "comment.block.javadoc.kotlin",
           "patterns": [
             {
-              "match": "@(author|deprecated|return|see|serial|since|version)\\b",
+              "match": "@(return|constructor|receiver|sample|see|author|since|suppress)\\b",
               "name": "keyword.other.documentation.javadoc.kotlin"
             },
             {
-              "match": "(@param)\\s+(\\S+)",
+              "match": "(@param|@property)\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "keyword.other.documentation.javadoc.kotlin"
+                },
+                "2": {
+                  "name": "variable.parameter.kotlin"
+                }
+              }
+            },
+            {
+              "match": "(@param)\\[(\\S+)\\]",
               "captures": {
                 "1": {
                   "name": "keyword.other.documentation.javadoc.kotlin"
