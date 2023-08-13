@@ -8,7 +8,7 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 
 - All grammars/themes/wasm served as pure-ESM, no more CDN, no more assets.
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
-- Drop CJS and IIFE build, focus on ESM (or use bundlers).
+- Drop CJS and IIFE build, focus on ESM (or you can use bundlers).
 - Bundles languages/themes composedly.
 - Zero-dependencies.
 - Simplified APIs.
@@ -31,6 +31,10 @@ const shiki = await getHighlighter({
   themes: ['nord'],
   langs: ['javascript'],
 })
+
+// optionally, load themes and languages after creation
+await shiki.loadTheme('vitesse-light')
+await shiki.loadLanguage('css')
 
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
@@ -70,6 +74,42 @@ const shiki = await getHighlighterCore({
 await shiki.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
 
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+```
+
+### CJS Usage
+
+`shikiji` is published as ESM-only to reduce the package size. It's still possible to use it in CJS, as Node.js supports importing ESM modules dynamically in CJS.
+
+For example, the following ESM code:
+
+```js
+// ESM
+import { getHighlighter } from 'shikiji'
+
+async function main() {
+  const shiki = await getHighlighter({
+    themes: ['nord'],
+    langs: ['javascript'],
+  })
+
+  const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+}
+```
+
+Can be written in CJS as:
+
+```js
+// CJS
+async function main() {
+  const { getHighlighter } = await import('shikiji')
+
+  const shiki = await getHighlighter({
+    themes: ['nord'],
+    langs: ['javascript'],
+  })
+
+  const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+}
 ```
 
 ### Cloudflare Workers
@@ -112,6 +152,10 @@ As of `v0.2.2`, measured at 12th, August 2023:
 | `shikiji` | 5.9 MB | 1.2 MB | includes all themes and languages |
 | `shikiji/core` | 75 KB | 23 KB | no themes or languages, compose on your own |
 | `shikiji/wasm` | 623 KB | 231 KB | wasm binary inlined as base64 string |
+
+## What's Next?
+
+Shikiji is a usable exploration of improving the experience of using `shiki` in various of scenarios. It's intended to push some of the ideas back to `shiki`, and eventually, this package might not be needed. Before that, you can use it as a replacement for `shiki` if you have similar requirements. It would be great to hear your feedbacks and suggestions in the meantime!
 
 ## License
 
