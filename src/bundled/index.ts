@@ -1,2 +1,2 @@
 export * from './highlighter'
-export * from './singleton'
+export * from './shorthands'

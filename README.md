@@ -42,25 +42,6 @@ await shiki.loadLanguage('css')
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
 
-#### Shorthands
-
-In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simplier usage.
-
-```js
-import { codeToHtml } from 'shikiji'
-
-const code1 = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
-const code2 = await codeToHtml('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
-```
-
-Currently supports:
-
-- `codeToThemedTokens`
-- `codeToHtml`
-- `codeToHtmlDualThemes`
-
-Internally they maintains a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
-
 ### Fine-grained Bundle
 
 When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you want to control what to bundle size, you can use the core and compose your own bundle.
@@ -164,6 +145,27 @@ export default {
 ```
 
 ## Additional Features
+
+### Shorthands
+
+In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simpler usage.
+
+```js
+import { codeToHtml } from 'shikiji'
+
+const code1 = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
+const code2 = await codeToHtml('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
+```
+
+Currently supports:
+
+- `codeToThemedTokens`
+- `codeToHtml`
+- `codeToHtmlDualThemes`
+
+Internally they maintain a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
+
+> **Note:** These are only available in the [bundled usage](#bundled-usage), a.k.a the main `shikiji` entry. If you are using the [fine-grained bundle](#fine-grained-bundle), you can create your own shorthands by porting [this file](https://github.com/antfu/shikiji/blob/main/src/bundled/shorthands.ts).
 
 ### Light/Dark Dual Themes
 

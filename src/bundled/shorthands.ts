@@ -1,22 +1,23 @@
-import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, PlainTextLanguage, RequireKeys } from '../types'
+import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, MaybeArray, PlainTextLanguage, RequireKeys } from '../types'
+import { toArray } from '../core/utils'
 import { getHighlighter } from './highlighter'
 import type { Highlighter } from './highlighter'
 
 let _shiki: Promise<Highlighter>
 
-async function getShikiWithThemeLang(options: { theme: BuiltinThemes; lang: BuiltinLanguages | PlainTextLanguage }) {
+async function getShikiWithThemeLang(options: { theme: MaybeArray<BuiltinThemes>; lang: MaybeArray<BuiltinLanguages | PlainTextLanguage> }) {
   if (!_shiki) {
     _shiki = getHighlighter({
-      themes: [options.theme],
-      langs: [options.lang],
+      themes: toArray(options.theme),
+      langs: toArray(options.lang),
     })
     return _shiki
   }
   else {
     const s = await _shiki
     await Promise.all([
-      s.loadTheme(options.theme),
-      s.loadLanguage(options.lang),
+      s.loadTheme(...toArray(options.theme)),
+      s.loadLanguage(...toArray(options.lang)),
     ])
     return s
   }
@@ -51,7 +52,9 @@ export async function codeToThemedTokens(code: string, options: RequireKeys<Code
  * Differences from `shiki.codeToHtmlDualThemes()`, this function is async.
  */
 export async function codeToHtmlDualThemes(code: string, options: RequireKeys<CodeToHtmlDualThemesOptions<BuiltinLanguages, BuiltinThemes>, 'theme' | 'lang'>) {
-  const shiki = await getShikiWithThemeLang({ lang: options.lang, theme: options.theme.light })
-  await shiki.loadTheme(options.theme.dark)
+  const shiki = await getShikiWithThemeLang({
+    lang: options.lang,
+    theme: [options.theme.light, options.theme.dark],
+  })
   return shiki.codeToHtmlDualThemes(code, options)
 }
