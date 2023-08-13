@@ -22,6 +22,8 @@ npm install -D shikiji
 
 ## Usage
 
+### Bundled Usage
+
 Basic usage is pretty much the same as `shiki`, only that some APIs are dropped, (for example, the singular `theme` options). Each theme and language file are dynamically imported ES modules, it would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```js
@@ -39,7 +41,20 @@ await shiki.loadLanguage('css')
 const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
 ```
 
-### Fine-grained Bundling
+#### Shorthands
+
+In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simplier usage.
+
+```js
+import { codeToHtml } from 'shikiji'
+
+const code1 = await codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
+const code2 = await codeToHtml('<div class="foo">bar</div>', { lang: 'html', theme: 'min-dark' })
+```
+
+Internally they maintains a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
+
+### Fine-grained Bundle
 
 When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you want to control what to bundle size, you can use the core and compose your own bundle.
 
@@ -116,7 +131,7 @@ async function main() {
 
 Cloudflare Workers [does not support initializing WebAssembly from binary data](https://community.cloudflare.com/t/fixed-cloudflare-workers-slow-with-moderate-sized-webassembly-bindings/184668/3), so the default wasm build won't work. You need to upload the wasm as assets and import it directly.
 
-Meanwhile, it's also recommended to use the [Fine-grained Bundling](#fine-grained-bundling) approach to reduce the bundle size.
+Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-bundle) approach to reduce the bundle size.
 
 ```ts
 import { getHighlighterCore, loadWasm } from 'shikiji/core'

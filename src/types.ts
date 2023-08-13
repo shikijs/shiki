@@ -6,10 +6,13 @@ import type { FontStyle } from './core/stackElementMetadata'
 export type BuiltinLanguages = keyof typeof bundledLanguages
 export type BuiltinThemes = keyof typeof bundledThemes
 
+export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
+
 export type Awaitable<T> = T | Promise<T>
 export type MaybeGetter<T> = Awaitable<MaybeModule<T>> | (() => Awaitable<MaybeModule<T>>)
 export type MaybeModule<T> = T | { default: T }
 export type MaybeArray<T> = T | T[]
+export type RequireKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>
 
 export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
 export type LanguageInput = MaybeGetter<MaybeArray<LanguageRegistration>>
@@ -39,7 +42,7 @@ export interface LanguageRegistration extends IRawGrammar {
 }
 
 export interface CodeToHtmlOptions<Languages = string, Themes = string> {
-  lang?: Languages | 'text' | 'plaintext' | 'txt'
+  lang?: Languages | PlainTextLanguage
   theme?: Themes
   lineOptions?: LineOption[]
 }

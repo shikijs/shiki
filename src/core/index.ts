@@ -5,6 +5,7 @@ import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer'
+import { isPlaintext } from './utils'
 
 export interface HighlighterCoreOptions {
   themes: ThemeInput[]
@@ -119,10 +120,6 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
     getLoadedThemes: () => _registry.getLoadedThemes(),
     getLoadedLanguages: () => _registry.getLoadedLanguages(),
   }
-}
-
-function isPlaintext(lang: string | null | undefined) {
-  return !lang || ['plaintext', 'txt', 'text'].includes(lang)
 }
 
 async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {

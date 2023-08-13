@@ -1,11 +1,11 @@
 import { defineConfig } from 'vitest/config'
 
 // @ts-expect-error no types
-import { wasmPlugin } from './build/wasm.mjs'
+import { wasmPlugin } from './rollup.config.mjs'
 
 export default defineConfig({
   plugins: [
-    wasmPlugin,
+    wasmPlugin(),
   ],
   test: {
     server: {
