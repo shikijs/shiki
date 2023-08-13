@@ -85,3 +85,23 @@ describe('should', () => {
       `)
   })
 })
+
+describe('errors', () => {
+  it('throw on invalid theme', async () => {
+    await expect(() => getHighlighter({
+      themes: ['invalid' as any],
+      langs: ['javascript'],
+    }))
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Theme `invalid` is not built-in."')
+  })
+
+  it('throw on invalid lang', async () => {
+    await expect(() => getHighlighter({
+      themes: ['nord'],
+      langs: ['invalid' as any],
+    }))
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Language `invalid` is not built-in."')
+  })
+})

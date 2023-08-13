@@ -72,14 +72,14 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   function getLang(name: string) {
     const _lang = _registry.getGrammar(name)
     if (!_lang)
-      throw new Error(`[shiki] Language \`${name}\` not found`)
+      throw new Error(`[shikiji] Language \`${name}\` not found`)
     return _lang
   }
 
   function getTheme(name = defaultTheme) {
     const _theme = _registry.getTheme(name!)
     if (!_theme)
-      throw new Error(`[shiki] Theme \`${name}\` not found`)
+      throw new Error(`[shikiji] Theme \`${name}\` not found`)
     _registry.setTheme(_theme)
     const _colorMap = _registry.getColorMap()
     return {

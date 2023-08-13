@@ -1,16 +1,13 @@
 import type { BuiltinLanguages, BuiltinThemes, CodeToHtmlOptions, LanguageInput, ThemeInput } from './types'
-import { bundledThemes } from './assets/themes'
-import { bundledLanguages, bundledLanguagesBase } from './assets/langs'
+import { bundledThemes } from './themes'
+import { bundledLanguages, bundledLanguagesBase } from './langs'
 import { getHighlighterCore } from './core'
 import { getWasmInlined } from './wasm'
 
 export * from './core'
-
-export {
-  getWasmInlined,
-  bundledLanguages,
-  bundledThemes,
-}
+export * from './themes'
+export * from './langs'
+export * from './wasm'
 
 export interface HighlighterOptions {
   themes?: (ThemeInput | BuiltinThemes)[]
@@ -24,7 +21,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     if (typeof lang === 'string') {
       const bundle = bundledLanguages[lang]
       if (!bundle)
-        throw new Error(`[shikiji] Unknown language: ${lang}`)
+        throw new Error(`[shikiji] Language \`${lang}\` is not built-in.`)
       return bundle
     }
     return lang as LanguageInput
@@ -34,7 +31,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     if (typeof theme === 'string') {
       const bundle = bundledThemes[theme]
       if (!bundle)
-        throw new Error(`[shikiji] Unknown theme: ${theme}`)
+        throw new Error(`[shikiji] Theme \`${theme}\` is not built-in.`)
       return bundle
     }
     return theme

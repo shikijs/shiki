@@ -89,7 +89,7 @@ export class Registry extends TextMateRegistry {
       const dependents = langsGraphArray
         .filter(([_, lang]) => lang && lang.embeddedLangs?.some(l => missingLangs.map(([name]) => name).includes(l)))
         .filter(lang => !missingLangs.includes(lang))
-      throw new Error(`[shiki] Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
+      throw new Error(`[shikiji] Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
     }
 
     for (const [_, lang] of langsGraphArray)

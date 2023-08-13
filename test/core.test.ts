@@ -86,7 +86,7 @@ describe('errors', () => {
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'invalid' }))
-      .toThrowErrorMatchingInlineSnapshot('"[shiki] Theme `invalid` not found"')
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Theme `invalid` not found"')
   })
 
   it('throw on invalid lang', async () => {
@@ -96,6 +96,6 @@ describe('errors', () => {
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
-      .toThrowErrorMatchingInlineSnapshot('"[shiki] Language `abc` not found"')
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Language `abc` not found"')
   })
 })
