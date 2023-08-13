@@ -1,4 +1,4 @@
-import type { CodeToHtmlOptions, LanguageInput, MaybeGetter, ThemeInput } from '../types'
+import type { CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput } from '../types'
 import type { OnigurumaLoadOptions } from '../oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
@@ -55,17 +55,23 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
 
   function codeToThemedTokens(
     code: string,
-    lang = 'text',
-    theme = defaultTheme,
-    options = { includeExplanation: true },
+    options: CodeToThemedTokensOptions = {},
   ) {
+    const {
+      lang = 'text',
+      theme = defaultTheme,
+      includeExplanation = true,
+    } = options
+
     if (isPlaintext(lang)) {
       const lines = code.split(/\r\n|\r|\n/)
       return [...lines.map(line => [{ content: line }])]
     }
     const _grammar = getLang(lang)
     const { _theme, _colorMap } = getTheme(theme)
-    return tokenizeWithTheme(_theme, _colorMap, code, _grammar, options)
+    return tokenizeWithTheme(code, _grammar, _theme, _colorMap, {
+      includeExplanation,
+    })
   }
 
   function getLang(name: string) {
@@ -88,7 +94,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
   }
 
   function codeToHtml(code: string, options: CodeToHtmlOptions = {}): string {
-    const tokens = codeToThemedTokens(code, options.lang, options.theme, {
+    const tokens = codeToThemedTokens(code, {
+      ...options,
       includeExplanation: false,
     })
     const { _theme } = getTheme(options.theme)

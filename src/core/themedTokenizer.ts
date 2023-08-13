@@ -10,10 +10,10 @@ import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
 
 export function tokenizeWithTheme(
-  theme: IRawTheme,
-  colorMap: string[],
   fileContents: string,
   grammar: IGrammar,
+  theme: IRawTheme,
+  colorMap: string[],
   options: { includeExplanation?: boolean },
 ): ThemedToken[][] {
   const lines = fileContents.split(/\r\n|\r|\n/)

@@ -47,6 +47,17 @@ export interface CodeToHtmlOptions<Languages = string, Themes = string> {
   lineOptions?: LineOption[]
 }
 
+export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
+  lang?: Languages | PlainTextLanguage
+  theme?: Themes
+  /**
+   * Include explanation of why a token is given a color.
+   *
+   * @default true
+   */
+  includeExplanation?: boolean
+}
+
 export interface LineOption {
   /**
    * 1-based line number.
