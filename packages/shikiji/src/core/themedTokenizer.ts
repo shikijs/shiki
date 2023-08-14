@@ -9,6 +9,10 @@ import type { ThemedToken, ThemedTokenExplanation, ThemedTokenScopeExplanation }
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
 
+export interface TokenizeWithThemeOptions {
+  includeExplanation?: boolean
+}
+
 export function tokenizeWithTheme(
   fileContents: string,
   grammar: IGrammar,

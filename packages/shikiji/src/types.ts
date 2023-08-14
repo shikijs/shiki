@@ -175,6 +175,13 @@ export interface HtmlRendererOptions {
    * When specified, `fg` and `bg` will be ignored.
    */
   rootStyle?: string
+  /**
+   * Merge token with only whitespace to the next token,
+   * Saving a few extra `<span>`
+   *
+   * @default true
+   */
+  mergeWhitespaces?: boolean
 }
 
 export interface ElementsOptions {

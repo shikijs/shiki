@@ -55,7 +55,7 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))
-      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#ffffff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#998418\\">print</span><span style=\\"color:#393A34\\"> </span><span style=\\"color:#2F798A\\">1</span></span></code></pre>"')
+      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#ffffff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#998418\\">print</span><span style=\\"color:#2F798A\\"> 1</span></span></code></pre>"')
   })
 
   it('requires nested lang', async () => {

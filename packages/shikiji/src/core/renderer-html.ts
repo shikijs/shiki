@@ -17,6 +17,13 @@ const defaultElements: ElementsOptions = {
 }
 
 export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOptions = {}) {
+  const {
+    mergeWhitespaces = true,
+  } = options
+
+  if (mergeWhitespaces)
+    lines = mergeWhitespaceTokens(lines)
+
   const bg = options.bg || '#fff'
   const fg = options.bg || '#000'
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
@@ -126,4 +133,29 @@ export function groupBy<TElement, TKey>(
     }
   }
   return map
+}
+
+function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
+  return tokens.map((line) => {
+    const newLine: ThemedToken[] = []
+    let carryOnContent = ''
+    line.forEach((token, idx) => {
+      if (token.content.match(/^\s+$/) && line[idx + 1]) {
+        carryOnContent += token.content
+      }
+      else {
+        if (carryOnContent) {
+          newLine.push({
+            ...token,
+            content: carryOnContent + token.content,
+          })
+          carryOnContent = ''
+        }
+        else {
+          newLine.push(token)
+        }
+      }
+    })
+    return newLine
+  })
 }
