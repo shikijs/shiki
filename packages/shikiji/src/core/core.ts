@@ -9,7 +9,7 @@ import { renderToHtmlDualThemes } from './renderer-html-dual-themes'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 
-export async function getHighlighterCore(options: HighlighterCoreOptions): Promise<HighlighterCore> {
+export async function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
   async function resolveLangs(langs: LanguageInput[]) {
     return Array.from(new Set((await Promise.all(
       langs.map(async lang => await normalizeGetter(lang).then(r => Array.isArray(r) ? r : [r])),
@@ -19,8 +19,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions): Promi
   const [
     themes, langs,
   ] = await Promise.all([
-    Promise.all(options.themes.map(normalizeGetter)),
-    resolveLangs(options.langs),
+    Promise.all((options.themes || []).map(normalizeGetter)),
+    resolveLangs(options.langs || []),
     typeof options.loadWasm === 'function'
       ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
       : options.loadWasm
@@ -40,7 +40,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions): Promi
   const _registry = new Registry(resolver, themes, langs)
   await _registry.init()
 
-  const defaultTheme = themes[0].name
+  const defaultTheme = themes[0]?.name
 
   function codeToThemedTokens(
     code: string,

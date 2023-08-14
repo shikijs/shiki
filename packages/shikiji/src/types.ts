@@ -49,8 +49,8 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
 }
 
 export interface HighlighterCoreOptions {
-  themes: ThemeInput[]
-  langs: LanguageInput[]
+  themes?: ThemeInput[]
+  langs?: LanguageInput[]
   loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
 }
 

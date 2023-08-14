@@ -76,6 +76,17 @@ describe('should', () => {
         ]
       `)
   })
+
+  it('works without no initial langs and themes', async () => {
+    const shiki = await getHighlighterCore()
+
+    await shiki.loadLanguage(js)
+    await shiki.loadTheme(nord)
+
+    const code = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' })
+
+    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki nord\\" style=\\"background-color:#2e3440ff;color:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#D8DEE9\\">console</span><span style=\\"color:#ECEFF4\\">.</span><span style=\\"color:#88C0D0\\">log</span><span style=\\"color:#D8DEE9FF\\">(</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#A3BE8C\\">Hi</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#D8DEE9FF\\">)</span></span></code></pre>"')
+  })
 })
 
 describe('errors', () => {
