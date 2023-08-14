@@ -1,4 +1,4 @@
-import type { CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, ThemeInput, ThemeRegisteration, ThemedToken } from '../types'
+import type { CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, LanguageInput, MaybeGetter, PlainTextLanguage, ThemeInput, ThemeRegisteration, ThemedToken } from '../types'
 import type { OnigurumaLoadOptions } from '../oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
@@ -166,4 +166,73 @@ export async function getHighlighterCore(options: HighlighterCoreOptions) {
 
 async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
   return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
+}
+
+export interface BundledHighlighterOptions<L extends string, T extends string> {
+  themes?: (ThemeInput | T)[]
+  langs?: (LanguageInput | L | PlainTextLanguage)[]
+}
+
+/**
+ * Create a `getHighlighter` function with bundled themes and languages.
+ *
+ * @param bundledLanguages
+ * @param bundledThemes
+ * @param ladWasm
+ */
+export function createdBundledHighlighter<L extends string, T extends string >(
+  bundledLanguages: Record<L, LanguageInput>,
+  bundledThemes: Record<T, ThemeInput>,
+  ladWasm: HighlighterCoreOptions['loadWasm'],
+) {
+  async function getHighlighter(options: BundledHighlighterOptions<L, T> = {}) {
+    function resolveLang(lang: LanguageInput | L | PlainTextLanguage): LanguageInput {
+      if (typeof lang === 'string') {
+        if (isPlaintext(lang))
+          return []
+        const bundle = bundledLanguages[lang as L]
+        if (!bundle)
+          throw new Error(`[shikiji] Language \`${lang}\` is not built-in.`)
+        return bundle
+      }
+      return lang as LanguageInput
+    }
+
+    function resolveTheme(theme: ThemeInput | T): ThemeInput {
+      if (typeof theme === 'string') {
+        const bundle = bundledThemes[theme]
+        if (!bundle)
+          throw new Error(`[shikiji] Theme \`${theme}\` is not built-in.`)
+        return bundle
+      }
+      return theme
+    }
+
+    const _themes = (options.themes ?? []).map(i => resolveTheme(i)) as ThemeInput[]
+
+    const langs = (options.langs ?? [] as L[])
+      .map(i => resolveLang(i))
+
+    const core = await getHighlighterCore({
+      ...options,
+      themes: _themes,
+      langs,
+      loadWasm: ladWasm,
+    })
+
+    return {
+      ...core,
+      codeToHtml(code: string, options: CodeToHtmlOptions<L, T> = {}) {
+        return core.codeToHtml(code, options as CodeToHtmlOptions)
+      },
+      loadLanguage(...langs: (LanguageInput | L | PlainTextLanguage)[]) {
+        return core.loadLanguage(...langs.map(resolveLang))
+      },
+      loadTheme(...themes: (ThemeInput | T)[]) {
+        return core.loadTheme(...themes.map(resolveTheme))
+      },
+    }
+  }
+
+  return getHighlighter
 }
