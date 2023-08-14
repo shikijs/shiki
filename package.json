@@ -1,11 +1,11 @@
 {
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "packageManager": "pnpm@8.6.12",
   "scripts": {
     "lint": "eslint .",
-    "release": "bumpp && pnpm -r publish",
+    "release": "bumpp -r && pnpm -r publish",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "build": "pnpm -r run build"
