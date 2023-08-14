@@ -72,8 +72,7 @@
     "dev": "rollup -cw",
     "prepublishOnly": "nr build",
     "test": "vitest",
-    "test:cf": "wrangler dev test/cf.ts --port 60001",
-    "typecheck": "tsc --noEmit"
+    "test:cf": "wrangler dev test/cf.ts --port 60001"
   },
   "devDependencies": {
     "shiki": "^0.14.3",
