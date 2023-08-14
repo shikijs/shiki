@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import { BUNDLED_LANGUAGES, BUNDLED_THEMES } from 'shiki'
 import fg from 'fast-glob'
 
-const files = await fg('*.json', {
+const allLangFiles = await fg('*.json', {
   cwd: './node_modules/shiki/languages',
   absolute: true,
   onlyFiles: true,
@@ -14,12 +14,11 @@ const comments = `
  */
 `.trim()
 
-files.sort()
-
 await fs.ensureDir('./src/assets/langs')
 await fs.emptyDir('./src/assets/langs')
 
-for (const file of files) {
+allLangFiles.sort()
+for (const file of allLangFiles) {
   const content = await fs.readJSON(file)
   const lang = BUNDLED_LANGUAGES.find(i => i.id === content.name)
   if (!lang) {
@@ -63,24 +62,24 @@ ${[
   )
 }
 
-const languages = Object.fromEntries(BUNDLED_LANGUAGES.map(i => [i.id, `__(() => import('./langs/${i.id}')) as DynamicLangReg__`]))
+async function writeLanguageBundleIndex(fileName: string, ids: string[]) {
+  const bundled = ids.map(id => BUNDLED_LANGUAGES.find(i => i.id === id)!)
 
-const langAlias = Object.fromEntries(BUNDLED_LANGUAGES.flatMap(i =>
-  (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
-))
+  const base = Object.fromEntries(bundled.map(i => [i.id, `__(() => import('./langs/${i.id}')) as DynamicLangReg__`]))
+  const alias = Object.fromEntries(bundled.flatMap(i =>
+    (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
+  ))
 
-const themes = Object.fromEntries(BUNDLED_THEMES.sort().map(i => [i, `__(() => import('shiki/themes/${i}.json')) as unknown as DynamicThemeReg__`]))
-
-await fs.writeFile(
-  'src/assets/langs.ts',
+  await fs.writeFile(
+    `src/assets/${fileName}.ts`,
   `${comments}
 import type { LanguageRegistration } from '../types'
 
 type DynamicLangReg = () => Promise<{ default: LanguageRegistration[] }>
 
-export const bundledLanguagesBase = ${JSON.stringify(languages, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
+export const bundledLanguagesBase = ${JSON.stringify(base, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
 
-export const bundledLanguagesAlias = ${JSON.stringify(langAlias, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
+export const bundledLanguagesAlias = ${JSON.stringify(alias, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
@@ -88,8 +87,13 @@ export const bundledLanguages = {
 }
 `,
   'utf-8',
-)
+  )
+}
 
+await writeLanguageBundleIndex('langs', BUNDLED_LANGUAGES.map(i => i.id))
+// await writeLanguageBundleIndex('langs-common', BundleCommonLangs)
+
+const themes = Object.fromEntries(BUNDLED_THEMES.sort().map(i => [i, `__(() => import('shiki/themes/${i}.json')) as unknown as DynamicThemeReg__`]))
 await fs.writeFile(
   'src/assets/themes.ts',
   `${comments}

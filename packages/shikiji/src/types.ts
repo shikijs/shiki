@@ -1,7 +1,8 @@
 import type { IRawGrammar, IRawTheme } from 'vscode-textmate'
-import type { bundledLanguages } from './langs'
 import type { bundledThemes } from './themes'
+import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
+import type { OnigurumaLoadOptions } from './oniguruma'
 
 export type BuiltinLanguages = keyof typeof bundledLanguages
 export type BuiltinThemes = keyof typeof bundledThemes
@@ -25,6 +26,48 @@ interface Nothing {}
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
+
+export type ResolveBundleKey<T extends string> = never extends T ? string : T
+
+export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
+  codeToHtml(
+    code: string,
+    options: CodeToHtmlOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): string
+  codeToHtmlDualThemes(
+    code: string,
+    options: CodeToHtmlDualThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): string
+  codeToThemedTokens(
+    code: string,
+    options: CodeToThemedTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): ThemedToken[][]
+  loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
+  loadLanguage(...langs: (LanguageInput | BundledLangKeys | PlainTextLanguage)[]): Promise<void>
+  getLoadedLanguages(): string[]
+  getLoadedThemes(): string[]
+}
+
+export interface HighlighterCoreOptions {
+  themes: ThemeInput[]
+  langs: LanguageInput[]
+  loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
+}
+
+export interface BundledHighlighterOptions<L extends string, T extends string> {
+  /**
+   * Theme registation
+   *
+   * @default []
+   */
+  themes?: (ThemeInput | T)[]
+  /**
+   * Language registation
+   *
+   * @default Object.keys(bundledThemes)
+   */
+  langs?: (LanguageInput | L | PlainTextLanguage)[]
+}
 
 export interface LanguageRegistration extends IRawGrammar {
   name: string
