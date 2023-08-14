@@ -1,0 +1,83 @@
+{
+  "name": "shikiji",
+  "type": "module",
+  "version": "0.3.3",
+  "description": "An ESM-focused rewrite of shiki",
+  "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikiji#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikiji.git",
+    "directory": "packages/shikiji"
+  },
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.mts",
+      "default": "./dist/core.mjs"
+    },
+    "./wasm": {
+      "types": "./dist/wasm.d.mts",
+      "default": "./dist/wasm.mjs"
+    },
+    "./langs": {
+      "types": "./dist/langs.d.mts",
+      "default": "./dist/langs.mjs"
+    },
+    "./themes": {
+      "types": "./dist/themes.d.mts",
+      "default": "./dist/themes.mjs"
+    },
+    "./dist/*": "./dist/*",
+    "./*": "./dist/*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "core": [
+        "./dist/core.d.mts"
+      ],
+      "wasm": [
+        "./dist/wasm.d.mts"
+      ],
+      "langs": [
+        "./dist/langs.d.mts"
+      ],
+      "themes": [
+        "./dist/themes.d.mts"
+      ],
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "esno scripts/prepare.ts",
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -cw",
+    "prepublishOnly": "nr build",
+    "test": "vitest",
+    "test:cf": "wrangler dev test/cf.ts --port 60001",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "shiki": "^0.14.3",
+    "vscode-oniguruma": "^1.7.0",
+    "vscode-textmate": "^9.0.0"
+  }
+}

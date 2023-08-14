@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 
 // @ts-expect-error no types
-import { wasmPlugin } from './rollup.config.mjs'
+import { wasmPlugin } from './packages/shikiji/rollup.config.mjs'
 
 export default defineConfig({
   plugins: [
