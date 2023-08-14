@@ -78,13 +78,13 @@ export function renderToHtmlDualThemes(
     }
   }
 
-  const fg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + t[2].fg).join(';')
-  const bg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + t[2].bg).join(';')
+  const fg = options.fg || themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + t[2].fg).join(';')
+  const bg = options.bg || themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + t[2].bg).join(';')
   return renderToHtml(merged, {
-    ...options,
     fg,
     bg,
     themeName: `shiki-dual-themes ${themes.map(t => t[2].name).join(' ')}`,
     rootStyle: defaultColor ? undefined : [fg, bg].join(';'),
+    ...options,
   })
 }
