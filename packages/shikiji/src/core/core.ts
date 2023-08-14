@@ -1,11 +1,11 @@
-import type { CodeToHtmlOptions, CodeToHtmlThemesOptions, CodeToThemedTokensOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeGetter, ThemeInput, ThemeRegisteration, ThemedToken } from '../types'
+import type { CodeToHtmlOptions, CodeToHtmlThemesOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeGetter, ThemeInput, ThemedToken } from '../types'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { tokenizeWithTheme } from './themedTokenizer'
 import { renderToHtml } from './renderer-html'
 import { isPlaintext } from './utils'
-import { renderToHtmlThemes } from './renderer-html-themes'
+import { renderToHtmlThemes, syncThemesTokenization } from './renderer-html-themes'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 
@@ -85,6 +85,9 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     }
   }
 
+  /**
+   * Get highlighted code in HTML.
+   */
   function codeToHtml(code: string, options: CodeToHtmlOptions = {}): string {
     const tokens = codeToThemedTokens(code, {
       ...options,
@@ -99,27 +102,38 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     })
   }
 
+  /**
+   * Get tokens with multiple themes, with synced
+   */
+  function codeToTokensWithThemes(code: string, options: CodeToTokensWithThemesOptions) {
+    const themes = Object.entries(options.themes)
+      .filter(i => i[1]) as [string, string][]
+
+    const tokens = syncThemesTokenization(...themes.map(t => codeToThemedTokens(code, {
+      ...options,
+      theme: t[1],
+      includeExplanation: false,
+    })))
+
+    return themes.map(([color, theme], idx) => [
+      color,
+      theme,
+      tokens[idx],
+    ] as [string, string, ThemedToken[][]])
+  }
+
   function codeToHtmlThemes(code: string, options: CodeToHtmlThemesOptions): string {
     const {
-      defaultColor = 'light', cssVariablePrefix = '--shiki-',
+      defaultColor = 'light',
+      cssVariablePrefix = '--shiki-',
     } = options
 
-    const themes = Object.entries(options.themes)
-      .filter(i => i[1])
+    const tokens = codeToTokensWithThemes(code, options)
       .sort(a => a[0] === defaultColor ? -1 : 1)
-
-    const tokens = themes.map(([color, theme]) => [
-      color,
-      codeToThemedTokens(code, {
-        ...options,
-        theme,
-        includeExplanation: false,
-      }),
-      getTheme(theme),
-    ] as [string, ThemedToken[][], ThemeRegisteration])
 
     return renderToHtmlThemes(
       tokens,
+      tokens.map(i => getTheme(i[1])),
       cssVariablePrefix,
       defaultColor !== false,
       options,
@@ -132,15 +146,15 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
 
   async function loadTheme(...themes: ThemeInput[]) {
     await Promise.all(
-      themes.map(async theme => _registry.loadTheme(await normalizeGetter(theme)),
-      ),
+      themes.map(async theme => _registry.loadTheme(await normalizeGetter(theme))),
     )
   }
 
   return {
-    codeToThemedTokens,
     codeToHtml,
     codeToHtmlThemes,
+    codeToThemedTokens,
+    codeToTokensWithThemes,
     loadLanguage,
     loadTheme,
     getLoadedThemes: () => _registry.getLoadedThemes(),

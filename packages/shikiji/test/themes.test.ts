@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import type { ThemedToken } from '../src'
-import { codeToHtmlThemes, codeToThemedTokens } from '../src'
-import { _syncThemedTokens } from '../src/core/renderer-html-themes'
+import { codeToHtmlThemes, codeToThemedTokens, codeToTokensWithThemes } from '../src'
+import { syncThemesTokenization } from '../src/core/renderer-html-themes'
 
-describe('syncThemedTokens', () => {
+describe('syncThemesTokenization', () => {
   function stringifyTokens(tokens: ThemedToken[][]) {
     return tokens.map(line => line.map(token => token.content).join(' ')).join('\n')
   }
@@ -17,7 +17,7 @@ describe('syncThemedTokens', () => {
     expect(stringifyTokens(lines2))
       .toMatchInlineSnapshot('"console .log ( \\"hello\\" )"')
 
-    const [out1, out2] = _syncThemedTokens(lines1, lines2)
+    const [out1, out2] = syncThemesTokenization(lines1, lines2)
 
     expect(stringifyTokens(out1))
       .toBe(stringifyTokens(out2))
@@ -35,7 +35,7 @@ describe('syncThemedTokens', () => {
     expect(stringifyTokens(lines3))
       .toMatchInlineSnapshot('"console . log ( \\" hello \\" ) ;"')
 
-    const [out1, out2, out3] = _syncThemedTokens(lines1, lines2, lines3)
+    const [out1, out2, out3] = syncThemesTokenization(lines1, lines2, lines3)
 
     expect(stringifyTokens(out1))
       .toBe(stringifyTokens(out2))
@@ -166,5 +166,143 @@ function toggleTheme() {
 
     expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes-no-default.html')
+  })
+})
+
+describe('codeToTokensWithThemes', () => {
+  it('generates', async () => {
+    const themes = {
+      'light': 'vitesse-light',
+      'dark': 'vitesse-dark',
+      'nord': 'nord',
+      'min-dark': 'min-dark',
+      'min-light': 'min-light',
+    } as const
+
+    const code = await codeToTokensWithThemes('a.b', {
+      lang: 'js',
+      themes,
+    })
+
+    expect(code)
+      .toMatchInlineSnapshot(`
+        [
+          [
+            "light",
+            "vitesse-light",
+            [
+              [
+                {
+                  "color": "#B07D48",
+                  "content": "a",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#999999",
+                  "content": ".",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#B07D48",
+                  "content": "b",
+                  "fontStyle": 0,
+                },
+              ],
+            ],
+          ],
+          [
+            "dark",
+            "vitesse-dark",
+            [
+              [
+                {
+                  "color": "#BD976A",
+                  "content": "a",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#666666",
+                  "content": ".",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#BD976A",
+                  "content": "b",
+                  "fontStyle": 0,
+                },
+              ],
+            ],
+          ],
+          [
+            "nord",
+            "nord",
+            [
+              [
+                {
+                  "color": "#D8DEE9",
+                  "content": "a",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#ECEFF4",
+                  "content": ".",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#D8DEE9",
+                  "content": "b",
+                  "fontStyle": 0,
+                },
+              ],
+            ],
+          ],
+          [
+            "min-dark",
+            "min-dark",
+            [
+              [
+                {
+                  "color": "#79B8FF",
+                  "content": "a",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#B392F0",
+                  "content": ".",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#B392F0",
+                  "content": "b",
+                  "fontStyle": 0,
+                },
+              ],
+            ],
+          ],
+          [
+            "min-light",
+            "min-light",
+            [
+              [
+                {
+                  "color": "#1976D2",
+                  "content": "a",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#24292EFF",
+                  "content": ".",
+                  "fontStyle": 0,
+                },
+                {
+                  "color": "#24292EFF",
+                  "content": "b",
+                  "fontStyle": 0,
+                },
+              ],
+            ],
+          ],
+        ]
+      `)
   })
 })

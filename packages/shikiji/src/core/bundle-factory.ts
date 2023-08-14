@@ -1,4 +1,4 @@
-import type { BundledHighlighterOptions, CodeToHtmlThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, PlainTextLanguage, RequireKeys, ThemeInput } from '../types'
+import type { BundledHighlighterOptions, CodeToHtmlOptions, CodeToHtmlThemesOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, PlainTextLanguage, RequireKeys, ThemeInput } from '../types'
 import { isPlaintext, toArray } from './utils'
 import { getHighlighterCore } from './core'
 
@@ -71,7 +71,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
 export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>) {
   let _shiki: ReturnType<typeof getHighlighter>
 
-  async function getShikiWithThemeLang(options: { theme: MaybeArray<T>; lang: MaybeArray<L | PlainTextLanguage> }) {
+  async function _getHighlighter(options: { theme: MaybeArray<T>; lang: MaybeArray<L | PlainTextLanguage> }) {
     if (!_shiki) {
       _shiki = getHighlighter({
         themes: toArray(options.theme),
@@ -96,7 +96,7 @@ export function createSingletonShorthands<L extends string, T extends string >(g
    * Differences from `shiki.codeToHtml()`, this function is async.
    */
   async function codeToHtml(code: string, options: RequireKeys<CodeToHtmlOptions<L, T>, 'theme' | 'lang'>) {
-    const shiki = await getShikiWithThemeLang(options)
+    const shiki = await _getHighlighter(options)
     return shiki.codeToHtml(code, options)
   }
 
@@ -107,7 +107,7 @@ export function createSingletonShorthands<L extends string, T extends string >(g
    * Differences from `shiki.codeToThemedTokens()`, this function is async.
    */
   async function codeToThemedTokens(code: string, options: RequireKeys<CodeToThemedTokensOptions<L, T>, 'theme' | 'lang'>) {
-    const shiki = await getShikiWithThemeLang(options)
+    const shiki = await _getHighlighter(options)
     return shiki.codeToThemedTokens(code, options)
   }
 
@@ -118,16 +118,31 @@ export function createSingletonShorthands<L extends string, T extends string >(g
    * Differences from `shiki.codeToHtmlThemes()`, this function is async.
    */
   async function codeToHtmlThemes(code: string, options: RequireKeys<CodeToHtmlThemesOptions<L, T>, 'themes' | 'lang'>) {
-    const shiki = await getShikiWithThemeLang({
+    const shiki = await _getHighlighter({
       lang: options.lang,
       theme: Object.values(options.themes).filter(Boolean) as T[],
     })
     return shiki.codeToHtmlThemes(code, options)
   }
 
+  /**
+   * Shorthand for `codeToTokensWithThemes` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   *
+   * Differences from `shiki.codeToTokensWithThemes()`, this function is async.
+   */
+  async function codeToTokensWithThemes(code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>) {
+    const shiki = await _getHighlighter({
+      lang: options.lang,
+      theme: Object.values(options.themes).filter(Boolean) as T[],
+    })
+    return shiki.codeToTokensWithThemes(code, options)
+  }
+
   return {
     codeToHtml,
     codeToHtmlThemes,
     codeToThemedTokens,
+    codeToTokensWithThemes,
   }
 }

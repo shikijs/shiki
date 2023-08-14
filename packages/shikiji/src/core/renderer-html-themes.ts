@@ -2,19 +2,19 @@ import type { HtmlRendererOptions, ThemeRegisteration, ThemedToken } from '../ty
 import { renderToHtml } from './renderer-html'
 
 /**
- * Break tokens from multiple themes into same length.
+ * Break tokens from multiple themes into same tokenization.
  *
  * For example, given two themes that tokenize `console.log("hello")` as:
  *
  * - `console . log (" hello ")` (6 tokens)
  * - `console .log ( "hello" )` (5 tokens)
  *
- * This function break both themes into same tokenization, so later the can be rendered in pairs.
+ * This function will return:
  *
  * - `console . log ( " hello " )` (8 tokens)
  * - `console . log ( " hello " )` (8 tokens)
  */
-export function _syncThemedTokens(...themes: ThemedToken[][][]) {
+export function syncThemesTokenization(...themes: ThemedToken[][][]) {
   const outThemes = themes.map<ThemedToken[][]>(() => [])
   const count = themes.length
 
@@ -55,35 +55,35 @@ export function _syncThemedTokens(...themes: ThemedToken[][][]) {
 }
 
 export function renderToHtmlThemes(
-  themes: [string, ThemedToken[][], ThemeRegisteration][],
+  themeTokens: [string, string, ThemedToken[][]][],
+  themeRegs: ThemeRegisteration[],
   cssVariablePrefix = '--shiki-',
   defaultColor = true,
   options: HtmlRendererOptions = {},
 ) {
-  const synced = _syncThemedTokens(...themes.map(t => t[1]))
-
+  const themeMap = themeTokens.map(t => t[2])
   const merged: ThemedToken[][] = []
-  for (let i = 0; i < synced[0].length; i++) {
-    const lines = synced.map(t => t[i])
+  for (let i = 0; i < themeMap[0].length; i++) {
+    const lineMap = themeMap.map(t => t[i])
     const lineout: any[] = []
     merged.push(lineout)
-    for (let j = 0; j < lines[0].length; j++) {
-      const tokens = lines.map(t => t[j])
-      const colors = tokens.map((t, idx) => `${idx === 0 && defaultColor ? '' : `${cssVariablePrefix + themes[idx][0]}:`}${t.color || 'inherit'}`).join(';')
+    for (let j = 0; j < lineMap[0].length; j++) {
+      const tokenMap = lineMap.map(t => t[j])
+      const colors = tokenMap.map((t, idx) => `${idx === 0 && defaultColor ? '' : `${cssVariablePrefix + themeTokens[idx][0]}:`}${t.color || 'inherit'}`).join(';')
       lineout.push({
-        ...tokens[0],
+        ...tokenMap[0],
         color: colors,
         htmlStyle: defaultColor ? undefined : colors,
       })
     }
   }
 
-  const fg = options.fg || themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + t[2].fg).join(';')
-  const bg = options.bg || themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + t[2].bg).join(';')
+  const fg = options.fg || themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + themeRegs[idx].fg).join(';')
+  const bg = options.bg || themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + themeRegs[idx].bg).join(';')
   return renderToHtml(merged, {
     fg,
     bg,
-    themeName: `shiki-themes ${themes.map(t => t[2].name).join(' ')}`,
+    themeName: `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`,
     rootStyle: defaultColor ? undefined : [fg, bg].join(';'),
     ...options,
   })

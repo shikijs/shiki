@@ -42,6 +42,10 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     code: string,
     options: CodeToThemedTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): ThemedToken[][]
+  codeToTokensWithThemes(
+    code: string,
+    options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): [color: string, theme: string, tokens: ThemedToken[][]][]
   loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
   loadLanguage(...langs: (LanguageInput | BundledLangKeys | PlainTextLanguage)[]): Promise<void>
   getLoadedLanguages(): string[]
@@ -84,13 +88,26 @@ export interface LanguageRegistration extends IRawGrammar {
   unbalancedBracketSelectors?: string[]
 }
 
-export interface CodeToHtmlOptions<Languages = string, Themes = string> {
+export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
   lang?: Languages | PlainTextLanguage
   theme?: Themes
+  /**
+   * Include explanation of why a token is given a color.
+   *
+   * @default true
+   */
+  includeExplanation?: boolean
+}
+
+export interface CodeToHtmlBasicOptions {
   lineOptions?: LineOption[]
 }
 
-export interface CodeToHtmlThemesOptions<Languages = string, Themes = string> {
+export interface CodeToHtmlOptions<Languages = string, Themes = string>
+  extends Omit<CodeToThemedTokensOptions<Languages, Themes>, 'includeExplanation'>, CodeToHtmlBasicOptions {
+}
+
+export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
   lang?: Languages | PlainTextLanguage
 
   /**
@@ -112,6 +129,10 @@ export interface CodeToHtmlThemesOptions<Languages = string, Themes = string> {
     light: Themes
     dark: Themes
   } & Partial<Record<string, Themes>>
+}
+
+export interface CodeToHtmlThemesOptions<Languages = string, Themes = string>
+  extends CodeToTokensWithThemesOptions<Languages, Themes>, CodeToHtmlBasicOptions {
 
   /**
    * The default theme applied to the code (via inline `color` style).
@@ -141,19 +162,6 @@ export interface CodeToHtmlThemesOptions<Languages = string, Themes = string> {
    * @default '--shiki-'
    */
   cssVariablePrefix?: string
-
-  lineOptions?: LineOption[]
-}
-
-export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
-  lang?: Languages | PlainTextLanguage
-  theme?: Themes
-  /**
-   * Include explanation of why a token is given a color.
-   *
-   * @default true
-   */
-  includeExplanation?: boolean
 }
 
 export interface LineOption {

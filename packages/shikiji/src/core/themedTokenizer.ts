@@ -5,7 +5,7 @@
 
 import type { IGrammar, IRawTheme } from 'vscode-textmate'
 import { INITIAL } from 'vscode-textmate'
-import type { ThemedToken, ThemedTokenExplanation, ThemedTokenScopeExplanation } from '../types'
+import type { ThemedToken, ThemedTokenScopeExplanation } from '../types'
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
 
@@ -58,8 +58,14 @@ export function tokenizeWithTheme(
       const foregroundColor = colorMap[foreground]
       const fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
-      const explanation: ThemedTokenExplanation[] = []
+      const token: ThemedToken = {
+        content: line.substring(startIndex, nextStartIndex),
+        color: foregroundColor,
+        fontStyle,
+      }
+
       if (options.includeExplanation) {
+        token.explanation = []
         let offset = 0
         while (startIndex + offset < nextStartIndex) {
           const tokenWithScopes = tokensWithScopes![tokensWithScopesIndex!]
@@ -69,7 +75,7 @@ export function tokenizeWithTheme(
             tokenWithScopes.endIndex,
           )
           offset += tokenWithScopesText.length
-          explanation.push({
+          token.explanation.push({
             content: tokenWithScopesText,
             scopes: explainThemeScopes(theme, tokenWithScopes.scopes),
           })
@@ -78,12 +84,7 @@ export function tokenizeWithTheme(
         }
       }
 
-      actual.push({
-        content: line.substring(startIndex, nextStartIndex),
-        color: foregroundColor,
-        fontStyle,
-        explanation,
-      })
+      actual.push(token)
     }
     final.push(actual)
     actual = []
