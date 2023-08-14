@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { ThemedToken } from '../src'
-import { codeToHtmlDualThemes, codeToThemedTokens } from '../src'
-import { _syncThemedTokens } from '../src/core/renderer-html-dual-themes'
+import { codeToHtmlThemes, codeToThemedTokens } from '../src'
+import { _syncThemedTokens } from '../src/core/renderer-html-themes'
 
 describe('syncThemedTokens', () => {
   function stringifyTokens(tokens: ThemedToken[][]) {
@@ -48,9 +48,9 @@ describe('syncThemedTokens', () => {
   })
 })
 
-describe('codeToHtmlDualThemes', () => {
+describe('codeToHtmlThemes', () => {
   it('dual themes', async () => {
-    const code = await codeToHtmlDualThemes('console.log("hello")', {
+    const code = await codeToHtmlThemes('console.log("hello")', {
       lang: 'js',
       themes: {
         dark: 'nord',
@@ -60,11 +60,9 @@ describe('codeToHtmlDualThemes', () => {
 
     const snippet = `
 <style>
-.dark .shiki {
-  background-color: var(--shiki-dark-bg) !important;
-  color: var(--shiki-dark) !important;
-}
+.dark .shiki,
 .dark .shiki span {
+  background-color: var(--shiki-dark-bg) !important;
   color: var(--shiki-dark) !important;
 }
 </style>
@@ -76,15 +74,17 @@ describe('codeToHtmlDualThemes', () => {
   })
 
   it('multiple themes', async () => {
-    const code = await codeToHtmlDualThemes('console.log("hello")', {
+    const themes = {
+      'light': 'vitesse-light',
+      'dark': 'vitesse-dark',
+      'nord': 'nord',
+      'min-dark': 'min-dark',
+      'min-light': 'min-light',
+    } as const
+
+    const code = await codeToHtmlThemes('console.log("hello")', {
       lang: 'js',
-      themes: {
-        'light': 'vitesse-light',
-        'dark': 'vitesse-dark',
-        'nord': 'nord',
-        'min-dark': 'min-dark',
-        'min-light': 'min-light',
-      },
+      themes,
       cssVariablePrefix: '--s-',
     })
 
@@ -95,40 +95,16 @@ describe('codeToHtmlDualThemes', () => {
   border-radius: 0.25em;
 }
 
-[data-theme="dark"] .shiki {
-  background-color: var(--s-dark-bg) !important;
-  color: var(--s-dark) !important;
+${Object.keys(themes).map(theme => `
+[data-theme="${theme}"] .shiki,
+[data-theme="${theme}"] .shiki span {
+  background-color: var(--s-${theme}-bg) !important;
+  color: var(--s-${theme}) !important;
 }
-[data-theme="dark"] .shiki span {
-  color: var(--s-dark) !important;
-}
-
-[data-theme="nord"] .shiki {
-  background-color: var(--s-nord-bg) !important;
-  color: var(--s-nord) !important;
-}
-[data-theme="nord"] .shiki span {
-  color: var(--s-nord) !important;
-}
-
-[data-theme="min-dark"] .shiki {
-  background-color: var(--s-min-dark-bg) !important;
-  color: var(--s-min-dark) !important;
-}
-[data-theme="min-dark"] .shiki span {
-  color: var(--s-min-dark) !important;
-}
-
-[data-theme="min-light"] .shiki {
-  background-color: var(--s-min-light-bg) !important;
-  color: var(--s-min-light) !important;
-}
-[data-theme="min-light"] .shiki span {
-  color: var(--s-min-light) !important;
-}
+`).join('\n')}
 </style>
 <script>
-const themes = ['light', 'dark', 'nord', 'min-dark', 'min-light']
+const themes = ${JSON.stringify(Object.keys(themes))}
 
 function toggleTheme() {
   document.body.dataset.theme = themes[(Math.max(themes.indexOf(document.body.dataset.theme), 0) + 1) % themes.length]
@@ -142,15 +118,17 @@ function toggleTheme() {
   })
 
   it('multiple themes without default', async () => {
-    const code = await codeToHtmlDualThemes('console.log("hello")', {
+    const themes = {
+      'light': 'vitesse-light',
+      'dark': 'vitesse-dark',
+      'nord': 'nord',
+      'min-dark': 'min-dark',
+      'min-light': 'min-light',
+    } as const
+
+    const code = await codeToHtmlThemes('console.log("hello")', {
       lang: 'js',
-      themes: {
-        'light': 'vitesse-light',
-        'dark': 'vitesse-dark',
-        'nord': 'nord',
-        'min-dark': 'min-dark',
-        'min-light': 'min-light',
-      },
+      themes,
       defaultColor: false,
       cssVariablePrefix: '--s-',
     })
@@ -162,48 +140,22 @@ function toggleTheme() {
   border-radius: 0.25em;
 }
 
-.shiki {
+.shiki,
+.shiki span {
   background-color: var(--s-light-bg);
   color: var(--s-light);
 }
-.shiki span {
-  color: var(--s-light)
-}
 
-[data-theme="dark"] .shiki {
-  background-color: var(--s-dark-bg);
-  color: var(--s-dark);
+${Object.keys(themes).map(theme => `
+[data-theme="${theme}"] .shiki,
+[data-theme="${theme}"] .shiki span {
+  background-color: var(--s-${theme}-bg) !important;
+  color: var(--s-${theme}) !important;
 }
-[data-theme="dark"] .shiki span {
-  color: var(--s-dark);
-}
-
-[data-theme="nord"] .shiki {
-  background-color: var(--s-nord-bg);
-  color: var(--s-nord);
-}
-[data-theme="nord"] .shiki span {
-  color: var(--s-nord);
-}
-
-[data-theme="min-dark"] .shiki {
-  background-color: var(--s-min-dark-bg);
-  color: var(--s-min-dark);
-}
-[data-theme="min-dark"] .shiki span {
-  color: var(--s-min-dark);
-}
-
-[data-theme="min-light"] .shiki {
-  background-color: var(--s-min-light-bg);
-  color: var(--s-min-light);
-}
-[data-theme="min-light"] .shiki span {
-  color: var(--s-min-light);
-}
+`).join('\n')}
 </style>
 <script>
-const themes = ['light', 'dark', 'nord', 'min-dark', 'min-light']
+const themes = ${JSON.stringify(Object.keys(themes))}
 
 function toggleTheme() {
   document.body.dataset.theme = themes[(Math.max(themes.indexOf(document.body.dataset.theme), 0) + 1) % themes.length]

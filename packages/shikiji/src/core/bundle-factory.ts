@@ -1,4 +1,4 @@
-import type { BundledHighlighterOptions, CodeToHtmlDualThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, PlainTextLanguage, RequireKeys, ThemeInput } from '../types'
+import type { BundledHighlighterOptions, CodeToHtmlThemesOptions, CodeToHtmlOptions, CodeToThemedTokensOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, PlainTextLanguage, RequireKeys, ThemeInput } from '../types'
 import { isPlaintext, toArray } from './utils'
 import { getHighlighterCore } from './core'
 
@@ -112,22 +112,22 @@ export function createSingletonShorthands<L extends string, T extends string >(g
   }
 
   /**
-   * Shorthand for `codeToHtmlDualThemes` with auto-loaded theme and language.
+   * Shorthand for `codeToHtmlThemes` with auto-loaded theme and language.
    * A singleton highlighter it maintained internally.
    *
-   * Differences from `shiki.codeToHtmlDualThemes()`, this function is async.
+   * Differences from `shiki.codeToHtmlThemes()`, this function is async.
    */
-  async function codeToHtmlDualThemes(code: string, options: RequireKeys<CodeToHtmlDualThemesOptions<L, T>, 'themes' | 'lang'>) {
+  async function codeToHtmlThemes(code: string, options: RequireKeys<CodeToHtmlThemesOptions<L, T>, 'themes' | 'lang'>) {
     const shiki = await getShikiWithThemeLang({
       lang: options.lang,
       theme: Object.values(options.themes).filter(Boolean) as T[],
     })
-    return shiki.codeToHtmlDualThemes(code, options)
+    return shiki.codeToHtmlThemes(code, options)
   }
 
   return {
     codeToHtml,
-    codeToHtmlDualThemes,
+    codeToHtmlThemes,
     codeToThemedTokens,
   }
 }

@@ -54,7 +54,7 @@ export function _syncThemedTokens(...themes: ThemedToken[][][]) {
   return outThemes
 }
 
-export function renderToHtmlDualThemes(
+export function renderToHtmlThemes(
   themes: [string, ThemedToken[][], ThemeRegisteration][],
   cssVariablePrefix = '--shiki-',
   defaultColor = true,
@@ -83,7 +83,7 @@ export function renderToHtmlDualThemes(
   return renderToHtml(merged, {
     fg,
     bg,
-    themeName: `shiki-dual-themes ${themes.map(t => t[2].name).join(' ')}`,
+    themeName: `shiki-themes ${themes.map(t => t[2].name).join(' ')}`,
     rootStyle: defaultColor ? undefined : [fg, bg].join(';'),
     ...options,
   })

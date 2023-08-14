@@ -34,9 +34,9 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     code: string,
     options: CodeToHtmlOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): string
-  codeToHtmlDualThemes(
+  codeToHtmlThemes(
     code: string,
-    options: CodeToHtmlDualThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToHtmlThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): string
   codeToThemedTokens(
     code: string,
@@ -90,7 +90,7 @@ export interface CodeToHtmlOptions<Languages = string, Themes = string> {
   lineOptions?: LineOption[]
 }
 
-export interface CodeToHtmlDualThemesOptions<Languages = string, Themes = string> {
+export interface CodeToHtmlThemesOptions<Languages = string, Themes = string> {
   lang?: Languages | PlainTextLanguage
 
   /**

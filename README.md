@@ -10,7 +10,7 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - Drop CJS and IIFE build, focus on ESM (or you can use bundlers).
 - [Bundles languages/themes composedly](#fine-grained-bundle).
-- [Light/Dark dual themes support](#lightdark-dual-themes).
+- [Light/Dark themes support](#lightdark-dual-themes).
 - Zero-dependencies.
 - Simplified APIs.
 - Please don't hate me Pine 😜 ([What's Next?](#whats-next))
@@ -205,7 +205,7 @@ Currently supports:
 
 - `codeToThemedTokens`
 - `codeToHtml`
-- `codeToHtmlDualThemes`
+- `codeToHtmlThemes`
 
 Internally they maintain a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
 
@@ -215,7 +215,7 @@ Internally they maintain a singleton highlighter instance and load the theme/lan
 
 `shikiji` added an experimental light/dark dual themes support. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, `shikiji`'s dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
-Use `codeToHtmlDualThemes` to render the code with dual themes:
+Use `codeToHtmlThemes` to render the code with dual themes:
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -225,7 +225,7 @@ const shiki = await getHighlighter({
   langs: ['javascript'],
 })
 
-const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
+const code = shiki.codeToHtmlThemes('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -238,7 +238,7 @@ The following HTML will be generated ([demo preview](https://htmlpreview.github.
 
 ```html
 <pre
-  class="shiki shiki-dual-themes min-light--nord"
+  class="shiki shiki-themes min-light--nord"
   style="background-color: #ffffff;--shiki-dark-bg:#2e3440ff;color: #ffffff;--shiki-dark-bg:#2e3440ff"
   tabindex="0"
 >
@@ -263,11 +263,9 @@ To make it reactive to your site's theme, you need to add a short CSS snippet:
 
 ```css
 @media (prefers-color-scheme: dark) {
-  .shiki {
-    background-color: var(--shiki-dark-bg) !important;
-    color: var(--shiki-dark) !important;
-  }
+  .shiki,
   .shiki span {
+    background-color: var(--shiki-dark-bg) !important;
     color: var(--shiki-dark) !important;
   }
 }
@@ -276,11 +274,9 @@ To make it reactive to your site's theme, you need to add a short CSS snippet:
 ###### Class-based Dark Mode
 
 ```css
-html.dark .shiki {
-  background-color: var(--shiki-dark-bg) !important;
-  color: var(--shiki-dark) !important;
-}
+html.dark .shiki,
 html.dark .shiki span {
+  background-color: var(--shiki-dark-bg) !important;
   color: var(--shiki-dark) !important;
 }
 ```
@@ -290,7 +286,7 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```js
-const code = shiki.codeToHtmlDualThemes('console.log("hello")', {
+const code = shiki.codeToHtmlThemes('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'github-light',
