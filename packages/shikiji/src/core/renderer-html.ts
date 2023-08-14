@@ -22,7 +22,7 @@ export function renderToHtml(lines: ThemedToken[][], options: HtmlRendererOption
   const optionsByLineNumber = groupBy(options.lineOptions ?? [], option => option.line)
   const userElements = options.elements || {}
 
-  function h(type: string = '', props = {}, children: string[]): string {
+  function h(type = '', props = {}, children: string[]): string {
     // @ts-expect-error don't check
     const element = userElements[type] || defaultElements[type]
     if (element) {
