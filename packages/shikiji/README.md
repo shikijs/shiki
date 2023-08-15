@@ -305,7 +305,7 @@ const code = shiki.codeToHtmlThemes('console.log("hello")', {
 })
 ```
 
-Token would be generated like:
+A token would be generated like:
 
 ```html
 <span style="color:#1976D2;--shiki-dark:#D8DEE9;--shiki-dim:#566575">console</span>
@@ -314,6 +314,31 @@ Token would be generated like:
 And then update your CSS snippet to control then each theme taking effect. Here is an example:
 
 [Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/packages/shikiji/test/out/multiple-themes.html)
+
+#### Without Default Color
+
+If you want to take full control of the colors, or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
+
+```js
+const code = shiki.codeToHtmlThemes('console.log("hello")', {
+  lang: 'javascript',
+  themes: {
+    light: 'vitesse-light',
+    dark: 'vitesse-dark',
+  },
+  defaultColor: false, // <--
+})
+```
+
+With it, a token would be generated like:
+
+```html
+<span style="--shiki-dark:#D8DEE9;--shiki-light:#2E3440">console</span>
+```
+
+In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
+
+It's also possible to control the theme in CSS variables, for more, reference to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
 
 ## Bundle Size
 
