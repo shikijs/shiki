@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/shikiji?color=a1b858&label=)](https://www.npmjs.com/package/shikiji)
 
-An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammars.
+An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammars. And [a little bit more](#additional-features).
 
 ## Changes
 
@@ -151,13 +151,17 @@ To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) 
   <div id="foo"></div>
 
   <script type="module">
-    import { codeToHtml } from 'https://esm.run/shikiji@0.3' // be sure to specify the exact version
+    import { codeToHtml } from 'https://esm.run/shikiji@0.4' // be sure to specify the exact version
 
     const foo = document.getElementById('foo')
-    foo.innerHTML = await codeToHtml('console.log("Hi")', { lang: 'js', theme: 'vitesse-light' })
+    foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', { lang: 'js', theme: 'vitesse-light' })
   </script>
 </body>
 ```
+
+It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shikiji`, `shikiji/themes/vitesse-light.mjs`, `shikiji/langs/javascript.mjs`, `shikiji/wasm.mjs`), with around 200KB data transferred in total.
+
+[Demo](https://jsfiddle.net/rdasqhxu/1/)
 
 ### Cloudflare Workers
 
@@ -209,7 +213,7 @@ Currently supports:
 
 Internally they maintain a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
 
-> **Note:** These are only available in the [bundled usage](#bundled-usage), a.k.a the main `shikiji` entry. If you are using the [fine-grained bundle](#fine-grained-bundle), you can create your own shorthands by porting [this file](https://github.com/antfu/shikiji/blob/main/packages/shikiji/src/bundled/shorthands.ts).
+> **Note:** These are only available in the [bundled usage](#bundled-usage), a.k.a the main `shikiji` entry. If you are using the [fine-grained bundle](#fine-grained-bundle), you can create your own shorthands using [`createSingletonShorthands`](https://github.com/antfu/shikiji/blob/main/packages/shikiji/src/core/bundle-factory.ts) or port it your own.
 
 ### Light/Dark Dual Themes
 
