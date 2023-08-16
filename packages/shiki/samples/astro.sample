@@ -1,16 +1,28 @@
 ---
-const name = "world"
+// Your component script here!
+import Banner from '../components/Banner.astro';
+import ReactPokemonComponent from '../components/ReactPokemonComponent.jsx';
+const myFavoritePokemon = [/* ... */];
+const { title } = Astro.props;
 ---
+<!-- HTML comments supported! -->
+{/* JS comment syntax is also valid! */}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <!-- This... is an Astro comment. -->
-    <title>Hello, {name}</title>
-  </head>
-  <body>
-    <main>
-      <h1>Hello, {name}</h1>
-    </main>
-  </body>
-</html>
+<Banner />
+<h1>Hello, world!</h1>
+
+<!-- Use props and other variables from the component script: -->
+<p>{title}</p>
+
+<!-- Include other UI framework components with a `client:` directive to hydrate: -->
+<ReactPokemonComponent client:visible />
+
+<!-- Mix HTML with JavaScript expressions, similar to JSX: -->
+<ul>
+  {myFavoritePokemon.map((data) => <li>{data.name}</li>)}
+</ul>
+
+<!-- Use a template directive to build class names from multiple strings or even objects! -->
+<p class:list={["add", "dynamic", {classNames: true}]} />
+
+<!-- From https://docs.astro.build/en/core-concepts/astro-components/ -->
