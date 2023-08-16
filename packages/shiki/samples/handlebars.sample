@@ -1,0 +1,17 @@
+<div class="entry">
+  <h1>{{title}}</h1>
+  {{#with story}}
+    <div class="intro">{{{intro}}}</div>
+    <div class="body">{{{body}}}</div>
+  {{/with}}
+</div>
+<div class="comments">
+  {{#each comments}}
+    <div class="comment">
+      <h2>{{subject}}</h2>
+      {{{body}}}
+    </div>
+  {{/each}}
+</div>
+
+{{! From https://handlebarsjs.com/guide/block-helpers.html#the-with-helper }}

@@ -1,19 +1,46 @@
-.Aligner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+html {
+	margin: 0;
+	background: black;
+	height: 100%;
 }
 
-.Aligner-item {
-  max-width: 50%;
+body {
+	margin: 0;
+	width: 100%;
+	height: inherit;
 }
 
-.Aligner-item--top {
-  align-self: flex-start;
+/* the three main rows going down the page */
+
+body > div {
+  height: 25%;
 }
 
-.Aligner-item--bottom {
-  align-self: flex-end;
+.thumb {
+	float: left;
+	width: 25%;
+	height: 100%;
+	object-fit: cover;
 }
 
-/* From https://philipwalton.github.io/solved-by-flexbox/demos/vertical-centering/ */
+.main {
+  display: none;
+}
+
+.blowup {
+  display: block;
+  position: absolute;
+  object-fit: contain;
+  object-position: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+}
+
+.darken {
+  opacity: 0.4;
+}
+
+/* From https://github.com/mdn/css-examples/blob/main/object-fit-gallery/style.css */
