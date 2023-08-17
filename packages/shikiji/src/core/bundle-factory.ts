@@ -1,5 +1,5 @@
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, PlainTextLanguage, RequireKeys, ThemeInput } from '../types'
-import { isPlaintext, toArray } from './utils'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, ThemeInput } from '../types'
+import { isSpecialLang, toArray } from './utils'
 import { getHighlighterCore } from './highlighter'
 
 export type GetHighlighterFactory<L extends string, T extends string> = (options?: BundledHighlighterOptions<L, T>) => Promise<HighlighterGeneric<L, T>>
@@ -17,9 +17,9 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
   ladWasm: HighlighterCoreOptions['loadWasm'],
 ): GetHighlighterFactory<BundledLangs, BundledThemes> {
   async function getHighlighter(options: BundledHighlighterOptions<BundledLangs, BundledThemes> = {}): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
-    function resolveLang(lang: LanguageInput | BundledLangs | PlainTextLanguage): LanguageInput {
+    function resolveLang(lang: LanguageInput | BundledLangs | SpecialLanguage): LanguageInput {
       if (typeof lang === 'string') {
-        if (isPlaintext(lang))
+        if (isSpecialLang(lang))
           return []
         const bundle = bundledLanguages[lang as BundledLangs]
         if (!bundle)
@@ -68,7 +68,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
 export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>) {
   let _shiki: ReturnType<typeof getHighlighter>
 
-  async function _getHighlighter(options: { theme: MaybeArray<T>; lang: MaybeArray<L | PlainTextLanguage> }) {
+  async function _getHighlighter(options: { theme: MaybeArray<T>; lang: MaybeArray<L | SpecialLanguage> }) {
     if (!_shiki) {
       _shiki = getHighlighter({
         themes: toArray(options.theme),

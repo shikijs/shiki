@@ -5,8 +5,8 @@ import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
 import type { OnigurumaLoadOptions } from './oniguruma'
 
-export type BuiltinLanguages = keyof typeof bundledLanguages | SpecialLanguage
-export type BuiltinThemes = keyof typeof bundledThemes
+export type BuiltinLanguage = keyof typeof bundledLanguages
+export type BuiltinTheme = keyof typeof bundledThemes
 
 export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
 export type AnsiLanguage = 'ansi'
@@ -66,7 +66,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   ): Root
 
   loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
-  loadLanguage(...langs: (LanguageInput | BundledLangKeys | PlainTextLanguage)[]): Promise<void>
+  loadLanguage(...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]): Promise<void>
   getLoadedLanguages(): string[]
   getLoadedThemes(): string[]
 }
@@ -89,7 +89,7 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
    *
    * @default Object.keys(bundledThemes)
    */
-  langs?: (LanguageInput | L | PlainTextLanguage)[]
+  langs?: (LanguageInput | L | SpecialLanguage)[]
 }
 
 export interface LanguageRegistration extends IRawGrammar {

@@ -1,4 +1,4 @@
-import type { BuiltinLanguages, BuiltinThemes, HighlighterGeneric } from './types'
+import type { BuiltinLanguage, BuiltinTheme, HighlighterGeneric } from './types'
 import { createSingletonShorthands, createdBundledHighlighter } from './core'
 import { bundledLanguages } from './langs'
 import { bundledThemes } from './themes'
@@ -9,11 +9,11 @@ export * from './themes'
 export * from './langs'
 export * from './wasm'
 
-export type Highlighter = HighlighterGeneric<BuiltinLanguages, BuiltinThemes>
+export type Highlighter = HighlighterGeneric<BuiltinLanguage, BuiltinTheme>
 
 export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
-  BuiltinLanguages,
-  BuiltinThemes
+  BuiltinLanguage,
+  BuiltinTheme
 >(
   bundledLanguages,
   bundledThemes,
@@ -26,8 +26,8 @@ export const {
   codeToThemedTokens,
   codeToTokensWithThemes,
 } = /* @__PURE__ */ createSingletonShorthands<
-  BuiltinLanguages,
-  BuiltinThemes
+  BuiltinLanguage,
+  BuiltinTheme
 >(
   getHighlighter,
 )
