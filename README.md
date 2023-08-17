@@ -419,7 +419,7 @@ console.log(root)
 
 As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 
-- Top level named export `setCDN`, `loadLanguage`, `loadLanguage`, `setWasm`, are dropped.
+- Top level named export `setCDN`, `loadLanguage`, `loadTheme`, `setWasm` are dropped as they are not needed anymore.
 - `BUNDLED_LANGUAGES`, `BUNDLED_THEMES` are moved to `shikiji/langs` and `shikiji/themes` and renamed to `bundledLanguages` and `bundledThemes` respectively.
 - `theme` option for `getHighlighter` is dropped, use `themes` with an array instead.
 - Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
@@ -427,7 +427,7 @@ As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 - `codeToHtml` uses [`hast`](https://github.com/syntax-tree/hast) internally. The generated HTML will be a bit different but should behavior the same.
 - `lineOptions` is dropped in favor of the fully customizable `hastTransform` option.
 - CJS and IIFE builds are dropped. See [CJS Usage](#cjs-usage) and [CDN Usage](#cdn-usage) for more details.
-- `LanguageRegistration`'s `grammar` field if flattened to `LanguageRegistration` itself (refer to the types for more details).
+- `LanguageRegistration`'s `grammar` field is flattened to `LanguageRegistration` itself (refer to the types for more details).
 
 ## Bundle Size
 
