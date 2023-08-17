@@ -27,7 +27,11 @@ export function codeToHast(
     if (themes.length === 0)
       throw new Error('[shikiji] `themes` option must not be empty')
 
-    const themeTokens = codeToTokensWithThemes(context, code, options)
+    const themeTokens = codeToTokensWithThemes(
+      context,
+      code,
+      options,
+    )
       .sort(a => a[0] === defaultColor ? -1 : 1)
 
     if (defaultColor && !themeTokens.find(t => t[0] === defaultColor))

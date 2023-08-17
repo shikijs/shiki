@@ -360,7 +360,8 @@ As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 - `BUNDLED_LANGUAGES`, `BUNDLED_THEMES` are moved to `shikiji/langs` and `shikiji/themes` and renamed to `bundledLanguages` and `bundledThemes` respectively.
 - `theme` option for `getHighlighter` is dropped, use `themes` with an array instead.
 - Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
-- CJS and IIFE builds are dropped.
+- `.ansiToHtml` is merged into `.codeToHtml` as a special language `ansi`. Use `.codeToHtml(code, { lang: 'ansi' })` instead.
+- CJS and IIFE builds are dropped. See [CJS Usage](#cjs-usage) and [CDN Usage](#cdn-usage) for more details.
 - `LanguageRegistration`'s `grammar` field if flattened to `LanguageRegistration` itself (refer to the types for more details).
 
 ## Bundle Size

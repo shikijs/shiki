@@ -1,4 +1,4 @@
-import { toHtml } from 'hast-util-to-html'
+import { toHtml as hastToHtml } from 'hast-util-to-html'
 import type { CodeToHastOptions, ShikiContext } from '../types'
 import { codeToHast } from './renderer-hast'
 
@@ -10,5 +10,5 @@ export function codeToHtml(
   code: string,
   options: CodeToHastOptions,
 ): string {
-  return toHtml(codeToHast(context, code, options))
+  return hastToHtml(codeToHast(context, code, options))
 }

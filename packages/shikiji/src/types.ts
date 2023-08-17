@@ -5,10 +5,12 @@ import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
 import type { OnigurumaLoadOptions } from './oniguruma'
 
-export type BuiltinLanguages = keyof typeof bundledLanguages
+export type BuiltinLanguages = keyof typeof bundledLanguages | SpecialLanguage
 export type BuiltinThemes = keyof typeof bundledThemes
 
 export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
+export type AnsiLanguage = 'ansi'
+export type SpecialLanguage = PlainTextLanguage | AnsiLanguage
 
 export type Awaitable<T> = T | Promise<T>
 export type MaybeGetter<T> = Awaitable<MaybeModule<T>> | (() => Awaitable<MaybeModule<T>>)
@@ -106,7 +108,7 @@ export interface LanguageRegistration extends IRawGrammar {
 }
 
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
-  lang?: Languages | PlainTextLanguage
+  lang?: Languages | SpecialLanguage
   theme?: Themes
   /**
    * Include explanation of why a token is given a color.
@@ -117,7 +119,7 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
 }
 
 export interface CodeToHastOptionsCommon<Languages = string> {
-  lang: Languages | PlainTextLanguage
+  lang: Languages | SpecialLanguage
   /**
    * TODO
    */
@@ -125,7 +127,7 @@ export interface CodeToHastOptionsCommon<Languages = string> {
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
-  lang?: Languages | PlainTextLanguage
+  lang?: Languages | SpecialLanguage
 
   /**
    * A map of color names to themes.

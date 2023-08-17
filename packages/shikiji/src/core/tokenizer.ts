@@ -9,6 +9,7 @@ import type { CodeToThemedTokensOptions, ShikiContext, ThemedToken, ThemedTokenS
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
 import { isPlaintext } from './utils'
+import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
 
 export interface TokenizeWithThemeOptions {
   includeExplanation?: boolean
@@ -29,8 +30,13 @@ export function codeToThemedTokens(
     const lines = code.split(/\r\n|\r|\n/)
     return [...lines.map(line => [{ content: line }])]
   }
-  const _grammar = context.getLangGrammar(lang)
+
   const { theme, colorMap } = context.setTheme(themeName)
+
+  if (lang === 'ansi')
+    return tokenizeAnsiWithTheme(theme, code)
+
+  const _grammar = context.getLangGrammar(lang)
   return tokenizeWithTheme(code, _grammar, theme, colorMap, {
     includeExplanation,
   })

@@ -11,10 +11,10 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
   const context = await getShikiContext(options)
 
   return {
-    codeToHtml: (code, options) => codeToHtml(context, code, options),
     codeToThemedTokens: (code, options) => codeToThemedTokens(context, code, options),
     codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(context, code, options),
     codeToHast: (code, options) => codeToHast(context, code, options),
+    codeToHtml: (code, options) => codeToHtml(context, code, options),
 
     loadLanguage: context.loadLanguage,
     loadTheme: context.loadTheme,
