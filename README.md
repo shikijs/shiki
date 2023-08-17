@@ -11,8 +11,10 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 - Drop CJS and IIFE build, focus on ESM (or you can use bundlers).
 - [Bundles languages/themes composedly](#fine-grained-bundle).
 - [Light/Dark themes support](#lightdark-dual-themes).
+- [`hast` support](#codetohast).
 - Zero-dependencies.
 - Simplified APIs.
+- [List of breaking changes from shiki](#breaking-changes-from-shiki).
 - Please don't hate me Pine 😜 ([What's Next?](#whats-next))
 
 ## Install
@@ -197,15 +199,6 @@ export default {
 
 ## Additional Features
 
-### `codeToHast`
-
-`shikiji` used [`hast`](https://github.com/syntax-tree/hast) to generate HTML. You can use `codeToHast` to generate the AST and use it with tools like [unified](https://github.com/unifiedjs).
-
-```js
-const root = shiki.codeToHast('const a = 1', { lang: 'javascript', theme: 'nord' })
-```
-
-
 ### Shorthands
 
 In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simpler usage.
@@ -351,6 +344,76 @@ With it, a token would be generated like:
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
 It's also possible to control the theme in CSS variables, for more, reference to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
+
+
+### `codeToHast`
+
+`shikiji` used [`hast`](https://github.com/syntax-tree/hast) to generate HTML. You can use `codeToHast` to generate the AST and use it with tools like [unified](https://github.com/unifiedjs).
+
+```js
+const root = shiki.codeToHast('const a = 1', { lang: 'javascript', theme: 'nord' })
+
+console.log(root)
+```
+
+<!-- eslint-skip -->
+
+```ts
+{
+  type: 'root',
+  children: [
+    {
+      type: 'element',
+      tagName: 'pre',
+      properties: {
+        class: 'shiki vitesse-light',
+        style: 'background-color:#ffffff;color:#393a34',
+        tabindex: '0'
+      },
+      children: [
+        {
+          type: 'element',
+          tagName: 'code',
+          properties: {},
+          children: [
+            {
+              type: 'element',
+              tagName: 'span',
+              properties: { class: 'line' },
+              children: [
+                {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { style: 'color:#AB5959' },
+                  children: [ { type: 'text', value: 'const' } ]
+                },
+                {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { style: 'color:#B07D48' },
+                  children: [ { type: 'text', value: ' a' } ]
+                },
+                {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { style: 'color:#999999' },
+                  children: [ { type: 'text', value: ' =' } ]
+                },
+                {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { style: 'color:#2F798A' },
+                  children: [ { type: 'text', value: ' 1' } ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Breaking Changes from Shiki
 
