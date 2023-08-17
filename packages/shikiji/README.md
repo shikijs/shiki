@@ -209,7 +209,7 @@ Currently supports:
 
 - `codeToThemedTokens`
 - `codeToHtml`
-- `codeToHtmlThemes`
+- `codeToHast`
 
 Internally they maintain a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
 
@@ -219,7 +219,7 @@ Internally they maintain a singleton highlighter instance and load the theme/lan
 
 `shikiji` added an experimental light/dark dual themes support. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, `shikiji`'s dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
-Use `codeToHtmlThemes` to render the code with dual themes:
+Use `codeToHtml` to render the code with dual themes:
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -229,7 +229,7 @@ const shiki = await getHighlighter({
   langs: ['javascript'],
 })
 
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -290,7 +290,7 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```js
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'github-light',
@@ -320,7 +320,7 @@ And then update your CSS snippet to control then each theme taking effect. Here 
 If you want to take full control of the colors, or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```js
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',

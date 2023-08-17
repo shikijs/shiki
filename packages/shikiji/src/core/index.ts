@@ -1,4 +1,5 @@
 export { loadWasm } from '../oniguruma'
 
-export * from './core'
+export * from './context'
+export * from './highlighter'
 export * from './bundle-factory'

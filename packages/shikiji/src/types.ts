@@ -1,4 +1,5 @@
-import type { IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { IGrammar, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { Root } from 'hast'
 import type { bundledThemes } from './themes'
 import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
@@ -29,14 +30,25 @@ export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
 export type ResolveBundleKey<T extends string> = never extends T ? string : T
 
+export interface ShikiContext {
+  setTheme(name: string): {
+    theme: ThemeRegisteration
+    colorMap: string[]
+  }
+
+  getTheme(name: string): ThemeRegisteration
+  getLangGrammar(name: string): IGrammar
+
+  getLoadedThemes(): string[]
+  getLoadedLanguages(): string[]
+  loadLanguage(...langs: LanguageInput[]): Promise<void>
+  loadTheme(...themes: ThemeInput[]): Promise<void>
+}
+
 export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
   codeToHtml(
     code: string,
-    options: CodeToHtmlOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): string
-  codeToHtmlThemes(
-    code: string,
-    options: CodeToHtmlThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): string
   codeToThemedTokens(
     code: string,
@@ -46,6 +58,11 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     code: string,
     options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): [color: string, theme: string, tokens: ThemedToken[][]][]
+  codeToHast(
+    code: string,
+    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): Root
+
   loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
   loadLanguage(...langs: (LanguageInput | BundledLangKeys | PlainTextLanguage)[]): Promise<void>
   getLoadedLanguages(): string[]
@@ -99,12 +116,12 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
   includeExplanation?: boolean
 }
 
-export interface CodeToHtmlBasicOptions {
-  lineOptions?: LineOption[]
-}
-
-export interface CodeToHtmlOptions<Languages = string, Themes = string>
-  extends Omit<CodeToThemedTokensOptions<Languages, Themes>, 'includeExplanation'>, CodeToHtmlBasicOptions {
+export interface CodeToHastOptionsCommon<Languages = string> {
+  lang: Languages | PlainTextLanguage
+  /**
+   * TODO
+   */
+  hastTransform?: (hast: Root) => Root | void
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
@@ -125,14 +142,35 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
    * }
    * ```
    */
-  themes: {
-    light: Themes
-    dark: Themes
-  } & Partial<Record<string, Themes>>
+  themes: Partial<Record<string, Themes>>
 }
 
-export interface CodeToHtmlThemesOptions<Languages = string, Themes = string>
-  extends CodeToTokensWithThemesOptions<Languages, Themes>, CodeToHtmlBasicOptions {
+export type CodeToHastOptions<Languages = string, Themes = string> = CodeToHastOptionsCommon<Languages> & ({
+  theme: Themes
+} | {
+  /**
+   * A map of color names to themes.
+   * This allows you to specify multiple themes for the generated code.
+   *
+   * ```ts
+   * shiki.codeToHtml(code, {
+   *  lang: 'js',
+   *  themes: {
+   *    light: 'vitesse-light',
+   *    dark: 'vitesse-dark',
+   *  }
+   * })
+   * ```
+   *
+   * Will generate:
+   *
+   * ```html
+   * <span style="color:#111;--shiki-dark:#fff;">code</span>
+   * ```
+   *
+   * @see https://github.com/antfu/shikiji#lightdark-dual-themes
+   */
+  themes: CodeToTokensWithThemesOptions<Languages, Themes>['themes']
 
   /**
    * The default theme applied to the code (via inline `color` style).
@@ -162,7 +200,7 @@ export interface CodeToHtmlThemesOptions<Languages = string, Themes = string>
    * @default '--shiki-'
    */
   cssVariablePrefix?: string
-}
+})
 
 export interface LineOption {
   /**
@@ -218,9 +256,13 @@ export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
-  lineOptions?: LineOption[]
+
+  hastTransform?: (hast: Root) => Root | void
+
   elements?: ElementsOptions
+
   themeName?: string
+
   /**
    * Custom style string to be applied to the root `<pre>` element.
    * When specified, `fg` and `bg` will be ignored.

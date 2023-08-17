@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { ThemedToken } from '../src'
-import { codeToHtmlThemes, codeToThemedTokens, codeToTokensWithThemes } from '../src'
+import { codeToHtml, codeToThemedTokens, codeToTokensWithThemes } from '../src'
 import { syncThemesTokenization } from '../src/core/renderer-html-themes'
 
 describe('syncThemesTokenization', () => {
@@ -48,9 +48,9 @@ describe('syncThemesTokenization', () => {
   })
 })
 
-describe('codeToHtmlThemes', () => {
+describe('codeToHtml', () => {
   it('dual themes', async () => {
-    const code = await codeToHtmlThemes('console.log("hello")', {
+    const code = await codeToHtml('console.log("hello")', {
       lang: 'js',
       themes: {
         dark: 'nord',
@@ -82,7 +82,7 @@ describe('codeToHtmlThemes', () => {
       'min-light': 'min-light',
     } as const
 
-    const code = await codeToHtmlThemes('console.log("hello")', {
+    const code = await codeToHtml('console.log("hello")', {
       lang: 'js',
       themes,
       cssVariablePrefix: '--s-',
@@ -126,7 +126,7 @@ function toggleTheme() {
       'min-light': 'min-light',
     } as const
 
-    const code = await codeToHtmlThemes('console.log("hello")', {
+    const code = await codeToHtml('console.log("hello")', {
       lang: 'js',
       themes,
       defaultColor: false,
@@ -304,5 +304,49 @@ describe('codeToTokensWithThemes', () => {
           ],
         ]
       `)
+  })
+})
+
+describe('errors', () => {
+  it('throws on empty theme', async () => {
+    expect(() => codeToHtml('console.log("hello")', {
+      lang: 'js',
+      themes: {},
+    }))
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must not be empty"')
+  })
+
+  it('throws on missing default color', async () => {
+    expect(() => codeToHtml('console.log("hello")', {
+      lang: 'js',
+      themes: {
+        dark: 'nord',
+      },
+    }))
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must contain the defaultColor key `light`"')
+
+    expect(() => codeToHtml('console.log("hello")', {
+      lang: 'js',
+      themes: {
+        light: 'nord',
+      },
+      defaultColor: 'dark',
+    }))
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must contain the defaultColor key `dark`"')
+  })
+
+  it('not throws when `defaultColor` set to false', async () => {
+    const code = await codeToHtml('console.log("hello")', {
+      lang: 'js',
+      themes: {
+        dark: 'nord',
+      },
+      defaultColor: false,
+    })
+
+    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki shiki-themes nord\\" style=\\"--shiki-dark:#d8dee9ff;--shiki-dark-bg:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"--shiki-dark:#D8DEE9\\">console</span><span style=\\"--shiki-dark:#ECEFF4\\">.</span><span style=\\"--shiki-dark:#88C0D0\\">log</span><span style=\\"--shiki-dark:#D8DEE9FF\\">(</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#A3BE8C\\">hello</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#D8DEE9FF\\">)</span></span></code></pre>"')
   })
 })

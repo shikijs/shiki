@@ -15,5 +15,12 @@ export default defineConfig({
         ],
       },
     },
+    coverage: {
+      exclude: [
+        '**/src/oniguruma/**',
+        '**/src/assets/**',
+        '**/stackElementMetadata.ts',
+      ],
+    },
   },
 })

@@ -5,12 +5,35 @@
 
 import type { IGrammar, IRawTheme } from 'vscode-textmate'
 import { INITIAL } from 'vscode-textmate'
-import type { ThemedToken, ThemedTokenScopeExplanation } from '../types'
+import type { CodeToThemedTokensOptions, ShikiContext, ThemedToken, ThemedTokenScopeExplanation } from '../types'
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
+import { isPlaintext } from './utils'
 
 export interface TokenizeWithThemeOptions {
   includeExplanation?: boolean
+}
+
+export function codeToThemedTokens(
+  context: ShikiContext,
+  code: string,
+  options: CodeToThemedTokensOptions = {},
+): ThemedToken[][] {
+  const {
+    lang = 'text',
+    theme: themeName = context.getLoadedThemes()[0],
+    includeExplanation = true,
+  } = options
+
+  if (isPlaintext(lang)) {
+    const lines = code.split(/\r\n|\r|\n/)
+    return [...lines.map(line => [{ content: line }])]
+  }
+  const _grammar = context.getLangGrammar(lang)
+  const { theme, colorMap } = context.setTheme(themeName)
+  return tokenizeWithTheme(code, _grammar, theme, colorMap, {
+    includeExplanation,
+  })
 }
 
 export function tokenizeWithTheme(

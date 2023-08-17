@@ -39,7 +39,7 @@ const shiki = await getHighlighter({
 await shiki.loadTheme('vitesse-light')
 await shiki.loadLanguage('css')
 
-const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+const code = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'vitesse-light' })
 ```
 
 Unlike `shiki`, `shikiji` does not load any themes or languages when not specified.
@@ -49,7 +49,7 @@ import { getHighlighter } from 'shikiji'
 
 const shiki = await getHighlighter()
 
-shiki.codeToHtml('const a = 1', { lang: 'javascript' }) // throws error, `javascript` is not loaded
+shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' }) // throws error, `javascript` is not loaded
 
 await shiki.loadLanguage('javascript') // load the language
 ```
@@ -103,7 +103,7 @@ const shiki = await getHighlighterCore({
 // optionally, load themes and languages after creation
 await shiki.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
 
-const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+const code = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
 ```
 
 ### CJS Usage
@@ -197,6 +197,15 @@ export default {
 
 ## Additional Features
 
+### `codeToHast`
+
+`shikiji` used [`hast`](https://github.com/syntax-tree/hast) to generate HTML. You can use `codeToHast` to generate the AST and use it with tools like [unified](https://github.com/unifiedjs).
+
+```js
+const root = shiki.codeToHast('const a = 1', { lang: 'javascript', theme: 'nord' })
+```
+
+
 ### Shorthands
 
 In addition to the `getHighlighter` function, `shikiji` also provides some shorthand functions for simpler usage.
@@ -212,7 +221,7 @@ Currently supports:
 
 - `codeToThemedTokens`
 - `codeToHtml`
-- `codeToHtmlThemes`
+- `codeToHast`
 
 Internally they maintain a singleton highlighter instance and load the theme/language on demand. Different from `shiki.codeToHtml`, the `codeToHtml` shorthand function returns a Promise and `lang` and `theme` options are required.
 
@@ -222,7 +231,7 @@ Internally they maintain a singleton highlighter instance and load the theme/lan
 
 `shikiji` added an experimental light/dark dual themes support. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, `shikiji`'s dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
-Use `codeToHtmlThemes` to render the code with dual themes:
+Changing the `theme` option in `codeToHtml` to `options` with `light` and `dark` key to generate with two themes.
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -232,7 +241,7 @@ const shiki = await getHighlighter({
   langs: ['javascript'],
 })
 
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -293,7 +302,7 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```js
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'github-light',
@@ -323,7 +332,7 @@ And then update your CSS snippet to control then each theme taking effect. Here 
 If you want to take full control of the colors, or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```js
-const code = shiki.codeToHtmlThemes('console.log("hello")', {
+const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -342,6 +351,17 @@ With it, a token would be generated like:
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
 It's also possible to control the theme in CSS variables, for more, reference to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
+
+## Breaking Changes from Shiki
+
+As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
+
+- Top level named export `setCDN`, `loadLanguage`, `loadLanguage`, `setWasm`, are dropped.
+- `BUNDLED_LANGUAGES`, `BUNDLED_THEMES` are moved to `shikiji/langs` and `shikiji/themes` and renamed to `bundledLanguages` and `bundledThemes` respectively.
+- `theme` option for `getHighlighter` is dropped, use `themes` with an array instead.
+- Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
+- CJS and IIFE builds are dropped.
+- `LanguageRegistration`'s `grammar` field if flattened to `LanguageRegistration` itself (refer to the types for more details).
 
 ## Bundle Size
 

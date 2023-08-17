@@ -16,7 +16,7 @@ export default {
     })
 
     return new Response(
-      highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }),
+      highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js', theme: 'nord' }),
       {
         headers: {
           'content-type': 'text/html;charset=UTF-8',

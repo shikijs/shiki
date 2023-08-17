@@ -17,8 +17,8 @@ describe('should', () => {
       },
     })
 
-    expect(shiki.codeToHtml('console.log("Hi")', { lang: 'javascript' }))
-      .toMatchInlineSnapshot('"<pre class=\\"shiki nord\\" style=\\"background-color:#2e3440ff;color:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#D8DEE9\\">console</span><span style=\\"color:#ECEFF4\\">.</span><span style=\\"color:#88C0D0\\">log</span><span style=\\"color:#D8DEE9FF\\">(</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#A3BE8C\\">Hi</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#D8DEE9FF\\">)</span></span></code></pre>"')
+    expect(shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))
+      .toMatchInlineSnapshot('"<pre class=\\"shiki nord\\" style=\\"background-color:#2e3440ff;color:#d8dee9ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#D8DEE9\\">console</span><span style=\\"color:#ECEFF4\\">.</span><span style=\\"color:#88C0D0\\">log</span><span style=\\"color:#D8DEE9FF\\">(</span><span style=\\"color:#ECEFF4\\">\\"</span><span style=\\"color:#A3BE8C\\">Hi</span><span style=\\"color:#ECEFF4\\">\\"</span><span style=\\"color:#D8DEE9FF\\">)</span></span></code></pre>"')
   })
 
   it('dynamic load theme and lang', async () => {
@@ -55,7 +55,7 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'vitesse-light' }))
-      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#ffffff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#998418\\">print</span><span style=\\"color:#2F798A\\"> 1</span></span></code></pre>"')
+      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#998418\\">print</span><span style=\\"color:#2F798A\\"> 1</span></span></code></pre>"')
   })
 
   it('requires nested lang', async () => {
@@ -85,7 +85,7 @@ describe('should', () => {
 
     const code = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' })
 
-    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki nord\\" style=\\"background-color:#2e3440ff;color:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#D8DEE9\\">console</span><span style=\\"color:#ECEFF4\\">.</span><span style=\\"color:#88C0D0\\">log</span><span style=\\"color:#D8DEE9FF\\">(</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#A3BE8C\\">Hi</span><span style=\\"color:#ECEFF4\\">&quot;</span><span style=\\"color:#D8DEE9FF\\">)</span></span></code></pre>"')
+    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki nord\\" style=\\"background-color:#2e3440ff;color:#d8dee9ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#D8DEE9\\">console</span><span style=\\"color:#ECEFF4\\">.</span><span style=\\"color:#88C0D0\\">log</span><span style=\\"color:#D8DEE9FF\\">(</span><span style=\\"color:#ECEFF4\\">\\"</span><span style=\\"color:#A3BE8C\\">Hi</span><span style=\\"color:#ECEFF4\\">\\"</span><span style=\\"color:#D8DEE9FF\\">)</span></span></code></pre>"')
   })
 })
 

@@ -1,5 +1,31 @@
-import type { HtmlRendererOptions, ThemeRegisteration, ThemedToken } from '../types'
-import { renderToHtml } from './renderer-html'
+import type { CodeToTokensWithThemesOptions, ShikiContext, ThemedToken } from '../types'
+import { codeToThemedTokens } from './tokenizer'
+
+/**
+ * Get tokens with multiple themes, with synced
+ */
+export function codeToTokensWithThemes(
+  context: ShikiContext,
+  code: string,
+  options: CodeToTokensWithThemesOptions,
+) {
+  const themes = Object.entries(options.themes)
+    .filter(i => i[1]) as [string, string][]
+
+  const tokens = syncThemesTokenization(
+    ...themes.map(t => codeToThemedTokens(context, code, {
+      ...options,
+      theme: t[1],
+      includeExplanation: false,
+    })),
+  )
+
+  return themes.map(([color, theme], idx) => [
+    color,
+    theme,
+    tokens[idx],
+  ] as [string, string, ThemedToken[][]])
+}
 
 /**
  * Break tokens from multiple themes into same tokenization.
@@ -52,39 +78,4 @@ export function syncThemesTokenization(...themes: ThemedToken[][][]) {
   }
 
   return outThemes
-}
-
-export function renderToHtmlThemes(
-  themeTokens: [string, string, ThemedToken[][]][],
-  themeRegs: ThemeRegisteration[],
-  cssVariablePrefix = '--shiki-',
-  defaultColor = true,
-  options: HtmlRendererOptions = {},
-) {
-  const themeMap = themeTokens.map(t => t[2])
-  const merged: ThemedToken[][] = []
-  for (let i = 0; i < themeMap[0].length; i++) {
-    const lineMap = themeMap.map(t => t[i])
-    const lineout: any[] = []
-    merged.push(lineout)
-    for (let j = 0; j < lineMap[0].length; j++) {
-      const tokenMap = lineMap.map(t => t[j])
-      const colors = tokenMap.map((t, idx) => `${idx === 0 && defaultColor ? '' : `${cssVariablePrefix + themeTokens[idx][0]}:`}${t.color || 'inherit'}`).join(';')
-      lineout.push({
-        ...tokenMap[0],
-        color: colors,
-        htmlStyle: defaultColor ? undefined : colors,
-      })
-    }
-  }
-
-  const fg = options.fg || themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + themeRegs[idx].fg).join(';')
-  const bg = options.bg || themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + themeRegs[idx].bg).join(';')
-  return renderToHtml(merged, {
-    fg,
-    bg,
-    themeName: `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`,
-    rootStyle: defaultColor ? undefined : [fg, bg].join(';'),
-    ...options,
-  })
 }
