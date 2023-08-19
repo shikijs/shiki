@@ -1,5 +1,5 @@
 import type { IGrammar, IRawGrammar, IRawTheme } from 'vscode-textmate'
-import type { Root } from 'hast'
+import type { Element, Root } from 'hast'
 import type { bundledThemes } from './themes'
 import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
@@ -121,9 +121,9 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
 export interface CodeToHastOptionsCommon<Languages = string> {
   lang: Languages | SpecialLanguage
   /**
-   * TODO
+   * Transform the generated HAST tree.
    */
-  hastTransform?: (hast: Root) => Root | void
+  transforms?: HastTransformers
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
@@ -254,14 +254,34 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   colors?: Record<string, string>
 }
 
+export interface HastTransformers {
+  /**
+   * Transform the entire generated HAST tree. Return a new Node will replace the original one.
+   *
+   * @param hast
+   */
+  root?: (hast: Root) => Root | void
+  pre?: (hast: Element) => Element | void
+  code?: (hast: Element) => Element | void
+  /**
+   * Transform each line element.
+   *
+   * @param hast
+   * @param line 1-based line number
+   */
+  line?: (hast: Element, line: number) => Element | void
+  token?: (hast: Element, line: number, col: number) => Element | void
+}
+
 export interface HtmlRendererOptions {
   langId?: string
   fg?: string
   bg?: string
 
-  hastTransform?: (hast: Root) => Root | void
-
-  elements?: ElementsOptions
+  /**
+   * Hast transformers
+   */
+  transforms?: HastTransformers
 
   themeName?: string
 
@@ -270,6 +290,7 @@ export interface HtmlRendererOptions {
    * When specified, `fg` and `bg` will be ignored.
    */
   rootStyle?: string
+
   /**
    * Merge token with only whitespace to the next token,
    * Saving a few extra `<span>`
@@ -277,39 +298,6 @@ export interface HtmlRendererOptions {
    * @default true
    */
   mergeWhitespaces?: boolean
-}
-
-export interface ElementsOptions {
-  pre?: (props: PreElementProps) => string
-  code?: (props: CodeElementProps) => string
-  line?: (props: LineElementProps) => string
-  token?: (props: TokenElementProps) => string
-}
-
-interface ElementProps {
-  children: string
-  [key: string]: unknown
-}
-
-interface PreElementProps extends ElementProps {
-  className: string
-  style: string
-}
-
-interface CodeElementProps extends ElementProps {}
-
-interface LineElementProps extends ElementProps {
-  className: string
-  lines: ThemedToken[][]
-  line: ThemedToken[]
-  index: number
-}
-
-interface TokenElementProps extends ElementProps {
-  style: string
-  tokens: ThemedToken[]
-  token: ThemedToken
-  index: number
 }
 
 export interface ThemedTokenScopeExplanation {

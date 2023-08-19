@@ -415,6 +415,30 @@ console.log(root)
 }
 ```
 
+### Hast transformers
+
+Since `shikiji` uses `hast` internally, you can use the `transforms` option to customize the generated HTML by manipulating the hast tree. You can pass custom functions to modify the tree for different types of nodes. For example:
+
+```js
+const code = await codeToHtml('foo\bar', {
+  lang: 'js',
+  theme: 'vitesse-light',
+  transforms: {
+    code(node) {
+      node.properties.class = 'language-js'
+    },
+    line(node, line) {
+      node.properties['data-line'] = line
+      if ([1, 3, 4].includes(line))
+        node.properties.class += ' highlight'
+    },
+    token(node, line, col) {
+      node.properties.class = `token:${line}:${col}`
+    },
+  },
+})
+```
+
 ## Breaking Changes from Shiki
 
 As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
@@ -425,7 +449,7 @@ As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 - Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
 - `.ansiToHtml` is merged into `.codeToHtml` as a special language `ansi`. Use `.codeToHtml(code, { lang: 'ansi' })` instead.
 - `codeToHtml` uses [`hast`](https://github.com/syntax-tree/hast) internally. The generated HTML will be a bit different but should behavior the same.
-- `lineOptions` is dropped in favor of the fully customizable `hastTransform` option.
+- `lineOptions` is dropped in favor of the fully customizable `transforms` option.
 - CJS and IIFE builds are dropped. See [CJS Usage](#cjs-usage) and [CDN Usage](#cdn-usage) for more details.
 - `LanguageRegistration`'s `grammar` field is flattened to `LanguageRegistration` itself (refer to the types for more details).
 

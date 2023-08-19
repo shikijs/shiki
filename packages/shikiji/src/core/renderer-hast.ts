@@ -99,38 +99,39 @@ export function tokensToHast(
   const lines: (Element | Text)[] = []
   const tree: Root = {
     type: 'root',
-    children: [
-      {
-        type: 'element',
-        tagName: 'pre',
-        properties: {
-          class: `shiki ${options.themeName || ''}`,
-          style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
-          tabindex: '0',
-        },
-        children: [
-          {
-            type: 'element',
-            tagName: 'code',
-            properties: {},
-            children: lines,
-          },
-        ],
-      },
-    ],
+    children: [],
+  }
+
+  let preNode: Element = {
+    type: 'element',
+    tagName: 'pre',
+    properties: {
+      class: `shiki ${options.themeName || ''}`,
+      style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
+      tabindex: '0',
+    },
+    children: [],
+  }
+
+  let codeNode: Element = {
+    type: 'element',
+    tagName: 'code',
+    properties: {},
+    children: lines,
   }
 
   tokens.forEach((line, idx) => {
     if (idx)
       lines.push({ type: 'text', value: '\n' })
 
-    const lineNode: Element = {
+    let lineNode: Element = {
       type: 'element',
       tagName: 'span',
       properties: { class: 'line' },
       children: [],
     }
-    lines.push(lineNode)
+
+    let col = 0
 
     for (const token of line) {
       const styles = [token.htmlStyle || `color:${token.color}`]
@@ -143,7 +144,7 @@ export function tokensToHast(
           styles.push('text-decoration:underline')
       }
 
-      const tokenNode: Element = {
+      let tokenNode: Element = {
         type: 'element',
         tagName: 'span',
         properties: {
@@ -152,11 +153,23 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
+      tokenNode = options.transforms?.token?.(tokenNode, idx + 1, col) || tokenNode
+
       lineNode.children.push(tokenNode)
+      col += token.content.length
     }
+
+    lineNode = options.transforms?.line?.(lineNode, idx + 1) || lineNode
+    lines.push(lineNode)
   })
 
-  return options.hastTransform?.(tree) || tree
+  codeNode = options.transforms?.code?.(codeNode) || codeNode
+  preNode.children.push(codeNode)
+
+  preNode = options.transforms?.pre?.(preNode) || preNode
+  tree.children.push(preNode)
+
+  return options.transforms?.root?.(tree) || tree
 }
 
 function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
