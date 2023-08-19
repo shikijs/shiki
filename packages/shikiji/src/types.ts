@@ -18,7 +18,7 @@ export type MaybeModule<T> = T | { default: T }
 export type MaybeArray<T> = T | T[]
 export type RequireKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>
 
-export type ThemeInput = MaybeGetter<ThemeRegisteration | ThemeRegisterationRaw>
+export type ThemeInput = MaybeGetter<ThemeRegistration | ThemeRegistrationRaw>
 export type LanguageInput = MaybeGetter<MaybeArray<LanguageRegistration>>
 
 interface Nothing {}
@@ -34,11 +34,11 @@ export type ResolveBundleKey<T extends string> = never extends T ? string : T
 
 export interface ShikiContext {
   setTheme(name: string): {
-    theme: ThemeRegisteration
+    theme: ThemeRegistration
     colorMap: string[]
   }
 
-  getTheme(name: string): ThemeRegisteration
+  getTheme(name: string): ThemeRegistration
   getLangGrammar(name: string): IGrammar
 
   getLoadedThemes(): string[]
@@ -212,11 +212,11 @@ export interface LineOption {
   classes?: string[]
 }
 
-export interface ThemeRegisterationRaw extends IRawTheme {
+export interface ThemeRegistrationRaw extends IRawTheme {
 
 }
 
-export interface ThemeRegisteration extends ThemeRegisterationRaw {
+export interface ThemeRegistration extends ThemeRegistrationRaw {
   /**
    * @description theme name
    */

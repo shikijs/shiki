@@ -97,9 +97,9 @@ const themes = Object.fromEntries(BUNDLED_THEMES.sort().map(i => [i, `__(() => i
 await fs.writeFile(
   'src/assets/themes.ts',
   `${comments}
-import type { ThemeRegisterationRaw } from '../types'
+import type { ThemeRegistrationRaw } from '../types'
 
-type DynamicThemeReg = () => Promise<{ default: ThemeRegisterationRaw }>
+type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 
 export const bundledThemes = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
 `,

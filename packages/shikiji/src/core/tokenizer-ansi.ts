@@ -1,8 +1,8 @@
 import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
-import type { ThemeRegisteration, ThemedToken } from '../types'
+import type { ThemeRegistration, ThemedToken } from '../types'
 import { FontStyle } from './stackElementMetadata'
 
-export function tokenizeAnsiWithTheme(theme: ThemeRegisteration, fileContents: string): ThemedToken[][] {
+export function tokenizeAnsiWithTheme(theme: ThemeRegistration, fileContents: string): ThemedToken[][] {
   const lines = fileContents.split(/\r?\n/)
 
   const colorPalette = createColorPalette(

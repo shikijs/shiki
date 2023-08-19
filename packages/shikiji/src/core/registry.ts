@@ -1,20 +1,20 @@
 import type { IGrammar, IGrammarConfiguration } from 'vscode-textmate'
 import { Registry as TextMateRegistry } from 'vscode-textmate'
-import type { LanguageRegistration, ThemeRegisteration, ThemeRegisterationRaw } from '../types'
+import type { LanguageRegistration, ThemeRegistration, ThemeRegistrationRaw } from '../types'
 import type { Resolver } from './resolver'
 import { toShikiTheme } from './normalize'
 
 export class Registry extends TextMateRegistry {
   public themesPath: string = 'themes/'
 
-  private _resolvedThemes: Record<string, ThemeRegisteration> = {}
+  private _resolvedThemes: Record<string, ThemeRegistration> = {}
   private _resolvedGrammars: Record<string, IGrammar> = {}
   private _langMap: Record<string, LanguageRegistration> = {}
   private _langGraph: Map<string, LanguageRegistration> = new Map()
 
   constructor(
     private _resolver: Resolver,
-    public _themes: (ThemeRegisteration | ThemeRegisterationRaw)[],
+    public _themes: (ThemeRegistration | ThemeRegistrationRaw)[],
     public _langs: LanguageRegistration[],
   ) {
     super(_resolver)
@@ -23,14 +23,14 @@ export class Registry extends TextMateRegistry {
     _langs.forEach(l => this.loadLanguage(l))
   }
 
-  public getTheme(theme: ThemeRegisteration | string) {
+  public getTheme(theme: ThemeRegistration | string) {
     if (typeof theme === 'string')
       return this._resolvedThemes[theme]
     else
       return theme
   }
 
-  public loadTheme(theme: ThemeRegisteration | ThemeRegisterationRaw) {
+  public loadTheme(theme: ThemeRegistration | ThemeRegistrationRaw) {
     const _theme = toShikiTheme(theme)
     if (_theme.name)
       this._resolvedThemes[_theme.name] = _theme

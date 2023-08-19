@@ -1,10 +1,10 @@
 import type { IRawTheme } from 'vscode-textmate'
-import type { ThemeRegisteration, ThemeRegisterationRaw } from '../types'
+import type { ThemeRegistration, ThemeRegistrationRaw } from '../types'
 
-export function toShikiTheme(rawTheme: ThemeRegisterationRaw | ThemeRegisteration): ThemeRegisteration {
+export function toShikiTheme(rawTheme: ThemeRegistrationRaw | ThemeRegistration): ThemeRegistration {
   const type = (<any>rawTheme).type || 'dark'
 
-  const shikiTheme: ThemeRegisteration = {
+  const shikiTheme: ThemeRegistration = {
     name: rawTheme.name!,
     type,
     ...rawTheme,
@@ -24,7 +24,7 @@ export function toShikiTheme(rawTheme: ThemeRegisterationRaw | ThemeRegisteratio
   return shikiTheme
 }
 
-export function repairTheme(theme: ThemeRegisteration) {
+export function repairTheme(theme: ThemeRegistration) {
   // Has the default no-scope setting with fallback colors
   if (!theme.settings)
     theme.settings = []

@@ -83,7 +83,7 @@ export default defineConfig([
           await Promise.all(
             themes.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { ThemeRegisterationRaw } from \'../types.mjs\';declare const reg: ThemeRegisterationRaw;export default reg',
+              'import { ThemeRegistrationRaw } from \'../types.mjs\';declare const reg: ThemeRegistrationRaw;export default reg',
               'utf-8',
             )),
           )
