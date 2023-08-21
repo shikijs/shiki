@@ -1,0 +1,44 @@
+{
+  "name": "markdown-it-shikiji",
+  "type": "module",
+  "version": "0.5.1",
+  "description": "markdown-it integration for shikiji",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikiji#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikiji.git",
+    "directory": "packages/markdown-it-shikiji"
+  },
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki",
+    "markdown-it"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build"
+  },
+  "dependencies": {
+    "markdown-it": "^13.0.1",
+    "shikiji": "^0.5.1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^13.0.0"
+  }
+}

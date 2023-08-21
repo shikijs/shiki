@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "rootDir": ".",
+    "target": "es2020",
     "module": "esnext",
     "lib": ["esnext", "DOM"],
     "moduleResolution": "Bundler",
@@ -9,7 +10,10 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "shikiji": ["./packages/shikiji/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "dist"]
 }

@@ -147,9 +147,11 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
   themes: Partial<Record<string, Themes>>
 }
 
-export type CodeToHastOptions<Languages = string, Themes = string> = CodeToHastOptionsCommon<Languages> & ({
+export interface CodeOptionsSingleTheme<Themes = string> {
   theme: Themes
-} | {
+}
+
+export interface CodeOptionsMultipleThemes<Themes = string> {
   /**
    * A map of color names to themes.
    * This allows you to specify multiple themes for the generated code.
@@ -172,7 +174,7 @@ export type CodeToHastOptions<Languages = string, Themes = string> = CodeToHastO
    *
    * @see https://github.com/antfu/shikiji#lightdark-dual-themes
    */
-  themes: CodeToTokensWithThemesOptions<Languages, Themes>['themes']
+  themes: Partial<Record<string, Themes>>
 
   /**
    * The default theme applied to the code (via inline `color` style).
@@ -202,7 +204,15 @@ export type CodeToHastOptions<Languages = string, Themes = string> = CodeToHastO
    * @default '--shiki-'
    */
   cssVariablePrefix?: string
-})
+}
+
+export type CodeOptionsThemes<Themes = string> =
+  | CodeOptionsSingleTheme<Themes>
+  | CodeOptionsMultipleThemes<Themes>
+
+export type CodeToHastOptions<Languages = string, Themes = string> =
+  & CodeToHastOptionsCommon<Languages>
+  & CodeOptionsThemes<Themes>
 
 export interface LineOption {
   /**

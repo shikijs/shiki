@@ -1,0 +1,49 @@
+{
+  "name": "rehype-shikiji",
+  "type": "module",
+  "version": "0.5.1",
+  "description": "rehype integration for shikiji",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikiji#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikiji.git",
+    "directory": "packages/rethype-shikiji"
+  },
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki",
+    "rehype"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build"
+  },
+  "dependencies": {
+    "@types/hast": "^3.0.0",
+    "hast-util-to-string": "^2.0.0",
+    "shikiji": "^0.5.1",
+    "unified": "^11.0.1",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "rehype-stringify": "^9.0.4",
+    "remark-parse": "^10.0.2",
+    "remark-rehype": "^10.1.0"
+  }
+}

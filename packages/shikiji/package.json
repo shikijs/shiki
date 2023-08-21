@@ -74,6 +74,9 @@
     "test": "vitest",
     "test:cf": "wrangler dev test/cf.ts --port 60001"
   },
+  "dependencies": {
+    "hast-util-to-html": "^9.0.0"
+  },
   "devDependencies": {
     "shiki": "^0.14.3",
     "vscode-oniguruma": "^1.7.0",

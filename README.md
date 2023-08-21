@@ -12,8 +12,6 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 - [Bundles languages/themes composedly](#fine-grained-bundle).
 - [Light/Dark themes support](#lightdark-dual-themes).
 - [`hast` support](#codetohast).
-- Zero-dependencies.
-- Simplified APIs.
 - [List of breaking changes from shiki](#breaking-changes-from-shiki).
 - Please don't hate me Pine 😜 ([What's Next?](#whats-next))
 
