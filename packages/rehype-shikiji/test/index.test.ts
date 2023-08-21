@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises'
-import { join } from 'node:path'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -8,7 +7,6 @@ import { expect, test } from 'vitest'
 import rehypeShikiji from '../src'
 
 test('run', async () => {
-  const __dirname = new URL('.', import.meta.url).pathname
   const file = await unified()
     // @ts-expect-error hast version mismatch
     .use(remarkParse)
@@ -19,7 +17,7 @@ test('run', async () => {
     })
     // @ts-expect-error hast version mismatch
     .use(rehypeStringify)
-    .process(await fs.readFile(join(__dirname, './fixtures/a.md')))
+    .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
   expect(file.toString()).toMatchFileSnapshot('./fixtures/a.out.html')
 })
