@@ -1,10 +1,9 @@
-import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, LanguageInput } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, CodeToHastOptions, LanguageInput } from 'shikiji'
 import { bundledLanguages, getHighlighter } from 'shikiji'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
 import type { Plugin } from 'unified'
 import type { Root } from 'hast'
-import type { CodeToHastOptions } from '../../shikiji/dist/core.mjs'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
 export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
