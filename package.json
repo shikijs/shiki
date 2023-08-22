@@ -16,12 +16,12 @@
     "@antfu/utils": "^0.7.6",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-replace": "^5.0.2",
     "@rollup/plugin-terser": "^0.4.3",
     "@types/fs-extra": "^11.0.1",
     "@types/hast": "^3.0.0",
-    "@types/node": "^20.5.1",
+    "@types/node": "^20.5.2",
     "@vitest/coverage-v8": "^0.34.2",
     "ansi-sequence-parser": "^1.1.1",
     "bumpp": "^9.2.0",
@@ -34,7 +34,7 @@
     "pnpm": "^8.6.12",
     "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
-    "rollup": "^3.28.0",
+    "rollup": "^3.28.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-esbuild": "^5.0.0",
@@ -48,6 +48,12 @@
     "vscode-oniguruma": "^1.7.0",
     "vscode-textmate": "^9.0.0",
     "wrangler": "^3.5.1"
+  },
+  "resolutions": {
+    "unified": "^11.0.2",
+    "@types/hast": "^3.0.0",
+    "@types/mdast": "^4.0.0",
+    "@types/unist": "^3.0.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

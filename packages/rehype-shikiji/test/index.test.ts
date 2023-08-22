@@ -8,14 +8,11 @@ import rehypeShikiji from '../src'
 
 test('run', async () => {
   const file = await unified()
-    // @ts-expect-error hast version mismatch
     .use(remarkParse)
-    // @ts-expect-error hast version mismatch
     .use(remarkRehype)
     .use(rehypeShikiji, {
       theme: 'vitesse-light',
     })
-    // @ts-expect-error hast version mismatch
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
