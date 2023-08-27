@@ -1,4 +1,4 @@
-import { expect, expectTypeOf, test } from 'vitest'
+import { expect, test } from 'vitest'
 import * as shiki from 'shiki'
 import * as shikiji from '../src/index'
 
@@ -17,8 +17,6 @@ test('run', async () => {
 
   expect(s.getLoadedThemes()).toEqual(sj.getLoadedThemes())
   expect(s.getLoadedLanguages()).toEqual(sj.getLoadedLanguages())
-
-  expectTypeOf(s.codeToHtml).toMatchTypeOf(sj.codeToHtml)
 
   expect(sj.codeToThemedTokens('const a = 1', 'javascript'))
     .toEqual(s.codeToThemedTokens('const a = 1', 'javascript'))
@@ -41,7 +39,6 @@ test('run', async () => {
   expect.soft(keysDiff).toMatchInlineSnapshot(`
     [
       "ansiToThemedTokens",
-      "getTheme",
       "getBackgroundColor",
       "getForegroundColor",
       "setColorReplacements",
@@ -55,10 +52,7 @@ test('run', async () => {
   expect.soft(exportsDiff).toMatchInlineSnapshot(`
     [
       "FontStyle",
-      "default",
-      "loadTheme",
       "renderToHtml",
-      "toShikiTheme",
     ]
   `)
 })

@@ -1,19 +1,15 @@
-import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, LineOption, StringLiteralUnion, ThemedToken } from 'shikiji'
-import { bundledLanguages, bundledThemes, getHighlighter as getShikiji } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeToHastOptions, CodeToThemedTokensOptions, MaybeGetter, ThemeInput, ThemedToken } from 'shikiji'
+import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
+import type { ThemeRegistration } from '../../shikiji/dist/core.mjs'
+import type { AnsiToHtmlOptions, HighlighterOptions } from './types'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
 export const BUNDLED_THEMES = bundledThemes
 
 export * from './stub'
+export * from './types'
 
-export interface AnsiToHtmlOptions {
-  theme?: StringLiteralUnion<BuiltinTheme>
-  lineOptions?: LineOption[]
-}
-
-export interface HighlighterOptions extends BundledHighlighterOptions<BuiltinLanguage, BuiltinTheme> {
-  theme?: BuiltinTheme
-}
+export { toShikiTheme } from 'shikiji'
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   const themes = options.themes || []
@@ -75,3 +71,18 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     },
   }
 }
+
+export type Highlighter = ReturnType<typeof getHighlighter>
+
+export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<ThemeRegistration> {
+  if (typeof theme === 'string')
+    return toShikiTheme(await bundledThemes[theme]().then(r => r.default))
+  else
+    return toShikiTheme(await normalizeGetter(theme))
+}
+
+async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
+  return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
+}
+
+export default getHighlighter

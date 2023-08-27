@@ -18,6 +18,9 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
 
     loadLanguage: context.loadLanguage,
     loadTheme: context.loadTheme,
+
+    getTheme: context.getTheme,
+
     getLoadedThemes: context.getLoadedThemes,
     getLoadedLanguages: context.getLoadedLanguages,
   }

@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 
 // @ts-expect-error no types
@@ -7,6 +8,11 @@ export default defineConfig({
   plugins: [
     wasmPlugin(),
   ],
+  resolve: {
+    alias: {
+      shikiji: fileURLToPath(new URL('./packages/shikiji/src/index.ts', import.meta.url)),
+    },
+  },
   test: {
     server: {
       deps: {

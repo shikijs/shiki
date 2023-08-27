@@ -3,6 +3,7 @@ import { getHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
 import nord from '../dist/themes/nord.mjs'
+import mtp from '../dist/themes/material-theme-palenight.mjs'
 
 // @ts-expect-error no-types
 import onig from '../dist/onig.mjs'
@@ -108,5 +109,24 @@ describe('errors', () => {
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
       .toThrowErrorMatchingInlineSnapshot('"[shikiji] Language `abc` not found, you may need to load it first"')
+  })
+
+  it('highlight with raw theme registation', async () => {
+    const shiki = await getHighlighterCore({
+      themes: [nord],
+      langs: [js as any],
+      loadWasm: {
+        instantiator: obj => WebAssembly.instantiate(onig, obj),
+      },
+    })
+
+    const code = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: mtp })
+    expect.soft(code)
+      .toMatchInlineSnapshot('"<pre class=\\"shiki material-theme-palenight\\" style=\\"background-color:#292D3E;color:#A6ACCD\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#A6ACCD\\">console</span><span style=\\"color:#89DDFF\\">.</span><span style=\\"color:#82AAFF\\">log</span><span style=\\"color:#A6ACCD\\">(</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#C3E88D\\">Hi</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#A6ACCD\\">)</span></span></code></pre>"')
+
+    expect.soft(shiki.getLoadedThemes()).toContain('material-theme-palenight')
+
+    const code2 = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'material-theme-palenight' })
+    expect.soft(code2).toBe(code)
   })
 })

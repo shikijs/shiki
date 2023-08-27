@@ -407,7 +407,7 @@ console.log(root)
             }
           ]
         }
-      ]
+      ]s
     }
   ]
 }

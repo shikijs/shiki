@@ -1,4 +1,4 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiContext, ThemeInput } from '../types'
+import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiContext, ThemeInput, ThemeRegistration } from '../types'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
@@ -48,14 +48,14 @@ export async function getShikiContext(options: HighlighterCoreOptions = {}): Pro
     return _lang
   }
 
-  function getTheme(name: string) {
+  function getTheme(name: string | ThemeRegistration) {
     const _theme = _registry.getTheme(name!)
     if (!_theme)
       throw new Error(`[shikiji] Theme \`${name}\` not found, you may need to load it first`)
     return _theme
   }
 
-  function setTheme(name: string) {
+  function setTheme(name: string | ThemeRegistration) {
     const theme = getTheme(name)
     _registry.setTheme(theme)
     const colorMap = _registry.getColorMap()

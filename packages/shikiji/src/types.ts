@@ -33,12 +33,12 @@ export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 export type ResolveBundleKey<T extends string> = never extends T ? string : T
 
 export interface ShikiContext {
-  setTheme(name: string): {
+  setTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): {
     theme: ThemeRegistration
     colorMap: string[]
   }
 
-  getTheme(name: string): ThemeRegistration
+  getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
   getLangGrammar(name: string): IGrammar
 
   getLoadedThemes(): string[]
@@ -67,6 +67,9 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
 
   loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
   loadLanguage(...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]): Promise<void>
+
+  getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
+
   getLoadedLanguages(): string[]
   getLoadedThemes(): string[]
 }
@@ -109,7 +112,7 @@ export interface LanguageRegistration extends IRawGrammar {
 
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
   lang?: Languages | SpecialLanguage
-  theme?: Themes
+  theme?: Themes | ThemeRegistration | ThemeRegistrationRaw
   /**
    * Include explanation of why a token is given a color.
    *
@@ -144,11 +147,11 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
    * }
    * ```
    */
-  themes: Partial<Record<string, Themes>>
+  themes: Partial<Record<string, Themes | ThemeRegistration | ThemeRegistrationRaw>>
 }
 
 export interface CodeOptionsSingleTheme<Themes = string> {
-  theme: Themes
+  theme: Themes | ThemeRegistration | ThemeRegistrationRaw
 }
 
 export interface CodeOptionsMultipleThemes<Themes = string> {
@@ -174,7 +177,7 @@ export interface CodeOptionsMultipleThemes<Themes = string> {
    *
    * @see https://github.com/antfu/shikiji#lightdark-dual-themes
    */
-  themes: Partial<Record<string, Themes>>
+  themes: Partial<Record<string, Themes | ThemeRegistration | ThemeRegistrationRaw>>
 
   /**
    * The default theme applied to the code (via inline `color` style).

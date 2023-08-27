@@ -27,14 +27,14 @@ export class Registry extends TextMateRegistry {
     if (typeof theme === 'string')
       return this._resolvedThemes[theme]
     else
-      return theme
+      return this.loadTheme(theme)
   }
 
-  public loadTheme(theme: ThemeRegistration | ThemeRegistrationRaw) {
+  public loadTheme(theme: ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration {
     const _theme = toShikiTheme(theme)
     if (_theme.name)
       this._resolvedThemes[_theme.name] = _theme
-    return theme
+    return _theme
   }
 
   public getLoadedThemes() {
