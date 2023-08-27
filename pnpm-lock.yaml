@@ -183,6 +183,12 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
 
+  packages/shikiji-compact:
+    dependencies:
+      shikiji:
+        specifier: workspace:*
+        version: link:../shikiji
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:

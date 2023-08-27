@@ -1,13 +1,13 @@
-# shikiji-compact
+# shikiji-compat
 
-Compactible build of `shikiji` to align with `shiki`.
+compatible build of `shikiji` to align with `shiki`.
 
 > Work in progress. It's not 100% compatible yet, but feedback is welcome :)
 
 ## Install
 
 ```bash
-npm i -D shikiji-compact
+npm i -D shikiji-compat
 ```
 
 Or set the alias
@@ -15,7 +15,7 @@ Or set the alias
 ```json
 {
   "dependencies": {
-    "shiki": "npm:shikiji-compact@0.6"
+    "shiki": "npm:shikiji-compat@0.6"
   }
 }
 ```
