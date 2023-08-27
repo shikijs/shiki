@@ -21,6 +21,12 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 npm install -D shikiji
 ```
 
+## Integrations
+
+- [`markdown-it-shikiji`](./packages/markdown-it-shikiji) - Markdown-it plugin
+- [`rehype-shikiji`](./packages/rehype-shikiji) - Rehype plugin
+- [`shikiji-compat`](./packages/shikiji-compat) - Compatibility build aligning with `shiki` API for npm aliasing
+
 ## Usage
 
 ### Bundled Usage
