@@ -1,4 +1,4 @@
-import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, LanguageRegistration, LineOption, StringLiteralUnion, ThemeRegistration } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, LanguageRegistration, LineOption, StringLiteralUnion, ThemeRegistration, ThemeRegistrationRaw } from 'shikiji'
 
 export interface AnsiToHtmlOptions {
   theme?: StringLiteralUnion<BuiltinTheme>
@@ -9,7 +9,9 @@ export interface HighlighterOptions extends BundledHighlighterOptions<BuiltinLan
   theme?: BuiltinTheme
 }
 
-export interface IThemeRegistration extends ThemeRegistration {}
+export type IThemeRegistration = ThemeRegistrationRaw | ThemeRegistration | StringLiteralUnion<BuiltinTheme>
+
+export interface IShikiTheme extends ThemeRegistration {}
 
 export interface ILanguageRegistration extends LanguageRegistration {}
 

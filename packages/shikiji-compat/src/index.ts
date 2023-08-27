@@ -72,7 +72,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
   }
 }
 
-export type Highlighter = ReturnType<typeof getHighlighter>
+export type Highlighter = Awaited<ReturnType<typeof getHighlighter>>
 
 export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<ThemeRegistration> {
   if (typeof theme === 'string')
