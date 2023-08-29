@@ -75,10 +75,14 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
 export type Highlighter = Awaited<ReturnType<typeof getHighlighter>>
 
 export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<ThemeRegistration> {
-  if (typeof theme === 'string')
+  if (typeof theme === 'string') {
+    if (bundledThemes[theme] == null)
+      throw new Error(`[shikiji-compat] Unknown theme: ${theme}`)
     return toShikiTheme(await bundledThemes[theme]().then(r => r.default))
-  else
+  }
+  else {
     return toShikiTheme(await normalizeGetter(theme))
+  }
 }
 
 async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
