@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   test: {
+    isolate: false,
     server: {
       deps: {
         inline: [
