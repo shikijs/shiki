@@ -1,5 +1,4 @@
-import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, LanguageRegistration, LineOption, StringLiteralUnion, ThemeRegistration, ThemeRegistrationRaw } from 'shikiji'
-import type { IRawGrammar } from 'vscode-textmate'
+import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, IRawGrammar, LanguageRegistration, LineOption, StringLiteralUnion, ThemeRegistration, ThemeRegistrationRaw } from 'shikiji'
 
 export interface AnsiToHtmlOptions {
   theme?: StringLiteralUnion<BuiltinTheme>
