@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import type { BuiltinLanguage, BuiltinTheme, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistration, ThemedToken } from 'shikiji'
 import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
@@ -97,9 +99,14 @@ export type Highlighter = Awaited<ReturnType<typeof getHighlighter>>
 
 export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<ThemeRegistration> {
   if (typeof theme === 'string') {
-    if (bundledThemes[theme] == null)
-      throw new Error(`[shikiji-compat] Unknown theme: ${theme}`)
-    return toShikiTheme(await bundledThemes[theme]().then(r => r.default))
+    if (bundledThemes[theme] != null)
+      return toShikiTheme(await bundledThemes[theme]().then(r => r.default))
+
+    // provide as a path
+    if (fs.existsSync(theme) && theme.endsWith('.json'))
+      return toShikiTheme(JSON.parse(await fsp.readFile(theme, 'utf-8')))
+
+    throw new Error(`[shikiji-compat] Unknown theme: ${theme}`)
   }
   else {
     return toShikiTheme(await normalizeGetter(theme))
