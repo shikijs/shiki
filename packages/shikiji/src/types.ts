@@ -123,8 +123,8 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
   includeExplanation?: boolean
 }
 
-export interface CodeToHastOptionsCommon<Languages = string> {
-  lang: Languages | SpecialLanguage
+export interface CodeToHastOptionsCommon<Languages extends string = string> {
+  lang: StringLiteralUnion<Languages | SpecialLanguage>
   /**
    * Transform the generated HAST tree.
    */
@@ -152,11 +152,11 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
   themes: Partial<Record<string, Themes | ThemeRegistration | ThemeRegistrationRaw>>
 }
 
-export interface CodeOptionsSingleTheme<Themes = string> {
-  theme: Themes | ThemeRegistration | ThemeRegistrationRaw
+export interface CodeOptionsSingleTheme<Themes extends string = string> {
+  theme: ThemeRegistration | ThemeRegistrationRaw | StringLiteralUnion<Themes>
 }
 
-export interface CodeOptionsMultipleThemes<Themes = string> {
+export interface CodeOptionsMultipleThemes<Themes extends string = string> {
   /**
    * A map of color names to themes.
    * This allows you to specify multiple themes for the generated code.
@@ -179,7 +179,7 @@ export interface CodeOptionsMultipleThemes<Themes = string> {
    *
    * @see https://github.com/antfu/shikiji#lightdark-dual-themes
    */
-  themes: Partial<Record<string, Themes | ThemeRegistration | ThemeRegistrationRaw>>
+  themes: Partial<Record<string, ThemeRegistration | ThemeRegistrationRaw | StringLiteralUnion<Themes>>>
 
   /**
    * The default theme applied to the code (via inline `color` style).
@@ -211,21 +211,13 @@ export interface CodeOptionsMultipleThemes<Themes = string> {
   cssVariablePrefix?: string
 }
 
-export type CodeOptionsThemes<Themes = string> =
+export type CodeOptionsThemes<Themes extends string = string> =
   | CodeOptionsSingleTheme<Themes>
   | CodeOptionsMultipleThemes<Themes>
 
-export type CodeToHastOptions<Languages = string, Themes = string> =
+export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
   & CodeToHastOptionsCommon<Languages>
   & CodeOptionsThemes<Themes>
-
-export interface LineOption {
-  /**
-   * 1-based line number.
-   */
-  line: number
-  classes?: string[]
-}
 
 export interface ThemeRegistrationRaw extends IRawTheme {
 

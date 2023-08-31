@@ -1,7 +1,7 @@
-import type { BuiltinLanguage, BuiltinTheme, CodeToHastOptions, CodeToThemedTokensOptions, MaybeGetter, ThemeInput, ThemedToken } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeToHastOptions, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemedToken } from 'shikiji'
 import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
 import type { ThemeRegistration } from '../../shikiji/dist/core.mjs'
-import type { AnsiToHtmlOptions, CodeToHtmlOptions, HighlighterOptions } from './types'
+import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
 export const BUNDLED_THEMES = bundledThemes
@@ -44,18 +44,40 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
   }
 
   function codeToHtml(code: string, options: CodeToHtmlOptions): string
-  function codeToHtml(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme): string
-  function codeToHtml(code: string, lang: any, theme?: BuiltinTheme): string {
-    if (typeof lang === 'string') {
-      return shikiji.codeToHtml(code, {
-        lang,
-        theme: (theme || defaultTheme),
-      })
+  /** @deprecated pass the second argument as object instead */
+  function codeToHtml(code: string, lang: StringLiteralUnion<BuiltinLanguage>, theme?: StringLiteralUnion<BuiltinTheme>, options?: CodeToHtmlOptionsExtra): string
+  function codeToHtml(code: string, arg1: any, arg2?: StringLiteralUnion<BuiltinTheme>, options2?: CodeToHtmlOptionsExtra): string {
+    const options: CodeToHtmlOptions = (
+      typeof arg1 === 'string'
+        ? options2
+        : arg1
+    ) || {}
+
+    if (typeof arg1 === 'string')
+      options.lang ||= arg1
+
+    if (!('themes' in options)) {
+      // @ts-expect-error when `themes` is not in options, `theme` has to be a string
+      options.theme = 'theme' in options
+        ? (options.theme || defaultTheme)
+        : arg2 || defaultTheme
     }
-    return shikiji.codeToHtml(code, {
-      ...lang,
-      theme: (lang.theme || defaultTheme),
-    })
+
+    if (options.lineOptions) {
+      options.transforms = options.transforms || {}
+      const prev = options.transforms.line
+      options.transforms.line = (ast, line) => {
+        const node = prev?.(ast, line) || ast
+        const lineOption = options.lineOptions?.find(o => o.line === line)
+        if (lineOption?.classes) {
+          node.properties ??= {}
+          node.properties.class = [node.properties.class, ...lineOption.classes].filter(Boolean).join(' ')
+        }
+        return node
+      }
+    }
+
+    return shikiji.codeToHtml(code, options as any)
   }
 
   return {

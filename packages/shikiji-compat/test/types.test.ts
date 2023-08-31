@@ -13,18 +13,16 @@ test('run', async () => {
     langs: ['javascript'],
   })
 
-  const group = [s, sj]
-
   expect(s.getLoadedThemes()).toEqual(sj.getLoadedThemes())
   expect(s.getLoadedLanguages()).toEqual(sj.getLoadedLanguages())
 
   expect(sj.codeToThemedTokens('const a = 1', 'javascript'))
     .toEqual(s.codeToThemedTokens('const a = 1', 'javascript'))
 
-  group.forEach((h) => {
-    h.codeToHtml('const a = 1', 'javascript')
-    h.codeToHtml('const a = 1', 'javascript', 'nord')
-  })
+  s.codeToHtml('const a = 1', 'javascript')
+  sj.codeToHtml('const a = 1', 'javascript')
+  s.codeToHtml('const a = 1', 'javascript', 'nord')
+  sj.codeToHtml('const a = 1', 'javascript', 'nord')
 
   s.codeToHtml('const a = 1', { lang: 'javascript' })
   sj.codeToHtml('const a = 1', { lang: 'javascript' })

@@ -1,8 +1,31 @@
-import type { BuiltinLanguage, BuiltinTheme, BundledHighlighterOptions, CodeOptionsMultipleThemes, CodeOptionsSingleTheme, CodeToHastOptionsCommon, IRawGrammar, LanguageRegistration, LineOption, StringLiteralUnion, ThemeRegistration, ThemeRegistrationRaw } from 'shikiji'
+import type {
+  BuiltinLanguage,
+  BuiltinTheme,
+  BundledHighlighterOptions,
+  CodeOptionsMultipleThemes,
+  CodeOptionsSingleTheme,
+  CodeToHastOptionsCommon,
+  IRawGrammar,
+  LanguageRegistration,
+  StringLiteralUnion,
+  ThemeRegistration,
+  ThemeRegistrationRaw,
+} from 'shikiji'
 
-export interface AnsiToHtmlOptions {
-  theme?: StringLiteralUnion<BuiltinTheme>
+export interface LineOption {
+  /**
+   * 1-based line number.
+   */
+  line: number
+  classes?: string[]
+}
+
+export interface OptionsOfLineOptions {
   lineOptions?: LineOption[]
+}
+
+export interface AnsiToHtmlOptions extends OptionsOfLineOptions {
+  theme?: StringLiteralUnion<BuiltinTheme>
 }
 
 export interface HighlighterOptions extends BundledHighlighterOptions<BuiltinLanguage, BuiltinTheme> {
@@ -23,4 +46,10 @@ export type Theme = StringLiteralUnion<BuiltinTheme>
 export type CodeToHtmlOptions = (
   | Partial<CodeOptionsSingleTheme<BuiltinTheme>>
   | Partial<CodeOptionsMultipleThemes<BuiltinTheme>>
-) & CodeToHastOptionsCommon<BuiltinLanguage>
+)
+& CodeToHastOptionsCommon<BuiltinLanguage>
+& OptionsOfLineOptions
+
+export type CodeToHtmlOptionsExtra =
+  & Omit<CodeToHastOptionsCommon<BuiltinLanguage>, 'lang'>
+  & OptionsOfLineOptions
