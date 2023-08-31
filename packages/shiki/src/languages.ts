@@ -96,6 +96,7 @@ export type Lang =
   | 'markdown' | 'md'
   | 'marko'
   | 'matlab'
+  | 'mdc'
   | 'mdx'
   | 'mermaid'
   | 'mojo'
@@ -867,6 +868,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'matlab.tmLanguage.json',
     displayName: 'MATLAB',
     samplePath: 'matlab.sample'
+  },
+  {
+    id: 'mdc',
+    scopeName: 'text.markdown.mdc',
+    path: 'mdc.tmLanguage.json',
+    displayName: 'markdown',
+    samplePath: 'mdc.sample',
+    embeddedLangs: ['markdown', 'yaml']
   },
   {
     id: 'mdx',
