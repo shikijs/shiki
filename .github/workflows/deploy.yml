@@ -1,5 +1,5 @@
 name: Deploy npm modules
-on:
+on: {}
   # push:
   #   branches: [main]
 
@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: lts/*
 
       - name: cache pnpm modules
         uses: actions/cache@v3
@@ -22,10 +22,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: pnpm setup
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.17.0
-          run_install: true
+        uses: pnpm/action-setup@v2
 
       - run: pnpm run update
       - run: pnpm run build
