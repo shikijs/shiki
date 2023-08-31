@@ -1,7 +1,7 @@
 import type { BuiltinLanguage, BuiltinTheme, CodeToHastOptions, CodeToThemedTokensOptions, MaybeGetter, ThemeInput, ThemedToken } from 'shikiji'
 import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
 import type { ThemeRegistration } from '../../shikiji/dist/core.mjs'
-import type { AnsiToHtmlOptions, HighlighterOptions } from './types'
+import type { AnsiToHtmlOptions, CodeToHtmlOptions, HighlighterOptions } from './types'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
 export const BUNDLED_THEMES = bundledThemes
@@ -43,7 +43,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     return shikiji.codeToThemedTokens(code, lang)
   }
 
-  function codeToHtml(code: string, options: Partial<CodeToHastOptions<BuiltinLanguage, BuiltinTheme>>): string
+  function codeToHtml(code: string, options: CodeToHtmlOptions): string
   function codeToHtml(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme): string
   function codeToHtml(code: string, lang: any, theme?: BuiltinTheme): string {
     if (typeof lang === 'string') {
