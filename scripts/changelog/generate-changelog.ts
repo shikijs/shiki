@@ -14,7 +14,7 @@ const getFilePath = (p: string) => path.resolve(ROOT_DIR, p)
 const FEAT_N_FIX_HEADER = `### 🚀 Features & Fixes`
 const CONTRIB_HEADER = `### 🙌 Contributions`
 
-const MAINTAINER_LOGINS = ['octref', 'orta']
+const MAINTAINER_LOGINS = ['octref', 'orta', 'antfu']
 
 const readQuery = (filename: string) => {
   return fs.readFileSync(path.resolve(__dirname, `./${filename}`), 'utf-8')
@@ -29,10 +29,13 @@ const getGithubGraphql = async (query: string) => {
     headers: {
       'Content-Type': 'application/json',
       'Content-Length': `${data.length}`,
-      Authorization: 'bearer ' + process.env.GITHUB_SECRET,
+      Authorization: 'bearer ' + (process.env.GITHUB_SECRET || process.env.GITHUB_TOKEN),
       'User-Agent': 'Shiki'
     }
   })
+
+  if (200 < res.status && res.status >= 300)
+    throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`)
 
   return await res.json()
 }
