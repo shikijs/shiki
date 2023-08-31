@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.14.4 | 2023-08-31
+
+### 🚀 Features & Fixes
+
+- feat: add ziglang
+- fix: inconsistent git core.ignorecase causes marko.sample added/removed
+- feat: add mojo lang
+- feat: add `mdc` grammar
+
+### 🙌 Contributions
+
+- feat: add additional sample code | [#511](https://github.com/shikijs/shiki/pull/511) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- fix: Compiler errors in Node | [#504](https://github.com/shikijs/shiki/pull/504) | [@Gerrit0](https://github.com/Gerrit0)
+- feat: add splunk grammar | [#505](https://github.com/shikijs/shiki/pull/505) | [@KevinBatdorf](https://github.com/KevinBatdorf)
+- Add bun support | [#493](https://github.com/shikijs/shiki/pull/493) | [@aabccd021](https://github.com/aabccd021)
+- feat: add shellsession grammar | [#483](https://github.com/shikijs/shiki/pull/483) | [@mashehu](https://github.com/mashehu)
+
+
 ## 0.14.3 | 2023-06-25
 
 ### 🚀 Features & Fixes
