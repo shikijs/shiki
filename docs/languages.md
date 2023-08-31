@@ -146,6 +146,7 @@ export type Lang =
   | 'markdown' | 'md'
   | 'marko'
   | 'matlab'
+  | 'mdc'
   | 'mdx'
   | 'mermaid'
   | 'mojo'
