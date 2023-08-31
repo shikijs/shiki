@@ -122,7 +122,7 @@ describe('errors', () => {
 
     const code = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: mtp })
     expect.soft(code)
-      .toMatchInlineSnapshot('"<pre class=\\"shiki material-theme-palenight\\" style=\\"background-color:#292D3E;color:#A6ACCD\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#A6ACCD\\">console</span><span style=\\"color:#89DDFF\\">.</span><span style=\\"color:#82AAFF\\">log</span><span style=\\"color:#A6ACCD\\">(</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#C3E88D\\">Hi</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#A6ACCD\\">)</span></span></code></pre>"')
+      .toMatchInlineSnapshot('"<pre class=\\"shiki material-theme-palenight\\" style=\\"background-color:#292D3E;color:#babed8\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#BABED8\\">console</span><span style=\\"color:#89DDFF\\">.</span><span style=\\"color:#82AAFF\\">log</span><span style=\\"color:#BABED8\\">(</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#C3E88D\\">Hi</span><span style=\\"color:#89DDFF\\">\\"</span><span style=\\"color:#BABED8\\">)</span></span></code></pre>"')
 
     expect.soft(shiki.getLoadedThemes()).toContain('material-theme-palenight')
 

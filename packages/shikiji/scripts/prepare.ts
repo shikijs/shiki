@@ -65,10 +65,16 @@ ${[
 async function writeLanguageBundleIndex(fileName: string, ids: string[]) {
   const bundled = ids.map(id => BUNDLED_LANGUAGES.find(i => i.id === id)!)
 
-  const base = Object.fromEntries(bundled.map(i => [i.id, `__(() => import('./langs/${i.id}')) as DynamicLangReg__`]))
-  const alias = Object.fromEntries(bundled.flatMap(i =>
-    (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
-  ))
+  const base = Object.fromEntries(
+    bundled.map(i => [i.id, `__(() => import('./langs/${i.id}')) as DynamicLangReg__`])
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
+  const alias = Object.fromEntries(
+    bundled.flatMap(i =>
+      (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
+    )
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  )
 
   await fs.writeFile(
     `src/assets/${fileName}.ts`,
