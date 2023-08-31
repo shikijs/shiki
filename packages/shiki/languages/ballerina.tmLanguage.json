@@ -2215,7 +2215,7 @@
         },
         {
           "name": "entity.service.path.ballerina",
-          "match": "(\\/([_$[:alpha:]][_$[:alnum:]]**)|\\\"[_$[:alpha:]][_$[:alnum:]]*\\\")"
+          "match": "(\\/([_$[:alpha:]][_$[:alnum:]]*)|\\\"[_$[:alpha:]][_$[:alnum:]]*\\\")"
         }
       ]
     },
@@ -3672,16 +3672,16 @@
           "endCaptures": {
             "1": {
               "name": "punctuation.other.unicode-property.end.regexp.ballerina"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#regex-unicode-properties-general-category"
             },
-            "patterns": [
-              {
-                "include": "#regex-unicode-properties-general-category"
-              },
-              {
-                "include": "#regex-unicode-property-key"
-              }
-            ]
-          }
+            {
+              "include": "#regex-unicode-property-key"
+            }
+          ]
         }
       ]
     },
@@ -3699,13 +3699,13 @@
           "endCaptures": {
             "1": {
               "name": "punctuation.other.unicode-property.end.regexp.ballerina"
-            },
-            "patterns": [
-              {
-                "include": "#regex-unicode-properties-general-category"
-              }
-            ]
-          }
+            }
+          },
+          "patterns": [
+            {
+              "include": "#regex-unicode-properties-general-category"
+            }
+          ]
         }
       ]
     },
@@ -3734,14 +3734,14 @@
           "endCaptures": {
             "1": {
               "name": "punctuation.other.unicode-value.end.regexp.ballerina"
-            },
-            "patterns": [
-              {
-                "match": "([0-9A-Fa-f]{1,6})",
-                "name": "constant.other.unicode-value.regexp.ballerina"
-              }
-            ]
-          }
+            }
+          },
+          "patterns": [
+            {
+              "match": "([0-9A-Fa-f]{1,6})",
+              "name": "constant.other.unicode-value.regexp.ballerina"
+            }
+          ]
         }
       ]
     },
