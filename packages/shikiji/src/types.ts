@@ -88,13 +88,13 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
    *
    * @default []
    */
-  themes?: (ThemeInput | T)[]
+  themes?: (ThemeInput | StringLiteralUnion<T>)[]
   /**
    * Language registation
    *
    * @default Object.keys(bundledThemes)
    */
-  langs?: (LanguageInput | L | SpecialLanguage)[]
+  langs?: (LanguageInput | StringLiteralUnion<L> | SpecialLanguage)[]
 }
 
 export interface LanguageRegistration extends IRawGrammar {

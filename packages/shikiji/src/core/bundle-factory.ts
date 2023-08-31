@@ -39,10 +39,10 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       return theme
     }
 
-    const _themes = (options.themes ?? []).map(i => resolveTheme(i)) as ThemeInput[]
+    const _themes = (options.themes ?? []).map(i => resolveTheme(i as ThemeInput)) as ThemeInput[]
 
     const langs = (options.langs ?? [] as BundledLangs[])
-      .map(i => resolveLang(i))
+      .map(i => resolveLang(i as BundledLangs))
 
     const core = await getHighlighterCore({
       ...options,
@@ -97,8 +97,8 @@ export function createSingletonShorthands<L extends string, T extends string >(g
    */
   async function codeToHtml(code: string, options: CodeToHastOptions<L, T>) {
     const shiki = await _getHighlighter({
-      lang: options.lang,
-      theme: 'theme' in options ? [options.theme] : Object.values(options.themes) as T[],
+      lang: options.lang as L,
+      theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
     })
     return shiki.codeToHtml(code, options)
   }
@@ -111,8 +111,8 @@ export function createSingletonShorthands<L extends string, T extends string >(g
    */
   async function codeToHast(code: string, options: CodeToHastOptions<L, T>) {
     const shiki = await _getHighlighter({
-      lang: options.lang,
-      theme: 'theme' in options ? [options.theme] : Object.values(options.themes) as T[],
+      lang: options.lang as L,
+      theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
     })
     return shiki.codeToHast(code, options)
   }

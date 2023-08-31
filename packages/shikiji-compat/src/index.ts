@@ -1,6 +1,5 @@
-import type { BuiltinLanguage, BuiltinTheme, CodeToHastOptions, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemedToken } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistration, ThemedToken } from 'shikiji'
 import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
-import type { ThemeRegistration } from '../../shikiji/dist/core.mjs'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
