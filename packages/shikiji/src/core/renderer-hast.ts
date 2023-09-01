@@ -153,7 +153,7 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      tokenNode = options.transforms?.token?.(tokenNode, idx + 1, col) || tokenNode
+      tokenNode = options.transforms?.token?.(tokenNode, idx + 1, col, lineNode) || tokenNode
 
       lineNode.children.push(tokenNode)
       col += token.content.length

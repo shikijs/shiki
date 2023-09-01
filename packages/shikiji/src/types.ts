@@ -277,7 +277,7 @@ export interface HastTransformers {
    * @param line 1-based line number
    */
   line?: (hast: Element, line: number) => Element | void
-  token?: (hast: Element, line: number, col: number) => Element | void
+  token?: (hast: Element, line: number, col: number, lineElement: Element) => Element | void
 }
 
 export interface HtmlRendererOptions {
