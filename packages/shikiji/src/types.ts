@@ -5,7 +5,7 @@ import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
 import type { OnigurumaLoadOptions } from './oniguruma'
 
-export { IRawGrammar, IGrammar }
+export { IRawGrammar, IGrammar, FontStyle }
 
 export type BuiltinLanguage = keyof typeof bundledLanguages
 export type BuiltinTheme = keyof typeof bundledThemes
