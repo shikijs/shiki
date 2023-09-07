@@ -47,11 +47,34 @@ export function codeToHast(
       tokens.push(lineout)
       for (let j = 0; j < lineMap[0].length; j++) {
         const tokenMap = lineMap.map(t => t[j])
-        const colors = tokenMap.map((t, idx) => `${idx === 0 && defaultColor ? '' : `${cssVariablePrefix + themeTokens[idx][0]}:`}${t.color || 'inherit'}`).join(';')
+        const tokenStyles = tokenMap.map(t => getTokenStyles(t))
+
+        // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
+        const styleKeys = new Set(tokenStyles.flatMap(t => Object.keys(t)))
+        const mergedStyles = tokenStyles.reduce((acc, cur, idx) => {
+          for (const key of styleKeys) {
+            const value = cur[key] || 'inherit'
+
+            if (idx === 0 && defaultColor) {
+              acc[key] = value
+            }
+            else {
+              const varKey = cssVariablePrefix + themeTokens[idx][0] + (key === 'color' ? '' : `-${key}`)
+              if (acc[key])
+                acc[key] += `;${varKey}:${value}`
+              else
+                acc[key] = `${varKey}:${value}`
+            }
+          }
+          return acc
+        }, {} as Record<string, string>)
+
         lineout.push({
           ...tokenMap[0],
-          color: colors,
-          htmlStyle: defaultColor ? undefined : colors,
+          color: '',
+          htmlStyle: defaultColor
+            ? stringifyTokenStyle(mergedStyles)
+            : Object.values(mergedStyles).join(';'),
         })
       }
     }
@@ -134,15 +157,7 @@ export function tokensToHast(
     let col = 0
 
     for (const token of line) {
-      const styles = [token.htmlStyle || `color:${token.color}`]
-      if (token.fontStyle) {
-        if (token.fontStyle & FontStyle.Italic)
-          styles.push('font-style:italic')
-        if (token.fontStyle & FontStyle.Bold)
-          styles.push('font-weight:bold')
-        if (token.fontStyle & FontStyle.Underline)
-          styles.push('text-decoration:underline')
-      }
+      const styles = [token.htmlStyle || stringifyTokenStyle(getTokenStyles(token))]
 
       let tokenNode: Element = {
         type: 'element',
@@ -170,6 +185,25 @@ export function tokensToHast(
   tree.children.push(preNode)
 
   return options.transforms?.root?.(tree) || tree
+}
+
+function getTokenStyles(token: ThemedToken) {
+  const styles: Record<string, string> = {}
+  if (token.color)
+    styles.color = token.color
+  if (token.fontStyle) {
+    if (token.fontStyle & FontStyle.Italic)
+      styles['font-style'] = 'italic'
+    if (token.fontStyle & FontStyle.Bold)
+      styles['font-weight'] = 'bold'
+    if (token.fontStyle & FontStyle.Underline)
+      styles['text-decoration'] = 'underline'
+  }
+  return styles
+}
+
+function stringifyTokenStyle(token: Record<string, string>) {
+  return Object.entries(token).map(([key, value]) => `${key}:${value}`).join(';')
 }
 
 function mergeWhitespaceTokens(tokens: ThemedToken[][]) {

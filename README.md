@@ -278,8 +278,12 @@ To make it reactive to your site's theme, you need to add a short CSS snippet:
 @media (prefers-color-scheme: dark) {
   .shiki,
   .shiki span {
-    background-color: var(--shiki-dark-bg) !important;
     color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    /* Optional, if you also want font styles */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
   }
 }
 ```
@@ -289,8 +293,12 @@ To make it reactive to your site's theme, you need to add a short CSS snippet:
 ```css
 html.dark .shiki,
 html.dark .shiki span {
-  background-color: var(--shiki-dark-bg) !important;
   color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 ```
 
@@ -413,7 +421,7 @@ console.log(root)
             }
           ]
         }
-      ]s
+      ]
     }
   ]
 }

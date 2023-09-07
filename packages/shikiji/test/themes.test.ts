@@ -80,9 +80,10 @@ describe('codeToHtml', () => {
       'nord': 'nord',
       'min-dark': 'min-dark',
       'min-light': 'min-light',
+      'palenight': 'material-theme-palenight',
     } as const
 
-    const code = await codeToHtml('console.log("hello")', {
+    const code = await codeToHtml('import * as Shiki from "shikiji"', {
       lang: 'js',
       themes,
       cssVariablePrefix: '--s-',
@@ -100,6 +101,9 @@ ${Object.keys(themes).map(theme => `
 [data-theme="${theme}"] .shiki span {
   background-color: var(--s-${theme}-bg) !important;
   color: var(--s-${theme}) !important;
+  font-style: var(--s-${theme}-font-style) !important;
+  font-weight: var(--s-${theme}-font-weight) !important;
+  text-decoration: var(--s-${theme}-text-decoration) !important;
 }
 `).join('\n')}
 </style>
@@ -166,6 +170,32 @@ function toggleTheme() {
 
     expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes-no-default.html')
+  })
+
+  it('should support font style', async () => {
+    const input = 'import * as Shiki from \'shiki\';\n'
+    const code1 = await codeToHtml(input, {
+      lang: 'js',
+      themes: {
+        light: 'material-theme-palenight',
+        dark: 'nord',
+      },
+    })
+
+    expect(code1)
+      .toContain('font-style:italic;--shiki-dark-font-style:inherit')
+
+    const code2 = await codeToHtml(input, {
+      lang: 'js',
+      themes: {
+        light: 'material-theme-palenight',
+        dark: 'nord',
+      },
+      defaultColor: 'dark',
+    })
+
+    expect(code2)
+      .toContain('font-style:inherit;--shiki-light-font-style:italic')
   })
 })
 
