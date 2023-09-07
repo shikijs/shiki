@@ -84,7 +84,7 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
-  | 'kotlin'
+  | 'kotlin' | 'kt'
   | 'kusto' | 'kql'
   | 'latex'
   | 'less'

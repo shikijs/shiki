@@ -372,6 +372,7 @@ export const languageAliases = {
   ini: ['properties'],
   javascript: ['js'],
   jssm: ['fsl'],
+  kotlin: ['kt'],
   kusto: ['kql'],
   make: ['makefile'],
   markdown: ['md'],
