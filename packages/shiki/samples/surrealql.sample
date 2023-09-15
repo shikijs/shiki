@@ -1,0 +1,11 @@
+// Object-based Record IDs
+// Set a new parameter
+LET $now = time::now();
+// Create a record with a complex ID using an object
+CREATE temperature:{ location: 'London', date: $now } SET
+  location = 'London',
+  date = $now,
+  temperature = 23.7
+;
+
+// From https://surrealdb.com/docs/surrealql/datamodel/ids
