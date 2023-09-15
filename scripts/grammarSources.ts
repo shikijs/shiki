@@ -297,6 +297,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/arcsector/vscode-splunk-search-syntax/blob/master/syntaxes/splunk_search.tmLanguage'
   ],
   [
+    'surrealql',
+    'https://github.com/surrealdb/surrealql-grammar/blob/main/syntaxes/surrealql.tmLanguage.json'
+  ],
+  [
     'ssh-config',
     'https://github.com/textmate/ssh-config.tmbundle/blob/master/Syntaxes/SSH-Config.tmLanguage'
   ],
@@ -389,6 +393,7 @@ export const languageAliases = {
   shellscript: ['bash', 'sh', 'shell', 'zsh'],
   shellsession: ['console'],
   splunk: ['spl'],
+  surrealql: ['surql', 'surreal'],
   stylus: ['styl'],
   typescript: ['ts'],
   vb: ['cmd'],
@@ -428,6 +433,7 @@ export const languageDisplayOverrides: Record<string, string> = {
   riscv: 'RISC-V',
   sas: 'SAS',
   shellscript: 'Shell',
+  surrealql: 'SurrealQl',
   svelte: 'Svelte',
   tasl: 'Tasl',
   tsx: 'TSX',
