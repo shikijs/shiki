@@ -4,6 +4,10 @@
 import { ILanguageRegistration } from './types'
 
 export type Lang =
+  | 'JavaScriptReact'
+  | 'MagicPython'
+  | 'MagicRegExp'
+  | 'TypeScriptReact'
   | 'abap'
   | 'actionscript-3'
   | 'ada'
@@ -13,10 +17,12 @@ export type Lang =
   | 'applescript'
   | 'ara'
   | 'asm'
+  | 'asp-vb-net'
   | 'astro'
   | 'awk'
   | 'ballerina'
   | 'bat' | 'batch'
+  | 'batchfile'
   | 'beancount'
   | 'berry' | 'be'
   | 'bibtex'
@@ -30,10 +36,15 @@ export type Lang =
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
+  | 'coffeescript'
+  | 'cpp-grammar-bailout'
+  | 'cpp.embedded.macro'
   | 'cpp'
   | 'crystal'
   | 'csharp' | 'c#' | 'cs'
+  | 'cshtml'
   | 'css'
+  | 'cuda-cpp'
   | 'cue'
   | 'cypher' | 'cql'
   | 'd'
@@ -68,14 +79,18 @@ export type Lang =
   | 'hcl'
   | 'hjson'
   | 'hlsl'
+  | 'html-derivative'
   | 'html'
   | 'http'
+  | 'ignore'
   | 'imba'
   | 'ini' | 'properties'
   | 'java'
   | 'javascript' | 'js'
   | 'jinja-html'
   | 'jison'
+  | 'jsdoc.js.injection'
+  | 'jsdoc.ts.injection'
   | 'json'
   | 'json5'
   | 'jsonc'
@@ -90,12 +105,17 @@ export type Lang =
   | 'less'
   | 'liquid'
   | 'lisp'
+  | 'log'
   | 'logo'
   | 'lua'
   | 'make' | 'makefile'
+  | 'markdown-latex-combined'
   | 'markdown' | 'md'
   | 'marko'
   | 'matlab'
+  | 'md-math-block'
+  | 'md-math-inline'
+  | 'md-math'
   | 'mdc'
   | 'mdx'
   | 'mermaid'
@@ -105,12 +125,15 @@ export type Lang =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'objective-c++'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
   | 'ocaml'
   | 'pascal'
   | 'perl'
+  | 'perl6'
   | 'php'
+  | 'platform'
   | 'plsql'
   | 'postcss'
   | 'powerquery'
@@ -133,13 +156,17 @@ export type Lang =
   | 'rust' | 'rs'
   | 'sas'
   | 'sass'
+  | 'sassdoc'
   | 'scala'
   | 'scheme'
   | 'scss'
+  | 'searchResult'
   | 'shaderlab' | 'shader'
+  | 'shell-unix-bash'
   | 'shellscript' | 'bash' | 'sh' | 'shell' | 'zsh'
   | 'shellsession' | 'console'
   | 'smalltalk'
+  | 'snippets'
   | 'solidity'
   | 'sparql'
   | 'splunk' | 'spl'
@@ -147,6 +174,7 @@ export type Lang =
   | 'ssh-config'
   | 'stata'
   | 'stylus' | 'styl'
+  | 'surrealql' | 'surql' | 'surreal'
   | 'svelte'
   | 'swift'
   | 'system-verilog'
@@ -177,6 +205,30 @@ export type Lang =
   | 'zig'
 
 export const languages: ILanguageRegistration[] = [
+  {
+    id: 'JavaScriptReact',
+    scopeName: 'source.js.jsx',
+    path: 'JavaScriptReact.tmLanguage.json',
+    displayName: 'JavaScript JSX'
+  },
+  {
+    id: 'MagicPython',
+    scopeName: 'source.python',
+    path: 'MagicPython.tmLanguage.json',
+    displayName: 'Python'
+  },
+  {
+    id: 'MagicRegExp',
+    scopeName: 'source.regexp.python',
+    path: 'MagicRegExp.tmLanguage.json',
+    displayName: 'MagicRegExp'
+  },
+  {
+    id: 'TypeScriptReact',
+    scopeName: 'source.tsx',
+    path: 'TypeScriptReact.tmLanguage.json',
+    displayName: 'TypeScript JSX'
+  },
   {
     id: 'abap',
     scopeName: 'source.abap',
@@ -242,6 +294,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'asm.sample'
   },
   {
+    id: 'asp-vb-net',
+    scopeName: 'source.asp.vb.net',
+    path: 'asp-vb-net.tmLanguage.json',
+    displayName: 'Visual Basic'
+  },
+  {
     id: 'astro',
     scopeName: 'source.astro',
     path: 'astro.tmLanguage.json',
@@ -270,6 +328,12 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Batch',
     samplePath: 'bat.sample',
     aliases: ['batch']
+  },
+  {
+    id: 'batchfile',
+    scopeName: 'source.batchfile',
+    path: 'batchfile.tmLanguage.json',
+    displayName: 'Batch'
   },
   {
     id: 'beancount',
@@ -370,12 +434,33 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['javascript']
   },
   {
+    id: 'coffeescript',
+    scopeName: 'source.coffee',
+    path: 'coffeescript.tmLanguage.json',
+    displayName: 'CoffeeScript',
+    embeddedLangs: ['javascript']
+  },
+  {
+    id: 'cpp-grammar-bailout',
+    scopeName: 'source.cpp.embedded.latex',
+    path: 'cpp-grammar-bailout.tmLanguage.json',
+    displayName: 'C++',
+    embeddedLangs: ['cpp.embedded.macro', 'MagicRegExp', 'glsl', 'sql']
+  },
+  {
+    id: 'cpp.embedded.macro',
+    scopeName: 'source.cpp.embedded.macro',
+    path: 'cpp.embedded.macro.tmLanguage.json',
+    displayName: 'C++',
+    embeddedLangs: ['cpp', 'MagicRegExp', 'glsl', 'sql']
+  },
+  {
     id: 'cpp',
     scopeName: 'source.cpp',
     path: 'cpp.tmLanguage.json',
     displayName: 'C++',
     samplePath: 'cpp.sample',
-    embeddedLangs: ['glsl', 'sql']
+    embeddedLangs: ['cpp.embedded.macro', 'MagicRegExp', 'glsl', 'sql']
   },
   {
     id: 'crystal',
@@ -394,11 +479,25 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['c#', 'cs']
   },
   {
+    id: 'cshtml',
+    scopeName: 'text.html.cshtml',
+    path: 'cshtml.tmLanguage.json',
+    displayName: 'Razor',
+    embeddedLangs: ['html', 'csharp']
+  },
+  {
     id: 'css',
     scopeName: 'source.css',
     path: 'css.tmLanguage.json',
     displayName: 'CSS',
     samplePath: 'css.sample'
+  },
+  {
+    id: 'cuda-cpp',
+    scopeName: 'source.cuda-cpp',
+    path: 'cuda-cpp.tmLanguage.json',
+    displayName: 'CUDA C++',
+    embeddedLangs: ['cpp.embedded.macro', 'MagicRegExp', 'glsl', 'sql']
   },
   {
     id: 'cue',
@@ -616,7 +715,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'haml.tmLanguage.json',
     displayName: 'Ruby Haml',
     samplePath: 'haml.sample',
-    embeddedLangs: ['ruby', 'javascript', 'sass', 'coffee', 'markdown', 'css']
+    embeddedLangs: ['ruby', 'javascript', 'sass', 'coffeescript', 'markdown', 'css']
   },
   {
     id: 'handlebars',
@@ -657,6 +756,13 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'hlsl.sample'
   },
   {
+    id: 'html-derivative',
+    scopeName: 'text.html.derivative',
+    path: 'html-derivative.tmLanguage.json',
+    displayName: 'HTML',
+    embeddedLangs: ['html']
+  },
+  {
     id: 'html',
     scopeName: 'text.html.basic',
     path: 'html.tmLanguage.json',
@@ -671,6 +777,12 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'HTTP',
     samplePath: 'http.sample',
     embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
+  },
+  {
+    id: 'ignore',
+    scopeName: 'source.ignore',
+    path: 'ignore.tmLanguage.json',
+    displayName: 'Ignore'
   },
   {
     id: 'imba',
@@ -717,6 +829,20 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Jison',
     samplePath: 'jison.sample',
     embeddedLangs: ['javascript']
+  },
+  {
+    id: 'jsdoc.js.injection',
+    scopeName: 'documentation.injection.js.jsx',
+    path: 'jsdoc.js.injection.tmLanguage.json',
+    displayName: 'Jsdoc.js.injection',
+    embeddedLangs: ['typescript']
+  },
+  {
+    id: 'jsdoc.ts.injection',
+    scopeName: 'documentation.injection.ts',
+    path: 'jsdoc.ts.injection.tmLanguage.json',
+    displayName: 'Jsdoc.ts.injection',
+    embeddedLangs: ['typescript']
   },
   {
     id: 'json',
@@ -797,7 +923,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'latex.tmLanguage.json',
     displayName: 'LaTeX',
     samplePath: 'latex.sample',
-    embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot']
+    embeddedLangs: ['tex', 'cpp-grammar-bailout', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot', 'markdown-latex-combined']
   },
   {
     id: 'less',
@@ -823,6 +949,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'lisp.sample'
   },
   {
+    id: 'log',
+    scopeName: 'text.log',
+    path: 'log.tmLanguage.json',
+    displayName: 'Log'
+  },
+  {
     id: 'logo',
     scopeName: 'source.logo',
     path: 'logo.tmLanguage.json',
@@ -846,13 +978,20 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['makefile']
   },
   {
+    id: 'markdown-latex-combined',
+    scopeName: 'text.tex.markdown_latex_combined',
+    path: 'markdown-latex-combined.tmLanguage.json',
+    displayName: 'Markdown',
+    embeddedLangs: ['latex', 'css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'batchfile', 'clojure', 'coffeescript', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'MagicRegExp', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'markdown', 'log', 'erlang', 'elixir', 'bibtex', 'html-derivative']
+  },
+  {
     id: 'markdown',
     scopeName: 'text.html.markdown',
     path: 'markdown.tmLanguage.json',
     displayName: 'Markdown',
     samplePath: 'markdown.sample',
     aliases: ['md'],
-    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'bat', 'clojure', 'coffee', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'erlang', 'elixir', 'latex', 'bibtex']
+    embeddedLangs: ['css', 'html', 'ini', 'java', 'lua', 'make', 'perl', 'r', 'ruby', 'php', 'sql', 'vb', 'xml', 'xsl', 'yaml', 'batchfile', 'clojure', 'coffeescript', 'c', 'cpp', 'diff', 'docker', 'git-commit', 'git-rebase', 'go', 'groovy', 'pug', 'javascript', 'json', 'jsonc', 'less', 'objective-c', 'swift', 'scss', 'raku', 'powershell', 'python', 'julia', 'MagicRegExp', 'rust', 'scala', 'shellscript', 'typescript', 'tsx', 'csharp', 'fsharp', 'dart', 'handlebars', 'log', 'erlang', 'elixir', 'latex', 'bibtex', 'html-derivative']
   },
   {
     id: 'marko',
@@ -870,12 +1009,32 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'matlab.sample'
   },
   {
+    id: 'md-math-block',
+    scopeName: 'markdown.math.block',
+    path: 'md-math-block.tmLanguage.json',
+    displayName: 'Md-math-block',
+    embeddedLangs: ['md-math']
+  },
+  {
+    id: 'md-math-inline',
+    scopeName: 'markdown.math.inline',
+    path: 'md-math-inline.tmLanguage.json',
+    displayName: 'Md-math-inline',
+    embeddedLangs: ['md-math']
+  },
+  {
+    id: 'md-math',
+    scopeName: 'text.html.markdown.math',
+    path: 'md-math.tmLanguage.json',
+    displayName: 'Markdown Math'
+  },
+  {
     id: 'mdc',
     scopeName: 'text.markdown.mdc',
     path: 'mdc.tmLanguage.json',
-    displayName: 'markdown',
+    displayName: 'mdc',
     samplePath: 'mdc.sample',
-    embeddedLangs: ['markdown', 'yaml']
+    embeddedLangs: ['markdown', 'yaml', 'html-derivative']
   },
   {
     id: 'mdx',
@@ -883,7 +1042,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'mdx.tmLanguage.json',
     displayName: 'MDX',
     samplePath: 'mdx.sample',
-    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffee', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'shellsession', 'sql', 'xml', 'swift', 'typescript']
+    embeddedLangs: ['tsx', 'toml', 'yaml', 'c', 'clojure', 'coffeescript', 'cpp', 'csharp', 'css', 'diff', 'docker', 'elixir', 'elm', 'erlang', 'go', 'graphql', 'haskell', 'html', 'ini', 'java', 'javascript', 'json', 'julia', 'kotlin', 'less', 'lua', 'make', 'markdown', 'objective-c', 'perl', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'shellsession', 'sql', 'xml', 'swift', 'typescript']
   },
   {
     id: 'mermaid',
@@ -939,6 +1098,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'nix.sample'
   },
   {
+    id: 'objective-c++',
+    scopeName: 'source.objcpp',
+    path: 'objective-c++.tmLanguage.json',
+    displayName: 'Objective-C++'
+  },
+  {
     id: 'objective-c',
     scopeName: 'source.objc',
     path: 'objective-c.tmLanguage.json',
@@ -976,12 +1141,24 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['html', 'xml', 'css', 'javascript', 'sql']
   },
   {
+    id: 'perl6',
+    scopeName: 'source.perl.6',
+    path: 'perl6.tmLanguage.json',
+    displayName: 'Raku'
+  },
+  {
     id: 'php',
     scopeName: 'source.php',
     path: 'php.tmLanguage.json',
     displayName: 'PHP',
     samplePath: 'php.sample',
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
+  },
+  {
+    id: 'platform',
+    scopeName: 'source.c.platform',
+    path: 'platform.tmLanguage.json',
+    displayName: 'Platform'
   },
   {
     id: 'plsql',
@@ -1040,7 +1217,7 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Pug',
     samplePath: 'pug.sample',
     aliases: ['jade'],
-    embeddedLangs: ['javascript', 'css', 'sass', 'scss', 'stylus', 'coffee', 'html']
+    embeddedLangs: ['javascript', 'css', 'sass', 'scss', 'stylus', 'coffeescript', 'html']
   },
   {
     id: 'puppet',
@@ -1075,7 +1252,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'raku',
     scopeName: 'source.perl.6',
     path: 'raku.tmLanguage.json',
-    displayName: 'Perl 6',
+    displayName: 'Raku',
     samplePath: 'raku.sample',
     aliases: ['perl6']
   },
@@ -1114,7 +1291,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'rst.tmLanguage.json',
     displayName: 'reStructuredText',
     samplePath: 'rst.sample',
-    embeddedLangs: ['cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
+    embeddedLangs: ['html-derivative', 'cpp', 'python', 'javascript', 'shellscript', 'yaml', 'cmake', 'ruby']
   },
   {
     id: 'ruby',
@@ -1149,6 +1326,13 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'sass.sample'
   },
   {
+    id: 'sassdoc',
+    scopeName: 'source.sassdoc',
+    path: 'sassdoc.tmLanguage.json',
+    displayName: 'SassDoc',
+    embeddedLangs: ['scss', 'javascript']
+  },
+  {
     id: 'scala',
     scopeName: 'source.scala',
     path: 'scala.tmLanguage.json',
@@ -1168,7 +1352,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'scss.tmLanguage.json',
     displayName: 'SCSS',
     samplePath: 'scss.sample',
-    embeddedLangs: ['css']
+    embeddedLangs: ['css', 'sassdoc']
+  },
+  {
+    id: 'searchResult',
+    scopeName: 'text.searchResult',
+    path: 'searchResult.tmLanguage.json',
+    displayName: 'Search Result',
+    embeddedLangs: ['batchfile', 'c', 'clojure', 'coffeescript', 'cpp', 'csharp', 'cshtml', 'css', 'dart', 'diff', 'docker', 'fsharp', 'go', 'groovy', 'objective-c', 'handlebars', 'hlsl', 'objective-cpp', 'html', 'ini', 'java', 'julia', 'javascript', 'jsonc', 'jsx', 'less', 'log', 'lua', 'make', 'markdown', 'raku', 'perl', 'php', 'powershell', 'pug', 'python', 'r', 'ruby', 'rust', 'scala', 'scss', 'shellscript', 'sql', 'swift', 'typescript', 'tsx', 'vb', 'xml', 'yaml']
   },
   {
     id: 'shaderlab',
@@ -1178,6 +1369,12 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'shaderlab.sample',
     aliases: ['shader'],
     embeddedLangs: ['hlsl']
+  },
+  {
+    id: 'shell-unix-bash',
+    scopeName: 'source.shell',
+    path: 'shell-unix-bash.tmLanguage.json',
+    displayName: 'Shell Script'
   },
   {
     id: 'shellscript',
@@ -1202,6 +1399,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'smalltalk.tmLanguage.json',
     displayName: 'Smalltalk',
     samplePath: 'smalltalk.sample'
+  },
+  {
+    id: 'snippets',
+    scopeName: 'source.json.comments.snippets',
+    path: 'snippets.tmLanguage.json',
+    displayName: 'Code Snippets'
   },
   {
     id: 'solidity',
@@ -1257,12 +1460,21 @@ export const languages: ILanguageRegistration[] = [
     aliases: ['styl']
   },
   {
+    id: 'surrealql',
+    scopeName: 'source.surrealql',
+    path: 'surrealql.tmLanguage.json',
+    displayName: 'SurrealQl',
+    samplePath: 'surrealql.sample',
+    aliases: ['surql', 'surreal'],
+    embeddedLangs: ['javascript']
+  },
+  {
     id: 'svelte',
     scopeName: 'source.svelte',
     path: 'svelte.tmLanguage.json',
     displayName: 'Svelte',
     samplePath: 'svelte.sample',
-    embeddedLangs: ['javascript', 'typescript', 'coffee', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'pug', 'markdown']
+    embeddedLangs: ['javascript', 'typescript', 'coffeescript', 'stylus', 'sass', 'css', 'scss', 'less', 'postcss', 'pug', 'markdown']
   },
   {
     id: 'swift',
@@ -1388,7 +1600,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'vue.tmLanguage.json',
     displayName: 'Vue',
     samplePath: 'vue.sample',
-    embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'json5', 'yaml', 'toml', 'graphql']
+    embeddedLangs: ['html', 'markdown', 'pug', 'stylus', 'sass', 'css', 'scss', 'less', 'javascript', 'typescript', 'jsx', 'tsx', 'json', 'jsonc', 'json5', 'yaml', 'toml', 'graphql', 'html-derivative']
   },
   {
     id: 'vyper',
