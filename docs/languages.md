@@ -142,6 +142,7 @@ export type Lang =
   | 'lisp'
   | 'logo'
   | 'lua'
+  | 'luau'
   | 'make' | 'makefile'
   | 'markdown' | 'md'
   | 'marko'

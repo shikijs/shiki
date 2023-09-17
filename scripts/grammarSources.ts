@@ -207,6 +207,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/Shopify/liquid-tm-grammar/blob/main/grammars/liquid.tmLanguage.json'
   ],
   ['logo', 'https://github.com/textmate/logo.tmbundle/blob/master/Syntaxes/Logo.tmLanguage'],
+  [
+    'luau',
+    'https://github.com/JohnnyMorganz/luau-lsp/blob/main/editors/code/syntaxes/Luau.tmLanguage.json'
+  ],
   ['marko', 'https://github.com/marko-js/marko-tmbundle/blob/master/Syntaxes/marko.tmLanguage'],
   [
     'matlab',
