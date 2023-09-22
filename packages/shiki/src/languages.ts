@@ -105,6 +105,7 @@ export type Lang =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'nushell' | 'nu'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
   | 'ocaml'
@@ -940,6 +941,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'nix.tmLanguage.json',
     displayName: 'Nix',
     samplePath: 'nix.sample'
+  },
+  {
+    id: 'nushell',
+    scopeName: 'source.nushell',
+    path: 'nushell.tmLanguage.json',
+    displayName: 'nushell',
+    samplePath: 'nushell.sample',
+    aliases: ['nu']
   },
   {
     id: 'objective-c',
