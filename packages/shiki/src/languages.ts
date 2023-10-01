@@ -84,7 +84,7 @@ export type Lang =
   | 'jssm' | 'fsl'
   | 'jsx'
   | 'julia'
-  | 'kotlin'
+  | 'kotlin' | 'kt' | 'kts'
   | 'kusto' | 'kql'
   | 'latex'
   | 'less'
@@ -781,7 +781,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.kotlin',
     path: 'kotlin.tmLanguage.json',
     displayName: 'Kotlin',
-    samplePath: 'kotlin.sample'
+    samplePath: 'kotlin.sample',
+    aliases: ['kt', 'kts']
   },
   {
     id: 'kusto',
