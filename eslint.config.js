@@ -3,7 +3,7 @@ import antfu from '@antfu/eslint-config'
 export default antfu(
   {
     ignores: [
-      './packages/shikiji/src/assets/**/*',
+      'packages/shikiji/src/assets/*.ts',
     ],
   },
   {
