@@ -197,6 +197,18 @@ function toggleTheme() {
     expect(code2)
       .toContain('font-style:inherit;--shiki-light-font-style:italic')
   })
+
+  it('should not have empty style', async () => {
+    const input = 'This is plain text'
+    const code = await codeToHtml(input, {
+      lang: 'plaintext',
+      themes: {
+        light: 'material-theme-palenight',
+        dark: 'nord',
+      },
+    })
+    expect(code).not.toContain('style=""')
+  })
 })
 
 describe('codeToTokensWithThemes', () => {

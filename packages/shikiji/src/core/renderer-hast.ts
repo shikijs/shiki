@@ -157,16 +157,16 @@ export function tokensToHast(
     let col = 0
 
     for (const token of line) {
-      const styles = [token.htmlStyle || stringifyTokenStyle(getTokenStyles(token))]
-
       let tokenNode: Element = {
         type: 'element',
         tagName: 'span',
-        properties: {
-          style: styles.join(';'),
-        },
+        properties: {},
         children: [{ type: 'text', value: token.content }],
       }
+
+      const style = token.htmlStyle || stringifyTokenStyle(getTokenStyles(token))
+      if (style)
+        tokenNode.properties.style = style
 
       tokenNode = options.transforms?.token?.(tokenNode, idx + 1, col, lineNode) || tokenNode
 
