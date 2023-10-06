@@ -21,6 +21,7 @@ export default {
         headers: {
           'content-type': 'text/html;charset=UTF-8',
         },
-      })
+      },
+    )
   },
 }

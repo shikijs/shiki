@@ -4,8 +4,8 @@ import { Registry } from './registry'
 import { Resolver } from './resolver'
 
 /**
-* Get the minimal shiki context for rendering.
-*/
+ * Get the minimal shiki context for rendering.
+ */
 export async function getShikiContext(options: HighlighterCoreOptions = {}): Promise<ShikiContext> {
   async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
     return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)

@@ -3,10 +3,10 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import { expect, test } from 'vitest'
+import { expect, it } from 'vitest'
 import rehypeShikiji from '../src'
 
-test('run', async () => {
+it('run', async () => {
   const file = await unified()
     .use(remarkParse)
     .use(remarkRehype)

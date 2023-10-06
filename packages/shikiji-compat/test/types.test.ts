@@ -1,8 +1,8 @@
-import { expect, test } from 'vitest'
+import { expect, it } from 'vitest'
 import * as shiki from 'shiki'
 import * as shikiji from '../src/index'
 
-test('run', async () => {
+it('run', async () => {
   const s = await shiki.getHighlighter({
     theme: 'nord',
     langs: ['javascript'],

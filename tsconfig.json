@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
     "target": "es2020",
-    "module": "esnext",
     "lib": ["esnext", "DOM"],
+    "rootDir": ".",
+    "module": "esnext",
     "moduleResolution": "Bundler",
-    "esModuleInterop": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
     "paths": {
       "shikiji": ["./packages/shikiji/src/index.ts"]
-    }
+    },
+    "resolveJsonModule": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "dist"]
 }

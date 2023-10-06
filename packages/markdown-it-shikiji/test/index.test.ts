@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises'
-import { expect, test } from 'vitest'
+import { expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
 import Shikiji from '../src'
 
-test('run', async () => {
+it('run', async () => {
   const md = MarkdownIt()
   md.use(await Shikiji({
     themes: {

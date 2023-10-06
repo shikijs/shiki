@@ -1,11 +1,10 @@
 /* eslint-disable no-irregular-whitespace */
-/* eslint-disable vue/no-irregular-whitespace */
-import { expect, test } from 'vitest'
+import { expect, it } from 'vitest'
 import {
   getHighlighter,
 } from '../src'
 
-test('renders ansi to html', async () => {
+it('renders ansi to html', async () => {
   const highlighter = await getHighlighter({ themes: ['monokai'] })
 
   const out = highlighter.codeToHtml(`[0;30;43m WARN [0m using --force I sure hope you know what you are doing

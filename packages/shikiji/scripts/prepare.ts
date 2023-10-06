@@ -43,8 +43,7 @@ for (const file of allLangFiles) {
 
   const embedded = (json.embeddedLangs || []) as string[]
 
-  await fs.writeFile(`./src/assets/langs/${lang.id}.ts`,
-    `${comments}
+  await fs.writeFile(`./src/assets/langs/${lang.id}.ts`, `${comments}
 import { LanguageRegistration } from '../../types'
 
 ${embedded.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
@@ -57,9 +56,7 @@ ${[
   '  lang',
 ].join(',\n') || ''}
 ]
-`,
-    'utf-8',
-  )
+`, 'utf-8')
 }
 
 async function writeLanguageBundleIndex(fileName: string, ids: string[]) {
