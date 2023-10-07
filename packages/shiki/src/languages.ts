@@ -142,6 +142,8 @@ export type Lang =
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
+  | 'spin'
+  | 'spin2'
   | 'splunk' | 'spl'
   | 'sql'
   | 'ssh-config'
@@ -1217,6 +1219,20 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'SPARQL',
     samplePath: 'sparql.sample',
     embeddedLangs: ['turtle']
+  },
+  {
+    id: 'spin',
+    scopeName: 'source.spin',
+    path: 'spin.tmLanguage.json',
+    displayName: 'spin',
+    samplePath: 'spin.sample'
+  },
+  {
+    id: 'spin2',
+    scopeName: 'source.spin2',
+    path: 'spin2.tmLanguage.json',
+    displayName: 'spin2',
+    samplePath: 'spin2.sample'
   },
   {
     id: 'splunk',

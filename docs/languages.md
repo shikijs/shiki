@@ -192,6 +192,8 @@ export type Lang =
   | 'smalltalk'
   | 'solidity'
   | 'sparql'
+  | 'spin'
+  | 'spin2'
   | 'splunk' | 'spl'
   | 'sql'
   | 'ssh-config'

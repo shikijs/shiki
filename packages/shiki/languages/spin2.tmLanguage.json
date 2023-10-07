@@ -1,0 +1,887 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "spin2",
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#block"
+    }
+  ],
+  "repository": {
+    "array_index": {
+      "name": "meta.array.index.spin2",
+      "match": "(?i)\\b(\\[)(.*)?(\\])\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.spin2"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "3": {
+          "name": "keyword.operator.spin2"
+        }
+      }
+    },
+    "binary_number": {
+      "name": "constant.numeric.binary.spin2",
+      "match": "(\\%[01][01_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base2.spin2"
+        }
+      }
+    },
+    "block": {
+      "name": "meta.block.spin2",
+      "patterns": [
+        {
+          "include": "#constant_block"
+        },
+        {
+          "include": "#variable_block"
+        },
+        {
+          "include": "#object_block"
+        },
+        {
+          "include": "#public_block"
+        },
+        {
+          "include": "#private_block"
+        },
+        {
+          "include": "#data_block"
+        }
+      ]
+    },
+    "block_comment": {
+      "name": "comment.block.spin2",
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "cog_register_names": {
+      "name": "constant.language.cog-register-names.spin2",
+      "match": "(?i)\\b(PR(0|1|2|3|4|5|6|7)|IJMP(1|2|3)|IRET(1|2|3)|P(A|B)|PTR(A|B)|DIR(A|B)|IN(A|B)|OUT(A|B))\\b"
+    },
+    "coginit_constants": {
+      "name": "constant.language.coginit.names.spin2",
+      "match": "(?i)\\b((COG|HUB)EXEC(_NEW|NEW_PAIR)?)\\b"
+    },
+    "comment": {
+      "patterns": [
+        {
+          "include": "#doc_block_comment"
+        },
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#doc_line_comment"
+        },
+        {
+          "include": "#line_comment"
+        }
+      ]
+    },
+    "configuration": {
+      "name": "keyword.control.configuration.spin2",
+      "match": "(?i)\\b(CHIPVER|_?CLKMODE|_?CLKFREQ|CLKSET|_XINFREQ|_STACK|_FREE|RCFAST|RCSLOW|XINPUT|XTAL[1-3]|PLL(1|2|4|8|16)X)\\b"
+    },
+    "constants": {
+      "name": "constant.language.spin2",
+      "match": "(?i)\\b(TRUE|FALSE|(POS|NEG)X|PI)\\b"
+    },
+    "constant_block": {
+      "name": "meta.block.constant.spin2",
+      "begin": "(?i)^(CON)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.con.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#configuration"
+        },
+        {
+          "include": "#configuration"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#debug_constants"
+        },
+        {
+          "include": "#spin2_float_conversions"
+        },
+        {
+          "include": "#spin2_field_operations"
+        },
+        {
+          "include": "#spin2_unary_operators"
+        },
+        {
+          "include": "#spin2_binary_operators"
+        }
+      ]
+    },
+    "constant_operators": {
+      "name": "keyword.operator.constant-math.spin2",
+      "match": "(\\=|\\/|\\*|\\+|\\-|\\\\)"
+    },
+    "data_block": {
+      "name": "meta.block.data.spin2",
+      "begin": "(?i)^(DAT)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.dat.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#debug_functions"
+        },
+        {
+          "include": "#includes_dat"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#pasm_language"
+        },
+        {
+          "include": "#spin2_binary_operators"
+        }
+      ]
+    },
+    "debug_constants": {
+      "name": "support.function.debug.methods.spin2",
+      "match": "(?i)\\b(DEBUG_MAIN|DEBUG_COGINIT)\\b"
+    },
+    "debug_functions": {
+      "name": "support.function.debug.methods.spin2",
+      "match": "(?i)\\b(FDEC(_ARRAY|_REG_ARRAY)?|(S|U)(DEC|HEX|BIN)(_BYTE|_LONG|_WORD|_REG_ARRAY|_BYTE_ARRAY|_LONG_ARRAY|_WORD_ARRAY)?(_)?|ZSTR(_)?|LSTR(_)?|debug|DEBUG_(BAUD|COGS|DELAY|DISPLAY_LEFT|DISPLAY_TOP|ENABLE|HEIGHT|LEFT|LOG_SIZE|PIN_TX|PIN_RX|TIMESTAMP|TOP|WIDTH|WINDOWS_OFF)|DLY|PC_(KEY|MOUSE)|DOWNLOAD_BAUD)\\b"
+    },
+    "decimal_number": {
+      "name": "constant.numeric.decimal.spin2",
+      "patterns": [
+        {
+          "name": "constant.numeric.base10.spin2",
+          "match": "([\\+\\-][0-9][0-9_]*)\\b"
+        },
+        {
+          "name": "constant.numeric.base10.spin2",
+          "match": "\\b([0-9][0-9_]*)\\b"
+        },
+        {
+          "name": "constant.numeric.base10.spin2",
+          "match": "\\b([0-9]+)[eE][\\+\\-]?[0-9]+\\b"
+        }
+      ]
+    },
+    "includes_dat": {
+      "name": "keyword.control.include.spin2",
+      "match": "(?i)\\bFILE\\b"
+    },
+    "doc_block_comment": {
+      "name": "comment.block.documentation.spin2",
+      "begin": "{{",
+      "end": "}}",
+      "patterns": [
+        {
+          "include": "#doc_block_comment"
+        }
+      ]
+    },
+    "doc_line_comment": {
+      "name": "comment.line.documentation.spin2",
+      "match": "''.*$"
+    },
+    "float_number": {
+      "name": "constant.numeric.decimal.spin2",
+      "patterns": [
+        {
+          "name": "constant.numeric.float.spin",
+          "match": "\\b([\\+\\-]?(?:0|[1-9][0-9_]*)\\.(?:[0-9]+)?(?:[eE][\\+\\-]?[0-9]+)?)\\b"
+        },
+        {
+          "name": "constant.numeric.float.spin",
+          "match": "\\b([\\+\\-]?(?:0|[1-9][0-9_]*)?\\.(?:[0-9]+)(?:[eE][\\+\\-]?[0-9]+))\\b"
+        }
+      ]
+    },
+    "hexadecimal_number": {
+      "name": "constant.numeric.hexadecimal.spin2",
+      "match": "(\\$[0-9a-fA-F][0-9a-fA-F_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base16.spin2"
+        }
+      }
+    },
+    "number": {
+      "patterns": [
+        {
+          "include": "#quaternary_number"
+        },
+        {
+          "include": "#binary_number"
+        },
+        {
+          "include": "#hexadecimal_number"
+        },
+        {
+          "include": "#float_number"
+        },
+        {
+          "include": "#decimal_number"
+        }
+      ]
+    },
+    "object_block": {
+      "name": "meta.block.object.spin2",
+      "begin": "(?i)^(OBJ)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.obj.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "name": "meta.object-initialization.spin2",
+          "match": "\\b(\\w+)(\\[.*\\])?\\s*(:)\\s*((\\\")(\\.|[^\"])*(\\\"))",
+          "captures": {
+            "1": {
+              "name": "entity.name.object.spin2"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "include": "#number"
+                },
+                {
+                  "include": "#constants"
+                },
+                {
+                  "include": "#array_index"
+                }
+              ]
+            },
+            "3": {
+              "name": "punctuation.spin2"
+            },
+            "4": {
+              "name": "meta.object.filename.spin2"
+            },
+            "5": {
+              "name": "punctuation.spin2"
+            },
+            "7": {
+              "name": "punctuation.spin2"
+            }
+          }
+        }
+      ]
+    },
+    "pasm_language": {
+      "name": "meta.block.pasm.language.spin2",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#coginit_constants"
+        },
+        {
+          "include": "#debug_functions"
+        },
+        {
+          "include": "#pasm_language_elements"
+        },
+        {
+          "include": "#pasm_storage_alignment"
+        },
+        {
+          "include": "#pasm_field_operations"
+        },
+        {
+          "include": "#pasm_only_instructions"
+        },
+        {
+          "include": "#spin2_float_conversions"
+        }
+      ]
+    },
+    "pasm_storage_alignment": {
+      "name": "storage.modifier.spin2",
+      "match": "(?i)\\b(ALIGN(W|L))\\b"
+    },
+    "pasm_language_elements": {
+      "name": "meta.block.pasm.elements.spin2",
+      "patterns": [
+        {
+          "include": "#event_constants"
+        },
+        {
+          "include": "#smartpins_constants"
+        },
+        {
+          "include": "#streamer_constants"
+        },
+        {
+          "include": "#cog_register_names"
+        },
+        {
+          "include": "#coginit_constants"
+        },
+        {
+          "include": "#modcz_constants"
+        },
+        {
+          "name": "storage.modifier.p2asm",
+          "match": "(?i)\\b(ORG(F|H)?|FIT)\\b"
+        },
+        {
+          "name": "storage.type.p2asm",
+          "match": "(?i)\\b(BYTE|WORD|LONG|RES)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.branch.p2asm",
+          "match": "(?i)\\b((CALL|RET)(A|B)?|CALL(D|PA|PB)|DJ(N?F|N?Z)|SKIP|(SKIP|EXEC)F|IJN?Z|JMP(REL)?|REP|RESI(0|1|2|3)|RETI(0|1|2|3)|TJ(N?F|N?S|N?Z|V))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.colorspace.p2asm",
+          "match": "(?i)\\b(SETC(FRQ|I|MOD|Q|Y))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.chordic-solver.p2asm",
+          "match": "(?i)\\b(GETQ(X|Y)|Q(DIV|EXP|FRAC|LOG|MUL|ROTATE|SQRT|VECTOR))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.hub-fifo.p2asm",
+          "match": "(?i)\\b((RD|WR)FAST|FBLOCK|GETPTR|RFVARS?|RF(BYTE|WORD|LONG)|WF(BYTE|WORD|LONG)|(RD|WR)BYTE|(RD|WR)WORD|(WR|WM|RD)LONG|POP(A|B)|PUSH(A|B))\\b"
+        },
+        {
+          "name": "keyword.pasm.control.instruction-conditionals.p2asm",
+          "match": "(?i)\\b(_RET_|IF_(0|1)(0|1|X)|IF_(A|B)E?|IF_(DIFF|SAME)|IF_(G|L)(E|T)|IF_C_(AND|OR)_N?Z|IF_C_(EQ|NE)_Z|IF_N?(C|Z|E)|IF_NC_(AND|OR)_N?Z|IF_NOT_(0|1)(0|1)|IF_NZ_(AND|OR)_N?C|IF_X(0|1)|IF_Z_(AND|OR)_N?C|IF_Z_(EQ|NE)_C)\\b"
+        },
+        {
+          "name": "keyword.pasm.control.instruction-effects.p2asm",
+          "match": "(?i)\\b(W(C|Z|CZ)|(AND|OR|XOR)(C|Z))\\b"
+        },
+        {
+          "name": "constant.language.clock-register-names.spin2",
+          "match": "(?i)\\b(_rc(fast|slow)|_clkfreq|(clkfreq|clkmode)_|(_x(in|tl)freq))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.hub-ram.p2asm",
+          "match": "(?i)\\b(POP(A|B)|PUSH(A|B)|WR(BYTE|WORD|LONG)|(RD|WR)BYTE|(RD|WR)WORD|(WR|WM|RD)LONG)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.hub-control.p2asm",
+          "match": "(?i)\\b(COG(ID|INIT|STOP)|HUBSET|LOCK(NEW|REL|RET|TRY))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.interrupts.p2asm",
+          "match": "(?i)\\b((STALL|ALLOW)I|(TRG|NIX|SET)INT(1|2|3)|(GET|COG)BRK|BRK)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.lut.p2asm",
+          "match": "(?i)\\b(SETLUTS|(RD|WR)LUT)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.pins.p2asm",
+          "match": "(?i)\\b((DIR|DRV|OUT|FLT)(L|H|C|NC|Z|NZ|RND|NOT)|TESTPN?)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.miscellaneous.p2asm",
+          "match": "(?i)\\b(AUG(S|D)|GET(CT|RND)|NOP|POP|PUSH|SETQ2?|WAITX|FVARS?)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.pixel-mixer.p2asm",
+          "match": "(?i)\\b((ADD|BLN|MIX|MUL|SET)PIX|SETPIV)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.register-indirect.p2asm",
+          "match": "(?i)\\bALT(SN?|GN|S?B|GB|SW|GW|R|D|I)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.streamer.io.p2asm",
+          "match": "(?i)\\b(X(CONT|INIT|STOP|ZERO)|GETXACC|SETXFRQ)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.smartpins.io.p2asm",
+          "match": "(?i)\\b((AK|RD|RQ|WR|WX|WY)PIN|(SET|GET)SCP|SETDACS)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.events.p2asm",
+          "match": "(?i)\\b(ADDCT(1|2|3)|(COG|J)ATN|JCT(1|2|3)|JN?(FBW|INT)|JNATN|JN?(PAT|QMT|SE1|SE2|SE3|SE4|XFI|XMT|XRL|XRO)|JNCT(1|2|3)|(SETSE|POLLSE|WAITSE)(1|2|3|4))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.events.p2asm",
+          "match": "(?i)\\b(SETPAT|POLLQMT|(POLLCT|WAITCT)(1|2|3)|(POLL|WAIT)(ATN|FBW|INT|PAT|XFI|XMT|XRL|XRO))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.math-logic.p2asm",
+          "match": "(?i)\\b(ABS|BMASK|LOC|NOT|ONES|OR|REV|SIGNX|ZEROX|ADD(S|SX|X)?|ANDN?|BIT(RND|NOT|H|L|N?Z|N?C)|CMP(M|R|SUB|X|S|SX)?|CRC(BIT|NIB)|(DEC|INC)MOD|(DE|EN)COD|(FG|FL)ES?)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.math-logic.p2asm",
+          "match": "(?i)\\b(GET(BYTE|NIB|WORD)|MERGE(B|W)|MOD(C|CZ|Z)|MOV(BYTS)?|MUL(S|NIBS|NITS|Q|N?C|N?Z|)?|MUX(N?C|N?Z|Q|NIBS|NITS)|NEG(N?C|N?Z)?|RC(L|R|ZL|ZR)|RGB(EXP|SQZ)|ROL(BYTE|NIB|WORD))\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.math-logic.p2asm",
+          "match": "(?i)\\b(RO(L|R)|SA(L|R)|SCAS?|SET(R|S|D|BYTE|NIB|WORD)?|SEUSS(F|R)|SH(L|R)|SPLIT(B|W)|SUB(R|S|SX|X)?|SUM(N?C|N?Z)|TESTN?|TESTBN?|WR(N?C|N?Z)|XOR(O32)?)\\b"
+        },
+        {
+          "name": "keyword.pasm.operators.binary.p2asm",
+          "match": "(?i)\\b(SAR|ROR|ROL|REV|ZEROX|SIGNX|SCAS?|FRAC|ADD(BINTS|PINS|AND|OR|XOR))\\b"
+        },
+        {
+          "name": "keyword.pasm.operators.unary.p2asm",
+          "match": "(?i)\\b(!!|NOT|F?ABS|ENCOD|DECOD|BMASK|ONES|F?SQRT|Q(LOG|EXP))\\b"
+        }
+      ]
+    },
+    "pasm_only_instructions": {
+      "name": "meta.block.pasm.elements.spin2",
+      "patterns": [
+        {
+          "name": "keyword.pasm.instruction.pasm-only.p2asm",
+          "match": "(?i)\\b(ASMCLK)\\b"
+        }
+      ]
+    },
+    "pasm_language_inline": {
+      "name": "meta.block.pasm.language.inline.spin2",
+      "begin": "(?i)\\b(ORG)(\\s+|\\s*$)",
+      "end": "(?i)\\b(END)(\\s+|\\s*$)",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.spin2"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "storage.modifier.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#debug_functions"
+        },
+        {
+          "include": "#pasm_language_elements"
+        },
+        {
+          "include": "#pasm_field_operations"
+        },
+        {
+          "include": "#spin2_float_conversions"
+        }
+      ]
+    },
+    "private_block": {
+      "name": "meta.block.private.spin2",
+      "begin": "(?i)^(PRI)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.pri.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#spin_language"
+        },
+        {
+          "include": "#pasm_language_inline"
+        }
+      ]
+    },
+    "public_block": {
+      "name": "meta.block.public.spin",
+      "begin": "(?i)^(PUB)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.pub.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#spin_language"
+        },
+        {
+          "include": "#pasm_language_inline"
+        }
+      ]
+    },
+    "quaternary_number": {
+      "name": "constant.numeric.quaternary.spin2",
+      "match": "(\\%\\%[0-3][0-3_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base4.spin2"
+        }
+      }
+    },
+    "spin2_field_operations": {
+      "name": "keyword.operator.field.spin2",
+      "match": "(?i)\\b(ADDBITS|ADDPINS)\\b"
+    },
+    "pasm_field_operations": {
+      "name": "keyword.operator.field.spin2",
+      "match": "(?i)\\b(ADDBITS|ADDPINS)\\b"
+    },
+    "spin2_float_conversions": {
+      "name": "keyword.operator.float.spin2",
+      "match": "(?i)\\b(FLOAT|ROUND|TRUNC)\\b"
+    },
+    "spin2_binary_operators": {
+      "name": "keyword.operator.binary.spin2",
+      "match": "(?i)\\b(SAR|ROR|ROL|REV|ZEROX|SIGNX|SCAS?|FRAC)\\b"
+    },
+    "spin2_unary_operators": {
+      "name": "keyword.operator.unary.spin2",
+      "match": "(?i)\\b(!!|NOT|!|-|FABS|ABS|ENCOD|DECOD|BMASK|ONES|FSQRT|SQRT|Q(LOG|EXP)|REG|AND|FIELD)\\b"
+    },
+    "spin_language": {
+      "name": "meta.block.spin.language.spin2",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#spin2_field_operations"
+        },
+        {
+          "include": "#spin2_float_conversions"
+        },
+        {
+          "include": "#debug_functions"
+        },
+        {
+          "include": "#event_constants"
+        },
+        {
+          "include": "#smartpins_constants"
+        },
+        {
+          "include": "#streamer_constants"
+        },
+        {
+          "include": "#cog_register_names"
+        },
+        {
+          "include": "#coginit_constants"
+        },
+        {
+          "include": "#modcz_constants"
+        },
+        {
+          "name": "storage.type.pasm.spin2",
+          "match": "(?i)\\b(BYTE|WORD|BYTEFIT|WORDFIT|LONG)\\b"
+        },
+        {
+          "name": "keyword.control.flow.spin2",
+          "match": "(?i)\\b(IF|ELSEIF|ELSEIFNOT|ELSE|IFNOT|CASE|CASE_FAST|OTHER|REPEAT|FROM|TO|STEP|UNTIL|WHILE|NEXT|QUIT|RETURN|ABORT)\\b"
+        },
+        {
+          "name": "support.function.hub.spin2",
+          "match": "(?i)\\b(COG(CHK|ID|INIT|SPIN|STOP)|(HUB|CLK)SET|LOCK(NEW|RET|TRY|REL|CHK)|(COG|POLL|WAIT)ATN)\\b"
+        },
+        {
+          "name": "support.function.pin.spin2",
+          "match": "(?i)\\b(PIN(W|WRITE|L|LOW|H|HIGH|T|TOGGLE|F|FLOAT|R|READ|START|CLEAR)|(WR|WX|WY|AK|RD|RQ)PIN)\\b"
+        },
+        {
+          "name": "support.function.memory.spin2",
+          "match": "(?i)\\b((GET|SET)REGS|(BYTE|WORD|LONG)MOVE|(BYTE|WORD|LONG)FILL)\\b"
+        },
+        {
+          "name": "support.function.timing.spin2",
+          "match": "(?i)\\b(POLLCT|GET(SEC|MS|CT)|WAIT(MS|US|CT))\\b"
+        },
+        {
+          "name": "constant.language.hub-variable-names.spin2",
+          "match": "(?i)\\b(VARBASE|CLK(MODE|FREQ))\\b"
+        },
+        {
+          "name": "support.function.string.spin2",
+          "match": "(?i)\\b(STR(ING|COMP|SIZE|COPY))\\b"
+        },
+        {
+          "name": "support.function.special.spin2",
+          "match": "(?i)\\b(SEND|RECV)\\b"
+        },
+        {
+          "name": "support.function.index.spin2",
+          "match": "(?i)\\b(LOOK(UP|DOWN)Z?)\\b"
+        },
+        {
+          "name": "support.function.math.spin2",
+          "match": "(?i)\\b((ROT|POL)XY|XYPOL|MULDIV64|GETRND|Q(SIN|COS)|NAN)|GETCRC\\b"
+        },
+        {
+          "name": "support.function.pasminterface.spin2",
+          "match": "(?i)\\b(CALL|REG(EXEC|LOAD))\\b"
+        },
+        {
+          "name": "constant.language.coginit-symbols.spin2",
+          "match": "(?i)\\b(COGEXEC|HUBEXEC|COGEXEC_NEW|HUBEXEC_NEW|COGEXEC_NEW_PAIR|HUBEXEC_NEW_PAIR)\\b"
+        },
+        {
+          "name": "constant.language.cogspin.spin2",
+          "match": "(?i)\\bNEWCOG\\b"
+        },
+        {
+          "name": "constant.language.clkset.spin2",
+          "match": "(?i)\\b(clkmode_|clkfreq_)\\b"
+        },
+        {
+          "name": "keyword.operator.unary.spin2",
+          "match": "(?i)\\b(!!|NOT|!|-|FABS|ABS|ENCOD|DECOD|BMASK|ONES|FSQRT|SQRT|Q(LOG|EXP)|REG|AND|FIELD)\\b"
+        },
+        {
+          "name": "keyword.operator.binary.spin2",
+          "match": "(?i)\\b(SAR|ROR|ROL|REV|ZEROX|SIGNX|SCAS?|FRAC|AND|XOR|OR)\\b"
+        }
+      ]
+    },
+    "event_constants": {
+      "name": "constant.language.events-interrupts.spin2",
+      "match": "(?i)\\bEVENT_(INT|CT1|CT2|CT3|SE1|SE2|SE3|SE4|PAT|FBW|XMT|XFI|XRO|XRL|ATN|QMT)\\b"
+    },
+    "modcz_constants": {
+      "name": "constant.language.modcz.operands.spin2",
+      "match": "(?i)\\b((_c(_and_nz|_and_z|eq_z|ne_z|or_nz|or_z)?|_(clr|e|ge|gt|le|lt|ne|set)?|_nc(_and_nz|and_z|or_nz|or_z)?|_nz(_and_c|_and_nc|_or_c|_or_nc)?|_z(_and_c|_and_nc|_eq_c|_ne_c|_or_c|_or_nc)?))\\b"
+    },
+    "smartpins_constants": {
+      "name": "meta.block.spin.language.spin2",
+      "patterns": [
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_ADC|P_ADC_(100X|10X|1X|30X|3X|EXT|FLOAT|GIO|SCOPE|VIO)|P_ASYNC_(IO|RX|TX)|P_COMPARE_(AB|AB_FB))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_COUNTER_(HIGHS|PERIODS|TICKS)|P_DAC_(124R_3V|600R_2V|75R_2V|990R_3V|DITHER_PWM|DITHER_RND|NOISE))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_HIGH_(100UA|10UA|150K|15K|1K5|1MA|FAST|FLOAT|TICKS)|P_COUNT_(HIGHS|RISES)|P_INVERT_(A|B|IN|OUTPUT))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_LEVEL_A|P_LEVEL_A_FBN|P_LEVEL_B_(FBN|FBP)|P_LOCAL_(A|B)|P_LOGIC_(A|A_FB|B_FB)|P_LOW_(100UA|10UA|150K|15K|1K5|1MA|FAST|FLOAT))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_(BITDAC|CHANNEL|EVENTS_TICKS|NORMAL|OE|PULSE|QUADRATURE|REPOSITORY|STATE_TICKS|TRANSITION|TRUE_OUTPUT|USB_PAIR))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_OUTBIT_(A|B)|P_PERIODS_(HIGHS|TICKS)|P_PLUS(1|2|3)_(A|B)|P_PWM_(SAWTOOTH|SMPS|TRIANGLE)|P_REG_(DOWN|UP))\\b"
+        },
+        {
+          "name": "constant.language.smartpins.spin2",
+          "match": "(?i)\\b(P_SCHMITT_(A|A_FB|B_FB)|P_SYNC_(IO|RX|TX)|P_TRUE_(A|B|IN)|P_TT_(0|1)(0|1)|P_MINUS(1|2|3)_(A|B)|P_NCO_(DUTY|FREQ))\\b"
+        }
+      ]
+    },
+    "streamer_constants": {
+      "name": "meta.block.spin.language.spin2",
+      "patterns": [
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_WRITE_(ON|OFF)|X_ALT_(ON|OFF)|X_PINS_(ON|OFF))\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_16P_2DAC8_WFWORD|X_16P_4DAC4_WFWORD|X_1ADC8_0P_1DAC8_WFBYTE|X_1ADC8_8P_2DAC8_WFWORD|X_1P_1DAC1_WFBYTE|X_2ADC8_0P_2DAC8_WFWORD)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_2ADC8_16P_4DAC8_WFLONG|X_2P_1DAC2_WFBYTE|X_2P_2DAC1_WFBYTE|X_32P_4DAC8_WFLONG|X_4ADC8_0P_4DAC8_WFLONG|X_4P_1DAC4_WFBYTE)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_4P_2DAC2_WFBYTE|X_4P_4DAC1_WFBYTE|X_8P_1DAC8_WFBYTE|X_8P_2DAC4_WFBYTE|X_8P_4DAC2_WFBYTE|X_DACS_0N0_0N0|X_DACS_0N0_X_X)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_DACS_0_0_0_0|X_DACS_0_0_X_X|X_DACS_0_X_X_X|X_DACS_1N1_0N0|X_DACS_1_0_1_0|X_DACS_1_0_X_X|X_DACS_3_2_1_0|X_DACS_OFF|X_DACS_X_0_X_X)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_DACS_X_X_0N0|X_DACS_X_X_0_0|X_DACS_X_X_0_X|X_DACS_X_X_1_0|X_DACS_X_X_X_0|X_DDS_GOERTZEL_SINC1|X_DDS_GOERTZEL_SINC2|X_IMM_16X2_1DAC2)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_IMM_16X2_2DAC1|X_IMM_16X2_LUT|X_IMM_1X32_4DAC8|X_IMM_2X16_2DAC8|X_IMM_2X16_4DAC4|X_IMM_32X1_1DAC1|X_IMM_32X1_LUT|X_IMM_4X8_1DAC8)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_IMM_4X8_2DAC4|X_IMM_4X8_4DAC2|X_IMM_4X8_LUT|X_IMM_8X4_1DAC4|X_IMM_8X4_2DAC2|X_IMM_8X4_4DAC1|X_IMM_8X4_LUT|X_RFBYTE_1P_1DAC1)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_RFBYTE_2P_1DAC2|X_RFBYTE_2P_2DAC1|X_RFBYTE_4P_1DAC4|X_RFBYTE_4P_2DAC2|X_RFBYTE_4P_4DAC1|X_RFBYTE_8P_1DAC8|X_RFBYTE_8P_2DAC4)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_RFBYTE_8P_4DAC2|X_RFBYTE_LUMA8|X_RFBYTE_RGB8|X_RFBYTE_RGBI8|X_RFLONG_16X2_LUT|X_RFLONG_32P_4DAC8|X_RFLONG_32X1_LUT)\\b"
+        },
+        {
+          "name": "constant.language.streamer.spin2",
+          "match": "(?i)\\b(X_RFLONG_4X8_LUT|X_RFLONG_8X4_LUT|X_RFLONG_RGB24|X_RFWORD_16P_2DAC8|X_RFWORD_16P_4DAC4|X_RFWORD_RGB16)\\b"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.spin2",
+      "begin": "\"",
+      "end": "\""
+    },
+    "variable_block": {
+      "name": "meta.block.variable.spin2",
+      "begin": "(?i)^(VAR)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.var.spin2"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#pasm_storage_alignment"
+        },
+        {
+          "match": "(?i)\\b(byte|word|bytefit|wordfit|long)\\s*(\\w+)(\\[.*\\])?",
+          "captures": {
+            "1": {
+              "name": "storage.type.spin2"
+            },
+            "2": {
+              "name": "variable.name.var.spin2"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#number"
+                },
+                {
+                  "include": "#constants"
+                },
+                {
+                  "include": "#array_index"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "line_comment": {
+      "name": "comment.line.spin2",
+      "match": "(?<!debug\\s*\\(`.*)'[^'].*$"
+    }
+  },
+  "scopeName": "source.spin2"
+}

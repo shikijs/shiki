@@ -293,6 +293,14 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/stardog-union/stardog-vsc/blob/master/stardog-rdf-grammars/syntaxes/sparql.tmLanguage.json'
   ],
   [
+    'spin',
+    'https://github.com/ironsheep/P2-vscode-extensions/blob/main/spin2/syntaxes/spin1.tmLanguage.json'
+  ],
+  [
+    'spin2',
+    'https://github.com/ironsheep/P2-vscode-extensions/blob/main/spin2/syntaxes/spin2.tmLanguage.json'
+  ],
+  [
     'splunk',
     'https://github.com/arcsector/vscode-splunk-search-syntax/blob/master/syntaxes/splunk_search.tmLanguage'
   ],

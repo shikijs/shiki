@@ -1,0 +1,647 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "spin",
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#block"
+    }
+  ],
+  "repository": {
+    "allocation_constants": {
+      "name": "keyword.control.allocation.spin",
+      "match": "(?i)\\b(_FREE|_STACK)\\b"
+    },
+    "array_index": {
+      "name": "meta.array.index.spin",
+      "match": "(?i)\\b(\\[)(.*)?(\\])\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.spin"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "3": {
+          "name": "keyword.operator.spin"
+        }
+      }
+    },
+    "binary_number": {
+      "name": "constant.numeric.binary.spin",
+      "match": "(\\%[01][01_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base2.spin"
+        }
+      }
+    },
+    "block": {
+      "name": "meta.block.spin",
+      "patterns": [
+        {
+          "include": "#constant_block"
+        },
+        {
+          "include": "#variable_block"
+        },
+        {
+          "include": "#object_block"
+        },
+        {
+          "include": "#public_block"
+        },
+        {
+          "include": "#private_block"
+        },
+        {
+          "include": "#data_block"
+        }
+      ]
+    },
+    "block_comment": {
+      "name": "comment.block.spin",
+      "begin": "{",
+      "end": "}",
+      "patterns": [
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "clock_constants_settable": {
+      "name": "constant.language.control.configuration.spin",
+      "match": "(?i)\\b(_CLKFREQ|_CLKMODE|_XINFREQ)\\b"
+    },
+    "clock_constants": {
+      "name": "constant.language.control.configuration.spin",
+      "match": "(?i)\\b(XINPUT|XTAL(1|2|3)|RC(FAST|SLOW)|PLL(1|2|4|8|16)X)\\b"
+    },
+    "cog_functions": {
+      "name": "support.function.cog_control",
+      "match": "(?i)\\b(COG(ID|NEW|INIT|STOP)|REBOOT)\\b"
+    },
+    "cog_register_names": {
+      "name": "variable.language.cog-register-names.spin",
+      "match": "(?i)\\b((DIR|IN|OUT|CTR|FRQ|PHS)(A|B)|CNT|VCFG|VSCL|PAR|SPR)\\b"
+    },
+    "comment": {
+      "patterns": [
+        {
+          "include": "#doc_block_comment"
+        },
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#doc_line_comment"
+        },
+        {
+          "include": "#line_comment"
+        }
+      ]
+    },
+    "configuration": {
+      "name": "variable.language.readonly.configuration",
+      "match": "(?i)\\b(CHIPVER|CLKMODE|CLKFREQ|CLKSET)\\b"
+    },
+    "constants": {
+      "name": "constant.language.spin",
+      "match": "(?i)\\b(TRUE|FALSE|(POS|NEG)X|PI)\\b"
+    },
+    "constant_block": {
+      "name": "meta.block.constant.spin",
+      "begin": "(?i)^(CON)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT))\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.con.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#clock_constants"
+        },
+        {
+          "include": "#clock_constants_settable"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "include": "#allocation_constants"
+        },
+        {
+          "match": "\\b((\\w|_)+)\\s*(=)\\s*(.*)$",
+          "captures": {
+            "1": {
+              "name": "entity.name.constant.spin"
+            },
+            "3": {
+              "name": "keyword.equ.operator.assignment.spin"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#number"
+                },
+                {
+                  "include": "#string"
+                },
+                {
+                  "include": "#comment"
+                },
+                {
+                  "include": "#number"
+                },
+                {
+                  "include": "#constants"
+                },
+                {
+                  "include": "#clock_constants"
+                },
+                {
+                  "include": "#spin_float_conversions"
+                },
+                {
+                  "include": "#allocation_constants"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "data_block": {
+      "name": "meta.block.data.spin",
+      "begin": "(?i)^(DAT)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT))\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.dat.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#cog_register_names"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#clock_constants"
+        },
+        {
+          "include": "#storage_modifier"
+        },
+        {
+          "include": "#directives_file_include"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "name": "storage.modifier.pasm",
+          "match": "(?i)\\b(ORG|FIT)\\b"
+        },
+        {
+          "name": "storage.type.pasm",
+          "match": "(?i)\\b(BYTE|WORD|LONG|RES)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.configuration",
+          "match": "(?i)\\bCLKSET\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.cog_control",
+          "match": "(?i)\\bCOG(ID|INIT|STOP)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.process_control",
+          "match": "(?i)\\b(LOCK(NEW|RET|CLR|SET)|WAIT(CNT|PEQ|PNE|VID))\\b"
+        },
+        {
+          "name": "keyword.pasm.control.conditions",
+          "match": "(?i)\\bIF_(ALWAYS|NEVER|N?E|(A|B)E?|N?C|N?Z|C_(EQ|NE)_Z|N?C_(AND|OR)_N?Z|Z_(EQ|NE)_C|N?Z_(AND|OR)_N?C)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.control.flow",
+          "match": "(?i)\\b(CALL|DJNZ|JMP|JMPRET|TJNZ|TJZ|RET)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.effects",
+          "match": "(?i)\\b(NR|WR|WC|WZ)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.main_memory_access",
+          "match": "(?i)\\b(RD|WR)(BYTE|WORD|LONG)\\b"
+        },
+        {
+          "name": "keyword.pasm.instruction.common",
+          "match": "(?i)\\b(ABS(NEG)?|NEGN?(C|Z)?|MINS?|MAXS?|ADD(ABS|S|X|SX)?|SUB(ABS|S|X|SX)?|SUMN?(C|Z)?|MULS?|ANDN?|X?OR|ONES|ENC|RC(L|R)|REV|RO(L|R)|SH(L|R)|SAR|CMPS?X?|CMPSUB|TESTN?|MOV(S|D|I)?|MUXN?(C|Z)?|HUBOP|NOP)\\b"
+        },
+        {
+          "name": "keyword.operator.pasm",
+          "match": "(?i)\\b(\\+|\\-|\\^\\^|\\|\\||\\|<|>\\||!|@|\\*\\*?|//?|#>|<#|~>|<<|>>|<-|->|><|&|\\||\\^|AND|OR|==|<>|<|>|=<|=>)\\b"
+        }
+      ]
+    },
+    "decimal_number": {
+      "name": "constant.numeric.decimal.spin",
+      "patterns": [
+        {
+          "name": "constant.numeric.base10.spin",
+          "match": "([\\+\\-][0-9][0-9_]*)\\b"
+        },
+        {
+          "name": "constant.numeric.base10.spin",
+          "match": "\\b([0-9][0-9_]*)\\b"
+        },
+        {
+          "name": "constant.numeric.base10.spin2",
+          "match": "\\b([0-9]+)[eE][\\+\\-]?[0-9]+\\b"
+        }
+      ]
+    },
+    "spin_float_conversions": {
+      "name": "keyword.operator.float.spin",
+      "match": "(?i)\\b(FLOAT|ROUND|TRUNC)\\b"
+    },
+    "directives_wraps": {
+      "name": "keyword.control.directive.spin",
+      "match": "(?i)\\b(STRING|CONSTANT)\\b"
+    },
+    "directives_file_include": {
+      "name": "keyword.control.directive.spin",
+      "match": "(?i)\\b(FILE)\\b"
+    },
+    "doc_block_comment": {
+      "name": "comment.block.documentation.spin",
+      "begin": "{{",
+      "end": "}}",
+      "patterns": [
+        {
+          "include": "#doc_block_comment"
+        }
+      ]
+    },
+    "doc_line_comment": {
+      "name": "comment.line.documentation.spin",
+      "match": "''.*$"
+    },
+    "float_number": {
+      "name": "constant.numeric.decimal.spin",
+      "patterns": [
+        {
+          "name": "constant.numeric.float.spin",
+          "match": "\\b([\\+\\-]?(?:0|[1-9][0-9_]*)\\.(?:[0-9]+)?(?:[eE][\\+\\-]?[0-9]+)?)\\b"
+        },
+        {
+          "name": "constant.numeric.float.spin",
+          "match": "\\b([\\+\\-]?(?:0|[1-9][0-9_]*)?\\.(?:[0-9]+)(?:[eE][\\+\\-]?[0-9]+))\\b"
+        }
+      ]
+    },
+    "hexadecimal_number": {
+      "name": "constant.numeric.hexadecimal.spin",
+      "match": "(?i)(\\$[0-9a-fA-F][0-9a-fA-F_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base16.spin"
+        }
+      }
+    },
+    "return_var": {
+      "name": "meta.return-type.spin",
+      "match": "(?i)\\b(RESULT)\\b"
+    },
+    "lock_functions": {
+      "name": "support.function.process_control.spin",
+      "match": "(?i)\\b(LOCK(CLR|NEW|RET|SET))\\b"
+    },
+    "wait_functions": {
+      "name": "support.function.waiting.spin",
+      "match": "(?i)\\b(WAIT(CNT|PEQ|PNE|VID))\\b"
+    },
+    "memory_functions": {
+      "name": "support.function.memory.spin",
+      "match": "(?i)\\b((BYTE|WORD|LONG)(FILL|MOVE)|LOOK(UPZ?|DOWNZ?)|STR(SIZE|COMP))\\b"
+    },
+    "storage_types": {
+      "name": "storage.type.pasm",
+      "match": "(?i)\\b(BYTE|WORD|LONG)\\b"
+    },
+    "number": {
+      "patterns": [
+        {
+          "include": "#quaternary_number"
+        },
+        {
+          "include": "#binary_number"
+        },
+        {
+          "include": "#hexadecimal_number"
+        },
+        {
+          "include": "#float_number"
+        },
+        {
+          "include": "#decimal_number"
+        }
+      ]
+    },
+    "object_block": {
+      "name": "meta.block.object.spin",
+      "begin": "(?i)^(OBJ)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT)(\\s+|\\s*$))",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.obj.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "name": "meta.object-initialization.spin",
+          "match": "\\b(\\w+)(\\[.*\\])?\\s*(:)\\s*((\\\")(\\.|[^\"])*(\\\"))",
+          "captures": {
+            "1": {
+              "name": "entity.name.object.spin"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "include": "#number"
+                },
+                {
+                  "include": "#constants"
+                },
+                {
+                  "include": "#array_index"
+                }
+              ]
+            },
+            "3": {
+              "name": "punctuation.spin"
+            },
+            "4": {
+              "name": "meta.object.filename.spin"
+            },
+            "5": {
+              "name": "punctuation.spin"
+            },
+            "7": {
+              "name": "punctuation.spin"
+            }
+          }
+        }
+      ]
+    },
+    "operator": {
+      "name": "keyword.operator.spin",
+      "match": "(?i)\\b(\\+(\\+|=)?|-(-|=)?|\\^(\\^|=)?|\\|(\\||=)?|~(~|>)?=?|\\?|\\|<|>\\||!|NOT|@@?|:?=|\\*(\\*|=)?|/(/|=)?|#>=?|<#=?|<<?=?|>>?=?|<-=?|->=?|><=?|&=|AND=?|OR=?|===?|<>=?|=[<>]=?)\\b"
+    },
+    "private_block": {
+      "name": "meta.block.private.spin",
+      "begin": "(?i)^(PRI)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT))\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.pri.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#configuration"
+        },
+        {
+          "include": "#clock_constants"
+        },
+        {
+          "include": "#return_var"
+        },
+        {
+          "include": "#directives_wraps"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#storage_types"
+        },
+        {
+          "include": "#cog_functions"
+        },
+        {
+          "include": "#memory_functions"
+        },
+        {
+          "include": "#lock_functions"
+        },
+        {
+          "include": "#wait_functions"
+        },
+        {
+          "include": "#operator"
+        },
+        {
+          "include": "#cog_register_names"
+        },
+        {
+          "include": "#control_flow"
+        }
+      ]
+    },
+    "public_block": {
+      "name": "meta.block.public.spin",
+      "begin": "(?i)^(PUB)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT))\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.pub.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#configuration"
+        },
+        {
+          "include": "#clock_constants"
+        },
+        {
+          "include": "#return_var"
+        },
+        {
+          "include": "#directives_wraps"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#storage_types"
+        },
+        {
+          "include": "#cog_functions"
+        },
+        {
+          "include": "#memory_functions"
+        },
+        {
+          "include": "#lock_functions"
+        },
+        {
+          "include": "#wait_functions"
+        },
+        {
+          "include": "#operator"
+        },
+        {
+          "include": "#cog_register_names"
+        },
+        {
+          "include": "#control_flow"
+        }
+      ]
+    },
+    "quaternary_number": {
+      "name": "constant.numeric.quaternary.spin",
+      "match": "(\\%\\%[0-3][0-3_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.base4.spin"
+        }
+      }
+    },
+    "control_flow": {
+      "name": "keyword.control.flow.spin",
+      "match": "(?i)\\b(RETURN|REPEAT|FROM|TO|STEP|UNTIL|WHILE|NEXT|QUIT|ABORT|IF(NOT)?|ELSE(IF|IFNOT)?|CASE|OTHER)\\b"
+    },
+    "storage_modifier": {
+      "name": "storage.modifier.pasm",
+      "match": "(?i)\\b(org|end|fit)\\b"
+    },
+    "string": {
+      "name": "string.quoted.double.spin",
+      "begin": "\"",
+      "end": "\""
+    },
+    "variable_block": {
+      "name": "meta.block.variable.spin",
+      "begin": "(?i)^(VAR)(\\s+|\\s*$)",
+      "end": "(?i)^(?=(CON|VAR|OBJ|PUB|PRI|DAT))\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.block.var.spin"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#array_index"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#spin_float_conversions"
+        },
+        {
+          "include": "#storage_types"
+        },
+        {
+          "match": "(?i)\\b(byte|word|long)\\s*((\\w|_)+)(\\[.*\\])?",
+          "captures": {
+            "1": {
+              "name": "storage.type.spin"
+            },
+            "2": {
+              "name": "variable.name.spin"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#array_index"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "line_comment": {
+      "name": "comment.line.spin",
+      "match": "(?<!debug\\s*\\(`.*)'[^'].*$"
+    }
+  },
+  "scopeName": "source.spin"
+}
