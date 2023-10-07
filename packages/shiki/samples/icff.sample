@@ -1,0 +1,12 @@
+     A*  ICF file example
+TEST A          R SNDPASS
+     A            FLD1          18A
+     A          R CHKPASS
+     A            FLD1           1A
+WASD A*
+     A          R EVOKPGM
+     A                                      EVOKE(MYLIB/SOMEPGM)
+XXXXXA                                      SECURITY(2 'PASSWRD' +
+     A                                               3 'USRID')
+
+* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test.icff

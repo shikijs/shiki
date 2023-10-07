@@ -1,0 +1,67 @@
+/* >>PRE-COMPILER<<                                              */
+/*   >>CRTCMD<<  CRTSRVPGM SRCFILE(&SL/&SF) SRCMBR(&SM);         */
+/*   >>IMPORTANT<<                                               */
+/*     >>PARM<<  SRVPGM(&LI/&SM);                                */
+/*     >>PARM<<  MODULE(&LI/BBMOD000R +                          */
+/*                      &LI/ALEATOIRE +                          */
+/*                      &LI/LIVRAISON +                          */
+/*                      &LI/ENVRAPMEL +                          */
+/*                      &LI/RTVSRCSTD +                          */
+/*                      &LI/WFTPSCRIPT +                         */
+/*                      &LI/SCRIPTFTP +                          */
+/*                      &LI/CONSTRUCT +                          */
+/*                      &LI/GESTERR +                            */
+/*                      &LI/MAILERR +                            */
+/*                      &LI/CRTBIBBLD +                          */
+/*                      &LI/GSBIBLOT10 +                         */
+/*                      &LI/EXECUTION +                          */
+/*                      &LI/EDTLIBLOT +                          */
+/*                      &LI/SAVLIBLOT +                          */
+/*                      &LI/ADDOBJSAV +                          */
+/*                      &LI/CPYLSTOBJ +                          */
+/*                      &LI/CPYSRCLOT +                          */
+/*                      &LI/CPYMBRSRC +                          */
+/*                      &LI/GSTERRSTR +                          */
+/*                      &LI/CPYOBJ +                             */
+/*                      &LI/STRTSTLOT +                          */
+/*                      &LI/ENDTSTLOT +                          */
+/*                      &LI/CHGLOTENV +                          */
+/*                      &LI/ENVIRON);                            */
+/*     >>PARM<<  TEXT('Programme de service +                    */
+/*                     de l''outils i_builder');                 */
+/*     >>PARM<<  BNDDIR(I_BUILDER SERVICE);                      */
+/*     >>PARM<<  OPTION(*DUPPROC);                               */
+/*     >>PARM<<  TGTRLS(*CURRENT);                               */
+/*     >>PARM<<  DETAIL(*FULL);                                  */
+/*     >>PARM<<  ALWLIBUPD(*YES);                                */
+/*   >>END-IMPORTANT<<                                           */
+/*   >>CMD<<  RMVBNDDIRE BNDDIR(I_BUILDER) OBJ((&LI/&SM));       */
+/*   >>EXECUTE<<                                                 */
+/*   >>CMD<<  ADDBNDDIRE BNDDIR(I_BUILDER) OBJ((&LI/&SM));       */
+/* >>END-PRE-COMPILER<<                                          */
+STRPGMEXP  PGMLVL(*PRV) LVLCHK(*YES) SIGNATURE('20190219')
+    EXPORT     SYMBOL(EXISTS)
+    EXPORT     SYMBOL(ALEATOIRE)
+    EXPORT     SYMBOL(LIVRAISON)
+    EXPORT     SYMBOL(CONSTRUCT)
+    EXPORT     SYMBOL(SOURCE_STANDARD)
+    EXPORT     SYMBOL(ENVRAPMEL)
+    EXPORT     SYMBOL(RECUP_ERREUR)
+    EXPORT     SYMBOL(GEST_ERREUR)
+    EXPORT     SYMBOL(MAILERR)
+    EXPORT     SYMBOL(SCRIPTFTP)
+    EXPORT     SYMBOL(CRTBIBBLD)
+    EXPORT     SYMBOL(GESTION_BIB_LOT)
+    EXPORT     SYMBOL(INFOS_OBJET)
+    EXPORT     SYMBOL(CMD_EXEC)
+    EXPORT     SYMBOL(CMD_CHK)
+    EXPORT     SYMBOL(EDTLIBLOT)
+    EXPORT     SYMBOL(SAVLIBLOT)
+    EXPORT     SYMBOL(SAUV_OBJ_LOT)
+    EXPORT     SYMBOL(Copie_liste_objet_a_livres)
+    EXPORT     SYMBOL(Copie_sources)
+    EXPORT     SYMBOL(CPYMBRSRC)
+    EXPORT     SYMBOL(CPYOBJ)
+ENDPGMEXP
+
+/* From https://github.com/ibmiiste/I_builder/blob/master/QSRVSRC/BUILDERSRV.BND */

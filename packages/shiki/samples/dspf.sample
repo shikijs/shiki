@@ -1,0 +1,16 @@
+     A*%%TS  SD  20160310  154120  USER1       REL-V7R1M0  5770-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A          R DSPFCENY1
+     A*%%TS  SD  20160310  154120  USER1       REL-V7R1M0  5770-WDS
+     A                                  1  3'Zobrazen� materi�lu:'
+     A                                      DSPATR(UL)
+     A            MATER     R        O  1 24REFFLD(CENIKPF0/MATER *LIBL/CENIKP)
+     A                                      COLOR(BLU)
+     A                                  2 18'Cena:'
+     A            NAZEV     R        O  2 24REFFLD(CENIKPF0/NAZEV *LIBL/CENIKP)
+     A                                  3 17'Nazev:'
+     A            CENA      R        O  3 24REFFLD(CENIKPF0/CENA *LIBL/CENIKP)
+     A                                      EDTCDE(P)
+
+* From https://github.com/Martinfx/Cobol/blob/master/AS400/QDDSSRC/DSPFCENY.DSPF

@@ -1,0 +1,194 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "dspf",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#gutter"
+    },
+    {
+      "include": "#identifiers"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.dds.dspf",
+          "match": "^.{5}(.)(\\*).*"
+        }
+      ]
+    },
+    "gutter": {
+      "patterns": [
+        {
+          "name": "comment.gutter",
+          "match": "^.{5}"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.dds.dspf",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        },
+        {
+          "name": "constant.language.dds.dspf.andor",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{0}))(A|O)"
+        },
+        {
+          "name": "constant.language.dds.dspf.n01",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{1}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.dspf.n02",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{4}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.dspf.n03",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{7}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.dspf.nameType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{10}))(R|H)"
+        },
+        {
+          "name": "constant.language.dds.dspf.ref",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{22}))(R)"
+        },
+        {
+          "name": "constant.language.dds.dspf.len",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{23}))[0-9|\\s]{5}"
+        },
+        {
+          "name": "constant.language.dds.dspf.dataType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{28}))(A|D|E|F|G|I|J|L|M|N|O|S|T|W|X|Y|Z)"
+        },
+        {
+          "name": "constant.language.dds.dspf.decpos",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{29}))[0-9|\\s]{2}"
+        },
+        {
+          "name": "constant.language.dds.dspf.usage",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{31}))(O|I|B|H|M|P)"
+        },
+        {
+          "name": "constant.language.dds.dspf.locline",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{32}))([0-9]|\\s){3}"
+        },
+        {
+          "name": "constant.language.dds.dspf.locpos",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{35}))([0-9]|\\s){3}"
+        },
+        {
+          "name": "constant.numeric.dds.dspf",
+          "match": "\\b([0-9]+)\\b"
+        },
+        {
+          "name": "dds.dspf.check",
+          "begin": "(?i)(?<=(CHECK\\())",
+          "end": "(?=(\\)))",
+          "patterns": [
+            {
+              "name": "constant.other.dds.dspf.check.values",
+              "match": "(?i)(\\b(AB|ME|MF|M10F|M10|M11F|M11|VNE|VN|ER|FE|LC|RB|RZ|RLTB|RL)\\b)"
+            }
+          ]
+        },
+        {
+          "name": "dds.dspf.dspatr",
+          "begin": "(?i)(?<=(DSPATR\\())",
+          "end": "(?=(\\)))",
+          "patterns": [
+            {
+              "name": "constant.other.dds.dspf.dspatr.values",
+              "match": "(?i)(\\b(SP|PR|OID|MDT|UL|RI|PC|ND|HI|CS|BL)\\b)"
+            }
+          ]
+        },
+        {
+          "name": "dds.dspf.color",
+          "begin": "(?i)(?<=(COLOR\\())",
+          "end": "(?=(\\)))",
+          "patterns": [
+            {
+              "name": "constant.other.dds.dspf.color.values",
+              "match": "(?i)(\\b(BLU|PNK|YLW|TRQ|RED|WHT|GRN)\\b)"
+            }
+          ]
+        },
+        {
+          "name": "dds.dspf.comp",
+          "begin": "(?i)((?<=((COMP)\\())|(?<=((CMP)\\()))",
+          "end": "(?=(\\)))",
+          "patterns": [
+            {
+              "name": "keyword.other.dds.dspf.comp.values",
+              "match": "(?i)(\\b(GE|LE|NG|GT|NL|LT|NE|EQ)\\b)"
+            },
+            {
+              "name": "constant.numeric.dds.dspf",
+              "match": "\\b([0-9]+)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.dds.dspf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        },
+        {
+          "name": "keyword.other.dds.dspf",
+          "match": "\\+"
+        },
+        {
+          "name": "keyword.other.dds.dspf.func",
+          "match": "((?i)(C(A|F)))[0-9]{2}"
+        },
+        {
+          "name": "keyword.other.dds.dspf.funcs",
+          "match": "(?i)(?<=(.{44}))(WRDWRAP|WINDOW|WDWTITLE|WDWBORDER|VLDCMDKEY|VALUES|VALNUM|USRRSTDSP|USRDSPMGT|USRDFN|USER|UNLOCK|TIMSEP|TIMFMT|TIME|TEXT|SYSNAME|SNGCHCFLD|SLNO|SFLSNGCHC|SFLSIZ|SFLSCROLL|SFLRTNSEL|SFLROLVAL|SFLRNA|SFLRCDNBR|SFLPGMQ|SFLPAG|SFLNXTCHG|SFLMSGRCD|SFLMSGKEY|SFLMSG|SFLMODE|SFLMLTCHC|SFLLIN|SFLINZ|SFLFOLD|SFLENTER|SFLEND|SFLDSPCTL|SFLDSP|SFLDROP|SFLDLT|SFLCTL|SFLCRRRN|SFLCSRPRG|SFLCLR|SFLCHCCTL|SETOFF|SETOF|RTNDTA|RTNCSRLOC|ROLLUP|ROLLDOWN|RMVWDW|RETLCKSTS|RETKEY|REFFLD|REF|RANGE|PUTRETAIN|PUTOVR|PULLDOWN|PSHBTNFLD|PSHBTNCHC|PROTECT|PRINT|PASSRCD|PAGEDOWN|PAGEUP|OVRDTA|OVRATR|OVERLAY|OPENPRT|NOCCSID|MSGLOC|MSGID|MSGCON|MSGALARM|MOUBTN|MNUCNL|MNUBARSW|MNUBARSEP|MNUBARDSP|MNUBARCHC|MNUBAR|MLTCHFLD|MDTOFF|MAPVAL|LOWER|LOGOUT|LOGINP|LOCK|KEEP|INZRCD|INZINP|INVITE|INDTXT|INDARA|HTML|HOME|HLPTITLE|HLPSEQ|HLPSCHIDX|HLPRTN|HLPRCD|HLPPNLGRP|HLPID|HLPFULL|HLPEXCLD|HLPDOC|HLPCMDKEY|HLPCLR|HLPBDY|HLPARA|HELP|GETRETAIN|FRCDTA|FLTPCN|FLTFIXDEC|FLDCSRPRG|ERRSFL|ERRMSG|ERRMSGID|ERASEINP|ERASE|ENTFLDATR|EDTWRD|EDTMSK|EDTCDE|DUP|DSPSIZ|DSPRL|DSPMOD|DSPATR|DLTEDT|DLTCHK|DFTVAL|DFT|DATSEP|DATFMT|DATE|CSRLOC|CSRINPONLY|COMP|COLOR|CNTFLD|CLEAR|CHRID|CHOICE|CHKMSGID|CHGINPDFT|CHECK|CHCUNAVAIL|CHCSLT|CHCCTL|CHCAVAIL|CHCACCEL|CHANGE|BLKFOLD|BLINK|BLANKS|AUTO|ASSUME|ALWROL|ALWGPH|ALTPAGEDWN|ALTPAGEUP|ALTNAME|ALTHELP|ALIAS|ALARM)\\b"
+        },
+        {
+          "name": "keyword.other.dds.dspf.funcs",
+          "match": "\\b(?i)(CMP|CLRL|SFL)\\b"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "identifier.other.dds.dspf.identifiers",
+          "match": "[a-zA-Z_#$][a-zA-Z0-9_.#$]*"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.single.dds.dspf",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "keyword.other.dds.dspf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.dds.dspf"
+}

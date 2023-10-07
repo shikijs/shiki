@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "lf",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#gutter"
+    },
+    {
+      "include": "#identifiers"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.dds.lf",
+          "match": "^.{5}(.)(\\*).*"
+        }
+      ]
+    },
+    "gutter": {
+      "patterns": [
+        {
+          "name": "comment.gutter",
+          "match": "^.{5}"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.dds.lf",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        },
+        {
+          "name": "constant.language.dds.lf.nametype",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{10}))(R|K|J|S|O)"
+        },
+        {
+          "name": "constant.language.dds.lf.ref",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{22}))R"
+        },
+        {
+          "name": "constant.language.dds.lf.len",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{23}))[0-9|\\s]{5}"
+        },
+        {
+          "name": "constant.language.dds.lf.datatype",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{28}))(P|S|B|F|A|L|T|Z|H|J|E|O|G|5)"
+        },
+        {
+          "name": "constant.language.dds.lf.decpos",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{29}))[0-9|\\s]{2}"
+        },
+        {
+          "name": "constant.language.dds.lf.use",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{31}))(B|I|N)"
+        },
+        {
+          "name": "constant.numeric.dds.lf",
+          "match": "(\\b[0-9]+)|([0-9]*[.][0-9]*)"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.dds.lf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        },
+        {
+          "name": "keyword.other.dds.lf",
+          "match": "\\+"
+        },
+        {
+          "name": "keyword.other.dds.lf.funcs",
+          "match": "(?i)(?<=(.{44}))(?<=((?<=^[\\s]{5}[A|\\s]).{38}))((ZONE|VARLEN|VALUES|UNSIGNED|UNIQUE|TIMSEP|TIMFMT|TEXT|SST|RENAME|REFSHIFT|REFACCPTH|RANGE|PFILE|NOALTSEQ|LIFO|JREF|JOIN|JFLD|JFILE|JDUPSEQ|JDFTVAL|FORMAT|FLTPCN|FIFO|FCFO|EDTCDE|EDTWRD|DYNSLT|DIGIT|DESCEND|DATSEP|DATFMT|CONCAT|COMP|COLHDG|CMP|CHKMSGID|CHECK|CCSID|ALTSEQ|ALL|ALIAS|ABSVAL)+)\\b"
+        },
+        {
+          "name": "dds.lf.comp",
+          "begin": "(?i)(?<=(.{44}))((?<=((COMP)\\())|(?<=((CMP)\\()))",
+          "end": "(?=(\\)))",
+          "patterns": [
+            {
+              "name": "keyword.other.dds.lf.comp.values",
+              "match": "(?i)(\\b(GE|LE|NG|GT|NL|LT|NE|EQ)\\b)"
+            },
+            {
+              "name": "constant.numeric.dds.lf",
+              "match": "\\b([0-9]+)\\b"
+            }
+          ]
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "identifier.other.dds.lf.identifiers",
+          "match": "[a-zA-Z_#$][a-zA-Z0-9_.#$]*"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.single.dds.lf",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "keyword.other.dds.lf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.dds.lf"
+}

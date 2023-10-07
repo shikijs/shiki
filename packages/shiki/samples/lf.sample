@@ -1,0 +1,11 @@
+     A* Logical file test
+      *
+     A          R PERSFMT4                  PFILE(PERSON)
+     A            PERSONID
+     A            FIRSTNAME
+     A            LASTNAME
+     A            AGE
+     A          K PERSONID
+     A          O AGE                       COMP(GT 30)
+     A*
+* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test.lf

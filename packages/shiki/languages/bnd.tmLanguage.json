@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "bnd",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#support"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.bnd",
+          "begin": "(\\/\\*)",
+          "end": "(\\*\\/)"
+        },
+        {
+          "name": "comment.line.bnd",
+          "begin": "\\-\\-",
+          "end": "\n"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.numeric.bnd",
+          "match": "(\\b[0-9]+)|([0-9]*[.][0-9]*)"
+        },
+        {
+          "name": "constant.language.bnd",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.bnd",
+          "match": "(?i)(STRPGMEXP|ENDPGMEXP|EXPORT)"
+        },
+        {
+          "name": "keyword.other.bnd",
+          "match": "<"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.other.bnd.hex",
+          "begin": "(?i)x'",
+          "end": "'"
+        },
+        {
+          "name": "string.quoted.single.bnd",
+          "begin": "('|\")",
+          "end": "'|\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.bnd",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "support": {
+      "patterns": [
+        {
+          "name": "support.function.bnd",
+          "match": "(?i)[A-Za-z]+(?=\\()"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.bnd"
+}

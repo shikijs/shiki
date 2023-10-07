@@ -1,0 +1,1102 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "pnlgrp",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#symbols"
+    },
+    {
+      "include": "#directives"
+    },
+    {
+      "include": "#tags"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.pnlgrp",
+          "begin": "^(\\.\\*).*",
+          "end": "\n"
+        }
+      ]
+    },
+    "symbols": {
+      "patterns": [
+        {
+          "name": "support.function.pnlgrp",
+          "match": "(?i)(&(AMP|COLON|CONT|MSG\\(.*\\)|PERIOD|SLR)\\.?)",
+          "comment": "Symbols in panel group source"
+        }
+      ]
+    },
+    "directives": {
+      "patterns": [
+        {
+          "name": "keyword.other.pnlgrp.directives.imbed",
+          "begin": "(?i)(?<=\\.)(IM)[ ]",
+          "end": "\n",
+          "patterns": [
+            {
+              "name": "string.other.pnlgrp.directives.imbed.member",
+              "match": "(?i)([A-Z][A-Z0-9#@$]{1,9}[ ]*$)"
+            }
+          ]
+        }
+      ]
+    },
+    "tags": {
+      "patterns": [
+        {
+          "name": "keyword.other.pnlgrp.appfmt",
+          "begin": "(?i)(?<=(:(APPFMT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.appfmt",
+              "match": "(?i)\\b(:(APPFMT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.appfmt.attribute.name",
+              "match": "(?i)\\b(VAR|WIDTH|DEPTH|USREXIT)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.appfmt.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32})[']|[0-9]{1,2])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.botinst",
+          "begin": "(?i)(?<=(:(BOTINST)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.botinst",
+              "match": "(?i)\\b(:(BOTINST)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.botinst.attribute.name",
+              "match": "(?i)\\b(INST)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.botinst.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32})['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.check",
+          "begin": "(?i)(?<=(:(CHECK)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.check",
+              "match": "(?i)\\b(:(CHECK)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.check.attribute.name",
+              "match": "(?i)\\b(MSGID|MSGF|RANGE|REL|VALUES)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.check.attribute.value",
+              "match": "(?i)([A-F]{3}[0-9A-F]{4}|['][A-Z][A-Z0-9#@$]{0,9}/[A-Z][A-Z0-9#@$]{0,9}['])",
+              "comment": "TODO: Regexp does not yet support values for RANGE, REL and VALUES"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.class",
+          "begin": "(?i)(?<=(:(CLASS)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.class",
+              "match": "(?i)\\b(:(CLASS)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.class.attribute.name",
+              "match": "(?i)\\b(NAME|BASETYPE|WIDTH|CHRID|SHIFT|CASE|BLANKS|SUBST|BIDI|CONTXTREV|NBRSHAPE|SYMSWAP)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.class.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.cmdline",
+          "begin": "(?i)(?<=(:(CMDLINE)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.cmdline",
+              "match": "(?i)\\b(:(CMDLINE)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.cmdline.attribute.name",
+              "match": "(?i)\\b(SIZE|NAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.cmdline.attribute.value",
+              "match": "(?i)(SHORT|LONG|[A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.cond",
+          "begin": "(?i)(?<=(:(COND)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.cond",
+              "match": "(?i)\\b(:(COND)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.cond.attribute.name",
+              "match": "(?i)\\b(NAME|EXPR|EVAL)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.cond.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|['](.*)[']|ALWAYS|ONCE)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.data",
+          "begin": "(?i)(?<=(:(DATA)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.data",
+              "match": "(?i)\\b(:(DATA)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.data.attribute.name",
+              "match": "(?i)\\b((DEPTH|HELP|BOTSEP|SCROLL|LAYOUT|MAXHEAD|BODYSEP|TYPE)[=]|COMPACT)"
+            },
+            {
+              "name": "support.variable.pnlgrp.data.attribute.value",
+              "match": "(?i)(([A-Z][A-Z0-9#@$]{1,9}/[A-Z][A-Z0-9#@$]{1,9})|SPACE|NONE|NO|YES|HORIZ|SPACE|INDENT|BOTH|NONE|PROLOG|([0-4]{1})|'\\*')"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.datac",
+          "begin": "(?i)(?<=(:(DATAC)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.datac",
+              "match": "(?i)\\b(:(DATAC)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.datac.attribute.name",
+              "match": "(?i)\\b(CHOICE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.datac.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.datacol",
+          "begin": "(?i)(?<=(:(DATACOL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.datacol",
+              "match": "(?i)\\b(:(DATACOL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.datacol.attribute.name",
+              "match": "(?i)\\b(WIDTH)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.datacol.attribute.value",
+              "match": "(?i)([0-9]{1,3}|'\\*')"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.datagrp",
+          "begin": "(?i)(?<=(:(DATAGRP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.datagrp",
+              "match": "(?i)\\b(:(DATAGRP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.datagrp.attribute.name",
+              "match": "(?i)\\b((HELP|NAME|GRPSEP|COND)[=]|COMPACT)"
+            },
+            {
+              "name": "support.variable.pnlgrp.datagrp.attribute.value",
+              "match": "(?i)(([A-Z][A-Z0-9#@$]{1,9}/[A-Z][A-Z0-9#@$]{1,9})|([A-Z0-9]{1,32})|INDENT|QINDENT|NONE)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.datai",
+          "begin": "(?i)(?<=(:(DATAI)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.datai",
+              "match": "(?i)\\b(:(DATAI)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.datai.attribute.name",
+              "match": "(?i)\\b(VAR|USAGE|HELP|NAME|PMTLOC|CHCLOC|ALIGN|JUSTIFY|REQUIRED|CSRLOC|DISPLAY|AUTOENTR|COND|PROMPT|DSPVALUE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.datai.attribute.value",
+              "match": "(?i)(([A-Z0-9]{1,32})|(['][A-Z][A-Z0-9#@$]{1,9}/[A-Z][A-Z0-9#@$]{1,9}['])|OUT|INOUT|BEFORE|ABOVE|AFTER|LEFT|RIGHT|START|END|NO|YES|'\\*')"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.dataix",
+          "begin": "(?i)(?<=(:(DATAIX)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.dataix",
+              "match": "(?i)\\b(:(DATAIX)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.dataix.attribute.name",
+              "match": "(?i)\\b(VAR|USAGE|NEWLINE|ITEMSEP|ALIGN|JUSTIFY|REQUIRED|DISPLAY|PROMPT|DSPVALUE|AUTOENTR)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.dataix.attribute.value",
+              "match": "(?i)(([A-Z0-9]{1,32})|OUT|INOUT|CALC|NO|YES|[0-9]+|LEFT|RIGHT|START|END|['].*['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.dataslt",
+          "begin": "(?i)(?<=(:(DATASLT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.dataslt",
+              "match": "(?i)\\b(:(DATASLT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.dataslt.attribute.name",
+              "match": "(?i)\\b(TYPE|VAR|HELP|NAME|PMTLOC|REQUIRED|AUTOENTR|COND)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.dataslt.attribute.value",
+              "match": "(?i)(([A-Z0-9]{1,32})|SINGLE|MULTI|BEFORE|ABOVE|NO|YES)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.datasltc",
+          "begin": "(?i)(?<=(:(DATASLTC)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.datasltc",
+              "match": "(?i)\\b(:(DATASLTC)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.datasltc.attribute.name",
+              "match": "(?i)\\b(CHOICE|OPTION|VAR|HELP|COND|AVAIL|AVLMSGID|AVLMSGF)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.datasltc.attribute.value",
+              "match": "(?i)(([A-Z0-9]{1,32})|([0-9]{1,2})|([A-F]{3}[0-9A-F]{4})|(['][A-Z][A-Z0-9#@$]{0,9}/[A-Z][A-Z0-9#@$]{0,9}[']))"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.fig",
+          "begin": "(?i)(?<=(:(FIG)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.fig",
+              "match": "(?i)\\b(:(FIG)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.fig.attribute.name",
+              "match": "(?i)\\b(FRAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.fig.attribute.value",
+              "match": "(?i)(RULE|NONE)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.help",
+          "begin": "(?i)(?<=(:(HELP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.help",
+              "match": "(?i)\\b(:(HELP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.help.attribute.name",
+              "match": "(?i)\\b(NAME|WIDTH|DEPTH)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.help.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.imhelp",
+          "begin": "(?i)(?<=(:(IMHELP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.imhelp",
+              "match": "(?i)\\b(:(IMHELP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.imhelp.attribute.name",
+              "match": "(?i)\\b(NAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.imhelp.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.import",
+          "begin": "(?i)(?<=(:(IMPORT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.import",
+              "match": "(?i)\\b(:(IMPORT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.import.attribute.name",
+              "match": "(?i)\\b(NEWNAME|NAME|PNLGRP|PRDLIB)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.import.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.info",
+          "begin": "(?i)(?<=(:(INFO)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.info",
+              "match": "(?i)\\b(:(INFO)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.info.attribute.name",
+              "match": "(?i)\\b(DEPTH|BOTSEP|SCROLL|TYPE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.info.attribute.value",
+              "match": "(?i)([0-9]{2,2}|[']\\*[']|SPACE|NONE|RULE|YES|NO|NORMAL|PROLOG)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.isch",
+          "begin": "(?i)(?<=(:(ISCH)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.isch",
+              "match": "(?i)\\b(:(ISCH)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.isch.attribute.name",
+              "match": "(?i)\\b(ROOTS)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.isch.attribute.value",
+              "match": "(?i)(['](([A-Z0-9]{1,20}[ ]*){1,50})['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.ischsubt",
+          "begin": "(?i)(?<=(:(ISCHSUBT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.ischsubt",
+              "match": "(?i)\\b(:(ISCHSUBT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.ischsubt.attribute.name",
+              "match": "(?i)\\b(TOPICS)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.ischsubt.attribute.value",
+              "match": "(?i)(['](([A-Z0-9_\\/]{1,32}[ ]*){1,16})['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.ischsyn",
+          "begin": "(?i)(?<=(:(ISCHSYN)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.ischsyn",
+              "match": "(?i)\\b(:(ISCHSYN)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.ischsyn.attribute.name",
+              "match": "(?i)\\b(ROOT)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.ischsyn.attribute.value",
+              "match": "(?i)(['](([A-Z0-9]{1,20}){1})['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.keyi",
+          "begin": "(?i)(?<=(:(KEYI)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.keyi",
+              "match": "(?i)\\b(:(KEYI)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.keyi.attribute.name",
+              "match": "(?i)\\b(KEY|HELP|ACTION|COND|VARUPD|PRIORITY)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.keyi.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32})['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.keyl",
+          "begin": "(?i)(?<=(:(KEYL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.keyl",
+              "match": "(?i)\\b(:(KEYL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.keyl.attribute.name",
+              "match": "(?i)\\b(NAME|HELP)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.keyl.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.link",
+          "begin": "(?i)(?<=(:(LINK)[ ]))",
+          "end": "\\.",
+          "comment": "TODO: Regex for attribute value is not complete - missing logical operators.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.link",
+              "match": "(?i)\\b(:(LINK)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.link.attribute.name",
+              "match": "(?i)\\b(PERFORM|UNLESS[1-4]|THENDO[1-4]|LINKWHEN)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.link.attribute.value",
+              "match": "(?i)'((DSPHELP ([A-Z0-9_/]{1,32})([ ]+[A-Z][A-Z0-9@#$]{0,9}/[A-Z][A-Z0-9@#$]{0,9}([ ]+[A-Z][A-Z0-9@#$]{0,9})?)?)|(CHKOBJ\\(\"[A-Z][A-Z0-9@#$]{0,9}\",\"\\*[A-Z]{0,9}\"(,\"(\\*(CHANGE|ALL|USE|EXCLUDE|AUTLMGT)|(\\*(OBJEXIST|OBJMGT|OBJOPR|OBJALTER|OBJREF|ADD|DLT|READ|UPD|EXECUTE)[ ]*){1,7})?\")\\))|(CHKPGM\\(\"(\\*LIBL/|[A-Z][A-Z0-9@#$]{0,9}/)?[A-Z][A-Z0-9@#$]{0,9}\"\\))|(CHKUSRCLS\\(\\*(SECOFR|SECADM|PGMR|SYSOPR|USER)\\)))'"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.list_tags",
+          "begin": "(?i)(?<=(:(DL|OL|SL|UL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.list_tags",
+              "match": "(?i)\\b(:(DL|OL|SL|UL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.list_tags.attribute.name",
+              "match": "(?i)\\b(COMPACT)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.list",
+          "begin": "(?i)(?<=(:(LIST)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.list",
+              "match": "(?i)\\b(:(LIST)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.list.attribute.name",
+              "match": "(?i)\\b(DEPTH|LISTDEF|BOTSEP|SCROLL|MAXHEAD|BODYSEP|VIEW|ACTOR|EXTACT|SELECT|MAXACTL|PARMS|HEADSIZE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.list.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']\\*[']|SPACE|NONE|RULE|YES|NO|[0-4]{1}|INDENT|BOTH|UIM|CALLER|SINGLE|MULTI)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.listact",
+          "begin": "(?i)(?<=(:(LISTACT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.listact",
+              "match": "(?i)\\b(:(LISTACT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.listact.attribute.name",
+              "match": "(?i)\\b(HELP|OPTION|ACTFOR|CONFIRM|ENTER|EXTENTER|PROMPT|EXTPROMPT|NOCMD|NOEXT|USREXIT|EXTMSGID|EXTMSGF|COND|AVAIL|AVLMSGID|AVLMSGF)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.listact.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)[']|[0-9]{1,3}|BOTH|LISTE|EXACTE|['](.*)[']|ENTER|PROMPT|MSG)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.listcol",
+          "begin": "(?i)(?<=(:(LISTCOL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.listcol",
+              "match": "(?i)\\b(:(LISTCOL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.listcol.attribute.name",
+              "match": "(?i)\\b(VAR|MAXWIDTH|USAGE|HELP|COL|NAME|JUSTIFY|EXTACT|PROMPT|DSPVALUE|COLHEAD|DISPLAY|AUTOSKIP)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.listcol.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)[']|OUT|INOUT|LEFT|RIGHT|START|END|NO|YES|['](.*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.listdef",
+          "begin": "(?i)(?<=(:(LISTDEF)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.listdef",
+              "match": "(?i)\\b(:(LISTDEF)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.listdef.attribute.name",
+              "match": "(?i)\\b(NAME|VARS|CHGVAR|MSGID|MSGIDVAR|MSGF|PRTFLAG|EMPHASIS|PROTECT)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.listdef.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.listgrp",
+          "begin": "(?i)(?<=(:(LISTGRP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.listgrp",
+              "match": "(?i)\\b(:(LISTGRP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.listgrp.attribute.name",
+              "match": "(?i)\\b(COL|HELP|NAME|COLSEP)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.listgrp.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)[']|\\*)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.listview",
+          "begin": "(?i)(?<=(:(LISTVIEW)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.listview",
+              "match": "(?i)\\b(:(LISTVIEW)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.listview.attribute.name",
+              "match": "(?i)\\b(COLS|LAYOUT)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.listview.attribute.value",
+              "match": "(?i)([']([A-Z0-9]{1,32}|\\s)+[']|[0-9]{1,2})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.mbar",
+          "begin": "(?i)(?<=(:(MBAR)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.mbar",
+              "match": "(?i)\\b(:(MBAR)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.mbar.attribute.name",
+              "match": "(?i)\\b(NAME|HELP|MAXBARL)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.mbar.attribute.value",
+              "match": "(?i)([A-Z]{1}[A-Z0-9]{0,9}|[A-Z/_]{1}[A-Z0-9/_]{1,31}|[123])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.mbarc",
+          "begin": "(?i)(?<=(:(MBARC)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.mbarc",
+              "match": "(?i)\\b(:(MBARC)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.mbarc.attribute.name",
+              "match": "(?i)\\b(HELP)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.mbarc.attribute.value",
+              "match": "(?i)([A-Z/_]{1}[A-Z0-9/_]{1,31})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.menu",
+          "begin": "(?i)(?<=(:(MENU)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.menu",
+              "match": "(?i)\\b(:(MENU)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.menu.attribute.name",
+              "match": "(?i)\\b(DEPTH|BOTSEP|SCROLL)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.menu.attribute.value",
+              "match": "(?i)(([0-9]{1,2}|'\\*')|(SPACE|NONE|RULE)|(NO|YES))"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.menugrp",
+          "begin": "(?i)(?<=(:(MENUGRP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.menugrp",
+              "match": "(?i)\\b(:(MENUGRP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.menugrp.attribute.name",
+              "match": "(?i)\\b(COND)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.menugrp.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.menui",
+          "begin": "(?i)(?<=(:(MENUI)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.menui",
+              "match": "(?i)\\b(:(MENUI)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.menui.attribute.name",
+              "match": "(?i)\\b(HELP|OPTION|ACTION|NAME|COND|AVAIL|AVLMSGID|AVLMSGF|MARKER|ITEM)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.menui.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[0-9]{1,3}|[']((CALL .*)|CANCEL|(CMD .*)|EXIT|(MENU .* (NO)?RTNPNT)|RETURN)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.mi",
+          "begin": "(?i)(?<=(:(MI)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.mi",
+              "match": "(?i)\\b(:(MI)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.mi.attribute.name",
+              "match": "(?i)\\b(HELP|OPTION|ACTION|NAME|COND|AVAIL|AVLMSGID|AVLMSGF|MARKER|ITEM)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.mi.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[0-9]{1,3}|[']((CALL .*)|CANCEL|(CMD .*)|EXIT|(MENU .* (NO)?RTNPNT)|RETURN)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.optline",
+          "begin": "(?i)(?<=(:(OPTLINE)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.optline",
+              "match": "(?i)\\b(:(OPTLINE)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.optline.attribute.name",
+              "match": "(?i)\\b(NAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.optline.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.panel",
+          "begin": "(?i)(?<=(:(PANEL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.panel",
+              "match": "(?i)\\b(:(PANEL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.panel.attribute.name",
+              "match": "(?i)\\b(NAME|HELP|KEYL|PANELID|TITLE|WIDTH|DEPTH|MBAR|MSGL|TOPSEP|DATE|TIME|ENBGUI|ENTER|SELECT|USREXIT|TT|CSRVAR|CSRPOS|CSRLST|CSREID|CSRNAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.panel.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.pdfld",
+          "begin": "(?i)(?<=(:(PDFLD)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.pdfld",
+              "match": "(?i)\\b(:(PDFLD)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.pdfld.attribute.name",
+              "match": "(?i)\\b(NAME)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.pdfld.attribute.value",
+              "match": "(?i)([A-Z]{1}[A-Z0-9]{0,9})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.pdfldc",
+          "begin": "(?i)(?<=(:(PDFLDC)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.pdfldc",
+              "match": "(?i)\\b(:(PDFLDC)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.pdfldc.attribute.name",
+              "match": "(?i)\\b(OPTION|HELP|ACTION|ACTFOR|CONFIRM|USREXIT|VARUPD|COND|AVAIL|AVLMSGID|AVLMSGF|CHOICE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.pdfldc.attribute.value",
+              "match": "(?i)([0-9]{1,2}|[A-Z]{1}[A-Z0-9]{0,9}|PANEL|LIST|['](CALL .*)[']|[A-Z/_]{1}[A-Z0-9/_]{1,31}|[A-F]{3}[0-9A-F]{4}|['][A-Z][A-Z0-9#@$]{0,9}/[A-Z][A-Z0-9#@$]{0,9}['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.pk",
+          "begin": "(?i)(?<=(:(PK)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.pk.attribute.name",
+              "match": "(?i)\\b(DEF)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.pnlgrp",
+          "begin": "(?i)(?<=(:(PNLGRP)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.pnlgrp",
+              "match": "(?i)\\b(:(PNLGRP)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.pnlgrp.attribute.name",
+              "match": "(?i)\\b(SCHIDX|ENBGUI|TXTMODE|TXTCHRID|BIDI|NBRSHAPE|DFTMSGF|SUBMSGF)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.pnlgrp.attribute.value",
+              "match": "(?i)(([A-Z][A-Z0-9#@$]{1,9}/[A-Z][A-Z0-9#@$]{1,9})|NONE|NO|YES|SBCS|DBCS|LTR|RTL|ARABIC|HINDI|('[0-9]{2,5}'))"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.prthead",
+          "begin": "(?i)(?<=(:(PRTHEAD)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.prthead",
+              "match": "(?i)\\b(:(PRTHEAD)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.prthead.attribute.name",
+              "match": "(?i)\\b(NAME|PRODINFO|PRTDATE|PRTTIME|TITLE|TT|WIDTH|OBJ|OBJLIB)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.prthead.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|80|132)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.prtpnl",
+          "begin": "(?i)(?<=(:(PRTPNL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.prtpnl",
+              "match": "(?i)\\b(:(PRTPNL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.prtpnl.attribute.name",
+              "match": "(?i)\\b(NAME|TITLE|TT|WIDTH)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.prtpnl.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|80|132)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.text",
+          "begin": "(?i)(?<=(:(TEXT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.text",
+              "match": "(?i)\\b(:(TEXT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.text.attribute.name",
+              "match": "(?i)\\b(VAR|USREXIT|ROW|COL)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.text.attribute.value",
+              "match": "(?i)([A-Z]{1}[A-Z0-9]{0,9}|['](CALL .*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.ti",
+          "begin": "(?i)(?<=(:(TI)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.ti",
+              "match": "(?i)\\b(:(TI)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.ti.attribute.name",
+              "match": "(?i)\\b(VALUE)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.ti.attribute.value",
+              "match": "(?i)(['](.+)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.tl",
+          "begin": "(?i)(?<=(:(TL)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.tl",
+              "match": "(?i)\\b(:(TL)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.tl.attribute.name",
+              "match": "(?i)\\b(CASE|MSGID|MSGF)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.tl.attribute.value",
+              "match": "(?i)(UPPER|MIXED|[A-F]{3}[0-9A-F]{4}|['][A-Z][A-Z0-9#@$]{0,9}/[A-Z][A-Z0-9#@$]{0,9}['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.topinst",
+          "begin": "(?i)(?<=(:(TOPINST)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.topinst",
+              "match": "(?i)\\b(:(TOPINST)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.topinst.attribute.name",
+              "match": "(?i)\\b(INST)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.topinst.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.tt",
+          "begin": "(?i)(?<=(:(TT)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.tt",
+              "match": "(?i)\\b(:(TT)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.tt.attribute.name",
+              "match": "(?i)\\b(NAME|CONDS)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.tt.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32}|[']([A-Z0-9_\\/]{1,32}|\\*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.ttrow",
+          "begin": "(?i)(?<=(:(TTROW)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.ttrow",
+              "match": "(?i)\\b(:(TTROW)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.ttrow.attribute.name",
+              "match": "(?i)\\b(VALUES)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.ttrow.attribute.value",
+              "match": "(?i)(['](.*)['])"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.var",
+          "begin": "(?i)(?<=(:(VAR)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.var",
+              "match": "(?i)\\b(:(VAR)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.var.attribute.name",
+              "match": "(?i)\\b(NAME|CLASS|ERRVAR)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.var.attribute.value",
+              "match": "(?i)([A-Z0-9]{1,32})"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp.varrcd",
+          "begin": "(?i)(?<=(:(VARRCD)[ ]))",
+          "end": "\\.",
+          "patterns": [
+            {
+              "name": "support.function.pnlgrp.varrcd",
+              "match": "(?i)\\b(:(VARRCD)[ ])"
+            },
+            {
+              "name": "support.function.pnlgrp.varrcd.attribute.name",
+              "match": "(?i)\\b(NAME|VARS|NOPUT|NOGET)[=]"
+            },
+            {
+              "name": "support.variable.pnlgrp.varrcd.attribute.value",
+              "match": "(?i)([']?)([A-Z0-9]{1,32}(['])?)"
+            }
+          ]
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(XMP|XH[1-4]|VARRCD|VAR|UL|TTROW|TT|TOPINST|TL|TI|TEXT|SL|RT|PV|PT|PT|PRTTRAIL|PRTPNL|PRTHEAD|PNLGRP).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(PK|PDFLDC|PDFLD|PDACCEL|PD|PC|PARML|PANEL|P|OPTLINE|OL|NT|NOTE|MI|MENUI|MENUGRP|MENU|MBARC|MBAR|LP).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(LISTVIEW|LISTGRP|LISTDEF|LISTCOL|LISTACT|LIST|LINK|LINES|LI|KEYL|KEYI|ISCHSYN|ISCHSUBT|ISCH|INFO).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(IMPORT|IMHELP|HP[0-9]|HELP|H[1-4]|FIG|EXMP|EUL|ETT|ETL|ESL|ERT|EPV|EPT|EPRTPNL|EPRTHEAD|EPNLGRP|EPK).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(EPDFLD|EPARML|EPANEL|EOL|ENT|ENOTE|EMENUGRP|EMENU|EMBARC|EMBAR|ELISTGRP|ELIST|ELINK|ELINES|EKEYL|EINFO).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(EHP[0-9]|EHELP|EFIG|EDL|EDATAGRP|EDATA|ECLASS|ECIT|DTHD|DT|DL|DDHD|DD|DATASLTC|DATASLT|DATAIX|DATAI).?)"
+        },
+        {
+          "name": "keyword.other.pnlgrp",
+          "match": "(?i)(:(DATAGRP|DATACOL|DATAC|DATA|COPYR|COND|CMDLINE|CLASS|CIT|CHECK|BOTINST|APPFMT).?)"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.pnlgrp"
+}

@@ -1,0 +1,16 @@
+    PGM        /* ORD040C ORDER DEPT GENERAL MENU */
+    DCLF       FILE(ORD040CD)
+START: SNDRCVF    RCDFMT(MENU)
+    SELECT
+        WHEN (&RESP=1) THEN(CALL CUS210)   /* CUSTOMER INQUIRY     */
+        WHEN (&RESP=2) THEN(CALL ITM210)   /* ITEM INQUIRY         */
+        WHEN (&RESP=3) THEN(CALL CUS210)   /* CUSTOMER NAME SEARCH */
+        WHEN (&RESP=4) THEN(CALL ORD215)   /* ORDERS BY CUST       */
+        WHEN (&RESP=5) THEN(CALL ORD220)   /* EXISTING ORDER       */
+        WHEN (&RESP=6) THEN(CALL ORD410C)  /* ORDER ENTRY          */
+        WHEN (&RESP=7) THEN(RETURN)
+    ENDSELECT
+    GOTO START
+    ENDPGM
+
+/* From https://www.ibm.com/docs/en/i/7.3?topic=commands-writing-comments-in-cl-programs-procedures */

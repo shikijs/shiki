@@ -1,0 +1,142 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "prtf",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#gutter"
+    },
+    {
+      "include": "#identifiers"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.dds.prtf",
+          "match": "^.{5}(.)(\\*).*"
+        }
+      ]
+    },
+    "gutter": {
+      "patterns": [
+        {
+          "name": "comment.gutter",
+          "match": "^.{5}"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.dds.prtf",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        },
+        {
+          "name": "constant.language.dds.prtf.andor",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{0}))(A|O)"
+        },
+        {
+          "name": "constant.language.dds.prtf.n01",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{1}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.prtf.n02",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{4}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.prtf.n03",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{7}))(?i)(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.prtf.nameType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{10}))R"
+        },
+        {
+          "name": "constant.language.dds.prtf.ref",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{22}))R"
+        },
+        {
+          "name": "constant.language.dds.prtf.len",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{23}))[0-9|\\s]{5}"
+        },
+        {
+          "name": "constant.language.dds.prtf.dataType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{28}))(A|F|G|L|O|S|T|Z)"
+        },
+        {
+          "name": "constant.language.dds.prtf.decpos",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{29}))[0-9|\\s]{2}"
+        },
+        {
+          "name": "constant.language.dds.prtf.usage",
+          "match": "(?i)(?<=((?<=^.{5}[A\\s]).{31}))O"
+        },
+        {
+          "name": "constant.language.dds.prtf.locline",
+          "match": "(?i)(?<=((?<=^.{5}[A\\s]).{32}))([0-9]|\\s|\\+){3}"
+        },
+        {
+          "name": "constant.language.dds.prtf.locpos",
+          "match": "(?i)(?<=((?<=^.{5}[A\\s]).{35}))([0-9]|\\s|\\+){3}"
+        },
+        {
+          "name": "constant.numeric.dds.prtf",
+          "match": "\\b([0-9]+)\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.dds.prtf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        },
+        {
+          "name": "keyword.other.dds.prtf",
+          "match": "\\+"
+        },
+        {
+          "name": "keyword.other.dds.prtf.func",
+          "match": "((?i)(C(A|F)))[0-9]{2}"
+        },
+        {
+          "name": "keyword.other.dds.prtf.funcs",
+          "match": "(?i)(?<=(.{44}))(ZFOLD|UNISCRIPT|UNDERLINE|TXTRTT|TRNSPY|TIMSEP|TIMFMT|TIME|TEXT|STRPAGGRP|STAPLE|SPACEB|SPACEA|SKIPB|SKIPA|RELPOS|REFFLD|REF|PRTQLTY|POSITION|PAGSEG|PAGRTT|PAGNBR|OVERLAY|OUTBIN|MSGCON|LPI|LINE|INVMMAP|INVDTAMAP|INDTXT|INDARA|HIGHLIGHT|GDF|FORCE|FONTNAME|FONT|FNTCHRSET|FLTPCN|FLTFIXDEC|ENDPAGGRP|ENDPAGE|EDTWRD|EDTCDE|DUPLEX|DTASTMCMD|DRAWER|DOCIDXTAG|DLTEDT|DFT|DFNCHR|DATSEP|DATFMT|DATE|CVTDTA|CPI|COLOR|CHRSIZ|CHRID|CDEFNT|BOX|BLKFOLD|BARCODE|ALIAS|AFPRSC)\\b"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "identifier.other.dds.lf.identifiers",
+          "match": "[a-zA-Z_#$][a-zA-Z0-9_.#$]*"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.single.dds.prtf",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "keyword.other.dds.prtf.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.dds.prtf"
+}

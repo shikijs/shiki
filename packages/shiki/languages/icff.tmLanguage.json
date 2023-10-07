@@ -1,0 +1,142 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "icff",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#gutter"
+    },
+    {
+      "include": "#identifiers"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.dds.icff",
+          "match": "^.{5}(.)(\\*).*"
+        }
+      ]
+    },
+    "gutter": {
+      "patterns": [
+        {
+          "name": "comment.gutter",
+          "match": "^.{5}"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.dds.icff",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        },
+        {
+          "name": "constant.language.dds.icff.andor",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{0}))(A|O)"
+        },
+        {
+          "name": "constant.language.dds.icff.n01",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{1}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.icff.n02",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{4}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.icff.n03",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{7}))(N|\\s)[0-9]{2}"
+        },
+        {
+          "name": "constant.language.dds.icff.nameType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{10}))(R|H)"
+        },
+        {
+          "name": "constant.language.dds.icff.ref",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{22}))R"
+        },
+        {
+          "name": "constant.language.dds.icff.len",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{23}))[0-9|\\s]{5}"
+        },
+        {
+          "name": "constant.language.dds.icff.dataType",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{28}))(P|S|B|F|A|O)"
+        },
+        {
+          "name": "constant.language.dds.icff.decpos",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{29}))[0-9|\\s]{2}"
+        },
+        {
+          "name": "constant.language.dds.icff.usage",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{31}))(B|P)"
+        },
+        {
+          "name": "constant.language.dds.icff.locline",
+          "match": "(?i)(?<=((?<=^.{5}[A|\\s]).{32}))([0-9]|\\s){3}"
+        },
+        {
+          "name": "constant.numeric.dds.icff",
+          "match": "\\b([0-9]+)\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.other.dds.icff.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        },
+        {
+          "name": "keyword.other.dds.icff",
+          "match": "\\+"
+        },
+        {
+          "name": "keyword.other.dds.icff.func",
+          "match": "((?i)(C(A|F)))[0-9]{2}"
+        },
+        {
+          "name": "keyword.other.dds.icff.funcs",
+          "match": "(?i)(?<=(.{44}))(VARLEN|VARBUFMGT|TNSSYNLVL|TIMER|TEXT|SYNLVL|SUBDEV|SECURITY|RSPCONFIRM|RQSWRT|REFFLD|REF|RECID|RCVTRNDRND|RCVTKCMT|RCVROLLB|RCVNEGRSP|RCVFMH|RCVFAIL|RCVENDGRP|RCVDETACH|RCVCTLDTA|RCVCONFIRM|RCVCANCEL|PRPCMT|NEGRSP|INVITE|INDTXT|INDARA|FRCDTA|FMTNAME|FMH|FLTPCN|FAIL|EVOKE|EOS|ENDGRP|DFREVOKE|DETACH|CTLDTA|CONFIRM|CNLINVITE|CANCEL|ALWWRT|ALIAS)\\b"
+        },
+        {
+          "name": "keyword.other.dds.icff.funcs",
+          "match": "\\b(?i)(CMP|CLRL|SFL)\\b"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "identifier.other.dds.icff.identifiers",
+          "match": "[a-zA-Z_#$][a-zA-Z0-9_.#$]*"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.single.dds.icff",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "keyword.other.dds.icff.spec",
+          "match": "(?i)(?<=^.{5})[A]"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.dds.icff"
+}

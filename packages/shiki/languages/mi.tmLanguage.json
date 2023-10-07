@@ -1,0 +1,109 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "mi",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#support"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.mi",
+          "begin": "(\\/\\*)",
+          "end": "(\\*\\/)"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.mi",
+          "match": "(?i)[*]\\b(IN)([0-9]{0,2})\\b"
+        },
+        {
+          "name": "constant.numeric.mi",
+          "match": "(\\b[0-9]+)|([0-9]*[.][0-9]*)"
+        },
+        {
+          "name": "constant.language.mi",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.mi.label",
+          "match": "^\\s*[a-zA-Z_][a-zA-Z0-9_\\-]*:"
+        },
+        {
+          "name": "keyword.other.mi",
+          "match": "\\b(?i)(YIELD|XORSTR|XOR|XLATWTDS|XLATEWT|XLATEMB|XLATEB1|XLATEB|XLATE|XFRLOCK|XCTL|WAITTIME|VERIFY|UNLOCKSL|UNLOCK|UNLKMTX|UNLCKTSL|TSTRPLC|TSTINLTH|TSTBUM|TSTBTS|TRIML|TESTULA|TESTTOBJ|TESTSUBSET|TESTRPL|TESTPTR|TESTPDC|TESTINTR|TESTEXCP|TESTEAU|TESTAU|TANH|TAN|SYNCSTG|SUBSPPFO|SUBSPP|SUBN|SUBLC|STSPPO|STPLLEN|SSCA|SNSEXCPD|STRNCPYNULLPAD|STRNCPYNULL|STRNCMPNULL|STRLENNULL|SINH|SIN|SIGEXCP|SETSPPO|SETSPPFP|SETSPPD|SETSPP|SETSPFP|SETIP|SETINVF|SETIEXIT|SETHSSMK|SETDPAT|SETDPADR|SETDP|SETCA|SETBTS|SETALLEN|SETACST|SEARCH|SCANX|SCANWC|SCAN|SCALE|RTX|RTNEXCP|RSLVSP|RSLVDP|RMVINXEN|RINZSTAT|RETTSADR|RETTHID|RETTHCNT|RETINVF|RETEXCPD|RETCA|REM|REALCHSS|QUANTIZEBV|QUANTIZEBE|PROPB|POWER|POPPAR8|POPPAR4|POPCNTB|POPCNT8|POPCNT4|PCOPTR2|PCOPTR|OVRPGATR|ORSTR|OR|OPM_PARM_CNT|OPM_PARM_ADDR|NPM_PARMLIST_ADDR|NOT|NOOPS|NOOP|NEG|MPYSUB|MPYADD|MULT|MODS2|MODS1|MODS|MODINVAU|MODINX|MODEXCPD|MODASA|MEMUSEHINT|MEMMOVE|MEMCPY|MEMCMP|MATUPID|MATUP|MATTODAT|MATSOBJ|MATS|MATSELLK|MATRMD|MATQMSGQ|MATQAT|MATPGMNM|MATPG|MVLICOPT|MATPRMTX|MATPRMSG|MATPRLK|MATPRECL|MATPRATR|MATPRAGP|MATPTRL|MATPTRIF|MATPTR|MATOBJLCK|MATMTX|MATMIF|MATMDATA|MATMATR1|MATMATR|MATJSAT|MATJPAT|MATJOBJ|MATJOAT|MATINVS|MATINVE|MATINVAT|MATINV|MATINAT|MATINXAT|MATEXCPD|MATDMPS|MATDRECL|MATBPGM|MATAUU|MATAUOBJ|MATAL|MATAU|MATAOL|MATHSAT|MATAGPAT|MATACTEX|MATACTAT|MATAGAT|LN|LOCKTSL|LOCKSL|LOCKMTX|LOCK|INVP|INSINXEN|INITEHCA|INCTS|INCT|INCD|GENUUID|FREHSSMK|FREHSS|FNDRINVN|FNDINXEN|STRCHRNULL|MEMCHR|FINDBYTE|EXTRMAG|EXTREXP|ECSCAN|EEXP|EXCHBY|ENSOBJ|ENQ|END|EDITPD|LBEDIT|EDIT|DIVREM|DIV|DESS|DESMTX|DESINX|DESHS|DEQWAIT|DEQ|DECTS|DECT|DECD|DCPDATA|DEACTPG|CVTTS|CVTT|CVTSC|CVTNC|CVTMC|CVTHC|CVTFPDF|CVTEFN|CVTDFFP|CVTD|CVTCS|CVTCN|CVTCM|CVTCH|CVTCB|CVTBC|CRTMTX|CRTINX|CRTHS|CNTLZ8|CNTLZ4|COT|COSH|COS|LBCPYNVR|LBCPYNV|CPYNV|STRCPYNULL|CPYHEXZZ|CPYHEXZN|CPYHEXNZ|CPYHEXNN|CPYECLAP|CPYBWP|CPYBRAP|CPYBRA|CPYBREP|CPYBO|CPYBOLAP|CPYBOLA|CPYBLAP|CPYBLA|CPYBBTL|CPYBBTA|CPYBYTES|CPYBTRLS|CPYBTRAS|CPYBTLLS|CPYBTL|CPYBTA|CPRDATA|CAT|CMPTOPAD|CMPSWP|CMPSW|CMPSPAD|CMPPTRT|CMPPTRE|CMPPTRA|CMPPSPAD|CMPNV|STRCMPNULL|CMPBRAP|CMPBRA|CMPBLAP|CMPBLA|CMF2|CMF1|CDD|CAI|COMSTR|CLRLKVAL|CLRINVF|CLRIEXIT|CLRBTS|CIPHER|CHKLKVAL|CALLPGMV|CALLI|CALLX|BITPERM|ATMCOR|ATMCAND|ATMCADD|ATANH|ATAN|ASIN|ACOS|ANDSTR|ANDCSTR|AND|ALCHSS|ADDSPP|ADDN|ADDLC|ACTPG|ACTBPGM)\\b"
+        },
+        {
+          "name": "keyword.other.mi",
+          "match": "\\s+(?i)(MATCTX|B|CRTS|CTSD|CTD)\\b"
+        },
+        {
+          "name": "keyword.other.mi",
+          "match": "\\b(?i)(ENTRY|DCL|PARM_LIST|PARM|PEND|EXT)\\b"
+        },
+        {
+          "name": "keyword.other.mi",
+          "match": "\\b(([\\|](\\||>|<))|\\+|>=|<=|=|>|<|:)\\b"
+        },
+        {
+          "name": "keyword.other.mi",
+          "match": "\\*"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.other.mi.hex",
+          "begin": "(?i)x'",
+          "end": "'"
+        },
+        {
+          "name": "string.quoted.single.mi",
+          "begin": "('|\")",
+          "end": "'|\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.mi",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "support": {
+      "patterns": [
+        {
+          "name": "support.type.mi",
+          "match": "\\b(?i)(SPCPTR|SYSPTR|OL|DD)"
+        },
+        {
+          "name": "support.function.mi",
+          "match": "\\b(?i)[A-Za-z]+\\s*(?=\\()"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.mi"
+}

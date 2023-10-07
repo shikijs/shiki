@@ -1,0 +1,22 @@
+     A                                      INDARA
+     A                                      REF(TESTPRTF)
+WASD A          R PRHEADER
+     A            PROGRAM       10A        1SKIPB(001)
+     A            USER          10A       +1
+     A                                    56'MY REPORT'
+     A                                   113TIME
+     A                                    +1DATE(*YY)
+     A                                      EDTCDE(Y)
+XXXXXA*
+     A                                     1'ID'
+TEST A                                      HIGHLIGHT
+     A                                      UNDERLINE
+     A                                      SPACEB(001)
+     A                                    +1'DESCRIPTION'
+     A                                      HIGHLIGHT
+     A                                      UNDERLINE
+     A                                   123'Page'
+     A                                    +1PAGNBR
+     A                                      EDTCDE(Z)
+
+* https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test.prtf

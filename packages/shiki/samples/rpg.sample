@@ -1,0 +1,71 @@
+     H/TITLE Testing syntax highlighting
+      *
+     H* Control spec (H prompt)
+     H        1   Y&J    D              1 F                               QWERTY
+      *
+     F* Externally described file (FX prompt)
+     FSOMEFILEIFEAE        L  K        DISK         K            A    UC  comment
+      *
+     F* Program described file (F prompt)
+     FSOMEFIL2OPEDF           ATOV    LPRINTER      K            A    U6  comment
+      *
+     E* Extension spec (E prompt)
+     E    FFILE   TFILE   ATBL  1239999128L6AALTNAM64 P8DTHIS IS A COMMENT
+      *
+     L* Line Counter spec (L prompt)
+     LSOMEFILE101FL300OL                                                  comment
+      *
+     I* Input spec record identification (I prompt)
+     ISOMEFILE3ANOL41   NZX2    CA3   ND4                                 comment
+     I*
+     I* Input spec record identification external (IX prompt)
+     IMYRECORD    H4                                                      comment
+     I* Input spec field description (J prompt)
+     I                                    P123499997MYFLD L4M2RTH4U7H6    comment
+     I* Input spec field description external (JX prompt)
+     I              EXTFILENAM                      MYFLD L4M5  U3RTH7    comment
+     I* Data structure input specification (DS prompt)
+     IMYDS      EUDSEXTFILENAM             12345555                       comment
+     I* Data structure subfield input spec (SS prompt)
+     I              EXTFLDNAME            P123488885MYFLD                 comment
+     I* Data structure subfield init spec (SV prompt)
+     I I            SOMETHING             P123456785MYFLD                 comment
+      *
+     C* Calc spec (C prompt)
+     CLRNLR MRNL1VARA      ADD  VARB      RES   30 1HOV02H2COMMENT!
+      *
+     C* Test embedded SQL
+      *
+      * -- ENTRY PARMS
+     C/COPY SRCLIB/QCPYSRC,ENC320C                         comment
+     C*
+      *
+     C/Exec SQL
+     C+ select count(*)
+     C+   into :VAR123
+     C+   from MYTABLE
+     C+  where COL1 = :VAR4 and COL2 = 0
+     C+  and SUBSTR(DATA,1,4)='WASD'
+     C/End-Exec
+      *
+     O* Output spec (O prompt)
+     O                NKA 01 L2FIELDXJB+NNNPWASD                          comment
+     O* Output spec disk (OD prompt)
+     OMYFILE  TADD    NKA L4NRTWASD                                       comment
+     O* Output spec field description (P prompt)
+     O                NKA L4NU2MYFLDMXBNNNNLMYCONST                       comment
+     O                N01 L2NKNSEATS#   200B                              comment
+      *
+     /EJECT
+     /COPY
+**     TABER# / TABERD
+1Text Text Text Text.
+2Text Text Text Text Text Text Text Text Text Text.
+3Text Text Text Text Text Text Text Text.
+4
+5
+6
+7
+8
+
+* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test1.rpg

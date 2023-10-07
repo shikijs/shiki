@@ -1,0 +1,25 @@
+     A* Testing a physical file
+     A*
+     A* Modified DDS from
+     A*   http://www.go4as400.com/Source-physical-file-and-logical-file-in-as400/files.aspx?cid=4
+     A
+     A* File level
+     A                                      UNIQUE
+     A* Record format level
+     A          R ACCOUNT                   TEXT('Record format text')
+     A* Field level
+     A            ACLEVELID      2P 0       TEXT('text')
+     A            ACORGCOD       3P 0       TEXT('text')
+     A            ACCOUNTNUM    12P 0       TEXT('text')
+     A            ACCURRENCY     3A         TEXT('text')
+     A            ACNAME        20A         TEXT('text')
+     A                                      COLHDG('Column' +
+     A                                             'Heading' )
+     A* Keyfield level
+     A          K ACLEVELID
+     A          K ACORGCOD
+     A          K ACCOUNTNUM
+     A          K ACCURRENCY
+     A*
+
+* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test.pf

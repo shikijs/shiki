@@ -1,0 +1,75 @@
+.*------------------------------------------------------------------------------------------------*.
+.*                                                                                                *.
+.*  Start Ungit server.                                                                           *.
+.*                                                                                                *.
+.*  Create Instructions:                                                                          *.
+.*                                                                                                *.
+.*> CRTFRMSTMF OBJ(&FCN2/&FNR) CMD(CRTPNLGRP) SRCSTMF('&FP')                                     <*.
+.*> CHGOBJD    OBJ(&FCN2/&FNR) OBJTYPE(*PNLGRP) TEXT('Start Ungit server')                       <*.
+.*                                                                                                *.
+.*------------------------------------------------------------------------------------------------*.
+
+.im member1
+
+:pnlgrp.
+
+.* Help for command STRUNGIT:
+
+:help name='STRUNGIT'.
+STRUNGIT - Help
+:P.
+This command starts an Ungit server job.
+:p.
+The Ungit server job provides a server for the Ungit user interface.
+The Ungit user interface is a clean and intuitive UI that makes it easy to use and understand git.
+:p.
+:lines.
+For more information see the following link:
+https://github.com/FredrikNoren/ungit
+:elines.
+:ehelp.
+
+.*------------------------------------------------------------------------------------------------*.
+.* Help for parameter USRPRF:
+
+:help name='STRUNGIT/USRPRF'.
+User profile (USRPRF) - Help
+:xh3.User profile (USRPRF)
+:p.Specifies the user profile for which to start the Ungit server.
+.*
+:parml.
+:pt.:pk def.*CURRENT:epk.
+:pd.
+Use the current user profile.
+.*
+:pt.:pv.name:epv.
+:pd.
+Specify the user profile to use.
+.*
+:eparml.
+:ehelp.
+
+.*------------------------------------------------------------------------------------------------*.
+.* Help for parameter OPTIONS:
+
+:help name='STRUNGIT/OPTIONS'.
+Ungit options (OPTIONS) - Help
+:xh3.Ungit options (OPTIONS)
+:p.Specifies any extra options used when starting the Ungit server.
+:nt.Do not use the options --port and --ungitBindIp - these are used by the STRUNGIT command.:ent.
+.*
+:parml.
+:pt.:pk def.*NONE:epk.
+:pd.
+No extra options will be used.
+.*
+:pt.:pv.Text:epv.
+:pd.
+Specify the extra options to use.
+.*
+:eparml.
+:ehelp.
+
+:epnlgrp.
+
+.* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test.pnlgrp

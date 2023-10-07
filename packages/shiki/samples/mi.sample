@@ -1,0 +1,29 @@
+/********************************************************************/
+/*                                                                  */
+/*     Program Name: MI01                                           */
+/*     Programming Language: MI                                     */
+/*     Description: Return the larger of two packed arguments.      */
+/*                                                                  */
+/* From: https://www.ibm.com/support/knowledgecenter                */
+/*       /en/ssw_ibm_i_73/rzatk/MIwritprog.htm                      */
+/********************************************************************/
+ENTRY * (PARM_LIST) EXT;
+DCL     SPCPTR      ARG1@      PARM;
+DCL     SPCPTR      ARG2@      PARM;
+DCL     SPCPTR      RESULT@    PARM;
+DCL     OL          PARM_LIST
+                   (ARG1@,
+                    ARG2@,
+                    RESULT@)
+                    PARM       EXT;
+DCL     DD          ARG1       PKD(15,5)     BAS(ARG1@);
+DCL     DD          ARG2       PKD(15,5)     BAS(ARG2@);
+DCL     DD          RESULT     PKD(15,5)     BAS(RESULT@);
+        CMPNV(B)    ARG1,ARG2  / LO(ITS2);
+        CPYNV       RESULT,ARG1;
+        B           RETURN;
+ITS2:   CPYNV       RESULT,ARG2;
+RETURN: RTX         *;
+        PEND;
+
+/* From https://github.com/barrettotte/vscode-ibmi-languages/blob/master/tests/general/test1.mi */

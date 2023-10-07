@@ -103,8 +103,16 @@ export const githubGrammarSources: [string, string][] = [
   ['bicep', 'https://github.com/Azure/bicep/blob/main/src/textmate/bicep.tmlanguage'],
   ['blade', 'https://github.com/spatie/shiki-php/blob/main/languages/blade.tmLanguage.json'],
   [
+    'bnd',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/bnd.tmLanguage.json'
+  ],
+  [
     'cadence',
     'https://github.com/onflow/vscode-cadence/blob/master/extension/language/syntaxes/cadence.tmGrammar.json'
+  ],
+  [
+    'cl',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/cl.tmLanguage.json'
   ],
   [
     'clarity',
@@ -118,6 +126,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/crystal-lang-tools/vscode-crystal-lang/blob/master/syntaxes/crystal.json'
   ],
   ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage'],
+  [
+    'cmd',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/cmd.tmLanguage.json'
+  ],
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   ['cypher', 'https://github.com/adam-cowley/neo4j-vscode/blob/main/cypher/cypher.tmLanguage'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
@@ -126,6 +138,10 @@ export const githubGrammarSources: [string, string][] = [
   [
     'dream-maker',
     'https://github.com/gbasood/vscode-atomic-dreams/blob/master/syntaxes/dm.tmLanguage.json'
+  ],
+  [
+    'dspf',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/dds.dspf.tmLanguage.json'
   ],
   [
     'elixir',
@@ -176,6 +192,14 @@ export const githubGrammarSources: [string, string][] = [
   ['haskell', 'https://github.com/octref/language-haskell/blob/master/syntaxes/haskell.json'],
   ['hcl', 'https://github.com/hashicorp/syntax/blob/main/syntaxes/hcl.tmGrammar.json'],
   ['hjson', 'https://github.com/hjson/textmate-hjson/blob/master/Syntaxes/Hjson.tmLanguage'],
+  [
+    'icff',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/dds.icff.tmLanguage.json'
+  ],
+  [
+    'lf',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/dds.lf.tmLanguage.json'
+  ],
   ['imba', 'https://github.com/imba/vscode-imba/blob/master/syntaxes/imba.tmLanguage'],
   [
     'jinja',
@@ -214,6 +238,10 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['mdc', 'https://github.com/nuxtlabs/vscode-mdc/blob/main/syntaxes/mdc.tmLanguage.json'],
   ['mdx', 'https://github.com/wooorm/markdown-tm-language/blob/main/source.mdx.tmLanguage'],
+  [
+    'mi',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/mi.tmLanguage.json'
+  ],
   ['mojo', 'https://github.com/modularml/mojo-syntax/blob/main/syntaxes/mojo.syntax.json'],
   [
     'narrat',
@@ -234,7 +262,15 @@ export const githubGrammarSources: [string, string][] = [
     'pascal',
     'https://github.com/alefragnani/vscode-language-pascal/blob/master/syntaxes/pascal.tmLanguage'
   ],
+  [
+    'pf',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/dds.pf.tmLanguage.json'
+  ],
   ['plsql', 'https://github.com/zabel-xyz/plsql-language/blob/master/syntaxes/plsql.tmLanguage'],
+  [
+    'pnlgrp',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/pnlgrp.tmLanguage.json'
+  ],
   [
     'powerquery',
     'https://github.com/microsoft/powerquery-language/blob/master/PowerQuery.tmLanguage.json'
@@ -242,6 +278,10 @@ export const githubGrammarSources: [string, string][] = [
   [
     'prisma',
     'https://github.com/prisma/language-tools/blob/master/packages/vscode/syntaxes/prisma.tmLanguage.json'
+  ],
+  [
+    'prtf',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/dds.prtf.tmLanguage.json'
   ],
   [
     'prolog',
@@ -265,6 +305,14 @@ export const githubGrammarSources: [string, string][] = [
   [
     'riscv',
     'https://github.com/zhuanhao-wu/vscode-riscv-support/blob/master/syntaxes/riscv.tmLanguage'
+  ],
+  [
+    'rpg',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/rpg.tmLanguage.json'
+  ],
+  [
+    'rpgle',
+    'https://github.com/barrettotte/vscode-ibmi-languages/blob/master/syntaxes/rpgle.tmLanguage.json'
   ],
   ['sas', 'https://github.com/rpardee/sas/blob/master/syntaxes/sas.tmLanguage'],
   [
@@ -358,17 +406,20 @@ export const languageAliases = {
   bat: ['batch'],
   berry: ['be'],
   cadence: ['cdc'],
+  cl: ['clp', 'clp38', 'clle'],
   clojure: ['clj'],
   codeql: ['ql'],
   csharp: ['c#', 'cs'],
   cypher: ['cql'],
   docker: ['dockerfile'],
+  dspf: ['dspf38'],
   erlang: ['erl'],
   fsharp: ['f#', 'fs'],
   'glimmer-js': ['gjs'],
   'glimmer-ts': ['gts'],
   haskell: ['hs'],
   handlebars: ['hbs'],
+  lf: ['lf38'],
   ini: ['properties'],
   javascript: ['js'],
   jssm: ['fsl'],
@@ -379,9 +430,13 @@ export const languageAliases = {
   nextflow: ['nf'],
   'objective-c': ['objc'],
   powershell: ['ps', 'ps1'],
+  pf: ['pf38', 'dds'],
+  prtf: ['prtf38'],
   pug: ['jade'],
   python: ['py'],
   raku: ['perl6'],
+  rpg: ['rpg38', 'sqlrpg'],
+  rpgle: ['sqlrpgle'],
   ruby: ['rb'],
   rust: ['rs'],
   'html-ruby-erb': ['erb'],

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "cmd",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#support"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.cmd",
+          "begin": "(\\/\\*)",
+          "end": "(\\*\\/)"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.language.cmd",
+          "match": "(?i)[*]\\b(IN)([0-9]{0,2})\\b"
+        },
+        {
+          "name": "constant.numeric.cmd",
+          "match": "(\\b[0-9]+)|([0-9]*[.][0-9]*)"
+        },
+        {
+          "name": "constant.language.cmd",
+          "match": "[*][a-zA-Z][a-zA-Z0-9]*"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.cmd.label",
+          "match": "^\\s*[a-zA-Z_][a-zA-Z0-9_]*:"
+        },
+        {
+          "name": "keyword.other.cmd",
+          "match": "(?i)\\b(QUAL|PMTCTL|PARM|ELEM|DEP|CMD)\\b"
+        },
+        {
+          "name": "keyword.other.cmd",
+          "match": "(?i)[*](CAT|TCAT|BCAT|AND|OR|NOT|EQ|GT|LT|GE|LE|NE|NG|NL)"
+        },
+        {
+          "name": "keyword.other.cmd",
+          "match": "(([\\|](\\||>|<))|\\+|\\-|\\*|\\/|>=|<=|=|>|<|:)"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.other.cmd.hex",
+          "begin": "(?i)x'",
+          "end": "'"
+        },
+        {
+          "name": "string.quoted.single.cmd",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.cmd",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "support": {
+      "patterns": [
+        {
+          "name": "support.function.cmd",
+          "match": "[a-zA-Z_][a-zA-Z0-9_]*(?=\\()"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.parameter.cmd",
+          "match": "[&][a-zA-Z_][a-zA-Z0-9_]*"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.cmd"
+}

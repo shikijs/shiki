@@ -22,11 +22,14 @@ export type Lang =
   | 'bibtex'
   | 'bicep'
   | 'blade'
+  | 'bnd'
   | 'c'
   | 'cadence' | 'cdc'
+  | 'cl' | 'clp' | 'clp38' | 'clle'
   | 'clarity'
   | 'clojure' | 'clj'
   | 'cmake'
+  | 'cmd'
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
@@ -42,6 +45,7 @@ export type Lang =
   | 'diff'
   | 'docker' | 'dockerfile'
   | 'dream-maker'
+  | 'dspf' | 'dspf38'
   | 'elixir'
   | 'elm'
   | 'erb'
@@ -70,6 +74,7 @@ export type Lang =
   | 'hlsl'
   | 'html'
   | 'http'
+  | 'icff'
   | 'imba'
   | 'ini' | 'properties'
   | 'java'
@@ -88,6 +93,7 @@ export type Lang =
   | 'kusto' | 'kql'
   | 'latex'
   | 'less'
+  | 'lf' | 'lf38'
   | 'liquid'
   | 'lisp'
   | 'logo'
@@ -99,6 +105,7 @@ export type Lang =
   | 'mdc'
   | 'mdx'
   | 'mermaid'
+  | 'mi'
   | 'mojo'
   | 'narrat' | 'nar'
   | 'nextflow' | 'nf'
@@ -110,14 +117,17 @@ export type Lang =
   | 'ocaml'
   | 'pascal'
   | 'perl'
+  | 'pf' | 'pf38' | 'dds'
   | 'php'
   | 'plsql'
+  | 'pnlgrp'
   | 'postcss'
   | 'powerquery'
   | 'powershell' | 'ps' | 'ps1'
   | 'prisma'
   | 'prolog'
   | 'proto'
+  | 'prtf' | 'prtf38'
   | 'pug' | 'jade'
   | 'puppet'
   | 'purescript'
@@ -128,6 +138,8 @@ export type Lang =
   | 'reg'
   | 'rel'
   | 'riscv'
+  | 'rpg' | 'rpg38' | 'sqlrpg'
+  | 'rpgle' | 'sqlrpgle'
   | 'rst'
   | 'ruby' | 'rb'
   | 'rust' | 'rs'
@@ -309,6 +321,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['html', 'xml', 'sql', 'javascript', 'json', 'css']
   },
   {
+    id: 'bnd',
+    scopeName: 'source.bnd',
+    path: 'bnd.tmLanguage.json',
+    displayName: 'BND',
+    samplePath: 'bnd.sample'
+  },
+  {
     id: 'c',
     scopeName: 'source.c',
     path: 'c.tmLanguage.json',
@@ -322,6 +341,14 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'Cadence',
     samplePath: 'cadence.sample',
     aliases: ['cdc']
+  },
+  {
+    id: 'cl',
+    scopeName: 'source.cl',
+    path: 'cl.tmLanguage.json',
+    displayName: 'CL',
+    samplePath: 'cl.sample',
+    aliases: ['clp', 'clp38', 'clle']
   },
   {
     id: 'clarity',
@@ -344,6 +371,12 @@ export const languages: ILanguageRegistration[] = [
     path: 'cmake.tmLanguage.json',
     displayName: 'CMake',
     samplePath: 'cmake.sample'
+  },
+  {
+    id: 'cmd',
+    scopeName: 'source.cmd',
+    path: 'cmd.tmLanguage.json',
+    displayName: 'CMD'
   },
   {
     id: 'cobol',
@@ -457,6 +490,14 @@ export const languages: ILanguageRegistration[] = [
     path: 'dream-maker.tmLanguage.json',
     displayName: 'Dream Maker',
     samplePath: 'dream-maker.sample'
+  },
+  {
+    id: 'dspf',
+    scopeName: 'source.dds.dspf',
+    path: 'dspf.tmLanguage.json',
+    displayName: 'DDS.DSPF',
+    samplePath: 'dspf.sample',
+    aliases: ['dspf38']
   },
   {
     id: 'elixir',
@@ -673,6 +714,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['shellscript', 'json', 'xml', 'graphql']
   },
   {
+    id: 'icff',
+    scopeName: 'source.dds.icff',
+    path: 'icff.tmLanguage.json',
+    displayName: 'DDS.ICFF',
+    samplePath: 'icff.sample'
+  },
+  {
     id: 'imba',
     scopeName: 'source.imba',
     path: 'imba.tmLanguage.json',
@@ -808,6 +856,14 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['css']
   },
   {
+    id: 'lf',
+    scopeName: 'source.dds.lf',
+    path: 'lf.tmLanguage.json',
+    displayName: 'DDS.LF',
+    samplePath: 'lf.sample',
+    aliases: ['lf38']
+  },
+  {
     id: 'liquid',
     scopeName: 'text.html.liquid',
     path: 'liquid.tmLanguage.json',
@@ -873,7 +929,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'mdc',
     scopeName: 'text.markdown.mdc',
     path: 'mdc.tmLanguage.json',
-    displayName: 'markdown',
+    displayName: 'mdc',
     samplePath: 'mdc.sample',
     embeddedLangs: ['markdown', 'yaml']
   },
@@ -891,6 +947,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'mermaid.tmLanguage.json',
     displayName: 'Mermaid',
     samplePath: 'mermaid.sample'
+  },
+  {
+    id: 'mi',
+    scopeName: 'source.mi',
+    path: 'mi.tmLanguage.json',
+    displayName: 'MI',
+    samplePath: 'mi.sample'
   },
   {
     id: 'mojo',
@@ -976,6 +1039,14 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['html', 'xml', 'css', 'javascript', 'sql']
   },
   {
+    id: 'pf',
+    scopeName: 'source.dds.pf',
+    path: 'pf.tmLanguage.json',
+    displayName: 'DDS.PF',
+    samplePath: 'pf.sample',
+    aliases: ['pf38', 'dds']
+  },
+  {
     id: 'php',
     scopeName: 'source.php',
     path: 'php.tmLanguage.json',
@@ -989,6 +1060,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'plsql.tmLanguage.json',
     displayName: 'PL/SQL',
     samplePath: 'plsql.sample'
+  },
+  {
+    id: 'pnlgrp',
+    scopeName: 'source.pnlgrp',
+    path: 'pnlgrp.tmLanguage.json',
+    displayName: 'PNLGRP',
+    samplePath: 'pnlgrp.sample'
   },
   {
     id: 'postcss',
@@ -1034,6 +1112,14 @@ export const languages: ILanguageRegistration[] = [
     samplePath: 'proto.sample'
   },
   {
+    id: 'prtf',
+    scopeName: 'source.dds.prtf',
+    path: 'prtf.tmLanguage.json',
+    displayName: 'DDS.PRTF',
+    samplePath: 'prtf.sample',
+    aliases: ['prtf38']
+  },
+  {
     id: 'pug',
     scopeName: 'text.pug',
     path: 'pug.tmLanguage.json',
@@ -1075,7 +1161,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'raku',
     scopeName: 'source.perl.6',
     path: 'raku.tmLanguage.json',
-    displayName: 'Perl 6',
+    displayName: 'Raku',
     samplePath: 'raku.sample',
     aliases: ['perl6']
   },
@@ -1107,6 +1193,24 @@ export const languages: ILanguageRegistration[] = [
     path: 'riscv.tmLanguage.json',
     displayName: 'RISC-V',
     samplePath: 'riscv.sample'
+  },
+  {
+    id: 'rpg',
+    scopeName: 'source.rpg',
+    path: 'rpg.tmLanguage.json',
+    displayName: 'RPG',
+    samplePath: 'rpg.sample',
+    aliases: ['rpg38', 'sqlrpg'],
+    embeddedLangs: ['sql']
+  },
+  {
+    id: 'rpgle',
+    scopeName: 'source.rpgle',
+    path: 'rpgle.tmLanguage.json',
+    displayName: 'RPGLE',
+    samplePath: 'rpgle.sample',
+    aliases: ['sqlrpgle'],
+    embeddedLangs: ['sql']
   },
   {
     id: 'rst',
