@@ -87,6 +87,7 @@ export type Lang =
   | 'kotlin'
   | 'kusto' | 'kql'
   | 'latex'
+  | 'lean'
   | 'less'
   | 'liquid'
   | 'lisp'
@@ -800,6 +801,13 @@ export const languages: ILanguageRegistration[] = [
     embeddedLangs: ['tex', 'css', 'haskell', 'html', 'xml', 'java', 'lua', 'julia', 'ruby', 'javascript', 'typescript', 'python', 'yaml', 'rust', 'scala', 'gnuplot']
   },
   {
+    id: 'lean',
+    scopeName: 'source.lean4',
+    path: 'lean.tmLanguage.json',
+    displayName: 'Lean 4',
+    samplePath: 'lean.sample'
+  },
+  {
     id: 'less',
     scopeName: 'source.css.less',
     path: 'less.tmLanguage.json',
@@ -873,7 +881,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'mdc',
     scopeName: 'text.markdown.mdc',
     path: 'mdc.tmLanguage.json',
-    displayName: 'markdown',
+    displayName: 'mdc',
     samplePath: 'mdc.sample',
     embeddedLangs: ['markdown', 'yaml']
   },
@@ -1075,7 +1083,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'raku',
     scopeName: 'source.perl.6',
     path: 'raku.tmLanguage.json',
-    displayName: 'Perl 6',
+    displayName: 'Raku',
     samplePath: 'raku.sample',
     aliases: ['perl6']
   },

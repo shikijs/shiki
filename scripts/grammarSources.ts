@@ -201,6 +201,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/rosshamish/kuskus/blob/master/kusto-syntax-highlighting/syntaxes/kusto.tmLanguage.json'
   ],
   ['latex', 'https://github.com/James-Yu/LaTeX-Workshop/blob/master/syntax/LaTeX.tmLanguage.json'],
+  [
+    'lean',
+    'https://github.com/leanprover/vscode-lean4/blob/master/vscode-lean4/syntaxes/lean4.json'
+  ],
   ['lisp', 'https://github.com/mattn/vscode-lisp/blob/master/syntaxes/Lisp.tmLanguage'],
   [
     'liquid',

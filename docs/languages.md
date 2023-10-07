@@ -137,6 +137,7 @@ export type Lang =
   | 'kotlin'
   | 'kusto' | 'kql'
   | 'latex'
+  | 'lean'
   | 'less'
   | 'liquid'
   | 'lisp'
