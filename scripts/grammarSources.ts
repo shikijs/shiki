@@ -360,6 +360,7 @@ export const languageAliases = {
   cadence: ['cdc'],
   clojure: ['clj'],
   codeql: ['ql'],
+  cpp: ['c++'],
   csharp: ['c#', 'cs'],
   cypher: ['cql'],
   docker: ['dockerfile'],

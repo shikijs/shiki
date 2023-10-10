@@ -80,7 +80,7 @@ export type Lang =
   | 'cobol'
   | 'codeql' | 'ql'
   | 'coffee'
-  | 'cpp'
+  | 'cpp' | 'c++'
   | 'crystal'
   | 'csharp' | 'c#' | 'cs'
   | 'css'
