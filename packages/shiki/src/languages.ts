@@ -873,7 +873,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'mdc',
     scopeName: 'text.markdown.mdc',
     path: 'mdc.tmLanguage.json',
-    displayName: 'markdown',
+    displayName: 'mdc',
     samplePath: 'mdc.sample',
     embeddedLangs: ['markdown', 'yaml']
   },
@@ -1075,7 +1075,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'raku',
     scopeName: 'source.perl.6',
     path: 'raku.tmLanguage.json',
-    displayName: 'Perl 6',
+    displayName: 'Raku',
     samplePath: 'raku.sample',
     aliases: ['perl6']
   },

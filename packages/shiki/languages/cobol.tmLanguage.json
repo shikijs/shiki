@@ -1,5 +1,5 @@
 {
-  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2022 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/main/syntaxes/COBOL.tmLanguage.json",
+  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2023 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/main/syntaxes/COBOL.tmLanguage.json",
   "$schema": "https://raw.githubusercontent.com/spgennard/vscode_cobol/main/schemas/tmlanguage.json",
   "fileTypes": [
     "ccp",
@@ -347,6 +347,10 @@
         {
           "match": "(^[0-9 ][0-9 ][0-9 ][0-9 ][0-9 ][0-9 ])",
           "name": "constant.numeric.cobol"
+        },
+        {
+          "match": "(?i:with|debugging|mode)",
+          "name": "keyword.Identifiers.gnucobol"
         }
       ],
       "name": "comment.block.cobol.remark",

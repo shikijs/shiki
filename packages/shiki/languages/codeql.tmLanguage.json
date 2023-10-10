@@ -105,6 +105,14 @@
       "match": "(?x)\\]",
       "name": "punctuation.squarebracket.close.ql"
     },
+    "open-angle": {
+      "match": "(?x)<",
+      "name": "punctuation.anglebracket.open.ql"
+    },
+    "close-angle": {
+      "match": "(?x)>",
+      "name": "punctuation.anglebracket.close.ql"
+    },
     "operator-or-punctuation": {
       "patterns": [
         {
@@ -148,6 +156,12 @@
         },
         {
           "include": "#close-bracket"
+        },
+        {
+          "include": "#open-angle"
+        },
+        {
+          "include": "#close-angle"
         }
       ]
     },
@@ -717,15 +731,48 @@
         }
       ]
     },
-    "import-directive": {
-      "end": "(?x)(?:\\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))) (?!\\s*(\\.|\\:\\:))",
-      "endCaptures": {
-        "0": {
+    "instantiation-args": {
+      "name": "meta.type.parameters.ql",
+      "patterns": [
+        {
+          "include": "#instantiation-args"
+        },
+        {
+          "include": "#non-context-sensitive"
+        },
+        {
+          "match": "(?x)(?:\\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))",
           "name": "entity.name.type.namespace.ql"
         }
+      ],
+      "begin": "(?x)((?:<))",
+      "beginCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#open-angle"
+            }
+          ]
+        }
       },
+      "end": "(?x)((?:>))",
+      "endCaptures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#close-angle"
+            }
+          ]
+        }
+      }
+    },
+    "import-directive": {
+      "end": "(?x)(?<!\\bimport)(?<=(?:\\>)|[A-Za-z0-9_]) (?!\\s*(\\.|\\:\\:|\\,|(?:<)))",
       "name": "meta.block.import-directive.ql",
       "patterns": [
+        {
+          "include": "#instantiation-args"
+        },
         {
           "include": "#non-context-sensitive"
         },
