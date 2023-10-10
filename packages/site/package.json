@@ -1,13 +1,13 @@
 {
   "name": "shiki-site",
-  "version": "0.14.4",
+  "version": "0.14.5",
   "private": true,
   "devDependencies": {
     "@types/node": "^18.11.17",
     "markdown-it": "^13.0.1",
     "playwright": "^1.29.0",
-    "shiki": "^0.14.4",
-    "shiki-renderer-svg": "^0.14.4"
+    "shiki": "^0.14.5",
+    "shiki-renderer-svg": "^0.14.5"
   },
   "scripts": {
     "gen": "node gen-index.js && node gen-palenight.js && node gen-mono.js && node gen-custom-theme.js && node gen-svg.js && node gen-wenyan.js"
