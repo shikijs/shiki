@@ -18,6 +18,9 @@ jobs:
       - name: pnpm setup
         uses: pnpm/action-setup@v2
 
+      - name: install
+        run: pnpm install
+
       - run: pnpm run update:themes
 
       - run: pnpm build
