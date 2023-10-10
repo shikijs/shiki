@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.14.5 | 2023-10-10
+
+### 🚀 Features & Fixes
+
+- feat: add `gql` as an alias of `graphql`
+
+### 🙌 Contributions
+
+- fix: alias `c++` to `cpp` | [#518](https://github.com/shikijs/shiki/pull/518) | [@scarf005](https://github.com/scarf005)
+- fix: add 'kt' and 'kts' alias for kotlin | [#525](https://github.com/shikijs/shiki/pull/525) | [@camina-apps](https://github.com/camina-apps)
+
+
 ## 0.14.4 | 2023-08-31
 
 ### 🚀 Features & Fixes
