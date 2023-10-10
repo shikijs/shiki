@@ -375,6 +375,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'cpp.tmLanguage.json',
     displayName: 'C++',
     samplePath: 'cpp.sample',
+    aliases: ['c++'],
     embeddedLangs: ['glsl', 'sql']
   },
   {
