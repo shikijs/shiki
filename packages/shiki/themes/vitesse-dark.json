@@ -582,7 +582,7 @@
       }
     },
     {
-      "scope": ["markup.underline.link.markdown"],
+      "scope": ["markup.underline.link.markdown", "markup.underline.link.image.markdown"],
       "settings": {
         "foreground": "#dedcd590",
         "fontStyle": "underline"
@@ -1074,6 +1074,10 @@
     },
     {
       "token": "markup.underline.link.markdown",
+      "foreground": "dedcd590"
+    },
+    {
+      "token": "markup.underline.link.image.markdown",
       "foreground": "dedcd590"
     },
     {
