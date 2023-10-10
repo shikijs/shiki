@@ -109,7 +109,7 @@ export type Lang =
   | 'glsl'
   | 'gnuplot'
   | 'go'
-  | 'graphql'
+  | 'graphql' | 'gql'
   | 'groovy'
   | 'hack'
   | 'haml'

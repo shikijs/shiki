@@ -395,7 +395,8 @@ export const languageAliases = {
   viml: ['vim', 'vimscript'],
   vyper: ['vy'],
   wenyan: ['文言'],
-  yaml: ['yml']
+  yaml: ['yml'],
+  graphql: ['gql'],
 }
 
 /**

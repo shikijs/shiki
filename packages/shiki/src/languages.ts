@@ -59,7 +59,7 @@ export type Lang =
   | 'glsl'
   | 'gnuplot'
   | 'go'
-  | 'graphql'
+  | 'graphql' | 'gql'
   | 'groovy'
   | 'hack'
   | 'haml'
@@ -593,6 +593,7 @@ export const languages: ILanguageRegistration[] = [
     path: 'graphql.tmLanguage.json',
     displayName: 'GraphQL',
     samplePath: 'graphql.sample',
+    aliases: ['gql'],
     embeddedLangs: ['javascript', 'typescript', 'jsx', 'tsx']
   },
   {
