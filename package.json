@@ -13,6 +13,9 @@
     "update:grammars": "bash ./scripts/pullGrammars.sh",
     "changelog": "esno scripts/changelog/generate-changelog.ts"
   },
+  "files": [
+    "dist"
+  ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
