@@ -132,7 +132,23 @@
           "end": "'''"
         },
         {
-          "begin": "\"",
+          "begin": "(r)?\"\"\"",
+          "end": "\"\"\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.untitled",
+              "match": "\\\\."
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "constant.character.escape.untitled"
+            }
+          },
+          "name": "string.quoted.triple.gdscript"
+        },
+        {
+          "begin": "(r)?\"",
           "end": "\"",
           "patterns": [
             {
@@ -140,10 +156,15 @@
               "match": "\\\\."
             }
           ],
+          "beginCaptures": {
+            "1": {
+              "name": "constant.character.escape.untitled"
+            }
+          },
           "name": "string.quoted.double.gdscript"
         },
         {
-          "begin": "'",
+          "begin": "(r)?'",
           "end": "'",
           "patterns": [
             {
@@ -151,6 +172,11 @@
               "match": "\\\\."
             }
           ],
+          "beginCaptures": {
+            "1": {
+              "name": "constant.character.escape.untitled"
+            }
+          },
           "name": "string.quoted.single.gdscript"
         },
         {
@@ -313,37 +339,41 @@
       "name": "keyword.operator.assignment.gdscript"
     },
     "control_flow": {
-      "match": "\\b(?i:if|elif|else|for|while|break|continue|pass|return|match|yield|await)\\b",
+      "match": "\\b(?:if|elif|else|for|while|break|continue|pass|return|match|yield|await)\\b",
       "name": "keyword.control.gdscript"
     },
     "keywords": {
-      "match": "\\b(?i:class|class_name|extends|is|onready|tool|static|export|as|void|enum|preload|assert|breakpoint|rpc|sync|remote|master|puppet|slave|remotesync|mastersync|puppetsync|trait|namespace)\\b",
+      "match": "\\b(?:class|class_name|extends|is|onready|tool|static|export|as|void|enum|preload|assert|breakpoint|rpc|sync|remote|master|puppet|slave|remotesync|mastersync|puppetsync|trait|namespace)\\b",
       "name": "keyword.language.gdscript"
     },
     "letter": {
-      "match": "\\b(?i:true|false|null)\\b",
+      "match": "\\b(?:true|false|null)\\b",
       "name": "constant.language.gdscript"
     },
     "numbers": {
       "patterns": [
         {
-          "match": "\\b(?i:0x\\h*)\\b",
+          "match": "\\b(?:0b[01_]+)\\b",
+          "name": "constant.numeric.integer.binary.gdscript"
+        },
+        {
+          "match": "\\b(?:0x[0-9A-Fa-f_]+)\\b",
           "name": "constant.numeric.integer.hexadecimal.gdscript"
         },
         {
-          "match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))\\b",
+          "match": "\\b(?:([0-9_]+\\.[0-9_]*(e[\\-\\+]?[0-9_]+)?))\\b",
           "name": "constant.numeric.float.gdscript"
         },
         {
-          "match": "\\b(?i:(\\.\\d+(e[\\-\\+]?\\d+)?))\\b",
+          "match": "\\b(?:(\\.[0-9_]+(e[\\-\\+]?[0-9_]+)?))\\b",
           "name": "constant.numeric.float.gdscript"
         },
         {
-          "match": "\\b(?i:(\\d+e[\\-\\+]?\\d+))\\b",
+          "match": "\\b(?:([0-9_]+e[\\-\\+]?\\[0-9_]))\\b",
           "name": "constant.numeric.float.gdscript"
         },
         {
-          "match": "\\b\\d+\\b",
+          "match": "\\b[0-9_]+\\b",
           "name": "constant.numeric.integer.gdscript"
         }
       ]
@@ -499,10 +529,37 @@
     "builtin_get_node_shorthand": {
       "patterns": [
         {
+          "include": "#builtin_get_nodepath_shorthand_quoted"
+        },
+        {
           "include": "#builtin_get_node_shorthand_quoted"
         },
         {
           "include": "#builtin_get_node_shorthand_bare"
+        }
+      ]
+    },
+    "builtin_get_nodepath_shorthand_quoted": {
+      "begin": "(&|\\^|@)([\"'])",
+      "end": "([\"'])",
+      "name": "support.function.builtin.shorthand.gdscript",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.other.enummember"
+        },
+        "2": {
+          "name": "constant.character.escape"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "constant.character.escape"
+        }
+      },
+      "patterns": [
+        {
+          "match": "[^%^\"^']*",
+          "name": "constant.character.escape"
         }
       ]
     },
@@ -535,7 +592,7 @@
       ]
     },
     "builtin_get_node_shorthand_bare": {
-      "begin": "(\\$)",
+      "begin": "(\\$|%)",
       "end": "[^\\w%]",
       "name": "support.function.builtin.shorthand.gdscript",
       "beginCaptures": {
@@ -545,12 +602,15 @@
       },
       "patterns": [
         {
-          "match": "[a-zA-Z_]\\w*/?",
-          "name": "constant.character.escape"
-        },
-        {
-          "match": "%[a-zA-Z_]\\w*/?",
-          "name": "invalid.illegal.escape.gdscript"
+          "match": "(%)?([a-zA-Z_]\\w*/?)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.flow"
+            },
+            "2": {
+              "name": "constant.character.escape"
+            }
+          }
         }
       ]
     },
