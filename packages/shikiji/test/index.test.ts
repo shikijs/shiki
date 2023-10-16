@@ -76,6 +76,7 @@ describe('should', () => {
           "coffee",
           "less",
           "graphql",
+          "gql",
           "markdown",
           "md",
           "pug",

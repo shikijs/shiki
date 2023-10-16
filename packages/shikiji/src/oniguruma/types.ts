@@ -4,7 +4,6 @@
 
 export type Pointer = number
 
-// eslint-disable-next-line antfu/no-const-enum
 export const enum FindOption {
   None = 0,
   /**

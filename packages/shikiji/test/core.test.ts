@@ -74,6 +74,7 @@ describe('should', () => {
           "c",
           "glsl",
           "cpp",
+          "c++",
         ]
       `)
   })

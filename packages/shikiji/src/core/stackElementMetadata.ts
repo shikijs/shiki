@@ -1,4 +1,3 @@
-/* eslint-disable antfu/no-const-enum */
 /**
  * Helpers to manage the "collapsed" metadata of an entire StackElement stack.
  * The following assumptions have been made:

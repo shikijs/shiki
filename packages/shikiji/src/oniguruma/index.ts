@@ -5,7 +5,6 @@
 import type { IOnigBinding, IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString, Pointer } from './types'
 import OnigasmModuleFactory from './onig'
 
-// eslint-disable-next-line antfu/no-const-enum
 export const enum FindOption {
   None = 0,
   /**

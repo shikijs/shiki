@@ -18,7 +18,8 @@ export async function getShikiContext(options: HighlighterCoreOptions = {}): Pro
   }
 
   const [
-    themes, langs,
+    themes,
+    langs,
   ] = await Promise.all([
     Promise.all((options.themes || []).map(normalizeGetter)),
     resolveLangs(options.langs || []),
