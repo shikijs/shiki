@@ -94,6 +94,9 @@
       "include": "#any_method"
     },
     {
+      "include": "#any_variable"
+    },
+    {
       "include": "#any_property"
     },
     {
@@ -379,7 +382,7 @@
       ]
     },
     "variable_definition": {
-      "begin": "\\b(?:(var)|(const))\\s+",
+      "begin": "\\b(?:(var)|(const))\\s+([a-zA-Z_]\\w*)\\s*",
       "end": "$|;",
       "beginCaptures": {
         "1": {
@@ -387,6 +390,9 @@
         },
         "2": {
           "name": "storage.type.const.gdscript"
+        },
+        "3": {
+          "name": "variable.other.gdscript"
         }
       },
       "patterns": [
@@ -421,6 +427,18 @@
         },
         {
           "include": "#base_expression"
+        },
+        {
+          "include": "#letter"
+        },
+        {
+          "include": "#any_variable"
+        },
+        {
+          "include": "#any_property"
+        },
+        {
+          "include": "#keywords"
         }
       ]
     },
@@ -615,7 +633,7 @@
       ]
     },
     "annotations": {
-      "match": "(@)(export|export_color_no_alpha|export_dir|export_enum|export_exp_easing|export_file|export_flags|export_flags_2d_navigation|export_flags_2d_physics|export_flags_2d_render|export_flags_3d_navigation|export_flags_3d_physics|export_flags_3d_render|export_global_dir|export_global_file|export_multiline|export_node_path|export_placeholder|export_range|icon|onready|rpc|tool|warning_ignore)\\b",
+      "match": "(@)(export|export_color_no_alpha|export_dir|export_enum|export_exp_easing|export_file|export_flags|export_flags_2d_navigation|export_flags_2d_physics|export_flags_2d_render|export_flags_3d_navigation|export_flags_3d_physics|export_flags_3d_render|export_global_dir|export_global_file|export_multiline|export_node_path|export_placeholder|export_range|icon|onready|rpc|tool|warning_ignore|abstract)\\b",
       "captures": {
         "1": {
           "name": "entity.name.function.decorator.gdscript"
@@ -627,7 +645,7 @@
     },
     "builtin_classes": {
       "match": "(?<![^.]\\.|:)\\b(OS|GDScript|Vector2|Vector2i|Vector3|Vector3i|Color|Rect2|Rect2i|Array|Basis|Dictionary|Plane|Quat|RID|Rect3|Transform|Transform2D|Transform3D|AABB|String|Color|NodePath|Object|PoolByteArray|PoolIntArray|PoolRealArray|PoolStringArray|PoolVector2Array|PoolVector3Array|PoolColorArray|bool|int|float|StringName|Quaternion|PackedByteArray|PackedInt32Array|PackedInt64Array|PackedFloat32Array|PackedFloat64Array|PackedStringArray|PackedVector2Array|PackedVector2iArray|PackedVector3Array|PackedVector3iArray|PackedColorArray|super)\\b",
-      "name": "support.class.library.gdscript"
+      "name": "entity.name.type.class.builtin.gdscript"
     },
     "const_vars": {
       "match": "\\b([A-Z_][A-Z_0-9]*)\\b",
@@ -635,7 +653,7 @@
     },
     "pascal_case_class": {
       "match": "\\b([A-Z][a-z_0-9]*([A-Z]?[a-z_0-9]+)*[A-Z]?)\\b",
-      "name": "support.class.library.gdscript"
+      "name": "entity.name.type.class.gdscript"
     },
     "signal_declaration_bare": {
       "match": "(?x) \\s*\n (signal) \\s+\n ([a-zA-Z_]\\w*)(?=[\\n\\s])",
@@ -724,9 +742,11 @@
           "include": "#line_continuation"
         },
         {
-          "match": "\\s*(\\-\\>)\\s*([a-zA-Z_]\\w*)\\s*\\:",
+          "match": "\\s*(?:\\-\\>)\\s*(void\\w*)|([a-zA-Z_]\\w*)\\s*\\:",
           "captures": {
-            "1": {},
+            "1": {
+              "name": "keyword.language.void.gdscript"
+            },
             "2": {
               "name": "entity.name.type.class.gdscript"
             }
@@ -856,8 +876,12 @@
       "match": "\\b([A-Za-z_]\\w*)\\b(?=\\s*(?:[(]))",
       "name": "support.function.any-method.gdscript"
     },
+    "any_variable": {
+      "match": "\\b(?<![@\\$#%])([A-Za-z_]\\w*)\\b(?![(])",
+      "name": "variable.other.gdscript"
+    },
     "any_property": {
-      "match": "(?<=[^.]\\.)\\b([A-Za-z_]\\w*)\\b(?![(])",
+      "match": "\\b\\.\\s*(?<![@\\$#%])([A-Za-z_]\\w*)\\b(?![(])",
       "name": "variable.other.property.gdscript"
     },
     "function_call": {
@@ -936,6 +960,18 @@
               "name": "punctuation.definition.arguments.begin.gdscript"
             }
           }
+        },
+        {
+          "include": "#letter"
+        },
+        {
+          "include": "#any_variable"
+        },
+        {
+          "include": "#any_property"
+        },
+        {
+          "include": "#keywords"
         }
       ]
     }
