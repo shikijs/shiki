@@ -281,6 +281,7 @@ export interface HastTransformers {
 }
 
 export interface HtmlRendererOptions {
+  lang?: string
   langId?: string
   fg?: string
   bg?: string
