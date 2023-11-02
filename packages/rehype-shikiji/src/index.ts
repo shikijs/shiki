@@ -3,7 +3,7 @@ import { bundledLanguages, getHighlighter } from 'shikiji'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
 import type { Plugin } from 'unified'
-import type { Root } from 'hast'
+import type { Element, Root } from 'hast'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
 export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
@@ -20,11 +20,28 @@ export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
    * @default true
    */
   highlightLines?: boolean | string
+
+  /**
+   * Extra meta data to pass to the highlighter
+   */
+  meta?: Record<string, any>
+
+  /**
+   * Custom meta string parser
+   * Return an object to merge with `meta`
+   */
+  parseMetaString?: (
+    metaString: string,
+    node: Element,
+    tree: Root
+  ) => Record<string, any> | undefined | null
 }
 
 const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = {} as any) {
   const {
     highlightLines = true,
+    parseMetaString,
+    ...rest
   } = options
 
   const prefix = 'language-'
@@ -64,12 +81,18 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = 
         return
 
       const code = toString(head as any)
+      const attrs = (head.data as any)?.meta
+      const meta = parseMetaString?.(attrs, node, tree) || {}
+
       const codeOptions: CodeToHastOptions = {
-        ...options,
+        ...rest,
         lang: language.slice(prefix.length),
+        meta: {
+          ...rest.meta,
+          ...meta,
+        },
       }
 
-      const attrs = (head.data as any)?.meta
       if (highlightLines && typeof attrs === 'string') {
         const lines = parseHighlightLines(attrs)
         if (lines) {

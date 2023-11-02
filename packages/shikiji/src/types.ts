@@ -215,9 +215,14 @@ export type CodeOptionsThemes<Themes extends string = string> =
   | CodeOptionsSingleTheme<Themes>
   | CodeOptionsMultipleThemes<Themes>
 
+export interface CodeOptionsMeta {
+  meta?: Record<string, any>
+}
+
 export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
   & CodeToHastOptionsCommon<Languages>
   & CodeOptionsThemes<Themes>
+  & CodeOptionsMeta
 
 export interface ThemeRegistrationRaw extends IRawTheme {
 
@@ -280,7 +285,7 @@ export interface HastTransformers {
   token?: (hast: Element, line: number, col: number, lineElement: Element) => Element | void
 }
 
-export interface HtmlRendererOptions {
+export interface HtmlRendererOptionsCommon {
   lang?: string
   langId?: string
   fg?: string
@@ -307,6 +312,8 @@ export interface HtmlRendererOptions {
    */
   mergeWhitespaces?: boolean
 }
+
+export type HtmlRendererOptions = HtmlRendererOptionsCommon & CodeToHastOptions
 
 export interface ThemedTokenScopeExplanation {
   scopeName: string

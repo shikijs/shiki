@@ -12,6 +12,15 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiji, {
       theme: 'vitesse-light',
+      parseMetaString: (str) => {
+        return Object.fromEntries(str.split(' ').reduce((prev: [string, boolean | string][], curr: string) => {
+          const [key, value] = curr.split('=')
+          const isNormalKey = /^[A-Za-z0-9]+$/.test(key)
+          if (isNormalKey)
+            prev = [...prev, [key, value || true]]
+          return prev
+        }, []))
+      },
     })
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
