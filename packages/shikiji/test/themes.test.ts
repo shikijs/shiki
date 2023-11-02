@@ -389,6 +389,6 @@ describe('errors', () => {
       defaultColor: false,
     })
 
-    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki shiki-themes nord\\" style=\\"--shiki-dark:#d8dee9ff;--shiki-dark-bg:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"--shiki-dark:#D8DEE9\\">console</span><span style=\\"--shiki-dark:#ECEFF4\\">.</span><span style=\\"--shiki-dark:#88C0D0\\">log</span><span style=\\"--shiki-dark:#D8DEE9FF\\">(</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#A3BE8C\\">hello</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#D8DEE9FF\\">)</span></span></code></pre>"')
+    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki shiki-themes nord\\" style=\\"--shiki-dark:#d8dee9ff;--shiki-dark-bg:#2e3440ff\\" tabindex=\\"0\\" lang=\\"js\\"><code><span class=\\"line\\"><span style=\\"--shiki-dark:#D8DEE9\\">console</span><span style=\\"--shiki-dark:#ECEFF4\\">.</span><span style=\\"--shiki-dark:#88C0D0\\">log</span><span style=\\"--shiki-dark:#D8DEE9FF\\">(</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#A3BE8C\\">hello</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#D8DEE9FF\\">)</span></span></code></pre>"')
   })
 })

@@ -16,7 +16,7 @@ Progress: resolved [0;104m952[0m, reused [0;104m910[0m, downloaded [0;104m4
 Done in 15.7s`, { theme: 'monokai', lang: 'ansi' })
 
   expect(out).toMatchInlineSnapshot(`
-    "<pre class=\\"shiki monokai\\" style=\\"background-color:#272822;color:#F8F8F2\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#333333\\"> WARN </span><span style=\\"color:#F8F8F2\\"> using --force I sure hope you know what you are doing</span></span>
+    "<pre class=\\"shiki monokai\\" style=\\"background-color:#272822;color:#F8F8F2\\" tabindex=\\"0\\" lang=\\"ansi\\"><code><span class=\\"line\\"><span style=\\"color:#333333\\"> WARN </span><span style=\\"color:#F8F8F2\\"> using --force I sure hope you know what you are doing</span></span>
     <span class=\\"line\\"><span style=\\"color:#F8F8F2\\">Scope: all 6 workspace projects</span></span>
     <span class=\\"line\\"><span style=\\"color:#F8F8F2\\">Lockfile is up to date, resolution step is skipped</span></span>
     <span class=\\"line\\"><span style=\\"color:#F8F8F2\\">Packages: </span><span style=\\"color:#86B42B\\">+952</span></span>
