@@ -1,7 +1,7 @@
 import type { MaybeArray } from '../types'
 
 export function isPlaintext(lang: string | null | undefined) {
-  return !lang || ['plaintext', 'txt', 'text'].includes(lang)
+  return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)
 }
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
