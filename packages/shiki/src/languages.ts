@@ -169,7 +169,7 @@ export type Lang =
   | 'wasm'
   | 'wenyan' | '文言'
   | 'wgsl'
-  | 'wolfram'
+  | 'wolfram' | 'wl'
   | 'xml'
   | 'xsl'
   | 'yaml' | 'yml'
@@ -1428,7 +1428,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.wolfram',
     path: 'wolfram.tmLanguage.json',
     displayName: 'Wolfram',
-    samplePath: 'wolfram.sample'
+    samplePath: 'wolfram.sample',
+    aliases: ['wl']
   },
   {
     id: 'xml',

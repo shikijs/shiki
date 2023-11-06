@@ -219,7 +219,7 @@ export type Lang =
   | 'wasm'
   | 'wenyan' | '文言'
   | 'wgsl'
-  | 'wolfram'
+  | 'wolfram' | 'wl'
   | 'xml'
   | 'xsl'
   | 'yaml' | 'yml'
