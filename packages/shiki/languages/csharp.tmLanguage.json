@@ -228,7 +228,7 @@
           "include": "#try-statement"
         },
         {
-          "include": "#checked-unchecked-statement"
+          "include": "#expression-operator-expression"
         },
         {
           "include": "#context-control-statement"
@@ -3820,7 +3820,7 @@
     },
     "char-character-escape": {
       "name": "constant.character.escape.cs",
-      "match": "\\\\(['\"\\\\0abfnrtv]|x[0-9a-fA-F]{1,4}|u[0-9a-fA-F]{4})"
+      "match": "\\\\(x[0-9a-fA-F]{1,4}|u[0-9a-fA-F]{4}|.)"
     },
     "string-literal": {
       "name": "string.quoted.double.cs",
@@ -3847,7 +3847,7 @@
     },
     "string-character-escape": {
       "name": "constant.character.escape.cs",
-      "match": "\\\\(['\"\\\\0abfnrtv]|x[0-9a-fA-F]{1,4}|U[0-9a-fA-F]{8}|u[0-9a-fA-F]{4})"
+      "match": "\\\\(x[0-9a-fA-F]{1,4}|U[0-9a-fA-F]{8}|u[0-9a-fA-F]{4}|.)"
     },
     "verbatim-string-literal": {
       "name": "string.quoted.double.cs",
