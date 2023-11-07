@@ -118,6 +118,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/crystal-lang-tools/vscode-crystal-lang/blob/master/syntaxes/crystal.json'
   ],
   ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage'],
+  ['csv', 'https://github.com/mechatroner/vscode_rainbow_csv/blob/master/syntaxes/csv.tmLanguage.json'],
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   ['cypher', 'https://github.com/adam-cowley/neo4j-vscode/blob/main/cypher/cypher.tmLanguage'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
