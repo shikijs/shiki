@@ -50,7 +50,7 @@
             },
             {
               "comment": "(class name) : (visibility)?(function)( (function param/generic param)? )(classifier)? (return/generic return)?$",
-              "match": "([\\w-]+)\\s?(:)\\s([\\+~#-])?([\\w-]+)(\\()([\\w-]+)?(~)?([\\w-]+)?(~)?\\s?([\\w-]+)?(\\))([*\\$])?\\s?([\\w-]+)?(~)?([\\w-]+)?(~)?$",
+              "match": "([\\w-]+)\\s?(:)\\s([\\+~#-])?([\\w-]+)(\\()([\\w-]+)?(~)?([\\w-]+)?(~)?\\s?([\\w-]+)?(\\))([*\\$]{0,2})\\s?([\\w-]+)?(~)?([\\w-]+)?(~)?$",
               "captures": {
                 "1": {
                   "name": "entity.name.type.class.mermaid"
@@ -215,7 +215,7 @@
                       }
                     }
                   ],
-                  "end": "(\\))([*\\$])?\\s?([\\w-]+)?(~)?([\\w-]+)?(~)?$",
+                  "end": "(\\))([*\\$]{0,2})\\s?([\\w-]+)?(~)?([\\w-]+)?(~)?$",
                   "endCaptures": {
                     "1": {
                       "name": "punctuation.parenthesis.closed.mermaid"
@@ -331,7 +331,7 @@
             },
             {
               "comment": "(entity) {",
-              "begin": "\\s+([\\w-]+)\\s+({)",
+              "begin": "\\s+([\\w-]+)\\s*({)",
               "beginCaptures": {
                 "1": {
                   "name": "variable"
@@ -358,6 +358,10 @@
                       "name": "string"
                     }
                   }
+                },
+                {
+                  "match": "\\%%.*",
+                  "name": "comment"
                 }
               ],
               "end": "(})",
@@ -369,7 +373,7 @@
             },
             {
               "comment": "(entity) (relationship) (entity) : (label)",
-              "match": "\\s*([\\w-]+)\\s+((?:\\|o|\\|\\||}o|}\\|)(?:..|--)(?:o\\||\\|\\||o{|\\|{))\\s+([\\w-]+)\\s+(:)\\s+((?:\"[\\w\\s]*\")|(?:[\\w-]+))",
+              "match": "\\s*([\\w-]+)\\s*((?:\\|o|\\|\\||}o|}\\||one or (?:zero|more|many)|zero or (?:one|more|many)|many\\((?:0|1)\\)|only one|0\\+|1\\+?)(?:..|--)(?:o\\||\\|\\||o{|\\|{|one or (?:zero|more|many)|zero or (?:one|more|many)|many\\((?:0|1)\\)|only one|0\\+|1\\+?))\\s*([\\w-]+)\\s*(:)\\s*((?:\"[\\w\\s]*\")|(?:[\\w-]+))",
               "captures": {
                 "1": {
                   "name": "variable"
