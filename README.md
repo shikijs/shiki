@@ -31,7 +31,7 @@ npm install -D shikiji
 
 ### Bundled Usage
 
-Basic usage is pretty much the same as `shiki`, only that some APIs are dropped, (for example, the singular `theme` options). Each theme and language file are dynamically imported ES modules, it would be better to list the languages and themes **explicitly** to have the best performance.
+Basic usage is pretty much the same as `shiki`, only that some APIs are dropped, (for example, the singular `theme` options). While each theme and language file is a dynamically imported ES module, it would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -77,7 +77,7 @@ Or if your usage can be async, you can try the [shorthands](#shorthands) which w
 
 ### Fine-grained Bundle
 
-When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. While in some cases you want to control what to bundle size, you can use the core and compose your own bundle.
+When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. In some cases, if you want to control what to bundle, you can use the core and compose your own bundle.
 
 ```js
 // `shikiji/core` entry does not include any themes or languages or the wasm binary.
@@ -228,7 +228,7 @@ Internally they maintain a singleton highlighter instance and load the theme/lan
 
 `shikiji` added an experimental light/dark dual themes support. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, `shikiji`'s dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
-Changing the `theme` option in `codeToHtml` to `options` with `light` and `dark` key to generate with two themes.
+Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
 
 ```js
 import { getHighlighter } from 'shikiji'
@@ -328,13 +328,13 @@ A token would be generated like:
 <span style="color:#1976D2;--shiki-dark:#D8DEE9;--shiki-dim:#566575">console</span>
 ```
 
-And then update your CSS snippet to control then each theme taking effect. Here is an example:
+Then update your CSS snippet to control when each theme takes effect. Here is an example:
 
 [Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/packages/shikiji/test/out/multiple-themes.html)
 
 #### Without Default Color
 
-If you want to take full control of the colors, or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
+If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```js
 const code = shiki.codeToHtml('console.log("hello")', {
@@ -355,7 +355,7 @@ With it, a token would be generated like:
 
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
-It's also possible to control the theme in CSS variables, for more, reference to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
+It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
 
 
 ### `codeToHast`
@@ -453,7 +453,7 @@ const code = await codeToHtml('foo\bar', {
 
 ## Breaking Changes from Shiki
 
-> We take this chance to make some breaking changes that we think is beneficial for the future. We'd suggest you try to migration those changes if possible, as most of them should be straight forward. If your have very deep integration, you can try with our compatibility build [`shikiji-compat`](./packages/shikiji-compat) which aligns with `shiki`'s current API.
+> We take this chance to make some breaking changes that we think are beneficial for the future. We'd suggest you try to migrate those changes if possible, as most of them should be straightforward. If you have very deep integration, you can try our compatibility build [`shikiji-compat`](./packages/shikiji-compat) which aligns with `shiki`'s current API.
 
 As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 
@@ -462,14 +462,14 @@ As of [`shiki@0.4.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3):
 Breaking changes applied to both `shikiji` and `shikiji-compat`:
 
 - CJS and IIFE builds are dropped. See [CJS Usage](#cjs-usage) and [CDN Usage](#cdn-usage) for more details.
-- `codeToHtml` uses [`hast`](https://github.com/syntax-tree/hast) internally. The generated HTML will be a bit different but should behavior the same.
+- `codeToHtml` uses [`hast`](https://github.com/syntax-tree/hast) internally. The generated HTML will be a bit different but should behave the same.
 - `css-variables` theme is not supported. Use the [dual themes](#lightdark-dual-themes) approach instead.
 
 #### Soft Breaking Changes
 
-Breaking changes applies to `shikiji`, but shimmed by [`shikiji-compat`](./packages/shikiji-compat):
+Breaking changes applies to `shikiji`, but are shimmed by [`shikiji-compat`](./packages/shikiji-compat):
 
-- Top level named export `setCDN`, `loadLanguage`, `loadTheme`, `setWasm` are dropped as they are not needed anymore.
+- Top-level named export `setCDN`, `loadLanguage`, `loadTheme`, `setWasm` are dropped as they are not needed anymore.
 - `BUNDLED_LANGUAGES`, `BUNDLED_THEMES` are moved to `shikiji/langs` and `shikiji/themes` and renamed to `bundledLanguages` and `bundledThemes` respectively.
 - `theme` option for `getHighlighter` is dropped, use `themes` with an array instead.
 - Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
@@ -491,7 +491,7 @@ As of `v0.5.0`, measured at 17th, August 2023:
 
 ## What's Next?
 
-Shikiji is a usable exploration of improving the experience of using `shiki` in various of scenarios. It's intended to [push some of the ideas back to `shiki`](https://github.com/shikijs/shiki/issues/510), and eventually, this package might not be needed. Before that, you can use it as a replacement for `shiki` if you have similar requirements. It would be great to hear your feedback and suggestions in the meantime!
+Shikiji is a usable exploration of improving the experience of using `shiki` in various scenarios. It's intended to [push some of the ideas back to `shiki`](https://github.com/shikijs/shiki/issues/510), and eventually, this package might not be needed. Before that, you can use it as a replacement for `shiki` if you have similar requirements. It would be great to hear your feedback and suggestions in the meantime!
 
 ## License
 
