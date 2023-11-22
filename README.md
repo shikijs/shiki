@@ -432,21 +432,23 @@ console.log(root)
 Since `shikiji` uses `hast` internally, you can use the `transforms` option to customize the generated HTML by manipulating the hast tree. You can pass custom functions to modify the tree for different types of nodes. For example:
 
 ```js
+import { addClassToHast, codeToHtml } from 'shikiji'
+
 const code = await codeToHtml('foo\bar', {
   lang: 'js',
   theme: 'vitesse-light',
   transformers: [
     {
       code(node) {
-        node.properties.class = 'language-js'
+        addClassToHast(node, 'language-js')
       },
       line(node, line) {
         node.properties['data-line'] = line
         if ([1, 3, 4].includes(line))
-          node.properties.class += ' highlight'
+          addClassToHast(node, 'highlight')
       },
       token(node, line, col) {
-        node.properties.class = `token:${line}:${col}`
+        node.properties['data-token'] = `token:${line}:${col}`
       },
     },
   ]

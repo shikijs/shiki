@@ -69,21 +69,21 @@ export function createSingletonShorthands<L extends string, T extends string >(g
   let _shiki: ReturnType<typeof getHighlighter>
 
   async function _getHighlighter(options: {
-    theme: MaybeArray<T | ThemeRegistration | ThemeRegistrationRaw>
-    lang: MaybeArray<L | SpecialLanguage>
-  }) {
+    theme?: MaybeArray<T | ThemeRegistration | ThemeRegistrationRaw>
+    lang?: MaybeArray<L | SpecialLanguage>
+  } = {}) {
     if (!_shiki) {
       _shiki = getHighlighter({
-        themes: toArray(options.theme),
-        langs: toArray(options.lang),
+        themes: toArray(options.theme || []),
+        langs: toArray(options.lang || []),
       })
       return _shiki
     }
     else {
       const s = await _shiki
       await Promise.all([
-        s.loadTheme(...toArray(options.theme)),
-        s.loadLanguage(...toArray(options.lang)),
+        s.loadTheme(...toArray(options.theme || [])),
+        s.loadLanguage(...toArray(options.lang || [])),
       ])
       return s
     }
@@ -143,6 +143,7 @@ export function createSingletonShorthands<L extends string, T extends string >(g
   }
 
   return {
+    getSingletonHighlighter: () => _getHighlighter(),
     codeToHtml,
     codeToHast,
     codeToThemedTokens,

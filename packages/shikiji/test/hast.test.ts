@@ -92,52 +92,17 @@ it('render whitespace', async () => {
     '\t\ttab()',
   ].join('\n')
 
-  const classMap: Record<string, string> = {
-    ' ': 'space',
-    '\t': 'tab',
-  }
-
   const code = await codeToHtml(snippet, {
     lang: 'js',
     theme: 'vitesse-light',
     transformers: [
-      {
-        line(node) {
-          const first = node.children[0]
-          if (!first || first.type !== 'element')
-            return
-          const textNode = first.children[0]
-          if (!textNode || textNode.type !== 'text')
-            return
-          node.children = node.children.flatMap((child) => {
-            if (child.type !== 'element')
-              return child
-            const node = child.children[0]
-            if (node.type !== 'text' || !node.value)
-              return child
-            const parts = node.value.split(/([ \t])/).filter(i => i.length)
-            if (parts.length <= 1)
-              return child
 
-            return parts.map((part) => {
-              const clone = {
-                ...child,
-                properties: { ...child.properties },
-              }
-              clone.children = [{ type: 'text', value: part }]
-              if (part in classMap)
-                clone.properties.class = [clone.properties.class, classMap[part]].filter(Boolean).join(' ')
-              return clone
-            })
-          })
-        },
-      },
     ],
   })
 
   expect(code)
     .toMatchInlineSnapshot(`
-      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#59873A" class="space"> </span><span style="color:#59873A" class="space"> </span><span style="color:#59873A">space</span><span style="color:#999999">()</span></span>
-      <span class="line"><span style="color:#59873A" class="tab">	</span><span style="color:#59873A" class="tab">	</span><span style="color:#59873A">tab</span><span style="color:#999999">()</span></span></code></pre>"
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#59873A">  space</span><span style="color:#999999">()</span></span>
+      <span class="line"><span style="color:#59873A">		tab</span><span style="color:#999999">()</span></span></code></pre>"
     `)
 })

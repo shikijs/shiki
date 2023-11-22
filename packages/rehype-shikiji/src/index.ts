@@ -1,5 +1,5 @@
 import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, CodeToHastOptions, LanguageInput } from 'shikiji'
-import { bundledLanguages, getHighlighter } from 'shikiji'
+import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
 import type { Plugin } from 'unified'
@@ -105,7 +105,7 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = 
             name: 'rehype-shikiji:line-class',
             line(node, line) {
               if (lines.includes(line))
-                node.properties.class += ` ${className}`
+                addClassToHast(node, className)
               return node
             },
           })

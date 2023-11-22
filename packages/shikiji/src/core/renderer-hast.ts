@@ -1,5 +1,5 @@
 import type { Element, Root, Text } from 'hast'
-import type { CodeToHastOptions, HtmlRendererOptions, ShikiContext, ThemedToken } from '../types'
+import type { CodeToHastOptions, HtmlRendererOptions, ShikiContext, ShikijiTransformerContext, ThemedToken } from '../types'
 import { codeToThemedTokens } from './tokenizer'
 import { FontStyle } from './stackElementMetadata'
 import { codeToTokensWithThemes } from './renderer-html-themes'
@@ -151,6 +151,24 @@ export function tokensToHast(
     children: lines,
   }
 
+  const context: ShikijiTransformerContext = {
+    get tokens() {
+      return tokens
+    },
+    get options() {
+      return options
+    },
+    get root() {
+      return tree
+    },
+    get pre() {
+      return preNode
+    },
+    get code() {
+      return codeNode
+    },
+  }
+
   tokens.forEach((line, idx) => {
     if (idx)
       lines.push({ type: 'text', value: '\n' })
@@ -177,30 +195,30 @@ export function tokensToHast(
         tokenNode.properties.style = style
 
       for (const transformer of transformers)
-        tokenNode = transformer?.token?.(tokenNode, idx + 1, col, lineNode) || tokenNode
+        tokenNode = transformer?.token?.call(context, tokenNode, idx + 1, col, lineNode) || tokenNode
 
       lineNode.children.push(tokenNode)
       col += token.content.length
     }
 
     for (const transformer of transformers)
-      lineNode = transformer?.line?.(lineNode, idx + 1) || lineNode
+      lineNode = transformer?.line?.call(context, lineNode, idx + 1) || lineNode
 
     lines.push(lineNode)
   })
 
   for (const transformer of transformers)
-    codeNode = transformer?.code?.(codeNode) || codeNode
+    codeNode = transformer?.code?.call(context, codeNode) || codeNode
   preNode.children.push(codeNode)
 
   for (const transformer of transformers)
-    preNode = transformer?.pre?.(preNode) || preNode
+    preNode = transformer?.pre?.call(context, preNode) || preNode
 
   tree.children.push(preNode)
 
   let result = tree
   for (const transformer of transformers)
-    result = transformer?.root?.(result) || result
+    result = transformer?.root?.call(context, result) || result
 
   return result
 }

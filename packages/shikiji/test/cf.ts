@@ -1,4 +1,5 @@
 import { getHighlighterCore, loadWasm } from 'shikiji/core'
+import type { LanguageRegistration } from 'shikiji'
 
 import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'
@@ -12,7 +13,7 @@ export default {
   async fetch() {
     const highlighter = await getHighlighterCore({
       themes: [nord],
-      langs: [js],
+      langs: [js as LanguageRegistration[]],
     })
 
     return new Response(

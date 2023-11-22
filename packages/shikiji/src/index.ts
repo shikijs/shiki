@@ -25,6 +25,7 @@ export const {
   codeToHast,
   codeToThemedTokens,
   codeToTokensWithThemes,
+  getSingletonHighlighter,
 } = /* @__PURE__ */ createSingletonShorthands<
   BuiltinLanguage,
   BuiltinTheme

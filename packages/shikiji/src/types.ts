@@ -271,6 +271,14 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   colors?: Record<string, string>
 }
 
+export interface ShikijiTransformerContext {
+  readonly tokens: ThemedToken[][]
+  readonly options: CodeToHastOptions
+  readonly root: Root
+  readonly pre: Element
+  readonly code: Element
+}
+
 export interface ShikijiTransformer {
   /**
    * Name of the transformer
@@ -278,20 +286,27 @@ export interface ShikijiTransformer {
   name?: string
   /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
-   *
-   * @param hast
    */
-  root?: (hast: Root) => Root | void
-  pre?: (hast: Element) => Element | void
-  code?: (hast: Element) => Element | void
+  root?(this: ShikijiTransformerContext, hast: Root): Root | void
+  /**
+   * Transform the `<pre>` element. Return a new Node will replace the original one.
+   */
+  pre?(this: ShikijiTransformerContext, hast: Element): Element | void
+  /**
+   * Transform the `<code>` element. Return a new Node will replace the original one.
+   */
+  code?(this: ShikijiTransformerContext, hast: Element): Element | void
   /**
    * Transform each line element.
    *
    * @param hast
    * @param line 1-based line number
    */
-  line?: (hast: Element, line: number) => Element | void
-  token?: (hast: Element, line: number, col: number, lineElement: Element) => Element | void
+  line?(this: ShikijiTransformerContext, hast: Element, line: number): Element | void
+  /**
+   * Transform each token element.
+   */
+  token?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
 }
 
 export interface HtmlRendererOptionsCommon {

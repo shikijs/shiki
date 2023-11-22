@@ -188,6 +188,15 @@ importers:
       shikiji:
         specifier: workspace:*
         version: link:../shikiji
+      shikiji-transformers:
+        specifier: workspace:*
+        version: link:../shikiji-transformers
+
+  packages/shikiji-transformers:
+    dependencies:
+      shikiji:
+        specifier: workspace:*
+        version: link:../shikiji
 
 packages:
 

@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it'
-import { bundledLanguages, getHighlighter } from 'shikiji'
+import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
 import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput } from 'shikiji'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
@@ -45,7 +45,7 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
           name: 'markdown-it-shikiji:line-class',
           line(node, line) {
             if (lines.includes(line))
-              node.properties.class += ` ${className}`
+              addClassToHast(node, className)
             return node
           },
         })

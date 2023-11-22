@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2020",
+    "target": "esnext",
     "lib": ["esnext", "DOM"],
     "rootDir": ".",
     "module": "esnext",
     "moduleResolution": "Bundler",
     "paths": {
-      "shikiji": ["./packages/shikiji/src/index.ts"]
+      "shikiji": ["./packages/shikiji/src/index.ts"],
+      "shikiji/core": ["./packages/shikiji/src/core/index.ts"],
+      "shikiji-transformers": ["./packages/shikiji-transformers/src/index.ts"]
     },
     "resolveJsonModule": true,
     "strict": true,
@@ -15,5 +17,12 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/fixtures/**"
+  ]
 }
