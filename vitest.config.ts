@@ -14,7 +14,6 @@ export default defineConfig({
     },
   },
   test: {
-    isolate: false,
     server: {
       deps: {
         inline: [
@@ -28,6 +27,11 @@ export default defineConfig({
         '**/src/assets/**',
         '**/stackElementMetadata.ts',
       ],
+    },
+    poolOptions: {
+      threads: {
+        singleThread: true,
+      },
     },
   },
 })
