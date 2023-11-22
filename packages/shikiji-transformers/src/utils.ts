@@ -23,7 +23,7 @@ export function createCommentNotationTransformer(
   regex: RegExp,
   onMatch: (
     this: ShikijiTransformerContext,
-    match: RegExpMatchArray,
+    match: string[],
     line: Element,
     commentNode: Element,
     lines: Element[],
@@ -39,18 +39,17 @@ export function createCommentNotationTransformer(
         for (const child of line.children) {
           if (child.type !== 'element')
             continue
-          if (!isCommentLike(child, line))
-            continue
           const text = child.children[0]
           if (text.type !== 'text')
             continue
-          const match = text.value.match(regex)
-          if (!match)
-            continue
-          if (onMatch.call(this, match, line, child, lines, idx)) {
+
+          text.value = text.value.replace(regex, (...match) => {
+            if (onMatch.call(this, match, line, child, lines, idx))
+              return ''
+            return match[0]
+          })
+          if (!text.value.trim())
             nodeToRemove = child
-            break
-          }
         }
         if (nodeToRemove)
           line.children.splice(line.children.indexOf(nodeToRemove), 1)

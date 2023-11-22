@@ -3,6 +3,6 @@ export function transformerNotationFocus(
 ) {
   const {
     classFocused = 'focused',
-    classRootActive = 'has-focused',
+    classActivePre = 'has-focused',
   } = options
 }

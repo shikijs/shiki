@@ -1,16 +1,17 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import { createCommentNotationTransformer } from '../utils'
+import { transformerNotationMap } from './notation-map'
 
 export interface TransformerNotationHighlightOptions {
   /**
    * Class for highlighted lines
    */
-  classHighlight?: string
+  classActiveLine?: string
   /**
    * Class added to the root element when the code has highlighted lines
    */
-  classRootActive?: string
+  classActivePre?: string
 }
 
 /**
@@ -20,23 +21,18 @@ export function transformerNotationHighlight(
   options: TransformerNotationHighlightOptions = {},
 ): ShikijiTransformer {
   const {
-    classHighlight = 'highlighted',
-    classRootActive = 'has-highlighted',
+    classActiveLine = 'highlighted',
+    classActivePre = 'has-highlighted',
   } = options
 
-  return createCommentNotationTransformer(
-    'shikiji-transformers:notation-highlight',
-    /\[!code (?:hl|highlight)(:\d+)?\]/,
-    function ([_, range = ':1'], _line, _comment, lines, index) {
-      const lineNum = Number.parseInt(range.slice(1), 10)
-      lines
-        .slice(index, index + lineNum)
-        .forEach((line) => {
-          addClassToHast(line, classHighlight)
-        })
-      if (classRootActive)
-        addClassToHast(this.pre, classRootActive)
-      return true
+  return transformerNotationMap(
+    {
+      classMap: {
+        highlight: classActiveLine,
+        hl: classActiveLine,
+      },
+      classActivePre,
     },
+    'shikiji-transformers:notation-highlight',
   )
 }

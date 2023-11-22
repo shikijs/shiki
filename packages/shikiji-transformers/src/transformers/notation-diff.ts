@@ -1,20 +1,21 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import { createCommentNotationTransformer } from '../utils'
+import { transformerNotationMap } from './notation-map'
 
 export interface TransformerNotationDiffOptions {
   /**
    * Class for added lines
    */
-  classAdded?: string
+  classLineAdd?: string
   /**
    * Class for removed lines
    */
-  classRemoved?: string
+  classLineRemove?: string
   /**
-   * Class added to the root element when the current code has diff
+   * Class added to the <pre> element when the current code has diff
    */
-  classRootActive?: string
+  classActivePre?: string
 }
 
 /**
@@ -24,27 +25,19 @@ export function transformerNotationDiff(
   options: TransformerNotationDiffOptions = {},
 ): ShikijiTransformer {
   const {
-    classAdded = 'diff add',
-    classRemoved = 'diff remove',
-    classRootActive = 'has-diff',
+    classLineAdd = 'diff add',
+    classLineRemove = 'diff remove',
+    classActivePre = 'has-diff',
   } = options
 
-  return createCommentNotationTransformer(
-    'shikiji-transformers:notation-diff',
-    /\[!code (\-\-|\+\+)(:\d+)?\]/,
-    function ([_, match, range = ':1'], _line, _comment, lines, index) {
-      const className = match === '--'
-        ? classRemoved
-        : classAdded
-      const lineNum = Number.parseInt(range.slice(1), 10)
-      lines
-        .slice(index, index + lineNum)
-        .forEach((line) => {
-          addClassToHast(line, className)
-        })
-      if (classRootActive)
-        addClassToHast(this.pre, classRootActive)
-      return true
+  return transformerNotationMap(
+    {
+      classMap: {
+        '++': classLineAdd,
+        '--': classLineRemove,
+      },
+      classActivePre,
     },
+    'shikiji-transformers:notation-diff',
   )
 }

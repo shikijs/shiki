@@ -1,9 +1,14 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import { createCommentNotationTransformer } from '../utils'
+import { transformerNotationMap } from './notation-map'
 
 export interface TransformerNotationErrorLevelOptions {
   classMap?: Record<string, string | string[]>
+  /**
+   * Class added to the <pre> element when the current code has diff
+   */
+  classActivePre?: string
 }
 
 /**
@@ -17,19 +22,14 @@ export function transformerNotationErrorLevel(
       error: ['highlighted', 'error'],
       warning: ['highlighted', 'warning'],
     },
+    classActivePre = 'has-highlighted',
   } = options
 
-  return createCommentNotationTransformer(
-    'shikiji-transformers:notation-error-level',
-    new RegExp(`\\[!code (${Object.keys(classMap).join('|')})(:\\d+)?\\]`),
-    ([_, match, range = ':1'], _line, _comment, lines, index) => {
-      const lineNum = Number.parseInt(range.slice(1), 10)
-      lines
-        .slice(index, index + lineNum)
-        .forEach((line) => {
-          addClassToHast(line, classMap[match])
-        })
-      return true
+  return transformerNotationMap(
+    {
+      classMap,
+      classActivePre,
     },
+    'shikiji-transformers:notation-error-level',
   )
 }

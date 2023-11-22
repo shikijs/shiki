@@ -1,16 +1,17 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import { createCommentNotationTransformer } from '../utils'
+import { transformerNotationMap } from './notation-map'
 
 export interface TransformerNotationFocusOptions {
   /**
    * Class for focused lines
    */
-  classFocused?: string
+  classActiveLine?: string
   /**
    * Class added to the root element when the code has focused lines
    */
-  classRootActive?: string
+  classActivePre?: string
 }
 
 /**
@@ -20,23 +21,17 @@ export function transformerNotationFocus(
   options: TransformerNotationFocusOptions = {},
 ): ShikijiTransformer {
   const {
-    classFocused = 'focused',
-    classRootActive = 'has-focused',
+    classActiveLine = 'focused',
+    classActivePre = 'has-focused',
   } = options
 
-  return createCommentNotationTransformer(
-    'shikiji-transformers:notation-focus',
-    /\[!code focus(:\d+)?\]/,
-    function ([_, range = ':1'], _line, _comment, lines, index) {
-      const lineNum = Number.parseInt(range.slice(1), 10)
-      lines
-        .slice(index, index + lineNum)
-        .forEach((line) => {
-          addClassToHast(line, classFocused)
-        })
-      if (classRootActive)
-        addClassToHast(this.pre, classRootActive)
-      return true
+  return transformerNotationMap(
+    {
+      classMap: {
+        focus: classActiveLine,
+      },
+      classActivePre,
     },
+    'shikiji-transformers:notation-focus',
   )
 }
