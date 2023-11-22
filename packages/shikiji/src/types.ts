@@ -123,17 +123,8 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
   includeExplanation?: boolean
 }
 
-export interface CodeToHastOptionsCommon<Languages extends string = string> {
+export interface CodeToHastOptionsCommon<Languages extends string = string> extends TransformerOptions {
   lang: StringLiteralUnion<Languages | SpecialLanguage>
-  /**
-   * Transform the generated HAST tree.
-   */
-  transformers?: ShikijiTransformer[]
-
-  /**
-   * @deprecated use `transformers` instead
-   */
-  transforms?: ShikijiTransformer
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
@@ -224,6 +215,18 @@ export interface CodeOptionsMeta {
   meta?: Record<string, any>
 }
 
+export interface TransformerOptions {
+  /**
+   * Transform the generated HAST tree.
+   */
+  transformers?: ShikijiTransformer[]
+
+  /**
+   * @deprecated use `transformers` instead
+   */
+  transforms?: ShikijiTransformer
+}
+
 export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
   & CodeToHastOptionsCommon<Languages>
   & CodeOptionsThemes<Themes>
@@ -297,30 +300,35 @@ export interface ShikijiTransformer {
    */
   code?(this: ShikijiTransformerContext, hast: Element): Element | void
   /**
-   * Transform each line element.
+   * Transform each line `<span class="line">` element.
    *
    * @param hast
    * @param line 1-based line number
    */
   line?(this: ShikijiTransformerContext, hast: Element, line: number): Element | void
   /**
-   * Transform each token element.
+   * Transform each token `<span>` element.
    */
   token?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+
+  /**
+   * Transform the raw input code before passing to the highlighter.
+   * This hook will only be called with `codeToHtml`.
+   */
+  preprocess?(code: string, options: CodeToHastOptions): string | undefined
+
+  /**
+   * Transform the generated HTML string before returning.
+   * This hook will only be called with `codeToHtml`.
+   */
+  postprocess?(code: string, options: CodeToHastOptions): string | undefined
 }
 
-export interface HtmlRendererOptionsCommon {
+export interface HtmlRendererOptionsCommon extends TransformerOptions {
   lang?: string
   langId?: string
   fg?: string
   bg?: string
-
-  transformers?: ShikijiTransformer[]
-
-  /**
-   * @deprecated use `transformers` instead
-   */
-  transforms?: ShikijiTransformer
 
   themeName?: string
 
