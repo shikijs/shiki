@@ -26,9 +26,14 @@ export function transformerNotationHighlight(
 
   return createCommentNotationTransformer(
     'shikiji-transformers:notation-highlight',
-    /\[!code (hl|highlight)\]/,
-    function (_, line) {
-      addClassToHast(line, classHighlight)
+    /\[!code (?:hl|highlight)(:\d+)?\]/,
+    function ([_, range = ':1'], _line, _comment, lines, index) {
+      const lineNum = Number.parseInt(range.slice(1), 10)
+      lines
+        .slice(index, index + lineNum)
+        .forEach((line) => {
+          addClassToHast(line, classHighlight)
+        })
       if (classRootActive)
         addClassToHast(this.pre, classRootActive)
       return true

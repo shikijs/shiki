@@ -21,9 +21,14 @@ export function transformerNotationErrorLevel(
 
   return createCommentNotationTransformer(
     'shikiji-transformers:notation-error-level',
-    new RegExp(`\\[!code (${Object.keys(classMap).join('|')})\\]`),
-    ([_, match], line) => {
-      addClassToHast(line, classMap[match])
+    new RegExp(`\\[!code (${Object.keys(classMap).join('|')})(:\\d+)?\\]`),
+    ([_, match, range = ':1'], _line, _comment, lines, index) => {
+      const lineNum = Number.parseInt(range.slice(1), 10)
+      lines
+        .slice(index, index + lineNum)
+        .forEach((line) => {
+          addClassToHast(line, classMap[match])
+        })
       return true
     },
   )

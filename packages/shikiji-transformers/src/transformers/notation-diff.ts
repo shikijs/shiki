@@ -31,12 +31,17 @@ export function transformerNotationDiff(
 
   return createCommentNotationTransformer(
     'shikiji-transformers:notation-diff',
-    /\[!code (\-\-|\+\+)\]/,
-    function ([_, match], line) {
+    /\[!code (\-\-|\+\+)(:\d+)?\]/,
+    function ([_, match, range = ':1'], _line, _comment, lines, index) {
       const className = match === '--'
         ? classRemoved
         : classAdded
-      addClassToHast(line, className)
+      const lineNum = Number.parseInt(range.slice(1), 10)
+      lines
+        .slice(index, index + lineNum)
+        .forEach((line) => {
+          addClassToHast(line, className)
+        })
       if (classRootActive)
         addClassToHast(this.pre, classRootActive)
       return true

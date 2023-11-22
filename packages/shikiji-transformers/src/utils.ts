@@ -21,30 +21,40 @@ export function isCommentLike(node: Element, line: Element) {
 export function createCommentNotationTransformer(
   name: string,
   regex: RegExp,
-  onMatch: (this: ShikijiTransformerContext, match: RegExpMatchArray, line: Element, commentNode: Element) => boolean,
+  onMatch: (
+    this: ShikijiTransformerContext,
+    match: RegExpMatchArray,
+    line: Element,
+    commentNode: Element,
+    lines: Element[],
+    index: number,
+  ) => boolean,
 ): ShikijiTransformer {
   return {
     name,
-    line(line) {
-      let nodeToRemove: Element | undefined
-      for (const child of line.children) {
-        if (child.type !== 'element')
-          continue
-        if (!isCommentLike(child, line))
-          continue
-        const text = child.children[0]
-        if (text.type !== 'text')
-          continue
-        const match = text.value.match(regex)
-        if (!match)
-          continue
-        if (onMatch.call(this, match, line, child)) {
-          nodeToRemove = child
-          break
+    code(code) {
+      const lines = code.children.filter(i => i.type === 'element') as Element[]
+      lines.forEach((line, idx) => {
+        let nodeToRemove: Element | undefined
+        for (const child of line.children) {
+          if (child.type !== 'element')
+            continue
+          if (!isCommentLike(child, line))
+            continue
+          const text = child.children[0]
+          if (text.type !== 'text')
+            continue
+          const match = text.value.match(regex)
+          if (!match)
+            continue
+          if (onMatch.call(this, match, line, child, lines, idx)) {
+            nodeToRemove = child
+            break
+          }
         }
-      }
-      if (nodeToRemove)
-        line.children.splice(line.children.indexOf(nodeToRemove), 1)
+        if (nodeToRemove)
+          line.children.splice(line.children.indexOf(nodeToRemove), 1)
+      })
     },
   }
 }

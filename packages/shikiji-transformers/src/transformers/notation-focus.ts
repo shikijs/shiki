@@ -26,9 +26,14 @@ export function transformerNotationFocus(
 
   return createCommentNotationTransformer(
     'shikiji-transformers:notation-focus',
-    /\[!code focus\]/,
-    function (_, line) {
-      addClassToHast(line, classFocused)
+    /\[!code focus(:\d+)?\]/,
+    function ([_, range = ':1'], _line, _comment, lines, index) {
+      const lineNum = Number.parseInt(range.slice(1), 10)
+      lines
+        .slice(index, index + lineNum)
+        .forEach((line) => {
+          addClassToHast(line, classFocused)
+        })
       if (classRootActive)
         addClassToHast(this.pre, classRootActive)
       return true
