@@ -114,7 +114,14 @@ export function tokensToHast(
 ) {
   const {
     mergeWhitespaces = true,
+    transformers = [],
   } = options
+
+  // TODO: remove this in next major version
+  if (options.transforms) {
+    transformers.push(options.transforms)
+    console.warn('[shikiji] `transforms` option is deprecated, use `transformers` instead')
+  }
 
   if (mergeWhitespaces)
     tokens = mergeWhitespaceTokens(tokens)
@@ -169,23 +176,33 @@ export function tokensToHast(
       if (style)
         tokenNode.properties.style = style
 
-      tokenNode = options.transforms?.token?.(tokenNode, idx + 1, col, lineNode) || tokenNode
+      for (const transformer of transformers)
+        tokenNode = transformer?.token?.(tokenNode, idx + 1, col, lineNode) || tokenNode
 
       lineNode.children.push(tokenNode)
       col += token.content.length
     }
 
-    lineNode = options.transforms?.line?.(lineNode, idx + 1) || lineNode
+    for (const transformer of transformers)
+      lineNode = transformer?.line?.(lineNode, idx + 1) || lineNode
+
     lines.push(lineNode)
   })
 
-  codeNode = options.transforms?.code?.(codeNode) || codeNode
+  for (const transformer of transformers)
+    codeNode = transformer?.code?.(codeNode) || codeNode
   preNode.children.push(codeNode)
 
-  preNode = options.transforms?.pre?.(preNode) || preNode
+  for (const transformer of transformers)
+    preNode = transformer?.pre?.(preNode) || preNode
+
   tree.children.push(preNode)
 
-  return options.transforms?.root?.(tree) || tree
+  let result = tree
+  for (const transformer of transformers)
+    result = transformer?.root?.(result) || result
+
+  return result
 }
 
 function getTokenStyles(token: ThemedToken) {

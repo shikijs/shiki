@@ -32,7 +32,7 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
       lang,
     }
 
-    codeOptions.transforms ||= {}
+    codeOptions.transformers ||= []
 
     if (highlightLines) {
       const lines = parseHighlightLines(attrs)
@@ -41,17 +41,23 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
           ? 'highlighted'
           : highlightLines
 
-        codeOptions.transforms.line = (node, line) => {
-          if (lines.includes(line))
-            node.properties.class += ` ${className}`
-          return node
-        }
+        codeOptions.transformers.push({
+          name: 'markdown-it-shikiji:line-class',
+          line(node, line) {
+            if (lines.includes(line))
+              node.properties.class += ` ${className}`
+            return node
+          },
+        })
       }
     }
 
-    codeOptions.transforms.code = (node) => {
-      node.properties.class = `language-${lang}`
-    }
+    codeOptions.transformers.push({
+      name: 'markdown-it-shikiji:block-class',
+      code(node) {
+        node.properties.class = `language-${lang}`
+      },
+    })
 
     return highlighter.codeToHtml(
       code,

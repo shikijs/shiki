@@ -1,6 +1,11 @@
-import { describe, expect, it } from 'vitest'
+/* eslint-disable style/no-tabs */
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { toHtml } from 'hast-util-to-html'
 import { codeToHtml, getHighlighter } from '../src'
+
+afterEach(() => {
+  vi.restoreAllMocks
+})
 
 describe('should', () => {
   it('works', async () => {
@@ -19,9 +24,13 @@ describe('should', () => {
   })
 
   it('hast transformer', async () => {
+    const warn = vi.spyOn(console, 'warn')
+    warn.mockImplementation((() => {}) as any)
+
     const code = await codeToHtml('foo\bar', {
       lang: 'js',
       theme: 'vitesse-light',
+      // Use deprecated `transforms` option on purpose to test
       transforms: {
         line(node, line) {
           node.properties['data-line'] = line
@@ -37,6 +46,10 @@ describe('should', () => {
 
     expect(code)
       .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code class=\\"language-js\\"><span class=\\"line\\" data-line=\\"1\\"><span style=\\"color:#B07D48\\" class=\\"token:1:0\\">foo</span><span style=\\"color:#393A34\\" class=\\"token:1:3\\"></span><span style=\\"color:#B07D48\\" class=\\"token:1:4\\">ar</span></span></code></pre>"')
+
+    expect(warn).toBeCalledTimes(1)
+    expect(warn.mock.calls[0][0])
+      .toMatchInlineSnapshot('"[shikiji] `transforms` option is deprecated, use `transformers` instead"')
   })
 })
 
@@ -48,19 +61,21 @@ it('hasfocus support', async () => {
   const code = await codeToHtml(snippet, {
     lang: 'php',
     theme: 'vitesse-light',
-    transforms: {
-      code(node) {
-        node.properties.class = 'language-php'
+    transformers: [
+      {
+        code(node) {
+          node.properties.class = 'language-php'
+        },
+        token(node, line, col, parent) {
+          node.children.forEach((child) => {
+            if (child.type === 'text' && child.value.includes('[!code focus]')) {
+              parent.properties['data-has-focus'] = 'true'
+              node.children.splice(node.children.indexOf(child), 1)
+            }
+          })
+        },
       },
-      token(node, line, col, parent) {
-        node.children.forEach((child) => {
-          if (child.type === 'text' && child.value.includes('[!code focus]')) {
-            parent.properties['data-has-focus'] = 'true'
-            node.children.splice(node.children.indexOf(child), 1)
-          }
-        })
-      },
-    },
+    ],
   })
 
   expect(code)
@@ -68,5 +83,61 @@ it('hasfocus support', async () => {
       "<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code class=\\"language-php\\"><span class=\\"line\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">foo</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">bar</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span></span>
       <span class=\\"line\\" data-has-focus=\\"true\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">test</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">owo</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span><span style=\\"color:#A0ADA0\\"></span></span>
       <span class=\\"line\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">bar</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">baz</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span></span></code></pre>"
+    `)
+})
+
+it('render whitespace', async () => {
+  const snippet = [
+    '  space()',
+    '\t\ttab()',
+  ].join('\n')
+
+  const classMap: Record<string, string> = {
+    ' ': 'space',
+    '\t': 'tab',
+  }
+
+  const code = await codeToHtml(snippet, {
+    lang: 'js',
+    theme: 'vitesse-light',
+    transformers: [
+      {
+        line(node) {
+          const first = node.children[0]
+          if (!first || first.type !== 'element')
+            return
+          const textNode = first.children[0]
+          if (!textNode || textNode.type !== 'text')
+            return
+          node.children = node.children.flatMap((child) => {
+            if (child.type !== 'element')
+              return child
+            const node = child.children[0]
+            if (node.type !== 'text' || !node.value)
+              return child
+            const parts = node.value.split(/([ \t])/).filter(i => i.length)
+            if (parts.length <= 1)
+              return child
+
+            return parts.map((part) => {
+              const clone = {
+                ...child,
+                properties: { ...child.properties },
+              }
+              clone.children = [{ type: 'text', value: part }]
+              if (part in classMap)
+                clone.properties.class = [clone.properties.class, classMap[part]].filter(Boolean).join(' ')
+              return clone
+            })
+          })
+        },
+      },
+    ],
+  })
+
+  expect(code)
+    .toMatchInlineSnapshot(`
+      "<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#59873A\\" class=\\"space\\"> </span><span style=\\"color:#59873A\\" class=\\"space\\"> </span><span style=\\"color:#59873A\\">space</span><span style=\\"color:#999999\\">()</span></span>
+      <span class=\\"line\\"><span style=\\"color:#59873A\\" class=\\"tab\\">	</span><span style=\\"color:#59873A\\" class=\\"tab\\">	</span><span style=\\"color:#59873A\\">tab</span><span style=\\"color:#999999\\">()</span></span></code></pre>"
     `)
 })

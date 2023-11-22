@@ -100,17 +100,18 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = 
             ? 'highlighted'
             : highlightLines
 
-          codeOptions.transforms ||= {}
-          codeOptions.transforms.line = (node, line) => {
-            if (lines.includes(line))
-              node.properties.class += ` ${className}`
-            return node
-          }
+          codeOptions.transformers ||= []
+          codeOptions.transformers.push({
+            name: 'rehype-shikiji:line-class',
+            line(node, line) {
+              if (lines.includes(line))
+                node.properties.class += ` ${className}`
+              return node
+            },
+          })
         }
       }
-
       const fragment = highlighter.codeToHast(code, codeOptions)
-
       parent.children.splice(index, 1, ...fragment.children)
     })
   }

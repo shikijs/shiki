@@ -65,17 +65,18 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     }
 
     if (options.lineOptions) {
-      options.transforms = options.transforms || {}
-      const prev = options.transforms.line
-      options.transforms.line = (ast, line) => {
-        const node = prev?.(ast, line) || ast
-        const lineOption = options.lineOptions?.find(o => o.line === line)
-        if (lineOption?.classes) {
-          node.properties ??= {}
-          node.properties.class = [node.properties.class, ...lineOption.classes].filter(Boolean).join(' ')
-        }
-        return node
-      }
+      options.transformers ||= []
+      options.transformers.push({
+        name: 'shikiji-compat:line-class',
+        line(node, line) {
+          const lineOption = options.lineOptions?.find(o => o.line === line)
+          if (lineOption?.classes) {
+            node.properties ??= {}
+            node.properties.class = [node.properties.class, ...lineOption.classes].filter(Boolean).join(' ')
+          }
+          return node
+        },
+      })
     }
 
     return shikiji.codeToHtml(code, options as any)

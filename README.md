@@ -435,19 +435,21 @@ Since `shikiji` uses `hast` internally, you can use the `transforms` option to c
 const code = await codeToHtml('foo\bar', {
   lang: 'js',
   theme: 'vitesse-light',
-  transforms: {
-    code(node) {
-      node.properties.class = 'language-js'
+  transformers: [
+    {
+      code(node) {
+        node.properties.class = 'language-js'
+      },
+      line(node, line) {
+        node.properties['data-line'] = line
+        if ([1, 3, 4].includes(line))
+          node.properties.class += ' highlight'
+      },
+      token(node, line, col) {
+        node.properties.class = `token:${line}:${col}`
+      },
     },
-    line(node, line) {
-      node.properties['data-line'] = line
-      if ([1, 3, 4].includes(line))
-        node.properties.class += ' highlight'
-    },
-    token(node, line, col) {
-      node.properties.class = `token:${line}:${col}`
-    },
-  },
+  ]
 })
 ```
 

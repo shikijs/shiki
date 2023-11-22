@@ -128,7 +128,12 @@ export interface CodeToHastOptionsCommon<Languages extends string = string> {
   /**
    * Transform the generated HAST tree.
    */
-  transforms?: HastTransformers
+  transformers?: ShikijiTransformer[]
+
+  /**
+   * @deprecated use `transformers` instead
+   */
+  transforms?: ShikijiTransformer
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
@@ -266,7 +271,11 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   colors?: Record<string, string>
 }
 
-export interface HastTransformers {
+export interface ShikijiTransformer {
+  /**
+   * Name of the transformer
+   */
+  name?: string
   /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
    *
@@ -291,10 +300,12 @@ export interface HtmlRendererOptionsCommon {
   fg?: string
   bg?: string
 
+  transformers?: ShikijiTransformer[]
+
   /**
-   * Hast transformers
+   * @deprecated use `transformers` instead
    */
-  transforms?: HastTransformers
+  transforms?: ShikijiTransformer
 
   themeName?: string
 
