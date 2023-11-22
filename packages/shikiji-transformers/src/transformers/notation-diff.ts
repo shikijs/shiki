@@ -1,6 +1,4 @@
 import type { ShikijiTransformer } from 'shikiji'
-import { addClassToHast } from 'shikiji'
-import { createCommentNotationTransformer } from '../utils'
 import { transformerNotationMap } from './notation-map'
 
 export interface TransformerNotationDiffOptions {
