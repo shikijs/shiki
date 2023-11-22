@@ -143,11 +143,11 @@ export class StackElementMetadata {
 
     return (
       ((_languageId << MetadataConsts.LANGUAGEID_OFFSET)
-        | (_tokenType << MetadataConsts.TOKEN_TYPE_OFFSET)
-        | (_fontStyle << MetadataConsts.FONT_STYLE_OFFSET)
-        | (_containsBalancedBracketsBit << MetadataConsts.BALANCED_BRACKETS_OFFSET)
-        | (_foreground << MetadataConsts.FOREGROUND_OFFSET)
-        | (_background << MetadataConsts.BACKGROUND_OFFSET))
+      | (_tokenType << MetadataConsts.TOKEN_TYPE_OFFSET)
+      | (_fontStyle << MetadataConsts.FONT_STYLE_OFFSET)
+      | (_containsBalancedBracketsBit << MetadataConsts.BALANCED_BRACKETS_OFFSET)
+      | (_foreground << MetadataConsts.FOREGROUND_OFFSET)
+      | (_background << MetadataConsts.BACKGROUND_OFFSET))
       >>> 0
     )
   }

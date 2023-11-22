@@ -47,7 +47,7 @@ export function repairTheme(theme: ThemeRegistration) {
 const VSCODE_FALLBACK_EDITOR_FG = { light: '#333333', dark: '#bbbbbb' }
 const VSCODE_FALLBACK_EDITOR_BG = { light: '#fffffe', dark: '#1e1e1e' }
 
-export function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: string; bg: string } {
+export function getThemeDefaultColors(theme: IRawTheme & { type?: string }): { fg: string, bg: string } {
   let fg, bg
 
   /**

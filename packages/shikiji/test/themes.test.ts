@@ -13,9 +13,9 @@ describe('syncThemesTokenization', () => {
     const lines2 = await codeToThemedTokens('console.log("hello")', { lang: 'js', theme: 'min-light', includeExplanation: true })
 
     expect(stringifyTokens(lines1))
-      .toMatchInlineSnapshot('"console . log ( \\" hello \\" )"')
+      .toMatchInlineSnapshot(`"console . log ( " hello " )"`)
     expect(stringifyTokens(lines2))
-      .toMatchInlineSnapshot('"console .log ( \\"hello\\" )"')
+      .toMatchInlineSnapshot(`"console .log ( "hello" )"`)
 
     const [out1, out2] = syncThemesTokenization(lines1, lines2)
 
@@ -29,11 +29,11 @@ describe('syncThemesTokenization', () => {
     const lines3 = await codeToThemedTokens('console.log("hello");', { lang: 'js', theme: 'nord', includeExplanation: true })
 
     expect(stringifyTokens(lines1))
-      .toMatchInlineSnapshot('"console . log ( \\" hello \\" );"')
+      .toMatchInlineSnapshot(`"console . log ( " hello " );"`)
     expect(stringifyTokens(lines2))
-      .toMatchInlineSnapshot('"console .log ( \\"hello\\" );"')
+      .toMatchInlineSnapshot(`"console .log ( "hello" );"`)
     expect(stringifyTokens(lines3))
-      .toMatchInlineSnapshot('"console . log ( \\" hello \\" ) ;"')
+      .toMatchInlineSnapshot(`"console . log ( " hello " ) ;"`)
 
     const [out1, out2, out3] = syncThemesTokenization(lines1, lines2, lines3)
 
@@ -44,7 +44,7 @@ describe('syncThemesTokenization', () => {
       .toBe(stringifyTokens(out3))
 
     expect(stringifyTokens(out1))
-      .toMatchInlineSnapshot('"console . log ( \\" hello \\" ) ;"')
+      .toMatchInlineSnapshot(`"console . log ( " hello " ) ;"`)
   })
 })
 
@@ -356,7 +356,7 @@ describe('errors', () => {
       themes: {},
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must not be empty"')
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] \`themes\` option must not be empty]`)
   })
 
   it('throws on missing default color', async () => {
@@ -367,7 +367,7 @@ describe('errors', () => {
       },
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must contain the defaultColor key `light`"')
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] \`themes\` option must contain the defaultColor key \`light\`]`)
 
     expect(() => codeToHtml('console.log("hello")', {
       lang: 'js',
@@ -377,7 +377,7 @@ describe('errors', () => {
       defaultColor: 'dark',
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shikiji] `themes` option must contain the defaultColor key `dark`"')
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] \`themes\` option must contain the defaultColor key \`dark\`]`)
   })
 
   it('not throws when `defaultColor` set to false', async () => {
@@ -389,6 +389,6 @@ describe('errors', () => {
       defaultColor: false,
     })
 
-    expect(code).toMatchInlineSnapshot('"<pre class=\\"shiki shiki-themes nord\\" style=\\"--shiki-dark:#d8dee9ff;--shiki-dark-bg:#2e3440ff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"--shiki-dark:#D8DEE9\\">console</span><span style=\\"--shiki-dark:#ECEFF4\\">.</span><span style=\\"--shiki-dark:#88C0D0\\">log</span><span style=\\"--shiki-dark:#D8DEE9FF\\">(</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#A3BE8C\\">hello</span><span style=\\"--shiki-dark:#ECEFF4\\">\\"</span><span style=\\"--shiki-dark:#D8DEE9FF\\">)</span></span></code></pre>"')
+    expect(code).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes nord" style="--shiki-dark:#d8dee9ff;--shiki-dark-bg:#2e3440ff" tabindex="0"><code><span class="line"><span style="--shiki-dark:#D8DEE9">console</span><span style="--shiki-dark:#ECEFF4">.</span><span style="--shiki-dark:#88C0D0">log</span><span style="--shiki-dark:#D8DEE9FF">(</span><span style="--shiki-dark:#ECEFF4">"</span><span style="--shiki-dark:#A3BE8C">hello</span><span style="--shiki-dark:#ECEFF4">"</span><span style="--shiki-dark:#D8DEE9FF">)</span></span></code></pre>"`)
   })
 })

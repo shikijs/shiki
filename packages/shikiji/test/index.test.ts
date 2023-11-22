@@ -9,7 +9,7 @@ describe('should', () => {
     })
 
     expect(shiki.codeToHtml('console.log', { lang: 'js', theme: 'vitesse-light' }))
-      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#B07D48\\">console</span><span style=\\"color:#999999\\">.</span><span style=\\"color:#B07D48\\">log</span></span></code></pre>"')
+      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span></code></pre>"`)
   })
 
   it('dynamic load theme and lang', async () => {
@@ -41,7 +41,7 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'min-dark' }))
-      .toMatchInlineSnapshot('"<pre class=\\"shiki min-dark\\" style=\\"background-color:#1f1f1f;color:#b392f0\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#B392F0\\">print </span><span style=\\"color:#F8F8F8\\">1</span></span></code></pre>"')
+      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#B392F0">print </span><span style="color:#F8F8F8">1</span></span></code></pre>"`)
   })
 
   it('requires nested lang', async () => {
@@ -94,7 +94,7 @@ describe('errors', () => {
       langs: ['javascript'],
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Theme `invalid` is not built-in."')
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] Theme \`invalid\` is not built-in.]`)
   })
 
   it('throw on invalid lang', async () => {
@@ -103,6 +103,6 @@ describe('errors', () => {
       langs: ['invalid' as any],
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot('"[shikiji] Language `invalid` is not built-in."')
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] Language \`invalid\` is not built-in.]`)
   })
 })

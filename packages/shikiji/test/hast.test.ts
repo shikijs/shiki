@@ -18,8 +18,8 @@ describe('should', () => {
 
     expect(toHtml(hast))
       .toMatchInlineSnapshot(`
-        "<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#B07D48\\">console</span><span style=\\"color:#999999\\">.</span><span style=\\"color:#B07D48\\">log</span></span>
-        <span class=\\"line\\"><span style=\\"color:#B07D48\\">foo</span><span style=\\"color:#999999\\">.</span><span style=\\"color:#B07D48\\">bar</span></span></code></pre>"
+        "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span>
+        <span class="line"><span style="color:#B07D48">foo</span><span style="color:#999999">.</span><span style="color:#B07D48">bar</span></span></code></pre>"
       `)
   })
 
@@ -45,7 +45,7 @@ describe('should', () => {
     })
 
     expect(code)
-      .toMatchInlineSnapshot('"<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code class=\\"language-js\\"><span class=\\"line\\" data-line=\\"1\\"><span style=\\"color:#B07D48\\" class=\\"token:1:0\\">foo</span><span style=\\"color:#393A34\\" class=\\"token:1:3\\"></span><span style=\\"color:#B07D48\\" class=\\"token:1:4\\">ar</span></span></code></pre>"')
+      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line" data-line="1"><span style="color:#B07D48" class="token:1:0">foo</span><span style="color:#393A34" class="token:1:3"></span><span style="color:#B07D48" class="token:1:4">ar</span></span></code></pre>"`)
 
     expect(warn).toBeCalledTimes(1)
     expect(warn.mock.calls[0][0])
@@ -80,9 +80,9 @@ it('hasfocus support', async () => {
 
   expect(code)
     .toMatchInlineSnapshot(`
-      "<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code class=\\"language-php\\"><span class=\\"line\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">foo</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">bar</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span></span>
-      <span class=\\"line\\" data-has-focus=\\"true\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">test</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">owo</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span><span style=\\"color:#A0ADA0\\"></span></span>
-      <span class=\\"line\\"><span style=\\"color:#999999\\">$</span><span style=\\"color:#B07D48\\">bar</span><span style=\\"color:#999999\\"> =</span><span style=\\"color:#B5695999\\"> \\"</span><span style=\\"color:#B56959\\">baz</span><span style=\\"color:#B5695999\\">\\"</span><span style=\\"color:#999999\\">;</span></span></code></pre>"
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-php"><span class="line"><span style="color:#999999">$</span><span style="color:#B07D48">foo</span><span style="color:#999999"> =</span><span style="color:#B5695999"> "</span><span style="color:#B56959">bar</span><span style="color:#B5695999">"</span><span style="color:#999999">;</span></span>
+      <span class="line" data-has-focus="true"><span style="color:#999999">$</span><span style="color:#B07D48">test</span><span style="color:#999999"> =</span><span style="color:#B5695999"> "</span><span style="color:#B56959">owo</span><span style="color:#B5695999">"</span><span style="color:#999999">;</span><span style="color:#A0ADA0"></span></span>
+      <span class="line"><span style="color:#999999">$</span><span style="color:#B07D48">bar</span><span style="color:#999999"> =</span><span style="color:#B5695999"> "</span><span style="color:#B56959">baz</span><span style="color:#B5695999">"</span><span style="color:#999999">;</span></span></code></pre>"
     `)
 })
 
@@ -137,7 +137,7 @@ it('render whitespace', async () => {
 
   expect(code)
     .toMatchInlineSnapshot(`
-      "<pre class=\\"shiki vitesse-light\\" style=\\"background-color:#ffffff;color:#393a34\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color:#59873A\\" class=\\"space\\"> </span><span style=\\"color:#59873A\\" class=\\"space\\"> </span><span style=\\"color:#59873A\\">space</span><span style=\\"color:#999999\\">()</span></span>
-      <span class=\\"line\\"><span style=\\"color:#59873A\\" class=\\"tab\\">	</span><span style=\\"color:#59873A\\" class=\\"tab\\">	</span><span style=\\"color:#59873A\\">tab</span><span style=\\"color:#999999\\">()</span></span></code></pre>"
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#59873A" class="space"> </span><span style="color:#59873A" class="space"> </span><span style="color:#59873A">space</span><span style="color:#999999">()</span></span>
+      <span class="line"><span style="color:#59873A" class="tab">	</span><span style="color:#59873A" class="tab">	</span><span style="color:#59873A">tab</span><span style="color:#999999">()</span></span></code></pre>"
     `)
 })
