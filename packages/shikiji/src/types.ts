@@ -103,6 +103,11 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
    * @default Object.keys(bundledThemes)
    */
   langs?: (LanguageInput | StringLiteralUnion<L> | SpecialLanguage)[]
+  /**
+   * Alias of languages
+   * @example { 'my-lang': 'javascript' }
+   */
+  langAlias?: Record<string, StringLiteralUnion<L>>
 }
 
 export interface LanguageRegistration extends IRawGrammar {
