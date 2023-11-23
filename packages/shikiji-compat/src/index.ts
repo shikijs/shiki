@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import type { BuiltinLanguage, BuiltinTheme, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistration, ThemedToken } from 'shikiji'
-import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme } from 'shikiji'
+import { bundledLanguages, bundledThemes, getHighlighter as getShikiji, toShikiTheme, tokenizeAnsiWithTheme } from 'shikiji'
 import { transformerCompactLineOptions } from 'shikiji-transformers'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
 
@@ -73,8 +73,17 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     return shikiji.codeToHtml(code, options as any)
   }
 
+  function ansiToThemedTokens(
+    ansi: string,
+    options: CodeToThemedTokensOptions = {},
+  ) {
+    const theme = shikiji.getTheme(options.theme || context.getLoadedThemes()[0])
+    return tokenizeAnsiWithTheme(theme, ansi)
+  }
+
   return {
     ...shikiji,
+    ansiToThemedTokens,
     codeToThemedTokens,
     codeToHtml,
     ansiToHtml(code: string, options?: AnsiToHtmlOptions) {

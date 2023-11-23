@@ -26,7 +26,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: [
-        '**/packages/*/src/*.ts',
+        '**/packages/*/src/**/*.ts',
       ],
       exclude: [
         '**/src/oniguruma/**',

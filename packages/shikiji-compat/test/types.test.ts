@@ -36,7 +36,6 @@ it('run', async () => {
 
   expect.soft(keysDiff).toMatchInlineSnapshot(`
     [
-      "ansiToThemedTokens",
       "getBackgroundColor",
       "getForegroundColor",
       "setColorReplacements",
