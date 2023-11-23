@@ -1,0 +1,14 @@
+<pre class="shiki github-dark has-focused has-highlighted" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">function</span><span class="space"> </span><span style="color:#B392F0">hello</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">indentSize</span><span style="color:#E1E4E8">,</span><span class="space"> </span><span style="color:#FFAB70">type</span><span style="color:#E1E4E8">)</span><span class="space"> </span><span style="color:#E1E4E8">{</span></span><span class="line highlighted"><span class="space"> </span><span class="space"> </span><span style="color:#F97583">if</span><span class="space"> </span><span style="color:#E1E4E8">(indentSize</span><span class="space"> </span><span style="color:#F97583">===</span><span class="space"> </span><span style="color:#79B8FF">4</span><span class="space"> </span><span style="color:#F97583">&#x26;&#x26;</span><span class="space"> </span><span style="color:#E1E4E8">type</span><span class="space"> </span><span style="color:#F97583">!==</span><span class="space"> </span><span style="color:#9ECBFF">'tab'</span><span style="color:#E1E4E8">)</span><span class="space"> </span><span style="color:#E1E4E8">{</span></span><span class="line focused highlighted error"><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="space"> </span><span class="tab">	</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Each</span><span class="space"> </span><span style="color:#9ECBFF">next</span><span class="space"> </span><span style="color:#9ECBFF">indentation</span><span class="space"> </span><span style="color:#9ECBFF">will</span><span class="space"> </span><span style="color:#9ECBFF">increase</span><span class="space"> </span><span style="color:#9ECBFF">on</span><span class="space"> </span><span style="color:#9ECBFF">4</span><span class="space"> </span><span style="color:#9ECBFF">spaces'</span><span style="color:#E1E4E8">);</span><span class="space"> </span></span><span class="line"><span class="space"> </span><span class="space"> </span><span style="color:#E1E4E8">}</span></span><span class="line"><span style="color:#E1E4E8">}</span></span><span class="line"></span></code></pre>
+<style>
+* { tab-size: 4; }
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.has-focused .focused { background-color: #8805; }
+.highlighted { background-color: #8885; }
+.highlighted.warning { background-color: #9905; }
+.highlighted.error { background-color: #8005; }
+.tab, .space { position: relative; }
+.tab::before { content: "\21E5"; position: absolute; opacity: 0.3; }
+.space::before { content: "\B7"; position: absolute; opacity: 0.3; }
+</style>

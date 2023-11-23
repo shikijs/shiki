@@ -1,5 +1,6 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
+import type { Element } from 'hast'
 
 export interface TransformerRenderWhitespaceOptions {
   /**
@@ -44,38 +45,45 @@ export function transformerRenderWhitespace(
 
   return {
     name: 'shikiji-transformers:render-whitespace',
-    line(node) {
-      const first = node.children[0]
-      if (!first || first.type !== 'element')
-        return
-      const textNode = first.children[0]
-      if (!textNode || textNode.type !== 'text')
-        return
-      node.children = node.children.flatMap((token) => {
-        if (token.type !== 'element')
-          return token
-        const node = token.children[0]
-        if (node.type !== 'text' || !node.value)
-          return token
+    root(root) {
+      const pre = root.children[0] as Element
+      const code = pre.children[0] as Element
+      code.children.forEach((line) => {
+        if (line.type !== 'element')
+          return
+        const first = line.children[0]
+        if (!first || first.type !== 'element')
+          return
+        const textNode = first.children[0]
+        if (!textNode || textNode.type !== 'text')
+          return
+        line.children = line.children.flatMap((token) => {
+          if (token.type !== 'element')
+            return token
+          const node = token.children[0]
+          if (node.type !== 'text' || !node.value)
+            return token
 
-        // Split by whitespaces
-        const parts = node.value.split(/([ \t])/).filter(i => i.length)
-        if (parts.length <= 1)
-          return token
+          // Split by whitespaces
+          const parts = node.value.split(/([ \t])/).filter(i => i.length)
+          if (parts.length <= 1)
+            return token
 
-        return parts.map((part) => {
-          const clone = {
-            ...token,
-            properties: { ...token.properties },
-          }
-          clone.children = [{ type: 'text', value: part }]
-          if (keys.includes(part)) {
-            addClassToHast(clone, classMap[part])
-            delete clone.properties.style
-          }
-          return clone
+          return parts.map((part) => {
+            const clone = {
+              ...token,
+              properties: { ...token.properties },
+            }
+            clone.children = [{ type: 'text', value: part }]
+            if (keys.includes(part)) {
+              addClassToHast(clone, classMap[part])
+              delete clone.properties.style
+            }
+            return clone
+          })
         })
-      })
+      },
+      )
     },
   }
 }

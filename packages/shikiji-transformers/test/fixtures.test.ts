@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import type { ShikijiTransformer } from 'shikiji'
 import { codeToHtml } from 'shikiji'
 import {
+  transformerCompactLineOptions,
   transformerNotationDiff,
   transformerNotationErrorLevel,
   transformerNotationFocus,
@@ -82,7 +83,7 @@ suite(
 body { margin: 0; }
 .shiki { padding: 1em; }
 .line { display: block; width: 100%; height: 1.2em; }
-.highlighted { background-color: #888; }
+.highlighted { background-color: #8885; }
 </style>`,
 )
 
@@ -109,6 +110,39 @@ suite(
 * { tab-size: 4; }
 body { margin: 0; }
 .shiki { padding: 1em; }
+.tab, .space { position: relative; }
+.tab::before { content: "\\21E5"; position: absolute; opacity: 0.3; }
+.space::before { content: "\\B7"; position: absolute; opacity: 0.3; }
+</style>`,
+)
+
+suite(
+  'all',
+  import.meta.glob('./fixtures/all/*.*', { as: 'raw', eager: true }),
+  [
+    transformerNotationDiff(),
+    transformerNotationFocus(),
+    transformerNotationHighlight(),
+    transformerNotationErrorLevel(),
+    transformerCompactLineOptions([
+      {
+        line: 2,
+        classes: ['highlighted'],
+      },
+    ]),
+    transformerRenderWhitespace(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+* { tab-size: 4; }
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.has-focused .focused { background-color: #8805; }
+.highlighted { background-color: #8885; }
+.highlighted.warning { background-color: #9905; }
+.highlighted.error { background-color: #8005; }
 .tab, .space { position: relative; }
 .tab::before { content: "\\21E5"; position: absolute; opacity: 0.3; }
 .space::before { content: "\\B7"; position: absolute; opacity: 0.3; }

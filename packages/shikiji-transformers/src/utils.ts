@@ -43,12 +43,15 @@ export function createCommentNotationTransformer(
           if (text.type !== 'text')
             continue
 
+          let replaced = false
           text.value = text.value.replace(regex, (...match) => {
-            if (onMatch.call(this, match, line, child, lines, idx))
+            if (onMatch.call(this, match, line, child, lines, idx)) {
+              replaced = true
               return ''
+            }
             return match[0]
           })
-          if (!text.value.trim())
+          if (replaced && !text.value.trim())
             nodeToRemove = child
         }
         if (nodeToRemove)
