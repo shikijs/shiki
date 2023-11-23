@@ -10,7 +10,7 @@ function replaceMarker(code: string, marker: string, content: string) {
 
 async function run() {
   let mdLangs = await fs.readFile('docs/languages.md', 'utf8')
-  const langs = await fs.readJSON('packages/shikiji/src/assets/langs.json')
+  const langs = await fs.readJSON('packages/shikiji/src/assets/langs.json') as { id: string, name?: string, aliases?: string[] }[]
   mdLangs = replaceMarker(
     mdLangs,
     'all-languages',
@@ -24,7 +24,7 @@ async function run() {
 
   // ---- Themes
   let mdThemes = await fs.readFile('docs/themes.md', 'utf8')
-  const themes = await fs.readJSON('packages/shikiji/src/assets/themes.json')
+  const themes = await fs.readJSON('packages/shikiji/src/assets/themes.json') as { id: string, name?: string }[]
   mdThemes = replaceMarker(
     mdThemes,
     'all-themes',
