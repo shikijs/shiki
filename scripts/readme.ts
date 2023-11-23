@@ -9,23 +9,10 @@ function replaceMarker(code: string, marker: string, content: string) {
 }
 
 async function run() {
-  let readme = await fs.readFile('README.md', 'utf8')
-
+  let mdLangs = await fs.readFile('docs/languages.md', 'utf8')
   const langs = await fs.readJSON('packages/shikiji/src/assets/langs.json')
-  const themes = await fs.readJSON('packages/shikiji/src/assets/themes.json')
-
-  readme = replaceMarker(
-    readme,
-    'all-themes',
-    [
-      '| ID |',
-      '| --- |',
-      ...themes.map(i => `| \`${i.id}\` |`),
-    ].join('\n'),
-  )
-
-  readme = replaceMarker(
-    readme,
+  mdLangs = replaceMarker(
+    mdLangs,
     'all-languages',
     [
       '| ID | Name | Aliases |',
@@ -33,8 +20,21 @@ async function run() {
       ...langs.map(i => `| \`${i.id}\` | ${i.name || i.id} | ${i.aliases?.map(i => `\`${i}\``).join(', ') || ''} |`),
     ].join('\n'),
   )
+  await fs.writeFile('docs/languages.md', mdLangs, 'utf-8')
 
-  await fs.writeFile('README.md', readme, 'utf-8')
+  // ---- Themes
+  let mdThemes = await fs.readFile('docs/themes.md', 'utf8')
+  const themes = await fs.readJSON('packages/shikiji/src/assets/themes.json')
+  mdThemes = replaceMarker(
+    mdThemes,
+    'all-themes',
+    [
+      '| ID |',
+      '| --- |',
+      ...themes.map(i => `| \`${i.id}\` |`),
+    ].join('\n'),
+  )
+  await fs.writeFile('docs/themes.md', mdThemes, 'utf-8')
 }
 
 run()
