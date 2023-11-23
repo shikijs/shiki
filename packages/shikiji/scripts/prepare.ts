@@ -91,6 +91,16 @@ export const bundledLanguages = {
 `,
   'utf-8',
   )
+
+  await fs.writeJSON(
+    `src/assets/${fileName}.json`,
+    BUNDLED_LANGUAGES.map(i => ({
+      id: i.id,
+      name: i.displayName,
+      aliases: i.aliases,
+    })),
+    { spaces: 2 },
+  )
 }
 
 await writeLanguageBundleIndex('langs', BUNDLED_LANGUAGES.map(i => i.id))
@@ -107,4 +117,12 @@ type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 export const bundledThemes = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
 `,
   'utf-8',
+)
+
+await fs.writeJSON(
+  'src/assets/themes.json',
+  BUNDLED_THEMES.map(i => ({
+    id: i,
+  })),
+  { spaces: 2 },
 )
