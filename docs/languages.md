@@ -222,7 +222,7 @@ Since `shikiji` is environment agnostic, that means we don't have access to the 
 const highlighter = await getHighlighter({
   langs: [
     {
-      id: 'vue-vine',
+      name: 'vue-vine',
       scopeName: 'source.vue-vine',
       // ‼️ This would not work!
       path: join(__dirname, './vine-ts.tmLanguage.json'),
@@ -247,7 +247,7 @@ const vineGrammar = JSON.parse(fs.readFileSync(join(__dirname, './vine-ts.tmLang
 const highlighter = await getHighlighter({
   langs: [
     {
-      id: 'vue-vine',
+      name: 'vue-vine',
       scopeName: 'source.vue-vine',
       embeddedLangs: [
         'vue-html',
