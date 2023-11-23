@@ -77,7 +77,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     ansi: string,
     options: CodeToThemedTokensOptions = {},
   ) {
-    const theme = shikiji.getTheme(options.theme || context.getLoadedThemes()[0])
+    const theme = shikiji.getTheme(options.theme || shikiji.getLoadedThemes()[0])
     return tokenizeAnsiWithTheme(theme, ansi)
   }
 
