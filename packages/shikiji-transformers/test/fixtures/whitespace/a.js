@@ -1,4 +1,4 @@
 function block( ) {
-  space()
-		table() 
+  space( )
+		table( ) 
 }

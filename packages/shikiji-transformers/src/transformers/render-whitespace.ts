@@ -18,13 +18,9 @@ export interface TransformerRenderWhitespaceOptions {
 
   /**
    * Position of rendered whitespace
-   * @default all positions
+   * @default all position
    */
-  positions?: {
-    startOfLine?: boolean
-    endOfLine?: boolean
-    inline?: boolean
-  }
+  position?: 'all' | 'boundary' | 'trailing'
 }
 
 /**
@@ -39,33 +35,42 @@ export function transformerRenderWhitespace(
     '\t': options.classTab ?? 'tab',
   }
 
-  const keys = Object.keys(classMap)
+  const position = options.position ?? 'all'
+  const renderStart = position === 'all' || position === 'boundary'
+  const renderEnd = position === 'all' || position === 'trailing' || position === 'boundary'
+  const renderMiddle = position === 'all'
 
-  // TODO: support `positions`
+  const keys = Object.keys(classMap)
 
   return {
     name: 'shikiji-transformers:render-whitespace',
+    // We use `root` hook here to ensure it runs after all other transformers
     root(root) {
       const pre = root.children[0] as Element
       const code = pre.children[0] as Element
       code.children.forEach((line) => {
         if (line.type !== 'element')
           return
-        const first = line.children[0]
-        if (!first || first.type !== 'element')
-          return
-        const textNode = first.children[0]
-        if (!textNode || textNode.type !== 'text')
-          return
-        line.children = line.children.flatMap((token) => {
+        const total = line.children.length
+        line.children = line.children.flatMap((token, idx) => {
           if (token.type !== 'element')
             return token
+          if (idx === 0 && !renderStart)
+            return token
+          if (idx === total - 1 && !renderEnd)
+            return token
+          if (idx > 0 && idx < total - 1 && !renderMiddle)
+            return token
+
           const node = token.children[0]
           if (node.type !== 'text' || !node.value)
             return token
 
           // Split by whitespaces
-          const parts = node.value.split(/([ \t])/).filter(i => i.length)
+          const parts = mergeSpaces(
+            node.value.split(/([ \t])/).filter(i => i.length),
+            position,
+          )
           if (parts.length <= 1)
             return token
 
@@ -86,4 +91,36 @@ export function transformerRenderWhitespace(
       )
     },
   }
+}
+
+function isSpace(part: string) {
+  return part === ' ' || part === '\t'
+}
+
+function mergeSpaces(parts: string[], type: 'all' | 'boundary' | 'trailing') {
+  if (type === 'all')
+    return parts
+  let leftCount = 0
+  let rightCount = 0
+  if (type === 'boundary') {
+    for (let i = 0; i < parts.length; i++) {
+      if (isSpace(parts[i]))
+        leftCount++
+      else
+        break
+    }
+  }
+  if (type === 'boundary' || type === 'trailing') {
+    for (let i = parts.length - 1; i >= 0; i--) {
+      if (isSpace(parts[i]))
+        rightCount++
+      else
+        break
+    }
+  }
+  return [
+    ...parts.slice(0, leftCount),
+    parts.slice(leftCount, parts.length - rightCount).join(''),
+    ...parts.slice(parts.length - rightCount),
+  ]
 }

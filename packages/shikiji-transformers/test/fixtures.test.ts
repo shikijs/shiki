@@ -18,6 +18,7 @@ function suite(
   files: Record<string, string>,
   transformers: ShikijiTransformer[],
   replace?: (code: string) => string,
+  outputSuffix = '',
 ) {
   describe(name, () => {
     for (const path of Object.keys(files)) {
@@ -37,11 +38,24 @@ function suite(
           code = replace(code)
 
         expect(code)
-          .toMatchFileSnapshot(`${path}.output.html`)
+          .toMatchFileSnapshot(`${path}${outputSuffix}.output.html`)
       })
     }
   })
 }
+
+const CSS_RENDER_WHITESPACE = `
+<style>
+* { tab-size: 4; }
+body { margin: 0; }
+.shiki { padding: 1em; }
+.tab, .space { position: relative; }
+.tab::before { content: "\\21E5"; position: absolute; opacity: 0.3; }
+.space::before { content: "\\B7"; position: absolute; opacity: 0.3; }
+</style>
+`
+
+// ---------
 
 suite(
   'diff',
@@ -102,18 +116,27 @@ body { margin: 0; }
 )
 
 suite(
-  'whitespace',
+  'whitespace:all',
   import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
-  [transformerRenderWhitespace()],
-  code => `${code}
-<style>
-* { tab-size: 4; }
-body { margin: 0; }
-.shiki { padding: 1em; }
-.tab, .space { position: relative; }
-.tab::before { content: "\\21E5"; position: absolute; opacity: 0.3; }
-.space::before { content: "\\B7"; position: absolute; opacity: 0.3; }
-</style>`,
+  [transformerRenderWhitespace({ position: 'all' })],
+  code => `${code}${CSS_RENDER_WHITESPACE}`,
+  '.all',
+)
+
+suite(
+  'whitespace:boundary',
+  import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
+  [transformerRenderWhitespace({ position: 'boundary' })],
+  code => `${code}${CSS_RENDER_WHITESPACE}`,
+  '.boundary',
+)
+
+suite(
+  'whitespace:trailing',
+  import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
+  [transformerRenderWhitespace({ position: 'trailing' })],
+  code => `${code}${CSS_RENDER_WHITESPACE}`,
+  '.trailing',
 )
 
 suite(
