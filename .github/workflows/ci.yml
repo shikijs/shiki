@@ -62,8 +62,13 @@ jobs:
 
     strategy:
       matrix:
-        node: [16.x, 18.x]
+        node: [lts/*]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - node: 16.x
+            os: ubuntu-latest
+          - node: 18.x
+            os: ubuntu-latest
       fail-fast: false
 
     steps:
@@ -87,4 +92,9 @@ jobs:
         run: nr build
 
       - name: Test
-        run: nr test
+        run: nr test --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
