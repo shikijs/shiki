@@ -40,6 +40,7 @@ export async function getShikiContext(options: HighlighterCoreOptions = {}): Pro
   }), 'vscode-oniguruma', langs)
 
   const _registry = new Registry(resolver, themes, langs)
+  Object.assign(_registry.alias, options.langAlias)
   await _registry.init()
 
   function getLangGrammar(name: string) {
@@ -84,12 +85,22 @@ export async function getShikiContext(options: HighlighterCoreOptions = {}): Pro
     )
   }
 
+  function updateAlias(alias: Record<string, string>) {
+    Object.assign(_registry.alias, alias)
+  }
+
+  function getAlias() {
+    return _registry.alias
+  }
+
   return {
     setTheme,
     getTheme,
     getLangGrammar,
     getLoadedThemes,
     getLoadedLanguages,
+    getAlias,
+    updateAlias,
     loadLanguage,
     loadTheme,
   }

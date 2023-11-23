@@ -12,6 +12,8 @@ export class Registry extends TextMateRegistry {
   private _langMap: Record<string, LanguageRegistration> = {}
   private _langGraph: Map<string, LanguageRegistration> = new Map()
 
+  alias: Record<string, string> = {}
+
   constructor(
     private _resolver: Resolver,
     public _themes: (ThemeRegistration | ThemeRegistrationRaw)[],
@@ -42,11 +44,20 @@ export class Registry extends TextMateRegistry {
   }
 
   public getGrammar(name: string) {
+    if (this.alias[name]) {
+      const resolved = new Set<string>([name])
+      while (this.alias[name]) {
+        name = this.alias[name]
+        if (resolved.has(name))
+          throw new Error(`[shikiji] Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
+        resolved.add(name)
+      }
+    }
     return this._resolvedGrammars[name]
   }
 
   public async loadLanguage(lang: LanguageRegistration) {
-    if (this._resolvedGrammars[lang.name])
+    if (this.getGrammar(lang.name))
       return
 
     this._resolver.addLanguage(lang)
@@ -67,8 +78,8 @@ export class Registry extends TextMateRegistry {
     const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
     this._resolvedGrammars[lang.name] = g!
     if (lang.aliases) {
-      lang.aliases.forEach((la) => {
-        this._resolvedGrammars[la] = g!
+      lang.aliases.forEach((alias) => {
+        this.alias[alias] = lang.name
       })
     }
   }
@@ -100,7 +111,7 @@ export class Registry extends TextMateRegistry {
   }
 
   public getLoadedLanguages() {
-    return Object.keys(this._resolvedGrammars) as string[]
+    return Object.keys({ ...this._resolvedGrammars, ...this.alias }) as string[]
   }
 
   private resolveEmbeddedLanguages(lang: LanguageRegistration) {

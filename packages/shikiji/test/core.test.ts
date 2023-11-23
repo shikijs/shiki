@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { getHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
+import ts from '../src/assets/langs/typescript'
 import nord from '../dist/themes/nord.mjs'
 import mtp from '../dist/themes/material-theme-palenight.mjs'
 
@@ -41,9 +42,9 @@ describe('should', () => {
       .toMatchInlineSnapshot(`
         [
           "javascript",
-          "js",
           "c",
           "python",
+          "js",
           "py",
         ]
       `)
@@ -89,6 +90,37 @@ describe('should', () => {
 
     expect(code).toMatchInlineSnapshot(`"<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">"</span><span style="color:#A3BE8C">Hi</span><span style="color:#ECEFF4">"</span><span style="color:#D8DEE9FF">)</span></span></code></pre>"`)
   })
+
+  it('works with alias', async () => {
+    const shiki = await getHighlighterCore({
+      langAlias: {
+        mylang: 'javascript',
+        mylang2: 'js', // nested alias
+      },
+    })
+
+    await shiki.loadLanguage(js)
+    await shiki.loadTheme(nord)
+
+    const code = shiki.codeToHtml('console.log("Hi")', { lang: 'mylang', theme: 'nord' })
+    const code2 = shiki.codeToHtml('console.log("Hi")', { lang: 'mylang2', theme: 'nord' })
+    expect(code).toBe(code2)
+    expect(code).toMatchInlineSnapshot(`"<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">"</span><span style="color:#A3BE8C">Hi</span><span style="color:#ECEFF4">"</span><span style="color:#D8DEE9FF">)</span></span></code></pre>"`)
+  })
+
+  it('works with alias override', async () => {
+    const shiki = await getHighlighterCore({
+      langAlias: {
+        js: 'typescript',
+      },
+    })
+
+    await shiki.loadLanguage(ts)
+    await shiki.loadTheme(nord)
+
+    const code = shiki.codeToHtml('const a: Foo = 1', { lang: 'js', theme: 'nord' })
+    expect(code).toMatchInlineSnapshot(`"<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9"> a</span><span style="color:#81A1C1">:</span><span style="color:#8FBCBB"> Foo</span><span style="color:#81A1C1"> =</span><span style="color:#B48EAD"> 1</span></span></code></pre>"`)
+  })
 })
 
 describe('errors', () => {
@@ -129,5 +161,20 @@ describe('errors', () => {
 
     const code2 = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'material-theme-palenight' })
     expect.soft(code2).toBe(code)
+  })
+
+  it('throw on circular alias', async () => {
+    const shiki = await getHighlighterCore({
+      langAlias: {
+        mylang: 'mylang2',
+        mylang2: 'mylang',
+      },
+    })
+
+    await shiki.loadLanguage(js)
+    await shiki.loadTheme(nord)
+
+    await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'mylang', theme: 'nord' }))
+      .toThrowErrorMatchingInlineSnapshot(`[Error: [shikiji] Circular alias \`mylang -> mylang2 -> mylang\`]`)
   })
 })

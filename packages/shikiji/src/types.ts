@@ -47,6 +47,9 @@ export interface ShikiContext {
   getLoadedLanguages(): string[]
   loadLanguage(...langs: LanguageInput[]): Promise<void>
   loadTheme(...themes: ThemeInput[]): Promise<void>
+
+  getAlias(): Record<string, string>
+  updateAlias(alias: Record<string, string>): void
 }
 
 export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
@@ -79,6 +82,11 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
 export interface HighlighterCoreOptions {
   themes?: ThemeInput[]
   langs?: LanguageInput[]
+  /**
+   * Alias of languages
+   * @example { 'my-lang': 'javascript' }
+   */
+  langAlias?: Record<string, string>
   loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
 }
 

@@ -25,10 +25,10 @@ describe('should', () => {
       .toMatchInlineSnapshot(`
         [
           "javascript",
-          "js",
           "typescript",
-          "ts",
           "python",
+          "js",
+          "ts",
           "py",
         ]
       `)
@@ -52,36 +52,36 @@ describe('should', () => {
       ],
     })
 
-    expect(shiki.getLoadedLanguages())
+    expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
+          "coffee",
+          "css",
+          "gql",
+          "graphql",
+          "html",
+          "jade",
           "javascript",
           "js",
-          "css",
-          "sass",
-          "stylus",
-          "styl",
-          "typescript",
-          "ts",
-          "jsx",
-          "tsx",
           "json",
-          "jsonc",
           "json5",
-          "yaml",
-          "yml",
-          "toml",
-          "html",
-          "scss",
-          "coffee",
+          "jsonc",
+          "jsx",
           "less",
-          "graphql",
-          "gql",
           "markdown",
           "md",
           "pug",
-          "jade",
+          "sass",
+          "scss",
+          "styl",
+          "stylus",
+          "toml",
+          "ts",
+          "tsx",
+          "typescript",
           "vue",
+          "yaml",
+          "yml",
         ]
       `)
   })

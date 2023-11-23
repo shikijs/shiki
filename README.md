@@ -455,6 +455,23 @@ const code = await codeToHtml('foo\bar', {
 })
 ```
 
+### Custom Language Aliases
+
+You can register custom language aliases with `langAlias` option. For example:
+
+```js
+import { getHighlighter } from 'shikiji'
+
+const shiki = await getHighlighter({
+  langs: ['javascript'],
+  langAlias: {
+    mylang: 'javascript',
+  },
+})
+
+const code = shiki.codeToHtml('const a = 1', { lang: 'mylang' })
+```
+
 ## Breaking Changes from Shiki
 
 > We take this chance to make some breaking changes that we think are beneficial for the future. We'd suggest you try to migrate those changes if possible, as most of them should be straightforward. If you have very deep integration, you can try our compatibility build [`shikiji-compat`](./packages/shikiji-compat) which aligns with `shiki`'s current API.
