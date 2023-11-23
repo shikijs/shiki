@@ -25,9 +25,14 @@ export default defineConfig({
     },
     coverage: {
       provider: 'v8',
+      include: [
+        '**/packages/*/src/*.ts',
+      ],
       exclude: [
         '**/src/oniguruma/**',
         '**/src/assets/**',
+        '**/node_modules/**',
+        '**/dist/**',
         '**/stackElementMetadata.ts',
       ],
     },

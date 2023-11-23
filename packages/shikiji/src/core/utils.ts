@@ -14,6 +14,8 @@ export function isSpecialLang(lang: string) {
 }
 
 export function addClassToHast(node: Element, className: string | string[]) {
+  if (!className)
+    return
   node.properties ||= {}
   node.properties.class ||= []
   if (typeof node.properties.class === 'string')

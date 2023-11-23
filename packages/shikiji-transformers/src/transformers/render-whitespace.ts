@@ -38,6 +38,8 @@ export function transformerRenderWhitespace(
     '\t': options.classTab ?? 'tab',
   }
 
+  const keys = Object.keys(classMap)
+
   // TODO: support `positions`
 
   return {
@@ -49,25 +51,25 @@ export function transformerRenderWhitespace(
       const textNode = first.children[0]
       if (!textNode || textNode.type !== 'text')
         return
-      node.children = node.children.flatMap((child) => {
-        if (child.type !== 'element')
-          return child
-        const node = child.children[0]
+      node.children = node.children.flatMap((token) => {
+        if (token.type !== 'element')
+          return token
+        const node = token.children[0]
         if (node.type !== 'text' || !node.value)
-          return child
+          return token
 
         // Split by whitespaces
         const parts = node.value.split(/([ \t])/).filter(i => i.length)
         if (parts.length <= 1)
-          return child
+          return token
 
         return parts.map((part) => {
           const clone = {
-            ...child,
-            properties: { ...child.properties },
+            ...token,
+            properties: { ...token.properties },
           }
           clone.children = [{ type: 'text', value: part }]
-          if (part in classMap) {
+          if (keys.includes(part)) {
             addClassToHast(clone, classMap[part])
             delete clone.properties.style
           }
