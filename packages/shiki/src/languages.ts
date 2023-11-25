@@ -807,7 +807,8 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.css.less',
     path: 'less.tmLanguage.json',
     displayName: 'Less',
-    samplePath: 'less.sample'
+    samplePath: 'less.sample',
+    embeddedLangs: ['css']
   },
   {
     id: 'liquid',
