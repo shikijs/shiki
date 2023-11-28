@@ -1,6 +1,7 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import type { Element } from 'hast'
+import { mergeSpaces } from './_utils'
 
 export interface TransformerRenderWhitespaceOptions {
   /**
@@ -36,10 +37,6 @@ export function transformerRenderWhitespace(
   }
 
   const position = options.position ?? 'all'
-  const renderStart = position === 'all' || position === 'boundary'
-  const renderEnd = position === 'all' || position === 'trailing' || position === 'boundary'
-  const renderMiddle = position === 'all'
-
   const keys = Object.keys(classMap)
 
   return {
@@ -51,15 +48,15 @@ export function transformerRenderWhitespace(
       code.children.forEach((line) => {
         if (line.type !== 'element')
           return
-        const total = line.children.length
-        line.children = line.children.flatMap((token, idx) => {
+        const elements = line.children.filter(token => token.type === 'element')
+        const last = elements.length - 1
+        line.children = line.children.flatMap((token) => {
           if (token.type !== 'element')
             return token
-          if (idx === 0 && !renderStart)
+          const index = elements.indexOf(token)
+          if (position === 'boundary' && index !== 0 && index !== last)
             return token
-          if (idx === total - 1 && !renderEnd)
-            return token
-          if (idx > 0 && idx < total - 1 && !renderMiddle)
+          if (position === 'trailing' && index !== last)
             return token
 
           const node = token.children[0]
@@ -69,7 +66,10 @@ export function transformerRenderWhitespace(
           // Split by whitespaces
           const parts = mergeSpaces(
             node.value.split(/([ \t])/).filter(i => i.length),
-            position,
+            (position === 'boundary' && index === last && last !== 0)
+              ? 'trailing'
+              : position,
+            position !== 'trailing',
           )
           if (parts.length <= 1)
             return token
@@ -91,36 +91,4 @@ export function transformerRenderWhitespace(
       )
     },
   }
-}
-
-function isSpace(part: string) {
-  return part === ' ' || part === '\t'
-}
-
-function mergeSpaces(parts: string[], type: 'all' | 'boundary' | 'trailing') {
-  if (type === 'all')
-    return parts
-  let leftCount = 0
-  let rightCount = 0
-  if (type === 'boundary') {
-    for (let i = 0; i < parts.length; i++) {
-      if (isSpace(parts[i]))
-        leftCount++
-      else
-        break
-    }
-  }
-  if (type === 'boundary' || type === 'trailing') {
-    for (let i = parts.length - 1; i >= 0; i--) {
-      if (isSpace(parts[i]))
-        rightCount++
-      else
-        break
-    }
-  }
-  return [
-    ...parts.slice(0, leftCount),
-    parts.slice(leftCount, parts.length - rightCount).join(''),
-    ...parts.slice(parts.length - rightCount),
-  ]
 }
