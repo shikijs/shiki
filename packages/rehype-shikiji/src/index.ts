@@ -22,6 +22,13 @@ export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
   highlightLines?: boolean | string
 
   /**
+   * Add `language-*` class to code element
+   *
+   * @default false
+   */
+  addLanguageClass?: boolean
+
+  /**
    * Extra meta data to pass to the highlighter
    */
   meta?: Record<string, any>
@@ -40,6 +47,7 @@ export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
 const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = {} as any) {
   const {
     highlightLines = true,
+    addLanguageClass = false,
     parseMetaString,
     ...rest
   } = options
@@ -91,6 +99,17 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = 
           ...rest.meta,
           ...meta,
         },
+      }
+
+      if (addLanguageClass) {
+        codeOptions.transformers ||= []
+        codeOptions.transformers.push({
+          name: 'rehype-shikiji:code-language-class',
+          code(node) {
+            addClassToHast(node, language)
+            return node
+          },
+        })
       }
 
       if (highlightLines && typeof attrs === 'string') {

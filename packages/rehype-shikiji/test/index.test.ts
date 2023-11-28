@@ -27,3 +27,17 @@ it('run', async () => {
 
   expect(file.toString()).toMatchFileSnapshot('./fixtures/a.out.html')
 })
+
+it('code-add-language-class', async () => {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiji, {
+      theme: 'vitesse-light',
+      addLanguageClass: true,
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/b.md', import.meta.url)))
+
+  expect(file.toString()).toMatchFileSnapshot('./fixtures/b.out.html')
+})
