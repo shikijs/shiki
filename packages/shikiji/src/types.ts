@@ -1,4 +1,5 @@
 import type { IGrammar, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type { IRawThemeSetting } from 'vscode-textmate/release/theme'
 import type { Element, Root } from 'hast'
 import type { bundledThemes } from './themes'
 import type { bundledLanguages } from './assets/langs'
@@ -263,7 +264,7 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   /**
    * @description tokenColors of the theme file
    */
-  settings: any[]
+  settings: IRawThemeSetting[]
 
   /**
    * @description text default foreground color
