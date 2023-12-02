@@ -37,9 +37,9 @@ for (const file of allLangFiles) {
     unbalancedBracketSelectors: lang.unbalancedBracketSelectors,
   }
 
-  // Do not include everything for markdown
-  if (lang.id === 'markdown')
-    json.embeddedLangs = []
+  // F# and Markdown has circular dependency
+  if (lang.id === 'fsharp')
+    json.embeddedLangs = json.embeddedLangs.filter((i: string) => i !== 'markdown')
 
   const embedded = (json.embeddedLangs || []) as string[]
 

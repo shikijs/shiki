@@ -55,34 +55,131 @@ describe('should', () => {
     expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
+          "bash",
+          "bat",
+          "batch",
+          "bibtex",
+          "c",
+          "c#",
+          "c++",
+          "clj",
+          "clojure",
+          "cmd",
           "coffee",
+          "cpp",
+          "cs",
+          "csharp",
           "css",
+          "dart",
+          "diff",
+          "docker",
+          "dockerfile",
+          "elixir",
+          "erl",
+          "erlang",
+          "f#",
+          "fs",
+          "fsharp",
+          "git-commit",
+          "git-rebase",
+          "glsl",
+          "gnuplot",
+          "go",
           "gql",
           "graphql",
+          "groovy",
+          "handlebars",
+          "haskell",
+          "hbs",
+          "hs",
           "html",
+          "ini",
           "jade",
+          "java",
           "javascript",
           "js",
           "json",
           "json5",
           "jsonc",
           "jsx",
+          "julia",
+          "latex",
           "less",
+          "lua",
+          "make",
+          "makefile",
           "markdown",
           "md",
+          "objc",
+          "objective-c",
+          "perl",
+          "perl6",
+          "php",
+          "powershell",
+          "properties",
+          "ps",
+          "ps1",
           "pug",
+          "py",
+          "python",
+          "r",
+          "raku",
+          "rb",
+          "rs",
+          "ruby",
+          "rust",
           "sass",
+          "scala",
           "scss",
+          "sh",
+          "shell",
+          "shellscript",
+          "sql",
           "styl",
           "stylus",
+          "swift",
+          "tex",
           "toml",
           "ts",
           "tsx",
           "typescript",
+          "vb",
           "vue",
+          "xml",
+          "xsl",
           "yaml",
           "yml",
+          "zsh",
         ]
+      `)
+  })
+
+  // https://github.com/antfu/shikiji/issues/35
+  it('dynamic load theme and lang with md', async () => {
+    const shiki = await getHighlighter({})
+
+    await shiki.loadTheme('min-dark')
+    await shiki.loadLanguage('md')
+    await shiki.loadLanguage('js')
+
+    expect(shiki.getLoadedLanguages().length)
+      .toMatchInlineSnapshot(`89`)
+
+    expect(shiki.getLoadedThemes())
+      .toMatchInlineSnapshot(`
+        [
+          "min-dark",
+        ]
+      `)
+
+    expect(shiki.codeToHtml('console.log(1)', { lang: 'js', theme: 'min-dark' }))
+      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span></code></pre>"`)
+
+    expect(shiki.codeToHtml('```js\nconsole.log(1)\n```', { lang: 'md', theme: 'min-dark' }))
+      .toMatchInlineSnapshot(`
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`js</span></span>
+        <span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span>
+        <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
   })
 })
