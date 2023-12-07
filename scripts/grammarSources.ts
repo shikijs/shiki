@@ -330,7 +330,7 @@ export const githubGrammarSources: [string, string][] = [
   ['viml', 'https://github.com/dunstontc/viml/blob/master/syntaxes/viml.tmLanguage.json'],
   [
     'vue',
-    'https://github.com/vuejs/language-tools/blob/master/packages/vscode-vue/syntaxes/vue.tmLanguage.json'
+    'https://github.com/vuejs/language-tools/blob/master/extensions/vscode/syntaxes/vue.tmLanguage.json'
   ],
   ['vue-html', 'https://github.com/vuejs/vetur/blob/master/syntaxes/vue-html.tmLanguage.json'],
   ['vyper', 'https://github.com/tintinweb/vscode-vyper/blob/master/syntaxes/vyper.tmLanguage.json'],
