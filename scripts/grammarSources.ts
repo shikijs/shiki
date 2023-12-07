@@ -256,7 +256,7 @@ export const githubGrammarSources: [string, string][] = [
   ],
   [
     'razor',
-    'https://github.com/dotnet/aspnetcore-tooling/blob/master/src/Razor/src/Microsoft.AspNetCore.Razor.VSCode.Extension/syntaxes/aspnetcorerazor.tmLanguage.json'
+    'https://github.com/dotnet/razor/blob/main/src/Razor/src/Microsoft.VisualStudio.RazorExtension/EmbeddedGrammars/aspnetcorerazor.tmLanguage.json'
   ],
   ['reg', 'https://github.com/mihai-vlc/reg-vscode/blob/master/syntaxes/reg.tmLanguage'],
   [
