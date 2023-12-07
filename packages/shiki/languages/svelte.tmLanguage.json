@@ -398,7 +398,15 @@
               "name": "keyword.control.flow.svelte"
             },
             {
+              "match": "snippet",
+              "name": "keyword.control.svelte"
+            },
+            {
               "match": "html",
+              "name": "keyword.other.svelte"
+            },
+            {
+              "match": "render",
               "name": "keyword.other.svelte"
             },
             {
@@ -416,7 +424,7 @@
     "special-tags-modes": {
       "patterns": [
         {
-          "begin": "(?<=(if|key|then|catch|html).*?)\\G",
+          "begin": "(?<=(if|key|then|catch|snippet|html|render).*?)\\G",
           "end": "(?=})",
           "name": "meta.embedded.expression.svelte source.ts",
           "patterns": [

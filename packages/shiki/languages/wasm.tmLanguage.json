@@ -150,7 +150,7 @@
             {
               "comment": "Vector instruction (i8x16) [simd]",
               "name": "keyword.operator.word.wat",
-              "match": "\\b(i8x16)\\.(?:splat|replace_lane|add|sub|mul|neg|shl|shr_[su]|eq|ne|lt_[su]|le_[su]|gt_[su]|ge_[su]|min_[su]|max_[su]|any_true|all_true|extract_lane_[su]|add_saturate_[su]|sub_saturate_[su]|avgr_u|narrow_i16x8_[su])\\b",
+              "match": "\\b(i8x16)\\.(?:shuffle|swizzle|splat|replace_lane|add|sub|mul|neg|shl|shr_[su]|eq|ne|lt_[su]|le_[su]|gt_[su]|ge_[su]|min_[su]|max_[su]|any_true|all_true|extract_lane_[su]|add_saturate_[su]|sub_saturate_[su]|avgr_u|narrow_i16x8_[su])\\b",
               "captures": {
                 "1": {
                   "name": "support.class.wat"

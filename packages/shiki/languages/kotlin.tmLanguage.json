@@ -300,7 +300,7 @@
       "name": "entity.name.type.annotation.kotlin"
     },
     "class-declaration": {
-      "match": "\\b(class|interface)\\s+(\\b\\w+\\b|`[^`]+`)\\s*(?<GROUP><([^<>]|\\g<GROUP>)+>)?",
+      "match": "\\b(class|(?:fun\\s+)?interface)\\s+(\\b\\w+\\b|`[^`]+`)\\s*(?<GROUP><([^<>]|\\g<GROUP>)+>)?",
       "captures": {
         "1": {
           "name": "storage.type.class.kotlin"

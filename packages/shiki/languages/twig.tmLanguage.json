@@ -253,6 +253,17 @@
       ]
     },
     {
+      "begin": "(?ix)   # Enable free spacing mode, case insensitive\n                        (?<=\\{\\%\\sscss\\s\\%\\}|\\{\\%\\sincludescss\\s\\%\\}|\\{\\%\\sincludehiresscss\\s\\%\\})\n                        ",
+      "comment": "Add SCSS support to set tags that use the pattern \"scss\" in their name",
+      "end": "(?ix)(?=\\{\\%\\sendscss\\s\\%\\}|\\{\\%\\sendincludescss\\s\\%\\}|\\{\\%\\sendincludehiresscss\\s\\%\\})",
+      "name": "source.css.scss.embedded.twig",
+      "patterns": [
+        {
+          "include": "source.css.scss"
+        }
+      ]
+    },
+    {
       "begin": "(</?)((?i:body|head|html)\\b)",
       "captures": {
         "1": {
@@ -591,7 +602,7 @@
               "name": "keyword.operator.logical.twig"
             }
           },
-          "match": "(?<=\\s)(\\?|:|and|not|or)(?=\\s)"
+          "match": "(?<=\\s)(\\?|:|\\?:|\\?\\?|and|not|or)(?=\\s)"
         },
         {
           "captures": {
@@ -783,6 +794,9 @@
           "include": "#twig-constants"
         },
         {
+          "include": "#twig-operators"
+        },
+        {
           "include": "#twig-strings"
         },
         {
@@ -841,6 +855,9 @@
         },
         {
           "include": "#twig-constants"
+        },
+        {
+          "include": "#twig-operators"
         },
         {
           "include": "#twig-strings"
@@ -1038,6 +1055,9 @@
       "patterns": [
         {
           "include": "#twig-constants"
+        },
+        {
+          "include": "#twig-operators"
         },
         {
           "include": "#twig-functions-warg"

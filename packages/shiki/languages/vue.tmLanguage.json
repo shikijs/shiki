@@ -953,7 +953,7 @@
       ]
     },
     "vue-directives-original": {
-      "begin": "(?:\\b(v-)|(:)|(@)|(#))(\\[?)([\\w\\-]*)(\\]?)(?:\\.([\\w\\-]*))*",
+      "begin": "(?:\\b(v-)|([:\\.])|(@)|(#))(\\[?)([\\w\\-]*)(\\]?)(?:\\.([\\w\\-]*))*",
       "beginCaptures": {
         "1": {
           "name": "entity.other.attribute-name.html.vue"

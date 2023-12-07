@@ -177,7 +177,7 @@
       "patterns": [
         {
           "name": "keyword.operator.c-pointer.zig",
-          "match": "\\[*c\\]"
+          "match": "(?<=\\[)\\*c(?=\\])"
         },
         {
           "name": "keyword.operator.comparison.zig",
