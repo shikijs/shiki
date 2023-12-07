@@ -1,5 +1,14 @@
 import type { Element, Root, Text } from 'hast'
-import type { CodeToHastOptions, HtmlRendererOptions, ShikiContext, ShikijiTransformerContext, ThemedToken } from '../types'
+import type {
+  CodeToHastOptions,
+  HtmlRendererOptions,
+  ShikiContext,
+  ShikijiTransformerContext,
+  ThemedToken,
+  ThemedTokenWithVariants,
+  TokenStyles,
+} from '../types'
+import css from '../assets/langs/css'
 import { codeToThemedTokens } from './tokenizer'
 import { FontStyle } from './stackElementMetadata'
 import { codeToTokensWithThemes } from './renderer-html-themes'
@@ -22,7 +31,9 @@ export function codeToHast(
     } = options
 
     const themes = Object.entries(options.themes)
-      .filter(i => i[1]) as [string, string][]
+      .filter(i => i[1])
+      .map(i => ({ color: i[0], theme: i[1]! }))
+      .sort((a, b) => a.color === defaultColor ? -1 : b.color === defaultColor ? 1 : 0)
 
     if (themes.length === 0)
       throw new Error('[shikiji] `themes` option must not be empty')
@@ -32,55 +43,18 @@ export function codeToHast(
       code,
       options,
     )
-      .sort(a => a[0] === defaultColor ? -1 : 1)
 
-    if (defaultColor && !themeTokens.find(t => t[0] === defaultColor))
+    if (defaultColor && !themes.find(t => t.color === defaultColor))
       throw new Error(`[shikiji] \`themes\` option must contain the defaultColor key \`${defaultColor}\``)
 
-    const themeRegs = themeTokens.map(t => context.getTheme(t[1]))
-    const themeMap = themeTokens.map(t => t[2])
-    tokens = []
+    const themeRegs = themes.map(t => context.getTheme(t.theme))
 
-    for (let i = 0; i < themeMap[0].length; i++) {
-      const lineMap = themeMap.map(t => t[i])
-      const lineout: any[] = []
-      tokens.push(lineout)
-      for (let j = 0; j < lineMap[0].length; j++) {
-        const tokenMap = lineMap.map(t => t[j])
-        const tokenStyles = tokenMap.map(t => getTokenStyles(t))
+    const themesOrder = themes.map(t => t.color)
+    tokens = themeTokens
+      .map(line => line.map(token => flattenToken(token, themesOrder, cssVariablePrefix, defaultColor)))
 
-        // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
-        const styleKeys = new Set(tokenStyles.flatMap(t => Object.keys(t)))
-        const mergedStyles = tokenStyles.reduce((acc, cur, idx) => {
-          for (const key of styleKeys) {
-            const value = cur[key] || 'inherit'
-
-            if (idx === 0 && defaultColor) {
-              acc[key] = value
-            }
-            else {
-              const varKey = cssVariablePrefix + themeTokens[idx][0] + (key === 'color' ? '' : `-${key}`)
-              if (acc[key])
-                acc[key] += `;${varKey}:${value}`
-              else
-                acc[key] = `${varKey}:${value}`
-            }
-          }
-          return acc
-        }, {} as Record<string, string>)
-
-        lineout.push({
-          ...tokenMap[0],
-          color: '',
-          htmlStyle: defaultColor
-            ? stringifyTokenStyle(mergedStyles)
-            : Object.values(mergedStyles).join(';'),
-        })
-      }
-    }
-
-    fg = themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}:`) + themeRegs[idx].fg).join(';')
-    bg = themeTokens.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t[0]}-bg:`) + themeRegs[idx].bg).join(';')
+    fg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}:`) + themeRegs[idx].fg).join(';')
+    bg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}-bg:`) + themeRegs[idx].bg).join(';')
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
@@ -106,6 +80,48 @@ export function codeToHast(
     themeName,
     rootStyle,
   })
+}
+
+/**
+ *
+ */
+function flattenToken(
+  merged: ThemedTokenWithVariants,
+  variantsOrder: string[],
+  cssVariablePrefix: string,
+  defaultColor: string | boolean,
+) {
+  const token: ThemedToken = {
+    content: merged.content,
+    explanation: merged.explanation,
+  }
+
+  const styles = variantsOrder.map(t => getTokenStyleObject(merged.variants[t]))
+
+  // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
+  const styleKeys = new Set(styles.flatMap(t => Object.keys(t)))
+  const mergedStyles = styles.reduce((acc, cur, idx) => {
+    for (const key of styleKeys) {
+      const value = cur[key] || 'inherit'
+
+      if (idx === 0 && defaultColor) {
+        acc[key] = value
+      }
+      else {
+        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : `-${key}`)
+        if (acc[key])
+          acc[key] += `;${varKey}:${value}`
+        else
+          acc[key] = `${varKey}:${value}`
+      }
+    }
+    return acc
+  }, {} as Record<string, string>)
+
+  token.htmlStyle = defaultColor
+    ? stringifyTokenStyle(mergedStyles)
+    : Object.values(mergedStyles).join(';')
+  return token
 }
 
 export function tokensToHast(
@@ -190,7 +206,7 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      const style = token.htmlStyle || stringifyTokenStyle(getTokenStyles(token))
+      const style = token.htmlStyle || stringifyTokenStyle(getTokenStyleObject(token))
       if (style)
         tokenNode.properties.style = style
 
@@ -223,7 +239,7 @@ export function tokensToHast(
   return result
 }
 
-function getTokenStyles(token: ThemedToken) {
+function getTokenStyleObject(token: TokenStyles) {
   const styles: Record<string, string> = {}
   if (token.color)
     styles.color = token.color

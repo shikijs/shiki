@@ -230,119 +230,81 @@ describe('codeToTokensWithThemes', () => {
       .toMatchInlineSnapshot(`
         [
           [
-            "light",
-            "vitesse-light",
-            [
-              [
-                {
-                  "color": "#B07D48",
-                  "content": "a",
-                  "fontStyle": 0,
-                },
-                {
-                  "color": "#999999",
-                  "content": ".",
-                  "fontStyle": 0,
-                },
-                {
-                  "color": "#B07D48",
-                  "content": "b",
-                  "fontStyle": 0,
-                },
-              ],
-            ],
-          ],
-          [
-            "dark",
-            "vitesse-dark",
-            [
-              [
-                {
+            {
+              "content": "a",
+              "variants": {
+                "dark": {
                   "color": "#BD976A",
-                  "content": "a",
                   "fontStyle": 0,
                 },
-                {
-                  "color": "#666666",
-                  "content": ".",
+                "light": {
+                  "color": "#B07D48",
                   "fontStyle": 0,
                 },
-                {
-                  "color": "#BD976A",
-                  "content": "b",
-                  "fontStyle": 0,
-                },
-              ],
-            ],
-          ],
-          [
-            "nord",
-            "nord",
-            [
-              [
-                {
-                  "color": "#D8DEE9",
-                  "content": "a",
-                  "fontStyle": 0,
-                },
-                {
-                  "color": "#ECEFF4",
-                  "content": ".",
-                  "fontStyle": 0,
-                },
-                {
-                  "color": "#D8DEE9",
-                  "content": "b",
-                  "fontStyle": 0,
-                },
-              ],
-            ],
-          ],
-          [
-            "min-dark",
-            "min-dark",
-            [
-              [
-                {
+                "min-dark": {
                   "color": "#79B8FF",
-                  "content": "a",
                   "fontStyle": 0,
                 },
-                {
-                  "color": "#B392F0",
-                  "content": ".",
-                  "fontStyle": 0,
-                },
-                {
-                  "color": "#B392F0",
-                  "content": "b",
-                  "fontStyle": 0,
-                },
-              ],
-            ],
-          ],
-          [
-            "min-light",
-            "min-light",
-            [
-              [
-                {
+                "min-light": {
                   "color": "#1976D2",
-                  "content": "a",
                   "fontStyle": 0,
                 },
-                {
+                "nord": {
+                  "color": "#D8DEE9",
+                  "fontStyle": 0,
+                },
+              },
+            },
+            {
+              "content": ".",
+              "variants": {
+                "dark": {
+                  "color": "#666666",
+                  "fontStyle": 0,
+                },
+                "light": {
+                  "color": "#999999",
+                  "fontStyle": 0,
+                },
+                "min-dark": {
+                  "color": "#B392F0",
+                  "fontStyle": 0,
+                },
+                "min-light": {
                   "color": "#24292EFF",
-                  "content": ".",
                   "fontStyle": 0,
                 },
-                {
+                "nord": {
+                  "color": "#ECEFF4",
+                  "fontStyle": 0,
+                },
+              },
+            },
+            {
+              "content": "b",
+              "variants": {
+                "dark": {
+                  "color": "#BD976A",
+                  "fontStyle": 0,
+                },
+                "light": {
+                  "color": "#B07D48",
+                  "fontStyle": 0,
+                },
+                "min-dark": {
+                  "color": "#B392F0",
+                  "fontStyle": 0,
+                },
+                "min-light": {
                   "color": "#24292EFF",
-                  "content": "b",
                   "fontStyle": 0,
                 },
-              ],
-            ],
+                "nord": {
+                  "color": "#D8DEE9",
+                  "fontStyle": 0,
+                },
+              },
+            },
           ],
         ]
       `)

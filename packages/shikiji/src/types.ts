@@ -54,40 +54,84 @@ export interface ShikiContext {
 }
 
 export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
+  /**
+   * Get highlighted code in HTML string
+   */
   codeToHtml(
     code: string,
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): string
-  codeToThemedTokens(
-    code: string,
-    options: CodeToThemedTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): ThemedToken[][]
-  codeToTokensWithThemes(
-    code: string,
-    options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): [color: string, theme: string, tokens: ThemedToken[][]][]
+  /**
+   * Get highlighted code in HAST.
+   * @see https://github.com/syntax-tree/hast
+   */
   codeToHast(
     code: string,
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): Root
+  /**
+   * Get highlighted code in tokens.
+   * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
+   */
+  codeToThemedTokens(
+    code: string,
+    options: CodeToThemedTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): ThemedToken[][]
+  /**
+   * Get highlighted code in tokens with multiple themes.
+   *
+   * Different from `codeToThemedTokens`, each token will have a `variants` property consisting of an object of color name to token styles.
+   *
+   * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
+   */
+  codeToTokensWithThemes(
+    code: string,
+    options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): ThemedTokenWithVariants[][]
 
+  /**
+   * Load a theme to the highlighter, so later it can be used synchronously.
+   */
   loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
+  /**
+   * Load a language to the highlighter, so later it can be used synchronously.
+   */
   loadLanguage(...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]): Promise<void>
 
+  /**
+   * Get the theme registration object
+   */
   getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
 
+  /**
+   * Get the names of loaded languages
+   *
+   * Special-handled languages like `text`, `plain` and `ansi` are not included.
+   */
   getLoadedLanguages(): string[]
+  /**
+   * Get the names of loaded themes
+   */
   getLoadedThemes(): string[]
 }
 
 export interface HighlighterCoreOptions {
+  /**
+   * Theme names, or theme registration objects to be loaded upfront.
+   */
   themes?: ThemeInput[]
+  /**
+   * Language names, or language registration objects to be loaded upfront.
+   */
   langs?: LanguageInput[]
   /**
    * Alias of languages
    * @example { 'my-lang': 'javascript' }
    */
   langAlias?: Record<string, string>
+  /**
+   * Load wasm file from a custom path or using a custom function.
+   */
   loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
 }
 
@@ -426,24 +470,13 @@ export interface ThemedTokenExplanation {
  * }
  *
  */
-export interface ThemedToken {
+export interface ThemedToken extends TokenStyles, TokenBase {}
+
+export interface TokenBase {
   /**
    * The content of the token
    */
   content: string
-  /**
-   * 6 or 8 digit hex code representation of the token's color
-   */
-  color?: string
-  /**
-   * Override with custom inline style for HTML renderer.
-   * When specified, `color` will be ignored.
-   */
-  htmlStyle?: string
-  /**
-   * Font style of token. Can be None/Italic/Bold/Underline
-   */
-  fontStyle?: FontStyle
   /**
    * Explanation of
    *
@@ -451,6 +484,29 @@ export interface ThemedToken {
    * - reason that token text is given a color (one matching scope matches a rule (scope -> color) in the theme)
    */
   explanation?: ThemedTokenExplanation[]
+}
+
+export interface TokenStyles {
+  /**
+   * 6 or 8 digit hex code representation of the token's color
+   */
+  color?: string
+  /**
+   * Font style of token. Can be None/Italic/Bold/Underline
+   */
+  fontStyle?: FontStyle
+  /**
+   * Override with custom inline style for HTML renderer.
+   * When specified, `color` and `fontStyle` will be ignored.
+   */
+  htmlStyle?: string
+}
+
+export interface ThemedTokenWithVariants extends TokenBase {
+  /**
+   * An object of color name to token styles
+   */
+  variants: Record<string, TokenStyles>
 }
 
 export {}

@@ -1,8 +1,13 @@
-import type { CodeToTokensWithThemesOptions, ShikiContext, ThemedToken } from '../types'
+import type {
+  CodeToTokensWithThemesOptions,
+  ShikiContext,
+  ThemedToken,
+  ThemedTokenWithVariants,
+} from '../types'
 import { codeToThemedTokens } from './tokenizer'
 
 /**
- * Get tokens with multiple themes, with synced
+ * Get tokens with multiple themes
  */
 export function codeToTokensWithThemes(
   context: ShikiContext,
@@ -10,21 +15,40 @@ export function codeToTokensWithThemes(
   options: CodeToTokensWithThemesOptions,
 ) {
   const themes = Object.entries(options.themes)
-    .filter(i => i[1]) as [string, string][]
+    .filter(i => i[1])
+    .map(i => ({ color: i[0], theme: i[1]! }))
 
   const tokens = syncThemesTokenization(
     ...themes.map(t => codeToThemedTokens(context, code, {
       ...options,
-      theme: t[1],
+      theme: t.theme,
       includeExplanation: false,
     })),
   )
 
-  return themes.map(([color, theme], idx) => [
-    color,
-    theme,
-    tokens[idx],
-  ] as [string, string, ThemedToken[][]])
+  const mergedTokens: ThemedTokenWithVariants[][] = tokens[0]
+    .map((line, lineIdx) => line
+      .map((_token, tokenIdx) => {
+        const mergedToken: ThemedTokenWithVariants = {
+          content: _token.content,
+          variants: {},
+        }
+
+        tokens.forEach((t, themeIdx) => {
+          const {
+            content: _,
+            explanation: __,
+            ...styles
+          } = t[lineIdx][tokenIdx]
+
+          mergedToken.variants[themes[themeIdx].color] = styles
+        })
+
+        return mergedToken
+      }),
+    )
+
+  return mergedTokens
 }
 
 /**
