@@ -8,7 +8,6 @@ import type {
   ThemedTokenWithVariants,
   TokenStyles,
 } from '../types'
-import css from '../assets/langs/css'
 import { codeToThemedTokens } from './tokenizer'
 import { FontStyle } from './stackElementMetadata'
 import { codeToTokensWithThemes } from './renderer-html-themes'

@@ -32,7 +32,6 @@ const file = await unified()
   .process(await fs.readFile('./input.md'))
 ```
 
-
 ## Features
 
 ### Line Highlight

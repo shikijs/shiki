@@ -36,6 +36,7 @@ export const bundledLanguagesBase = {
   'crystal': (() => import('./langs/crystal')) as DynamicLangReg,
   'csharp': (() => import('./langs/csharp')) as DynamicLangReg,
   'css': (() => import('./langs/css')) as DynamicLangReg,
+  'csv': (() => import('./langs/csv')) as DynamicLangReg,
   'cue': (() => import('./langs/cue')) as DynamicLangReg,
   'cypher': (() => import('./langs/cypher')) as DynamicLangReg,
   'd': (() => import('./langs/d')) as DynamicLangReg,

@@ -159,9 +159,9 @@ To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) 
 
   <script type="module">
     // be sure to specify the exact version
-    import { codeToHtml } from 'https://esm.sh/shikiji@0.5.0' 
+    import { codeToHtml } from 'https://esm.sh/shikiji@0.8.0'
     // or
-    // import { codeToHtml } from 'https://esm.run/shikiji@0.5.0' 
+    // import { codeToHtml } from 'https://esm.run/shikiji@0.8.0'
 
     const foo = document.getElementById('foo')
     foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', { lang: 'js', theme: 'vitesse-light' })
@@ -357,7 +357,6 @@ With it, a token would be generated like:
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
 It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
-
 
 ### `codeToHast`
 
