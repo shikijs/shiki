@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.14.6 | 2023-12-07
+
+### 🚀 Features & Fixes
+
+- fix: update razor grammar source
+- fix: update kotlin language source
+- fix: update vue syntax path
+
+### 🙌 Contributions
+
+- feat: add csv highlighting | [#536](https://github.com/shikijs/shiki/pull/536) | [@mashehu](https://github.com/mashehu)
+
+
 ## 0.14.5 | 2023-10-10
 
 ### 🚀 Features & Fixes
