@@ -84,6 +84,7 @@ export type Lang =
   | 'crystal'
   | 'csharp' | 'c#' | 'cs'
   | 'css'
+  | 'csv'
   | 'cue'
   | 'cypher' | 'cql'
   | 'd'

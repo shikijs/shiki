@@ -34,6 +34,7 @@ export type Lang =
   | 'crystal'
   | 'csharp' | 'c#' | 'cs'
   | 'css'
+  | 'csv'
   | 'cue'
   | 'cypher' | 'cql'
   | 'd'
@@ -400,6 +401,13 @@ export const languages: ILanguageRegistration[] = [
     path: 'css.tmLanguage.json',
     displayName: 'CSS',
     samplePath: 'css.sample'
+  },
+  {
+    id: 'csv',
+    scopeName: 'text.csv',
+    path: 'csv.tmLanguage.json',
+    displayName: 'csv syntax',
+    samplePath: 'csv.sample'
   },
   {
     id: 'cue',
