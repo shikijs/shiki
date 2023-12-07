@@ -9,6 +9,7 @@ import { downloadFromGH } from '../util/downloadFromGitHub'
 const GRAMMAR_FOLDER_PATH = path.join(__dirname, '../..', 'tmp/grammars')
 
 async function go() {
+  let errors: unknown[] = []
   for (let [name, url] of githubGrammarSources) {
     const outPath = path.resolve(GRAMMAR_FOLDER_PATH, name + '.tmLanguage.json')
     await downloadFromGH(
@@ -38,6 +39,15 @@ async function go() {
       },
       outPath
     )
+    .catch(e => {
+      errors.push(e)
+    })
+  }
+
+  if (errors.length > 0) {
+    console.error(`Failed to download ${errors.length} grammars:`)
+    console.error(errors)
+    process.exit(1)
   }
 }
 
