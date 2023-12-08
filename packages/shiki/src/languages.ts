@@ -1093,7 +1093,7 @@ export const languages: ILanguageRegistration[] = [
     id: 'razor',
     scopeName: 'text.aspnetcorerazor',
     path: 'razor.tmLanguage.json',
-    displayName: 'Razor',
+    displayName: 'ASP.NET Razor',
     samplePath: 'razor.sample',
     embeddedLangs: ['html', 'csharp']
   },
