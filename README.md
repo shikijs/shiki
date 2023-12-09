@@ -252,8 +252,8 @@ The following HTML will be generated ([demo preview](https://htmlpreview.github.
 
 ```html
 <pre
-  class="shiki shiki-themes min-light--nord"
-  style="background-color: #ffffff;--shiki-dark-bg:#2e3440ff;color: #ffffff;--shiki-dark-bg:#2e3440ff"
+  class="shiki shiki-themes min-light nord" 
+  style="background-color:#ffffff;--shiki-dark-bg:#2e3440ff;color:#24292eff;--shiki-dark:#d8dee9ff" 
   tabindex="0"
 >
   <code>
@@ -262,12 +262,12 @@ The following HTML will be generated ([demo preview](https://htmlpreview.github.
       <span style="color:#6F42C1;--shiki-dark:#ECEFF4">.</span>
       <span style="color:#6F42C1;--shiki-dark:#88C0D0">log</span>
       <span style="color:#24292EFF;--shiki-dark:#D8DEE9FF">(</span>
-      <span style="color:#22863A;--shiki-dark:#ECEFF4">&quot;</span>
+      <span style="color:#22863A;--shiki-dark:#ECEFF4">"</span>
       <span style="color:#22863A;--shiki-dark:#A3BE8C">hello</span>
-      <span style="color:#22863A;--shiki-dark:#ECEFF4">&quot;</span>
+      <span style="color:#22863A;--shiki-dark:#ECEFF4">"</span>
       <span style="color:#24292EFF;--shiki-dark:#D8DEE9FF">)</span>
-    </span>
-  </code>
+      </span>
+    </code>
 </pre>
 ```
 
