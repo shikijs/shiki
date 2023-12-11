@@ -10,7 +10,7 @@ import { codeToThemedTokens } from './tokenizer'
  * Get tokens with multiple themes
  */
 export function codeToTokensWithThemes(
-  context: ShikiInternal,
+  internal: ShikiInternal,
   code: string,
   options: CodeToTokensWithThemesOptions,
 ) {
@@ -19,7 +19,7 @@ export function codeToTokensWithThemes(
     .map(i => ({ color: i[0], theme: i[1]! }))
 
   const tokens = syncThemesTokenization(
-    ...themes.map(t => codeToThemedTokens(context, code, {
+    ...themes.map(t => codeToThemedTokens(internal, code, {
       ...options,
       theme: t.theme,
       includeExplanation: false,

@@ -19,6 +19,7 @@ export function codeToHast(
   options: CodeToHastOptions,
   transformerContext: ShikijiTransformerContextCommon = {
     meta: {},
+    codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
   },
 ) {
   let bg: string
@@ -138,9 +139,7 @@ function flattenToken(
 export function tokensToHast(
   tokens: ThemedToken[][],
   options: HtmlRendererOptions,
-  transformerContext: ShikijiTransformerContextCommon = {
-    meta: {},
-  },
+  transformerContext: ShikijiTransformerContextCommon,
 ) {
   const {
     mergeWhitespaces = true,

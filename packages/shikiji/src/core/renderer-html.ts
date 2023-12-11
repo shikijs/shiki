@@ -12,6 +12,7 @@ export function codeToHtml(
 ): string {
   const context: ShikijiTransformerContextCommon = {
     meta: {},
+    codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
   }
 
   let intput = code

@@ -1,8 +1,6 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-'use strict'
-
 import type { IGrammar, IRawTheme } from 'vscode-textmate'
 import { INITIAL } from 'vscode-textmate'
 import type { CodeToThemedTokensOptions, ShikiInternal, ThemedToken, ThemedTokenScopeExplanation } from '../types'
@@ -16,13 +14,13 @@ export interface TokenizeWithThemeOptions {
 }
 
 export function codeToThemedTokens(
-  context: ShikiInternal,
+  internal: ShikiInternal,
   code: string,
   options: CodeToThemedTokensOptions = {},
 ): ThemedToken[][] {
   const {
     lang = 'text',
-    theme: themeName = context.getLoadedThemes()[0],
+    theme: themeName = internal.getLoadedThemes()[0],
     includeExplanation = true,
   } = options
 
@@ -31,12 +29,12 @@ export function codeToThemedTokens(
     return [...lines.map(line => [{ content: line }])]
   }
 
-  const { theme, colorMap } = context.setTheme(themeName)
+  const { theme, colorMap } = internal.setTheme(themeName)
 
   if (lang === 'ansi')
     return tokenizeAnsiWithTheme(theme, code)
 
-  const _grammar = context.getLangGrammar(lang)
+  const _grammar = internal.getLangGrammar(lang)
   return tokenizeWithTheme(code, _grammar, theme, colorMap, {
     includeExplanation,
   })

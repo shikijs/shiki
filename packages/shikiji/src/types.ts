@@ -360,6 +360,7 @@ export interface ShikijiTransformerContextMeta {}
 
 export interface ShikijiTransformerContextCommon {
   meta: ShikijiTransformerContextMeta
+  codeToHast: (code: string, options: CodeToHastOptions) => Root
 }
 
 export interface ShikijiTransformerContext extends ShikijiTransformerContextCommon {
