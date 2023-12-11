@@ -124,6 +124,13 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * Get the names of loaded themes
    */
   getLoadedThemes(): string[]
+
+  /**
+   * Get internal context object
+   * @internal
+   * @deprecated
+   */
+  getInternalContext(): ShikiContext
 }
 
 export interface HighlighterCoreOptions {

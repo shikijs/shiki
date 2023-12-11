@@ -34,13 +34,7 @@ it('run', async () => {
   const shikijiKeys = Object.keys(sj)
   const keysDiff = shikiKeys.filter(k => !shikijiKeys.includes(k))
 
-  expect.soft(keysDiff).toMatchInlineSnapshot(`
-    [
-      "getBackgroundColor",
-      "getForegroundColor",
-      "setColorReplacements",
-    ]
-  `)
+  expect.soft(keysDiff).toMatchInlineSnapshot(`[]`)
 
   const shikiExports = Object.keys(shiki)
   const shikijiExports = Object.keys(shikiji)
@@ -48,7 +42,6 @@ it('run', async () => {
 
   expect.soft(exportsDiff).toMatchInlineSnapshot(`
     [
-      "FontStyle",
       "renderToHtml",
     ]
   `)

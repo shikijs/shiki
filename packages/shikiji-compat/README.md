@@ -1,8 +1,8 @@
 # shikiji-compat
 
-compatible build of `shikiji` to align with `shiki`.
+Compatible build of `shikiji` to align with `shiki`.
 
-> Work in progress. It's not 100% compatible yet, but feedback is welcome :)
+[Changes and compatibility](https://github.com/antfu/shikiji#soft-breaking-changes)
 
 ## Install
 

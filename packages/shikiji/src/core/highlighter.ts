@@ -23,5 +23,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
 
     getLoadedThemes: context.getLoadedThemes,
     getLoadedLanguages: context.getLoadedLanguages,
+
+    getInternalContext: () => context,
   }
 }

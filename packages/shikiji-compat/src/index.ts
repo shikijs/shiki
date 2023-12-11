@@ -11,7 +11,10 @@ export const BUNDLED_THEMES = bundledThemes
 export * from './stub'
 export * from './types'
 
-export { toShikiTheme } from 'shikiji'
+export {
+  toShikiTheme,
+  FontStyle,
+} from 'shikiji'
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   const themes = options.themes || []
@@ -30,6 +33,8 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     themes,
     langs,
   })
+
+  const context = shikiji.getInternalContext()
 
   const defaultTheme = shikiji.getLoadedThemes()[0]
 
@@ -92,6 +97,19 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
         ...options,
         theme: options?.theme || defaultTheme,
       })
+    },
+    getBackgroundColor(theme: BuiltinTheme | ThemeRegistration | string) {
+      return context.getTheme(theme).bg
+    },
+    getForegroundColor(theme: BuiltinTheme | ThemeRegistration | string) {
+      return context.getTheme(theme).fg
+    },
+
+    /**
+     * @deprecated Not supported by Shikiji
+     */
+    setColorReplacements(..._args: any[]) {
+      throw new Error('[shikiji-compat] `setColorReplacements` is not supported by Shikiji')
     },
   }
 }
