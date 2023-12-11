@@ -38,7 +38,7 @@ const file = await unified()
 
 In addition to the features of `shikiji`, this plugin also supports line highlighting. You can add `{1,3-4}` after the language name to highlight the specified lines. For example:
 
-~~~md
+````md
 # Hello World
 
 ```js {1,3-4}
@@ -47,7 +47,7 @@ console.log('line2')
 console.log('line3') // highlighted
 console.log('line4') // highlighted
 ```
-~~~
+````
 
 ## License
 

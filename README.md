@@ -252,8 +252,8 @@ The following HTML will be generated ([demo preview](https://htmlpreview.github.
 
 ```html
 <pre
-  class="shiki shiki-themes min-light nord" 
-  style="background-color:#ffffff;--shiki-dark-bg:#2e3440ff;color:#24292eff;--shiki-dark:#d8dee9ff" 
+  class="shiki shiki-themes min-light nord"
+  style="background-color:#ffffff;--shiki-dark-bg:#2e3440ff;color:#24292eff;--shiki-dark:#d8dee9ff"
   tabindex="0"
 >
   <code>
@@ -509,11 +509,11 @@ You can inspect the bundle size in detail on [pkg-size.dev/shikiji](https://pkg-
 
 As of `v0.5.0`, measured at 17th, August 2023:
 
-| Bundle | Size (minified) | Size (gzip) | Notes |
-| --- | ---: | ---: | --- |
-| `shikiji` | 6 MB | 1.2 MB | includes all themes and languages as async chunks |
-| `shikiji/core` | 112 KB | 35 KB | no themes or languages, compose on your own |
-| `shikiji/wasm` | 623 KB | 231 KB | wasm binary inlined as base64 string |
+| Bundle         | Size (minified) | Size (gzip) | Notes                                             |
+| -------------- | --------------: | ----------: | ------------------------------------------------- |
+| `shikiji`      |            6 MB |      1.2 MB | includes all themes and languages as async chunks |
+| `shikiji/core` |          112 KB |       35 KB | no themes or languages, compose on your own       |
+| `shikiji/wasm` |          623 KB |      231 KB | wasm binary inlined as base64 string              |
 
 ## What's Next?
 
