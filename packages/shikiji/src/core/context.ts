@@ -1,4 +1,4 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiContext, ThemeInput, ThemeRegistration } from '../types'
+import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistration } from '../types'
 import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
@@ -6,7 +6,7 @@ import { Resolver } from './resolver'
 /**
  * Get the minimal shiki context for rendering.
  */
-export async function getShikiContext(options: HighlighterCoreOptions = {}): Promise<ShikiContext> {
+export async function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
   async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
     return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
   }

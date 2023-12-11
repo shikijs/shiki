@@ -5,7 +5,7 @@
 
 import type { IGrammar, IRawTheme } from 'vscode-textmate'
 import { INITIAL } from 'vscode-textmate'
-import type { CodeToThemedTokensOptions, ShikiContext, ThemedToken, ThemedTokenScopeExplanation } from '../types'
+import type { CodeToThemedTokensOptions, ShikiInternal, ThemedToken, ThemedTokenScopeExplanation } from '../types'
 import type { FontStyle } from './stackElementMetadata'
 import { StackElementMetadata } from './stackElementMetadata'
 import { isPlaintext } from './utils'
@@ -16,7 +16,7 @@ export interface TokenizeWithThemeOptions {
 }
 
 export function codeToThemedTokens(
-  context: ShikiContext,
+  context: ShikiInternal,
   code: string,
   options: CodeToThemedTokensOptions = {},
 ): ThemedToken[][] {

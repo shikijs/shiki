@@ -1,6 +1,6 @@
 import type {
   CodeToTokensWithThemesOptions,
-  ShikiContext,
+  ShikiInternal,
   ThemedToken,
   ThemedTokenWithVariants,
 } from '../types'
@@ -10,7 +10,7 @@ import { codeToThemedTokens } from './tokenizer'
  * Get tokens with multiple themes
  */
 export function codeToTokensWithThemes(
-  context: ShikiContext,
+  context: ShikiInternal,
   code: string,
   options: CodeToTokensWithThemesOptions,
 ) {

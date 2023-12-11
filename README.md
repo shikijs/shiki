@@ -5,7 +5,7 @@
 
 An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammars. And [a little bit more](#additional-features).
 
-## Changes
+## Features
 
 - All grammars/themes/wasm served as pure-ESM, no more [CDN](https://github.com/shikijs/shiki#specify-a-custom-root-directory), no more [assets](https://github.com/shikijs/shiki#specify-how-to-load-webassembly).
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
@@ -13,6 +13,8 @@ An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful
 - [Bundles languages/themes composedly](#fine-grained-bundle).
 - [Light/Dark themes support](#lightdark-dual-themes).
 - [`hast` support](#codetohast).
+- [AST-based transformers addons](#hast-transformers).
+- [TwoSlash transformer](./packages/shikiji-twoslash).
 - [List of breaking changes from shiki](#breaking-changes-from-shiki).
 - Please don't hate me Pine 😜 ([What's Next?](#whats-next))
 
@@ -454,6 +456,8 @@ const code = await codeToHtml('foo\bar', {
   ]
 })
 ```
+
+We also provide some common transformers for you to use, check [`shikiji-transforms`](./packages/shikiji-transformers) for more details.
 
 ### Custom Language Aliases
 

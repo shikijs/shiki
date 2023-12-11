@@ -46,7 +46,7 @@ export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
 export type ResolveBundleKey<T extends string> = never extends T ? string : T
 
-export interface ShikiContext {
+export interface ShikiInternal {
   setTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): {
     theme: ThemeRegistration
     colorMap: string[]
@@ -130,7 +130,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * @internal
    * @deprecated
    */
-  getInternalContext(): ShikiContext
+  getInternalContext(): ShikiInternal
 }
 
 export interface HighlighterCoreOptions {
@@ -201,6 +201,14 @@ export interface CodeToThemedTokensOptions<Languages = string, Themes = string> 
 
 export interface CodeToHastOptionsCommon<Languages extends string = string> extends TransformerOptions {
   lang: StringLiteralUnion<Languages | SpecialLanguage>
+
+  /**
+   * Merge token with only whitespace to the next token,
+   * Saving a few extra `<span>`
+   *
+   * @default true
+   */
+  mergeWhitespaces?: boolean
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
@@ -348,12 +356,19 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   colors?: Record<string, string>
 }
 
-export interface ShikijiTransformerContext {
+export interface ShikijiTransformerContextMeta {}
+
+export interface ShikijiTransformerContextCommon {
+  meta: ShikijiTransformerContextMeta
+}
+
+export interface ShikijiTransformerContext extends ShikijiTransformerContextCommon {
   readonly tokens: ThemedToken[][]
   readonly options: CodeToHastOptions
   readonly root: Root
   readonly pre: Element
   readonly code: Element
+  readonly lines: Element[]
 }
 
 export interface ShikijiTransformer {
@@ -389,13 +404,13 @@ export interface ShikijiTransformer {
    * Transform the raw input code before passing to the highlighter.
    * This hook will only be called with `codeToHtml`.
    */
-  preprocess?(code: string, options: CodeToHastOptions): string | undefined
+  preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | undefined
 
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
-  postprocess?(code: string, options: CodeToHastOptions): string | undefined
+  postprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | undefined
 }
 
 export interface HtmlRendererOptionsCommon extends TransformerOptions {
@@ -411,14 +426,6 @@ export interface HtmlRendererOptionsCommon extends TransformerOptions {
    * When specified, `fg` and `bg` will be ignored.
    */
   rootStyle?: string
-
-  /**
-   * Merge token with only whitespace to the next token,
-   * Saving a few extra `<span>`
-   *
-   * @default true
-   */
-  mergeWhitespaces?: boolean
 }
 
 export type HtmlRendererOptions = HtmlRendererOptionsCommon & CodeToHastOptions

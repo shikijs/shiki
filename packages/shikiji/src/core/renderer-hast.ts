@@ -2,8 +2,9 @@ import type { Element, Root, Text } from 'hast'
 import type {
   CodeToHastOptions,
   HtmlRendererOptions,
-  ShikiContext,
+  ShikiInternal,
   ShikijiTransformerContext,
+  ShikijiTransformerContextCommon,
   ThemedToken,
   ThemedTokenWithVariants,
   TokenStyles,
@@ -13,9 +14,12 @@ import { FontStyle } from './stackElementMetadata'
 import { codeToTokensWithThemes } from './renderer-html-themes'
 
 export function codeToHast(
-  context: ShikiContext,
+  internal: ShikiInternal,
   code: string,
   options: CodeToHastOptions,
+  transformerContext: ShikijiTransformerContextCommon = {
+    meta: {},
+  },
 ) {
   let bg: string
   let fg: string
@@ -38,7 +42,7 @@ export function codeToHast(
       throw new Error('[shikiji] `themes` option must not be empty')
 
     const themeTokens = codeToTokensWithThemes(
-      context,
+      internal,
       code,
       options,
     )
@@ -46,7 +50,7 @@ export function codeToHast(
     if (defaultColor && !themes.find(t => t.color === defaultColor))
       throw new Error(`[shikiji] \`themes\` option must contain the defaultColor key \`${defaultColor}\``)
 
-    const themeRegs = themes.map(t => context.getTheme(t.theme))
+    const themeRegs = themes.map(t => internal.getTheme(t.theme))
 
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
@@ -58,12 +62,16 @@ export function codeToHast(
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
   else if ('theme' in options) {
-    tokens = codeToThemedTokens(context, code, {
-      ...options,
-      includeExplanation: false,
-    })
+    tokens = codeToThemedTokens(
+      internal,
+      code,
+      {
+        ...options,
+        includeExplanation: false,
+      },
+    )
 
-    const _theme = context.getTheme(options.theme)
+    const _theme = internal.getTheme(options.theme)
     bg = _theme.bg
     fg = _theme.fg
     themeName = _theme.name
@@ -72,13 +80,17 @@ export function codeToHast(
     throw new Error('[shikiji] Invalid options, either `theme` or `themes` must be provided')
   }
 
-  return tokensToHast(tokens, {
-    ...options,
-    fg,
-    bg,
-    themeName,
-    rootStyle,
-  })
+  return tokensToHast(
+    tokens,
+    {
+      ...options,
+      fg,
+      bg,
+      themeName,
+      rootStyle,
+    },
+    transformerContext,
+  )
 }
 
 /**
@@ -126,6 +138,9 @@ function flattenToken(
 export function tokensToHast(
   tokens: ThemedToken[][],
   options: HtmlRendererOptions,
+  transformerContext: ShikijiTransformerContextCommon = {
+    meta: {},
+  },
 ) {
   const {
     mergeWhitespaces = true,
@@ -166,7 +181,10 @@ export function tokensToHast(
     children: lines,
   }
 
+  const lineNodes: Element[] = []
+
   const context: ShikijiTransformerContext = {
+    ...transformerContext,
     get tokens() {
       return tokens
     },
@@ -182,6 +200,9 @@ export function tokensToHast(
     get code() {
       return codeNode
     },
+    get lines() {
+      return lineNodes
+    },
   }
 
   tokens.forEach((line, idx) => {
@@ -194,6 +215,8 @@ export function tokensToHast(
       properties: { class: 'line' },
       children: [],
     }
+
+    lineNodes.push(lineNode)
 
     let col = 0
 
@@ -224,6 +247,7 @@ export function tokensToHast(
 
   for (const transformer of transformers)
     codeNode = transformer?.code?.call(context, codeNode) || codeNode
+
   preNode.children.push(codeNode)
 
   for (const transformer of transformers)

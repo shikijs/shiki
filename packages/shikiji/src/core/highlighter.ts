@@ -2,13 +2,13 @@ import type { HighlighterCoreOptions, HighlighterGeneric } from '../types'
 import { codeToHtml } from './renderer-html'
 import { codeToTokensWithThemes } from './renderer-html-themes'
 import { codeToThemedTokens } from './tokenizer'
-import { getShikiContext } from './context'
+import { getShikiInternal } from './context'
 import { codeToHast } from './renderer-hast'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 
 export async function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
-  const context = await getShikiContext(options)
+  const context = await getShikiInternal(options)
 
   return {
     codeToThemedTokens: (code, options) => codeToThemedTokens(context, code, options),
