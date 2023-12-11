@@ -1,4 +1,8 @@
-import type { IGrammar, IRawGrammar, IRawTheme } from 'vscode-textmate'
+import type {
+  IGrammar as Grammar,
+  IRawGrammar as RawGrammar,
+  IRawTheme as RawTheme,
+} from 'vscode-textmate'
 import type { IRawThemeSetting } from 'vscode-textmate/release/theme'
 import type { Element, Root } from 'hast'
 import type { bundledThemes } from './themes'
@@ -6,7 +10,14 @@ import type { bundledLanguages } from './assets/langs'
 import type { FontStyle } from './core/stackElementMetadata'
 import type { OnigurumaLoadOptions } from './oniguruma'
 
-export { IRawGrammar, IGrammar, FontStyle }
+export {
+  Grammar,
+  RawGrammar,
+  FontStyle,
+  // TODO: move these in the next major version
+  Grammar as IGrammar,
+  RawGrammar as IRawGrammar,
+}
 
 export type BuiltinLanguage = keyof typeof bundledLanguages
 export type BuiltinTheme = keyof typeof bundledThemes
@@ -42,7 +53,7 @@ export interface ShikiContext {
   }
 
   getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
-  getLangGrammar(name: string): IGrammar
+  getLangGrammar(name: string): Grammar
 
   getLoadedThemes(): string[]
   getLoadedLanguages(): string[]
@@ -155,7 +166,7 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
   langAlias?: Record<string, StringLiteralUnion<L>>
 }
 
-export interface LanguageRegistration extends IRawGrammar {
+export interface LanguageRegistration extends RawGrammar {
   name: string
   scopeName: string
   displayName?: string
@@ -290,9 +301,7 @@ export type CodeToHastOptions<Languages extends string = string, Themes extends 
   & CodeOptionsThemes<Themes>
   & CodeOptionsMeta
 
-export interface ThemeRegistrationRaw extends IRawTheme {
-
-}
+export interface ThemeRegistrationRaw extends RawTheme {}
 
 export interface ThemeRegistration extends ThemeRegistrationRaw {
   /**

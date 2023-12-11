@@ -5,11 +5,12 @@ import type {
   CodeOptionsMultipleThemes,
   CodeOptionsSingleTheme,
   CodeToHastOptionsCommon,
-  IRawGrammar,
   LanguageRegistration,
+  RawGrammar,
   StringLiteralUnion,
   ThemeRegistration,
   ThemeRegistrationRaw,
+  ThemedToken,
 } from 'shikiji'
 
 export interface LineOption {
@@ -35,6 +36,8 @@ export interface HighlighterOptions extends BundledHighlighterOptions<BuiltinLan
 export type IThemeRegistration = ThemeRegistrationRaw | ThemeRegistration | StringLiteralUnion<BuiltinTheme>
 
 export interface IShikiTheme extends ThemeRegistration {}
+export interface IThemedToken extends ThemedToken {}
+export interface IRawGrammar extends RawGrammar {}
 
 export interface ILanguageRegistration extends LanguageRegistration {
   grammar?: IRawGrammar
