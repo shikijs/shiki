@@ -2,28 +2,28 @@ import type { HighlighterCoreOptions, HighlighterGeneric } from '../types'
 import { codeToHtml } from './renderer-html'
 import { codeToTokensWithThemes } from './renderer-html-themes'
 import { codeToThemedTokens } from './tokenizer'
-import { getShikiInternal } from './context'
+import { getShikiInternal } from './internal'
 import { codeToHast } from './renderer-hast'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 
 export async function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
-  const context = await getShikiInternal(options)
+  const internal = await getShikiInternal(options)
 
   return {
-    codeToThemedTokens: (code, options) => codeToThemedTokens(context, code, options),
-    codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(context, code, options),
-    codeToHast: (code, options) => codeToHast(context, code, options),
-    codeToHtml: (code, options) => codeToHtml(context, code, options),
+    codeToThemedTokens: (code, options) => codeToThemedTokens(internal, code, options),
+    codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
+    codeToHast: (code, options) => codeToHast(internal, code, options),
+    codeToHtml: (code, options) => codeToHtml(internal, code, options),
 
-    loadLanguage: context.loadLanguage,
-    loadTheme: context.loadTheme,
+    loadLanguage: internal.loadLanguage,
+    loadTheme: internal.loadTheme,
 
-    getTheme: context.getTheme,
+    getTheme: internal.getTheme,
 
-    getLoadedThemes: context.getLoadedThemes,
-    getLoadedLanguages: context.getLoadedLanguages,
+    getLoadedThemes: internal.getLoadedThemes,
+    getLoadedLanguages: internal.getLoadedLanguages,
 
-    getInternalContext: () => context,
+    getInternalContext: () => internal,
   }
 }

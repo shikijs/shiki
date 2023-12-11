@@ -34,8 +34,6 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
     langs,
   })
 
-  const context = shikiji.getInternalContext()
-
   const defaultTheme = shikiji.getLoadedThemes()[0]
 
   function codeToThemedTokens(code: string, options: CodeToThemedTokensOptions<BuiltinLanguage, BuiltinTheme>): ThemedToken[][]
@@ -99,10 +97,10 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
       })
     },
     getBackgroundColor(theme: BuiltinTheme | ThemeRegistration | string) {
-      return context.getTheme(theme).bg
+      return shikiji.getTheme(theme).bg
     },
     getForegroundColor(theme: BuiltinTheme | ThemeRegistration | string) {
-      return context.getTheme(theme).fg
+      return shikiji.getTheme(theme).fg
     },
 
     /**
