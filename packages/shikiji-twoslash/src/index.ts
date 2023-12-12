@@ -1,5 +1,5 @@
 import { twoslasher } from '@typescript/twoslash'
-import type { ShikijiTransformer, ShikijiTransformerContext } from 'shikiji'
+import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import type { Element, ElementContent, Text } from 'hast'
 import { rendererClassic } from './renderer-classic'
