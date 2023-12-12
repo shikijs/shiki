@@ -1,7 +1,6 @@
 import type MarkdownIt from 'markdown-it'
 import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
 import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput, TransformerOptions } from 'shikiji'
-import type { Root } from 'hast'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
 export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
