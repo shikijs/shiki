@@ -20,10 +20,11 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
       json5: 'json',
       yml: 'yaml',
     },
+    explicitTrigger = false,
     renderer = rendererClassic,
     throws = true,
   } = options
-  const filter = options.filter || (lang => langs.includes(lang))
+  const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
   return {
     preprocess(code, shikijiOptions) {
       let lang = shikijiOptions.lang

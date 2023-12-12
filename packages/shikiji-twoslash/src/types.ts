@@ -14,12 +14,18 @@ export interface TransformerTwoSlashOptions {
    */
   langs?: string[]
   /**
+   * Requires `twoslash` to be presented in the code block meta to apply this transformer
+   *
+   * @default false
+   */
+  explicitTrigger?: boolean
+  /**
    * Mapping from language alias to language name
    */
   langAlias?: Record<string, string>
   /**
    * Custom filter function to apply this transformer to
-   * When specified, `langs` will be ignored
+   * When specified, `langs` and `explicitTrigger` will be ignored
    */
   filter?: (lang: string, code: string, options: CodeToHastOptions) => boolean
   /**
@@ -30,7 +36,6 @@ export interface TransformerTwoSlashOptions {
    * Custom renderers to decide how each info should be rendered
    */
   renderer?: TwoSlashRenderers
-
   /**
    * Strictly throw when there is an error
    * @default true

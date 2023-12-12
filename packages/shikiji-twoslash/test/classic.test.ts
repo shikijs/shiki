@@ -1,11 +1,11 @@
 import { expect, it } from 'vitest'
 import { codeToHtml } from 'shikiji'
 import { createShikiHighlighter, renderCodeToHTML, runTwoSlash } from 'shiki-twoslash'
+import type { BuiltinTheme } from 'shikiji'
 import { transformerTwoSlash } from '../src'
-import type { BuiltinTheme } from '../../shikiji/dist/types.mjs'
 
 const styleTag = `
-<link rel="stylesheet" href="../../style-shiki-twoslash.css" />
+<link rel="stylesheet" href="../../../style-shiki-twoslash.css" />
 <style>
 html, body { margin: 0; }
 .shiki { padding: 2em; }
@@ -27,7 +27,7 @@ const b = "345"
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/simple.html')
+  expect(styleTag + html).toMatchFileSnapshot('./out/classic/simple.html')
 })
 
 it('compiler_errors', async () => {
@@ -50,7 +50,7 @@ fn(42)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/compiler_errors.html')
+  expect(styleTag + html).toMatchFileSnapshot('./out/classic/compiler_errors.html')
 })
 
 it('completions', async () => {
@@ -67,7 +67,7 @@ const a = Number.isNaN(123)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/completions.html')
+  expect(styleTag + html).toMatchFileSnapshot('./out/classic/completions.html')
 })
 
 it('cuts_out_unnecessary_code', async () => {
@@ -104,7 +104,7 @@ let c = createLabel(Math.random() ? "hello" : 42)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/cuts_out_unnecessary_code.html')
+  expect(styleTag + html).toMatchFileSnapshot('./out/classic/cuts_out_unnecessary_code.html')
 })
 
 it('console_log', async () => {
@@ -123,7 +123,7 @@ console.error("This is an error")
   })
 
   // expect(styleTag + await runShiki(code, 'vitesse-dark')).toMatchFileSnapshot('./out/shiki.html')
-  expect(styleTag + html).toMatchFileSnapshot('./out/console_log.html')
+  expect(styleTag + html).toMatchFileSnapshot('./out/classic/console_log.html')
 })
 
 export async function runShiki(code: string, theme: BuiltinTheme) {

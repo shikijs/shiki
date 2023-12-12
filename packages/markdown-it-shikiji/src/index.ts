@@ -1,6 +1,7 @@
 import type MarkdownIt from 'markdown-it'
 import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
-import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput, TransformerOptions } from 'shikiji'
+import type { Root } from 'hast'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
 export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
@@ -12,24 +13,44 @@ export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
   langs?: Array<LanguageInput | BuiltinLanguage>
 }
 
-export type MarkdownItShikijiSetupOptions = CodeOptionsThemes<BuiltinTheme> & {
+export type MarkdownItShikijiSetupOptions = CodeOptionsThemes<BuiltinTheme>
+  & TransformerOptions
+  & CodeOptionsMeta
+  & {
   /**
    * Add `highlighted` class to lines defined in after codeblock
    *
    * @default true
    */
-  highlightLines?: boolean | string
-}
+    highlightLines?: boolean | string
+
+    /**
+     * Custom meta string parser
+     * Return an object to merge with `meta`
+     */
+    parseMetaString?: (
+      metaString: string,
+      code: string,
+      lang: string,
+    ) => Record<string, any> | undefined | null
+  }
 
 function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: MarkdownItShikijiSetupOptions) {
   const {
     highlightLines = true,
+    parseMetaString,
   } = options
 
   markdownit.options.highlight = (code, lang = 'text', attrs) => {
+    const meta = parseMetaString?.(attrs, code, lang) || {}
     const codeOptions: CodeToHastOptions = {
       ...options,
       lang,
+      meta: {
+        ...options.meta,
+        ...meta,
+        __raw: attrs,
+      },
     }
 
     codeOptions.transformers ||= []
@@ -67,7 +88,9 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
 }
 
 export default async function markdownItShikiji(options: MarkdownItShikijiOptions) {
-  const themeNames = ('themes' in options ? Object.values(options.themes) : [options.theme]).filter(Boolean) as BuiltinTheme[]
+  const themeNames = ('themes' in options
+    ? Object.values(options.themes)
+    : [options.theme]).filter(Boolean) as BuiltinTheme[]
   const highlighter = await getHighlighter({
     themes: themeNames,
     langs: options.langs || Object.keys(bundledLanguages) as BuiltinLanguage[],

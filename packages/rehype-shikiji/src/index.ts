@@ -1,4 +1,4 @@
-import type { BuiltinLanguage, BuiltinTheme, CodeOptionsThemes, CodeToHastOptions, LanguageInput } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, LanguageInput, TransformerOptions } from 'shikiji'
 import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
@@ -6,43 +6,41 @@ import type { Plugin } from 'unified'
 import type { Element, Root } from 'hast'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
-export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme> & {
-  /**
-   * Language names to include.
-   *
-   * @default Object.keys(bundledLanguages)
-   */
-  langs?: Array<LanguageInput | BuiltinLanguage>
+export type RehypeShikijiOptions = CodeOptionsThemes<BuiltinTheme>
+  & TransformerOptions
+  & CodeOptionsMeta
+  & {
+    /**
+     * Language names to include.
+     *
+     * @default Object.keys(bundledLanguages)
+     */
+    langs?: Array<LanguageInput | BuiltinLanguage>
 
-  /**
-   * Add `highlighted` class to lines defined in after codeblock
-   *
-   * @default true
-   */
-  highlightLines?: boolean | string
+    /**
+     * Add `highlighted` class to lines defined in after codeblock
+     *
+     * @default true
+     */
+    highlightLines?: boolean | string
 
-  /**
-   * Add `language-*` class to code element
-   *
-   * @default false
-   */
-  addLanguageClass?: boolean
+    /**
+     * Add `language-*` class to code element
+     *
+     * @default false
+     */
+    addLanguageClass?: boolean
 
-  /**
-   * Extra meta data to pass to the highlighter
-   */
-  meta?: Record<string, any>
-
-  /**
-   * Custom meta string parser
-   * Return an object to merge with `meta`
-   */
-  parseMetaString?: (
-    metaString: string,
-    node: Element,
-    tree: Root
-  ) => Record<string, any> | undefined | null
-}
+    /**
+     * Custom meta string parser
+     * Return an object to merge with `meta`
+     */
+    parseMetaString?: (
+      metaString: string,
+      node: Element,
+      tree: Root
+    ) => Record<string, any> | undefined | null
+  }
 
 const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = {} as any) {
   const {
@@ -98,6 +96,7 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (options = 
         meta: {
           ...rest.meta,
           ...meta,
+          __raw: attrs,
         },
       }
 

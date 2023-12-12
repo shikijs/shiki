@@ -168,7 +168,12 @@ export function tokensToHast(
       class: `shiki ${options.themeName || ''}`,
       style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
       tabindex: '0',
-      ...options.meta,
+      ...Object.fromEntries(
+        Array.from(
+          Object.entries(options.meta || {}),
+        )
+          .filter(([key]) => !key.startsWith('_')),
+      ),
     },
     children: [],
   }

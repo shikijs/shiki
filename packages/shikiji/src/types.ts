@@ -296,7 +296,22 @@ export type CodeOptionsThemes<Themes extends string = string> =
   | CodeOptionsMultipleThemes<Themes>
 
 export interface CodeOptionsMeta {
-  meta?: Record<string, any>
+  /**
+   * Meta data passed to Shikiji, usually used by plugin integrations to pass the code block header.
+   *
+   * Key values in meta will be serialized to the attributes of the root `<pre>` element.
+   *
+   * Keys starting with `_` will be ignored.
+   *
+   * A special key `__raw` key will be used to pass the raw code block header (if the integration supports it).
+   */
+  meta?: {
+    /**
+     * Raw string of the code block header.
+     */
+    __raw?: string
+    [key: string]: any
+  }
 }
 
 export interface TransformerOptions {

@@ -79,7 +79,7 @@ export const rendererRich: TwoSlashRenderers = {
       {
         type: 'element',
         tagName: 'div',
-        properties: { class: 'twoslash-meta-line' },
+        properties: { class: 'twoslash-meta-line twoslash-completions-line' },
         children: [
           { type: 'text', value: ' '.repeat(query.offset) },
           {
@@ -154,7 +154,7 @@ export const rendererRich: TwoSlashRenderers = {
       {
         type: 'element',
         tagName: 'div',
-        properties: { class: 'twoslash-meta-line' },
+        properties: { class: 'twoslash-meta-line twoslash-popover-line' },
         children: [
           { type: 'text', value: ' '.repeat(offset) },
           {
@@ -181,7 +181,7 @@ export const rendererRich: TwoSlashRenderers = {
       {
         type: 'element',
         tagName: 'div',
-        properties: { class: `twoslash-meta-line twoslash-tag-${tag.name}` },
+        properties: { class: `twoslash-meta-line twoslash-tag-${tag.name}-line` },
         children: [
           {
             type: 'text',

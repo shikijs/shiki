@@ -3,7 +3,7 @@ import { codeToHtml } from 'shikiji'
 import { rendererRich, transformerTwoSlash } from '../src'
 
 const styleTag = `
-<link rel="stylesheet" href="../../style-rich.css" />
+<link rel="stylesheet" href="../../../style-rich.css" />
 <style>
 html, body { margin: 0; }
 .shiki { padding: 2em; }
@@ -68,5 +68,5 @@ Number.isNaN(123)
     ],
   })
 
-  expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich.html')
+  expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich/rich.html')
 })
