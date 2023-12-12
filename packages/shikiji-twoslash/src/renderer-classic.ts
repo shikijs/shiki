@@ -133,7 +133,8 @@ export const rendererClassic: TwoSlashRenderers = {
 
   lineQuery(query, targetNode) {
     const targetText = targetNode?.type === 'text' ? targetNode.value : ''
-    const offset = Math.max(0, (query.offset || 0) - Math.round(targetText.length / 2) - 1)
+    const offset = Math.max(0, (query.offset || 0) + Math.floor(targetText.length / 2) - 1)
+
     return [
       {
         type: 'element',

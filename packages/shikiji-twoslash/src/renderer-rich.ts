@@ -7,20 +7,20 @@ import type { TwoSlashRenderers } from './types'
  */
 export const rendererRich: TwoSlashRenderers = {
   nodeStaticInfo(info, node) {
-    let themed: ElementContent
+    let themedContent: ElementContent[]
 
     try {
-      themed = (this.codeToHast(info.text, {
+      themedContent = ((this.codeToHast(info.text, {
         ...this.options,
         transformers: [],
         transforms: undefined,
-      }).children[0] as Element).children[0]
+      }).children[0] as Element).children[0] as Element).children
     }
     catch (e) {
-      themed = {
+      themedContent = [{
         type: 'text',
         value: info.text,
-      }
+      }]
     }
 
     return {
@@ -37,9 +37,7 @@ export const rendererRich: TwoSlashRenderers = {
           properties: {
             class: 'twoslash-hover-info',
           },
-          children: [
-            themed,
-          ],
+          children: themedContent,
         },
       ],
     }
@@ -131,23 +129,26 @@ export const rendererRich: TwoSlashRenderers = {
   },
 
   lineQuery(query, targetNode) {
-    const targetText = targetNode?.type === 'text' ? targetNode.value : ''
-    const offset = Math.max(0, (query.offset || 0) - Math.round(targetText.length / 2) - 1)
+    if (!query.text)
+      return []
 
-    let themed: ElementContent
+    const targetText = targetNode?.type === 'text' ? targetNode.value : ''
+    const offset = Math.max(0, (query.offset || 0) + Math.floor(targetText.length / 2) - 1)
+
+    let themedContent: ElementContent[]
 
     try {
-      themed = (this.codeToHast(query.text || '', {
+      themedContent = ((this.codeToHast(query.text, {
         ...this.options,
         transformers: [],
         transforms: undefined,
-      }).children[0] as Element).children[0]
+      }).children[0] as Element).children[0] as Element).children
     }
     catch (e) {
-      themed = {
+      themedContent = [{
         type: 'text',
-        value: query.text || '',
-      }
+        value: query.text,
+      }]
     }
 
     return [
@@ -168,7 +169,7 @@ export const rendererRich: TwoSlashRenderers = {
                 properties: { class: 'twoslash-popover-arrow' },
                 children: [],
               },
-              themed,
+              ...themedContent,
             ],
           },
         ],

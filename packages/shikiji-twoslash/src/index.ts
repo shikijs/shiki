@@ -91,6 +91,8 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
           throw new Error(`[shikiji-twoslash] Cannot find token at L${line}:${character}`)
       }
 
+      const skipTokens = new Set<Element | Text>()
+
       for (const error of twoslash.errors) {
         if (error.line == null || error.character == null)
           return
@@ -98,10 +100,24 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         if (!token)
           continue
 
+        skipTokens.add(token)
+
         const clone = { ...token }
         Object.assign(token, renderer.nodeError.call(this, error, clone))
 
         insertAfterLine(error.line, renderer.lineError.call(this, error))
+      }
+
+      for (const query of twoslash.queries) {
+        if (query.kind === 'completions') {
+          insertAfterLine(query.line, renderer.lineCompletions.call(this, query))
+        }
+        else if (query.kind === 'query') {
+          const token = locateTextToken(query.line - 1, query.offset)
+          if (token)
+            skipTokens.add(token)
+          insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
+        }
       }
 
       for (const info of twoslash.staticQuickInfos) {
@@ -109,19 +125,12 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         if (!token || token.type !== 'text')
           continue
 
+        // If it's already rendered as popup or error, skip it
+        if (skipTokens.has(token))
+          continue
+
         const clone = { ...token }
         Object.assign(token, renderer.nodeStaticInfo.call(this, info, clone))
-      }
-
-      for (const query of twoslash.queries) {
-        insertAfterLine(
-          query.line,
-          query.kind === 'completions'
-            ? renderer.lineCompletions.call(this, query)
-            : query.kind === 'query'
-              ? renderer.lineQuery.call(this, query, locateTextToken(query.line - 1, query.offset))
-              : [],
-        )
       }
 
       for (const tag of twoslash.tags)

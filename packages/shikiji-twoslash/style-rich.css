@@ -1,7 +1,7 @@
 /* ===== Basic ===== */
 .twoslash {
-  --twoslash-border-color: #8885;
-  --twoslash-underline-color: #888;
+  --twoslash-border-color: #8888;
+  --twoslash-underline-color: currentColor;
   --twoslash-popup-bg: #f8f8f8;
   --twoslash-popup-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
   --twoslash-matched-color: #2e8f82;
@@ -20,7 +20,7 @@
 
 /* ===== Hover Info ===== */
 .twoslash:hover .twoslash-hover {
-  border-color: var(--twoslash-border-color);
+  border-color: var(--twoslash-underline-color);
 }
 
 .twoslash .twoslash-hover {
@@ -76,7 +76,7 @@
   border: 1px solid var(--twoslash-border-color);
   border-radius: 4px;
   padding: 6px 8px;
-  margin: 0 -0.5em;
+  margin: 0 -20px;
   z-index: 9;
   user-select: none;
   box-shadow: var(--twoslash-popup-shadow);
