@@ -11,10 +11,7 @@ export const BUNDLED_THEMES = bundledThemes
 export * from './stub'
 export * from './types'
 
-export {
-  toShikiTheme,
-  FontStyle,
-} from 'shikiji'
+export { toShikiTheme } from 'shikiji'
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   const themes = options.themes || []
