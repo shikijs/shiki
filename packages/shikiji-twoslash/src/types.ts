@@ -1,5 +1,5 @@
 import type { TwoSlashOptions, TwoSlashReturn } from '@typescript/twoslash'
-import type { CodeToHastOptions } from 'shikiji'
+import type { CodeToHastOptions, ShikijiTransformerContext } from 'shikiji'
 import type { Element, ElementContent, Text } from 'hast'
 
 declare module 'shikiji' {
@@ -30,14 +30,20 @@ export interface TransformerTwoSlashOptions {
    * Custom renderers to decide how each info should be rendered
    */
   renderer?: TwoSlashRenderers
+
+  /**
+   * Strictly throw when there is an error
+   * @default true
+   */
+  throws?: boolean
 }
 
 export interface TwoSlashRenderers {
-  lineError(error: TwoSlashReturn['errors'][0]): ElementContent[]
-  lineCompletions(query: TwoSlashReturn['queries'][0]): ElementContent[]
-  lineQuery(query: TwoSlashReturn['queries'][0], targetNode?: Element | Text): ElementContent[]
-  lineCustomTag(tag: TwoSlashReturn['tags'][0]): ElementContent[]
+  lineError(this: ShikijiTransformerContext, error: TwoSlashReturn['errors'][0]): ElementContent[]
+  lineCompletions(this: ShikijiTransformerContext, query: TwoSlashReturn['queries'][0]): ElementContent[]
+  lineQuery(this: ShikijiTransformerContext, query: TwoSlashReturn['queries'][0], targetNode?: Element | Text): ElementContent[]
+  lineCustomTag(this: ShikijiTransformerContext, tag: TwoSlashReturn['tags'][0]): ElementContent[]
 
-  nodeError(error: TwoSlashReturn['errors'][0], node: Element | Text): ElementContent
-  nodeStaticInfo(info: TwoSlashReturn['staticQuickInfos'][0], node: Element | Text): ElementContent
+  nodeError(this: ShikijiTransformerContext, error: TwoSlashReturn['errors'][0], node: Element | Text): ElementContent
+  nodeStaticInfo(this: ShikijiTransformerContext, info: TwoSlashReturn['staticQuickInfos'][0], node: Element | Text): ElementContent
 }

@@ -215,8 +215,6 @@ export function tokensToHast(
       children: [],
     }
 
-    lineNodes.push(lineNode)
-
     let col = 0
 
     for (const token of line) {
@@ -241,6 +239,7 @@ export function tokensToHast(
     for (const transformer of transformers)
       lineNode = transformer?.line?.call(context, lineNode, idx + 1) || lineNode
 
+    lineNodes.push(lineNode)
     lines.push(lineNode)
   })
 

@@ -31,6 +31,38 @@ const html = await codeToHtml(code, {
 
 Same as `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
 
+## Renderers
+
+Thanks to the flexibility of [`hast`](https://github.com/syntax-tree/hast), this transformer allows customizing how each piece of information is rendered in the output HTML with ASTs.
+
+We provide two renderers built-in, while you can also create your own:
+
+### `rendererClassic`
+
+[Source code](./src/renderer-classic.ts)
+
+This is the default renderer that aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+
+You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here](./style-shiki-twoslash.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+
+### `rendererRich`
+
+[Source code](./src/renderer-rich.ts)
+
+This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information as well.
+
+```ts
+import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+
+transformerTwoSlash({
+  renderer: rendererRich // <--
+})
+```
+
+Here is an example with the [`style-rich.css`](./style-rich.css):
+
+![](https://github.com/antfu/shikiji/assets/11247099/41f75799-e652-4331-ab75-39dbe8772c81)
+
 ## Integrations
 
 ### VitePress

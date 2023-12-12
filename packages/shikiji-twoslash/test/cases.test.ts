@@ -5,7 +5,7 @@ import { transformerTwoSlash } from '../src'
 import type { BuiltinTheme } from '../../shikiji/dist/types.mjs'
 
 const styleTag = `
-<link rel="stylesheet" href="../../style.css" />
+<link rel="stylesheet" href="../../style-shiki-twoslash.css" />
 <style>
 html, body { margin: 0; }
 .shiki { padding: 2em; }

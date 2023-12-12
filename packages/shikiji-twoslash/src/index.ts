@@ -7,6 +7,7 @@ import type { TransformerTwoSlashOptions } from './types'
 
 export * from './types'
 export * from './renderer-classic'
+export * from './renderer-rich'
 
 export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): ShikijiTransformer {
   const {
@@ -20,6 +21,7 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
       yml: 'yaml',
     },
     renderer = rendererClassic,
+    throws = true,
   } = options
   const filter = options.filter || (lang => langs.includes(lang))
   return {
@@ -52,8 +54,11 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         else {
           const lineEl = this.lines[line]
           index = codeEl.children.indexOf(lineEl)
-          if (index === -1)
-            return false
+          if (index === -1) {
+            if (throws)
+              throw new Error(`[shikiji-twoslash] Cannot find line ${line} in code element`)
+            return
+          }
         }
 
         // If there is a newline after this line, remove it because we have the error element take place.
@@ -61,63 +66,65 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         if (nodeAfter && nodeAfter.type === 'text' && nodeAfter.value === '\n')
           codeEl.children.splice(index + 1, 1)
         codeEl.children.splice(index + 1, 0, ...nodes)
-        return true
       }
 
-      for (const info of twoslash.staticQuickInfos) {
-        const token = locateTextToken(this, info.line, info.character)
-        if (!token || token.type !== 'text')
-          continue
+      const locateTextToken = (
+        line: number,
+        character: number,
+      ) => {
+        const lineEl = this.lines[line]
+        if (!lineEl) {
+          if (throws)
+            throw new Error(`[shikiji-twoslash] Cannot find line ${line} in code element`)
+        }
+        const textNodes = lineEl.children.flatMap(i => i.type === 'element' ? i.children || [] : []) as (Text | Element)[]
+        let index = 0
+        for (const token of textNodes) {
+          if ('value' in token && typeof token.value === 'string')
+            index += token.value.length
 
-        const clone = { ...token }
-        Object.assign(token, renderer.nodeStaticInfo(info, clone))
+          if (index > character)
+            return token
+        }
+        if (throws)
+          throw new Error(`[shikiji-twoslash] Cannot find token at L${line}:${character}`)
       }
 
       for (const error of twoslash.errors) {
         if (error.line == null || error.character == null)
           return
-        const token = locateTextToken(this, error.line, error.character)
+        const token = locateTextToken(error.line, error.character)
         if (!token)
           continue
 
         const clone = { ...token }
-        Object.assign(token, renderer.nodeError(error, clone))
+        Object.assign(token, renderer.nodeError.call(this, error, clone))
 
-        insertAfterLine(error.line, renderer.lineError(error))
+        insertAfterLine(error.line, renderer.lineError.call(this, error))
+      }
+
+      for (const info of twoslash.staticQuickInfos) {
+        const token = locateTextToken(info.line, info.character)
+        if (!token || token.type !== 'text')
+          continue
+
+        const clone = { ...token }
+        Object.assign(token, renderer.nodeStaticInfo.call(this, info, clone))
       }
 
       for (const query of twoslash.queries) {
         insertAfterLine(
           query.line,
           query.kind === 'completions'
-            ? renderer.lineCompletions(query)
+            ? renderer.lineCompletions.call(this, query)
             : query.kind === 'query'
-              ? renderer.lineQuery(query, locateTextToken(this, query.line, query.offset))
+              ? renderer.lineQuery.call(this, query, locateTextToken(query.line - 1, query.offset))
               : [],
         )
       }
 
       for (const tag of twoslash.tags)
-        insertAfterLine(tag.line, renderer.lineCustomTag(tag))
+        insertAfterLine(tag.line, renderer.lineCustomTag.call(this, tag))
     },
-  }
-}
-
-function locateTextToken(
-  context: ShikijiTransformerContext,
-  line: number,
-  character: number,
-) {
-  const lineEl = context.lines[line]
-  if (!lineEl)
-    return
-  const textNodes = lineEl.children.flatMap(i => i.type === 'element' ? i.children || [] : []) as (Text | Element)[]
-  let index = 0
-  for (const token of textNodes) {
-    if ('value' in token && typeof token.value === 'string')
-      index += token.value.length
-
-    if (index > character)
-      return token
   }
 }
