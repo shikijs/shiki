@@ -47,7 +47,7 @@ You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here
 
 ### `rendererRich`
 
-[Source code](./src/renderer-rich.ts)
+[Source code](./src/renderer-rich.ts) | [Live Demo](https://antfu.me/posts/shikiji-twoslash)
 
 This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information as well.
 
@@ -63,6 +63,32 @@ Here is an example with the [`style-rich.css`](./style-rich.css):
 
 ![](https://github.com/antfu/shikiji/assets/11247099/41f75799-e652-4331-ab75-39dbe8772c81)
 
+## Options
+
+### Explicit Trigger
+
+When integrating with `markdown-it-shikiji` or `rehype-shikiji`, we may not want TwoSlash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
+
+```ts
+import { transformerTwoSlash } from 'shikiji-twoslash'
+
+transformerTwoSlash({
+  explicitTrigger: true // <--
+})
+```
+
+````md
+In markdown, you can use the following syntax to trigger TwoSlash:
+
+```ts
+// this is a normal code block
+```
+
+```ts twoslash
+// this will run TwoSlash
+```
+````
+
 ## Integrations
 
 ### VitePress
@@ -77,7 +103,9 @@ import { transformerTwoSlash } from 'shikiji-twoslash'
 export default defineUserConfig({
   markdown: {
     codeTransformers: [
-      transformerTwoSlash() // <-- here
+      transformerTwoSlash({
+        explicitTrigger: true,
+      })
     ]
   },
 })
