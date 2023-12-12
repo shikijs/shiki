@@ -42,6 +42,7 @@ it('run', async () => {
 
   expect.soft(exportsDiff).toMatchInlineSnapshot(`
     [
+      "FontStyle",
       "renderToHtml",
     ]
   `)
