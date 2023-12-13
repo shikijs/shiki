@@ -1,6 +1,6 @@
 import type MarkdownIt from 'markdown-it'
 import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
-import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput, TransformerOptions } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput, ShikijiTransformer, TransformerOptions } from 'shikiji'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
 export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
@@ -52,7 +52,7 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
       },
     }
 
-    codeOptions.transformers ||= []
+    const builtInTransformer: ShikijiTransformer[] = []
 
     if (highlightLines) {
       const lines = parseHighlightLines(attrs)
@@ -61,7 +61,7 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
           ? 'highlighted'
           : highlightLines
 
-        codeOptions.transformers.push({
+        builtInTransformer.push({
           name: 'markdown-it-shikiji:line-class',
           line(node, line) {
             if (lines.includes(line))
@@ -72,7 +72,7 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
       }
     }
 
-    codeOptions.transformers.push({
+    builtInTransformer.push({
       name: 'markdown-it-shikiji:block-class',
       code(node) {
         node.properties.class = `language-${lang}`
@@ -81,7 +81,13 @@ function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: Markdo
 
     return highlighter.codeToHtml(
       code,
-      codeOptions,
+      {
+        ...codeOptions,
+        transformers: [
+          ...builtInTransformer,
+          ...codeOptions.transformers || [],
+        ],
+      },
     )
   }
 }

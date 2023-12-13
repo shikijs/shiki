@@ -60,4 +60,43 @@ const a = 123
 
     expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/works.html')
   })
+
+  it('with highlight lines', async () => {
+    const md = MarkdownIt()
+
+    md.use(await Shikiji({
+      highlightLines: true,
+      themes: {
+        light: 'vitesse-light',
+        dark: 'vitesse-dark',
+      },
+      defaultColor: false,
+      transformers: [
+        transformerTwoSlash({
+          explicitTrigger: true,
+          renderer: rendererRich,
+        }),
+      ],
+    }))
+
+    const html = md.render(`
+# Hello
+
+\`\`\`ts {1,3} twoslash
+const a = 123
+const b = 123
+const v = 123
+//    ^?
+\`\`\`
+
+\`\`\`ts twoslash {2}
+const a = 123
+const b = 123
+const v = 123
+//    ^?
+\`\`\`
+    `.trim())
+
+    expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/highlight-lines.html')
+  })
 })
