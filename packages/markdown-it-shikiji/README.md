@@ -24,6 +24,31 @@ md.use(await Shikiji({
 }))
 ```
 
+## Fine-grained Bundle
+
+By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](https://github.com/antfu/shikiji#fine-grained-bundle), you can import from `markdown-it-shikiji/core` and pass your own highlighter:
+
+```ts
+import MarkdownIt from 'markdown-it'
+import { fromHighlighter } from 'markdown-it-shikiji/core'
+import { getHighlighterCore } from 'shikiji/core'
+import { getWasmInlined } from 'shikiji/wasm'
+
+const highlighter = await getHighlighterCore({
+  themes: [
+    import('shikiji/themes/vitesse-light.mjs')
+  ],
+  langs: [
+    import('shikiji/langs/javascript.mjs'),
+  ],
+  loadWasm: getWasmInlined
+})
+
+const md = MarkdownIt()
+
+md.use(fromHighlighter(highlighter, { /* options */ }))
+```
+
 ## Features
 
 ### Line Highlight
@@ -41,6 +66,12 @@ console.log('line4') // highlighted
 ```
 ````
 
+````
+
+```
+
 ## License
 
 MIT
+```
+````

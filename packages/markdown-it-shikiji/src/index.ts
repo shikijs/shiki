@@ -1,7 +1,10 @@
 import type MarkdownIt from 'markdown-it'
-import { addClassToHast, bundledLanguages, getHighlighter } from 'shikiji'
-import type { BuiltinLanguage, BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, Highlighter, LanguageInput, ShikijiTransformer, TransformerOptions } from 'shikiji'
-import { parseHighlightLines } from '../../shared/line-highlight'
+import { bundledLanguages, getHighlighter } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, LanguageInput } from 'shikiji'
+import type { MarkdownItShikijiSetupOptions } from './core'
+import { setupMarkdownIt } from './core'
+
+export * from './core'
 
 export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
   /**
@@ -10,86 +13,6 @@ export type MarkdownItShikijiOptions = MarkdownItShikijiSetupOptions & {
    * @default Object.keys(bundledLanguages)
    */
   langs?: Array<LanguageInput | BuiltinLanguage>
-}
-
-export type MarkdownItShikijiSetupOptions = CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & {
-  /**
-   * Add `highlighted` class to lines defined in after codeblock
-   *
-   * @default true
-   */
-    highlightLines?: boolean | string
-
-    /**
-     * Custom meta string parser
-     * Return an object to merge with `meta`
-     */
-    parseMetaString?: (
-      metaString: string,
-      code: string,
-      lang: string,
-    ) => Record<string, any> | undefined | null
-  }
-
-function setup(markdownit: MarkdownIt, highlighter: Highlighter, options: MarkdownItShikijiSetupOptions) {
-  const {
-    highlightLines = true,
-    parseMetaString,
-  } = options
-
-  markdownit.options.highlight = (code, lang = 'text', attrs) => {
-    const meta = parseMetaString?.(attrs, code, lang) || {}
-    const codeOptions: CodeToHastOptions = {
-      ...options,
-      lang,
-      meta: {
-        ...options.meta,
-        ...meta,
-        __raw: attrs,
-      },
-    }
-
-    const builtInTransformer: ShikijiTransformer[] = []
-
-    if (highlightLines) {
-      const lines = parseHighlightLines(attrs)
-      if (lines) {
-        const className = highlightLines === true
-          ? 'highlighted'
-          : highlightLines
-
-        builtInTransformer.push({
-          name: 'markdown-it-shikiji:line-class',
-          line(node, line) {
-            if (lines.includes(line))
-              addClassToHast(node, className)
-            return node
-          },
-        })
-      }
-    }
-
-    builtInTransformer.push({
-      name: 'markdown-it-shikiji:block-class',
-      code(node) {
-        node.properties.class = `language-${lang}`
-      },
-    })
-
-    return highlighter.codeToHtml(
-      code,
-      {
-        ...codeOptions,
-        transformers: [
-          ...builtInTransformer,
-          ...codeOptions.transformers || [],
-        ],
-      },
-    )
-  }
 }
 
 export default async function markdownItShikiji(options: MarkdownItShikijiOptions) {
@@ -102,6 +25,6 @@ export default async function markdownItShikiji(options: MarkdownItShikijiOption
   })
 
   return function (markdownit: MarkdownIt) {
-    setup(markdownit, highlighter, options)
+    setupMarkdownIt(markdownit, highlighter, options)
   }
 }
