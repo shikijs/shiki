@@ -4,11 +4,17 @@
   --twoslash-underline-color: currentColor;
   --twoslash-popup-bg: #f8f8f8;
   --twoslash-popup-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
-  --twoslash-matched-color: #2e8f82;
+  --twoslash-matched-color: inherit;
   --twoslash-unmatched-color: #888;
   --twoslash-cursor-color: #8888;
   --twoslash-error-color: #d45656;
   --twoslash-error-bg: #d4565620;
+  --twoslash-tag-color: #3772cf;
+  --twoslash-tag-bg: #3772cf20;
+  --twoslash-tag-warn-color: #c37d0d;
+  --twoslash-tag-warn-bg: #c37d0d20;
+  --twoslash-tag-annotate-color: #1ba673;
+  --twoslash-tag-annotate-bg: #1ba67320;
 }
 
 /* Respect people's wishes to not have animations */
@@ -30,7 +36,7 @@
   position: relative;
 }
 
-.twoslash .twoslash-hover-info {
+.twoslash .twoslash-popup-info {
   position: absolute;
   top: 0;
   left: 0;
@@ -47,10 +53,32 @@
   box-shadow: var(--twoslash-popup-shadow);
 }
 
-.twoslash .twoslash-hover:hover .twoslash-hover-info {
+.twoslash-query-presisted .twoslash-popup-info {
+  z-index: 9;
+  transform: translate(0, 1.45em);
+}
+
+.twoslash .twoslash-hover:hover .twoslash-popup-info,
+.twoslash .twoslash-query-presisted .twoslash-popup-info {
   opacity: 1;
   pointer-events: auto;
-  user-select: unset;
+}
+
+.twoslash .twoslash-popup-info:hover {
+  user-select: auto;
+}
+
+.twoslash .twoslash-popup-arrow {
+  position: absolute;
+  top: -4px;
+  left: 1em;
+  border-top: 1px solid var(--twoslash-border-color);
+  border-right: 1px solid var(--twoslash-border-color);
+  background: var(--twoslash-popup-bg);
+  transform: rotate(-45deg);
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
 }
 
 /* ===== Error Line ===== */
@@ -69,67 +97,93 @@
   padding-bottom: 2px;
 }
 
-/* ===== Popover ===== */
-.twoslash .twoslash-popover {
-  position: relative;
-  background: var(--twoslash-popup-bg);
-  border: 1px solid var(--twoslash-border-color);
-  border-radius: 4px;
-  padding: 4px 6px;
-  margin: 0 -0.5em;
-  z-index: 9;
-  user-select: none;
-  box-shadow: var(--twoslash-popup-shadow);
-}
-
-.twoslash .twoslash-popover-arrow {
-  position: absolute;
-  top: -5px;
-  left: 1em;
-  border-top: 1px solid var(--twoslash-border-color);
-  border-right: 1px solid var(--twoslash-border-color);
-  background: var(--twoslash-popup-bg);
-  transform: rotate(-45deg);
-  width: 8px;
-  height: 8px;
-  pointer-events: none;
-}
-
 /* ===== Completeions ===== */
-.twoslash .twoslash-completions ul {
-  display: inline-block;
+.twoslash .twoslash-completions-list {
+  position: relative;
+}
+
+.twoslash .twoslash-completions-list ul {
+  user-select: none;
   position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0, 1.2em);
+  display: inline-block;
   width: 240px;
   background: var(--twoslash-popup-bg);
   border: 1px solid var(--twoslash-border-color);
   font-size: 0.8rem;
   margin: 3px 0 0 -1px;
-  padding: 4px 0 0 0;
-  border-left: 4px solid var(--twoslash-matched-color);
+  padding: 4px;
   z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   box-shadow: var(--twoslash-popup-shadow);
 }
-.twoslash .twoslash-completions ul::before {
+.twoslash .twoslash-completions-list ul:hover {
+  user-select: auto;
+}
+.twoslash .twoslash-completions-list ul::before {
   background-color: var(--twoslash-cursor-color);
   width: 2px;
   position: absolute;
   top: -1.6em;
   height: 1.4em;
-  left: -4px;
+  left: -1px;
   content: ' ';
 }
-.twoslash .twoslash-completions ul li {
-  overflow-x: hidden;
-  padding-left: 4px;
-  margin-bottom: 4px;
+.twoslash .twoslash-completions-list ul li {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  line-height: 1em;
 }
-.twoslash .twoslash-completions ul li span {
+.twoslash .twoslash-completions-list ul li span.twoslash-completions-unmatched {
   color: var(--twoslash-unmatched-color);
 }
-.twoslash .twoslash-completions ul .deprecated {
+.twoslash .twoslash-completions-list ul .deprecated {
   text-decoration: line-through;
-  opacity: 0.75;
+  opacity: 0.5;
 }
-.twoslash .twoslash-completions ul li span.twoslash-completions-matched {
+.twoslash .twoslash-completions-list ul li span.twoslash-completions-matched {
   color: var(--twoslash-matched-color);
+}
+/* Icons */
+.twoslash .twoslash-completions-list .twoslash-completions-icon {
+  color: var(--twoslash-unmatched-color);
+  width: 1em;
+  flex: none;
+}
+/* Custom Tags */
+.twoslash .twoslash-tag-line {
+  position: relative;
+  background-color: var(--twoslash-tag-bg);
+  border-left: 3px solid var(--twoslash-tag-color);
+  color: var(--twoslash-tag-color);
+  padding: 6px 6px;
+  margin: 0.2em 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.twoslash .twoslash-tag-line .twoslash-tag-icon {
+  width: 1.1em;
+  color: inherit;
+}
+.twoslash .twoslash-tag-line.twoslash-tag-error-line {
+  background-color: var(--twoslash-error-bg);
+  border-left: 3px solid var(--twoslash-error-color);
+  color: var(--twoslash-error-color);
+}
+.twoslash .twoslash-tag-line.twoslash-tag-warn-line {
+  background-color: var(--twoslash-tag-warn-bg);
+  border-left: 3px solid var(--twoslash-tag-warn-color);
+  color: var(--twoslash-tag-warn-color);
+}
+.twoslash .twoslash-tag-line.twoslash-tag-annotate-line {
+  background-color: var(--twoslash-tag-annotate-bg);
+  border-left: 3px solid var(--twoslash-tag-annotate-color);
+  color: var(--twoslash-tag-annotate-color);
 }

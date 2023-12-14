@@ -2,26 +2,36 @@ import { twoslasher } from '@typescript/twoslash'
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import type { Element, ElementContent, Text } from 'hast'
+import { ModuleKind, ScriptTarget } from 'typescript'
 import { rendererClassic } from './renderer-classic'
 import type { TransformerTwoSlashOptions } from './types'
 
 export * from './types'
 export * from './renderer-classic'
 export * from './renderer-rich'
+export * from './icons'
+
+export function defaultTwoSlashOptions() {
+  return {
+    customTags: ['annotate', 'log', 'warn', 'error'],
+    defaultCompilerOptions: {
+      module: ModuleKind.ESNext,
+      target: ScriptTarget.ESNext,
+    },
+  }
+}
 
 export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): ShikijiTransformer {
   const {
     langs = ['ts', 'tsx'],
-    twoslashOptions = {
-      customTags: ['annotate', 'log', 'warn', 'error'],
-    },
+    twoslashOptions = defaultTwoSlashOptions(),
     langAlias = {
       typescript: 'ts',
       json5: 'json',
       yml: 'yaml',
     },
     explicitTrigger = false,
-    renderer = rendererClassic,
+    renderer = rendererClassic(),
     throws = true,
   } = options
   const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
@@ -48,6 +58,8 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         return
 
       const insertAfterLine = (line: number, nodes: ElementContent[]) => {
+        if (!nodes.length)
+          return
         let index: number
         if (line >= this.lines.length) {
           index = codeEl.children.length
@@ -102,21 +114,44 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
 
         skipTokens.add(token)
 
-        const clone = { ...token }
-        Object.assign(token, renderer.nodeError.call(this, error, clone))
+        if (renderer.nodeError) {
+          const clone = { ...token }
+          Object.assign(token, renderer.nodeError.call(this, error, clone))
+        }
 
-        insertAfterLine(error.line, renderer.lineError.call(this, error))
+        if (renderer.lineError)
+          insertAfterLine(error.line, renderer.lineError.call(this, error))
       }
 
       for (const query of twoslash.queries) {
         if (query.kind === 'completions') {
-          insertAfterLine(query.line, renderer.lineCompletions.call(this, query))
+          const token = locateTextToken(query.line - 1, query.offset)
+          if (!token)
+            throw new Error(`[shikiji-twoslash] Cannot find token at L${query.line}:${query.offset}`)
+          skipTokens.add(token)
+
+          if (renderer.nodeCompletions) {
+            const clone = { ...token }
+            Object.assign(token, renderer.nodeCompletions.call(this, query, clone))
+          }
+
+          if (renderer.lineCompletions)
+            insertAfterLine(query.line, renderer.lineCompletions.call(this, query))
         }
         else if (query.kind === 'query') {
           const token = locateTextToken(query.line - 1, query.offset)
-          if (token)
-            skipTokens.add(token)
-          insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
+          if (!token)
+            throw new Error(`[shikiji-twoslash] Cannot find token at L${query.line}:${query.offset}`)
+
+          skipTokens.add(token)
+
+          if (renderer.nodeQuery) {
+            const clone = { ...token }
+            Object.assign(token, renderer.nodeQuery.call(this, query, clone))
+          }
+
+          if (renderer.lineQuery)
+            insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
         }
       }
 
@@ -133,8 +168,10 @@ export function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): S
         Object.assign(token, renderer.nodeStaticInfo.call(this, info, clone))
       }
 
-      for (const tag of twoslash.tags)
-        insertAfterLine(tag.line, renderer.lineCustomTag.call(this, tag))
+      if (renderer.lineCustomTag) {
+        for (const tag of twoslash.tags)
+          insertAfterLine(tag.line, renderer.lineCustomTag.call(this, tag))
+      }
     },
   }
 }

@@ -223,12 +223,24 @@ importers:
         specifier: workspace:*
         version: link:../shikiji
     devDependencies:
+      '@iconify-json/carbon':
+        specifier: ^1.1.26
+        version: 1.1.26
+      '@iconify-json/codicon':
+        specifier: ^1.1.39
+        version: 1.1.39
+      hast-util-from-html:
+        specifier: ^2.0.1
+        version: 2.0.1
       shiki:
         specifier: ^0.14.6
         version: 0.14.6
       shiki-twoslash:
         specifier: ^3.1.2
         version: 3.1.2(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
 packages:
 
@@ -1307,6 +1319,22 @@ packages:
 
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
+    dev: true
+
+  /@iconify-json/carbon@1.1.26:
+    resolution: {integrity: sha512-0y6JstqPCsjEiUuyTTdHE7Wd9gGlxzH2dEfvKUJe5E741qRgLlIipVdBoCkOtbyAT92WEcU8BNfDaC585OCC8w==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/codicon@1.1.39:
+    resolution: {integrity: sha512-h/4Wlp6byjStnUH1HaE+fNb7ttFoG1Qc1QMCavl82RasBGwCbvjVizg7DrA+gl63t96Yk9rB/kxSV6azGgdkNw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify/types@2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
 
   /@isaacs/cliui@8.0.2:
@@ -4174,6 +4202,17 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: true
+
+  /hast-util-from-html@2.0.1:
+    resolution: {integrity: sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==}
+    dependencies:
+      '@types/hast': 3.0.3
+      devlop: 1.1.0
+      hast-util-from-parse5: 8.0.1
+      parse5: 7.1.2
+      vfile: 6.0.1
+      vfile-message: 4.0.2
     dev: true
 
   /hast-util-from-parse5@8.0.1:

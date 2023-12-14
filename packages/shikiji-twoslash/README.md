@@ -43,7 +43,7 @@ We provide two renderers built-in, while you can also create your own:
 
 This is the default renderer that aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
 
-You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here](./style-shiki-twoslash.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here](./style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
 
 ### `rendererRich`
 
@@ -55,7 +55,7 @@ This renderer provides a more explicit class name that is always prefixed with `
 import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
 
 transformerTwoSlash({
-  renderer: rendererRich // <--
+  renderer: rendererRich() // <--
 })
 ```
 

@@ -35,7 +35,7 @@ describe('markdown-it', () => {
       transformers: [
         transformerTwoSlash({
           explicitTrigger: true,
-          renderer: rendererRich,
+          renderer: rendererRich(),
         }),
       ],
     }))
@@ -74,7 +74,7 @@ const a = 123
       transformers: [
         transformerTwoSlash({
           explicitTrigger: true,
-          renderer: rendererRich,
+          renderer: rendererRich(),
         }),
       ],
     }))

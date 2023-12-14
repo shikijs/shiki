@@ -23,7 +23,7 @@
       "default": "./dist/index.mjs"
     },
     "./style-rich.css": "./style-rich.css",
-    "./style-shiki-twoslash.css": "./style-shiki-twoslash.css",
+    "./style-classic.css": "./style-classic.css",
     "./*": "./dist/*"
   },
   "main": "./dist/index.mjs",
@@ -47,12 +47,19 @@
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
     "@typescript/twoslash": "^3.2.4",
     "shikiji": "workspace:*"
   },
   "devDependencies": {
+    "@iconify-json/carbon": "^1.1.26",
+    "@iconify-json/codicon": "^1.1.39",
+    "hast-util-from-html": "^2.0.1",
     "shiki": "^0.14.6",
-    "shiki-twoslash": "^3.1.2"
+    "shiki-twoslash": "^3.1.2",
+    "typescript": "^5.3.3"
   }
 }
