@@ -61,7 +61,9 @@ transformerTwoSlash({
 
 Here is an example with the [`style-rich.css`](./style-rich.css):
 
-![](https://github.com/antfu/shikiji/assets/11247099/41f75799-e652-4331-ab75-39dbe8772c81)
+<img width="1067" alt="image" src="https://github.com/antfu/shikiji/assets/11247099/9456aa98-b80a-48b3-b67c-ac58352c699a">
+
+<img width="572" alt="image" src="https://github.com/antfu/shikiji/assets/11247099/7ae92a45-f7a9-4a93-94bd-fc8839c09539">
 
 ## Options
 
