@@ -1,8 +1,8 @@
 import { twoslasher } from '@typescript/twoslash'
 import type { ShikijiTransformer } from 'shikiji'
-import { addClassToHast } from 'shikiji'
+import { addClassToHast } from 'shikiji/core'
 import type { Element, ElementContent, Text } from 'hast'
-import { ModuleKind, ScriptTarget } from 'typescript'
+import type { ModuleKind, ScriptTarget } from 'typescript'
 import { rendererClassic } from './renderer-classic'
 import type { TransformerTwoSlashOptions } from './types'
 
@@ -15,8 +15,8 @@ export function defaultTwoSlashOptions() {
   return {
     customTags: ['annotate', 'log', 'warn', 'error'],
     defaultCompilerOptions: {
-      module: ModuleKind.ESNext,
-      target: ScriptTarget.ESNext,
+      module: 99 satisfies ModuleKind.ESNext,
+      target: 99 satisfies ScriptTarget.ESNext,
     },
   }
 }
