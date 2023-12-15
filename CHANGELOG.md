@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.14.7 | 2023-12-15
+
+### 🙌 Contributions
+
+- doc: fix typo | [#544](https://github.com/shikijs/shiki/pull/544) | [@Seven-Y-Q-Guo](https://github.com/Seven-Y-Q-Guo)
+- feat: Add `nushell` grammar | [#522](https://github.com/shikijs/shiki/pull/522) | [@hustcer](https://github.com/hustcer)
+- feat: add `wl` alias for `wolfram` | [#535](https://github.com/shikijs/shiki/pull/535) | [@stone-zeng](https://github.com/stone-zeng)
+
+
 ## 0.14.6 | 2023-12-07
 
 ### 🚀 Features & Fixes
