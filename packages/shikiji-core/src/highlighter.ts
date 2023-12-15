@@ -1,4 +1,4 @@
-import type { HighlighterCoreOptions, HighlighterGeneric } from '../types'
+import type { HighlighterCoreOptions, HighlighterGeneric } from './types'
 import { codeToHtml } from './renderer-html'
 import { codeToTokensWithThemes } from './renderer-html-themes'
 import { codeToThemedTokens } from './tokenizer'

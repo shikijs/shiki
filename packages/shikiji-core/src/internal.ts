@@ -1,5 +1,5 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistration } from '../types'
-import { createOnigScanner, createOnigString, loadWasm } from '../oniguruma'
+import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistration } from './types'
+import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 
@@ -30,14 +30,17 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
         : undefined,
   ] as const)
 
-  const resolver = new Resolver(Promise.resolve({
-    createOnigScanner(patterns) {
-      return createOnigScanner(patterns)
-    },
-    createOnigString(s) {
-      return createOnigString(s)
-    },
-  }), 'vscode-oniguruma', langs)
+  const resolver = new Resolver(
+    Promise.resolve({
+      createOnigScanner(patterns) {
+        return createOnigScanner(patterns)
+      },
+      createOnigString(s) {
+        return createOnigString(s)
+      },
+    }),
+    langs,
+  )
 
   const _registry = new Registry(resolver, themes, langs)
   Object.assign(_registry.alias, options.langAlias)

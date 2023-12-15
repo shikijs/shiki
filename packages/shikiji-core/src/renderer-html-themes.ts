@@ -3,7 +3,7 @@ import type {
   ShikiInternal,
   ThemedToken,
   ThemedTokenWithVariants,
-} from '../types'
+} from './types'
 import { codeToThemedTokens } from './tokenizer'
 
 /**

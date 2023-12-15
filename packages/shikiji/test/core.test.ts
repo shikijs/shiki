@@ -5,9 +5,7 @@ import js from '../src/assets/langs/javascript'
 import ts from '../src/assets/langs/typescript'
 import nord from '../dist/themes/nord.mjs'
 import mtp from '../dist/themes/material-theme-palenight.mjs'
-
-// @ts-expect-error no-types
-import onig from '../dist/onig.mjs'
+import onig from '../../shikiji-core/dist/onig.mjs'
 
 describe('should', () => {
   it('works', async () => {

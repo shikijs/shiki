@@ -1,8 +1,9 @@
-export { loadWasm } from '../oniguruma'
+export { loadWasm } from './oniguruma'
 
 export * from './highlighter'
 export * from './bundle-factory'
 export * from './utils'
+export * from './types'
 
 export { getShikiInternal, getShikiContext } from './internal'
 export { codeToThemedTokens } from './tokenizer'

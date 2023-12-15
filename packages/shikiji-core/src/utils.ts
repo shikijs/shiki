@@ -1,5 +1,5 @@
 import type { Element } from 'hast'
-import type { MaybeArray } from '../types'
+import type { MaybeArray } from './types'
 
 export function isPlaintext(lang: string | null | undefined) {
   return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)

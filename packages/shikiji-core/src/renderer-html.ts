@@ -1,5 +1,5 @@
 import { toHtml as hastToHtml } from 'hast-util-to-html'
-import type { CodeToHastOptions, ShikiInternal, ShikijiTransformerContextCommon } from '../types'
+import type { CodeToHastOptions, ShikiInternal, ShikijiTransformerContextCommon } from './types'
 import { codeToHast } from './renderer-hast'
 
 /**

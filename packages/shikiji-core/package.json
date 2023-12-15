@@ -1,15 +1,15 @@
 {
-  "name": "shikiji",
+  "name": "shikiji-core",
   "type": "module",
-  "version": "0.9.2",
-  "description": "An ESM-focused rewrite of shiki",
+  "version": "0.9.3-alpha.0",
+  "description": "Core of Shikiji",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/antfu/shikiji#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antfu/shikiji.git",
-    "directory": "packages/shikiji"
+    "directory": "packages/shikiji-core"
   },
   "bugs": "https://github.com/antfu/shikiji/issues",
   "keywords": [
@@ -21,21 +21,16 @@
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     },
-    "./core": {
-      "types": "./dist/core.d.mts",
-      "default": "./dist/core.mjs"
-    },
     "./wasm": {
       "types": "./dist/wasm.d.mts",
       "default": "./dist/wasm.mjs"
     },
-    "./langs": {
-      "types": "./dist/langs.d.mts",
-      "default": "./dist/langs.mjs"
+    "./textmate": {
+      "types": "./dist/textmate.d.mts",
+      "default": "./dist/textmate.mjs"
     },
-    "./themes": {
-      "types": "./dist/themes.d.mts",
-      "default": "./dist/themes.mjs"
+    "./types": {
+      "types": "./dist/types.d.mts"
     },
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
@@ -45,17 +40,14 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
-      "core": [
-        "./dist/core.d.mts"
-      ],
       "wasm": [
         "./dist/wasm.d.mts"
       ],
-      "langs": [
-        "./dist/langs.d.mts"
+      "types": [
+        "./dist/types.d.mts"
       ],
-      "themes": [
-        "./dist/themes.d.mts"
+      "textmate": [
+        "./dist/textmate.d.mts"
       ],
       "*": [
         "./dist/*",
@@ -67,18 +59,13 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -cw",
     "prepublishOnly": "nr build",
-    "test": "vitest",
-    "test:cf": "wrangler dev test/cf.ts --port 60001"
-  },
-  "dependencies": {
-    "shikiji-core": "workspace:*"
+    "test": "vitest"
   },
   "devDependencies": {
-    "shiki": "^0.14.6",
+    "hast-util-to-html": "^9.0.0",
     "vscode-oniguruma": "^1.7.0"
   }
 }

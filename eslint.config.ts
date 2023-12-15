@@ -13,6 +13,7 @@ export default antfu(
       '**/test/out/**',
       'docs/languages.md',
       'docs/themes.md',
+      '**/vendor/**',
     ],
   },
   {

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { ThemedToken } from '../src'
 import { codeToHtml, codeToThemedTokens, codeToTokensWithThemes } from '../src'
-import { syncThemesTokenization } from '../src/core/renderer-html-themes'
+import { syncThemesTokenization } from '../../shikiji-core/src/renderer-html-themes'
 
 describe('syncThemesTokenization', () => {
   function stringifyTokens(tokens: ThemedToken[][]) {

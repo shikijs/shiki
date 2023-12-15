@@ -8,6 +8,7 @@ export * from './core'
 export * from './themes'
 export * from './langs'
 export * from './wasm'
+export * from './types'
 
 export type Highlighter = HighlighterGeneric<BuiltinLanguage, BuiltinTheme>
 

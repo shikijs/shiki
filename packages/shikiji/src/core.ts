@@ -1,2 +1,1 @@
-export * from './core/index'
-export * from './types'
+export * from 'shikiji-core'

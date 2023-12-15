@@ -6,23 +6,30 @@
     "module": "esnext",
     "moduleResolution": "Bundler",
     "paths": {
-      "shikiji": ["./packages/shikiji/src/index.ts"],
-      "shikiji/core": ["./packages/shikiji/src/core/index.ts"],
+      "shikiji-core/types": ["./packages/shikiji-core/src/types.ts"],
+      "shikiji-core/wasm": ["./packages/shikiji-core/src/wasm.ts"],
+      "shikiji-core": ["./packages/shikiji-core/src/index.ts"],
       "shikiji-transformers": ["./packages/shikiji-transformers/src/index.ts"],
       "shikiji-twoslash": ["./packages/shikiji-twoslash/src/index.ts"],
+      "shikiji/core": ["./packages/shikiji/src/core.ts"],
+      "shikiji": ["./packages/shikiji/src/index.ts"],
       "markdown-it-shikiji": ["./packages/markdown-it-shikiji/src/index.ts"]
     },
     "resolveJsonModule": true,
+    "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
+    "preserveValueImports": false,
     "esModuleInterop": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.mjs"
   ],
   "exclude": [
+    "**/vendor/**",
     "**/node_modules/**",
     "**/dist/**",
     "**/fixtures/**"

@@ -19,6 +19,12 @@ const entries = [
   'src/wasm.ts',
 ]
 
+const external = [
+  'shikiji-core',
+  'shikiji-core/wasm',
+  'shikiji-core/types',
+]
+
 const plugins = [
   esbuild(),
   nodeResolve(),
@@ -28,7 +34,6 @@ const plugins = [
     preferConst: true,
     compact: true,
   }),
-  wasmPlugin(),
 ]
 
 export default defineConfig([
@@ -43,14 +48,13 @@ export default defineConfig([
           return `langs/${f.name.replace('.tmLanguage', '')}.mjs`
         else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
           return 'themes/[name].mjs'
-        else if (f.name === 'onig')
-          return 'onig.mjs'
         return 'chunks/[name].mjs'
       },
     },
     plugins: [
       ...plugins,
     ],
+    external,
   },
   {
     input: entries,
@@ -70,7 +74,7 @@ export default defineConfig([
       {
         name: 'post',
         async buildEnd() {
-          await fs.writeFile('dist/onig.d.ts', 'declare const binary: ArrayBuffer; export default binary;', 'utf-8')
+          await fs.writeFile('dist/onig.d.mts', 'declare const binary: ArrayBuffer; export default binary;', 'utf-8')
           const langs = await fg('dist/langs/*.mjs', { absolute: true })
           await Promise.all(
             langs.map(file => fs.writeFile(
@@ -90,22 +94,10 @@ export default defineConfig([
         },
       },
     ],
+    external,
     onwarn: (warning, warn) => {
-      if (!/Circular/.test(warning.message))
+      if (!/Circular|an empty chunk/.test(warning.message))
         warn(warning)
     },
   },
 ])
-
-export function wasmPlugin() {
-  return {
-    name: 'wasm',
-    async load(id) {
-      if (!id.endsWith('.wasm'))
-        return
-      const binary = await fs.readFile(id)
-      const base64 = binary.toString('base64')
-      return `export default Uint8Array.from(atob(${JSON.stringify(base64)}), c => c.charCodeAt(0))`
-    },
-  }
-}

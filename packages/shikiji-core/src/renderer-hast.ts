@@ -8,9 +8,9 @@ import type {
   ThemedToken,
   ThemedTokenWithVariants,
   TokenStyles,
-} from '../types'
+} from './types'
 import { codeToThemedTokens } from './tokenizer'
-import { FontStyle } from './stackElementMetadata'
+import { FontStyle } from './types'
 import { codeToTokensWithThemes } from './renderer-html-themes'
 
 export function codeToHast(
