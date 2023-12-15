@@ -56,13 +56,10 @@ export class Registry extends TextMateRegistry {
   }
 
   public async loadLanguage(lang: ILanguageRegistration) {
-    const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
-      if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
-        await this._resolver.loadGrammar(this._resolver.getLangRegistration(l).scopeName)
-        acc[this._resolver.getLangRegistration(l).scopeName] = idx + 2
-        return acc
-      }
-    }, {})
+    const embeddedLanguages =
+      lang.embeddedLangs && lang.embeddedLangs.length > 0
+        ? Object.fromEntries(await this.loadGrammars(lang.embeddedLangs))
+        : {}
 
     const grammarConfig: IGrammarConfiguration = {
       embeddedLanguages,
@@ -96,6 +93,18 @@ export class Registry extends TextMateRegistry {
 
   public getLoadedLanguages() {
     return Object.keys(this._resolvedGrammars) as Lang[]
+  }
+
+  private async loadGrammars(embeddedLangs: Lang[]) {
+    const languageGrammarPromises = embeddedLangs
+      ?.filter(l => !this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l))
+      .map((l, idx) =>
+        this._resolver
+          .loadGrammar(this._resolver.getLangRegistration(l).scopeName)
+          .then(() => [this._resolver.getLangRegistration(l).scopeName, idx + 2] as const)
+      )
+
+    return Promise.all(languageGrammarPromises)
   }
 
   private resolveEmbeddedLanguages(lang: ILanguageRegistration) {
