@@ -111,9 +111,19 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   loadLanguage(...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]): Promise<void>
 
   /**
-   * Get the theme registration object
+   * Get the registered theme object
    */
   getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
+  /**
+   * Get the registered language object
+   */
+  getLangGrammar(name: string | LanguageRegistration): Grammar
+
+  /**
+   * Set the current theme and get the resolved theme object and color map.
+   * @internal
+   */
+  setTheme: ShikiInternal['setTheme']
 
   /**
    * Get the names of loaded languages

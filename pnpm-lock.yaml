@@ -241,6 +241,16 @@ importers:
         specifier: ^4.8.0
         version: 4.10.0(webpack@5.89.0)
 
+  packages/shikiji-monaco:
+    dependencies:
+      shikiji-core:
+        specifier: workspace:*
+        version: link:../shikiji-core
+    devDependencies:
+      monaco-editor-core:
+        specifier: ^0.45.0
+        version: 0.45.0
+
   packages/shikiji-transformers:
     dependencies:
       shikiji:
@@ -5883,6 +5893,10 @@ packages:
       yargs: 16.2.0
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
+    dev: true
+
+  /monaco-editor-core@0.45.0:
+    resolution: {integrity: sha512-3eqO61jcP+YSMwVB47FNIjma51HNPepMpLsBE8pV4kFw/ynf3KEvSKAbm6HtueZnjVoatKFtSyKhXi7B58/8aA==}
     dev: true
 
   /mri@1.2.0:

@@ -20,6 +20,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     loadTheme: internal.loadTheme,
 
     getTheme: internal.getTheme,
+    getLangGrammar: internal.getLangGrammar,
+    setTheme: internal.setTheme,
 
     getLoadedThemes: internal.getLoadedThemes,
     getLoadedLanguages: internal.getLoadedLanguages,

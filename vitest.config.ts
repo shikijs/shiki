@@ -41,7 +41,8 @@ export default defineConfig({
         '**/dist/**',
         '**/scripts/**',
         '**/vendor/**',
-        '**/stackElementMetadata.ts',
+        '**/stack-element-metadata.ts',
+        '**/shikiji-monaco/**',
       ],
     },
     poolOptions: {
