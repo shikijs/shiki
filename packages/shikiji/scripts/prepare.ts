@@ -168,18 +168,19 @@ function isLightColor(hex: string) {
 }
 
 function guessThemeType(id: string, theme: any) {
-  let color = theme.type
-  if (!['light', 'dark'].includes(color)) {
-    if (id.includes('dark') || id.includes('dimmed') || id.includes('black'))
-      color = 'dark'
-    else if (theme.colors.background)
-      color = isLightColor(theme.colors.background) ? 'light' : 'dark'
-    else if (theme.colors['editor.background'])
-      color = isLightColor(theme.colors['editor.background']) ? 'light' : 'dark'
-    else
-      color = 'light'
-    console.log('guess', id, color)
-  }
+  let color
+  if (id.includes('dark') || id.includes('dimmed') || id.includes('black'))
+    color = 'dark'
+  else if (id.includes('light') || id.includes('white') || id === 'slack-ochin')
+    color = 'light'
+  else if (theme.colors.background)
+    color = isLightColor(theme.colors.background) ? 'light' : 'dark'
+  else if (theme.colors['editor.background'])
+    color = isLightColor(theme.colors['editor.background']) ? 'light' : 'dark'
+  else if (theme.colors.foreground)
+    color = isLightColor(theme.colors.foreground) ? 'dark' : 'light'
+  else
+    color = 'light'
   return color
 }
 

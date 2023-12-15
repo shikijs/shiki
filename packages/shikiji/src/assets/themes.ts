@@ -46,7 +46,7 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   {
     "id": "github-light",
     "name": "GitHub Light",
-    "type": "dark",
+    "type": "light",
     "import": (() => import('shiki/themes/github-light.json')) as unknown as DynamicThemeReg
   },
   {
@@ -148,7 +148,7 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   {
     "id": "slack-ochin",
     "name": "Slack Ochin",
-    "type": "dark",
+    "type": "light",
     "import": (() => import('shiki/themes/slack-ochin.json')) as unknown as DynamicThemeReg
   },
   {
