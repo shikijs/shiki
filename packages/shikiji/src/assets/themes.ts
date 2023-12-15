@@ -6,7 +6,6 @@ import type { ThemeRegistrationRaw } from '../types'
 type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 
 export const bundledThemes = {
-  "css-variables": (() => import('shiki/themes/css-variables.json')) as unknown as DynamicThemeReg,
   "dark-plus": (() => import('shiki/themes/dark-plus.json')) as unknown as DynamicThemeReg,
   "dracula": (() => import('shiki/themes/dracula.json')) as unknown as DynamicThemeReg,
   "dracula-soft": (() => import('shiki/themes/dracula-soft.json')) as unknown as DynamicThemeReg,

@@ -106,7 +106,10 @@ export const bundledLanguages = {
 await writeLanguageBundleIndex('langs', BUNDLED_LANGUAGES.map(i => i.id))
 // await writeLanguageBundleIndex('langs-common', BundleCommonLangs)
 
-const themes = Object.fromEntries(BUNDLED_THEMES.sort().map(i => [i, `__(() => import('shiki/themes/${i}.json')) as unknown as DynamicThemeReg__`]))
+const themes = Object.fromEntries(BUNDLED_THEMES.sort()
+  .filter(i => i !== 'css-variables')
+  .map(i => [i, `__(() => import('shiki/themes/${i}.json')) as unknown as DynamicThemeReg__`]))
+
 await fs.writeFile(
   'src/assets/themes.ts',
   `${comments}

@@ -431,13 +431,13 @@ export interface ShikijiTransformer {
    * Transform the raw input code before passing to the highlighter.
    * This hook will only be called with `codeToHtml`.
    */
-  preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | undefined
+  preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
 
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
-  postprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | undefined
+  postprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
 }
 
 export interface HtmlRendererOptionsCommon extends TransformerOptions {

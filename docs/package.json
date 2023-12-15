@@ -1,0 +1,28 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "fuse.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it-container": "^2.0.9",
+    "@unocss/reset": "^0.58.0",
+    "@vueuse/core": "^10.7.0",
+    "gray-matter": "^4.0.3",
+    "markdown-it-container": "^3.0.0",
+    "pinia": "^2.1.7",
+    "shiki": "^0.14.6",
+    "shikiji": "workspace:*",
+    "shikiji-transformers": "workspace:*",
+    "shikiji-twoslash": "workspace:*",
+    "unocss": "^0.58.0",
+    "unplugin-vue-components": "^0.26.0",
+    "vitepress": "1.0.0-rc.30",
+    "vue": "^3.3.10"
+  }
+}

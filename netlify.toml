@@ -1,0 +1,13 @@
+[build]
+publish = "docs/.vitepress/dist"
+command = "pnpm run docs:build"
+
+[build.environment]
+NODE_VERSION = "20"
+NODE_OPTIONS = "--max_old_space_size=8192"
+
+[[redirects]]
+from = "/chat"
+to = "https://discord.gg/Xta6huNhVv"
+status = 302
+force = true
