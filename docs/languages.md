@@ -156,6 +156,7 @@ export type Lang =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'nushell' | 'nu'
   | 'objective-c' | 'objc'
   | 'objective-cpp'
   | 'ocaml'
