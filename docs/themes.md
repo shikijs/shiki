@@ -156,6 +156,7 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'vitesse-black'
   | 'vitesse-dark'
   | 'vitesse-light'
 ```

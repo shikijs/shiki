@@ -26,6 +26,7 @@ export type Theme =
   | 'slack-ochin'
   | 'solarized-dark'
   | 'solarized-light'
+  | 'vitesse-black'
   | 'vitesse-dark'
   | 'vitesse-light'
 
@@ -57,6 +58,7 @@ export const themes: Theme[] = [
   'slack-ochin',
   'solarized-dark',
   'solarized-light',
+  'vitesse-black',
   'vitesse-dark',
   'vitesse-light'
 ]
