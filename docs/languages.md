@@ -37,6 +37,7 @@ Inherited from [`shiki`](https://github.com/shikijs/shiki/blob/main/docs/languag
 | `crystal` | Crystal |  |
 | `csharp` | C# | `c#`, `cs` |
 | `css` | CSS |  |
+| `csv` | csv syntax |  |
 | `cue` | CUE |  |
 | `cypher` | Cypher | `cql` |
 | `d` | D |  |
@@ -108,6 +109,7 @@ Inherited from [`shiki`](https://github.com/shikijs/shiki/blob/main/docs/languag
 | `nginx` | Nginx |  |
 | `nim` | Nim |  |
 | `nix` | Nix |  |
+| `nushell` | nushell | `nu` |
 | `objective-c` | Objective-C | `objc` |
 | `objective-cpp` | Objective-C++ |  |
 | `ocaml` | OCaml |  |
@@ -172,7 +174,7 @@ Inherited from [`shiki`](https://github.com/shikijs/shiki/blob/main/docs/languag
 | `wasm` | WebAssembly |  |
 | `wenyan` | Wenyan | `文言` |
 | `wgsl` | WGSL |  |
-| `wolfram` | Wolfram |  |
+| `wolfram` | Wolfram | `wl` |
 | `xml` | XML |  |
 | `xsl` | XSL |  |
 | `yaml` | YAML | `yml` |

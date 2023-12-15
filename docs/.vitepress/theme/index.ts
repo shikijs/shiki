@@ -6,14 +6,11 @@ import 'shikiji-twoslash/style-rich.css'
 import './style.css'
 import './custom.css'
 import { createPinia } from 'pinia'
-import HomeDemo from '../components/HomeDemo.vue'
 
 export default {
   extends: Theme,
   Layout: () => {
-    return h(Theme.Layout, null, {
-      'home-features-after': () => h(HomeDemo),
-    })
+    return h(Theme.Layout, null, {})
   },
   enhanceApp({ app }: any) {
     app.use(createPinia())

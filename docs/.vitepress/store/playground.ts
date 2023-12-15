@@ -1,51 +1,81 @@
 /// <reference types="vite/client" />
 
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { BuiltinLanguage, BuiltinTheme } from 'shikiji'
+import type { BuiltinLanguage, BuiltinTheme, BundledLanguageInfo, BundledThemeInfo } from 'shikiji'
 import { useLocalStorage } from '@vueuse/core'
-import { ref, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
 export const usePlayground = defineStore('playground', () => {
   const lang = useLocalStorage<BuiltinLanguage>('shikiji-playground-lang', 'typescript')
   const theme = useLocalStorage<BuiltinTheme>('shikiji-playground-theme', 'vitesse-dark')
-  const allThemes = ref<BuiltinTheme[]>([])
-  const allLanguages = ref<BuiltinLanguage[]>([])
-  const input = ref('console.log(\'Hello World\')')
+  const allThemes = shallowRef<BundledThemeInfo[]>([
+    {
+      id: 'vitesse-dark',
+      name: 'Vitesse Dark',
+      type: 'dark',
+      import: undefined!,
+    },
+  ])
+  const allLanguages = shallowRef<BundledLanguageInfo[]>([
+    {
+      id: 'typescript',
+      name: 'TypeScript',
+      import: undefined!,
+    },
+  ])
+  const input = useLocalStorage('shikiji-playground-input', '')
   const output = ref('<pre></pre>')
   const preStyle = ref('')
   const isLoading = ref(true)
 
+  function randomize() {
+    if (allLanguages.value.length && allThemes.value.length) {
+      lang.value = allLanguages.value[Math.floor(Math.random() * allLanguages.value.length)].id as any
+      theme.value = allThemes.value[Math.floor(Math.random() * allThemes.value.length)].id as any
+    }
+  }
+
   if (typeof window !== 'undefined') {
-    import('shikiji').then(async ({ getHighlighter, addClassToHast, bundledLanguages, bundledThemes }) => {
+    (async () => {
+      const { getHighlighter, addClassToHast } = await import('shikiji')
+      const { bundledLanguagesInfo } = await import('shikiji/langs')
+      const { bundledThemesInfo } = await import('shikiji/themes')
       const highlighter = await getHighlighter({
         themes: [theme.value],
-        langs: ['typescript', 'javascript', 'json', 'html', 'css', 'markdown', lang.value as any],
+        langs: ['typescript', 'javascript', lang.value as any],
       })
 
-      const samples = Object.fromEntries(
-        Array.from(
-          Object.entries(import.meta.glob('../../node_modules/shiki/samples/*.sample', {
-            exhaustive: true,
-            as: 'raw',
-          })),
-        ).map(([path, load]) => [path.split(/\//).pop()!.split(/\./).shift()!, load]),
-      )
+      const samplesCache = new Map<string, Promise<string | undefined>>()
 
-      allThemes.value = Object.keys(bundledThemes) as any
-      allLanguages.value = Object.keys(bundledLanguages) as any
+      function fetchSample(id: string) {
+        if (!samplesCache.has(id)) {
+          samplesCache.set(id, fetch(`https://raw.githubusercontent.com/shikijs/shiki/main/packages/shiki/samples/${id}.sample`)
+            .then(r => r.text())
+            .catch((e) => {
+              console.error(e)
+              return undefined
+            }))
+        }
+        return samplesCache.get(id)!
+      }
+
+      allThemes.value = bundledThemesInfo
+      allLanguages.value = bundledLanguagesInfo
 
       watch(input, run, { immediate: true })
 
-      watch([lang, theme], async () => {
+      watch([lang, theme], async (n, o) => {
         isLoading.value = true
         await Promise.all([
           highlighter.loadTheme(theme.value),
           highlighter.loadLanguage(lang.value as any),
         ])
-        const grammar = highlighter.getLangGrammar(lang.value) as any
-        const sample = await samples[grammar?._grammar?.name || lang.value]?.()
-        if (sample)
-          input.value = sample.replace(/\n.*?From.*?$/im, '').trim()
+        // Fetch sample if language changed
+        if ((o[0] || !input.value) && n[0] !== o[0]) {
+          const sample = await fetchSample(lang.value)
+          if (sample)
+            input.value = sample.replace(/\n.*?From.*?$/im, '').trim()
+        }
         run()
       }, { immediate: true })
 
@@ -64,7 +94,7 @@ export const usePlayground = defineStore('playground', () => {
         })
         isLoading.value = false
       }
-    })
+    })()
   }
 
   return {
@@ -76,6 +106,7 @@ export const usePlayground = defineStore('playground', () => {
     output,
     isLoading,
     preStyle,
+    randomize,
   }
 })
 

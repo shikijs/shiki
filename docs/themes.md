@@ -7,14 +7,12 @@ Inherited from [`shiki`](https://github.com/shikijs/shiki/blob/main/docs/themes.
 <!--all-themes:start-->
 | ID |
 | --- |
-| `css-variables` |
 | `dark-plus` |
 | `dracula` |
 | `dracula-soft` |
 | `github-dark` |
 | `github-dark-dimmed` |
 | `github-light` |
-| `hc_light` |
 | `light-plus` |
 | `material-theme` |
 | `material-theme-darker` |
@@ -34,6 +32,7 @@ Inherited from [`shiki`](https://github.com/shikijs/shiki/blob/main/docs/themes.
 | `slack-ochin` |
 | `solarized-dark` |
 | `solarized-light` |
+| `vitesse-black` |
 | `vitesse-dark` |
 | `vitesse-light` |
 <!--all-themes:end-->

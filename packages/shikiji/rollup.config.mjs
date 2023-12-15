@@ -79,7 +79,7 @@ export default defineConfig([
           await Promise.all(
             langs.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { LanguageRegistration } from \'../types.mjs\';declare const reg: LanguageRegistration[];export default reg',
+              'import { LanguageRegistration } from \'shikiji-core\';declare const reg: LanguageRegistration[];export default reg',
               'utf-8',
             )),
           )
@@ -87,7 +87,7 @@ export default defineConfig([
           await Promise.all(
             themes.map(file => fs.writeFile(
               join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
-              'import { ThemeRegistrationRaw } from \'../types.mjs\';declare const reg: ThemeRegistrationRaw;export default reg',
+              'import { ThemeRegistrationRaw } from \'shikiji-core\';declare const reg: ThemeRegistrationRaw;export default reg',
               'utf-8',
             )),
           )

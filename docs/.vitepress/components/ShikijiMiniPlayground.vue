@@ -2,11 +2,6 @@
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
-
-function randomize() {
-  play.lang = play.allLanguages[Math.floor(Math.random() * play.allLanguages.length)]
-  play.theme = play.allThemes[Math.floor(Math.random() * play.allThemes.length)]
-}
 </script>
 
 <template>
@@ -14,21 +9,28 @@ function randomize() {
     <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
       <div i-carbon:chevron-down op50 />
       <select v-model="play.lang" font-mono>
-        <option v-for="lang in play.allLanguages" :key="lang" :value="lang">
-          {{ lang }}
+        <option v-for="lang in play.allLanguages" :key="lang.id" :value="lang.id">
+          {{ lang.name }}
         </option>
       </select>
       <div i-carbon:chevron-down op50 />
       <select v-model="play.theme" font-mono>
-        <option v-for="theme in play.allThemes" :key="theme" :value="theme">
-          {{ theme }}
+        <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.id" :value="theme.id">
+          {{ theme.name }}
+        </option>
+        <option disabled>
+          ──────────
+        </option>
+        <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.id" :value="theme.id">
+          {{ theme.name }}
         </option>
       </select>
       <div flex-auto />
+      <div v-if="play.isLoading" svg-spinners:270-ring />
       <div op50 text-xs mr-2>
         Playground
       </div>
-      <button title="Randomize" hover="bg-gray/10" p1 rounded @click="randomize">
+      <button title="Randomize" hover="bg-gray/10" p1 rounded @click="play.randomize">
         <div i-carbon:shuffle op50 />
       </button>
     </div>

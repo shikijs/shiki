@@ -44,7 +44,7 @@ for (const file of allLangFiles) {
   const embedded = (json.embeddedLangs || []) as string[]
 
   await fs.writeFile(`./src/assets/langs/${lang.id}.ts`, `${comments}
-import { LanguageRegistration } from '../../types'
+import type { LanguageRegistration } from 'shikiji-core'
 
 ${embedded.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
 
@@ -62,32 +62,42 @@ ${[
 async function writeLanguageBundleIndex(fileName: string, ids: string[]) {
   const bundled = ids.map(id => BUNDLED_LANGUAGES.find(i => i.id === id)!)
 
-  const base = Object.fromEntries(
-    bundled.map(i => [i.id, `__(() => import('./langs/${i.id}')) as DynamicLangReg__`])
-      .sort((a, b) => a[0].localeCompare(b[0])),
-  )
-  const alias = Object.fromEntries(
-    bundled.flatMap(i =>
-      (i.aliases || []).map(x => [x, `__bundledLanguagesBase['${i.id}']__`]),
-    )
-      .sort((a, b) => a[0].localeCompare(b[0])),
-  )
+  const info = bundled.map(i => ({
+    id: i.id,
+    name: i.displayName,
+    aliases: i.aliases,
+    import: `__(() => import('./langs/${i.id}')) as DynamicLangReg__`,
+  }) as const)
+    .sort((a, b) => a.id.localeCompare(b.id))
+
+  const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `'${i}'`).join(' | ')
 
   await fs.writeFile(
     `src/assets/${fileName}.ts`,
   `${comments}
-import type { LanguageRegistration } from '../types'
+import type { LanguageRegistration } from 'shikiji-core'
 
 type DynamicLangReg = () => Promise<{ default: LanguageRegistration[] }>
 
-export const bundledLanguagesBase = ${JSON.stringify(base, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
+export interface BundledLanguageInfo {
+  id: string
+  name: string
+  import: DynamicLangReg
+  aliases?: string[]
+}
 
-export const bundledLanguagesAlias = ${JSON.stringify(alias, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
+export const bundledLanguagesInfo: BundledLanguageInfo[] = ${JSON.stringify(info, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
+
+export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(i => [i.id, i.import]))
+
+export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
+
+export type BuiltinLanguage = ${type}
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
   ...bundledLanguagesAlias,
-}
+} as Record<BuiltinLanguage, DynamicLangReg>
 `,
   'utf-8',
   )
@@ -106,26 +116,78 @@ export const bundledLanguages = {
 await writeLanguageBundleIndex('langs', BUNDLED_LANGUAGES.map(i => i.id))
 // await writeLanguageBundleIndex('langs-common', BundleCommonLangs)
 
-const themes = Object.fromEntries(BUNDLED_THEMES.sort()
+const themes = BUNDLED_THEMES.sort()
   .filter(i => i !== 'css-variables')
-  .map(i => [i, `__(() => import('shiki/themes/${i}.json')) as unknown as DynamicThemeReg__`]))
+  .map((id) => {
+    const theme = fs.readJSONSync(`./node_modules/shiki/themes/${id}.json`)
+
+    return {
+      id,
+      name: guessThemeName(id, theme),
+      type: guessThemeType(id, theme),
+      import: `__(() => import('shiki/themes/${id}.json')) as unknown as DynamicThemeReg__`,
+    }
+  })
 
 await fs.writeFile(
   'src/assets/themes.ts',
   `${comments}
-import type { ThemeRegistrationRaw } from '../types'
+import type { ThemeRegistrationRaw } from 'shikiji-core'
 
 type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 
-export const bundledThemes = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
+export interface BundledThemeInfo {
+  id: string
+  name: string
+  type: 'light' | 'dark'
+  import: DynamicThemeReg
+}
+
+export const bundledThemesInfo: BundledThemeInfo[] = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
+
+export type BuiltinTheme = ${themes.map(i => `'${i.id}'`).join(' | ')}
+
+export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id, i.import])) as Record<BuiltinTheme, DynamicThemeReg>
 `,
   'utf-8',
 )
 
 await fs.writeJSON(
   'src/assets/themes.json',
-  BUNDLED_THEMES.map(i => ({
-    id: i,
-  })),
+  BUNDLED_THEMES
+    .filter(i => i !== 'css-variables')
+    .map(i => ({
+      id: i,
+    })),
   { spaces: 2 },
 )
+
+function isLightColor(hex: string) {
+  const [r, g, b] = hex.slice(1).match(/.{2}/g)!.map(i => Number.parseInt(i, 16))
+  return (r * 299 + g * 587 + b * 114) / 1000 > 128
+}
+
+function guessThemeType(id: string, theme: any) {
+  let color = theme.type
+  if (!['light', 'dark'].includes(color)) {
+    if (id.includes('dark') || id.includes('dimmed') || id.includes('black'))
+      color = 'dark'
+    else if (theme.colors.background)
+      color = isLightColor(theme.colors.background) ? 'light' : 'dark'
+    else if (theme.colors['editor.background'])
+      color = isLightColor(theme.colors['editor.background']) ? 'light' : 'dark'
+    else
+      color = 'light'
+    console.log('guess', id, color)
+  }
+  return color
+}
+
+function guessThemeName(id: string, theme: any) {
+  if (theme.displayName)
+    return theme.displayName
+  let name: string = theme.name || id
+  name = name.split(/[_-]/).map(i => i[0].toUpperCase() + i.slice(1)).join(' ')
+  name = name.replace(/github/ig, 'GitHub')
+  return name
+}

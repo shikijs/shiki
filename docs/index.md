@@ -30,3 +30,5 @@ features:
     icon: 🎄
     details: Fully tree-shakable ESM, runs on any JavaScript runtime, including Browser, Node.js, Cloudflare Workers, etc.
 ---
+
+<HomeDemo />
