@@ -34,3 +34,15 @@ test(`Don't preload any language if lang is set to an empty array (#326)`, async
   })
   expect(highlighter.getLoadedLanguages()).toHaveLength(0)
 })
+
+// https://github.com/shikijs/shiki/issues/438
+test(`Highlighter's loadLanguage is buggy (#438)`, async () => {
+  const highlighter = await getHighlighter({
+    theme: 'nord',
+    langs: []
+  })
+
+  await highlighter.loadLanguage('md')
+  await highlighter.loadLanguage('json')
+  expect(highlighter.getLoadedLanguages()).toHaveLength(2)
+})
