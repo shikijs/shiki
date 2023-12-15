@@ -7,6 +7,7 @@ import vite from './vite.config'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
+  { text: 'Installation', link: '/guide/install' },
   { text: 'Shorthands', link: '/guide/shorthands' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Transformers', link: '/guide/transformers' },

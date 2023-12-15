@@ -30,7 +30,7 @@ const code = await codeToHtml('foo\bar', {
 
 We also provide some common transformers for you to use, check [`shikiji-transforms`](/packages/transformers) for more details.
 
-### `codeToHast`
+## `codeToHast`
 
 You can also got the intermediate `hast` to do your custom rendering without serialize them into HTML with `codeToHast`. You can also further integrate the ast the [unified](https://github.com/unifiedjs) ecosystem.
 

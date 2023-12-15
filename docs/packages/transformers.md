@@ -63,10 +63,6 @@ will be transformed to
 </pre>
 ```
 
-With some CSS, you can make it look like this:
-
-<img width="362" alt="image" src="https://github.com/antfu/shikiji/assets/11247099/c1b6d2b2-686c-4d36-87b1-f01877071cde">
-
 ### `transformerNotationHighlight`
 
 Use `[!code highlight]` to highlight a line (adding `highlighted` class).
@@ -113,7 +109,3 @@ Support for `shiki`'s `lineOptions` that is removed in `shikiji`.
 ### `transformerRemoveLineBreak`
 
 Remove line breaks between `<span class="line">`. Useful when you set `display: block` to `.line` in CSS.
-
-## License
-
-MIT

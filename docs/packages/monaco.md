@@ -2,12 +2,13 @@
 
 <Badges name="shikiji-monaco" />
 
-Use [shikiji](https://github.com/antfu/shikiji) to highlight [Monaco Editor](https://microsoft.github.io/monaco-editor/).
+Use Shikiji to highlight [Monaco Editor](https://microsoft.github.io/monaco-editor/).
 
 Monaco's built-in highlighter does not use the full TextMate grammar, which in some cases is not accurate enough. This package allows you to use Shikiji's syntax highlighting engine to highlight Monaco, with shared grammars and themes from Shikiji.
 
-> [!IMPORTANT]
-> This package is experimental. Breaking changes may happend without following semver.
+::: warning
+This package is experimental. Breaking changes may happend without following semver.
+:::
 
 Heavily inspired by [`monaco-editor-textmate`](https://github.com/zikaari/monaco-editor-textmate).
 
@@ -40,7 +41,7 @@ monaco.languages.register({ id: 'vue' })
 monaco.languages.register({ id: 'typescript' })
 monaco.languages.register({ id: 'javascript' })
 
-// Register the themes from Shikiji, and provide syntax highlighting for Monaco.
+// Register the themes from Shikiji, and provide syntax highlighting for Monaco. // [!code highlight:2]
 shikijiToMonaco(highlighter, monaco)
 
 // Create the editor
@@ -52,7 +53,3 @@ const editor = monaco.editor.create(document.getElementById('container'), {
 
 // ...As you use the editor normally
 ```
-
-## License
-
-MIT

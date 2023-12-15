@@ -28,7 +28,7 @@ md.use(await Shikiji({
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](/guide/#fine-grained-bundle), you can import from `markdown-it-shikiji/core` and pass your own highlighter:
+By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `markdown-it-shikiji/core` and pass your own highlighter:
 
 ```ts
 import MarkdownIt from 'markdown-it'

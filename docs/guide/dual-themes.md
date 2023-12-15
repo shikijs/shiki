@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # Light/Dark Dual Themes
 
 Shikiji supports outputing light/dark dual themes. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, Shikiji's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
@@ -46,7 +50,7 @@ The following HTML will be generated ([demo preview](https://htmlpreview.github.
 
 To make it reactive to your site's theme, you need to add a short CSS snippet:
 
-###### Query-based Dark Mode
+## Query-based Dark Mode
 
 ```css
 @media (prefers-color-scheme: dark) {
@@ -62,7 +66,7 @@ To make it reactive to your site's theme, you need to add a short CSS snippet:
 }
 ```
 
-###### Class-based Dark Mode
+## Class-based Dark Mode
 
 ```css
 html.dark .shiki,
@@ -76,7 +80,7 @@ html.dark .shiki span {
 }
 ```
 
-#### Multiple Themes
+## Multiple Themes
 
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
@@ -106,7 +110,7 @@ Then update your CSS snippet to control when each theme takes effect. Here is an
 
 [Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/packages/shikiji/test/out/multiple-themes.html)
 
-#### Without Default Color
+### Without Default Color
 
 If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
@@ -131,7 +135,7 @@ In that case, the generated HTML would have no style out of the box, you need to
 
 It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
 
-### Custom Language Aliases
+## Custom Language Aliases
 
 You can register custom language aliases with `langAlias` option. For example:
 

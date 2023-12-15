@@ -12,7 +12,7 @@ npm i -D shikiji-twoslash
 
 Unlike `shiki-twoslash` that wraps around `shiki`, this package is **a transformer addon** to Shikiji. This means that for every integration that supports shikiji transformers, you can use this package.
 
-```ts
+```ts twoslash
 import {
   codeToHtml,
 } from 'shikiji'
@@ -20,7 +20,7 @@ import {
   transformerTwoSlash,
 } from 'shikiji-twoslash'
 
-const html = await codeToHtml(code, {
+const html = await codeToHtml(`console.log()`, {
   lang: 'ts',
   theme: 'vitesse-dark',
   transformers: [
@@ -52,7 +52,7 @@ You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here
 
 This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information as well.
 
-```ts
+```ts twoslash
 import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
 
 transformerTwoSlash({
@@ -103,7 +103,7 @@ const c = 1
 
 When integrating with `markdown-it-shikiji` or `rehype-shikiji`, we may not want TwoSlash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
 
-```ts
+```ts twoslash
 import { transformerTwoSlash } from 'shikiji-twoslash'
 
 transformerTwoSlash({
@@ -129,12 +129,12 @@ In markdown, you can use the following syntax to trigger TwoSlash:
 
 VitePress uses Shikiji for syntax highlighting since [`1.0.0-rc.30`](https://github.com/vuejs/vitepress/blob/main/CHANGELOG.md#100-rc30-2023-11-23). To use this transformer, you can add it to the `markdown.codeTransformers` option in your VitePress config file.
 
-```ts
+```ts twoslash
 // .vitepress/config.ts
-import { defineUserConfig } from 'vitepress'
+import { defineConfig } from 'vitepress'
 import { transformerTwoSlash } from 'shikiji-twoslash'
 
-export default defineUserConfig({
+export default defineConfig({
   markdown: {
     codeTransformers: [
       transformerTwoSlash({
