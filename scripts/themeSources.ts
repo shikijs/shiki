@@ -20,6 +20,7 @@ export const vscodeThemesToRemove = [
   'quietlight-color-theme',
   'abyss-color-theme',
   'hc_black',
+  'hc_light',
   'tomorrow-night-blue-color-theme'
 ]
 
@@ -68,6 +69,18 @@ export const githubThemeSources: [string, string][] = [
   [
     'rose-pine-moon',
     'https://github.com/rose-pine/vscode/blob/main/themes/rose-pine-moon-color-theme.json'
+  ],
+  [
+    'vitesse-light',
+    'https://github.com/antfu/vscode-theme-vitesse/blob/main/themes/vitesse-light.json'
+  ],
+  [
+    'vitesse-dark',
+    'https://github.com/antfu/vscode-theme-vitesse/blob/main/themes/vitesse-dark.json'
+  ],
+  [
+    'vitesse-black',
+    'https://github.com/antfu/vscode-theme-vitesse/blob/main/themes/vitesse-black.json'
   ]
 ]
 
@@ -92,6 +105,5 @@ export const marketplaceThemeSources: Record<string, string[]> = {
   ],
   'dracula-theme.theme-dracula': ['Dracula', 'Dracula Soft'],
   'GitHub.github-vscode-theme': ['GitHub Dark', 'GitHub Light', 'GitHub Dark Dimmed'],
-  'antfu.theme-vitesse': ['Vitesse Dark', 'Vitesse Light'],
   'zhuangtongfa.material-theme': ['One Dark Pro']
 }
