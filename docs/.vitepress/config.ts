@@ -157,7 +157,7 @@ export default defineConfig({
     ),
 
     editLink: {
-      pattern: 'https://github.com/antfu/shikiji/edit/main/:path',
+      pattern: 'https://github.com/antfu/shikiji/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
     search: {
