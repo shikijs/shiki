@@ -102,6 +102,12 @@ export default defineConfig({
           options.transformers?.splice(options.transformers.indexOf(cleanup), 1)
         },
       },
+      {
+        name: 'shikiji:remove-escape',
+        postprocess(code) {
+          return code.replace(/\[\\\!code/g, '[!code')
+        },
+      },
     ],
   },
 

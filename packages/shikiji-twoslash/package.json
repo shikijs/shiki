@@ -22,6 +22,10 @@
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     },
+    "./core": {
+      "types": "./dist/core.d.mts",
+      "default": "./dist/core.mjs"
+    },
     "./style-rich.css": "./style-rich.css",
     "./style-classic.css": "./style-classic.css",
     "./*": "./dist/*"
@@ -31,6 +35,9 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
+      "./core": [
+        "./dist/core.d.mts"
+      ],
       "*": [
         "./dist/*",
         "./*"
@@ -49,7 +56,7 @@
   },
   "dependencies": {
     "@typescript/twoslash": "^3.2.4",
-    "shikiji": "workspace:*"
+    "shikiji-core": "workspace:*"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.26",

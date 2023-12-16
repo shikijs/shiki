@@ -1,8 +1,8 @@
 import type { TwoSlashOptions, TwoSlashReturn } from '@typescript/twoslash'
-import type { CodeToHastOptions, ShikijiTransformerContext } from 'shikiji'
+import type { CodeToHastOptions, ShikijiTransformerContext } from 'shikiji-core'
 import type { Element, ElementContent, Text } from 'hast'
 
-declare module 'shikiji' {
+declare module 'shikiji-core' {
   interface ShikijiTransformerContextMeta {
     twoslash?: TwoSlashReturn
   }

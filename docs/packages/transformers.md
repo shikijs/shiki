@@ -36,14 +36,23 @@ Use `[!code ++]` and `[!code --]` to mark added and removed lines.
 
 For example, the following code
 
+````md
+```ts
+export function foo() {
+  console.log('hewwo') // [\!code --]
+  console.log('hello') // [\!code ++]
+}
+```
+````
+
+will be transformed to
+
 ```ts
 export function foo() {
   console.log('hewwo') // [!code --]
   console.log('hello') // [!code ++]
 }
 ```
-
-will be transformed to
 
 ```html
 <!-- Output (stripped of `style` attributes for clarity) -->
