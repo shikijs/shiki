@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { BuiltinLanguage, BuiltinTheme, BundledLanguageInfo, BundledThemeInfo } from 'shikiji'
+import type { BundledLanguageInfo, BundledThemeInfo } from 'shikiji'
 import { useLocalStorage } from '@vueuse/core'
 import { ref, shallowRef, watch } from 'vue'
 
