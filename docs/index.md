@@ -13,8 +13,11 @@ hero:
       text: Get Started
       link: /guide/
     - theme: alt
-      text: Integrations
-      link: /integrations
+      text: Installation
+      link: /guide/install/
+    - theme: alt
+      text: Who is using?
+      link: /guide/#who-is-using
 
 features:
   - title: Accurate & Beautiful

@@ -35,6 +35,17 @@ Oh btw, the code blocks in this document is highlighted by Shikiji, as you'd exp
 Here is a little playground for you to try out how Shikiji highlights your code. Unlike other code blocks that ran on the build time, this playground is rendered on the client side in the browser. Themes and languages are loaded on demand.
 
 <ShikijiMiniPlayground />
+
+## Who is using?
+
+Projects that depend on Shikiji (sort alphabetically):
+
+- [Astro](https://docs.astro.build/en/guides/markdown-content/#syntax-highlighting)
+- [Lobe UI](https://github.com/lobehub/lobe-ui)
+- [Nuxt Content](https://content.nuxt.com/usage/markdown#code-highlighting)
+- [Slidev](https://sli.dev/custom/highlighters.html#highlighters)
+- [VitePress](https://vitepress.dev/guide/markdown#syntax-highlighting-in-code-blocks)
+
 ## Bundle Size
 
 You can inspect the bundle size in detail on [pkg-size.dev/shikiji](https://pkg-size.dev/shikiji).
