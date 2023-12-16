@@ -67,13 +67,3 @@ console.log('line3') // highlighted
 console.log('line4') // highlighted
 ```
 ````
-
-````
-
-```
-
-## License
-
-MIT
-```
-````
