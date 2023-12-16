@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
+const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
 </script>
 
 <template>
-  <div class="language-ts vp-adaptive-theme mini-playground" shadow :style="play.preStyle">
+  <div class="language-ts vp-adaptive-theme mini-playground" shadow :style="[play.preStyle, { colorScheme: currentThemeType }]">
     <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
       <div i-carbon:chevron-down op50 />
       <select v-model="play.lang" font-mono>
