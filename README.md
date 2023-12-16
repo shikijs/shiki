@@ -1,5 +1,4 @@
 <img src="./docs/public/logo.svg" width="150" alt="Shikiji Logo" />
-<br><br>
 
 # Shikiji 式辞
 
