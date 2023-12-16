@@ -1,5 +1,5 @@
 import type * as monaco from 'monaco-editor-core'
-import type { HighlighterGeneric, ShikiInternal } from 'shikiji-core'
+import type { HighlighterGeneric, ShikiInternal, ThemeRegistration } from 'shikiji-core'
 import type { StateStack } from 'shikiji-core/textmate'
 import { INITIAL, StackElementMetadata } from 'shikiji-core/textmate'
 
@@ -19,16 +19,77 @@ export interface HighlighterInterface {
   setTheme: AcceptableShiki['setTheme']
 }
 
+export interface MonacoTheme extends monaco.editor.IStandaloneThemeData { }
+
+export function textmateThemeToMonacoTheme(theme: ThemeRegistration): MonacoTheme {
+  let rules = 'rules' in theme
+    ? theme.rules as MonacoTheme['rules']
+    : undefined
+
+  if (!rules) {
+    rules = []
+    if ('settings' in theme) {
+      for (const { scope, settings } of theme.settings) {
+        const scopes = Array.isArray(scope) ? scope : [scope]
+        for (const s of scopes) {
+          if (settings.foreground && s) {
+            rules.push({
+              token: s,
+              foreground: settings.foreground.replace('#', ''),
+            })
+          }
+        }
+      }
+    }
+    else if ('tokenColors' in theme) {
+      for (const { scope, settings } of (theme as any).tokenColors as any) {
+        const scopes = Array.isArray(scope) ? scope : [scope]
+        for (const s of scopes) {
+          if (settings.foreground && s) {
+            rules.push({
+              token: s,
+              foreground: settings.foreground?.replace('#', ''),
+            })
+          }
+        }
+      }
+    }
+    else {
+      throw new Error('[shikiji-monaco] Failed to convert theme to Monaco theme, neither of `rules`, `settings` or `tokenColors` is presented in the theme.')
+    }
+  }
+
+  const maybeIsLight = 'type' in theme
+    ? theme.type === 'light'
+    : (theme as ThemeRegistration).name?.match(/light/i)
+
+  return {
+    // Not sure if this would even matter as we set inherit to false
+    base: maybeIsLight ? 'vs' : 'vs-dark',
+    inherit: false,
+    colors: theme.colors || {},
+    rules,
+  }
+}
+
 export function shikijiToMonaco(
   highlighter: HighlighterInterface,
   monaco: MonacoInferface,
 ) {
-  const themes = highlighter.getLoadedThemes()
-  for (const theme of themes)
-    monaco.editor.defineTheme(theme, highlighter.getTheme(theme) as any)
+  // Convert themes to Monaco themes and register them
+  const themeMap = new Map<string, MonacoTheme>()
+  const themeIds = highlighter.getLoadedThemes()
+  for (const themeId of themeIds) {
+    const tmTheme = highlighter.getTheme(themeId)
+    const monacoTheme = textmateThemeToMonacoTheme(tmTheme)
+    themeMap.set(themeId, monacoTheme)
+    monaco.editor.defineTheme(themeId, monacoTheme)
+  }
 
-  let currentTheme = themes[0]
+  let currentTheme = themeIds[0]
 
+  // Because Monaco does not have the API of reading the current theme,
+  // We hijack it here to keep track of the current theme.
   const _setTheme = monaco.editor.setTheme.bind(monaco.editor)
   monaco.editor.setTheme = (theme: string) => {
     _setTheme(theme)
@@ -43,13 +104,13 @@ export function shikijiToMonaco(
         },
         tokenize(line, state: TokenizerState) {
           const grammar = state.highlighter.getLangGrammar(lang)
-          const { theme, colorMap } = state.highlighter.setTheme(currentTheme)
+          const { colorMap } = state.highlighter.setTheme(currentTheme)
+          const theme = themeMap.get(currentTheme)
           const result = grammar.tokenizeLine2(line, state.ruleStack)
 
           const colorToScopeMap = new Map<string, string>()
 
-          // @ts-expect-error - 'rules' is presented on resolved theme
-          theme?.rules.forEach((rule) => {
+          theme!.rules.forEach((rule) => {
             const c = rule.foreground?.replace('#', '').toLowerCase()
             if (c && !colorToScopeMap.has(c))
               colorToScopeMap.set(c, rule.token)
