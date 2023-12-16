@@ -197,6 +197,14 @@ export interface LanguageRegistration extends RawGrammar {
   embeddedLangs?: string[]
   balancedBracketSelectors?: string[]
   unbalancedBracketSelectors?: string[]
+
+  /**
+   * Inject this language to other scopes.
+   * Same as `injectTo` in VSCode's `contributes.grammars`.
+   *
+   * @see https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#injection-grammars
+   */
+  injectTo?: string[]
 }
 
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
