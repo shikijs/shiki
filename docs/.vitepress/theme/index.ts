@@ -3,9 +3,11 @@ import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import 'uno.css'
 import 'shikiji-twoslash/style-rich.css'
+import 'floating-vue/dist/style.css'
 import './style.css'
 import './custom.css'
 import { createPinia } from 'pinia'
+import FloatingVue from 'floating-vue'
 
 export default {
   extends: Theme,
@@ -14,5 +16,6 @@ export default {
   },
   enhanceApp({ app }: any) {
     app.use(createPinia())
+    app.use(FloatingVue)
   },
 }

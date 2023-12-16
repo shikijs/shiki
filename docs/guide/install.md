@@ -17,7 +17,7 @@ npm install -D shikiji
 yarn add -D shikiji
 ```
 
-```sh [yarn]
+```sh [pnpm]
 pnpm add -D shikiji
 ```
 

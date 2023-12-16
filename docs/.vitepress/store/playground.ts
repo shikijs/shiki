@@ -6,8 +6,8 @@ import { useLocalStorage } from '@vueuse/core'
 import { ref, shallowRef, watch } from 'vue'
 
 export const usePlayground = defineStore('playground', () => {
-  const lang = useLocalStorage<BuiltinLanguage>('shikiji-playground-lang', 'typescript')
-  const theme = useLocalStorage<BuiltinTheme>('shikiji-playground-theme', 'vitesse-dark')
+  const lang = useLocalStorage('shikiji-playground-lang', 'typescript')
+  const theme = useLocalStorage('shikiji-playground-theme', 'vitesse-dark')
   const allThemes = shallowRef<BundledThemeInfo[]>([
     {
       id: 'vitesse-dark',
@@ -67,7 +67,7 @@ export const usePlayground = defineStore('playground', () => {
       watch([lang, theme], async (n, o) => {
         isLoading.value = true
         await Promise.all([
-          highlighter.loadTheme(theme.value),
+          highlighter.loadTheme(theme.value as any),
           highlighter.loadLanguage(lang.value as any),
         ])
         // Fetch sample if language changed
