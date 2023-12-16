@@ -45,7 +45,7 @@ interface Nothing {}
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
-export type ResolveBundleKey<T extends string> = never extends T ? string : T
+export type ResolveBundleKey<T extends string> = [T] extends [never] ? string : T
 
 export interface ShikiInternal {
   setTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): {
