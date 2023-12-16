@@ -55,7 +55,7 @@ export default defineConfig([
     output: {
       dir: 'dist',
       format: 'esm',
-      chunkFileNames: '[name].d.mts',
+      chunkFileNames: 'chunk-[name].d.mts',
       entryFileNames: f => `${f.name.replace(/src[\\\/]/, '')}.d.mts`,
     },
     plugins: [
