@@ -26,7 +26,7 @@ export function defaultTwoSlashOptions() {
   }
 }
 
-export function createTransformer(runTwoslasher: typeof twoslasher) {
+export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
   return function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): ShikijiTransformer {
     const {
       langs = ['ts', 'tsx'],
@@ -36,6 +36,7 @@ export function createTransformer(runTwoslasher: typeof twoslasher) {
         json5: 'json',
         yml: 'yaml',
       },
+      twoslasher = defaultTwoslasher,
       explicitTrigger = false,
       renderer = rendererClassic(),
       throws = true,
@@ -49,7 +50,7 @@ export function createTransformer(runTwoslasher: typeof twoslasher) {
 
         if (filter(lang, code, shikijiOptions)) {
           shikijiOptions.mergeWhitespaces = false
-          const twoslash = runTwoslasher(code, lang, twoslashOptions)
+          const twoslash = twoslasher(code, lang, twoslashOptions)
           this.meta.twoslash = twoslash
           return twoslash.code
         }

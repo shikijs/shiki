@@ -1,6 +1,6 @@
 import { twoslasher } from '@typescript/twoslash'
-import { createTransformer } from './core'
+import { createTransformerFactory } from './core'
 
 export * from './core'
 
-export const transformerTwoSlash = createTransformer(twoslasher)
+export const transformerTwoSlash = createTransformerFactory(twoslasher)

@@ -1,4 +1,4 @@
-import type { TwoSlashOptions, TwoSlashReturn } from '@typescript/twoslash'
+import type { TwoSlashOptions, TwoSlashReturn, twoslasher } from '@typescript/twoslash'
 import type { CodeToHastOptions, ShikijiTransformerContext } from 'shikiji-core'
 import type { Element, ElementContent, Text } from 'hast'
 
@@ -28,6 +28,10 @@ export interface TransformerTwoSlashOptions {
    * When specified, `langs` and `explicitTrigger` will be ignored
    */
   filter?: (lang: string, code: string, options: CodeToHastOptions) => boolean
+  /**
+   * Custom instance of twoslasher function
+   */
+  twoslasher?: typeof twoslasher
   /**
    * Options to pass to twoslash
    */
