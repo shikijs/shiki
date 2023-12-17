@@ -2,9 +2,12 @@ import fs from 'fs-extra'
 import { BUNDLED_THEMES } from 'shiki'
 import { COMMENT_HEAD } from './constants'
 
+const allThemes = BUNDLED_THEMES
+  .sort()
+  .filter(i => i !== 'css-variables')
+
 export async function prepareTheme() {
-  const themes = BUNDLED_THEMES.sort()
-    .filter(i => i !== 'css-variables')
+  const themes = allThemes
     .map((id) => {
       const theme = fs.readJSONSync(`./node_modules/shiki/themes/${id}.json`)
 
@@ -39,11 +42,8 @@ export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id
   )
   await fs.writeJSON(
     'src/assets/themes.json',
-    BUNDLED_THEMES
-      .filter(i => i !== 'css-variables')
-      .map(i => ({
-        id: i,
-      })),
+    allThemes
+      .map(i => ({ id: i })),
     { spaces: 2 },
   )
 }
@@ -75,7 +75,10 @@ function guessThemeName(id: string, theme: any) {
   if (theme.displayName)
     return theme.displayName
   let name: string = theme.name || id
-  name = name.split(/[_-]/).map(i => i[0].toUpperCase() + i.slice(1)).join(' ')
-  name = name.replace(/github/ig, 'GitHub')
+  name = name.split(/[_-]/)
+    .map(i => i[0].toUpperCase() + i.slice(1))
+    .join(' ')
+    .replace(/github/ig, 'GitHub')
+    .replace('Rose Pine', 'Rosé Pine')
   return name
 }

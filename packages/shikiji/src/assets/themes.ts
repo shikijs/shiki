@@ -123,19 +123,19 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   },
   {
     "id": "rose-pine",
-    "name": "Rose Pine",
+    "name": "Rosé Pine",
     "type": "dark",
     "import": (() => import('shiki/themes/rose-pine.json')) as unknown as DynamicThemeReg
   },
   {
     "id": "rose-pine-dawn",
-    "name": "Rose Pine Dawn",
+    "name": "Rosé Pine Dawn",
     "type": "light",
     "import": (() => import('shiki/themes/rose-pine-dawn.json')) as unknown as DynamicThemeReg
   },
   {
     "id": "rose-pine-moon",
-    "name": "Rose Pine Moon",
+    "name": "Rosé Pine Moon",
     "type": "dark",
     "import": (() => import('shiki/themes/rose-pine-moon.json')) as unknown as DynamicThemeReg
   },

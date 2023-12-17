@@ -12,6 +12,8 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Compat Build', link: '/guide/compat' },
+  { text: 'Custom Themes', link: '/guide/load-theme' },
+  { text: 'Custom Languages', link: '/guide/load-lang' },
 ]
 
 const REFERENCES: DefaultTheme.NavItemWithLink[] = [
@@ -50,15 +52,7 @@ export default defineConfig({
     codeTransformers: [
       transformerTwoSlash({
         explicitTrigger: true,
-        renderer: rendererRich({
-          formatInfo(info) {
-            return info
-              .replace(/\<"abap".*?\>/, '<BundledLanguages>')
-              .replace(/\<"abap".*\.\.\./, '<BundledLanguages>...')
-              .replace(/\<"css-variables".*?\>/, '<BundledThemes>')
-              .replace(/\<"css-variables".*\.\.\./, '<BundledThemes>...')
-          },
-        }),
+        renderer: rendererRich(),
       }),
       {
         // Render custom themes with codeblocks
