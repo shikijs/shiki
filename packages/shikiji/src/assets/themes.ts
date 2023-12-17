@@ -7,7 +7,7 @@ type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 
 export interface BundledThemeInfo {
   id: string
-  name: string
+  displayName: string
   type: 'light' | 'dark'
   import: DynamicThemeReg
 }
@@ -15,171 +15,171 @@ export interface BundledThemeInfo {
 export const bundledThemesInfo: BundledThemeInfo[] = [
   {
     "id": "dark-plus",
-    "name": "Dark Plus",
+    "displayName": "Dark Plus",
     "type": "dark",
-    "import": (() => import('shiki/themes/dark-plus.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/dark-plus')) as unknown as DynamicThemeReg
   },
   {
     "id": "dracula",
-    "name": "Dracula",
+    "displayName": "Dracula",
     "type": "dark",
-    "import": (() => import('shiki/themes/dracula.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/dracula')) as unknown as DynamicThemeReg
   },
   {
     "id": "dracula-soft",
-    "name": "Dracula Soft",
+    "displayName": "Dracula Soft",
     "type": "dark",
-    "import": (() => import('shiki/themes/dracula-soft.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/dracula-soft')) as unknown as DynamicThemeReg
   },
   {
     "id": "github-dark",
-    "name": "GitHub Dark",
+    "displayName": "GitHub Dark",
     "type": "dark",
-    "import": (() => import('shiki/themes/github-dark.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/github-dark')) as unknown as DynamicThemeReg
   },
   {
     "id": "github-dark-dimmed",
-    "name": "GitHub Dark Dimmed",
+    "displayName": "GitHub Dark Dimmed",
     "type": "dark",
-    "import": (() => import('shiki/themes/github-dark-dimmed.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/github-dark-dimmed')) as unknown as DynamicThemeReg
   },
   {
     "id": "github-light",
-    "name": "GitHub Light",
+    "displayName": "GitHub Light",
     "type": "light",
-    "import": (() => import('shiki/themes/github-light.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/github-light')) as unknown as DynamicThemeReg
   },
   {
     "id": "light-plus",
-    "name": "Light Plus",
+    "displayName": "Light Plus",
     "type": "light",
-    "import": (() => import('shiki/themes/light-plus.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/light-plus')) as unknown as DynamicThemeReg
   },
   {
     "id": "material-theme",
-    "name": "Material Theme",
+    "displayName": "Material Theme",
     "type": "dark",
-    "import": (() => import('shiki/themes/material-theme.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/material-theme')) as unknown as DynamicThemeReg
   },
   {
     "id": "material-theme-darker",
-    "name": "Material Theme Darker",
+    "displayName": "Material Theme Darker",
     "type": "dark",
-    "import": (() => import('shiki/themes/material-theme-darker.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/material-theme-darker')) as unknown as DynamicThemeReg
   },
   {
     "id": "material-theme-lighter",
-    "name": "Material Theme Lighter",
+    "displayName": "Material Theme Lighter",
     "type": "light",
-    "import": (() => import('shiki/themes/material-theme-lighter.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/material-theme-lighter')) as unknown as DynamicThemeReg
   },
   {
     "id": "material-theme-ocean",
-    "name": "Material Theme Ocean",
+    "displayName": "Material Theme Ocean",
     "type": "dark",
-    "import": (() => import('shiki/themes/material-theme-ocean.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/material-theme-ocean')) as unknown as DynamicThemeReg
   },
   {
     "id": "material-theme-palenight",
-    "name": "Material Theme Palenight",
+    "displayName": "Material Theme Palenight",
     "type": "dark",
-    "import": (() => import('shiki/themes/material-theme-palenight.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/material-theme-palenight')) as unknown as DynamicThemeReg
   },
   {
     "id": "min-dark",
-    "name": "Min Dark",
+    "displayName": "Min Dark",
     "type": "dark",
-    "import": (() => import('shiki/themes/min-dark.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/min-dark')) as unknown as DynamicThemeReg
   },
   {
     "id": "min-light",
-    "name": "Min Light",
+    "displayName": "Min Light",
     "type": "light",
-    "import": (() => import('shiki/themes/min-light.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/min-light')) as unknown as DynamicThemeReg
   },
   {
     "id": "monokai",
-    "name": "Monokai",
+    "displayName": "Monokai",
     "type": "dark",
-    "import": (() => import('shiki/themes/monokai.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/monokai')) as unknown as DynamicThemeReg
   },
   {
     "id": "nord",
-    "name": "Nord",
+    "displayName": "Nord",
     "type": "dark",
-    "import": (() => import('shiki/themes/nord.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/nord')) as unknown as DynamicThemeReg
   },
   {
     "id": "one-dark-pro",
-    "name": "One Dark Pro",
+    "displayName": "One Dark Pro",
     "type": "dark",
-    "import": (() => import('shiki/themes/one-dark-pro.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/one-dark-pro')) as unknown as DynamicThemeReg
   },
   {
     "id": "poimandres",
-    "name": "Poimandres",
+    "displayName": "Poimandres",
     "type": "dark",
-    "import": (() => import('shiki/themes/poimandres.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/poimandres')) as unknown as DynamicThemeReg
   },
   {
     "id": "rose-pine",
-    "name": "Rosé Pine",
+    "displayName": "Rosé Pine",
     "type": "dark",
-    "import": (() => import('shiki/themes/rose-pine.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/rose-pine')) as unknown as DynamicThemeReg
   },
   {
     "id": "rose-pine-dawn",
-    "name": "Rosé Pine Dawn",
+    "displayName": "Rosé Pine Dawn",
     "type": "light",
-    "import": (() => import('shiki/themes/rose-pine-dawn.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/rose-pine-dawn')) as unknown as DynamicThemeReg
   },
   {
     "id": "rose-pine-moon",
-    "name": "Rosé Pine Moon",
+    "displayName": "Rosé Pine Moon",
     "type": "dark",
-    "import": (() => import('shiki/themes/rose-pine-moon.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/rose-pine-moon')) as unknown as DynamicThemeReg
   },
   {
     "id": "slack-dark",
-    "name": "Slack Dark",
+    "displayName": "Slack Dark",
     "type": "dark",
-    "import": (() => import('shiki/themes/slack-dark.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/slack-dark')) as unknown as DynamicThemeReg
   },
   {
     "id": "slack-ochin",
-    "name": "Slack Ochin",
-    "type": "light",
-    "import": (() => import('shiki/themes/slack-ochin.json')) as unknown as DynamicThemeReg
+    "displayName": "Slack Ochin",
+    "type": "dark",
+    "import": (() => import('./themes/slack-ochin')) as unknown as DynamicThemeReg
   },
   {
     "id": "solarized-dark",
-    "name": "Solarized Dark",
+    "displayName": "Solarized Dark",
     "type": "dark",
-    "import": (() => import('shiki/themes/solarized-dark.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/solarized-dark')) as unknown as DynamicThemeReg
   },
   {
     "id": "solarized-light",
-    "name": "Solarized Light",
+    "displayName": "Solarized Light",
     "type": "light",
-    "import": (() => import('shiki/themes/solarized-light.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/solarized-light')) as unknown as DynamicThemeReg
   },
   {
     "id": "vitesse-black",
-    "name": "Vitesse Black",
+    "displayName": "Vitesse Black",
     "type": "dark",
-    "import": (() => import('shiki/themes/vitesse-black.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/vitesse-black')) as unknown as DynamicThemeReg
   },
   {
     "id": "vitesse-dark",
-    "name": "Vitesse Dark",
+    "displayName": "Vitesse Dark",
     "type": "dark",
-    "import": (() => import('shiki/themes/vitesse-dark.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/vitesse-dark')) as unknown as DynamicThemeReg
   },
   {
     "id": "vitesse-light",
-    "name": "Vitesse Light",
+    "displayName": "Vitesse Light",
     "type": "light",
-    "import": (() => import('shiki/themes/vitesse-light.json')) as unknown as DynamicThemeReg
+    "import": (() => import('./themes/vitesse-light')) as unknown as DynamicThemeReg
   }
 ]
 

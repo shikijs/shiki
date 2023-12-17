@@ -3,6 +3,7 @@
 import fs from 'fs-extra'
 import { fetch } from 'ofetch'
 import { COMMENT_HEAD } from './constants'
+import { cleanupLanguageReg } from './utils'
 
 interface Injection {
   name: string
@@ -24,7 +25,9 @@ export async function prepareInjections() {
       `${COMMENT_HEAD}
 import type { LanguageRegistration } from 'shikiji-core'
 
-export default ${JSON.stringify(injection.contents, null, 2)} as unknown as LanguageRegistration[]
+export default [
+  ${injection.contents.map(i => `Object.freeze(${JSON.stringify(i, null, 2)})`).join(',\n')}
+] as unknown as LanguageRegistration[]
 `,
       'utf-8',
     )
@@ -41,11 +44,11 @@ export async function prepareVueInjections(): Promise<Injection> {
     .filter(i => i.injectTo)
     .map(async (i) => {
       const content = await fetchJson(`${new URL(i.path, base).href}?raw=true`)
-      return {
+      return cleanupLanguageReg({
         ...content,
         name: i.language,
         injectTo: i.injectTo,
-      }
+      })
     }),
   )
 

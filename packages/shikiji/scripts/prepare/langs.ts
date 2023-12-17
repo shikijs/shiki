@@ -3,6 +3,7 @@ import { BUNDLED_LANGUAGES } from 'shiki'
 import fg from 'fast-glob'
 import type { LanguageRegistration } from 'shikiji-core'
 import { COMMENT_HEAD } from './constants'
+import { cleanupLanguageReg } from './utils'
 import { prepareInjections } from './injections'
 
 export async function prepareLangs() {
@@ -24,7 +25,7 @@ export async function prepareLangs() {
       continue
     }
 
-    const json: LanguageRegistration = {
+    const json: LanguageRegistration = cleanupLanguageReg({
       ...content,
       name: content.name || lang.id,
       scopeName: content.scopeName || lang.scopeName,
@@ -33,7 +34,7 @@ export async function prepareLangs() {
       embeddedLangs: lang.embeddedLangs,
       balancedBracketSelectors: lang.balancedBracketSelectors,
       unbalancedBracketSelectors: lang.unbalancedBracketSelectors,
-    }
+    })
 
     // F# and Markdown has circular dependency
     if (lang.id === 'fsharp' && json.embeddedLangs)
@@ -49,7 +50,7 @@ import type { LanguageRegistration } from 'shikiji-core'
 
 ${deps.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
 
-const lang = Object.freeze(${JSON.stringify(json)}) as unknown as LanguageRegistration
+const lang = Object.freeze(${JSON.stringify(json, null, 2)}) as unknown as LanguageRegistration
 
 export default [
 ${[
@@ -101,16 +102,6 @@ export const bundledLanguages = {
 } as Record<BuiltinLanguage, DynamicLangReg>
 `,
   'utf-8',
-    )
-
-    await fs.writeJSON(
-    `src/assets/${fileName}.json`,
-    BUNDLED_LANGUAGES.map(i => ({
-      id: i.id,
-      name: i.displayName,
-      aliases: i.aliases,
-    })),
-    { spaces: 2 },
     )
   }
 

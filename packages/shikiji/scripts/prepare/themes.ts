@@ -1,23 +1,37 @@
 import fs from 'fs-extra'
 import { BUNDLED_THEMES } from 'shiki'
 import { COMMENT_HEAD } from './constants'
+import { cleanupThemeReg } from './utils'
 
 const allThemes = BUNDLED_THEMES
   .sort()
   .filter(i => i !== 'css-variables')
 
 export async function prepareTheme() {
-  const themes = allThemes
-    .map((id) => {
-      const theme = fs.readJSONSync(`./node_modules/shiki/themes/${id}.json`)
+  const themes = await Promise.all(allThemes
+    .map(async (id) => {
+      const theme = cleanupThemeReg(await fs.readJSON(`./node_modules/shiki/themes/${id}.json`))
+
+      theme.displayName = guessThemeName(id, theme)
+      theme.type = guessThemeType(id, theme)
+
+      await fs.writeFile(
+        `./src/assets/themes/${id}.ts`,
+        `${COMMENT_HEAD}
+import type { ThemeRegistration } from 'shikiji-core'
+
+export default Object.freeze(${JSON.stringify(theme, null, 2)}) as unknown as ThemeRegistration
+`,
+        'utf-8',
+      )
 
       return {
         id,
-        name: guessThemeName(id, theme),
-        type: guessThemeType(id, theme),
-        import: `__(() => import('shiki/themes/${id}.json')) as unknown as DynamicThemeReg__`,
+        displayName: theme.displayName,
+        type: theme.type,
+        import: `__(() => import('./themes/${id}')) as unknown as DynamicThemeReg__`,
       }
-    })
+    }))
   await fs.writeFile(
     'src/assets/themes.ts',
 `${COMMENT_HEAD}
@@ -27,7 +41,7 @@ type DynamicThemeReg = () => Promise<{ default: ThemeRegistrationRaw }>
 
 export interface BundledThemeInfo {
   id: string
-  name: string
+  displayName: string
   type: 'light' | 'dark'
   import: DynamicThemeReg
 }
@@ -40,12 +54,6 @@ export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id
 `,
 'utf-8',
   )
-  await fs.writeJSON(
-    'src/assets/themes.json',
-    allThemes
-      .map(i => ({ id: i })),
-    { spaces: 2 },
-  )
 }
 
 function isLightColor(hex: string) {
@@ -54,6 +62,8 @@ function isLightColor(hex: string) {
 }
 
 function guessThemeType(id: string, theme: any) {
+  if ('type' in theme)
+    return theme.type
   let color
   if (id.includes('dark') || id.includes('dimmed') || id.includes('black'))
     color = 'dark'

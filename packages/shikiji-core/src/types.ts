@@ -198,6 +198,9 @@ export interface LanguageRegistration extends RawGrammar {
   balancedBracketSelectors?: string[]
   unbalancedBracketSelectors?: string[]
 
+  foldingStopMarker?: string
+  foldingStartMarker?: string
+
   /**
    * Inject this language to other scopes.
    * Same as `injectTo` in VSCode's `contributes.grammars`.
@@ -354,40 +357,48 @@ export interface ThemeRegistrationRaw extends RawTheme {}
 
 export interface ThemeRegistration extends ThemeRegistrationRaw {
   /**
-   * @description theme name
+   * Theme name
    */
   name: string
 
   /**
-   * @description light/dark theme
+   * Display name
    */
-  type: 'light' | 'dark' | 'css'
+  displayName?: string
 
   /**
-   * @description tokenColors of the theme file
+   * Light/dark theme
+   */
+  type: 'light' | 'dark'
+
+  /**
+   * TokenColors of the theme file
    */
   settings: IRawThemeSetting[]
 
   /**
-   * @description text default foreground color
+   * Text default foreground color
    */
   fg: string
 
   /**
-   * @description text default background color
+   * Text default background color
    */
   bg: string
 
   /**
-   * @description relative path of included theme
+   * Relative path of included theme
    */
   include?: string
 
   /**
-   *
-   * @description color map of the theme file
+   * Color map of the theme file
    */
   colors?: Record<string, string>
+
+  tokenColors?: any[]
+  semanticHighlighting?: boolean
+  semanticTokenColors?: any[]
 }
 
 export interface ShikijiTransformerContextMeta {}
