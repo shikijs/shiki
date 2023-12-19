@@ -145,7 +145,7 @@ import { createTransformerFactory, rendererRich } from 'https://esm.sh/shikiji-t
 import { codeToHtml } from 'https://esm.sh/shikiji@latest'
 import { createStorage } from 'https://esm.sh/unstorage@latest'
 import indexedDbDriver from 'https://esm.sh/unstorage@latest/drivers/indexedb'
-import { createTwoSlashFromCDN } from 'https://esm.sh/twoslash-cdn@lastest'
+import { createTwoSlashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
 
 // ============= Initialization =============
 
