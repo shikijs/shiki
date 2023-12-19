@@ -23,7 +23,7 @@ function preview(id: string) {
       </thead>
       <tbody>
         <tr v-for="l in play.allThemes" :key="l.id">
-          <td>{{ l.name }}</td>
+          <td>{{ l.displayName }}</td>
           <td><code>{{ l.id }}</code></td>
           <td>
             <div flex>

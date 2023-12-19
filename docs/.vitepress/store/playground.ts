@@ -11,7 +11,7 @@ export const usePlayground = defineStore('playground', () => {
   const allThemes = shallowRef<BundledThemeInfo[]>([
     {
       id: 'vitesse-dark',
-      name: 'Vitesse Dark',
+      displayName: 'Vitesse Dark',
       type: 'dark',
       import: undefined!,
     },
