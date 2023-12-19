@@ -18,13 +18,13 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
       <div i-carbon:chevron-down op50 />
       <select v-model="play.theme" font-mono :style="play.preStyle">
         <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.id" :value="theme.id">
-          {{ theme.name }}
+          {{ theme.displayName }}
         </option>
         <option disabled>
           ──────────
         </option>
         <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.id" :value="theme.id">
-          {{ theme.name }}
+          {{ theme.displayName }}
         </option>
       </select>
       <div flex-auto />
