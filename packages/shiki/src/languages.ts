@@ -564,6 +564,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.gjs',
     path: 'glimmer-js.tmLanguage.json',
     displayName: 'Glimmer JS',
+    samplePath: 'glimmer-js.sample',
     aliases: ['gjs'],
     embeddedLangs: ['javascript', 'handlebars']
   },
