@@ -1,14 +1,11 @@
 import fs from 'fs-extra'
 import { themes as allThemes } from 'tm-themes'
 import { COMMENT_HEAD } from './constants'
-import { cleanupThemeReg } from './utils'
 
 export async function prepareTheme() {
   const themes = await Promise.all(allThemes
     .map(async (t) => {
-      const theme = cleanupThemeReg(
-        await fs.readJSON(`./node_modules/tm-themes/themes/${t.name}.json`),
-      )
+      const theme = await fs.readJSON(`./node_modules/tm-themes/themes/${t.name}.json`)
 
       await fs.writeFile(
         `./src/assets/themes/${t.name}.ts`,

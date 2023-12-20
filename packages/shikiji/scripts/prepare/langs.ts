@@ -3,7 +3,6 @@ import { grammars, injections } from 'tm-grammars'
 import fg from 'fast-glob'
 import type { LanguageRegistration } from 'shikiji-core'
 import { COMMENT_HEAD } from './constants'
-import { cleanupLanguageReg } from './utils'
 
 export async function prepareLangs() {
   const allLangFiles = await fg('*.json', {
@@ -22,14 +21,14 @@ export async function prepareLangs() {
       continue
     }
 
-    const json: LanguageRegistration = cleanupLanguageReg({
+    const json: LanguageRegistration = {
       ...lang,
       ...content,
       name: content.name || lang.name,
       scopeName: content.scopeName || lang.scopeName,
       displayName: lang.displayName,
       embeddedLangs: lang.embedded,
-    })
+    }
 
     // F# and Markdown has circular dependency
     if (lang.name === 'fsharp' && json.embeddedLangs)
