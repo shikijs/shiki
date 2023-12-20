@@ -54,7 +54,7 @@ export function cleanupThemeReg(theme: ThemeRegistration) {
       'bg',
       'include',
       'settings',
-
+      'displayName',
       'tokenColors',
       'semanticHighlighting',
       'semanticTokenColors',

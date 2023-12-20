@@ -66,7 +66,9 @@ describe('should', () => {
           "clojure",
           "cmd",
           "coffee",
+          "coffeescript",
           "cpp",
+          "cpp-macro",
           "cs",
           "csharp",
           "css",
@@ -109,6 +111,7 @@ describe('should', () => {
           "make",
           "makefile",
           "markdown",
+          "markdown-vue",
           "md",
           "objc",
           "objective-c",
@@ -146,7 +149,6 @@ describe('should', () => {
           "vb",
           "vue",
           "vue-directives",
-          "vue-injection-markdown",
           "vue-interpolations",
           "vue-sfc-style-variable-injection",
           "xml",
@@ -167,7 +169,7 @@ describe('should', () => {
     await shiki.loadLanguage('js')
 
     expect(shiki.getLoadedLanguages().length)
-      .toMatchInlineSnapshot(`89`)
+      .toMatchInlineSnapshot(`91`)
 
     expect(shiki.getLoadedThemes())
       .toMatchInlineSnapshot(`

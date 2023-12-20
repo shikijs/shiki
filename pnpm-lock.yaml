@@ -126,9 +126,6 @@ importers:
       rollup-plugin-typescript2:
         specifier: ^0.36.0
         version: 0.36.0(rollup@4.9.0)(typescript@5.3.3)
-      shiki:
-        specifier: ^0.14.7
-        version: 0.14.7
       shikiji:
         specifier: workspace:*
         version: link:packages/shikiji
@@ -175,9 +172,6 @@ importers:
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(typescript@5.3.3)(vue@3.3.11)
-      shiki:
-        specifier: ^0.14.7
-        version: 0.14.7
       shikiji:
         specifier: workspace:*
         version: link:../packages/shikiji
@@ -247,9 +241,12 @@ importers:
         specifier: workspace:*
         version: link:../shikiji-core
     devDependencies:
-      shiki:
-        specifier: ^0.14.7
-        version: 0.14.7
+      tm-grammars:
+        specifier: ^0.0.6
+        version: 0.0.6
+      tm-themes:
+        specifier: ^0.0.3
+        version: 0.0.3
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -8526,6 +8523,14 @@ packages:
   /titleize@3.0.0:
     resolution: {integrity: sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==}
     engines: {node: '>=12'}
+    dev: true
+
+  /tm-grammars@0.0.6:
+    resolution: {integrity: sha512-j8+ONeyz87GWw6pXnApyGTmipVoX6uprLJ1Rnj0tBHpPJqmPMOwjfDPCbLIKDgKST/qWC0bQSRGdQGxSFzQnmg==}
+    dev: true
+
+  /tm-themes@0.0.3:
+    resolution: {integrity: sha512-mYLZG/lGg7pH5otu7/Ud3cwvodUhIUkyJc8CahcA9szrG4XMwT0pVMbARSFVWPuUh3U8Qtn74PHna7qldOV2Jg==}
     dev: true
 
   /to-fast-properties@2.0.0:

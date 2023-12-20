@@ -75,7 +75,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'bat',
-    'name': 'Batch',
+    'name': 'Batch File',
     'aliases': [
       'batch'
     ],
@@ -156,6 +156,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'coffee',
     'name': 'CoffeeScript',
+    'aliases': [
+      'coffeescript'
+    ],
     'import': (() => import('./langs/coffee')) as DynamicLangReg
   },
   {
@@ -225,7 +228,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'docker',
-    'name': 'Docker',
+    'name': 'Dockerfile',
     'aliases': [
       'dockerfile'
     ],
@@ -394,11 +397,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/html')) as DynamicLangReg
   },
   {
-    'id': 'http',
-    'name': 'HTTP',
-    'import': (() => import('./langs/http')) as DynamicLangReg
-  },
-  {
     'id': 'imba',
     'name': 'Imba',
     'import': (() => import('./langs/imba')) as DynamicLangReg
@@ -425,9 +423,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/javascript')) as DynamicLangReg
   },
   {
-    'id': 'jinja-html',
+    'id': 'jinja',
     'name': 'Jinja',
-    'import': (() => import('./langs/jinja-html')) as DynamicLangReg
+    'import': (() => import('./langs/jinja')) as DynamicLangReg
   },
   {
     'id': 'jison',
@@ -567,7 +565,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'mojo',
-    'name': 'MagicPython',
+    'name': 'Mojo',
     'import': (() => import('./langs/mojo')) as DynamicLangReg
   },
   {
@@ -1027,7 +1025,7 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
-export type BuiltinLanguage = 'abap' | 'actionscript-3' | 'ada' | 'apache' | 'apex' | 'apl' | 'applescript' | 'ara' | 'asm' | 'astro' | 'awk' | 'ballerina' | 'bash' | 'bat' | 'batch' | 'be' | 'beancount' | 'berry' | 'bibtex' | 'bicep' | 'blade' | 'c' | 'c#' | 'c++' | 'cadence' | 'cdc' | 'clarity' | 'clj' | 'clojure' | 'cmake' | 'cmd' | 'cobol' | 'codeql' | 'coffee' | 'console' | 'cpp' | 'cql' | 'crystal' | 'cs' | 'csharp' | 'css' | 'csv' | 'cue' | 'cypher' | 'd' | 'dart' | 'dax' | 'diff' | 'docker' | 'dockerfile' | 'dream-maker' | 'elixir' | 'elm' | 'erb' | 'erl' | 'erlang' | 'f#' | 'fish' | 'fs' | 'fsharp' | 'fsl' | 'gdresource' | 'gdscript' | 'gdshader' | 'gherkin' | 'git-commit' | 'git-rebase' | 'gjs' | 'glimmer-js' | 'glimmer-ts' | 'glsl' | 'gnuplot' | 'go' | 'gql' | 'graphql' | 'groovy' | 'gts' | 'hack' | 'haml' | 'handlebars' | 'haskell' | 'hbs' | 'hcl' | 'hjson' | 'hlsl' | 'hs' | 'html' | 'http' | 'imba' | 'ini' | 'jade' | 'java' | 'javascript' | 'jinja-html' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsonnet' | 'jssm' | 'jsx' | 'julia' | 'kotlin' | 'kql' | 'kt' | 'kts' | 'kusto' | 'latex' | 'less' | 'liquid' | 'lisp' | 'logo' | 'lua' | 'make' | 'makefile' | 'markdown' | 'marko' | 'matlab' | 'md' | 'mdc' | 'mdx' | 'mermaid' | 'mojo' | 'nar' | 'narrat' | 'nextflow' | 'nf' | 'nginx' | 'nim' | 'nix' | 'nu' | 'nushell' | 'objc' | 'objective-c' | 'objective-cpp' | 'ocaml' | 'pascal' | 'perl' | 'perl6' | 'php' | 'plsql' | 'postcss' | 'powerquery' | 'powershell' | 'prisma' | 'prolog' | 'properties' | 'proto' | 'ps' | 'ps1' | 'pug' | 'puppet' | 'purescript' | 'py' | 'python' | 'ql' | 'r' | 'raku' | 'razor' | 'rb' | 'reg' | 'rel' | 'riscv' | 'rs' | 'rst' | 'ruby' | 'rust' | 'sas' | 'sass' | 'scala' | 'scheme' | 'scss' | 'sh' | 'shader' | 'shaderlab' | 'shell' | 'shellscript' | 'shellsession' | 'smalltalk' | 'solidity' | 'sparql' | 'spl' | 'splunk' | 'sql' | 'ssh-config' | 'stata' | 'styl' | 'stylus' | 'svelte' | 'swift' | 'system-verilog' | 'tasl' | 'tcl' | 'tex' | 'toml' | 'ts' | 'tsx' | 'turtle' | 'twig' | 'typescript' | 'v' | 'vb' | 'verilog' | 'vhdl' | 'vim' | 'viml' | 'vimscript' | 'vue' | 'vue-html' | 'vy' | 'vyper' | 'wasm' | 'wenyan' | 'wgsl' | 'wl' | 'wolfram' | 'xml' | 'xsl' | 'yaml' | 'yml' | 'zenscript' | 'zig' | 'zsh' | '文言'
+export type BuiltinLanguage = 'abap' | 'actionscript-3' | 'ada' | 'apache' | 'apex' | 'apl' | 'applescript' | 'ara' | 'asm' | 'astro' | 'awk' | 'ballerina' | 'bash' | 'bat' | 'batch' | 'be' | 'beancount' | 'berry' | 'bibtex' | 'bicep' | 'blade' | 'c' | 'c#' | 'c++' | 'cadence' | 'cdc' | 'clarity' | 'clj' | 'clojure' | 'cmake' | 'cmd' | 'cobol' | 'codeql' | 'coffee' | 'coffeescript' | 'console' | 'cpp' | 'cql' | 'crystal' | 'cs' | 'csharp' | 'css' | 'csv' | 'cue' | 'cypher' | 'd' | 'dart' | 'dax' | 'diff' | 'docker' | 'dockerfile' | 'dream-maker' | 'elixir' | 'elm' | 'erb' | 'erl' | 'erlang' | 'f#' | 'fish' | 'fs' | 'fsharp' | 'fsl' | 'gdresource' | 'gdscript' | 'gdshader' | 'gherkin' | 'git-commit' | 'git-rebase' | 'gjs' | 'glimmer-js' | 'glimmer-ts' | 'glsl' | 'gnuplot' | 'go' | 'gql' | 'graphql' | 'groovy' | 'gts' | 'hack' | 'haml' | 'handlebars' | 'haskell' | 'hbs' | 'hcl' | 'hjson' | 'hlsl' | 'hs' | 'html' | 'imba' | 'ini' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsonnet' | 'jssm' | 'jsx' | 'julia' | 'kotlin' | 'kql' | 'kt' | 'kts' | 'kusto' | 'latex' | 'less' | 'liquid' | 'lisp' | 'logo' | 'lua' | 'make' | 'makefile' | 'markdown' | 'marko' | 'matlab' | 'md' | 'mdc' | 'mdx' | 'mermaid' | 'mojo' | 'nar' | 'narrat' | 'nextflow' | 'nf' | 'nginx' | 'nim' | 'nix' | 'nu' | 'nushell' | 'objc' | 'objective-c' | 'objective-cpp' | 'ocaml' | 'pascal' | 'perl' | 'perl6' | 'php' | 'plsql' | 'postcss' | 'powerquery' | 'powershell' | 'prisma' | 'prolog' | 'properties' | 'proto' | 'ps' | 'ps1' | 'pug' | 'puppet' | 'purescript' | 'py' | 'python' | 'ql' | 'r' | 'raku' | 'razor' | 'rb' | 'reg' | 'rel' | 'riscv' | 'rs' | 'rst' | 'ruby' | 'rust' | 'sas' | 'sass' | 'scala' | 'scheme' | 'scss' | 'sh' | 'shader' | 'shaderlab' | 'shell' | 'shellscript' | 'shellsession' | 'smalltalk' | 'solidity' | 'sparql' | 'spl' | 'splunk' | 'sql' | 'ssh-config' | 'stata' | 'styl' | 'stylus' | 'svelte' | 'swift' | 'system-verilog' | 'tasl' | 'tcl' | 'tex' | 'toml' | 'ts' | 'tsx' | 'turtle' | 'twig' | 'typescript' | 'v' | 'vb' | 'verilog' | 'vhdl' | 'vim' | 'viml' | 'vimscript' | 'vue' | 'vue-html' | 'vy' | 'vyper' | 'wasm' | 'wenyan' | 'wgsl' | 'wl' | 'wolfram' | 'xml' | 'xsl' | 'yaml' | 'yml' | 'zenscript' | 'zig' | 'zsh' | '文言'
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,

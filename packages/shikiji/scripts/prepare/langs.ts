@@ -1,51 +1,45 @@
 import fs from 'fs-extra'
-import { BUNDLED_LANGUAGES } from 'shiki'
+import { grammars, injections } from 'tm-grammars'
 import fg from 'fast-glob'
 import type { LanguageRegistration } from 'shikiji-core'
 import { COMMENT_HEAD } from './constants'
 import { cleanupLanguageReg } from './utils'
-import { prepareInjections } from './injections'
 
 export async function prepareLangs() {
   const allLangFiles = await fg('*.json', {
-    cwd: './node_modules/shiki/languages',
+    cwd: './node_modules/tm-grammars/grammars',
     absolute: true,
     onlyFiles: true,
   })
 
   allLangFiles.sort()
 
-  const injections = await prepareInjections()
-
   for (const file of allLangFiles) {
     const content = await fs.readJSON(file)
-    const lang = BUNDLED_LANGUAGES.find(i => i.id === content.name)
+    const lang = grammars.find(i => i.name === content.name) || injections.find(i => i.name === content.name)
     if (!lang) {
       console.warn(`unknown ${content.name}`)
       continue
     }
 
     const json: LanguageRegistration = cleanupLanguageReg({
+      ...lang,
       ...content,
-      name: content.name || lang.id,
+      name: content.name || lang.name,
       scopeName: content.scopeName || lang.scopeName,
       displayName: lang.displayName,
-      aliases: lang.aliases,
-      embeddedLangs: lang.embeddedLangs,
-      balancedBracketSelectors: lang.balancedBracketSelectors,
-      unbalancedBracketSelectors: lang.unbalancedBracketSelectors,
+      embeddedLangs: lang.embedded,
     })
 
     // F# and Markdown has circular dependency
-    if (lang.id === 'fsharp' && json.embeddedLangs)
+    if (lang.name === 'fsharp' && json.embeddedLangs)
       json.embeddedLangs = json.embeddedLangs.filter((i: string) => i !== 'markdown')
 
     const deps: string[] = [
       ...(json.embeddedLangs || []),
-      ...injections.filter(i => i.toLang === lang.id).map(i => i.name),
     ]
 
-    await fs.writeFile(`./src/assets/langs/${lang.id}.ts`, `${COMMENT_HEAD}
+    await fs.writeFile(`./src/assets/langs/${lang.name}.ts`, `${COMMENT_HEAD}
 import type { LanguageRegistration } from 'shikiji-core'
 
 ${deps.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
@@ -62,13 +56,13 @@ ${[
   }
 
   async function writeLanguageBundleIndex(fileName: string, ids: string[]) {
-    const bundled = ids.map(id => BUNDLED_LANGUAGES.find(i => i.id === id)!)
+    const bundled = ids.map(id => grammars.find(i => i.name === id)!)
 
     const info = bundled.map(i => ({
-      id: i.id,
-      name: i.displayName,
+      id: i.name,
+      name: i.displayName || i.name,
       aliases: i.aliases,
-      import: `__(() => import('./langs/${i.id}')) as DynamicLangReg__`,
+      import: `__(() => import('./langs/${i.name}')) as DynamicLangReg__`,
     }) as const)
       .sort((a, b) => a.id.localeCompare(b.id))
 
@@ -105,5 +99,5 @@ export const bundledLanguages = {
     )
   }
 
-  await writeLanguageBundleIndex('langs', BUNDLED_LANGUAGES.map(i => i.id))
+  await writeLanguageBundleIndex('langs', grammars.map(i => i.name))
 }

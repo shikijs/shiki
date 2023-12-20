@@ -148,7 +148,7 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   {
     "id": "slack-ochin",
     "displayName": "Slack Ochin",
-    "type": "dark",
+    "type": "light",
     "import": (() => import('./themes/slack-ochin')) as unknown as DynamicThemeReg
   },
   {

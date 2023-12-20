@@ -72,6 +72,7 @@ describe('should', () => {
           "sql",
           "c",
           "glsl",
+          "cpp-macro",
           "cpp",
           "c++",
         ]
