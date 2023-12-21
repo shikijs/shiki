@@ -49,7 +49,7 @@ export const usePlayground = defineStore('playground', () => {
 
       function fetchSample(id: string) {
         if (!samplesCache.has(id)) {
-          samplesCache.set(id, fetch(`https://raw.githubusercontent.com/shikijs/shiki/main/packages/shiki/samples/${id}.sample`)
+          samplesCache.set(id, fetch(`https://raw.githubusercontent.com/antfu/textmate-grammars-themes/main/samples/${id}.sample`)
             .then(r => r.text())
             .catch((e) => {
               console.error(e)
@@ -74,7 +74,7 @@ export const usePlayground = defineStore('playground', () => {
         if ((o[0] || !input.value) && n[0] !== o[0]) {
           const sample = await fetchSample(lang.value)
           if (sample)
-            input.value = sample.replace(/\n.*?From.*?$/im, '').trim()
+            input.value = sample.trim().replace(/\n.*?from.*?$/i, '').trim()
         }
         run()
       }, { immediate: true })
