@@ -60,27 +60,35 @@ export class Registry extends TextMateRegistry {
     if (this.getGrammar(lang.name))
       return
 
+    const embeddedLazilyBy = new Set(Object.values(this._langMap).filter(i => i.embeddedLangsLazy?.includes(lang.name)))
+
     this._resolver.addLanguage(lang)
-    const embeddedLanguages = lang.embeddedLangs?.reduce(async (acc, l, idx) => {
-      if (!this.getLoadedLanguages().includes(l) && this._resolver.getLangRegistration(l)) {
-        await this._resolver.loadGrammar(this._resolver.getLangRegistration(l).scopeName)
-        acc[this._resolver.getLangRegistration(l).scopeName] = idx + 2
-        return acc
-      }
-    }, {} as any)
 
     const grammarConfig: IGrammarConfiguration = {
-      embeddedLanguages,
       balancedBracketSelectors: lang.balancedBracketSelectors || ['*'],
       unbalancedBracketSelectors: lang.unbalancedBracketSelectors || [],
     }
 
+    // @ts-expect-error Private members, set this to override the previous grammar (that can be a stub)
+    this._syncRegistry._rawGrammars.set(lang.scopeName, lang)
     const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
     this._resolvedGrammars[lang.name] = g!
     if (lang.aliases) {
       lang.aliases.forEach((alias) => {
         this.alias[alias] = lang.name
       })
+    }
+
+    // If there is a language that embeds this language lazily, we need to reload it
+    if (embeddedLazilyBy.size) {
+      for (const e of embeddedLazilyBy) {
+        delete this._resolvedGrammars[e.name]
+        // @ts-expect-error clear cache
+        this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
+        // @ts-expect-error clear cache
+        this._syncRegistry?._grammars?.delete(e.scopeName)
+        await this.loadLanguage(this._langMap[e.name])
+      }
     }
   }
 

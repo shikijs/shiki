@@ -195,6 +195,11 @@ export interface LanguageRegistration extends RawGrammar {
    * languages for each parent language.
    */
   embeddedLangs?: string[]
+  /**
+   * A list of languages that embed the current language.
+   * Unlike `embeddedLangs`, the embedded languages will not be loaded automatically.
+   */
+  embeddedLangsLazy?: string[]
   balancedBracketSelectors?: string[]
   unbalancedBracketSelectors?: string[]
 

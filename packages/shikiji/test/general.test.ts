@@ -55,107 +55,38 @@ describe('should', () => {
     expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
-          "bash",
-          "bat",
-          "batch",
-          "bibtex",
-          "c",
-          "c#",
-          "c++",
-          "clj",
-          "clojure",
-          "cmd",
           "coffee",
           "coffeescript",
-          "cpp",
-          "cpp-macro",
-          "cs",
-          "csharp",
           "css",
-          "dart",
-          "diff",
-          "docker",
-          "dockerfile",
-          "elixir",
-          "erl",
-          "erlang",
-          "f#",
-          "fs",
-          "fsharp",
-          "git-commit",
-          "git-rebase",
-          "glsl",
-          "gnuplot",
-          "go",
           "gql",
           "graphql",
-          "groovy",
-          "handlebars",
-          "haskell",
-          "hbs",
-          "hs",
           "html",
-          "ini",
           "jade",
-          "java",
           "javascript",
           "js",
           "json",
           "json5",
           "jsonc",
           "jsx",
-          "julia",
-          "latex",
           "less",
-          "lua",
-          "make",
-          "makefile",
           "markdown",
           "markdown-vue",
           "md",
-          "objc",
-          "objective-c",
-          "perl",
-          "perl6",
-          "php",
-          "powershell",
-          "properties",
-          "ps",
-          "ps1",
           "pug",
-          "py",
-          "python",
-          "r",
-          "raku",
-          "rb",
-          "rs",
-          "ruby",
-          "rust",
           "sass",
-          "scala",
           "scss",
-          "sh",
-          "shell",
-          "shellscript",
-          "sql",
           "styl",
           "stylus",
-          "swift",
-          "tex",
           "toml",
           "ts",
           "tsx",
           "typescript",
-          "vb",
           "vue",
           "vue-directives",
           "vue-interpolations",
           "vue-sfc-style-variable-injection",
-          "xml",
-          "xsl",
           "yaml",
           "yml",
-          "zsh",
         ]
       `)
   })
@@ -167,9 +98,10 @@ describe('should', () => {
     await shiki.loadTheme('min-dark')
     await shiki.loadLanguage('md')
     await shiki.loadLanguage('js')
+    await shiki.loadLanguage('ts')
 
     expect(shiki.getLoadedLanguages().length)
-      .toMatchInlineSnapshot(`91`)
+      .toMatchInlineSnapshot(`6`)
 
     expect(shiki.getLoadedThemes())
       .toMatchInlineSnapshot(`
@@ -185,6 +117,31 @@ describe('should', () => {
       .toMatchInlineSnapshot(`
         "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`js</span></span>
         <span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span>
+        <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
+      `)
+
+    expect(shiki.codeToHtml('```ts\nconsole.log(1)\n```', { lang: 'md', theme: 'min-dark' }))
+      .toMatchInlineSnapshot(`
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`ts</span></span>
+        <span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span>
+        <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
+      `)
+
+    // This should be unstyled
+    expect(shiki.codeToHtml('```cpp\nint a = 1;\n```', { lang: 'md', theme: 'min-dark' }))
+      .toMatchInlineSnapshot(`
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
+        <span class="line"><span style="color:#9DB1C5">int a = 1;</span></span>
+        <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
+      `)
+
+    await shiki.loadLanguage('cpp')
+
+    // This should be styled
+    expect(shiki.codeToHtml('```cpp\nint a = 1;\n```', { lang: 'md', theme: 'min-dark' }))
+      .toMatchInlineSnapshot(`
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
+        <span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> a </span><span style="color:#F97583">=</span><span style="color:#F8F8F8"> 1</span><span style="color:#B392F0">;</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
   })

@@ -17,6 +17,8 @@ export default defineConfig({
       'markdown-it-shikiji': fileURLToPath(new URL('./packages/markdown-it-shikiji/src/index.ts', import.meta.url)),
       'shikiji/wasm': fileURLToPath(new URL('./packages/shikiji/src/wasm.ts', import.meta.url)),
       'shikiji/core': fileURLToPath(new URL('./packages/shikiji/src/core.ts', import.meta.url)),
+      'shikiji/bundle/full': fileURLToPath(new URL('./packages/shikiji/src/bundle-full.ts', import.meta.url)),
+      'shikiji/bundle/web': fileURLToPath(new URL('./packages/shikiji/src/bundle-web.ts', import.meta.url)),
       'shikiji': fileURLToPath(new URL('./packages/shikiji/src/index.ts', import.meta.url)),
     },
   },

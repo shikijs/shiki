@@ -15,9 +15,35 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/blade')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'c',
+    'name': 'C',
+    'import': (() => import('./langs/c')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'coffee',
+    'name': 'CoffeeScript',
+    'aliases': [
+      'coffeescript'
+    ],
+    'import': (() => import('./langs/coffee')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'cpp',
+    'name': 'C++',
+    'aliases': [
+      'c++'
+    ],
+    'import': (() => import('./langs/cpp')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'css',
     'name': 'CSS',
     'import': (() => import('./langs/css')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'glsl',
+    'name': 'GLSL',
+    'import': (() => import('./langs/glsl')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'graphql',
@@ -56,6 +82,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/imba')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'java',
+    'name': 'Java',
+    'import': (() => import('./langs/java')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'javascript',
     'name': 'JavaScript',
     'aliases': [
@@ -77,6 +108,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'json',
     'name': 'JSON',
     'import': (() => import('./langs/json')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'json5',
+    'name': 'JSON5',
+    'import': (() => import('./langs/json5')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'jsonc',
@@ -102,6 +138,19 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'less',
     'name': 'Less',
     'import': (() => import('./langs/less')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'lua',
+    'name': 'Lua',
+    'import': (() => import('./langs/lua')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'markdown',
+    'name': 'Markdown',
+    'aliases': [
+      'md'
+    ],
+    'import': (() => import('./langs/markdown')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'marko',
@@ -137,6 +186,27 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/pug')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'python',
+    'name': 'Python',
+    'aliases': [
+      'py'
+    ],
+    'import': (() => import('./langs/python')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'r',
+    'name': 'R',
+    'import': (() => import('./langs/r')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'ruby',
+    'name': 'Ruby',
+    'aliases': [
+      'rb'
+    ],
+    'import': (() => import('./langs/ruby')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'sass',
     'name': 'Sass',
     'import': (() => import('./langs/sass')) as DynamicImportLanguageRegistration
@@ -158,6 +228,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/shellscript')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'sql',
+    'name': 'SQL',
+    'import': (() => import('./langs/sql')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'stylus',
     'name': 'Stylus',
     'aliases': [
@@ -169,6 +244,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'svelte',
     'name': 'Svelte',
     'import': (() => import('./langs/svelte')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'toml',
+    'name': 'TOML',
+    'import': (() => import('./langs/toml')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'tsx',
@@ -202,6 +282,19 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'wgsl',
     'name': 'WGSL',
     'import': (() => import('./langs/wgsl')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'xml',
+    'name': 'XML',
+    'import': (() => import('./langs/xml')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'yaml',
+    'name': 'YAML',
+    'aliases': [
+      'yml'
+    ],
+    'import': (() => import('./langs/yaml')) as DynamicImportLanguageRegistration
   }
 ]
 
@@ -209,7 +302,7 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
-export type BundledLanguage = 'astro' | 'bash' | 'blade' | 'css' | 'gql' | 'graphql' | 'haml' | 'handlebars' | 'hbs' | 'html' | 'http' | 'imba' | 'jade' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'jsonc' | 'jsonl' | 'jsx' | 'julia' | 'less' | 'marko' | 'mdc' | 'mdx' | 'php' | 'postcss' | 'pug' | 'sass' | 'scss' | 'sh' | 'shell' | 'shellscript' | 'styl' | 'stylus' | 'svelte' | 'ts' | 'tsx' | 'typescript' | 'vue' | 'vue-html' | 'wasm' | 'wgsl' | 'zsh'
+export type BundledLanguage = 'astro' | 'bash' | 'blade' | 'c' | 'c++' | 'coffee' | 'coffeescript' | 'cpp' | 'css' | 'glsl' | 'gql' | 'graphql' | 'haml' | 'handlebars' | 'hbs' | 'html' | 'http' | 'imba' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsx' | 'julia' | 'less' | 'lua' | 'markdown' | 'marko' | 'md' | 'mdc' | 'mdx' | 'php' | 'postcss' | 'pug' | 'py' | 'python' | 'r' | 'rb' | 'ruby' | 'sass' | 'scss' | 'sh' | 'shell' | 'shellscript' | 'sql' | 'styl' | 'stylus' | 'svelte' | 'toml' | 'ts' | 'tsx' | 'typescript' | 'vue' | 'vue-html' | 'wasm' | 'wgsl' | 'xml' | 'yaml' | 'yml' | 'zsh'
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
