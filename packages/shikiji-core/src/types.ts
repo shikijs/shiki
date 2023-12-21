@@ -578,4 +578,21 @@ export interface ThemedTokenWithVariants extends TokenBase {
   variants: Record<string, TokenStyles>
 }
 
+export type DynamicImportLanguageRegistration = () => Promise<{ default: LanguageRegistration[] }>
+export type DynamicImportThemeRegistration = () => Promise<{ default: ThemeRegistration }>
+
+export interface BundledLanguageInfo {
+  id: string
+  name: string
+  import: DynamicImportLanguageRegistration
+  aliases?: string[]
+}
+
+export interface BundledThemeInfo {
+  id: string
+  displayName: string
+  type: 'light' | 'dark'
+  import: DynamicImportThemeRegistration
+}
+
 export {}

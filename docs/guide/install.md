@@ -126,6 +126,10 @@ const code = shiki.codeToHtml('const a = 1', {
 })
 ```
 
+### Bundle Presets
+
+We also provide some pre-composed bundles for you to use easily, learn more about them in the [bundles section](/guide/bundles).
+
 ### CJS Usage
 
 `shikiji` is published as ESM-only to reduce the package size. It's still possible to use it in CJS, as Node.js supports importing ESM modules dynamically in CJS.
@@ -138,7 +142,7 @@ import { getHighlighter } from 'shikiji'
 
 async function main() {
   const shiki = await getHighlighter({
-    themes: ['nord'],
+    themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
 
@@ -154,7 +158,7 @@ async function main() {
   const { getHighlighter } = await import('shikiji')
 
   const shiki = await getHighlighter({
-    themes: ['nord'],
+    themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
 
@@ -166,7 +170,7 @@ async function main() {
 
 To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) or [esm.sh](https://esm.sh).
 
-```html
+```html theme:rose-pine
 <body>
   <div id="foo"></div>
 
@@ -177,7 +181,10 @@ To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) 
     // import { codeToHtml } from 'https://esm.run/shikiji@0.8.0'
 
     const foo = document.getElementById('foo')
-    foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', { lang: 'js', theme: 'vitesse-light' })
+    foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {
+      lang: 'js',
+      theme: 'rose-pine'
+    })
   </script>
 </body>
 ```
@@ -192,7 +199,7 @@ Cloudflare Workers [does not support initializing WebAssembly from binary data](
 
 Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-bundle) approach to reduce the bundle size.
 
-```ts
+```ts theme:nord
 import { getHighlighterCore, loadWasm } from 'shikiji/core'
 import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'

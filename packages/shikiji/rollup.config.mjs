@@ -17,6 +17,8 @@ const entries = [
   'src/themes.ts',
   'src/langs.ts',
   'src/wasm.ts',
+  'src/bundle-full.ts',
+  'src/bundle-web.ts',
 ]
 
 const external = [

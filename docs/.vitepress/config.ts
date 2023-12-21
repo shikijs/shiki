@@ -9,6 +9,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
   { text: 'Installation', link: '/guide/install' },
   { text: 'Shorthands', link: '/guide/shorthands' },
+  { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Compat Build', link: '/guide/compat' },

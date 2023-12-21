@@ -23,6 +23,9 @@ export const usePlayground = defineStore('playground', () => {
       import: undefined!,
     },
   ])
+  const bundledLangsFull = shallowRef<BundledLanguageInfo[]>([])
+  const bundledLangsWeb = shallowRef<BundledLanguageInfo[]>([])
+
   const input = useLocalStorage('shikiji-playground-input', '')
   const output = ref('<pre></pre>')
   const preStyle = ref('')
@@ -38,7 +41,8 @@ export const usePlayground = defineStore('playground', () => {
   if (typeof window !== 'undefined') {
     (async () => {
       const { getHighlighter, addClassToHast } = await import('shikiji')
-      const { bundledLanguagesInfo } = await import('shikiji/langs')
+      const { bundledLanguagesInfo: bundleFull } = await import('shikiji/bundle/full')
+      const { bundledLanguagesInfo: bundleWeb } = await import('shikiji/bundle/web')
       const { bundledThemesInfo } = await import('shikiji/themes')
       const highlighter = await getHighlighter({
         themes: [theme.value],
@@ -60,7 +64,9 @@ export const usePlayground = defineStore('playground', () => {
       }
 
       allThemes.value = bundledThemesInfo
-      allLanguages.value = bundledLanguagesInfo
+      allLanguages.value = bundleFull
+      bundledLangsFull.value = bundleFull
+      bundledLangsWeb.value = bundleWeb
 
       watch(input, run, { immediate: true })
 
@@ -102,6 +108,8 @@ export const usePlayground = defineStore('playground', () => {
     theme,
     allLanguages,
     allThemes,
+    bundledLangsFull,
+    bundledLangsWeb,
     input,
     output,
     isLoading,

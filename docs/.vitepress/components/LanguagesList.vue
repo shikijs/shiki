@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
@@ -9,10 +9,27 @@ function preview(id: string) {
   play.lang = id
   showModel.value = true
 }
+
+const bundle = ref('all')
+
+const langs = computed(() => {
+  if (bundle.value === 'web')
+    return play.bundledLangsWeb
+  return play.bundledLangsFull
+})
 </script>
 
 <template>
   <div>
+    <div flex="~ gap-0.5 items-center">
+      <input id="radio-all" v-model="bundle" type="radio" name="lang" value="all">
+      <label for="radio-all">Full Bundle</label>
+      <div mx2 />
+      <input id="radio-web" v-model="bundle" type="radio" name="lang" value="web">
+      <label for="radio-web">Web Bundle</label>
+      <div mx2 />
+      <a href="/guide/bundles">?</a>
+    </div>
     <table>
       <thead>
         <tr>
@@ -23,7 +40,7 @@ function preview(id: string) {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="l in play.allLanguages" :key="l.id">
+        <tr v-for="l in langs" :key="l.id">
           <td>{{ l.name }}</td>
           <td><code>{{ l.id }}</code></td>
           <td>

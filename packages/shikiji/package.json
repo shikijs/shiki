@@ -37,6 +37,14 @@
       "types": "./dist/themes.d.mts",
       "default": "./dist/themes.mjs"
     },
+    "./bundle/full": {
+      "types": "./dist/bundle-full.d.mts",
+      "default": "./dist/bundle-full.mjs"
+    },
+    "./bundle/web": {
+      "types": "./dist/bundle-web.d.mts",
+      "default": "./dist/bundle-web.mjs"
+    },
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
   },
@@ -56,6 +64,12 @@
       ],
       "themes": [
         "./dist/themes.d.mts"
+      ],
+      "bundle/full": [
+        "./dist/bundle-full.d.mts"
+      ],
+      "bundle/web": [
+        "./dist/bundle-web.d.mts"
       ],
       "*": [
         "./dist/*",
@@ -78,8 +92,8 @@
     "shikiji-core": "workspace:*"
   },
   "devDependencies": {
-    "tm-grammars": "^0.0.6",
-    "tm-themes": "^0.0.3",
+    "tm-grammars": "^1.0.2",
+    "tm-themes": "^1.0.0",
     "vscode-oniguruma": "^1.7.0"
   }
 }
