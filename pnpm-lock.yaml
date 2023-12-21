@@ -160,6 +160,9 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
     devDependencies:
+      '@iconify-json/svg-spinners':
+        specifier: ^1.1.2
+        version: 1.1.2
       '@unocss/reset':
         specifier: ^0.58.0
         version: 0.58.0
@@ -1760,6 +1763,12 @@ packages:
 
   /@iconify-json/codicon@1.1.39:
     resolution: {integrity: sha512-h/4Wlp6byjStnUH1HaE+fNb7ttFoG1Qc1QMCavl82RasBGwCbvjVizg7DrA+gl63t96Yk9rB/kxSV6azGgdkNw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/svg-spinners@1.1.2:
+    resolution: {integrity: sha512-Aab6SqkORaTJ1W+ooufn6C8BsBitrn3uk8iRQLPA6pjhyvQAhkKCGMctyXIL5ZjrycnoFVsZ4mx7KnwEMra8qg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

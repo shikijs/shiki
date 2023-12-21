@@ -7,7 +7,10 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
 </script>
 
 <template>
-  <div class="language-ts vp-adaptive-theme mini-playground" shadow :style="[play.preStyle, { colorScheme: currentThemeType }]">
+  <div
+    class="language-ts vp-adaptive-theme mini-playground transition-none!" shadow
+    :style="[play.preStyle, { colorScheme: currentThemeType }]"
+  >
     <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
       <div i-carbon:chevron-down op50 />
       <select v-model="play.lang" font-mono :style="play.preStyle">
@@ -28,23 +31,31 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
         </option>
       </select>
       <div flex-auto />
-      <div v-if="play.isLoading" svg-spinners:270-ring />
-      <div op50 text-xs mr-2>
+      <div
+        i-svg-spinners-3-dots-fade
+        :class="play.isLoading ? 'op100' : 'op0'"
+        flex-none transition-opacity
+      />
+      <div op50 text-xs mx-2>
         Playground
       </div>
       <button title="Randomize" hover="bg-gray/10" p1 rounded @click="play.randomize">
         <div i-carbon:shuffle op50 />
       </button>
     </div>
-    <span v-html="play.output" />
+    <div relative mt-10 min-h-100>
+      <span v-html="play.output" />
+      <textarea
+        v-model="play.input"
+        font-mono bg-transparent absolute inset-0 z-100 py-20px px-24px
+        text-transparent caret-gray
+        class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
+      />
+    </div>
   </div>
 </template>
 
 <style>
-.mini-playground pre {
-  padding-top: 3.5em !important;
-  min-height: 20em !important;
-}
 .mini-playground select {
   background: transparent;
   color: inherit;
