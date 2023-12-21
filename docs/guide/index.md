@@ -52,10 +52,12 @@ Projects that depend on Shikiji (sort alphabetically):
 
 You can inspect the bundle size in detail on [pkg-size.dev/shikiji](https://pkg-size.dev/shikiji).
 
-As of `v0.9.2`, measured at 15th, December 2023:
+As of `v0.9.11`, measured at 21th, December 2023:
 
-| Bundle         | Size (minified) | Size (gzip) | Notes                                             |
-| -------------- | --------------: | ----------: | ------------------------------------------------- |
-| `shikiji`      |          6.2 MB |      1.2 MB | includes all themes and languages as async chunks |
-| `shikiji/core` |           99 KB |       31 KB | without themes or languages, compose on your own  |
-| `shikiji/wasm` |          623 KB |      231 KB | wasm binary inlined as base64 string              |
+| Bundle                | Size (minified) | Size (gzip) | Notes                                                            |
+| --------------------- | --------------: | ----------: | ---------------------------------------------------------------- |
+| `shikiji`             |          6.4 MB |      1.2 MB | All themes and languages as async chunks                         |
+| `shikiji/bundle/full` |          6.4 MB |      1.2 MB | Same as `shikiji`                                                |
+| `shikiji/bundle/web`  |          3.8 MB |      695 KB | All themes and common web languages as async chunks              |
+| `shikiji/core`        |          100 KB |       31 KB | Core engine without any themes or languages, compose on your own |
+| `shikiji/wasm`        |          623 KB |      231 KB | WASM binary inlined as base64 string                             |
