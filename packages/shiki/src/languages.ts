@@ -573,6 +573,7 @@ export const languages: ILanguageRegistration[] = [
     scopeName: 'source.gts',
     path: 'glimmer-ts.tmLanguage.json',
     displayName: 'Glimmer TS',
+    samplePath: 'glimmer-ts.sample',
     aliases: ['gts'],
     embeddedLangs: ['typescript', 'handlebars']
   },

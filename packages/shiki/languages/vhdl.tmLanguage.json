@@ -1170,7 +1170,7 @@
     "process_pattern": {
       "patterns": [
         {
-          "begin": "(?x)\n\t\t\t\t\t\t# From the beginning of the line\n\t\t\t\t\t\t^\\s*\n\n\t\t\t\t\t\t(\n\t\t\t\t\t\t\t# Optional identifier $2\n\t\t\t\t\t\t\t([a-zA-Z][a-zA-Z0-9_]*)\n\n\t\t\t\t\t\t\t# Colon $3\n\t\t\t\t\t\t\t\\s*(:)\\s*\n\t\t\t\t\t\t)?\n\n\t\t\t\t\t\t# The word process #4\n\t\t\t\t\t\t((?i:process\\b))\n\t\t\t\t\t",
+          "begin": "(?x)\n\t\t\t\t\t\t# From the beginning of the line\n\t\t\t\t\t\t^\\s*\n\n\t\t\t\t\t\t(\n\t\t\t\t\t\t\t# Optional identifier $2\n\t\t\t\t\t\t\t([a-zA-Z][a-zA-Z0-9_]*)\n\n\t\t\t\t\t\t\t# Colon $3\n\t\t\t\t\t\t\t\\s*(:)\\s*\n\t\t\t\t\t\t)?\n\n\t\t\t\t\t\t# The word process #4\n\t\t\t\t\t\t(\n\t\t\t\t\t\t\t(?:postponed\\s+)?\n\t\t\t\t\t\t\t(?i:process\\b)\n\t\t\t\t\t\t)\n\t\t\t\t\t",
           "beginCaptures": {
             "2": {
               "name": "entity.name.section.process.begin.vhdl"
@@ -1182,7 +1182,7 @@
               "name": "keyword.language.vhdl"
             }
           },
-          "end": "(?x)\n\t\t\t\t\t\t# The word end $1\n\t\t\t\t\t\t((?i:end))\n\n\t\t\t\t\t\t# Optional word process $3\n\t\t\t\t\t\t(\\s+((?i:process)))\n\n\t\t\t\t\t\t# Optional identifier $6 or invalid identifier $7\n\t\t\t\t\t\t(\\s+((\\2)|(.+?)))?\n\n\t\t\t\t\t\t(?=\\s*;)\n\t\t\t\t\t",
+          "end": "(?x)\n\t\t\t\t\t\t# The word end $1\n\t\t\t\t\t\t((?i:end))\n\n\t\t\t\t\t\t# Optional word process $3\n\t\t\t\t\t\t(\\s+(\n\t\t\t\t\t\t\t(?:postponed\\s+)?\n\t\t\t\t\t\t\t(?i:process)\n\t\t\t\t\t\t))\n\n\t\t\t\t\t\t# Optional identifier $6 or invalid identifier $7\n\t\t\t\t\t\t(\\s+((\\2)|(.+?)))?\n\n\t\t\t\t\t\t(?=\\s*;)\n\t\t\t\t\t",
           "endCaptures": {
             "1": {
               "name": "keyword.language.vhdl"

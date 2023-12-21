@@ -1047,6 +1047,18 @@
           "match": "\\bstruct\\b"
         },
         {
+          "name": "keyword.other.constraint.default.cs",
+          "match": "\\bdefault\\b"
+        },
+        {
+          "name": "keyword.other.constraint.notnull.cs",
+          "match": "\\bnotnull\\b"
+        },
+        {
+          "name": "keyword.other.constraint.unmanaged.cs",
+          "match": "\\bunmanaged\\b"
+        },
+        {
           "match": "(new)\\s*(\\()\\s*(\\))",
           "captures": {
             "1": {
@@ -2628,7 +2640,7 @@
           },
           "patterns": [
             {
-              "begin": "\\G",
+              "begin": "(?=[^;\\)])",
               "end": "(?=;|\\))",
               "patterns": [
                 {
