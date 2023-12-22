@@ -198,15 +198,33 @@ VitePress uses Shikiji for syntax highlighting since [`1.0.0-rc.30`](https://git
 ```ts twoslash
 // .vitepress/config.ts
 import { defineConfig } from 'vitepress'
-import { transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
 
 export default defineConfig({
   markdown: {
     codeTransformers: [
       transformerTwoSlash({
+        // This makes TwoSlash only run on code blocks with `twoslash` presented in the codeframe
         explicitTrigger: true,
+        // Use the rich renderer
+        renderer: rendererRich({
+          // This makes VitePress ignore the additional meta DOM on copy
+          // Available since VitePress 1.0.0-rc.33
+          classExtra: 'vp-copy-ignore',
+        }),
       })
     ]
   },
 })
+```
+
+And import the CSS in your `.vitepress/theme/index.ts`
+
+```ts
+// .vitepress/theme/index.ts
+import 'shikiji-twoslash/style-rich.css'
+
+export default {
+  // ...
+}
 ```

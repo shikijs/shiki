@@ -27,6 +27,11 @@ export interface RendererRichOptions {
    * Note that it might not be valid TypeScript syntax.
    */
   formatInfo?(info: string): string
+
+  /**
+   * Classes added to injected elements
+   */
+  classExtra?: string
 }
 
 /**
@@ -38,6 +43,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
     completionIcons = defaultCompletionIcons,
     customTagIcons = defaultCustomTagIcons,
     formatInfo = info => info,
+    classExtra = '',
   } = options
   return {
     nodeStaticInfo(info, node) {
@@ -59,7 +65,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
             type: 'element',
             tagName: 'span',
             properties: {
-              class: 'twoslash-popup-info',
+              class: ['twoslash-popup-info', classExtra].filter(Boolean).join(' '),
             },
             children: themedContent,
           },
@@ -89,7 +95,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
             type: 'element',
             tagName: 'span',
             properties: {
-              class: 'twoslash-popup-info',
+              class: ['twoslash-popup-info', classExtra].filter(Boolean).join(' '),
             },
             children: [
               {
@@ -125,7 +131,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
             type: 'element',
             tagName: 'span',
             properties: {
-              class: 'twoslash-completions-list',
+              class: ['twoslash-completions-list', classExtra].filter(Boolean).join(' '),
             },
             children: [{
               type: 'element',
@@ -136,9 +142,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
                 .map(i => ({
                   type: 'element',
                   tagName: 'li',
-                  properties: {
-
-                  },
+                  properties: {},
                   children: [
                     ...completionIcons
                       ? [<Element>{
@@ -212,7 +216,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
           type: 'element',
           tagName: 'div',
           properties: {
-            class: 'twoslash-meta-line twoslash-error-line',
+            class: ['twoslash-meta-line twoslash-error-line', classExtra].filter(Boolean).join(' '),
           },
           children: [
             {
@@ -229,7 +233,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
         {
           type: 'element',
           tagName: 'div',
-          properties: { class: `twoslash-tag-line twoslash-tag-${tag.name}-line` },
+          properties: {
+            class: [`twoslash-tag-line twoslash-tag-${tag.name}-line`, classExtra].filter(Boolean).join(' '),
+          },
           children: [
             ...customTagIcons
               ? [

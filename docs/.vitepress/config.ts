@@ -53,7 +53,9 @@ export default defineConfig({
     codeTransformers: [
       transformerTwoSlash({
         explicitTrigger: true,
-        renderer: rendererRich(),
+        renderer: rendererRich({
+          classExtra: 'vp-copy-ignore',
+        }),
       }),
       {
         // Render custom themes with codeblocks
