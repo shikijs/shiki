@@ -546,7 +546,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'mdc',
-    'name': 'mdc',
+    'name': 'MDC',
     'import': (() => import('./langs/mdc')) as DynamicImportLanguageRegistration
   },
   {
