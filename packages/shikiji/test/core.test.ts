@@ -3,8 +3,10 @@ import { getHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
 import ts from '../src/assets/langs/typescript'
-import nord from '../dist/themes/nord.mjs'
-import mtp from '../dist/themes/material-theme-palenight.mjs'
+import nord from '../src/assets/themes/nord'
+import mtp from '../src/assets/themes/material-theme-palenight'
+
+// eslint-disable-next-line antfu/no-import-dist
 import onig from '../../shikiji-core/dist/onig.mjs'
 
 describe('should', () => {

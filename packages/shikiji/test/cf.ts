@@ -5,6 +5,7 @@ import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'
 
 // @ts-expect-error no types
+// eslint-disable-next-line antfu/no-import-dist
 import wasm from '../dist/onig.wasm'
 
 await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
