@@ -19,9 +19,14 @@ export function codeToHast(
   options: CodeToHastOptions,
   transformerContext: ShikijiTransformerContextCommon = {
     meta: {},
+    options,
     codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
   },
 ) {
+  let input = code
+  for (const transformer of options.transformers || [])
+    input = transformer.preprocess?.call(transformerContext, input, options) || input
+
   let bg: string
   let fg: string
   let tokens: ThemedToken[][]
@@ -44,7 +49,7 @@ export function codeToHast(
 
     const themeTokens = codeToTokensWithThemes(
       internal,
-      code,
+      input,
       options,
     )
 
@@ -65,7 +70,7 @@ export function codeToHast(
   else if ('theme' in options) {
     tokens = codeToThemedTokens(
       internal,
-      code,
+      input,
       {
         ...options,
         includeExplanation: false,

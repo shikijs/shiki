@@ -410,12 +410,12 @@ export interface ShikijiTransformerContextMeta {}
 
 export interface ShikijiTransformerContextCommon {
   meta: ShikijiTransformerContextMeta
+  options: CodeToHastOptions
   codeToHast: (code: string, options: CodeToHastOptions) => Root
 }
 
 export interface ShikijiTransformerContext extends ShikijiTransformerContextCommon {
   readonly tokens: ThemedToken[][]
-  readonly options: CodeToHastOptions
   readonly root: Root
   readonly pre: Element
   readonly code: Element
@@ -453,15 +453,14 @@ export interface ShikijiTransformer {
 
   /**
    * Transform the raw input code before passing to the highlighter.
-   * This hook will only be called with `codeToHtml`.
+   * This hook will only be called with `codeToHtml` or `codeToHast`.
    */
   preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
-
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
-  postprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
+  postprocess?(this: ShikijiTransformerContextCommon, html: string, options: CodeToHastOptions): string | void
 }
 
 export interface HtmlRendererOptionsCommon extends TransformerOptions {

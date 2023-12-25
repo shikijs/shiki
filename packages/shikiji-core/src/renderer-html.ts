@@ -12,14 +12,11 @@ export function codeToHtml(
 ): string {
   const context: ShikijiTransformerContextCommon = {
     meta: {},
+    options,
     codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
   }
 
-  let intput = code
-  for (const transformer of options.transformers || [])
-    intput = transformer.preprocess?.call(context, intput, options) || intput
-
-  let result = hastToHtml(codeToHast(internal, intput, options, context))
+  let result = hastToHtml(codeToHast(internal, code, options, context))
 
   for (const transformer of options.transformers || [])
     result = transformer.postprocess?.call(context, result, options) || result
