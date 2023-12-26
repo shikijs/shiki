@@ -157,7 +157,7 @@
   flex: none;
 }
 /* Custom Tags */
-.twoslash-tag-line {
+.twoslash .twoslash-tag-line {
   position: relative;
   background-color: var(--twoslash-tag-bg);
   border-left: 3px solid var(--twoslash-tag-color);
@@ -168,21 +168,21 @@
   align-items: center;
   gap: 0.3em;
 }
-.twoslash-tag-line .twoslash-tag-icon {
+.twoslash .twoslash-tag-line .twoslash-tag-icon {
   width: 1.1em;
   color: inherit;
 }
-.twoslash-tag-line.twoslash-tag-error-line {
+.twoslash .twoslash-tag-line.twoslash-tag-error-line {
   background-color: var(--twoslash-error-bg);
   border-left: 3px solid var(--twoslash-error-color);
   color: var(--twoslash-error-color);
 }
-.twoslash-tag-line.twoslash-tag-warn-line {
+.twoslash .twoslash-tag-line.twoslash-tag-warn-line {
   background-color: var(--twoslash-tag-warn-bg);
   border-left: 3px solid var(--twoslash-tag-warn-color);
   color: var(--twoslash-tag-warn-color);
 }
-.twoslash-tag-line.twoslash-tag-annotate-line {
+.twoslash .twoslash-tag-line.twoslash-tag-annotate-line {
   background-color: var(--twoslash-tag-annotate-bg);
   border-left: 3px solid var(--twoslash-tag-annotate-color);
   color: var(--twoslash-tag-annotate-color);
