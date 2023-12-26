@@ -60,7 +60,6 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
           class: 'twoslash-hover',
         },
         children: [
-          node,
           {
             type: 'element',
             tagName: 'span',
@@ -69,6 +68,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
             },
             children: themedContent,
           },
+          node,
         ],
       }
     },
@@ -90,7 +90,6 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
           class: 'twoslash-hover twoslash-query-presisted',
         },
         children: [
-          node,
           {
             type: 'element',
             tagName: 'span',
@@ -107,6 +106,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
               ...themedContent,
             ],
           },
+          node,
         ],
       }
     },
