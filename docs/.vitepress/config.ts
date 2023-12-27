@@ -1,9 +1,10 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+import { transformerTwoSlash } from 'shikiji-twoslash'
 import { bundledThemes } from 'shikiji'
 import { version } from '../../package.json'
 import vite from './vite.config'
+import { rendererFloatingVue } from './render-floating-vue'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
@@ -53,10 +54,16 @@ export default defineConfig({
     codeTransformers: [
       transformerTwoSlash({
         explicitTrigger: true,
-        renderer: rendererRich({
-          classExtra: 'vp-copy-ignore',
-        }),
+        renderer: rendererFloatingVue,
       }),
+      // HAST treat `template` element specially and ignore its children
+      // We need to render it as `vue-template` and use postprocess to replace it back
+      {
+        postprocess(code) {
+          return code
+            .replace(/(<\/?)vue-template/g, '$1template')
+        },
+      },
       {
         // Render custom themes with codeblocks
         name: 'shikiji:inline-theme',
@@ -92,11 +99,17 @@ export default defineConfig({
       },
       {
         name: 'shikiji:vitepress-patch',
-        preprocess(code, options) {
+        preprocess(_, options) {
           const cleanup = options.transformers?.find(i => i.name === 'vitepress:clean-up')
-          if (!cleanup)
-            return
-          options.transformers?.splice(options.transformers.indexOf(cleanup), 1)
+          if (cleanup)
+            options.transformers?.splice(options.transformers.indexOf(cleanup), 1)
+
+          // Disable v-pre for twoslash, because we need render it with FloatingVue
+          if (options.meta?.__raw?.includes('twoslash')) {
+            const vPre = options.transformers?.find(i => i.name === 'vitepress:v-pre')
+            if (vPre)
+              options.transformers?.splice(options.transformers.indexOf(vPre), 1)
+          }
         },
       },
       {

@@ -25,3 +25,20 @@
 .twoslash-query-presisted .twoslash-popup-info {
   transform: translateY(1.8em);
 }
+
+.twoslash .v-popper {
+  display: inline-block;
+}
+
+.floating-vue-twoslash code {
+  max-width: 600px;
+  display: block;
+  padding: 6px 12px;
+  width: fit-content;
+  min-width: 100%;
+  line-height: var(--vp-code-line-height);
+  font-size: var(--vp-code-font-size);
+  color: var(--vp-code-block-color);
+  transition: color 0.5s;
+  white-space: pre-wrap;
+}

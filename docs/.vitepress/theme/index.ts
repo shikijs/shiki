@@ -18,6 +18,8 @@ export default {
   },
   enhanceApp({ app }: any) {
     app.use(createPinia())
+
+    FloatingVue.options.themes.menu.delay = { show: 0, hide: 0 }
     app.use(FloatingVue)
   },
 }
