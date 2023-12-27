@@ -358,9 +358,9 @@ export type CodeToHastOptions<Languages extends string = string, Themes extends 
   & CodeOptionsThemes<Themes>
   & CodeOptionsMeta
 
-export interface ThemeRegistrationRaw extends RawTheme {}
+export interface ThemeRegistrationRaw extends RawTheme, Partial<Omit<ThemeRegistration, 'name' | 'settings'>> {}
 
-export interface ThemeRegistration extends ThemeRegistrationRaw {
+export interface ThemeRegistration extends RawTheme {
   /**
    * Theme name
    */
@@ -377,17 +377,17 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
   type: 'light' | 'dark'
 
   /**
-   * TokenColors of the theme file
+   * Token rules
    */
   settings: IRawThemeSetting[]
 
   /**
-   * Text default foreground color
+   * Default foreground color
    */
   fg: string
 
   /**
-   * Text default background color
+   * Background color
    */
   bg: string
 
@@ -401,9 +401,20 @@ export interface ThemeRegistration extends ThemeRegistrationRaw {
    */
   colors?: Record<string, string>
 
-  tokenColors?: any[]
+  /**
+   * Same as `settings`
+   */
+  tokenColors?: IRawThemeSetting[]
+
+  /**
+   * Enable semantic highlighting (ignored in Shikiji)
+   */
   semanticHighlighting?: boolean
-  semanticTokenColors?: any[]
+
+  /**
+   * Tokens for semantic highlighting (ignored in Shikiji)
+   */
+  semanticTokenColors?: Record<string, string>
 }
 
 export interface ShikijiTransformerContextMeta {}
