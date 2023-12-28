@@ -60,7 +60,7 @@ export function codeToHast(
 
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
-      .map(line => line.map(token => flattenToken(token, themesOrder, cssVariablePrefix, defaultColor)))
+      .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
 
     fg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}:`) + themeRegs[idx].fg).join(';')
     bg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}-bg:`) + themeRegs[idx].bg).join(';')
@@ -102,7 +102,7 @@ export function codeToHast(
 /**
  *
  */
-function flattenToken(
+function mergeToken(
   merged: ThemedTokenWithVariants,
   variantsOrder: string[],
   cssVariablePrefix: string,
@@ -294,15 +294,27 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
     const newLine: ThemedToken[] = []
     let carryOnContent = ''
     line.forEach((token, idx) => {
-      if (token.content.match(/^\s+$/) && line[idx + 1]) {
+      const isUnderline = token.fontStyle && token.fontStyle & FontStyle.Underline
+      const couldMerge = !isUnderline
+      if (couldMerge && token.content.match(/^\s+$/) && line[idx + 1]) {
         carryOnContent += token.content
       }
       else {
         if (carryOnContent) {
-          newLine.push({
-            ...token,
-            content: carryOnContent + token.content,
-          })
+          if (couldMerge) {
+            newLine.push({
+              ...token,
+              content: carryOnContent + token.content,
+            })
+          }
+          else {
+            newLine.push(
+              {
+                content: carryOnContent,
+              },
+              token,
+            )
+          }
           carryOnContent = ''
         }
         else {

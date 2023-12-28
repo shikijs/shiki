@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getHighlighter } from '../src'
+import { codeToHtml, getHighlighter } from '../src'
 
 describe('should', () => {
   it('works', async () => {
@@ -144,6 +144,14 @@ describe('should', () => {
         <span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> a </span><span style="color:#F97583">=</span><span style="color:#F8F8F8"> 1</span><span style="color:#B392F0">;</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
+  })
+
+  it('monokai underline', async () => {
+    expect(await codeToHtml('type Foo = { bar: string }', {
+      theme: 'monokai',
+      lang: 'ts',
+    }))
+      .toMatchFileSnapshot('./out/monokai-underline.html')
   })
 })
 
