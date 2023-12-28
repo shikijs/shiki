@@ -1,7 +1,8 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistration } from './types'
+import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistrationResolved } from './types'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
+import { normalizeTheme } from './normalize'
 
 /**
  * Get the minimal shiki context for rendering.
@@ -21,7 +22,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     themes,
     langs,
   ] = await Promise.all([
-    Promise.all((options.themes || []).map(normalizeGetter)),
+    Promise.all((options.themes || []).map(normalizeGetter)).then(r => r.map(normalizeTheme)),
     resolveLangs(options.langs || []),
     typeof options.loadWasm === 'function'
       ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
@@ -53,14 +54,14 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     return _lang
   }
 
-  function getTheme(name: string | ThemeRegistration) {
-    const _theme = _registry.getTheme(name!)
+  function getTheme(name: string | ThemeRegistrationResolved) {
+    const _theme = _registry.getTheme(name)
     if (!_theme)
       throw new Error(`[shikiji] Theme \`${name}\` not found, you may need to load it first`)
     return _theme
   }
 
-  function setTheme(name: string | ThemeRegistration) {
+  function setTheme(name: string | ThemeRegistrationResolved) {
     const theme = getTheme(name)
     _registry.setTheme(theme)
     const colorMap = _registry.getColorMap()

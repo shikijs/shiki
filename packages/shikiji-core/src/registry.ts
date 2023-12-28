@@ -1,13 +1,11 @@
 import type { IGrammar, IGrammarConfiguration } from './textmate'
 import { Registry as TextMateRegistry } from './textmate'
-import type { LanguageRegistration, ThemeRegistration, ThemeRegistrationRaw } from './types'
+import type { LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import type { Resolver } from './resolver'
-import { toShikiTheme } from './normalize'
+import { normalizeTheme } from './normalize'
 
 export class Registry extends TextMateRegistry {
-  public themesPath: string = 'themes/'
-
-  private _resolvedThemes: Record<string, ThemeRegistration> = {}
+  private _resolvedThemes: Record<string, ThemeRegistrationResolved> = {}
   private _resolvedGrammars: Record<string, IGrammar> = {}
   private _langMap: Record<string, LanguageRegistration> = {}
   private _langGraph: Map<string, LanguageRegistration> = new Map()
@@ -16,7 +14,7 @@ export class Registry extends TextMateRegistry {
 
   constructor(
     private _resolver: Resolver,
-    public _themes: (ThemeRegistration | ThemeRegistrationRaw)[],
+    public _themes: ThemeRegistrationResolved[],
     public _langs: LanguageRegistration[],
   ) {
     super(_resolver)
@@ -25,15 +23,15 @@ export class Registry extends TextMateRegistry {
     _langs.forEach(l => this.loadLanguage(l))
   }
 
-  public getTheme(theme: ThemeRegistration | string) {
+  public getTheme(theme: ThemeRegistrationAny | string) {
     if (typeof theme === 'string')
       return this._resolvedThemes[theme]
     else
       return this.loadTheme(theme)
   }
 
-  public loadTheme(theme: ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration {
-    const _theme = toShikiTheme(theme)
+  public loadTheme(theme: ThemeRegistrationAny): ThemeRegistrationResolved {
+    const _theme = normalizeTheme(theme)
     if (_theme.name)
       this._resolvedThemes[_theme.name] = _theme
     return _theme

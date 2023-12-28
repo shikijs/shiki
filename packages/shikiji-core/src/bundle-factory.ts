@@ -1,4 +1,4 @@
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, ThemeInput, ThemeRegistration, ThemeRegistrationRaw } from './types'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, ThemeInput, ThemeRegistrationAny } from './types'
 import { isSpecialLang, toArray } from './utils'
 import { getHighlighterCore } from './highlighter'
 
@@ -69,7 +69,7 @@ export function createSingletonShorthands<L extends string, T extends string >(g
   let _shiki: ReturnType<typeof getHighlighter>
 
   async function _getHighlighter(options: {
-    theme?: MaybeArray<T | ThemeRegistration | ThemeRegistrationRaw>
+    theme?: MaybeArray<T | ThemeRegistrationAny>
     lang?: MaybeArray<L | SpecialLanguage>
   } = {}) {
     if (!_shiki) {

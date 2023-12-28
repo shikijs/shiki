@@ -1,9 +1,9 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-import type { IGrammar, IRawTheme } from './textmate'
+import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
-import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemedToken, ThemedTokenScopeExplanation } from './types'
+import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationRaw, ThemedToken, ThemedTokenScopeExplanation } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
 import { isPlaintext } from './utils'
 import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
@@ -42,7 +42,7 @@ export function codeToThemedTokens(
 export function tokenizeWithTheme(
   fileContents: string,
   grammar: IGrammar,
-  theme: IRawTheme,
+  theme: ThemeRegistrationRaw,
   colorMap: string[],
   options: { includeExplanation?: boolean },
 ): ThemedToken[][] {
@@ -120,7 +120,10 @@ export function tokenizeWithTheme(
   return final
 }
 
-function explainThemeScopes(theme: IRawTheme, scopes: string[]): ThemedTokenScopeExplanation[] {
+function explainThemeScopes(
+  theme: ThemeRegistrationRaw,
+  scopes: string[],
+): ThemedTokenScopeExplanation[] {
   const result: ThemedTokenScopeExplanation[] = []
   for (let i = 0, len = scopes.length; i < len; i++) {
     const parentScopes = scopes.slice(0, i)
@@ -164,7 +167,11 @@ function matches(
   return false
 }
 
-function explainThemeScope(theme: IRawTheme, scope: string, parentScopes: string[]): any[] {
+function explainThemeScope(
+  theme: ThemeRegistrationRaw,
+  scope: string,
+  parentScopes: string[],
+): any[] {
   const result: any[] = []
   let resultLen = 0
   for (let i = 0, len = theme.settings.length; i < len; i++) {

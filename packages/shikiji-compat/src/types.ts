@@ -8,8 +8,8 @@ import type {
   LanguageRegistration,
   RawGrammar,
   StringLiteralUnion,
-  ThemeRegistration,
-  ThemeRegistrationRaw,
+  ThemeRegistrationAny,
+  ThemeRegistrationResolved,
   ThemedToken,
 } from 'shikiji'
 
@@ -33,9 +33,9 @@ export interface HighlighterOptions extends BundledHighlighterOptions<BuiltinLan
   theme?: BuiltinTheme
 }
 
-export type IThemeRegistration = ThemeRegistrationRaw | ThemeRegistration | StringLiteralUnion<BuiltinTheme>
+export type IThemeRegistration = ThemeRegistrationAny | StringLiteralUnion<BuiltinTheme>
 
-export interface IShikiTheme extends ThemeRegistration {}
+export interface IShikiTheme extends ThemeRegistrationResolved {}
 export interface IThemedToken extends ThemedToken {}
 export interface IRawGrammar extends RawGrammar {}
 

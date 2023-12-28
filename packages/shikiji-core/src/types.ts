@@ -33,7 +33,7 @@ export type MaybeModule<T> = T | { default: T }
 export type MaybeArray<T> = T | T[]
 export type RequireKeys<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>
 
-export type ThemeInput = MaybeGetter<ThemeRegistration | ThemeRegistrationRaw>
+export type ThemeInput = MaybeGetter<ThemeRegistrationAny>
 export type LanguageInput = MaybeGetter<MaybeArray<LanguageRegistration>>
 
 interface Nothing {}
@@ -48,12 +48,12 @@ export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 export type ResolveBundleKey<T extends string> = [T] extends [never] ? string : T
 
 export interface ShikiInternal {
-  setTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): {
-    theme: ThemeRegistration
+  setTheme(name: string | ThemeRegistrationAny): {
+    theme: ThemeRegistrationResolved
     colorMap: string[]
   }
 
-  getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
+  getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved
   getLangGrammar(name: string): Grammar
 
   getLoadedThemes(): string[]
@@ -113,7 +113,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   /**
    * Get the registered theme object
    */
-  getTheme(name: string | ThemeRegistration | ThemeRegistrationRaw): ThemeRegistration
+  getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved
   /**
    * Get the registered language object
    */
@@ -217,7 +217,7 @@ export interface LanguageRegistration extends RawGrammar {
 
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
   lang?: Languages | SpecialLanguage
-  theme?: Themes | ThemeRegistration | ThemeRegistrationRaw
+  theme?: Themes | ThemeRegistrationAny
   /**
    * Include explanation of why a token is given a color.
    *
@@ -256,11 +256,11 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
    * }
    * ```
    */
-  themes: Partial<Record<string, Themes | ThemeRegistration | ThemeRegistrationRaw>>
+  themes: Partial<Record<string, Themes | ThemeRegistrationAny>>
 }
 
 export interface CodeOptionsSingleTheme<Themes extends string = string> {
-  theme: ThemeRegistration | ThemeRegistrationRaw | StringLiteralUnion<Themes>
+  theme: ThemeRegistrationAny | StringLiteralUnion<Themes>
 }
 
 export interface CodeOptionsMultipleThemes<Themes extends string = string> {
@@ -286,7 +286,7 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    *
    * @see https://github.com/antfu/shikiji#lightdark-dual-themes
    */
-  themes: Partial<Record<string, ThemeRegistration | ThemeRegistrationRaw | StringLiteralUnion<Themes>>>
+  themes: Partial<Record<string, ThemeRegistrationAny | StringLiteralUnion<Themes>>>
 
   /**
    * The default theme applied to the code (via inline `color` style).
@@ -360,7 +360,9 @@ export type CodeToHastOptions<Languages extends string = string, Themes extends 
 
 export interface ThemeRegistrationRaw extends RawTheme, Partial<Omit<ThemeRegistration, 'name' | 'settings'>> {}
 
-export interface ThemeRegistration extends RawTheme {
+export interface ThemeRegistration extends Partial<ThemeRegistrationResolved> {}
+
+export interface ThemeRegistrationResolved extends RawTheme {
   /**
    * Theme name
    */
@@ -392,30 +394,32 @@ export interface ThemeRegistration extends RawTheme {
   bg: string
 
   /**
-   * Relative path of included theme
-   */
-  include?: string
-
-  /**
-   * Color map of the theme file
-   */
-  colors?: Record<string, string>
-
-  /**
    * Same as `settings`
    */
   tokenColors?: IRawThemeSetting[]
 
   /**
-   * Enable semantic highlighting (ignored in Shikiji)
+   * Color map of the theme file (not used by shikiji)
+   */
+  colors?: Record<string, string>
+
+  /**
+   * JSON schema path (not used by shikiji)
+   */
+  $schema?: string
+
+  /**
+   * Enable semantic highlighting (not used by shikiji)
    */
   semanticHighlighting?: boolean
 
   /**
-   * Tokens for semantic highlighting (ignored in Shikiji)
+   * Tokens for semantic highlighting (not used by shikiji)
    */
   semanticTokenColors?: Record<string, string>
 }
+
+export type ThemeRegistrationAny = ThemeRegistrationRaw | ThemeRegistration | ThemeRegistrationResolved
 
 export interface ShikijiTransformerContextMeta {}
 

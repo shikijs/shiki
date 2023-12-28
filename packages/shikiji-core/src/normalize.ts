@@ -1,4 +1,4 @@
-import type { ThemeRegistration, ThemeRegistrationRaw } from './types'
+import type { ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 
 /**
  * https://github.com/microsoft/vscode/blob/f7f05dee53fb33fe023db2e06e30a89d3094488f/src/vs/platform/theme/common/colorRegistry.ts#L258-L268
@@ -9,9 +9,9 @@ const VSCODE_FALLBACK_EDITOR_BG = { light: '#fffffe', dark: '#1e1e1e' }
 /**
  * Normalize a textmate theme to shiki theme
  */
-export function toShikiTheme(rawTheme: ThemeRegistrationRaw | ThemeRegistration): ThemeRegistration {
+export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistrationResolved {
   if (['settings', 'type', 'bg', 'fg'].every(key => key in rawTheme))
-    return rawTheme as ThemeRegistration
+    return rawTheme as ThemeRegistrationResolved
 
   const type = (<any>rawTheme).type || 'dark'
 
@@ -19,7 +19,7 @@ export function toShikiTheme(rawTheme: ThemeRegistrationRaw | ThemeRegistration)
     name: rawTheme.name!,
     type,
     ...rawTheme,
-  } as ThemeRegistration
+  } as ThemeRegistrationResolved
 
   if (shikiTheme.tokenColors && !shikiTheme.settings) {
     shikiTheme.settings = shikiTheme.tokenColors
@@ -31,7 +31,7 @@ export function toShikiTheme(rawTheme: ThemeRegistrationRaw | ThemeRegistration)
   return shikiTheme
 }
 
-export function repairTheme(theme: ThemeRegistration) {
+function repairTheme(theme: ThemeRegistrationResolved) {
   const type = theme.type || 'dark'
 
   // Has the default no-scope setting with fallback colors
@@ -90,3 +90,8 @@ export function repairTheme(theme: ThemeRegistration) {
     })
   }
 }
+
+/**
+ * @deprecated Use `normalizeTheme` instead.
+ */
+export const toShikiTheme = normalizeTheme

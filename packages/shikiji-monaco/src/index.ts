@@ -1,5 +1,5 @@
 import type * as monaco from 'monaco-editor-core'
-import type { HighlighterGeneric, ShikiInternal, ThemeRegistration } from 'shikiji-core'
+import type { HighlighterGeneric, ShikiInternal, ThemeRegistrationResolved } from 'shikiji-core'
 import type { StateStack } from 'shikiji-core/textmate'
 import { INITIAL, StackElementMetadata } from 'shikiji-core/textmate'
 
@@ -21,51 +21,29 @@ export interface HighlighterInterface {
 
 export interface MonacoTheme extends monaco.editor.IStandaloneThemeData { }
 
-export function textmateThemeToMonacoTheme(theme: ThemeRegistration): MonacoTheme {
+export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): MonacoTheme {
   let rules = 'rules' in theme
     ? theme.rules as MonacoTheme['rules']
     : undefined
 
   if (!rules) {
     rules = []
-    if ('settings' in theme) {
-      for (const { scope, settings } of theme.settings) {
-        const scopes = Array.isArray(scope) ? scope : [scope]
-        for (const s of scopes) {
-          if (settings.foreground && s) {
-            rules.push({
-              token: s,
-              foreground: settings.foreground.replace('#', ''),
-            })
-          }
+    const themeSettings = theme.settings || theme.tokenColors
+    for (const { scope, settings } of themeSettings) {
+      const scopes = Array.isArray(scope) ? scope : [scope]
+      for (const s of scopes) {
+        if (settings.foreground && s) {
+          rules.push({
+            token: s,
+            foreground: settings.foreground.replace('#', ''),
+          })
         }
       }
-    }
-    else if ('tokenColors' in theme) {
-      for (const { scope, settings } of (theme as any).tokenColors as any) {
-        const scopes = Array.isArray(scope) ? scope : [scope]
-        for (const s of scopes) {
-          if (settings.foreground && s) {
-            rules.push({
-              token: s,
-              foreground: settings.foreground?.replace('#', ''),
-            })
-          }
-        }
-      }
-    }
-    else {
-      throw new Error('[shikiji-monaco] Failed to convert theme to Monaco theme, neither of `rules`, `settings` or `tokenColors` is presented in the theme.')
     }
   }
 
-  const maybeIsLight = 'type' in theme
-    ? theme.type === 'light'
-    : (theme as ThemeRegistration).name?.match(/light/i)
-
   return {
-    // Not sure if this would even matter as we set inherit to false
-    base: maybeIsLight ? 'vs' : 'vs-dark',
+    base: theme.type === 'light' ? 'vs' : 'vs-dark',
     inherit: false,
     colors: theme.colors || {},
     rules,
