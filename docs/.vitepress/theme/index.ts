@@ -3,8 +3,6 @@ import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import 'uno.css'
 import 'shikiji-twoslash/style-rich.css'
-
-// eslint-disable-next-line antfu/no-import-dist
 import 'floating-vue/dist/style.css'
 import './style.css'
 import './custom.css'

@@ -23,7 +23,11 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: ['**/vendor/**', '**/node_modules/**'],
+    exclude: [
+      '**/vendor/**',
+      '**/node_modules/**',
+      '**/shikiji-cli/**',
+    ],
     server: {
       deps: {
         inline: [
