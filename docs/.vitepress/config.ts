@@ -29,6 +29,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Markdown It', link: '/packages/markdown-it' },
   { text: 'Rehype', link: '/packages/rehype' },
   { text: 'Monaco Editor', link: '/packages/monaco' },
+  { text: 'CLI', link: '/packages/cli' },
 ]
 
 const VERSIONS: DefaultTheme.NavItemWithLink[] = [
