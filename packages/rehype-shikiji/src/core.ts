@@ -1,0 +1,131 @@
+import { addClassToHast } from 'shikiji/core'
+import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, TransformerOptions } from 'shikiji/core'
+import type { Element, Root } from 'hast'
+import type { BuiltinTheme } from 'shikiji'
+import type { Plugin } from 'unified'
+import { toString } from 'hast-util-to-string'
+import { visit } from 'unist-util-visit'
+import { parseHighlightLines } from '../../shared/line-highlight'
+
+export interface RehypeShikijiExtraOptions {
+  /**
+   * Add `highlighted` class to lines defined in after codeblock
+   *
+   * @default true
+   */
+  highlightLines?: boolean | string
+
+  /**
+   * Add `language-*` class to code element
+   *
+   * @default false
+   */
+  addLanguageClass?: boolean
+
+  /**
+   * Custom meta string parser
+   * Return an object to merge with `meta`
+   */
+  parseMetaString?: (
+    metaString: string,
+    node: Element,
+    tree: Root
+  ) => Record<string, any> | undefined | null
+}
+
+export type RehypeShikijiCoreOptions =
+  & CodeOptionsThemes<BuiltinTheme>
+  & TransformerOptions
+  & CodeOptionsMeta
+  & RehypeShikijiExtraOptions
+
+const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeShikijiCoreOptions], Root> = function (
+  highlighter,
+  options,
+) {
+  const {
+    highlightLines = true,
+    addLanguageClass = false,
+    parseMetaString,
+    ...rest
+  } = options
+
+  const prefix = 'language-'
+
+  return function (tree) {
+    visit(tree, 'element', (node, index, parent) => {
+      if (!parent || index == null || node.tagName !== 'pre')
+        return
+
+      const head = node.children[0]
+
+      if (
+        !head
+        || head.type !== 'element'
+        || head.tagName !== 'code'
+        || !head.properties
+      )
+        return
+
+      const classes = head.properties.className
+
+      if (!Array.isArray(classes))
+        return
+
+      const language = classes.find(
+        d => typeof d === 'string' && d.startsWith(prefix),
+      )
+
+      if (typeof language !== 'string')
+        return
+
+      const code = toString(head as any)
+      const attrs = (head.data as any)?.meta
+      const meta = parseMetaString?.(attrs, node, tree) || {}
+
+      const codeOptions: CodeToHastOptions = {
+        ...rest,
+        lang: language.slice(prefix.length),
+        meta: {
+          ...rest.meta,
+          ...meta,
+          __raw: attrs,
+        },
+      }
+
+      if (addLanguageClass) {
+        codeOptions.transformers ||= []
+        codeOptions.transformers.push({
+          name: 'rehype-shikiji:code-language-class',
+          code(node) {
+            addClassToHast(node, language)
+            return node
+          },
+        })
+      }
+
+      if (highlightLines && typeof attrs === 'string') {
+        const lines = parseHighlightLines(attrs)
+        if (lines) {
+          const className = highlightLines === true
+            ? 'highlighted'
+            : highlightLines
+
+          codeOptions.transformers ||= []
+          codeOptions.transformers.push({
+            name: 'rehype-shikiji:line-class',
+            line(node, line) {
+              if (lines.includes(line))
+                addClassToHast(node, className)
+              return node
+            },
+          })
+        }
+      }
+      const fragment = highlighter.codeToHast(code, codeOptions)
+      parent.children.splice(index, 1, ...fragment.children)
+    })
+  }
+}
+
+export default rehypeShikijiFromHighlighter
