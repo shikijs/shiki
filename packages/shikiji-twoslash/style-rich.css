@@ -29,14 +29,14 @@
   border-color: var(--twoslash-underline-color);
 }
 
-.twoslash-hover {
+.twoslash .twoslash-hover {
   border-bottom: 1px dotted transparent;
   transition-timing-function: ease;
   transition: border-color 0.3s;
   position: relative;
 }
 
-.twoslash-popup-info {
+.twoslash .twoslash-popup-info {
   position: absolute;
   opacity: 0;
   display: inline-block;
@@ -53,22 +53,22 @@
   box-shadow: var(--twoslash-popup-shadow);
 }
 
-.twoslash-query-presisted .twoslash-popup-info {
+.twoslash .twoslash-query-presisted .twoslash-popup-info {
   z-index: 9;
   transform: translateY(1.5em);
 }
 
-.twoslash-hover:hover .twoslash-popup-info,
-.twoslash-query-presisted .twoslash-popup-info {
+.twoslash .twoslash-hover:hover .twoslash-popup-info,
+.twoslash .twoslash-query-presisted .twoslash-popup-info {
   opacity: 1;
   pointer-events: auto;
 }
 
-.twoslash-popup-info:hover {
+.twoslash .twoslash-popup-info:hover {
   user-select: auto;
 }
 
-.twoslash-popup-arrow {
+.twoslash .twoslash-popup-arrow {
   position: absolute;
   top: -4px;
   left: 1em;
@@ -82,7 +82,7 @@
 }
 
 /* ===== Error Line ===== */
-.twoslash-error-line {
+.twoslash .twoslash-error-line {
   position: relative;
   background-color: var(--twoslash-error-bg);
   border-left: 3px solid var(--twoslash-error-color);
@@ -91,18 +91,18 @@
   margin: 0.2em 0;
 }
 
-.twoslash-error {
+.twoslash .twoslash-error {
   background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%206%203'%20enable-background%3D'new%200%200%206%203'%20height%3D'3'%20width%3D'6'%3E%3Cg%20fill%3D'%23c94824'%3E%3Cpolygon%20points%3D'5.5%2C0%202.5%2C3%201.1%2C3%204.1%2C0'%2F%3E%3Cpolygon%20points%3D'4%2C0%206%2C2%206%2C0.6%205.4%2C0'%2F%3E%3Cpolygon%20points%3D'0%2C2%201%2C3%202.4%2C3%200%2C0.6'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")
     repeat-x bottom left;
   padding-bottom: 2px;
 }
 
 /* ===== Completeions ===== */
-.twoslash-completions-list {
+.twoslash .twoslash-completions-list {
   position: relative;
 }
 
-.twoslash-completions-list ul {
+.twoslash .twoslash-completions-list ul {
   user-select: none;
   position: absolute;
   top: 0;
@@ -121,10 +121,10 @@
   gap: 4px;
   box-shadow: var(--twoslash-popup-shadow);
 }
-.twoslash-completions-list ul:hover {
+.twoslash .twoslash-completions-list ul:hover {
   user-select: auto;
 }
-.twoslash-completions-list ul::before {
+.twoslash .twoslash-completions-list ul::before {
   background-color: var(--twoslash-cursor-color);
   width: 2px;
   position: absolute;
@@ -133,25 +133,25 @@
   left: -1px;
   content: ' ';
 }
-.twoslash-completions-list ul li {
+.twoslash .twoslash-completions-list ul li {
   overflow: hidden;
   display: flex;
   align-items: center;
   gap: 0.25em;
   line-height: 1em;
 }
-.twoslash-completions-list ul li span.twoslash-completions-unmatched {
+.twoslash .twoslash-completions-list ul li span.twoslash-completions-unmatched {
   color: var(--twoslash-unmatched-color);
 }
-.twoslash-completions-list ul .deprecated {
+.twoslash .twoslash-completions-list ul .deprecated {
   text-decoration: line-through;
   opacity: 0.5;
 }
-.twoslash-completions-list ul li span.twoslash-completions-matched {
+.twoslash .twoslash-completions-list ul li span.twoslash-completions-matched {
   color: var(--twoslash-matched-color);
 }
 /* Icons */
-.twoslash-completions-list .twoslash-completions-icon {
+.twoslash .twoslash-completions-list .twoslash-completions-icon {
   color: var(--twoslash-unmatched-color);
   width: 1em;
   flex: none;
