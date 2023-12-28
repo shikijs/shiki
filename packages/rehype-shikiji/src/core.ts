@@ -31,6 +31,12 @@ export interface RehypeShikijiExtraOptions {
     node: Element,
     tree: Root
   ) => Record<string, any> | undefined | null
+
+  /**
+   * Chance to handle the error
+   * If not provided, the error will be thrown
+   */
+  onError?: (error: unknown) => void
 }
 
 export type RehypeShikijiCoreOptions =
@@ -122,8 +128,17 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
           })
         }
       }
-      const fragment = highlighter.codeToHast(code, codeOptions)
-      parent.children.splice(index, 1, ...fragment.children)
+
+      try {
+        const fragment = highlighter.codeToHast(code, codeOptions)
+        parent.children.splice(index, 1, ...fragment.children)
+      }
+      catch (error) {
+        if (options.onError)
+          options.onError(error)
+        else
+          throw error
+      }
     })
   }
 }
