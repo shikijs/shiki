@@ -359,6 +359,12 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  packages/skat:
+    dependencies:
+      shikiji-cli:
+        specifier: workspace:*
+        version: link:../shikiji-cli
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
