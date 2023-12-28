@@ -1,0 +1,56 @@
+{
+  "name": "shikiji-cli",
+  "type": "module",
+  "version": "0.9.12",
+  "description": "Shikiji in the command line",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikiji#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikiji.git",
+    "directory": "packages/shikiji-cli"
+  },
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki",
+    "shikiji",
+    "cli"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.mts",
+      "default": "./dist/cli.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "shikiji": "bin.mjs",
+    "shikiji-cli": "bin.mjs",
+    "skat": "bin.mjs"
+  },
+  "files": [
+    "bin.mjs",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "minimist": "^1.2.8",
+    "shikiji": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.5"
+  }
+}
