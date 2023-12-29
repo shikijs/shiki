@@ -5,6 +5,13 @@ import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
 
 export interface RendererRichOptions {
   /**
+   * Render JSDoc comments in hover popup.
+   *
+   * @default true
+   */
+  jsdoc?: boolean
+
+  /**
    * Custom icons for completion items.
    * A map from completion item kind to a HAST node.
    *
@@ -44,6 +51,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
     customTagIcons = defaultCustomTagIcons,
     formatInfo = info => info,
     classExtra = '',
+    jsdoc = true,
   } = options
   return {
     nodeStaticInfo(info, node) {
@@ -52,6 +60,20 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
         transformers: [],
         transforms: undefined,
       }).children[0] as Element).children[0] as Element).children
+
+      if (jsdoc && info.docs) {
+        themedContent.push({
+          type: 'element',
+          tagName: 'div',
+          properties: { class: 'twoslash-popup-jsdoc' },
+          children: [
+            {
+              type: 'text',
+              value: info.docs,
+            },
+          ],
+        })
+      }
 
       return {
         type: 'element',

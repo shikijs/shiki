@@ -46,6 +46,7 @@ it('rich', async () => {
   const code = `
 // @errors: 2540
 interface Todo {
+  /** The title of the todo item */
   title: string;
 }
 
@@ -56,7 +57,7 @@ const todo: Readonly<Todo> = {
 
 todo.title = "Hello";
 
-Number.parseInt("123", 10);
+Number.parseInt(todo.title, 10);
 //      ^|
 `.trim()
 
