@@ -1,8 +1,17 @@
 import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
-import type { ThemeRegistrationResolved, ThemedToken } from './types'
+import type { ThemeRegistrationResolved, ThemedToken, TokenizeWithThemeOptions } from './types'
 import { FontStyle } from './types'
+import { applyColorReplacements } from './tokenizer'
 
-export function tokenizeAnsiWithTheme(theme: ThemeRegistrationResolved, fileContents: string): ThemedToken[][] {
+export function tokenizeAnsiWithTheme(
+  theme: ThemeRegistrationResolved,
+  fileContents: string,
+  options?: TokenizeWithThemeOptions,
+): ThemedToken[][] {
+  const colorReplacements = {
+    ...theme.colorReplacements,
+    ...options?.colorReplacements,
+  }
   const lines = fileContents.split(/\r?\n/)
 
   const colorPalette = createColorPalette(
@@ -21,9 +30,10 @@ export function tokenizeAnsiWithTheme(theme: ThemeRegistrationResolved, fileCont
       let color: string
       if (token.decorations.has('reverse'))
         color = token.background ? colorPalette.value(token.background) : theme.bg
-
       else
         color = token.foreground ? colorPalette.value(token.foreground) : theme.fg
+
+      color = applyColorReplacements(color, colorReplacements)
 
       if (token.decorations.has('dim'))
         color = dimColor(color)
@@ -72,7 +82,7 @@ function dimColor(color: string) {
     }
   }
 
-  const cssVarMatch = color.match(/var\((--shiki-color-ansi-[\w-]+)\)/)
+  const cssVarMatch = color.match(/var\((--[\w-]+-ansi-[\w-]+)\)/)
   if (cssVarMatch)
     return `var(${cssVarMatch[1]}-dim)`
 

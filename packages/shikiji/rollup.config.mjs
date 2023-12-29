@@ -19,6 +19,7 @@ const entries = [
   'src/wasm.ts',
   'src/bundle-full.ts',
   'src/bundle-web.ts',
+  'src/theme-css-variables.ts',
 ]
 
 const external = [

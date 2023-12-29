@@ -215,18 +215,15 @@ export interface LanguageRegistration extends RawGrammar {
   injectTo?: string[]
 }
 
-export interface CodeToThemedTokensOptions<Languages = string, Themes = string> {
+export interface CodeToThemedTokensOptions<Languages = string, Themes = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage
   theme?: Themes | ThemeRegistrationAny
-  /**
-   * Include explanation of why a token is given a color.
-   *
-   * @default true
-   */
-  includeExplanation?: boolean
 }
 
-export interface CodeToHastOptionsCommon<Languages extends string = string> extends TransformerOptions {
+export interface CodeToHastOptionsCommon<Languages extends string = string> extends
+  TransformerOptions,
+  Pick<TokenizeWithThemeOptions, 'colorReplacements'> {
+
   lang: StringLiteralUnion<Languages | SpecialLanguage>
 
   /**
@@ -370,11 +367,15 @@ export interface ThemeRegistrationResolved extends RawTheme {
 
   /**
    * Display name
+   *
+   * @field shikiji custom property
    */
   displayName?: string
 
   /**
    * Light/dark theme
+   *
+   * @field shikiji custom property
    */
   type: 'light' | 'dark'
 
@@ -384,37 +385,58 @@ export interface ThemeRegistrationResolved extends RawTheme {
   settings: IRawThemeSetting[]
 
   /**
+   * Same as `settings`, will use as fallback if `settings` is not present.
+   */
+  tokenColors?: IRawThemeSetting[]
+
+  /**
    * Default foreground color
+   *
+   * @field shikiji custom property
    */
   fg: string
 
   /**
    * Background color
+   *
+   * @field shikiji custom property
    */
   bg: string
 
   /**
-   * Same as `settings`
+   * A map of color names to new color values.
+   *
+   * The color key starts with '#' and should be lowercased.
+   *
+   * @field shikiji custom property
    */
-  tokenColors?: IRawThemeSetting[]
+  colorReplacements?: Record<string, string>
 
   /**
-   * Color map of the theme file (not used by shikiji)
+   * Color map of VS Code options
+   *
+   * Will be used by shikiji on `lang: 'ansi'` to find ANSI colors, and to find the default foreground/background colors.
    */
   colors?: Record<string, string>
 
   /**
-   * JSON schema path (not used by shikiji)
+   * JSON schema path
+   *
+   * @field not used by shikiji
    */
   $schema?: string
 
   /**
-   * Enable semantic highlighting (not used by shikiji)
+   * Enable semantic highlighting
+   *
+   * @field not used by shikiji
    */
   semanticHighlighting?: boolean
 
   /**
-   * Tokens for semantic highlighting (not used by shikiji)
+   * Tokens for semantic highlighting
+   *
+   * @field not used by shikiji
    */
   semanticTokenColors?: Record<string, string>
 }
@@ -612,6 +634,24 @@ export interface BundledThemeInfo {
   displayName: string
   type: 'light' | 'dark'
   import: DynamicImportThemeRegistration
+}
+
+export interface TokenizeWithThemeOptions {
+  /**
+   * Include explanation of why a token is given a color.
+   *
+   * @default false
+   */
+  includeExplanation?: boolean
+
+  /**
+   * A map of color names to new color values.
+   *
+   * The color key starts with '#' and should be lowercased.
+   *
+   * This will be merged with theme's `colorReplacements` if any.
+   */
+  colorReplacements?: Record<string, string>
 }
 
 export {}

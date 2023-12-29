@@ -37,6 +37,10 @@
       "types": "./dist/themes.d.mts",
       "default": "./dist/themes.mjs"
     },
+    "./theme-css-variables": {
+      "types": "./dist/theme-css-variables.d.mts",
+      "default": "./dist/theme-css-variables.mjs"
+    },
     "./bundle/full": {
       "types": "./dist/bundle-full.d.mts",
       "default": "./dist/bundle-full.mjs"
@@ -70,6 +74,9 @@
       ],
       "bundle/web": [
         "./dist/bundle-web.d.mts"
+      ],
+      "theme-css-variables": [
+        "./dist/theme-css-variables.d.mts"
       ],
       "*": [
         "./dist/*",

@@ -3,14 +3,10 @@
  *-------------------------------------------------------- */
 import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
-import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationRaw, ThemedToken, ThemedTokenScopeExplanation } from './types'
+import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
 import { isPlaintext } from './utils'
 import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
-
-export interface TokenizeWithThemeOptions {
-  includeExplanation?: boolean
-}
 
 export function codeToThemedTokens(
   internal: ShikiInternal,
@@ -20,7 +16,6 @@ export function codeToThemedTokens(
   const {
     lang = 'text',
     theme: themeName = internal.getLoadedThemes()[0],
-    includeExplanation = true,
   } = options
 
   if (isPlaintext(lang)) {
@@ -31,22 +26,25 @@ export function codeToThemedTokens(
   const { theme, colorMap } = internal.setTheme(themeName)
 
   if (lang === 'ansi')
-    return tokenizeAnsiWithTheme(theme, code)
+    return tokenizeAnsiWithTheme(theme, code, options)
 
   const _grammar = internal.getLangGrammar(lang)
-  return tokenizeWithTheme(code, _grammar, theme, colorMap, {
-    includeExplanation,
-  })
+  return tokenizeWithTheme(code, _grammar, theme, colorMap, options)
 }
 
 export function tokenizeWithTheme(
-  fileContents: string,
+  code: string,
   grammar: IGrammar,
-  theme: ThemeRegistrationRaw,
+  theme: ThemeRegistrationResolved,
   colorMap: string[],
-  options: { includeExplanation?: boolean },
+  options: TokenizeWithThemeOptions,
 ): ThemedToken[][] {
-  const lines = fileContents.split(/\r\n|\r|\n/)
+  const colorReplacements = {
+    ...theme.colorReplacements,
+    ...options?.colorReplacements,
+  }
+
+  const lines = code.split(/\r\n|\r|\n/)
 
   let ruleStack = INITIAL
   let actual: ThemedToken[] = []
@@ -81,7 +79,7 @@ export function tokenizeWithTheme(
 
       const metadata = result.tokens[2 * j + 1]
       const foreground = StackElementMetadata.getForeground(metadata)
-      const foregroundColor = colorMap[foreground]
+      const foregroundColor = applyColorReplacements(colorMap[foreground], colorReplacements)
       const fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
       const token: ThemedToken = {
@@ -121,7 +119,7 @@ export function tokenizeWithTheme(
 }
 
 function explainThemeScopes(
-  theme: ThemeRegistrationRaw,
+  theme: ThemeRegistrationResolved,
   scopes: string[],
 ): ThemedTokenScopeExplanation[] {
   const result: ThemedTokenScopeExplanation[] = []
@@ -168,7 +166,7 @@ function matches(
 }
 
 function explainThemeScope(
-  theme: ThemeRegistrationRaw,
+  theme: ThemeRegistrationResolved,
   scope: string,
   parentScopes: string[],
 ): any[] {
@@ -200,4 +198,8 @@ function explainThemeScope(
     }
   }
   return result
+}
+
+export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
+  return replacements?.[color.toLowerCase()] || color
 }

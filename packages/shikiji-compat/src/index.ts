@@ -33,16 +33,22 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
 
   const defaultTheme = shikiji.getLoadedThemes()[0]
 
-  function codeToThemedTokens(code: string, options: CodeToThemedTokensOptions<BuiltinLanguage, BuiltinTheme>): ThemedToken[][]
-  function codeToThemedTokens(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme): ThemedToken[][]
-  function codeToThemedTokens(code: string, lang: BuiltinLanguage | CodeToThemedTokensOptions<BuiltinLanguage, BuiltinTheme>, theme?: BuiltinTheme): ThemedToken[][] {
-    if (typeof lang === 'string') {
-      return shikiji.codeToThemedTokens(code, {
-        lang,
-        theme: (theme || defaultTheme) as BuiltinTheme,
+  function codeToThemedTokens(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme, options?: CodeToThemedTokensOptions<BuiltinLanguage, BuiltinTheme>): ThemedToken[][] {
+    const tokens = shikiji.codeToThemedTokens(code, {
+      includeExplanation: true,
+      lang,
+      theme: (theme || defaultTheme) as BuiltinTheme,
+      ...options,
+    })
+
+    tokens.forEach((line) => {
+      line.forEach((token) => {
+        // Shiki always provides `explanation` array, even it's disabled
+        token.explanation ||= []
       })
-    }
-    return shikiji.codeToThemedTokens(code, lang)
+    })
+
+    return tokens
   }
 
   function codeToHtml(code: string, options: CodeToHtmlOptions): string

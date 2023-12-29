@@ -19,6 +19,9 @@ it('run', async () => {
   expect(sj.codeToThemedTokens('const a = 1', 'javascript'))
     .toEqual(s.codeToThemedTokens('const a = 1', 'javascript'))
 
+  expect(sj.codeToThemedTokens('const a = 1', 'javascript', 'nord', { includeExplanation: false }))
+    .toEqual(s.codeToThemedTokens('const a = 1', 'javascript', 'nord', { includeExplanation: false }))
+
   s.codeToHtml('const a = 1', 'javascript')
   sj.codeToHtml('const a = 1', 'javascript')
   s.codeToHtml('const a = 1', 'javascript', 'nord')
