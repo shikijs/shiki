@@ -47,7 +47,7 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
       <span v-html="play.output" />
       <textarea
         v-model="play.input"
-        font-mono bg-transparent absolute inset-0 z-100 py-20px px-24px
+        font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
       />

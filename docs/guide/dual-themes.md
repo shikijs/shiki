@@ -19,7 +19,7 @@ const shiki = await getHighlighter({
 const code = shiki.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
-    light: 'vitesse-light',
+    light: 'min-light',
     dark: 'nord',
   }
 })
