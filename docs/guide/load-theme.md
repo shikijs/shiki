@@ -4,7 +4,7 @@ Check [All Builtin Themes](/themes) as well.
 
 You can load custom themes by passing a `Theme` object into the themes array.
 
-```ts
+```ts twoslash
 import { getHighlighter } from 'shikiji'
 
 const myTheme = {
@@ -24,6 +24,7 @@ const highlighter = await getHighlighter({
   themes: [myTheme]
 })
 
+const code = `console.log('hello')`
 const html = highlighter.codeToHtml(code, {
   lang: 'javascript',
   theme: 'my-theme'
@@ -32,7 +33,8 @@ const html = highlighter.codeToHtml(code, {
 
 You can also load themes after the highlighter has been created.
 
-```ts
+```ts twoslash
+// @noErrors
 import { getHighlighter } from 'shikiji'
 
 // Load the theme object from a file, a network request, or anywhere
@@ -42,6 +44,7 @@ const highlighter = await getHighlighter()
 
 await highlighter.loadTheme(myTheme) // <--
 
+const code = `console.log('hello')`
 const html = highlighter.codeToHtml(code, {
   lang: 'javascript',
   theme: 'my-theme'

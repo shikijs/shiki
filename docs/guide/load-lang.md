@@ -4,7 +4,8 @@ Check [All Builtin Languages](/languages) as well.
 
 You can load custom languages by passing a TextMate grammar object into the langs array.
 
-```ts
+```ts twoslash
+// @noErrors
 import { getHighlighter } from 'shikiji'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
@@ -20,7 +21,8 @@ const html = highlighter.codeToHtml(code, {
 
 You can also load languages after the highlighter has been created.
 
-```ts
+```ts twoslash
+// @noErrors
 import { getHighlighter } from 'shikiji'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))

@@ -10,7 +10,7 @@ Collective of common transformers for Shikiji, inspired by [shiki-processor](htt
 npm i -D shikiji-transformers
 ```
 
-```ts
+```ts twoslash
 import {
   codeToHtml,
 } from 'shikiji'
@@ -19,8 +19,10 @@ import {
   // ...
 } from 'shikiji-transformers'
 
-const html = codeToHtml(code, {
+const code = `console.log('hello')`
+const html = await codeToHtml(code, {
   lang: 'ts',
+  theme: 'nord',
   transformers: [
     transformerNotationDiff(),
     // ...

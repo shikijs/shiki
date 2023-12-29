@@ -1,4 +1,5 @@
 import type { Element, ElementContent } from 'hast'
+import type { ShikijiTransformerContextCommon } from 'shikiji-core'
 import type { TwoSlashRenderers } from './types'
 import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
@@ -53,27 +54,41 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
     classExtra = '',
     jsdoc = true,
   } = options
+
+  function hightlightPopupContent(
+    codeToHast: ShikijiTransformerContextCommon['codeToHast'],
+    options: ShikijiTransformerContextCommon['options'],
+    info: { text?: string, docs?: string },
+  ) {
+    if (!info.text)
+      return []
+
+    const themedContent = ((codeToHast(formatInfo(info.text), {
+      ...options,
+      transformers: [],
+      transforms: undefined,
+    }).children[0] as Element).children[0] as Element).children
+
+    if (jsdoc && info.docs) {
+      themedContent.push({
+        type: 'element',
+        tagName: 'div',
+        properties: { class: 'twoslash-popup-jsdoc' },
+        children: [
+          {
+            type: 'text',
+            value: info.docs,
+          },
+        ],
+      })
+    }
+
+    return themedContent
+  }
+
   return {
     nodeStaticInfo(info, node) {
-      const themedContent = ((this.codeToHast(formatInfo(info.text), {
-        ...this.options,
-        transformers: [],
-        transforms: undefined,
-      }).children[0] as Element).children[0] as Element).children
-
-      if (jsdoc && info.docs) {
-        themedContent.push({
-          type: 'element',
-          tagName: 'div',
-          properties: { class: 'twoslash-popup-jsdoc' },
-          children: [
-            {
-              type: 'text',
-              value: info.docs,
-            },
-          ],
-        })
-      }
+      const themedContent = hightlightPopupContent(this.codeToHast, this.options, info)
 
       return {
         type: 'element',
@@ -99,11 +114,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
       if (!query.text)
         return {}
 
-      const themedContent = ((this.codeToHast(formatInfo(query.text), {
-        ...this.options,
-        transformers: [],
-        transforms: undefined,
-      }).children[0] as Element).children[0] as Element).children
+      const themedContent = hightlightPopupContent(this.codeToHast, this.options, query)
 
       return {
         type: 'element',

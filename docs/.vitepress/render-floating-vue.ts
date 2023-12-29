@@ -7,12 +7,26 @@ const rich = rendererRich({
   classExtra: 'vp-copy-ignore',
 })
 
-function createFloatingVueWarpper(this: ShikijiTransformerContext, text: string, node: Element | Text, presisted = false): Element {
+function createFloatingVueWarpper(this: ShikijiTransformerContext, text: string, docs: string | undefined, node: Element | Text, presisted = false): Element {
   const themedContent = (this.codeToHast(text, {
     ...this.options,
     transformers: [],
     transforms: undefined,
   }).children[0] as Element).children
+
+  if (docs) {
+    themedContent.push({
+      type: 'element',
+      tagName: 'div',
+      properties: { class: 'twoslash-popup-jsdoc' },
+      children: [
+        {
+          type: 'text',
+          value: docs,
+        },
+      ],
+    })
+  }
 
   return {
     type: 'element',
@@ -51,11 +65,11 @@ function createFloatingVueWarpper(this: ShikijiTransformerContext, text: string,
 export const rendererFloatingVue: TwoSlashRenderers = {
   ...rich,
   nodeStaticInfo(info, node) {
-    return createFloatingVueWarpper.call(this, info.text, node)
+    return createFloatingVueWarpper.call(this, info.text, info.docs, node)
   },
   nodeQuery(query, node) {
     if (!query.text)
       return {}
-    return createFloatingVueWarpper.call(this, query.text, node, true)
+    return createFloatingVueWarpper.call(this, query.text, query.docs, node, true)
   },
 }

@@ -7,6 +7,12 @@ export default antfu(
       markdown: true,
       css: true,
     },
+    markdown: {
+      overrides: {
+        'unicorn/prefer-node-protocol': 'off',
+        'import/first': 'off',
+      },
+    },
     ignores: [
       'packages/shikiji/src/assets/*.ts',
       '**/fixtures/**',

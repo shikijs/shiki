@@ -73,7 +73,7 @@ await highlighter.loadLanguage('javascript') // load the language
 
 If you want to load all themes and languages (not recommended), you can iterate all keys from `bundledLanguages` and `bundledThemes`.
 
-```ts
+```ts twoslash theme:poimandres
 import { bundledLanguages, bundledThemes, getHighlighter } from 'shikiji'
 
 const highlighter = await getHighlighter({
@@ -81,7 +81,10 @@ const highlighter = await getHighlighter({
   langs: Object.keys(bundledLanguages),
 })
 
-highlighter.codeToHtml('const a = 1', { lang: 'javascript' })
+highlighter.codeToHtml('const a = 1', {
+  lang: 'javascript',
+  theme: 'poimandres'
+})
 ```
 
 Or if your usage can be async, you can try the [shorthands](/guide/shorthands) which will load the theme/language on demand.
@@ -90,7 +93,8 @@ Or if your usage can be async, you can try the [shorthands](/guide/shorthands) w
 
 When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. In some cases, if you want to control what to bundle, you can use the core and compose your own bundle.
 
-```js theme:material-theme-ocean
+```ts twoslash theme:material-theme-ocean
+// @noErrors
 // `shikiji/core` entry does not include any themes or languages or the wasm binary.
 import { getHighlighterCore } from 'shikiji/core'
 
@@ -100,7 +104,7 @@ import { getWasmInlined } from 'shikiji/wasm'
 // directly import the theme and language modules, only the ones you imported will be bundled.
 import nord from 'shikiji/themes/nord.mjs'
 
-const shiki = await getHighlighterCore({
+const highlighter = await getHighlighterCore({
   themes: [
     // instead of strings, you need to pass the imported module
     nord,
@@ -118,9 +122,9 @@ const shiki = await getHighlighterCore({
 })
 
 // optionally, load themes and languages after creation
-await shiki.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
+await highlighter.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
 
-const code = shiki.codeToHtml('const a = 1', {
+const code = highlighter.codeToHtml('const a = 1', {
   lang: 'javascript',
   theme: 'material-theme-ocean'
 })
@@ -136,33 +140,39 @@ We also provide some pre-composed bundles for you to use easily, learn more abou
 
 For example, the following ESM code:
 
-```js
+```ts twoslash
 // ESM
 import { getHighlighter } from 'shikiji'
 
 async function main() {
-  const shiki = await getHighlighter({
+  const highlighter = await getHighlighter({
     themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
 
-  const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+  const code = highlighter.codeToHtml('const a = 1', {
+    theme: 'vitesse-dark',
+    lang: 'javascript',
+  })
 }
 ```
 
 Can be written in CJS as:
 
-```js
+```ts twoslash
 // CJS
 async function main() {
   const { getHighlighter } = await import('shikiji')
 
-  const shiki = await getHighlighter({
+  const highlighter = await getHighlighter({
     themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
 
-  const code = shiki.codeToHtml('const a = 1', { lang: 'javascript' })
+  const code = highlighter.codeToHtml('const a = 1', {
+    theme: 'vitesse-dark',
+    lang: 'javascript'
+  })
 }
 ```
 
@@ -199,7 +209,8 @@ Cloudflare Workers [does not support initializing WebAssembly from binary data](
 
 Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-bundle) approach to reduce the bundle size.
 
-```ts theme:nord
+```ts twoslash theme:nord
+// @noErrors
 import { getHighlighterCore, loadWasm } from 'shikiji/core'
 import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'
@@ -217,7 +228,10 @@ export default {
       langs: [js],
     })
 
-    return new Response(highlighter.codeToHtml('console.log(\'shiki\');', { lang: 'js' }))
+    return new Response(highlighter.codeToHtml('console.log(\'shiki\');', {
+      theme: 'nord',
+      lang: 'js'
+    }))
   },
 }
 ```

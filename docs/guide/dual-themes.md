@@ -8,15 +8,15 @@ Shikiji supports outputing light/dark dual themes. Different from [markdown-it-s
 
 Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
 
-```js
+```ts twoslash
 import { getHighlighter } from 'shikiji'
 
-const shiki = await getHighlighter({
+const highlighter = await getHighlighter({
   themes: ['nord', 'min-light'],
   langs: ['javascript'],
 })
 
-const code = shiki.codeToHtml('console.log("hello")', {
+const code = highlighter.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'min-light',
@@ -85,7 +85,7 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```js
-const code = shiki.codeToHtml('console.log("hello")', {
+const code = highlighter.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'github-light',
@@ -115,7 +115,7 @@ Then update your CSS snippet to control when each theme takes effect. Here is an
 If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```js
-const code = shiki.codeToHtml('console.log("hello")', {
+const code = highlighter.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -142,12 +142,12 @@ You can register custom language aliases with `langAlias` option. For example:
 ```js
 import { getHighlighter } from 'shikiji'
 
-const shiki = await getHighlighter({
+const highlighter = await getHighlighter({
   langs: ['javascript'],
   langAlias: {
     mylang: 'javascript',
   },
 })
 
-const code = shiki.codeToHtml('const a = 1', { lang: 'mylang' })
+const code = highlighter.codeToHtml('const a = 1', { lang: 'mylang' })
 ```

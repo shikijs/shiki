@@ -89,7 +89,7 @@ Number.parseInt('123', 10)
 ```ts twoslash
 import { getHighlighterCore } from 'shikiji/core'
 
-const shiki = await getHighlighterCore({})
+const highlighter = await getHighlighterCore({})
 // @log: Custom log message
 const a = 1
 // @error: Custom error message
