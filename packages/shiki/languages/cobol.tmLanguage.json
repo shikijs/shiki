@@ -269,6 +269,20 @@
       "name": "invalid.illegal.functions.cobolit"
     },
     {
+      "match": "((((>>|\\$)[\\s]*)(?i:elif))(.*$))",
+      "captures": {
+        "1": {
+          "name": "invalid.illegal.keyword.control.directive.conditional.cobol"
+        },
+        "2": {
+          "name": "invalid.illegal.entity.name.function.preprocessor.cobol"
+        },
+        "3": {
+          "name": "invalid.illegal.entity.name.function.preprocessor.cobol"
+        }
+      }
+    },
+    {
       "match": "((((>>|\\$)[\\s]*)(?i:if|else|elif|end-if|end-evaluate|end|define|evaluate|when|display|call-convention|set))(.*$))",
       "captures": {
         "1": {
