@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { expect, it } from 'vitest'
 import { getHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
