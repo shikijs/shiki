@@ -9,12 +9,12 @@ export type GetHighlighterFactory<L extends string, T extends string> = (options
  *
  * @param bundledLanguages
  * @param bundledThemes
- * @param ladWasm
+ * @param loadWasm
  */
 export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   bundledLanguages: Record<BundledLangs, LanguageInput>,
   bundledThemes: Record<BundledThemes, ThemeInput>,
-  ladWasm: HighlighterCoreOptions['loadWasm'],
+  loadWasm: HighlighterCoreOptions['loadWasm'],
 ): GetHighlighterFactory<BundledLangs, BundledThemes> {
   async function getHighlighter(options: BundledHighlighterOptions<BundledLangs, BundledThemes> = {}): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
     function resolveLang(lang: LanguageInput | BundledLangs | SpecialLanguage): LanguageInput {
@@ -48,7 +48,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       ...options,
       themes: _themes,
       langs,
-      loadWasm: ladWasm,
+      loadWasm,
     })
 
     return {

@@ -3,7 +3,7 @@
  *-------------------------------------------------------- */
 
 import type { IOnigBinding, IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString, Pointer } from './types'
-import OnigasmModuleFactory from './onig'
+import createOnigasm from './onig'
 
 export const enum FindOption {
   None = 0,
@@ -29,7 +29,7 @@ let onigBinding: IOnigBinding | null = null
 let defaultDebugCall = false
 
 function throwLastOnigError(onigBinding: IOnigBinding): void {
-  throw new Error(onigBinding.UTF8ToString(onigBinding._getLastOnigError()))
+  throw new Error(onigBinding.UTF8ToString(onigBinding.getLastOnigError()))
 }
 
 class UtfString {
@@ -169,7 +169,7 @@ class UtfString {
   }
 
   public createString(onigBinding: IOnigBinding): Pointer {
-    const result = onigBinding._omalloc(this.utf8Length)
+    const result = onigBinding.omalloc(this.utf8Length)
     onigBinding.HEAPU8.set(this.utf8Value, result)
     return result
   }
@@ -203,7 +203,7 @@ export class OnigString implements IOnigString {
 
     if (this.utf8Length < 10000 && !OnigString._sharedPtrInUse) {
       if (!OnigString._sharedPtr)
-        OnigString._sharedPtr = onigBinding._omalloc(10000)
+        OnigString._sharedPtr = onigBinding.omalloc(10000)
 
       OnigString._sharedPtrInUse = true
       onigBinding.HEAPU8.set(utfString.utf8Value, OnigString._sharedPtr)
@@ -245,7 +245,7 @@ export class OnigString implements IOnigString {
       OnigString._sharedPtrInUse = false
 
     else
-      this._onigBinding._ofree(this.ptr)
+      this._onigBinding.ofree(this.ptr)
   }
 }
 
@@ -264,19 +264,19 @@ export class OnigScanner implements IOnigScanner {
       strPtrsArr[i] = utfString.createString(onigBinding)
       strLenArr[i] = utfString.utf8Length
     }
-    const strPtrsPtr = onigBinding._omalloc(4 * patterns.length)
+    const strPtrsPtr = onigBinding.omalloc(4 * patterns.length)
     onigBinding.HEAPU32.set(strPtrsArr, strPtrsPtr / 4)
 
-    const strLenPtr = onigBinding._omalloc(4 * patterns.length)
+    const strLenPtr = onigBinding.omalloc(4 * patterns.length)
     onigBinding.HEAPU32.set(strLenArr, strLenPtr / 4)
 
-    const scannerPtr = onigBinding._createOnigScanner(strPtrsPtr, strLenPtr, patterns.length)
+    const scannerPtr = onigBinding.createOnigScanner(strPtrsPtr, strLenPtr, patterns.length)
 
     for (let i = 0, len = patterns.length; i < len; i++)
-      onigBinding._ofree(strPtrsArr[i])
+      onigBinding.ofree(strPtrsArr[i])
 
-    onigBinding._ofree(strLenPtr)
-    onigBinding._ofree(strPtrsPtr)
+    onigBinding.ofree(strLenPtr)
+    onigBinding.ofree(strPtrsPtr)
 
     if (scannerPtr === 0)
       throwLastOnigError(onigBinding)
@@ -286,7 +286,7 @@ export class OnigScanner implements IOnigScanner {
   }
 
   public dispose(): void {
-    this._onigBinding._freeOnigScanner(this._ptr)
+    this._onigBinding.freeOnigScanner(this._ptr)
   }
 
   public findNextMatchSync(string: string | OnigString, startPosition: number, options: number): IOnigMatch | null
@@ -317,10 +317,10 @@ export class OnigScanner implements IOnigScanner {
     const onigBinding = this._onigBinding
     let resultPtr: Pointer
     if (debugCall)
-      resultPtr = onigBinding._findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+      resultPtr = onigBinding.findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
     else
-      resultPtr = onigBinding._findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+      resultPtr = onigBinding.findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
     if (resultPtr === 0) {
       // no match
@@ -348,94 +348,88 @@ export class OnigScanner implements IOnigScanner {
 }
 
 export interface WebAssemblyInstantiator {
-  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance>
+  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssemblyInstance>
 }
 
-interface ICommonOptions {
-  print?(str: string): void
-}
-interface IInstantiatorOptions extends ICommonOptions {
+export type WebAssemblyInstance = WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance | WebAssembly.Instance['exports']
+
+interface IInstantiatorOptions {
   instantiator: WebAssemblyInstantiator
 }
-interface IDataOptions extends ICommonOptions {
+interface IDataOptions {
   data: ArrayBufferView | ArrayBuffer | Response
 }
+
 export type OnigurumaLoadOptions = IInstantiatorOptions | IDataOptions
 
-async function _loadWasm(loader: WebAssemblyInstantiator, print: ((str: string) => void) | undefined): Promise<void> {
-  onigBinding = await OnigasmModuleFactory({
-    print,
-    instantiateWasm: (importObject) => {
-      if (typeof performance === 'undefined') {
-        // performance.now() is not available in this environment, so use Date.now()
-        const get_now = () => Date.now();
-        (<any>importObject).env.emscripten_get_now = get_now;
-        (<any>importObject).wasi_snapshot_preview1.emscripten_get_now = get_now
-      }
-      // @ts-expect-error Can be a instantiator, or a instance
-      return loader(importObject).then(instantiatedSource => instantiatedSource.instance || instantiatedSource)
-    },
-  })
-}
-
-function isInstantiatorOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is IInstantiatorOptions {
+function isInstantiatorOptionsObject(dataOrOptions: any): dataOrOptions is IInstantiatorOptions {
   return (typeof (<IInstantiatorOptions>dataOrOptions).instantiator === 'function')
 }
 
-function isDataOptionsObject(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is IDataOptions {
+function isDataOptionsObject(dataOrOptions: any): dataOrOptions is IDataOptions {
   return (typeof (<IDataOptions>dataOrOptions).data !== 'undefined')
 }
 
-function isResponse(dataOrOptions: ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): dataOrOptions is Response {
+function isResponse(dataOrOptions: any): dataOrOptions is Response {
   return (typeof Response !== 'undefined' && dataOrOptions instanceof Response)
 }
 
-let initCalled = false
+function isArrayBuffer(data: any): data is ArrayBuffer | ArrayBufferView {
+  return (typeof ArrayBuffer !== 'undefined' && (data instanceof ArrayBuffer || ArrayBuffer.isView(data)))
+    // eslint-disable-next-line node/prefer-global/buffer
+    || (typeof Buffer !== 'undefined' && Buffer.isBuffer(data))
+    || (typeof SharedArrayBuffer !== 'undefined' && data instanceof SharedArrayBuffer)
+    || (typeof Uint32Array !== 'undefined' && data instanceof Uint32Array)
+}
+
 let initPromise: Promise<void> | null = null
 
-export function loadWasm(loader: WebAssemblyInstantiator): Promise<void>
-export function loadWasm(options: OnigurumaLoadOptions): Promise<void>
-export function loadWasm(data: ArrayBufferView | ArrayBuffer | Response): Promise<void>
-export function loadWasm(dataOrOptions: WebAssemblyInstantiator | ArrayBufferView | ArrayBuffer | Response | OnigurumaLoadOptions): Promise<void> {
-  if (initCalled) {
-    // Already initialized
-    return initPromise!
+type Awaitable<T> = T | Promise<T>
+
+export type LoadWasmOptions =
+  | OnigurumaLoadOptions
+  | WebAssemblyInstantiator
+  | ArrayBufferView | ArrayBuffer | Response
+
+export async function loadWasm(options: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>)): Promise<void> {
+  if (initPromise)
+    return initPromise
+
+  async function _load() {
+    onigBinding = await createOnigasm(async (info) => {
+      let instance: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>) | WebAssemblyInstance = options
+      if (typeof instance === 'function')
+        instance = await instance(info)
+      if (typeof instance === 'function')
+        instance = await instance(info)
+
+      if (isInstantiatorOptionsObject(instance)) {
+        instance = await instance.instantiator(info)
+      }
+      else {
+        if (isDataOptionsObject(instance))
+          instance = instance.data
+
+        if (isResponse(instance)) {
+          if (typeof WebAssembly.instantiateStreaming === 'function')
+            instance = await _makeResponseStreamingLoader(instance)(info)
+          else
+            instance = await _makeResponseNonStreamingLoader(instance)(info)
+        }
+        else if (isArrayBuffer(instance)) {
+          instance = await _makeArrayBufferLoader(instance)(info)
+        }
+      }
+
+      if ('instance' in instance)
+        instance = (instance as WebAssembly.WebAssemblyInstantiatedSource).instance
+      if ('exports' in instance)
+        instance = (instance as WebAssembly.Instance).exports
+      return instance
+    })
   }
-  initCalled = true
 
-  let loader: WebAssemblyInstantiator
-  let print: ((str: string) => void) | undefined
-
-  if (typeof dataOrOptions === 'function') {
-    loader = dataOrOptions
-  }
-  else if (isInstantiatorOptionsObject(dataOrOptions)) {
-    loader = dataOrOptions.instantiator
-    print = dataOrOptions.print
-  }
-  else {
-    let data: ArrayBufferView | ArrayBuffer | Response
-    if (isDataOptionsObject(dataOrOptions)) {
-      data = dataOrOptions.data
-      print = dataOrOptions.print
-    }
-    else {
-      data = dataOrOptions
-    }
-
-    if (isResponse(data)) {
-      if (typeof WebAssembly.instantiateStreaming === 'function')
-        loader = _makeResponseStreamingLoader(data)
-
-      else
-        loader = _makeResponseNonStreamingLoader(data)
-    }
-    else {
-      loader = _makeArrayBufferLoader(data)
-    }
-  }
-
-  initPromise = _loadWasm(loader, print)
+  initPromise = _load()
   return initPromise
 }
 

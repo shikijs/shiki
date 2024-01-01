@@ -5,7 +5,7 @@ import type {
   IRawGrammar as RawGrammar,
   IRawTheme as RawTheme,
 } from './textmate'
-import type { OnigurumaLoadOptions } from './oniguruma'
+import type { LoadWasmOptions, OnigurumaLoadOptions } from './oniguruma'
 
 export {
   Grammar,
@@ -161,7 +161,7 @@ export interface HighlighterCoreOptions {
   /**
    * Load wasm file from a custom path or using a custom function.
    */
-  loadWasm?: OnigurumaLoadOptions | (() => Promise<OnigurumaLoadOptions>)
+  loadWasm?: LoadWasmOptions | (() => Promise<LoadWasmOptions> | LoadWasmOptions)
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> {

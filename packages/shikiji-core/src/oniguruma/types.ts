@@ -2,6 +2,8 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
+export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>
+
 export type Pointer = number
 
 export const enum FindOption {
@@ -24,15 +26,15 @@ export interface IOnigBinding {
   HEAPU8: Uint8Array
   HEAPU32: Uint32Array
 
-  _omalloc(count: number): Pointer
-  _ofree(ptr: Pointer): void
   UTF8ToString(ptr: Pointer): string
 
-  _getLastOnigError(): Pointer
-  _createOnigScanner(strPtrsPtr: Pointer, strLenPtr: Pointer, count: number): Pointer
-  _freeOnigScanner(ptr: Pointer): void
-  _findNextOnigScannerMatch(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
-  _findNextOnigScannerMatchDbg(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
+  omalloc(count: number): Pointer
+  ofree(ptr: Pointer): void
+  getLastOnigError(): Pointer
+  createOnigScanner(strPtrsPtr: Pointer, strLenPtr: Pointer, count: number): Pointer
+  freeOnigScanner(ptr: Pointer): void
+  findNextOnigScannerMatch(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
+  findNextOnigScannerMatchDbg(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
 }
 
 export interface IOnigCaptureIndex {

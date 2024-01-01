@@ -31,7 +31,8 @@ describe('should', () => {
         import('../src/assets/langs/c'),
       ],
       loadWasm: {
-        instantiator: obj => WebAssembly.instantiate(onig, obj),
+        // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
+        instantiator: obj => WebAssembly.instantiate(onig, obj).then(r => r.instance.exports),
       },
     })
 
