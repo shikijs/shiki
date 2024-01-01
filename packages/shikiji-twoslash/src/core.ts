@@ -49,7 +49,7 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
           lang = langAlias[shikijiOptions.lang]
 
         if (filter(lang, code, shikijiOptions)) {
-          shikijiOptions.mergeWhitespaces = false
+          shikijiOptions.mergeWhitespaces = 'never'
           const twoslash = twoslasher(code, lang, twoslashOptions)
           this.meta.twoslash = twoslash
           return twoslash.code

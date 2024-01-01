@@ -157,8 +157,10 @@ export function tokensToHast(
     console.warn('[shikiji] `transforms` option is deprecated, use `transformers` instead')
   }
 
-  if (mergeWhitespaces)
+  if (mergeWhitespaces === true)
     tokens = mergeWhitespaceTokens(tokens)
+  else if (mergeWhitespaces === 'never')
+    tokens = splitWhitespaceTokens(tokens)
 
   const lines: (Element | Text)[] = []
   const tree: Root = {
@@ -323,5 +325,30 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
       }
     })
     return newLine
+  })
+}
+
+function splitWhitespaceTokens(tokens: ThemedToken[][]) {
+  return tokens.map((line) => {
+    return line.flatMap((token) => {
+      if (token.content.match(/^\s+$/))
+        return token
+      const match = token.content.match(/^(\s*)(.*?)(\s*)$/)
+      if (!match)
+        return token
+      const [, leading, content, trailing] = match
+      if (!leading && !trailing)
+        return token
+
+      const expanded = [{
+        ...token,
+        content,
+      }]
+      if (leading)
+        expanded.unshift({ content: leading })
+      if (trailing)
+        expanded.push({ content: trailing })
+      return expanded
+    })
   })
 }

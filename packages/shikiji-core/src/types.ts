@@ -227,12 +227,15 @@ export interface CodeToHastOptionsCommon<Languages extends string = string> exte
   lang: StringLiteralUnion<Languages | SpecialLanguage>
 
   /**
-   * Merge token with only whitespace to the next token,
-   * Saving a few extra `<span>`
+   * Merge whitespace tokens to saving extra `<span>`.
+   *
+   * When set to true, it will merge whitespace tokens with the next token.
+   * When set to false, it keep the output as-is.
+   * When set to `never`, it will force to separate leading and trailing spaces from tokens.
    *
    * @default true
    */
-  mergeWhitespaces?: boolean
+  mergeWhitespaces?: boolean | 'never'
 }
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {

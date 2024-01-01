@@ -35,7 +35,7 @@ export function isSpace(part: string) {
   return part === ' ' || part === '\t'
 }
 
-export function mergeSpaces(
+export function splitSpaces(
   parts: string[],
   type: 'all' | 'boundary' | 'trailing',
   renderContinuousSpaces = true,

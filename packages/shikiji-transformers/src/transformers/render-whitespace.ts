@@ -1,7 +1,7 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import type { Element } from 'hast'
-import { mergeSpaces } from './_utils'
+import { splitSpaces } from './_utils'
 
 export interface TransformerRenderWhitespaceOptions {
   /**
@@ -64,7 +64,7 @@ export function transformerRenderWhitespace(
             return token
 
           // Split by whitespaces
-          const parts = mergeSpaces(
+          const parts = splitSpaces(
             node.value.split(/([ \t])/).filter(i => i.length),
             (position === 'boundary' && index === last && last !== 0)
               ? 'trailing'
