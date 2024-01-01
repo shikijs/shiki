@@ -353,21 +353,21 @@ export interface WebAssemblyInstantiator {
 
 export type WebAssemblyInstance = WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance | WebAssembly.Instance['exports']
 
-interface IInstantiatorOptions {
-  instantiator: WebAssemblyInstantiator
-}
-interface IDataOptions {
-  data: ArrayBufferView | ArrayBuffer | Response
-}
+export type OnigurumaLoadOptions =
+  | { instantiator: WebAssemblyInstantiator }
+  | { default: WebAssemblyInstantiator }
+  | { data: ArrayBufferView | ArrayBuffer | Response }
 
-export type OnigurumaLoadOptions = IInstantiatorOptions | IDataOptions
-
-function isInstantiatorOptionsObject(dataOrOptions: any): dataOrOptions is IInstantiatorOptions {
-  return (typeof (<IInstantiatorOptions>dataOrOptions).instantiator === 'function')
+function isInstantiatorOptionsObject(dataOrOptions: any): dataOrOptions is { instantiator: WebAssemblyInstantiator } {
+  return (typeof dataOrOptions.instantiator === 'function')
 }
 
-function isDataOptionsObject(dataOrOptions: any): dataOrOptions is IDataOptions {
-  return (typeof (<IDataOptions>dataOrOptions).data !== 'undefined')
+function isInstantiatorModule(dataOrOptions: any): dataOrOptions is { default: WebAssemblyInstantiator } {
+  return (typeof dataOrOptions.default === 'function')
+}
+
+function isDataOptionsObject(dataOrOptions: any): dataOrOptions is { data: ArrayBufferView | ArrayBuffer | Response } {
+  return (typeof dataOrOptions.data !== 'undefined')
 }
 
 function isResponse(dataOrOptions: any): dataOrOptions is Response {
@@ -382,7 +382,7 @@ function isArrayBuffer(data: any): data is ArrayBuffer | ArrayBufferView {
     || (typeof Uint32Array !== 'undefined' && data instanceof Uint32Array)
 }
 
-let initPromise: Promise<void> | null = null
+let initPromise: Promise<void>
 
 type Awaitable<T> = T | Promise<T>
 
@@ -405,6 +405,9 @@ export function loadWasm(options: LoadWasmOptions | (() => Awaitable<LoadWasmOpt
 
       if (isInstantiatorOptionsObject(instance)) {
         instance = await instance.instantiator(info)
+      }
+      else if (isInstantiatorModule(instance)) {
+        instance = await instance.default(info)
       }
       else {
         if (isDataOptionsObject(instance))
