@@ -5,7 +5,7 @@ import type {
   IRawGrammar as RawGrammar,
   IRawTheme as RawTheme,
 } from './textmate'
-import type { LoadWasmOptions, OnigurumaLoadOptions } from './oniguruma'
+import type { LoadWasmOptions } from './oniguruma'
 
 export {
   Grammar,

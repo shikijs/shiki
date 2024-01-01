@@ -24,11 +24,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   ] = await Promise.all([
     Promise.all((options.themes || []).map(normalizeGetter)).then(r => r.map(normalizeTheme)),
     resolveLangs(options.langs || []),
-    typeof options.loadWasm === 'function'
-      ? Promise.resolve(options.loadWasm()).then(r => loadWasm(r))
-      : options.loadWasm
-        ? loadWasm(options.loadWasm)
-        : undefined,
+    options.loadWasm ? loadWasm(options.loadWasm) : undefined,
   ] as const)
 
   const resolver = new Resolver(

@@ -391,7 +391,7 @@ export type LoadWasmOptions =
   | WebAssemblyInstantiator
   | ArrayBufferView | ArrayBuffer | Response
 
-export async function loadWasm(options: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>)): Promise<void> {
+export function loadWasm(options: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>)): Promise<void> {
   if (initPromise)
     return initPromise
 
