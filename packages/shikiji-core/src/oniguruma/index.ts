@@ -386,18 +386,21 @@ let initPromise: Promise<void>
 
 type Awaitable<T> = T | Promise<T>
 
-export type LoadWasmOptions =
+export type LoadWasmOptionsPlain =
   | OnigurumaLoadOptions
   | WebAssemblyInstantiator
   | ArrayBufferView | ArrayBuffer | Response
 
-export function loadWasm(options: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>)): Promise<void> {
+export type LoadWasmOptions = Awaitable<LoadWasmOptionsPlain> | (() => Awaitable<LoadWasmOptionsPlain>)
+
+export function loadWasm(options: LoadWasmOptions): Promise<void> {
   if (initPromise)
     return initPromise
 
   async function _load() {
     onigBinding = await createOnigasm(async (info) => {
-      let instance: LoadWasmOptions | (() => Awaitable<LoadWasmOptions>) | WebAssemblyInstance = options
+      let instance: LoadWasmOptions | WebAssemblyInstance = options
+      instance = await instance
       if (typeof instance === 'function')
         instance = await instance(info)
       if (typeof instance === 'function')

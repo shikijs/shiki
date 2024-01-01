@@ -161,7 +161,7 @@ export interface HighlighterCoreOptions {
   /**
    * Load wasm file from a custom path or using a custom function.
    */
-  loadWasm?: LoadWasmOptions | (() => Promise<LoadWasmOptions> | LoadWasmOptions)
+  loadWasm?: LoadWasmOptions
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> {
