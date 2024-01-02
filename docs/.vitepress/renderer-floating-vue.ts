@@ -52,11 +52,15 @@ function createFloatingVueWarpper(this: ShikijiTransformerContext, text: string,
       },
       {
         type: 'element',
-        tagName: 'vue-template',
+        tagName: 'template',
         properties: {
           'v-slot:popper': '{}',
         },
-        children: themedContent,
+        content: {
+          type: 'root',
+          children: themedContent,
+        },
+        children: [],
       },
     ],
   }

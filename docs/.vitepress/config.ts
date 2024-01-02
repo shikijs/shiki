@@ -4,7 +4,7 @@ import { transformerTwoSlash } from 'shikiji-twoslash'
 import { bundledThemes } from 'shikiji'
 import { version } from '../../package.json'
 import vite from './vite.config'
-import { rendererFloatingVue } from './render-floating-vue'
+import { rendererFloatingVue } from './renderer-floating-vue'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
@@ -57,14 +57,6 @@ export default defineConfig({
         explicitTrigger: true,
         renderer: rendererFloatingVue,
       }),
-      // HAST treat `template` element specially and ignore its children
-      // We need to render it as `vue-template` and use postprocess to replace it back
-      {
-        postprocess(code) {
-          return code
-            .replace(/(<\/?)vue-template/g, '$1template')
-        },
-      },
       {
         // Render custom themes with codeblocks
         name: 'shikiji:inline-theme',
