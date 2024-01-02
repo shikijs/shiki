@@ -29,38 +29,96 @@ bun add -D shikiji
 
 ## Integrations
 
-We also provide some integrations like [Markdown It Plugin](/packages/markdown-it) and [Rehype Plugin](/packages/rehype). Learn more about them in the integrations section.
+We also provide some integrations:
+
+- [Markdown It Plugin](/packages/markdown-it)
+- [Rehype Plugin](/packages/rehype)
+- [TypeScript TwoSlash Integration](/packages/twoslash)
+- [Monaco Editor Syntax Highlight](/packages/monaco)
+- [CLI](/packages/cli)
+- [Common Transformers](/packages/transformers)
 
 ## Usage
 
-### Bundled Usage
+### Shorthands
 
-Basic usage is pretty much the same as `shiki`, only that some APIs are dropped, (for example, the singular `theme` options). While each theme and language file is a dynamically imported ES module, it would be better to list the languages and themes **explicitly** to have the best performance.
+The quickest way to get started with `shikiji` is to use the shorthands functions we provided. They will load the necessary themes and languages on demand and cache them in memory automatically.
+
+Passing your code snippet to the `codeToHtml` function with the `lang` and `theme` specified, it will return a highlighted HTML string that you can embed in your page. The generated HTML contains inline style for each token, so you don't need extra CSS to style it.
 
 ```ts twoslash
+import { codeToHtml } from 'shikiji'
+
+const code = 'const a = 1' // input code
+const html = await codeToHtml(code, {
+  lang: 'javascript',
+  theme: 'vitesse-dark'
+})
+
+console.log(html) // highlighted html string
+```
+
+Going a bit advanced, you can also use `codeToThemedTokens` or `codeToHast` to get the intermediate data structure, and render them by yourself:
+
+```ts twoslash theme:min-dark
+import { codeToThemedTokens } from 'shikiji'
+
+const tokens = await codeToThemedTokens('<div class="foo">bar</div>', {
+  lang: 'html',
+  theme: 'min-dark'
+})
+```
+
+```ts twoslash theme:catppuccin-mocha
+import { codeToHast } from 'shikiji'
+
+const hast = codeToHast('.text-red { color: red; }', {
+  lang: 'css',
+  theme: 'catppuccin-mocha'
+})
+```
+
+### Highlighter Usage
+
+The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, we provide the `getHighlighter` function to create a highlighter instance that can later be used synchronously.
+
+The usage is pretty much the same as `shiki`, while each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
+
+```ts twoslash theme:nord
 import { getHighlighter } from 'shikiji'
 
+// `getHighlighter` is async, it initializes the internal and
+// loads the themes and languages specified.
 const highlighter = await getHighlighter({
   themes: ['nord'],
   langs: ['javascript'],
 })
 
-// optionally, load themes and languages after creation
-await highlighter.loadTheme('vitesse-light')
-await highlighter.loadLanguage('css')
-
+// then later you can use `highlighter.codeToHtml` synchronously
+// with the loaded themes and languages.
 const code = highlighter.codeToHtml('const a = 1', {
   lang: 'javascript',
-  theme: 'vitesse-light'
+  theme: 'nord'
 })
 ```
 
-Unlike `shiki`, `shikiji` does not load any themes or languages when not specified.
+In addition, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
+
+```ts twoslash
+import { getHighlighter } from 'shikiji'
+const highlighter = await getHighlighter({ themes: [], langs: [] })
+// ---cut---
+// load themes and languages after creation
+await highlighter.loadTheme('vitesse-light')
+await highlighter.loadLanguage('css')
+```
+
+Unlike `shiki` that loads all themes and languages by default, `shikiji` requires all themes and languages to be loaded explicitly.
 
 ```ts theme:slack-dark twoslash
 import { getHighlighter } from 'shikiji'
 
-const highlighter = await getHighlighter()
+const highlighter = await getHighlighter({ /* ... */ })
 
 highlighter.codeToHtml(
   'const a = 1',
@@ -86,8 +144,6 @@ highlighter.codeToHtml('const a = 1', {
   theme: 'poimandres'
 })
 ```
-
-Or if your usage can be async, you can try the [shorthands](/guide/shorthands) which will load the theme/language on demand.
 
 ### Fine-grained Bundle
 
@@ -129,6 +185,10 @@ const code = highlighter.codeToHtml('const a = 1', {
   theme: 'material-theme-ocean'
 })
 ```
+
+::: info
+[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-core/src/bundle-factory.ts) or port it your own.
+:::
 
 ### Bundle Presets
 
