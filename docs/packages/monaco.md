@@ -6,10 +6,6 @@ Use Shikiji to highlight [Monaco Editor](https://microsoft.github.io/monaco-edit
 
 Monaco's built-in highlighter does not use the full TextMate grammar, which in some cases is not accurate enough. This package allows you to use Shikiji's syntax highlighting engine to highlight Monaco, with shared grammars and themes from Shikiji.
 
-::: warning
-This package is experimental. Breaking changes may happend without following semver.
-:::
-
 Heavily inspired by [`monaco-editor-textmate`](https://github.com/zikaari/monaco-editor-textmate).
 
 ## Install

@@ -129,10 +129,6 @@ In markdown, you can use the following syntax to trigger TwoSlash:
 
 ### CDN Usage
 
-::: warning
-This is an experimental feature.
-:::
-
 By default `@typescript/twoslash` runs on Node.js and relies on your local system to resolve TypeScript and types for the imports. Import it directly in non-Node.js environments would not work.
 
 Luckily, TwoSlash implemented a virtual file system, allow you to provide your own files for TypeScript to resolve in memory. However, how to load those files in the browser is still a challenge. Thanks to the work on [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team already provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
