@@ -519,6 +519,9 @@
         },
         {
           "include": "#builtin_get_node_shorthand_bare"
+        },
+        {
+          "include": "#builtin_get_node_shorthand_bare_multi"
         }
       ]
     },
@@ -543,7 +546,22 @@
     },
     "builtin_get_node_shorthand_bare": {
       "name": "meta.literal.nodepath.gdscript",
-      "begin": "(\\$|%|\\$%)([a-zA-Z_]\\w*/?)",
+      "match": "(?<!/\\s*)(\\$|%|\\$%)([a-zA-Z_]\\w*)\\b(?!\\s*/)",
+      "captures": {
+        "1": {
+          "name": "keyword.control.flow.gdscript"
+        },
+        "2": {
+          "name": "constant.character.escape.gdscript"
+        },
+        "3": {
+          "name": "constant.character.escape.gdscript"
+        }
+      }
+    },
+    "builtin_get_node_shorthand_bare_multi": {
+      "name": "meta.literal.nodepath.gdscript",
+      "begin": "(\\$|%|\\$%)([a-zA-Z_]\\w*)",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.flow.gdscript"
@@ -552,15 +570,18 @@
           "name": "constant.character.escape.gdscript"
         }
       },
-      "end": "(?!%?\\s*[a-zA-Z_]\\w*)\\s*/?*",
+      "end": "(?!\\s*/\\s*%?\\s*[a-zA-Z_]\\w*)",
       "patterns": [
         {
-          "match": "(%)?\\s*([a-zA-Z_]\\w*)\\s*/?",
+          "match": "(/)\\s*(%)?\\s*([a-zA-Z_]\\w*)\\s*",
           "captures": {
             "1": {
-              "name": "keyword.control.flow.gdscript"
+              "name": "constant.character.escape.gdscript"
             },
             "2": {
+              "name": "keyword.control.flow.gdscript"
+            },
+            "3": {
               "name": "constant.character.escape.gdscript"
             }
           }
@@ -846,7 +867,7 @@
       "name": "variable.other.gdscript"
     },
     "any_property": {
-      "match": "\\b(\\.)\\s*(?<![@\\$#%])(?:(\\b[A-Z_][A-Z_0-9]*\\b)|([A-Za-z_]\\w*))\\b(?![(])",
+      "match": "\\b(\\.)\\s*(?<![@\\$#%])(?:([A-Z_][A-Z_0-9]*)|([A-Za-z_]\\w*))\\b(?![(])",
       "captures": {
         "1": {
           "name": "punctuation.accessor.gdscript"
