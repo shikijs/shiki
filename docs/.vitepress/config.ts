@@ -24,11 +24,13 @@ const REFERENCES: DefaultTheme.NavItemWithLink[] = [
 ]
 
 const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
-  { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'TypeScript TwoSlash', link: '/packages/twoslash' },
   { text: 'Markdown It', link: '/packages/markdown-it' },
   { text: 'Rehype', link: '/packages/rehype' },
   { text: 'Monaco Editor', link: '/packages/monaco' },
+  { text: 'VitePress', link: '/packages/vitepress' },
+  { text: 'Astro', link: '/packages/astro' },
+  { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'CLI', link: '/packages/cli' },
 ]
 
