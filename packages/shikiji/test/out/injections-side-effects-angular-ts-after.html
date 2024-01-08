@@ -1,0 +1,28 @@
+<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"></span>
+<span class="line"><span style="color:#1E754F">import</span><span style="color:#999999"> {</span><span style="color:#B07D48"> Component</span><span style="color:#999999">,</span><span style="color:#B07D48"> inject</span><span style="color:#999999"> }</span><span style="color:#1E754F"> from</span><span style="color:#B5695999"> '</span><span style="color:#B56959">@angular/core</span><span style="color:#B5695999">'</span><span style="color:#999999">;</span></span>
+<span class="line"><span style="color:#1E754F">import</span><span style="color:#999999"> {</span><span style="color:#B07D48"> RouterLink</span><span style="color:#999999"> }</span><span style="color:#1E754F"> from</span><span style="color:#B5695999"> '</span><span style="color:#B56959">@angular/router</span><span style="color:#B5695999">'</span><span style="color:#999999">;</span></span>
+<span class="line"><span style="color:#1E754F">import</span><span style="color:#999999"> {</span><span style="color:#B07D48"> CartService</span><span style="color:#999999"> }</span><span style="color:#1E754F"> from</span><span style="color:#B5695999"> '</span><span style="color:#B56959">./cart.service</span><span style="color:#B5695999">'</span><span style="color:#999999">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#999999">@</span><span style="color:#59873A">Component</span><span style="color:#999999">({</span></span>
+<span class="line"><span style="color:#998418">  selector</span><span style="color:#999999">: </span><span style="color:#B5695999">'</span><span style="color:#B56959">app-cart-button</span><span style="color:#B5695999">'</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#998418">  standalone</span><span style="color:#999999">: </span><span style="color:#1E754F">true</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#998418">  imports</span><span style="color:#999999">: [</span><span style="color:#B07D48">RouterLink</span><span style="color:#999999">],</span></span>
+<span class="line"><span style="color:#998418">  template</span><span style="color:#999999">: </span><span style="color:#B56959">`</span></span>
+<span class="line"><span style="color:#999999">    &#x3C;</span><span style="color:#1E754F">button</span></span>
+<span class="line"><span style="color:#B07D48">      type</span><span style="color:#999999">=</span><span style="color:#B5695999">"</span><span style="color:#B56959">button</span><span style="color:#B5695999">"</span></span>
+<span class="line"><span style="color:#999999">      [</span><span style="color:#59873A">routerLink</span><span style="color:#999999">]=</span><span style="color:#B5695999">"'</span><span style="color:#B56959">/cart</span><span style="color:#B5695999">'"</span></span>
+<span class="line"><span style="color:#999999">    ></span></span>
+<span class="line"><span style="color:#1E754F">      @if </span><span style="color:#999999">(</span><span style="color:#B07D48">cartService</span><span style="color:#999999">.</span><span style="color:#B07D48">length</span><span style="color:#999999"> > </span><span style="color:#2F798A">0</span><span style="color:#999999">) {</span></span>
+<span class="line"><span style="color:#999999">        &#x3C;</span><span style="color:#1E754F">div</span><span style="color:#999999">></span></span>
+<span class="line"><span style="color:#999999">          {{ </span><span style="color:#B07D48">cartService</span><span style="color:#999999">.</span><span style="color:#B07D48">length</span><span style="color:#999999"> }}</span></span>
+<span class="line"><span style="color:#999999">        &#x3C;/</span><span style="color:#1E754F">div</span><span style="color:#999999">></span></span>
+<span class="line"><span style="color:#999999">      }</span></span>
+<span class="line"><span style="color:#999999">      Cart</span></span>
+<span class="line"><span style="color:#999999">    &#x3C;/</span><span style="color:#1E754F">button</span><span style="color:#999999">></span></span>
+<span class="line"><span style="color:#B56959">  `</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#998418">  styles</span><span style="color:#999999">: </span><span style="color:#B56959">`</span><span style="color:#1E754F">div</span><span style="color:#999999"> {</span><span style="color:#998418">display</span><span style="color:#999999">: </span><span style="color:#A65E2B">block</span><span style="color:#999999">;}</span><span style="color:#B56959">`</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#999999">})</span></span>
+<span class="line"><span style="color:#1E754F">export</span><span style="color:#AB5959"> class</span><span style="color:#2E8F82"> CartButtonComponent</span><span style="color:#999999"> {</span></span>
+<span class="line"><span style="color:#AB5959">  protected</span><span style="color:#B07D48"> cartService</span><span style="color:#999999"> =</span><span style="color:#59873A"> inject</span><span style="color:#999999">(</span><span style="color:#B07D48">CartService</span><span style="color:#999999">);</span></span>
+<span class="line"><span style="color:#999999">}</span></span>
+<span class="line"></span></code></pre>

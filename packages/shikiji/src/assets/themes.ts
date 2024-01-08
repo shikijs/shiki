@@ -12,7 +12,7 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   },
   {
     "id": "catppuccin-frappe",
-    "displayName": "Catppuccin Frappe",
+    "displayName": "Catppuccin Frappé",
     "type": "dark",
     "import": (() => import('./themes/catppuccin-frappe')) as unknown as DynamicImportThemeRegistration
   },
