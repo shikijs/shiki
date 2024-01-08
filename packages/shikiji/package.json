@@ -89,7 +89,7 @@
   ],
   "scripts": {
     "prepare": "esno scripts/prepare.ts",
-    "build": "rimraf dist && rollup -c",
+    "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=4096 rollup -c",
     "dev": "rollup -cw",
     "prepublishOnly": "nr build",
     "test": "vitest",
