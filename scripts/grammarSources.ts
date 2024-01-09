@@ -118,7 +118,10 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/crystal-lang-tools/vscode-crystal-lang/blob/master/syntaxes/crystal.json'
   ],
   ['csharp', 'https://github.com/dotnet/csharp-tmLanguage/blob/main/grammars/csharp.tmLanguage'],
-  ['csv', 'https://github.com/mechatroner/vscode_rainbow_csv/blob/master/syntaxes/csv.tmLanguage.json'],
+  [
+    'csv',
+    'https://github.com/mechatroner/vscode_rainbow_csv/blob/master/syntaxes/csv.tmLanguage.json'
+  ],
   ['cue', 'https://github.com/cue-sh/vscode-cue/blob/master/syntaxes/cue.tmLanguage.json'],
   ['cypher', 'https://github.com/adam-cowley/neo4j-vscode/blob/main/cypher/cypher.tmLanguage'],
   ['d', 'https://github.com/Pure-D/code-d/blob/master/syntaxes/d.json'],
@@ -193,10 +196,7 @@ export const githubGrammarSources: [string, string][] = [
     'https://github.com/heptio/vscode-jsonnet/blob/master/syntaxes/jsonnet.tmLanguage.json'
   ],
   ['jssm', 'https://github.com/StoneCypher/sublime-jssm/blob/master/jssm.tmLanguage'],
-  [
-    'kotlin',
-    'https://github.com/fwcd/vscode-kotlin/blob/main/syntaxes/kotlin.tmLanguage.json'
-  ],
+  ['kotlin', 'https://github.com/fwcd/vscode-kotlin/blob/main/syntaxes/kotlin.tmLanguage.json'],
   [
     'kusto',
     'https://github.com/rosshamish/kuskus/blob/master/kusto-syntax-highlighting/syntaxes/kusto.tmLanguage.json'
@@ -230,7 +230,10 @@ export const githubGrammarSources: [string, string][] = [
   ],
   ['nim', 'https://github.com/pragmagic/vscode-nim/blob/master/syntaxes/nim.json'],
   ['nix', 'https://github.com/bbenoist/vscode-nix/blob/master/syntaxes/nix.tmLanguage'],
-  ['nushell', 'https://github.com/nushell/vscode-nushell-lang/blob/main/syntaxes/nushell.tmLanguage.json'],
+  [
+    'nushell',
+    'https://github.com/nushell/vscode-nushell-lang/blob/main/syntaxes/nushell.tmLanguage.json'
+  ],
   ['ocaml', 'https://github.com/reasonml-editor/vscode-reasonml/blob/master/syntaxes/ocaml.json'],
   [
     'pascal',
@@ -259,6 +262,7 @@ export const githubGrammarSources: [string, string][] = [
     'razor',
     'https://github.com/dotnet/razor/blob/main/src/Razor/src/Microsoft.VisualStudio.RazorExtension/EmbeddedGrammars/aspnetcorerazor.tmLanguage.json'
   ],
+  ['reason', 'https://github.com/ocamllabs/vscode-ocaml-platform/blob/master/syntaxes/reason.json'],
   ['reg', 'https://github.com/mihai-vlc/reg-vscode/blob/master/syntaxes/reg.tmLanguage'],
   [
     'rel',
@@ -387,6 +391,7 @@ export const languageAliases = {
   pug: ['jade'],
   python: ['py'],
   raku: ['perl6'],
+  reason: ['reasonml'],
   ruby: ['rb'],
   rust: ['rs'],
   'html-ruby-erb': ['erb'],
@@ -402,7 +407,7 @@ export const languageAliases = {
   wenyan: ['文言'],
   wolfram: ['wl'],
   yaml: ['yml'],
-  graphql: ['gql'],
+  graphql: ['gql']
 }
 
 /**

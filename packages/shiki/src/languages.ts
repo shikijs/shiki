@@ -127,6 +127,7 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'reason'
   | 'reg'
   | 'rel'
   | 'riscv'
@@ -1107,6 +1108,14 @@ export const languages: ILanguageRegistration[] = [
     displayName: 'ASP.NET Razor',
     samplePath: 'razor.sample',
     embeddedLangs: ['html', 'csharp']
+  },
+  {
+    id: 'reason',
+    scopeName: 'source.reason',
+    path: 'reason.tmLanguage.json',
+    displayName: 'Reason',
+    samplePath: 'reason.sample',
+    embeddedLangs: ['javascript']
   },
   {
     id: 'reg',

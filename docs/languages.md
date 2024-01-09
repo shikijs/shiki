@@ -177,6 +177,7 @@ export type Lang =
   | 'r'
   | 'raku' | 'perl6'
   | 'razor'
+  | 'reason'
   | 'reg'
   | 'rel'
   | 'riscv'
