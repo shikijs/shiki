@@ -18,8 +18,13 @@ const TwoSlashFloatingVue: Plugin<[FloatingVueConfig?]> = {
       ...options,
       themes: {
         twoslash: {
-          $extend: 'menu',
-          delay: { show: 0, hide: 0 },
+          $extend: 'dropdown',
+          triggers: ['hover', 'focus', 'touch'],
+          popperTriggers: ['hover', 'focus', 'touch'],
+          delay: 0,
+          handleResize: false,
+          autoHide: true,
+          instantMove: true,
         },
         ...options.theme,
       },
