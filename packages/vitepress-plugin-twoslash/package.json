@@ -1,0 +1,63 @@
+{
+  "name": "vitepress-plugin-twoslash",
+  "type": "module",
+  "version": "0.9.0-0",
+  "description": "Enable TwoSlash support in VitePress",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/shikiji#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/shikiji.git",
+    "directory": "packages/vitepress-plugin-twoslash"
+  },
+  "bugs": "https://github.com/antfu/shikiji/issues",
+  "keywords": [
+    "shiki",
+    "twoslash",
+    "vitepress-plugin"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./client": {
+      "types": "./dist/client.d.mts",
+      "default": "./dist/client.mjs"
+    },
+    "./style.css": "./style.css"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "./client": [
+        "./dist/client.d.mts"
+      ],
+      "*": [
+        "./dist/index.d.mts"
+      ]
+    }
+  },
+  "files": [
+    "*.css",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build"
+  },
+  "dependencies": {
+    "floating-vue": "^5.0.2",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-gfm": "^3.0.0",
+    "mdast-util-to-hast": "^13.0.2",
+    "shikiji": "workspace:*",
+    "shikiji-twoslash": "workspace:*",
+    "vue": "^3.4.7"
+  }
+}

@@ -1,10 +1,9 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import { transformerTwoSlash } from 'shikiji-twoslash'
 import { bundledThemes } from 'shikiji'
+import { defaultInfoProcessor, transformerTwoslash } from 'vitepress-plugin-twoslash'
 import { version } from '../../package.json'
 import vite from './vite.config'
-import { rendererFloatingVue } from './renderer-floating-vue'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
@@ -55,9 +54,14 @@ export default defineConfig({
       }))
     },
     codeTransformers: [
-      transformerTwoSlash({
-        explicitTrigger: true,
-        renderer: rendererFloatingVue(),
+      transformerTwoslash({
+        processHoverInfo(info) {
+          return defaultInfoProcessor(info)
+            // Remove shikiji_core namespace
+            .replace(/\bshikiji_core\./g, '')
+            // Remove member access
+            .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
+        },
       }),
       {
         // Render custom themes with codeblocks
@@ -92,21 +96,7 @@ export default defineConfig({
           return code
         },
       },
-      {
-        name: 'shikiji:vitepress-patch',
-        preprocess(_, options) {
-          const cleanup = options.transformers?.find(i => i.name === 'vitepress:clean-up')
-          if (cleanup)
-            options.transformers?.splice(options.transformers.indexOf(cleanup), 1)
 
-          // Disable v-pre for twoslash, because we need render it with FloatingVue
-          if (options.meta?.__raw?.includes('twoslash')) {
-            const vPre = options.transformers?.find(i => i.name === 'vitepress:v-pre')
-            if (vPre)
-              options.transformers?.splice(options.transformers.indexOf(vPre), 1)
-          }
-        },
-      },
       {
         name: 'shikiji:remove-escape',
         postprocess(code) {
