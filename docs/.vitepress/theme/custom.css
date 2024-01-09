@@ -1,11 +1,11 @@
 .twoslash {
-  --twoslash-popup-bg: var(--vp-code-block-bg, inherit);
+  --twoslash-popup-bg: var(--vp-c-bg, inherit);
   --twoslash-underline-color: #8888;
   --twoslash-border-color: #8884;
 }
 
 .v-popper--theme-dropdown .v-popper__inner {
-  background: var(--vp-code-block-bg);
+  background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
   border-color: var(--vp-c-border);
 }
@@ -49,19 +49,19 @@
   padding: 0px 12px 0px 12px !important;
   font-family: var(--vp-font-family-base);
   font-size: 0.9em;
-  max-height: 400px;
+  max-height: 500px;
+  max-width: 500px;
   overflow-y: auto;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc p {
-  margin: 6px 0;
-  padding: 0;
+  margin: 0;
+  padding: 6px 0;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc pre {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 4px;
+  background-color: var(--vp-code-block-bg);
+  border-radius: 8px;
   padding: 12px;
-  margin-left: -5px;
-  margin-right: -5px;
+  margin: 6px -2px;
 }

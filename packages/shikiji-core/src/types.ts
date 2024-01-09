@@ -272,12 +272,12 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * This allows you to specify multiple themes for the generated code.
    *
    * ```ts
-   * shiki.codeToHtml(code, {
-   *  lang: 'js',
-   *  themes: {
-   *    light: 'vitesse-light',
-   *    dark: 'vitesse-dark',
-   *  }
+   * highlighter.codeToHtml(code, {
+   *   lang: 'js',
+   *   themes: {
+   *     light: 'vitesse-light',
+   *     dark: 'vitesse-dark',
+   *   }
    * })
    * ```
    *
@@ -544,6 +544,7 @@ export interface ThemedTokenExplanation {
  *
  * For example:
  *
+ * ```json
  * {
  *   "content": "shiki",
  *   "color": "#D8DEE9",
@@ -590,7 +591,7 @@ export interface ThemedTokenExplanation {
  *     }
  *   ]
  * }
- *
+ * ```
  */
 export interface ThemedToken extends TokenStyles, TokenBase {}
 
