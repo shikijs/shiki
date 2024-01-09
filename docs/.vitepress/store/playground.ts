@@ -38,35 +38,36 @@ export const usePlayground = defineStore('playground', () => {
     }
   }
 
-  if (typeof window !== 'undefined') {
-    (async () => {
-      const { getHighlighter, addClassToHast } = await import('shikiji')
-      const { bundledLanguagesInfo: bundleFull } = await import('shikiji/bundle/full')
-      const { bundledLanguagesInfo: bundleWeb } = await import('shikiji/bundle/web')
-      const { bundledThemesInfo } = await import('shikiji/themes')
+  ;(async () => {
+    const { getHighlighter, addClassToHast } = await import('shikiji')
+    const { bundledLanguagesInfo: bundleFull } = await import('shikiji/bundle/full')
+    const { bundledLanguagesInfo: bundleWeb } = await import('shikiji/bundle/web')
+    const { bundledThemesInfo } = await import('shikiji/themes')
+
+    const samplesCache = new Map<string, Promise<string | undefined>>()
+
+    function fetchSample(id: string) {
+      if (!samplesCache.has(id)) {
+        samplesCache.set(id, fetch(`https://raw.githubusercontent.com/antfu/textmate-grammars-themes/main/samples/${id}.sample`)
+          .then(r => r.text())
+          .catch((e) => {
+            console.error(e)
+            return undefined
+          }))
+      }
+      return samplesCache.get(id)!
+    }
+
+    allThemes.value = bundledThemesInfo
+    allLanguages.value = bundleFull
+    bundledLangsFull.value = bundleFull
+    bundledLangsWeb.value = bundleWeb
+
+    if (typeof window !== 'undefined') {
       const highlighter = await getHighlighter({
         themes: [theme.value],
         langs: ['typescript', 'javascript', lang.value as any],
       })
-
-      const samplesCache = new Map<string, Promise<string | undefined>>()
-
-      function fetchSample(id: string) {
-        if (!samplesCache.has(id)) {
-          samplesCache.set(id, fetch(`https://raw.githubusercontent.com/antfu/textmate-grammars-themes/main/samples/${id}.sample`)
-            .then(r => r.text())
-            .catch((e) => {
-              console.error(e)
-              return undefined
-            }))
-        }
-        return samplesCache.get(id)!
-      }
-
-      allThemes.value = bundledThemesInfo
-      allLanguages.value = bundleFull
-      bundledLangsFull.value = bundleFull
-      bundledLangsWeb.value = bundleWeb
 
       watch(input, run, { immediate: true })
 
@@ -100,8 +101,8 @@ export const usePlayground = defineStore('playground', () => {
         })
         isLoading.value = false
       }
-    })()
-  }
+    }
+  })()
 
   return {
     lang,
@@ -117,6 +118,3 @@ export const usePlayground = defineStore('playground', () => {
     randomize,
   }
 })
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(usePlayground, import.meta.hot))
