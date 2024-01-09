@@ -1,4 +1,5 @@
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, ThemeInput, ThemeRegistrationAny } from './types'
+import type { Root } from 'hast'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToThemedTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, ThemeInput, ThemeRegistrationAny, ThemedToken, ThemedTokenWithVariants } from './types'
 import { isSpecialLang, toArray } from './utils'
 import { getHighlighterCore } from './highlighter'
 
@@ -65,7 +66,48 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
   return getHighlighter
 }
 
-export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>) {
+export interface ShorthandsBundle<L extends string, T extends string> {
+  /**
+   * Shorthand for `codeToHtml` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   *
+   * Differences from `highlighter.codeToHtml()`, this function is async.
+   */
+  codeToHtml(code: string, options: CodeToHastOptions<L, T>): Promise<string>
+
+  /**
+   * Shorthand for `codeToHtml` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   *
+   * Differences from `highlighter.codeToHtml()`, this function is async.
+   */
+  codeToHast(code: string, options: CodeToHastOptions<L, T>): Promise<Root>
+
+  /**
+   * Shorthand for `codeToThemedTokens` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   *
+   * Differences from `highlighter.codeToThemedTokens()`, this function is async.
+   */
+  codeToThemedTokens(code: string, options: RequireKeys<CodeToThemedTokensOptions<L, T>, 'theme' | 'lang'>): Promise<ThemedToken[][]>
+
+  /**
+   * Shorthand for `codeToTokensWithThemes` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   *
+   * Differences from `highlighter.codeToTokensWithThemes()`, this function is async.
+   */
+  codeToTokensWithThemes(code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>): Promise<ThemedTokenWithVariants[][]>
+
+  /**
+   * Get internal singleton highlighter.
+   *
+   * @internal
+   */
+  getSingletonHighlighter(): Promise<HighlighterGeneric<L, T>>
+}
+
+export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>): ShorthandsBundle<L, T> {
   let _shiki: ReturnType<typeof getHighlighter>
 
   async function _getHighlighter(options: {
@@ -89,64 +131,35 @@ export function createSingletonShorthands<L extends string, T extends string >(g
     }
   }
 
-  /**
-   * Shorthand for `codeToHtml` with auto-loaded theme and language.
-   * A singleton highlighter it maintained internally.
-   *
-   * Differences from `shiki.codeToHtml()`, this function is async.
-   */
-  async function codeToHtml(code: string, options: CodeToHastOptions<L, T>) {
-    const shiki = await _getHighlighter({
-      lang: options.lang as L,
-      theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
-    })
-    return shiki.codeToHtml(code, options)
-  }
-
-  /**
-   * Shorthand for `codeToHtml` with auto-loaded theme and language.
-   * A singleton highlighter it maintained internally.
-   *
-   * Differences from `shiki.codeToHtml()`, this function is async.
-   */
-  async function codeToHast(code: string, options: CodeToHastOptions<L, T>) {
-    const shiki = await _getHighlighter({
-      lang: options.lang as L,
-      theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
-    })
-    return shiki.codeToHast(code, options)
-  }
-
-  /**
-   * Shorthand for `codeToThemedTokens` with auto-loaded theme and language.
-   * A singleton highlighter it maintained internally.
-   *
-   * Differences from `shiki.codeToThemedTokens()`, this function is async.
-   */
-  async function codeToThemedTokens(code: string, options: RequireKeys<CodeToThemedTokensOptions<L, T>, 'theme' | 'lang'>) {
-    const shiki = await _getHighlighter(options)
-    return shiki.codeToThemedTokens(code, options)
-  }
-
-  /**
-   * Shorthand for `codeToTokensWithThemes` with auto-loaded theme and language.
-   * A singleton highlighter it maintained internally.
-   *
-   * Differences from `shiki.codeToTokensWithThemes()`, this function is async.
-   */
-  async function codeToTokensWithThemes(code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>) {
-    const shiki = await _getHighlighter({
-      lang: options.lang,
-      theme: Object.values(options.themes).filter(Boolean) as T[],
-    })
-    return shiki.codeToTokensWithThemes(code, options)
-  }
-
   return {
     getSingletonHighlighter: () => _getHighlighter(),
-    codeToHtml,
-    codeToHast,
-    codeToThemedTokens,
-    codeToTokensWithThemes,
+    async codeToHtml(code, options) {
+      const shiki = await _getHighlighter({
+        lang: options.lang as L,
+        theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      })
+      return shiki.codeToHtml(code, options)
+    },
+
+    async codeToHast(code, options) {
+      const shiki = await _getHighlighter({
+        lang: options.lang as L,
+        theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      })
+      return shiki.codeToHast(code, options)
+    },
+
+    async codeToThemedTokens(code, options) {
+      const shiki = await _getHighlighter(options)
+      return shiki.codeToThemedTokens(code, options)
+    },
+
+    async codeToTokensWithThemes(code, options) {
+      const shiki = await _getHighlighter({
+        lang: options.lang,
+        theme: Object.values(options.themes).filter(Boolean) as T[],
+      })
+      return shiki.codeToTokensWithThemes(code, options)
+    },
   }
 }

@@ -30,7 +30,7 @@
   display: inline-block;
 }
 
-.floating-vue-twoslash :not(p) > code {
+.floating-vue-twoslash .twoslash-popup-type {
   max-width: 600px;
   display: block;
   padding: 6px 12px;
@@ -49,9 +49,19 @@
   padding: 0px 12px 0px 12px !important;
   font-family: var(--vp-font-family-base);
   font-size: 0.9em;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc p {
   margin: 6px 0;
   padding: 0;
+}
+
+.floating-vue-twoslash .twoslash-popup-jsdoc pre {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  padding: 12px;
+  margin-left: -5px;
+  margin-right: -5px;
 }

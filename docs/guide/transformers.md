@@ -34,7 +34,14 @@ We also provide some common transformers for you to use, check [`shikiji-transfo
 
 You can also got the intermediate `hast` to do your custom rendering without serialize them into HTML with `codeToHast`. You can also further integrate the ast the [unified](https://github.com/unifiedjs) ecosystem.
 
-```js
+```ts twoslash
+import { getHighlighter } from 'shikiji'
+
+const highlighter = await getHighlighter({
+  themes: ['nord', 'min-light'],
+  langs: ['javascript'],
+})
+// ---cut---
 const root = highlighter.codeToHast(
   'const a = 1',
   { lang: 'javascript', theme: 'nord' }

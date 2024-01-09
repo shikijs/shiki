@@ -7,6 +7,12 @@ import { codeToHast } from './renderer-hast'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 
+/**
+ * Create a Shikiji core highlighter instance, with no languages or themes bundled.
+ * Wasm and each language and theme must be loaded manually.
+ *
+ * @see http://shikiji.netlify.app/guide/install#fine-grained-bundle
+ */
 export async function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
   const internal = await getShikiInternal(options)
 

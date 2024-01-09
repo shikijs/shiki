@@ -16,7 +16,8 @@ npm i -D rehype-shikiji
 
 ## Usage
 
-```ts
+```ts twoslash
+// @noErrors: true
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -41,7 +42,8 @@ const file = await unified()
 
 By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikijiFromHighlighter` from `rehype-shikiji/core` and pass your own highlighter:
 
-```ts
+```ts twoslash
+// @noErrors: true
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'

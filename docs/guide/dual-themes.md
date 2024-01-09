@@ -84,7 +84,14 @@ html.dark .shiki span {
 
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
-```js
+```ts twoslash
+import { getHighlighter } from 'shikiji'
+
+const highlighter = await getHighlighter({
+  themes: ['nord', 'min-light'],
+  langs: ['javascript'],
+})
+// ---cut---
 const code = highlighter.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
@@ -114,7 +121,14 @@ Then update your CSS snippet to control when each theme takes effect. Here is an
 
 If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
-```js
+```ts twoslash
+import { getHighlighter } from 'shikiji'
+
+const highlighter = await getHighlighter({
+  themes: ['nord', 'min-light'],
+  langs: ['javascript'],
+})
+// ---cut---
 const code = highlighter.codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
@@ -139,15 +153,18 @@ It's also possible to control the theme in CSS variables. For more, refer to the
 
 You can register custom language aliases with `langAlias` option. For example:
 
-```js
+```ts twoslash
 import { getHighlighter } from 'shikiji'
 
 const highlighter = await getHighlighter({
   langs: ['javascript'],
-  langAlias: {
+  langAlias: { // [!code hl:3]
     mylang: 'javascript',
   },
 })
 
-const code = highlighter.codeToHtml('const a = 1', { lang: 'mylang' })
+const code = highlighter.codeToHtml('const a = 1', {
+  lang: 'mylang', // [!code hl]
+  theme: 'nord'
+})
 ```

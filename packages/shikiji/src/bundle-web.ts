@@ -13,6 +13,16 @@ export * from './wasm'
 
 export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
 
+/**
+ * Initiate a highlighter instance and load the specified languages and themes.
+ * Later it can be used synchronously to highlight code.
+ *
+ * Importing this function will bundle all languages and themes.
+ * @see https://shikiji.netlify.app/guide/bundles#shikiji-bundle-web
+ *
+ * For granular control over the bundle, check:
+ * @see https://shikiji.netlify.app/guide/install#fine-grained-bundle
+ */
 export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,
   BundledTheme

@@ -65,6 +65,9 @@ export interface ShikiInternal {
   updateAlias(alias: Record<string, string>): void
 }
 
+/**
+ * Generic instance interface of Shikiji
+ */
 export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
   /**
    * Get highlighted code in HTML string
@@ -343,7 +346,7 @@ export interface CodeOptionsMeta {
 
 export interface TransformerOptions {
   /**
-   * Transform the generated HAST tree.
+   * Transformers for the Shikiji pipeline.
    */
   transformers?: ShikijiTransformer[]
 
@@ -448,12 +451,18 @@ export type ThemeRegistrationAny = ThemeRegistrationRaw | ThemeRegistration | Th
 
 export interface ShikijiTransformerContextMeta {}
 
+/**
+ * Common transformer context for all transformers hooks
+ */
 export interface ShikijiTransformerContextCommon {
   meta: ShikijiTransformerContextMeta
   options: CodeToHastOptions
   codeToHast: (code: string, options: CodeToHastOptions) => Root
 }
 
+/**
+ * Transformer context for HAST related hooks
+ */
 export interface ShikijiTransformerContext extends ShikijiTransformerContextCommon {
   readonly tokens: ThemedToken[][]
   readonly root: Root

@@ -57,7 +57,7 @@ export default defineConfig({
     codeTransformers: [
       transformerTwoSlash({
         explicitTrigger: true,
-        renderer: rendererFloatingVue,
+        renderer: rendererFloatingVue(),
       }),
       {
         // Render custom themes with codeblocks

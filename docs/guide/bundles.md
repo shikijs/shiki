@@ -22,7 +22,7 @@ The bundle the includes all themes and common web languages like (HTML, CSS, JS,
 
 Use as normal, all functions from `shikiji` are also available in the bundle:
 
-```ts
+```ts twoslash
 import {
   BundledLanguage,
   BundledTheme,

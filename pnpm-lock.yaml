@@ -9,6 +9,7 @@ overrides:
   '@types/mdast': ^4.0.3
   '@types/unist': ^3.0.2
   markdown-it-shikiji: workspace:*
+  rehype-shikiji: workspace:*
   shikiji: workspace:*
   shikiji-core: workspace:*
   shikiji-transformers: workspace:*
@@ -112,6 +113,9 @@ importers:
       prettier:
         specifier: ^3.1.1
         version: 3.1.1
+      rehype-shikiji:
+        specifier: workspace:*
+        version: link:packages/rehype-shikiji
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5

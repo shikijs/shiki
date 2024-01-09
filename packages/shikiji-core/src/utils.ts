@@ -1,18 +1,33 @@
 import type { Element } from 'hast'
 import type { MaybeArray } from './types'
 
-export function isPlaintext(lang: string | null | undefined) {
-  return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)
-}
-
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
 }
 
+/**
+ * Check if the language is plaintext that is ignored by Shikiji.
+ *
+ * Hard-coded languages: `plaintext`, `txt`, `text`, `plain`.
+ */
+export function isPlaintext(lang: string | null | undefined) {
+  return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)
+}
+
+/**
+ * Check if the language is specially handled by Shikiji.
+ *
+ * Hard-coded languages: `ansi` and plaintexts like `plaintext`, `txt`, `text`, `plain`.
+ */
 export function isSpecialLang(lang: string) {
   return lang === 'ansi' || isPlaintext(lang)
 }
 
+/**
+ * Utility to append class to a hast node
+ *
+ * If the `property.class` is a string, it will be splitted by space and converted to an array.
+ */
 export function addClassToHast(node: Element, className: string | string[]) {
   if (!className)
     return

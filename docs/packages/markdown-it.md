@@ -12,7 +12,7 @@ npm i -D markdown-it-shikiji
 
 ## Usage
 
-```ts
+```ts twoslash
 import MarkdownIt from 'markdown-it'
 import Shikiji from 'markdown-it-shikiji'
 
@@ -30,7 +30,8 @@ md.use(await Shikiji({
 
 By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `markdown-it-shikiji/core` and pass your own highlighter:
 
-```ts
+```ts twoslash
+// @noErrors: true
 import MarkdownIt from 'markdown-it'
 import { fromHighlighter } from 'markdown-it-shikiji/core'
 import { getHighlighterCore } from 'shikiji/core'
