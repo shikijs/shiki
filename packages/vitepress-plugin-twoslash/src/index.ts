@@ -154,6 +154,8 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions = {}
         ...presisted && {
           ':shown': 'true',
           ':triggers': '[]',
+          ':popper-triggers': '[]',
+          ':auto-hide': 'false',
         },
       },
       children: [
