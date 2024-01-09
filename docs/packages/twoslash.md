@@ -32,7 +32,7 @@ const html = await codeToHtml(`console.log()`, {
 
 Same as `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
 
-If if you want to run TwoSlash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
+If you want to run TwoSlash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
 
 ## Renderers
 
