@@ -118,3 +118,6 @@ export const usePlayground = defineStore('playground', () => {
     randomize,
   }
 })
+
+if (import.meta.hot)
+  import.meta.hot.accept(acceptHMRUpdate(usePlayground, import.meta.hot))
