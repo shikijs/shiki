@@ -30,7 +30,7 @@
   display: inline-block;
 }
 
-.floating-vue-twoslash code {
+.floating-vue-twoslash :not(p) > code {
   max-width: 600px;
   display: block;
   padding: 6px 12px;
@@ -46,7 +46,12 @@
 .floating-vue-twoslash .twoslash-popup-jsdoc {
   border-top: 1px solid var(--vp-c-border);
   color: var(--vp-c-text-1);
-  padding: 6px 12px 6px 12px;
+  padding: 0px 12px 0px 12px !important;
   font-family: var(--vp-font-family-base);
   font-size: 0.9em;
+}
+
+.floating-vue-twoslash .twoslash-popup-jsdoc p {
+  margin: 6px 0;
+  padding: 0;
 }
