@@ -50,8 +50,9 @@
   font-family: var(--vp-font-family-base);
   font-size: 0.9em;
   max-height: 500px;
-  max-width: 500px;
+  max-width: 700px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc p {
@@ -64,4 +65,5 @@
   border-radius: 8px;
   padding: 12px;
   margin: 6px -2px;
+  overflow-x: auto;
 }
