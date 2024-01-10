@@ -33,8 +33,16 @@ export interface RendererRichOptions {
   /**
    * Custom formatter for the type info text.
    * Note that it might not be valid TypeScript syntax.
+   *
+   * @default defaultHoverInfoProcessor
    */
-  formatInfo?(info: string): string
+  processHoverInfo?: (info: string) => string
+  /**
+   * Custom formatter for the docs text (can be markdown).
+   *
+   * @default undefined
+   */
+  processHoverDocs?: (docs: string) => string
 
   /**
    * Classes added to injected elements
@@ -46,6 +54,11 @@ export interface RendererRichOptions {
    * @default the language of the code block
    */
   lang?: string
+
+  /**
+   * @deprecated Use `processHoverInfo` instead.
+   */
+  formatInfo?(info: string): string
 }
 
 /**
@@ -56,7 +69,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
   const {
     completionIcons = defaultCompletionIcons,
     customTagIcons = defaultCustomTagIcons,
-    formatInfo = info => info,
+    formatInfo,
+    processHoverInfo = formatInfo || defaultHoverInfoProcessor,
+    processHoverDocs = docs => docs,
     classExtra = '',
     jsdoc = true,
   } = options
@@ -69,7 +84,11 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
     if (!info.text)
       return []
 
-    const themedContent = ((codeToHast(formatInfo(info.text), {
+    const text = processHoverInfo(info.text) ?? info.text
+    if (!text)
+      return []
+
+    const themedContent = ((codeToHast(text, {
       ...shikijiOptions,
       lang: options.lang || shikijiOptions.lang,
       transformers: [],
@@ -77,17 +96,20 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
     }).children[0] as Element).children[0] as Element).children
 
     if (jsdoc && info.docs) {
-      themedContent.push({
-        type: 'element',
-        tagName: 'div',
-        properties: { class: 'twoslash-popup-jsdoc' },
-        children: [
-          {
-            type: 'text',
-            value: info.docs,
-          },
-        ],
-      })
+      const docs = processHoverDocs(info.docs) ?? info.docs
+      if (docs) {
+        themedContent.push({
+          type: 'element',
+          tagName: 'div',
+          properties: { class: 'twoslash-popup-jsdoc' },
+          children: [
+            {
+              type: 'text',
+              value: docs,
+            },
+          ],
+        })
+      }
     }
 
     return themedContent
@@ -298,4 +320,29 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
       ]
     },
   }
+}
+
+const regexType = /^[A-Z][a-zA-Z0-9_]*(\<[^\>]*\>)?:/
+const regexFunction = /^[a-zA-Z0-9_]*\(/
+
+/**
+ * The default hover info processor, which will do some basic cleanup
+ */
+export function defaultHoverInfoProcessor(type: string) {
+  let content = type
+    // remove leading `(property)` or `(method)` on each line
+    .replace(/^\(([\w-]+?)\)\s+/mg, '')
+    // remove import statement
+    .replace(/\nimport .*$/, '')
+    // remove interface or namespace lines with only the name
+    .replace(/^(interface|namespace) \w+$/mg, '')
+    .trim()
+
+  // Add `type` or `function` keyword if needed
+  if (content.match(regexType))
+    content = `type ${content}`
+  else if (content.match(regexFunction))
+    content = `function ${content}`
+
+  return content
 }

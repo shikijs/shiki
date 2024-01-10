@@ -1,4 +1,4 @@
-import { rendererRich } from 'shikiji-twoslash'
+import { defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
 import type { RendererRichOptions, TwoSlashRenderers } from 'shikiji-twoslash'
 import type { Element, Text } from 'hast'
 import type { ShikijiTransformerContext } from 'shikiji'
@@ -8,31 +8,11 @@ import { defaultHandlers, toHast } from 'mdast-util-to-hast'
 import { addClassToHast } from 'shikiji/core'
 import type { VitePressPluginTwoSlashOptions } from 'vitepress-plugin-twoslash'
 
-const regexType = /^[A-Z][a-zA-Z0-9_]*(\<[^\>]*\>)?:/
-const regexFunction = /^[a-zA-Z0-9_]*\(/
-
-export function defaultInfoProcessor(type: string) {
-  let content = type
-    // remove leading `(property)` or `(method)` on each line
-    .replace(/^\(([\w-]+?)\)\s+/mg, '')
-    // remove import statement
-    .replace(/\nimport .*$/, '')
-    // remove interface or namespace lines with only the name
-    .replace(/^(interface|namespace) \w+$/mg, '')
-    .trim()
-
-  // Add `type` or `function` keyword if needed
-  if (content.match(regexType))
-    content = `type ${content}`
-  else if (content.match(regexFunction))
-    content = `function ${content}`
-
-  return content
-}
+export { defaultHoverInfoProcessor }
 
 export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & RendererRichOptions = {}): TwoSlashRenderers {
   const {
-    processHoverInfo = defaultInfoProcessor,
+    processHoverInfo = defaultHoverInfoProcessor,
     processHoverDocs = docs => docs,
   } = options
 

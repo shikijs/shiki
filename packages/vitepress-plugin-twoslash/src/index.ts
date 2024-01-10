@@ -1,19 +1,16 @@
 import { transformerTwoSlash } from 'shikiji-twoslash'
-import type { TransformerTwoSlashOptions } from 'shikiji-twoslash'
+import type { RendererRichOptions, TransformerTwoSlashOptions } from 'shikiji-twoslash'
 import type { ShikijiTransformer } from 'shikiji'
 import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
 
-export interface VitePressPluginTwoSlashOptions extends TransformerTwoSlashOptions {
+export interface VitePressPluginTwoSlashOptions extends TransformerTwoSlashOptions, RendererRichOptions {
   /**
    * Requires adding `twoslash` to the code block explicitly to run twoslash
    * @default true
    */
   explicitTrigger?: boolean
-
-  processHoverInfo?: (info: string) => string
-  processHoverDocs?: (docs: string) => string
 }
 
 /**
