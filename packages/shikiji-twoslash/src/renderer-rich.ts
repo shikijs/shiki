@@ -40,6 +40,12 @@ export interface RendererRichOptions {
    * Classes added to injected elements
    */
   classExtra?: string
+
+  /**
+   * Language for syntax highlight.
+   * @default the language of the code block
+   */
+  lang?: string
 }
 
 /**
@@ -57,14 +63,15 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
 
   function hightlightPopupContent(
     codeToHast: ShikijiTransformerContextCommon['codeToHast'],
-    options: ShikijiTransformerContextCommon['options'],
+    shikijiOptions: ShikijiTransformerContextCommon['options'],
     info: { text?: string, docs?: string },
   ) {
     if (!info.text)
       return []
 
     const themedContent = ((codeToHast(formatInfo(info.text), {
-      ...options,
+      ...shikijiOptions,
+      lang: options.lang || shikijiOptions.lang,
       transformers: [],
       transforms: undefined,
     }).children[0] as Element).children[0] as Element).children
