@@ -139,6 +139,6 @@ If you are migrating form Shiki, some variables are renamed from Shiki's `css-va
 
 | Shiki                      | Shikiji              |
 | -------------------------- | -------------------- |
-| `--shiki-color-text`       | `--shiki-forground`  |
+| `--shiki-color-text`       | `--shiki-foreground`  |
 | `--shiki-color-background` | `--shiki-background` |
 | `--shiki-color-ansi-*`     | `--shiki-ansi-*`     |
