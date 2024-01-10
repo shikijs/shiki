@@ -18,7 +18,7 @@ The full bundle includes all themes and languages, same as the main `shikiji` en
 
 > [Bundle Size](/guide/#bundle-size): 3.8 MB (minified), 695 KB (gzip), async chunks included
 
-The bundle the includes all themes and common web languages like (HTML, CSS, JS, TS, JSON, Markdown, etc.) and some web frameworks (Vue, JSX, Svelte, etc.).
+The bundle includes all themes and common web languages like (HTML, CSS, JS, TS, JSON, Markdown, etc.) and some web frameworks (Vue, JSX, Svelte, etc.).
 
 Use as normal, all functions from `shikiji` are also available in the bundle:
 

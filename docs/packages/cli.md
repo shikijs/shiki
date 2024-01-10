@@ -6,7 +6,7 @@ Shikiji in the command line.
 
 ## Usage
 
-Shikiji CLI works like `cat` command, but with syntax highlighting.
+The Shikiji CLI works like `cat` command, but with syntax highlighting.
 
 ```bash
 npx shikiji-cli README.md
@@ -14,7 +14,7 @@ npx shikiji-cli README.md
 
 ## Install
 
-You can also install it globally. Command alias `shikiji-cli`, `shikiji`, `skat` are registered.
+You can also install it globally. Command aliases `shikiji-cli`, `shikiji`, `skat` are registered.
 
 ```bash
 npm i -g shikiji-cli
@@ -26,7 +26,7 @@ skat src/index.ts
 
 ### `--theme`
 
-Specify the theme to use. Default to `vitesse-dark`.
+Specify the theme to use. Defaults to `vitesse-dark`.
 
 ```bash
 npx shikiji-cli README.md --theme=nord

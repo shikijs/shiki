@@ -40,7 +40,7 @@ const file = await unified()
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shikiji` will be imported. If you are Shikiji's [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikijiFromHighlighter` from `rehype-shikiji/core` and pass your own highlighter:
+By default, the full bundle of `shikiji` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikijiFromHighlighter` from `rehype-shikiji/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true
@@ -83,15 +83,14 @@ const file = await unified()
 
 ### Line Highlight
 
-In addition to the features of `shikiji`, this plugin also supports line highlighting. You can add `{1,3-4}` after the language name to highlight the specified lines. For example:
+In addition to the features of `shikiji`, this plugin also supports line highlighting. You can specify line numbers to highlight after the language name in the format `{<line-numbers>}` - a comma separated list of `<line-number>`s, wrapped in curly braces. Each line number can be a single number (e.g. `{2}` highlights line 2 and `{1,4}` highlights lines 1 and 4) or a range (e.g. `{5-7}` highlights lines 1 through 7, and `{1-3,5-6}` highlights lines 1 through 3 and 5 through 6). For example:
 
 ````md
-# Hello World
-
 ```js {1,3-4}
-console.log('line1') // highlighted
-console.log('line2')
-console.log('line3') // highlighted
-console.log('line4') // highlighted
+console.log('1') // highlighted
+console.log('2')
+console.log('3') // highlighted
+console.log('4') // highlighted
 ```
 ````
+

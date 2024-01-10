@@ -4,7 +4,7 @@ outline: deep
 
 # Light/Dark Dual Themes
 
-Shikiji supports outputing light/dark dual themes. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, Shikiji's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
+Shikiji supports outputting light/dark dual themes. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, Shikiji's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
 Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
 
@@ -151,7 +151,7 @@ It's also possible to control the theme in CSS variables. For more, refer to the
 
 ## Custom Language Aliases
 
-You can register custom language aliases with `langAlias` option. For example:
+You can register custom language aliases with the `langAlias` option. For example:
 
 ```ts twoslash
 import { getHighlighter } from 'shikiji'

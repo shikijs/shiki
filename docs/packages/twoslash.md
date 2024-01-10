@@ -10,7 +10,7 @@ A Shikiji transformer for [TypeScript TwoSlash](https://www.typescriptlang.org/d
 npm i -D shikiji-twoslash
 ```
 
-Unlike `shiki-twoslash` that wraps around `shiki`, this package is **a transformer addon** to Shikiji. This means that for every integration that supports shikiji transformers, you can use this package.
+Unlike `shiki-twoslash` that wraps around `shiki`, this package is **a transformer addon** to Shikiji. This means that for every integration that supports Shikiji transformers, you can use this package.
 
 ```ts twoslash
 import {
@@ -30,7 +30,7 @@ const html = await codeToHtml(`console.log()`, {
 })
 ```
 
-Same as `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
+Just like `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
 
 If you want to run TwoSlash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
 
@@ -38,7 +38,7 @@ If you want to run TwoSlash on browsers or workers, reference to the [CDN Usage]
 
 Thanks to the flexibility of [`hast`](https://github.com/syntax-tree/hast), this transformer allows customizing how each piece of information is rendered in the output HTML with ASTs.
 
-We provide two renderers built-in, while you can also create your own:
+We provide two renderers built-in, and you can also create your own:
 
 ### `rendererClassic`
 
@@ -46,13 +46,13 @@ We provide two renderers built-in, while you can also create your own:
 
 This is the default renderer that aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
 
-You might need to reference `shiki-twoslash`'s CSS to make them look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
 
 ### `rendererRich`
 
 [Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-rich.ts)
 
-This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information as well.
+This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information.
 
 ```ts twoslash
 import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
@@ -62,7 +62,7 @@ transformerTwoSlash({
 })
 ```
 
-Here is a few examples with the built-in [`style-rich.css`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-rich.css):
+Here are a few examples with the built-in [`style-rich.css`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-rich.css):
 
 <!-- eslint-skip -->
 
@@ -131,7 +131,7 @@ In markdown, you can use the following syntax to trigger TwoSlash:
 
 By default `@typescript/twoslash` runs on Node.js and relies on your local system to resolve TypeScript and types for the imports. Import it directly in non-Node.js environments would not work.
 
-Luckily, TwoSlash implemented a virtual file system, allow you to provide your own files for TypeScript to resolve in memory. However, how to load those files in the browser is still a challenge. Thanks to the work on [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team already provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
+Luckily, TwoSlash implemented a virtual file system, which allow you to provide your own files for TypeScript to resolve in memory. However, loading these files in the browser is still a challenge. Thanks to the work on the [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team has provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
 
 We make tiny wrappers around the building blocks and provide an easy-to-use API in [`twoslash-cdn`](https://github.com/antfu/twoslash-cdn). For example:
 
@@ -174,7 +174,7 @@ const count = ref(0)
 //     ^?
 `.trim()
 
-// Before rendering, we need to prepare the types, so that the rendering could happend synchronously
+// Before rendering, we need to prepare the types, so that the rendering can happen synchronously
 await twoslash.prepareTypes(source)
 
 // Then we can render the code

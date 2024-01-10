@@ -6,7 +6,7 @@ outline: deep
 
 <Badges name="shikiji" />
 
-Install via npm, or [CDN Usage](#cdn-usage):
+Install via npm, or see [CDN Usage](#cdn-usage):
 ::: code-group
 
 ```sh [npm]
@@ -80,9 +80,9 @@ const hast = codeToHast('.text-red { color: red; }', {
 
 ### Highlighter Usage
 
-The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, we provide the `getHighlighter` function to create a highlighter instance that can later be used synchronously.
+The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, so we provide the `getHighlighter` function to create a highlighter instance that can later be used synchronously.
 
-The usage is pretty much the same as `shiki`, while each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
+The usage is pretty much the same as `shiki`, where each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```ts twoslash theme:nord
 import { getHighlighter } from 'shikiji'
@@ -187,12 +187,12 @@ const code = highlighter.codeToHtml('const a = 1', {
 ```
 
 ::: info
-[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-core/src/bundle-factory.ts) or port it your own.
+[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-core/src/bundle-factory.ts) or port it yourself.
 :::
 
 ### Bundle Presets
 
-We also provide some pre-composed bundles for you to use easily, learn more about them in the [bundles section](/guide/bundles).
+We also provide some pre-composed bundles for you to use easily, you can learn more about them in the [bundles section](/guide/bundles).
 
 ### CJS Usage
 

@@ -1,8 +1,8 @@
 # Load Custom Themes
 
-Check [All Builtin Themes](/themes) as well.
+See [All Builtin Themes](/themes) first.
 
-You can load custom themes by passing a `Theme` object into the themes array.
+You can load custom themes by passing a `Theme` object into the `themes` array.
 
 ```ts twoslash
 import { getHighlighter } from 'shikiji'

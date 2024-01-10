@@ -1,8 +1,8 @@
 # Load Custom Languages
 
-Check [All Builtin Languages](/languages) as well.
+See [All Builtin Languages](/languages) first.
 
-You can load custom languages by passing a TextMate grammar object into the langs array.
+You can load custom languages by passing a TextMate grammar object into the `langs` array.
 
 ```ts twoslash
 // @noErrors
@@ -38,7 +38,9 @@ const html = highlighter.codeToHtml(code, {
 
 ## Migrate from Shiki
 
-Since `shikiji` is environment agnostic, that means we don't have access to the file system. That means the `path` property `shiki` supports is not available in `shikiji`. Instead, you need to read them in yourself and pass the object. For example:
+Since `shikiji` is environment agnostic, we don't have access to the file system. That means the `path` property `shiki` supports is not available in `shikiji`, and you must to read the files yourself and pass in the object.
+
+For example, the following would not work:
 
 ```ts
 const highlighter = await getHighlighter({
@@ -61,7 +63,7 @@ const highlighter = await getHighlighter({
 })
 ```
 
-Instead, load that file yourself (via `fs`, `import()`, `fetch()`, etc.) and pass the object:
+Instead, load that file yourself (via `fs`, `import()`, `fetch()`, etc.):
 
 ```ts
 const vineGrammar = JSON.parse(fs.readFileSync(join(__dirname, './vine-ts.tmLanguage.json'), 'utf8'))
