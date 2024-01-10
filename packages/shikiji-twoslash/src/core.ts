@@ -96,6 +96,7 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
           if (!lineEl) {
             if (throws)
               throw new Error(`[shikiji-twoslash] Cannot find line ${line} in code element`)
+            return
           }
           const textNodes = lineEl.children.flatMap(i => i.type === 'element' ? i.children || [] : []) as (Text | Element)[]
           let index = 0
@@ -106,6 +107,7 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
             if (index > character)
               return token
           }
+
           if (throws)
             throw new Error(`[shikiji-twoslash] Cannot find token at L${line}:${character}`)
         }
@@ -134,7 +136,8 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
           if (query.kind === 'completions') {
             const token = locateTextToken(query.line - 1, query.offset)
             if (!token)
-              throw new Error(`[shikiji-twoslash] Cannot find token at L${query.line}:${query.offset}`)
+              continue
+
             skipTokens.add(token)
 
             if (renderer.nodeCompletions) {
@@ -148,7 +151,7 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
           else if (query.kind === 'query') {
             const token = locateTextToken(query.line - 1, query.offset)
             if (!token)
-              throw new Error(`[shikiji-twoslash] Cannot find token at L${query.line}:${query.offset}`)
+              continue
 
             skipTokens.add(token)
 
