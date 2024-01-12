@@ -10,7 +10,8 @@
     "typecheck": "vue-tsc --noEmit",
     "build": "pnpm -r run build",
     "docs": "pnpm -C docs run docs:dev",
-    "docs:build": "pnpm -C docs run docs:build"
+    "docs:build": "pnpm -C docs run docs:build",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.2",
