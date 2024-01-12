@@ -90,6 +90,7 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
         'placement': 'bottom-start',
         'theme': 'twoslash',
         ':arrow-padding': '8',
+        ':auto-boundary-max-size': 'true',
         ...presisted && {
           ':shown': 'true',
           ':triggers': '[]',
