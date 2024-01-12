@@ -41,3 +41,19 @@ it('code-add-language-class', async () => {
 
   expect(file.toString()).toMatchFileSnapshot('./fixtures/b.out.html')
 })
+
+it('add-custom-cache', async () => {
+  const cache = new Map()
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiji, {
+      theme: 'vitesse-light',
+      addLanguageClass: true,
+      cache,
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/c.md', import.meta.url)))
+
+  expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
+})

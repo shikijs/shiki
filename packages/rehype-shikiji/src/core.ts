@@ -7,6 +7,11 @@ import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
 import { parseHighlightLines } from '../../shared/line-highlight'
 
+export interface MapLike<K = any, V = any> {
+  get(key: K): V | undefined
+  set(key: K, value: V): this
+}
+
 export interface RehypeShikijiExtraOptions {
   /**
    * Add `highlighted` class to lines defined in after codeblock
@@ -33,6 +38,13 @@ export interface RehypeShikijiExtraOptions {
   ) => Record<string, any> | undefined | null
 
   /**
+   * Custom map to cache transformed codeToHast result
+   *
+   * @default undefined
+   */
+  cache?: MapLike
+
+  /**
    * Chance to handle the error
    * If not provided, the error will be thrown
    */
@@ -53,6 +65,7 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
     highlightLines = true,
     addLanguageClass = false,
     parseMetaString,
+    cache,
     ...rest
   } = options
 
@@ -86,6 +99,14 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
         return
 
       const code = toString(head as any)
+
+      const cachedValue = cache?.get(code)
+
+      if (cachedValue) {
+        parent.children.splice(index, 1, ...cachedValue)
+        return
+      }
+
       const attrs = (head.data as any)?.meta
       const meta = parseMetaString?.(attrs, node, tree) || {}
 
@@ -131,6 +152,7 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
 
       try {
         const fragment = highlighter.codeToHast(code, codeOptions)
+        cache?.set(code, fragment.children)
         parent.children.splice(index, 1, ...fragment.children)
       }
       catch (error) {
