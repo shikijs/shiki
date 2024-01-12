@@ -30,14 +30,14 @@ export default defineConfig({
 })
 ```
 
-And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme):
+And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme), install the Vue plugin and import the css with `vitepress-plugin-twoslash/styles.css`.
 
 ```ts twoslash
 // @noErrors: true
 // .vitepress/theme/index.ts
 import Theme from 'vitepress/theme'
 import TwoSlashFloatingVue from 'vitepress-plugin-twoslash/client' // [!code hl]
-import './custom-style.css'
+import 'vitepress-plugin-twoslash/style.css' // [!code hl]
 import type { EnhanceAppContext } from 'vitepress'
 
 export default {
@@ -47,6 +47,21 @@ export default {
   },
 }
 ```
+
+::: details About style.css
+
+For easier setup, `vitepress-plugin-twoslash/styles.css` bundles the styles from `floating-vue` and `shikiji-twoslash/style-rich.css` so you only need a single entry. If you are using a custom `floating-vue` style or want to have more control of the styles, you can expand them as:
+
+```ts
+import 'vitepress-plugin-twoslash/style.css'
+
+// Equivalent to:
+import 'shikiji-twoslash/style-rich.css'
+import 'floating-vue/dist/style.css'
+import 'vitepress-plugin-twoslash/style-core.css'
+```
+
+:::
 
 That's it, you can now use `ts twoslash` in your markdown files to enable the beautiful type hover.
 

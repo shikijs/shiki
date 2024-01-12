@@ -1,7 +1,3 @@
-import 'shikiji-twoslash/style-rich.css'
-import 'floating-vue/dist/style.css'
-import 'vitepress-plugin-twoslash/style.css'
-
 import type { Plugin } from 'vue'
 import FloatingVue from 'floating-vue'
 
