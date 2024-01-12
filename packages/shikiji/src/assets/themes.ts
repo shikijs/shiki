@@ -5,6 +5,12 @@ import type { DynamicImportThemeRegistration, BundledThemeInfo } from 'shikiji-c
 
 export const bundledThemesInfo: BundledThemeInfo[] = [
   {
+    "id": "andromeeda",
+    "displayName": "Andromeeda",
+    "type": "dark",
+    "import": (() => import('./themes/andromeeda')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "aurora-x",
     "displayName": "Aurora X",
     "type": "dark",
@@ -210,6 +216,6 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   }
 ]
 
-export type BundledTheme = 'aurora-x' | 'catppuccin-frappe' | 'catppuccin-latte' | 'catppuccin-macchiato' | 'catppuccin-mocha' | 'dark-plus' | 'dracula' | 'dracula-soft' | 'github-dark' | 'github-dark-dimmed' | 'github-light' | 'light-plus' | 'material-theme' | 'material-theme-darker' | 'material-theme-lighter' | 'material-theme-ocean' | 'material-theme-palenight' | 'min-dark' | 'min-light' | 'monokai' | 'nord' | 'one-dark-pro' | 'poimandres' | 'red' | 'rose-pine' | 'rose-pine-dawn' | 'rose-pine-moon' | 'slack-dark' | 'slack-ochin' | 'solarized-dark' | 'solarized-light' | 'vitesse-black' | 'vitesse-dark' | 'vitesse-light'
+export type BundledTheme = 'andromeeda' | 'aurora-x' | 'catppuccin-frappe' | 'catppuccin-latte' | 'catppuccin-macchiato' | 'catppuccin-mocha' | 'dark-plus' | 'dracula' | 'dracula-soft' | 'github-dark' | 'github-dark-dimmed' | 'github-light' | 'light-plus' | 'material-theme' | 'material-theme-darker' | 'material-theme-lighter' | 'material-theme-ocean' | 'material-theme-palenight' | 'min-dark' | 'min-light' | 'monokai' | 'nord' | 'one-dark-pro' | 'poimandres' | 'red' | 'rose-pine' | 'rose-pine-dawn' | 'rose-pine-moon' | 'slack-dark' | 'slack-ochin' | 'solarized-dark' | 'solarized-light' | 'vitesse-black' | 'vitesse-dark' | 'vitesse-light'
 
 export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id, i.import])) as Record<BundledTheme, DynamicImportThemeRegistration>
