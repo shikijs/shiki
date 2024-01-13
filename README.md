@@ -8,7 +8,7 @@
 
 An ESM-focused rewrite of [shiki](https://github.com/shikijs/shiki), a beautiful syntax highlighter based on TextMate grammars, with more features and capabilities.
 
-[📚 **Documentations**](https://shikiji.netlify.app)
+[📚 **Documentation**](https://shikiji.netlify.app)
 
 ## License
 
