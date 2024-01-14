@@ -12,6 +12,7 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiji, {
       theme: 'vitesse-light',
+      highlightLines: true,
       parseMetaString: (str) => {
         return Object.fromEntries(str.split(' ').reduce((prev: [string, boolean | string][], curr: string) => {
           const [key, value] = curr.split('=')

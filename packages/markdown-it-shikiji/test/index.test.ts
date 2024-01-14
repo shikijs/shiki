@@ -10,6 +10,7 @@ it('run', async () => {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
+    highlightLines: true,
   }))
 
   const result = md.render(await fs.readFile(new URL('./fixtures/a.md', import.meta.url), 'utf-8'))

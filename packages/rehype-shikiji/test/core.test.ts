@@ -23,6 +23,7 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikijiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
+      highlightLines: true,
     })
     .use(rehypeStringify)
     .processSync(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
