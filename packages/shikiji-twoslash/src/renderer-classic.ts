@@ -76,7 +76,7 @@ export function rendererClassic(): TwoSlashRenderer {
       ]
     },
 
-    lineCompletions(query) {
+    lineCompletion(query) {
       return [
         {
           type: 'element',

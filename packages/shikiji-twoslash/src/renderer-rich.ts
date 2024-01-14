@@ -175,9 +175,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
       }
     },
 
-    nodeCompletions(query, node) {
+    nodeCompletion(query, node) {
       if (node.type !== 'text')
-        throw new Error(`[shikiji-twoslash] nodeCompletions only works on text nodes, got ${node.type}`)
+        throw new Error(`[shikiji-twoslash] nodeCompletion only works on text nodes, got ${node.type}`)
 
       const leftPart = query.completionsPrefix || ''
       const rightPart = node.value.slice(leftPart.length || 0)

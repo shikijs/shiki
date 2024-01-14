@@ -120,73 +120,79 @@ export function createTransformerFactory(
             throw new Error(`[shikiji-twoslash] Cannot find token at L${line}:${character}`)
         }
 
-        const skipTokens = new Set<Element | Text>()
+        const tokensSkipHover = new Set<Element | Text>()
+        const postActions: (() => void)[] = []
 
-        for (const error of twoslash.errors) {
-          const token = locateTextToken(error.line, error.character)
-          if (!token)
+        for (const node of twoslash.nodes) {
+          if (node.type === 'tag') {
+            if (renderer.lineCustomTag)
+              insertAfterLine(node.line, renderer.lineCustomTag.call(this, node))
             continue
-
-          skipTokens.add(token)
-
-          if (renderer.nodeError) {
-            const clone = { ...token }
-            Object.assign(token, renderer.nodeError.call(this, error, clone))
           }
 
-          if (renderer.lineError)
-            insertAfterLine(error.line, renderer.lineError.call(this, error))
-        }
+          const token = locateTextToken(node.line, node.character)
 
-        for (const query of twoslash.queries) {
-          const token = locateTextToken(query.line, query.character)
-          if (!token)
-            continue
-
-          skipTokens.add(token)
-
-          if (renderer.nodeQuery) {
-            const clone = { ...token }
-            Object.assign(token, renderer.nodeQuery.call(this, query, clone))
+          switch (node.type) {
+            case 'error': {
+              if (token && renderer.nodeError) {
+                tokensSkipHover.add(token)
+                const clone = { ...token }
+                Object.assign(token, renderer.nodeError.call(this, node, clone))
+              }
+              if (renderer.lineError)
+                insertAfterLine(node.line, renderer.lineError.call(this, node))
+              break
+            }
+            case 'query': {
+              if (token && renderer.nodeQuery) {
+                tokensSkipHover.add(token)
+                const clone = { ...token }
+                Object.assign(token, renderer.nodeQuery.call(this, node, clone))
+              }
+              if (renderer.lineQuery)
+                insertAfterLine(node.line, renderer.lineQuery.call(this, node, token))
+              break
+            }
+            case 'completion': {
+              if (token && renderer.nodeCompletion) {
+                tokensSkipHover.add(token)
+                const clone = { ...token }
+                Object.assign(token, renderer.nodeCompletion.call(this, node, clone))
+              }
+              if (renderer.lineCompletion)
+                insertAfterLine(node.line, renderer.lineCompletion.call(this, node))
+              break
+            }
+            case 'highlight': {
+              if (token && renderer.nodeHightlight) {
+                tokensSkipHover.add(token)
+                const clone = { ...token }
+                Object.assign(token, renderer.nodeHightlight.call(this, node, clone))
+              }
+              if (renderer.lineHighlight)
+                insertAfterLine(node.line, renderer.lineHighlight.call(this, node))
+              break
+            }
+            case 'hover': {
+              // Hover will be handled after all other nodes are processed
+              if (token && renderer.nodeStaticInfo) {
+                postActions.push(() => {
+                  if (tokensSkipHover.has(token))
+                    return
+                  const clone = { ...token }
+                  Object.assign(token, renderer.nodeStaticInfo.call(this, node, clone))
+                })
+              }
+              break
+            }
+            default: {
+              if (throws)
+                // @ts-expect-error Unknown node type
+                throw new Error(`[shikiji-twoslash] Unknown node type: ${node.type}`)
+            }
           }
-
-          if (renderer.lineQuery)
-            insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
         }
-
-        for (const completion of twoslash.completions) {
-          const token = locateTextToken(completion.line, completion.character)
-          if (!token)
-            continue
-
-          skipTokens.add(token)
-
-          if (renderer.nodeCompletions) {
-            const clone = { ...token }
-            Object.assign(token, renderer.nodeCompletions.call(this, completion, clone))
-          }
-
-          if (renderer.lineCompletions)
-            insertAfterLine(completion.line, renderer.lineCompletions.call(this, completion))
-        }
-
-        for (const info of twoslash.hovers) {
-          const token = locateTextToken(info.line, info.character)
-          if (!token || token.type !== 'text')
-            continue
-
-          // If it's already rendered as popup or error, skip it
-          if (skipTokens.has(token))
-            continue
-
-          const clone = { ...token }
-          Object.assign(token, renderer.nodeStaticInfo.call(this, info, clone))
-        }
-
-        if (renderer.lineCustomTag) {
-          for (const tag of twoslash.tags)
-            insertAfterLine(tag.line, renderer.lineCustomTag.call(this, tag))
-        }
+        postActions.forEach(i => i())
       },
     }
   }
