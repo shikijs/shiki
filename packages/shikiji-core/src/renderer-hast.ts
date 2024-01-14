@@ -99,9 +99,6 @@ export function codeToHast(
   )
 }
 
-/**
- *
- */
 function mergeToken(
   merged: ThemedTokenWithVariants,
   variantsOrder: string[],
@@ -111,6 +108,7 @@ function mergeToken(
   const token: ThemedToken = {
     content: merged.content,
     explanation: merged.explanation,
+    offset: merged.offset,
   }
 
   const styles = variantsOrder.map(t => getTokenStyleObject(merged.variants[t]))
@@ -289,10 +287,13 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
   return tokens.map((line) => {
     const newLine: ThemedToken[] = []
     let carryOnContent = ''
+    let firstOffset = 0
     line.forEach((token, idx) => {
       const isUnderline = token.fontStyle && token.fontStyle & FontStyle.Underline
       const couldMerge = !isUnderline
       if (couldMerge && token.content.match(/^\s+$/) && line[idx + 1]) {
+        if (!firstOffset)
+          firstOffset = token.offset
         carryOnContent += token.content
       }
       else {
@@ -307,6 +308,7 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
             newLine.push(
               {
                 content: carryOnContent,
+                offset: firstOffset,
               },
               token,
             )
@@ -336,12 +338,21 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]) {
 
       const expanded = [{
         ...token,
+        offset: token.offset + leading.length,
         content,
       }]
-      if (leading)
-        expanded.unshift({ content: leading })
-      if (trailing)
-        expanded.push({ content: trailing })
+      if (leading) {
+        expanded.unshift({
+          content: leading,
+          offset: token.offset,
+        })
+      }
+      if (trailing) {
+        expanded.push({
+          content: trailing,
+          offset: token.offset + leading.length + content.length,
+        })
+      }
       return expanded
     })
   })

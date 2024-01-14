@@ -596,6 +596,10 @@ export interface TokenBase {
    */
   content: string
   /**
+   * The start offset of the token, relative to the input code. 0-indexed.
+   */
+  offset: number
+  /**
    * Explanation of
    *
    * - token text's matching scopes

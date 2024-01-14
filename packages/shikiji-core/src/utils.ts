@@ -6,6 +6,13 @@ export function toArray<T>(x: MaybeArray<T>): T[] {
 }
 
 /**
+ * Slipt a string into lines, each line preserves the line ending.
+ */
+export function splitLines(str: string) {
+  return Array.from(str.matchAll(/^.*$/mg)).map(x => [x[0], x.index!] as [code: string, offset: number])
+}
+
+/**
  * Check if the language is plaintext that is ignored by Shikiji.
  *
  * Hard-coded languages: `plaintext`, `txt`, `text`, `plain`.

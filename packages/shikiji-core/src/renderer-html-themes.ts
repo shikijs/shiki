@@ -32,12 +32,14 @@ export function codeToTokensWithThemes(
         const mergedToken: ThemedTokenWithVariants = {
           content: _token.content,
           variants: {},
+          offset: _token.offset,
         }
 
         tokens.forEach((t, themeIdx) => {
           const {
             content: _,
             explanation: __,
+            offset: ___,
             ...styles
           } = t[lineIdx][tokenIdx]
 

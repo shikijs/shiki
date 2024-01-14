@@ -5,7 +5,7 @@ import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
-import { isPlaintext } from './utils'
+import { isPlaintext, splitLines } from './utils'
 import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
 
 export function codeToThemedTokens(
@@ -18,10 +18,8 @@ export function codeToThemedTokens(
     theme: themeName = internal.getLoadedThemes()[0],
   } = options
 
-  if (isPlaintext(lang)) {
-    const lines = code.split(/\r\n|\r|\n/)
-    return [...lines.map(line => [{ content: line }])]
-  }
+  if (isPlaintext(lang))
+    return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
 
   const { theme, colorMap } = internal.setTheme(themeName)
 
@@ -44,14 +42,14 @@ export function tokenizeWithTheme(
     ...options?.colorReplacements,
   }
 
-  const lines = code.split(/\r\n|\r|\n/)
+  const lines = splitLines(code)
 
   let ruleStack = INITIAL
   let actual: ThemedToken[] = []
   const final: ThemedToken[][] = []
 
   for (let i = 0, len = lines.length; i < len; i++) {
-    const line = lines[i]
+    const [line, lineOffset] = lines[i]
     if (line === '') {
       actual = []
       final.push([])
@@ -84,6 +82,7 @@ export function tokenizeWithTheme(
 
       const token: ThemedToken = {
         content: line.substring(startIndex, nextStartIndex),
+        offset: lineOffset + startIndex,
         color: foregroundColor,
         fontStyle,
       }

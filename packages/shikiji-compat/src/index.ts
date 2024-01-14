@@ -46,6 +46,8 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
       line.forEach((token) => {
         // Shiki always provides `explanation` array, even it's disabled
         token.explanation ||= []
+        // @ts-expect-error Shiki does not have `offset` in `ThemedToken`
+        delete token.offset
       })
     })
 

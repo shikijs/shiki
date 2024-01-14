@@ -232,6 +232,7 @@ describe('codeToTokensWithThemes', () => {
           [
             {
               "content": "a",
+              "offset": 0,
               "variants": {
                 "dark": {
                   "color": "#BD976A",
@@ -257,6 +258,7 @@ describe('codeToTokensWithThemes', () => {
             },
             {
               "content": ".",
+              "offset": 1,
               "variants": {
                 "dark": {
                   "color": "#666666",
@@ -282,6 +284,7 @@ describe('codeToTokensWithThemes', () => {
             },
             {
               "content": "b",
+              "offset": 2,
               "variants": {
                 "dark": {
                   "color": "#BD976A",
