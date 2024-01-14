@@ -16,7 +16,8 @@ export interface RehypeShikijiExtraOptions {
   /**
    * Add `highlighted` class to lines defined in after codeblock
    *
-   * @default true
+   * @deprecated Use [transformerNotationHighlight](https://shikiji.netlify.app/packages/transformers#transformernotationhighlight) instead
+   * @default false
    */
   highlightLines?: boolean | string
 
@@ -62,7 +63,7 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
   options,
 ) {
   const {
-    highlightLines = true,
+    highlightLines = false,
     addLanguageClass = false,
     parseMetaString,
     cache,
