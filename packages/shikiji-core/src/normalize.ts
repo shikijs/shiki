@@ -136,8 +136,3 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
 
   return theme
 }
-
-/**
- * @deprecated Use `normalizeTheme` instead.
- */
-export const toShikiTheme = normalizeTheme

@@ -151,12 +151,6 @@ export function tokensToHast(
     transformers = [],
   } = options
 
-  // TODO: remove this in next major version
-  if (options.transforms) {
-    transformers.push(options.transforms)
-    console.warn('[shikiji] `transforms` option is deprecated, use `transformers` instead')
-  }
-
   if (mergeWhitespaces === true)
     tokens = mergeWhitespaceTokens(tokens)
   else if (mergeWhitespaces === 'never')

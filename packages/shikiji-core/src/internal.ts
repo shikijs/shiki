@@ -110,8 +110,3 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     loadTheme,
   }
 }
-
-/**
- * @deprecated Use `getShikiInternal` instead.
- */
-export const getShikiContext = getShikiInternal

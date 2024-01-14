@@ -92,7 +92,6 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
       ...shikijiOptions,
       lang: options.lang || shikijiOptions.lang,
       transformers: [],
-      transforms: undefined,
     }).children[0] as Element).children[0] as Element).children
 
     if (jsdoc && info.docs) {

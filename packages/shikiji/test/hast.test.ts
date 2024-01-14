@@ -22,35 +22,6 @@ describe('should', () => {
         <span class="line"><span style="color:#B07D48">foo</span><span style="color:#999999">.</span><span style="color:#B07D48">bar</span></span></code></pre>"
       `)
   })
-
-  it('hast transformer', async () => {
-    const warn = vi.spyOn(console, 'warn')
-    warn.mockImplementation((() => {}) as any)
-
-    const code = await codeToHtml('foo\bar', {
-      lang: 'js',
-      theme: 'vitesse-light',
-      // Use deprecated `transforms` option on purpose to test
-      transforms: {
-        line(node, line) {
-          node.properties['data-line'] = line
-        },
-        code(node) {
-          node.properties.class = 'language-js'
-        },
-        token(node, line, col) {
-          node.properties.class = `token:${line}:${col}`
-        },
-      },
-    })
-
-    expect(code)
-      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line" data-line="1"><span style="color:#B07D48" class="token:1:0">foo</span><span style="color:#393A34" class="token:1:3"></span><span style="color:#B07D48" class="token:1:4">ar</span></span></code></pre>"`)
-
-    expect(warn).toBeCalledTimes(1)
-    expect(warn.mock.calls[0][0])
-      .toMatchInlineSnapshot('"[shikiji] `transforms` option is deprecated, use `transformers` instead"')
-  })
 })
 
 it('hasfocus support', async () => {

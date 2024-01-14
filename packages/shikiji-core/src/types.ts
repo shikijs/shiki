@@ -349,11 +349,6 @@ export interface TransformerOptions {
    * Transformers for the Shikiji pipeline.
    */
   transformers?: ShikijiTransformer[]
-
-  /**
-   * @deprecated use `transformers` instead
-   */
-  transforms?: ShikijiTransformer
 }
 
 export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =

@@ -32,7 +32,6 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
       {
         ...this.options,
         transformers: [],
-        transforms: undefined,
       },
     ).children[0] as Element).children as Element[]
 
@@ -56,7 +55,6 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
                 {
                   ...this.options,
                   transformers: [],
-                  transforms: undefined,
                   lang,
                 },
               ).children[0] as Element
