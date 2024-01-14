@@ -86,6 +86,9 @@ export function codeToHast(
     throw new Error('[shikiji] Invalid options, either `theme` or `themes` must be provided')
   }
 
+  for (const transformer of options.transformers || [])
+    tokens = transformer.tokens?.call(transformerContext, tokens) || tokens
+
   return tokensToHast(
     tokens,
     {

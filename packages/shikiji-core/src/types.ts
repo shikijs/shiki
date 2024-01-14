@@ -472,6 +472,15 @@ export interface ShikijiTransformer {
    */
   name?: string
   /**
+   * Transform the raw input code before passing to the highlighter.
+   */
+  preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
+  /**
+   * Transform the full tokens list before converting to HAST.
+   * Return a new tokens list will replace the original one.
+   */
+  tokens?(this: ShikijiTransformerContextCommon, tokens: ThemedToken[][]): ThemedToken[][] | void
+  /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
    */
   root?(this: ShikijiTransformerContext, hast: Root): Root | void
@@ -494,12 +503,6 @@ export interface ShikijiTransformer {
    * Transform each token `<span>` element.
    */
   token?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
-
-  /**
-   * Transform the raw input code before passing to the highlighter.
-   * This hook will only be called with `codeToHtml` or `codeToHast`.
-   */
-  preprocess?(this: ShikijiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
