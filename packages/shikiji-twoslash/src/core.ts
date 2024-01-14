@@ -27,7 +27,10 @@ export function defaultTwoSlashOptions(): TwoSlashExecuteOptions {
 
 type TwoSlashFunction = (code: string, lang?: string, options?: TwoSlashExecuteOptions) => TwoSlashReturn
 
-export function createTransformerFactory(defaultTwoslasher: TwoSlashFunction, defaultRenderer?: TwoSlashRenderer) {
+export function createTransformerFactory(
+  defaultTwoslasher: TwoSlashFunction,
+  defaultRenderer?: TwoSlashRenderer,
+) {
   return function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): ShikijiTransformer {
     const {
       langs = ['ts', 'tsx'],

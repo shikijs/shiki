@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # shikiji-twoslash
 
 <Badges name="shikiji-twoslash" />
@@ -40,17 +44,15 @@ Thanks to the flexibility of [`hast`](https://github.com/syntax-tree/hast), this
 
 We provide two renderers built-in, and you can also create your own:
 
-### `rendererClassic`
-
-[Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-classic.ts)
-
-This renderer aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
-
-You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+---
 
 ### `rendererRich`
 
 [Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-rich.ts)
+
+::: tip
+This is the default renderer since v0.10.0.
+:::
 
 This renderer provides a more explicit class name is prefixed with `twoslash-` for better scoping.
 In addition, it runs syntax highlighting on the hover information.
@@ -99,6 +101,24 @@ const b = 1
 const c = 1
 // @annotate: Custom annotation message
 ```
+
+---
+
+### `rendererClassic`
+
+[Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-classic.ts)
+
+This renderer aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+
+```ts twoslash
+import { rendererClassic, transformerTwoSlash } from 'shikiji-twoslash'
+
+transformerTwoSlash({
+  renderer: rendererClassic() // <--
+})
+```
+
+You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
 
 ## Options
 

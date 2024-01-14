@@ -1,5 +1,5 @@
 import { createTwoSlasher } from 'twoslash'
-import { createTransformerFactory, rendererClassic } from './core'
+import { createTransformerFactory, rendererRich } from './core'
 
 export * from './core'
 
@@ -8,5 +8,5 @@ export * from './core'
  */
 export const transformerTwoSlash = /* @__PURE__ */ createTransformerFactory(
   /* @__PURE__ */ createTwoSlasher(),
-  /* @__PURE__ */ rendererClassic(),
+  /* @__PURE__ */ rendererRich(),
 )

@@ -1,8 +1,6 @@
 import { expect, it } from 'vitest'
 import { codeToHtml } from 'shikiji'
-import { createShikiHighlighter, renderCodeToHTML, runTwoSlash } from 'shiki-twoslash'
-import type { BuiltinTheme } from 'shikiji'
-import { transformerTwoSlash } from '../src'
+import { rendererClassic, transformerTwoSlash } from '../src'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-classic.css" />
@@ -11,6 +9,10 @@ html, body { margin: 0; }
 .shiki { padding: 2em; }
 </style>
 `
+
+const transformer = transformerTwoSlash({
+  renderer: rendererClassic(),
+})
 
 it('simple', async () => {
   const code = `
@@ -23,7 +25,7 @@ const b = "345"
     lang: 'ts',
     theme: 'dark-plus',
     transformers: [
-      transformerTwoSlash(),
+      transformer,
     ],
   })
 
@@ -46,7 +48,7 @@ fn(42)
     lang: 'ts',
     theme: 'vitesse-light',
     transformers: [
-      transformerTwoSlash(),
+      transformer,
     ],
   })
 
@@ -63,7 +65,7 @@ const a = Number.isNaN(123)
     lang: 'ts',
     theme: 'vitesse-light',
     transformers: [
-      transformerTwoSlash(),
+      transformer,
     ],
   })
 
@@ -100,7 +102,7 @@ let c = createLabel(Math.random() ? "hello" : 42)
     lang: 'ts',
     theme: 'vitesse-dark',
     transformers: [
-      transformerTwoSlash(),
+      transformer,
     ],
   })
 
@@ -118,24 +120,9 @@ console.error("This is an error")
     lang: 'ts',
     theme: 'vitesse-dark',
     transformers: [
-      transformerTwoSlash(),
+      transformer,
     ],
   })
 
-  // expect(styleTag + await runShiki(code, 'vitesse-dark')).toMatchFileSnapshot('./out/shiki.html')
   expect(styleTag + html).toMatchFileSnapshot('./out/classic/console_log.html')
 })
-
-export async function runShiki(code: string, theme: BuiltinTheme) {
-  const highlighter = await createShikiHighlighter({ theme })
-  const twoslash = runTwoSlash(code, 'ts', {})
-  const html = renderCodeToHTML(
-    twoslash.code,
-    'ts',
-    { twoslash: true },
-    {} as any,
-    highlighter,
-    twoslash,
-  )
-  return html
-}
