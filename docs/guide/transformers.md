@@ -20,7 +20,7 @@ const code = await codeToHtml('foo\bar', {
         if ([1, 3, 4].includes(line))
           addClassToHast(node, 'highlight')
       },
-      token(node, line, col) {
+      span(node, line, col) {
         node.properties['data-token'] = `token:${line}:${col}`
       },
     },

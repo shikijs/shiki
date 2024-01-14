@@ -37,7 +37,7 @@ it('hasfocus support', async () => {
         code(node) {
           node.properties.class = 'language-php'
         },
-        token(node, line, col, parent) {
+        span(node, line, col, parent) {
           node.children.forEach((child) => {
             if (child.type === 'text' && child.value.includes('[!code focus]')) {
               parent.properties['data-has-focus'] = 'true'

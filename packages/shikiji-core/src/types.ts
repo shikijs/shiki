@@ -502,12 +502,18 @@ export interface ShikijiTransformer {
   /**
    * Transform each token `<span>` element.
    */
-  token?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+  span?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
   postprocess?(this: ShikijiTransformerContextCommon, html: string, options: CodeToHastOptions): string | void
+
+  // deprecated
+  /**
+   * @deprecated Use `span` instead
+   */
+  token?(this: ShikijiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
 }
 
 export interface HtmlRendererOptionsCommon extends TransformerOptions {

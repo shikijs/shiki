@@ -240,7 +240,7 @@ export function tokensToHast(
         tokenNode.properties.style = style
 
       for (const transformer of transformers)
-        tokenNode = transformer?.token?.call(context, tokenNode, idx + 1, col, lineNode) || tokenNode
+        tokenNode = (transformer?.span || transformer?.token)?.call(context, tokenNode, idx + 1, col, lineNode) || tokenNode
 
       lineNode.children.push(tokenNode)
       col += token.content.length
