@@ -63,6 +63,41 @@ export function createTransformerFactory(
           return twoslash.code
         }
       },
+      tokens(tokens) {
+        if (!this.meta.twoslash)
+          return
+
+        // Break tokens at the boundaries of twoslash nodes
+        const breakpoints = Array.from(new Set(this.meta.twoslash.nodes.flatMap(i =>
+          ['hover', 'error', 'query', 'highlight'].includes(i.type)
+            ? [i.start, i.start + i.length]
+            : [],
+        ))).sort()
+
+        return tokens.map((line) => {
+          return line.flatMap((token) => {
+            const breakpointsInToken = breakpoints
+              .filter(i => token.offset < i && i < token.offset + token.content.length)
+              .map(i => i - token.offset)
+
+            if (!breakpointsInToken.length)
+              return token
+
+            breakpointsInToken.push(token.content.length)
+            breakpointsInToken.sort((a, b) => a - b)
+            let lastDelta = 0
+            return breakpointsInToken.map((i) => {
+              const n = {
+                ...token,
+                content: token.content.slice(lastDelta, i),
+                offset: token.offset + lastDelta,
+              }
+              lastDelta = i
+              return n
+            })
+          })
+        })
+      },
       pre(pre) {
         if (this.meta.twoslash)
           addClassToHast(pre, 'twoslash lsp')

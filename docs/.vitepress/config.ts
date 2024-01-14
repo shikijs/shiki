@@ -54,15 +54,6 @@ export default defineConfig({
       }))
     },
     codeTransformers: [
-      transformerTwoslash({
-        processHoverInfo(info) {
-          return defaultHoverInfoProcessor(info)
-            // Remove shikiji_core namespace
-            .replace(/shikiji_core\./g, '')
-            // Remove member access
-            .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
-        },
-      }),
       {
         // Render custom themes with codeblocks
         name: 'shikiji:inline-theme',
@@ -96,7 +87,15 @@ export default defineConfig({
           return code
         },
       },
-
+      transformerTwoslash({
+        processHoverInfo(info) {
+          return defaultHoverInfoProcessor(info)
+            // Remove shikiji_core namespace
+            .replace(/shikiji_core\./g, '')
+            // Remove member access
+            .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
+        },
+      }),
       {
         name: 'shikiji:remove-escape',
         postprocess(code) {

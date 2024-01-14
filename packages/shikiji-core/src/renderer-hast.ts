@@ -86,6 +86,15 @@ export function codeToHast(
     throw new Error('[shikiji] Invalid options, either `theme` or `themes` must be provided')
   }
 
+  const {
+    mergeWhitespaces = true,
+  } = options
+
+  if (mergeWhitespaces === true)
+    tokens = mergeWhitespaceTokens(tokens)
+  else if (mergeWhitespaces === 'never')
+    tokens = splitWhitespaceTokens(tokens)
+
   for (const transformer of options.transformers || [])
     tokens = transformer.tokens?.call(transformerContext, tokens) || tokens
 
@@ -148,14 +157,8 @@ export function tokensToHast(
   transformerContext: ShikijiTransformerContextCommon,
 ) {
   const {
-    mergeWhitespaces = true,
     transformers = [],
   } = options
-
-  if (mergeWhitespaces === true)
-    tokens = mergeWhitespaceTokens(tokens)
-  else if (mergeWhitespaces === 'never')
-    tokens = splitWhitespaceTokens(tokens)
 
   const lines: (Element | Text)[] = []
   const tree: Root = {
