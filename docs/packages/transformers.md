@@ -60,6 +60,8 @@ export function foo() {
 }
 ```
 
+::: details HTML Output
+
 ```html
 <!-- Output (stripped of `style` attributes for clarity) -->
 <pre class="shiki has-diff"> <!-- Notice `has-diff` -->
@@ -78,6 +80,10 @@ export function foo() {
 </pre>
 ```
 
+:::
+
+---
+
 ### `transformerNotationHighlight`
 
 Use `[!code highlight]` to highlight a line (adding `highlighted` class).
@@ -88,6 +94,10 @@ export function foo() {
 }
 ```
 
+Alternatively, you can use the [`transformerMetaHighlight`](#transformermetahighlight) to highlight lines based on the meta string.
+
+---
+
 ### `transformerNotationFocus`
 
 Use `[!code focus]` to focus a line (adding `focused` class).
@@ -97,6 +107,8 @@ export function foo() {
   console.log('Focused') // [!code focus]
 }
 ```
+
+---
 
 ### `transformerNotationErrorLevel`
 
@@ -109,17 +121,73 @@ export function foo() {
 }
 ```
 
+---
+
 ### `transformerRenderWhitespace`
 
 Render whitespaces (tabs and spaces) as individual spans, with classes `tab` and `space`.
 
 With some CSS, you can make it look like this:
 
-<img width="293" alt="image" src="https://github.com/antfu/shikiji/assets/11247099/01b7c4ba-6d63-4e74-8fd7-68a9f901f3de">
+<div class="language-js vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;" tabindex="0"><code><span class="line"><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676;">function</span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">block</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">{</span></span>
+<span class="line"><span class="space"> </span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">space</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span></span>
+<span class="line"><span class="tab">&#9;</span><span class="tab">&#9;</span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">table</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span style="--shiki-light:#393A34;--shiki-dark:#DBD7CAEE;"> </span></span>
+<span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666;">}</span></span></code></pre></div>
+
+::: details Example CSS
+
+```css
+.vp-code .tab,
+.vp-code .space {
+  position: relative;
+}
+
+.vp-code .tab::before {
+  content: '⇥';
+  position: absolute;
+  opacity: 0.3;
+}
+
+.vp-code .space::before {
+  content: '·';
+  position: absolute;
+  opacity: 0.3;
+}
+```
+
+:::
+
+---
+
+### `transformerMetaHighlight`
+
+Highlight lines based on the meta string provided on the code snippet. Requires integrations supports.
+
+````md
+```js {1,3-4}
+console.log('1')
+console.log('2')
+console.log('3')
+console.log('4')
+```
+````
+
+Results in
+
+```js {1,3-4}
+console.log('1')
+console.log('2')
+console.log('3')
+console.log('4')
+```
+
+---
 
 ### `transformerCompactLineOptions`
 
 Support for `shiki`'s `lineOptions` that is removed in `shikiji`.
+
+---
 
 ### `transformerRemoveLineBreak`
 

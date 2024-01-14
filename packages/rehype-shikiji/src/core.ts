@@ -5,7 +5,7 @@ import type { BuiltinTheme } from 'shikiji'
 import type { Plugin } from 'unified'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
-import { parseHighlightLines } from '../../shared/line-highlight'
+import { transformerMetaHighlight } from 'shikiji-transformers'
 
 export interface MapLike<K = any, V = any> {
   get(key: K): V | undefined
@@ -133,22 +133,14 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
       }
 
       if (highlightLines && typeof attrs === 'string') {
-        const lines = parseHighlightLines(attrs)
-        if (lines) {
-          const className = highlightLines === true
-            ? 'highlighted'
-            : highlightLines
-
-          codeOptions.transformers ||= []
-          codeOptions.transformers.push({
-            name: 'rehype-shikiji:line-class',
-            line(node, line) {
-              if (lines.includes(line))
-                addClassToHast(node, className)
-              return node
-            },
-          })
-        }
+        codeOptions.transformers ||= []
+        codeOptions.transformers.push(
+          transformerMetaHighlight({
+            className: highlightLines === true
+              ? 'highlighted'
+              : highlightLines,
+          }),
+        )
       }
 
       try {

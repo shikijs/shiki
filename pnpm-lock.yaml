@@ -137,6 +137,9 @@ importers:
       shikiji:
         specifier: workspace:*
         version: link:packages/shikiji
+      shikiji-transformers:
+        specifier: workspace:*
+        version: link:packages/shikiji-transformers
       simple-git-hooks:
         specifier: ^2.9.0
         version: 2.9.0
@@ -216,6 +219,9 @@ importers:
       shikiji:
         specifier: workspace:*
         version: link:../shikiji
+      shikiji-transformers:
+        specifier: workspace:*
+        version: link:../shikiji-transformers
     devDependencies:
       '@types/markdown-it':
         specifier: ^13.0.7
@@ -232,6 +238,9 @@ importers:
       shikiji:
         specifier: workspace:*
         version: link:../shikiji
+      shikiji-transformers:
+        specifier: workspace:*
+        version: link:../shikiji-transformers
       unified:
         specifier: ^11.0.4
         version: 11.0.4
