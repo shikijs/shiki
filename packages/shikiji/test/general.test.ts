@@ -153,6 +153,28 @@ describe('should', () => {
     }))
       .toMatchFileSnapshot('./out/monokai-underline.html')
   })
+
+  it('should have correct offset', async () => {
+    const shiki = await getHighlighter({
+      themes: ['nord'],
+      langs: ['html'],
+    })
+
+    const code = `
+      <script>
+        console.log(1)
+          </script>
+    `
+
+    const tokens = shiki.codeToThemedTokens(code, { lang: 'html', theme: 'nord' })
+
+    for (const line of tokens) {
+      for (const token of line) {
+        expect(code.slice(token.offset, token.offset + token.content.length))
+          .toBe(token.content)
+      }
+    }
+  })
 })
 
 describe('errors', () => {
