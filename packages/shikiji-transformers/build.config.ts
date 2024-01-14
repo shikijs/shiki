@@ -7,6 +7,11 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: false,
+    dts: {
+      compilerOptions: {
+        paths: {},
+      },
+    },
   },
   externals: [
     'hast',

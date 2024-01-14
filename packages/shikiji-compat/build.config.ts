@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
@@ -7,6 +8,11 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: false,
+    dts: {
+      compilerOptions: {
+        paths: {},
+      },
+    },
   },
   externals: [
     'hast',
