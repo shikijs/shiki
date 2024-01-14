@@ -155,7 +155,7 @@ When importing `shikiji`, all the themes and languages are bundled as async chun
 import { getHighlighterCore } from 'shikiji/core'
 
 // `shikiji/wasm` contains the wasm binary inlined as base64 string.
-import { getWasmInlined } from 'shikiji/wasm'
+import getWasm from 'shikiji/wasm'
 
 // directly import the theme and language modules, only the ones you imported will be bundled.
 import nord from 'shikiji/themes/nord.mjs'
@@ -174,7 +174,7 @@ const highlighter = await getHighlighterCore({
     // or a getter that returns custom grammar
     async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))
   ],
-  loadWasm: getWasmInlined
+  loadWasm: getWasm
 })
 
 // optionally, load themes and languages after creation
@@ -276,10 +276,7 @@ import nord from 'shikiji/themes/nord.mjs'
 import js from 'shikiji/langs/javascript.mjs'
 
 // import wasm as assets
-import wasm from 'shikiji/onig.wasm'
-
-// load wasm outside of `fetch` so it can be reused
-await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
+await loadWasm(import('shikiji/onig.wasm'))
 
 export default {
   async fetch() {

@@ -26,6 +26,7 @@
       "default": "./dist/core.mjs"
     },
     "./wasm": {
+      "unwasm": "./dist/onig.wasm",
       "types": "./dist/wasm.d.mts",
       "default": "./dist/wasm.mjs"
     },
@@ -49,6 +50,7 @@
       "types": "./dist/bundle-web.d.mts",
       "default": "./dist/bundle-web.mjs"
     },
+    "./onig.wasm": "./dist/onig.wasm",
     "./dist/*": "./dist/*",
     "./*": "./dist/*"
   },

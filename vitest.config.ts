@@ -8,7 +8,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      'shikiji-core/wasm': fileURLToPath(new URL('./packages/shikiji-core/src/wasm.ts', import.meta.url)),
+      'shikiji-core/wasm-inlined': fileURLToPath(new URL('./packages/shikiji-core/src/wasm-inlined.ts', import.meta.url)),
       'shikiji-core/types': fileURLToPath(new URL('./packages/shikiji-core/src/types.ts', import.meta.url)),
       'shikiji-core': fileURLToPath(new URL('./packages/shikiji-core/src/index.ts', import.meta.url)),
       'shikiji-transformers': fileURLToPath(new URL('./packages/shikiji-transformers/src/index.ts', import.meta.url)),

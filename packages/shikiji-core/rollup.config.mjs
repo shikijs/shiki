@@ -12,7 +12,7 @@ const entries = [
   'src/index.ts',
   'src/types.ts',
   'src/textmate.ts',
-  'src/wasm.ts',
+  'src/wasm-inlined.ts',
 ]
 
 const plugins = [
