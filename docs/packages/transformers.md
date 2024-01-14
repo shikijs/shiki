@@ -1,3 +1,7 @@
+---
+outline: deep
+---
+
 # shikiji-transformers
 
 <Badges name="shikiji-transformers" />

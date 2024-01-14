@@ -2,31 +2,32 @@
  * This file is the core of the shikiji-twoslash package,
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
-import type { twoslasher } from '@typescript/twoslash'
+import type { TwoSlashExecuteOptions, TwoSlashReturn } from 'twoslash'
 import type { ShikijiTransformer } from 'shikiji-core'
 import type { Element, ElementContent, Text } from 'hast'
 import type { ModuleKind, ScriptTarget } from 'typescript'
 
 import { addClassToHast } from 'shikiji-core'
-import { rendererClassic } from './renderer-classic'
-import type { TransformerTwoSlashOptions } from './types'
+import type { TransformerTwoSlashOptions, TwoSlashRenderer } from './types'
 
 export * from './types'
-export * from './renderer-classic'
 export * from './renderer-rich'
+export * from './renderer-classic'
 export * from './icons'
 
-export function defaultTwoSlashOptions() {
+export function defaultTwoSlashOptions(): TwoSlashExecuteOptions {
   return {
     customTags: ['annotate', 'log', 'warn', 'error'],
-    defaultCompilerOptions: {
+    compilerOptions: {
       module: 99 satisfies ModuleKind.ESNext,
       target: 99 satisfies ScriptTarget.ESNext,
     },
   }
 }
 
-export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
+type TwoSlashFunction = (code: string, lang?: string, options?: TwoSlashExecuteOptions) => TwoSlashReturn
+
+export function createTransformerFactory(defaultTwoslasher: TwoSlashFunction, defaultRenderer?: TwoSlashRenderer) {
   return function transformerTwoSlash(options: TransformerTwoSlashOptions = {}): ShikijiTransformer {
     const {
       langs = ['ts', 'tsx'],
@@ -38,9 +39,13 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
       },
       twoslasher = defaultTwoslasher,
       explicitTrigger = false,
-      renderer = rendererClassic(),
+      renderer = defaultRenderer,
       throws = true,
     } = options
+
+    if (!renderer)
+      throw new Error('[shikiji-twoslash] Missing renderer')
+
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
     return {
       preprocess(code, shikijiOptions) {
@@ -115,8 +120,6 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
         const skipTokens = new Set<Element | Text>()
 
         for (const error of twoslash.errors) {
-          if (error.line == null || error.character == null)
-            return
           const token = locateTextToken(error.line, error.character)
           if (!token)
             continue
@@ -133,39 +136,38 @@ export function createTransformerFactory(defaultTwoslasher: typeof twoslasher) {
         }
 
         for (const query of twoslash.queries) {
-          if (query.kind === 'completions') {
-            const token = locateTextToken(query.line - 1, query.offset)
-            if (!token)
-              continue
+          const token = locateTextToken(query.line, query.character)
+          if (!token)
+            continue
 
-            skipTokens.add(token)
+          skipTokens.add(token)
 
-            if (renderer.nodeCompletions) {
-              const clone = { ...token }
-              Object.assign(token, renderer.nodeCompletions.call(this, query, clone))
-            }
-
-            if (renderer.lineCompletions)
-              insertAfterLine(query.line, renderer.lineCompletions.call(this, query))
+          if (renderer.nodeQuery) {
+            const clone = { ...token }
+            Object.assign(token, renderer.nodeQuery.call(this, query, clone))
           }
-          else if (query.kind === 'query') {
-            const token = locateTextToken(query.line - 1, query.offset)
-            if (!token)
-              continue
 
-            skipTokens.add(token)
-
-            if (renderer.nodeQuery) {
-              const clone = { ...token }
-              Object.assign(token, renderer.nodeQuery.call(this, query, clone))
-            }
-
-            if (renderer.lineQuery)
-              insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
-          }
+          if (renderer.lineQuery)
+            insertAfterLine(query.line, renderer.lineQuery.call(this, query, token))
         }
 
-        for (const info of twoslash.staticQuickInfos) {
+        for (const completion of twoslash.completions) {
+          const token = locateTextToken(completion.line, completion.character)
+          if (!token)
+            continue
+
+          skipTokens.add(token)
+
+          if (renderer.nodeCompletions) {
+            const clone = { ...token }
+            Object.assign(token, renderer.nodeCompletions.call(this, completion, clone))
+          }
+
+          if (renderer.lineCompletions)
+            insertAfterLine(completion.line, renderer.lineCompletions.call(this, completion))
+        }
+
+        for (const info of twoslash.hovers) {
           const token = locateTextToken(info.line, info.character)
           if (!token || token.type !== 'text')
             continue

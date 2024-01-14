@@ -1,9 +1,9 @@
-import type { TwoSlashRenderers } from './types'
+import type { TwoSlashRenderer } from './types'
 
 /**
  * The default renderer aligning with the original `shiki-twoslash` output.
  */
-export function rendererClassic(): TwoSlashRenderers {
+export function rendererClassic(): TwoSlashRenderer {
   return {
     nodeStaticInfo(info, node) {
       return {
@@ -41,7 +41,7 @@ export function rendererClassic(): TwoSlashRenderers {
               children: [
                 {
                   type: 'text',
-                  value: error.renderedMessage,
+                  value: error.text,
                 },
               ],
             },
@@ -69,7 +69,7 @@ export function rendererClassic(): TwoSlashRenderers {
           children: [
             {
               type: 'text',
-              value: error.renderedMessage,
+              value: error.text,
             },
           ],
         },
@@ -83,7 +83,7 @@ export function rendererClassic(): TwoSlashRenderers {
           tagName: 'div',
           properties: { class: 'meta-line' },
           children: [
-            { type: 'text', value: ' '.repeat(query.offset) },
+            { type: 'text', value: ' '.repeat(query.character) },
             {
               type: 'element',
               tagName: 'span',
@@ -134,7 +134,7 @@ export function rendererClassic(): TwoSlashRenderers {
 
     lineQuery(query, targetNode) {
       const targetText = targetNode?.type === 'text' ? targetNode.value : ''
-      const offset = Math.max(0, (query.offset || 0) + Math.floor(targetText.length / 2) - 1)
+      const offset = Math.max(0, (query.character || 0) + Math.floor(targetText.length / 2) - 1)
 
       return [
         {
@@ -179,7 +179,7 @@ export function rendererClassic(): TwoSlashRenderers {
               children: [
                 {
                   type: 'text',
-                  value: tag.annotation || '',
+                  value: tag.text || '',
                 },
               ],
             },

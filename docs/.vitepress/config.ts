@@ -58,7 +58,7 @@ export default defineConfig({
         processHoverInfo(info) {
           return defaultHoverInfoProcessor(info)
             // Remove shikiji_core namespace
-            .replace(/\bshikiji_core\./g, '')
+            .replace(/shikiji_core\./g, '')
             // Remove member access
             .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
         },

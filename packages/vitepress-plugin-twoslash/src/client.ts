@@ -1,6 +1,8 @@
 import type { Plugin } from 'vue'
 import FloatingVue from 'floating-vue'
 
+const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
 export type FloatingVueConfig = Parameters<(typeof FloatingVue)['install']>[1]
 
 /**
@@ -15,12 +17,14 @@ const TwoSlashFloatingVue: Plugin<[FloatingVueConfig?]> = {
       themes: {
         twoslash: {
           $extend: 'dropdown',
-          triggers: ['hover', 'focus', 'touch'],
-          popperTriggers: ['hover', 'focus', 'touch'],
+          triggers: isMobile ? ['touch'] : ['hover', 'touch'],
+          popperTriggers: isMobile ? ['touch'] : ['hover', 'touch'],
+          overflowPadding: 10,
           delay: 0,
           handleResize: false,
           autoHide: true,
           instantMove: true,
+          flip: false,
         },
         ...options.theme,
       },

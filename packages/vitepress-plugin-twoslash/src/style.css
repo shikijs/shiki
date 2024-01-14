@@ -4,6 +4,10 @@
   --twoslash-border-color: #8884;
 }
 
+.v-popper--theme-twoslash {
+  z-index: calc(var(--vp-z-index-local-nav) - 1);
+}
+
 .v-popper--theme-twoslash .v-popper__inner {
   background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
@@ -53,11 +57,13 @@
   max-width: 700px;
   overflow-y: auto;
   overflow-x: hidden;
+  text-wrap: balance;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc p {
   margin: 0;
   padding: 6px 0;
+  text-wrap: balance;
 }
 
 .floating-vue-twoslash .twoslash-popup-jsdoc pre {

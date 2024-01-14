@@ -1,5 +1,5 @@
 import { defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
-import type { RendererRichOptions, TwoSlashRenderers } from 'shikiji-twoslash'
+import type { RendererRichOptions, TwoSlashRenderer } from 'shikiji-twoslash'
 import type { Element, Text } from 'hast'
 import type { ShikijiTransformerContext } from 'shikiji'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
@@ -10,7 +10,7 @@ import type { VitePressPluginTwoSlashOptions } from 'vitepress-plugin-twoslash'
 
 export { defaultHoverInfoProcessor }
 
-export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & RendererRichOptions = {}): TwoSlashRenderers {
+export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & RendererRichOptions = {}): TwoSlashRenderer {
   const {
     processHoverInfo = defaultHoverInfoProcessor,
     processHoverDocs = docs => docs,
@@ -32,6 +32,7 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
       {
         ...this.options,
         transformers: [],
+        lang: this.options.lang === 'vue' ? 'tsx' : this.options.lang,
       },
     ).children[0] as Element).children as Element[]
 
@@ -91,8 +92,8 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
         ':auto-boundary-max-size': 'true',
         ...presisted && {
           ':shown': 'true',
-          ':triggers': '[]',
-          ':popper-triggers': '[]',
+          ':triggers': '["click"]',
+          ':popper-triggers': '["click"]',
           ':auto-hide': 'false',
         },
       },

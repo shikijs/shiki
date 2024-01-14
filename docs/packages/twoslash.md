@@ -2,7 +2,7 @@
 
 <Badges name="shikiji-twoslash" />
 
-A Shikiji transformer for [TypeScript TwoSlash](https://www.typescriptlang.org/dev/twoslash/), provide inline type hover inside code blocks. Inspired by [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+A Shikiji transformer for [`twoslash`](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks. Inspired by [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
 
 ## Install
 
@@ -44,7 +44,7 @@ We provide two renderers built-in, and you can also create your own:
 
 [Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-classic.ts)
 
-This is the default renderer that aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+This renderer aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
 
 You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
 
@@ -52,7 +52,8 @@ You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](
 
 [Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-rich.ts)
 
-This renderer provides a more explicit class name that is always prefixed with `twoslash-` for better scoping. In addition, it runs syntax highlighting on the hover information.
+This renderer provides a more explicit class name is prefixed with `twoslash-` for better scoping.
+In addition, it runs syntax highlighting on the hover information.
 
 ```ts twoslash
 import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
