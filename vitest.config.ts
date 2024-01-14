@@ -41,15 +41,20 @@ export default defineConfig({
         '**/packages/*/src/**/*.ts',
       ],
       exclude: [
-        '**/src/oniguruma/**',
-        '**/src/assets/**',
         '**/node_modules/**',
         '**/dist/**',
         '**/scripts/**',
+
+        // Vendored code
         '**/vendor/**',
         '**/stack-element-metadata.ts',
+        '**/src/oniguruma/**',
+        '**/src/assets/**',
+
+        // Integration packages that are hard to cover, or tested elsewhere
         '**/shikiji-cli/**',
         '**/shikiji-monaco/**',
+        '**/vitepress-plugin-twoslash/**',
       ],
     },
     poolOptions: {
