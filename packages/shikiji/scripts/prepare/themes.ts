@@ -8,11 +8,20 @@ export async function prepareTheme() {
       const theme = await fs.readJSON(`./node_modules/tm-themes/themes/${t.name}.json`)
 
       await fs.writeFile(
-        `./src/assets/themes/${t.name}.ts`,
+        `./src/assets/themes/${t.name}.js`,
+        `${COMMENT_HEAD}
+export default Object.freeze(${JSON.stringify(theme, null, 2)})
+`,
+        'utf-8',
+      )
+
+      await fs.writeFile(
+        `./src/assets/themes/${t.name}.d.ts`,
         `${COMMENT_HEAD}
 import type { ThemeRegistration } from 'shikiji-core'
 
-export default Object.freeze(${JSON.stringify(theme, null, 2)}) as unknown as ThemeRegistration
+const theme: ThemeRegistration
+export default theme
 `,
         'utf-8',
       )

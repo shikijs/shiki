@@ -47,12 +47,12 @@ export async function prepareLangs() {
 
     const deps: string[] = json.embeddedLangs || []
 
-    await fs.writeFile(`./src/assets/langs/${lang.name}.ts`, `${COMMENT_HEAD}
-import type { LanguageRegistration } from 'shikiji-core'
-
+    await fs.writeFile(
+      `./src/assets/langs/${lang.name}.js`,
+      `${COMMENT_HEAD}
 ${deps.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
 
-const lang = Object.freeze(${JSON.stringify(json)}) as unknown as LanguageRegistration
+const lang = Object.freeze(${JSON.stringify(json)})
 
 export default [
 ${[
@@ -60,7 +60,20 @@ ${[
   '  lang',
 ].join(',\n') || ''}
 ]
-`.replace(/\n\n+/g, '\n\n'), 'utf-8')
+`.replace(/\n\n+/g, '\n\n'),
+      'utf-8',
+    )
+
+    await fs.writeFile(
+      `./src/assets/langs/${lang.name}.d.ts`,
+      `${COMMENT_HEAD}
+import type { LanguageRegistration } from 'shikiji-core'
+
+const langs: LanguageRegistration []
+export default langs
+`,
+      'utf-8',
+    )
   }
 
   async function writeLanguageBundleIndex(
