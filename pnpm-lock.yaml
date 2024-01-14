@@ -363,8 +363,8 @@ importers:
         specifier: workspace:*
         version: link:../shikiji-core
       twoslash:
-        specifier: ^0.0.6
-        version: 0.0.6(typescript@5.3.3)
+        specifier: ^0.0.7
+        version: 0.0.7(typescript@5.3.3)
     devDependencies:
       '@iconify-json/carbon':
         specifier: ^1.1.27
@@ -412,8 +412,8 @@ importers:
         specifier: workspace:*
         version: link:../shikiji-twoslash
       twoslash-vue:
-        specifier: ^0.0.6
-        version: 0.0.6(typescript@5.3.3)
+        specifier: ^0.0.7
+        version: 0.0.7(typescript@5.3.3)
       vue:
         specifier: ^3.4.13
         version: 3.4.13(typescript@5.3.3)
@@ -8426,20 +8426,20 @@ packages:
       - supports-color
     dev: true
 
-  /twoslash-vue@0.0.6(typescript@5.3.3):
-    resolution: {integrity: sha512-Q//jJsS/JthGTTfAuWA3qZF65PZWuejCC9tp7XO9anhZfq61TgUsE6EFJuyEUhIzAB4L2L9uq5yRrgV/SU3sTA==}
+  /twoslash-vue@0.0.7(typescript@5.3.3):
+    resolution: {integrity: sha512-QuVhy2och8aoNR5O0b0ZNoDUlKwaGCEUdWfI8XWT9UcVCo5psKCIGmD2Fl+XUICQAetSaOZ1uRZlLmh45FJ5LQ==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@vue/language-core': 1.8.27(typescript@5.3.3)
-      twoslash: 0.0.6(typescript@5.3.3)
+      twoslash: 0.0.7(typescript@5.3.3)
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /twoslash@0.0.6(typescript@5.3.3):
-    resolution: {integrity: sha512-DwqhLMF2LDJ5SBcKu1cIEe8RgMVP/UVoxrPFsIARqsD5OmBiX+k0S6yd/yHvv/m1Nx2SId0sE0NpEHf6NAVeLw==}
+  /twoslash@0.0.7(typescript@5.3.3):
+    resolution: {integrity: sha512-uyAsTqDZxSCqbgC4cHWp18NrtcLW446VYRlLewDPSIo4Gfgv8SJsrhwciOCHr4JrUS29nYwIBHz0kHKYQNDetg==}
     peerDependencies:
       typescript: '*'
     dependencies:
