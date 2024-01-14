@@ -51,3 +51,7 @@ export function addClassToHast(node: Element, className: string | string[]) {
       node.properties.class.push(c)
   }
 }
+
+export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
+  return replacements?.[color.toLowerCase()] || color
+}

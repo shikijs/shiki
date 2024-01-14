@@ -5,7 +5,7 @@ import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
-import { isPlaintext, splitLines } from './utils'
+import { applyColorReplacements, isPlaintext, splitLines } from './utils'
 import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
 
 export function codeToThemedTokens(
@@ -197,8 +197,4 @@ function explainThemeScope(
     }
   }
   return result
-}
-
-export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
-  return replacements?.[color.toLowerCase()] || color
 }

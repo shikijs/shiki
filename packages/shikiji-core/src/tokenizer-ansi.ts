@@ -1,8 +1,7 @@
 import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
 import type { ThemeRegistrationResolved, ThemedToken, TokenizeWithThemeOptions } from './types'
 import { FontStyle } from './types'
-import { applyColorReplacements } from './tokenizer'
-import { splitLines } from '.'
+import { applyColorReplacements, splitLines } from './utils'
 
 export function tokenizeAnsiWithTheme(
   theme: ThemeRegistrationResolved,
