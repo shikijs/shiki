@@ -231,6 +231,8 @@ export function createTransformerFactory(
                   tokens.forEach((token) => {
                     if (tokensSkipHover.has(token))
                       return
+                    // Already hovered, don't hover again
+                    tokensSkipHover.add(token)
                     const clone = { ...token }
                     Object.assign(token, renderer.nodeStaticInfo.call(this, node, clone))
                   })
