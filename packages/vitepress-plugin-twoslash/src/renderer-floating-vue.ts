@@ -1,4 +1,4 @@
-import { defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
+import { defaultCompletionIcons, defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
 import type { RendererRichOptions, TwoSlashRenderer } from 'shikiji-twoslash'
 import type { Element, Text } from 'hast'
 import type { ShikijiTransformerContext } from 'shikiji'
@@ -122,6 +122,10 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
     }
   }
 
+  const {
+    completionIcons = defaultCompletionIcons,
+  } = options
+
   return {
     ...rich,
     nodeStaticInfo(info, node) {
@@ -131,6 +135,123 @@ export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & Re
       if (!query.text)
         return {}
       return createFloatingVueWarpper.call(this, query.text, query.docs, node, true) || {}
+    },
+    nodeCompletion(query, node) {
+      if (node.type !== 'text')
+        throw new Error(`[shikiji-twoslash] nodeCompletion only works on text nodes, got ${node.type}`)
+
+      const leftPart = query.completionsPrefix || ''
+      const rightPart = node.value.slice(leftPart.length || 0)
+
+      return <Element>{
+        type: 'element',
+        tagName: 'span',
+        properties: {},
+        children: [
+          {
+            type: 'text',
+            value: leftPart,
+          },
+          {
+            type: 'element',
+            tagName: 'v-menu',
+            properties: {
+              'popper-class': 'vp-code shiki floating-vue-twoslash-compeltion vp-copy-ignore',
+              'placement': 'bottom-start',
+              'theme': 'twoslash',
+              ':distance': '0',
+              ':arrow-overflow': 'true',
+              ':auto-boundary-max-size': 'true',
+              ':shown': 'true',
+              ':triggers': '["click"]',
+              ':popper-triggers': '["click"]',
+              ':auto-hide': 'false',
+            },
+            children: [
+              {
+                type: 'element',
+                tagName: 'span',
+                properties: {
+                  class: 'twoslash-completion-cursor',
+                },
+              },
+              {
+                type: 'element',
+                tagName: 'template',
+                properties: {
+                  'v-slot:popper': '{}',
+                },
+                content: {
+                  type: 'root',
+                  children: [{
+                    type: 'element',
+                    tagName: 'ul',
+                    properties: {
+                      class: 'twoslash-completion-list',
+                    },
+                    children: query.completions
+                      .map((i): Element => ({
+                        type: 'element',
+                        tagName: 'li',
+                        properties: {},
+                        children: [
+                          ...completionIcons
+                            ? [<Element>{
+                              type: 'element',
+                              tagName: 'span',
+                              properties: { class: `twoslash-completions-icon completions-${i.kind.replace(/\s/g, '-')}` },
+                              children: [
+                                completionIcons[i.kind] || completionIcons.property,
+                              ].filter(Boolean),
+                            }]
+                            : [],
+                          {
+                            type: 'element',
+                            tagName: 'span',
+                            properties: {
+                              class: i.kindModifiers?.split(',').includes('deprecated')
+                                ? 'deprecated'
+                                : undefined,
+                            },
+                            children: [
+                              {
+                                type: 'element',
+                                tagName: 'span',
+                                properties: { class: 'twoslash-completions-matched' },
+                                children: [
+                                  {
+                                    type: 'text',
+                                    value: query.completionsPrefix || '',
+                                  },
+                                ],
+                              },
+                              {
+                                type: 'element',
+                                tagName: 'span',
+                                properties: { class: 'twoslash-completions-unmatched' },
+                                children: [
+                                  {
+                                    type: 'text',
+                                    value: i.name.slice(query.completionsPrefix?.length || 0),
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      })),
+                  }],
+                },
+                children: [],
+              },
+            ],
+          },
+          {
+            type: 'text',
+            value: rightPart,
+          },
+        ],
+      }
     },
   }
 }

@@ -34,6 +34,10 @@
   display: inline-block;
 }
 
+.twoslash-completion-list .twoslash-completions-icon {
+  color: var(--twoslash-unmatched-color) !important;
+}
+
 .floating-vue-twoslash .twoslash-popup-type {
   max-width: 600px;
   display: block;
@@ -72,4 +76,31 @@
   padding: 12px;
   margin: 6px -2px;
   overflow-x: auto;
+}
+
+.twoslash-completion-cursor {
+  height: 1.2em;
+  width: 2px;
+  margin-bottom: -0.2em;
+  background: var(--vp-c-brand);
+  display: inline-block;
+  user-select: none;
+}
+
+.floating-vue-twoslash-compeltion {
+  --twoslash-matched-color: var(--vp-c-brand);
+}
+
+.floating-vue-twoslash-compeltion .v-popper__arrow-container {
+  display: none;
+}
+
+.floating-vue-twoslash-compeltion .twoslash-completion-list {
+  padding: 6px;
+  font-family: var(--vp-font-family-mono);
+  font-size: var(--vp-code-font-size) !important;
+}
+
+.floating-vue-twoslash-compeltion .twoslash-completion-list li {
+  padding: 3px 0;
 }

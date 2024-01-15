@@ -107,33 +107,36 @@
 }
 
 /* ===== Completeions ===== */
-.twoslash .twoslash-completions-list {
+.twoslash .twoslash-completion-cursor {
   position: relative;
 }
 
-.twoslash .twoslash-completions-list ul {
+.twoslash .twoslash-completion-cursor .twoslash-completion-list {
   user-select: none;
   position: absolute;
   top: 0;
   left: 0;
   transform: translate(0, 1.2em);
+  margin: 3px 0 0 -1px;
   display: inline-block;
-  width: 240px;
+  z-index: 8;
+  box-shadow: var(--twoslash-popup-shadow);
   background: var(--twoslash-popup-bg);
   border: 1px solid var(--twoslash-border-color);
+}
+
+.twoslash-completion-list {
+  width: 240px;
   font-size: 0.8rem;
-  margin: 3px 0 0 -1px;
   padding: 4px;
-  z-index: 8;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  box-shadow: var(--twoslash-popup-shadow);
 }
-.twoslash .twoslash-completions-list ul:hover {
+.twoslash-completion-list:hover {
   user-select: auto;
 }
-.twoslash .twoslash-completions-list ul::before {
+.twoslash-completion-list::before {
   background-color: var(--twoslash-cursor-color);
   width: 2px;
   position: absolute;
@@ -142,25 +145,25 @@
   left: -1px;
   content: ' ';
 }
-.twoslash .twoslash-completions-list ul li {
+.twoslash-completion-list li {
   overflow: hidden;
   display: flex;
   align-items: center;
   gap: 0.25em;
   line-height: 1em;
 }
-.twoslash .twoslash-completions-list ul li span.twoslash-completions-unmatched {
+.twoslash-completion-list li span.twoslash-completions-unmatched {
   color: var(--twoslash-unmatched-color);
 }
-.twoslash .twoslash-completions-list ul .deprecated {
+.twoslash-completion-list .deprecated {
   text-decoration: line-through;
   opacity: 0.5;
 }
-.twoslash .twoslash-completions-list ul li span.twoslash-completions-matched {
+.twoslash-completion-list li span.twoslash-completions-matched {
   color: var(--twoslash-matched-color);
 }
 /* Icons */
-.twoslash .twoslash-completions-list .twoslash-completions-icon {
+.twoslash-completion-list .twoslash-completions-icon {
   color: var(--twoslash-unmatched-color);
   width: 1em;
   flex: none;

@@ -195,12 +195,14 @@ export function rendererRich(options: RendererRichOptions = {}): TwoSlashRendere
             type: 'element',
             tagName: 'span',
             properties: {
-              class: ['twoslash-completions-list', classExtra].filter(Boolean).join(' '),
+              class: ['twoslash-completion-cursor', classExtra].filter(Boolean).join(' '),
             },
             children: [{
               type: 'element',
               tagName: 'ul',
-              properties: {},
+              properties: {
+                class: ['twoslash-completion-list', classExtra].filter(Boolean).join(' '),
+              },
               children: query.completions!
                 .filter(i => i.name.startsWith(query.completionsPrefix || '____'))
                 .map(i => ({
