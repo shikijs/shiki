@@ -1,7 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { bundledThemes } from 'shikiji'
-import { defaultHoverInfoProcessor, transformerTwoslash } from 'vitepress-plugin-twoslash'
+import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-plugin-twoslash/src/index'
 import { version } from '../../package.json'
 import vite from './vite.config'
 
