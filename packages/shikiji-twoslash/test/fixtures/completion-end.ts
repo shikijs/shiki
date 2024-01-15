@@ -1,0 +1,3 @@
+// @noErrors
+console.e
+//       ^|
