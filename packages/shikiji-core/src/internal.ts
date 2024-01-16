@@ -1,8 +1,18 @@
 import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistrationResolved } from './types'
+import type { LoadWasmOptions } from './oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
+
+let _defaultWasmLoader: LoadWasmOptions | undefined
+/**
+ * Set the default wasm loader for `loadWasm`.
+ * @internal
+ */
+export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
+  _defaultWasmLoader = _loader
+}
 
 /**
  * Get the minimal shiki context for rendering.
@@ -18,13 +28,15 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     )).flat()))
   }
 
+  const wasmLoader = options.loadWasm || _defaultWasmLoader
+
   const [
     themes,
     langs,
   ] = await Promise.all([
     Promise.all((options.themes || []).map(normalizeGetter)).then(r => r.map(normalizeTheme)),
     resolveLangs(options.langs || []),
-    options.loadWasm ? loadWasm(options.loadWasm) : undefined,
+    wasmLoader ? loadWasm(wasmLoader) : undefined,
   ] as const)
 
   const resolver = new Resolver(

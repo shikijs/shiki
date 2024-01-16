@@ -4,7 +4,7 @@ export * from './utils'
 export * from './types'
 
 export { loadWasm } from './oniguruma'
-export { getShikiInternal } from './internal'
+export { getShikiInternal, setDefaultWasmLoader } from './internal'
 export { codeToThemedTokens } from './tokenizer'
 export { tokenizeAnsiWithTheme } from './tokenizer-ansi'
 export { codeToHast } from './renderer-hast'
