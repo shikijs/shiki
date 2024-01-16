@@ -75,13 +75,13 @@
           "include": "#class-declaration"
         },
         {
-          "include": "#object-declaration"
+          "include": "#object"
         },
         {
           "include": "#type-alias"
         },
         {
-          "include": "#function-declaration"
+          "include": "#function"
         },
         {
           "include": "#variable-declaration"
@@ -317,8 +317,8 @@
         }
       }
     },
-    "object-declaration": {
-      "match": "\\b(object)\\s+(\\b\\w+\\b|`[^`]+`)",
+    "object": {
+      "match": "\\b(object)(?:\\s+(\\b\\w+\\b|`[^`]+`))?",
       "captures": {
         "1": {
           "name": "storage.type.object.kotlin"
@@ -346,8 +346,8 @@
         }
       }
     },
-    "function-declaration": {
-      "match": "\\b(fun)\\b\\s*(?<GROUP><([^<>]|\\g<GROUP>)+>)?\\s*(?:(\\w+)\\.)?(\\b\\w+\\b|`[^`]+`)",
+    "function": {
+      "match": "\\b(fun)\\b\\s*(?<GROUP><([^<>]|\\g<GROUP>)+>)?\\s*(?:(?:(\\w+)\\.)?(\\b\\w+\\b|`[^`]+`))?",
       "captures": {
         "1": {
           "name": "storage.type.function.kotlin"
