@@ -18,10 +18,6 @@ export * from './icons'
 export function defaultTwoSlashOptions(): TwoSlashExecuteOptions {
   return {
     customTags: ['annotate', 'log', 'warn', 'error'],
-    compilerOptions: {
-      module: 99 satisfies ModuleKind.ESNext,
-      target: 99 satisfies ScriptTarget.ESNext,
-    },
   }
 }
 
@@ -51,15 +47,16 @@ export function createTransformerFactory(
 
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
     return {
-      preprocess(code, shikijiOptions) {
-        let lang = shikijiOptions.lang
+      preprocess(code) {
+        let lang = this.options.lang
         if (lang in langAlias)
-          lang = langAlias[shikijiOptions.lang]
+          lang = langAlias[this.options.lang]
 
-        if (filter(lang, code, shikijiOptions)) {
-          shikijiOptions.mergeWhitespaces = 'never'
+        if (filter(lang, code, this.options)) {
+          this.options.mergeWhitespaces = 'never'
           const twoslash = twoslasher(code, lang, twoslashOptions)
           this.meta.twoslash = twoslash
+          this.options.lang = twoslash.meta.extension || lang
           return twoslash.code
         }
       },
