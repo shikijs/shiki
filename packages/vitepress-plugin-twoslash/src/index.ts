@@ -46,8 +46,8 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
 
       return twoslash.preprocess!.call(this, code, options)
     },
-    postprocess(html, options) {
-      if (this.meta.twoslash && options.lang === 'vue')
+    postprocess(html) {
+      if (this.meta.twoslash)
         return html.replace(/{/g, '&#123;')
     },
   }
