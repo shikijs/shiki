@@ -1,6 +1,7 @@
 import { defaultCompletionIcons, defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
 import type { RendererRichOptions, TwoslashRenderer } from 'shikiji-twoslash'
-import type { Element, Text } from 'hast'
+import type { NodeHover, NodeQuery } from 'twoslash'
+import type { Element, ElementContent, Text } from 'hast'
 import type { ShikijiTransformerContext } from 'shikiji'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { fromMarkdown } from 'mdast-util-from-markdown'
@@ -21,10 +22,9 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
     ...options,
   })
 
-  function createFloatingVueWarpper(this: ShikijiTransformerContext, text: string, docs: string | undefined, node: Element | Text, presisted = false): Element | undefined {
-    const content = processHoverInfo(text)
-
-    if ((!content || content === 'any'))
+  function createFloatingVueWarpper(this: ShikijiTransformerContext, info: NodeHover | NodeQuery, node: Element | Text, presisted = false): Element | undefined {
+    const content = processHoverInfo(info.text)
+    if (!content || content === 'any')
       return undefined
 
     const themedContent = (this.codeToHast(
@@ -41,12 +41,11 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
       addClassToHast(node, 'twoslash-popup-type')
     })
 
-    if (docs) {
-      docs = processHoverDocs(docs) ?? docs
-      const mdast = fromMarkdown(docs, {
+    const markdownToHast = (md: string): ElementContent[] => {
+      const mdast = fromMarkdown(md, {
         mdastExtensions: [gfmFromMarkdown()],
       })
-      const hast = toHast(mdast, {
+      return (toHast(mdast, {
         handlers: {
           code: (state, node) => {
             const lang = node.lang || ''
@@ -63,14 +62,71 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
             return defaultHandlers.code(state, node)
           },
         },
-      })
+      }) as Element).children
+    }
+
+    const markdownInlineToHast = (md: string): ElementContent[] => {
+      const children = markdownToHast(md)
+      if (children.length === 1 && children[0].type === 'element' && children[0].tagName === 'p')
+        return children[0].children
+      return children
+    }
+
+    if (info.docs) {
+      const docs = processHoverDocs(info.docs) ?? info.docs
+      const children = markdownToHast(docs)
+
       themedContent.push({
         type: 'element',
         tagName: 'div',
         properties: {
           class: 'twoslash-popup-jsdoc vp-doc',
         },
-        children: (hast as any).children,
+        children,
+      })
+    }
+
+    if (info.tags?.length) {
+      themedContent.push({
+        type: 'element',
+        tagName: 'div',
+        properties: {
+          class: 'twoslash-popup-jsdoc twoslash-popup-jsdoc-tags vp-doc',
+        },
+        children: info.tags.map(tag => (<Element>{
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: `twoslash-popup-jsdoc-tag`,
+          },
+          children: [
+            {
+              type: 'element',
+              tagName: 'span',
+              properties: {
+                class: 'twoslash-popup-jsdoc-tag-name',
+              },
+              children: [
+                {
+                  type: 'text',
+                  value: `@${tag[0]}`,
+                },
+              ],
+            },
+            ...tag[1]
+              ? [
+                    <Element>{
+                      type: 'element',
+                      tagName: 'span',
+                      properties: {
+                        class: 'twoslash-popup-jsdoc-tag-value',
+                      },
+                      children: markdownInlineToHast(tag[1]),
+                    },
+                ]
+              : [],
+          ],
+        })),
       })
     }
 
@@ -129,12 +185,12 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
   return {
     ...rich,
     nodeStaticInfo(info, node) {
-      return createFloatingVueWarpper.call(this, info.text, info.docs, node) || {}
+      return createFloatingVueWarpper.call(this, info, node) || {}
     },
     nodeQuery(query, node) {
       if (!query.text)
         return {}
-      return createFloatingVueWarpper.call(this, query.text, query.docs, node, true) || {}
+      return createFloatingVueWarpper.call(this, query, node, true) || {}
     },
     nodeCompletion(query, node) {
       if (node.type !== 'text')

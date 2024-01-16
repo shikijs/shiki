@@ -78,6 +78,21 @@
   overflow-x: auto;
 }
 
+.floating-vue-twoslash .twoslash-popup-jsdoc-tags {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px !important;
+}
+
+.floating-vue-twoslash
+  .twoslash-popup-jsdoc-tags
+  .twoslash-popup-jsdoc-tag-name {
+  font-family: var(--vp-font-family-mono);
+  color: var(--vp-c-brand-1);
+  margin-right: 0.5em;
+  font-size: 0.9em;
+}
+
 .twoslash-completion-cursor {
   height: 1.2em;
   width: 2px;
