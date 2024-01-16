@@ -277,7 +277,9 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
                                 children: [
                                   {
                                     type: 'text',
-                                    value: query.completionsPrefix || '',
+                                    value: i.name.startsWith(query.completionsPrefix)
+                                      ? query.completionsPrefix
+                                      : '',
                                   },
                                 ],
                               },
@@ -288,7 +290,9 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
                                 children: [
                                   {
                                     type: 'text',
-                                    value: i.name.slice(query.completionsPrefix?.length || 0),
+                                    value: i.name.startsWith(query.completionsPrefix)
+                                      ? i.name.slice(query.completionsPrefix.length)
+                                      : i.name,
                                   },
                                 ],
                               },

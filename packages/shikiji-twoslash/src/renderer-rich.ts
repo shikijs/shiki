@@ -204,7 +204,6 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
                 class: ['twoslash-completion-list', classExtra].filter(Boolean).join(' '),
               },
               children: query.completions!
-                .filter(i => i.name.startsWith(query.completionsPrefix || '____'))
                 .map(i => ({
                   type: 'element',
                   tagName: 'li',
@@ -236,7 +235,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
                           children: [
                             {
                               type: 'text',
-                              value: query.completionsPrefix || '',
+                              value: i.name.startsWith(query.completionsPrefix)
+                                ? query.completionsPrefix
+                                : '',
                             },
                           ],
                         },
@@ -247,7 +248,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
                           children: [
                             {
                               type: 'text',
-                              value: i.name.slice(query.completionsPrefix?.length || 0),
+                              value: i.name.startsWith(query.completionsPrefix)
+                                ? i.name.slice(query.completionsPrefix.length || 0)
+                                : i.name,
                             },
                           ],
                         },
