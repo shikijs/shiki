@@ -5,7 +5,6 @@
 import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { ShikijiTransformer } from 'shikiji-core'
 import type { Element, ElementContent, Text } from 'hast'
-import type { ModuleKind, ScriptTarget } from 'typescript'
 
 import { addClassToHast } from 'shikiji-core'
 import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
