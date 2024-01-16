@@ -1,6 +1,6 @@
 import type { Element, ElementContent } from 'hast'
 import type { ShikijiTransformerContextCommon } from 'shikiji-core'
-import type { TwoSlashRenderer } from './types'
+import type { TwoslashRenderer } from './types'
 import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
 
@@ -65,7 +65,7 @@ export interface RendererRichOptions {
  * An alternative renderer that providers better prefixed class names,
  * with syntax highlight for the info text.
  */
-export function rendererRich(options: RendererRichOptions = {}): TwoSlashRenderer {
+export function rendererRich(options: RendererRichOptions = {}): TwoslashRenderer {
   const {
     completionIcons = defaultCompletionIcons,
     customTagIcons = defaultCustomTagIcons,

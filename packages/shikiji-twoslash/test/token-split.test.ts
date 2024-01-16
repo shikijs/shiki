@@ -1,5 +1,5 @@
 import { codeToHast, codeToThemedTokens } from 'shikiji'
-import { transformerTwoSlash } from 'shikiji-twoslash'
+import { transformerTwoslash } from 'shikiji-twoslash'
 import { expect, it } from 'vitest'
 import { visit } from 'unist-util-visit'
 import type { Node } from 'hast'
@@ -24,7 +24,7 @@ it('should split tokens correctly', async () => {
     lang: 'ts',
     theme: 'min-dark',
     transformers: [
-      transformerTwoSlash(),
+      transformerTwoslash(),
     ],
   })
 

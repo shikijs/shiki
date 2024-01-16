@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 import { codeToHtml } from 'shikiji'
-import { rendererRich, transformerTwoSlash } from '../src'
+import { rendererRich, transformerTwoslash } from '../src'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-rich.css" />
@@ -69,7 +69,7 @@ Number.parseInt(todo.title, 10);
     },
     defaultColor: false,
     transformers: [
-      transformerTwoSlash({
+      transformerTwoslash({
         renderer: rendererRich(),
       }),
     ],
@@ -94,7 +94,7 @@ obj.boo
     theme: 'nord',
     defaultColor: false,
     transformers: [
-      transformerTwoSlash({
+      transformerTwoslash({
         renderer: rendererRich({
           completionIcons: false,
         }),
@@ -133,7 +133,7 @@ const c = 1
     },
     defaultColor: false,
     transformers: [
-      transformerTwoSlash({
+      transformerTwoslash({
         renderer: rendererRich(),
       }),
     ],

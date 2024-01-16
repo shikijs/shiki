@@ -23,7 +23,7 @@ const REFERENCES: DefaultTheme.NavItemWithLink[] = [
 ]
 
 const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
-  { text: 'TypeScript TwoSlash', link: '/packages/twoslash' },
+  { text: 'TypeScript Twoslash', link: '/packages/twoslash' },
   { text: 'Markdown It', link: '/packages/markdown-it' },
   { text: 'Rehype', link: '/packages/rehype' },
   { text: 'Monaco Editor', link: '/packages/monaco' },

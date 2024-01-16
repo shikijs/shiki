@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 import { codeToHtml } from 'shikiji'
-import { rendererClassic, transformerTwoSlash } from '../src'
+import { rendererClassic, transformerTwoslash } from '../src'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-classic.css" />
@@ -10,7 +10,7 @@ html, body { margin: 0; }
 </style>
 `
 
-const transformer = transformerTwoSlash({
+const transformer = transformerTwoslash({
   renderer: rendererClassic(),
 })
 

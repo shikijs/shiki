@@ -8,9 +8,9 @@ export type FloatingVueConfig = Parameters<(typeof FloatingVue)['install']>[1]
 /**
  * Vue plugin to install FloatingVue with styles.
  *
- * Import this function in `.vitepress/theme/index.ts` and use `app.use(TwoSlashFloatingVue)` inside the `enhanceApp` hook.
+ * Import this function in `.vitepress/theme/index.ts` and use `app.use(TwoslashFloatingVue)` inside the `enhanceApp` hook.
  */
-const TwoSlashFloatingVue: Plugin<[FloatingVueConfig?]> = {
+const TwoslashFloatingVue: Plugin<[FloatingVueConfig?]> = {
   install: (app, options: FloatingVueConfig = {}) => {
     app.use(FloatingVue, {
       ...options,
@@ -32,4 +32,4 @@ const TwoSlashFloatingVue: Plugin<[FloatingVueConfig?]> = {
   },
 }
 
-export default TwoSlashFloatingVue
+export default TwoslashFloatingVue

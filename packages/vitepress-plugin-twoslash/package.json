@@ -2,7 +2,7 @@
   "name": "vitepress-plugin-twoslash",
   "type": "module",
   "version": "0.10.0-beta.2",
-  "description": "Enable TwoSlash support in VitePress",
+  "description": "Enable Twoslash support in VitePress",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/antfu/shikiji#readme",
@@ -53,13 +53,13 @@
     "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "floating-vue": "^5.0.3",
+    "floating-vue": "^5.1.0",
     "mdast-util-from-markdown": "^2.0.0",
     "mdast-util-gfm": "^3.0.0",
     "mdast-util-to-hast": "^13.1.0",
     "shikiji": "workspace:*",
     "shikiji-twoslash": "workspace:*",
-    "twoslash-vue": "^0.0.7",
-    "vue": "^3.4.13"
+    "twoslash-vue": "^0.0.8",
+    "vue": "^3.4.14"
   }
 }

@@ -8,9 +8,9 @@ outline: deep
 
 VitePress provides [a few options for customizing Shikiji](https://github.com/vuejs/vitepress/blob/main/src/node/markdown/markdown.ts#L66-L112). Learn more about them in the [VitePress documentation](https://vitepress.dev/reference/site-config#markdown).
 
-## TwoSlash
+## Twoslash
 
-To enable [TypeScript TwoSlash](/packages/twoslash) (type hover on code snippets) in VitePress, we provide a VitePress plugin for easy setup. Pre-styled, with [Floating Vue](https://floating-vue.starpad.dev/) to display the type information out side of the code container.
+To enable [TypeScript Twoslash](/packages/twoslash) (type hover on code snippets) in VitePress, we provide a VitePress plugin for easy setup. Pre-styled, with [Floating Vue](https://floating-vue.starpad.dev/) to display the type information out side of the code container.
 
 <Badges name="vitepress-plugin-twoslash" />
 
@@ -42,14 +42,14 @@ And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custo
 // @noErrors: true
 // .vitepress/theme/index.ts
 import Theme from 'vitepress/theme'
-import TwoSlashFloatingVue from 'vitepress-plugin-twoslash/client' // [!code hl]
+import TwoslashFloatingVue from 'vitepress-plugin-twoslash/client' // [!code hl]
 import 'vitepress-plugin-twoslash/style.css' // [!code hl]
 import type { EnhanceAppContext } from 'vitepress'
 
 export default {
   extends: Theme,
   enhanceApp({ app }: EnhanceAppContext) {
-    app.use(TwoSlashFloatingVue) // [!code hl]
+    app.use(TwoslashFloatingVue) // [!code hl]
   },
 }
 ```

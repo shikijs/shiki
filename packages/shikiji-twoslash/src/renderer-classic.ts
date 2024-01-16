@@ -1,9 +1,9 @@
-import type { TwoSlashRenderer } from './types'
+import type { TwoslashRenderer } from './types'
 
 /**
  * The default renderer aligning with the original `shiki-twoslash` output.
  */
-export function rendererClassic(): TwoSlashRenderer {
+export function rendererClassic(): TwoslashRenderer {
   return {
     nodeStaticInfo(info, node) {
       return {

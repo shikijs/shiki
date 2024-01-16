@@ -1,5 +1,5 @@
 import { codeToHtml, codeToThemedTokens } from 'shikiji'
-import { transformerTwoSlash } from 'shikiji-twoslash'
+import { transformerTwoslash } from 'shikiji-twoslash'
 import { expect, it } from 'vitest'
 
 const code = `const x: [number] = ["hello"]`
@@ -22,7 +22,7 @@ it('should split tokens correctly', async () => {
     lang: 'ts',
     theme: 'vitesse-dark',
     transformers: [
-      transformerTwoSlash({
+      transformerTwoslash({
         twoslashOptions: {
           handbookOptions: {
             errors: [2322],

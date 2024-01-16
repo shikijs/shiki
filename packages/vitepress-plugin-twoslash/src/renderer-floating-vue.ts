@@ -1,16 +1,16 @@
 import { defaultCompletionIcons, defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
-import type { RendererRichOptions, TwoSlashRenderer } from 'shikiji-twoslash'
+import type { RendererRichOptions, TwoslashRenderer } from 'shikiji-twoslash'
 import type { Element, Text } from 'hast'
 import type { ShikijiTransformerContext } from 'shikiji'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { defaultHandlers, toHast } from 'mdast-util-to-hast'
 import { addClassToHast } from 'shikiji/core'
-import type { VitePressPluginTwoSlashOptions } from 'vitepress-plugin-twoslash'
+import type { VitePressPluginTwoslashOptions } from 'vitepress-plugin-twoslash'
 
 export { defaultHoverInfoProcessor }
 
-export function rendererFloatingVue(options: VitePressPluginTwoSlashOptions & RendererRichOptions = {}): TwoSlashRenderer {
+export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & RendererRichOptions = {}): TwoslashRenderer {
   const {
     processHoverInfo = defaultHoverInfoProcessor,
     processHoverDocs = docs => docs,

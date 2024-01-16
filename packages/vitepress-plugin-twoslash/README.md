@@ -1,6 +1,6 @@
 # vitepress-plugin-twoslash
 
-Enable TwoSlash support in VitePress.
+Enable Twoslash support in VitePress.
 
 [Documentation](https://shikiji.netlify.app/packages/vitepress#twoslash)
 

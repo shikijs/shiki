@@ -1,12 +1,12 @@
 import { createTransformerFactory } from 'shikiji-twoslash/core'
-import { createTwoSlasher } from 'twoslash-vue'
-import type { RendererRichOptions, TransformerTwoSlashOptions } from 'shikiji-twoslash'
+import { createTwoslasher } from 'twoslash-vue'
+import type { RendererRichOptions, TransformerTwoslashOptions } from 'shikiji-twoslash'
 import type { ShikijiTransformer } from 'shikiji'
 import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
 
-export interface VitePressPluginTwoSlashOptions extends TransformerTwoSlashOptions, RendererRichOptions {
+export interface VitePressPluginTwoslashOptions extends TransformerTwoslashOptions, RendererRichOptions {
   /**
    * Requires adding `twoslash` to the code block explicitly to run twoslash
    * @default true
@@ -19,9 +19,9 @@ export interface VitePressPluginTwoSlashOptions extends TransformerTwoSlashOptio
  *
  * Add this to `markdown.codeTransformers` in `.vitepress/config.ts`
  */
-export function transformerTwoslash(options: VitePressPluginTwoSlashOptions = {}): ShikijiTransformer {
+export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}): ShikijiTransformer {
   const twoslash = createTransformerFactory(
-    createTwoSlasher(),
+    createTwoslasher(),
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     explicitTrigger: true,

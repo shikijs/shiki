@@ -2,7 +2,7 @@
 import Theme from 'vitepress/theme'
 import type { EnhanceAppContext } from 'vitepress'
 import { createPinia } from 'pinia'
-import TwoSlashFloatingVue from '../../../packages/vitepress-plugin-twoslash/src/client'
+import TwoslashFloatingVue from '../../../packages/vitepress-plugin-twoslash/src/client'
 
 import '../../../packages/shikiji-twoslash/style-rich.css'
 import 'floating-vue/dist/style.css'
@@ -14,6 +14,6 @@ export default {
   extends: Theme,
   enhanceApp({ app }: EnhanceAppContext) {
     app.use(createPinia())
-    app.use(TwoSlashFloatingVue)
+    app.use(TwoslashFloatingVue)
   },
 }

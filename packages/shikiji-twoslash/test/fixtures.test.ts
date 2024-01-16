@@ -1,5 +1,5 @@
 import { codeToHtml } from 'shikiji'
-import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
 import { describe, expect, it } from 'vitest'
 
 const files = import.meta.glob('./fixtures/*.*', { as: 'raw', eager: true })
@@ -13,7 +13,7 @@ describe('fixtures', () => {
         lang: ext,
         theme: 'vitesse-dark',
         transformers: [
-          transformerTwoSlash({
+          transformerTwoslash({
             renderer: rendererRich(),
           }),
         ],

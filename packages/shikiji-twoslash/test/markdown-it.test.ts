@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
 import Shikiji from 'markdown-it-shikiji'
-import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-rich.css" />
@@ -33,7 +33,7 @@ describe('markdown-it', () => {
       },
       defaultColor: false,
       transformers: [
-        transformerTwoSlash({
+        transformerTwoslash({
           explicitTrigger: true,
           renderer: rendererRich(),
         }),
@@ -72,7 +72,7 @@ const a = 123
       },
       defaultColor: false,
       transformers: [
-        transformerTwoSlash({
+        transformerTwoslash({
           explicitTrigger: true,
           renderer: rendererRich(),
         }),

@@ -33,7 +33,7 @@ We also provide some integrations:
 
 - [Markdown It Plugin](/packages/markdown-it)
 - [Rehype Plugin](/packages/rehype)
-- [TypeScript TwoSlash Integration](/packages/twoslash)
+- [TypeScript Twoslash Integration](/packages/twoslash)
 - [Monaco Editor Syntax Highlight](/packages/monaco)
 - [CLI](/packages/cli)
 - [Common Transformers](/packages/transformers)

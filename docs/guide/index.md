@@ -27,7 +27,7 @@ Oh btw, the code blocks in this document are highlighted by Shikiji, as you'd ex
 - [Light/Dark themes support](/guide/dual-themes).
 - [AST-based transformers addons](/guide/transformers).
 - [`hast` support](/guide/transformers#codetohast).
-- [TypeScript TwoSlash](/packages/twoslash).
+- [TypeScript Twoslash](/packages/twoslash).
 - [Shiki-compatible build](/guide/compat).
 
 ## Playground

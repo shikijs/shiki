@@ -21,14 +21,14 @@ import {
   codeToHtml,
 } from 'shikiji'
 import {
-  transformerTwoSlash,
+  transformerTwoslash,
 } from 'shikiji-twoslash'
 
 const html = await codeToHtml(`console.log()`, {
   lang: 'ts',
   theme: 'vitesse-dark',
   transformers: [
-    transformerTwoSlash(), // <-- here
+    transformerTwoslash(), // <-- here
     // ...
   ],
 })
@@ -36,7 +36,7 @@ const html = await codeToHtml(`console.log()`, {
 
 Just like `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
 
-If you want to run TwoSlash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
+If you want to run Twoslash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
 
 ## Renderers
 
@@ -58,9 +58,9 @@ This renderer provides a more explicit class name is prefixed with `twoslash-` f
 In addition, it runs syntax highlighting on the hover information.
 
 ```ts twoslash
-import { rendererRich, transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
 
-transformerTwoSlash({
+transformerTwoslash({
   renderer: rendererRich() // <--
 })
 ```
@@ -111,9 +111,9 @@ const c = 1
 This renderer aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
 
 ```ts twoslash
-import { rendererClassic, transformerTwoSlash } from 'shikiji-twoslash'
+import { rendererClassic, transformerTwoslash } from 'shikiji-twoslash'
 
-transformerTwoSlash({
+transformerTwoslash({
   renderer: rendererClassic() // <--
 })
 ```
@@ -124,25 +124,25 @@ You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](
 
 ### Explicit Trigger
 
-When integrating with `markdown-it-shikiji` or `rehype-shikiji`, we may not want TwoSlash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
+When integrating with `markdown-it-shikiji` or `rehype-shikiji`, we may not want Twoslash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
 
 ```ts twoslash
-import { transformerTwoSlash } from 'shikiji-twoslash'
+import { transformerTwoslash } from 'shikiji-twoslash'
 
-transformerTwoSlash({
+transformerTwoslash({
   explicitTrigger: true // <--
 })
 ```
 
 ````md
-In markdown, you can use the following syntax to trigger TwoSlash:
+In markdown, you can use the following syntax to trigger Twoslash:
 
 ```ts
 // this is a normal code block
 ```
 
 ```ts twoslash
-// this will run TwoSlash
+// this will run Twoslash
 ```
 ````
 
@@ -152,7 +152,7 @@ In markdown, you can use the following syntax to trigger TwoSlash:
 
 By default `@typescript/twoslash` runs on Node.js and relies on your local system to resolve TypeScript and types for the imports. Import it directly in non-Node.js environments would not work.
 
-Luckily, TwoSlash implemented a virtual file system, which allow you to provide your own files for TypeScript to resolve in memory. However, loading these files in the browser is still a challenge. Thanks to the work on the [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team has provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
+Luckily, Twoslash implemented a virtual file system, which allow you to provide your own files for TypeScript to resolve in memory. However, loading these files in the browser is still a challenge. Thanks to the work on the [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team has provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
 
 We make tiny wrappers around the building blocks and provide an easy-to-use API in [`twoslash-cdn`](https://github.com/antfu/twoslash-cdn). For example:
 
@@ -162,7 +162,7 @@ import { createTransformerFactory, rendererRich } from 'https://esm.sh/shikiji-t
 import { codeToHtml } from 'https://esm.sh/shikiji@latest'
 import { createStorage } from 'https://esm.sh/unstorage@latest'
 import indexedDbDriver from 'https://esm.sh/unstorage@latest/drivers/indexedb'
-import { createTwoSlashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
+import { createTwoslashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
 
 // ============= Initialization =============
 
@@ -171,14 +171,14 @@ const storage = createStorage({
   driver: indexedDbDriver({ base: 'twoslash-cdn' }),
 })
 
-const twoslash = createTwoSlashFromCDN({
+const twoslash = createTwoslashFromCDN({
   storage,
   compilerOptions: {
     lib: ['esnext', 'dom'],
   },
 })
 
-const transformerTwoSlash = createTransformerFactory(twoslash.runSync)({
+const transformerTwoslash = createTransformerFactory(twoslash.runSync)({
   renderer: rendererRich(),
 })
 
@@ -189,7 +189,7 @@ const app = document.getElementById('app')
 const source = `
 import { ref } from 'vue'
 
-console.log("Hi! Shikiji + TwoSlash on CDN :)")
+console.log("Hi! Shikiji + Twoslash on CDN :)")
 
 const count = ref(0)
 //     ^?
@@ -202,10 +202,10 @@ await twoslash.prepareTypes(source)
 app.innerHTML = await codeToHtml(source, {
   lang: 'ts',
   theme: 'vitesse-dark',
-  transformers: [transformerTwoSlash],
+  transformers: [transformerTwoslash],
 })
 ```
 
 ## Integrations
 
-- [VitePress](/packages/vitepress#twoslash) - Enable TwoSlash support in VitePress.
+- [VitePress](/packages/vitepress#twoslash) - Enable Twoslash support in VitePress.
