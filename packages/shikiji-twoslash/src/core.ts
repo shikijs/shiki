@@ -210,7 +210,7 @@ export function createTransformerFactory(
               break
             }
             case 'highlight': {
-              if (renderer.nodesHightlight) {
+              if (renderer.nodesHighlight) {
                 actionsHighlights.push(() => {
                   const line = this.lines[node.line]
                   let charIndex = 0
@@ -230,8 +230,8 @@ export function createTransformerFactory(
 
                   const targets = line.children.slice(itemStart, itemEnd)
                   const length = targets.length
-                  const hightlighted = renderer.nodesHightlight?.call(this, node, targets) || targets
-                  line.children.splice(itemStart, length, ...hightlighted)
+                  const highlighted = renderer.nodesHighlight?.call(this, node, targets) || targets
+                  line.children.splice(itemStart, length, ...highlighted)
                 })
               }
               break

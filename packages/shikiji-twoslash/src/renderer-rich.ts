@@ -76,7 +76,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
     jsdoc = true,
   } = options
 
-  function hightlightPopupContent(
+  function highlightPopupContent(
     codeToHast: ShikijiTransformerContextCommon['codeToHast'],
     shikijiOptions: ShikijiTransformerContextCommon['options'],
     info: { text?: string, docs?: string },
@@ -116,7 +116,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
 
   return {
     nodeStaticInfo(info, node) {
-      const themedContent = hightlightPopupContent(this.codeToHast, this.options, info)
+      const themedContent = highlightPopupContent(this.codeToHast, this.options, info)
 
       if (!themedContent.length)
         return node
@@ -145,7 +145,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       if (!query.text)
         return {}
 
-      const themedContent = hightlightPopupContent(this.codeToHast, this.options, query)
+      const themedContent = highlightPopupContent(this.codeToHast, this.options, query)
 
       return {
         type: 'element',
@@ -327,7 +327,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       ]
     },
 
-    nodesHightlight(highlight, nodes) {
+    nodesHighlight(highlight, nodes) {
       return [
         {
           type: 'element',
