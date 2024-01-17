@@ -6,7 +6,9 @@ outline: deep
 
 <Badges name="shikiji-twoslash" />
 
-A Shikiji transformer for [`twoslash`](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks. Inspired by [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+A Shikiji transformer for [Twoslash](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks.
+
+[TwoSlash Notation Reference](https://twoslash.netlify.app/refs/notations).
 
 ## Install
 
@@ -14,7 +16,7 @@ A Shikiji transformer for [`twoslash`](https://github.com/twoslashes/twoslash), 
 npm i -D shikiji-twoslash
 ```
 
-Unlike `shiki-twoslash` that wraps around `shiki`, this package is **a transformer addon** to Shikiji. This means that for every integration that supports Shikiji transformers, you can use this package.
+This package is **a transformer addon** to Shikiji. This means that for every integration that supports passing Shikiji transformers, you can use this package.
 
 ```ts twoslash
 import {
@@ -34,7 +36,7 @@ const html = await codeToHtml(`console.log()`, {
 })
 ```
 
-Just like `shiki-twoslash`, the output is unstyled. You need to add some extra CSS to make them look good.
+The default output is unstyled. You need to add some extra CSS to make them look good.
 
 If you want to run Twoslash on browsers or workers, reference to the [CDN Usage](#cdn-usage) section.
 
@@ -119,6 +121,12 @@ transformerTwoslash({
 ```
 
 You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+
+### `rendererFloatingVue`
+
+[Source code](https://github.com/antfu/shikiji/blob/main/packages/vitepress-plugin-twoslash/src/renderer-floating-vue.ts)
+
+This renderer outputs Vue template syntax that using [Floating Vue](https://floating-vue.starpad.dev/) as the popup component (to render it outside the containers). This renderer is **NOT** directly usable but an internal renderer for the [VitePress integration](/packages/vitepress#twoslash). Listing it here for reference if you want to create your own renderer.
 
 ## Options
 
