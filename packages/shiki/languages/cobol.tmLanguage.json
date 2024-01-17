@@ -467,6 +467,9 @@
           "include": "#dli-keywords"
         },
         {
+          "include": "#dli-options"
+        },
+        {
           "include": "#string-double-quoted-constant"
         },
         {
@@ -1100,6 +1103,10 @@
     "dli-keywords": {
       "match": "(?<![\\-\\w])(?i:accept|chkp|deq|dlet|gnp|gn|gu|isrt|load|log|pos|query|refresh|repl|retrieve|rolb|roll|rols|schd|sets|setu|symchkp|term|xrst)(?![\\-\\w])",
       "name": "keyword.verb.dli"
+    },
+    "dli-options": {
+      "match": "(?<![\\-\\w])(?i:statusgroup|checkpoint|chkp|id|lockclass|segment|info|where|from|using|keyfeedback|feedbacklen|variable|first|last|current|seglength|offset|locked|movenext|getfirst|set|setcond|setzero|setparent|fieldlength|keys|maxlength|length[0-9]*|area[0-9]*|psc|pcs|pcb|sysserve|into)(?![\\-\\w])",
+      "name": "keyword.other.dli"
     },
     "string-quoted-constant": {
       "begin": "'",
