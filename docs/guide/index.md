@@ -43,10 +43,13 @@ Here is a little playground for you to try out how Shikiji highlights your code.
 Projects that depend on Shikiji (sorted alphabetically):
 
 - [Astro](https://docs.astro.build/en/guides/markdown-content/#syntax-highlighting)
+- [Expressive Code](https://expressive-code.com/)
+- [JSX email](https://jsx.email/)
 - [Lobe UI](https://github.com/lobehub/lobe-ui)
 - [Nuxt Content](https://content.nuxt.com/usage/markdown#code-highlighting)
 - [Slidev](https://sli.dev/custom/highlighters.html#highlighters)
 - [VitePress](https://vitepress.dev/guide/markdown#syntax-highlighting-in-code-blocks)
+- [Vocs](https://github.com/wevm/vocs)
 
 ## Bundle Size
 
