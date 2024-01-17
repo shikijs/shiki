@@ -181,20 +181,3 @@
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
-
-.vp-code .tab,
-.vp-code .space {
-  position: relative;
-}
-
-.vp-code .tab::before {
-  content: '⇥';
-  position: absolute;
-  opacity: 0.3;
-}
-
-.vp-code .space::before {
-  content: '·';
-  position: absolute;
-  opacity: 0.3;
-}

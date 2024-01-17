@@ -1,7 +1,7 @@
 import type { ShikijiTransformer } from 'shikiji'
 import { addClassToHast } from 'shikiji'
 import type { Element } from 'hast'
-import { splitSpaces } from './_utils'
+import { splitSpaces } from '../shared/utils'
 
 export interface TransformerRenderWhitespaceOptions {
   /**

@@ -2,7 +2,7 @@
 
 …world!
 
-```js {3-4} fileName=test
+```js {3-4} fileName=test /a/
 console.log('it works!')
 
 const a = 1

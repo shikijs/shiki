@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { separateContinuousSpaces } from '../src/transformers/_utils'
+import { separateContinuousSpaces } from '../src/shared/utils'
 
 describe('utils', () => {
   it('separateContinuousSpaces', () => {

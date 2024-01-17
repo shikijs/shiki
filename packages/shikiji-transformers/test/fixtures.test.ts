@@ -9,6 +9,7 @@ import {
   transformerNotationErrorLevel,
   transformerNotationFocus,
   transformerNotationHighlight,
+  transformerNotationWordHighlight,
   transformerRemoveLineBreak,
   transformerRenderWhitespace,
 } from '../src'
@@ -98,6 +99,19 @@ body { margin: 0; }
 .shiki { padding: 1em; }
 .line { display: block; width: 100%; height: 1.2em; }
 .highlighted { background-color: #8885; }
+</style>`,
+)
+
+suite(
+  'highlight-word',
+  import.meta.glob('./fixtures/highlight-word/*.*', { as: 'raw', eager: true }),
+  [transformerNotationWordHighlight(), transformerRemoveLineBreak()],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.highlighted-word { background-color: #8885; }
 </style>`,
 )
 

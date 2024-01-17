@@ -9,6 +9,7 @@ import 'floating-vue/dist/style.css'
 import '../../../packages/vitepress-plugin-twoslash/src/style.css'
 import 'uno.css'
 import './style.css'
+import './transformers.css'
 
 export default {
   extends: Theme,

@@ -1,0 +1,24 @@
+.vp-code .tab,
+.vp-code .space {
+  position: relative;
+}
+
+.vp-code .tab::before {
+  content: '⇥';
+  position: absolute;
+  opacity: 0.3;
+}
+
+.vp-code .space::before {
+  content: '·';
+  position: absolute;
+  opacity: 0.3;
+}
+
+.vp-code .highlighted-word {
+  background-color: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  padding: 1px 3px;
+  margin: -1px -3px;
+  border-radius: 4px;
+}

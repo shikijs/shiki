@@ -4,6 +4,7 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import { expect, it } from 'vitest'
+import { transformerMetaHighlight, transformerMetaWordHighlight } from 'shikiji-transformers'
 import rehypeShikiji from '../src'
 
 it('run', async () => {
@@ -12,7 +13,10 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiji, {
       theme: 'vitesse-light',
-      highlightLines: true,
+      transformers: [
+        transformerMetaWordHighlight(),
+        transformerMetaHighlight(),
+      ],
       parseMetaString: (str) => {
         return Object.fromEntries(str.split(' ').reduce((prev: [string, boolean | string][], curr: string) => {
           const [key, value] = curr.split('=')

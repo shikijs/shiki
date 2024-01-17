@@ -1,6 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { bundledThemes } from 'shikiji'
+import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '../../packages/shikiji-transformers/src'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-plugin-twoslash/src/index'
 import { version } from '../../package.json'
 import vite from './vite.config'
@@ -54,6 +55,8 @@ export default defineConfig({
       }))
     },
     codeTransformers: [
+      transformerMetaWordHighlight(),
+      transformerNotationWordHighlight(),
       {
         // Render custom themes with codeblocks
         name: 'shikiji:inline-theme',
