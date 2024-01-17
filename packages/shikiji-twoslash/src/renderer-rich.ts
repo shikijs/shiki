@@ -326,6 +326,19 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         },
       ]
     },
+
+    nodesHightlight(highlight, nodes) {
+      return [
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: ['twoslash-highlighted', classExtra].filter(Boolean).join(' '),
+          },
+          children: nodes,
+        },
+      ]
+    },
   }
 }
 

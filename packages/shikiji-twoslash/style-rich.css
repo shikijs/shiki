@@ -3,6 +3,8 @@
   --twoslash-border-color: #8888;
   --twoslash-jsdoc-color: #888;
   --twoslash-underline-color: currentColor;
+  --twoslash-highlighted-border: #c37d0d50;
+  --twoslash-highlighted-bg: #c37d0d20;
   --twoslash-popup-bg: #f8f8f8;
   --twoslash-popup-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
   --twoslash-matched-color: inherit;
@@ -161,6 +163,14 @@
 }
 .twoslash-completion-list li span.twoslash-completions-matched {
   color: var(--twoslash-matched-color);
+}
+/* Highlights */
+.twoslash-highlighted {
+  background-color: var(--twoslash-highlighted-bg);
+  border: 1px solid var(--twoslash-highlighted-border);
+  padding: 1px 2px;
+  margin: -1px -2px;
+  border-radius: 4px;
 }
 /* Icons */
 .twoslash-completion-list .twoslash-completions-icon {

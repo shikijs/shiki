@@ -52,11 +52,11 @@ export interface TwoslashRenderer {
   lineCustomTag?(this: ShikijiTransformerContext, tag: NodeTag): ElementContent[]
   lineQuery?(this: ShikijiTransformerContext, query: NodeQuery, targetNode?: Element | Text): ElementContent[]
   lineCompletion?(this: ShikijiTransformerContext, query: NodeCompletion): ElementContent[]
-  lineHighlight?(this: ShikijiTransformerContext, query: NodeHighlight): ElementContent[]
 
   nodeStaticInfo(this: ShikijiTransformerContext, info: NodeHover, node: Element | Text): Partial<ElementContent>
   nodeError?(this: ShikijiTransformerContext, error: NodeError, node: Element | Text): Partial<ElementContent>
   nodeQuery?(this: ShikijiTransformerContext, query: NodeQuery, node: Element | Text): Partial<ElementContent>
   nodeCompletion?(this: ShikijiTransformerContext, query: NodeCompletion, node: Element | Text): Partial<ElementContent>
-  nodeHightlight?(this: ShikijiTransformerContext, query: NodeHighlight, node: Element | Text): Partial<ElementContent>
+
+  nodesHightlight?(this: ShikijiTransformerContext, highlight: NodeHighlight, nodes: ElementContent[]): ElementContent[]
 }
