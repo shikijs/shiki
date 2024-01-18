@@ -1,9 +1,10 @@
 import { basename } from 'node:path'
-import { codeToHast, hastToHtml } from 'shikiji'
-import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
+import { codeToHast } from 'shikiji'
+import { transformerTwoslash } from 'shikiji-twoslash'
 import { describe, expect, it } from 'vitest'
+import { rendererFloatingVue } from '../src'
 
-const files = import.meta.glob('./fixtures/*.*', { as: 'raw', eager: true })
+const files = import.meta.glob('../../shikiji-twoslash/test/fixtures/*.*', { as: 'raw', eager: true })
 
 describe('fixtures', () => {
   for (const file in files) {
@@ -16,19 +17,13 @@ describe('fixtures', () => {
         theme: 'vitesse-dark',
         transformers: [
           transformerTwoslash({
-            renderer: rendererRich(),
+            renderer: rendererFloatingVue(),
           }),
         ],
       })
 
-      const html = hastToHtml(hast)
-
       expect.soft(JSON.stringify(hast, null, 2))
         .toMatchFileSnapshot(`./out/${name}.json`)
-
-      const style = '<link rel="stylesheet" href="../../../style-rich.css" />'
-      expect.soft(style + html)
-        .toMatchFileSnapshot(`./out/${name}.html`)
     })
   }
 })
