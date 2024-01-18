@@ -56,7 +56,7 @@ md.use(fromHighlighter(highlighter, { /* options */ }))
 
 ### Line Highlight
 
-::: note
+::: warning
 This is deprecated. It's disabled by default in `v0.10.0` and will be removed in the next minor. Consider use [`transformerNotationHighlight`](https://shikiji.netlify.app/packages/transformers#transformernotationhighlight) instead.
 :::
 
@@ -71,6 +71,6 @@ console.log('4') // highlighted
 ```
 ````
 
-::: note
+::: info
 If line highlighting is not working, it may be due to compatibility issues with the [markdown-it-attrs](https://github.com/arve0/markdown-it-attrs) plugin. The syntax of `markdown-it-attrs` uses the same curly brace (`{}`) syntax that this plugin uses, which causes line highlighting to not work. If you wish to continue using `markdown-it-attrs` alongside this plugin, consider [changing the delimiter/syntax](https://github.com/arve0/markdown-it-attrs#custom-delimiters) of `markdown-it-attrs` to use a different character, such as `%`.
 :::

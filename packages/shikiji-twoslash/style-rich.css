@@ -39,16 +39,16 @@
   position: relative;
 }
 
-.twoslash .twoslash-popup-info {
+.twoslash .twoslash-popup-container {
   position: absolute;
   opacity: 0;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   transform: translateY(1.1em);
   background: var(--twoslash-popup-bg);
   border: 1px solid var(--twoslash-border-color);
   transition: opacity 0.3s;
   border-radius: 4px;
-  padding: 4px 6px;
   pointer-events: none;
   z-index: 10;
   user-select: none;
@@ -56,18 +56,18 @@
   box-shadow: var(--twoslash-popup-shadow);
 }
 
-.twoslash .twoslash-query-presisted .twoslash-popup-info {
+.twoslash .twoslash-query-presisted .twoslash-popup-container {
   z-index: 9;
   transform: translateY(1.5em);
 }
 
-.twoslash .twoslash-hover:hover .twoslash-popup-info,
-.twoslash .twoslash-query-presisted .twoslash-popup-info {
+.twoslash .twoslash-hover:hover .twoslash-popup-container,
+.twoslash .twoslash-query-presisted .twoslash-popup-container {
   opacity: 1;
   pointer-events: auto;
 }
 
-.twoslash .twoslash-popup-info:hover {
+.twoslash .twoslash-popup-container:hover {
   user-select: auto;
 }
 
@@ -84,12 +84,26 @@
   pointer-events: none;
 }
 
-.twoslash .twoslash-popup-jsdoc {
+.twoslash .twoslash-popup-code,
+.twoslash .twoslash-popup-docs {
+  padding: 6px 8px !important;
+}
+
+.twoslash .twoslash-popup-docs {
   color: var(--twoslash-jsdoc-color);
-  padding-top: 6px;
-  padding-bottom: 2px;
   font-family: sans-serif;
   font-size: 0.8em;
+  border-top: 1px solid var(--twoslash-border-color);
+}
+
+.twoslash .twoslash-popup-docs-tags {
+  display: flex;
+  flex-direction: column;
+}
+
+.twoslash .twoslash-popup-docs-tags,
+.twoslash .twoslash-popup-docs-tag-name {
+  margin-right: 0.5em;
 }
 
 /* ===== Error Line ===== */

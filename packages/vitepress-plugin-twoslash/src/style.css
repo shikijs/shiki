@@ -22,11 +22,11 @@
   border-color: var(--vp-c-bg, inherit);
 }
 
-.twoslash-popup-info {
+.twoslash-popup-container {
   transform: translateY(1.5em);
 }
 
-.twoslash-query-presisted .twoslash-popup-info {
+.twoslash-query-presisted .twoslash-popup-container {
   transform: translateY(1.8em);
 }
 
@@ -38,12 +38,12 @@
   color: var(--twoslash-unmatched-color) !important;
 }
 
-.floating-vue-twoslash .twoslash-popup-type {
+.floating-vue-twoslash .twoslash-popup-code {
   max-width: 600px;
   display: block;
-  padding: 6px 12px;
   width: fit-content;
   min-width: 100%;
+  padding: 6px 12px;
   line-height: var(--vp-code-line-height);
   font-size: var(--vp-code-font-size);
   color: var(--vp-code-block-color);
@@ -51,7 +51,7 @@
   white-space: pre-wrap;
 }
 
-.floating-vue-twoslash .twoslash-popup-jsdoc {
+.floating-vue-twoslash .twoslash-popup-docs {
   border-top: 1px solid var(--vp-c-border);
   color: var(--vp-c-text-1);
   padding: 0px 12px 0px 12px !important;
@@ -64,13 +64,13 @@
   text-wrap: balance;
 }
 
-.floating-vue-twoslash .twoslash-popup-jsdoc p {
+.floating-vue-twoslash .twoslash-popup-docs p {
   margin: 0;
   padding: 6px 0;
   text-wrap: balance;
 }
 
-.floating-vue-twoslash .twoslash-popup-jsdoc pre {
+.floating-vue-twoslash .twoslash-popup-docs pre {
   background-color: var(--vp-code-block-bg);
   border-radius: 8px;
   padding: 12px;
@@ -78,19 +78,16 @@
   overflow-x: auto;
 }
 
-.floating-vue-twoslash .twoslash-popup-jsdoc-tags {
+.floating-vue-twoslash .twoslash-popup-docs-tags {
   display: flex;
   flex-direction: column;
   padding: 8px 12px !important;
 }
 
-.floating-vue-twoslash
-  .twoslash-popup-jsdoc-tags
-  .twoslash-popup-jsdoc-tag-name {
+.floating-vue-twoslash .twoslash-popup-docs-tags .twoslash-popup-docs-tag-name {
   font-family: var(--vp-font-family-mono);
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-2);
   margin-right: 0.5em;
-  font-size: 0.9em;
 }
 
 .twoslash-completion-cursor {

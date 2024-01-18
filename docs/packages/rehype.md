@@ -83,7 +83,7 @@ const file = await unified()
 
 ### Line Highlight
 
-::: note
+::: warning
 This is deprecated. It's disabled by default in `v0.10.0` and will be removed in the next minor. Consider use [`transformerNotationHighlight`](https://shikiji.netlify.app/packages/transformers#transformernotationhighlight) instead.
 :::
 

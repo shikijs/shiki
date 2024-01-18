@@ -1,5 +1,6 @@
-import type { Element, ElementContent } from 'hast'
+import type { Element, ElementContent, Text } from 'hast'
 import type { ShikijiTransformerContextCommon } from 'shikiji-core'
+import type { NodeHover, NodeQuery } from 'twoslash'
 import type { TwoslashRenderer } from './types'
 import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
@@ -37,6 +38,7 @@ export interface RendererRichOptions {
    * @default defaultHoverInfoProcessor
    */
   processHoverInfo?: (info: string) => string
+
   /**
    * Custom formatter for the docs text (can be markdown).
    *
@@ -59,6 +61,117 @@ export interface RendererRichOptions {
    * @deprecated Use `processHoverInfo` instead.
    */
   formatInfo?(info: string): string
+
+  /**
+   * Custom function to render markdown.
+   *
+   * By default it pass-through the markdown.
+   */
+  renderMarkdown?(this: ShikijiTransformerContextCommon, markdown: string): ElementContent[]
+
+  /**
+   * Custom function to render inline markdown.
+   *
+   * By default it pass-through the markdown.
+   */
+  renderMarkdownInline?(this: ShikijiTransformerContextCommon, markdown: string): ElementContent[]
+
+  /**
+   * Extensions for the genreated HAST tree.
+   */
+  hast?: {
+    /**
+     * The <code> block for in the hover popup.
+     */
+    popupTypes?: HastExtension
+    /**
+     * The documentation block in the hover popup. Can be markdown rendered if `renderMarkdown` is provided.
+     */
+    popupDocs?: HastExtension
+    /**
+     * The container of jsdoc tags in the hover popup.
+     */
+    popupDocsTags?: HastExtension
+    /**
+     * The token for the hover informaton.
+     */
+    hoverToken?: HastExtension
+    /**
+     * The container of the hover popup.
+     */
+    hoverPopup?: HastExtension
+    /**
+     * Custom function to compose the hover token.
+     */
+    hoverCompose?: (parts: { popup: Element, token: Text | Element }) => ElementContent[]
+    /**
+     * The token for the query informaton.
+     */
+    queryToken?: HastExtension
+    /**
+     * The container of the query popup.
+     */
+    queryPopup?: HastExtension
+    /**
+     * Custom function to compose the hover token.
+     */
+    queryCompose?: (parts: { popup: Element, token: Text | Element }) => ElementContent[]
+    /**
+     * The token for the completion informaton.
+     */
+    completionToken?: HastExtension
+    /**
+     * The cursor element in the completion popup.
+     */
+    completionCursor?: HastExtension
+    /**
+     * The container of the completion popup.
+     */
+    completionPopup?: HastExtension
+    /**
+     * Custom function to compose the completion token.
+     */
+    completionCompose?: (parts: { popup: Element, cursor: Element }) => ElementContent[]
+    /**
+     * The token for the error informaton.
+     */
+    errorToken?: HastExtension
+    /**
+     * The wrapper for the highlighted nodes.
+     */
+    nodesHighlight?: HastExtension
+  }
+}
+
+export interface HastExtension {
+  tagName?: string
+  properties?: Element['properties']
+  class?: string
+  children?: (input: ElementContent[]) => ElementContent[]
+}
+
+function extend(extension: HastExtension | undefined, node: Element): Element {
+  if (!extension)
+    return node
+  return {
+    ...node,
+    tagName: extension.tagName ?? node.tagName,
+    properties: {
+      ...node.properties,
+      class: node.properties?.class || extension.class,
+      ...extension.properties,
+    },
+    children: extension.children?.(node.children) ?? node.children,
+  }
+}
+
+function renderMarkdownPassThrough(markdown: string): ElementContent[] {
+  return [
+    {
+      type: 'text',
+      value: markdown,
+    },
+  ]
 }
 
 /**
@@ -74,105 +187,181 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
     processHoverDocs = docs => docs,
     classExtra = '',
     jsdoc = true,
+    renderMarkdown = renderMarkdownPassThrough,
+    renderMarkdownInline = renderMarkdownPassThrough,
+    hast,
   } = options
 
   function highlightPopupContent(
-    codeToHast: ShikijiTransformerContextCommon['codeToHast'],
-    shikijiOptions: ShikijiTransformerContextCommon['options'],
-    info: { text?: string, docs?: string },
+    this: ShikijiTransformerContextCommon,
+    info: NodeHover | NodeQuery,
   ) {
     if (!info.text)
       return []
-
-    const text = processHoverInfo(info.text) ?? info.text
-    if (!text.trim())
+    const content = processHoverInfo(info.text)
+    if (!content || content === 'any')
       return []
 
-    const themedContent = ((codeToHast(text, {
-      ...shikijiOptions,
-      lang: options.lang || shikijiOptions.lang,
-      transformers: [],
-    }).children[0] as Element).children[0] as Element).children
+    const popupContents: ElementContent[] = []
+
+    const typeCode = ((this.codeToHast(
+      content,
+      {
+        ...this.options,
+        transformers: [],
+        lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
+          ? 'tsx'
+          : 'ts',
+      },
+    ).children[0] as Element).children as Element[])[0]
+    typeCode.properties.class = 'twoslash-popup-code'
+
+    popupContents.push(
+      extend(
+        hast?.popupTypes,
+        typeCode,
+      ),
+    )
 
     if (jsdoc && info.docs) {
       const docs = processHoverDocs(info.docs) ?? info.docs
       if (docs) {
-        themedContent.push({
-          type: 'element',
-          tagName: 'div',
-          properties: { class: 'twoslash-popup-jsdoc' },
-          children: [
-            {
-              type: 'text',
-              value: docs,
-            },
-          ],
-        })
+        const children = renderMarkdown.call(this, docs)
+        popupContents.push(extend(
+          hast?.popupDocs,
+          {
+            type: 'element',
+            tagName: 'div',
+            properties: { class: 'twoslash-popup-docs' },
+            children,
+          },
+        ))
       }
     }
 
-    return themedContent
+    if (jsdoc && info.tags?.length) {
+      popupContents.push(extend(
+        hast?.popupDocsTags,
+        {
+          type: 'element',
+          tagName: 'div',
+          properties: {
+            class: 'twoslash-popup-docs twoslash-popup-docs-tags',
+          },
+          children: info.tags.map(tag => (<Element>{
+            type: 'element',
+            tagName: 'span',
+            properties: {
+              class: `twoslash-popup-docs-tag`,
+            },
+            children: [
+              {
+                type: 'element',
+                tagName: 'span',
+                properties: {
+                  class: 'twoslash-popup-docs-tag-name',
+                },
+                children: [
+                  {
+                    type: 'text',
+                    value: `@${tag[0]}`,
+                  },
+                ],
+              },
+              ...tag[1]
+                ? [
+                    <Element>{
+                      type: 'element',
+                      tagName: 'span',
+                      properties: {
+                        class: 'twoslash-popup-docs-tag-value',
+                      },
+                      children: renderMarkdownInline.call(this, tag[1]),
+                    },
+                  ]
+                : [],
+            ],
+          })),
+        },
+      ))
+    }
+
+    return popupContents
   }
 
   return {
     nodeStaticInfo(info, node) {
-      const themedContent = highlightPopupContent(this.codeToHast, this.options, info)
+      const themedContent = highlightPopupContent.call(this, info)
 
       if (!themedContent.length)
         return node
 
-      return {
-        type: 'element',
-        tagName: 'span',
-        properties: {
-          class: 'twoslash-hover',
-        },
-        children: [
-          {
-            type: 'element',
-            tagName: 'span',
-            properties: {
-              class: ['twoslash-popup-info', classExtra].filter(Boolean).join(' '),
-            },
-            children: themedContent,
+      const popup = extend(
+        hast?.hoverPopup,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
           },
-          node,
-        ],
-      }
+          children: themedContent,
+        },
+      )
+
+      return extend(
+        hast?.hoverToken,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: 'twoslash-hover',
+          },
+          children: hast?.hoverCompose
+            ? hast?.hoverCompose({ popup, token: node })
+            : [popup, node],
+        },
+      )
     },
 
     nodeQuery(query, node) {
       if (!query.text)
         return {}
 
-      const themedContent = highlightPopupContent(this.codeToHast, this.options, query)
+      const themedContent = highlightPopupContent.call(this, query)
 
-      return {
-        type: 'element',
-        tagName: 'span',
-        properties: {
-          class: 'twoslash-hover twoslash-query-presisted',
-        },
-        children: [
-          {
-            type: 'element',
-            tagName: 'span',
-            properties: {
-              class: ['twoslash-popup-info', classExtra].filter(Boolean).join(' '),
-            },
-            children: [
-              {
-                type: 'element',
-                tagName: 'div',
-                properties: { class: 'twoslash-popup-arrow' },
-                children: [],
-              },
-              ...themedContent,
-            ],
+      const popup = extend(
+        hast?.queryPopup,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
           },
-          node,
-        ],
-      }
+          children: [
+            {
+              type: 'element',
+              tagName: 'div',
+              properties: { class: 'twoslash-popup-arrow' },
+              children: [],
+            },
+            ...themedContent,
+          ],
+        },
+      )
+
+      return extend(
+        hast?.queryToken,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: 'twoslash-hover twoslash-query-presisted',
+          },
+          children: hast?.queryCompose
+            ? hast?.queryCompose({ popup, token: node })
+            : [popup, node],
+        },
+      )
     },
 
     nodeCompletion(query, node) {
@@ -182,101 +371,124 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       const leftPart = query.completionsPrefix || ''
       const rightPart = node.value.slice(leftPart.length || 0)
 
-      return {
-        type: 'element',
-        tagName: 'span',
-        properties: {},
-        children: [
-          {
-            type: 'text',
-            value: leftPart,
-          },
-          {
-            type: 'element',
-            tagName: 'span',
-            properties: {
-              class: ['twoslash-completion-cursor', classExtra].filter(Boolean).join(' '),
-            },
-            children: [{
+      const items: Element[] = query.completions
+        .map(i => ({
+          type: 'element',
+          tagName: 'li',
+          properties: {},
+          children: [
+            ...completionIcons
+              ? [<Element>{
+                type: 'element',
+                tagName: 'span',
+                properties: { class: `twoslash-completions-icon completions-${i.kind.replace(/\s/g, '-')}` },
+                children: [
+                  completionIcons[i.kind] || completionIcons.property,
+                ].filter(Boolean),
+              }]
+              : [],
+            {
               type: 'element',
-              tagName: 'ul',
+              tagName: 'span',
               properties: {
-                class: ['twoslash-completion-list', classExtra].filter(Boolean).join(' '),
+                class: i.kindModifiers?.split(',').includes('deprecated')
+                  ? 'deprecated'
+                  : undefined,
               },
-              children: query.completions!
-                .map(i => ({
+              children: [
+                {
                   type: 'element',
-                  tagName: 'li',
-                  properties: {},
+                  tagName: 'span',
+                  properties: { class: 'twoslash-completions-matched' },
                   children: [
-                    ...completionIcons
-                      ? [<Element>{
-                        type: 'element',
-                        tagName: 'span',
-                        properties: { class: `twoslash-completions-icon completions-${i.kind.replace(/\s/g, '-')}` },
-                        children: [
-                          completionIcons[i.kind] || completionIcons.property,
-                        ].filter(Boolean),
-                      }]
-                      : [],
                     {
-                      type: 'element',
-                      tagName: 'span',
-                      properties: {
-                        class: i.kindModifiers?.split(',').includes('deprecated')
-                          ? 'deprecated'
-                          : undefined,
-                      },
-                      children: [
-                        {
-                          type: 'element',
-                          tagName: 'span',
-                          properties: { class: 'twoslash-completions-matched' },
-                          children: [
-                            {
-                              type: 'text',
-                              value: i.name.startsWith(query.completionsPrefix)
-                                ? query.completionsPrefix
-                                : '',
-                            },
-                          ],
-                        },
-                        {
-                          type: 'element',
-                          tagName: 'span',
-                          properties: { class: 'twoslash-completions-unmatched' },
-                          children: [
-                            {
-                              type: 'text',
-                              value: i.name.startsWith(query.completionsPrefix)
-                                ? i.name.slice(query.completionsPrefix.length || 0)
-                                : i.name,
-                            },
-                          ],
-                        },
-                      ],
+                      type: 'text',
+                      value: i.name.startsWith(query.completionsPrefix)
+                        ? query.completionsPrefix
+                        : '',
                     },
                   ],
-                })),
-            }],
+                },
+                {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { class: 'twoslash-completions-unmatched' },
+                  children: [
+                    {
+                      type: 'text',
+                      value: i.name.startsWith(query.completionsPrefix)
+                        ? i.name.slice(query.completionsPrefix.length || 0)
+                        : i.name,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        }))
+
+      const cursor = extend(
+        hast?.completionCursor,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: ['twoslash-completion-cursor', classExtra].filter(Boolean).join(' '),
           },
-          {
-            type: 'text',
-            value: rightPart,
+          children: [],
+        },
+      )
+
+      const popup = extend(
+        hast?.completionPopup,
+        {
+          type: 'element',
+          tagName: 'ul',
+          properties: {
+            class: ['twoslash-completion-list', classExtra].filter(Boolean).join(' '),
           },
-        ],
-      }
+          children: items,
+        },
+      )
+
+      return extend(
+        hast?.completionToken,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {},
+          children: [
+            {
+              type: 'text',
+              value: leftPart,
+            },
+            ...(hast?.completionCompose
+              ? hast?.completionCompose({ popup, cursor })
+              : [{
+                  ...cursor,
+                  children: [popup],
+                }]),
+            {
+              type: 'text',
+              value: rightPart,
+            },
+          ],
+        },
+      )
     },
 
     nodeError(_, node) {
-      return {
-        type: 'element',
-        tagName: 'span',
-        properties: {
-          class: 'twoslash-error',
+      return extend(
+        hast?.errorToken,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: 'twoslash-error',
+          },
+          children: [node],
         },
-        children: [node],
-      }
+      )
     },
 
     lineError(error) {
@@ -307,16 +519,14 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           },
           children: [
             ...customTagIcons
-              ? [
-                <Element>{
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { class: `twoslash-tag-icon tag-${tag.name}-icon` },
-                  children: [
-                    customTagIcons[tag.name],
-                  ].filter(Boolean),
-                },
-                ]
+              ? [<Element>{
+                type: 'element',
+                tagName: 'span',
+                properties: { class: `twoslash-tag-icon tag-${tag.name}-icon` },
+                children: [
+                  customTagIcons[tag.name],
+                ].filter(Boolean),
+              }]
               : [],
             {
               type: 'text',
@@ -329,14 +539,17 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
 
     nodesHighlight(highlight, nodes) {
       return [
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {
-            class: ['twoslash-highlighted', classExtra].filter(Boolean).join(' '),
+        extend(
+          hast?.nodesHighlight,
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {
+              class: 'twoslash-highlighted',
+            },
+            children: nodes,
           },
-          children: nodes,
-        },
+        ),
       ]
     },
   }
