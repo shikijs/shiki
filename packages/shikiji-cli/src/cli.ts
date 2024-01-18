@@ -17,11 +17,14 @@ export async function run(
     _: files = [],
   } = options
 
-  for (const path of files) {
+  const codes = await Promise.all(files.map(async (path) => {
     const content = await fs.readFile(path, 'utf-8')
     const ext = lang || parse(path).ext.slice(1)
-    log(await codeToANSI(content, ext as BundledLanguage, theme))
-  }
+    return await codeToANSI(content, ext as BundledLanguage, theme)
+  }))
+
+  for (const code of codes)
+    log(code)
 }
 
 run()
