@@ -13,7 +13,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
-  { text: 'Compatibly Build', link: '/guide/compat' },
+  { text: 'Compatibility Build', link: '/guide/compat' },
   { text: 'Custom Themes', link: '/guide/load-theme' },
   { text: 'Custom Languages', link: '/guide/load-lang' },
 ]
