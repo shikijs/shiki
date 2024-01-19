@@ -1,4 +1,4 @@
-import { codeToHast, codeToThemedTokens } from 'shikiji'
+import { codeToHast, codeToHtml, codeToThemedTokens } from 'shikiji'
 import { transformerTwoslash } from 'shikiji-twoslash'
 import { expect, it } from 'vitest'
 import { visit } from 'unist-util-visit'

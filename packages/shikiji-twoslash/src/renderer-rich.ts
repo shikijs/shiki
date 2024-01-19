@@ -368,9 +368,6 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       if (node.type !== 'text')
         throw new Error(`[shikiji-twoslash] nodeCompletion only works on text nodes, got ${node.type}`)
 
-      const leftPart = query.completionsPrefix || ''
-      const rightPart = node.value.slice(leftPart.length || 0)
-
       const items: Element[] = query.completions
         .map(i => ({
           type: 'element',
@@ -451,28 +448,27 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         },
       )
 
+      const children: ElementContent[] = []
+      if (node.value)
+        children.push({ type: 'text', value: node.value })
+
+      if (hast?.completionCompose) {
+        children.push(...hast.completionCompose({ popup, cursor }))
+      }
+      else {
+        children.push({
+          ...cursor,
+          children: [popup],
+        })
+      }
+
       return extend(
         hast?.completionToken,
         {
           type: 'element',
           tagName: 'span',
           properties: {},
-          children: [
-            {
-              type: 'text',
-              value: leftPart,
-            },
-            ...(hast?.completionCompose
-              ? hast?.completionCompose({ popup, cursor })
-              : [{
-                  ...cursor,
-                  children: [popup],
-                }]),
-            {
-              type: 'text',
-              value: rightPart,
-            },
-          ],
+          children,
         },
       )
     },

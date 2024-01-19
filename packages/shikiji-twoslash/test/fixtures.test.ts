@@ -9,11 +9,18 @@ describe('fixtures', () => {
   for (const file in files) {
     const name = basename(file)
     it(name, async () => {
-      const code = files[file]
+      let code = files[file]
       const ext = file.split('.').pop()!
+
+      let theme = 'vitesse-dark'
+      code = code.replace(/\/\/\s+@theme:\s+(.*)\n/, (_, t) => {
+        theme = t
+        return ''
+      })
+
       const hast = await codeToHast(code, {
         lang: ext,
-        theme: 'vitesse-dark',
+        theme,
         transformers: [
           transformerTwoslash({
             renderer: rendererRich(),

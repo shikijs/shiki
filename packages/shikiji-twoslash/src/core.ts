@@ -65,7 +65,7 @@ export function createTransformerFactory(
 
         // Break tokens at the boundaries of twoslash nodes
         const breakpoints = Array.from(new Set(this.meta.twoslash.nodes.flatMap(i =>
-          ['hover', 'error', 'query', 'highlight'].includes(i.type)
+          ['hover', 'error', 'query', 'highlight', 'completion'].includes(i.type)
             ? [i.start, i.start + i.length]
             : [],
         ))).sort()
