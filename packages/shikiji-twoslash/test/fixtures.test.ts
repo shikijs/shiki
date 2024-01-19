@@ -26,7 +26,7 @@ describe('fixtures', () => {
       expect.soft(JSON.stringify(hast, null, 2))
         .toMatchFileSnapshot(`./out/${name}.json`)
 
-      const style = '<link rel="stylesheet" href="../../../style-rich.css" />'
+      const style = '<link rel="stylesheet" href="../../style-rich.css" />'
       expect.soft(style + html)
         .toMatchFileSnapshot(`./out/${name}.html`)
     })
