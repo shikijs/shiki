@@ -217,3 +217,4 @@ app.innerHTML = await codeToHtml(source, {
 ## Integrations
 
 - [VitePress](/packages/vitepress#twoslash) - Enable Twoslash support in VitePress.
+- [Vocs](https://vocs.dev/docs/guides/twoslash) - Enable Twoslash support in Vocs.
