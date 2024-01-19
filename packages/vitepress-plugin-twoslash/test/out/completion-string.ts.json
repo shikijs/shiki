@@ -36,14 +36,16 @@
                   "children": [
                     {
                       "type": "text",
-                      "value": "const"
+                      "value": "type"
                     }
                   ]
                 },
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -55,12 +57,12 @@
                   "type": "element",
                   "tagName": "span",
                   "properties": {
-                    "style": "color:#BD976A"
+                    "style": "color:#5DA994"
                   },
                   "children": [
                     {
                       "type": "element",
-                      "value": "str",
+                      "value": "A",
                       "tagName": "v-menu",
                       "properties": {
                         "class": "twoslash-hover",
@@ -78,7 +80,7 @@
                           "children": [
                             {
                               "type": "text",
-                              "value": "str"
+                              "value": "A"
                             }
                           ]
                         },
@@ -121,14 +123,16 @@
                                             "children": [
                                               {
                                                 "type": "text",
-                                                "value": "const"
+                                                "value": "type"
                                               }
                                             ]
                                           },
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -140,12 +144,25 @@
                                             "type": "element",
                                             "tagName": "span",
                                             "properties": {
-                                              "style": "color:#BD976A"
+                                              "style": "color:#5DA994"
                                             },
                                             "children": [
                                               {
                                                 "type": "text",
-                                                "value": "str"
+                                                "value": "A"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
                                               }
                                             ]
                                           },
@@ -158,14 +175,16 @@
                                             "children": [
                                               {
                                                 "type": "text",
-                                                "value": ":"
+                                                "value": "="
                                               }
                                             ]
                                           },
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -195,7 +214,7 @@
                                             "children": [
                                               {
                                                 "type": "text",
-                                                "value": "/"
+                                                "value": "@foo"
                                               }
                                             ]
                                           },
@@ -215,7 +234,9 @@
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -239,7 +260,87 @@
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "@bar"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "|"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -289,7 +390,9 @@
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -313,7 +416,9 @@
                                           {
                                             "type": "element",
                                             "tagName": "span",
-                                            "properties": {},
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
                                             "children": [
                                               {
                                                 "type": "text",
@@ -378,19 +483,34 @@
                   "type": "element",
                   "tagName": "span",
                   "properties": {
-                    "style": "color:#666666"
+                    "style": "color:#DBD7CAEE"
                   },
                   "children": [
                     {
                       "type": "text",
-                      "value": ":"
+                      "value": " "
                     }
                   ]
                 },
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#666666"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "="
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -420,7 +540,7 @@
                   "children": [
                     {
                       "type": "text",
-                      "value": "/"
+                      "value": "@foo"
                     }
                   ]
                 },
@@ -440,7 +560,9 @@
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -464,7 +586,87 @@
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": " "
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#C98A7D99"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "'"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#C98A7D"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "@bar"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#C98A7D99"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "'"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": " "
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#666666"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "|"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -514,7 +716,9 @@
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -538,7 +742,9 @@
                 {
                   "type": "element",
                   "tagName": "span",
-                  "properties": {},
+                  "properties": {
+                    "style": "color:#DBD7CAEE"
+                  },
                   "children": [
                     {
                       "type": "text",
@@ -582,6 +788,528 @@
                     {
                       "type": "text",
                       "value": "'"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "value": "\n"
+            },
+            {
+              "type": "element",
+              "tagName": "span",
+              "properties": {
+                "class": "line"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "value": "\n"
+            },
+            {
+              "type": "element",
+              "tagName": "span",
+              "properties": {
+                "class": "line"
+              },
+              "children": [
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#CB7676"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "const"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {},
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": " "
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#BD976A"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "value": "a",
+                      "tagName": "span",
+                      "properties": {
+                        "class": "twoslash-error"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "value": "a"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#666666"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": ":"
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {},
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": " "
+                    }
+                  ]
+                },
+                {
+                  "type": "element",
+                  "tagName": "span",
+                  "properties": {
+                    "style": "color:#5DA994"
+                  },
+                  "children": [
+                    {
+                      "type": "element",
+                      "value": "A",
+                      "tagName": "v-menu",
+                      "properties": {
+                        "class": "twoslash-hover",
+                        "popper-class": "vp-code shiki floating-vue-twoslash vp-copy-ignore",
+                        "placement": "bottom-start",
+                        "theme": "twoslash",
+                        ":arrow-padding": "8",
+                        ":auto-boundary-max-size": "true"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tagName": "span",
+                          "properties": {},
+                          "children": [
+                            {
+                              "type": "text",
+                              "value": "A"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tagName": "template",
+                          "properties": {
+                            "v-slot:popper": "{}"
+                          },
+                          "content": {
+                            "type": "root",
+                            "children": [
+                              {
+                                "type": "element",
+                                "tagName": "span",
+                                "properties": {
+                                  "class": "twoslash-popup-container vp-copy-ignore"
+                                },
+                                "children": [
+                                  {
+                                    "type": "element",
+                                    "tagName": "code",
+                                    "properties": {
+                                      "class": "twoslash-popup-code"
+                                    },
+                                    "children": [
+                                      {
+                                        "type": "element",
+                                        "tagName": "span",
+                                        "properties": {
+                                          "class": "line"
+                                        },
+                                        "children": [
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#CB7676"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "type"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#5DA994"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "A"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "="
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "@foo"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "|"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "@bar"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "|"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "/foo"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "|"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#DBD7CAEE"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": " "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "/bar"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#C98A7D99"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "\""
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 },
@@ -644,13 +1372,13 @@
                   "children": [
                     {
                       "type": "element",
-                      "value": "/",
+                      "value": "@",
                       "tagName": "span",
                       "properties": {},
                       "children": [
                         {
                           "type": "text",
-                          "value": "/"
+                          "value": "@"
                         },
                         {
                           "type": "element",
@@ -738,74 +1466,7 @@
                                                 "children": [
                                                   {
                                                     "type": "text",
-                                                    "value": "/"
-                                                  }
-                                                ]
-                                              },
-                                              {
-                                                "type": "element",
-                                                "tagName": "span",
-                                                "properties": {
-                                                  "class": "twoslash-completions-unmatched"
-                                                },
-                                                "children": [
-                                                  {
-                                                    "type": "text",
-                                                    "value": ""
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        ]
-                                      },
-                                      {
-                                        "type": "element",
-                                        "tagName": "li",
-                                        "properties": {},
-                                        "children": [
-                                          {
-                                            "type": "element",
-                                            "tagName": "span",
-                                            "properties": {
-                                              "class": "twoslash-completions-icon completions-string"
-                                            },
-                                            "children": [
-                                              {
-                                                "type": "element",
-                                                "tagName": "svg",
-                                                "properties": {
-                                                  "viewBox": "0 0 32 32"
-                                                },
-                                                "children": [
-                                                  {
-                                                    "type": "element",
-                                                    "tagName": "path",
-                                                    "properties": {
-                                                      "fill": "currentColor",
-                                                      "d": "M29 22h-5a2.003 2.003 0 0 1-2-2v-6a2.002 2.002 0 0 1 2-2h5v2h-5v6h5zM18 12h-4V8h-2v14h6a2.003 2.003 0 0 0 2-2v-6a2.002 2.002 0 0 0-2-2m-4 8v-6h4v6zm-6-8H3v2h5v2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h6v-8a2.002 2.002 0 0 0-2-2m0 8H4v-2h4z"
-                                                    },
-                                                    "children": []
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          {
-                                            "type": "element",
-                                            "tagName": "span",
-                                            "properties": {},
-                                            "children": [
-                                              {
-                                                "type": "element",
-                                                "tagName": "span",
-                                                "properties": {
-                                                  "class": "twoslash-completions-matched"
-                                                },
-                                                "children": [
-                                                  {
-                                                    "type": "text",
-                                                    "value": "/"
+                                                    "value": "@"
                                                   }
                                                 ]
                                               },
@@ -872,7 +1533,7 @@
                                                 "children": [
                                                   {
                                                     "type": "text",
-                                                    "value": "/"
+                                                    "value": "@"
                                                   }
                                                 ]
                                               },
@@ -886,6 +1547,140 @@
                                                   {
                                                     "type": "text",
                                                     "value": "bar"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "element",
+                                        "tagName": "li",
+                                        "properties": {},
+                                        "children": [
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "class": "twoslash-completions-icon completions-string"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "element",
+                                                "tagName": "svg",
+                                                "properties": {
+                                                  "viewBox": "0 0 32 32"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "element",
+                                                    "tagName": "path",
+                                                    "properties": {
+                                                      "fill": "currentColor",
+                                                      "d": "M29 22h-5a2.003 2.003 0 0 1-2-2v-6a2.002 2.002 0 0 1 2-2h5v2h-5v6h5zM18 12h-4V8h-2v14h6a2.003 2.003 0 0 0 2-2v-6a2.002 2.002 0 0 0-2-2m-4 8v-6h4v6zm-6-8H3v2h5v2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h6v-8a2.002 2.002 0 0 0-2-2m0 8H4v-2h4z"
+                                                    },
+                                                    "children": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {},
+                                            "children": [
+                                              {
+                                                "type": "element",
+                                                "tagName": "span",
+                                                "properties": {
+                                                  "class": "twoslash-completions-matched"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "text",
+                                                    "value": ""
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "type": "element",
+                                                "tagName": "span",
+                                                "properties": {
+                                                  "class": "twoslash-completions-unmatched"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "text",
+                                                    "value": "/foo"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "element",
+                                        "tagName": "li",
+                                        "properties": {},
+                                        "children": [
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "class": "twoslash-completions-icon completions-string"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "element",
+                                                "tagName": "svg",
+                                                "properties": {
+                                                  "viewBox": "0 0 32 32"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "element",
+                                                    "tagName": "path",
+                                                    "properties": {
+                                                      "fill": "currentColor",
+                                                      "d": "M29 22h-5a2.003 2.003 0 0 1-2-2v-6a2.002 2.002 0 0 1 2-2h5v2h-5v6h5zM18 12h-4V8h-2v14h6a2.003 2.003 0 0 0 2-2v-6a2.002 2.002 0 0 0-2-2m-4 8v-6h4v6zm-6-8H3v2h5v2H4a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h6v-8a2.002 2.002 0 0 0-2-2m0 8H4v-2h4z"
+                                                    },
+                                                    "children": []
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {},
+                                            "children": [
+                                              {
+                                                "type": "element",
+                                                "tagName": "span",
+                                                "properties": {
+                                                  "class": "twoslash-completions-matched"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "text",
+                                                    "value": ""
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "type": "element",
+                                                "tagName": "span",
+                                                "properties": {
+                                                  "class": "twoslash-completions-unmatched"
+                                                },
+                                                "children": [
+                                                  {
+                                                    "type": "text",
+                                                    "value": "/bar"
                                                   }
                                                 ]
                                               }
@@ -924,8 +1719,17 @@
               ]
             },
             {
-              "type": "text",
-              "value": "\n"
+              "type": "element",
+              "tagName": "div",
+              "properties": {
+                "class": "twoslash-meta-line twoslash-error-line vp-copy-ignore"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Type '\"@\"' is not assignable to type 'A'."
+                }
+              ]
             },
             {
               "type": "element",
