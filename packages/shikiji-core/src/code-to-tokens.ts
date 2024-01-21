@@ -6,7 +6,7 @@ import { INITIAL } from './textmate'
 import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
 import { applyColorReplacements, isPlaintext, splitLines } from './utils'
-import { tokenizeAnsiWithTheme } from './tokenizer-ansi'
+import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
 
 export function codeToThemedTokens(
   internal: ShikiInternal,

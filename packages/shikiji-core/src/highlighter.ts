@@ -1,9 +1,9 @@
-import type { HighlighterCoreOptions, HighlighterGeneric } from './types'
-import { codeToHtml } from './renderer-html'
-import { codeToTokensWithThemes } from './renderer-html-themes'
-import { codeToThemedTokens } from './tokenizer'
+import { codeToHast } from './code-to-hast'
+import { codeToHtml } from './code-to-html'
+import { codeToThemedTokens } from './code-to-tokens'
+import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { getShikiInternal } from './internal'
-import { codeToHast } from './renderer-hast'
+import type { HighlighterCoreOptions, HighlighterGeneric } from './types'
 
 export type HighlighterCore = HighlighterGeneric<never, never>
 

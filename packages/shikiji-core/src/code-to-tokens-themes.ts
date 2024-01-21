@@ -4,7 +4,7 @@ import type {
   ThemedToken,
   ThemedTokenWithVariants,
 } from './types'
-import { codeToThemedTokens } from './tokenizer'
+import { codeToThemedTokens } from './code-to-tokens'
 
 /**
  * Get tokens with multiple themes

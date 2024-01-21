@@ -9,9 +9,9 @@ import type {
   ThemedTokenWithVariants,
   TokenStyles,
 } from './types'
-import { codeToThemedTokens } from './tokenizer'
 import { FontStyle } from './types'
-import { codeToTokensWithThemes } from './renderer-html-themes'
+import { codeToThemedTokens } from './code-to-tokens'
+import { codeToTokensWithThemes } from './code-to-tokens-themes'
 
 export function codeToHast(
   internal: ShikiInternal,
