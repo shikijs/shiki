@@ -97,6 +97,7 @@ export function syncThemesTokenization(...themes: ThemedToken[][][]) {
           current[n] = {
             ...token,
             content: token.content.slice(minLength),
+            offset: token.offset + minLength,
           }
         }
       }

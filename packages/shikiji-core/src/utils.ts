@@ -1,5 +1,5 @@
 import type { Element } from 'hast'
-import type { MaybeArray } from './types'
+import type { MaybeArray, ThemedToken } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -50,6 +50,42 @@ export function addClassToHast(node: Element, className: string | string[]) {
     if (c && !node.properties.class.includes(c))
       node.properties.class.push(c)
   }
+}
+
+/**
+ * Split a token into multiple tokens by given offsets.
+ *
+ * The offsets are relative to the token, and should be sorted.
+ */
+export function splitToken<
+  T extends Pick<ThemedToken, 'content' | 'offset'>,
+>(
+  token: T,
+  offsets: number[],
+): T[] {
+  let lastOffset = 0
+  const tokens: T[] = []
+
+  for (const offset of offsets) {
+    if (offset > lastOffset) {
+      tokens.push({
+        ...token,
+        content: token.content.slice(lastOffset, offset),
+        offset: token.offset + lastOffset,
+      })
+    }
+    lastOffset = offset
+  }
+
+  if (lastOffset < token.content.length) {
+    tokens.push({
+      ...token,
+      content: token.content.slice(lastOffset),
+      offset: token.offset + lastOffset,
+    })
+  }
+
+  return tokens
 }
 
 export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {

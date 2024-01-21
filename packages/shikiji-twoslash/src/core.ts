@@ -6,7 +6,7 @@ import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { ShikijiTransformer } from 'shikiji-core'
 import type { Element, ElementContent, Text } from 'hast'
 
-import { addClassToHast } from 'shikiji-core'
+import { addClassToHast, splitToken } from 'shikiji-core'
 import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
 
 export * from './types'
@@ -75,22 +75,12 @@ export function createTransformerFactory(
             const breakpointsInToken = breakpoints
               .filter(i => token.offset < i && i < token.offset + token.content.length)
               .map(i => i - token.offset)
+              .sort((a, b) => a - b)
 
             if (!breakpointsInToken.length)
               return token
 
-            breakpointsInToken.push(token.content.length)
-            breakpointsInToken.sort((a, b) => a - b)
-            let lastDelta = 0
-            return breakpointsInToken.map((i) => {
-              const n = {
-                ...token,
-                content: token.content.slice(lastDelta, i),
-                offset: token.offset + lastDelta,
-              }
-              lastDelta = i
-              return n
-            })
+            return splitToken(token, breakpointsInToken)
           })
         })
       },
