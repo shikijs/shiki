@@ -154,6 +154,14 @@ In markdown, you can use the following syntax to trigger Twoslash:
 ```
 ````
 
+## Integrations
+
+While you can set up Twoslash with Shikiji on your own with the instructions above, you can also find high-level integrations with frameworks and tools here:
+
+- [VitePress](/packages/vitepress#twoslash) - A plugin to enable Twoslash support in VitePress.
+- [Vocs](https://vocs.dev/docs/guides/twoslash) - Vocs has TwoSlash support built-in.
+- [Slidev](https://sli.dev/custom/highlighters.html#twoslash-integration) - Slidev has TwoSlash support built-in.
+
 ## Recipes
 
 ### CDN Usage
@@ -213,8 +221,3 @@ app.innerHTML = await codeToHtml(source, {
   transformers: [transformerTwoslash],
 })
 ```
-
-## Integrations
-
-- [VitePress](/packages/vitepress#twoslash) - Enable Twoslash support in VitePress.
-- [Vocs](https://vocs.dev/docs/guides/twoslash) - Enable Twoslash support in Vocs.
