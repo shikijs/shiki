@@ -5,9 +5,12 @@ export function parseMetaHighlightWords(meta: string): string[] {
   if (!meta)
     return []
 
-  const match = Array.from(meta.matchAll(/\/(\w+)\//g))
+  // https://regex101.com/r/BHS5fd/1
+  const match = Array.from(meta.matchAll(/\/((?:\\.|[^\/])+?)\//ig))
 
-  return match.map(v => v[1])
+  return match
+    // Escape backslashes
+    .map(v => v[1].replace(/\\(.)/g, '$1'))
 }
 
 export interface TransformerMetaWordHighlightOptions {

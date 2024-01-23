@@ -23,9 +23,13 @@ export function transformerNotationWordHighlight(
 
   return createCommentNotationTransformer(
     'shikiji-transformers:notation-highlight-word',
-    /^\s*(?:\/\/|\/\*|<!--|#)\s+\[!code word:(\w+)(:\d+)?\]\s*(?:\*\/|-->)?/,
+    // comment-start             | marker    | word           | range | comment-end
+    /^\s*(?:\/\/|\/\*|<!--|#)\s+\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]\s*(?:\*\/|-->)?/,
     function ([_, word, range], _line, comment, lines, index) {
       const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
+
+      // escape backslashes
+      word = word.replace(/\\(.)/g, '$1')
 
       lines
         // Don't include the comment itself
