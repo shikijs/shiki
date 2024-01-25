@@ -158,7 +158,7 @@ function extend(extension: HastExtension | undefined, node: Element): Element {
     tagName: extension.tagName ?? node.tagName,
     properties: {
       ...node.properties,
-      class: node.properties?.class || extension.class,
+      class: extension.class || node.properties?.class,
       ...extension.properties,
     },
     children: extension.children?.(node.children) ?? node.children,

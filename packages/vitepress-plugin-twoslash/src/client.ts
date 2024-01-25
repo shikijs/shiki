@@ -1,4 +1,4 @@
-import type { Plugin } from 'vue'
+import type { App } from 'vue'
 import FloatingVue, { recomputeAllPoppers } from 'floating-vue'
 
 const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -10,8 +10,8 @@ export type FloatingVueConfig = Parameters<(typeof FloatingVue)['install']>[1]
  *
  * Import this function in `.vitepress/theme/index.ts` and use `app.use(TwoslashFloatingVue)` inside the `enhanceApp` hook.
  */
-const TwoslashFloatingVue: Plugin<[FloatingVueConfig?]> = {
-  install: (app, options: FloatingVueConfig = {}) => {
+const TwoslashFloatingVue = {
+  install: (app: App, options: FloatingVueConfig = {}) => {
     if (typeof window !== 'undefined') {
       // Recompute poppers when clicking on a tab
       window.addEventListener('click', (e) => {

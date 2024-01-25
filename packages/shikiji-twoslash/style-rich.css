@@ -1,7 +1,7 @@
 /* ===== Basic ===== */
 :root {
   --twoslash-border-color: #8888;
-  --twoslash-jsdoc-color: #888;
+  --twoslash-docs-color: #888;
   --twoslash-underline-color: currentColor;
   --twoslash-highlighted-border: #c37d0d50;
   --twoslash-highlighted-bg: #c37d0d20;
@@ -90,7 +90,7 @@
 }
 
 .twoslash .twoslash-popup-docs {
-  color: var(--twoslash-jsdoc-color);
+  color: var(--twoslash-docs-color);
   font-family: sans-serif;
   font-size: 0.8em;
   border-top: 1px solid var(--twoslash-border-color);
