@@ -76,6 +76,18 @@ Number.parseInt(todo.title, 10);
   })
 
   expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich/rich.html')
+
+  const html2 = await codeToHtml(code, {
+    lang: 'ts',
+    theme: 'none',
+    transformers: [
+      transformerTwoslash({
+        renderer: rendererRich(),
+      }),
+    ],
+  })
+
+  expect(styleTag + html2).toMatchFileSnapshot('./out/rich/rich-none-theme.html')
 })
 
 it('no-icons', async () => {

@@ -1,5 +1,5 @@
 import type { Element } from 'hast'
-import type { MaybeArray, ThemedToken } from './types'
+import type { MaybeArray, SpecialTheme, ThemeInput, ThemedToken } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -15,19 +15,37 @@ export function splitLines(str: string) {
 /**
  * Check if the language is plaintext that is ignored by Shikiji.
  *
- * Hard-coded languages: `plaintext`, `txt`, `text`, `plain`.
+ * Hard-coded plain text languages: `plaintext`, `txt`, `text`, `plain`.
  */
-export function isPlaintext(lang: string | null | undefined) {
+export function isPlainLang(lang: string | null | undefined) {
   return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)
 }
 
 /**
- * Check if the language is specially handled by Shikiji.
+ * Check if the language is specially handled or bypassed by Shikiji.
  *
  * Hard-coded languages: `ansi` and plaintexts like `plaintext`, `txt`, `text`, `plain`.
  */
 export function isSpecialLang(lang: string) {
-  return lang === 'ansi' || isPlaintext(lang)
+  return lang === 'ansi' || isPlainLang(lang)
+}
+
+/**
+ * Check if the theme is specially handled or bypassed by Shikiji.
+ *
+ * Hard-coded themes: `none`.
+ */
+export function isNoneTheme(theme: string | ThemeInput | null | undefined): theme is 'none' {
+  return theme === 'none'
+}
+
+/**
+ * Check if the theme is specially handled or bypassed by Shikiji.
+ *
+ * Hard-coded themes: `none`.
+ */
+export function isSpecialTheme(theme: string | ThemeInput | null | undefined): theme is SpecialTheme {
+  return isNoneTheme(theme)
 }
 
 /**
@@ -91,3 +109,8 @@ export function splitToken<
 export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
   return replacements?.[color.toLowerCase()] || color
 }
+
+/**
+ * @deprecated Use `isPlainLang` instead.
+ */
+export const isPlaintext = isPlainLang

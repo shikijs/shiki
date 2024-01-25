@@ -5,7 +5,7 @@ import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToThemedTokensOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
-import { applyColorReplacements, isPlaintext, splitLines } from './utils'
+import { applyColorReplacements, isNoneTheme, isPlainLang, splitLines } from './utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
 
 export function codeToThemedTokens(
@@ -18,7 +18,7 @@ export function codeToThemedTokens(
     theme: themeName = internal.getLoadedThemes()[0],
   } = options
 
-  if (isPlaintext(lang))
+  if (isPlainLang(lang) || isNoneTheme(themeName))
     return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
 
   const { theme, colorMap } = internal.setTheme(themeName)

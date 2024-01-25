@@ -1,9 +1,10 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, ThemeInput, ThemeRegistrationResolved } from './types'
+import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, SpecialTheme, ThemeInput, ThemeRegistrationResolved } from './types'
 import type { LoadWasmOptions } from './oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
+import { isSpecialTheme } from './utils'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
 /**
@@ -64,7 +65,9 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     return _lang
   }
 
-  function getTheme(name: string | ThemeRegistrationResolved) {
+  function getTheme(name: string | ThemeRegistrationResolved): ThemeRegistrationResolved {
+    if (name === 'none')
+      return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
     const _theme = _registry.getTheme(name)
     if (!_theme)
       throw new Error(`[shikiji] Theme \`${name}\` not found, you may need to load it first`)
@@ -96,9 +99,13 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     await _registry.loadLanguages(await resolveLangs(langs))
   }
 
-  async function loadTheme(...themes: ThemeInput[]) {
+  async function loadTheme(...themes: (ThemeInput | SpecialTheme)[]) {
     await Promise.all(
-      themes.map(async theme => _registry.loadTheme(await normalizeGetter(theme))),
+      themes.map(async theme =>
+        isSpecialTheme(theme)
+          ? null
+          : _registry.loadTheme(await normalizeGetter(theme)),
+      ),
     )
   }
 

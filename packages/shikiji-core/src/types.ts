@@ -27,6 +27,8 @@ export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
 export type AnsiLanguage = 'ansi'
 export type SpecialLanguage = PlainTextLanguage | AnsiLanguage
 
+export type SpecialTheme = 'none'
+
 export type Awaitable<T> = T | Promise<T>
 export type MaybeGetter<T> = Awaitable<MaybeModule<T>> | (() => Awaitable<MaybeModule<T>>)
 export type MaybeModule<T> = T | { default: T }
@@ -107,7 +109,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   /**
    * Load a theme to the highlighter, so later it can be used synchronously.
    */
-  loadTheme(...themes: (ThemeInput | BundledThemeKeys)[]): Promise<void>
+  loadTheme(...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]): Promise<void>
   /**
    * Load a language to the highlighter, so later it can be used synchronously.
    */
@@ -136,6 +138,8 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   getLoadedLanguages(): string[]
   /**
    * Get the names of loaded themes
+   *
+   * Special-handled themes like `none` are not included.
    */
   getLoadedThemes(): string[]
 
@@ -220,7 +224,7 @@ export interface LanguageRegistration extends RawGrammar {
 
 export interface CodeToThemedTokensOptions<Languages = string, Themes = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage
-  theme?: Themes | ThemeRegistrationAny
+  theme?: Themes | ThemeRegistrationAny | SpecialTheme
 }
 
 export interface CodeToHastOptionsCommon<Languages extends string = string> extends
@@ -259,7 +263,7 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
    * }
    * ```
    */
-  themes: Partial<Record<string, Themes | ThemeRegistrationAny>>
+  themes: Partial<Record<string, Themes | ThemeRegistrationAny | SpecialTheme>>
 }
 
 export interface CodeOptionsSingleTheme<Themes extends string = string> {
