@@ -58,6 +58,15 @@ export type RehypeShikijiCoreOptions =
   & CodeOptionsMeta
   & RehypeShikijiExtraOptions
 
+declare module 'hast' {
+  interface Data {
+    meta?: string
+  }
+  interface Properties {
+    metastring?: string
+  }
+}
+
 const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeShikijiCoreOptions], Root> = function (
   highlighter,
   options,
@@ -108,8 +117,8 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
         return
       }
 
-      const attrs = (head.data as any)?.meta
-      const meta = parseMetaString?.(attrs, node, tree) || {}
+      const metaString = head.data?.meta ?? head.properties.metastring ?? ''
+      const meta = parseMetaString?.(metaString, node, tree) || {}
 
       const codeOptions: CodeToHastOptions = {
         ...rest,
@@ -117,7 +126,7 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
         meta: {
           ...rest.meta,
           ...meta,
-          __raw: attrs,
+          __raw: metaString,
         },
       }
 
@@ -132,7 +141,7 @@ const rehypeShikijiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, Rehype
         })
       }
 
-      if (highlightLines && typeof attrs === 'string') {
+      if (highlightLines && typeof metaString === 'string') {
         codeOptions.transformers ||= []
         codeOptions.transformers.push(
           transformerMetaHighlight({
