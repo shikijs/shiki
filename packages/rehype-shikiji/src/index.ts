@@ -24,14 +24,17 @@ const rehypeShikiji: Plugin<[RehypeShikijiOptions], Root> = function (
 
   // eslint-disable-next-line ts/no-this-alias
   const ctx = this
-  const promise = getHighlighter({
-    themes: themeNames,
-    langs,
-  })
-    .then(highlighter => rehypeShikijiFromHighlighter.call(ctx, highlighter, options))
+  let promise: Promise<any>
 
   return async function (tree) {
-    const handler = await promise as any
+    if (!promise) {
+      promise = getHighlighter({
+        themes: themeNames,
+        langs,
+      })
+        .then(highlighter => rehypeShikijiFromHighlighter.call(ctx, highlighter, options))
+    }
+    const handler = await promise
     return handler!(tree) as Root
   }
 }
