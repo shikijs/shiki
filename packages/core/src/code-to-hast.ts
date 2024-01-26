@@ -274,6 +274,8 @@ function getTokenStyleObject(token: TokenStyles) {
   const styles: Record<string, string> = {}
   if (token.color)
     styles.color = token.color
+  if (token.bgColor)
+    styles['background-color'] = token.bgColor
   if (token.fontStyle) {
     if (token.fontStyle & FontStyle.Italic)
       styles['font-style'] = 'italic'

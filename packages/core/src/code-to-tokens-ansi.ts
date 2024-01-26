@@ -28,10 +28,15 @@ export function tokenizeAnsiWithTheme(
   return lines.map(line =>
     parser.parse(line[0]).map((token): ThemedToken => {
       let color: string
-      if (token.decorations.has('reverse'))
+      let bgColor: string | undefined
+      if (token.decorations.has('reverse')) {
         color = token.background ? colorPalette.value(token.background) : theme.bg
-      else
+        bgColor = token.foreground ? colorPalette.value(token.foreground) : theme.fg
+      }
+      else {
         color = token.foreground ? colorPalette.value(token.foreground) : theme.fg
+        bgColor = token.background ? colorPalette.value(token.background) : undefined
+      }
 
       color = applyColorReplacements(color, colorReplacements)
 
@@ -52,6 +57,7 @@ export function tokenizeAnsiWithTheme(
         content: token.value,
         offset: line[1], // TODO: more accurate offset? might need to fork ansi-sequence-parser
         color,
+        bgColor,
         fontStyle,
       }
     }),

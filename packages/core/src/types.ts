@@ -627,6 +627,10 @@ export interface TokenStyles {
    */
   color?: string
   /**
+   * 6 or 8 digit hex code representation of the token's background color
+   */
+  bgColor?: string
+  /**
    * Font style of token. Can be None/Italic/Bold/Underline
    */
   fontStyle?: FontStyle
