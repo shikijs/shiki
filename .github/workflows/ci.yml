@@ -1,106 +1,51 @@
 name: CI
-
 on:
   push:
     branches:
       - main
-
   pull_request:
     branches:
       - main
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Set node
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
-      - name: Install
-        run: nci
-
-      - name: Lint
-        run: nr lint
-
-  typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
-      - name: Set node
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
-      - name: Install
-        run: nci
-
-      - name: Build
-        run: nr build
-
-      - name: Typecheck
-        run: nr typecheck
-
   test:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        node: [lts/*]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          - node: 16.x
-            os: ubuntu-latest
-          - node: 18.x
-            os: ubuntu-latest
-      fail-fast: false
+        os: [ubuntu-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          submodules: recursive
+          node-version: lts/*
 
-      - name: Install pnpm
+      - name: pnpm setup
         uses: pnpm/action-setup@v2
 
-      - name: Set node ${{ matrix.node }}
-        uses: actions/setup-node@v4
+      - name: Install dependencies
+        run: pnpm install
+
+      - run: pnpm run update
+      - run: pnpm run build
+      - run: pnpm run gen
+        working-directory: ./packages/site
+
+      - run: pnpm run test
+
+      - name: Install E2E test browsers
+        if: runner.os != 'Windows'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run E2E tests
+        if: runner.os != 'Windows'
+        run: pnpm run test:e2e
+
+      - name: Upload E2E results
+        uses: actions/upload-artifact@v3
+        if: runner.os != 'Windows'
         with:
-          node-version: ${{ matrix.node }}
-
-      - name: Setup
-        run: npm i -g @antfu/ni
-
-      - name: Install
-        run: nci
-
-      - name: Build
-        run: nr build
-
-      - name: Test
-        run: nr test --coverage
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

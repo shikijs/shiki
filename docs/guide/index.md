@@ -57,10 +57,10 @@ You can inspect the bundle size in detail on [pkg-size.dev/shiki](https://pkg-si
 
 As of `v0.9.11`, measured at 21th, December 2023:
 
-| Bundle                | Size (minified) | Size (gzip) | Notes                                                            |
-| --------------------- | --------------: | ----------: | ---------------------------------------------------------------- |
+| Bundle              | Size (minified) | Size (gzip) | Notes                                                            |
+| ------------------- | --------------: | ----------: | ---------------------------------------------------------------- |
 | `shiki`             |          6.4 MB |      1.2 MB | All themes and languages as async chunks                         |
-| `shiki/bundle/full` |          6.4 MB |      1.2 MB | Same as `shiki`                                                |
+| `shiki/bundle/full` |          6.4 MB |      1.2 MB | Same as `shiki`                                                  |
 | `shiki/bundle/web`  |          3.8 MB |      695 KB | All themes and common web languages as async chunks              |
 | `shiki/core`        |          100 KB |       31 KB | Core engine without any themes or languages, compose on your own |
 | `shiki/wasm`        |          623 KB |      231 KB | WASM binary inlined as base64 string                             |
