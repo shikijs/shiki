@@ -35,7 +35,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'CLI', link: '/packages/cli' },
 ]
 
-const VERSIONS: DefaultTheme.NavItem[] = [
+const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] = [
   { text: `v${version} (current)`, link: '/' },
   { text: `Release Notes`, link: 'https://github.com/shikijs/shiki/releases' },
   { text: `Contributing`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
