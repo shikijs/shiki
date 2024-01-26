@@ -35,10 +35,16 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'CLI', link: '/packages/cli' },
 ]
 
-const VERSIONS: DefaultTheme.NavItemWithLink[] = [
+const VERSIONS: DefaultTheme.NavItem[] = [
   { text: `v${version} (current)`, link: '/' },
   { text: `Release Notes`, link: 'https://github.com/shikijs/shiki/releases' },
   { text: `Contributing`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
+  {
+    items: [
+      { text: 'Migration from v0.14', link: '/guide/migrate#migrate-from-v0-14' },
+      { text: 'Migration from Shikiji', link: '/guide/migrate#migrate-from-shikiji' },
+    ],
+  },
 ]
 
 // https://vitepress.dev/reference/site-config

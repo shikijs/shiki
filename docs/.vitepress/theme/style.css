@@ -140,15 +140,7 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    80deg,
-    #5daab5 5%,
-    #89d4de 65%,
-    #e6cc78 66%,
-    #e6cc78 77%,
-    #4b9978 78%
-  );
+  --vp-home-hero-name-color: var(--vp-c-brand-1);
 }
 
 @media (min-width: 640px) {
