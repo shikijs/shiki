@@ -1,5 +1,5 @@
 import { defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
-import type { RendererRichOptions, TransformerTwoslashOptions, TwoslashRenderer } from 'shikiji-twoslash'
+import type { RendererRichOptions, TwoslashRenderer } from 'shikiji-twoslash'
 import type { Element, ElementContent, Text } from 'hast'
 import type { ShikijiTransformerContext, ShikijiTransformerContextCommon } from 'shikiji'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
