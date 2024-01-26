@@ -36,9 +36,9 @@ const html = highlighter.codeToHtml(code, {
 })
 ```
 
-## Migrate from Shiki
+## Migrate from v0.14
 
-Since `shiki` is environment agnostic, we don't have access to the file system. That means the `path` property `shiki` supports is not available in `shiki`, and you must to read the files yourself and pass in the object.
+Since v1.0, `shiki` now is environment agnostic, we don't have access to the file system. That means the `path` property `shiki@0.14` supports is not available in v1.0, and you must to read the files yourself and pass in the object.
 
 For example, the following would not work:
 
@@ -84,5 +84,25 @@ const highlighter = await getHighlighter({
       ...vineGrammar
     },
   ]
+})
+```
+
+## Custom Language Aliases
+
+You can register custom language aliases with the `langAlias` option. For example:
+
+```ts twoslash
+import { getHighlighter } from 'shiki'
+
+const highlighter = await getHighlighter({
+  langs: ['javascript'],
+  langAlias: { // [!code hl:3]
+    mylang: 'javascript',
+  },
+})
+
+const code = highlighter.codeToHtml('const a = 1', {
+  lang: 'mylang', // [!code hl]
+  theme: 'nord'
 })
 ```

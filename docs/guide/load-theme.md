@@ -52,23 +52,3 @@ const html = highlighter.codeToHtml(code, {
 ```
 
 The theme is a TextMate theme in JavaScript object. For example, [it should looks like this](https://github.com/antfu/textmate-grammars-themes/blob/main/packages/tm-themes/themes/dark-plus.json).
-
-## Custom Language Aliases
-
-You can register custom language aliases with the `langAlias` option. For example:
-
-```ts twoslash
-import { getHighlighter } from 'shiki'
-
-const highlighter = await getHighlighter({
-  langs: ['javascript'],
-  langAlias: { // [!code hl:3]
-    mylang: 'javascript',
-  },
-})
-
-const code = highlighter.codeToHtml('const a = 1', {
-  lang: 'mylang', // [!code hl]
-  theme: 'nord'
-})
-```
