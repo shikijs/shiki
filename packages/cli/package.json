@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shikijs/shiki.git",
-    "directory": "packages/shiki-cli"
+    "directory": "packages/cli"
   },
   "bugs": "https://github.com/shikijs/shiki/issues",
   "keywords": [
@@ -34,6 +34,7 @@
   "bin": {
     "shiki": "bin.mjs",
     "shiki-cli": "bin.mjs",
+    "@shikijs/cli": "bin.mjs",
     "skat": "bin.mjs"
   },
   "files": [

@@ -170,7 +170,7 @@ By default `@typescript/twoslash` runs on Node.js and relies on your local syste
 
 Luckily, Twoslash implemented a virtual file system, which allow you to provide your own files for TypeScript to resolve in memory. However, loading these files in the browser is still a challenge. Thanks to the work on the [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team has provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
 
-We make tiny wrappers around the building blocks and provide an easy-to-use API in [`twoslash-cdn`](https://github.com/antfu/twoslash-cdn). For example:
+We make tiny wrappers around the building blocks and provide an easy-to-use API in [`twoslash-cdn`](https://twoslash.netlify.app/packages/cdn). For example:
 
 ```js
 // TODO: Replace with explicit versions in production

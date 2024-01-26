@@ -1,6 +1,6 @@
-# shiki-monaco
+# @shikijs/monaco
 
-<Badges name="shiki-monaco" />
+<Badges name="@shikijs/monaco" />
 
 Use Shiki to highlight [Monaco Editor](https://microsoft.github.io/monaco-editor/).
 
@@ -11,12 +11,12 @@ Heavily inspired by [`monaco-editor-textmate`](https://github.com/zikaari/monaco
 ## Install
 
 ```bash
-npm i -D shiki-monaco
+npm i -D @shikijs/monaco
 ```
 
 ```ts
 import { getHighlighter } from 'shiki'
-import { shikiToMonaco } from 'shiki-monaco'
+import { shikiToMonaco } from '@shikijs/monaco'
 import * as monaco from 'monaco-editor-core'
 
 // Create the highlighter, it can be reused

@@ -2,16 +2,16 @@
 outline: deep
 ---
 
-# rehype-shiki
+# @shikijs/rehype
 
-<Badges name="rehype-shiki" />
+<Badges name="@shikijs/rehype" />
 
 [rehype](https://github.com/rehypejs/rehype) plugin for Shiki.
 
 ## Install
 
 ```bash
-npm i -D rehype-shiki
+npm i -D @shikijs/rehype
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import rehypeShiki from 'rehype-shiki'
+import rehypeShiki from '@shikijs/rehype'
 
 const file = await unified()
   .use(remarkParse)
@@ -40,7 +40,7 @@ const file = await unified()
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikiFromHighlighter` from `rehype-shiki/core` and pass your own highlighter:
+By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikiFromHighlighter` from `@shikijs/rehype/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true
@@ -48,7 +48,7 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
-import rehypeShikiFromHighlighter from 'rehype-shiki/core'
+import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
 
 import { fromHighlighter } from '@shikijs/markdown-it/core'
 import { getHighlighterCore } from 'shiki/core'

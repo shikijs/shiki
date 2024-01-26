@@ -89,7 +89,7 @@ console.log('hello')
 
 ### Vue Single File Component
 
-In addition, this plugin also integrated [`twoslash-vue`](https://github.com/antfu/twoslash-vue) for you, so that you can also highlight Vue SFC blocks with `vue twoslash`:
+In addition, this plugin also integrated [`twoslash-vue`](https://twoslash.netlify.app/packages/vue) for you, so that you can also highlight Vue SFC blocks with `vue twoslash`:
 
 ```vue twoslash
 <script setup>
