@@ -4,21 +4,16 @@ outline: deep
 
 # Light/Dark Dual Themes
 
-Shiki supports outputting light/dark dual themes. Different from [@shikijs/markdown-it](https://github.com/antfu/@shikijs/markdown-it#dark-mode)'s approach which renders the code twice, Shiki's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
+Shiki supports outputting light/dark dual or multiple themes. Shiki's dual themes approach uses CSS variables to store the colors on each token.
 
 Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { codeToHtml } from 'shiki'
 
-const highlighter = await getHighlighter({
-  themes: ['nord', 'min-light'],
-  langs: ['javascript'],
-})
-
-const code = highlighter.codeToHtml('console.log("hello")', {
+const code = await codeToHtml('console.log("hello")', {
   lang: 'javascript',
-  themes: {
+  themes: { // [!code hl:4]
     light: 'min-light',
     dark: 'nord',
   }
@@ -85,14 +80,9 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { codeToHtml } from 'shiki'
 
-const highlighter = await getHighlighter({
-  themes: ['nord', 'min-light'],
-  langs: ['javascript'],
-})
-// ---cut---
-const code = highlighter.codeToHtml('console.log("hello")', {
+const code = await codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'github-light',
@@ -122,14 +112,9 @@ Then update your CSS snippet to control when each theme takes effect. Here is an
 If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { codeToHtml } from 'shiki'
 
-const highlighter = await getHighlighter({
-  themes: ['nord', 'min-light'],
-  langs: ['javascript'],
-})
-// ---cut---
-const code = highlighter.codeToHtml('console.log("hello")', {
+const code = await codeToHtml('console.log("hello")', {
   lang: 'javascript',
   themes: {
     light: 'vitesse-light',
@@ -148,23 +133,3 @@ With it, a token would be generated like:
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
 It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/shikijs/shiki/issues/6).
-
-## Custom Language Aliases
-
-You can register custom language aliases with the `langAlias` option. For example:
-
-```ts twoslash
-import { getHighlighter } from 'shiki'
-
-const highlighter = await getHighlighter({
-  langs: ['javascript'],
-  langAlias: { // [!code hl:3]
-    mylang: 'javascript',
-  },
-})
-
-const code = highlighter.codeToHtml('const a = 1', {
-  lang: 'mylang', // [!code hl]
-  theme: 'nord'
-})
-```

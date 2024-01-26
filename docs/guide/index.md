@@ -6,21 +6,15 @@ outline: deep
 
 <br>
 
-<span text-xl text-green>
-<b><span text-brand-yellow>Shiki</span><span text-brand-red>ji</span></b> <ruby text-brand-yellow>式<rt>shiki</rt></ruby><ruby text-brand-red>辞<rt>ji</rt></ruby>
-</span> is a beautiful and powerful syntax highlighter based on TextMate grammar and themes, the same engine as VS Code's syntax highlighting. Provides very accurate and fast syntax highlighting for almost any mainstream programming language.
+<span text-brand-yellow text-xl>Shiki</span> <span op75>(式, a Japanese word for ["Style"](https://jisho.org/word/%E5%BC%8F))</span> is a beautiful and powerful syntax highlighter based on TextMate grammar and themes, the same engine as VS Code's syntax highlighting. Provides very accurate and fast syntax highlighting for almost any mainstream programming language.
 
 No custom RegExp to maintain, no custom CSS to maintain, no custom HTML to maintain. And as your favorite languages and themes in VS Code evolve - your syntax highlighting will evolve too.
 
-Shiki is a ESM-rewrite of [Shiki](https://github.com/shikijs/shiki) with quite a few improvements. We aim to [merge this project back to Shiki as a milestone update](https://github.com/shikijs/shiki/issues/510). Check the [breaking changes from Shiki and our compatibility build](/guide/compat) if you are migrating.
-
-About the name, <ruby text-lg text-brand-yellow>式<rt>shiki</rt></ruby><ruby text-lg text-brand-red>辞<rt>ji</rt></ruby> is a Japanese word meaning ["Ceremonial Speech"](https://jisho.org/word/%E5%BC%8F%E8%BE%9E). <ruby text-brand-yellow text-lg>式<rt>shiki</rt></ruby> is inherited from [shiki](https://github.com/shikijs/shiki) means ["Style"](https://jisho.org/word/%E5%BC%8F) and <ruby text-brand-red text-lg>辞<rt>ji</rt></ruby> means ["Word"](https://jisho.org/word/%E8%BE%9E).
-
-Oh btw, all the code blocks in this site are highlighted by Shiki, as you'd expect \:)
+Oh by the way, all the code blocks in this site are highlighted by Shiki, as you'd expect \:)
 
 ## Features
 
-- All grammars/themes/wasm served as pure-ESM, no more [CDN](https://github.com/shikijs/shiki#specify-a-custom-root-directory), no more [assets](https://github.com/shikijs/shiki#specify-how-to-load-webassembly).
+- All grammars/themes/wasm served as pure-ESM, no [CDN](https://github.com/shikijs/shiki#specify-a-custom-root-directory) and [assets](https://github.com/shikijs/shiki#specify-how-to-load-webassembly) needed.
 - Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - ESM-only ([CDN Usage](/guide/install#cdn-usage), [CJS Usage](/guide/install#cjs-usage)).
 - [Bundles languages/themes composedly](/guide/install#fine-grained-bundle).
@@ -28,7 +22,7 @@ Oh btw, all the code blocks in this site are highlighted by Shiki, as you'd expe
 - [AST-based transformers addons](/guide/transformers).
 - [`hast` support](/guide/transformers#codetohast).
 - [TypeScript Twoslash](/packages/twoslash).
-- [Shiki-compatible build](/guide/compat).
+- [Compatible build](/guide/compat).
 
 ## Playground
 

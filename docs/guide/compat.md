@@ -4,29 +4,36 @@ outline: deep
 
 # Compatibility Build
 
-We took the chance of the rewrite to make some breaking changes that we think are beneficial for the future. We'd suggest you try to migrate those changes if possible, as most of them should be straightforward. If you have very deep integration, you can try our compatibility build which aligns better with `shiki`'s current API.
+The v1.0 release of Shiki is a major rewrite that we took the chance to revise every design decision we made in the past. We'd suggest you try to migrate those changes if possible for future-proof. Most most of them should be straightforward if you have TypeScript enabled.
 
-## Install `shiki-compat`
+To make deep migration easier, we provide a compatibility build that shimmed the breaking changes from v0.x. You can use it as a drop-in replacement for `shiki` and migrate step by step.
 
-<Badges name="shiki-compat" />
+## Install Compatibility Build
+
+<Badges name="@shikijs/compat" />
 
 Set the alias to `shiki` in your `package.json`:
+
+<!-- eslint-skip -->
 
 ```json
 {
   "dependencies": {
-    "shiki": "npm:shiki-compat@0.9"
+    "shiki": "0.14.3", // [!code --]
+    "shiki": "npm:@shikijs/compat@1.0" // [!code ++]
   }
 }
 ```
 
-## Breaking Changes from Shiki
+Check the breaking changes list below to see if you need to migrate anything manually.
 
-Compare to [`shiki@0.14.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3), the breaking changes between Shiki and Shiki are:
+## Breaking Changes from v0.x
+
+Compare to [`shiki@0.14.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3), the breaking changes are:
 
 ### Hard Breaking Changes
 
-Breaking changes applied to both `shiki` and `shiki-compat`:
+Breaking changes applied to both `shiki` and `shiki-compat`, that you need to migrate manually:
 
 - CJS and IIFE builds are dropped. See [CJS Usage](/guide/install#cjs-usage) and [CDN Usage](/guide/install#cdn-usage) for more details.
 - `codeToHtml` uses [`hast`](https://github.com/syntax-tree/hast) internally. The generated HTML will be a bit different but should behave the same.

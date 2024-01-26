@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "式辞 Shiki"
+  name: "Shiki 式 "
   text: "Syntax highlighter"
-  tagline: A beautiful and powerful syntax highlighter
+  tagline: A beautiful yet powerful syntax highlighter
   image:
     src: /logo.svg
     alt: Shiki Logo
