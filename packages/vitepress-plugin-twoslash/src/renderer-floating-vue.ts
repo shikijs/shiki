@@ -1,5 +1,5 @@
 import { defaultHoverInfoProcessor, rendererRich } from 'shikiji-twoslash'
-import type { RendererRichOptions, TwoslashRenderer } from 'shikiji-twoslash'
+import type { RendererRichOptions, TransformerTwoslashOptions, TwoslashRenderer } from 'shikiji-twoslash'
 import type { Element, ElementContent, Text } from 'hast'
 import type { ShikijiTransformerContext, ShikijiTransformerContextCommon } from 'shikiji'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
@@ -19,7 +19,10 @@ export interface TwoslashFloatingVueOptions {
   floatingVueThemeCompletion?: string
 }
 
-export interface TwoslashFloatingVueRendererOptions extends RendererRichOptions, TwoslashFloatingVueOptions {
+export interface TwoslashFloatingVueRendererOptions extends RendererRichOptions {
+  /**
+   * Class and themes for floating-vue specific nodes
+   */
   floatingVue?: TwoslashFloatingVueOptions
 }
 
@@ -56,7 +59,7 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
         },
         content: {
           type: 'root',
-          children: [parts.popup],
+          children: [vPre(parts.popup)],
         },
         children: [],
       },
@@ -108,7 +111,7 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
                 },
                 content: {
                   type: 'root',
-                  children: [popup],
+                  children: [vPre(popup)],
                 },
               },
             ],
@@ -119,6 +122,14 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
   })
 
   return rich
+}
+
+function vPre<T extends ElementContent>(el: T): T {
+  if (el.type === 'element') {
+    el.properties = el.properties || {}
+    el.properties['v-pre'] = ''
+  }
+  return el
 }
 
 function renderMarkdown(this: ShikijiTransformerContextCommon, md: string): ElementContent[] {
