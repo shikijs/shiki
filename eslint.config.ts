@@ -16,10 +16,10 @@ export default antfu(
     ignores: [
       'packages/shiki/src/assets/*.ts',
       '**/fixtures/**',
+      '**/vendor/**',
       '**/test/out/**',
       'docs/languages.md',
       'docs/themes.md',
-      '**/vendor/**',
     ],
   },
   {
