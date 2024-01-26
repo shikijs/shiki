@@ -133,7 +133,11 @@ function vPre<T extends ElementContent>(el: T): T {
 }
 
 function renderMarkdown(this: ShikijiTransformerContextCommon, md: string): ElementContent[] {
-  const mdast = fromMarkdown(md, { mdastExtensions: [gfmFromMarkdown()] })
+  const mdast = fromMarkdown(
+    md.replace(/{@link ([^}]*)}/g, '$1'), // replace jsdoc links
+    { mdastExtensions: [gfmFromMarkdown()] },
+  )
+
   return (toHast(
     mdast,
     {
@@ -157,12 +161,11 @@ function renderMarkdown(this: ShikijiTransformerContextCommon, md: string): Elem
   ) as Element).children
 }
 
-function renderMarkdownInline(this: ShikijiTransformerContext, md: string): ElementContent[] {
-  const children = renderMarkdown.call(
-    this,
-    md
-      .replace(/{@link ([^}]*)}/g, '$1'), // replace jsdoc links
-  )
+function renderMarkdownInline(this: ShikijiTransformerContext, md: string, context?: string): ElementContent[] {
+  if (context === 'tag:param')
+    md = md.replace(/^([\w$-]+)/, '`$1` ')
+
+  const children = renderMarkdown.call(this, md)
   if (children.length === 1 && children[0].type === 'element' && children[0].tagName === 'p')
     return children[0].children
   return children

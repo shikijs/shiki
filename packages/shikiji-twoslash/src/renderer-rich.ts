@@ -74,7 +74,7 @@ export interface RendererRichOptions {
    *
    * By default it pass-through the markdown.
    */
-  renderMarkdownInline?(this: ShikijiTransformerContextCommon, markdown: string): ElementContent[]
+  renderMarkdownInline?(this: ShikijiTransformerContextCommon, markdown: string, context: string): ElementContent[]
 
   /**
    * Extensions for the genreated HAST tree.
@@ -276,7 +276,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
                       properties: {
                         class: 'twoslash-popup-docs-tag-value',
                       },
-                      children: renderMarkdownInline.call(this, tag[1]),
+                      children: renderMarkdownInline.call(this, tag[1], `tag:${tag[0]}`),
                     },
                   ]
                 : [],
