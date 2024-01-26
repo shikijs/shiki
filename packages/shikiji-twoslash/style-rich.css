@@ -10,6 +10,7 @@
   --twoslash-docs-color: #888;
   --twoslash-docs-font: sans-serif;
   --twoslach-code-font: inherit;
+  --twoslach-code-font-size: 1em;
   --twoslash-matched-color: inherit;
   --twoslash-unmatched-color: #888;
   --twoslash-cursor-color: #8888;
@@ -95,6 +96,7 @@
 
 .twoslash .twoslash-popup-code {
   font-family: var(--twoslach-code-font);
+  font-size: var(--twoslach-code-font-size);
 }
 
 .twoslash .twoslash-popup-docs {

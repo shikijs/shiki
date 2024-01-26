@@ -10,20 +10,18 @@ import type { VitePressPluginTwoslashOptions } from 'vitepress-plugin-twoslash'
 export { defaultHoverInfoProcessor }
 
 export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & RendererRichOptions = {}): TwoslashRenderer {
+  const classCopyIgnore = 'vp-copy-ignore'
+  const classFloatingPanel = 'twoslash-floating'
+  const classCode = 'vp-code'
+  const classMarkdown = 'vp-doc'
+  const floatingVueTheme = 'twoslash'
+  const floatingVueThemeQuery = 'twoslash-query'
+  const floatingVueThemeCompletion = 'twoslash-completion'
+
   const hoverBasicProps = {
     'class': 'twoslash-hover',
-    'popper-class': 'vp-code shiki floating-vue-twoslash vp-copy-ignore',
-    'placement': 'bottom-start',
-    'theme': 'twoslash',
-    ':arrow-padding': '8',
-    ':auto-boundary-max-size': 'true',
-  }
-  const hoverPresistedProps = {
-    ...hoverBasicProps,
-    ':shown': 'true',
-    ':triggers': '["click"]',
-    ':popper-triggers': '["click"]',
-    ':auto-hide': 'false',
+    'popper-class': ['shiki', classFloatingPanel, classCopyIgnore, classCode].join(' '),
+    'theme': floatingVueTheme,
   }
 
   function compose(parts: { token: Element | Text, popup: Element }): Element[] {
@@ -50,7 +48,7 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
   }
 
   const rich = rendererRich({
-    classExtra: 'vp-copy-ignore',
+    classExtra: classCopyIgnore,
     ...options,
     renderMarkdown,
     renderMarkdownInline,
@@ -62,14 +60,17 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
       hoverCompose: compose,
       queryToken: {
         tagName: 'v-menu',
-        properties: hoverPresistedProps,
+        properties: {
+          ...hoverBasicProps,
+          theme: floatingVueThemeQuery,
+        },
       },
       queryCompose: compose,
       popupDocs: {
-        class: 'twoslash-popup-docs vp-doc',
+        class: `twoslash-popup-docs ${classMarkdown}`,
       },
       popupDocsTags: {
-        class: 'twoslash-popup-docs twoslash-popup-docs-tags vp-doc',
+        class: `twoslash-popup-docs twoslash-popup-docs-tags ${classMarkdown}`,
       },
       completionCompose({ popup, cursor }) {
         return [
@@ -77,16 +78,9 @@ export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & Re
             type: 'element',
             tagName: 'v-menu',
             properties: {
-              'popper-class': 'vp-code shiki floating-vue-twoslash-compeltion vp-copy-ignore',
-              'placement': 'bottom-start',
-              'theme': 'twoslash',
-              ':distance': '0',
-              ':arrow-overflow': 'true',
-              ':auto-boundary-max-size': 'true',
+              'popper-class': ['shiki twoslash-completion', classCopyIgnore, classFloatingPanel],
+              'theme': floatingVueThemeCompletion,
               ':shown': 'true',
-              ':triggers': '["click"]',
-              ':popper-triggers': '["click"]',
-              ':auto-hide': 'false',
             },
             children: [
               cursor,

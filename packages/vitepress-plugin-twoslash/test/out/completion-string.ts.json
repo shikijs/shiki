@@ -66,11 +66,8 @@
                       "tagName": "v-menu",
                       "properties": {
                         "class": "twoslash-hover",
-                        "popper-class": "vp-code shiki floating-vue-twoslash vp-copy-ignore",
-                        "placement": "bottom-start",
-                        "theme": "twoslash",
-                        ":arrow-padding": "8",
-                        ":auto-boundary-max-size": "true"
+                        "popper-class": "shiki twoslash-floating vp-copy-ignore vp-code",
+                        "theme": "twoslash"
                       },
                       "children": [
                         {
@@ -696,11 +693,8 @@
                       "tagName": "v-menu",
                       "properties": {
                         "class": "twoslash-hover",
-                        "popper-class": "vp-code shiki floating-vue-twoslash vp-copy-ignore",
-                        "placement": "bottom-start",
-                        "theme": "twoslash",
-                        ":arrow-padding": "8",
-                        ":auto-boundary-max-size": "true"
+                        "popper-class": "shiki twoslash-floating vp-copy-ignore vp-code",
+                        "theme": "twoslash"
                       },
                       "children": [
                         {
@@ -1065,16 +1059,13 @@
                           "type": "element",
                           "tagName": "v-menu",
                           "properties": {
-                            "popper-class": "vp-code shiki floating-vue-twoslash-compeltion vp-copy-ignore",
-                            "placement": "bottom-start",
-                            "theme": "twoslash",
-                            ":distance": "0",
-                            ":arrow-overflow": "true",
-                            ":auto-boundary-max-size": "true",
-                            ":shown": "true",
-                            ":triggers": "[\"click\"]",
-                            ":popper-triggers": "[\"click\"]",
-                            ":auto-hide": "false"
+                            "popper-class": [
+                              "shiki twoslash-completion",
+                              "vp-copy-ignore",
+                              "twoslash-floating"
+                            ],
+                            "theme": "twoslash-completion",
+                            ":shown": "true"
                           },
                           "children": [
                             {
