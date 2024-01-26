@@ -2,7 +2,7 @@
 
 Compatible build of `shiki` to align with `shiki`.
 
-[Documentation](https://shiki.netlify.app/guide/compat)
+[Documentation](https://shiki.style/guide/compat)
 
 ## License
 

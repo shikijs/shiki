@@ -2,7 +2,7 @@
 
 Enable Twoslash support in VitePress.
 
-[Documentation](https://shiki.netlify.app/packages/vitepress#twoslash)
+[Documentation](https://shiki.style/packages/vitepress#twoslash)
 
 ## License
 

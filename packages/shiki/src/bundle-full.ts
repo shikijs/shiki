@@ -18,10 +18,10 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
  * Later it can be used synchronously to highlight code.
  *
  * Importing this function will bundle all languages and themes.
- * @see https://shiki.netlify.app/guide/bundles#shiki-bundle-full
+ * @see https://shiki.style/guide/bundles#shiki-bundle-full
  *
  * For granular control over the bundle, check:
- * @see https://shiki.netlify.app/guide/install#fine-grained-bundle
+ * @see https://shiki.style/guide/install#fine-grained-bundle
  */
 export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,

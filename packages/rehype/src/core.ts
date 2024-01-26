@@ -16,7 +16,7 @@ export interface RehypeShikiExtraOptions {
   /**
    * Add `highlighted` class to lines defined in after codeblock
    *
-   * @deprecated Use [transformerNotationHighlight](https://shiki.netlify.app/packages/transformers#transformernotationhighlight) instead
+   * @deprecated Use [transformerNotationHighlight](https://shiki.style/packages/transformers#transformernotationhighlight) instead
    * @default false
    */
   highlightLines?: boolean | string

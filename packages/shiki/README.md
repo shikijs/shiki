@@ -8,7 +8,7 @@
 
 A beautiful syntax highlighter based on TextMate grammars, accurate and powerful.
 
-[📚 **Documentation**](https://shiki.netlify.app)
+[📚 **Documentation**](https://shiki.style)
 
 ## License
 
