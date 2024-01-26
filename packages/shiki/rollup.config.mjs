@@ -1,136 +1,108 @@
-//@ts-check
-
-// Re: https://github.com/rollup/plugins/issues/1366
-import { fileURLToPath } from 'url'
-const __filename = fileURLToPath(import.meta.url)
-global['__filename'] = __filename
-
+// @ts-check
+import { basename, dirname, join } from 'node:path'
+import { defineConfig } from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import copy from 'rollup-plugin-copy'
 import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
-import copy from 'rollup-plugin-copy'
-import terser from '@rollup/plugin-terser'
-import rollupReplace from '@rollup/plugin-replace'
-import { defineConfig } from 'rollup'
-import { resolve } from 'path'
-import { readFileSync } from 'fs'
+import json from '@rollup/plugin-json'
+import fs from 'fs-extra'
+import fg from 'fast-glob'
 
-const replace = opts => {
-  return rollupReplace({
-    ...opts,
-    preventAssignment: true
-  })
-}
+const entries = [
+  'src/index.ts',
+  'src/core.ts',
+  'src/core-unwasm.ts',
+  'src/types.ts',
+  'src/themes.ts',
+  'src/langs.ts',
+  'src/wasm.ts',
+  'src/bundle-full.ts',
+  'src/bundle-web.ts',
+  'src/theme-css-variables.ts',
+]
 
-const pkg = JSON.parse(readFileSync('./package.json', 'utf8'))
+const external = [
+  '@shikijs/core',
+  '@shikijs/core/wasm-inlined',
+  '@shikijs/core/types',
+  'shiki/wasm',
+]
 
-const external = ['vscode-oniguruma', 'vscode-textmate']
-const globals = {
-  'vscode-oniguruma': 'vscode-oniguruma',
-  'vscode-textmate': 'vscode-textmate'
-}
+const plugins = [
+  esbuild(),
+  nodeResolve(),
+  commonjs(),
+  json({
+    namedExports: false,
+    preferConst: true,
+    compact: true,
+  }),
+]
 
 export default defineConfig([
   {
-    input: 'src/index.ts',
-    external,
-    output: [
-      {
-        file: 'dist/index.js',
-        format: 'cjs'
-      },
-      {
-        file: 'dist/index.esm.js',
-        format: 'esm'
-      }
-    ],
-    plugins: [
-      replace({
-        __CDN_ROOT__: '',
-        __BROWSER__: JSON.stringify(false)
-      }),
-      esbuild(),
-      nodeResolve(),
-      commonjs()
-    ]
-  },
-  {
-    input: 'src/index.ts',
+    input: entries,
     output: {
-      file: 'dist/index.browser.mjs',
+      dir: 'dist',
       format: 'esm',
-      globals
+      entryFileNames: '[name].mjs',
+      chunkFileNames: (f) => {
+        if (f.moduleIds.some(i => i.match(/[\\\/]langs[\\\/]/)))
+          return `langs/${f.name.replace('.tmLanguage', '')}.mjs`
+        else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
+          return 'themes/[name].mjs'
+        return 'chunks/[name].mjs'
+      },
     },
     plugins: [
-      replace({
-        __BROWSER__: JSON.stringify(true),
-        __CDN_ROOT__: ''
-      }),
-      esbuild(),
-      nodeResolve(),
-      commonjs(),
-      terser()
-    ]
-  },
-  {
-    input: 'src/index.ts',
-    output: {
-      file: 'dist/index.unpkg.iife.js',
-      format: 'iife',
-      name: 'shiki',
-      extend: true,
-      globals
-    },
-    plugins: [
-      replace({
-        __BROWSER__: JSON.stringify(true),
-        __CDN_ROOT__: `https://unpkg.com/shiki@${pkg.version}/`
-      }),
-      esbuild(),
-      nodeResolve(),
-      commonjs(),
-      terser()
-    ]
-  },
-  {
-    input: 'src/index.ts',
-    output: {
-      file: 'dist/index.jsdelivr.iife.js',
-      format: 'iife',
-      name: 'shiki',
-      extend: true,
-      globals
-    },
-    plugins: [
-      replace({
-        __BROWSER__: JSON.stringify(true),
-        __CDN_ROOT__: `https://cdn.jsdelivr.net/npm/shiki@${pkg.version}/`
-      }),
-      esbuild(),
-      nodeResolve(),
-      commonjs(),
-      terser()
-    ]
-  },
-  {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: 'dist/index.d.ts',
-        format: 'es'
-      }
+      ...plugins,
     ],
+    external,
+  },
+  {
+    input: entries,
+    output: {
+      dir: 'dist',
+      format: 'esm',
+      chunkFileNames: 'types/[name].d.mts',
+      entryFileNames: f => `${f.name.replace(/src[\\\/]/, '')}.d.mts`,
+    },
     plugins: [
-      dts(),
+      dts({
+        respectExternal: true,
+      }),
       copy({
-        targets: [{ src: resolve('node_modules/vscode-oniguruma/release/onig.wasm'), dest: 'dist' }]
-      })
+        targets: [{ src: './node_modules/vscode-oniguruma/release/onig.wasm', dest: 'dist' }],
+      }),
+      {
+        name: 'post',
+        async buildEnd() {
+          await fs.writeFile('dist/onig.d.mts', 'declare const binary: ArrayBuffer; export default binary;', 'utf-8')
+          const langs = await fg('dist/langs/*.mjs', { absolute: true })
+          await Promise.all(
+            langs.map(file => fs.writeFile(
+              join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
+              'import { LanguageRegistration } from \'@shikijs/core\';declare const reg: LanguageRegistration[];export default reg',
+              'utf-8',
+            )),
+          )
+          const themes = await fg('dist/themes/*.mjs', { absolute: true })
+          await Promise.all(
+            themes.map(file => fs.writeFile(
+              join(dirname(file), `${basename(file, '.mjs')}.d.mts`),
+              'import { ThemeRegistrationRaw } from \'@shikijs/core\';declare const reg: ThemeRegistrationRaw;export default reg',
+              'utf-8',
+            )),
+          )
+        },
+      },
     ],
+    external,
     onwarn: (warning, warn) => {
-      if (!/Circular/.test(warning.message)) {
+      if (!/Circular|an empty chunk/.test(warning.message))
         warn(warning)
-      }
-    }
-  }
+    },
+  },
 ])

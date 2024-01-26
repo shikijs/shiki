@@ -1,0 +1,14 @@
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> hello</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">indentSize</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">type</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (indentSize </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> 4</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> type </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> 'tab'</span><span style="color:#E1E4E8">) {</span><span class="space"> </span></span>
+<span class="line"><span style="color:#E1E4E8">    	console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'Each next indentation will increase on 4 spaces'</span><span style="color:#E1E4E8">);</span><span class="space"> </span><span class="space"> </span><span class="space"> </span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span></code></pre>
+<style>
+* { tab-size: 4; }
+body { margin: 0; }
+.shiki { padding: 1em; }
+.tab, .space { position: relative; }
+.tab::before { content: "\21E5"; position: absolute; opacity: 0.3; }
+.space::before { content: "\B7"; position: absolute; opacity: 0.3; }
+</style>

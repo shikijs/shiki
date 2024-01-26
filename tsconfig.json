@@ -1,11 +1,49 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true
+    "target": "esnext",
+    "lib": ["esnext", "DOM"],
+    "rootDir": ".",
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@shikijs/core/types": ["./packages/core/src/types.ts"],
+      "@shikijs/core/textmate": ["./packages/core/src/textmate.ts"],
+      "@shikijs/core/wasm-inlined": ["./packages/core/src/wasm.ts"],
+      "@shikijs/core": ["./packages/core/src/index.ts"],
+      "@shikijs/transformers": ["./packages/transformers/src/index.ts"],
+      "@shikijs/twoslash/core": ["./packages/twoslash/src/core.ts"],
+      "@shikijs/twoslash": ["./packages/twoslash/src/index.ts"],
+      "@shikijs/vitepress-twoslash/client": ["./packages/vitepress-twoslash/src/client.ts"],
+      "@shikijs/vitepress-twoslash": ["./packages/vitepress-twoslash/src/index.ts"],
+      "@shikijs/markdown-it": ["./packages/markdown-it/src/index.ts"],
+      "shiki/core": ["./packages/shiki/src/core.ts"],
+      "shiki/wasm": ["./packages/shiki/src/wasm.ts"],
+      "shiki/langs": ["./packages/shiki/src/langs.ts"],
+      "shiki/themes": ["./packages/shiki/src/themes.ts"],
+      "shiki/bundle/web": ["./packages/shiki/src/bundle-web.ts"],
+      "shiki/bundle/full": ["./packages/shiki/src/bundle-full.ts"],
+      "shiki": ["./packages/shiki/src/index.ts"]
+    },
+    "resolveJsonModule": true,
+    "types": ["vite/client", "node"],
+    "allowJs": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "preserveValueImports": false,
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
   },
-  "files": [],
-  "references": [
-    { "path": "packages/shiki" },
-    { "path": "packages/renderer-svg" },
-    { "path": "packages/renderer-path" }
+  "include": [
+    "**/*.ts",
+    "**/*.mjs",
+    "docs/.vitepress/**/*.ts",
+    "docs/.vitepress/**/*.vue"
+  ],
+  "exclude": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/fixtures/**"
   ]
 }

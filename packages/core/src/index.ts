@@ -1,0 +1,13 @@
+export * from './highlighter'
+export * from './bundle-factory'
+export * from './utils'
+export * from './types'
+
+export { loadWasm } from './oniguruma'
+export { getShikiInternal, setDefaultWasmLoader } from './internal'
+export { codeToThemedTokens, tokenizeWithTheme } from './code-to-tokens'
+export { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
+export { codeToHast } from './code-to-hast'
+export { codeToHtml, hastToHtml } from './code-to-html'
+export { codeToTokensWithThemes } from './code-to-tokens-themes'
+export { normalizeTheme } from './normalize'

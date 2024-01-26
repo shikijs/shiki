@@ -1,0 +1,121 @@
+:root {
+  --twoslash-popup-bg: var(--vp-c-bg, inherit);
+  --twoslash-popup-color: var(--vp-c-text-1);
+  --twoslash-docs-color: var(--vp-c-text-1);
+  --twoslash-docs-font: var(--vp-font-family-base);
+  --twoslash-code-font: var(--vp-font-family-mono);
+  --twoslash-code-size: var(--vp-code-font-size);
+  --twoslash-underline-color: #8888;
+  --twoslash-border-color: var(--vp-c-border);
+  --twoslash-cursor-color: var(--vp-c-brand);
+  --twoslash-matched-color: var(--vp-c-brand);
+  --twoslash-unmatched-color: var(--vp-c-text-2);
+}
+
+.v-popper--theme-twoslash {
+  z-index: calc(var(--vp-z-index-local-nav) - 1);
+}
+
+.v-popper--theme-twoslash .v-popper__inner {
+  background: var(--twoslash-popup-bg);
+  color: var(--twoslash-popup-color);
+  border-color: var(--twoslash-border-color);
+}
+
+.v-popper--theme-twoslash .v-popper__arrow-outer {
+  border-color: var(--twoslash-border-color);
+}
+
+.v-popper--theme-twoslash .v-popper__arrow-inner {
+  border-color: var(--twoslash-popup-bg);
+}
+
+.twoslash-popup-container {
+  transform: translateY(1.5em);
+}
+
+.twoslash-query-presisted .twoslash-popup-container {
+  transform: translateY(1.8em);
+}
+
+.twoslash .v-popper {
+  display: inline-block;
+}
+
+.twoslash-completion-list .twoslash-completions-icon {
+  color: var(--twoslash-unmatched-color) !important;
+}
+
+.twoslash-floating .twoslash-popup-code {
+  max-width: 600px;
+  display: block;
+  width: fit-content;
+  min-width: 100%;
+  padding: 6px 12px;
+  line-height: var(--vp-code-line-height);
+  font-size: var(--twoslash-code-size);
+  transition: color 0.5s;
+  white-space: pre-wrap;
+}
+
+.twoslash-floating .twoslash-popup-docs {
+  border-top: 1px solid var(--twoslash-border-color);
+  color: var(--twoslash-docs-color);
+  padding: 0px 12px 0px 12px !important;
+  font-family: var(--twoslash-docs-font);
+  font-size: 0.9em;
+  max-height: 500px;
+  max-width: 700px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-wrap: balance;
+}
+
+.twoslash-floating .twoslash-popup-docs p {
+  margin: 0;
+  padding: 6px 0;
+  text-wrap: balance;
+}
+
+.twoslash-floating .twoslash-popup-docs pre {
+  background-color: var(--vp-code-block-bg);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 6px -2px;
+  overflow-x: auto;
+}
+
+.twoslash-floating .twoslash-popup-docs-tags {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px !important;
+}
+
+.twoslash-floating .twoslash-popup-docs-tags .twoslash-popup-docs-tag-name {
+  font-family: var(--twoslash-code-font);
+  color: var(--twoslash-unmatched-color);
+  margin-right: 0.5em;
+}
+
+.twoslash-completion-cursor {
+  height: 1.2em;
+  width: 2px;
+  margin-bottom: -0.2em;
+  background: var(--twoslash-cursor-color);
+  display: inline-block;
+  user-select: none;
+}
+
+.twoslash-floating.twoslash-completion .v-popper__arrow-container {
+  display: none;
+}
+
+.twoslash-floating.twoslash-completion .twoslash-completion-list {
+  padding: 6px;
+  font-family: var(--twoslash-code-font);
+  font-size: var(--twoslash-code-size) !important;
+}
+
+.twoslash-floating.twoslash-completion .twoslash-completion-list li {
+  padding: 3px 0;
+}
