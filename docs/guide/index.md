@@ -16,7 +16,7 @@ Shikiji is a ESM-rewrite of [Shiki](https://github.com/shikijs/shiki) with quite
 
 About the name, <ruby text-lg text-brand-yellow>式<rt>shiki</rt></ruby><ruby text-lg text-brand-red>辞<rt>ji</rt></ruby> is a Japanese word meaning ["Ceremonial Speech"](https://jisho.org/word/%E5%BC%8F%E8%BE%9E). <ruby text-brand-yellow text-lg>式<rt>shiki</rt></ruby> is inherited from [shiki](https://github.com/shikijs/shiki) means ["Style"](https://jisho.org/word/%E5%BC%8F) and <ruby text-brand-red text-lg>辞<rt>ji</rt></ruby> means ["Word"](https://jisho.org/word/%E8%BE%9E).
 
-Oh btw, the code blocks in this document are highlighted by Shikiji, as you'd expect \:)
+Oh btw, all the code blocks in this site are highlighted by Shikiji, as you'd expect \:)
 
 ## Features
 
