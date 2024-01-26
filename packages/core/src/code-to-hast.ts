@@ -135,7 +135,8 @@ function mergeToken(
         acc[key] = value
       }
       else {
-        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : `-${key}`)
+        const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
+        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
         if (acc[key])
           acc[key] += `;${varKey}:${value}`
         else
