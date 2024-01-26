@@ -1,0 +1,68 @@
+{
+  "name": "@shikijs/twoslash",
+  "type": "module",
+  "version": "0.10.2",
+  "description": "Shiki transformer for twoslash",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/shikijs/shiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikijs/shiki.git",
+    "directory": "packages/@shikijs/twoslash"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
+  "keywords": [
+    "shiki",
+    "twoslash"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.mts",
+      "default": "./dist/core.mjs"
+    },
+    "./style-rich.css": "./style-rich.css",
+    "./style-classic.css": "./style-classic.css",
+    "./*": "./dist/*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "./core": [
+        "./dist/core.d.mts"
+      ],
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "*.css",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@shikijs/core": "workspace:*",
+    "twoslash": "^0.1.0"
+  },
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.1.28",
+    "@iconify-json/codicon": "^1.1.41",
+    "@shikijs/twoslash": "^3.1.2",
+    "hast-util-from-html": "^2.0.1",
+    "typescript": "^5.3.3"
+  }
+}

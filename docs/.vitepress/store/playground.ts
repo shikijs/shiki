@@ -1,13 +1,13 @@
 /// <reference types="vite/client" />
 
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { BundledLanguageInfo, BundledThemeInfo } from 'shikiji'
+import type { BundledLanguageInfo, BundledThemeInfo } from 'shiki'
 import { useLocalStorage } from '@vueuse/core'
 import { ref, shallowRef, watch } from 'vue'
 
 export const usePlayground = defineStore('playground', () => {
-  const lang = useLocalStorage('shikiji-playground-lang', 'typescript')
-  const theme = useLocalStorage('shikiji-playground-theme', 'vitesse-dark')
+  const lang = useLocalStorage('shiki-playground-lang', 'typescript')
+  const theme = useLocalStorage('shiki-playground-theme', 'vitesse-dark')
   const allThemes = shallowRef<BundledThemeInfo[]>([
     {
       id: 'vitesse-dark',
@@ -26,7 +26,7 @@ export const usePlayground = defineStore('playground', () => {
   const bundledLangsFull = shallowRef<BundledLanguageInfo[]>([])
   const bundledLangsWeb = shallowRef<BundledLanguageInfo[]>([])
 
-  const input = useLocalStorage('shikiji-playground-input', '')
+  const input = useLocalStorage('shiki-playground-input', '')
   const output = ref('<pre></pre>')
   const preStyle = ref('')
   const isLoading = ref(true)
@@ -39,10 +39,10 @@ export const usePlayground = defineStore('playground', () => {
   }
 
   ;(async () => {
-    const { getHighlighter, addClassToHast } = await import('shikiji')
-    const { bundledLanguagesInfo: bundleFull } = await import('shikiji/bundle/full')
-    const { bundledLanguagesInfo: bundleWeb } = await import('shikiji/bundle/web')
-    const { bundledThemesInfo } = await import('shikiji/themes')
+    const { getHighlighter, addClassToHast } = await import('shiki')
+    const { bundledLanguagesInfo: bundleFull } = await import('shiki/bundle/full')
+    const { bundledLanguagesInfo: bundleWeb } = await import('shiki/bundle/web')
+    const { bundledThemesInfo } = await import('shiki/themes')
 
     const samplesCache = new Map<string, Promise<string | undefined>>()
 

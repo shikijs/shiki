@@ -4,12 +4,12 @@ outline: deep
 
 # Light/Dark Dual Themes
 
-Shikiji supports outputting light/dark dual themes. Different from [markdown-it-shiki](https://github.com/antfu/markdown-it-shiki#dark-mode)'s approach which renders the code twice, Shikiji's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
+Shiki supports outputting light/dark dual themes. Different from [@shikijs/markdown-it](https://github.com/antfu/@shikijs/markdown-it#dark-mode)'s approach which renders the code twice, Shiki's dual themes approach uses CSS variables to store the colors on each token. It's more performant with a smaller bundle size.
 
 Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   themes: ['nord', 'min-light'],
@@ -25,7 +25,7 @@ const code = highlighter.codeToHtml('console.log("hello")', {
 })
 ```
 
-The following HTML will be generated ([demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/packages/shikiji/test/out/dual-themes.html)):
+The following HTML will be generated ([demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/shikijs/shiki/main/packages/shiki/test/out/dual-themes.html)):
 
 ```html
 <pre
@@ -85,7 +85,7 @@ html.dark .shiki span {
 It's also possible to support more than two themes. In the `themes` object, you can have an arbitrary number of themes, and specify the default theme with `defaultColor` option.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   themes: ['nord', 'min-light'],
@@ -115,14 +115,14 @@ A token would be generated like:
 
 Then update your CSS snippet to control when each theme takes effect. Here is an example:
 
-[Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/antfu/shikiji/main/packages/shikiji/test/out/multiple-themes.html)
+[Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/shikijs/shiki/main/packages/shiki/test/out/multiple-themes.html)
 
 ### Without Default Color
 
 If you want to take full control of the colors or avoid using `!important` to override, you can optionally disable the default color by setting `defaultColor` to `false`.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   themes: ['nord', 'min-light'],
@@ -147,14 +147,14 @@ With it, a token would be generated like:
 
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
-It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
+It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/shikijs/shiki/issues/6).
 
 ## Custom Language Aliases
 
 You can register custom language aliases with the `langAlias` option. For example:
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   langs: ['javascript'],

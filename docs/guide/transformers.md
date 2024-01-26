@@ -1,11 +1,11 @@
 # Transformers
 
-Shikiji uses [`hast`](https://github.com/syntax-tree/hast), a AST format for HTML, to process the result and generate the HTML.
+Shiki uses [`hast`](https://github.com/syntax-tree/hast), a AST format for HTML, to process the result and generate the HTML.
 
 You can provide your own `transformers` to customize the generated HTML by manipulating the hast tree. You can pass custom functions to modify the tree for different types of nodes. For example:
 
 ```ts twoslash
-import { addClassToHast, codeToHtml } from 'shikiji'
+import { addClassToHast, codeToHtml } from 'shiki'
 
 const code = await codeToHtml('foo\bar', {
   lang: 'js',
@@ -28,14 +28,14 @@ const code = await codeToHtml('foo\bar', {
 })
 ```
 
-We also provide some common transformers for you to use, see [`shikiji-transforms`](/packages/transformers) for more details.
+We also provide some common transformers for you to use, see [`shiki-transforms`](/packages/transformers) for more details.
 
 ## `codeToHast`
 
 You can also get the intermediate `hast` to do custom rendering without serializing them into HTML with `codeToHast`. You can also further integrate the AST with the [unified](https://github.com/unifiedjs) ecosystem.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   themes: ['nord', 'min-light'],

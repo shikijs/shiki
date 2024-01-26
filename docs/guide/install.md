@@ -4,25 +4,25 @@ outline: deep
 
 # Installation
 
-<Badges name="shikiji" />
+<Badges name="shiki" />
 
 Install via npm, or see [CDN Usage](#cdn-usage):
 ::: code-group
 
 ```sh [npm]
-npm install -D shikiji
+npm install -D shiki
 ```
 
 ```sh [yarn]
-yarn add -D shikiji
+yarn add -D shiki
 ```
 
 ```sh [pnpm]
-pnpm add -D shikiji
+pnpm add -D shiki
 ```
 
 ```sh [bun]
-bun add -D shikiji
+bun add -D shiki
 ```
 
 :::
@@ -42,12 +42,12 @@ We also provide some integrations:
 
 ### Shorthands
 
-The quickest way to get started with `shikiji` is to use the shorthands functions we provided. They will load the necessary themes and languages on demand and cache them in memory automatically.
+The quickest way to get started with `shiki` is to use the shorthands functions we provided. They will load the necessary themes and languages on demand and cache them in memory automatically.
 
 Passing your code snippet to the `codeToHtml` function with the `lang` and `theme` specified, it will return a highlighted HTML string that you can embed in your page. The generated HTML contains inline style for each token, so you don't need extra CSS to style it.
 
 ```ts twoslash
-import { codeToHtml } from 'shikiji'
+import { codeToHtml } from 'shiki'
 
 const code = 'const a = 1' // input code
 const html = await codeToHtml(code, {
@@ -61,7 +61,7 @@ console.log(html) // highlighted html string
 Going a bit advanced, you can also use `codeToThemedTokens` or `codeToHast` to get the intermediate data structure, and render them by yourself:
 
 ```ts twoslash theme:min-dark
-import { codeToThemedTokens } from 'shikiji'
+import { codeToThemedTokens } from 'shiki'
 
 const tokens = await codeToThemedTokens('<div class="foo">bar</div>', {
   lang: 'html',
@@ -70,7 +70,7 @@ const tokens = await codeToThemedTokens('<div class="foo">bar</div>', {
 ```
 
 ```ts twoslash theme:catppuccin-mocha
-import { codeToHast } from 'shikiji'
+import { codeToHast } from 'shiki'
 
 const hast = codeToHast('.text-red { color: red; }', {
   lang: 'css',
@@ -85,7 +85,7 @@ The [shorthands](#shorthands) we provided are executed asynchronously as we use 
 The usage is pretty much the same as `shiki`, where each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```ts twoslash theme:nord
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 // `getHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
@@ -105,7 +105,7 @@ const code = highlighter.codeToHtml('const a = 1', {
 In addition, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 const highlighter = await getHighlighter({ themes: [], langs: [] })
 // ---cut---
 // load themes and languages after creation
@@ -113,10 +113,10 @@ await highlighter.loadTheme('vitesse-light')
 await highlighter.loadLanguage('css')
 ```
 
-Unlike `shiki` that loads all themes and languages by default, `shikiji` requires all themes and languages to be loaded explicitly.
+Unlike `shiki` that loads all themes and languages by default, `shiki` requires all themes and languages to be loaded explicitly.
 
 ```ts theme:slack-dark twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({ /* ... */ })
 
@@ -132,7 +132,7 @@ await highlighter.loadLanguage('javascript') // load the language
 If you want to load all themes and languages (not recommended), you can iterate all keys from `bundledLanguages` and `bundledThemes`.
 
 ```ts twoslash theme:poimandres
-import { bundledLanguages, bundledThemes, getHighlighter } from 'shikiji'
+import { bundledLanguages, bundledThemes, getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   themes: Object.keys(bundledThemes),
@@ -147,30 +147,30 @@ highlighter.codeToHtml('const a = 1', {
 
 ### Fine-grained Bundle
 
-When importing `shikiji`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. In some cases, if you want to control what to bundle, you can use the core and compose your own bundle.
+When importing `shiki`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. In some cases, if you want to control what to bundle, you can use the core and compose your own bundle.
 
 ```ts twoslash theme:material-theme-ocean
 // @noErrors
-// `shikiji/core` entry does not include any themes or languages or the wasm binary.
-import { getHighlighterCore } from 'shikiji/core'
+// `shiki/core` entry does not include any themes or languages or the wasm binary.
+import { getHighlighterCore } from 'shiki/core'
 
-// `shikiji/wasm` contains the wasm binary inlined as base64 string.
-import getWasm from 'shikiji/wasm'
+// `shiki/wasm` contains the wasm binary inlined as base64 string.
+import getWasm from 'shiki/wasm'
 
 // directly import the theme and language modules, only the ones you imported will be bundled.
-import nord from 'shikiji/themes/nord.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 const highlighter = await getHighlighterCore({
   themes: [
     // instead of strings, you need to pass the imported module
     nord,
     // or a dynamic import if you want to do chunk splitting
-    import('shikiji/themes/material-theme-ocean.mjs')
+    import('shiki/themes/material-theme-ocean.mjs')
   ],
   langs: [
-    import('shikiji/langs/javascript.mjs'),
-    // shikiji will try to interop the module with the default export
-    () => import('shikiji/langs/css.mjs'),
+    import('shiki/langs/javascript.mjs'),
+    // shiki will try to interop the module with the default export
+    () => import('shiki/langs/css.mjs'),
     // or a getter that returns custom grammar
     async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))
   ],
@@ -178,7 +178,7 @@ const highlighter = await getHighlighterCore({
 })
 
 // optionally, load themes and languages after creation
-await highlighter.loadTheme(import('shikiji/themes/vitesse-light.mjs'))
+await highlighter.loadTheme(import('shiki/themes/vitesse-light.mjs'))
 
 const code = highlighter.codeToHtml('const a = 1', {
   lang: 'javascript',
@@ -187,7 +187,7 @@ const code = highlighter.codeToHtml('const a = 1', {
 ```
 
 ::: info
-[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-core/src/bundle-factory.ts) or port it yourself.
+[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/core/src/bundle-factory.ts) or port it yourself.
 :::
 
 ### Bundle Presets
@@ -196,13 +196,13 @@ We also provide some pre-composed bundles for you to use easily, you can learn m
 
 ### CJS Usage
 
-`shikiji` is published as ESM-only to reduce the package size. It's still possible to use it in CJS, as Node.js supports importing ESM modules dynamically in CJS.
+`shiki` is published as ESM-only to reduce the package size. It's still possible to use it in CJS, as Node.js supports importing ESM modules dynamically in CJS.
 
 For example, the following ESM code:
 
 ```ts twoslash
 // ESM
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 async function main() {
   const highlighter = await getHighlighter({
@@ -222,7 +222,7 @@ Can be written in CJS as:
 ```ts twoslash
 // CJS
 async function main() {
-  const { getHighlighter } = await import('shikiji')
+  const { getHighlighter } = await import('shiki')
 
   const highlighter = await getHighlighter({
     themes: ['vitesse-dark'],
@@ -238,7 +238,7 @@ async function main() {
 
 ### CDN Usage
 
-To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) or [esm.sh](https://esm.sh).
+To use `shiki` in the browser via CDN, you can use [esm.run](https://esm.run) or [esm.sh](https://esm.sh).
 
 ```html theme:rose-pine
 <body>
@@ -246,9 +246,9 @@ To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) 
 
   <script type="module">
     // be sure to specify the exact version
-    import { codeToHtml } from 'https://esm.sh/shikiji@0.8.0'
+    import { codeToHtml } from 'https://esm.sh/shiki@0.8.0'
     // or
-    // import { codeToHtml } from 'https://esm.run/shikiji@0.8.0'
+    // import { codeToHtml } from 'https://esm.run/shiki@0.8.0'
 
     const foo = document.getElementById('foo')
     foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {
@@ -259,7 +259,7 @@ To use `shikiji` in the browser via CDN, you can use [esm.run](https://esm.run) 
 </body>
 ```
 
-It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shikiji`, `shikiji/themes/vitesse-light.mjs`, `shikiji/langs/javascript.mjs`, `shikiji/wasm.mjs`), with around 200KB data transferred in total.
+It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shiki`, `shiki/themes/vitesse-light.mjs`, `shiki/langs/javascript.mjs`, `shiki/wasm.mjs`), with around 200KB data transferred in total.
 
 [Demo](https://jsfiddle.net/rdasqhxu/1/)
 
@@ -271,12 +271,12 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 
 ```ts twoslash theme:nord
 // @noErrors
-import { getHighlighterCore, loadWasm } from 'shikiji/core'
-import nord from 'shikiji/themes/nord.mjs'
-import js from 'shikiji/langs/javascript.mjs'
+import { getHighlighterCore, loadWasm } from 'shiki/core'
+import nord from 'shiki/themes/nord.mjs'
+import js from 'shiki/langs/javascript.mjs'
 
 // import wasm as assets
-await loadWasm(import('shikiji/onig.wasm'))
+await loadWasm(import('shiki/onig.wasm'))
 
 export default {
   async fetch() {

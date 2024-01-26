@@ -10,8 +10,8 @@ declare module 'vue' {
     Badges: typeof import('./.vitepress/components/Badges.vue')['default']
     HomeDemo: typeof import('./.vitepress/components/HomeDemo.vue')['default']
     LanguagesList: typeof import('./.vitepress/components/LanguagesList.vue')['default']
-    ShikijiMiniPlayground: typeof import('./.vitepress/components/ShikijiMiniPlayground.vue')['default']
-    ShikijiPlayground: typeof import('./.vitepress/components/ShikijiPlayground.vue')['default']
+    ShikiMiniPlayground: typeof import('./.vitepress/components/ShikiMiniPlayground.vue')['default']
+    ShikiPlayground: typeof import('./.vitepress/components/ShikiPlayground.vue')['default']
     ThemesList: typeof import('./.vitepress/components/ThemesList.vue')['default']
   }
 }

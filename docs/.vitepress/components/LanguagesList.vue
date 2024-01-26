@@ -62,7 +62,7 @@ const langs = computed(() => {
     </table>
     <div v-if="showModel" fixed inset-0 z-100 flex items-center justify-center>
       <div bg-black:50 absolute inset-0 backdrop-blur-sm @click="showModel = false" />
-      <ShikijiMiniPlayground max-h-80vh w-full md:w-150 lg:w-200 />
+      <ShikiMiniPlayground max-h-80vh w-full md:w-150 lg:w-200 />
     </div>
   </div>
 </template>

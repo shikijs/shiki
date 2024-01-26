@@ -5,7 +5,7 @@ See [All Builtin Themes](/themes) first.
 You can load custom themes by passing a `Theme` object into the `themes` array.
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const myTheme = {
   name: 'my-theme',
@@ -35,7 +35,7 @@ You can also load themes after the highlighter has been created.
 
 ```ts twoslash
 // @noErrors
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 // Load the theme object from a file, a network request, or anywhere
 const myTheme = JSON.parse(fs.readFileSync('my-theme.json', 'utf8'))

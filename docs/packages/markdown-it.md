@@ -1,24 +1,24 @@
-# markdown-it-shikiji
+# @shikijs/markdown-it
 
-<Badges name="markdown-it-shikiji" />
+<Badges name="@shikijs/markdown-it" />
 
-[Markdown It](https://markdown-it.github.io/) plugin for Shikiji.
+[Markdown It](https://markdown-it.github.io/) plugin for Shiki.
 
 ## Install
 
 ```bash
-npm i -D markdown-it-shikiji
+npm i -D @shikijs/markdown-it
 ```
 
 ## Usage
 
 ```ts twoslash
 import MarkdownIt from 'markdown-it'
-import Shikiji from 'markdown-it-shikiji'
+import Shiki from '@shikijs/markdown-it'
 
 const md = MarkdownIt()
 
-md.use(await Shikiji({
+md.use(await Shiki({
   themes: {
     light: 'vitesse-light',
     dark: 'vitesse-dark',
@@ -28,21 +28,21 @@ md.use(await Shikiji({
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shikiji` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `markdown-it-shikiji/core` and pass your own highlighter:
+By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `@shikijs/markdown-it/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true
 import MarkdownIt from 'markdown-it'
-import { fromHighlighter } from 'markdown-it-shikiji/core'
-import { getHighlighterCore } from 'shikiji/core'
-import getWasm from 'shikiji/wasm'
+import { fromHighlighter } from '@shikijs/markdown-it/core'
+import { getHighlighterCore } from 'shiki/core'
+import getWasm from 'shiki/wasm'
 
 const highlighter = await getHighlighterCore({
   themes: [
-    import('shikiji/themes/vitesse-light.mjs')
+    import('shiki/themes/vitesse-light.mjs')
   ],
   langs: [
-    import('shikiji/langs/javascript.mjs'),
+    import('shiki/langs/javascript.mjs'),
   ],
   loadWasm: getWasm
 })
@@ -57,10 +57,10 @@ md.use(fromHighlighter(highlighter, { /* options */ }))
 ### Line Highlight
 
 ::: warning
-This is deprecated. It's disabled by default in `v0.10.0` and will be removed in the next minor. Consider use [`transformerNotationHighlight`](https://shikiji.netlify.app/packages/transformers#transformernotationhighlight) instead.
+This is deprecated. It's disabled by default in `v0.10.0` and will be removed in the next minor. Consider use [`transformerNotationHighlight`](https://shiki.netlify.app/packages/transformers#transformernotationhighlight) instead.
 :::
 
-In addition to the features of `shikiji`, this plugin also supports line highlighting. You can specify line numbers to highlight after the language name in the format `{<line-numbers>}` - a comma separated list of `<line-number>`s, wrapped in curly braces. Each line number can be a single number (e.g. `{2}` highlights line 2 and `{1,4}` highlights lines 1 and 4) or a range (e.g. `{5-7}` highlights lines 1 through 7, and `{1-3,5-6}` highlights lines 1 through 3 and 5 through 6). For example:
+In addition to the features of `shiki`, this plugin also supports line highlighting. You can specify line numbers to highlight after the language name in the format `{<line-numbers>}` - a comma separated list of `<line-number>`s, wrapped in curly braces. Each line number can be a single number (e.g. `{2}` highlights line 2 and `{1,4}` highlights lines 1 and 4) or a range (e.g. `{5-7}` highlights lines 1 through 7, and `{1-3,5-6}` highlights lines 1 through 3 and 5 through 6). For example:
 
 ````md
 ```js {1,3-4}

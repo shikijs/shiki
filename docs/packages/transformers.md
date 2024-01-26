@@ -2,26 +2,26 @@
 outline: deep
 ---
 
-# shikiji-transformers
+# @shikijs/transformers
 
-<Badges name="shikiji-transformers" />
+<Badges name="@shikijs/transformers" />
 
-Collective of common transformers for Shikiji, inspired by [shiki-processor](https://github.com/innocenzi/shiki-processor).
+Collective of common transformers for Shiki, inspired by [shiki-processor](https://github.com/innocenzi/shiki-processor).
 
 ## Install
 
 ```bash
-npm i -D shikiji-transformers
+npm i -D @shikijs/transformers
 ```
 
 ```ts twoslash
 import {
   codeToHtml,
-} from 'shikiji'
+} from 'shiki'
 import {
   transformerNotationDiff,
   // ...
-} from 'shikiji-transformers'
+} from '@shikijs/transformers'
 
 const code = `console.log('hello')`
 const html = await codeToHtml(code, {
@@ -277,7 +277,7 @@ console.log(msg) // prints Hello World
 
 ### `transformerCompactLineOptions`
 
-Support for `shiki`'s `lineOptions` that is removed in `shikiji`.
+Support for `shiki`'s `lineOptions` that is removed in `shiki`.
 
 ---
 

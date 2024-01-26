@@ -2,29 +2,29 @@
 outline: deep
 ---
 
-# shikiji-twoslash
+# @shikijs/twoslash
 
-<Badges name="shikiji-twoslash" />
+<Badges name="@shikijs/twoslash" />
 
-A Shikiji transformer for [Twoslash](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks.
+A Shiki transformer for [Twoslash](https://github.com/twoslashes/twoslash), provide inline type hover inside code blocks.
 
 [TwoSlash Notation Reference](https://twoslash.netlify.app/refs/notations).
 
 ## Install
 
 ```bash
-npm i -D shikiji-twoslash
+npm i -D @shikijs/twoslash
 ```
 
-This package is **a transformer addon** to Shikiji. This means that for every integration that supports passing Shikiji transformers, you can use this package.
+This package is **a transformer addon** to Shiki. This means that for every integration that supports passing Shiki transformers, you can use this package.
 
 ```ts twoslash
 import {
   codeToHtml,
-} from 'shikiji'
+} from 'shiki'
 import {
   transformerTwoslash,
-} from 'shikiji-twoslash'
+} from '@shikijs/twoslash'
 
 const html = await codeToHtml(`console.log()`, {
   lang: 'ts',
@@ -50,7 +50,7 @@ We provide two renderers built-in, and you can also create your own:
 
 ### `rendererRich`
 
-[Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-rich.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/src/renderer-rich.ts)
 
 ::: tip
 This is the default renderer since v0.10.0.
@@ -60,14 +60,14 @@ This renderer provides a more explicit class name is prefixed with `twoslash-` f
 In addition, it runs syntax highlighting on the hover information.
 
 ```ts twoslash
-import { rendererRich, transformerTwoslash } from 'shikiji-twoslash'
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 
 transformerTwoslash({
   renderer: rendererRich() // <--
 })
 ```
 
-Here are a few examples with the built-in [`style-rich.css`](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-rich.css):
+Here are a few examples with the built-in [`style-rich.css`](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/style-rich.css):
 
 <!-- eslint-skip -->
 
@@ -92,7 +92,7 @@ Number.parseInt('123', 10)
 ```
 
 ```ts twoslash
-import { getHighlighterCore } from 'shikiji/core'
+import { getHighlighterCore } from 'shiki/core'
 
 const highlighter = await getHighlighterCore({})
 // @log: Custom log message
@@ -108,23 +108,23 @@ const c = 1
 
 ### `rendererClassic`
 
-[Source code](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/src/renderer-classic.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/src/renderer-classic.ts)
 
-This renderer aligns with the output of [`shiki-twoslash`](https://shikijs.github.io/twoslash/).
+This renderer aligns with the output of [`@shikijs/twoslash`](https://shikijs.github.io/twoslash/).
 
 ```ts twoslash
-import { rendererClassic, transformerTwoslash } from 'shikiji-twoslash'
+import { rendererClassic, transformerTwoslash } from '@shikijs/twoslash'
 
 transformerTwoslash({
   renderer: rendererClassic() // <--
 })
 ```
 
-You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/antfu/shikiji/blob/main/packages/shikiji-twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
+You might need to reference `@shikijs/twoslash`'s CSS to make it look good. [Here](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/style-classic.css) we also copied the CSS from `@shikijs/twoslash` but it might need some cleanup.
 
 ### `rendererFloatingVue`
 
-[Source code](https://github.com/antfu/shikiji/blob/main/packages/vitepress-plugin-twoslash/src/renderer-floating-vue.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/vitepress-twoslash/src/renderer-floating-vue.ts)
 
 This renderer outputs Vue template syntax that using [Floating Vue](https://floating-vue.starpad.dev/) as the popup component (to render it outside the containers). This renderer is **NOT** directly usable but an internal renderer for the [VitePress integration](/packages/vitepress#twoslash). Listing it here for reference if you want to create your own renderer.
 
@@ -132,10 +132,10 @@ This renderer outputs Vue template syntax that using [Floating Vue](https://floa
 
 ### Explicit Trigger
 
-When integrating with `markdown-it-shikiji` or `rehype-shikiji`, we may not want Twoslash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
+When integrating with `@shikijs/markdown-it` or `rehype-shiki`, we may not want Twoslash to run on every code block. In this case, we can set `explicitTrigger` to `true` to only run on code blocks with `twoslash` presented in the codeframe.
 
 ```ts twoslash
-import { transformerTwoslash } from 'shikiji-twoslash'
+import { transformerTwoslash } from '@shikijs/twoslash'
 
 transformerTwoslash({
   explicitTrigger: true // <--
@@ -156,7 +156,7 @@ In markdown, you can use the following syntax to trigger Twoslash:
 
 ## Integrations
 
-While you can set up Twoslash with Shikiji on your own with the instructions above, you can also find high-level integrations with frameworks and tools here:
+While you can set up Twoslash with Shiki on your own with the instructions above, you can also find high-level integrations with frameworks and tools here:
 
 - [VitePress](/packages/vitepress#twoslash) - A plugin to enable Twoslash support in VitePress.
 - [Vocs](https://vocs.dev/docs/guides/twoslash) - Vocs has TwoSlash support built-in.
@@ -174,8 +174,8 @@ We make tiny wrappers around the building blocks and provide an easy-to-use API 
 
 ```js
 // TODO: Replace with explicit versions in production
-import { createTransformerFactory, rendererRich } from 'https://esm.sh/shikiji-twoslash@latest/core'
-import { codeToHtml } from 'https://esm.sh/shikiji@latest'
+import { createTransformerFactory, rendererRich } from 'https://esm.sh/@shikijs/twoslash@latest/core'
+import { codeToHtml } from 'https://esm.sh/shiki@latest'
 import { createStorage } from 'https://esm.sh/unstorage@latest'
 import indexedDbDriver from 'https://esm.sh/unstorage@latest/drivers/indexedb'
 import { createTwoslashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
@@ -205,7 +205,7 @@ const app = document.getElementById('app')
 const source = `
 import { ref } from 'vue'
 
-console.log("Hi! Shikiji + Twoslash on CDN :)")
+console.log("Hi! Shiki + Twoslash on CDN :)")
 
 const count = ref(0)
 //     ^?

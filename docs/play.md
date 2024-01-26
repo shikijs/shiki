@@ -2,4 +2,4 @@
 layout: home
 ---
 
-<ShikijiPlayground />
+<ShikiPlayground />

@@ -6,7 +6,7 @@ You can load custom languages by passing a TextMate grammar object into the `lan
 
 ```ts twoslash
 // @noErrors
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
@@ -23,7 +23,7 @@ You can also load languages after the highlighter has been created.
 
 ```ts twoslash
 // @noErrors
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
@@ -38,7 +38,7 @@ const html = highlighter.codeToHtml(code, {
 
 ## Migrate from Shiki
 
-Since `shikiji` is environment agnostic, we don't have access to the file system. That means the `path` property `shiki` supports is not available in `shikiji`, and you must to read the files yourself and pass in the object.
+Since `shiki` is environment agnostic, we don't have access to the file system. That means the `path` property `shiki` supports is not available in `shiki`, and you must to read the files yourself and pass in the object.
 
 For example, the following would not work:
 

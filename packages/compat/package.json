@@ -1,0 +1,47 @@
+{
+  "name": "@shikijs/compat",
+  "type": "module",
+  "version": "0.10.2",
+  "description": "Shiki v0.x compatible API",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/shikijs/shiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikijs/shiki.git",
+    "directory": "packages/shiki-compat"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
+  "keywords": [
+    "shiki",
+    "rehype"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "require": "./index.cjs",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "index.cjs"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build"
+  },
+  "dependencies": {
+    "@shikijs/core": "workspace:*",
+    "@shikijs/transformers": "workspace:*",
+    "shiki": "workspace:*"
+  },
+  "devDependencies": {
+    "shiki-legacy": "npm:shiki@^0.14"
+  }
+}

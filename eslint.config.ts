@@ -14,7 +14,7 @@ export default antfu(
       },
     },
     ignores: [
-      'packages/shikiji/src/assets/*.ts',
+      'packages/shiki/src/assets/*.ts',
       '**/fixtures/**',
       '**/test/out/**',
       'docs/languages.md',

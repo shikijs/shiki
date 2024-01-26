@@ -1,8 +1,8 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import { bundledThemes } from 'shikiji'
-import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '../../packages/shikiji-transformers/src'
-import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-plugin-twoslash/src/index'
+import { bundledThemes } from 'shiki'
+import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '../../packages/transformers/src'
+import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import { version } from '../../package.json'
 import vite from './vite.config'
 
@@ -36,22 +36,22 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
 
 const VERSIONS: DefaultTheme.NavItemWithLink[] = [
   { text: `v${version} (current)`, link: '/' },
-  { text: `Release Notes`, link: 'https://github.com/antfu/shikiji/releases' },
-  { text: `Contributing`, link: 'https://github.com/antfu/shikiji/blob/main/CONTRIBUTING.md' },
+  { text: `Release Notes`, link: 'https://github.com/shikijs/shiki/releases' },
+  { text: `Contributing`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
 ]
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'Shikiji',
+  title: 'Shiki',
   description: 'A beautiful and powerful syntax highlighter',
   markdown: {
     theme: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
-    async shikijiSetup(shikiji) {
+    async shikijiSetup(shiki) {
       await Promise.all(Object.keys(bundledThemes).map(async (theme) => {
-        await shikiji.loadTheme(theme as any)
+        await shiki.loadTheme(theme as any)
       }))
     },
     codeTransformers: [
@@ -59,7 +59,7 @@ export default defineConfig({
       transformerNotationWordHighlight(),
       {
         // Render custom themes with codeblocks
-        name: 'shikiji:inline-theme',
+        name: 'shiki:inline-theme',
         preprocess(code, options) {
           const reg = /\btheme:([\w,-]+)\b/
           const match = options.meta?.__raw?.match(reg)
@@ -93,14 +93,14 @@ export default defineConfig({
       transformerTwoslash({
         processHoverInfo(info) {
           return defaultHoverInfoProcessor(info)
-            // Remove shikiji_core namespace
-            .replace(/shikiji_core\./g, '')
+            // Remove shiki_core namespace
+            .replace(/shiki_core\./g, '')
             // Remove member access
             .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
         },
       }),
       {
-        name: 'shikiji:remove-escape',
+        name: 'shiki:remove-escape',
         postprocess(code) {
           return code.replace(/\[\\\!code/g, '[!code')
         },
@@ -160,7 +160,7 @@ export default defineConfig({
     ),
 
     editLink: {
-      pattern: 'https://github.com/antfu/shikiji/edit/main/docs/:path',
+      pattern: 'https://github.com/shikijs/shiki/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
     search: {
@@ -168,7 +168,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/antfu/shikiji' },
+      { icon: 'github', link: 'https://github.com/shikijs/shiki' },
     ],
 
     footer: {
@@ -181,11 +181,11 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
     ['meta', { name: 'author', content: 'Pine Wu, Anthony Fu' }],
-    ['meta', { property: 'og:title', content: 'Shikiji' }],
-    ['meta', { property: 'og:image', content: 'https://shikiji.netlify.app/og.png' }],
+    ['meta', { property: 'og:title', content: 'Shiki' }],
+    ['meta', { property: 'og:image', content: 'https://shiki.netlify.app/og.png' }],
     ['meta', { property: 'og:description', content: 'A beautiful and powerful syntax highlighter' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: 'https://shikiji.netlify.app/og.png' }],
+    ['meta', { name: 'twitter:image', content: 'https://shiki.netlify.app/og.png' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
   ],
 })

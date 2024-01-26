@@ -12,11 +12,11 @@ outline: deep
 
 No custom RegExp to maintain, no custom CSS to maintain, no custom HTML to maintain. And as your favorite languages and themes in VS Code evolve - your syntax highlighting will evolve too.
 
-Shikiji is a ESM-rewrite of [Shiki](https://github.com/shikijs/shiki) with quite a few improvements. We aim to [merge this project back to Shiki as a milestone update](https://github.com/shikijs/shiki/issues/510). Check the [breaking changes from Shiki and our compatibility build](/guide/compat) if you are migrating.
+Shiki is a ESM-rewrite of [Shiki](https://github.com/shikijs/shiki) with quite a few improvements. We aim to [merge this project back to Shiki as a milestone update](https://github.com/shikijs/shiki/issues/510). Check the [breaking changes from Shiki and our compatibility build](/guide/compat) if you are migrating.
 
 About the name, <ruby text-lg text-brand-yellow>式<rt>shiki</rt></ruby><ruby text-lg text-brand-red>辞<rt>ji</rt></ruby> is a Japanese word meaning ["Ceremonial Speech"](https://jisho.org/word/%E5%BC%8F%E8%BE%9E). <ruby text-brand-yellow text-lg>式<rt>shiki</rt></ruby> is inherited from [shiki](https://github.com/shikijs/shiki) means ["Style"](https://jisho.org/word/%E5%BC%8F) and <ruby text-brand-red text-lg>辞<rt>ji</rt></ruby> means ["Word"](https://jisho.org/word/%E8%BE%9E).
 
-Oh btw, all the code blocks in this site are highlighted by Shikiji, as you'd expect \:)
+Oh btw, all the code blocks in this site are highlighted by Shiki, as you'd expect \:)
 
 ## Features
 
@@ -32,15 +32,15 @@ Oh btw, all the code blocks in this site are highlighted by Shikiji, as you'd ex
 
 ## Playground
 
-Here is a little playground for you to try out how Shikiji highlights your code. Unlike other code blocks that ran on the build time, this playground is rendered on the client side in the browser. Themes and languages are loaded on demand.
+Here is a little playground for you to try out how Shiki highlights your code. Unlike other code blocks that ran on the build time, this playground is rendered on the client side in the browser. Themes and languages are loaded on demand.
 
-<ShikijiMiniPlayground />
+<ShikiMiniPlayground />
 
-[Install Shikiji](/guide/install) to use it in your project.
+[Install Shiki](/guide/install) to use it in your project.
 
 ## Who is using?
 
-Projects that depend on Shikiji (sorted alphabetically):
+Projects that depend on Shiki (sorted alphabetically):
 
 - [Astro](https://docs.astro.build/en/guides/markdown-content/#syntax-highlighting)
 - [Expressive Code](https://expressive-code.com/)
@@ -53,14 +53,14 @@ Projects that depend on Shikiji (sorted alphabetically):
 
 ## Bundle Size
 
-You can inspect the bundle size in detail on [pkg-size.dev/shikiji](https://pkg-size.dev/shikiji).
+You can inspect the bundle size in detail on [pkg-size.dev/shiki](https://pkg-size.dev/shiki).
 
 As of `v0.9.11`, measured at 21th, December 2023:
 
 | Bundle                | Size (minified) | Size (gzip) | Notes                                                            |
 | --------------------- | --------------: | ----------: | ---------------------------------------------------------------- |
-| `shikiji`             |          6.4 MB |      1.2 MB | All themes and languages as async chunks                         |
-| `shikiji/bundle/full` |          6.4 MB |      1.2 MB | Same as `shikiji`                                                |
-| `shikiji/bundle/web`  |          3.8 MB |      695 KB | All themes and common web languages as async chunks              |
-| `shikiji/core`        |          100 KB |       31 KB | Core engine without any themes or languages, compose on your own |
-| `shikiji/wasm`        |          623 KB |      231 KB | WASM binary inlined as base64 string                             |
+| `shiki`             |          6.4 MB |      1.2 MB | All themes and languages as async chunks                         |
+| `shiki/bundle/full` |          6.4 MB |      1.2 MB | Same as `shiki`                                                |
+| `shiki/bundle/web`  |          3.8 MB |      695 KB | All themes and common web languages as async chunks              |
+| `shiki/core`        |          100 KB |       31 KB | Core engine without any themes or languages, compose on your own |
+| `shiki/wasm`        |          623 KB |      231 KB | WASM binary inlined as base64 string                             |

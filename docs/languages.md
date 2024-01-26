@@ -2,7 +2,7 @@
 
 ## Bundled Languages
 
-Language grammars listed below are re-distributed via [`tm-grammars`](https://github.com/antfu/textmate-grammars-themes/tree/main/packages/tm-grammars) into the `shikiji` package.
+Language grammars listed below are re-distributed via [`tm-grammars`](https://github.com/antfu/textmate-grammars-themes/tree/main/packages/tm-grammars) into the `shiki` package.
 
 <LanguagesList />
 
@@ -17,7 +17,7 @@ For loading your custom languages, please reference to [this guide](/guide/load-
 You can set lang to `text` to bypass highlighting. This is useful as the fallback when you receive user specified language that are not available. For example:
 
 ```txt
-import { codeToHtml } from 'shikiji'
+import { codeToHtml } from 'shiki'
 
 const html = codeToHtml('console.log("Hello World")', {
   lang: 'text', // [!code hl]
@@ -50,4 +50,4 @@ A special processed language `ansi` is provided to highlight terminal outputs. F
 [0;36m└[0m
 ```
 
-Check the [raw markdown of code snippet above](https://github.com/antfu/shikiji/blob/main/docs/languages.md?plain=1#L35).
+Check the [raw markdown of code snippet above](https://github.com/shikijs/shiki/blob/main/docs/languages.md?plain=1#L35).

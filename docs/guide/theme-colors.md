@@ -2,10 +2,10 @@
 
 ## Arbitrary Color Values
 
-Usually, TextMate themes expect the color values of each token to be a valid hex color value. This limitation is inherited from [`vscode-textmate`](https://github.com/microsoft/vscode-textmate). However, in Shikiji v0.9.15 we introduced an automatic workaround by replacing non-hex color values with a placeholder and replacing them back on tokenization. This would allows you to use themes with arbitrary color values for rendering without worrying about the technical details:
+Usually, TextMate themes expect the color values of each token to be a valid hex color value. This limitation is inherited from [`vscode-textmate`](https://github.com/microsoft/vscode-textmate). However, in Shiki v0.9.15 we introduced an automatic workaround by replacing non-hex color values with a placeholder and replacing them back on tokenization. This would allows you to use themes with arbitrary color values for rendering without worrying about the technical details:
 
 ```ts twoslash
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
   langs: ['javascript'],
@@ -42,7 +42,7 @@ const html = highlighter.codeToHtml('const foo = "bar"', { lang: 'javascript', t
 ::: info Notice
 Use this carefully as this will diverge from TextMate theme compatibility.
 
-This may make the theme incompatible with non-web usage such as [`shikiji-cli`](/packages/cli) and [`shikiji-monaco`](/packages/monaco).
+This may make the theme incompatible with non-web usage such as [`shiki-cli`](/packages/cli) and [`shiki-monaco`](/packages/monaco).
 :::
 
 Learn more about how to [load themes](./load-theme).
@@ -57,12 +57,12 @@ You can also use the `colorReplacements` option to replace the color values of t
 This feature is experimental and may change without following semver.
 :::
 
-Shikiji provides a factory function helper `createCssVariablesTheme` for creating a theme that uses CSS variables easier. Note that this theme is a lot less granular than most of the other themes and requires to define the CSS variables in your app. This is provided for easier migration from Shiki's [`css-variables theme`](https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables). For better highlighting result, we recommend construct the theme manually with [Arbitrary Color Values](#arbitrary-color-values) or use [Color Replacements](#color-replacements) to override an existing theme.
+Shiki provides a factory function helper `createCssVariablesTheme` for creating a theme that uses CSS variables easier. Note that this theme is a lot less granular than most of the other themes and requires to define the CSS variables in your app. This is provided for easier migration from Shiki's [`css-variables theme`](https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables). For better highlighting result, we recommend construct the theme manually with [Arbitrary Color Values](#arbitrary-color-values) or use [Color Replacements](#color-replacements) to override an existing theme.
 
 This theme is **not included by default** and must be registered explicitly:
 
 ```ts twoslash
-import { createCssVariablesTheme, getHighlighter } from 'shikiji'
+import { createCssVariablesTheme, getHighlighter } from 'shiki'
 
 // Create a custom CSS variables theme, the following are the default values
 const myTheme = createCssVariablesTheme({ // [!code hl:6]
@@ -137,7 +137,7 @@ CSS variables example:
 
 If you are migrating from Shiki, some variables are renamed from Shiki's `css-variables`:
 
-| Shiki                      | Shikiji              |
+| Shiki                      | Shiki              |
 | -------------------------- | -------------------- |
 | `--shiki-color-text`       | `--shiki-foreground` |
 | `--shiki-color-background` | `--shiki-background` |
