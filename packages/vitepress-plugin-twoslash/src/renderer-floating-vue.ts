@@ -5,18 +5,34 @@ import type { ShikijiTransformerContext, ShikijiTransformerContextCommon } from 
 import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { defaultHandlers, toHast } from 'mdast-util-to-hast'
-import type { VitePressPluginTwoslashOptions } from 'vitepress-plugin-twoslash'
 
 export { defaultHoverInfoProcessor }
 
-export function rendererFloatingVue(options: VitePressPluginTwoslashOptions & RendererRichOptions = {}): TwoslashRenderer {
-  const classCopyIgnore = 'vp-copy-ignore'
-  const classFloatingPanel = 'twoslash-floating'
-  const classCode = 'vp-code'
-  const classMarkdown = 'vp-doc'
-  const floatingVueTheme = 'twoslash'
-  const floatingVueThemeQuery = 'twoslash-query'
-  const floatingVueThemeCompletion = 'twoslash-completion'
+export interface TwoslashFloatingVueOptions {
+  classCopyIgnore?: string
+  classFloatingPanel?: string
+  classCode?: string
+  classMarkdown?: string
+
+  floatingVueTheme?: string
+  floatingVueThemeQuery?: string
+  floatingVueThemeCompletion?: string
+}
+
+export interface TwoslashFloatingVueRendererOptions extends RendererRichOptions, TwoslashFloatingVueOptions {
+  floatingVue?: TwoslashFloatingVueOptions
+}
+
+export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions = {}): TwoslashRenderer {
+  const {
+    classCopyIgnore = 'vp-copy-ignore',
+    classFloatingPanel = 'twoslash-floating',
+    classCode = 'vp-code',
+    classMarkdown = 'vp-doc',
+    floatingVueTheme = 'twoslash',
+    floatingVueThemeQuery = 'twoslash-query',
+    floatingVueThemeCompletion = 'twoslash-completion',
+  } = options.floatingVue || {}
 
   const hoverBasicProps = {
     'class': 'twoslash-hover',
