@@ -184,6 +184,16 @@ export default defineConfig({
     },
   },
 
+  locales: {
+    root: {
+      label: 'English',
+    },
+    zh: {
+      label: '简体中文',
+      link: 'https://shiki-zh-docs.vercel.app',
+    },
+  },
+
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
