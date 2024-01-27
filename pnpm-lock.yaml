@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 overrides:
   '@shikijs/compat': workspace:*
   '@shikijs/core': workspace:*
@@ -250,7 +246,7 @@ importers:
     devDependencies:
       shiki-legacy:
         specifier: npm:shiki@^0.14
-        version: /shiki@0.14.7
+        version: /shiki@0.14.0
 
   packages/core:
     devDependencies:
@@ -339,6 +335,9 @@ importers:
 
   packages/transformers:
     dependencies:
+      hast-util-to-string:
+        specifier: ^3.0.0
+        version: 3.0.0
       shiki:
         specifier: workspace:*
         version: link:../shiki
@@ -7350,8 +7349,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /shiki@0.14.7:
-    resolution: {integrity: sha512-dNPAPrxSc87ua2sKJ3H5dQ/6ZaY8RNnaAqK+t0eG7p0Soi2ydiqbGOTaZCqaYvA/uZYfS1LJnemt3Q+mSfcPCg==}
+  /shiki@0.14.0:
+    resolution: {integrity: sha512-fb9Fg1Yx/ElVJcTqPQIEOSfn7mSZlrT1W3CkymY08lL2Jsi+t7jPcZzKO1lCsQwlSDuyNhHvolnyA2OI4EgJNg==}
     dependencies:
       ansi-sequence-parser: 1.1.1
       jsonc-parser: 3.2.1
@@ -8663,3 +8662,7 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
