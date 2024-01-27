@@ -1,16 +1,22 @@
 import type { Element, ElementContent, Text } from 'hast'
 import { addClassToHast } from 'shiki/core'
-import { toString as hastToString } from 'hast-util-to-string'
 
 export function highlightWordInLine(line: Element, ignoredElement: Element | null, word: string, className: string): void {
-  const content = hastToString(line)
+  const content = getTextContent(line)
   let index = content.indexOf(word)
 
   while (index !== -1) {
     highlightRange(line.children, ignoredElement, index, word.length, className)
-
     index = content.indexOf(word, index + 1)
   }
+}
+
+function getTextContent(element: ElementContent): string {
+  if (element.type === 'text')
+    return element.value
+  if (element.type === 'element' && element.tagName === 'span')
+    return element.children.map(getTextContent).join('')
+  return ''
 }
 
 /**

@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   '@shikijs/compat': workspace:*
   '@shikijs/core': workspace:*
@@ -335,9 +339,6 @@ importers:
 
   packages/transformers:
     dependencies:
-      hast-util-to-string:
-        specifier: ^3.0.0
-        version: 3.0.0
       shiki:
         specifier: workspace:*
         version: link:../shiki
@@ -8662,7 +8663,3 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
