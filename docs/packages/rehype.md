@@ -50,7 +50,6 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
 
-import { fromHighlighter } from '@shikijs/markdown-it/core'
 import { getHighlighterCore } from 'shiki/core'
 import getWasm from 'shiki/wasm'
 

@@ -132,4 +132,4 @@ With it, a token would be generated like:
 
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
-It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/shikijs/shiki/issues/6).
+It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
