@@ -1,0 +1,52 @@
+name: 🚀 New feature proposal
+description: Propose a new feature
+labels: [enhancement]
+title: '`rule-name`: describe the feature here'
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in the project and taking the time to fill out this feature report!
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Clear and concise description of the problem
+      description: 'I want [goal / wish] so that [benefit]. If you intend to submit a PR for this issue, tell us in the description. Thanks!'
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: Suggested solution
+      description: 'In rule [xy] we could provide following implementation...'
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Alternative
+      description: Clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other context or screenshots about the feature request here.
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Validations
+      description: Before submitting the issue, please make sure you do the following
+      options:
+        - label: Follow our [Code of Conduct](https://github.com/eslint-stylistic/eslint-stylistic/blob/main/CODE_OF_CONDUCT.md)
+          required: true
+        - label: Read the [Contributing Guide](https://eslint.style/contribute/guide).
+          required: true
+        - label: Check that there isn't already an issue that request the same feature to avoid creating a duplicate.
+          required: true
+  - type: checkboxes
+    id: contributes
+    attributes:
+      label: Contributes
+      description: As stylistic rules can be sometime subjective or niche, we may not have enough to maintainability to fix or improve every aspect. In general, **we encourage the original reporter (or anyone wants to work on it) to submit a PR to fix issue**. Check the following if you are willing to
+      options:
+        - label: If this feature request is accepted, I am willing to submit a PR to fix this issue

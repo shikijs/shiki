@@ -1,16 +1,22 @@
-- [ ] Add a test if possible
-- [ ] Format all commit messages with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+<!-- DO NOT IGNORE THE TEMPLATE!
 
-<!-- If fixing a bug -->
+Thank you for contributing!
 
-- [ ] This PR fixes #
+Before submitting the PR, please make sure you do the following:
 
-<!-- If adding a theme -->
+- Read the [Contributing Guide](https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md).
+- Check that there isn't already a PR that solves the problem the same way to avoid creating a duplicate.
+- Provide a description in this PR that addresses **what** the PR is solving, or reference the issue that it solves (e.g. `fixes #123`).
+- Ideally, include relevant tests that fail without this PR but pass with it.
 
-- [ ] I have read docs for [adding a theme](https://github.com/shikijs/shiki/blob/main/docs/themes.md#adding-theme).
+-->
 
-<!-- If adding a language -->
+### Description
 
-- [ ] I have read docs for [adding a language](https://github.com/shikijs/shiki/blob/main/docs/languages.md#adding-grammar).
-- [ ] I have searched around and this is the most up-to-date, actively maintained version of the language grammar.
-- [ ] I have added a sample file that includes a variety of language syntaxes and succinctly captures the idiosyncrasy of a language. See [docs](https://github.com/shikijs/shiki/blob/main/docs/languages.md#adding-grammar) for requirement.
+<!-- Please insert your description here and provide especially info about the "what" this PR is solving -->
+
+### Linked Issues
+
+### Additional context
+
+<!-- e.g. is there anything you'd like reviewers to focus on? -->
