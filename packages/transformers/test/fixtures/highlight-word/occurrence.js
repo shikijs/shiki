@@ -1,5 +1,5 @@
 export function transformerNotationFocus(
-  // [!code word:options:4]
+  // [!code word:'options':4]
   options = {},
 ) {
   const options = 'options'
