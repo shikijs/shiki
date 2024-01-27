@@ -41,5 +41,5 @@ If you are already using [Shikiji](https://github.com/antfu/shikiji), first make
 - `shikiji-transformers` -> `@shikijs/transformers`
 - `shikiji-monaco` -> `@shikijs/monaco`
 - `shikiji-cli` -> `@shikijs/cli`
-- `markdown-it-shiki` -> `@shikijs/markdown-it`
-- `rehype-shiki` -> `@shikijs/rehype`
+- `markdown-it-shikiji` -> `@shikijs/markdown-it`
+- `rehype-shikiji` -> `@shikijs/rehype`
