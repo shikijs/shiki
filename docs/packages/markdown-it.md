@@ -2,7 +2,7 @@
 
 <Badges name="@shikijs/markdown-it" />
 
-[Markdown It](https://markdown-it.github.io/) plugin for Shiki.
+[markdown-it](https://markdown-it.github.io/) plugin for Shiki.
 
 ## Install
 
