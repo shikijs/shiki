@@ -31,7 +31,7 @@ bun add -D shiki
 
 We also provide some integrations:
 
-- [Markdown It Plugin](/packages/markdown-it)
+- [markdown-it Plugin](/packages/markdown-it)
 - [Rehype Plugin](/packages/rehype)
 - [TypeScript Twoslash Integration](/packages/twoslash)
 - [Monaco Editor Syntax Highlight](/packages/monaco)
