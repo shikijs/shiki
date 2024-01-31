@@ -1,12 +1,12 @@
 import type { Element, ElementContent, Text } from 'hast'
-import { addClassToHast } from 'shiki/core'
+import type { ShikiTransformerContext } from 'shiki/core'
 
-export function highlightWordInLine(line: Element, ignoredElement: Element | null, word: string, className: string): void {
+export function highlightWordInLine(this: ShikiTransformerContext, line: Element, ignoredElement: Element | null, word: string, className: string): void {
   const content = getTextContent(line)
   let index = content.indexOf(word)
 
   while (index !== -1) {
-    highlightRange(line.children, ignoredElement, index, word.length, className)
+    highlightRange.call(this, line.children, ignoredElement, index, word.length, className)
     index = content.indexOf(word, index + 1)
   }
 }
@@ -25,7 +25,7 @@ function getTextContent(element: ElementContent): string {
  * @param index highlight beginning index
  * @param len highlight length
  */
-function highlightRange(elements: ElementContent[], ignoredElement: Element | null, index: number, len: number, className: string) {
+function highlightRange(this: ShikiTransformerContext, elements: ElementContent[], ignoredElement: Element | null, index: number, len: number, className: string) {
   let currentIdx = 0
 
   for (let i = 0; i < elements.length; i++) {
@@ -45,7 +45,7 @@ function highlightRange(elements: ElementContent[], ignoredElement: Element | nu
         continue
 
       const separated = separateToken(element, textNode, start, length)
-      addClassToHast(separated[1], className)
+      this.addClassToHast(separated[1], className)
 
       // insert
       const output = separated.filter(Boolean) as Element[]

@@ -1,5 +1,4 @@
 import type { ShikiTransformer } from 'shiki'
-import { addClassToHast } from 'shiki'
 import { createCommentNotationTransformer } from '../utils'
 
 export interface TransformerNotationMapOptions {
@@ -31,10 +30,10 @@ export function transformerNotationMap(
       lines
         .slice(index, index + lineNum)
         .forEach((line) => {
-          addClassToHast(line, classMap[match])
+          this.addClassToHast(line, classMap[match])
         })
       if (classActivePre)
-        addClassToHast(this.pre, classActivePre)
+        this.addClassToHast(this.pre, classActivePre)
       return true
     },
   )

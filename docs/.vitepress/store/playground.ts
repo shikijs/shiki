@@ -39,7 +39,7 @@ export const usePlayground = defineStore('playground', () => {
   }
 
   ;(async () => {
-    const { getHighlighter, addClassToHast } = await import('shiki')
+    const { getHighlighter } = await import('shiki')
     const { bundledLanguagesInfo: bundleFull } = await import('shiki/bundle/full')
     const { bundledLanguagesInfo: bundleWeb } = await import('shiki/bundle/web')
     const { bundledThemesInfo } = await import('shiki/themes')
@@ -93,7 +93,7 @@ export const usePlayground = defineStore('playground', () => {
           transformers: [
             {
               pre(node) {
-                addClassToHast(node, 'vp-code')
+                this.addClassToHast(node, 'vp-code')
                 preStyle.value = node.properties?.style as string || ''
               },
             },

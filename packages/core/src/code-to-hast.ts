@@ -9,7 +9,7 @@ import type {
 } from './types'
 import { FontStyle } from './types'
 import { codeToTokens } from './code-to-tokens'
-import { getTokenStyleObject, stringifyTokenStyle } from './utils'
+import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from './utils'
 
 export function codeToHast(
   internal: ShikiInternal,
@@ -102,6 +102,7 @@ export function tokensToHast(
 
   const context: ShikiTransformerContext = {
     ...transformerContext,
+    addClassToHast,
     get tokens() {
       return tokens
     },

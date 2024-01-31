@@ -488,6 +488,13 @@ export interface ShikiTransformerContext extends ShikiTransformerContextCommon {
   readonly pre: Element
   readonly code: Element
   readonly lines: Element[]
+
+  /**
+   * Utility to append class to a hast node
+   *
+   * If the `property.class` is a string, it will be splitted by space and converted to an array.
+   */
+  addClassToHast: (hast: Element, className: string | string[]) => Element
 }
 
 export interface ShikiTransformer {

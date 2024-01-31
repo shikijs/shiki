@@ -1,4 +1,4 @@
-import { type ShikiTransformer, addClassToHast } from 'shiki'
+import type { ShikiTransformer } from 'shiki'
 
 export function parseMetaHighlightString(meta: string) {
   if (!meta)
@@ -46,7 +46,7 @@ export function transformerMetaHighlight(
       ;(this.meta as any)[symbol] ||= parseMetaHighlightString(this.options.meta.__raw)
       const lines: number[] = (this.meta as any)[symbol] || []
       if (lines.includes(line))
-        addClassToHast(node, className)
+        this.addClassToHast(node, className)
       return node
     },
   }

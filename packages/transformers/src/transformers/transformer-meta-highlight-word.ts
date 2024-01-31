@@ -41,7 +41,7 @@ export function transformerMetaWordHighlight(
       const words = parseMetaHighlightWords(this.options.meta.__raw)
 
       for (const word of words)
-        highlightWordInLine(node, null, word, className)
+        highlightWordInLine.call(this, node, null, word, className)
 
       return node
     },
