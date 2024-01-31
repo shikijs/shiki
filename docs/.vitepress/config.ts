@@ -189,7 +189,7 @@ export default defineConfig({
       label: 'English',
     },
     zh: {
-      label: '简体中文',
+      label: '简体中文 (Community)',
       link: 'https://shiki-zh-docs.vercel.app',
     },
   },
