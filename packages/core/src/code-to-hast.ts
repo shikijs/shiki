@@ -71,10 +71,7 @@ export function codeToHast(
     tokens = codeToThemedTokens(
       internal,
       input,
-      {
-        ...options,
-        includeExplanation: false,
-      },
+      options,
     )
 
     const _theme = internal.getTheme(options.theme)

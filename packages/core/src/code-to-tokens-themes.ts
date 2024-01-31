@@ -22,7 +22,6 @@ export function codeToTokensWithThemes(
     ...themes.map(t => codeToThemedTokens(internal, code, {
       ...options,
       theme: t.theme,
-      includeExplanation: false,
     })),
   )
 
