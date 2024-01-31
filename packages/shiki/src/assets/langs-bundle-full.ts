@@ -271,11 +271,23 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'fortran-fixed-form',
     'name': 'Fortran (Fixed Form)',
+    'aliases': [
+      'f',
+      'for',
+      'f77'
+    ],
     'import': (() => import('./langs/fortran-fixed-form')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'fortran-free-form',
     'name': 'Fortran (Free Form)',
+    'aliases': [
+      'f90',
+      'f95',
+      'f03',
+      'f08',
+      'f18'
+    ],
     'import': (() => import('./langs/fortran-free-form')) as DynamicImportLanguageRegistration
   },
   {
