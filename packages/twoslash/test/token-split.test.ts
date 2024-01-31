@@ -1,4 +1,4 @@
-import { codeToHast, codeToThemedTokens } from 'shiki'
+import { codeToHast, codeToTokensBase } from 'shiki'
 import { transformerTwoslash } from '@shikijs/twoslash'
 import { expect, it } from 'vitest'
 import { visit } from 'unist-util-visit'
@@ -7,7 +7,7 @@ import type { Node } from 'hast'
 const code = `import { ref, computed } from "vue"`
 
 it('verify theme behavior', async () => {
-  const tokens = await codeToThemedTokens(code, {
+  const tokens = await codeToTokensBase(code, {
     lang: 'ts',
     theme: 'min-dark',
   })

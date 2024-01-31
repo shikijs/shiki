@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, codeToThemedTokens } from '../src'
+import { codeToHtml, codeToTokensBase } from '../src'
 
 describe('should', () => {
   it('codeToHtml', async () => {
@@ -10,8 +10,8 @@ describe('should', () => {
       .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#B392F0">&#x3C;</span><span style="color:#FFAB70">div</span><span style="color:#B392F0"> class</span><span style="color:#F97583">=</span><span style="color:#FFAB70">"foo"</span><span style="color:#B392F0">>bar&#x3C;/</span><span style="color:#FFAB70">div</span><span style="color:#B392F0">></span></span></code></pre>"`)
   })
 
-  it('codeToThemedTokens', async () => {
-    expect(await codeToThemedTokens('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: false }))
+  it('codeToTokensBase', async () => {
+    expect(await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: false }))
       .toMatchInlineSnapshot(`
         [
           [

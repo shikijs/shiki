@@ -1,17 +1,15 @@
 import type { Element, Root, Text } from 'hast'
 import type {
   CodeToHastOptions,
-  HtmlRendererOptions,
+  CodeToHastRenderOptions,
   ShikiInternal,
   ShikiTransformerContext,
   ShikiTransformerContextCommon,
   ThemedToken,
-  ThemedTokenWithVariants,
-  TokenStyles,
 } from './types'
 import { FontStyle } from './types'
-import { codeToThemedTokens } from './code-to-tokens'
-import { codeToTokensWithThemes } from './code-to-tokens-themes'
+import { codeToTokens } from './code-to-tokens'
+import { getTokenStyleObject, stringifyTokenStyle } from './utils'
 
 export function codeToHast(
   internal: ShikiInternal,
@@ -21,67 +19,20 @@ export function codeToHast(
     meta: {},
     options,
     codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
+    codeToTokens: (_code, _options) => codeToTokens(internal, _code, _options),
   },
 ) {
   let input = code
   for (const transformer of options.transformers || [])
     input = transformer.preprocess?.call(transformerContext, input, options) || input
 
-  let bg: string
-  let fg: string
-  let tokens: ThemedToken[][]
-  let themeName: string
-  let rootStyle: string | undefined
-
-  if ('themes' in options) {
-    const {
-      defaultColor = 'light',
-      cssVariablePrefix = '--shiki-',
-    } = options
-
-    const themes = Object.entries(options.themes)
-      .filter(i => i[1])
-      .map(i => ({ color: i[0], theme: i[1]! }))
-      .sort((a, b) => a.color === defaultColor ? -1 : b.color === defaultColor ? 1 : 0)
-
-    if (themes.length === 0)
-      throw new Error('[shiki] `themes` option must not be empty')
-
-    const themeTokens = codeToTokensWithThemes(
-      internal,
-      input,
-      options,
-    )
-
-    if (defaultColor && !themes.find(t => t.color === defaultColor))
-      throw new Error(`[shiki] \`themes\` option must contain the defaultColor key \`${defaultColor}\``)
-
-    const themeRegs = themes.map(t => internal.getTheme(t.theme))
-
-    const themesOrder = themes.map(t => t.color)
-    tokens = themeTokens
-      .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
-
-    fg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}:`) + (themeRegs[idx].fg || 'inherit')).join(';')
-    bg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}-bg:`) + (themeRegs[idx].bg || 'inherit')).join(';')
-    themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
-    rootStyle = defaultColor ? undefined : [fg, bg].join(';')
-  }
-  else if ('theme' in options) {
-    tokens = codeToThemedTokens(
-      internal,
-      input,
-      options,
-    )
-
-    const _theme = internal.getTheme(options.theme)
-    bg = _theme.bg
-    fg = _theme.fg
-    themeName = _theme.name
-  }
-  else {
-    throw new Error('[shiki] Invalid options, either `theme` or `themes` must be provided')
-  }
+  let {
+    tokens,
+    fg,
+    bg,
+    themeName,
+    rootStyle,
+  } = codeToTokens(internal, input, options)
 
   const {
     mergeWhitespaces = true,
@@ -108,50 +59,9 @@ export function codeToHast(
   )
 }
 
-function mergeToken(
-  merged: ThemedTokenWithVariants,
-  variantsOrder: string[],
-  cssVariablePrefix: string,
-  defaultColor: string | boolean,
-) {
-  const token: ThemedToken = {
-    content: merged.content,
-    explanation: merged.explanation,
-    offset: merged.offset,
-  }
-
-  const styles = variantsOrder.map(t => getTokenStyleObject(merged.variants[t]))
-
-  // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
-  const styleKeys = new Set(styles.flatMap(t => Object.keys(t)))
-  const mergedStyles = styles.reduce((acc, cur, idx) => {
-    for (const key of styleKeys) {
-      const value = cur[key] || 'inherit'
-
-      if (idx === 0 && defaultColor) {
-        acc[key] = value
-      }
-      else {
-        const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
-        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
-        if (acc[key])
-          acc[key] += `;${varKey}:${value}`
-        else
-          acc[key] = `${varKey}:${value}`
-      }
-    }
-    return acc
-  }, {} as Record<string, string>)
-
-  token.htmlStyle = defaultColor
-    ? stringifyTokenStyle(mergedStyles)
-    : Object.values(mergedStyles).join(';')
-  return token
-}
-
 export function tokensToHast(
   tokens: ThemedToken[][],
-  options: HtmlRendererOptions,
+  options: CodeToHastRenderOptions,
   transformerContext: ShikiTransformerContextCommon,
 ) {
   const {
@@ -266,27 +176,6 @@ export function tokensToHast(
     result = transformer?.root?.call(context, result) || result
 
   return result
-}
-
-function getTokenStyleObject(token: TokenStyles) {
-  const styles: Record<string, string> = {}
-  if (token.color)
-    styles.color = token.color
-  if (token.bgColor)
-    styles['background-color'] = token.bgColor
-  if (token.fontStyle) {
-    if (token.fontStyle & FontStyle.Italic)
-      styles['font-style'] = 'italic'
-    if (token.fontStyle & FontStyle.Bold)
-      styles['font-weight'] = 'bold'
-    if (token.fontStyle & FontStyle.Underline)
-      styles['text-decoration'] = 'underline'
-  }
-  return styles
-}
-
-function stringifyTokenStyle(token: Record<string, string>) {
-  return Object.entries(token).map(([key, value]) => `${key}:${value}`).join(';')
 }
 
 function mergeWhitespaceTokens(tokens: ThemedToken[][]) {

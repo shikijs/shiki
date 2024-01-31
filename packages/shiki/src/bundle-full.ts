@@ -35,7 +35,8 @@ export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
 export const {
   codeToHtml,
   codeToHast,
-  codeToThemedTokens,
+  codeToTokens,
+  codeToTokensBase,
   codeToTokensWithThemes,
   getSingletonHighlighter,
 } = /* @__PURE__ */ createSingletonShorthands<

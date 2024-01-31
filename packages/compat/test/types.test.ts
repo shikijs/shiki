@@ -16,9 +16,6 @@ it('run', async () => {
   expect(s.getLoadedThemes()).toEqual(sj.getLoadedThemes())
   // expect(s.getLoadedLanguages()).toEqual(sj.getLoadedLanguages())
 
-  // expect(sj.codeToThemedTokens('const a = 1', 'javascript'))
-  //   .toEqual(s.codeToThemedTokens('const a = 1', 'javascript'))
-
   expect(sj.codeToThemedTokens('const a = 1', 'javascript', 'nord', { includeExplanation: false }))
     .toEqual(s.codeToThemedTokens('const a = 1', 'javascript', 'nord', { includeExplanation: false }))
 

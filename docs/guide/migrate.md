@@ -25,8 +25,9 @@ Breaking changes applies to main package `shiki`, but are shimmed by the [compat
 - Top-level named exports `setCDN`, `loadLanguage`, `loadTheme`, `setWasm` are dropped as they are not needed anymore.
 - `BUNDLED_LANGUAGES`, `BUNDLED_THEMES` are moved to `shiki/langs` and `shiki/themes` and renamed to `bundledLanguages` and `bundledThemes` respectively.
 - `theme` option for `getHighlighter` is dropped, use `themes` with an array instead.
-- Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToThemedTokens`.
-- `codeToThemedTokens` sets `includeExplanation` to `false` by default.
+- Highlighter does not maintain an internal default theme context. `theme` option is required for `codeToHtml` and `codeToTokens`.
+- `codeToThemedTokens` is renamed to `codeToTokensBase`, a higher level `codeToTokens` is added.
+- `codeToTokens` sets `includeExplanation` to `false` by default.
 - `.ansiToHtml` is merged into `.codeToHtml` as a special language, `ansi`. Use `.codeToHtml(code, { lang: 'ansi' })` instead.
 - `lineOptions` is dropped in favor of the fully customizable `transforms` option.
 - `LanguageRegistration`'s `grammar` field is flattened to `LanguageRegistration` itself, refer to the types for more details.
