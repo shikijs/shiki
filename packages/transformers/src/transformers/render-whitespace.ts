@@ -1,5 +1,4 @@
 import type { ShikiTransformer } from 'shiki'
-import { addClassToHast } from 'shiki'
 import type { Element } from 'hast'
 import { splitSpaces } from '../shared/utils'
 
@@ -81,7 +80,7 @@ export function transformerRenderWhitespace(
             }
             clone.children = [{ type: 'text', value: part }]
             if (keys.includes(part)) {
-              addClassToHast(clone, classMap[part])
+              this.addClassToHast(clone, classMap[part])
               delete clone.properties.style
             }
             return clone

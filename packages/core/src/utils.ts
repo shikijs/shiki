@@ -56,7 +56,7 @@ export function isSpecialTheme(theme: string | ThemeInput | null | undefined): t
  */
 export function addClassToHast(node: Element, className: string | string[]) {
   if (!className)
-    return
+    return node
   node.properties ||= {}
   node.properties.class ||= []
   if (typeof node.properties.class === 'string')
@@ -69,6 +69,7 @@ export function addClassToHast(node: Element, className: string | string[]) {
     if (c && !node.properties.class.includes(c))
       node.properties.class.push(c)
   }
+  return node
 }
 
 /**

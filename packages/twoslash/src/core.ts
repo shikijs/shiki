@@ -6,7 +6,7 @@ import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { ShikiTransformer } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
-import { addClassToHast, splitToken } from '@shikijs/core'
+import { splitToken } from '@shikijs/core'
 import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
 
 export * from './types'
@@ -86,7 +86,7 @@ export function createTransformerFactory(
       },
       pre(pre) {
         if (this.meta.twoslash)
-          addClassToHast(pre, 'twoslash lsp')
+          this.addClassToHast(pre, 'twoslash lsp')
       },
       code(codeEl) {
         const twoslash = this.meta.twoslash

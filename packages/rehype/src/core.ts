@@ -1,4 +1,3 @@
-import { addClassToHast } from 'shiki/core'
 import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, TransformerOptions } from 'shiki/core'
 import type { Element, Root } from 'hast'
 import type { BuiltinTheme } from 'shiki'
@@ -135,7 +134,7 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
         codeOptions.transformers.push({
           name: 'rehype-shiki:code-language-class',
           code(node) {
-            addClassToHast(node, language)
+            this.addClassToHast(node, language)
             return node
           },
         })

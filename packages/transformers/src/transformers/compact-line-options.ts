@@ -1,5 +1,4 @@
 import type { ShikiTransformer } from 'shiki'
-import { addClassToHast } from 'shiki'
 
 export interface TransformerCompactLineOption {
   /**
@@ -20,7 +19,7 @@ export function transformerCompactLineOptions(
     line(node, line) {
       const lineOption = lineOptions.find(o => o.line === line)
       if (lineOption?.classes)
-        addClassToHast(node, lineOption.classes)
+        this.addClassToHast(node, lineOption.classes)
       return node
     },
   }

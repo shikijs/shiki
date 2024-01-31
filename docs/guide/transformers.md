@@ -5,7 +5,7 @@ Shiki uses [`hast`](https://github.com/syntax-tree/hast), a AST format for HTML,
 You can provide your own `transformers` to customize the generated HTML by manipulating the hast tree. You can pass custom functions to modify the tree for different types of nodes. For example:
 
 ```ts twoslash
-import { addClassToHast, codeToHtml } from 'shiki'
+import { codeToHtml } from 'shiki'
 
 const code = await codeToHtml('foo\bar', {
   lang: 'js',
@@ -13,12 +13,12 @@ const code = await codeToHtml('foo\bar', {
   transformers: [
     {
       code(node) {
-        addClassToHast(node, 'language-js')
+        this.addClassToHast(node, 'language-js')
       },
       line(node, line) {
         node.properties['data-line'] = line
         if ([1, 3, 4].includes(line))
-          addClassToHast(node, 'highlight')
+          this.addClassToHast(node, 'highlight')
       },
       span(node, line, col) {
         node.properties['data-token'] = `token:${line}:${col}`

@@ -1,4 +1,4 @@
-import { type ShikiTransformer, addClassToHast } from 'shiki'
+import type { ShikiTransformer } from 'shiki'
 import { createCommentNotationTransformer } from '../utils'
 import { highlightWordInLine } from '../shared/highlight-word'
 
@@ -34,10 +34,10 @@ export function transformerNotationWordHighlight(
       lines
         // Don't include the comment itself
         .slice(index + 1, index + 1 + lineNum)
-        .forEach(line => highlightWordInLine(line, comment, word, classActiveWord))
+        .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
 
       if (classActivePre)
-        addClassToHast(this.pre, classActivePre)
+        this.addClassToHast(this.pre, classActivePre)
       return true
     },
     true, // remove empty lines
