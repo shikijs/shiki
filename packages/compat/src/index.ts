@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
-import type { BuiltinLanguage, BuiltinTheme, CodeToThemedTokensOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved, ThemedToken } from 'shiki'
+import type { BuiltinLanguage, BuiltinTheme, CodeToTokensBaseOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved, ThemedToken } from 'shiki'
 import { bundledLanguages, bundledThemes, getHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
 import { transformerCompactLineOptions } from '@shikijs/transformers'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
@@ -34,8 +34,8 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
 
   const defaultTheme = shiki.getLoadedThemes()[0]
 
-  function codeToThemedTokens(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme, options?: CodeToThemedTokensOptions<BuiltinLanguage, BuiltinTheme>): ThemedToken[][] {
-    const tokens = shiki.codeToThemedTokens(code, {
+  function codeToTokensBase(code: string, lang: BuiltinLanguage, theme?: BuiltinTheme, options?: CodeToTokensBaseOptions<BuiltinLanguage, BuiltinTheme>): ThemedToken[][] {
+    const tokens = shiki.codeToTokensBase(code, {
       includeExplanation: true,
       lang,
       theme: (theme || defaultTheme) as BuiltinTheme,
@@ -84,7 +84,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
 
   function ansiToThemedTokens(
     ansi: string,
-    options: CodeToThemedTokensOptions = {},
+    options: CodeToTokensBaseOptions = {},
   ) {
     const theme = shiki.getTheme(options.theme || shiki.getLoadedThemes()[0])
     return tokenizeAnsiWithTheme(theme, ansi)
@@ -93,7 +93,8 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
   return {
     ...shiki,
     ansiToThemedTokens,
-    codeToThemedTokens,
+    codeToTokensBase,
+    codeToThemedTokens: codeToTokensBase,
     codeToHtml,
     ansiToHtml(code: string, options?: AnsiToHtmlOptions) {
       return shiki.codeToHtml(code, {

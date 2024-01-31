@@ -58,12 +58,12 @@ const html = await codeToHtml(code, {
 console.log(html) // highlighted html string
 ```
 
-Going a bit advanced, you can also use `codeToThemedTokens` or `codeToHast` to get the intermediate data structure, and render them by yourself:
+Going a bit advanced, you can also use `codeToTokens` or `codeToHast` to get the intermediate data structure, and render them by yourself:
 
 ```ts twoslash theme:min-dark
-import { codeToThemedTokens } from 'shiki'
+import { codeToTokens } from 'shiki'
 
-const tokens = await codeToThemedTokens('<div class="foo">bar</div>', {
+const { tokens } = await codeToTokens('<div class="foo">bar</div>', {
   lang: 'html',
   theme: 'min-dark'
 })

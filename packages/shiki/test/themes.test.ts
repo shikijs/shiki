@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { ThemedToken } from '../src'
-import { codeToHtml, codeToThemedTokens, codeToTokensWithThemes } from '../src'
+import { codeToHtml, codeToTokensBase, codeToTokensWithThemes } from '../src'
 import { syncThemesTokenization } from '../../core/src/code-to-tokens-themes'
 
 describe('syncThemesTokenization', () => {
@@ -9,8 +9,8 @@ describe('syncThemesTokenization', () => {
   }
 
   it('two themes', async () => {
-    const lines1 = await codeToThemedTokens('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
-    const lines2 = await codeToThemedTokens('console.log("hello")', { lang: 'js', theme: 'min-light', includeExplanation: true })
+    const lines1 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
+    const lines2 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'min-light', includeExplanation: true })
 
     expect(stringifyTokens(lines1))
       .toMatchInlineSnapshot(`"console . log ( " hello " )"`)
@@ -24,9 +24,9 @@ describe('syncThemesTokenization', () => {
   })
 
   it('three themes', async () => {
-    const lines1 = await codeToThemedTokens('console.log("hello");', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
-    const lines2 = await codeToThemedTokens('console.log("hello");', { lang: 'js', theme: 'min-light', includeExplanation: true })
-    const lines3 = await codeToThemedTokens('console.log("hello");', { lang: 'js', theme: 'nord', includeExplanation: true })
+    const lines1 = await codeToTokensBase('console.log("hello");', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
+    const lines2 = await codeToTokensBase('console.log("hello");', { lang: 'js', theme: 'min-light', includeExplanation: true })
+    const lines3 = await codeToTokensBase('console.log("hello");', { lang: 'js', theme: 'nord', includeExplanation: true })
 
     expect(stringifyTokens(lines1))
       .toMatchInlineSnapshot(`"console . log ( " hello " );"`)

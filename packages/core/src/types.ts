@@ -87,17 +87,24 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): Root
   /**
-   * Get highlighted code in tokens.
+   * Get highlighted code in tokens. Uses `codeToTokensWithThemes` or `codeToTokensBase` based on the options.
+   */
+  codeToTokens(
+    code: string,
+    options: CodeToTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): TokensResult
+  /**
+   * Get highlighted code in tokens with a single theme.
    * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
    */
-  codeToThemedTokens(
+  codeToTokensBase(
     code: string,
-    options: CodeToThemedTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): ThemedToken[][]
   /**
    * Get highlighted code in tokens with multiple themes.
    *
-   * Different from `codeToThemedTokens`, each token will have a `variants` property consisting of an object of color name to token styles.
+   * Different from `codeToTokensBase`, each token will have a `variants` property consisting of an object of color name to token styles.
    *
    * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
    */
@@ -105,6 +112,14 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     code: string,
     options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ): ThemedTokenWithVariants[][]
+
+  /**
+   * @deprecated Renamed to `codeToTokensBase`, or use high-level `codeToTokens` directly.
+   */
+  codeToThemedTokens(
+    code: string,
+    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ): ThemedToken[][]
 
   /**
    * Load a theme to the highlighter, so later it can be used synchronously.
@@ -222,10 +237,14 @@ export interface LanguageRegistration extends RawGrammar {
   injectTo?: string[]
 }
 
-export interface CodeToThemedTokensOptions<Languages = string, Themes = string> extends TokenizeWithThemeOptions {
+export interface CodeToTokensBaseOptions<Languages extends string = string, Themes extends string = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage
   theme?: Themes | ThemeRegistrationAny | SpecialTheme
 }
+
+export type CodeToTokensOptions<Languages extends string = string, Themes extends string = string> =
+  & Omit<CodeToTokensBaseOptions<Languages, Themes>, 'theme'>
+  & CodeOptionsThemes<Themes>
 
 export interface CodeToHastOptionsCommon<Languages extends string = string> extends
   TransformerOptions,
@@ -457,6 +476,7 @@ export interface ShikiTransformerContextCommon {
   meta: ShikiTransformerContextMeta
   options: CodeToHastOptions
   codeToHast: (code: string, options: CodeToHastOptions) => Root
+  codeToTokens: (code: string, options: CodeToTokensOptions) => TokensResult
 }
 
 /**
@@ -520,12 +540,25 @@ export interface ShikiTransformer {
   token?(this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
 }
 
-export interface HtmlRendererOptionsCommon extends TransformerOptions {
-  lang?: string
-  langId?: string
+export interface TokensResult {
+  /**
+   * 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
+   */
+  tokens: ThemedToken[][]
+
+  /**
+   * Foreground color of the code.
+   */
   fg?: string
+
+  /**
+   * Background color of the code.
+   */
   bg?: string
 
+  /**
+   * A string representation of themes applied to the token.
+   */
   themeName?: string
 
   /**
@@ -535,7 +568,12 @@ export interface HtmlRendererOptionsCommon extends TransformerOptions {
   rootStyle?: string
 }
 
-export type HtmlRendererOptions = HtmlRendererOptionsCommon & CodeToHastOptions
+export interface CodeToHastRenderOptionsCommon extends TransformerOptions, Omit<TokensResult, 'tokens'> {
+  lang?: string
+  langId?: string
+}
+
+export type CodeToHastRenderOptions = CodeToHastRenderOptionsCommon & CodeToHastOptions
 
 export interface ThemedTokenScopeExplanation {
   scopeName: string

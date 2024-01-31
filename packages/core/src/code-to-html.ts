@@ -1,6 +1,7 @@
 import { toHtml as hastToHtml } from 'hast-util-to-html'
 import type { CodeToHastOptions, ShikiInternal, ShikiTransformerContextCommon } from './types'
 import { codeToHast } from './code-to-hast'
+import { codeToTokens } from './code-to-tokens'
 
 export { hastToHtml }
 
@@ -16,6 +17,7 @@ export function codeToHtml(
     meta: {},
     options,
     codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
+    codeToTokens: (_code, _options) => codeToTokens(internal, _code, _options),
   }
 
   let result = hastToHtml(codeToHast(internal, code, options, context))

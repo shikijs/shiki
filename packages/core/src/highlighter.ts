@@ -1,6 +1,7 @@
 import { codeToHast } from './code-to-hast'
 import { codeToHtml } from './code-to-html'
-import { codeToThemedTokens } from './code-to-tokens'
+import { codeToTokens } from './code-to-tokens'
+import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { getShikiInternal } from './internal'
 import type { HighlighterCoreOptions, HighlighterGeneric } from './types'
@@ -17,8 +18,9 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
   const internal = await getShikiInternal(options)
 
   return {
-    codeToThemedTokens: (code, options) => codeToThemedTokens(internal, code, options),
+    codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
     codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
+    codeToTokens: (code, options) => codeToTokens(internal, code, options),
     codeToHast: (code, options) => codeToHast(internal, code, options),
     codeToHtml: (code, options) => codeToHtml(internal, code, options),
 
@@ -33,5 +35,8 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     getLoadedLanguages: internal.getLoadedLanguages,
 
     getInternalContext: () => internal,
+
+    /** @deprecated */
+    codeToThemedTokens: (code, options) => codeToTokensBase(internal, code, options),
   }
 }

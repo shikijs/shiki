@@ -4,7 +4,7 @@ import type {
   ThemedToken,
   ThemedTokenWithVariants,
 } from './types'
-import { codeToThemedTokens } from './code-to-tokens'
+import { codeToTokensBase } from './code-to-tokens-base'
 
 /**
  * Get tokens with multiple themes
@@ -19,7 +19,7 @@ export function codeToTokensWithThemes(
     .map(i => ({ color: i[0], theme: i[1]! }))
 
   const tokens = syncThemesTokenization(
-    ...themes.map(t => codeToThemedTokens(internal, code, {
+    ...themes.map(t => codeToTokensBase(internal, code, {
       ...options,
       theme: t.theme,
     })),

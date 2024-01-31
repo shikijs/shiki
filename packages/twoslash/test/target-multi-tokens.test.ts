@@ -1,11 +1,11 @@
-import { codeToHtml, codeToThemedTokens } from 'shiki'
+import { codeToHtml, codeToTokensBase } from 'shiki'
 import { transformerTwoslash } from '@shikijs/twoslash'
 import { expect, it } from 'vitest'
 
 const code = `const x: [number] = ["hello"]`
 
 it('verify theme behavior', async () => {
-  const tokens = await codeToThemedTokens(code, {
+  const tokens = await codeToTokensBase(code, {
     lang: 'ts',
     theme: 'vitesse-dark',
   })

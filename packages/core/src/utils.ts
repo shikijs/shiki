@@ -1,5 +1,6 @@
 import type { Element } from 'hast'
-import type { MaybeArray, SpecialTheme, ThemeInput, ThemedToken } from './types'
+import { FontStyle } from './types'
+import type { MaybeArray, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -114,3 +115,24 @@ export function applyColorReplacements(color: string, replacements?: Record<stri
  * @deprecated Use `isPlainLang` instead.
  */
 export const isPlaintext = isPlainLang
+
+export function getTokenStyleObject(token: TokenStyles) {
+  const styles: Record<string, string> = {}
+  if (token.color)
+    styles.color = token.color
+  if (token.bgColor)
+    styles['background-color'] = token.bgColor
+  if (token.fontStyle) {
+    if (token.fontStyle & FontStyle.Italic)
+      styles['font-style'] = 'italic'
+    if (token.fontStyle & FontStyle.Bold)
+      styles['font-weight'] = 'bold'
+    if (token.fontStyle & FontStyle.Underline)
+      styles['text-decoration'] = 'underline'
+  }
+  return styles
+}
+
+export function stringifyTokenStyle(token: Record<string, string>) {
+  return Object.entries(token).map(([key, value]) => `${key}:${value}`).join(';')
+}

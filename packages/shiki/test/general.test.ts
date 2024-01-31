@@ -166,7 +166,7 @@ describe('should', () => {
           </script>
     `
 
-    const tokens = shiki.codeToThemedTokens(code, { lang: 'html', theme: 'nord' })
+    const tokens = shiki.codeToTokensBase(code, { lang: 'html', theme: 'nord' })
 
     for (const line of tokens) {
       for (const token of line) {
