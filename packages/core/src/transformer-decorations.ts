@@ -132,12 +132,14 @@ export function transformerDecorations(): ShikiTransformer {
           throw new Error(`[Shiki] Failed to find end index for decoration ${JSON.stringify(decoration.end)}`)
 
         const children = lineEl.children.slice(startIndex, endIndex)
-        const element = {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children,
-        } as Element
+        const element: Element = !decoration.alwaysWrap && children.length === 1 && children[0].type === 'element'
+          ? children[0]
+          : {
+              type: 'element',
+              tagName: 'span',
+              properties: {},
+              children,
+            }
 
         applyDecoration(element, decoration, false)
 

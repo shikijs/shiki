@@ -31,6 +31,15 @@ export interface DecorationItem {
    * A custom function to transform the element after it has been created.
    */
   transform?: (element: Element, isEntireLine: boolean) => Element | void
+
+  /**
+   * By default when the decoration contains only one token, the decoration will be applied to the token.
+   *
+   * Set to `true` to always wrap the token with a new element
+   *
+   * @default false
+   */
+  alwaysWrap?: boolean
 }
 
 export interface ResolvedDecorationItem extends Omit<DecorationItem, 'start' | 'end'> {
