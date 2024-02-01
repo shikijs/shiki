@@ -1,6 +1,6 @@
 import type { Element, ElementContent } from 'hast'
-import type { DecorationItem, DecorationOptions, OffsetOrPosition, Position, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
-import { addClassToHast, createPositionConverter, splitToken, splitTokens } from './utils'
+import type { DecorationItem, OffsetOrPosition, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
+import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 
 interface TransformerDecorationsInternalContext {
   decorations: ResolvedDecorationItem[]
