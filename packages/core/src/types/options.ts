@@ -2,8 +2,9 @@ import type { LoadWasmOptions } from '../oniguruma'
 import type { StringLiteralUnion } from './utils'
 import type { LanguageInput, SpecialLanguage } from './langs'
 import type { ThemeInput, ThemeRegistrationAny } from './themes'
-import type { CodeToHastOptions, TransformerOptions } from './transformers'
-import type { TokensResult } from './tokens'
+import type { TransformerOptions } from './transformers'
+import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
+import type { DecorationOptions } from './decorations'
 
 export interface HighlighterCoreOptions {
   /**
@@ -107,6 +108,31 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
 export type CodeOptionsThemes<Themes extends string = string> =
   | CodeOptionsSingleTheme<Themes>
   | CodeOptionsMultipleThemes<Themes>
+
+export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
+  & CodeToHastOptionsCommon<Languages>
+  & CodeOptionsThemes<Themes>
+  & CodeOptionsMeta
+
+export interface CodeToHastOptionsCommon<Languages extends string = string>
+  extends
+  TransformerOptions,
+  DecorationOptions,
+  Pick<TokenizeWithThemeOptions, 'colorReplacements'> {
+
+  lang: StringLiteralUnion<Languages | SpecialLanguage>
+
+  /**
+   * Merge whitespace tokens to saving extra `<span>`.
+   *
+   * When set to true, it will merge whitespace tokens with the next token.
+   * When set to false, it keep the output as-is.
+   * When set to `never`, it will force to separate leading and trailing spaces from tokens.
+   *
+   * @default true
+   */
+  mergeWhitespaces?: boolean | 'never'
+}
 
 export interface CodeOptionsMeta {
   /**

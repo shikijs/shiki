@@ -6,7 +6,7 @@ import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { ShikiTransformer } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
-import { splitToken } from '@shikijs/core'
+import { splitTokens } from '@shikijs/core'
 import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
 
 export * from './types'
@@ -63,25 +63,14 @@ export function createTransformerFactory(
           return
 
         // Break tokens at the boundaries of twoslash nodes
-        const breakpoints = Array.from(new Set(this.meta.twoslash.nodes.flatMap(i =>
-          ['hover', 'error', 'query', 'highlight', 'completion'].includes(i.type)
-            ? [i.start, i.start + i.length]
-            : [],
-        ))).sort()
-
-        return tokens.map((line) => {
-          return line.flatMap((token) => {
-            const breakpointsInToken = breakpoints
-              .filter(i => token.offset < i && i < token.offset + token.content.length)
-              .map(i => i - token.offset)
-              .sort((a, b) => a - b)
-
-            if (!breakpointsInToken.length)
-              return token
-
-            return splitToken(token, breakpointsInToken)
-          })
-        })
+        return splitTokens(
+          tokens,
+          this.meta.twoslash.nodes.flatMap(i =>
+            ['hover', 'error', 'query', 'highlight', 'completion'].includes(i.type)
+              ? [i.start, i.start + i.length]
+              : [],
+          ),
+        )
       },
       pre(pre) {
         if (this.meta.twoslash)

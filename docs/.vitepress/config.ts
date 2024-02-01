@@ -1,6 +1,9 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { bundledThemes } from 'shiki'
+
+// @ts-expect-error missing types
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '../../packages/transformers/src'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import { version } from '../../package.json'
@@ -11,6 +14,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Installation', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
+  { text: 'Decorations', link: '/guide/decorations' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
   { text: 'Migration', link: '/guide/migrate' },
@@ -48,7 +52,7 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
 ]
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'Shiki',
   description: 'A beautiful and powerful syntax highlighter',
   markdown: {
@@ -94,6 +98,18 @@ export default defineConfig({
           else {
             throw new Error(`Only 1 or 2 themes are supported, got ${themes.length}`)
           }
+          return code
+        },
+      },
+      {
+        name: 'shiki:inline-decorations',
+        preprocess(code, options) {
+          const reg = /^\/\/ @decorations:(.*?)\n/
+          code = code.replace(reg, (match, decorations) => {
+            options.decorations ||= []
+            options.decorations.push(...JSON.parse(decorations))
+            return ''
+          })
           return code
         },
       },
@@ -205,4 +221,4 @@ export default defineConfig({
     ['meta', { name: 'twitter:image', content: 'https://shiki.style/og.png' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
   ],
-})
+}))

@@ -5,11 +5,13 @@ import type {
   ShikiInternal,
   ShikiTransformerContext,
   ShikiTransformerContextCommon,
+  ShikiTransformerContextSource,
   ThemedToken,
 } from './types'
 import { FontStyle } from './types'
 import { codeToTokens } from './code-to-tokens'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from './utils'
+import { getTransformers } from './transformers'
 
 export function codeToHast(
   internal: ShikiInternal,
@@ -23,7 +25,8 @@ export function codeToHast(
   },
 ) {
   let input = code
-  for (const transformer of options.transformers || [])
+
+  for (const transformer of getTransformers(options))
     input = transformer.preprocess?.call(transformerContext, input, options) || input
 
   let {
@@ -43,8 +46,15 @@ export function codeToHast(
   else if (mergeWhitespaces === 'never')
     tokens = splitWhitespaceTokens(tokens)
 
-  for (const transformer of options.transformers || [])
-    tokens = transformer.tokens?.call(transformerContext, tokens) || tokens
+  const contextSource = {
+    ...transformerContext,
+    get source() {
+      return input
+    },
+  }
+
+  for (const transformer of getTransformers(options))
+    tokens = transformer.tokens?.call(contextSource, tokens) || tokens
 
   return tokensToHast(
     tokens,
@@ -55,18 +65,16 @@ export function codeToHast(
       themeName,
       rootStyle,
     },
-    transformerContext,
+    contextSource,
   )
 }
 
 export function tokensToHast(
   tokens: ThemedToken[][],
   options: CodeToHastRenderOptions,
-  transformerContext: ShikiTransformerContextCommon,
+  transformerContext: ShikiTransformerContextSource,
 ) {
-  const {
-    transformers = [],
-  } = options
+  const transformers = getTransformers(options)
 
   const lines: (Element | Text)[] = []
   const tree: Root = {
@@ -103,6 +111,9 @@ export function tokensToHast(
   const context: ShikiTransformerContext = {
     ...transformerContext,
     addClassToHast,
+    get source() {
+      return transformerContext.source
+    },
     get tokens() {
       return tokens
     },

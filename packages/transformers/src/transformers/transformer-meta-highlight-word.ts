@@ -1,5 +1,4 @@
 import type { ShikiTransformer } from 'shiki'
-import { highlightWordInLine } from '../shared/highlight-word'
 
 export function parseMetaHighlightWords(meta: string): string[] {
   if (!meta)
@@ -34,16 +33,33 @@ export function transformerMetaWordHighlight(
 
   return {
     name: '@shikijs/transformers:meta-word-highlight',
-    line(node) {
+    preprocess(code, options) {
       if (!this.options.meta?.__raw)
         return
 
       const words = parseMetaHighlightWords(this.options.meta.__raw)
-
-      for (const word of words)
-        highlightWordInLine.call(this, node, null, word, className)
-
-      return node
+      options.decorations ||= []
+      for (const word of words) {
+        const indexes = findAllSubstringIndexes(code, word)
+        for (const index of indexes) {
+          options.decorations.push({
+            start: index,
+            end: index + word.length,
+            properties: {
+              class: className,
+            },
+          })
+        }
+      }
     },
   }
+}
+
+function findAllSubstringIndexes(str: string, substr: string): number[] {
+  const indexes = []
+  let i = -1
+  // eslint-disable-next-line no-cond-assign
+  while ((i = str.indexOf(substr, i + 1)) !== -1)
+    indexes.push(i)
+  return indexes
 }

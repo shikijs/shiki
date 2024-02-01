@@ -2,8 +2,8 @@ import type { Root } from 'hast'
 import type { Grammar } from './textmate'
 import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
-import type { CodeToHastOptions } from './transformers'
 import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
+import type { CodeToHastOptions } from './options'
 
 export interface ShikiInternal {
   setTheme(name: string | ThemeRegistrationAny): {

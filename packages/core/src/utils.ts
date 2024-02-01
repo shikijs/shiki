@@ -1,6 +1,6 @@
 import type { Element } from 'hast'
 import { FontStyle } from './types'
-import type { MaybeArray, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
+import type { MaybeArray, Position, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -108,6 +108,33 @@ export function splitToken<
   return tokens
 }
 
+/**
+ * Split 2D tokens array by given breakpoints.
+ */
+export function splitTokens<
+  T extends Pick<ThemedToken, 'content' | 'offset'>,
+>(tokens: T[][], breakpoints: number[] | Set<number>) {
+  const sorted = Array.from(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))
+    .sort((a, b) => a - b)
+
+  if (!sorted.length)
+    return tokens
+
+  return tokens.map((line) => {
+    return line.flatMap((token) => {
+      const breakpointsInToken = sorted
+        .filter(i => token.offset < i && i < token.offset + token.content.length)
+        .map(i => i - token.offset)
+        .sort((a, b) => a - b)
+
+      if (!breakpointsInToken.length)
+        return token
+
+      return splitToken(token, breakpointsInToken)
+    })
+  })
+}
+
 export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
   return replacements?.[color.toLowerCase()] || color
 }
@@ -136,4 +163,38 @@ export function getTokenStyleObject(token: TokenStyles) {
 
 export function stringifyTokenStyle(token: Record<string, string>) {
   return Object.entries(token).map(([key, value]) => `${key}:${value}`).join(';')
+}
+
+/**
+ * Creates a converter between index and position in a code block.
+ */
+export function createPositionConverter(code: string) {
+  const lines = Array.from(code.matchAll(/.*?($|\n)/g)).map(match => match[0])
+
+  function indexToPos(index: number): Position {
+    let character = index
+    let line = 0
+    for (const lineText of lines) {
+      if (character < lineText.length)
+        break
+      character -= lineText.length
+      line++
+    }
+    return { line, character }
+  }
+
+  function posToIndex(line: number, character: number) {
+    let index = 0
+    for (let i = 0; i < line; i++)
+      index += lines[i].length
+
+    index += character
+    return index
+  }
+
+  return {
+    lines,
+    indexToPos,
+    posToIndex,
+  }
 }
