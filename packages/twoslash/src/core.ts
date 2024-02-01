@@ -52,7 +52,6 @@ export function createTransformerFactory(
           lang = langAlias[this.options.lang]
 
         if (filter(lang, code, this.options)) {
-          this.options.mergeWhitespaces = 'never'
           const twoslash = twoslasher(code, lang, twoslashOptions)
           this.meta.twoslash = twoslash
           this.options.lang = twoslash.meta.extension || lang
