@@ -197,6 +197,7 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
           if (couldMerge) {
             newLine.push({
               ...token,
+              offset: firstOffset,
               content: carryOnContent + token.content,
             })
           }
@@ -209,6 +210,7 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
               token,
             )
           }
+          firstOffset = 0
           carryOnContent = ''
         }
         else {
