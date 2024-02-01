@@ -28,83 +28,28 @@ const code = await codeToHtml('foo\bar', {
 })
 ```
 
-We also provide some common transformers for you to use, see [`shiki-transforms`](/packages/transformers) for more details.
+We also provide some common transformers for you to use, see [`@shikijs/transforms`](/packages/transformers) for more details.
 
-## `codeToHast`
+## Transformer Hooks
 
-You can also get the intermediate `hast` to do custom rendering without serializing them into HTML with `codeToHast`. You can also further integrate the AST with the [unified](https://github.com/unifiedjs) ecosystem.
-
-```ts twoslash
-import { getHighlighter } from 'shiki'
-
-const highlighter = await getHighlighter({
-  themes: ['nord', 'min-light'],
-  langs: ['javascript'],
-})
-// ---cut---
-const root = highlighter.codeToHast(
-  'const a = 1',
-  { lang: 'javascript', theme: 'nord' }
-)
-
-console.log(root)
+```mermaid
+flowchart LR
+  preprocess --> tokens
+  tokens --> span
+  span --> span
+  span --> line
+  line --> span
+  line --> code
+  code --> pre
+  pre --> root
+  root --> postprocess
 ```
 
-<!-- eslint-skip -->
-
-```ts
-{
-  type: 'root',
-  children: [
-    {
-      type: 'element',
-      tagName: 'pre',
-      properties: {
-        class: 'shiki vitesse-light',
-        style: 'background-color:#ffffff;color:#393a34',
-        tabindex: '0'
-      },
-      children: [
-        {
-          type: 'element',
-          tagName: 'code',
-          properties: {},
-          children: [
-            {
-              type: 'element',
-              tagName: 'span',
-              properties: { class: 'line' },
-              children: [
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { style: 'color:#AB5959' },
-                  children: [ { type: 'text', value: 'const' } ]
-                },
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { style: 'color:#B07D48' },
-                  children: [ { type: 'text', value: ' a' } ]
-                },
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { style: 'color:#999999' },
-                  children: [ { type: 'text', value: ' =' } ]
-                },
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { style: 'color:#2F798A' },
-                  children: [ { type: 'text', value: ' 1' } ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+- `preprocess` - Called before the code is tokenized. You can use this to modify the code before it is tokenized.
+- `tokens` - Called after the code is tokenized. You can use this to modify the tokens.
+- `span` - Called for each `<span>` tag, for each token.
+- `line` - Called for each line `<span>` tag.
+- `code` - Called for each `<code>` tag, wraps all the lines.
+- `pre` - Called for each `<pre>` tag, wraps the `<code>` tag.
+- `root` - The root of HAST tree. Usually with only one child `<pre>` tag.
+- `postprocess` - Called after the HTML is generated, get a chance to modify the final output. Will not been called in `codeToHast`.
