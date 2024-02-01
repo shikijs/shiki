@@ -1,7 +1,5 @@
-import type { StringLiteralUnion } from './utils'
 import type { SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeRegistrationAny } from './themes'
-import type { TransformerOptions } from './transformers'
 import type { CodeOptionsThemes } from './options'
 
 export interface CodeToTokensBaseOptions<Languages extends string = string, Themes extends string = string> extends TokenizeWithThemeOptions {
@@ -11,25 +9,6 @@ export interface CodeToTokensBaseOptions<Languages extends string = string, Them
 
 export type CodeToTokensOptions<Languages extends string = string, Themes extends string = string> = Omit<CodeToTokensBaseOptions<Languages, Themes>, 'theme'> &
   CodeOptionsThemes<Themes>
-
-export interface CodeToHastOptionsCommon<Languages extends string = string>
-  extends
-  TransformerOptions,
-  Pick<TokenizeWithThemeOptions, 'colorReplacements'> {
-
-  lang: StringLiteralUnion<Languages | SpecialLanguage>
-
-  /**
-   * Merge whitespace tokens to saving extra `<span>`.
-   *
-   * When set to true, it will merge whitespace tokens with the next token.
-   * When set to false, it keep the output as-is.
-   * When set to `never`, it will force to separate leading and trailing spaces from tokens.
-   *
-   * @default true
-   */
-  mergeWhitespaces?: boolean | 'never'
-}
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> {
   lang?: Languages | SpecialLanguage

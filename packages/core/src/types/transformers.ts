@@ -1,6 +1,6 @@
 import type { Element, Root } from 'hast'
-import type { CodeOptionsMeta, CodeOptionsThemes } from './options'
-import type { CodeToHastOptionsCommon, CodeToTokensOptions, ThemedToken, TokensResult } from './tokens'
+import type { CodeToHastOptions } from './options'
+import type { CodeToTokensOptions, ThemedToken, TokensResult } from './tokens'
 
 export interface TransformerOptions {
   /**
@@ -8,11 +8,6 @@ export interface TransformerOptions {
    */
   transformers?: ShikiTransformer[]
 }
-
-export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
-  & CodeToHastOptionsCommon<Languages>
-  & CodeOptionsThemes<Themes>
-  & CodeOptionsMeta
 
 export interface ShikiTransformerContextMeta { }
 
@@ -26,10 +21,14 @@ export interface ShikiTransformerContextCommon {
   codeToTokens: (code: string, options: CodeToTokensOptions) => TokensResult
 }
 
+export interface ShikiTransformerContextSource extends ShikiTransformerContextCommon {
+  readonly source: string
+}
+
 /**
  * Transformer context for HAST related hooks
  */
-export interface ShikiTransformerContext extends ShikiTransformerContextCommon {
+export interface ShikiTransformerContext extends ShikiTransformerContextSource {
   readonly tokens: ThemedToken[][]
   readonly root: Root
   readonly pre: Element
@@ -45,9 +44,9 @@ export interface ShikiTransformerContext extends ShikiTransformerContextCommon {
 }
 
 export interface ShikiTransformer {
-/**
- * Name of the transformer
- */
+  /**
+   * Name of the transformer
+   */
   name?: string
   /**
    * Transform the raw input code before passing to the highlighter.
@@ -57,7 +56,7 @@ export interface ShikiTransformer {
    * Transform the full tokens list before converting to HAST.
    * Return a new tokens list will replace the original one.
    */
-  tokens?(this: ShikiTransformerContextCommon, tokens: ThemedToken[][]): ThemedToken[][] | void
+  tokens?(this: ShikiTransformerContextSource, tokens: ThemedToken[][]): ThemedToken[][] | void
   /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
    */

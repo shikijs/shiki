@@ -2,6 +2,7 @@ import { toHtml as hastToHtml } from 'hast-util-to-html'
 import type { CodeToHastOptions, ShikiInternal, ShikiTransformerContextCommon } from './types'
 import { codeToHast } from './code-to-hast'
 import { codeToTokens } from './code-to-tokens'
+import { getTransformers } from './transformers'
 
 export { hastToHtml }
 
@@ -22,7 +23,7 @@ export function codeToHtml(
 
   let result = hastToHtml(codeToHast(internal, code, options, context))
 
-  for (const transformer of options.transformers || [])
+  for (const transformer of getTransformers(options))
     result = transformer.postprocess?.call(context, result, options) || result
 
   return result
