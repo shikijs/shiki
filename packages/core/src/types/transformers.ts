@@ -1,0 +1,110 @@
+import type { Element, Root } from 'hast'
+import type { CodeOptionsMeta, CodeOptionsThemes } from './options'
+import type { CodeToHastOptionsCommon, CodeToTokensOptions, ThemedToken, TokensResult } from './tokens'
+
+export interface TransformerOptions {
+  /**
+   * Transformers for the Shiki pipeline.
+   */
+  transformers?: ShikiTransformer[]
+}
+
+export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
+  & CodeToHastOptionsCommon<Languages>
+  & CodeOptionsThemes<Themes>
+  & CodeOptionsMeta
+
+export interface ShikiTransformerContextMeta { }
+
+/**
+ * Common transformer context for all transformers hooks
+ */
+export interface ShikiTransformerContextCommon {
+  meta: ShikiTransformerContextMeta
+  options: CodeToHastOptions
+  codeToHast: (code: string, options: CodeToHastOptions) => Root
+  codeToTokens: (code: string, options: CodeToTokensOptions) => TokensResult
+}
+
+/**
+ * Transformer context for HAST related hooks
+ */
+export interface ShikiTransformerContext extends ShikiTransformerContextCommon {
+  readonly tokens: ThemedToken[][]
+  readonly root: Root
+  readonly pre: Element
+  readonly code: Element
+  readonly lines: Element[]
+
+  /**
+   * Utility to append class to a hast node
+   *
+   * If the `property.class` is a string, it will be splitted by space and converted to an array.
+   */
+  addClassToHast: (hast: Element, className: string | string[]) => Element
+}
+
+export interface ShikiTransformer {
+/**
+ * Name of the transformer
+ */
+  name?: string
+  /**
+   * Transform the raw input code before passing to the highlighter.
+   */
+  preprocess?(this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
+  /**
+   * Transform the full tokens list before converting to HAST.
+   * Return a new tokens list will replace the original one.
+   */
+  tokens?(this: ShikiTransformerContextCommon, tokens: ThemedToken[][]): ThemedToken[][] | void
+  /**
+   * Transform the entire generated HAST tree. Return a new Node will replace the original one.
+   */
+  root?(this: ShikiTransformerContext, hast: Root): Root | void
+  /**
+   * Transform the `<pre>` element. Return a new Node will replace the original one.
+   */
+  pre?(this: ShikiTransformerContext, hast: Element): Element | void
+  /**
+   * Transform the `<code>` element. Return a new Node will replace the original one.
+   */
+  code?(this: ShikiTransformerContext, hast: Element): Element | void
+  /**
+   * Transform each line `<span class="line">` element.
+   *
+   * @param hast
+   * @param line 1-based line number
+   */
+  line?(this: ShikiTransformerContext, hast: Element, line: number): Element | void
+  /**
+   * Transform each token `<span>` element.
+   */
+  span?(this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+  /**
+   * Transform the generated HTML string before returning.
+   * This hook will only be called with `codeToHtml`.
+   */
+  postprocess?(this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions): string | void
+
+  // deprecated
+  /**
+   * @deprecated Use `span` instead
+   */
+  token?(this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+}
+
+/**
+ * @deprecated Rnamed to `ShikiTransformer`
+ */
+export interface ShikijiTransformer extends ShikiTransformer {}
+
+/**
+ * @deprecated Rnamed to `ShikiTransformerContext`
+ */
+export interface ShikijiTransformerContext extends ShikiTransformerContext {}
+
+/**
+ * @deprecated Rnamed to `ShikiTransformerContextCommon`
+ */
+export interface ShikijiTransformerContextCommon extends ShikiTransformerContextCommon {}
