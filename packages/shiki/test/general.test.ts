@@ -61,6 +61,7 @@ describe('should', () => {
           "gql",
           "graphql",
           "html",
+          "html-derivative",
           "jade",
           "javascript",
           "js",

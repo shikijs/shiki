@@ -169,7 +169,7 @@ importers:
         version: 4.3.1(typescript@5.3.3)(vite@5.0.12)
       vitepress-plugin-mermaid:
         specifier: ^2.0.16
-        version: 2.0.16(mermaid@10.7.0)(vitepress@1.0.0-rc.40)
+        version: 2.0.16(mermaid@10.7.0)(vitepress@1.0.0-rc.41)
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.16)
@@ -217,8 +217,8 @@ importers:
         specifier: ^0.26.0
         version: 0.26.0(rollup@4.9.6)(vue@3.4.15)
       vitepress:
-        specifier: ^1.0.0-rc.40
-        version: 1.0.0-rc.40(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
+        specifier: ^1.0.0-rc.41
+        version: 1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
       vue:
         specifier: ^3.4.15
         version: 3.4.15(typescript@5.3.3)
@@ -331,8 +331,8 @@ importers:
         version: link:../core
     devDependencies:
       tm-grammars:
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.1.2
+        version: 1.1.2
       tm-themes:
         specifier: ^1.1.1
         version: 1.1.1
@@ -2945,6 +2945,33 @@ packages:
 
   /@vue/devtools-api@6.5.1:
     resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==}
+    dev: true
+
+  /@vue/devtools-api@7.0.14:
+    resolution: {integrity: sha512-TluWR9qZ6aO11bwtYK8+fzXxBqLfsE0mWZz1q/EQBmO9k82Cm6deieLwNNXjNFJz7xutazoia5Qa+zTYkPPOfw==}
+    dependencies:
+      '@vue/devtools-kit': 7.0.14
+    dev: true
+
+  /@vue/devtools-kit@7.0.14:
+    resolution: {integrity: sha512-wAAJazr4hI0aVRpgWOCVPw+NzMQdthhnprHHIg4njp1MkKrpCNGQ7MtQbZF1AltAA7xpMCGyyt+0kYH0FqTiPg==}
+    dependencies:
+      '@vue/devtools-schema': 7.0.14
+      '@vue/devtools-shared': 7.0.14
+      hookable: 5.5.3
+      mitt: 3.0.1
+      perfect-debounce: 1.0.0
+      speakingurl: 14.0.1
+    dev: true
+
+  /@vue/devtools-schema@7.0.14:
+    resolution: {integrity: sha512-tpUeCLVrdHX+KzWMLTAwx/vAPFbo6jAUi7sr6Q+0mBIqIVSSIxNr5wEhegiFvYva+OtDeM2OrT+f7/X/5bvZNg==}
+    dev: true
+
+  /@vue/devtools-shared@7.0.14:
+    resolution: {integrity: sha512-79RP1NDakBVWou9rDpVnT1WMjTbL1lJKm6YEOodjQ0dq5ehf0wsRbeYDhgAlnjehWRzTq5GAYFBFUPYBs0/QpA==}
+    dependencies:
+      rfdc: 1.3.1
     dev: true
 
   /@vue/language-core@1.8.27(typescript@5.3.3):
@@ -6734,6 +6761,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: true
+
   /mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
@@ -8206,6 +8237,11 @@ packages:
     resolution: {integrity: sha512-eWN+LnM3GR6gPu35WxNgbGl8rmY1AEmoMDvL/QD6zYmPWgywxWqJWNdLGT+ke8dKNWrcYgYjPpG5gbTfghP8rw==}
     dev: true
 
+  /speakingurl@14.0.1:
+    resolution: {integrity: sha512-1POYv7uv2gXoyGFpBCmpDVSNV74IfsWlDW216UPjbWufNf+bSU6GdbDsxdcxtfwb4xlI3yxzOTKClUosxARYrQ==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /ssri@10.0.5:
     resolution: {integrity: sha512-bSf16tAFkGeRlUNDjXu8FzaMQt6g2HZJrun7mtMbIPOddxt3GLMSz5VWUWcqTJUPfLEaDIepGxv+bYQW49596A==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -8453,8 +8489,8 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: true
 
-  /tm-grammars@1.1.1:
-    resolution: {integrity: sha512-C3dpo69FaiRaw+kf4GY8mRntAb2zpgOUtna1xdgo3gTt4e5XuD0gbIpS1PnHN6bC+8J6sLZeTZeT82Hw4r6tSA==}
+  /tm-grammars@1.1.2:
+    resolution: {integrity: sha512-MCkNL3nPRkd9WNtWk0DCLJtWcmeQprrJ4q3SjxWs2o2ibVlrcc8FfQssxX9n9QfYHpx6rKN2EjEqHcPrYipgAg==}
     dev: true
 
   /tm-themes@1.1.1:
@@ -8990,20 +9026,20 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress-plugin-mermaid@2.0.16(mermaid@10.7.0)(vitepress@1.0.0-rc.40):
+  /vitepress-plugin-mermaid@2.0.16(mermaid@10.7.0)(vitepress@1.0.0-rc.41):
     resolution: {integrity: sha512-sW0Eu4+1EzRdwZBMGjzwKDsbQiuJIxCy8BlMw7Ur88p9fXalrFYKqZ3wYWLxsFTBipeooFIeanef/xw1P+v7vQ==}
     peerDependencies:
       mermaid: '10'
       vitepress: ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.7.0
-      vitepress: 1.0.0-rc.40(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
+      vitepress: 1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: true
 
-  /vitepress@1.0.0-rc.40(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-1x9PCrcsJwqhpccyTR93uD6jpiPDeRC98CBCAQLLBb44a3VSXYBPzhCahi+2kwAYylu49p0XhseMPVM4IVcWcw==}
+  /vitepress@1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-PAEoIIc9J//k/Wg39C6k86hZpXPmLZjRiTBwieDNeYGdevD7xr5Ve8o1W/w+e9dtyQMkuvzgianEamXDX3aj7g==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2
@@ -9016,18 +9052,18 @@ packages:
     dependencies:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2(@algolia/client-search@4.22.1)(search-insights@2.13.0)
+      '@shikijs/core': link:packages/core
+      '@shikijs/transformers': link:packages/transformers
       '@types/markdown-it': 13.0.7
       '@vitejs/plugin-vue': 5.0.3(vite@5.0.12)(vue@3.4.15)
-      '@vue/devtools-api': 6.5.1
+      '@vue/devtools-api': 7.0.14
       '@vueuse/core': 10.7.2(vue@3.4.15)
       '@vueuse/integrations': 10.7.2(focus-trap@7.5.4)(fuse.js@7.0.0)(vue@3.4.15)
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.3.0
       postcss: 8.4.33
-      shikiji: link:packages/shiki
-      shikiji-core: link:packages/core
-      shikiji-transformers: link:packages/transformers
+      shiki: link:packages/shiki
       vite: 5.0.12(@types/node@20.11.16)
       vue: 3.4.15(typescript@5.3.3)
     transitivePeerDependencies:

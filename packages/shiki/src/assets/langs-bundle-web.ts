@@ -82,6 +82,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/html')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'html-derivative',
+    'name': 'HTML (Derivative)',
+    'import': (() => import('./langs/html-derivative')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'http',
     'name': 'HTTP',
     'import': (() => import('./langs/http')) as DynamicImportLanguageRegistration
@@ -312,7 +317,7 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
-export type BundledLanguage = 'angular-html' | 'angular-ts' | 'astro' | 'bash' | 'blade' | 'c' | 'c++' | 'coffee' | 'coffeescript' | 'cpp' | 'css' | 'glsl' | 'gql' | 'graphql' | 'haml' | 'handlebars' | 'hbs' | 'html' | 'http' | 'imba' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsx' | 'julia' | 'less' | 'lua' | 'markdown' | 'marko' | 'md' | 'mdc' | 'mdx' | 'php' | 'postcss' | 'pug' | 'py' | 'python' | 'r' | 'rb' | 'ruby' | 'sass' | 'scss' | 'sh' | 'shell' | 'shellscript' | 'sql' | 'styl' | 'stylus' | 'svelte' | 'toml' | 'ts' | 'tsx' | 'typescript' | 'vue' | 'vue-html' | 'wasm' | 'wgsl' | 'xml' | 'yaml' | 'yml' | 'zsh'
+export type BundledLanguage = 'angular-html' | 'angular-ts' | 'astro' | 'bash' | 'blade' | 'c' | 'c++' | 'coffee' | 'coffeescript' | 'cpp' | 'css' | 'glsl' | 'gql' | 'graphql' | 'haml' | 'handlebars' | 'hbs' | 'html' | 'html-derivative' | 'http' | 'imba' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsx' | 'julia' | 'less' | 'lua' | 'markdown' | 'marko' | 'md' | 'mdc' | 'mdx' | 'php' | 'postcss' | 'pug' | 'py' | 'python' | 'r' | 'rb' | 'ruby' | 'sass' | 'scss' | 'sh' | 'shell' | 'shellscript' | 'sql' | 'styl' | 'stylus' | 'svelte' | 'toml' | 'ts' | 'tsx' | 'typescript' | 'vue' | 'vue-html' | 'wasm' | 'wgsl' | 'xml' | 'yaml' | 'yml' | 'zsh'
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
