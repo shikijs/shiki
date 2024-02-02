@@ -133,7 +133,7 @@ describe('errors', () => {
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'invalid' }))
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] Theme \`invalid\` not found, you may need to load it first]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Theme \`invalid\` not found, you may need to load it first]`)
   })
 
   it('throw on invalid lang', async () => {
@@ -143,7 +143,7 @@ describe('errors', () => {
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] Language \`abc\` not found, you may need to load it first]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Language \`abc\` not found, you may need to load it first]`)
   })
 
   it('highlight with raw theme registation', async () => {
@@ -177,6 +177,6 @@ describe('errors', () => {
     await shiki.loadTheme(nord)
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'mylang', theme: 'nord' }))
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] Circular alias \`mylang -> mylang2 -> mylang\`]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Circular alias \`mylang -> mylang2 -> mylang\`]`)
   })
 })

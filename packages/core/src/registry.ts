@@ -3,6 +3,7 @@ import { Registry as TextMateRegistry } from './textmate'
 import type { LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import type { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
+import { ShikiError } from './error'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Record<string, ThemeRegistrationResolved> = {}
@@ -47,7 +48,7 @@ export class Registry extends TextMateRegistry {
       while (this.alias[name]) {
         name = this.alias[name]
         if (resolved.has(name))
-          throw new Error(`[shiki] Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
+          throw new ShikiError(`Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
         resolved.add(name)
       }
     }
@@ -106,7 +107,7 @@ export class Registry extends TextMateRegistry {
       const dependents = langsGraphArray
         .filter(([_, lang]) => lang && lang.embeddedLangs?.some(l => missingLangs.map(([name]) => name).includes(l)))
         .filter(lang => !missingLangs.includes(lang))
-      throw new Error(`[shiki] Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
+      throw new ShikiError(`Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
     }
 
     for (const [_, lang] of langsGraphArray)

@@ -29,7 +29,7 @@ let onigBinding: IOnigBinding | null = null
 let defaultDebugCall = false
 
 function throwLastOnigError(onigBinding: IOnigBinding): void {
-  throw new Error(onigBinding.UTF8ToString(onigBinding.getLastOnigError()))
+  throw new ShikiError(onigBinding.UTF8ToString(onigBinding.getLastOnigError()))
 }
 
 class UtfString {
@@ -191,7 +191,7 @@ export class OnigString implements IOnigString {
 
   constructor(str: string) {
     if (!onigBinding)
-      throw new Error('Must invoke loadWasm first.')
+      throw new ShikiError('Must invoke loadWasm first.')
 
     this._onigBinding = onigBinding
     this.content = str
@@ -255,7 +255,7 @@ export class OnigScanner implements IOnigScanner {
 
   constructor(patterns: string[]) {
     if (!onigBinding)
-      throw new Error('Must invoke loadWasm first.')
+      throw new ShikiError('Must invoke loadWasm first.')
 
     const strPtrsArr: Pointer[] = []
     const strLenArr: number[] = []

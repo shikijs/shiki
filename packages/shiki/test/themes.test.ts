@@ -321,7 +321,7 @@ describe('errors', () => {
       themes: {},
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] \`themes\` option must not be empty]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: \`themes\` option must not be empty]`)
   })
 
   it('throws on missing default color', async () => {
@@ -332,7 +332,7 @@ describe('errors', () => {
       },
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] \`themes\` option must contain the defaultColor key \`light\`]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: \`themes\` option must contain the defaultColor key \`light\`]`)
 
     expect(() => codeToHtml('console.log("hello")', {
       lang: 'js',
@@ -342,7 +342,7 @@ describe('errors', () => {
       defaultColor: 'dark',
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] \`themes\` option must contain the defaultColor key \`dark\`]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: \`themes\` option must contain the defaultColor key \`dark\`]`)
   })
 
   it('not throws when `defaultColor` set to false', async () => {

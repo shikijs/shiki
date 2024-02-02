@@ -184,7 +184,7 @@ describe('errors', () => {
       langs: ['javascript'],
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] Theme \`invalid\` is not built-in.]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Theme \`invalid\` is not included in this bundle. You may want to load it from external source.]`)
   })
 
   it('throw on invalid lang', async () => {
@@ -193,6 +193,6 @@ describe('errors', () => {
       langs: ['invalid' as any],
     }))
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [shiki] Language \`invalid\` is not built-in.]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Language \`invalid\` is not included in this bundle. You may want to load it from external source.]`)
   })
 })

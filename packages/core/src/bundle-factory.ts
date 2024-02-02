@@ -2,6 +2,7 @@ import type { Root } from 'hast'
 import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
 import { isSpecialLang, isSpecialTheme, toArray } from './utils'
 import { getHighlighterCore } from './highlighter'
+import { ShikiError } from './error'
 
 export type GetHighlighterFactory<L extends string, T extends string> = (options?: BundledHighlighterOptions<L, T>) => Promise<HighlighterGeneric<L, T>>
 
@@ -24,7 +25,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
           return []
         const bundle = bundledLanguages[lang as BundledLangs]
         if (!bundle)
-          throw new Error(`[shiki] Language \`${lang}\` is not built-in.`)
+          throw new ShikiError(`Language \`${lang}\` is not included in this bundle. You may want to load it from external source.`)
         return bundle
       }
       return lang as LanguageInput
@@ -36,7 +37,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       if (typeof theme === 'string') {
         const bundle = bundledThemes[theme]
         if (!bundle)
-          throw new Error(`[shiki] Theme \`${theme}\` is not built-in.`)
+          throw new ShikiError(`Theme \`${theme}\` is not included in this bundle. You may want to load it from external source.`)
         return bundle
       }
       return theme

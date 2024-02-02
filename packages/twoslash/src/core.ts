@@ -8,11 +8,13 @@ import type { Element, ElementContent, Text } from 'hast'
 
 import { splitTokens } from '@shikijs/core'
 import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
+import { ShikiTwoslashError } from './error'
 
 export * from './types'
 export * from './renderer-rich'
 export * from './renderer-classic'
 export * from './icons'
+export * from './error'
 
 export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   return {
@@ -42,7 +44,7 @@ export function createTransformerFactory(
     } = options
 
     if (!renderer)
-      throw new Error('[@shikijs/twoslash] Missing renderer')
+      throw new ShikiTwoslashError('Missing renderer')
 
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
     return {
@@ -93,7 +95,7 @@ export function createTransformerFactory(
             index = codeEl.children.indexOf(lineEl)
             if (index === -1) {
               if (throws)
-                throw new Error(`[@shikijs/twoslash] Cannot find line ${line} in code element`)
+                throw new ShikiTwoslashError(`Cannot find line ${line} in code element`)
               return
             }
           }
@@ -233,7 +235,7 @@ export function createTransformerFactory(
             default: {
               if (throws)
                 // @ts-expect-error Unknown node type
-                throw new Error(`[@shikijs/twoslash] Unknown node type: ${node.type}`)
+                throw new ShikiTwoslashError(`Unknown node type: ${node.type}`)
             }
           }
         }

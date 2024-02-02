@@ -99,7 +99,7 @@ describe('decorations errors', () => {
         ],
       })
     }).rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [Shiki] Invalid decoration range: {"line":1,"character":6,"offset":10} - {"line":0,"character":0,"offset":0}]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration range: {"line":1,"character":6,"offset":10} - {"line":0,"character":0,"offset":0}]`)
   })
 
   it('throws when decorations intersect', async () => {
@@ -113,7 +113,7 @@ describe('decorations errors', () => {
         ],
       })
     }).rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [Shiki] Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
   })
 
   it('throws when lines overflow', async () => {
@@ -139,6 +139,6 @@ describe('decorations errors', () => {
         ],
       })
     }).rejects
-      .toThrowErrorMatchingInlineSnapshot(`[Error: [Shiki] Failed to find end index for decoration {"line":0,"character":10,"offset":10}]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Failed to find end index for decoration {"line":0,"character":10,"offset":10}]`)
   })
 })

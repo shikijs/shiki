@@ -5,6 +5,7 @@ import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
 import { isSpecialTheme } from './utils'
+import { ShikiError } from './error'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
 /**
@@ -61,7 +62,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   function getLangGrammar(name: string) {
     const _lang = _registry.getGrammar(name)
     if (!_lang)
-      throw new Error(`[shiki] Language \`${name}\` not found, you may need to load it first`)
+      throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
     return _lang
   }
 
@@ -70,7 +71,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
       return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
     const _theme = _registry.getTheme(name)
     if (!_theme)
-      throw new Error(`[shiki] Theme \`${name}\` not found, you may need to load it first`)
+      throw new ShikiError(`Theme \`${name}\` not found, you may need to load it first`)
     return _theme
   }
 

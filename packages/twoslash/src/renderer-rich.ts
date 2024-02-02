@@ -4,6 +4,7 @@ import type { NodeHover, NodeQuery } from 'twoslash'
 import type { TwoslashRenderer } from './types'
 import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
+import { ShikiTwoslashError } from './error'
 
 export interface RendererRichOptions {
   /**
@@ -366,7 +367,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
 
     nodeCompletion(query, node) {
       if (node.type !== 'text')
-        throw new Error(`[@shikijs/twoslash] nodeCompletion only works on text nodes, got ${node.type}`)
+        throw new ShikiTwoslashError(`Renderer hook nodeCompletion only works on text nodes, got ${node.type}`)
 
       const items: Element[] = query.completions
         .map(i => ({

@@ -1,5 +1,6 @@
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
+import { ShikiError } from './error'
 import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
 import { getTokenStyleObject, stringifyTokenStyle } from './utils'
 
@@ -31,7 +32,7 @@ export function codeToTokens(
       .sort((a, b) => a.color === defaultColor ? -1 : b.color === defaultColor ? 1 : 0)
 
     if (themes.length === 0)
-      throw new Error('[shiki] `themes` option must not be empty')
+      throw new ShikiError('`themes` option must not be empty')
 
     const themeTokens = codeToTokensWithThemes(
       internal,
@@ -40,7 +41,7 @@ export function codeToTokens(
     )
 
     if (defaultColor && !themes.find(t => t.color === defaultColor))
-      throw new Error(`[shiki] \`themes\` option must contain the defaultColor key \`${defaultColor}\``)
+      throw new ShikiError(`\`themes\` option must contain the defaultColor key \`${defaultColor}\``)
 
     const themeRegs = themes.map(t => internal.getTheme(t.theme))
     const themesOrder = themes.map(t => t.color)
@@ -65,7 +66,7 @@ export function codeToTokens(
     themeName = _theme.name
   }
   else {
-    throw new Error('[shiki] Invalid options, either `theme` or `themes` must be provided')
+    throw new ShikiError('Invalid options, either `theme` or `themes` must be provided')
   }
 
   return {

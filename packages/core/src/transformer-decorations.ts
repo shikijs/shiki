@@ -1,6 +1,7 @@
 import type { Element, ElementContent } from 'hast'
 import type { DecorationItem, OffsetOrPosition, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
 import { addClassToHast, createPositionConverter, splitTokens } from './utils'
+import { ShikiError } from './error'
 
 interface TransformerDecorationsInternalContext {
   decorations: ResolvedDecorationItem[]
@@ -56,7 +57,7 @@ export function transformerDecorations(): ShikiTransformer {
     for (let i = 0; i < items.length; i++) {
       const foo = items[i]
       if (foo.start.offset > foo.end.offset)
-        throw new Error(`[Shiki] Invalid decoration range: ${JSON.stringify(foo.start)} - ${JSON.stringify(foo.end)}`)
+        throw new ShikiError(`Invalid decoration range: ${JSON.stringify(foo.start)} - ${JSON.stringify(foo.end)}`)
 
       for (let j = i + 1; j < items.length; j++) {
         const bar = items[j]
@@ -69,7 +70,7 @@ export function transformerDecorations(): ShikiTransformer {
             continue // nested
           if (isBarHasFooStart && isBarHasFooEnd)
             continue // nested
-          throw new Error(`[Shiki] Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
+          throw new ShikiError(`Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
         }
       }
     }
@@ -93,7 +94,7 @@ export function transformerDecorations(): ShikiTransformer {
       const lines = Array.from(codeEl.children).filter(i => i.type === 'element' && i.tagName === 'span') as Element[]
 
       // if (lines.length !== ctx.converter.lines.length)
-      //   throw new Error(`[Shiki] Number of lines in code element (${lines.length}) does not match the number of lines in the source (${ctx.converter.lines.length}). Failed to apply decorations.`)
+      //   throw new ShikiError(`Number of lines in code element (${lines.length}) does not match the number of lines in the source (${ctx.converter.lines.length}). Failed to apply decorations.`)
 
       function applyLineSection(line: number, start: number, end: number, decoration: DecorationItem) {
         const lineEl = lines[line]
@@ -127,9 +128,9 @@ export function transformerDecorations(): ShikiTransformer {
         }
 
         if (startIndex === -1)
-          throw new Error(`[Shiki] Failed to find start index for decoration ${JSON.stringify(decoration.start)}`)
+          throw new ShikiError(`Failed to find start index for decoration ${JSON.stringify(decoration.start)}`)
         if (endIndex === -1)
-          throw new Error(`[Shiki] Failed to find end index for decoration ${JSON.stringify(decoration.end)}`)
+          throw new ShikiError(`Failed to find end index for decoration ${JSON.stringify(decoration.end)}`)
 
         const children = lineEl.children.slice(startIndex, endIndex)
         const element: Element = !decoration.alwaysWrap && children.length === 1 && children[0].type === 'element'

@@ -4,6 +4,7 @@ import type { BuiltinLanguage, BuiltinTheme, CodeToTokensBaseOptions, MaybeGette
 import { bundledLanguages, bundledThemes, getHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
 import { transformerCompactLineOptions } from '@shikijs/transformers'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
+import { ShikiCompatError } from './error'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
 export const BUNDLED_THEMES = bundledThemes
@@ -13,6 +14,7 @@ export * from './types'
 
 export { normalizeTheme } from 'shiki'
 export { normalizeTheme as toShikiTheme } from 'shiki'
+export { ShikiCompatError } from './error'
 
 export async function getHighlighter(options: HighlighterOptions = {}) {
   const themes = options.themes || []
@@ -114,7 +116,7 @@ export async function getHighlighter(options: HighlighterOptions = {}) {
      * @deprecated Not supported by Shiki
      */
     setColorReplacements(..._args: any[]) {
-      throw new Error('[shiki-compat] `setColorReplacements` is not supported by Shiki')
+      throw new ShikiCompatError('`setColorReplacements` is not supported by @shikijs/compat')
     },
   }
 }
@@ -130,7 +132,7 @@ export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<Theme
     if (fs.existsSync(theme) && theme.endsWith('.json'))
       return normalizeTheme(JSON.parse(await fsp.readFile(theme, 'utf-8')))
 
-    throw new Error(`[shiki-compat] Unknown theme: ${theme}`)
+    throw new ShikiCompatError(`Unknown theme: ${theme}`)
   }
   else {
     return normalizeTheme(await normalizeGetter(theme))

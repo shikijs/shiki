@@ -10,7 +10,7 @@ async function buildIcons(filepath: string, map: Record<string, string>) {
       const iconset = value.startsWith('codicon:') ? codicon : carbon
       const icon = iconset.icons[value.split(':')[1]]
       if (!icon)
-        throw new Error(`icon not found: ${value}`)
+        throw new ShikiError(`icon not found: ${value}`)
       const str = `<svg viewBox="0 0 ${carbon.height} ${carbon.height}">${icon.body}</svg>`
       const hast = fromHtml(str, { space: 'svg', fragment: true }).children[0]
       return [key, hast]
