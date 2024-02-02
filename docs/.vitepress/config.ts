@@ -60,10 +60,8 @@ export default withMermaid(defineConfig({
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
-    async shikijiSetup(shiki) {
-      await Promise.all(Object.keys(bundledThemes).map(async (theme) => {
-        await shiki.loadTheme(theme as any)
-      }))
+    async shikiSetup(shiki) {
+      await shiki.loadTheme(...Object.keys(bundledThemes) as any)
     },
     codeTransformers: [
       transformerMetaWordHighlight(),
