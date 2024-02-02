@@ -1,5 +1,5 @@
 import type { Element, ElementContent } from 'hast'
-import type { DecorationItem, OffsetOrPosition, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
+import type { DecorationItem, DecorationTransformType, OffsetOrPosition, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
 import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 import { ShikiError } from './error'
 
@@ -133,25 +133,34 @@ export function transformerDecorations(): ShikiTransformer {
           throw new ShikiError(`Failed to find end index for decoration ${JSON.stringify(decoration.end)}`)
 
         const children = lineEl.children.slice(startIndex, endIndex)
-        const element: Element = !decoration.alwaysWrap && children.length === 1 && children[0].type === 'element'
-          ? children[0]
-          : {
-              type: 'element',
-              tagName: 'span',
-              properties: {},
-              children,
-            }
 
-        applyDecoration(element, decoration, false)
+        // Full line decoration
+        if (!decoration.alwaysWrap && children.length === lineEl.children.length) {
+          applyDecoration(lineEl, decoration, 'line')
+        }
+        // Single token decoration
+        else if (!decoration.alwaysWrap && children.length === 1 && children[0].type === 'element') {
+          applyDecoration(children[0], decoration, 'token')
+        }
+        // Create a wrapper for the decoration
+        else {
+          const wrapper: Element = {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children,
+          }
 
-        lineEl.children.splice(startIndex, children.length, element)
+          applyDecoration(wrapper, decoration, 'wrapper')
+          lineEl.children.splice(startIndex, children.length, wrapper)
+        }
       }
 
       function applyLine(line: number, decoration: DecorationItem) {
-        lines[line] = applyDecoration(lines[line], decoration, true)
+        lines[line] = applyDecoration(lines[line], decoration, 'line')
       }
 
-      function applyDecoration(el: Element, decoration: DecorationItem, isLine: boolean) {
+      function applyDecoration(el: Element, decoration: DecorationItem, type: DecorationTransformType) {
         const properties = decoration.properties || {}
         const transform = decoration.transform || (i => i)
 
@@ -163,7 +172,7 @@ export function transformerDecorations(): ShikiTransformer {
         }
         if (decoration.properties?.class)
           addClassToHast(el, decoration.properties.class as string[])
-        el = transform(el, isLine) || el
+        el = transform(el, type) || el
         return el
       }
 

@@ -30,7 +30,7 @@ export interface DecorationItem {
   /**
    * A custom function to transform the element after it has been created.
    */
-  transform?: (element: Element, isEntireLine: boolean) => Element | void
+  transform?: (element: Element, type: DecorationTransformType) => Element | void
 
   /**
    * By default when the decoration contains only one token, the decoration will be applied to the token.
@@ -46,6 +46,8 @@ export interface ResolvedDecorationItem extends Omit<DecorationItem, 'start' | '
   start: ResolvedPosition
   end: ResolvedPosition
 }
+
+export type DecorationTransformType = 'wrapper' | 'line' | 'token'
 
 export interface Position {
   line: number
