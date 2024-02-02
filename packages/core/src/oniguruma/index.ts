@@ -2,6 +2,7 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
+import { ShikiError } from '../error'
 import type { IOnigBinding, IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString, Pointer } from './types'
 import createOnigasm from './onig'
 
