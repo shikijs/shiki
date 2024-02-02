@@ -12,6 +12,11 @@
   --twoslash-unmatched-color: var(--vp-c-text-2);
 }
 
+.twoslash-error-line,
+.twoslash-tag-line {
+  width: max-content;
+}
+
 .v-popper--theme-twoslash {
   z-index: calc(var(--vp-z-index-local-nav) - 1);
 }
