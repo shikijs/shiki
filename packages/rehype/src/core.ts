@@ -7,8 +7,8 @@ import { visit } from 'unist-util-visit'
 import { transformerMetaHighlight } from '@shikijs/transformers'
 
 export interface MapLike<K = any, V = any> {
-  get(key: K): V | undefined
-  set(key: K, value: V): this
+  get: (key: K) => V | undefined
+  set: (key: K, value: V) => this
 }
 
 export interface RehypeShikiExtraOptions {

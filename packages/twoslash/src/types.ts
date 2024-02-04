@@ -48,15 +48,15 @@ export interface TransformerTwoslashOptions {
 }
 
 export interface TwoslashRenderer {
-  lineError?(this: ShikiTransformerContext, error: NodeError): ElementContent[]
-  lineCustomTag?(this: ShikiTransformerContext, tag: NodeTag): ElementContent[]
-  lineQuery?(this: ShikiTransformerContext, query: NodeQuery, targetNode?: Element | Text): ElementContent[]
-  lineCompletion?(this: ShikiTransformerContext, query: NodeCompletion): ElementContent[]
+  lineError?: (this: ShikiTransformerContext, error: NodeError) => ElementContent[]
+  lineCustomTag?: (this: ShikiTransformerContext, tag: NodeTag) => ElementContent[]
+  lineQuery?: (this: ShikiTransformerContext, query: NodeQuery, targetNode?: Element | Text) => ElementContent[]
+  lineCompletion?: (this: ShikiTransformerContext, query: NodeCompletion) => ElementContent[]
 
-  nodeStaticInfo(this: ShikiTransformerContext, info: NodeHover, node: Element | Text): Partial<ElementContent>
-  nodeError?(this: ShikiTransformerContext, error: NodeError, node: Element | Text): Partial<ElementContent>
-  nodeQuery?(this: ShikiTransformerContext, query: NodeQuery, node: Element | Text): Partial<ElementContent>
-  nodeCompletion?(this: ShikiTransformerContext, query: NodeCompletion, node: Element | Text): Partial<ElementContent>
+  nodeStaticInfo: (this: ShikiTransformerContext, info: NodeHover, node: Element | Text) => Partial<ElementContent>
+  nodeError?: (this: ShikiTransformerContext, error: NodeError, node: Element | Text) => Partial<ElementContent>
+  nodeQuery?: (this: ShikiTransformerContext, query: NodeQuery, node: Element | Text) => Partial<ElementContent>
+  nodeCompletion?: (this: ShikiTransformerContext, query: NodeCompletion, node: Element | Text) => Partial<ElementContent>
 
-  nodesHighlight?(this: ShikiTransformerContext, highlight: NodeHighlight, nodes: ElementContent[]): ElementContent[]
+  nodesHighlight?: (this: ShikiTransformerContext, highlight: NodeHighlight, nodes: ElementContent[]) => ElementContent[]
 }

@@ -76,7 +76,7 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    *
    * Differences from `highlighter.codeToHtml()`, this function is async.
    */
-  codeToHtml(code: string, options: CodeToHastOptions<L, T>): Promise<string>
+  codeToHtml: (code: string, options: CodeToHastOptions<L, T>) => Promise<string>
 
   /**
    * Shorthand for `codeToHtml` with auto-loaded theme and language.
@@ -84,7 +84,7 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    *
    * Differences from `highlighter.codeToHtml()`, this function is async.
    */
-  codeToHast(code: string, options: CodeToHastOptions<L, T>): Promise<Root>
+  codeToHast: (code: string, options: CodeToHastOptions<L, T>) => Promise<Root>
 
   /**
    * Shorthand for `codeToTokens` with auto-loaded theme and language.
@@ -92,7 +92,7 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    *
    * Differences from `highlighter.codeToTokens()`, this function is async.
    */
-  codeToTokens(code: string, options: CodeToTokensOptions<L, T>): Promise<TokensResult>
+  codeToTokens: (code: string, options: CodeToTokensOptions<L, T>) => Promise<TokensResult>
 
   /**
    * Shorthand for `codeToTokensBase` with auto-loaded theme and language.
@@ -100,7 +100,7 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    *
    * Differences from `highlighter.codeToTokensBase()`, this function is async.
    */
-  codeToTokensBase(code: string, options: RequireKeys<CodeToTokensBaseOptions<L, T>, 'theme' | 'lang'>): Promise<ThemedToken[][]>
+  codeToTokensBase: (code: string, options: RequireKeys<CodeToTokensBaseOptions<L, T>, 'theme' | 'lang'>) => Promise<ThemedToken[][]>
 
   /**
    * Shorthand for `codeToTokensWithThemes` with auto-loaded theme and language.
@@ -108,19 +108,19 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    *
    * Differences from `highlighter.codeToTokensWithThemes()`, this function is async.
    */
-  codeToTokensWithThemes(code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>): Promise<ThemedTokenWithVariants[][]>
+  codeToTokensWithThemes: (code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>) => Promise<ThemedTokenWithVariants[][]>
 
   /**
    * Get internal singleton highlighter.
    *
    * @internal
    */
-  getSingletonHighlighter(): Promise<HighlighterGeneric<L, T>>
+  getSingletonHighlighter: () => Promise<HighlighterGeneric<L, T>>
 
   /**
    * @deprecated Use `codeToTokensBase` instead.
    */
-  codeToThemedTokens(code: string, options: RequireKeys<CodeToTokensBaseOptions<L, T>, 'theme' | 'lang'>): Promise<ThemedToken[][]>
+  codeToThemedTokens: (code: string, options: RequireKeys<CodeToTokensBaseOptions<L, T>, 'theme' | 'lang'>) => Promise<ThemedToken[][]>
 }
 
 export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>): ShorthandsBundle<L, T> {

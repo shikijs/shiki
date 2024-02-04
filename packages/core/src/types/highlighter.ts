@@ -6,21 +6,21 @@ import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThem
 import type { CodeToHastOptions } from './options'
 
 export interface ShikiInternal {
-  setTheme(name: string | ThemeRegistrationAny): {
+  setTheme: (name: string | ThemeRegistrationAny) => {
     theme: ThemeRegistrationResolved
     colorMap: string[]
   }
 
-  getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved
-  getLangGrammar(name: string): Grammar
+  getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
+  getLangGrammar: (name: string) => Grammar
 
-  getLoadedThemes(): string[]
-  getLoadedLanguages(): string[]
-  loadLanguage(...langs: LanguageInput[]): Promise<void>
-  loadTheme(...themes: ThemeInput[]): Promise<void>
+  getLoadedThemes: () => string[]
+  getLoadedLanguages: () => string[]
+  loadLanguage: (...langs: LanguageInput[]) => Promise<void>
+  loadTheme: (...themes: ThemeInput[]) => Promise<void>
 
-  getAlias(): Record<string, string>
-  updateAlias(alias: Record<string, string>): void
+  getAlias: () => Record<string, string>
+  updateAlias: (alias: Record<string, string>) => void
 }
 /**
  * Generic instance interface of Shiki
@@ -30,33 +30,33 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
 /**
  * Get highlighted code in HTML string
  */
-  codeToHtml(
+  codeToHtml: (
     code: string,
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): string
+  ) => string
   /**
    * Get highlighted code in HAST.
    * @see https://github.com/syntax-tree/hast
    */
-  codeToHast(
+  codeToHast: (
     code: string,
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): Root
+  ) => Root
   /**
    * Get highlighted code in tokens. Uses `codeToTokensWithThemes` or `codeToTokensBase` based on the options.
    */
-  codeToTokens(
+  codeToTokens: (
     code: string,
     options: CodeToTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): TokensResult
+  ) => TokensResult
   /**
    * Get highlighted code in tokens with a single theme.
    * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
    */
-  codeToTokensBase(
+  codeToTokensBase: (
     code: string,
     options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): ThemedToken[][]
+  ) => ThemedToken[][]
   /**
    * Get highlighted code in tokens with multiple themes.
    *
@@ -64,36 +64,36 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    *
    * @returns A 2D array of tokens, first dimension is lines, second dimension is tokens in a line.
    */
-  codeToTokensWithThemes(
+  codeToTokensWithThemes: (
     code: string,
     options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): ThemedTokenWithVariants[][]
+  ) => ThemedTokenWithVariants[][]
 
   /**
    * @deprecated Renamed to `codeToTokensBase`, or use high-level `codeToTokens` directly.
    */
-  codeToThemedTokens(
+  codeToThemedTokens: (
     code: string,
     options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ): ThemedToken[][]
+  ) => ThemedToken[][]
 
   /**
    * Load a theme to the highlighter, so later it can be used synchronously.
    */
-  loadTheme(...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]): Promise<void>
+  loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>
   /**
    * Load a language to the highlighter, so later it can be used synchronously.
    */
-  loadLanguage(...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]): Promise<void>
+  loadLanguage: (...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]) => Promise<void>
 
   /**
    * Get the registered theme object
    */
-  getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved
+  getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
   /**
    * Get the registered language object
    */
-  getLangGrammar(name: string | LanguageRegistration): Grammar
+  getLangGrammar: (name: string | LanguageRegistration) => Grammar
 
   /**
    * Set the current theme and get the resolved theme object and color map.
@@ -106,18 +106,18 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    *
    * Special-handled languages like `text`, `plain` and `ansi` are not included.
    */
-  getLoadedLanguages(): string[]
+  getLoadedLanguages: () => string[]
   /**
    * Get the names of loaded themes
    *
    * Special-handled themes like `none` are not included.
    */
-  getLoadedThemes(): string[]
+  getLoadedThemes: () => string[]
 
   /**
    * Get internal context object
    * @internal
    * @deprecated
    */
-  getInternalContext(): ShikiInternal
+  getInternalContext: () => ShikiInternal
 }

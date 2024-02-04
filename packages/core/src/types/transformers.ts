@@ -51,46 +51,46 @@ export interface ShikiTransformer {
   /**
    * Transform the raw input code before passing to the highlighter.
    */
-  preprocess?(this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions): string | void
+  preprocess?: (this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions) => string | void
   /**
    * Transform the full tokens list before converting to HAST.
    * Return a new tokens list will replace the original one.
    */
-  tokens?(this: ShikiTransformerContextSource, tokens: ThemedToken[][]): ThemedToken[][] | void
+  tokens?: (this: ShikiTransformerContextSource, tokens: ThemedToken[][]) => ThemedToken[][] | void
   /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
    */
-  root?(this: ShikiTransformerContext, hast: Root): Root | void
+  root?: (this: ShikiTransformerContext, hast: Root) => Root | void
   /**
    * Transform the `<pre>` element. Return a new Node will replace the original one.
    */
-  pre?(this: ShikiTransformerContext, hast: Element): Element | void
+  pre?: (this: ShikiTransformerContext, hast: Element) => Element | void
   /**
    * Transform the `<code>` element. Return a new Node will replace the original one.
    */
-  code?(this: ShikiTransformerContext, hast: Element): Element | void
+  code?: (this: ShikiTransformerContext, hast: Element) => Element | void
   /**
    * Transform each line `<span class="line">` element.
    *
    * @param hast
    * @param line 1-based line number
    */
-  line?(this: ShikiTransformerContext, hast: Element, line: number): Element | void
+  line?: (this: ShikiTransformerContext, hast: Element, line: number) => Element | void
   /**
    * Transform each token `<span>` element.
    */
-  span?(this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+  span?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element) => Element | void
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
-  postprocess?(this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions): string | void
+  postprocess?: (this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => string | void
 
   // deprecated
   /**
    * @deprecated Use `span` instead
    */
-  token?(this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element): Element | void
+  token?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element) => Element | void
 }
 
 /**

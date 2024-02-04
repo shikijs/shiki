@@ -61,21 +61,21 @@ export interface RendererRichOptions {
   /**
    * @deprecated Use `processHoverInfo` instead.
    */
-  formatInfo?(info: string): string
+  formatInfo?: (info: string) => string
 
   /**
    * Custom function to render markdown.
    *
    * By default it pass-through the markdown.
    */
-  renderMarkdown?(this: ShikiTransformerContextCommon, markdown: string): ElementContent[]
+  renderMarkdown?: (this: ShikiTransformerContextCommon, markdown: string) => ElementContent[]
 
   /**
    * Custom function to render inline markdown.
    *
    * By default it pass-through the markdown.
    */
-  renderMarkdownInline?(this: ShikiTransformerContextCommon, markdown: string, context: string): ElementContent[]
+  renderMarkdownInline?: (this: ShikiTransformerContextCommon, markdown: string, context: string) => ElementContent[]
 
   /**
    * Extensions for the genreated HAST tree.

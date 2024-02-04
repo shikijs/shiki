@@ -26,15 +26,15 @@ export interface IOnigBinding {
   HEAPU8: Uint8Array
   HEAPU32: Uint32Array
 
-  UTF8ToString(ptr: Pointer): string
+  UTF8ToString: (ptr: Pointer) => string
 
-  omalloc(count: number): Pointer
-  ofree(ptr: Pointer): void
-  getLastOnigError(): Pointer
-  createOnigScanner(strPtrsPtr: Pointer, strLenPtr: Pointer, count: number): Pointer
-  freeOnigScanner(ptr: Pointer): void
-  findNextOnigScannerMatch(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
-  findNextOnigScannerMatchDbg(scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number): number
+  omalloc: (count: number) => Pointer
+  ofree: (ptr: Pointer) => void
+  getLastOnigError: () => Pointer
+  createOnigScanner: (strPtrsPtr: Pointer, strLenPtr: Pointer, count: number) => Pointer
+  freeOnigScanner: (ptr: Pointer) => void
+  findNextOnigScannerMatch: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
+  findNextOnigScannerMatchDbg: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
 }
 
 export interface IOnigCaptureIndex {
@@ -49,7 +49,7 @@ export interface IOnigMatch {
 }
 
 export interface OnigScanner {
-  findNextMatchSync(string: string | OnigString, startPosition: number): IOnigMatch | null
+  findNextMatchSync: (string: string | OnigString, startPosition: number) => IOnigMatch | null
   readonly dispose?: () => void
 }
 
