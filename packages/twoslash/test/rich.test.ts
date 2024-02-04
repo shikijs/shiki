@@ -77,7 +77,7 @@ Number.parseInt(todo.title, 10);
 
   expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich/rich.html')
 
-  const html2 = await codeToHtml(code, {
+  const htmlNoTheme = await codeToHtml(code, {
     lang: 'ts',
     theme: 'none',
     transformers: [
@@ -87,7 +87,36 @@ Number.parseInt(todo.title, 10);
     ],
   })
 
-  expect(styleTag + html2).toMatchFileSnapshot('./out/rich/rich-none-theme.html')
+  expect(styleTag + htmlNoTheme).toMatchFileSnapshot('./out/rich/rich-none-theme.html')
+})
+
+it('error rendering hover', async () => {
+  const code = `
+// @errors: 2540
+interface Todo {
+  title: string;
+}
+
+const todo: Readonly<Todo> = {
+  title: "Delete inactive users".toUpperCase(),
+};
+
+todo.title = "Hello";
+`.trim()
+
+  const htmlErrorsHover = await codeToHtml(code, {
+    lang: 'ts',
+    theme: 'vitesse-light',
+    transformers: [
+      transformerTwoslash({
+        renderer: rendererRich({
+          errorRendering: 'hover',
+        }),
+      }),
+    ],
+  })
+
+  expect(styleTag + htmlErrorsHover).toMatchFileSnapshot('./out/rich/rich-error-hover.html')
 })
 
 it('no-icons', async () => {

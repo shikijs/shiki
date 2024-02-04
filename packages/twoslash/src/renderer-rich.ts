@@ -1,6 +1,6 @@
 import type { Element, ElementContent, Text } from 'hast'
 import type { ShikiTransformerContextCommon } from '@shikijs/core'
-import type { NodeHover, NodeQuery } from 'twoslash'
+import type { NodeError, NodeHover, NodeQuery } from 'twoslash'
 import type { TwoslashRenderer } from './types'
 import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
@@ -46,6 +46,16 @@ export interface RendererRichOptions {
    * @default undefined
    */
   processHoverDocs?: (docs: string) => string
+
+  /**
+   * The way errors should be rendered.
+   *
+   * - `'line'`: Render the error line after the line of code
+   * - `'hover'`: Render the error in the hover popup
+   *
+   * @default 'line'
+   */
+  errorRendering?: 'line' | 'hover'
 
   /**
    * Classes added to injected elements
@@ -138,6 +148,16 @@ export interface RendererRichOptions {
      */
     errorToken?: HastExtension
     /**
+     * The container of the error popup.
+     * Only used when `errorRendering` is set to `'hover'`.
+     */
+    errorPopup?: HastExtension
+    /**
+     * Custom function to compose the error token.
+     * Only used when `errorRendering` is set to `'hover'`.
+     */
+    errorCompose?: (parts: { popup: Element, token: Text | Element }) => ElementContent[]
+    /**
      * The wrapper for the highlighted nodes.
      */
     nodesHighlight?: HastExtension
@@ -188,6 +208,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
     processHoverDocs = docs => docs,
     classExtra = '',
     jsdoc = true,
+    errorRendering = 'line',
     renderMarkdown = renderMarkdownPassThrough,
     renderMarkdownInline = renderMarkdownPassThrough,
     hast,
@@ -474,27 +495,66 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       )
     },
 
-    nodeError(_, node) {
+    nodeError(error, node) {
+      if (errorRendering !== 'hover') {
+        return extend(
+          hast?.errorToken,
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {
+              class: [`twoslash-error`, getErrorLevelClass(error)].filter(Boolean).join(' '),
+            },
+            children: [node],
+          },
+        )
+      }
+
+      const popup = extend(
+        hast?.errorPopup,
+        {
+          type: 'element',
+          tagName: 'span',
+          properties: {
+            class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
+          },
+          children: [
+            {
+              type: 'element',
+              tagName: 'div',
+              properties: {
+                class: 'twoslash-popup-error',
+              },
+              children: renderMarkdown.call(this, error.text),
+            },
+          ],
+        },
+      )
+
       return extend(
         hast?.errorToken,
         {
           type: 'element',
           tagName: 'span',
           properties: {
-            class: 'twoslash-error',
+            class: `twoslash-error twoslash-error-hover ${getErrorLevelClass(error)}`,
           },
-          children: [node],
+          children: hast?.errorCompose
+            ? hast?.errorCompose({ popup, token: node })
+            : [popup, node],
         },
       )
     },
 
     lineError(error) {
+      if (errorRendering !== 'line')
+        return []
       return [
         {
           type: 'element',
           tagName: 'div',
           properties: {
-            class: ['twoslash-meta-line twoslash-error-line', classExtra].filter(Boolean).join(' '),
+            class: ['twoslash-meta-line twoslash-error-line', getErrorLevelClass(error), classExtra].filter(Boolean).join(' '),
           },
           children: [
             {
@@ -575,4 +635,17 @@ export function defaultHoverInfoProcessor(type: string) {
     content = `function ${content}`
 
   return content
+}
+
+function getErrorLevelClass(error: NodeError) {
+  switch (error.level) {
+    case 0:
+      return 'twoslash-error-level-warning'
+    case 1:
+      return '' // 'twoslash-error-level-error'
+    case 2:
+      return 'twoslash-error-level-suggestion'
+    default:
+      return 'twoslash-error-level-info'
+  }
 }
