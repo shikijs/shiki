@@ -161,7 +161,7 @@ function renderMarkdown(this: ShikiTransformerContextCommon, md: string): Elemen
   ) as Element).children
 }
 
-function renderMarkdownInline(this: ShikiTransformerContext, md: string, context?: string): ElementContent[] {
+function renderMarkdownInline(this: ShikiTransformerContextCommon, md: string, context?: string): ElementContent[] {
   if (context === 'tag:param')
     md = md.replace(/^([\w$-]+)/, '`$1` ')
 

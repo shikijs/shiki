@@ -49,7 +49,9 @@ export interface IOnigMatch {
 }
 
 export interface OnigScanner {
-  findNextMatchSync: (string: string | OnigString, startPosition: number) => IOnigMatch | null
+  // We need the bivariant type here
+  // eslint-disable-next-line ts/method-signature-style
+  findNextMatchSync(string: string | OnigString, startPosition: number): IOnigMatch | null
   readonly dispose?: () => void
 }
 

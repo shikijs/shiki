@@ -1,6 +1,6 @@
 import type { Element } from 'hast'
 import { FontStyle } from './types'
-import type { MaybeArray, Position, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
+import type { MaybeArray, PlainTextLanguage, Position, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -18,7 +18,7 @@ export function splitLines(str: string) {
  *
  * Hard-coded plain text languages: `plaintext`, `txt`, `text`, `plain`.
  */
-export function isPlainLang(lang: string | null | undefined) {
+export function isPlainLang(lang: string | null | undefined): lang is PlainTextLanguage {
   return !lang || ['plaintext', 'txt', 'text', 'plain'].includes(lang)
 }
 
@@ -27,7 +27,7 @@ export function isPlainLang(lang: string | null | undefined) {
  *
  * Hard-coded languages: `ansi` and plaintexts like `plaintext`, `txt`, `text`, `plain`.
  */
-export function isSpecialLang(lang: string) {
+export function isSpecialLang(lang: any): lang is SpecialLanguage {
   return lang === 'ansi' || isPlainLang(lang)
 }
 

@@ -12,12 +12,12 @@ export interface ShikiInternal {
   }
 
   getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
-  getLangGrammar: (name: string) => Grammar
+  getLangGrammar: (name: string | LanguageRegistration) => Grammar
 
   getLoadedThemes: () => string[]
   getLoadedLanguages: () => string[]
-  loadLanguage: (...langs: LanguageInput[]) => Promise<void>
-  loadTheme: (...themes: ThemeInput[]) => Promise<void>
+  loadLanguage: (...langs: (LanguageInput | SpecialLanguage)[]) => Promise<void>
+  loadTheme: (...themes: (ThemeInput | SpecialTheme)[]) => Promise<void>
 
   getAlias: () => Record<string, string>
   updateAlias: (alias: Record<string, string>) => void

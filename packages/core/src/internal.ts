@@ -1,10 +1,10 @@
-import type { HighlighterCoreOptions, LanguageInput, MaybeGetter, ShikiInternal, SpecialTheme, ThemeInput, ThemeRegistrationResolved } from './types'
+import type { HighlighterCoreOptions, LanguageInput, LanguageRegistration, MaybeGetter, ShikiInternal, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import type { LoadWasmOptions } from './oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
-import { isSpecialTheme } from './utils'
+import { isSpecialLang, isSpecialTheme } from './utils'
 import { ShikiError } from './error'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
@@ -24,9 +24,11 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
   }
 
-  async function resolveLangs(langs: LanguageInput[]) {
+  async function resolveLangs(langs: (LanguageInput | SpecialLanguage)[]) {
     return Array.from(new Set((await Promise.all(
-      langs.map(async lang => await normalizeGetter(lang).then(r => Array.isArray(r) ? r : [r])),
+      langs
+        .filter(l => !isSpecialLang(l))
+        .map(async lang => await normalizeGetter(lang as LanguageInput).then(r => Array.isArray(r) ? r : [r])),
     )).flat()))
   }
 
@@ -57,16 +59,16 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   Object.assign(_registry.alias, options.langAlias)
   await _registry.init()
 
-  let _lastTheme: string | ThemeRegistrationResolved
+  let _lastTheme: string | ThemeRegistrationAny
 
-  function getLangGrammar(name: string) {
-    const _lang = _registry.getGrammar(name)
+  function getLangGrammar(name: string | LanguageRegistration) {
+    const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
     if (!_lang)
       throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
     return _lang
   }
 
-  function getTheme(name: string | ThemeRegistrationResolved): ThemeRegistrationResolved {
+  function getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved {
     if (name === 'none')
       return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
     const _theme = _registry.getTheme(name)
@@ -75,7 +77,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     return _theme
   }
 
-  function setTheme(name: string | ThemeRegistrationResolved) {
+  function setTheme(name: string | ThemeRegistrationAny) {
     const theme = getTheme(name)
     if (_lastTheme !== name) {
       _registry.setTheme(theme)
@@ -96,7 +98,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     return _registry.getLoadedLanguages()
   }
 
-  async function loadLanguage(...langs: LanguageInput[]) {
+  async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]) {
     await _registry.loadLanguages(await resolveLangs(langs))
   }
 
