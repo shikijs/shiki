@@ -18,7 +18,7 @@ export interface TransformerTwoslashOptions {
    *
    * @default false
    */
-  explicitTrigger?: boolean
+  explicitTrigger?: boolean | RegExp
   /**
    * Mapping from language alias to language name
    */

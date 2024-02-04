@@ -22,7 +22,7 @@ export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   }
 }
 
-type TwoslashFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashReturn
+export type TwoslashFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashReturn
 
 export function createTransformerFactory(
   defaultTwoslasher: TwoslashFunction,
@@ -43,10 +43,14 @@ export function createTransformerFactory(
       throws = true,
     } = options
 
+    const trigger = explicitTrigger instanceof RegExp
+      ? explicitTrigger
+      : /\btwoslash\b/
+
     if (!renderer)
       throw new ShikiTwoslashError('Missing renderer')
 
-    const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || /\btwoslash\b/.test(options.meta?.__raw || '')))
+    const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || trigger.test(options.meta?.__raw || '')))
     return {
       preprocess(code) {
         let lang = this.options.lang
