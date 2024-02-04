@@ -2,12 +2,12 @@
  * This file is the core of the @shikijs/twoslash package,
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
-import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
+import type { TwoslashExecuteOptions } from 'twoslash'
 import type { ShikiTransformer } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
 import { splitTokens } from '@shikijs/core'
-import type { TransformerTwoslashOptions, TwoslashRenderer } from './types'
+import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiReturn } from './types'
 import { ShikiTwoslashError } from './error'
 
 export * from './types'
@@ -22,7 +22,7 @@ export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   }
 }
 
-export type TwoslashFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashReturn
+export type TwoslashFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashShikiReturn
 
 export function createTransformerFactory(
   defaultTwoslasher: TwoslashFunction,
@@ -60,7 +60,7 @@ export function createTransformerFactory(
         if (filter(lang, code, this.options)) {
           const twoslash = twoslasher(code, lang, twoslashOptions)
           this.meta.twoslash = twoslash
-          this.options.lang = twoslash.meta.extension || lang
+          this.options.lang = twoslash.meta?.extension || lang
           return twoslash.code
         }
       },
