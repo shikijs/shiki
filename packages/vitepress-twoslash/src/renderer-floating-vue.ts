@@ -1,7 +1,7 @@
 import { defaultHoverInfoProcessor, rendererRich } from '@shikijs/twoslash'
 import type { RendererRichOptions, TwoslashRenderer } from '@shikijs/twoslash'
 import type { Element, ElementContent, Text } from 'hast'
-import type { ShikiTransformerContext, ShikiTransformerContextCommon } from 'shiki'
+import type { ShikiTransformerContextCommon } from 'shiki'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { defaultHandlers, toHast } from 'mdast-util-to-hast'
