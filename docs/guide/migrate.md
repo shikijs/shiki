@@ -32,6 +32,12 @@ Breaking changes applies to main package `shiki`, but are shimmed by the [compat
 - `lineOptions` is dropped in favor of the fully customizable `transforms` option.
 - `LanguageRegistration`'s `grammar` field is flattened to `LanguageRegistration` itself, refer to the types for more details.
 
+### Ecosystem Packages
+
+- `shiki-twoslash` has been completely rewritten. It's no longer a wrapper around Shiki highlighter, but instead, it's now a Shiki transformer that can be plugged in any integrations that supports SHiki transformers. The package is now [`@shikijs/twoslash`](/package/twoslash).
+- Integrations of `shiki-twoslash`, like `gatsby-remark-shiki-twoslash` etc, will be slowly moved to a general Shiki version. Before that, you can use [`@shikijs/rehype`](/packages/rehype) or [`@shikijs/markdown-it`](/packages/markdown-it/) to integrate Shiki into those meta-frameworks.
+- New official integrations like [`@shikijs/monaco`](/packages/monaco), [`@shikijs/cli`](/packages/cli), [`@shikijs/rehype`](/packages/rehype), [`@shikijs/markdown-it`](/packages/markdown-it/) are introduced.
+
 ## Migrate from Shikiji
 
 If you are already using [Shikiji](https://github.com/antfu/shikiji), first make sure you are on the latest minor v0.10. Then the migration should be very straightforward by renaming the packages:
