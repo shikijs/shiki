@@ -95,6 +95,9 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
       popupDocsTags: {
         class: `twoslash-popup-docs twoslash-popup-docs-tags ${classMarkdown}`,
       },
+      popupError: {
+        class: `twoslash-popup-error ${classMarkdown}`,
+      },
       errorToken: errorRendering === 'line'
         ? undefined
         : {

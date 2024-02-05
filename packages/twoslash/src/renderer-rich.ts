@@ -112,6 +112,10 @@ export interface RendererRichOptions {
      */
     hoverPopup?: HastExtension
     /**
+     * The container of error popup.
+     */
+    popupError?: HastExtension
+    /**
      * Custom function to compose the hover token.
      */
     hoverCompose?: (parts: { popup: Element, token: Text | Element }) => ElementContent[]
@@ -519,14 +523,17 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
             class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
           },
           children: [
-            {
-              type: 'element',
-              tagName: 'div',
-              properties: {
-                class: 'twoslash-popup-error',
+            extend(
+              hast?.popupError,
+              {
+                type: 'element',
+                tagName: 'div',
+                properties: {
+                  class: 'twoslash-popup-error',
+                },
+                children: renderMarkdown.call(this, error.text),
               },
-              children: renderMarkdown.call(this, error.text),
-            },
+            ),
           ],
         },
       )
