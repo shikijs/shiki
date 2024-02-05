@@ -7,7 +7,7 @@ import type { ShikiTransformer } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
 import { splitTokens } from '@shikijs/core'
-import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiReturn } from './types'
+import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction } from './types'
 import { ShikiTwoslashError } from './error'
 
 export * from './types'
@@ -22,10 +22,8 @@ export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   }
 }
 
-export type TwoslashFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashShikiReturn
-
 export function createTransformerFactory(
-  defaultTwoslasher: TwoslashFunction,
+  defaultTwoslasher: TwoslashShikiFunction,
   defaultRenderer?: TwoslashRenderer,
 ) {
   return function transformerTwoslash(options: TransformerTwoslashOptions = {}): ShikiTransformer {

@@ -1,4 +1,4 @@
-import type { NodeCompletion, NodeError, NodeHighlight, NodeHover, NodeQuery, NodeTag, TwoslashOptions, TwoslashReturn, twoslasher } from 'twoslash'
+import type { NodeCompletion, NodeError, NodeHighlight, NodeHover, NodeQuery, NodeTag, TwoslashExecuteOptions, TwoslashOptions, TwoslashReturn } from 'twoslash'
 import type { CodeToHastOptions, ShikiTransformerContext } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
@@ -7,6 +7,8 @@ export type TwoslashShikiReturn =
   Pick<TwoslashReturn, 'nodes' | 'code'> & {
     meta?: Partial<Pick<TwoslashReturn['meta'], 'extension'>>
   }
+
+export type TwoslashShikiFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashShikiReturn
 
 declare module '@shikijs/core' {
   interface ShikiTransformerContextMeta {
@@ -37,7 +39,7 @@ export interface TransformerTwoslashOptions {
   /**
    * Custom instance of twoslasher function
    */
-  twoslasher?: typeof twoslasher
+  twoslasher?: TwoslashShikiFunction
   /**
    * Options to pass to twoslash
    */
