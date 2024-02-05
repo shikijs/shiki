@@ -1,4 +1,4 @@
-import type { TransformerTwoslashOptions, TwoslashFunction } from '@shikijs/twoslash/core'
+import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
 import { createTransformerFactory } from '@shikijs/twoslash/core'
 import { createTwoslasher } from 'twoslash-vue'
 import type { ShikiTransformer } from 'shiki'

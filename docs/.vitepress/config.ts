@@ -112,12 +112,11 @@ export default withMermaid(defineConfig({
         },
       },
       transformerTwoslash({
+        // errorRendering: 'hover',
         processHoverInfo(info) {
           return defaultHoverInfoProcessor(info)
             // Remove shiki_core namespace
-            .replace(/shiki_core\./g, '')
-            // Remove member access
-            .replace(/^[a-zA-Z0-9_]*(\<[^\>]*\>)?\./, '')
+            .replace(/_shikijs_core[\w_]*\./g, '')
         },
       }),
       {

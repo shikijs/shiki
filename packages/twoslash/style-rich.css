@@ -140,6 +140,8 @@
   color: var(--twoslash-error-color);
   padding: 6px 12px;
   margin: 0.2em 0;
+  min-width: 100%;
+  width: max-content;
 }
 
 .twoslash .twoslash-error-line.twoslash-error-level-warning {
@@ -250,6 +252,8 @@
   display: flex;
   align-items: center;
   gap: 0.3em;
+  min-width: 100%;
+  width: max-content;
 }
 
 .twoslash .twoslash-tag-line .twoslash-tag-icon {

@@ -37,6 +37,10 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
     floatingVueThemeCompletion = 'twoslash-completion',
   } = options.floatingVue || {}
 
+  const {
+    errorRendering = 'line',
+  } = options
+
   const hoverBasicProps = {
     'class': 'twoslash-hover',
     'popper-class': ['shiki', classFloatingPanel, classCopyIgnore, classCode].join(' '),
@@ -91,6 +95,16 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
       popupDocsTags: {
         class: `twoslash-popup-docs twoslash-popup-docs-tags ${classMarkdown}`,
       },
+      errorToken: errorRendering === 'line'
+        ? undefined
+        : {
+            tagName: 'v-menu',
+            properties: {
+              ...hoverBasicProps,
+              class: 'twoslash-error twoslash-error-hover',
+            },
+          },
+      errorCompose: compose,
       completionCompose({ popup, cursor }) {
         return [
           <Element>{
