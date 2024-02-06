@@ -1,0 +1,22 @@
+diff --git a/dist/node/serve-TjCp41j0.js b/dist/node/serve-TjCp41j0.js
+index a9bd902793ae5cf0b596617b8a40a7ea5ea7764e..a43d286c4a5aa5455a7e6aadeaaa69a6721874ad 100644
+--- a/dist/node/serve-TjCp41j0.js
++++ b/dist/node/serve-TjCp41j0.js
+@@ -29,7 +29,7 @@ import http from 'http';
+ import * as qs from 'querystring';
+ import require$$0$2 from 'constants';
+ import { webcrypto } from 'node:crypto';
+-import { getHighlighter, bundledLanguages, addClassToHast, isPlaintext, isSpecialLang } from 'shiki';
++import { getHighlighter, bundledLanguages, addClassToHast, isSpecialLang } from 'shiki';
+ import { transformerNotationDiff, transformerNotationFocus, transformerNotationHighlight, transformerNotationErrorLevel, transformerCompactLineOptions } from '@shikijs/transformers';
+ import MiniSearch from 'minisearch';
+ 
+@@ -36947,7 +36947,7 @@ async function highlight(theme, options, logger = console) {
+     lang = lang.replace(lineNoStartRE, "").replace(lineNoRE, "").replace(vueRE, "").toLowerCase() || defaultLang;
+     if (lang) {
+       const langLoaded = highlighter.getLoadedLanguages().includes(lang);
+-      if (!langLoaded && !isPlaintext(lang) && !isSpecialLang(lang)) {
++      if (!langLoaded && !isSpecialLang(lang)) {
+         logger.warn(
+           c$2.yellow(
+             `

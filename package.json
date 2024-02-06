@@ -66,6 +66,11 @@
     "vue-tsc": "^1.8.27",
     "wrangler": "^3.26.0"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "vitepress@1.0.0-rc.41": "patches/vitepress@1.0.0-rc.41.patch"
+    }
+  },
   "resolutions": {
     "@shikijs/compat": "workspace:*",
     "@shikijs/core": "workspace:*",

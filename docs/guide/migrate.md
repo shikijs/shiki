@@ -34,9 +34,9 @@ Breaking changes applies to main package `shiki`, but are shimmed by the [compat
 
 ### Ecosystem Packages
 
-- `shiki-twoslash` has been completely rewritten. It's no longer a wrapper around Shiki highlighter, but instead, it's now a Shiki transformer that can be plugged in any integrations that supports SHiki transformers. The package is now [`@shikijs/twoslash`](/package/twoslash).
-- Integrations of `shiki-twoslash`, like `gatsby-remark-shiki-twoslash` etc, will be slowly moved to a general Shiki version. Before that, you can use [`@shikijs/rehype`](/packages/rehype) or [`@shikijs/markdown-it`](/packages/markdown-it/) to integrate Shiki into those meta-frameworks.
-- New official integrations like [`@shikijs/monaco`](/packages/monaco), [`@shikijs/cli`](/packages/cli), [`@shikijs/rehype`](/packages/rehype), [`@shikijs/markdown-it`](/packages/markdown-it/) are introduced.
+- `shiki-twoslash` has been completely rewritten. It's no longer a wrapper around Shiki highlighter, but instead, it's now a Shiki transformer that can be plugged in any integrations that supports SHiki transformers. The package is now [`@shikijs/twoslash`](/packages/twoslash).
+- Integrations of `shiki-twoslash`, like `gatsby-remark-shiki-twoslash` etc, will be slowly moved to a general Shiki version. Before that, you can use [`@shikijs/rehype`](/packages/rehype) or [`@shikijs/markdown-it`](/packages/markdown-it) to integrate Shiki into those meta-frameworks.
+- New official integrations like [`@shikijs/monaco`](/packages/monaco), [`@shikijs/cli`](/packages/cli), [`@shikijs/rehype`](/packages/rehype), [`@shikijs/markdown-it`](/packages/markdown-it) are introduced.
 
 ## Migrate from Shikiji
 

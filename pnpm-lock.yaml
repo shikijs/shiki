@@ -19,6 +19,11 @@ overrides:
   unified: ^11.0.4
   vscode-oniguruma: ^1.7.0
 
+patchedDependencies:
+  vitepress@1.0.0-rc.41:
+    hash: ebwghxwvkocguxeoth3awfdnbi
+    path: patches/vitepress@1.0.0-rc.41.patch
+
 importers:
 
   .:
@@ -215,7 +220,7 @@ importers:
         version: 0.26.0(rollup@4.9.6)(vue@3.4.15)
       vitepress:
         specifier: ^1.0.0-rc.41
-        version: 1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
+        version: 1.0.0-rc.41(patch_hash=ebwghxwvkocguxeoth3awfdnbi)(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
       vue:
         specifier: ^3.4.15
         version: 3.4.15(typescript@5.3.3)
@@ -9102,12 +9107,12 @@ packages:
       vitepress: ^1.0.0 || ^1.0.0-alpha
     dependencies:
       mermaid: 10.7.0
-      vitepress: 1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
+      vitepress: 1.0.0-rc.41(patch_hash=ebwghxwvkocguxeoth3awfdnbi)(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
     dev: true
 
-  /vitepress@1.0.0-rc.41(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3):
+  /vitepress@1.0.0-rc.41(patch_hash=ebwghxwvkocguxeoth3awfdnbi)(@algolia/client-search@4.22.1)(@types/node@20.11.16)(fuse.js@7.0.0)(postcss@8.4.33)(search-insights@2.13.0)(typescript@5.3.3):
     resolution: {integrity: sha512-PAEoIIc9J//k/Wg39C6k86hZpXPmLZjRiTBwieDNeYGdevD7xr5Ve8o1W/w+e9dtyQMkuvzgianEamXDX3aj7g==}
     hasBin: true
     peerDependencies:
@@ -9162,6 +9167,7 @@ packages:
       - typescript
       - universal-cookie
     dev: true
+    patched: true
 
   /vitest@1.2.2(@types/node@20.11.16):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}
