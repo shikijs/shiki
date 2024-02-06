@@ -66,5 +66,6 @@ export interface TwoslashRenderer {
   nodeQuery?: (this: ShikiTransformerContext, query: NodeQuery, node: Element | Text) => Partial<ElementContent>
   nodeCompletion?: (this: ShikiTransformerContext, query: NodeCompletion, node: Element | Text) => Partial<ElementContent>
 
+  nodesError?: (this: ShikiTransformerContext, error: NodeError, nodes: ElementContent[]) => ElementContent[]
   nodesHighlight?: (this: ShikiTransformerContext, highlight: NodeHighlight, nodes: ElementContent[]) => ElementContent[]
 }

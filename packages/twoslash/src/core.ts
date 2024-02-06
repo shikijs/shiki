@@ -155,6 +155,29 @@ export function createTransformerFactory(
 
           const tokens = locateTextTokens(node.line, node.character, node.length)
 
+          // Wrap tokens with new elements, all tokens has to be in the same line
+          const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]) => {
+            const line = this.lines[node.line]
+            let charIndex = 0
+            let itemStart = line.children.length
+            let itemEnd = 0
+
+            line.children.forEach((token, index) => {
+              if (charIndex >= node.character && index < itemStart)
+                itemStart = index
+              if ((charIndex <= node.character + node.length) && index > itemEnd)
+                itemEnd = index
+              charIndex += getTokenString(token).length
+            })
+
+            if ((charIndex <= node.character + node.length))
+              itemEnd = line.children.length
+
+            const targets = line.children.slice(itemStart, itemEnd)
+            const length = targets.length
+            line.children.splice(itemStart, length, ...fn(targets))
+          }
+
           switch (node.type) {
             case 'error': {
               if (renderer.nodeError) {
@@ -162,6 +185,14 @@ export function createTransformerFactory(
                   tokensSkipHover.add(token)
                   const clone = { ...token }
                   Object.assign(token, renderer.nodeError!.call(this, node, clone))
+                })
+              }
+              if (renderer.nodesError) {
+                tokens.forEach((token) => {
+                  tokensSkipHover.add(token)
+                })
+                actionsHighlights.push(() => {
+                  wrapTokens(targets => renderer.nodesError?.call(this, node, targets) || targets)
                 })
               }
               if (renderer.lineError)
@@ -194,26 +225,7 @@ export function createTransformerFactory(
             case 'highlight': {
               if (renderer.nodesHighlight) {
                 actionsHighlights.push(() => {
-                  const line = this.lines[node.line]
-                  let charIndex = 0
-                  let itemStart = line.children.length
-                  let itemEnd = 0
-
-                  line.children.forEach((token, index) => {
-                    if (charIndex >= node.character && index < itemStart)
-                      itemStart = index
-                    if ((charIndex <= node.character + node.length) && index > itemEnd)
-                      itemEnd = index
-                    charIndex += getTokenString(token).length
-                  })
-
-                  if ((charIndex <= node.character + node.length))
-                    itemEnd = line.children.length
-
-                  const targets = line.children.slice(itemStart, itemEnd)
-                  const length = targets.length
-                  const highlighted = renderer.nodesHighlight?.call(this, node, targets) || targets
-                  line.children.splice(itemStart, length, ...highlighted)
+                  wrapTokens(targets => renderer.nodesHighlight?.call(this, node, targets) || targets)
                 })
               }
               break

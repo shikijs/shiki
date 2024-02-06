@@ -32,11 +32,6 @@ it('should split tokens correctly', async () => {
     ],
   })
 
-  expect.soft(
-    [...html.matchAll(/<span class="twoslash-error">(.*?)<\/span>/g)].map(i => i[1]),
-  )
-    .toEqual(['"', 'hello', '"'])
-
   expect(
     `<link rel="stylesheet" href="../../style-rich.css" />\n${html}`,
   )

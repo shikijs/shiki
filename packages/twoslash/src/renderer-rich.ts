@@ -493,19 +493,21 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       )
     },
 
-    nodeError(error, node) {
+    nodesError(error, children) {
       if (errorRendering !== 'hover') {
-        return extend(
-          hast?.errorToken,
-          {
-            type: 'element',
-            tagName: 'span',
-            properties: {
-              class: [`twoslash-error`, getErrorLevelClass(error)].filter(Boolean).join(' '),
+        return [
+          extend(
+            hast?.errorToken,
+            {
+              type: 'element',
+              tagName: 'span',
+              properties: {
+                class: [`twoslash-error`, getErrorLevelClass(error)].filter(Boolean).join(' '),
+              },
+              children,
             },
-            children: [node],
-          },
-        )
+          ),
+        ]
       }
 
       const popup = extend(
@@ -532,19 +534,28 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         },
       )
 
-      return extend(
-        hast?.errorToken,
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {
-            class: `twoslash-error twoslash-error-hover ${getErrorLevelClass(error)}`,
+      const token: Element = {
+        type: 'element',
+        tagName: 'span',
+        children,
+        properties: {},
+      }
+
+      return [
+        extend(
+          hast?.errorToken,
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {
+              class: `twoslash-error twoslash-error-hover ${getErrorLevelClass(error)}`,
+            },
+            children: hast?.errorCompose
+              ? hast?.errorCompose({ popup, token })
+              : [popup, token],
           },
-          children: hast?.errorCompose
-            ? hast?.errorCompose({ popup, token: node })
-            : [popup, node],
-        },
-      )
+        ),
+      ]
     },
 
     lineError(error) {
