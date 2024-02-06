@@ -4,9 +4,7 @@ import { codeToTokens } from './code-to-tokens'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { getShikiInternal } from './internal'
-import type { HighlighterCoreOptions, HighlighterGeneric } from './types'
-
-export type HighlighterCore = HighlighterGeneric<never, never>
+import type { HighlighterCore, HighlighterCoreOptions } from './types'
 
 /**
  * Create a Shiki core highlighter instance, with no languages or themes bundled.
@@ -23,17 +21,7 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     codeToTokens: (code, options) => codeToTokens(internal, code, options),
     codeToHast: (code, options) => codeToHast(internal, code, options),
     codeToHtml: (code, options) => codeToHtml(internal, code, options),
-
-    loadLanguage: internal.loadLanguage,
-    loadTheme: internal.loadTheme,
-
-    getTheme: internal.getTheme,
-    getLangGrammar: internal.getLangGrammar,
-    setTheme: internal.setTheme,
-
-    getLoadedThemes: internal.getLoadedThemes,
-    getLoadedLanguages: internal.getLoadedLanguages,
-
+    ...internal,
     getInternalContext: () => internal,
   }
 }

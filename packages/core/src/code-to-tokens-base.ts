@@ -29,7 +29,7 @@ export function codeToTokensBase(
   if (lang === 'ansi')
     return tokenizeAnsiWithTheme(theme, code, options)
 
-  const _grammar = internal.getLangGrammar(lang)
+  const _grammar = internal.getLanguage(lang)
   return tokenizeWithTheme(code, _grammar, theme, colorMap, options)
 }
 

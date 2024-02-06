@@ -1,22 +1,13 @@
 import type * as monaco from 'monaco-editor-core'
-import type { HighlighterGeneric, ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
+import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
 import type { StateStack } from '@shikijs/core/textmate'
 import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
 
 type Monaco = typeof monaco
-type AcceptableShiki = HighlighterGeneric<any, any> | ShikiInternal
 
 export interface MonacoInferface {
   editor: Monaco['editor']
   languages: Monaco['languages']
-}
-
-export interface HighlighterInterface {
-  getLoadedThemes: AcceptableShiki['getLoadedThemes']
-  getTheme: AcceptableShiki['getTheme']
-  getLoadedLanguages: AcceptableShiki['getLoadedLanguages']
-  getLangGrammar: AcceptableShiki['getLangGrammar']
-  setTheme: AcceptableShiki['setTheme']
 }
 
 export interface MonacoTheme extends monaco.editor.IStandaloneThemeData { }
@@ -51,7 +42,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 }
 
 export function shikiToMonaco(
-  highlighter: HighlighterInterface,
+  highlighter: ShikiInternal<any, any>,
   monaco: MonacoInferface,
 ) {
   // Convert themes to Monaco themes and register them
@@ -81,7 +72,7 @@ export function shikiToMonaco(
           return new TokenizerState(INITIAL, highlighter)
         },
         tokenize(line, state: TokenizerState) {
-          const grammar = state.highlighter.getLangGrammar(lang)
+          const grammar = state.highlighter.getLanguage(lang)
           const { colorMap } = state.highlighter.setTheme(currentTheme)
           const theme = themeMap.get(currentTheme)
           const result = grammar.tokenizeLine2(line, state.ruleStack)
@@ -126,7 +117,7 @@ export function shikiToMonaco(
 class TokenizerState implements monaco.languages.IState {
   constructor(
     private _ruleStack: StateStack,
-    public highlighter: HighlighterInterface,
+    public highlighter: ShikiInternal<any, any>,
   ) { }
 
   public get ruleStack(): StateStack {

@@ -5,31 +5,59 @@ import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationR
 import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
 import type { CodeToHastOptions } from './options'
 
-export interface ShikiInternal {
-  setTheme: (name: string | ThemeRegistrationAny) => {
+/**
+ * Internal context of Shiki, core textmate logic
+ */
+export interface ShikiInternal<BundledLangKeys extends string = never, BundledThemeKeys extends string = never> {
+  /**
+   * Load a theme to the highlighter, so later it can be used synchronously.
+   */
+  loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>
+  /**
+   * Load a language to the highlighter, so later it can be used synchronously.
+   */
+  loadLanguage: (...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]) => Promise<void>
+
+  /**
+   * Get the registered theme object
+   */
+  getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
+  /**
+   * Get the registered language object
+   */
+  getLanguage: (name: string | LanguageRegistration) => Grammar
+
+  /**
+   * Set the current theme and get the resolved theme object and color map.
+   * @internal
+   */
+  setTheme: (themeName: string | ThemeRegistrationAny) => {
     theme: ThemeRegistrationResolved
     colorMap: string[]
   }
 
-  getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
-  getLangGrammar: (name: string | LanguageRegistration) => Grammar
-
-  getLoadedThemes: () => string[]
+  /**
+   * Get the names of loaded languages
+   *
+   * Special-handled languages like `text`, `plain` and `ansi` are not included.
+   */
   getLoadedLanguages: () => string[]
-  loadLanguage: (...langs: (LanguageInput | SpecialLanguage)[]) => Promise<void>
-  loadTheme: (...themes: (ThemeInput | SpecialTheme)[]) => Promise<void>
-
-  getAlias: () => Record<string, string>
-  updateAlias: (alias: Record<string, string>) => void
+  /**
+   * Get the names of loaded themes
+   *
+   * Special-handled themes like `none` are not included.
+   */
+  getLoadedThemes: () => string[]
 }
+
 /**
  * Generic instance interface of Shiki
  */
-
-export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string> {
-/**
- * Get highlighted code in HTML string
- */
+export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string>
+  extends ShikiInternal<BundledLangKeys, BundledThemeKeys> {
+  /**
+   * Get highlighted code in HTML string
+   */
   codeToHtml: (
     code: string,
     options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
@@ -70,46 +98,14 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   ) => ThemedTokenWithVariants[][]
 
   /**
-   * Load a theme to the highlighter, so later it can be used synchronously.
-   */
-  loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>
-  /**
-   * Load a language to the highlighter, so later it can be used synchronously.
-   */
-  loadLanguage: (...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]) => Promise<void>
-
-  /**
-   * Get the registered theme object
-   */
-  getTheme: (name: string | ThemeRegistrationAny) => ThemeRegistrationResolved
-  /**
-   * Get the registered language object
-   */
-  getLangGrammar: (name: string | LanguageRegistration) => Grammar
-
-  /**
-   * Set the current theme and get the resolved theme object and color map.
-   * @internal
-   */
-  setTheme: ShikiInternal['setTheme']
-
-  /**
-   * Get the names of loaded languages
-   *
-   * Special-handled languages like `text`, `plain` and `ansi` are not included.
-   */
-  getLoadedLanguages: () => string[]
-  /**
-   * Get the names of loaded themes
-   *
-   * Special-handled themes like `none` are not included.
-   */
-  getLoadedThemes: () => string[]
-
-  /**
    * Get internal context object
    * @internal
    * @deprecated
    */
   getInternalContext: () => ShikiInternal
 }
+
+/**
+ * The fine-grained core Shiki highlighter instance.
+ */
+export type HighlighterCore = HighlighterGeneric<never, never>

@@ -61,7 +61,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
 
   let _lastTheme: string | ThemeRegistrationAny
 
-  function getLangGrammar(name: string | LanguageRegistration) {
+  function getLanguage(name: string | LanguageRegistration) {
     const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
     if (!_lang)
       throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
@@ -112,22 +112,12 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     )
   }
 
-  function updateAlias(alias: Record<string, string>) {
-    Object.assign(_registry.alias, alias)
-  }
-
-  function getAlias() {
-    return _registry.alias
-  }
-
   return {
     setTheme,
     getTheme,
-    getLangGrammar,
+    getLanguage,
     getLoadedThemes,
     getLoadedLanguages,
-    getAlias,
-    updateAlias,
     loadLanguage,
     loadTheme,
   }
