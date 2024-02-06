@@ -69,11 +69,6 @@ export interface RendererRichOptions {
   lang?: string
 
   /**
-   * @deprecated Use `processHoverInfo` instead.
-   */
-  formatInfo?: (info: string) => string
-
-  /**
    * Custom function to render markdown.
    *
    * By default it pass-through the markdown.
@@ -207,8 +202,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
   const {
     completionIcons = defaultCompletionIcons,
     customTagIcons = defaultCustomTagIcons,
-    formatInfo,
-    processHoverInfo = formatInfo || defaultHoverInfoProcessor,
+    processHoverInfo = defaultHoverInfoProcessor,
     processHoverDocs = docs => docs,
     classExtra = '',
     jsdoc = true,

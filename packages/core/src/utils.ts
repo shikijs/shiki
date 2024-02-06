@@ -150,11 +150,6 @@ export function applyColorReplacements(color: string, replacements?: Record<stri
   return replacements?.[color.toLowerCase()] || color
 }
 
-/**
- * @deprecated Use `isPlainLang` instead.
- */
-export const isPlaintext = isPlainLang
-
 export function getTokenStyleObject(token: TokenStyles) {
   const styles: Record<string, string> = {}
   if (token.color)

@@ -1,16 +1,7 @@
 import type MarkdownIt from 'markdown-it'
 import type { BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, ShikiTransformer, TransformerOptions } from 'shiki'
-import { transformerMetaHighlight } from '@shikijs/transformers'
 
 export interface MarkdownItShikiExtraOptions {
-  /**
-   * Add `highlighted` class to lines defined in after codeblock
-   *
-   * @deprecated Use [transformerNotationHighlight](https://shiki.style/packages/transformers#transformernotationhighlight) instead
-   * @default false
-   */
-  highlightLines?: boolean | string
-
   /**
    * Custom meta string parser
    * Return an object to merge with `meta`
@@ -34,7 +25,6 @@ export function setupMarkdownIt(
   options: MarkdownItShikiSetupOptions,
 ) {
   const {
-    highlightLines = false,
     parseMetaString,
   } = options
 
@@ -51,16 +41,6 @@ export function setupMarkdownIt(
     }
 
     const builtInTransformer: ShikiTransformer[] = []
-
-    if (highlightLines) {
-      builtInTransformer.push(
-        transformerMetaHighlight({
-          className: highlightLines === true
-            ? 'highlighted'
-            : highlightLines,
-        }),
-      )
-    }
 
     builtInTransformer.push({
       name: '@shikijs/markdown-it:block-class',

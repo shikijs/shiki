@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import { expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
+import { transformerMetaHighlight } from '@shikijs/transformers'
 import Shiki from '../src'
 
 it('run', async () => {
@@ -10,7 +11,9 @@ it('run', async () => {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
-    highlightLines: true,
+    transformers: [
+      transformerMetaHighlight(),
+    ],
   }))
 
   const result = md.render(await fs.readFile(new URL('./fixtures/a.md', import.meta.url), 'utf-8'))

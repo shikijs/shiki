@@ -10,13 +10,4 @@ export type {
   RawGrammar,
   RawTheme,
   RawThemeSetting,
-
-  /**
-   * @deprecated Renamed to `Grammar`
-   */
-  Grammar as IGrammar,
-  /**
-   * @deprecated Renamed to `RawGrammar`
-   */
-  RawGrammar as IRawGrammar,
 }

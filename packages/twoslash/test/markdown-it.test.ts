@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+import { transformerMetaHighlight } from '@shikijs/transformers'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-rich.css" />
@@ -65,13 +66,13 @@ const a = 123
     const md = MarkdownIt()
 
     md.use(await Shiki({
-      highlightLines: true,
       themes: {
         light: 'vitesse-light',
         dark: 'vitesse-dark',
       },
       defaultColor: false,
       transformers: [
+        transformerMetaHighlight(),
         transformerTwoslash({
           explicitTrigger: true,
           renderer: rendererRich(),

@@ -35,8 +35,5 @@ export async function getHighlighterCore(options: HighlighterCoreOptions = {}): 
     getLoadedLanguages: internal.getLoadedLanguages,
 
     getInternalContext: () => internal,
-
-    /** @deprecated */
-    codeToThemedTokens: (code, options) => codeToTokensBase(internal, code, options),
   }
 }

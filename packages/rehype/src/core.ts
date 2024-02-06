@@ -4,7 +4,6 @@ import type { BuiltinTheme } from 'shiki'
 import type { Plugin } from 'unified'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
-import { transformerMetaHighlight } from '@shikijs/transformers'
 
 export interface MapLike<K = any, V = any> {
   get: (key: K) => V | undefined
@@ -12,14 +11,6 @@ export interface MapLike<K = any, V = any> {
 }
 
 export interface RehypeShikiExtraOptions {
-  /**
-   * Add `highlighted` class to lines defined in after codeblock
-   *
-   * @deprecated Use [transformerNotationHighlight](https://shiki.style/packages/transformers#transformernotationhighlight) instead
-   * @default false
-   */
-  highlightLines?: boolean | string
-
   /**
    * Add `language-*` class to code element
    *
@@ -71,7 +62,6 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
   options,
 ) {
   const {
-    highlightLines = false,
     addLanguageClass = false,
     parseMetaString,
     cache,
@@ -138,17 +128,6 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
             return node
           },
         })
-      }
-
-      if (highlightLines && typeof metaString === 'string') {
-        codeOptions.transformers ||= []
-        codeOptions.transformers.push(
-          transformerMetaHighlight({
-            className: highlightLines === true
-              ? 'highlighted'
-              : highlightLines,
-          }),
-        )
       }
 
       try {

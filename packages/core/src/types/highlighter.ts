@@ -70,14 +70,6 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
   ) => ThemedTokenWithVariants[][]
 
   /**
-   * @deprecated Renamed to `codeToTokensBase`, or use high-level `codeToTokens` directly.
-   */
-  codeToThemedTokens: (
-    code: string,
-    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ) => ThemedToken[][]
-
-  /**
    * Load a theme to the highlighter, so later it can be used synchronously.
    */
   loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>

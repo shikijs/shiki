@@ -9,6 +9,7 @@ import { expect, it } from 'vitest'
 
 import { getHighlighter } from 'shiki'
 import type { Root } from 'hast'
+import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 
 it('run', async () => {
@@ -26,7 +27,9 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
-      highlightLines: true,
+      transformers: [
+        transformerMetaHighlight(),
+      ],
     })
     .use(rehypeStringify)
     .processSync(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
@@ -60,7 +63,9 @@ it('run with rehype-raw', async () => {
     .use(rehypeRaw)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
-      highlightLines: true,
+      transformers: [
+        transformerMetaHighlight(),
+      ],
     })
     .use(rehypeStringify)
     .processSync(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))

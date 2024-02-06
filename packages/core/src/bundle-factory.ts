@@ -116,11 +116,6 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    * @internal
    */
   getSingletonHighlighter: () => Promise<HighlighterGeneric<L, T>>
-
-  /**
-   * @deprecated Use `codeToTokensBase` instead.
-   */
-  codeToThemedTokens: (code: string, options: RequireKeys<CodeToTokensBaseOptions<L, T>, 'theme' | 'lang'>) => Promise<ThemedToken[][]>
 }
 
 export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>): ShorthandsBundle<L, T> {
@@ -176,14 +171,6 @@ export function createSingletonShorthands<L extends string, T extends string >(g
     async codeToTokensBase(code, options) {
       const shiki = await _getHighlighter(options)
       return shiki.codeToTokensBase(code, options)
-    },
-
-    /**
-     * @deprecated Use `codeToTokensBase` instead.
-     */
-    async codeToThemedTokens(code, options) {
-      const shiki = await _getHighlighter(options)
-      return shiki.codeToThemedTokens(code, options)
     },
 
     async codeToTokensWithThemes(code, options) {

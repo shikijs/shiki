@@ -85,25 +85,4 @@ export interface ShikiTransformer {
    * This hook will only be called with `codeToHtml`.
    */
   postprocess?: (this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => string | void
-
-  // deprecated
-  /**
-   * @deprecated Use `span` instead
-   */
-  token?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element) => Element | void
 }
-
-/**
- * @deprecated Rnamed to `ShikiTransformer`
- */
-export interface ShikijiTransformer extends ShikiTransformer {}
-
-/**
- * @deprecated Rnamed to `ShikiTransformerContext`
- */
-export interface ShikijiTransformerContext extends ShikiTransformerContext {}
-
-/**
- * @deprecated Rnamed to `ShikiTransformerContextCommon`
- */
-export interface ShikijiTransformerContextCommon extends ShikiTransformerContextCommon {}
