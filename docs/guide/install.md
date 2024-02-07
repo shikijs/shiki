@@ -261,7 +261,7 @@ To use `shiki` in the browser via CDN, you can use [esm.run](https://esm.run) or
 
 It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shiki`, `shiki/themes/vitesse-light.mjs`, `shiki/langs/javascript.mjs`, `shiki/wasm.mjs`), with around 200KB data transferred in total.
 
-[Demo](https://jsfiddle.net/rdasqhxu/1/)
+[Demo](https://jsfiddle.net/t7brz23v/)
 
 ### Cloudflare Workers
 
