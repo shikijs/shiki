@@ -246,9 +246,9 @@ To use `shiki` in the browser via CDN, you can use [esm.run](https://esm.run) or
 
   <script type="module">
     // be sure to specify the exact version
-    import { codeToHtml } from 'https://esm.sh/shiki@0.8.0'
+    import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
     // or
-    // import { codeToHtml } from 'https://esm.run/shiki@0.8.0'
+    // import { codeToHtml } from 'https://esm.run/shiki@1.0.0'
 
     const foo = document.getElementById('foo')
     foo.innerHTML = await codeToHtml('console.log("Hi, Shiki on CDN :)")', {
