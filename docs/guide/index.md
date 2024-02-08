@@ -14,15 +14,16 @@ Oh by the way, all the code blocks in this site are highlighted by Shiki, as you
 
 ## Features
 
-- All grammars/themes/wasm served as pure-ESM, no [CDN](https://github.com/shikijs/shiki#specify-a-custom-root-directory) and [assets](https://github.com/shikijs/shiki#specify-how-to-load-webassembly) needed.
-- Portable. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
+- All grammars/themes/wasm served as ESM, lazy-loaded on demand and bundler-friendly.
+- Portable & agnostic. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - ESM-only ([CDN Usage](/guide/install#cdn-usage), [CJS Usage](/guide/install#cjs-usage)).
 - [Bundles languages/themes composedly](/guide/install#fine-grained-bundle).
-- [Light/Dark themes support](/guide/dual-themes).
-- [AST-based transformers addons](/guide/transformers).
-- [`hast` support](/guide/transformers#codetohast).
-- [TypeScript Twoslash](/packages/twoslash).
-- [Compatible build](/guide/compat).
+- [Light/Dark themes support](/guide/dual-themes)
+- [`hast` support](/guide/transformers#codetohast)
+- [Transformers API](/guide/transformers)
+- [Decorations API](/guide/decorations)
+- [TypeScript Twoslash integrations](/packages/twoslash)
+- [Compatible build](/guide/compat)
 
 ## Playground
 
