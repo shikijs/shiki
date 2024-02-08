@@ -10,12 +10,6 @@ export type TwoslashShikiReturn =
 
 export type TwoslashShikiFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashShikiReturn
 
-declare module '@shikijs/core' {
-  interface ShikiTransformerContextMeta {
-    twoslash?: TwoslashShikiReturn
-  }
-}
-
 export interface TransformerTwoslashOptions {
   /**
    * Languages to apply this transformer to

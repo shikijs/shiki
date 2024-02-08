@@ -7,7 +7,8 @@ import type { ShikiTransformer } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
 import { splitTokens } from '@shikijs/core'
-import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction } from './types'
+import type { ShikiTransformerContextMeta } from 'shiki'
+import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
 import { ShikiTwoslashError } from './error'
 
 export * from './types'
@@ -48,6 +49,8 @@ export function createTransformerFactory(
     if (!renderer)
       throw new ShikiTwoslashError('Missing renderer')
 
+    const map = new WeakMap<ShikiTransformerContextMeta, TwoslashShikiReturn>()
+
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || trigger.test(options.meta?.__raw || '')))
     return {
       preprocess(code) {
@@ -57,19 +60,20 @@ export function createTransformerFactory(
 
         if (filter(lang, code, this.options)) {
           const twoslash = twoslasher(code, lang, twoslashOptions)
-          this.meta.twoslash = twoslash
+          map.set(this.meta, twoslash)
           this.options.lang = twoslash.meta?.extension || lang
           return twoslash.code
         }
       },
       tokens(tokens) {
-        if (!this.meta.twoslash)
+        const twoslash = map.get(this.meta)
+        if (!twoslash)
           return
 
         // Break tokens at the boundaries of twoslash nodes
         return splitTokens(
           tokens,
-          this.meta.twoslash.nodes.flatMap(i =>
+          twoslash.nodes.flatMap(i =>
             ['hover', 'error', 'query', 'highlight', 'completion'].includes(i.type)
               ? [i.start, i.start + i.length]
               : [],
@@ -77,11 +81,13 @@ export function createTransformerFactory(
         )
       },
       pre(pre) {
-        if (this.meta.twoslash)
-          this.addClassToHast(pre, 'twoslash lsp')
+        const twoslash = map.get(this.meta)
+        if (!twoslash)
+          return
+        this.addClassToHast(pre, 'twoslash lsp')
       },
       code(codeEl) {
-        const twoslash = this.meta.twoslash
+        const twoslash = map.get(this.meta)
         if (!twoslash)
           return
 
@@ -154,6 +160,9 @@ export function createTransformerFactory(
           }
 
           const tokens = locateTextTokens(node.line, node.character, node.length)
+
+          if (!tokens.length)
+            throw new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`)
 
           // Wrap tokens with new elements, all tokens has to be in the same line
           const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]) => {
