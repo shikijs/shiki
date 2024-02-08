@@ -2,7 +2,6 @@ import type { Element, ElementContent, Text } from 'hast'
 import type { ShikiTransformerContextCommon } from '@shikijs/core'
 import type { NodeError, NodeHover, NodeQuery } from 'twoslash'
 import type { TwoslashRenderer } from './types'
-import type { CompletionItem } from './icons'
 import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
 import { ShikiTwoslashError } from './error'
 
@@ -21,7 +20,7 @@ export interface RendererRichOptions {
    * If `false`, no icons will be rendered.
    * @default defaultCompletionIcons
    */
-  completionIcons?: Partial<Record<CompletionItem['kind'], ElementContent>> | false
+  completionIcons?: Partial<Record<string, ElementContent>> | false
 
   /**
    * Custom icons for custom tags lines.
@@ -389,60 +388,64 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         throw new ShikiTwoslashError(`Renderer hook nodeCompletion only works on text nodes, got ${node.type}`)
 
       const items: Element[] = query.completions
-        .map(i => ({
-          type: 'element',
-          tagName: 'li',
-          properties: {},
-          children: [
-            ...completionIcons
-              ? [<Element>{
+        .map((i) => {
+          const kind = i.kind || 'default'
+          const isDeprecated = 'kindModifiers' in i && typeof i.kindModifiers === 'string' && i.kindModifiers?.split(',').includes('deprecated')
+          return {
+            type: 'element',
+            tagName: 'li',
+            properties: {},
+            children: [
+              ...completionIcons
+                ? [<Element>{
+                  type: 'element',
+                  tagName: 'span',
+                  properties: { class: `twoslash-completions-icon completions-${kind.replace(/\s/g, '-')}` },
+                  children: [
+                    completionIcons[kind] || completionIcons.property,
+                  ].filter(Boolean),
+                }]
+                : [],
+              {
                 type: 'element',
                 tagName: 'span',
-                properties: { class: `twoslash-completions-icon completions-${i.kind.replace(/\s/g, '-')}` },
+                properties: {
+                  class: isDeprecated
+                    ? 'deprecated'
+                    : undefined,
+                },
                 children: [
-                  completionIcons[i.kind] || completionIcons.property,
-                ].filter(Boolean),
-              }]
-              : [],
-            {
-              type: 'element',
-              tagName: 'span',
-              properties: {
-                class: i.kindModifiers?.split(',').includes('deprecated')
-                  ? 'deprecated'
-                  : undefined,
+                  {
+                    type: 'element',
+                    tagName: 'span',
+                    properties: { class: 'twoslash-completions-matched' },
+                    children: [
+                      {
+                        type: 'text',
+                        value: i.name.startsWith(query.completionsPrefix)
+                          ? query.completionsPrefix
+                          : '',
+                      },
+                    ],
+                  },
+                  {
+                    type: 'element',
+                    tagName: 'span',
+                    properties: { class: 'twoslash-completions-unmatched' },
+                    children: [
+                      {
+                        type: 'text',
+                        value: i.name.startsWith(query.completionsPrefix)
+                          ? i.name.slice(query.completionsPrefix.length || 0)
+                          : i.name,
+                      },
+                    ],
+                  },
+                ],
               },
-              children: [
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { class: 'twoslash-completions-matched' },
-                  children: [
-                    {
-                      type: 'text',
-                      value: i.name.startsWith(query.completionsPrefix)
-                        ? query.completionsPrefix
-                        : '',
-                    },
-                  ],
-                },
-                {
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { class: 'twoslash-completions-unmatched' },
-                  children: [
-                    {
-                      type: 'text',
-                      value: i.name.startsWith(query.completionsPrefix)
-                        ? i.name.slice(query.completionsPrefix.length || 0)
-                        : i.name,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        }))
+            ],
+          }
+        })
 
       const cursor = extend(
         hast?.completionCursor,
@@ -651,13 +654,13 @@ export function defaultHoverInfoProcessor(type: string) {
 
 function getErrorLevelClass(error: NodeError) {
   switch (error.level) {
-    case 0:
+    case 'warning':
       return 'twoslash-error-level-warning'
-    case 1:
-      return '' // 'twoslash-error-level-error'
-    case 2:
+    case 'suggestion':
       return 'twoslash-error-level-suggestion'
+    case 'message':
+      return 'twoslash-error-level-message'
     default:
-      return 'twoslash-error-level-info'
+      return ''
   }
 }

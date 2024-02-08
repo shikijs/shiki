@@ -98,7 +98,7 @@ export function rendererClassic(): TwoslashRenderer {
                     type: 'element',
                     tagName: 'li',
                     properties: {
-                      class: i.kindModifiers?.split(',').includes('deprecated')
+                      class: 'kindModifiers' in i && typeof i.kindModifiers === 'string' && i.kindModifiers?.split(',').includes('deprecated')
                         ? 'deprecated'
                         : undefined,
                     },

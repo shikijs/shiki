@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import { icons as codicon } from '@iconify-json/codicon'
 import { icons as carbon } from '@iconify-json/carbon'
 import { fromHtml } from 'hast-util-from-html'
-import type { CompletionItem } from '../src/icons'
+import type { CompletionEntry } from 'typescript'
 
 async function buildIcons(filepath: string, map: Record<string, string>) {
   const result = Object.fromEntries(
@@ -39,7 +39,7 @@ await buildIcons(
     interface: 'carbon:connect',
     function: 'carbon:function',
     string: 'carbon:string-text',
-  } satisfies Partial<Record<CompletionItem['kind'], string>>,
+  } satisfies Partial<Record<CompletionEntry['kind'], string>>,
 )
 
 await buildIcons(

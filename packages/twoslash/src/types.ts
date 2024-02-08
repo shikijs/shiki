@@ -1,4 +1,4 @@
-import type { NodeCompletion, NodeError, NodeHighlight, NodeHover, NodeQuery, NodeTag, TwoslashExecuteOptions, TwoslashOptions, TwoslashReturn } from 'twoslash'
+import type { NodeCompletion, NodeError, NodeHighlight, NodeHover, NodeQuery, NodeTag, TwoslashExecuteOptions, TwoslashGenericFunction, TwoslashOptions, TwoslashReturn } from 'twoslash'
 import type { CodeToHastOptions, ShikiTransformerContext } from '@shikijs/core'
 import type { Element, ElementContent, Text } from 'hast'
 
@@ -9,6 +9,12 @@ export type TwoslashShikiReturn =
   }
 
 export type TwoslashShikiFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions) => TwoslashShikiReturn
+
+declare module '@shikijs/core' {
+  interface ShikiTransformerContextMeta {
+    twoslash?: TwoslashShikiReturn
+  }
+}
 
 export interface TransformerTwoslashOptions {
   /**
@@ -33,7 +39,7 @@ export interface TransformerTwoslashOptions {
   /**
    * Custom instance of twoslasher function
    */
-  twoslasher?: TwoslashShikiFunction
+  twoslasher?: TwoslashShikiFunction | TwoslashGenericFunction
   /**
    * Options to pass to twoslash
    */
