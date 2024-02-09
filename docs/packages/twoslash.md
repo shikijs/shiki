@@ -50,7 +50,7 @@ We provide two renderers built-in, and you can also create your own:
 
 ### `rendererRich`
 
-[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/src/renderer-rich.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/twoslash/src/renderer-rich.ts)
 
 ::: tip
 This is the default renderer since v0.10.0.
@@ -67,7 +67,7 @@ transformerTwoslash({
 })
 ```
 
-Here are a few examples with the built-in [`style-rich.css`](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/style-rich.css):
+Here are a few examples with the built-in [`style-rich.css`](https://github.com/shikijs/shiki/blob/main/packages/twoslash/style-rich.css):
 
 <!-- eslint-skip -->
 
@@ -108,7 +108,7 @@ const c = 1
 
 ### `rendererClassic`
 
-[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/src/renderer-classic.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/twoslash/src/renderer-classic.ts)
 
 This renderer aligns with the output of [`@shikijs/twoslash`](https://shikijs.github.io/twoslash/).
 
@@ -120,11 +120,11 @@ transformerTwoslash({
 })
 ```
 
-You might need to reference `@shikijs/twoslash`'s CSS to make it look good. [Here](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/twoslash/style-classic.css) we also copied the CSS from `@shikijs/twoslash` but it might need some cleanup.
+You might need to reference `@shikijs/twoslash`'s CSS to make it look good. [Here](https://github.com/shikijs/shiki/blob/main/packages/twoslash/style-classic.css) we also copied the CSS from `@shikijs/twoslash` but it might need some cleanup.
 
 ### `rendererFloatingVue`
 
-[Source code](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/vitepress-twoslash/src/renderer-floating-vue.ts)
+[Source code](https://github.com/shikijs/shiki/blob/main/packages/vitepress-twoslash/src/renderer-floating-vue.ts)
 
 This renderer outputs Vue template syntax that using [Floating Vue](https://floating-vue.starpad.dev/) as the popup component (to render it outside the containers). This renderer is **NOT** directly usable but an internal renderer for the [VitePress integration](/packages/vitepress#twoslash). Listing it here for reference if you want to create your own renderer.
 
