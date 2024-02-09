@@ -1,6 +1,6 @@
 /* eslint-disable node/prefer-global/process */
 import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
-import { ShikiTwoslashError, createTransformerFactory } from '@shikijs/twoslash/core'
+import { createTransformerFactory } from '@shikijs/twoslash/core'
 import { createTwoslasher } from 'twoslash-vue'
 import type { ShikiTransformer } from 'shiki'
 import { removeTwoslashNotations } from 'twoslash'
