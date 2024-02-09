@@ -53,6 +53,17 @@ export interface TransformerTwoslashOptions {
    * @default true
    */
   throws?: boolean
+  /**
+   * Custom error handler for twoslash errors
+   * When specified, `throws` will be ignored
+   * Optionally return a string to replace the code
+   */
+  onTwoslashError?: (error: unknown, code: string, lang: string, options: CodeToHastOptions) => string | void
+  /**
+   * Custom error handler for Shiki errors
+   * When specified, `throws` will be ignored
+   */
+  onShikiError?: (error: unknown) => void
 }
 
 export interface TwoslashRenderer {

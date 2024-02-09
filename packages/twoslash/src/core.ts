@@ -41,6 +41,21 @@ export function createTransformerFactory(
       throws = true,
     } = options
 
+    const onTwoslashError = options.onTwoslashError || (
+      throws
+        ? (error) => {
+            throw error
+          }
+        : () => false
+    )
+    const onShikiError = options.onShikiError || (
+      throws
+        ? (error) => {
+            throw error
+          }
+        : () => false
+    )
+
     const trigger = explicitTrigger instanceof RegExp
       ? explicitTrigger
       : /\btwoslash\b/
@@ -58,11 +73,18 @@ export function createTransformerFactory(
           lang = langAlias[this.options.lang]
 
         if (filter(lang, code, this.options)) {
-          const twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, twoslashOptions)
-          map.set(this.meta, twoslash)
-          this.meta.twoslash = twoslash
-          this.options.lang = twoslash.meta?.extension || lang
-          return twoslash.code
+          try {
+            const twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, twoslashOptions)
+            map.set(this.meta, twoslash)
+            this.meta.twoslash = twoslash
+            this.options.lang = twoslash.meta?.extension || lang
+            return twoslash.code
+          }
+          catch (error) {
+            const result = onTwoslashError(error, code, lang, this.options)
+            if (typeof result === 'string')
+              return code
+          }
         }
       },
       tokens(tokens) {
@@ -102,8 +124,7 @@ export function createTransformerFactory(
             const lineEl = this.lines[line]
             index = codeEl.children.indexOf(lineEl)
             if (index === -1) {
-              if (throws)
-                throw new ShikiTwoslashError(`Cannot find line ${line} in code element`)
+              onShikiError(new ShikiTwoslashError(`Cannot find line ${line} in code element`))
               return
             }
           }
@@ -161,8 +182,10 @@ export function createTransformerFactory(
 
           const tokens = locateTextTokens(node.line, node.character, node.length)
 
-          if (!tokens.length)
-            throw new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`)
+          if (!tokens.length && !(node.type === 'error' && renderer.nodesError)) {
+            onShikiError(new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`))
+            continue
+          }
 
           // Wrap tokens with new elements, all tokens has to be in the same line
           const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]) => {
@@ -256,9 +279,7 @@ export function createTransformerFactory(
               break
             }
             default: {
-              if (throws)
-                // @ts-expect-error Unknown node type
-                throw new ShikiTwoslashError(`Unknown node type: ${node.type}`)
+              onShikiError(new ShikiTwoslashError(`Unknown node type: ${(node as any)?.type}`))
             }
           }
         }
