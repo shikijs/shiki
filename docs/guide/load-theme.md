@@ -21,7 +21,8 @@ const myTheme = {
 }
 
 const highlighter = await getHighlighter({
-  themes: [myTheme]
+  themes: [myTheme],
+  langs: [],
 })
 
 const code = `console.log('hello')`
@@ -40,7 +41,10 @@ import { getHighlighter } from 'shiki'
 // Load the theme object from a file, a network request, or anywhere
 const myTheme = JSON.parse(fs.readFileSync('my-theme.json', 'utf8'))
 
-const highlighter = await getHighlighter()
+const highlighter = await getHighlighter({
+  langs: ['javascript'],
+  themes: [],
+})
 
 await highlighter.loadTheme(myTheme) // <--
 

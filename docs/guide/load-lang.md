@@ -11,11 +11,13 @@ import { getHighlighter } from 'shiki'
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
 const highlighter = await getHighlighter({
-  langs: [myLang]
+  langs: [myLang],
+  themes: ['vitesse-light']
 })
 
 const html = highlighter.codeToHtml(code, {
   lang: 'my-lang',
+  theme: 'vitesse-light'
 })
 ```
 
@@ -27,12 +29,16 @@ import { getHighlighter } from 'shiki'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
-const highlighter = await getHighlighter()
+const highlighter = await getHighlighter({
+  langs: [],
+  themes: ['vitesse-light'],
+})
 
 await highlighter.loadLanguage(myLang) // <--
 
 const html = highlighter.codeToHtml(code, {
   lang: 'my-lang',
+  theme: 'vitesse-light'
 })
 ```
 
@@ -59,7 +65,8 @@ const highlighter = await getHighlighter({
         'stylus',
       ],
     },
-  ]
+  ],
+  themes: []
 })
 ```
 
@@ -83,7 +90,8 @@ const highlighter = await getHighlighter({
       ],
       ...vineGrammar
     },
-  ]
+  ],
+  themes: []
 })
 ```
 
@@ -99,6 +107,7 @@ const highlighter = await getHighlighter({
   langAlias: { // [!code hl:3]
     mylang: 'javascript',
   },
+  themes: ['nord']
 })
 
 const code = highlighter.codeToHtml('const a = 1', {

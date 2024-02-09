@@ -174,8 +174,8 @@ importers:
         specifier: ^1.8.27
         version: 1.8.27(typescript@5.3.3)
       wrangler:
-        specifier: ^3.28.0
-        version: 3.28.0
+        specifier: ^3.28.1
+        version: 3.28.1
 
   docs:
     dependencies:
@@ -349,8 +349,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       twoslash:
-        specifier: ^0.2.0
-        version: 0.2.0(typescript@5.3.3)
+        specifier: ^0.2.1
+        version: 0.2.1(typescript@5.3.3)
     devDependencies:
       '@iconify-json/carbon':
         specifier: ^1.1.29
@@ -388,9 +388,12 @@ importers:
       shiki:
         specifier: workspace:*
         version: link:../shiki
+      twoslash:
+        specifier: ^0.2.1
+        version: 0.2.1(typescript@5.3.3)
       twoslash-vue:
-        specifier: ^0.2.0
-        version: 0.2.0(typescript@5.3.3)
+        specifier: ^0.2.1
+        version: 0.2.1(typescript@5.3.3)
       vue:
         specifier: ^3.4.18
         version: 3.4.18(typescript@5.3.3)
@@ -8579,30 +8582,30 @@ packages:
       - supports-color
     dev: true
 
-  /twoslash-protocol@0.2.0:
-    resolution: {integrity: sha512-dR67W4smBeb1bV4ef804KBAGw+/PIyXN2e44uSk/hRqsSmOpiDSY1AsEJtinBoCOkAHo3v6rcpm8UHB/bVuJxg==}
+  /twoslash-protocol@0.2.1:
+    resolution: {integrity: sha512-ppACotZJJQlhI7UdoAQ1SOhLsnAyVHoY69gmBY6ygw+mULShR13zVToHpM0eUA/GqS2jiNCAeE2HrcXZ+1qLfg==}
     dev: false
 
-  /twoslash-vue@0.2.0(typescript@5.3.3):
-    resolution: {integrity: sha512-nb+ludKNHxo3B2fEVpkx47mkx689yUgnoH9EKonJucpkZ4u/MwKwgqzP1mM8nRv04m3HFFsBKExEVkmJJPQN5g==}
+  /twoslash-vue@0.2.1(typescript@5.3.3):
+    resolution: {integrity: sha512-j/5xaz5aD/8Wiyz/8MXJPQ26hPFefHozcy3XfGuEcR4yjxJv+ErOnjBhts3pKVMpkRbExLtyE/z9qJjZRcpOFA==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@vue/language-core': 1.8.27(typescript@5.3.3)
-      twoslash: 0.2.0(typescript@5.3.3)
-      twoslash-protocol: 0.2.0
+      twoslash: 0.2.1(typescript@5.3.3)
+      twoslash-protocol: 0.2.1
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /twoslash@0.2.0(typescript@5.3.3):
-    resolution: {integrity: sha512-HF3lu6I/wsYFs5G47ZscUHuQqSdxTaYTH0Jqa0nObhGbYxkkM6b+NnHPDkhB9+aOBoZZ4d+ugz7ZcMbvAJcpaQ==}
+  /twoslash@0.2.1(typescript@5.3.3):
+    resolution: {integrity: sha512-V8J0OGo9gj5pZ2UlZvIYlr71PThc/eYEfK/UnnrhysUpEtzhdMC102ucm3C43RHXdUMLYBccwILiOGl87zswDA==}
     peerDependencies:
       typescript: '*'
     dependencies:
       '@typescript/vfs': 1.5.0
-      twoslash-protocol: 0.2.0
+      twoslash-protocol: 0.2.1
       typescript: 5.3.3
     transitivePeerDependencies:
       - supports-color
@@ -9297,8 +9300,8 @@ packages:
       '@cloudflare/workerd-windows-64': 1.20240129.0
     dev: true
 
-  /wrangler@3.28.0:
-    resolution: {integrity: sha512-28lqaO4THoGyvnRtrC5+GvyFthn8E9brRSiz4sMJU8Wf5UT8JRq31Pp4leHuQ3sCzSI2yqzB4+NTo6YZaoXMfw==}
+  /wrangler@3.28.1:
+    resolution: {integrity: sha512-3O8vCzd7IC71Kciu/+oDVO0VZ83ujlUuKwmCkv6/zzt4WAoYu0vk7PyEo4WvlsSbZL8aHuv3bS917rd6TM1/9Q==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:

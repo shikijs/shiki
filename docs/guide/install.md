@@ -118,7 +118,10 @@ Unlike `shiki` that loads all themes and languages by default, `shiki` requires 
 ```ts theme:slack-dark twoslash
 import { getHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({ /* ... */ })
+const highlighter = await getHighlighter({
+  themes: [],
+  langs: []
+})
 
 highlighter.codeToHtml(
   'const a = 1',

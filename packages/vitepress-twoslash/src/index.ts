@@ -1,7 +1,9 @@
+/* eslint-disable node/prefer-global/process */
 import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
-import { createTransformerFactory } from '@shikijs/twoslash/core'
+import { ShikiTwoslashError, createTransformerFactory } from '@shikijs/twoslash/core'
 import { createTwoslasher } from 'twoslash-vue'
 import type { ShikiTransformer } from 'shiki'
+import { removeTwoslashNotations } from 'twoslash'
 import type { TwoslashFloatingVueRendererOptions } from './renderer-floating-vue'
 import { rendererFloatingVue } from './renderer-floating-vue'
 
@@ -30,6 +32,16 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
+    onTwoslashError: (error, code) => {
+      const isCI = typeof process !== 'undefined' && process?.env?.CI
+      const isDev = typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development'
+      console.error(String(error), `\n\n--------\nTwoslash error in code:\n--------\n${code.split(/\n/g).slice(0, 15).join('\n').trim()}\n--------\n`)
+      if (isCI || !isDev || options.throws)
+        throw error
+      if (typeof process !== 'undefined')
+        process.exitCode = 1
+      return removeTwoslashNotations(code)
+    },
     ...options,
     explicitTrigger,
   })
