@@ -4,7 +4,7 @@ import { isSpecialLang, isSpecialTheme, toArray } from './utils'
 import { getHighlighterCore } from './highlighter'
 import { ShikiError } from './error'
 
-export type GetHighlighterFactory<L extends string, T extends string> = (options?: BundledHighlighterOptions<L, T>) => Promise<HighlighterGeneric<L, T>>
+export type GetHighlighterFactory<L extends string, T extends string> = (options: BundledHighlighterOptions<L, T>) => Promise<HighlighterGeneric<L, T>>
 
 /**
  * Create a `getHighlighter` function with bundled themes and languages.
@@ -18,7 +18,9 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
   bundledThemes: Record<BundledThemes, ThemeInput>,
   loadWasm: HighlighterCoreOptions['loadWasm'],
 ): GetHighlighterFactory<BundledLangs, BundledThemes> {
-  async function getHighlighter(options: BundledHighlighterOptions<BundledLangs, BundledThemes> = {}): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
+  async function getHighlighter(
+    options: BundledHighlighterOptions<BundledLangs, BundledThemes>,
+  ): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
     function resolveLang(lang: LanguageInput | BundledLangs | SpecialLanguage): LanguageInput {
       if (typeof lang === 'string') {
         if (isSpecialLang(lang))

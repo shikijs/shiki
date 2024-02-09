@@ -32,13 +32,13 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
    *
    * @default []
    */
-  themes?: (ThemeInput | StringLiteralUnion<T>)[]
+  themes: (ThemeInput | StringLiteralUnion<T>)[]
   /**
    * Language registation
    *
-   * @default Object.keys(bundledThemes)
+   * @default []
    */
-  langs?: (LanguageInput | StringLiteralUnion<L> | SpecialLanguage)[]
+  langs: (LanguageInput | StringLiteralUnion<L> | SpecialLanguage)[]
   /**
    * Alias of languages
    * @example { 'my-lang': 'javascript' }

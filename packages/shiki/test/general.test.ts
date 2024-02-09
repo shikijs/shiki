@@ -94,7 +94,10 @@ describe('should', () => {
 
   // https://github.com/shikijs/shiki/issues/35
   it('dynamic load theme and lang with md', async () => {
-    const shiki = await getHighlighter({})
+    const shiki = await getHighlighter({
+      langs: [],
+      themes: [],
+    })
 
     await shiki.loadTheme('min-dark')
     await shiki.loadLanguage('md')

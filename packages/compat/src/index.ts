@@ -16,7 +16,7 @@ export { normalizeTheme } from 'shiki'
 export { normalizeTheme as toShikiTheme } from 'shiki'
 export { ShikiCompatError } from './error'
 
-export async function getHighlighter(options: HighlighterOptions = {}) {
+export async function getHighlighter(options: Partial<HighlighterOptions> = {}) {
   const themes = options.themes || []
   const langs = options.langs || []
 
