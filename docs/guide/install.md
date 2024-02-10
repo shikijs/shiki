@@ -42,7 +42,7 @@ We also provide some integrations:
 
 ### Shorthands
 
-The quickest way to get started with `shiki` is to use the shorthands functions we provided. They will load the necessary themes and languages on demand and cache them in memory automatically.
+The quickest way to get started with `shiki` is to use the provided shorthand functions. These will load the necessary themes and languages on demand, and automatically cache them in memory.
 
 Passing your code snippet to the `codeToHtml` function with the `lang` and `theme` specified, it will return a highlighted HTML string that you can embed in your page. The generated HTML contains inline style for each token, so you don't need extra CSS to style it.
 
@@ -102,7 +102,7 @@ const code = highlighter.codeToHtml('const a = 1', {
 })
 ```
 
-In addition, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
+Additionally, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
 
 ```ts twoslash
 import { getHighlighter } from 'shiki'
@@ -113,7 +113,7 @@ await highlighter.loadTheme('vitesse-light')
 await highlighter.loadLanguage('css')
 ```
 
-Unlike `shiki` that loads all themes and languages by default, `shiki` requires all themes and languages to be loaded explicitly.
+Unlike `shiki`, which loads all themes and languages by default, `shiki` requires all themes and languages to be loaded explicitly.
 
 ```ts theme:slack-dark twoslash
 import { getHighlighter } from 'shiki'
@@ -132,7 +132,7 @@ highlighter.codeToHtml(
 await highlighter.loadLanguage('javascript') // load the language
 ```
 
-If you want to load all themes and languages (not recommended), you can iterate all keys from `bundledLanguages` and `bundledThemes`.
+If you want to load all themes and languages (not recommended), you can iterate over all keys from `bundledLanguages` and `bundledThemes`.
 
 ```ts twoslash theme:poimandres
 import { bundledLanguages, bundledThemes, getHighlighter } from 'shiki'
