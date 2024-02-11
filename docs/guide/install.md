@@ -113,14 +113,14 @@ await highlighter.loadTheme('vitesse-light')
 await highlighter.loadLanguage('css')
 ```
 
-Unlike `shiki`, which loads all themes and languages by default, `shiki` requires all themes and languages to be loaded explicitly.
+Since Shiki v1.0, it requires all themes and languages to be loaded explicitly.
 
 ```ts theme:slack-dark twoslash
 import { getHighlighter } from 'shiki'
 
 const highlighter = await getHighlighter({
-  themes: [],
-  langs: []
+  themes: ['slack-dark'],
+  langs: ['css']
 })
 
 highlighter.codeToHtml(
@@ -130,6 +130,8 @@ highlighter.codeToHtml(
 // @error: Throw error, `javascript` is not loaded
 
 await highlighter.loadLanguage('javascript') // load the language
+
+// now it works
 ```
 
 If you want to load all themes and languages (not recommended), you can iterate over all keys from `bundledLanguages` and `bundledThemes`.
