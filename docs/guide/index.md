@@ -27,7 +27,7 @@ Oh by the way, all the code blocks in this site are highlighted by Shiki, as you
 
 ## Playground
 
-Here is a little playground for you to try out how Shiki highlights your code. Unlike other code blocks that ran on the build time, this playground is rendered on the client side in the browser. Themes and languages are loaded on demand.
+Here is a little playground for you to try out how Shiki highlights your code. The other code blocks in this docs are rendered on the build time and ships statically, while this playground is rendered on the client side in the browser. Themes and languages are loaded on demand.
 
 <ShikiMiniPlayground />
 

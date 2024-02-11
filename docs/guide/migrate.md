@@ -37,6 +37,8 @@ Breaking changes applies to main package `shiki`, but are shimmed by the [compat
 - `shiki-twoslash` has been completely rewritten. It's no longer a wrapper around Shiki highlighter, but instead, it's now a Shiki transformer that can be plugged in any integrations that supports SHiki transformers. The package is now [`@shikijs/twoslash`](/packages/twoslash).
 - Integrations of `shiki-twoslash`, like `gatsby-remark-shiki-twoslash` etc, will be slowly moved to a general Shiki version. Before that, you can use [`@shikijs/rehype`](/packages/rehype) or [`@shikijs/markdown-it`](/packages/markdown-it) to integrate Shiki into those meta-frameworks.
 - New official integrations like [`@shikijs/monaco`](/packages/monaco), [`@shikijs/cli`](/packages/cli), [`@shikijs/rehype`](/packages/rehype), [`@shikijs/markdown-it`](/packages/markdown-it) are introduced.
+- `shiki-renderer-path` and `shiki-renderer-svg` packages are being deprecated due to low usage. If need them, please open an issue with your use case, we are open to bring them back.
+- `vuepress-plugin-shiki` is deprecated as [VuePress](https://github.com/vuejs/vuepress#status) is no longer recommended. Its successor [VitePress](https://vitepress.dev/) has a built-in Shiki integration.
 
 ## Migrate from Shikiji
 
