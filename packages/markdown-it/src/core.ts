@@ -50,7 +50,7 @@ export function setupMarkdownIt(
     })
 
     return highlighter.codeToHtml(
-      code,
+      code.slice(0, -1),
       {
         ...codeOptions,
         transformers: [
