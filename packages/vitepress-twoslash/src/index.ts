@@ -27,21 +27,27 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     explicitTrigger = true,
   } = options
 
+  const onError = (error: any, code: string) => {
+    const isCI = typeof process !== 'undefined' && process?.env?.CI
+    const isDev = typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development'
+    const shouldThrow = (options.throws || isCI || !isDev) && options.throws !== false
+    console.error(`\n\n--------\nTwoslash error in code:\n--------\n${code.split(/\n/g).slice(0, 15).join('\n').trim()}\n--------\n`)
+    if (shouldThrow)
+      throw error
+    else
+      console.error(error)
+    if (typeof process !== 'undefined')
+      process.exitCode = 1
+    return removeTwoslashNotations(code)
+  }
+
   const twoslash = createTransformerFactory(
     createTwoslasher(),
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
-    onTwoslashError: (error, code) => {
-      const isCI = typeof process !== 'undefined' && process?.env?.CI
-      const isDev = typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development'
-      console.error(String(error), `\n\n--------\nTwoslash error in code:\n--------\n${code.split(/\n/g).slice(0, 15).join('\n').trim()}\n--------\n`)
-      if (isCI || !isDev || options.throws)
-        throw error
-      if (typeof process !== 'undefined')
-        process.exitCode = 1
-      return removeTwoslashNotations(code)
-    },
+    onTwoslashError: onError,
+    onShikiError: onError,
     ...options,
     explicitTrigger,
   })

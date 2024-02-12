@@ -124,7 +124,7 @@ export function createTransformerFactory(
             const lineEl = this.lines[line]
             index = codeEl.children.indexOf(lineEl)
             if (index === -1) {
-              onShikiError(new ShikiTwoslashError(`Cannot find line ${line} in code element`))
+              onShikiError(new ShikiTwoslashError(`Cannot find line ${line} in code element`), this.source, this.options.lang)
               return
             }
           }
@@ -183,7 +183,7 @@ export function createTransformerFactory(
           const tokens = locateTextTokens(node.line, node.character, node.length)
 
           if (!tokens.length && !(node.type === 'error' && renderer.nodesError)) {
-            onShikiError(new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`))
+            onShikiError(new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`), this.source, this.options.lang)
             continue
           }
 
@@ -279,7 +279,7 @@ export function createTransformerFactory(
               break
             }
             default: {
-              onShikiError(new ShikiTwoslashError(`Unknown node type: ${(node as any)?.type}`))
+              onShikiError(new ShikiTwoslashError(`Unknown node type: ${(node as any)?.type}`), this.source, this.options.lang)
             }
           }
         }

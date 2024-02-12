@@ -63,7 +63,7 @@ export interface TransformerTwoslashOptions {
    * Custom error handler for Shiki errors
    * When specified, `throws` will be ignored
    */
-  onShikiError?: (error: unknown) => void
+  onShikiError?: (error: unknown, code: string, lang: string) => void
 }
 
 export interface TwoslashRenderer {
