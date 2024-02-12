@@ -36,7 +36,7 @@ export function setupMarkdownIt(
 ) {
   const {
     parseMetaString,
-    trimEndingNewline: trimEnd = true,
+    trimEndingNewline = true,
   } = options
 
   markdownit.options.highlight = (code, lang = 'text', attrs) => {
@@ -60,7 +60,7 @@ export function setupMarkdownIt(
       },
     })
 
-    if (trimEnd) {
+    if (trimEndingNewline) {
       if (code.endsWith('\n'))
         code = code.slice(0, -1)
     }
