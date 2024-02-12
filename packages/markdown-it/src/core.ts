@@ -15,11 +15,12 @@ export interface MarkdownItShikiExtraOptions {
   /**
    * markdown-it's highlight function will add a trailing newline to the code.
    *
-   * This integration removes the trailing newline by applying `.trimEnd()` to the code by default
+   * This integration removes the trailing newline to the code by default,
+   * you can turn this off by passing false.
    *
    * @default true
    */
-  trimEnd?: boolean
+  trimEndingNewline?: boolean
 }
 
 export type MarkdownItShikiSetupOptions =
@@ -35,7 +36,7 @@ export function setupMarkdownIt(
 ) {
   const {
     parseMetaString,
-    trimEnd = true,
+    trimEndingNewline: trimEnd = true,
   } = options
 
   markdownit.options.highlight = (code, lang = 'text', attrs) => {
@@ -59,8 +60,10 @@ export function setupMarkdownIt(
       },
     })
 
-    if (trimEnd)
-      code = code.trimEnd()
+    if (trimEnd) {
+      if (code.endsWith('\n'))
+        code = code.slice(0, -1)
+    }
 
     return highlighter.codeToHtml(
       code,
