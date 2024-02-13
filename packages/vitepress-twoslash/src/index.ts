@@ -36,8 +36,6 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
       throw error
     else
       console.error(error)
-    if (typeof process !== 'undefined')
-      process.exitCode = 1
     return removeTwoslashNotations(code)
   }
 
