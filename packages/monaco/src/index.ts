@@ -76,6 +76,15 @@ export function shikiToMonaco(
           const { colorMap } = state.highlighter.setTheme(currentTheme)
           const theme = themeMap.get(currentTheme)
           const result = grammar.tokenizeLine2(line, state.ruleStack, 500)
+          
+          if (result.stoppedEarly) {
+      			console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
+      			// return the state at the beginning of the line
+      			return {
+              endState: state,
+              tokens: result.tokens,
+            }
+      		}
 
           const colorToScopeMap = new Map<string, string>()
 
