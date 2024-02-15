@@ -59,9 +59,9 @@ export function tokenizeWithTheme(
       continue
     }
 
-    // Do not attempt to tokenize if a line is too long
-    const maxTokenizationLineLength = 20000
-    if (line.length >= maxTokenizationLineLength) {
+    // Do not attempt to tokenize if the line length is longer than the `maxTokenizationLineLength`
+    const maxTokenizationLineLength = options?.maxTokenizationLineLength ?? 0
+    if (maxTokenizationLineLength > 0 && line.length >= maxTokenizationLineLength) {
       actual = []
       final.push([{
         content: line,

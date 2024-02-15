@@ -73,6 +73,7 @@ export function shikiToMonaco(
         },
         tokenize(line, state: TokenizerState) {
           // Do not attempt to tokenize if a line is too long
+          // default to 20000 (as in monaco-editor-core defaults)
           const maxTokenizationLineLength = 20000
           if (line.length >= maxTokenizationLineLength) {
             return {
