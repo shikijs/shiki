@@ -59,6 +59,19 @@ export function tokenizeWithTheme(
       continue
     }
 
+    // Do not attempt to tokenize if a line is too long
+    const maxTokenizationLineLength = 20000
+    if (line.length >= maxTokenizationLineLength) {
+      actual = []
+      final.push([{
+        content: line,
+        offset: lineOffset,
+        color: '',
+        fontStyle: 0,
+      }])
+      continue
+    }
+
     let resultWithScopes
     let tokensWithScopes
     let tokensWithScopesIndex
@@ -69,7 +82,7 @@ export function tokenizeWithTheme(
       tokensWithScopesIndex = 0
     }
 
-    const result = grammar.tokenizeLine2(line, ruleStack)
+    const result = grammar.tokenizeLine2(line, ruleStack, 500)
 
     const tokensLength = result.tokens.length / 2
     for (let j = 0; j < tokensLength; j++) {
