@@ -75,7 +75,7 @@ export function shikiToMonaco(
           const grammar = state.highlighter.getLanguage(lang)
           const { colorMap } = state.highlighter.setTheme(currentTheme)
           const theme = themeMap.get(currentTheme)
-          const result = grammar.tokenizeLine2(line, state.ruleStack)
+          const result = grammar.tokenizeLine2(line, state.ruleStack, 500)
 
           const colorToScopeMap = new Map<string, string>()
 
