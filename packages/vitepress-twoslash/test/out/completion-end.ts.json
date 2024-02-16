@@ -35,8 +35,120 @@
                   },
                   "children": [
                     {
-                      "type": "text",
-                      "value": "console"
+                      "type": "element",
+                      "value": "console",
+                      "tagName": "v-menu",
+                      "properties": {
+                        "class": "twoslash-hover",
+                        "popper-class": "shiki twoslash-floating vp-copy-ignore vp-code",
+                        "theme": "twoslash"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tagName": "span",
+                          "properties": {},
+                          "children": [
+                            {
+                              "type": "text",
+                              "value": "console"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "element",
+                          "tagName": "template",
+                          "properties": {
+                            "v-slot:popper": "{}"
+                          },
+                          "content": {
+                            "type": "root",
+                            "children": [
+                              {
+                                "type": "element",
+                                "tagName": "span",
+                                "properties": {
+                                  "class": "twoslash-popup-container vp-copy-ignore",
+                                  "v-pre": ""
+                                },
+                                "children": [
+                                  {
+                                    "type": "element",
+                                    "tagName": "code",
+                                    "properties": {
+                                      "class": "twoslash-popup-code"
+                                    },
+                                    "children": [
+                                      {
+                                        "type": "element",
+                                        "tagName": "span",
+                                        "properties": {
+                                          "class": "line"
+                                        },
+                                        "children": [
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#CB7676"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "var "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#BD976A"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "console"
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#666666"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": ": "
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "element",
+                                            "tagName": "span",
+                                            "properties": {
+                                              "style": "color:#5DA994"
+                                            },
+                                            "children": [
+                                              {
+                                                "type": "text",
+                                                "value": "Console"
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "children": []
+                        }
+                      ]
                     }
                   ]
                 },

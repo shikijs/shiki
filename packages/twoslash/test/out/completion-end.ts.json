@@ -35,8 +35,97 @@
                   },
                   "children": [
                     {
-                      "type": "text",
-                      "value": "console"
+                      "type": "element",
+                      "value": "console",
+                      "tagName": "span",
+                      "properties": {
+                        "class": "twoslash-hover"
+                      },
+                      "children": [
+                        {
+                          "type": "element",
+                          "tagName": "span",
+                          "properties": {
+                            "class": "twoslash-popup-container"
+                          },
+                          "children": [
+                            {
+                              "type": "element",
+                              "tagName": "code",
+                              "properties": {
+                                "class": "twoslash-popup-code"
+                              },
+                              "children": [
+                                {
+                                  "type": "element",
+                                  "tagName": "span",
+                                  "properties": {
+                                    "class": "line"
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "element",
+                                      "tagName": "span",
+                                      "properties": {
+                                        "style": "color:#CB7676"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "var "
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tagName": "span",
+                                      "properties": {
+                                        "style": "color:#BD976A"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "console"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tagName": "span",
+                                      "properties": {
+                                        "style": "color:#666666"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": ": "
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "element",
+                                      "tagName": "span",
+                                      "properties": {
+                                        "style": "color:#5DA994"
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "value": "Console"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "value": "console"
+                        }
+                      ]
                     }
                   ]
                 },

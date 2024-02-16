@@ -921,6 +921,15 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/tcl')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'terraform',
+    'name': 'Terraform',
+    'aliases': [
+      'tf',
+      'tfvars'
+    ],
+    'import': (() => import('./langs/terraform')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'tex',
     'name': 'TeX',
     'import': (() => import('./langs/tex')) as DynamicImportLanguageRegistration
@@ -1054,7 +1063,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'zig',
-    'name': 'zig',
+    'name': 'Zig',
     'import': (() => import('./langs/zig')) as DynamicImportLanguageRegistration
   }
 ]
@@ -1063,7 +1072,7 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
-export type BundledLanguage = 'abap' | 'actionscript-3' | 'ada' | 'angular-html' | 'angular-ts' | 'apache' | 'apex' | 'apl' | 'applescript' | 'ara' | 'asm' | 'astro' | 'awk' | 'ballerina' | 'bash' | 'bat' | 'batch' | 'be' | 'beancount' | 'berry' | 'bibtex' | 'bicep' | 'blade' | 'c' | 'c#' | 'c++' | 'cadence' | 'cdc' | 'clarity' | 'clj' | 'clojure' | 'cmake' | 'cmd' | 'cobol' | 'codeql' | 'coffee' | 'coffeescript' | 'console' | 'cpp' | 'cql' | 'crystal' | 'cs' | 'csharp' | 'css' | 'csv' | 'cue' | 'cypher' | 'd' | 'dart' | 'dax' | 'diff' | 'docker' | 'dockerfile' | 'dream-maker' | 'elixir' | 'elm' | 'erb' | 'erl' | 'erlang' | 'f' | 'f#' | 'f03' | 'f08' | 'f18' | 'f77' | 'f90' | 'f95' | 'fish' | 'for' | 'fortran-fixed-form' | 'fortran-free-form' | 'fs' | 'fsharp' | 'fsl' | 'gdresource' | 'gdscript' | 'gdshader' | 'gherkin' | 'git-commit' | 'git-rebase' | 'gjs' | 'glimmer-js' | 'glimmer-ts' | 'glsl' | 'gnuplot' | 'go' | 'gql' | 'graphql' | 'groovy' | 'gts' | 'hack' | 'haml' | 'handlebars' | 'haskell' | 'hbs' | 'hcl' | 'hjson' | 'hlsl' | 'hs' | 'html' | 'html-derivative' | 'http' | 'imba' | 'ini' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsonnet' | 'jssm' | 'jsx' | 'julia' | 'kotlin' | 'kql' | 'kt' | 'kts' | 'kusto' | 'latex' | 'less' | 'liquid' | 'lisp' | 'logo' | 'lua' | 'make' | 'makefile' | 'markdown' | 'marko' | 'matlab' | 'md' | 'mdc' | 'mdx' | 'mermaid' | 'mojo' | 'move' | 'nar' | 'narrat' | 'nextflow' | 'nf' | 'nginx' | 'nim' | 'nix' | 'nu' | 'nushell' | 'objc' | 'objective-c' | 'objective-cpp' | 'ocaml' | 'pascal' | 'perl' | 'perl6' | 'php' | 'plsql' | 'postcss' | 'powerquery' | 'powershell' | 'prisma' | 'prolog' | 'properties' | 'proto' | 'ps' | 'ps1' | 'pug' | 'puppet' | 'purescript' | 'py' | 'python' | 'ql' | 'r' | 'raku' | 'razor' | 'rb' | 'reg' | 'rel' | 'riscv' | 'rs' | 'rst' | 'ruby' | 'rust' | 'sas' | 'sass' | 'scala' | 'scheme' | 'scss' | 'sh' | 'shader' | 'shaderlab' | 'shell' | 'shellscript' | 'shellsession' | 'smalltalk' | 'solidity' | 'sparql' | 'spl' | 'splunk' | 'sql' | 'ssh-config' | 'stata' | 'styl' | 'stylus' | 'svelte' | 'swift' | 'system-verilog' | 'tasl' | 'tcl' | 'tex' | 'toml' | 'ts' | 'tsx' | 'turtle' | 'twig' | 'typescript' | 'v' | 'vb' | 'verilog' | 'vhdl' | 'vim' | 'viml' | 'vimscript' | 'vue' | 'vue-html' | 'vy' | 'vyper' | 'wasm' | 'wenyan' | 'wgsl' | 'wl' | 'wolfram' | 'xml' | 'xsl' | 'yaml' | 'yml' | 'zenscript' | 'zig' | 'zsh' | '文言'
+export type BundledLanguage = 'abap' | 'actionscript-3' | 'ada' | 'angular-html' | 'angular-ts' | 'apache' | 'apex' | 'apl' | 'applescript' | 'ara' | 'asm' | 'astro' | 'awk' | 'ballerina' | 'bash' | 'bat' | 'batch' | 'be' | 'beancount' | 'berry' | 'bibtex' | 'bicep' | 'blade' | 'c' | 'c#' | 'c++' | 'cadence' | 'cdc' | 'clarity' | 'clj' | 'clojure' | 'cmake' | 'cmd' | 'cobol' | 'codeql' | 'coffee' | 'coffeescript' | 'console' | 'cpp' | 'cql' | 'crystal' | 'cs' | 'csharp' | 'css' | 'csv' | 'cue' | 'cypher' | 'd' | 'dart' | 'dax' | 'diff' | 'docker' | 'dockerfile' | 'dream-maker' | 'elixir' | 'elm' | 'erb' | 'erl' | 'erlang' | 'f' | 'f#' | 'f03' | 'f08' | 'f18' | 'f77' | 'f90' | 'f95' | 'fish' | 'for' | 'fortran-fixed-form' | 'fortran-free-form' | 'fs' | 'fsharp' | 'fsl' | 'gdresource' | 'gdscript' | 'gdshader' | 'gherkin' | 'git-commit' | 'git-rebase' | 'gjs' | 'glimmer-js' | 'glimmer-ts' | 'glsl' | 'gnuplot' | 'go' | 'gql' | 'graphql' | 'groovy' | 'gts' | 'hack' | 'haml' | 'handlebars' | 'haskell' | 'hbs' | 'hcl' | 'hjson' | 'hlsl' | 'hs' | 'html' | 'html-derivative' | 'http' | 'imba' | 'ini' | 'jade' | 'java' | 'javascript' | 'jinja' | 'jison' | 'js' | 'json' | 'json5' | 'jsonc' | 'jsonl' | 'jsonnet' | 'jssm' | 'jsx' | 'julia' | 'kotlin' | 'kql' | 'kt' | 'kts' | 'kusto' | 'latex' | 'less' | 'liquid' | 'lisp' | 'logo' | 'lua' | 'make' | 'makefile' | 'markdown' | 'marko' | 'matlab' | 'md' | 'mdc' | 'mdx' | 'mermaid' | 'mojo' | 'move' | 'nar' | 'narrat' | 'nextflow' | 'nf' | 'nginx' | 'nim' | 'nix' | 'nu' | 'nushell' | 'objc' | 'objective-c' | 'objective-cpp' | 'ocaml' | 'pascal' | 'perl' | 'perl6' | 'php' | 'plsql' | 'postcss' | 'powerquery' | 'powershell' | 'prisma' | 'prolog' | 'properties' | 'proto' | 'ps' | 'ps1' | 'pug' | 'puppet' | 'purescript' | 'py' | 'python' | 'ql' | 'r' | 'raku' | 'razor' | 'rb' | 'reg' | 'rel' | 'riscv' | 'rs' | 'rst' | 'ruby' | 'rust' | 'sas' | 'sass' | 'scala' | 'scheme' | 'scss' | 'sh' | 'shader' | 'shaderlab' | 'shell' | 'shellscript' | 'shellsession' | 'smalltalk' | 'solidity' | 'sparql' | 'spl' | 'splunk' | 'sql' | 'ssh-config' | 'stata' | 'styl' | 'stylus' | 'svelte' | 'swift' | 'system-verilog' | 'tasl' | 'tcl' | 'terraform' | 'tex' | 'tf' | 'tfvars' | 'toml' | 'ts' | 'tsx' | 'turtle' | 'twig' | 'typescript' | 'v' | 'vb' | 'verilog' | 'vhdl' | 'vim' | 'viml' | 'vimscript' | 'vue' | 'vue-html' | 'vy' | 'vyper' | 'wasm' | 'wenyan' | 'wgsl' | 'wl' | 'wolfram' | 'xml' | 'xsl' | 'yaml' | 'yml' | 'zenscript' | 'zig' | 'zsh' | '文言'
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
