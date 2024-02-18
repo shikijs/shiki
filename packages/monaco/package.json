@@ -42,7 +42,8 @@
     "build": "unbuild",
     "dev": "unbuild --stub",
     "prepublishOnly": "nr build",
-    "test": "vitest"
+    "test": "vitest",
+    "play": "nr -C playground play"
   },
   "dependencies": {
     "@shikijs/core": "workspace:*"

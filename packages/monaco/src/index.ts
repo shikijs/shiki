@@ -35,7 +35,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 
   const colors = Object.fromEntries(
     Object.entries(theme.colors || {})
-      .map(([key, value]) => [key, normalizeColor(value)]),
+      .map(([key, value]) => [key, `#${normalizeColor(value)}`]),
   )
 
   return {
