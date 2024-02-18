@@ -77,10 +77,25 @@ export function shikiToMonaco(
           return new TokenizerState(INITIAL, highlighter)
         },
         tokenize(line, state: TokenizerState) {
+          // Do not attempt to tokenize if a line is too long
+          // default to 20000 (as in monaco-editor-core defaults)
+          const tokenizeMaxLineLength = 20000
+          const tokenizeTimeLimit = 500
+
+          if (line.length >= tokenizeMaxLineLength) {
+            return {
+              endState: state,
+              tokens: [{ startIndex: 0, scopes: '' }],
+            }
+          }
+
           const grammar = state.highlighter.getLanguage(lang)
           const { colorMap } = state.highlighter.setTheme(currentTheme)
           const theme = themeMap.get(currentTheme)
-          const result = grammar.tokenizeLine2(line, state.ruleStack)
+          const result = grammar.tokenizeLine2(line, state.ruleStack, tokenizeTimeLimit)
+
+          if (result.stoppedEarly)
+            console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
 
           const colorToScopeMap = new Map<string, string>()
 

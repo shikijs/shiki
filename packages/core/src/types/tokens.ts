@@ -158,6 +158,20 @@ export interface TokenizeWithThemeOptions {
    * This will be merged with theme's `colorReplacements` if any.
    */
   colorReplacements?: Record<string, string>
+
+  /**
+   * Lines above this length will not be tokenized for performance reasons.
+   *
+   * @default 0 (no limit)
+   */
+  tokenizeMaxLineLength?: number
+
+  /**
+   * Time limit in milliseconds for tokenizing a single line.
+   *
+   * @default 500 (0.5s)
+   */
+  tokenizeTimeLimit?: number
 }
 
 /**
