@@ -164,7 +164,14 @@ export interface TokenizeWithThemeOptions {
    *
    * @default 0 (no limit)
    */
-  maxTokenizationLineLength?: number
+  tokenizeMaxLineLength?: number
+
+  /**
+   * Time limit in milliseconds for tokenizing a single line.
+   *
+   * @default 500 (0.5s)
+   */
+  tokenizeTimeLimit?: number
 }
 
 /**

@@ -118,7 +118,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   extends
   TransformerOptions,
   DecorationOptions,
-  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'maxTokenizationLineLength'> {
+  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit'> {
 
   lang: StringLiteralUnion<Languages | SpecialLanguage>
 

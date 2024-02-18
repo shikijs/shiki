@@ -45,6 +45,11 @@ export function tokenizeWithTheme(
     ...options?.colorReplacements,
   }
 
+  const {
+    tokenizeMaxLineLength = 0,
+    tokenizeTimeLimit = 500,
+  } = options
+
   const lines = splitLines(code)
 
   let ruleStack = INITIAL
@@ -59,9 +64,8 @@ export function tokenizeWithTheme(
       continue
     }
 
-    // Do not attempt to tokenize if the line length is longer than the `maxTokenizationLineLength`
-    const maxTokenizationLineLength = options?.maxTokenizationLineLength ?? 0
-    if (maxTokenizationLineLength > 0 && line.length >= maxTokenizationLineLength) {
+    // Do not attempt to tokenize if the line length is longer than the `tokenizationMaxLineLength`
+    if (tokenizeMaxLineLength > 0 && line.length >= tokenizeMaxLineLength) {
       actual = []
       final.push([{
         content: line,
@@ -82,7 +86,7 @@ export function tokenizeWithTheme(
       tokensWithScopesIndex = 0
     }
 
-    const result = grammar.tokenizeLine2(line, ruleStack, 500)
+    const result = grammar.tokenizeLine2(line, ruleStack, tokenizeTimeLimit)
 
     const tokensLength = result.tokens.length / 2
     for (let j = 0; j < tokensLength; j++) {
