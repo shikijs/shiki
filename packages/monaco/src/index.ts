@@ -26,17 +26,22 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
         if (settings.foreground && s) {
           rules.push({
             token: s,
-            foreground: settings.foreground.replace('#', ''),
+            foreground: normalizeColor(settings.foreground),
           })
         }
       }
     }
   }
 
+  const colors = Object.fromEntries(
+    Object.entries(theme.colors || {})
+      .map(([key, value]) => [key, normalizeColor(value)]),
+  )
+
   return {
     base: theme.type === 'light' ? 'vs' : 'vs-dark',
     inherit: false,
-    colors: theme.colors || {},
+    colors,
     rules,
   }
 }
@@ -80,7 +85,7 @@ export function shikiToMonaco(
           const colorToScopeMap = new Map<string, string>()
 
           theme!.rules.forEach((rule) => {
-            const c = rule.foreground?.replace('#', '').toLowerCase()
+            const c = normalizeColor(rule.foreground)
             if (c && !colorToScopeMap.has(c))
               colorToScopeMap.set(c, rule.token)
           })
@@ -94,7 +99,7 @@ export function shikiToMonaco(
           for (let j = 0; j < tokensLength; j++) {
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
-            const color = (colorMap[StackElementMetadata.getForeground(metadata)] || '').replace('#', '').toLowerCase()
+            const color = normalizeColor(colorMap[StackElementMetadata.getForeground(metadata)] || '')
             // Because Monaco only support one scope per token,
             // we workaround this to use color to trace back the scope
             const scope = findScopeByColor(color) || ''
@@ -138,4 +143,17 @@ class TokenizerState implements monaco.languages.IState {
 
     return true
   }
+}
+
+function normalizeColor(color: undefined): undefined
+function normalizeColor(color: string): string
+function normalizeColor(color: string | undefined): string | undefined
+function normalizeColor(color: string | undefined) {
+  if (!color)
+    return color
+  color = color.replace('#', '').toLowerCase()
+  // #RGB => #RRGGBB - Monaco does not support hex color with 3 or 4 digits
+  if (color.length === 3 || color.length === 4)
+    color = color.split('').map(c => c + c).join('')
+  return color
 }
