@@ -191,7 +191,7 @@ describe('should', () => {
     expect(await codeToHtml(`const short = ""\nconst long = ${longText}`, {
       theme: 'vitesse-light',
       lang: 'javascript',
-      maxTokenizationLineLength: 100,
+      tokenizeMaxLineLength: 100,
     })).toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> short</span><span style="color:#999999"> =</span><span style="color:#B5695999"> ""</span></span>\n<span class="line"><span>const long = ${longText}</span></span></code></pre>"`)
   })
 })
