@@ -64,16 +64,32 @@ ${[
       'utf-8',
     )
 
-    await fs.writeFile(
-      `./src/assets/langs/${lang.name}.d.ts`,
-      `${COMMENT_HEAD}
-import type { LanguageRegistration } from '@shikijs/core'
+    for (const alias of json.aliases || []) {
+      if (isInvalidFilename(alias))
+        continue
+      await fs.writeFile(
+        `./src/assets/langs/${alias}.js`,
+        `${COMMENT_HEAD}
+// ${alias} is an alias of ${lang.name}
+export { default } from './${lang.name}'
+`,
+        'utf-8',
+      )
+    }
 
+    for (const name of [...json.aliases || [], lang.name]) {
+      if (isInvalidFilename(name))
+        continue
+      await fs.writeFile(
+        `./src/assets/langs/${name}.d.ts`,
+        `${COMMENT_HEAD}
+import type { LanguageRegistration } from '@shikijs/core'
 const langs: LanguageRegistration []
 export default langs
 `,
-      'utf-8',
-    )
+        'utf-8',
+      )
+    }
   }
 
   async function writeLanguageBundleIndex(
@@ -145,4 +161,8 @@ export const bundledLanguages = {
       'shellscript',
     ],
   )
+}
+
+function isInvalidFilename(filename: string) {
+  return !filename.match(/^[a-zA-Z0-9_-]+$/)
 }
