@@ -147,7 +147,7 @@ export function splitTokens<
 }
 
 export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
-  return replacements?.[color.toLowerCase()] || color
+  return replacements?.[color?.toLowerCase()] || color
 }
 
 export function getTokenStyleObject(token: TokenStyles) {
