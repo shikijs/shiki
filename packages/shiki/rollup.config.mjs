@@ -43,14 +43,22 @@ const plugins = [
 
 export default defineConfig([
   {
-    input: entries,
+    input: [
+      ...entries,
+      // add language files entries
+      ...fg.sync('src/assets/langs/*.js'),
+    ],
     output: {
       dir: 'dist',
       format: 'esm',
-      entryFileNames: '[name].mjs',
+      entryFileNames: (f) => {
+        if (f.facadeModuleId?.match(/[\\\/]langs[\\\/]/))
+          return `langs/${f.name}.mjs`
+        return '[name].mjs'
+      },
       chunkFileNames: (f) => {
         if (f.moduleIds.some(i => i.match(/[\\\/]langs[\\\/]/)))
-          return `langs/${f.name.replace('.tmLanguage', '')}.mjs`
+          return `langs/${f.name}.mjs`
         else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
           return 'themes/[name].mjs'
         return 'chunks/[name].mjs'
