@@ -40,7 +40,8 @@ import type { DynamicImportThemeRegistration, BundledThemeInfo } from '@shikijs/
 
 export const bundledThemesInfo: BundledThemeInfo[] = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
 
-export type BundledTheme = ${themes.map(i => `'${i.id}'`).join(' | ')}
+export type BundledTheme =
+${themes.map(i => `  | '${i.id}'`).join('\n')}
 
 export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id, i.import])) as Record<BundledTheme, DynamicImportThemeRegistration>
 `,

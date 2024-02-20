@@ -126,7 +126,7 @@ export default langs
     }) as const)
       .sort((a, b) => a.id.localeCompare(b.id))
 
-    const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `'${i}'`).join(' | ')
+    const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `  | '${i}'`).join('\n')
 
     await fs.writeFile(
     `src/assets/${fileName}.ts`,
@@ -139,7 +139,8 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
-export type BundledLanguage = ${type}
+export type BundledLanguage =
+${type}
 
 export const bundledLanguages = {
   ...bundledLanguagesBase,
