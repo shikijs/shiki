@@ -85,7 +85,8 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
         tagName: 'v-menu',
         properties: {
           ...hoverBasicProps,
-          theme: floatingVueThemeQuery,
+          ':shown': 'true',
+          'theme': floatingVueThemeQuery,
         },
       },
       queryCompose: compose,
