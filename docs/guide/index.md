@@ -37,12 +37,12 @@ Here is a little playground for you to try out how Shiki highlights your code. T
 
 You can inspect the bundle size in detail on [pkg-size.dev/shiki](https://pkg-size.dev/shiki).
 
-As of `v0.9.11`, measured at 21th, December 2023:
+As of `v1.1.6`, measured at 22th, February 2024:
 
 | Bundle              | Size (minified) | Size (gzip) | Notes                                                            |
 | ------------------- | --------------: | ----------: | ---------------------------------------------------------------- |
-| `shiki`             |          6.4 MB |      1.2 MB | All themes and languages as async chunks                         |
-| `shiki/bundle/full` |          6.4 MB |      1.2 MB | Same as `shiki`                                                  |
-| `shiki/bundle/web`  |          3.8 MB |      695 KB | All themes and common web languages as async chunks              |
-| `shiki/core`        |          100 KB |       31 KB | Core engine without any themes or languages, compose on your own |
+| `shiki`             |          6.9 MB |      1.3 MB | All themes and languages as async chunks                         |
+| `shiki/bundle/full` |          6.9 MB |      1.3 MB | Same as `shiki`                                                  |
+| `shiki/bundle/web`  |          4.2 MB |      748 KB | All themes and common web languages as async chunks              |
+| `shiki/core`        |          106 KB |       34 KB | Core engine without any themes or languages, compose on your own |
 | `shiki/wasm`        |          623 KB |      231 KB | WASM binary inlined as base64 string                             |
