@@ -110,7 +110,7 @@ const c = 1
 
 [Source code](https://github.com/shikijs/shiki/blob/main/packages/twoslash/src/renderer-classic.ts)
 
-This renderer aligns with the output of [`@shikijs/twoslash`](https://shikijs.github.io/twoslash/).
+This renderer aligns with the output of legacy [`shiki-twoslash`](https://github.com/shikijs/twoslash).
 
 ```ts twoslash
 import { rendererClassic, transformerTwoslash } from '@shikijs/twoslash'
@@ -120,7 +120,7 @@ transformerTwoslash({
 })
 ```
 
-You might need to reference `@shikijs/twoslash`'s CSS to make it look good. [Here](https://github.com/shikijs/shiki/blob/main/packages/twoslash/style-classic.css) we also copied the CSS from `@shikijs/twoslash` but it might need some cleanup.
+You might need to reference `shiki-twoslash`'s CSS to make it look good. [Here](https://github.com/shikijs/shiki/blob/main/packages/twoslash/style-classic.css) we also copied the CSS from `shiki-twoslash` but it might need some cleanup.
 
 ### `rendererFloatingVue`
 
@@ -159,6 +159,7 @@ In markdown, you can use the following syntax to trigger Twoslash:
 While you can set up Twoslash with Shiki on your own with the instructions above, you can also find high-level integrations with frameworks and tools here:
 
 - [VitePress](/packages/vitepress#twoslash) - A plugin to enable Twoslash support in VitePress.
+- [Nuxt](/pacakges/nuxt#twoslash) - A module to enable Twoslash for Nuxt Content.
 - [Vocs](https://vocs.dev/docs/guides/twoslash) - Vocs has TwoSlash support built-in.
 - [Slidev](https://sli.dev/custom/highlighters.html#twoslash-integration) - Slidev has TwoSlash support built-in.
 
@@ -166,7 +167,7 @@ While you can set up Twoslash with Shiki on your own with the instructions above
 
 ### CDN Usage
 
-By default `@typescript/twoslash` runs on Node.js and relies on your local system to resolve TypeScript and types for the imports. Import it directly in non-Node.js environments would not work.
+By default [`twoslash`](https://github.com/twoslashes/twoslash/tree/main/packages/twoslash) runs on Node.js and relies on your local system to resolve TypeScript and types for the imports. Import it directly in non-Node.js environments would not work.
 
 Luckily, Twoslash implemented a virtual file system, which allow you to provide your own files for TypeScript to resolve in memory. However, loading these files in the browser is still a challenge. Thanks to the work on the [TypeScript WebSite](https://github.com/microsoft/TypeScript-Website), the TypeScript team has provided some utilities to fetch types on demand through CDN, they call it [Automatic Type Acquisition (ATA)](https://github.com/microsoft/TypeScript-Website/tree/v2/packages/ata).
 
