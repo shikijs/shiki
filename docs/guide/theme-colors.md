@@ -51,6 +51,21 @@ Learn more about how to [load themes](./load-theme).
 
 You can also use the `colorReplacements` option to replace the color values of the theme. This is useful when you want to use a theme with a different color palette. It can be provided on both the theme object and the `codeToHast` `codeToHtml` options.
 
+The `colorReplacements` object should follow a color-to-color format, where the keys represent the color to be replaced and the value represents the new color:
+
+```js
+const html = await codeToHtml(
+  code,
+  {
+    lang: 'js',
+    theme: 'min-dark',
+    colorReplacements: {
+      '#ff79c6': '#189eff'
+    }
+  }
+)
+```
+
 ## CSS Variables Theme
 
 ::: warning Experimental
