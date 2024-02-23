@@ -54,9 +54,16 @@ You can also use the `colorReplacements` option to replace the color values of t
 The `colorReplacements` object should follow a color-to-color format, where the keys represent the color to be replaced and the value represents the new color:
 
 ```js
-colorReplacements: {
-  '#ff79c6': '#189eff'
-}
+const html = await codeToHtml(
+  code,
+  {
+    lang: 'js',
+    theme: 'min-dark',
+    colorReplacements: {
+      '#ff79c6': '#189eff'
+    }
+  }
+)
 ```
 
 ## CSS Variables Theme
