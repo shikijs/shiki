@@ -145,6 +145,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'julia',
     'name': 'Julia',
+    'aliases': [
+      'jl',
+    ],
     'import': (() => import('./langs/julia')) as DynamicImportLanguageRegistration
   },
   {
@@ -349,6 +352,7 @@ export type BundledLanguage =
   | 'jsonl'
   | 'jsx'
   | 'julia'
+  | 'jl'
   | 'less'
   | 'lua'
   | 'markdown'
