@@ -159,7 +159,7 @@ In markdown, you can use the following syntax to trigger Twoslash:
 While you can set up Twoslash with Shiki on your own with the instructions above, you can also find high-level integrations with frameworks and tools here:
 
 - [VitePress](/packages/vitepress#twoslash) - A plugin to enable Twoslash support in VitePress.
-- [Nuxt](/pacakges/nuxt#twoslash) - A module to enable Twoslash for Nuxt Content.
+- [Nuxt](/packages/nuxt#twoslash) - A module to enable Twoslash for Nuxt Content.
 - [Vocs](https://vocs.dev/docs/guides/twoslash) - Vocs has TwoSlash support built-in.
 - [Slidev](https://sli.dev/custom/highlighters.html#twoslash-integration) - Slidev has TwoSlash support built-in.
 
