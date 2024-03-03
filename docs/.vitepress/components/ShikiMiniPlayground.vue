@@ -1,15 +1,55 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
 const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
+
+const textAreaRef = ref<HTMLDivElement>()
+onMounted(() => {
+  textAreaRef.value.textContent = play.input
+})
+
+const highlightContainerRef = ref<HTMLSpanElement>()
+function syncScroll(e: UIEvent) {
+  if (!highlightContainerRef.value)
+    return
+  const preEl = highlightContainerRef.value.children[0] as HTMLPreElement
+  if (!preEl)
+    return
+
+  const target = e.target as HTMLTextAreaElement
+  // preEl.scrollTop = target.scrollTop
+  preEl.scrollLeft = target.scrollLeft
+}
+
+function pastePlainText(e: ClipboardEvent) {
+  e.preventDefault()
+  const text = e.clipboardData?.getData('text/plain')
+  if (!text)
+    return
+  text.split('\n').forEach((line, i) => {
+    if (i !== 0)
+      document.execCommand('insertLineBreak')
+
+    document.execCommand('insertText', false, line)
+  })
+}
+
+function preventEnter(e: KeyboardEvent) {
+  // Prevent contenteditable adding <div> on ENTER - Chrome
+  // https://stackoverflow.com/questions/18552336/prevent-contenteditable-adding-div-on-enter-chrome
+  if (e.key === 'Enter') {
+    document.execCommand('insertLineBreak')
+    e.preventDefault()
+  }
+}
 </script>
 
 <template>
   <div
     class="language-ts vp-adaptive-theme mini-playground transition-none!" shadow
-    :style="[play.preStyle, { colorScheme: currentThemeType }]"
+    :style="[play.preStyle, { colorScheme: currentThemeType, overflow: 'hidden' }]"
   >
     <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
       <div i-carbon:chevron-down op50 />
@@ -44,13 +84,18 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
       </button>
     </div>
     <div relative mt-10 min-h-100>
-      <span v-html="play.output" />
-      <textarea
-        v-model="play.input"
+      <span ref="highlightContainerRef" v-html="play.output" />
+      <div
+        ref="textAreaRef"
+        contenteditable whitespace-pre overflow-auto outline-none
         font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        @input="play.input = $event.target.textContent"
+        @scroll="syncScroll"
+        @keydown="preventEnter"
+        @paste="pastePlainText"
       />
     </div>
   </div>
