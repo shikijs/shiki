@@ -7,6 +7,8 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
 
 const textAreaRef = ref<HTMLDivElement>()
 onMounted(() => {
+  if (!textAreaRef.value)
+    return
   textAreaRef.value.textContent = play.input
 })
 
@@ -92,7 +94,7 @@ function preventEnter(e: KeyboardEvent) {
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-        @input="play.input = $event.target.textContent"
+        @input="play.input = ($event.target as HTMLDivElement).textContent"
         @scroll="syncScroll"
         @keydown="preventEnter"
         @paste="pastePlainText"
