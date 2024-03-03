@@ -18,10 +18,11 @@ function syncScroll() {
   preEl.scrollLeft = textAreaRef.value.scrollLeft
 }
 
-async function onInput(event: InputEvent) {
+function onInput(event: Event) {
   play.input = (event.target as HTMLDivElement).textContent ?? ''
-  await nextTick()
-  syncScroll()
+  nextTick().then(() => {
+    syncScroll()
+  })
 }
 
 function pastePlainText(e: ClipboardEvent) {
