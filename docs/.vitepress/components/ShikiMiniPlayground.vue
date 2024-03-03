@@ -25,28 +25,6 @@ function onInput(event: Event) {
   })
 }
 
-function pastePlainText(e: ClipboardEvent) {
-  e.preventDefault()
-  const text = e.clipboardData?.getData('text/plain')
-  if (!text)
-    return
-  text.split('\n').forEach((line, i) => {
-    if (i !== 0)
-      document.execCommand('insertLineBreak')
-
-    document.execCommand('insertText', false, line)
-  })
-}
-
-function preventEnter(e: KeyboardEvent) {
-  // Prevent contenteditable adding <div> on ENTER - Chrome
-  // https://stackoverflow.com/questions/18552336/prevent-contenteditable-adding-div-on-enter-chrome
-  if (e.key === 'Enter') {
-    document.execCommand('insertLineBreak')
-    e.preventDefault()
-  }
-}
-
 onMounted(() => {
   if (!textAreaRef.value)
     return
@@ -95,15 +73,14 @@ onMounted(() => {
       <span ref="highlightContainerRef" v-html="play.output" />
       <div
         ref="textAreaRef"
-        contenteditable whitespace-pre overflow-auto outline-none
+        contenteditable="plaintext-only"
+        whitespace-pre overflow-auto outline-none
         font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
         @input="onInput"
         @scroll="syncScroll"
-        @keydown="preventEnter"
-        @paste="pastePlainText"
       />
     </div>
   </div>
