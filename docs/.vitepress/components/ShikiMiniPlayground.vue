@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
 const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
 
 const textAreaRef = ref<HTMLDivElement>()
-onMounted(() => {
-  if (!textAreaRef.value)
-    return
-  textAreaRef.value.textContent = play.input
-})
-
 const highlightContainerRef = ref<HTMLSpanElement>()
-function syncScroll(e: UIEvent) {
-  if (!highlightContainerRef.value)
+
+function syncScroll() {
+  if (!highlightContainerRef.value || !textAreaRef.value)
     return
   const preEl = highlightContainerRef.value.children[0] as HTMLPreElement
   if (!preEl)
     return
+  // preEl.scrollTop = textAreaRef.value.scrollTop
+  preEl.scrollLeft = textAreaRef.value.scrollLeft
+}
 
-  const target = e.target as HTMLTextAreaElement
-  // preEl.scrollTop = target.scrollTop
-  preEl.scrollLeft = target.scrollLeft
+async function onInput(event: InputEvent) {
+  play.input = (event.target as HTMLDivElement).textContent ?? ''
+  await nextTick()
+  syncScroll()
 }
 
 function pastePlainText(e: ClipboardEvent) {
@@ -46,6 +45,12 @@ function preventEnter(e: KeyboardEvent) {
     e.preventDefault()
   }
 }
+
+onMounted(() => {
+  if (!textAreaRef.value)
+    return
+  textAreaRef.value.textContent = play.input
+})
 </script>
 
 <template>
@@ -94,7 +99,7 @@ function preventEnter(e: KeyboardEvent) {
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-        @input="play.input = ($event.target as HTMLDivElement).textContent"
+        @input="onInput"
         @scroll="syncScroll"
         @keydown="preventEnter"
         @paste="pastePlainText"
