@@ -92,6 +92,13 @@ export const usePlayground = defineStore('playground', () => {
           theme: theme.value,
           transformers: [
             {
+              preprocess(code) {
+                // Workaround for https://github.com/shikijs/shiki/issues/608
+                // When last span is empty, it's height is 0px
+                // so add a newline to render it correctly
+                if (code.endsWith('\n'))
+                  return `${code}\n`
+              },
               pre(node) {
                 this.addClassToHast(node, 'vp-code')
                 preStyle.value = node.properties?.style as string || ''
