@@ -623,6 +623,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'nginx',
     'name': 'Nginx',
+    'aliases': [
+      'njs'
+    ],
     'import': (() => import('./langs/nginx')) as DynamicImportLanguageRegistration
   },
   {
