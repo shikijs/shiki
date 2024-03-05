@@ -1226,6 +1226,7 @@ export type BundledLanguage =
   | 'narrat'
   | 'nextflow'
   | 'nf'
+  | 'njs'
   | 'nginx'
   | 'nim'
   | 'nix'
