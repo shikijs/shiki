@@ -36,6 +36,8 @@ const html = await codeToHtml(code, {
 
 ## Transformers
 
+Transformers add specific CSS classes to relevant tags but do not come with any styles, the users is responsible for writing the CSS rules for the classes themselves.
+
 ### `transformerNotationDiff`
 
 Use `[!code ++]` and `[!code --]` to mark added and removed lines.
@@ -51,7 +53,9 @@ export function foo() {
 ```
 ````
 
-will be transformed to
+Render the tag `pre` with the class `has-diff`, and `span` tags for the marked lines with the classes `diff` and either `add`  for `// [\!code ++]` or `remove` for `// [\!code --]`. 
+
+With some CSS, you can make it look like this:
 
 ```ts
 export function foo() {
@@ -86,7 +90,9 @@ export function foo() {
 
 ### `transformerNotationHighlight`
 
-Use `[!code highlight]` to highlight a line (adding `highlighted` class).
+Use `[!code highlight]` to highlight a line.
+
+For example, the following code:
 
 ````md
 ```ts
@@ -96,7 +102,9 @@ export function foo() {
 ```
 ````
 
-Results in
+Render the tag `pre` and and the `span` tag for the line marked with `// [\!code highlight]` with the class `highlighted`. 
+
+With some CSS, you can make it look like this:
 
 ```ts
 export function foo() {
@@ -110,7 +118,9 @@ Alternatively, you can use the [`transformerMetaHighlight`](#transformermetahigh
 
 ### `transformerNotationWordHighlight`
 
-Use `[!code word:xxx]` to highlight a word (adding `highlighted-word` class).
+Use `[!code word:xxx]` to highlight a word.
+
+For example, the following code:
 
 ````md
 ```ts
@@ -121,7 +131,9 @@ export function foo() { // [\!code word:Hello]
 ```
 ````
 
-Results in
+Render the `span` for the the word "Hello" with the class `highlighted-word`. 
+
+With some CSS, you can make it look like this:
 
 ```ts
 export function foo() { // [!code word:Hello]
@@ -152,7 +164,9 @@ console.log(options.foo) // this one will not be highlighted
 
 ### `transformerNotationFocus`
 
-Use `[!code focus]` to focus a line (adding `focused` class).
+Use `[!code focus]` to focus a line.
+
+For example, the following code:
 
 ````md
 ```ts
@@ -162,7 +176,9 @@ export function foo() {
 ```
 ````
 
-Results in
+Render the tag `pre` with the class `has-focused-lines`, and `span` lines marked with `// [\!code focus]` the class `has-focus`. 
+
+With some CSS, you can make it look like this:
 
 ```ts
 export function foo() {
@@ -174,7 +190,9 @@ export function foo() {
 
 ### `transformerNotationErrorLevel`
 
-Use `[!code error]`, `[!code warning]`, to mark a line with an error level (adding `highlighted error`, `highlighted warning` class).
+Use `[!code error]`, `[!code warning]`, to mark a line with an error level.
+
+For example, the following code:
 
 ````md
 ```ts
@@ -185,7 +203,9 @@ export function foo() {
 ```
 ````
 
-Results in
+Render the tag `pre` with the class `has-highlighted`, and the `span` tags for the marked lines with the classes `highlighted` and either `error`  for `// [\!code error]` or `warning` for `// [\!code warning]`. 
+
+With some CSS, you can make it look like this:
 
 ```ts
 export function foo() {
@@ -236,6 +256,8 @@ With some CSS, you can make it look like this:
 
 Highlight lines based on the meta string provided on the code snippet. Requires integrations supports.
 
+For example, the following code:
+
 ````md
 ```js {1,3-4}
 console.log('1')
@@ -245,7 +267,9 @@ console.log('4')
 ```
 ````
 
-Results in
+Render the informed `span` lines with the class `highlighted`.
+
+With some CSS, you can make it look like this:
 
 ```js {1,3-4}
 console.log('1')
@@ -258,6 +282,8 @@ console.log('4')
 
 Highlight words based on the meta string provided on the code snippet. Requires integrations supports.
 
+For example, the following code:
+
 ````md
 ```js /Hello/
 const msg = 'Hello World'
@@ -266,7 +292,9 @@ console.log(msg) // prints Hello World
 ```
 ````
 
-Results in
+Render the `span` tags for the informed word class `highlighted-word`.
+
+With some CSS, you can make it look like this:
 
 ```js /Hello/
 const msg = 'Hello World'
