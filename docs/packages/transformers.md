@@ -53,7 +53,7 @@ export function foo() {
 ```
 ````
 
-Render the tag `pre` with the class `has-diff`, and `span` tags for the marked lines with the classes `diff` and either `add`  for `// [\!code ++]` or `remove` for `// [\!code --]`. 
+Render the tag `pre` with the class `has-diff`, and `span` tags for the marked lines with the classes `diff` and either `add` for `// [\!code ++]` or `remove` for `// [\!code --]`.
 
 With some CSS, you can make it look like this:
 
@@ -102,7 +102,7 @@ export function foo() {
 ```
 ````
 
-Render the tag `pre` and and the `span` tag for the line marked with `// [\!code highlight]` with the class `highlighted`. 
+Render the tag `pre` and and the `span` tag for the line marked with `// [\!code highlight]` with the class `highlighted`.
 
 With some CSS, you can make it look like this:
 
@@ -131,7 +131,7 @@ export function foo() { // [\!code word:Hello]
 ```
 ````
 
-Render the `span` for the the word "Hello" with the class `highlighted-word`. 
+Render the `span` for the the word "Hello" with the class `highlighted-word`.
 
 With some CSS, you can make it look like this:
 
@@ -176,7 +176,7 @@ export function foo() {
 ```
 ````
 
-Render the tag `pre` with the class `has-focused-lines`, and `span` lines marked with `// [\!code focus]` the class `has-focus`. 
+Render the tag `pre` with the class `has-focused-lines`, and `span` lines marked with `// [\!code focus]` the class `has-focus`.
 
 With some CSS, you can make it look like this:
 
@@ -203,7 +203,7 @@ export function foo() {
 ```
 ````
 
-Render the tag `pre` with the class `has-highlighted`, and the `span` tags for the marked lines with the classes `highlighted` and either `error`  for `// [\!code error]` or `warning` for `// [\!code warning]`. 
+Render the tag `pre` with the class `has-highlighted`, and the `span` tags for the marked lines with the classes `highlighted` and either `error` for `// [\!code error]` or `warning` for `// [\!code warning]`.
 
 With some CSS, you can make it look like this:
 
