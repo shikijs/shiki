@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
@@ -18,24 +18,17 @@ function syncScroll() {
   preEl.scrollLeft = textAreaRef.value.scrollLeft
 }
 
-function onInput(event: Event) {
-  play.input = (event.target as HTMLDivElement).textContent ?? ''
+function onInput() {
   nextTick().then(() => {
     syncScroll()
   })
 }
-
-onMounted(() => {
-  if (!textAreaRef.value)
-    return
-  textAreaRef.value.textContent = play.input
-})
 </script>
 
 <template>
   <div
     class="language-ts vp-adaptive-theme mini-playground transition-none!" shadow
-    :style="[play.preStyle, { colorScheme: currentThemeType, overflow: 'hidden' }]"
+    :style="[play.preStyle, { colorScheme: currentThemeType }]"
   >
     <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
       <div i-carbon:chevron-down op50 />
@@ -71,10 +64,10 @@ onMounted(() => {
     </div>
     <div relative mt-10 min-h-100>
       <span ref="highlightContainerRef" v-html="play.output" />
-      <div
+      <textarea
         ref="textAreaRef"
-        contenteditable="plaintext-only"
-        whitespace-pre overflow-auto outline-none
+        v-model="play.input"
+        whitespace-pre overflow-auto
         font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
@@ -87,6 +80,10 @@ onMounted(() => {
 </template>
 
 <style>
+.mini-playground {
+  overflow: hidden;
+}
+
 .mini-playground select {
   background: transparent;
   color: inherit;
