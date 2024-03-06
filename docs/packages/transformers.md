@@ -36,7 +36,7 @@ const html = await codeToHtml(code, {
 
 ## Transformers
 
-Transformers add specific CSS classes to relevant tags but do not come with any styles, the users is responsible for writing the CSS rules for the classes themselves.
+Transformers add specific CSS classes to relevant tags but do not come with styles, you might want to provide your own CSS rules to style them properly.
 
 ### `transformerNotationDiff`
 
