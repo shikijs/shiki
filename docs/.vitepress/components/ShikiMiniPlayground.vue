@@ -1,9 +1,28 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
 const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
+
+const textAreaRef = ref<HTMLDivElement>()
+const highlightContainerRef = ref<HTMLSpanElement>()
+
+function syncScroll() {
+  if (!highlightContainerRef.value || !textAreaRef.value)
+    return
+  const preEl = highlightContainerRef.value.children[0] as HTMLPreElement
+  if (!preEl)
+    return
+  // preEl.scrollTop = textAreaRef.value.scrollTop
+  preEl.scrollLeft = textAreaRef.value.scrollLeft
+}
+
+function onInput() {
+  nextTick().then(() => {
+    syncScroll()
+  })
+}
 </script>
 
 <template>
@@ -44,19 +63,27 @@ const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.t
       </button>
     </div>
     <div relative mt-10 min-h-100>
-      <span v-html="play.output" />
+      <span ref="highlightContainerRef" v-html="play.output" />
       <textarea
+        ref="textAreaRef"
         v-model="play.input"
+        whitespace-pre overflow-auto
         font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        @input="onInput"
+        @scroll="syncScroll"
       />
     </div>
   </div>
 </template>
 
 <style>
+.mini-playground {
+  overflow: hidden;
+}
+
 .mini-playground select {
   background: transparent;
   color: inherit;
