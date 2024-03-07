@@ -1,6 +1,6 @@
 # Decorations
 
-We provide a decorations API allowing you to warp custom class and attributes to ranges of your code.
+We provide a decorations API allowing you to wrap custom classes and attributes around ranges of your code.
 
 ```ts twoslash
 import { codeToHtml } from 'shiki'
