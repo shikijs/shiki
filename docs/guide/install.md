@@ -82,7 +82,7 @@ const hast = codeToHast('.text-red { color: red; }', {
 
 The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, so we provide the `getHighlighter` function to create a highlighter instance that can later be used synchronously.
 
-The usage is pretty much the same as `shiki`, where each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
+The usage is pretty much the same as with `codeToHtml`, where each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```ts twoslash theme:nord
 import { getHighlighter } from 'shiki'
