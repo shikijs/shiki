@@ -156,7 +156,7 @@ console.log(message) // prints Hello World
 
 Outputs: `<span class="highlighted-word">Hello</span>` for matched words.
 
-You can also specify the number of occurrences to highlight, e.g. `[!code word:Hello:1]` will only highlight 1 occurrence of `Hello`.
+You can also specify the number of lines to highlight words on, e.g. `[!code word:Hello:1]` will only highlight occurrences of `Hello` on the next line.
 
 ````md
 ```ts
