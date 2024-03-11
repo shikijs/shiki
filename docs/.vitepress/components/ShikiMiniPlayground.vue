@@ -67,7 +67,7 @@ function onInput() {
       <textarea
         ref="textAreaRef"
         v-model="play.input"
-        whitespace-pre overflow-auto
+        whitespace-pre overflow-auto w-full h-full
         font-mono bg-transparent absolute inset-0 py-20px px-24px
         text-transparent caret-gray tab-4 resize-none z-10
         class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
