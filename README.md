@@ -11,9 +11,9 @@ A beautiful syntax highlighter based on TextMate grammar, accurate and powerful.
 [📚 **Documentation**](https://shiki.style)
 
 > [!NOTE]
-> You are viewing the **v1 branch**, which is a [major rewrite](https://github.com/shikijs/shiki/releases/tag/v1.0.0) from v0.x. Check out the [Migration Guide](https://shiki.style/guide/migrate#migrate-from-v0-14) if you are upgrading from v0.x.
+> You are viewing the **v1 branch**, which is a [major rewrite](https://github.com/shikijs/shiki/releases/tag/v1.0.0) from v0.x. Check out the [Migration Guide](https://shiki.style/guide/migrate#migrate-from-v0-14) if you are upgrading.
 >
-> If you are looking for the v0.x code, check the [v0.x branch](https://github.com/shikijs/shiki/tree/v0).
+> For legacy code, check the [v0.x branch](https://github.com/shikijs/shiki/tree/v0).
 
 ## License
 

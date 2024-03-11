@@ -6,6 +6,9 @@ outline: deep
 
 The v1.0 release of Shiki is a major rewrite that we took the chance to revise every design decision we made in the past. We originally had a separate package name as [Shikiji](https://github.com/antfu/shikiji) to experiment with the new design, now it's merged back to Shiki as v1.0.
 
+> [!TIP] Learn more
+> Interested in the story behind v1.0? Check out this [blog post](https://nuxt.com/blog/shiki-v1) for more details.
+
 ## Migrate from v0.14
 
 Compare to [`shiki@0.14.3`](https://github.com/shikijs/shiki/releases/tag/v0.14.3), the list of breaking changes are:
