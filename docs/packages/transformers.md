@@ -51,6 +51,7 @@ Use `[!code ++]` and `[!code --]` to mark added and removed lines.
 ```ts
 console.log('hewwo') // [\!code --]
 console.log('hello') // [\!code ++]
+console.log('goodbye')
 ```
 ````
 
@@ -59,6 +60,7 @@ Renders (with custom CSS rules):
 ```ts
 console.log('hewwo') // [!code --]
 console.log('hello') // [!code ++]
+console.log('goodbye')
 ```
 
 - `// [!code ++]` outputs: `<span class="line diff add">`
@@ -227,6 +229,7 @@ Use `[!code error]` and `[!code warning]` to mark a line with an error and warni
 
 ````md
 ```ts
+console.log('No errors or warnings')
 console.error('Error') // [\!code error]
 console.warn('Warning') // [\!code warning]
 ```
@@ -239,6 +242,7 @@ console.warn('Warning') // [\!code warning]
 With some additional CSS rules, you can make it look like this:
 
 ```ts
+console.log('No errors or warnings')
 console.error('Error') // [!code error]
 console.warn('Warning') // [!code warning]
 ```
