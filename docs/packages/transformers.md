@@ -37,7 +37,7 @@ const html = await codeToHtml(code, {
 })
 ```
 
-## CSS rules not included
+## Unstyled
 
 Transformers only applies classes and does not come with styles; you can provide your own CSS rules to style them properly.
 
