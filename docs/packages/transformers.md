@@ -39,7 +39,7 @@ const html = await codeToHtml(code, {
 
 ## CSS rules not included
 
-Shiki does not come with any CSS rules by default. You need to provide your own CSS rules to style Shiki's HTML output.
+Transformers only applies classes and does not come with styles; you can provide your own CSS rules to style them properly.
 
 ## Transformers
 
