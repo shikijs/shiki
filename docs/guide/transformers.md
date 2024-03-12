@@ -56,7 +56,7 @@ flowchart LR
 
 ## Meta
 
-Transformers can also access markdown 'meta' strings in supported integrations.
+Transformers can also access markdown 'meta' strings in [supported integrations](/guide/install#integrations).
 
 ````markdown
 <!-- [!code word:meta=here] -->
