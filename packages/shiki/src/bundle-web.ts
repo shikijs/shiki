@@ -1,15 +1,16 @@
 import type { HighlighterGeneric } from '@shikijs/core'
-import getWasm from 'shiki/wasm'
 import { createSingletonShorthands, createdBundledHighlighter } from './core'
 import type { BundledLanguage } from './assets/langs-bundle-web'
 import type { BundledTheme } from './themes'
 import { bundledLanguages } from './assets/langs-bundle-web'
 import { bundledThemes } from './themes'
+import { getWasmInlined } from './wasm-dynamic'
 
 export * from './core'
 export * from './themes'
 export * from './assets/langs-bundle-web'
-export { default as getWasmInlined } from 'shiki/wasm'
+
+export { getWasmInlined }
 
 export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
 
@@ -29,7 +30,7 @@ export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
 >(
   bundledLanguages,
   bundledThemes,
-  getWasm,
+  getWasmInlined,
 )
 
 export const {

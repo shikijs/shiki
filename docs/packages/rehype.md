@@ -51,7 +51,6 @@ import rehypeStringify from 'rehype-stringify'
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
 
 import { getHighlighterCore } from 'shiki/core'
-import getWasm from 'shiki/wasm'
 
 const highlighter = await getHighlighterCore({
   themes: [
@@ -60,7 +59,7 @@ const highlighter = await getHighlighterCore({
   langs: [
     import('shiki/langs/javascript.mjs'),
   ],
-  loadWasm: getWasm
+  loadWasm: import('shiki/wasm')
 })
 
 const raw = await fs.readFile('./input.md')

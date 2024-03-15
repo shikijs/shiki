@@ -7,7 +7,7 @@ import nord from '../src/assets/themes/nord'
 import mtp from '../src/assets/themes/material-theme-palenight'
 
 // eslint-disable-next-line antfu/no-import-dist
-import onig from '../../core/dist/onig.mjs'
+import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
 
 describe('should', () => {
   it('works', async () => {
@@ -15,7 +15,7 @@ describe('should', () => {
       themes: [nord],
       langs: [js as any],
       loadWasm: {
-        instantiator: obj => WebAssembly.instantiate(onig, obj),
+        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
       },
     })
 
@@ -32,7 +32,7 @@ describe('should', () => {
       ],
       loadWasm: {
         // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
-        instantiator: obj => WebAssembly.instantiate(onig, obj).then(r => r.instance.exports),
+        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance.exports),
       },
     })
 
@@ -151,7 +151,7 @@ describe('errors', () => {
       themes: [nord],
       langs: [js as any],
       loadWasm: {
-        instantiator: obj => WebAssembly.instantiate(onig, obj),
+        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
       },
     })
 

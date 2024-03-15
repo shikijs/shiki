@@ -5,13 +5,13 @@ import js from '../src/assets/langs/javascript'
 import nord from '../src/assets/themes/nord'
 
 // eslint-disable-next-line antfu/no-import-dist
-import onig from '../../core/dist/onig.mjs'
+import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
 
 it('wasm', async () => {
   const shiki = await getHighlighterCore({
     themes: [nord],
     langs: [js as any],
-    loadWasm: obj => WebAssembly.instantiate(onig, obj).then(r => r.instance),
+    loadWasm: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance),
   })
 
   expect(shiki.codeToHtml('1 + 1', { lang: 'javascript', theme: 'nord' }))
