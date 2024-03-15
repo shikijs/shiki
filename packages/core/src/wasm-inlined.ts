@@ -1,9 +1,11 @@
+// @ts-expect-error this will be compiled to ArrayBuffer
+import binary from 'vscode-oniguruma/release/onig.wasm'
 import type { WebAssemblyInstantiator } from './oniguruma'
 
-const getWasm: WebAssemblyInstantiator = async (info) => {
-  // @ts-expect-error this will be compiled to ArrayBuffer
-  const binray: ArrayBuffer = await import('vscode-oniguruma/release/onig.wasm').then(m => m.default)
-  return WebAssembly.instantiate(binray, info).then(wasm => wasm.instance.exports)
+export const wasmBinary = binary as ArrayBuffer
+
+export const getWasmInstance: WebAssemblyInstantiator = async (info) => {
+  return WebAssembly.instantiate(wasmBinary, info).then(wasm => wasm.instance.exports)
 }
 
-export default getWasm
+export default getWasmInstance

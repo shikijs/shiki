@@ -35,7 +35,6 @@ By default, the full bundle of `shiki` will be imported. If you are using a [fin
 import MarkdownIt from 'markdown-it'
 import { fromHighlighter } from '@shikijs/markdown-it/core'
 import { getHighlighterCore } from 'shiki/core'
-import getWasm from 'shiki/wasm'
 
 const highlighter = await getHighlighterCore({
   themes: [
@@ -44,7 +43,7 @@ const highlighter = await getHighlighterCore({
   langs: [
     import('shiki/langs/javascript.mjs'),
   ],
-  loadWasm: getWasm
+  loadWasm: import('shiki/wasm')
 })
 
 const md = MarkdownIt()

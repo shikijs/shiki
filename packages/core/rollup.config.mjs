@@ -40,9 +40,7 @@ export default defineConfig([
       dir: 'dist',
       format: 'esm',
       entryFileNames: '[name].mjs',
-      chunkFileNames: (f) => {
-        if (f.name === 'onig')
-          return 'onig.mjs'
+      chunkFileNames: () => {
         return 'chunks-[name].mjs'
       },
     },
