@@ -1,5 +1,4 @@
 import type { HighlighterGeneric } from '@shikijs/core'
-import getWasm from 'shiki/wasm'
 import { createSingletonShorthands, createdBundledHighlighter } from './core'
 import type { BundledLanguage } from './assets/langs-bundle-web'
 import type { BundledTheme } from './themes'
