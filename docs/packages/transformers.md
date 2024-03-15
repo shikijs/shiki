@@ -6,7 +6,7 @@ outline: deep
 
 <Badges name="@shikijs/transformers" />
 
-Collective of common transformers for Shiki, inspired by [shiki-processor](https://github.com/innocenzi/shiki-processor).
+Common transformers for Shiki, inspired by [shiki-processor](https://github.com/innocenzi/shiki-processor).
 
 ## Install
 
@@ -14,10 +14,13 @@ Collective of common transformers for Shiki, inspired by [shiki-processor](https
 npm i -D @shikijs/transformers
 ```
 
+## Usage
+
 ```ts twoslash
 import {
   codeToHtml,
 } from 'shiki'
+// [!code highlight:5]
 import {
   transformerNotationDiff,
   // ...
@@ -28,41 +31,41 @@ const html = await codeToHtml(code, {
   lang: 'ts',
   theme: 'nord',
   transformers: [
-    transformerNotationDiff(),
+    transformerNotationDiff(), // [!code highlight]
     // ...
   ],
 })
 ```
 
-## Transformers
+## Unstyled
 
-Transformers add specific CSS classes to relevant tags but do not come with styles, you might want to provide your own CSS rules to style them properly.
+Transformers only applies classes and does not come with styles; you can provide your own CSS rules to style them properly.
+
+## Transformers
 
 ### `transformerNotationDiff`
 
 Use `[!code ++]` and `[!code --]` to mark added and removed lines.
 
-For example, the following code
-
 ````md
 ```ts
-export function foo() {
-  console.log('hewwo') // [\!code --]
-  console.log('hello') // [\!code ++]
-}
+console.log('hewwo') // [\!code --]
+console.log('hello') // [\!code ++]
+console.log('goodbye')
 ```
 ````
 
-Render the tag `pre` with the class `has-diff`, and `span` tags for the marked lines with the classes `diff` and either `add` for `// [\!code ++]` or `remove` for `// [\!code --]`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```ts
-export function foo() {
-  console.log('hewwo') // [!code --]
-  console.log('hello') // [!code ++]
-}
+console.log('hewwo') // [!code --]
+console.log('hello') // [!code ++]
+console.log('goodbye')
 ```
+
+- `// [!code ++]` outputs: `<span class="line diff add">`
+- `// [!code --]` outputs: `<span class="line diff remove">`
+- The outer `<pre>` tag is modified: `<pre class="has-diff">`
 
 ::: details HTML Output
 
@@ -92,72 +95,85 @@ export function foo() {
 
 Use `[!code highlight]` to highlight a line.
 
-For example, the following code:
-
 ````md
 ```ts
-export function foo() {
-  console.log('Highlighted') // [\!code highlight]
-}
+console.log('Not highlighted')
+console.log('Highlighted') // [\!code highlight]
+console.log('Not highlighted')
 ```
 ````
 
-Render the tag `pre` and and the `span` tag for the line marked with `// [\!code highlight]` with the class `highlighted`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```ts
-export function foo() {
-  console.log('Highlighted') // [!code highlight]
-}
+console.log('Not highlighted')
+console.log('Highlighted') // [!code highlight]
+console.log('Not highlighted')
 ```
 
-Alternatively, you can use the [`transformerMetaHighlight`](#transformermetahighlight) to highlight lines based on the meta string.
+- `// [!code highlight]` outputs: `<span class="highlighted">`
+- The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
+
+You can also highlight multiple lines with a single comment:
+
+````md
+```ts
+// [\!code highlight:3]
+console.log('Highlighted')
+console.log('Highlighted')
+console.log('Not highlighted')
+```
+````
+
+Renders:
+
+```ts
+// [!code highlight:3]
+console.log('Highlighted')
+console.log('Highlighted')
+console.log('Not highlighted')
+```
 
 ---
 
 ### `transformerNotationWordHighlight`
 
-Use `[!code word:xxx]` to highlight a word.
-
-For example, the following code:
+Use `[!code word:Hello]` to highlight the word `Hello` in any subsequent code.
 
 ````md
 ```ts
-export function foo() { // [\!code word:Hello]
-  const msg = 'Hello World'
-  console.log(msg) // prints Hello World
-}
+// [\!code word:Hello]
+const message = 'Hello World'
+console.log(message) // prints Hello World
 ```
 ````
 
-Render the `span` for the the word "Hello" with the class `highlighted-word`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```ts
-export function foo() { // [!code word:Hello]
-  const msg = 'Hello World'
-  console.log(msg) // prints Hello World
-}
+// [!code word:Hello]
+const message = 'Hello World'
+console.log(message) // prints Hello World
 ```
 
-You can also specify the number of occurrences to highlight, e.g. `[!code word:options:2]` will highlight the next 2 occurrences of `options`.
+Outputs: `<span class="highlighted-word">Hello</span>` for matched words.
+
+You can also specify the number of lines to highlight words on, e.g. `[!code word:Hello:1]` will only highlight occurrences of `Hello` on the next line.
 
 ````md
 ```ts
-// [\!code word:options:2]
-const options = { foo: 'bar' }
-options.foo = 'baz'
-console.log(options.foo) // this one will not be highlighted
+// [\!code word:Hello:1]
+const message = 'Hello World'
+console.log(message) // prints Hello World
 ```
 ````
 
+Renders:
+
 ```ts
-// [!code word:options:2]
-const options = { foo: 'bar' }
-options.foo = 'baz'
-console.log(options.foo) // this one will not be highlighted
+// [!code word:Hello:1]
+const message = 'Hello World'
+console.log(message) // prints Hello World
 ```
 
 ---
@@ -166,52 +182,69 @@ console.log(options.foo) // this one will not be highlighted
 
 Use `[!code focus]` to focus a line.
 
-For example, the following code:
-
 ````md
 ```ts
-export function foo() {
-  console.log('Focused') // [\!code focus]
-}
+console.log('Not focused');
+console.log('Focused') // [\!code focus]
+console.log('Not focused');
 ```
 ````
 
-Render the tag `pre` with the class `has-focused-lines`, and `span` lines marked with `// [\!code focus]` the class `has-focus`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```ts
-export function foo() {
-  console.log('Focused') // [!code focus]
-}
+console.log('Not focused')
+console.log('Focused') // [!code focus]
+console.log('Not focused')
+```
+
+- Outputs: `<span class="line has-focus">`
+- The outer `<pre>` tag is modified: `<pre class="has-focused-lines">`
+
+You can also focus multiple lines with a single comment:
+
+````md
+```ts
+// [\!code focus:3]
+console.log('Focused')
+console.log('Focused')
+console.log('Not focused')
+```
+````
+
+Renders:
+
+```ts
+// [!code focus:3]
+console.log('Focused')
+console.log('Focused')
+console.log('Not focused')
 ```
 
 ---
 
 ### `transformerNotationErrorLevel`
 
-Use `[!code error]`, `[!code warning]`, to mark a line with an error level.
-
-For example, the following code:
+Use `[!code error]` and `[!code warning]` to mark a line with an error and warning levels.
 
 ````md
 ```ts
-export function foo() {
-  console.error('Error') // [\!code error]
-  console.warn('Warning') // [\!code warning]
-}
+console.log('No errors or warnings')
+console.error('Error') // [\!code error]
+console.warn('Warning') // [\!code warning]
 ```
 ````
 
-Render the tag `pre` with the class `has-highlighted`, and the `span` tags for the marked lines with the classes `highlighted` and either `error` for `// [\!code error]` or `warning` for `// [\!code warning]`.
+- Outputs: `<span class="highlighted error">` for errors
+- Outputs: `<span class="highlighted warning">` for warnings
+- The outer `<pre>` tag is modified: `<pre class="has-error-levels">`
 
-With some CSS, you can make it look like this:
+With some additional CSS rules, you can make it look like this:
 
 ```ts
-export function foo() {
-  console.error('Error') // [!code error]
-  console.warn('Warning') // [!code warning]
-}
+console.log('No errors or warnings')
+console.error('Error') // [!code error]
+console.warn('Warning') // [!code warning]
 ```
 
 ---
@@ -220,7 +253,7 @@ export function foo() {
 
 Render whitespaces (tabs and spaces) as individual spans, with classes `tab` and `space`.
 
-With some CSS, you can make it look like this:
+With some additional CSS rules, you can make it look like this:
 
 <div class="language-js vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;" tabindex="0"><code><span class="line"><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676;">function</span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">block</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">space</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span></span>
@@ -254,9 +287,7 @@ With some CSS, you can make it look like this:
 
 ### `transformerMetaHighlight`
 
-Highlight lines based on the meta string provided on the code snippet. Requires integrations supports.
-
-For example, the following code:
+Highlight lines based on the [meta string](/guide/transformers#meta) provided on the code snippet.
 
 ````md
 ```js {1,3-4}
@@ -267,9 +298,7 @@ console.log('4')
 ```
 ````
 
-Render the informed `span` lines with the class `highlighted`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```js {1,3-4}
 console.log('1')
@@ -278,11 +307,11 @@ console.log('3')
 console.log('4')
 ```
 
+- Outputs: `<span class="line highlighted">` for included lines.
+
 ### `transformerMetaWordHighlight`
 
-Highlight words based on the meta string provided on the code snippet. Requires integrations supports.
-
-For example, the following code:
+Highlight words based on the meta string provided on the code snippet.
 
 ````md
 ```js /Hello/
@@ -292,14 +321,14 @@ console.log(msg) // prints Hello World
 ```
 ````
 
-Render the `span` tags for the informed word class `highlighted-word`.
-
-With some CSS, you can make it look like this:
+Renders (with custom CSS rules):
 
 ```js /Hello/
 const msg = 'Hello World'
 console.log(msg) // prints Hello World
 ```
+
+Outputs: `<span class="highlighted-word">Hello</span>` for matched words.
 
 ---
 
