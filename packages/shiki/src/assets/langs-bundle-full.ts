@@ -328,6 +328,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/git-rebase')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'gleam',
+    'name': 'Gleam',
+    'import': (() => import('./langs/gleam')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'glimmer-js',
     'name': 'Glimmer JS',
     'aliases': [
@@ -504,6 +509,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'julia',
     'name': 'Julia',
+    'aliases': [
+      'jl'
+    ],
     'import': (() => import('./langs/julia')) as DynamicImportLanguageRegistration
   },
   {
@@ -1160,6 +1168,7 @@ export type BundledLanguage =
   | 'git-commit'
   | 'git-rebase'
   | 'gjs'
+  | 'gleam'
   | 'glimmer-js'
   | 'glimmer-ts'
   | 'glsl'
@@ -1188,6 +1197,7 @@ export type BundledLanguage =
   | 'javascript'
   | 'jinja'
   | 'jison'
+  | 'jl'
   | 'js'
   | 'json'
   | 'json5'

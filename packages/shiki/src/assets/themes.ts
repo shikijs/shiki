@@ -69,6 +69,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/github-dark')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "github-dark-default",
+    "displayName": "GitHub Dark Default",
+    "type": "dark",
+    "import": (() => import('./themes/github-dark-default')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "github-dark-dimmed",
     "displayName": "GitHub Dark Dimmed",
     "type": "dark",
@@ -79,6 +85,18 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "displayName": "GitHub Light",
     "type": "light",
     "import": (() => import('./themes/github-light')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "github-light-default",
+    "displayName": "GitHub Light Default",
+    "type": "light",
+    "import": (() => import('./themes/github-light-default')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "houston",
+    "displayName": "Houston",
+    "type": "dark",
+    "import": (() => import('./themes/houston')) as unknown as DynamicImportThemeRegistration
   },
   {
     "id": "light-plus",
@@ -256,8 +274,11 @@ export type BundledTheme =
   | 'dracula'
   | 'dracula-soft'
   | 'github-dark'
+  | 'github-dark-default'
   | 'github-dark-dimmed'
   | 'github-light'
+  | 'github-light-default'
+  | 'houston'
   | 'light-plus'
   | 'material-theme'
   | 'material-theme-darker'
