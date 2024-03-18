@@ -22,7 +22,7 @@ features:
     details: TextMate grammar powered, same engine as your VS Code. Improves with VS Code.
   - title: Zero Runtime
     icon: ⏱️
-    details: Runs ahead of time, ship zero JavaScript while getting the perfect syntax highlight.
+    details: Runs ahead of time, ship zero JavaScript while getting the perfect syntax highlighting.
   - title: Customizable
     icon: 🧩
     details: HAST based. Addons, transformations, highly customizable.
