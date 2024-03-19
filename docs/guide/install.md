@@ -192,7 +192,7 @@ const code = highlighter.codeToHtml('const a = 1', {
 ```
 
 ::: info
-[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/shikijs/shiki/blob/main/packages/@shikijs/core/src/bundle-factory.ts) or port it yourself.
+[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/shikijs/shiki/blob/main/packages/core/src/bundle-factory.ts) or port it yourself.
 :::
 
 ### Bundle Presets
