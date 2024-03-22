@@ -204,7 +204,7 @@ export default withMermaid(defineConfig({
     },
     zh: {
       label: '简体中文 (Community)',
-      link: 'https://shiki-zh-docs.vercel.app',
+      link: 'https://shiki.tmrs.site',
     },
   },
 
