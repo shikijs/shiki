@@ -52,7 +52,7 @@ flowchart LR
 - `code` - Called for each `<code>` tag, wraps all the lines.
 - `pre` - Called for each `<pre>` tag, wraps the `<code>` tag.
 - `root` - The root of HAST tree. Usually with only one child `<pre>` tag.
-- `postprocess` - Called after the HTML is generated, get a chance to modify the final output. Will not been called in `codeToHast`.
+- `postprocess` - Called after the HTML is generated, get a chance to modify the final output. Will not be called in `codeToHast`.
 
 ## Meta
 
