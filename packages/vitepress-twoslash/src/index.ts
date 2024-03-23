@@ -40,7 +40,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   }
 
   const twoslash = createTransformerFactory(
-    createTwoslasher(),
+    createTwoslasher(options.twoslashOptions),
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
