@@ -13,6 +13,8 @@ A beautiful syntax highlighter based on TextMate grammar, accurate and powerful.
 > [!NOTE]
 > You are viewing the **v1 branch**, which is a [major rewrite](https://github.com/shikijs/shiki/releases/tag/v1.0.0) from v0.x. Check out the [Migration Guide](https://shiki.style/guide/migrate#migrate-from-v0-14) if you are upgrading.
 >
+> Read more about [The Evolution of Shiki v1.0](https://nuxt.com/blog/shiki-v1).
+>
 > For legacy code, check the [v0.x branch](https://github.com/shikijs/shiki/tree/v0).
 
 ## License
