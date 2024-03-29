@@ -5,7 +5,7 @@ import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
 
 type Monaco = typeof monaco
 
-export interface MonacoInferface {
+export interface MonacoInterface {
   editor: Monaco['editor']
   languages: Monaco['languages']
 }
@@ -48,7 +48,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 
 export function shikiToMonaco(
   highlighter: ShikiInternal<any, any>,
-  monaco: MonacoInferface,
+  monaco: MonacoInterface,
 ) {
   // Convert themes to Monaco themes and register them
   const themeMap = new Map<string, MonacoTheme>()
