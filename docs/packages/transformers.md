@@ -111,7 +111,7 @@ console.log('Highlighted') // [!code highlight]
 console.log('Not highlighted')
 ```
 
-- `// [!code highlight]` outputs: `<span class="highlighted">`
+- `// [!code highlight]` outputs: `<span class="line highlighted">`
 - The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
 
 You can also highlight multiple lines with a single comment:
@@ -198,8 +198,8 @@ console.log('Focused') // [!code focus]
 console.log('Not focused')
 ```
 
-- Outputs: `<span class="line has-focus">`
-- The outer `<pre>` tag is modified: `<pre class="has-focused-lines">`
+- Outputs: `<span class="line focused">`
+- The outer `<pre>` tag is modified: `<pre class="has-focused">`
 
 You can also focus multiple lines with a single comment:
 
@@ -235,9 +235,9 @@ console.warn('Warning') // [\!code warning]
 ```
 ````
 
-- Outputs: `<span class="highlighted error">` for errors
-- Outputs: `<span class="highlighted warning">` for warnings
-- The outer `<pre>` tag is modified: `<pre class="has-error-levels">`
+- Outputs: `<span class="line highlighted error">` for errors
+- Outputs: `<span class="line highlighted warning">` for warnings
+- The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
 
 With some additional CSS rules, you can make it look like this:
 
