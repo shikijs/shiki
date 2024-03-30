@@ -946,6 +946,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/toml')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'tsv',
+    'name': 'TSV',
+    'import': (() => import('./langs/tsv')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'tsx',
     'name': 'TSX',
     'import': (() => import('./langs/tsx')) as DynamicImportLanguageRegistration
@@ -1305,6 +1310,7 @@ export type BundledLanguage =
   | 'tfvars'
   | 'toml'
   | 'ts'
+  | 'tsv'
   | 'tsx'
   | 'turtle'
   | 'twig'
