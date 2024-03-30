@@ -1,16 +1,9 @@
-import type * as monaco from 'monaco-editor-core'
+import type monacoNs from 'monaco-editor-core'
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
 import type { StateStack } from '@shikijs/core/textmate'
 import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
 
-type Monaco = typeof monaco
-
-export interface MonacoInterface {
-  editor: Monaco['editor']
-  languages: Monaco['languages']
-}
-
-export interface MonacoTheme extends monaco.editor.IStandaloneThemeData { }
+export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
 
 export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): MonacoTheme {
   let rules = 'rules' in theme
@@ -48,7 +41,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 
 export function shikiToMonaco(
   highlighter: ShikiInternal<any, any>,
-  monaco: MonacoInterface,
+  monaco: typeof monacoNs,
 ) {
   // Convert themes to Monaco themes and register them
   const themeMap = new Map<string, MonacoTheme>()
@@ -60,21 +53,41 @@ export function shikiToMonaco(
     monaco.editor.defineTheme(themeId, monacoTheme)
   }
 
-  let currentTheme = themeIds[0]
+  const colorMap: string[] = []
+  const colorToScopeMap = new Map<string, string>()
 
   // Because Monaco does not have the API of reading the current theme,
   // We hijack it here to keep track of the current theme.
   const _setTheme = monaco.editor.setTheme.bind(monaco.editor)
-  monaco.editor.setTheme = (theme: string) => {
-    _setTheme(theme)
-    currentTheme = theme
+  monaco.editor.setTheme = (themeName: string) => {
+    const ret = highlighter.setTheme(themeName)
+    const theme = themeMap.get(themeName)
+    colorMap.length = ret.colorMap.length
+    ret.colorMap.forEach((color, i) => {
+      colorMap[i] = color
+    })
+    colorToScopeMap.clear()
+    theme?.rules.forEach((rule) => {
+      const c = normalizeColor(rule.foreground)
+      if (c && !colorToScopeMap.has(c))
+        colorToScopeMap.set(c, rule.token)
+    })
+    _setTheme(themeName)
   }
 
+  // Set the first theme as the default theme
+  monaco.editor.setTheme(themeIds[0])
+
+  function findScopeByColor(color: string) {
+    return colorToScopeMap.get(color)
+  }
+
+  const monacoLanguageIds = new Set(monaco.languages.getLanguages().map(l => l.id))
   for (const lang of highlighter.getLoadedLanguages()) {
-    if (monaco.languages.getLanguages().some(l => l.id === lang)) {
+    if (monacoLanguageIds.has(lang)) {
       monaco.languages.setTokensProvider(lang, {
         getInitialState() {
-          return new TokenizerState(INITIAL, highlighter)
+          return new TokenizerState(INITIAL)
         },
         tokenize(line, state: TokenizerState) {
           // Do not attempt to tokenize if a line is too long
@@ -89,25 +102,11 @@ export function shikiToMonaco(
             }
           }
 
-          const grammar = state.highlighter.getLanguage(lang)
-          const { colorMap } = state.highlighter.setTheme(currentTheme)
-          const theme = themeMap.get(currentTheme)
+          const grammar = highlighter.getLanguage(lang)
           const result = grammar.tokenizeLine2(line, state.ruleStack, tokenizeTimeLimit)
 
           if (result.stoppedEarly)
             console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
-
-          const colorToScopeMap = new Map<string, string>()
-
-          theme!.rules.forEach((rule) => {
-            const c = normalizeColor(rule.foreground)
-            if (c && !colorToScopeMap.has(c))
-              colorToScopeMap.set(c, rule.token)
-          })
-
-          function findScopeByColor(color: string) {
-            return colorToScopeMap.get(color)
-          }
 
           const tokensLength = result.tokens.length / 2
           const tokens: any[] = []
@@ -118,38 +117,32 @@ export function shikiToMonaco(
             // Because Monaco only support one scope per token,
             // we workaround this to use color to trace back the scope
             const scope = findScopeByColor(color) || ''
-            tokens.push({
-              startIndex,
-              scopes: scope,
-            })
+            tokens.push({ startIndex, scopes: scope })
           }
 
-          return {
-            endState: new TokenizerState(result.ruleStack, state.highlighter),
-            tokens,
-          }
+          return { endState: new TokenizerState(result.ruleStack), tokens }
         },
       })
     }
   }
 }
 
-class TokenizerState implements monaco.languages.IState {
+class TokenizerState implements monacoNs.languages.IState {
   constructor(
     private _ruleStack: StateStack,
-    public highlighter: ShikiInternal<any, any>,
-  ) { }
+  ) {}
 
   public get ruleStack(): StateStack {
     return this._ruleStack
   }
 
   public clone(): TokenizerState {
-    return new TokenizerState(this._ruleStack, this.highlighter)
+    return new TokenizerState(this._ruleStack)
   }
 
-  public equals(other: monaco.languages.IState): boolean {
-    if (!other
+  public equals(other: monacoNs.languages.IState): boolean {
+    if (
+      !other
       || !(other instanceof TokenizerState)
       || other !== this
       || other._ruleStack !== this._ruleStack
@@ -166,9 +159,12 @@ function normalizeColor(color: string | undefined): string | undefined
 function normalizeColor(color: string | undefined) {
   if (!color)
     return color
-  color = color.replace('#', '').toLowerCase()
+
+  color = (color.charCodeAt(0) === 35 ? color.slice(1) : color).toLowerCase()
+
   // #RGB => #RRGGBB - Monaco does not support hex color with 3 or 4 digits
   if (color.length === 3 || color.length === 4)
     color = color.split('').map(c => c + c).join('')
+
   return color
 }
