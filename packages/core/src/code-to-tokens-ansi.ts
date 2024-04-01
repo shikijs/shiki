@@ -39,6 +39,7 @@ export function tokenizeAnsiWithTheme(
       }
 
       color = applyColorReplacements(color, colorReplacements)
+      bgColor = applyColorReplacements(bgColor, colorReplacements)
 
       if (token.decorations.has('dim'))
         color = dimColor(color)

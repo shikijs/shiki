@@ -2,7 +2,7 @@ import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { ShikiError } from './error'
 import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
-import { getTokenStyleObject, stringifyTokenStyle } from './utils'
+import { applyColorReplacements, getTokenStyleObject, stringifyTokenStyle } from './utils'
 
 /**
  * High-level code-to-tokens API.
@@ -24,6 +24,7 @@ export function codeToTokens(
     const {
       defaultColor = 'light',
       cssVariablePrefix = '--shiki-',
+      colorReplacements,
     } = options
 
     const themes = Object.entries(options.themes)
@@ -48,12 +49,20 @@ export function codeToTokens(
     tokens = themeTokens
       .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
 
-    fg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}:`) + (themeRegs[idx].fg || 'inherit')).join(';')
-    bg = themes.map((t, idx) => (idx === 0 && defaultColor ? '' : `${cssVariablePrefix + t.color}-bg:`) + (themeRegs[idx].bg || 'inherit')).join(';')
+    fg = themes.map((t, idx) => (idx === 0 && defaultColor
+      ? ''
+      : `${cssVariablePrefix + t.color}:`) + (applyColorReplacements(themeRegs[idx].fg, colorReplacements) || 'inherit')).join(';')
+    bg = themes.map((t, idx) => (idx === 0 && defaultColor
+      ? ''
+      : `${cssVariablePrefix + t.color}-bg:`) + (applyColorReplacements(themeRegs[idx].bg, colorReplacements) || 'inherit')).join(';')
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
   else if ('theme' in options) {
+    const {
+      colorReplacements,
+    } = options
+
     tokens = codeToTokensBase(
       internal,
       code,
@@ -61,8 +70,8 @@ export function codeToTokens(
     )
 
     const _theme = internal.getTheme(options.theme)
-    bg = _theme.bg
-    fg = _theme.fg
+    bg = applyColorReplacements(_theme.bg, colorReplacements)
+    fg = applyColorReplacements(_theme.fg, colorReplacements)
     themeName = _theme.name
   }
   else {

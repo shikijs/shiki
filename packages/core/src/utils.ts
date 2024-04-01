@@ -146,7 +146,11 @@ export function splitTokens<
   })
 }
 
-export function applyColorReplacements(color: string, replacements?: Record<string, string>): string {
+export function applyColorReplacements(color: string, replacements?: Record<string, string>): string
+export function applyColorReplacements(color?: string | undefined, replacements?: Record<string, string>): string | undefined
+export function applyColorReplacements(color?: string, replacements?: Record<string, string>): string | undefined {
+  if (!color)
+    return color
   return replacements?.[color?.toLowerCase()] || color
 }
 

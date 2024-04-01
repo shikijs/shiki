@@ -96,14 +96,16 @@ export function tokenizeWithTheme(
         continue
 
       const metadata = result.tokens[2 * j + 1]
-      const foreground = StackElementMetadata.getForeground(metadata)
-      const foregroundColor = applyColorReplacements(colorMap[foreground], colorReplacements)
+      const color = applyColorReplacements(
+        colorMap[StackElementMetadata.getForeground(metadata)],
+        colorReplacements,
+      )
       const fontStyle: FontStyle = StackElementMetadata.getFontStyle(metadata)
 
       const token: ThemedToken = {
         content: line.substring(startIndex, nextStartIndex),
         offset: lineOffset + startIndex,
-        color: foregroundColor,
+        color,
         fontStyle,
       }
 
