@@ -55,8 +55,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     langs,
   )
 
-  const _registry = new Registry(resolver, themes, langs)
-  Object.assign(_registry.alias, options.langAlias)
+  const _registry = new Registry(resolver, themes, langs, options.langAlias)
   await _registry.init()
 
   let _lastTheme: string | ThemeRegistrationAny

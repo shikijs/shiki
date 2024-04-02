@@ -10,13 +10,14 @@ export class Registry extends TextMateRegistry {
   private _resolvedGrammars: Record<string, IGrammar> = {}
   private _langMap: Record<string, LanguageRegistration> = {}
   private _langGraph: Map<string, LanguageRegistration> = new Map()
-
-  alias: Record<string, string> = {}
+  private _loadedThemesCache: string[] | null = null
+  private _loadedLanguagesCache: string[] | null = null
 
   constructor(
     private _resolver: Resolver,
-    public _themes: ThemeRegistrationResolved[],
-    public _langs: LanguageRegistration[],
+    private _themes: ThemeRegistrationResolved[],
+    private _langs: LanguageRegistration[],
+    private _alias: Record<string, string> = {},
   ) {
     super(_resolver)
 
@@ -33,20 +34,25 @@ export class Registry extends TextMateRegistry {
 
   public loadTheme(theme: ThemeRegistrationAny): ThemeRegistrationResolved {
     const _theme = normalizeTheme(theme)
-    if (_theme.name)
+    if (_theme.name) {
       this._resolvedThemes[_theme.name] = _theme
+      // Reset cache
+      this._loadedThemesCache = null
+    }
     return _theme
   }
 
   public getLoadedThemes() {
-    return Object.keys(this._resolvedThemes) as string[]
+    if (!this._loadedThemesCache)
+      this._loadedThemesCache = Object.keys(this._resolvedThemes)
+    return this._loadedThemesCache
   }
 
   public getGrammar(name: string) {
-    if (this.alias[name]) {
+    if (this._alias[name]) {
       const resolved = new Set<string>([name])
-      while (this.alias[name]) {
-        name = this.alias[name]
+      while (this._alias[name]) {
+        name = this._alias[name]
         if (resolved.has(name))
           throw new ShikiError(`Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
         resolved.add(name)
@@ -74,14 +80,18 @@ export class Registry extends TextMateRegistry {
     this._resolvedGrammars[lang.name] = g!
     if (lang.aliases) {
       lang.aliases.forEach((alias) => {
-        this.alias[alias] = lang.name
+        this._alias[alias] = lang.name
       })
     }
+    // Reset cache
+    this._loadedLanguagesCache = null
 
     // If there is a language that embeds this language lazily, we need to reload it
     if (embeddedLazilyBy.size) {
       for (const e of embeddedLazilyBy) {
         delete this._resolvedGrammars[e.name]
+        // Reset cache
+        this._loadedLanguagesCache = null
         // @ts-expect-error clear cache
         this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
         // @ts-expect-error clear cache
@@ -118,7 +128,9 @@ export class Registry extends TextMateRegistry {
   }
 
   public getLoadedLanguages() {
-    return Object.keys({ ...this._resolvedGrammars, ...this.alias }) as string[]
+    if (!this._loadedLanguagesCache)
+      this._loadedLanguagesCache = Object.keys({ ...this._resolvedGrammars, ...this._alias })
+    return this._loadedLanguagesCache
   }
 
   private resolveEmbeddedLanguages(lang: LanguageRegistration) {
