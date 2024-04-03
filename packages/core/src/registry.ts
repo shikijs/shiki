@@ -1,5 +1,5 @@
-import type { IGrammar, IGrammarConfiguration } from './textmate'
-import { Registry as TextMateRegistry } from './textmate'
+import type { IGrammar, IGrammarConfiguration, IRawTheme } from './textmate'
+import { Registry as TextMateRegistry, Theme as TextMateTheme } from './textmate'
 import type { LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import type { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
@@ -10,6 +10,8 @@ export class Registry extends TextMateRegistry {
   private _resolvedGrammars: Record<string, IGrammar> = {}
   private _langMap: Record<string, LanguageRegistration> = {}
   private _langGraph: Map<string, LanguageRegistration> = new Map()
+
+  private _textmateThemeCache = new WeakMap<IRawTheme, TextMateTheme>()
   private _loadedThemesCache: string[] | null = null
   private _loadedLanguagesCache: string[] | null = null
 
@@ -46,6 +48,22 @@ export class Registry extends TextMateRegistry {
     if (!this._loadedThemesCache)
       this._loadedThemesCache = Object.keys(this._resolvedThemes)
     return this._loadedThemesCache
+  }
+
+  // Override and re-implement this method to cache the textmate themes as `TextMateTheme.createFromRawTheme`
+  // is expensive. Themes can switch often especially for dual-theme support.
+  //
+  // The parent class also accepts `colorMap` as the second parameter, but since we don't use that,
+  // we omit here so it's easier to cache the themes.
+  public override setTheme(theme: IRawTheme): void {
+    let textmateTheme = this._textmateThemeCache.get(theme)
+    if (!textmateTheme) {
+      textmateTheme = TextMateTheme.createFromRawTheme(theme)
+      this._textmateThemeCache.set(theme, textmateTheme)
+    }
+
+    // @ts-expect-error Access private `_syncRegistry`, but should work in runtime
+    this._syncRegistry.setTheme(textmateTheme)
   }
 
   public getGrammar(name: string) {
