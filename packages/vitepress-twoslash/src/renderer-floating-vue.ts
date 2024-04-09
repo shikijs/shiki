@@ -163,14 +163,20 @@ function renderMarkdown(this: ShikiTransformerContextCommon, md: string): Elemen
         code: (state, node) => {
           const lang = node.lang || ''
           if (lang) {
-            return this.codeToHast(
-              node.value,
-              {
-                ...this.options,
-                transformers: [],
-                lang,
-              },
-            ).children[0] as Element
+            return <Element>{
+              type: 'element',
+              tagName: 'code',
+              properties: {},
+              children: this.codeToHast(
+                node.value,
+                {
+                  ...this.options,
+                  transformers: [],
+                  lang,
+                  structure: 'inline',
+                },
+              ).children,
+            }
           }
           return defaultHandlers.code(state, node)
         },

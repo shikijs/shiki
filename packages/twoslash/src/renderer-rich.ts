@@ -223,16 +223,22 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
 
     const popupContents: ElementContent[] = []
 
-    const typeCode = ((this.codeToHast(
-      content,
-      {
-        ...this.options,
-        transformers: [],
-        lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
-          ? 'tsx'
-          : 'ts',
-      },
-    ).children[0] as Element).children as Element[])[0]
+    const typeCode: Element = {
+      type: 'element',
+      tagName: 'code',
+      properties: {},
+      children: this.codeToHast(
+        content,
+        {
+          ...this.options,
+          transformers: [],
+          lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
+            ? 'tsx'
+            : 'ts',
+          structure: 'inline',
+        },
+      ).children as ElementContent[],
+    }
     typeCode.properties.class = 'twoslash-popup-code'
 
     popupContents.push(

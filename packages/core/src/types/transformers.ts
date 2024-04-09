@@ -35,6 +35,8 @@ export interface ShikiTransformerContext extends ShikiTransformerContextSource {
   readonly code: Element
   readonly lines: Element[]
 
+  readonly structure: CodeToHastOptions['structure']
+
   /**
    * Utility to append class to a hast node
    *

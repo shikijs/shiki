@@ -22,6 +22,22 @@ describe('should', () => {
         <span class="line"><span style="color:#B07D48">foo</span><span style="color:#999999">.</span><span style="color:#B07D48">bar</span></span></code></pre>"
       `)
   })
+
+  it('structure inline', async () => {
+    const shiki = await getHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log\nfoo.bar', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      structure: 'inline',
+    })
+
+    expect(toHtml(hast))
+      .toMatchInlineSnapshot(`"<span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span><br><span style="color:#B07D48">foo</span><span style="color:#999999">.</span><span style="color:#B07D48">bar</span>"`)
+  })
 })
 
 it('hasfocus support', async () => {
