@@ -77,10 +77,14 @@ export function tokensToHast(
   const transformers = getTransformers(options)
 
   const lines: (Element | Text)[] = []
-  const tree: Root = {
+  const root: Root = {
     type: 'root',
     children: [],
   }
+
+  const {
+    structure = 'classic',
+  } = options
 
   let preNode: Element = {
     type: 'element',
@@ -110,6 +114,7 @@ export function tokensToHast(
 
   const context: ShikiTransformerContext = {
     ...transformerContext,
+    structure,
     addClassToHast,
     get source() {
       return transformerContext.source
@@ -121,7 +126,7 @@ export function tokensToHast(
       return options
     },
     get root() {
-      return tree
+      return root
     },
     get pre() {
       return preNode
@@ -135,8 +140,12 @@ export function tokensToHast(
   }
 
   tokens.forEach((line, idx) => {
-    if (idx)
-      lines.push({ type: 'text', value: '\n' })
+    if (idx) {
+      if (structure === 'inline')
+        root.children.push({ type: 'element', tagName: 'br', properties: {}, children: [] })
+      else if (structure === 'classic')
+        lines.push({ type: 'text', value: '\n' })
+    }
 
     let lineNode: Element = {
       type: 'element',
@@ -162,28 +171,35 @@ export function tokensToHast(
       for (const transformer of transformers)
         tokenNode = transformer?.span?.call(context, tokenNode, idx + 1, col, lineNode) || tokenNode
 
-      lineNode.children.push(tokenNode)
+      if (structure === 'inline')
+        root.children.push(tokenNode)
+      else if (structure === 'classic')
+        lineNode.children.push(tokenNode)
       col += token.content.length
     }
 
-    for (const transformer of transformers)
-      lineNode = transformer?.line?.call(context, lineNode, idx + 1) || lineNode
+    if (structure === 'classic') {
+      for (const transformer of transformers)
+        lineNode = transformer?.line?.call(context, lineNode, idx + 1) || lineNode
 
-    lineNodes.push(lineNode)
-    lines.push(lineNode)
+      lineNodes.push(lineNode)
+      lines.push(lineNode)
+    }
   })
 
-  for (const transformer of transformers)
-    codeNode = transformer?.code?.call(context, codeNode) || codeNode
+  if (structure === 'classic') {
+    for (const transformer of transformers)
+      codeNode = transformer?.code?.call(context, codeNode) || codeNode
 
-  preNode.children.push(codeNode)
+    preNode.children.push(codeNode)
 
-  for (const transformer of transformers)
-    preNode = transformer?.pre?.call(context, preNode) || preNode
+    for (const transformer of transformers)
+      preNode = transformer?.pre?.call(context, preNode) || preNode
 
-  tree.children.push(preNode)
+    root.children.push(preNode)
+  }
 
-  let result = tree
+  let result = root
   for (const transformer of transformers)
     result = transformer?.root?.call(context, result) || result
 

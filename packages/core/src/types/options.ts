@@ -132,6 +132,16 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    * @default true
    */
   mergeWhitespaces?: boolean | 'never'
+
+  /**
+   * The structure of the generated HAST and HTML.
+   *
+   * - `classic`: The classic structure with `<pre>` and `<code>` elements, each line wrapped with a `<span class="line">` element.
+   * - `inline`: All tokens are rendered as `<span>`, line breaks are rendered as `<br>`. No `<pre>` or `<code>` elements. Default forground and background colors are not applied.
+   *
+   * @default 'classic'
+   */
+  structure?: 'classic' | 'inline'
 }
 
 export interface CodeOptionsMeta {
