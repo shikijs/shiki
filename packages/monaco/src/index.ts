@@ -5,6 +5,11 @@ import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
 
 export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
 
+export interface ShikiToMonacoOptions {
+  tokenizeMaxLineLength?: number
+  tokenizeTimeLimit?: number
+}
+
 export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): MonacoTheme {
   let rules = 'rules' in theme
     ? theme.rules as MonacoTheme['rules']
@@ -42,6 +47,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 export function shikiToMonaco(
   highlighter: ShikiInternal<any, any>,
   monaco: typeof monacoNs,
+  options?: ShikiToMonacoOptions,
 ) {
   // Convert themes to Monaco themes and register them
   const themeMap = new Map<string, MonacoTheme>()
@@ -92,8 +98,10 @@ export function shikiToMonaco(
         tokenize(line, state: TokenizerState) {
           // Do not attempt to tokenize if a line is too long
           // default to 20000 (as in monaco-editor-core defaults)
-          const tokenizeMaxLineLength = 20000
-          const tokenizeTimeLimit = 500
+          const {
+            tokenizeMaxLineLength = 20000,
+            tokenizeTimeLimit = 500,
+          } = options || {}
 
           if (line.length >= tokenizeMaxLineLength) {
             return {
