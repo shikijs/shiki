@@ -378,7 +378,7 @@ function isResponse(dataOrOptions: any): dataOrOptions is Response {
 function isArrayBuffer(data: any): data is ArrayBuffer | ArrayBufferView {
   return (typeof ArrayBuffer !== 'undefined' && (data instanceof ArrayBuffer || ArrayBuffer.isView(data)))
     // eslint-disable-next-line node/prefer-global/buffer
-    || (typeof Buffer !== 'undefined' && Buffer.isBuffer(data))
+    || (typeof Buffer !== 'undefined' && Buffer.isBuffer?.(data))
     || (typeof SharedArrayBuffer !== 'undefined' && data instanceof SharedArrayBuffer)
     || (typeof Uint32Array !== 'undefined' && data instanceof Uint32Array)
 }
