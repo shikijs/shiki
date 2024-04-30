@@ -171,6 +171,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/one-dark-pro')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "one-light",
+    "displayName": "One Light",
+    "type": "light",
+    "import": (() => import('./themes/one-light')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "poimandres",
     "displayName": "Poimandres",
     "type": "dark",
@@ -211,6 +217,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "displayName": "Slack Ochin",
     "type": "light",
     "import": (() => import('./themes/slack-ochin')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "snazzy-light",
+    "displayName": "Snazzy Light",
+    "type": "light",
+    "import": (() => import('./themes/snazzy-light')) as unknown as DynamicImportThemeRegistration
   },
   {
     "id": "solarized-dark",
@@ -291,6 +303,7 @@ export type BundledTheme =
   | 'night-owl'
   | 'nord'
   | 'one-dark-pro'
+  | 'one-light'
   | 'poimandres'
   | 'red'
   | 'rose-pine'
@@ -298,6 +311,7 @@ export type BundledTheme =
   | 'rose-pine-moon'
   | 'slack-dark'
   | 'slack-ochin'
+  | 'snazzy-light'
   | 'solarized-dark'
   | 'solarized-light'
   | 'synthwave-84'

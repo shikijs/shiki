@@ -161,6 +161,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/coffee')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'common-lisp',
+    'name': 'Common Lisp',
+    'aliases': [
+      'lisp'
+    ],
+    'import': (() => import('./langs/common-lisp')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'cpp',
     'name': 'C++',
     'aliases': [
@@ -221,6 +229,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/dax')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'desktop',
+    'name': 'Desktop',
+    'import': (() => import('./langs/desktop')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'diff',
     'name': 'Diff',
     'import': (() => import('./langs/diff')) as DynamicImportLanguageRegistration
@@ -260,6 +273,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'erl'
     ],
     'import': (() => import('./langs/erlang')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'fennel',
+    'name': 'Fennel',
+    'import': (() => import('./langs/fennel')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'fish',
@@ -433,6 +451,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/http')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'hy',
+    'name': 'Hy',
+    'import': (() => import('./langs/hy')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'imba',
     'name': 'Imba',
     'import': (() => import('./langs/imba')) as DynamicImportLanguageRegistration
@@ -547,9 +570,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/liquid')) as DynamicImportLanguageRegistration
   },
   {
-    'id': 'lisp',
-    'name': 'Lisp',
-    'import': (() => import('./langs/lisp')) as DynamicImportLanguageRegistration
+    'id': 'log',
+    'name': 'Log file',
+    'import': (() => import('./langs/log')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'logo',
@@ -690,6 +713,15 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/plsql')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'po',
+    'name': 'Gettext PO',
+    'aliases': [
+      'pot',
+      'potx'
+    ],
+    'import': (() => import('./langs/po')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'postcss',
     'name': 'PostCSS',
     'import': (() => import('./langs/postcss')) as DynamicImportLanguageRegistration
@@ -753,6 +785,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'r',
     'name': 'R',
     'import': (() => import('./langs/r')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'racket',
+    'name': 'Racket',
+    'import': (() => import('./langs/racket')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'raku',
@@ -915,6 +952,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'system-verilog',
     'name': 'SystemVerilog',
     'import': (() => import('./langs/system-verilog')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'systemd',
+    'name': 'Systemd Units',
+    'import': (() => import('./langs/systemd')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'tasl',
@@ -1129,6 +1171,7 @@ export type BundledLanguage =
   | 'codeql'
   | 'coffee'
   | 'coffeescript'
+  | 'common-lisp'
   | 'console'
   | 'cpp'
   | 'cql'
@@ -1142,6 +1185,7 @@ export type BundledLanguage =
   | 'd'
   | 'dart'
   | 'dax'
+  | 'desktop'
   | 'diff'
   | 'docker'
   | 'dockerfile'
@@ -1159,6 +1203,7 @@ export type BundledLanguage =
   | 'f77'
   | 'f90'
   | 'f95'
+  | 'fennel'
   | 'fish'
   | 'for'
   | 'fortran-fixed-form'
@@ -1195,6 +1240,7 @@ export type BundledLanguage =
   | 'html'
   | 'html-derivative'
   | 'http'
+  | 'hy'
   | 'imba'
   | 'ini'
   | 'jade'
@@ -1221,6 +1267,7 @@ export type BundledLanguage =
   | 'less'
   | 'liquid'
   | 'lisp'
+  | 'log'
   | 'logo'
   | 'lua'
   | 'make'
@@ -1252,7 +1299,10 @@ export type BundledLanguage =
   | 'perl6'
   | 'php'
   | 'plsql'
+  | 'po'
   | 'postcss'
+  | 'pot'
+  | 'potx'
   | 'powerquery'
   | 'powershell'
   | 'prisma'
@@ -1268,6 +1318,7 @@ export type BundledLanguage =
   | 'python'
   | 'ql'
   | 'r'
+  | 'racket'
   | 'raku'
   | 'razor'
   | 'rb'
@@ -1302,6 +1353,7 @@ export type BundledLanguage =
   | 'svelte'
   | 'swift'
   | 'system-verilog'
+  | 'systemd'
   | 'tasl'
   | 'tcl'
   | 'terraform'
