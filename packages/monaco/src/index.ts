@@ -6,7 +6,17 @@ import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
 export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
 
 export interface ShikiToMonacoOptions {
+  /**
+   * The maximum length of a line to tokenize.
+   *
+   * @default 20000
+   */
   tokenizeMaxLineLength?: number
+  /**
+   * The time limit in milliseconds for tokenizing a line.
+   *
+   * @default 500
+   */
   tokenizeTimeLimit?: number
 }
 
@@ -47,7 +57,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 export function shikiToMonaco(
   highlighter: ShikiInternal<any, any>,
   monaco: typeof monacoNs,
-  options?: ShikiToMonacoOptions,
+  options: ShikiToMonacoOptions = {},
 ) {
   // Convert themes to Monaco themes and register them
   const themeMap = new Map<string, MonacoTheme>()
@@ -88,6 +98,13 @@ export function shikiToMonaco(
     return colorToScopeMap.get(color)
   }
 
+  // Do not attempt to tokenize if a line is too long
+  // default to 20000 (as in monaco-editor-core defaults)
+  const {
+    tokenizeMaxLineLength = 20000,
+    tokenizeTimeLimit = 500,
+  } = options
+
   const monacoLanguageIds = new Set(monaco.languages.getLanguages().map(l => l.id))
   for (const lang of highlighter.getLoadedLanguages()) {
     if (monacoLanguageIds.has(lang)) {
@@ -96,13 +113,6 @@ export function shikiToMonaco(
           return new TokenizerState(INITIAL)
         },
         tokenize(line, state: TokenizerState) {
-          // Do not attempt to tokenize if a line is too long
-          // default to 20000 (as in monaco-editor-core defaults)
-          const {
-            tokenizeMaxLineLength = 20000,
-            tokenizeTimeLimit = 500,
-          } = options || {}
-
           if (line.length >= tokenizeMaxLineLength) {
             return {
               endState: state,

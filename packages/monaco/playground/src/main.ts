@@ -20,11 +20,7 @@ monaco.languages.register({ id: 'typescript' })
 monaco.languages.register({ id: 'javascript' })
 
 // Register the themes from Shiki, and provide syntax highlighting for Monaco.
-// Custom token parsing configuration can be defined.
-shikiToMonaco(highlighter, monaco, {
-  tokenizeMaxLineLength: 20000,
-  tokenizeTimeLimit: 500,
-})
+shikiToMonaco(highlighter, monaco)
 
 // Create the editor
 monaco.editor.create(document.getElementById('app')!, {
