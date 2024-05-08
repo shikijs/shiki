@@ -53,6 +53,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/ara')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'asciidoc',
+    'name': 'AsciiDoc',
+    'aliases': [
+      'adoc'
+    ],
+    'import': (() => import('./langs/asciidoc')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'asm',
     'name': 'Assembly',
     'import': (() => import('./langs/asm')) as DynamicImportLanguageRegistration
@@ -143,6 +151,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'cobol',
     'name': 'COBOL',
     'import': (() => import('./langs/cobol')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'codeowners',
+    'name': 'CODEOWNERS',
+    'import': (() => import('./langs/codeowners')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'codeql',
@@ -262,6 +275,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/elm')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'emacs-lisp',
+    'name': 'Emacs Lisp',
+    'aliases': [
+      'elisp'
+    ],
+    'import': (() => import('./langs/emacs-lisp')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'erb',
     'name': 'ERB',
     'import': (() => import('./langs/erb')) as DynamicImportLanguageRegistration
@@ -283,6 +304,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'fish',
     'name': 'Fish',
     'import': (() => import('./langs/fish')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'fluent',
+    'name': 'Fluent',
+    'aliases': [
+      'ftl'
+    ],
+    'import': (() => import('./langs/fluent')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'fortran-fixed-form',
@@ -329,6 +358,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'gdshader',
     'name': 'GDShader',
     'import': (() => import('./langs/gdshader')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'genie',
+    'name': 'Genie',
+    'import': (() => import('./langs/genie')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'gherkin',
@@ -421,6 +455,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/haskell')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'haxe',
+    'name': 'Haxe',
+    'import': (() => import('./langs/haxe')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'hcl',
     'name': 'HashiCorp HCL',
     'import': (() => import('./langs/hcl')) as DynamicImportLanguageRegistration
@@ -449,6 +488,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'http',
     'name': 'HTTP',
     'import': (() => import('./langs/http')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'hxml',
+    'name': 'HXML',
+    'import': (() => import('./langs/hxml')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'hy',
@@ -782,6 +826,21 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/python')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'qml',
+    'name': 'QML',
+    'import': (() => import('./langs/qml')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'qmldir',
+    'name': 'QML Directory',
+    'import': (() => import('./langs/qmldir')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'qss',
+    'name': 'Qt Style Sheets',
+    'import': (() => import('./langs/qss')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'r',
     'name': 'R',
     'import': (() => import('./langs/r')) as DynamicImportLanguageRegistration
@@ -903,6 +962,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/solidity')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'soy',
+    'name': 'Closure Templates',
+    'aliases': [
+      'closure-templates'
+    ],
+    'import': (() => import('./langs/soy')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'sparql',
     'name': 'SPARQL',
     'import': (() => import('./langs/sparql')) as DynamicImportLanguageRegistration
@@ -1016,6 +1083,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/typescript')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'typespec',
+    'name': 'TypeSpec',
+    'aliases': [
+      'tsp'
+    ],
+    'import': (() => import('./langs/typespec')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'typst',
     'name': 'Typst',
     'aliases': [
@@ -1027,6 +1102,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'v',
     'name': 'V',
     'import': (() => import('./langs/v')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'vala',
+    'name': 'Vala',
+    'import': (() => import('./langs/vala')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'vb',
@@ -1092,6 +1172,15 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/wgsl')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'wikitext',
+    'name': 'Wikitext',
+    'aliases': [
+      'mediawiki',
+      'wiki'
+    ],
+    'import': (() => import('./langs/wikitext')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'wolfram',
     'name': 'Wolfram',
     'aliases': [
@@ -1137,6 +1226,7 @@ export type BundledLanguage =
   | 'abap'
   | 'actionscript-3'
   | 'ada'
+  | 'adoc'
   | 'angular-html'
   | 'angular-ts'
   | 'apache'
@@ -1144,6 +1234,7 @@ export type BundledLanguage =
   | 'apl'
   | 'applescript'
   | 'ara'
+  | 'asciidoc'
   | 'asm'
   | 'astro'
   | 'awk'
@@ -1165,9 +1256,11 @@ export type BundledLanguage =
   | 'clarity'
   | 'clj'
   | 'clojure'
+  | 'closure-templates'
   | 'cmake'
   | 'cmd'
   | 'cobol'
+  | 'codeowners'
   | 'codeql'
   | 'coffee'
   | 'coffeescript'
@@ -1190,8 +1283,10 @@ export type BundledLanguage =
   | 'docker'
   | 'dockerfile'
   | 'dream-maker'
+  | 'elisp'
   | 'elixir'
   | 'elm'
+  | 'emacs-lisp'
   | 'erb'
   | 'erl'
   | 'erlang'
@@ -1205,15 +1300,18 @@ export type BundledLanguage =
   | 'f95'
   | 'fennel'
   | 'fish'
+  | 'fluent'
   | 'for'
   | 'fortran-fixed-form'
   | 'fortran-free-form'
   | 'fs'
   | 'fsharp'
   | 'fsl'
+  | 'ftl'
   | 'gdresource'
   | 'gdscript'
   | 'gdshader'
+  | 'genie'
   | 'gherkin'
   | 'git-commit'
   | 'git-rebase'
@@ -1232,6 +1330,7 @@ export type BundledLanguage =
   | 'haml'
   | 'handlebars'
   | 'haskell'
+  | 'haxe'
   | 'hbs'
   | 'hcl'
   | 'hjson'
@@ -1240,6 +1339,7 @@ export type BundledLanguage =
   | 'html'
   | 'html-derivative'
   | 'http'
+  | 'hxml'
   | 'hy'
   | 'imba'
   | 'ini'
@@ -1278,6 +1378,7 @@ export type BundledLanguage =
   | 'md'
   | 'mdc'
   | 'mdx'
+  | 'mediawiki'
   | 'mermaid'
   | 'mojo'
   | 'move'
@@ -1317,6 +1418,9 @@ export type BundledLanguage =
   | 'py'
   | 'python'
   | 'ql'
+  | 'qml'
+  | 'qmldir'
+  | 'qss'
   | 'r'
   | 'racket'
   | 'raku'
@@ -1342,6 +1446,7 @@ export type BundledLanguage =
   | 'shellsession'
   | 'smalltalk'
   | 'solidity'
+  | 'soy'
   | 'sparql'
   | 'spl'
   | 'splunk'
@@ -1362,14 +1467,17 @@ export type BundledLanguage =
   | 'tfvars'
   | 'toml'
   | 'ts'
+  | 'tsp'
   | 'tsv'
   | 'tsx'
   | 'turtle'
   | 'twig'
   | 'typ'
   | 'typescript'
+  | 'typespec'
   | 'typst'
   | 'v'
+  | 'vala'
   | 'vb'
   | 'verilog'
   | 'vhdl'
@@ -1383,6 +1491,8 @@ export type BundledLanguage =
   | 'wasm'
   | 'wenyan'
   | 'wgsl'
+  | 'wiki'
+  | 'wikitext'
   | 'wl'
   | 'wolfram'
   | 'xml'
