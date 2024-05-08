@@ -58,6 +58,8 @@ flowchart LR
 
 Transformers can also access markdown 'meta' strings in [supported integrations](/guide/install#integrations).
 
+<!-- eslint-skip -->
+
 ````markdown
 <!-- [!code word:meta=here] -->
 ```html meta=here
