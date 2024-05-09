@@ -426,6 +426,14 @@ export function loadWasm(options: LoadWasmOptions): Promise<void> {
         else if (isArrayBuffer(instance)) {
           instance = await _makeArrayBufferLoader(instance)(info)
         }
+        // import("shiki/onig.wasm") returns `{ default: WebAssembly.Module }` on cloudflare workers
+        // https://developers.cloudflare.com/workers/wrangler/bundling/
+        else if (instance instanceof WebAssembly.Module) {
+          instance = await _makeArrayBufferLoader(instance)(info)
+        }
+        else if ('default' in instance && instance.default instanceof WebAssembly.Module) {
+          instance = await _makeArrayBufferLoader(instance.default)(info)
+        }
       }
 
       if ('instance' in instance)
@@ -440,7 +448,7 @@ export function loadWasm(options: LoadWasmOptions): Promise<void> {
   return initPromise
 }
 
-function _makeArrayBufferLoader(data: ArrayBufferView | ArrayBuffer): WebAssemblyInstantiator {
+function _makeArrayBufferLoader(data: ArrayBufferView | ArrayBuffer | WebAssembly.Module): WebAssemblyInstantiator {
   return importObject => WebAssembly.instantiate(data, importObject)
 }
 function _makeResponseStreamingLoader(data: Response): WebAssemblyInstantiator {
