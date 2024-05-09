@@ -8,7 +8,10 @@ import js from 'shiki/langs/javascript.mjs'
 // eslint-disable-next-line antfu/no-import-dist
 import wasm from '../dist/onig.wasm'
 
-await loadWasm(obj => WebAssembly.instantiate(wasm, obj))
+await loadWasm(wasm)
+
+// cloudflare also supports dynamic import
+// await loadWasm(import('../dist/onig.wasm'))
 
 export default {
   async fetch() {
