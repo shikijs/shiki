@@ -426,7 +426,7 @@ export function loadWasm(options: LoadWasmOptions): Promise<void> {
         else if (isArrayBuffer(instance)) {
           instance = await _makeArrayBufferLoader(instance)(info)
         }
-        // cloudflare's import("xxx.wasm") returns `{ default: WebAssembly.Module }`
+        // import("shiki/onig.wasm") returns `{ default: WebAssembly.Module }` on cloudflare workers
         // https://developers.cloudflare.com/workers/wrangler/bundling/
         else if (instance instanceof WebAssembly.Module) {
           instance = await _makeArrayBufferLoader(instance)(info)
