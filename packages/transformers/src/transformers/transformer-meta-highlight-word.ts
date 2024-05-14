@@ -5,7 +5,7 @@ export function parseMetaHighlightWords(meta: string): string[] {
     return []
 
   // https://regex101.com/r/BHS5fd/1
-  const match = Array.from(meta.matchAll(/\/((?:\\.|[^\/])+?)\//ig))
+  const match = Array.from(meta.matchAll(/\/((?:\\.|[^/])+)\//g))
 
   return match
     // Escape backslashes

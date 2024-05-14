@@ -254,6 +254,7 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]) {
     return line.flatMap((token) => {
       if (token.content.match(/^\s+$/))
         return token
+      // eslint-disable-next-line regexp/no-super-linear-backtracking
       const match = token.content.match(/^(\s*)(.*?)(\s*)$/)
       if (!match)
         return token

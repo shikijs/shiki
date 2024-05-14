@@ -20,7 +20,7 @@ it('run', async () => {
       parseMetaString: (str) => {
         return Object.fromEntries(str.split(' ').reduce((prev: [string, boolean | string][], curr: string) => {
           const [key, value] = curr.split('=')
-          const isNormalKey = /^[A-Za-z0-9]+$/.test(key)
+          const isNormalKey = /^[A-Z0-9]+$/i.test(key)
           if (isNormalKey)
             prev = [...prev, [key, value || true]]
           return prev

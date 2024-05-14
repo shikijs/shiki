@@ -152,7 +152,7 @@ function vPre<T extends ElementContent>(el: T): T {
 
 function renderMarkdown(this: ShikiTransformerContextCommon, md: string): ElementContent[] {
   const mdast = fromMarkdown(
-    md.replace(/{@link ([^}]*)}/g, '$1'), // replace jsdoc links
+    md.replace(/\{@link ([^}]*)\}/g, '$1'), // replace jsdoc links
     { mdastExtensions: [gfmFromMarkdown()] },
   )
 

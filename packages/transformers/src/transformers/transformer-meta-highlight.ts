@@ -3,7 +3,7 @@ import type { ShikiTransformer } from 'shiki'
 export function parseMetaHighlightString(meta: string) {
   if (!meta)
     return null
-  const match = meta.match(/{([\d,-]+)}/)
+  const match = meta.match(/\{([\d,-]+)\}/)
   if (!match)
     return null
   const lines = match[1].split(',')

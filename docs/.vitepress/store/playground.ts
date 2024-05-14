@@ -81,7 +81,7 @@ export const usePlayground = defineStore('playground', () => {
         if ((o[0] || !input.value) && n[0] !== o[0]) {
           const sample = await fetchSample(lang.value)
           if (sample)
-            input.value = sample.trim().replace(/\n.*?from.*?$/i, '').trim()
+            input.value = sample.trim().replace(/\n.*?from.*$/i, '').trim()
         }
         run()
       }, { immediate: true })
