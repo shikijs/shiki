@@ -33,21 +33,65 @@ fact(5).then(show)
 fact(2).then(show)
 fact(3).then(show)
 fact(1).then(show)`
+
   const { tokens } = await codeToTokens(str.trim(), {
     lang: 'javascript',
     theme: 'github-light',
   })
 
   it('renderToSVG', async () => {
-    const { renderToSVG } = await getSVGRenderer({
-      fontSize: 20,
-    })
+    const { renderToSVG } = await getSVGRenderer()
     const res = await renderToSVG(tokens)
     expect(res).toContain('</text>')
     expect(res).toContain('</tspan>')
     expect(res).toContain('<svg')
+    expect(res).toContain('::selection')
+    expect(res).not.toContain('border-radius')
+    expect(res).not.toContain('opacity')
 
     // for ui test
     writeHTMLFile(res)
+  })
+
+  it('fontSize', async () => {
+    const { renderToSVG } = await getSVGRenderer({ fontSize: 16 })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('font-size="16"')
+  })
+
+  it('backgroundColor', async () => {
+    const { renderToSVG } = await getSVGRenderer({ backgroundColor: 'blue' })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('background-color:blue')
+  })
+
+  it('borderRadius', async () => {
+    const { renderToSVG } = await getSVGRenderer({ borderRadius: 10 })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('border-radius:10')
+  })
+
+  it('opacity', async () => {
+    const { renderToSVG } = await getSVGRenderer({ opacity: 0.5 })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('opacity:0.5')
+  })
+
+  it('cursor', async () => {
+    const { renderToSVG } = await getSVGRenderer({ cursor: 'text' })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('cursor:text')
+  })
+
+  it('selectionColor', async () => {
+    const { renderToSVG } = await getSVGRenderer({ selectionColor: 'red' })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('fill:red')
+  })
+
+  it('selectionbgColor', async () => {
+    const { renderToSVG } = await getSVGRenderer({ selectionbgColor: 'yellow' })
+    const res = await renderToSVG(tokens)
+    expect(res).toContain('background-color:yellow')
   })
 })
