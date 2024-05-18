@@ -88,6 +88,7 @@ export async function getSVGRenderer(renderOptions?: RenderOptions) {
   const { width: fontWidth, height: fontHeight } = await measureFont(
     options.fontSize,
     options.fontFamily,
+    options.remoteFontCSSURL,
   )
 
   return {
@@ -98,7 +99,8 @@ export async function getSVGRenderer(renderOptions?: RenderOptions) {
         fontHeight,
       )
 
-      let svg = `<svg ${svgId} viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">`
+      let svg = `<svg ${svgId} viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" `
+        + `height="${svgHeight}" font-size="${options.fontSize}" xmlns="http://www.w3.org/2000/svg">`
       svg += styleStr
 
       const x = Math.floor(fontWidth / 2)
@@ -131,7 +133,6 @@ export async function getSVGRenderer(renderOptions?: RenderOptions) {
 function generateStyle(svgId: string, options: RequiredRenderOptions) {
   const {
     fontFamily,
-    fontSize,
     backgroundColor,
     borderRadius,
     cursor,
@@ -143,8 +144,7 @@ function generateStyle(svgId: string, options: RequiredRenderOptions) {
   // svg css
   let svgStyle = `svg[${svgId}]`
   svgStyle += '{'
-  svgStyle += (`font-family:${fontFamily};font-size:${fontSize};`
-  + `background-color:${backgroundColor};cursor:${cursor};`)
+  svgStyle += (`font-family:${fontFamily};background-color:${backgroundColor};cursor:${cursor};`)
   if (opacity < 1 && opacity >= 0)
     svgStyle += `opacity:${opacity};`
 

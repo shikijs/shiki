@@ -27,7 +27,7 @@ async function fact(n) {
 }
 fact(6).then(show)
 const str = "12"
-
+const str2 = '12'
 fact(4).then(show)
 fact(5).then(show)
 fact(2).then(show)
