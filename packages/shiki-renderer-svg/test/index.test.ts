@@ -5,20 +5,6 @@ import { getSVGRenderer } from '../src/index'
 
 globalThis.__BROWSER__ = false
 
-function writeHTMLFile(svgStr: string) {
-  const htmlfile = `
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-  <body>
-    ${svgStr}
-  </body>
-</html>
-`
-  writeFileSync(new URL('./uiviewer/test.html', import.meta.url), htmlfile)
-}
-
 describe('renderToSVG', async () => {
   const str = `const show = console.log
 //  注释注释
@@ -34,7 +20,7 @@ fact(2).then(show)
 fact(3).then(show)
 fact(1).then(show)`
 
-  const { tokens } = await codeToTokens(str.trim(), {
+  const { tokens } = await codeToTokens(str, {
     lang: 'javascript',
     theme: 'github-light',
   })
@@ -53,10 +39,21 @@ fact(1).then(show)`
     writeHTMLFile(res)
   })
 
+  it('line height ratio', async () => {
+    const fontSize = 20
+    const { renderToSVG } = await getSVGRenderer({
+      fontSize,
+      lineHeightRatio: 1,
+    })
+    const svgHeight = (str.split('\n').length + 1) * fontSize
+    const res = await renderToSVG(tokens)
+    expect(res).toContain(`height="${svgHeight.toFixed(2)}"`)
+  })
+
   it('fontSize', async () => {
     const { renderToSVG } = await getSVGRenderer({ fontSize: 16 })
     const res = await renderToSVG(tokens)
-    expect(res).toContain('font-size="16"')
+    expect(res).toContain('font-size="16px"')
   })
 
   it('backgroundColor', async () => {
@@ -95,3 +92,17 @@ fact(1).then(show)`
     expect(res).toContain('background-color:yellow')
   })
 })
+
+function writeHTMLFile(svgStr: string) {
+  const htmlfile = `
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+  <body>
+    ${svgStr}
+  </body>
+</html>
+`
+  writeFileSync(new URL('./uiviewer/test.html', import.meta.url), htmlfile)
+}

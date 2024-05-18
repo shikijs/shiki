@@ -17,6 +17,14 @@ interface RenderOptions {
   fontSize?: number
 
   /**
+   * The line height is caculated based on the font height.
+   * The lineHeightRatio is the ratio of line height to font height(font size).
+   *
+   * @default 1.5
+   */
+  lineHeightRatio?: number
+
+  /**
    * The svg background color.
    *
    * @default '#eee'
@@ -70,7 +78,8 @@ interface RenderOptions {
 type RequiredRenderOptions = Required<RenderOptions>
 const defaultRenderOptions: RequiredRenderOptions = {
   fontFamily: '"Lucida Console", Courier, monospace',
-  fontSize: 20,
+  fontSize: 16,
+  lineHeightRatio: 1.5,
   backgroundColor: '#eee',
   borderRadius: 0,
   opacity: 1,
@@ -85,11 +94,19 @@ export async function getSVGRenderer(renderOptions?: RenderOptions) {
 
   const svgId = getId()
   const styleStr = generateStyle(svgId, options)
-  const { width: fontWidth, height: fontHeight } = await measureFont(
-    options.fontSize,
-    options.fontFamily,
-    options.remoteFontCSSURL,
+  const {
+    fontSize,
+    fontFamily,
+    remoteFontCSSURL,
+    lineHeightRatio,
+  } = options
+
+  let { width: fontWidth, height: fontHeight } = await measureFont(
+    fontSize,
+    fontFamily,
+    remoteFontCSSURL,
   )
+  fontHeight *= (lineHeightRatio / 1.5)
 
   return {
     renderToSVG(tokenLines: ThemedToken[][]) {
@@ -100,7 +117,7 @@ export async function getSVGRenderer(renderOptions?: RenderOptions) {
       )
 
       let svg = `<svg ${svgId} viewBox="0 0 ${svgWidth} ${svgHeight}" width="${svgWidth}" `
-        + `height="${svgHeight}" font-size="${options.fontSize}" xmlns="http://www.w3.org/2000/svg">`
+        + `height="${svgHeight}" font-size="${fontSize}px" xmlns="http://www.w3.org/2000/svg">`
       svg += styleStr
 
       const x = Math.floor(fontWidth / 2)
@@ -201,5 +218,5 @@ function getAdaptiveWidthAndHeight(
     ),
   )
   const width = (maxCharNum + 1) * fontWidth
-  return [width, height]
+  return [width.toFixed(2), height.toFixed(2)]
 }

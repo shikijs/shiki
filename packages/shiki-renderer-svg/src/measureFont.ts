@@ -24,8 +24,8 @@ function measureStr([fontSize, fontFamily]: [number, string]): Measurement {
   const { width, height } = window.getComputedStyle(span)
   document.body.removeChild(span)
   return {
-    width: Number.parseInt(width),
-    height: Number.parseInt(height),
+    width: Number.parseFloat(width),
+    height: Number.parseFloat(height),
   }
 }
 
@@ -46,6 +46,9 @@ function getDocument(fontName: string, url: string) {
 `
 }
 
+/**
+ * measure the width and height of char 'a' based on fontSize and fontFamily
+ */
 export async function measureFont(
   fontSize: number,
   fontFamily: string,
