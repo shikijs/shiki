@@ -66,6 +66,28 @@ const html = await codeToHtml(
 )
 ```
 
+In addition, `colorReplacements` may contain scoped replacements. This is useful when you provide multiple themes and want to replace the colors of a specific theme:
+
+```js
+const html = await codeToHtml(
+  code,
+  {
+    lang: 'js',
+    themes: { dark: 'min-dark', light: 'min-light' },
+    colorReplacements: {
+      'min-dark': {
+        '#ff79c6': '#189eff'
+      },
+      'min-light': {
+        '#ff79c6': '#defdef'
+      }
+    }
+  }
+)
+```
+
+This is only allowed for the `colorReplacements` option and not for the theme object.
+
 ## CSS Variables Theme
 
 ::: warning Experimental

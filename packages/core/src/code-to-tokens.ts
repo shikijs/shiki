@@ -2,7 +2,7 @@ import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { ShikiError } from './error'
 import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
-import { applyColorReplacements, getTokenStyleObject, stringifyTokenStyle } from './utils'
+import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements, stringifyTokenStyle } from './utils'
 
 /**
  * High-level code-to-tokens API.
@@ -24,7 +24,6 @@ export function codeToTokens(
     const {
       defaultColor = 'light',
       cssVariablePrefix = '--shiki-',
-      colorReplacements,
     } = options
 
     const themes = Object.entries(options.themes)
@@ -49,19 +48,19 @@ export function codeToTokens(
     tokens = themeTokens
       .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
 
+    const themeColorReplacements = themes.map(t => resolveColorReplacements(t.theme, options))
+
     fg = themes.map((t, idx) => (idx === 0 && defaultColor
       ? ''
-      : `${cssVariablePrefix + t.color}:`) + (applyColorReplacements(themeRegs[idx].fg, colorReplacements) || 'inherit')).join(';')
+      : `${cssVariablePrefix + t.color}:`) + (applyColorReplacements(themeRegs[idx].fg, themeColorReplacements[idx]) || 'inherit')).join(';')
     bg = themes.map((t, idx) => (idx === 0 && defaultColor
       ? ''
-      : `${cssVariablePrefix + t.color}-bg:`) + (applyColorReplacements(themeRegs[idx].bg, colorReplacements) || 'inherit')).join(';')
+      : `${cssVariablePrefix + t.color}-bg:`) + (applyColorReplacements(themeRegs[idx].bg, themeColorReplacements[idx]) || 'inherit')).join(';')
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
   else if ('theme' in options) {
-    const {
-      colorReplacements,
-    } = options
+    const colorReplacements = resolveColorReplacements(options.theme, options.colorReplacements)
 
     tokens = codeToTokensBase(
       internal,
