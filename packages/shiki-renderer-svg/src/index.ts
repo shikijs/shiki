@@ -80,7 +80,7 @@ const defaultRenderOptions: RequiredRenderOptions = {
   selectionbgColor: '#b4d5ea',
 }
 
-export async function getSVGRenderer(renderOptions: RenderOptions) {
+export async function getSVGRenderer(renderOptions?: RenderOptions) {
   const options = { ...defaultRenderOptions, ...renderOptions }
 
   const svgId = getId()
