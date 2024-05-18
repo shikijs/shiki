@@ -157,7 +157,7 @@ export interface TokenizeWithThemeOptions {
    *
    * This will be merged with theme's `colorReplacements` if any.
    */
-  colorReplacements?: Record<string, string>
+  colorReplacements?: Record<string, string | Record<string, string>>
 
   /**
    * Lines above this length will not be tokenized for performance reasons.

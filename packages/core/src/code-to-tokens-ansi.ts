@@ -1,17 +1,14 @@
 import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
 import type { ThemeRegistrationResolved, ThemedToken, TokenizeWithThemeOptions } from './types'
 import { FontStyle } from './types'
-import { applyColorReplacements, splitLines } from './utils'
+import { applyColorReplacements, resolveColorReplacements, splitLines } from './utils'
 
 export function tokenizeAnsiWithTheme(
   theme: ThemeRegistrationResolved,
   fileContents: string,
   options?: TokenizeWithThemeOptions,
 ): ThemedToken[][] {
-  const colorReplacements = {
-    ...theme.colorReplacements,
-    ...options?.colorReplacements,
-  }
+  const colorReplacements = resolveColorReplacements(theme, options)
   const lines = splitLines(fileContents)
 
   const colorPalette = createColorPalette(
