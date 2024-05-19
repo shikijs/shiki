@@ -869,6 +869,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/reg')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'regexp',
+    'name': 'RegExp',
+    'aliases': [
+      'regex'
+    ],
+    'import': (() => import('./langs/regexp')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'rel',
     'name': 'Rel',
     'import': (() => import('./langs/rel')) as DynamicImportLanguageRegistration
@@ -1427,6 +1435,8 @@ export type BundledLanguage =
   | 'razor'
   | 'rb'
   | 'reg'
+  | 'regex'
+  | 'regexp'
   | 'rel'
   | 'riscv'
   | 'rs'

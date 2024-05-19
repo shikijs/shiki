@@ -5,7 +5,7 @@ import type { IGrammar } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
-import { applyColorReplacements, isNoneTheme, isPlainLang, splitLines } from './utils'
+import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from './utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
 
 /**
@@ -40,10 +40,7 @@ export function tokenizeWithTheme(
   colorMap: string[],
   options: TokenizeWithThemeOptions,
 ): ThemedToken[][] {
-  const colorReplacements = {
-    ...theme.colorReplacements,
-    ...options?.colorReplacements,
-  }
+  const colorReplacements = resolveColorReplacements(theme, options)
 
   const {
     tokenizeMaxLineLength = 0,
