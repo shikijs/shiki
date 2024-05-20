@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { codeToTokens } from 'shiki'
 import { getSVGRenderer } from '../src/index'
@@ -104,5 +104,9 @@ function writeHTMLFile(svgStr: string) {
   </body>
 </html>
 `
+  // create uiviewer folder
+  if (!existsSync(new URL('./uiviewer', import.meta.url)))
+    mkdirSync(new URL('./uiviewer', import.meta.url))
+
   writeFileSync(new URL('./uiviewer/test.html', import.meta.url), htmlfile)
 }
