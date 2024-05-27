@@ -1,6 +1,7 @@
 /* eslint-disable node/prefer-global/process */
 import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
 import { createTransformerFactory } from '@shikijs/twoslash/core'
+import type { VueSpecificOptions } from 'twoslash-vue'
 import { createTwoslasher } from 'twoslash-vue'
 import type { ShikiTransformer } from 'shiki'
 import { removeTwoslashNotations } from 'twoslash'
@@ -9,7 +10,11 @@ import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
 
-export interface VitePressPluginTwoslashOptions extends TransformerTwoslashOptions, TwoslashFloatingVueRendererOptions {
+interface TransformerTwoslashVueOptions extends TransformerTwoslashOptions {
+  twoslashOptions?: TransformerTwoslashOptions['twoslashOptions'] & VueSpecificOptions
+}
+
+export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOptions, TwoslashFloatingVueRendererOptions {
   /**
    * Requires adding `twoslash` to the code block explicitly to run twoslash
    * @default true
