@@ -235,7 +235,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
             ? 'tsx'
             : 'ts',
-          structure: 'inline',
+          structure: content.trim().includes('\n') ? 'classic' : 'inline',
         },
       ).children as ElementContent[],
     }

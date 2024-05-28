@@ -173,7 +173,7 @@ function renderMarkdown(this: ShikiTransformerContextCommon, md: string): Elemen
                   ...this.options,
                   transformers: [],
                   lang,
-                  structure: 'inline',
+                  structure: node.value.trim().includes('\n') ? 'classic' : 'inline',
                 },
               ).children,
             }

@@ -60,7 +60,7 @@
 
 .twoslash-floating .twoslash-popup-docs,
 .twoslash-floating .twoslash-popup-error {
-  padding: 0px 12px 0px 12px !important;
+  padding: 12px !important;
   font-family: var(--twoslash-docs-font);
   font-size: 0.9em;
   max-height: 500px;
@@ -68,6 +68,16 @@
   overflow-y: auto;
   overflow-x: hidden;
   text-wrap: balance;
+}
+
+.twoslash-floating .twoslash-popup-docs p:first-child,
+.twoslash-floating .twoslash-popup-error p:first-child {
+  margin-top: 0;
+}
+
+.twoslash-floating .twoslash-popup-docs p:last-child,
+.twoslash-floating .twoslash-popup-error p:last-child {
+  margin-bottom: 0;
 }
 
 .twoslash-floating .twoslash-popup-docs {
@@ -85,8 +95,7 @@
 
 .twoslash-floating .twoslash-popup-docs p,
 .twoslash-floating .twoslash-popup-error p {
-  margin: 0;
-  padding: 6px 0;
+  margin: 6px 0;
   text-wrap: balance;
 }
 
