@@ -1,5 +1,15 @@
 import type MarkdownIt from 'markdown-it'
-import type { BuiltinTheme, CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, ShikiTransformer, TransformerOptions } from 'shiki'
+import type {
+  BuiltinLanguage,
+  BuiltinTheme,
+  CodeOptionsMeta,
+  CodeOptionsThemes,
+  CodeToHastOptions,
+  HighlighterGeneric,
+  LanguageInput,
+  ShikiTransformer,
+  TransformerOptions,
+} from 'shiki'
 
 export interface MarkdownItShikiExtraOptions {
   /**
@@ -21,6 +31,18 @@ export interface MarkdownItShikiExtraOptions {
    * @default true
    */
   trimEndingNewline?: boolean
+
+  /**
+   * When lang of code block is empty string, it will work.
+   *
+   * @default 'text'
+   */
+  defaultLanguage?: LanguageInput | BuiltinLanguage
+
+  /**
+   * When lang of code block is not included in langs of options, it will be as a fallback lang.
+   */
+  fallbackLanguage?: LanguageInput | BuiltinLanguage
 }
 
 export type MarkdownItShikiSetupOptions =
@@ -37,9 +59,17 @@ export function setupMarkdownIt(
   const {
     parseMetaString,
     trimEndingNewline = true,
+    defaultLanguage = 'text',
+    fallbackLanguage,
   } = options
-
+  const langs = highlighter.getLoadedLanguages()
   markdownit.options.highlight = (code, lang = 'text', attrs) => {
+    if (lang === '') {
+      lang = defaultLanguage as string
+    }
+    if (fallbackLanguage && !langs.includes(lang)) {
+      lang = fallbackLanguage as string
+    }
     const meta = parseMetaString?.(attrs, code, lang) || {}
     const codeOptions: CodeToHastOptions = {
       ...options,
