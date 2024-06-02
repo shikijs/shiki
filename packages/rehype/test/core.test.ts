@@ -27,6 +27,7 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
+      defaultLanguage: 'text',
       transformers: [
         transformerMetaHighlight(),
       ],
@@ -63,6 +64,7 @@ it('run with rehype-raw', async () => {
     .use(rehypeRaw)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
+      defaultLanguage: 'text',
       transformers: [
         transformerMetaHighlight(),
       ],

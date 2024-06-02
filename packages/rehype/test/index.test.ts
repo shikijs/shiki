@@ -13,6 +13,7 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShiki, {
       theme: 'vitesse-light',
+      defaultLanguage: 'text',
       transformers: [
         transformerMetaWordHighlight(),
         transformerMetaHighlight(),
