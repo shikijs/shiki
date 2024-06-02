@@ -1,7 +1,7 @@
 import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, TransformerOptions } from 'shiki/core'
 import type { Element, Root } from 'hast'
 import type { BuiltinTheme } from 'shiki'
-import type { Plugin } from 'unified'
+import type { Transformer } from 'unified'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
 
@@ -17,6 +17,11 @@ export interface RehypeShikiExtraOptions {
    * @default false
    */
   addLanguageClass?: boolean
+
+  /**
+   * The default language to use when is not specified
+   */
+  defaultLanguage?: string
 
   /**
    * Custom meta string parser
@@ -57,17 +62,17 @@ declare module 'hast' {
   }
 }
 
-const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeShikiCoreOptions], Root> = function (
-  highlighter,
-  options,
-) {
-  const {
+function rehypeShikiFromHighlighter(
+  highlighter: HighlighterGeneric<any, any>,
+  {
     addLanguageClass = false,
     parseMetaString,
     cache,
+    defaultLanguage,
+    onError,
     ...rest
-  } = options
-
+  }: RehypeShikiCoreOptions,
+): Transformer<Root, Root> {
   const prefix = 'language-'
 
   return function (tree) {
@@ -82,23 +87,22 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
         || head.type !== 'element'
         || head.tagName !== 'code'
         || !head.properties
-      )
+      ) {
         return
+      }
 
       const classes = head.properties.className
+      const languageClass = Array.isArray(classes)
+        ? classes.find(
+          d => typeof d === 'string' && d.startsWith(prefix),
+        )
+        : undefined
 
-      if (!Array.isArray(classes))
+      const language = typeof languageClass === 'string' ? languageClass.slice(prefix.length) : defaultLanguage
+      if (!language)
         return
 
-      const language = classes.find(
-        d => typeof d === 'string' && d.startsWith(prefix),
-      )
-
-      if (typeof language !== 'string')
-        return
-
-      const code = toString(head as any)
-
+      const code = toString(head)
       const cachedValue = cache?.get(code)
 
       if (cachedValue) {
@@ -111,7 +115,7 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
 
       const codeOptions: CodeToHastOptions = {
         ...rest,
-        lang: language.slice(prefix.length),
+        lang: language,
         meta: {
           ...rest.meta,
           ...meta,
@@ -124,7 +128,7 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
         codeOptions.transformers.push({
           name: 'rehype-shiki:code-language-class',
           code(node) {
-            this.addClassToHast(node, language)
+            this.addClassToHast(node, `${prefix}${language}`)
             return node
           },
         })
@@ -136,8 +140,8 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
         parent.children.splice(index, 1, ...fragment.children)
       }
       catch (error) {
-        if (options.onError)
-          options.onError(error)
+        if (onError)
+          onError(error)
         else
           throw error
       }
