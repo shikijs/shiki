@@ -164,8 +164,9 @@ class TokenizerState implements monacoNs.languages.IState {
       || !(other instanceof TokenizerState)
       || other !== this
       || other._ruleStack !== this._ruleStack
-    )
+    ) {
       return false
+    }
 
     return true
   }
