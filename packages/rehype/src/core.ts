@@ -24,6 +24,11 @@ export interface RehypeShikiExtraOptions {
   defaultLanguage?: string
 
   /**
+   * The fallback language to use when specified language is not loaded
+   */
+  fallbackLanguage?: string
+
+  /**
    * Custom meta string parser
    * Return an object to merge with `meta`
    */
@@ -62,6 +67,8 @@ declare module 'hast' {
   }
 }
 
+const languagePrefix = 'language-'
+
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
   {
@@ -69,11 +76,12 @@ function rehypeShikiFromHighlighter(
     parseMetaString,
     cache,
     defaultLanguage,
+    fallbackLanguage,
     onError,
     ...rest
   }: RehypeShikiCoreOptions,
 ): Transformer<Root, Root> {
-  const prefix = 'language-'
+  const langs = highlighter.getLoadedLanguages()
 
   return function (tree) {
     visit(tree, 'element', (node, index, parent) => {
@@ -91,16 +99,13 @@ function rehypeShikiFromHighlighter(
         return
       }
 
-      const classes = head.properties.className
-      const languageClass = Array.isArray(classes)
-        ? classes.find(
-          d => typeof d === 'string' && d.startsWith(prefix),
-        )
-        : undefined
+      let lang = getLanguage(head) ?? defaultLanguage
 
-      const language = typeof languageClass === 'string' ? languageClass.slice(prefix.length) : defaultLanguage
-      if (!language)
+      if (!lang)
         return
+
+      if (fallbackLanguage && !langs.includes(lang))
+        lang = fallbackLanguage
 
       const code = toString(head)
       const cachedValue = cache?.get(code)
@@ -115,7 +120,7 @@ function rehypeShikiFromHighlighter(
 
       const codeOptions: CodeToHastOptions = {
         ...rest,
-        lang: language,
+        lang,
         meta: {
           ...rest.meta,
           ...meta,
@@ -128,7 +133,7 @@ function rehypeShikiFromHighlighter(
         codeOptions.transformers.push({
           name: 'rehype-shiki:code-language-class',
           code(node) {
-            this.addClassToHast(node, `${prefix}${language}`)
+            this.addClassToHast(node, `${languagePrefix}${lang}`)
             return node
           },
         })
@@ -147,6 +152,18 @@ function rehypeShikiFromHighlighter(
       }
     })
   }
+}
+
+function getLanguage(head: Element): string | undefined {
+  const classes = head.properties.className
+  const languageClass = Array.isArray(classes)
+    ? classes.find(
+      d => typeof d === 'string' && d.startsWith(languagePrefix),
+    )
+    : undefined
+
+  if (typeof languageClass === 'string')
+    return languageClass.slice(languagePrefix.length)
 }
 
 export default rehypeShikiFromHighlighter
