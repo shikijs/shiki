@@ -82,8 +82,9 @@ const rehypeShikiFromHighlighter: Plugin<[HighlighterGeneric<any, any>, RehypeSh
         || head.type !== 'element'
         || head.tagName !== 'code'
         || !head.properties
-      )
+      ) {
         return
+      }
 
       const classes = head.properties.className
 
