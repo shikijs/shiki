@@ -82,6 +82,14 @@ export interface RendererRichOptions {
   renderMarkdownInline?: (this: ShikiTransformerContextCommon, markdown: string, context: string) => ElementContent[]
 
   /**
+   * The way query should be rendered.
+   * - `'popup'`: Render the query in the absolute popup
+   * - `'line'`: Render the query line after the line of code
+   * @default 'popup'
+   */
+  queryRendering?: 'popup' | 'line'
+
+  /**
    * Extensions for the genreated HAST tree.
    */
   hast?: {
@@ -206,6 +214,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
     classExtra = '',
     jsdoc = true,
     errorRendering = 'line',
+    queryRendering = 'popup',
     renderMarkdown = renderMarkdownPassThrough,
     renderMarkdownInline = renderMarkdownPassThrough,
     hast,
@@ -353,6 +362,22 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         return {}
 
       const themedContent = highlightPopupContent.call(this, query)
+
+      if (queryRendering !== 'popup') {
+        return extend(
+          hast?.queryToken,
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {
+              class: 'twoslash-hover',
+            },
+            children: [
+              node,
+            ],
+          },
+        )
+      }
 
       const popup = extend(
         hast?.queryPopup,
@@ -564,6 +589,45 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
               : [popup, token],
           },
         ),
+      ]
+    },
+
+    lineQuery(query, node) {
+      if (queryRendering !== 'line')
+        return []
+
+      const themedContent = highlightPopupContent.call(this, query)
+      const targetNode = node?.type === 'element' ? node.children[0] : undefined
+      const targetText = targetNode?.type === 'text' ? targetNode.value : ''
+      const offset = Math.max(0, (query.character || 0) + Math.floor(targetText.length / 2) - 2)
+
+      return [
+        {
+          type: 'element',
+          tagName: 'div',
+          properties: {
+            class: ['twoslash-meta-line twoslash-query-line', classExtra].filter(Boolean).join(' '),
+          },
+          children: [
+            { type: 'text', value: ' '.repeat(offset) },
+            {
+              type: 'element',
+              tagName: 'span',
+              properties: {
+                class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
+              },
+              children: [
+                {
+                  type: 'element',
+                  tagName: 'div',
+                  properties: { class: 'twoslash-popup-arrow' },
+                  children: [],
+                },
+                ...themedContent,
+              ],
+            },
+          ],
+        },
       ]
     },
 

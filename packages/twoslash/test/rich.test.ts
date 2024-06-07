@@ -186,3 +186,41 @@ const c = 1
     + colorToggle,
   ).toMatchFileSnapshot('./out/rich/custom-tags.html')
 })
+
+it('line-query', async () => {
+  const code = `
+// @errors: 2540
+interface Todo {
+  /** The title of the todo item */
+  title: string;
+}
+
+const todo: Readonly<Todo> = {
+  title: "Delete inactive users".toUpperCase(),
+//  ^?
+};
+
+todo.title = "Hello";
+
+Number.parseInt(todo.title, 10);
+//      ^|
+`.trim()
+
+  const htmlWithSeparateLine = await codeToHtml(code, {
+    lang: 'ts',
+    themes: {
+      dark: 'vitesse-dark',
+      light: 'vitesse-light',
+    },
+    defaultColor: false,
+    transformers: [
+      transformerTwoslash({
+        renderer: rendererRich({
+          queryRendering: 'line',
+        }),
+      }),
+    ],
+  })
+
+  expect(styleTag + htmlWithSeparateLine + colorToggle).toMatchFileSnapshot('./out/rich/line-query.html')
+})
