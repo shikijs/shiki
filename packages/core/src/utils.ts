@@ -1,6 +1,6 @@
 import type { Element } from 'hast'
 import { FontStyle } from './types'
-import type { MaybeArray, PlainTextLanguage, Position, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, TokenStyles } from './types'
+import type { MaybeArray, PlainTextLanguage, Position, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemedToken, TokenStyles, TokenizeWithThemeOptions } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -144,6 +144,21 @@ export function splitTokens<
       return splitToken(token, breakpointsInToken)
     })
   })
+}
+
+export function resolveColorReplacements(
+  theme: ThemeRegistrationAny | string,
+  options?: TokenizeWithThemeOptions,
+) {
+  const replacements = typeof theme === 'string' ? {} : { ...theme.colorReplacements }
+  const themeName = typeof theme === 'string' ? theme : theme.name
+  for (const [key, value] of Object.entries(options?.colorReplacements || {})) {
+    if (typeof value === 'string')
+      replacements[key] = value
+    else if (key === themeName)
+      Object.assign(replacements, value)
+  }
+  return replacements
 }
 
 export function applyColorReplacements(color: string, replacements?: Record<string, string>): string

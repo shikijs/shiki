@@ -50,17 +50,17 @@ export async function prepareLangs() {
     await fs.writeFile(
       `./src/assets/langs/${lang.name}.js`,
       `${COMMENT_HEAD}
-${deps.map(i => `import ${i.replace(/[^\w]/g, '_')} from './${i}'`).join('\n')}
+${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}'`).join('\n')}
 
 const lang = Object.freeze(${JSON.stringify(json)})
 
 export default [
 ${[
-  ...deps.map(i => `  ...${i.replace(/[^\w]/g, '_')}`),
+  ...deps.map(i => `  ...${i.replace(/\W/g, '_')}`),
   '  lang',
 ].join(',\n') || ''}
 ]
-`.replace(/\n\n+/g, '\n\n'),
+`.replace(/\n{2,}/g, '\n\n'),
       'utf-8',
     )
 
@@ -165,5 +165,5 @@ export const bundledLanguages = {
 }
 
 function isInvalidFilename(filename: string) {
-  return !filename.match(/^[a-zA-Z0-9_-]+$/)
+  return !filename.match(/^[\w-]+$/)
 }

@@ -52,14 +52,14 @@ export default defineConfig([
       dir: 'dist',
       format: 'esm',
       entryFileNames: (f) => {
-        if (f.facadeModuleId?.match(/[\\\/]langs[\\\/]/))
+        if (f.facadeModuleId?.match(/[\\/]langs[\\/]/))
           return `langs/${f.name}.mjs`
         return '[name].mjs'
       },
       chunkFileNames: (f) => {
-        if (f.moduleIds.some(i => i.match(/[\\\/]langs[\\\/]/)))
+        if (f.moduleIds.some(i => i.match(/[\\/]langs[\\/]/)))
           return `langs/${f.name}.mjs`
-        else if (f.moduleIds.some(i => i.match(/[\\\/]themes[\\\/]/)))
+        else if (f.moduleIds.some(i => i.match(/[\\/]themes[\\/]/)))
           return 'themes/[name].mjs'
         return 'chunks/[name].mjs'
       },
@@ -75,7 +75,7 @@ export default defineConfig([
       dir: 'dist',
       format: 'esm',
       chunkFileNames: 'types/[name].d.mts',
-      entryFileNames: f => `${f.name.replace(/src[\\\/]/, '')}.d.mts`,
+      entryFileNames: f => `${f.name.replace(/src[\\/]/, '')}.d.mts`,
     },
     plugins: [
       dts({

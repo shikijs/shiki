@@ -244,7 +244,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
             ? 'tsx'
             : 'ts',
-          structure: 'inline',
+          structure: content.trim().includes('\n') ? 'classic' : 'inline',
         },
       ).children as ElementContent[],
     }
@@ -697,8 +697,8 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
   }
 }
 
-const regexType = /^[A-Z][a-zA-Z0-9_]*(\<[^\>]*\>)?:/
-const regexFunction = /^[a-zA-Z0-9_]*\(/
+const regexType = /^[A-Z]\w*(<[^>]*>)?:/
+const regexFunction = /^\w*\(/
 
 /**
  * The default hover info processor, which will do some basic cleanup
@@ -706,11 +706,11 @@ const regexFunction = /^[a-zA-Z0-9_]*\(/
 export function defaultHoverInfoProcessor(type: string) {
   let content = type
     // remove leading `(property)` or `(method)` on each line
-    .replace(/^\(([\w-]+?)\)\s+/mg, '')
+    .replace(/^\(([\w-]+)\)\s+/gm, '')
     // remove import statement
     .replace(/\nimport .*$/, '')
     // remove interface or namespace lines with only the name
-    .replace(/^(interface|namespace) \w+$/mg, '')
+    .replace(/^(interface|namespace) \w+$/gm, '')
     .trim()
 
   // Add `type` or `function` keyword if needed

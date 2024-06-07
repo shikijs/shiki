@@ -14,7 +14,7 @@ describe('fixtures', () => {
       const ext = file.split('.').pop()!
 
       let theme = 'vitesse-dark'
-      code = code.replace(/\/\/\s+@theme:\s+(.*)\n/, (_, t) => {
+      code = code.replace(/\/\/\s+@theme:\s+(\S*)\n/, (_, t) => {
         theme = t
         return ''
       })
