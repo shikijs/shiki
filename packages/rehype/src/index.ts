@@ -17,7 +17,7 @@ export type RehypeShikiOptions = RehypeShikiCoreOptions
   }
 
 const rehypeShiki: Plugin<[RehypeShikiOptions], Root> = function (
-  options = { theme: 'vitesse-dark' },
+  options = {} as RehypeShikiOptions,
 ) {
   const themeNames = ('themes' in options ? Object.values(options.themes) : [options.theme]).filter(Boolean) as BuiltinTheme[]
   const langs = options.langs || Object.keys(bundledLanguages)

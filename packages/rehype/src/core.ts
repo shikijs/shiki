@@ -71,7 +71,10 @@ const languagePrefix = 'language-'
 
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
-  {
+  options: RehypeShikiCoreOptions,
+): Transformer<Root, Root> {
+  const langs = highlighter.getLoadedLanguages()
+  const {
     addLanguageClass = false,
     parseMetaString,
     cache,
@@ -79,9 +82,7 @@ function rehypeShikiFromHighlighter(
     fallbackLanguage,
     onError,
     ...rest
-  }: RehypeShikiCoreOptions,
-): Transformer<Root, Root> {
-  const langs = highlighter.getLoadedLanguages()
+  } = options
 
   return function (tree) {
     visit(tree, 'element', (node, index, parent) => {
@@ -99,7 +100,14 @@ function rehypeShikiFromHighlighter(
         return
       }
 
-      let lang = getLanguage(head) ?? defaultLanguage
+      const classes = head.properties.className
+      const languageClass = Array.isArray(classes)
+        ? classes.find(
+          d => typeof d === 'string' && d.startsWith(languagePrefix),
+        )
+        : undefined
+
+      let lang = typeof languageClass === 'string' ? languageClass.slice(languagePrefix.length) : defaultLanguage
 
       if (!lang)
         return
@@ -152,18 +160,6 @@ function rehypeShikiFromHighlighter(
       }
     })
   }
-}
-
-function getLanguage(head: Element): string | undefined {
-  const classes = head.properties.className
-  const languageClass = Array.isArray(classes)
-    ? classes.find(
-      d => typeof d === 'string' && d.startsWith(languagePrefix),
-    )
-    : undefined
-
-  if (typeof languageClass === 'string')
-    return languageClass.slice(languagePrefix.length)
 }
 
 export default rehypeShikiFromHighlighter
