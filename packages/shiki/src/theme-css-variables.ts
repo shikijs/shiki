@@ -231,6 +231,36 @@ export function createCssVariablesTheme(options: CssVariablesThemeOptions = {}):
           foreground: variable('token-keyword'),
         },
       },
+      {
+        // [Custom] Diff
+        scope: [
+          'markup.inserted',
+          'meta.diff.header.to-file',
+          'punctuation.definition.inserted',
+        ],
+        settings: {
+          foreground: variable('token-inserted'),
+        },
+      },
+      {
+        scope: [
+          'markup.deleted',
+          'meta.diff.header.from-file',
+          'punctuation.definition.deleted',
+        ],
+        settings: {
+          foreground: variable('token-deleted'),
+        },
+      },
+      {
+        scope: [
+          'markup.changed',
+          'punctuation.definition.changed',
+        ],
+        settings: {
+          foreground: variable('token-changed'),
+        },
+      },
     ],
   }
 
