@@ -1,3 +1,4 @@
+/// <reference types="mdast-util-to-hast" />
 import type { LanguageInput } from 'shiki/core'
 import type { BuiltinLanguage, BuiltinTheme } from 'shiki'
 import { bundledLanguages, getHighlighter } from 'shiki'
