@@ -58,15 +58,6 @@ export type RehypeShikiCoreOptions =
   & CodeOptionsMeta
   & RehypeShikiExtraOptions
 
-declare module 'hast' {
-  interface Data {
-    meta?: string
-  }
-  interface Properties {
-    metastring?: string
-  }
-}
-
 const languagePrefix = 'language-'
 
 function rehypeShikiFromHighlighter(
@@ -123,7 +114,7 @@ function rehypeShikiFromHighlighter(
         return
       }
 
-      const metaString = head.data?.meta ?? head.properties.metastring ?? ''
+      const metaString = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
       const meta = parseMetaString?.(metaString, node, tree) || {}
 
       const codeOptions: CodeToHastOptions = {
