@@ -61,8 +61,8 @@ export function tokenizeWithTheme(
 
   const themeSettingsSelectors: ThemeSettingsSelectors[] = []
   if (options.includeExplanation) {
-		for (const setting of theme.settings) {
-			let selectors: string[]
+    for (const setting of theme.settings) {
+      let selectors: string[]
       switch (typeof setting.scope) {
       case 'string':
         selectors = setting.scope.split(/,/).map(scope => scope.trim())
@@ -78,8 +78,8 @@ export function tokenizeWithTheme(
         settings: setting,
         selectors: selectors.map(selector => selector.split(/ /)),
       })
-		}
-	}
+    }
+  }
 
   for (let i = 0, len = lines.length; i < len; i++) {
     const [line, lineOffset] = lines[i]
@@ -214,12 +214,12 @@ function explainThemeScope(
 ): IRawThemeSetting[] {
   const result: IRawThemeSetting[] = []
   for (const {selectors, settings} of themeSettingsSelectors) {
-		for (const selectorPieces of selectors) {
+    for (const selectorPieces of selectors) {
       if (matches(selectorPieces, scope, parentScopes)) {
         result.push(settings)
         break // continue to the next theme settings
       }
     }
-	}
+  }
   return result
 }
