@@ -34,9 +34,9 @@ export function codeToTokensBase(
 }
 
 /** for explanations */
-type ThemeSettingsSelectors = {
-  settings: IRawThemeSetting,
-  selectors: string[][],
+interface ThemeSettingsSelectors {
+  settings: IRawThemeSetting
+  selectors: string[][]
 }
 
 export function tokenizeWithTheme(
@@ -64,14 +64,14 @@ export function tokenizeWithTheme(
     for (const setting of theme.settings) {
       let selectors: string[]
       switch (typeof setting.scope) {
-      case 'string':
-        selectors = setting.scope.split(/,/).map(scope => scope.trim())
-        break
-      case 'object':
-        selectors = setting.scope
-        break
-      default:
-        continue
+        case 'string':
+          selectors = setting.scope.split(/,/).map(scope => scope.trim())
+          break
+        case 'object':
+          selectors = setting.scope
+          break
+        default:
+          continue
       }
 
       themeSettingsSelectors.push({
@@ -181,8 +181,8 @@ function explainThemeScopes(
 }
 
 function matchesOne(selector: string, scope: string): boolean {
-  return selector === scope ||
-    (scope.substring(0, selector.length) === selector && scope[selector.length] === '.')
+  return selector === scope
+    || (scope.substring(0, selector.length) === selector && scope[selector.length] === '.')
 }
 
 function matches(
@@ -190,7 +190,7 @@ function matches(
   scope: string,
   parentScopes: string[],
 ): boolean {
-  if (!matchesOne(selectors[selectors.length-1], scope))
+  if (!matchesOne(selectors[selectors.length - 1], scope))
     return false
 
   let selectorParentIndex = selectors.length - 2
@@ -213,7 +213,7 @@ function explainThemeScope(
   parentScopes: string[],
 ): IRawThemeSetting[] {
   const result: IRawThemeSetting[] = []
-  for (const {selectors, settings} of themeSettingsSelectors) {
+  for (const { selectors, settings } of themeSettingsSelectors) {
     for (const selectorPieces of selectors) {
       if (matches(selectorPieces, scope, parentScopes)) {
         result.push(settings)
