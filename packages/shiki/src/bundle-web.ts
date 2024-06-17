@@ -1,4 +1,4 @@
-import type { HighlighterGeneric } from '@shikijs/core'
+import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/core'
 import { createSingletonShorthands, createdBundledHighlighter } from './core'
 import type { BundledLanguage } from './assets/langs-bundle-web'
 import type { BundledTheme } from './themes'
@@ -46,3 +46,11 @@ export const {
 >(
   createHighlighter,
 )
+
+/**
+ * @deprecated Use `createHighlighter` or `getSingletonHighlighter` instead.
+ */
+export const getHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme> = /* @__PURE__ */ (options) => {
+  console.warn('`getHighlighter` is deprecated. Use `createHighlighter` or `getSingletonHighlighter` instead.')
+  return createHighlighter(options)
+}

@@ -1,7 +1,7 @@
 import type { LoadWasmOptions } from '../oniguruma'
 import type { StringLiteralUnion } from './utils'
 import type { LanguageInput, SpecialLanguage } from './langs'
-import type { ThemeInput, ThemeRegistrationAny } from './themes'
+import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
 import type { TransformerOptions } from './transformers'
 import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
 import type { DecorationOptions } from './decorations'
@@ -37,7 +37,7 @@ export interface BundledHighlighterOptions<L extends string, T extends string> {
    *
    * @default []
    */
-  themes: (ThemeInput | StringLiteralUnion<T>)[]
+  themes: (ThemeInput | StringLiteralUnion<T> | SpecialTheme)[]
   /**
    * Language registation
    *

@@ -25,3 +25,40 @@ export async function createHighlighterCore(options: HighlighterCoreOptions = {}
     getInternalContext: () => internal,
   }
 }
+
+export function makeSingletonHighlighterCore(createHighlighter: typeof createHighlighterCore) {
+  let _shiki: ReturnType<typeof createHighlighterCore>
+
+  async function getSingletonHighlighterCore(
+    options: Partial<HighlighterCoreOptions> = {},
+  ) {
+    if (!_shiki) {
+      _shiki = createHighlighter({
+        ...options,
+        themes: options.themes || [],
+        langs: options.langs || [],
+      })
+      return _shiki
+    }
+    else {
+      const s = await _shiki
+      await Promise.all([
+        s.loadTheme(...(options.themes || [])),
+        s.loadLanguage(...(options.langs || [])),
+      ])
+      return s
+    }
+  }
+
+  return getSingletonHighlighterCore
+}
+
+export const getSingletonHighlighterCore = /* @__PURE__ */ makeSingletonHighlighterCore(createHighlighterCore)
+
+/**
+ * @deprecated Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.
+ */
+export function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
+  console.warn('`getHighlighterCore` is deprecated. Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.')
+  return createHighlighterCore(options)
+}
