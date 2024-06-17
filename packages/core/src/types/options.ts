@@ -24,6 +24,11 @@ export interface HighlighterCoreOptions {
    * Load wasm file from a custom path or using a custom function.
    */
   loadWasm?: LoadWasmOptions
+  /**
+   * Emit console warnings to alert users of potential issues.
+   * @default true
+   */
+  warnings?: boolean
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> {

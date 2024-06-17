@@ -16,10 +16,16 @@ export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
   _defaultWasmLoader = _loader
 }
 
+let instancesCount = 0
+
 /**
  * Get the minimal shiki context for rendering.
  */
 export async function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+  instancesCount += 1
+  if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
+    console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance.`)
+
   async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
     return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
   }

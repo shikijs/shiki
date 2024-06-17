@@ -102,6 +102,12 @@ const code = highlighter.codeToHtml('const a = 1', {
 })
 ```
 
+:::info Important Note
+Highlighter instance should be **long-lived singleton**. You might need to cache it somewhere and reuse it across your application. Avoid calling `getHighlighter` in hot functions or loops.
+
+If running on Node.js, we recommend using the [Shorthands](#shorthands) which manages the highlighter instance and dynamic theme/language loading for you.
+:::
+
 Additionally, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
 
 ```ts twoslash
