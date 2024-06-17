@@ -1,5 +1,5 @@
 import type MarkdownIt from 'markdown-it'
-import { bundledLanguages, getHighlighter } from 'shiki'
+import { bundledLanguages, createHighlighter } from 'shiki'
 import type { BuiltinLanguage, BuiltinTheme, LanguageInput } from 'shiki'
 import type { MarkdownItShikiSetupOptions } from './core'
 import { setupMarkdownIt } from './core'
@@ -19,7 +19,7 @@ export default async function markdownItShiki(options: MarkdownItShikiOptions) {
   const themeNames = ('themes' in options
     ? Object.values(options.themes)
     : [options.theme]).filter(Boolean) as BuiltinTheme[]
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: themeNames,
     langs: options.langs || Object.keys(bundledLanguages) as BuiltinLanguage[],
   })

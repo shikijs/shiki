@@ -34,9 +34,9 @@ By default, the full bundle of `shiki` will be imported. If you are using a [fin
 // @noErrors: true
 import MarkdownIt from 'markdown-it'
 import { fromHighlighter } from '@shikijs/markdown-it/core'
-import { getHighlighterCore } from 'shiki/core'
+import { createHighlighterCore } from 'shiki/core'
 
-const highlighter = await getHighlighterCore({
+const highlighter = await createHighlighterCore({
   themes: [
     import('shiki/themes/vitesse-light.mjs')
   ],

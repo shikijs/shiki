@@ -24,7 +24,7 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
  * For granular control over the bundle, check:
  * @see https://shiki.style/guide/install#fine-grained-bundle
  */
-export const getHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >(
@@ -44,5 +44,5 @@ export const {
   BundledLanguage,
   BundledTheme
 >(
-  getHighlighter,
+  createHighlighter,
 )

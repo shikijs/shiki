@@ -21,7 +21,7 @@ let instancesCount = 0
 /**
  * Get the minimal shiki context for rendering.
  */
-export async function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
   instancesCount += 1
   if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
     console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance.`)

@@ -27,10 +27,10 @@ import {
   BundledLanguage,
   BundledTheme,
   codeToHtml,
-  getHighlighter
+  createHighlighter
 } from 'shiki/bundle/web' // [!code highlight]
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: ['html', 'css', 'js'],
   themes: ['github-dark', 'github-light'],
 })

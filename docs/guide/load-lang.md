@@ -6,11 +6,11 @@ You can load custom languages by passing a TextMate grammar object into the `lan
 
 ```ts twoslash
 // @noErrors
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: [myLang],
   themes: ['vitesse-light']
 })
@@ -25,11 +25,11 @@ You can also load languages after the highlighter has been created.
 
 ```ts twoslash
 // @noErrors
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
 const myLang = JSON.parse(fs.readFileSync('my-lang.json', 'utf8'))
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: [],
   themes: ['vitesse-light'],
 })
@@ -49,7 +49,7 @@ Since v1.0, `shiki` now is environment agnostic, we don't have access to the fil
 For example, the following would not work:
 
 ```ts
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: [
     {
       name: 'vue-vine',
@@ -75,7 +75,7 @@ Instead, load that file yourself (via `fs`, `import()`, `fetch()`, etc.):
 ```ts
 const vineGrammar = JSON.parse(fs.readFileSync(join(__dirname, './vine-ts.tmLanguage.json'), 'utf8'))
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: [
     {
       name: 'vue-vine',
@@ -100,9 +100,9 @@ const highlighter = await getHighlighter({
 You can register custom language aliases with the `langAlias` option. For example:
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: ['javascript'],
   langAlias: { // [!code hl:3]
     mylang: 'javascript',

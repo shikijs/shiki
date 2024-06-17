@@ -3,7 +3,7 @@ import { codeToHtml } from './code-to-html'
 import { codeToTokens } from './code-to-tokens'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
-import { getShikiInternal } from './internal'
+import { createShikiInternal } from './internal'
 import type { HighlighterCore, HighlighterCoreOptions } from './types'
 
 /**
@@ -12,8 +12,8 @@ import type { HighlighterCore, HighlighterCoreOptions } from './types'
  *
  * @see http://shiki.style/guide/install#fine-grained-bundle
  */
-export async function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
-  const internal = await getShikiInternal(options)
+export async function createHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
+  const internal = await createShikiInternal(options)
 
   return {
     codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
