@@ -16,7 +16,7 @@ export { normalizeTheme } from 'shiki'
 export { normalizeTheme as toShikiTheme } from 'shiki'
 export { ShikiCompatError } from './error'
 
-export async function createHighlighter(options: Partial<HighlighterOptions> = {}) {
+export async function getHighlighter(options: Partial<HighlighterOptions> = {}) {
   const themes = options.themes || []
   const langs = options.langs || []
 
@@ -121,7 +121,7 @@ export async function createHighlighter(options: Partial<HighlighterOptions> = {
   }
 }
 
-export type Highlighter = Awaited<ReturnType<typeof createHighlighter>>
+export type Highlighter = Awaited<ReturnType<typeof getHighlighter>>
 
 export async function loadTheme(theme: BuiltinTheme | ThemeInput): Promise<ThemeRegistrationResolved> {
   if (typeof theme === 'string') {
@@ -143,4 +143,4 @@ async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
   return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
 }
 
-export default createHighlighter
+export default getHighlighter

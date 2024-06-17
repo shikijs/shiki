@@ -3,12 +3,12 @@ import * as shikiLegacy from 'shiki-legacy'
 import * as shiki from '../src/index'
 
 it('getBackgroundColor', async () => {
-  const s = await shikiLegacy.createHighlighter({
+  const s = await shikiLegacy.getHighlighter({
     theme: 'nord',
     langs: ['javascript'],
   })
 
-  const sj = await shiki.createHighlighter({
+  const sj = await shiki.getHighlighter({
     theme: 'nord',
     langs: ['javascript'],
   })

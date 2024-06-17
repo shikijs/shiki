@@ -3,7 +3,7 @@
 import process from 'node:process'
 import { extname } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import createHighlighter from '../src'
+import getHighlighter from '../src'
 
 describe('fixtures', () => {
   const files = import.meta.glob('./input/*.*', { as: 'raw', eager: true })
@@ -15,7 +15,7 @@ describe('fixtures', () => {
         : it.skip
 
       run(`render ${path}`, async () => {
-        const shiki = await createHighlighter({
+        const shiki = await getHighlighter({
           theme: 'nord',
           langs: ['javascript'],
         })
