@@ -48,6 +48,50 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     return false
   }
 
+  const UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder('utf8') : undefined
+  function UTF8ArrayToString(heapOrArray: Uint8Array, idx: number, maxBytesToRead = 1024) {
+    const endIdx = idx + maxBytesToRead
+    let endPtr = idx
+    while (heapOrArray[endPtr] && !(endPtr >= endIdx)) ++endPtr
+    if (endPtr - idx > 16 && heapOrArray.buffer && UTF8Decoder) {
+      return UTF8Decoder.decode(heapOrArray.subarray(idx, endPtr))
+    }
+    let str = ''
+    while (idx < endPtr) {
+      let u0 = heapOrArray[idx++]
+      if (!(u0 & 128)) {
+        str += String.fromCharCode(u0)
+        continue
+      }
+      const u1 = heapOrArray[idx++] & 63
+      if ((u0 & 224) === 192) {
+        str += String.fromCharCode(((u0 & 31) << 6) | u1)
+        continue
+      }
+      const u2 = heapOrArray[idx++] & 63
+      if ((u0 & 240) === 224) {
+        u0 = ((u0 & 15) << 12) | (u1 << 6) | u2
+      }
+      else {
+        u0 = ((u0 & 7) << 18)
+        | (u1 << 12)
+        | (u2 << 6)
+        | (heapOrArray[idx++] & 63)
+      }
+      if (u0 < 65536) {
+        str += String.fromCharCode(u0)
+      }
+      else {
+        const ch = u0 - 65536
+        str += String.fromCharCode(55296 | (ch >> 10), 56320 | (ch & 1023))
+      }
+    }
+    return str
+  }
+  function UTF8ToString(ptr: number, maxBytesToRead?: number) {
+    return ptr ? UTF8ArrayToString(binding.HEAPU8, ptr, maxBytesToRead) : ''
+  }
+
   const asmLibraryArg = {
     emscripten_get_now: _emscripten_get_now,
     emscripten_memcpy_big: _emscripten_memcpy_big,
@@ -64,6 +108,7 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     wasmMemory = exports.memory
     updateGlobalBufferAndViews(wasmMemory.buffer)
     Object.assign(binding, exports)
+    binding.UTF8ToString = UTF8ToString
   }
 
   await createWasm()
