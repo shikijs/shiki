@@ -171,7 +171,7 @@ export class Registry extends TextMateRegistry {
     this._langGraph.set(lang.name, lang)
     if (lang.embeddedLangs) {
       for (const embeddedLang of lang.embeddedLangs)
-        this._langGraph.set(embeddedLang, this._langMap.get(embeddedLang))
+        this._langGraph.set(embeddedLang, this._langMap.get(embeddedLang)!)
     }
   }
 }
