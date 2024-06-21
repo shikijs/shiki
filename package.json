@@ -2,7 +2,7 @@
   "type": "module",
   "version": "1.7.0",
   "private": true,
-  "packageManager": "pnpm@9.3.0",
+  "packageManager": "pnpm@9.4.0",
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp && pnpm -r publish",
@@ -30,7 +30,7 @@
     "@shikijs/vitepress-twoslash": "workspace:*",
     "@types/fs-extra": "^11.0.4",
     "@types/hast": "^3.0.4",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.7",
     "@vitest/coverage-v8": "^1.6.0",
     "ansi-sequence-parser": "^1.1.1",
     "bumpp": "^9.4.1",
@@ -46,7 +46,7 @@
     "mdast-util-gfm": "^3.0.0",
     "mdast-util-to-hast": "^13.2.0",
     "ofetch": "^1.3.4",
-    "pnpm": "^9.3.0",
+    "pnpm": "^9.4.0",
     "prettier": "^3.3.2",
     "rimraf": "^5.0.7",
     "rollup": "^4.18.0",
@@ -57,14 +57,14 @@
     "shiki": "workspace:*",
     "simple-git-hooks": "^2.11.1",
     "taze": "^0.13.8",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "unbuild": "^2.0.0",
     "vite": "^5.3.1",
     "vite-tsconfig-paths": "^4.3.2",
     "vitepress-plugin-mermaid": "^2.0.16",
     "vitest": "^1.6.0",
     "vue-tsc": "^2.0.21",
-    "wrangler": "^3.60.3"
+    "wrangler": "^3.61.0"
   },
   "resolutions": {
     "@shikijs/compat": "workspace:*",
@@ -78,7 +78,7 @@
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.2",
     "shiki": "workspace:*",
-    "unified": "^11.0.4",
+    "unified": "^11.0.5",
     "vscode-oniguruma": "^1.7.0"
   },
   "simple-git-hooks": {
