@@ -60,6 +60,6 @@ export const getSingletonHighlighterCore = /* @__PURE__ */ makeSingletonHighligh
  */
 /* v8 ignore next 5 */
 export function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
-  console.warn('`getHighlighterCore` is deprecated. Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.')
+  // TODO: next:  console.warn('`getHighlighterCore` is deprecated. Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.')
   return createHighlighterCore(options)
 }

@@ -51,6 +51,6 @@ export const {
  * @deprecated Use `createHighlighter` or `getSingletonHighlighter` instead.
  */
 export const getHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme> = /* @__PURE__ */ (options) => {
-  console.warn('`getHighlighter` is deprecated. Use `createHighlighter` or `getSingletonHighlighter` instead.')
+  // TODO: next:  console.warn('`getHighlighter` is deprecated. Use `createHighlighter` or `getSingletonHighlighter` instead.')
   return createHighlighter(options)
 }
