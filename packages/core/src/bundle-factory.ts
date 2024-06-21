@@ -1,13 +1,15 @@
 import type { Root } from 'hast'
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, MaybeArray, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
-import { isSpecialLang, isSpecialTheme, toArray } from './utils'
-import { getHighlighterCore } from './highlighter'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
+import { isSpecialLang, isSpecialTheme } from './utils'
+import { createHighlighterCore } from './highlighter'
 import { ShikiError } from './error'
 
-export type GetHighlighterFactory<L extends string, T extends string> = (options: BundledHighlighterOptions<L, T>) => Promise<HighlighterGeneric<L, T>>
+export type CreateHighlighterFactory<L extends string, T extends string> = (
+  options: BundledHighlighterOptions<L, T>
+) => Promise<HighlighterGeneric<L, T>>
 
 /**
- * Create a `getHighlighter` function with bundled themes and languages.
+ * Create a `createHighlighter` function with bundled themes and languages.
  *
  * @param bundledLanguages
  * @param bundledThemes
@@ -17,8 +19,8 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
   bundledLanguages: Record<BundledLangs, LanguageInput>,
   bundledThemes: Record<BundledThemes, ThemeInput>,
   loadWasm: HighlighterCoreOptions['loadWasm'],
-): GetHighlighterFactory<BundledLangs, BundledThemes> {
-  async function getHighlighter(
+): CreateHighlighterFactory<BundledLangs, BundledThemes> {
+  async function createHighlighter(
     options: BundledHighlighterOptions<BundledLangs, BundledThemes>,
   ): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
     function resolveLang(lang: LanguageInput | BundledLangs | SpecialLanguage): LanguageInput {
@@ -50,7 +52,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
     const langs = (options.langs ?? [] as BundledLangs[])
       .map(i => resolveLang(i as BundledLangs))
 
-    const core = await getHighlighterCore({
+    const core = await createHighlighterCore({
       ...options,
       themes: _themes,
       langs,
@@ -68,7 +70,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
     }
   }
 
-  return getHighlighter
+  return createHighlighter
 }
 
 export interface ShorthandsBundle<L extends string, T extends string> {
@@ -114,71 +116,83 @@ export interface ShorthandsBundle<L extends string, T extends string> {
 
   /**
    * Get internal singleton highlighter.
-   *
-   * @internal
    */
-  getSingletonHighlighter: () => Promise<HighlighterGeneric<L, T>>
+  getSingletonHighlighter: (options?: Partial<BundledHighlighterOptions<L, T>>) => Promise<HighlighterGeneric<L, T>>
 }
 
-export function createSingletonShorthands<L extends string, T extends string >(getHighlighter: GetHighlighterFactory<L, T>): ShorthandsBundle<L, T> {
-  let _shiki: ReturnType<typeof getHighlighter>
+export function makeSingletonHighlighter<L extends string, T extends string>(createHighlighter: CreateHighlighterFactory<L, T>) {
+  let _shiki: ReturnType<typeof createHighlighter>
 
-  async function _getHighlighter(options: {
-    theme?: MaybeArray<T | ThemeRegistrationAny | SpecialTheme>
-    lang?: MaybeArray<L | SpecialLanguage>
-  } = {}) {
+  async function getSingletonHighlighter(
+    options: Partial<BundledHighlighterOptions<L, T>> = {},
+  ) {
     if (!_shiki) {
-      _shiki = getHighlighter({
-        themes: toArray(options.theme || []),
-        langs: toArray(options.lang || []),
+      _shiki = createHighlighter({
+        ...options,
+        themes: options.themes || [],
+        langs: options.langs || [],
       })
       return _shiki
     }
     else {
       const s = await _shiki
       await Promise.all([
-        s.loadTheme(...toArray(options.theme || [])),
-        s.loadLanguage(...toArray(options.lang || [])),
+        s.loadTheme(...(options.themes as T[] || [])),
+        s.loadLanguage(...(options.langs as L[] || [])),
       ])
       return s
     }
   }
 
+  return getSingletonHighlighter
+}
+
+export function createSingletonShorthands<L extends string, T extends string >(
+  createHighlighter: CreateHighlighterFactory<L, T>,
+): ShorthandsBundle<L, T> {
+  const getSingletonHighlighter = makeSingletonHighlighter(createHighlighter)
+
   return {
-    getSingletonHighlighter: () => _getHighlighter(),
+    getSingletonHighlighter(options) {
+      return getSingletonHighlighter(options)
+    },
+
     async codeToHtml(code, options) {
-      const shiki = await _getHighlighter({
-        lang: options.lang as L,
-        theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
       })
       return shiki.codeToHtml(code, options)
     },
 
     async codeToHast(code, options) {
-      const shiki = await _getHighlighter({
-        lang: options.lang as L,
-        theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
       })
       return shiki.codeToHast(code, options)
     },
 
     async codeToTokens(code, options) {
-      const shiki = await _getHighlighter({
-        lang: options.lang as L,
-        theme: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
       })
       return shiki.codeToTokens(code, options)
     },
 
     async codeToTokensBase(code, options) {
-      const shiki = await _getHighlighter(options)
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: [options.theme as T],
+      })
       return shiki.codeToTokensBase(code, options)
     },
 
     async codeToTokensWithThemes(code, options) {
-      const shiki = await _getHighlighter({
-        lang: options.lang,
-        theme: Object.values(options.themes).filter(Boolean) as T[],
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: Object.values(options.themes).filter(Boolean) as T[],
       })
       return shiki.codeToTokensWithThemes(code, options)
     },

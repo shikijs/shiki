@@ -1,7 +1,7 @@
 /* eslint-disable style/no-tabs */
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { toHtml } from 'hast-util-to-html'
-import { codeToHtml, getHighlighter } from '../src'
+import { codeToHtml, createHighlighter } from '../src'
 
 afterEach(() => {
   vi.restoreAllMocks
@@ -9,7 +9,7 @@ afterEach(() => {
 
 describe('should', () => {
   it('works', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
     })
@@ -24,7 +24,7 @@ describe('should', () => {
   })
 
   it('structure inline', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
     })

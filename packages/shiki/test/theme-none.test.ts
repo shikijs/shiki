@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { getHighlighter } from '../src'
+import { createHighlighter } from '../src'
 
 describe('none theme', () => {
   it('works', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
     })
@@ -13,7 +13,7 @@ describe('none theme', () => {
   })
 
   it('multiple-themes', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript', 'ts'],
     })

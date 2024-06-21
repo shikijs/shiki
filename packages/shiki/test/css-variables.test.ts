@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, createCssVariablesTheme, getHighlighter } from '../src'
+import { codeToHtml, createCssVariablesTheme, createHighlighter } from '../src'
 
 describe('css-variables', () => {
   it('theme auto-patch', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: [
         Object.freeze({
           name: 'my-css-variables',

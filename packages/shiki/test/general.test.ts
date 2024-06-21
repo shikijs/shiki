@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, getHighlighter } from '../src'
+import { codeToHtml, createHighlighter } from '../src'
 
 describe('should', () => {
   it('works', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
     })
@@ -13,7 +13,7 @@ describe('should', () => {
   })
 
   it('dynamic load theme and lang', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript', 'ts'],
     })
@@ -45,7 +45,7 @@ describe('should', () => {
   })
 
   it('requires nested lang', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['nord'],
       langs: [
         'vue',
@@ -94,7 +94,7 @@ describe('should', () => {
 
   // https://github.com/shikijs/shiki/issues/35
   it('dynamic load theme and lang with md', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       langs: [],
       themes: [],
     })
@@ -159,7 +159,7 @@ describe('should', () => {
   })
 
   it('should have correct offset', async () => {
-    const shiki = await getHighlighter({
+    const shiki = await createHighlighter({
       themes: ['nord'],
       langs: ['html'],
     })
@@ -198,7 +198,7 @@ describe('should', () => {
 
 describe('errors', () => {
   it('throw on invalid theme', async () => {
-    await expect(() => getHighlighter({
+    await expect(() => createHighlighter({
       themes: ['invalid' as any],
       langs: ['javascript'],
     }))
@@ -207,7 +207,7 @@ describe('errors', () => {
   })
 
   it('throw on invalid lang', async () => {
-    await expect(() => getHighlighter({
+    await expect(() => createHighlighter({
       themes: ['nord'],
       langs: ['invalid' as any],
     }))

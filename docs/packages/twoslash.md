@@ -92,9 +92,9 @@ Number.parseInt('123', 10)
 ```
 
 ```ts twoslash
-import { getHighlighterCore } from 'shiki/core'
+import { createHighlighterCore } from 'shiki/core'
 
-const highlighter = await getHighlighterCore({})
+const highlighter = await createHighlighterCore({})
 // @log: Custom log message
 const a = 1
 // @error: Custom error message

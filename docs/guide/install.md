@@ -80,16 +80,16 @@ const hast = await codeToHast('.text-red { color: red; }', {
 
 ### Highlighter Usage
 
-The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, so we provide the `getHighlighter` function to create a highlighter instance that can later be used synchronously.
+The [shorthands](#shorthands) we provided are executed asynchronously as we use WASM and load themes and languages on demand internally. In some cases, you may need to highlight code synchronously, so we provide the `createHighlighter` function to create a highlighter instance that can later be used synchronously.
 
 The usage is pretty much the same as with `codeToHtml`, where each theme and language file is a dynamically imported ES module. It would be better to list the languages and themes **explicitly** to have the best performance.
 
 ```ts twoslash theme:nord
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
-// `getHighlighter` is async, it initializes the internal and
+// `createHighlighter` is async, it initializes the internal and
 // loads the themes and languages specified.
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   themes: ['nord'],
   langs: ['javascript'],
 })
@@ -103,7 +103,7 @@ const code = highlighter.codeToHtml('const a = 1', {
 ```
 
 :::info Important Note
-Highlighter instance should be **long-lived singleton**. You might need to cache it somewhere and reuse it across your application. Avoid calling `getHighlighter` in hot functions or loops.
+Highlighter instance should be **long-lived singleton**. You might need to cache it somewhere and reuse it across your application. Avoid calling `createHighlighter` in hot functions or loops.
 
 If running on Node.js, we recommend using the [Shorthands](#shorthands) which manages the highlighter instance and dynamic theme/language loading for you.
 :::
@@ -111,8 +111,8 @@ If running on Node.js, we recommend using the [Shorthands](#shorthands) which ma
 Additionally, if you want to load themes and languages after the highlighter is created, you can use the `loadTheme` and `loadLanguage` methods.
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
-const highlighter = await getHighlighter({ themes: [], langs: [] })
+import { createHighlighter } from 'shiki'
+const highlighter = await createHighlighter({ themes: [], langs: [] })
 // ---cut---
 // load themes and languages after creation
 await highlighter.loadTheme('vitesse-light')
@@ -122,9 +122,9 @@ await highlighter.loadLanguage('css')
 Since Shiki v1.0, it requires all themes and languages to be loaded explicitly.
 
 ```ts theme:slack-dark twoslash
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   themes: ['slack-dark'],
   langs: ['css']
 })
@@ -143,9 +143,9 @@ await highlighter.loadLanguage('javascript') // load the language
 If you want to load all themes and languages (not recommended), you can iterate over all keys from `bundledLanguages` and `bundledThemes`.
 
 ```ts twoslash theme:poimandres
-import { bundledLanguages, bundledThemes, getHighlighter } from 'shiki'
+import { bundledLanguages, bundledThemes, createHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   themes: Object.keys(bundledThemes),
   langs: Object.keys(bundledLanguages),
 })
@@ -163,7 +163,7 @@ When importing `shiki`, all the themes and languages are bundled as async chunks
 ```ts twoslash theme:material-theme-ocean
 // @noErrors
 // `shiki/core` entry does not include any themes or languages or the wasm binary.
-import { getHighlighterCore } from 'shiki/core'
+import { createHighlighterCore } from 'shiki/core'
 
 // `shiki/wasm` contains the wasm binary inlined as base64 string.
 import getWasm from 'shiki/wasm'
@@ -171,7 +171,7 @@ import getWasm from 'shiki/wasm'
 // directly import the theme and language modules, only the ones you imported will be bundled.
 import nord from 'shiki/themes/nord.mjs'
 
-const highlighter = await getHighlighterCore({
+const highlighter = await createHighlighterCore({
   themes: [
     // instead of strings, you need to pass the imported module
     nord,
@@ -213,10 +213,10 @@ For example, the following ESM code:
 
 ```ts twoslash
 // ESM
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
 async function main() {
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
@@ -233,9 +233,9 @@ Can be written in CJS as:
 ```ts twoslash
 // CJS
 async function main() {
-  const { getHighlighter } = await import('shiki')
+  const { createHighlighter } = await import('shiki')
 
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: ['vitesse-dark'],
     langs: ['javascript'],
   })
@@ -282,7 +282,7 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 
 ```ts twoslash theme:nord
 // @noErrors
-import { getHighlighterCore, loadWasm } from 'shiki/core'
+import { createHighlighterCore, loadWasm } from 'shiki/core'
 import nord from 'shiki/themes/nord.mjs'
 import js from 'shiki/langs/javascript.mjs'
 
@@ -291,7 +291,7 @@ await loadWasm(import('shiki/onig.wasm'))
 
 export default {
   async fetch() {
-    const highlighter = await getHighlighterCore({
+    const highlighter = await createHighlighterCore({
       themes: [nord],
       langs: [js],
     })

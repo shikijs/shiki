@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { getHighlighterCore } from '../src/core'
+import { createHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
 import ts from '../src/assets/langs/typescript'
@@ -11,7 +11,7 @@ import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
 
 describe('should', () => {
   it('works', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
       loadWasm: {
@@ -24,7 +24,7 @@ describe('should', () => {
   })
 
   it('dynamic load theme and lang', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [
         js,
@@ -62,7 +62,7 @@ describe('should', () => {
   })
 
   it('requires nested lang', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [
         import('../src/assets/langs/cpp'),
@@ -83,7 +83,7 @@ describe('should', () => {
   })
 
   it('works without no initial langs and themes', async () => {
-    const shiki = await getHighlighterCore()
+    const shiki = await createHighlighterCore()
 
     await shiki.loadLanguage(js)
     await shiki.loadTheme(nord)
@@ -94,7 +94,7 @@ describe('should', () => {
   })
 
   it('works with alias', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       langAlias: {
         mylang: 'javascript',
         mylang2: 'js', // nested alias
@@ -111,7 +111,7 @@ describe('should', () => {
   })
 
   it('works with alias override', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       langAlias: {
         js: 'typescript',
       },
@@ -127,7 +127,7 @@ describe('should', () => {
 
 describe('errors', () => {
   it('throw on invalid theme', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
     })
@@ -137,7 +137,7 @@ describe('errors', () => {
   })
 
   it('throw on invalid lang', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
     })
@@ -147,7 +147,7 @@ describe('errors', () => {
   })
 
   it('highlight with raw theme registation', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
       loadWasm: {
@@ -166,7 +166,7 @@ describe('errors', () => {
   })
 
   it('throw on circular alias', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       langAlias: {
         mylang: 'mylang2',
         mylang2: 'mylang',
@@ -181,7 +181,7 @@ describe('errors', () => {
   })
 
   it('throw on using disposed instance', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
     })

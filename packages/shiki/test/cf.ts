@@ -1,4 +1,4 @@
-import { getHighlighterCore, loadWasm } from 'shiki/core'
+import { createHighlighterCore, loadWasm } from 'shiki/core'
 import type { LanguageRegistration } from 'shiki'
 
 import nord from 'shiki/themes/nord.mjs'
@@ -15,7 +15,7 @@ await loadWasm(wasm)
 
 export default {
   async fetch() {
-    const highlighter = await getHighlighterCore({
+    const highlighter = await createHighlighterCore({
       themes: [nord],
       langs: [js as LanguageRegistration[]],
     })

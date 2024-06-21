@@ -21,7 +21,7 @@ let instancesCount = 0
 /**
  * Get the minimal shiki context for rendering.
  */
-export async function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
   instancesCount += 1
   if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
     console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call \`highlighter.dispose()\` to release unused instances.`)
@@ -150,4 +150,12 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     dispose,
     [Symbol.dispose]: dispose,
   }
+}
+
+/**
+ * @deprecated Use `createShikiInternal` instead.
+ */
+export function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+  // TODO: next: console.warn('`getShikiInternal` is deprecated. Use `createShikiInternal` instead.')
+  return createShikiInternal(options)
 }
