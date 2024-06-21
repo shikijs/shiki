@@ -179,4 +179,19 @@ describe('errors', () => {
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'mylang', theme: 'nord' }))
       .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Circular alias \`mylang -> mylang2 -> mylang\`]`)
   })
+
+  it('throw on using disposed instance', async () => {
+    const shiki = await getHighlighterCore({
+      themes: [nord],
+      langs: [js as any],
+    })
+
+    expect(shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))
+      .toContain('console')
+
+    shiki.dispose()
+
+    expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Shiki instance has been disposed]`)
+  })
 })

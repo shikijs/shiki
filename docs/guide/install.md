@@ -72,7 +72,7 @@ const { tokens } = await codeToTokens('<div class="foo">bar</div>', {
 ```ts twoslash theme:catppuccin-mocha
 import { codeToHast } from 'shiki'
 
-const hast = codeToHast('.text-red { color: red; }', {
+const hast = await codeToHast('.text-red { color: red; }', {
   lang: 'css',
   theme: 'catppuccin-mocha'
 })
