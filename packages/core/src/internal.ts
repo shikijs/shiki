@@ -152,6 +152,9 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
   }
 }
 
+/**
+ * @deprecated Use `createShikiInternal` instead.
+ */
 export function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
   // TODO: next: console.warn('`getShikiInternal` is deprecated. Use `createShikiInternal` instead.')
   return createShikiInternal(options)

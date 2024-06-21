@@ -181,7 +181,7 @@ describe('errors', () => {
   })
 
   it('throw on using disposed instance', async () => {
-    const shiki = await getHighlighterCore({
+    const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
     })
