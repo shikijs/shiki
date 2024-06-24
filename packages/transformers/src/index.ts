@@ -1,5 +1,6 @@
 export * from './transformers/render-whitespace'
 export * from './transformers/remove-line-breaks'
+export * from './transformers/remove-notation-escape'
 export * from './transformers/compact-line-options'
 export * from './transformers/notation-focus'
 export * from './transformers/notation-highlight'
