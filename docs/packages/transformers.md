@@ -341,3 +341,10 @@ Support for `shiki`'s `lineOptions` that is removed in `shiki`.
 ### `transformerRemoveLineBreak`
 
 Remove line breaks between `<span class="line">`. Useful when you set `display: block` to `.line` in CSS.
+
+---
+
+### `transformerRemoveNotationEscape`
+
+Transform `// [\!code ...]` to `// [!code ...]`.
+Avoid rendering the escaped notation syntax as it is.
