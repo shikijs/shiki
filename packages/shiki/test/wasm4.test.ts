@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { getHighlighterCore } from '../src/core'
+import { createHighlighterCore } from '../src/core'
 
 import js from '../src/assets/langs/javascript'
 import nord from '../src/assets/themes/nord'
@@ -8,7 +8,7 @@ import nord from '../src/assets/themes/nord'
 import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
 
 it('wasm', async () => {
-  const shiki = await getHighlighterCore({
+  const shiki = await createHighlighterCore({
     themes: [nord],
     langs: [js as any],
     loadWasm: Promise.resolve().then(() => obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance)),

@@ -48,6 +48,14 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
    * Special-handled themes like `none` are not included.
    */
   getLoadedThemes: () => string[]
+  /**
+   * Dispose the internal registry and release resources
+   */
+  dispose: () => void
+  /**
+   * Dispose the internal registry and release resources
+   */
+  [Symbol.dispose]: () => void
 }
 
 /**

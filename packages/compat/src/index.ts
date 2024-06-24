@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import type { BuiltinLanguage, BuiltinTheme, CodeToTokensBaseOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved, ThemedToken } from 'shiki'
-import { bundledLanguages, bundledThemes, getHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
+import { bundledLanguages, bundledThemes, createHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
 import { transformerCompactLineOptions } from '@shikijs/transformers'
 import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
 import { ShikiCompatError } from './error'

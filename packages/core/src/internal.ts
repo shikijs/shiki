@@ -16,10 +16,18 @@ export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
   _defaultWasmLoader = _loader
 }
 
+let instancesCount = 0
+
 /**
  * Get the minimal shiki context for rendering.
  */
-export async function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+  instancesCount += 1
+  if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
+    console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call \`highlighter.dispose()\` to release unused instances.`)
+
+  let isDisposed = false
+
   async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
     return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
   }
@@ -61,6 +69,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   let _lastTheme: string | ThemeRegistrationAny
 
   function getLanguage(name: string | LanguageRegistration) {
+    ensureNotDisposed()
     const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
     if (!_lang)
       throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
@@ -70,6 +79,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   function getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved {
     if (name === 'none')
       return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
+    ensureNotDisposed()
     const _theme = _registry.getTheme(name)
     if (!_theme)
       throw new ShikiError(`Theme \`${name}\` not found, you may need to load it first`)
@@ -77,6 +87,7 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   }
 
   function setTheme(name: string | ThemeRegistrationAny) {
+    ensureNotDisposed()
     const theme = getTheme(name)
     if (_lastTheme !== name) {
       _registry.setTheme(theme)
@@ -90,18 +101,22 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
   }
 
   function getLoadedThemes() {
+    ensureNotDisposed()
     return _registry.getLoadedThemes()
   }
 
   function getLoadedLanguages() {
+    ensureNotDisposed()
     return _registry.getLoadedLanguages()
   }
 
   async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]) {
+    ensureNotDisposed()
     await _registry.loadLanguages(await resolveLangs(langs))
   }
 
   async function loadTheme(...themes: (ThemeInput | SpecialTheme)[]) {
+    ensureNotDisposed()
     await Promise.all(
       themes.map(async theme =>
         isSpecialTheme(theme)
@@ -109,6 +124,19 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
           : _registry.loadTheme(await normalizeGetter(theme)),
       ),
     )
+  }
+
+  function ensureNotDisposed() {
+    if (isDisposed)
+      throw new ShikiError('Shiki instance has been disposed')
+  }
+
+  function dispose() {
+    if (isDisposed)
+      return
+    isDisposed = true
+    _registry.dispose()
+    instancesCount -= 1
   }
 
   return {
@@ -119,5 +147,15 @@ export async function getShikiInternal(options: HighlighterCoreOptions = {}): Pr
     getLoadedLanguages,
     loadLanguage,
     loadTheme,
+    dispose,
+    [Symbol.dispose]: dispose,
   }
+}
+
+/**
+ * @deprecated Use `createShikiInternal` instead.
+ */
+export function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+  // TODO: next: console.warn('`getShikiInternal` is deprecated. Use `createShikiInternal` instead.')
+  return createShikiInternal(options)
 }

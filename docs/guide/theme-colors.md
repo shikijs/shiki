@@ -5,9 +5,9 @@
 Usually, TextMate themes expect the color values of each token to be a valid hex color value. This limitation is inherited from [`vscode-textmate`](https://github.com/microsoft/vscode-textmate). However, in Shiki v0.9.15 we introduced an automatic workaround by replacing non-hex color values with a placeholder and replacing them back on tokenization. This would allows you to use themes with arbitrary color values for rendering without worrying about the technical details:
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: ['javascript'],
   themes: [
     {
@@ -99,7 +99,7 @@ Shiki provides a factory function helper `createCssVariablesTheme` for creating 
 This theme is **not included by default** and must be registered explicitly:
 
 ```ts twoslash
-import { createCssVariablesTheme, getHighlighter } from 'shiki'
+import { createCssVariablesTheme, createHighlighter } from 'shiki'
 
 // Create a custom CSS variables theme, the following are the default values
 const myTheme = createCssVariablesTheme({ // [!code hl:6]
@@ -109,7 +109,7 @@ const myTheme = createCssVariablesTheme({ // [!code hl:6]
   fontStyle: true
 })
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   langs: ['javascript'],
   themes: [myTheme] // register the theme // [!code hl]
 })

@@ -41,8 +41,9 @@ export function transformerMetaHighlight(
   return {
     name: '@shikijs/transformers:meta-highlight',
     line(node, line) {
-      if (!this.options.meta?.__raw)
+      if (!this.options.meta?.__raw) {
         return
+      }
       ;(this.meta as any)[symbol] ||= parseMetaHighlightString(this.options.meta.__raw)
       const lines: number[] = (this.meta as any)[symbol] || []
       if (lines.includes(line))

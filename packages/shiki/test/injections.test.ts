@@ -1,4 +1,4 @@
-import { codeToHtml, getHighlighterCore } from 'shiki'
+import { codeToHtml, createHighlighterCore } from 'shiki'
 import { expect, it } from 'vitest'
 import vl from '../src/assets/themes/vitesse-light'
 import html from '../src/assets/langs/html'
@@ -28,7 +28,7 @@ const count = ref(0)
 })
 
 it('injections-side-effects vue', async () => {
-  const highlighter = await getHighlighterCore({
+  const highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],
@@ -54,7 +54,7 @@ it('injections-side-effects vue', async () => {
 
 // It seems that angular-html is not correctly highlighted in the recent update. Bring this back once fixed.
 it.skip('injections-side-effects angular-html', async () => {
-  const highlighter = await getHighlighterCore({
+  const highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],
@@ -103,7 +103,7 @@ it.skip('injections-side-effects angular-html', async () => {
 })
 
 it('injections-side-effects angular-ts', async () => {
-  const highlighter = await getHighlighterCore({
+  const highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],

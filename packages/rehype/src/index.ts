@@ -1,6 +1,7 @@
+/// <reference types="mdast-util-to-hast" />
 import type { LanguageInput } from 'shiki/core'
 import type { BuiltinLanguage, BuiltinTheme } from 'shiki'
-import { bundledLanguages, getHighlighter } from 'shiki'
+import { bundledLanguages, createHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import type { Root } from 'hast'
 import rehypeShikiFromHighlighter from './core'
@@ -17,24 +18,22 @@ export type RehypeShikiOptions = RehypeShikiCoreOptions
   }
 
 const rehypeShiki: Plugin<[RehypeShikiOptions], Root> = function (
-  options = {} as any,
+  options = {} as RehypeShikiOptions,
 ) {
   const themeNames = ('themes' in options ? Object.values(options.themes) : [options.theme]).filter(Boolean) as BuiltinTheme[]
   const langs = options.langs || Object.keys(bundledLanguages)
 
-  // eslint-disable-next-line ts/no-this-alias
-  const ctx = this
-  let promise: Promise<any>
+  let getHandler: Promise<any>
 
-  return async function (tree) {
-    if (!promise) {
-      promise = getHighlighter({
+  return async (tree) => {
+    if (!getHandler) {
+      getHandler = createHighlighter({
         themes: themeNames,
         langs,
       })
-        .then(highlighter => rehypeShikiFromHighlighter.call(ctx, highlighter, options))
+        .then(highlighter => rehypeShikiFromHighlighter.call(this, highlighter, options))
     }
-    const handler = await promise
+    const handler = await getHandler
     return handler!(tree) as Root
   }
 }

@@ -39,7 +39,7 @@ export const usePlayground = defineStore('playground', () => {
   }
 
   ;(async () => {
-    const { getHighlighter } = await import('shiki')
+    const { createHighlighter } = await import('shiki')
     const { bundledLanguagesInfo: bundleFull } = await import('shiki/bundle/full')
     const { bundledLanguagesInfo: bundleWeb } = await import('shiki/bundle/web')
     const { bundledThemesInfo } = await import('shiki/themes')
@@ -64,7 +64,7 @@ export const usePlayground = defineStore('playground', () => {
     bundledLangsWeb.value = bundleWeb
 
     if (typeof window !== 'undefined') {
-      const highlighter = await getHighlighter({
+      const highlighter = await createHighlighter({
         themes: [theme.value],
         langs: ['typescript', 'javascript', lang.value as any],
       })

@@ -70,7 +70,8 @@
 
 .twoslash .twoslash-hover:hover .twoslash-popup-container,
 .twoslash .twoslash-error-hover:hover .twoslash-popup-container,
-.twoslash .twoslash-query-presisted .twoslash-popup-container {
+.twoslash .twoslash-query-presisted .twoslash-popup-container,
+.twoslash .twoslash-query-line .twoslash-popup-container {
   opacity: 1;
   pointer-events: auto;
 }
@@ -130,6 +131,13 @@
 
 .twoslash .twoslash-popup-docs-tag-name {
   font-family: var(--twoslash-code-font);
+}
+
+/* ===== Query Line ===== */
+.twoslash .twoslash-query-line .twoslash-popup-container {
+  position: relative;
+  margin-bottom: 1.4em;
+  transform: translateY(0.6em);
 }
 
 /* ===== Error Line ===== */

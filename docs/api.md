@@ -5,9 +5,9 @@
 You can also get the intermediate `hast` to do custom rendering without serializing them into HTML with `codeToHast`. You can also further integrate the AST with the [unified](https://github.com/unifiedjs) ecosystem.
 
 ```ts twoslash
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 
-const highlighter = await getHighlighter({
+const highlighter = await createHighlighter({
   themes: ['nord', 'min-light'],
   langs: ['javascript'],
 })

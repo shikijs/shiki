@@ -7,13 +7,13 @@ import rehypeStringify from 'rehype-stringify'
 import { visit } from 'unist-util-visit'
 import { expect, it } from 'vitest'
 
-import { getHighlighter } from 'shiki'
+import { createHighlighter } from 'shiki'
 import type { Root } from 'hast'
 import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 
 it('run', async () => {
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
@@ -27,6 +27,7 @@ it('run', async () => {
     .use(remarkRehype)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
+      defaultLanguage: 'text',
       transformers: [
         transformerMetaHighlight(),
       ],
@@ -38,7 +39,7 @@ it('run', async () => {
 })
 
 it('run with rehype-raw', async () => {
-  const highlighter = await getHighlighter({
+  const highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
@@ -63,6 +64,7 @@ it('run with rehype-raw', async () => {
     .use(rehypeRaw)
     .use(rehypeShikiFromHighlighter, highlighter, {
       theme: 'vitesse-light',
+      defaultLanguage: 'text',
       transformers: [
         transformerMetaHighlight(),
       ],

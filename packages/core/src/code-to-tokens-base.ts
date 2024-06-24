@@ -1,7 +1,7 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-import type { IGrammar } from './textmate'
+import type { IGrammar, IRawThemeSetting } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
@@ -33,6 +33,12 @@ export function codeToTokensBase(
   return tokenizeWithTheme(code, _grammar, theme, colorMap, options)
 }
 
+/** for explanations */
+interface ThemeSettingsSelectors {
+  settings: IRawThemeSetting
+  selectors: string[][]
+}
+
 export function tokenizeWithTheme(
   code: string,
   grammar: IGrammar,
@@ -52,6 +58,28 @@ export function tokenizeWithTheme(
   let ruleStack = INITIAL
   let actual: ThemedToken[] = []
   const final: ThemedToken[][] = []
+
+  const themeSettingsSelectors: ThemeSettingsSelectors[] = []
+  if (options.includeExplanation) {
+    for (const setting of theme.settings) {
+      let selectors: string[]
+      switch (typeof setting.scope) {
+        case 'string':
+          selectors = setting.scope.split(/,/).map(scope => scope.trim())
+          break
+        case 'object':
+          selectors = setting.scope
+          break
+        default:
+          continue
+      }
+
+      themeSettingsSelectors.push({
+        settings: setting,
+        selectors: selectors.map(selector => selector.split(/ /)),
+      })
+    }
+  }
 
   for (let i = 0, len = lines.length; i < len; i++) {
     const [line, lineOffset] = lines[i]
@@ -119,7 +147,7 @@ export function tokenizeWithTheme(
           offset += tokenWithScopesText.length
           token.explanation.push({
             content: tokenWithScopesText,
-            scopes: explainThemeScopes(theme, tokenWithScopes.scopes),
+            scopes: explainThemeScopes(themeSettingsSelectors, tokenWithScopes.scopes),
           })
 
           tokensWithScopesIndex! += 1
@@ -137,7 +165,7 @@ export function tokenizeWithTheme(
 }
 
 function explainThemeScopes(
-  theme: ThemeRegistrationResolved,
+  themeSelectors: ThemeSettingsSelectors[],
   scopes: string[],
 ): ThemedTokenScopeExplanation[] {
   const result: ThemedTokenScopeExplanation[] = []
@@ -146,33 +174,29 @@ function explainThemeScopes(
     const scope = scopes[i]
     result[i] = {
       scopeName: scope,
-      themeMatches: explainThemeScope(theme, scope, parentScopes),
+      themeMatches: explainThemeScope(themeSelectors, scope, parentScopes),
     }
   }
   return result
 }
 
 function matchesOne(selector: string, scope: string): boolean {
-  const selectorPrefix = `${selector}.`
-  if (selector === scope || scope.substring(0, selectorPrefix.length) === selectorPrefix)
-    return true
-
-  return false
+  return selector === scope
+    || (scope.substring(0, selector.length) === selector && scope[selector.length] === '.')
 }
 
 function matches(
-  selector: string,
-  selectorParentScopes: string[],
+  selectors: string[],
   scope: string,
   parentScopes: string[],
 ): boolean {
-  if (!matchesOne(selector, scope))
+  if (!matchesOne(selectors[selectors.length - 1], scope))
     return false
 
-  let selectorParentIndex = selectorParentScopes.length - 1
+  let selectorParentIndex = selectors.length - 2
   let parentIndex = parentScopes.length - 1
   while (selectorParentIndex >= 0 && parentIndex >= 0) {
-    if (matchesOne(selectorParentScopes[selectorParentIndex], parentScopes[parentIndex]))
+    if (matchesOne(selectors[selectorParentIndex], parentScopes[parentIndex]))
       selectorParentIndex -= 1
     parentIndex -= 1
   }
@@ -184,34 +208,16 @@ function matches(
 }
 
 function explainThemeScope(
-  theme: ThemeRegistrationResolved,
+  themeSettingsSelectors: ThemeSettingsSelectors[],
   scope: string,
   parentScopes: string[],
-): any[] {
-  const result: any[] = []
-  let resultLen = 0
-  for (let i = 0, len = theme.settings.length; i < len; i++) {
-    const setting = theme.settings[i]
-    let selectors: string[]
-    if (typeof setting.scope === 'string')
-      selectors = setting.scope.split(/,/).map(scope => scope.trim())
-    else if (Array.isArray(setting.scope))
-      selectors = setting.scope
-    else
-      continue
-
-    for (let j = 0, lenJ = selectors.length; j < lenJ; j++) {
-      const rawSelector = selectors[j]
-      const rawSelectorPieces = rawSelector.split(/ /)
-
-      const selector = rawSelectorPieces[rawSelectorPieces.length - 1]
-      const selectorParentScopes = rawSelectorPieces.slice(0, rawSelectorPieces.length - 1)
-
-      if (matches(selector, selectorParentScopes, scope, parentScopes)) {
-        // match!
-        result[resultLen++] = setting
-        // break the loop
-        j = lenJ
+): IRawThemeSetting[] {
+  const result: IRawThemeSetting[] = []
+  for (const { selectors, settings } of themeSettingsSelectors) {
+    for (const selectorPieces of selectors) {
+      if (matches(selectorPieces, scope, parentScopes)) {
+        result.push(settings)
+        break // continue to the next theme settings
       }
     }
   }
