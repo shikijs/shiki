@@ -404,8 +404,8 @@ importers:
         specifier: ^0.2.8
         version: 0.2.8(typescript@5.5.2)
       twoslash-vue:
-        specifier: ^0.2.8
-        version: 0.2.8(typescript@5.5.2)
+        specifier: ^0.2.9
+        version: 0.2.9(typescript@5.5.2)
       vue:
         specifier: ^3.4.29
         version: 3.4.29(typescript@5.5.2)
@@ -1778,8 +1778,14 @@ packages:
   '@volar/language-core@2.3.0':
     resolution: {integrity: sha512-pvhL24WUh3VDnv7Yw5N1sjhPtdx7q9g+Wl3tggmnkMcyK8GcCNElF2zHiKznryn0DiUGk+eez/p2qQhz+puuHw==}
 
+  '@volar/language-core@2.3.3':
+    resolution: {integrity: sha512-Blu4NQaRszEsgK/QvWFRSQPRAhPDbYef+peFV9Gb86swxRCs01q7h673/HYstaPsTbjh/F5mXjozoOFxQ8tLYw==}
+
   '@volar/source-map@2.3.0':
     resolution: {integrity: sha512-G/228aZjAOGhDjhlyZ++nDbKrS9uk+5DMaEstjvzglaAw7nqtDyhnQAsYzUg6BMP9BtwZ59RIw5HGePrutn00Q==}
+
+  '@volar/source-map@2.3.3':
+    resolution: {integrity: sha512-eFRHA13hxiGPt+Xa0EX3yNd50ozctnW5KzQj/IllKmSK/KuBEkSAsIhBdOxCpv1YhV4GmI3iKG9peOs6k9LtnA==}
 
   '@volar/typescript@2.3.0':
     resolution: {integrity: sha512-PtUwMM87WsKVeLJN33GSTUjBexlKfKgouWlOUIv7pjrOnTwhXHZNSmpc312xgXdTjQPpToK6KXSIcKu9sBQ5LQ==}
@@ -1812,6 +1818,14 @@ packages:
 
   '@vue/language-core@2.0.21':
     resolution: {integrity: sha512-vjs6KwnCK++kIXT+eI63BGpJHfHNVJcUCr3RnvJsccT3vbJnZV5IhHR2puEkoOkIbDdp0Gqi1wEnv3hEd3WsxQ==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@vue/language-core@2.0.22':
+    resolution: {integrity: sha512-dNTAAtEOuMiz7N1s5tKpypnVVCtawxVSF5BukD0ELcYSw+DSbrSlYYSw8GuwvurodCeYFSHsmslE+c2sYDNoiA==}
     peerDependencies:
       typescript: '*'
     peerDependenciesMeta:
@@ -4589,13 +4603,21 @@ packages:
   twoslash-protocol@0.2.8:
     resolution: {integrity: sha512-8l439jrFEJiQmQ6ugFtYXgHpQDp3nBYVF6RR88doLarFGWhjfq0sgntgQYc2aDmJb87Jzhh4EicV8k9DrqpIZg==}
 
-  twoslash-vue@0.2.8:
-    resolution: {integrity: sha512-46I4TA0FNquQ++AKc2mKS8EV7ElQEP34dGi7T9mQm7y1/r5HH16zmq+Er9LUtomasFLue+Jb87B+qElbF2yYMw==}
+  twoslash-protocol@0.2.9:
+    resolution: {integrity: sha512-uKQl8UboT6JU4VAtYaSI3DbNtgaNhFaTpCSMy/n3tRl5lMlMhrjiuNKdqx15xjcviconuGJ9oObkz1h9zJFrJg==}
+
+  twoslash-vue@0.2.9:
+    resolution: {integrity: sha512-1f/AMB7jvifOMWjG2xdqnEywmkt+U2xef2TBfXugZasNDkqeTwdHCRGafi37Kk6smyzYYj2JLemMECfdSjWwoQ==}
     peerDependencies:
       typescript: '*'
 
   twoslash@0.2.8:
     resolution: {integrity: sha512-mQiUB4SvBF58FJkEEtXvVhTO1h0oDpTZuEAyaC8xwf4P6392ydSFhsMiUBbJEOvaelN9DLesViopn3E9O2GKOA==}
+    peerDependencies:
+      typescript: '*'
+
+  twoslash@0.2.9:
+    resolution: {integrity: sha512-oj7XY6h8E9nTZBmfRE1gpsSSUqAQo5kcIpFkXyQPp8UCsyCQsUlP2bJ2s32o02c1n5+xl4h9rcCsQ1F97Z6LZg==}
     peerDependencies:
       typescript: '*'
 
@@ -6424,9 +6446,15 @@ snapshots:
     dependencies:
       '@volar/source-map': 2.3.0
 
+  '@volar/language-core@2.3.3':
+    dependencies:
+      '@volar/source-map': 2.3.3
+
   '@volar/source-map@2.3.0':
     dependencies:
       muggle-string: 0.4.1
+
+  '@volar/source-map@2.3.3': {}
 
   '@volar/typescript@2.3.0':
     dependencies:
@@ -6492,6 +6520,19 @@ snapshots:
       '@vue/shared': 3.4.29
       computeds: 0.0.1
       minimatch: 9.0.4
+      path-browserify: 1.0.1
+      vue-template-compiler: 2.7.16
+    optionalDependencies:
+      typescript: 5.5.2
+
+  '@vue/language-core@2.0.22(typescript@5.5.2)':
+    dependencies:
+      '@volar/language-core': 2.3.3
+      '@vue/compiler-dom': 3.4.29
+      '@vue/shared': 3.4.29
+      computeds: 0.0.1
+      minimatch: 9.0.4
+      muggle-string: 0.4.1
       path-browserify: 1.0.1
       vue-template-compiler: 2.7.16
     optionalDependencies:
@@ -9739,11 +9780,13 @@ snapshots:
 
   twoslash-protocol@0.2.8: {}
 
-  twoslash-vue@0.2.8(typescript@5.5.2):
+  twoslash-protocol@0.2.9: {}
+
+  twoslash-vue@0.2.9(typescript@5.5.2):
     dependencies:
-      '@vue/language-core': 2.0.21(typescript@5.5.2)
-      twoslash: 0.2.8(typescript@5.5.2)
-      twoslash-protocol: 0.2.8
+      '@vue/language-core': 2.0.22(typescript@5.5.2)
+      twoslash: 0.2.9(typescript@5.5.2)
+      twoslash-protocol: 0.2.9
       typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
@@ -9752,6 +9795,14 @@ snapshots:
     dependencies:
       '@typescript/vfs': 1.5.0
       twoslash-protocol: 0.2.8
+      typescript: 5.5.2
+    transitivePeerDependencies:
+      - supports-color
+
+  twoslash@0.2.9(typescript@5.5.2):
+    dependencies:
+      '@typescript/vfs': 1.5.0
+      twoslash-protocol: 0.2.9
       typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
