@@ -4,7 +4,7 @@ import { bundledThemes } from 'shiki'
 
 // @ts-expect-error missing types
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import { transformerMetaWordHighlight, transformerNotationWordHighlight } from '../../packages/transformers/src'
+import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import { version } from '../../package.json'
 import vite from './vite.config'
@@ -120,12 +120,7 @@ export default withMermaid(defineConfig({
             .replace(/_shikijs_core\w*\./g, '')
         },
       }),
-      {
-        name: 'shiki:remove-escape',
-        postprocess(code) {
-          return code.replace(/\[\\!code/g, '[!code')
-        },
-      },
+      transformerRemoveNotationEscape(),
     ],
   },
 
