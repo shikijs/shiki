@@ -109,7 +109,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * You can pass the grammar state to `codeToTokens` as `grammarState` to continue tokenizing from an intermediate state.
    */
   getLastGrammarState: (
-    langId: string,
+    code: string,
     options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ) => GrammarState
 
