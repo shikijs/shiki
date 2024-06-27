@@ -1,6 +1,9 @@
+import type { GrammarState } from '../grammar-state'
 import type { SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 import type { CodeOptionsThemes } from './options'
+
+export type { GrammarState }
 
 export interface CodeToTokensBaseOptions<Languages extends string = string, Themes extends string = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage
@@ -172,6 +175,21 @@ export interface TokenizeWithThemeOptions {
    * @default 500 (0.5s)
    */
   tokenizeTimeLimit?: number
+
+  /**
+   * Represent the state of the grammar, allowing to continue tokenizing from a intermediate grammar state.
+   *
+   * You can get the grammar state from `getLastGrammarState`.
+   */
+  grammarState?: GrammarState
+
+  /**
+   * The code context of the grammar.
+   * Consider it a prepended code to the input code, that only participate the grammar inference but not presented in the final output.
+   *
+   * This will be ignored if `grammarState` is provided.
+   */
+  grammarContextCode?: string
 }
 
 /**

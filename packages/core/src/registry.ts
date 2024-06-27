@@ -1,13 +1,13 @@
-import type { IGrammar, IGrammarConfiguration, IRawTheme } from './textmate'
+import type { IGrammarConfiguration, IRawTheme } from './textmate'
 import { Registry as TextMateRegistry, Theme as TextMateTheme } from './textmate'
-import type { LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
+import type { Grammar, LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import type { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
 import { ShikiError } from './error'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Map<string, ThemeRegistrationResolved> = new Map()
-  private _resolvedGrammars: Map<string, IGrammar> = new Map()
+  private _resolvedGrammars: Map<string, Grammar> = new Map()
   private _langMap: Map<string, LanguageRegistration> = new Map()
   private _langGraph: Map<string, LanguageRegistration> = new Map()
 
@@ -97,8 +97,9 @@ export class Registry extends TextMateRegistry {
 
     // @ts-expect-error Private members, set this to override the previous grammar (that can be a stub)
     this._syncRegistry._rawGrammars.set(lang.scopeName, lang)
-    const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig)
-    this._resolvedGrammars.set(lang.name, g!)
+    const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig) as Grammar
+    g.name = lang.name
+    this._resolvedGrammars.set(lang.name, g)
     if (lang.aliases) {
       lang.aliases.forEach((alias) => {
         this._alias[alias] = lang.name
