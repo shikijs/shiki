@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, createHighlighter } from '../src'
+import { createHighlighter } from '../src'
 
 it('getLastGrammarState', async () => {
   const shiki = await createHighlighter({
@@ -228,5 +228,21 @@ describe('errors', () => {
       theme: 'vitesse-light',
       grammarState: state,
     })
+  })
+
+  it('should throw on wrong themes', async () => {
+    const shiki = await createHighlighter({
+      themes: ['vitesse-light', 'vitesse-dark'],
+      langs: ['typescript', 'javascript'],
+    })
+
+    const state = shiki.getLastGrammarState('let a:', { lang: 'typescript', theme: 'vitesse-light' })
+
+    expect(() => shiki.codeToTokens('string', {
+      lang: 'ts',
+      theme: 'vitesse-dark',
+      grammarState: state,
+    }))
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Grammar state theme "vitesse-light" does not match highlight theme "vitesse-dark"]`)
   })
 })
