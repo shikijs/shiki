@@ -40,6 +40,7 @@ export const {
   codeToTokens,
   codeToTokensWithThemes,
   getSingletonHighlighter,
+  getLastGrammarState,
 } = /* @__PURE__ */ createSingletonShorthands<
   BundledLanguage,
   BundledTheme

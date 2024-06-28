@@ -1,5 +1,5 @@
 import type { Root } from 'hast'
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
 import { isSpecialLang, isSpecialTheme } from './utils'
 import { createHighlighterCore } from './highlighter'
 import { ShikiError } from './error'
@@ -115,9 +115,15 @@ export interface ShorthandsBundle<L extends string, T extends string> {
   codeToTokensWithThemes: (code: string, options: RequireKeys<CodeToTokensWithThemesOptions<L, T>, 'themes' | 'lang'>) => Promise<ThemedTokenWithVariants[][]>
 
   /**
-   * Get internal singleton highlighter.
+   * Get the singleton highlighter.
    */
   getSingletonHighlighter: (options?: Partial<BundledHighlighterOptions<L, T>>) => Promise<HighlighterGeneric<L, T>>
+
+  /**
+   * Shorthand for `getLastGrammarState` with auto-loaded theme and language.
+   * A singleton highlighter it maintained internally.
+   */
+  getLastGrammarState: (code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>
 }
 
 export function makeSingletonHighlighter<L extends string, T extends string>(createHighlighter: CreateHighlighterFactory<L, T>) {
@@ -195,6 +201,14 @@ export function createSingletonShorthands<L extends string, T extends string >(
         themes: Object.values(options.themes).filter(Boolean) as T[],
       })
       return shiki.codeToTokensWithThemes(code, options)
+    },
+
+    async getLastGrammarState(code, options) {
+      const shiki = await getSingletonHighlighter({
+        langs: [options.lang as L],
+        themes: [options.theme as T],
+      })
+      return shiki.getLastGrammarState(code, options)
     },
   }
 }
