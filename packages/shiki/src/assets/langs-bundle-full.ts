@@ -265,6 +265,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/dream-maker')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'edge',
+    'name': 'Edge',
+    'import': (() => import('./langs/edge')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'elixir',
     'name': 'Elixir',
     'import': (() => import('./langs/elixir')) as DynamicImportLanguageRegistration
@@ -627,6 +632,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'lua',
     'name': 'Lua',
     'import': (() => import('./langs/lua')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'luau',
+    'name': 'Luau',
+    'import': (() => import('./langs/luau')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'make',
@@ -1044,6 +1054,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/tcl')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'templ',
+    'name': 'Templ',
+    'import': (() => import('./langs/templ')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'terraform',
     'name': 'Terraform',
     'aliases': [
@@ -1291,6 +1306,7 @@ export type BundledLanguage =
   | 'docker'
   | 'dockerfile'
   | 'dream-maker'
+  | 'edge'
   | 'elisp'
   | 'elixir'
   | 'elm'
@@ -1378,6 +1394,7 @@ export type BundledLanguage =
   | 'log'
   | 'logo'
   | 'lua'
+  | 'luau'
   | 'make'
   | 'makefile'
   | 'markdown'
@@ -1471,6 +1488,7 @@ export type BundledLanguage =
   | 'systemd'
   | 'tasl'
   | 'tcl'
+  | 'templ'
   | 'terraform'
   | 'tex'
   | 'tf'

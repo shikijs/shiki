@@ -49,6 +49,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/css')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'edge',
+    'name': 'Edge',
+    'import': (() => import('./langs/edge')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'glsl',
     'name': 'GLSL',
     'import': (() => import('./langs/glsl')) as DynamicImportLanguageRegistration
@@ -330,6 +335,7 @@ export type BundledLanguage =
   | 'coffeescript'
   | 'cpp'
   | 'css'
+  | 'edge'
   | 'glsl'
   | 'gql'
   | 'graphql'

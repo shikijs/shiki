@@ -99,6 +99,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/houston')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "laserwave",
+    "displayName": "LaserWave",
+    "type": "dark",
+    "import": (() => import('./themes/laserwave')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "light-plus",
     "displayName": "Light Plus",
     "type": "light",
@@ -291,6 +297,7 @@ export type BundledTheme =
   | 'github-light'
   | 'github-light-default'
   | 'houston'
+  | 'laserwave'
   | 'light-plus'
   | 'material-theme'
   | 'material-theme-darker'
