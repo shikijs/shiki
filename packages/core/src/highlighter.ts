@@ -1,7 +1,7 @@
 import { codeToHast } from './code-to-hast'
 import { codeToHtml } from './code-to-html'
 import { codeToTokens } from './code-to-tokens'
-import { codeToTokensBase } from './code-to-tokens-base'
+import { codeToTokensBase, getLastGrammarState } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 import { createShikiInternal } from './internal'
 import type { HighlighterCore, HighlighterCoreOptions } from './types'
@@ -16,6 +16,7 @@ export async function createHighlighterCore(options: HighlighterCoreOptions = {}
   const internal = await createShikiInternal(options)
 
   return {
+    getLastGrammarState: (code, options) => getLastGrammarState(internal, code, options),
     codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
     codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
     codeToTokens: (code, options) => codeToTokens(internal, code, options),

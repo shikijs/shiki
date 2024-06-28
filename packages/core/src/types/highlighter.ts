@@ -2,7 +2,7 @@ import type { Root } from 'hast'
 import type { Grammar } from './textmate'
 import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
-import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
+import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
 import type { CodeToHastOptions } from './options'
 
 /**
@@ -104,6 +104,14 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
     code: string,
     options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
   ) => ThemedTokenWithVariants[][]
+  /**
+   * Get the last grammar state of a code snippet.
+   * You can pass the grammar state to `codeToTokens` as `grammarState` to continue tokenizing from an intermediate state.
+   */
+  getLastGrammarState: (
+    code: string,
+    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+  ) => GrammarState
 
   /**
    * Get internal context object

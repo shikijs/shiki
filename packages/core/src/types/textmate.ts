@@ -1,13 +1,16 @@
 import type {
-  IGrammar as Grammar,
+  IGrammar,
   IRawGrammar as RawGrammar,
   IRawTheme as RawTheme,
   IRawThemeSetting as RawThemeSetting,
 } from '../textmate'
 
 export type {
-  Grammar,
   RawGrammar,
   RawTheme,
   RawThemeSetting,
+}
+
+export interface Grammar extends IGrammar {
+  name: string
 }

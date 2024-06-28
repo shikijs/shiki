@@ -1,12 +1,14 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-import type { IGrammar, IRawThemeSetting } from './textmate'
+import type { IGrammar, IRawThemeSetting, StateStack } from './textmate'
 import { INITIAL } from './textmate'
 import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
 import { StackElementMetadata } from './stack-element-metadata'
 import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from './utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
+import { ShikiError } from './error'
+import { GrammarState, getGrammarStack } from './grammar-state'
 
 /**
  * Code to tokens, with a simple theme.
@@ -30,7 +32,43 @@ export function codeToTokensBase(
     return tokenizeAnsiWithTheme(theme, code, options)
 
   const _grammar = internal.getLanguage(lang)
+
+  if (options.grammarState) {
+    if (options.grammarState.lang !== _grammar.name) {
+      throw new ShikiError(`Grammar state language "${options.grammarState.lang}" does not match highlight language "${_grammar.name}"`)
+    }
+    if (options.grammarState.theme !== themeName) {
+      throw new ShikiError(`Grammar state theme "${options.grammarState.theme}" does not match highlight theme "${themeName}"`)
+    }
+  }
+
   return tokenizeWithTheme(code, _grammar, theme, colorMap, options)
+}
+
+export function getLastGrammarState(
+  internal: ShikiInternal,
+  code: string,
+  options: CodeToTokensBaseOptions = {},
+): GrammarState {
+  const {
+    lang = 'text',
+    theme: themeName = internal.getLoadedThemes()[0],
+  } = options
+
+  if (isPlainLang(lang) || isNoneTheme(themeName))
+    throw new ShikiError('Plain language does not have grammar state')
+  if (lang === 'ansi')
+    throw new ShikiError('ANSI language does not have grammar state')
+
+  const { theme, colorMap } = internal.setTheme(themeName)
+
+  const _grammar = internal.getLanguage(lang)
+
+  return new GrammarState(
+    _tokenizeWithTheme(code, _grammar, theme, colorMap, options).stateStack,
+    _grammar.name,
+    theme.name,
+  )
 }
 
 /** for explanations */
@@ -46,6 +84,19 @@ export function tokenizeWithTheme(
   colorMap: string[],
   options: TokenizeWithThemeOptions,
 ): ThemedToken[][] {
+  return _tokenizeWithTheme(code, grammar, theme, colorMap, options).tokens
+}
+
+function _tokenizeWithTheme(
+  code: string,
+  grammar: IGrammar,
+  theme: ThemeRegistrationResolved,
+  colorMap: string[],
+  options: TokenizeWithThemeOptions,
+): {
+    tokens: ThemedToken[][]
+    stateStack: StateStack
+  } {
   const colorReplacements = resolveColorReplacements(theme, options)
 
   const {
@@ -55,7 +106,22 @@ export function tokenizeWithTheme(
 
   const lines = splitLines(code)
 
-  let ruleStack = INITIAL
+  let stateStack = options.grammarState
+    ? getGrammarStack(options.grammarState)
+    : options.grammarContextCode != null
+      ? _tokenizeWithTheme(
+        options.grammarContextCode,
+        grammar,
+        theme,
+        colorMap,
+        {
+          ...options,
+          grammarState: undefined,
+          grammarContextCode: undefined,
+        },
+      ).stateStack
+      : INITIAL
+
   let actual: ThemedToken[] = []
   const final: ThemedToken[][] = []
 
@@ -106,12 +172,12 @@ export function tokenizeWithTheme(
     let tokensWithScopesIndex
 
     if (options.includeExplanation) {
-      resultWithScopes = grammar.tokenizeLine(line, ruleStack)
+      resultWithScopes = grammar.tokenizeLine(line, stateStack)
       tokensWithScopes = resultWithScopes.tokens
       tokensWithScopesIndex = 0
     }
 
-    const result = grammar.tokenizeLine2(line, ruleStack, tokenizeTimeLimit)
+    const result = grammar.tokenizeLine2(line, stateStack, tokenizeTimeLimit)
 
     const tokensLength = result.tokens.length / 2
     for (let j = 0; j < tokensLength; j++) {
@@ -158,10 +224,13 @@ export function tokenizeWithTheme(
     }
     final.push(actual)
     actual = []
-    ruleStack = result.ruleStack
+    stateStack = result.ruleStack
   }
 
-  return final
+  return {
+    tokens: final,
+    stateStack,
+  }
 }
 
 function explainThemeScopes(
