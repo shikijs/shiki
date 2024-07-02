@@ -38,6 +38,8 @@ const file = await unified()
   .process(await fs.readFile('./input.md'))
 ```
 
+The default export of `@shikijs/rehype` uses a shared instance of `shiki` from `getSingletonHighlighter`, which will persist across processes. If you want full control over the highlighter lifecycle, use [Fine-grained Bundle `@shikijs/rehype/core`](#fine-grained-bundle) instead.
+
 ## Fine-grained Bundle
 
 By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikiFromHighlighter` from `@shikijs/rehype/core` and pass your own highlighter:
