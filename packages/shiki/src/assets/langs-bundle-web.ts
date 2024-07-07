@@ -49,11 +49,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/css')) as DynamicImportLanguageRegistration
   },
   {
-    'id': 'edge',
-    'name': 'Edge',
-    'import': (() => import('./langs/edge')) as DynamicImportLanguageRegistration
-  },
-  {
     'id': 'glsl',
     'name': 'GLSL',
     'import': (() => import('./langs/glsl')) as DynamicImportLanguageRegistration
@@ -220,6 +215,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/r')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'regexp',
+    'name': 'RegExp',
+    'aliases': [
+      'regex'
+    ],
+    'import': (() => import('./langs/regexp')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'ruby',
     'name': 'Ruby',
     'aliases': [
@@ -335,7 +338,6 @@ export type BundledLanguage =
   | 'coffeescript'
   | 'cpp'
   | 'css'
-  | 'edge'
   | 'glsl'
   | 'gql'
   | 'graphql'
@@ -373,6 +375,8 @@ export type BundledLanguage =
   | 'python'
   | 'r'
   | 'rb'
+  | 'regex'
+  | 'regexp'
   | 'ruby'
   | 'sass'
   | 'scss'
