@@ -72,11 +72,13 @@ describe('should', () => {
     expect(shiki.getLoadedLanguages())
       .toMatchInlineSnapshot(`
         [
+          "regexp",
           "sql",
           "c",
           "glsl",
           "cpp-macro",
           "cpp",
+          "regex",
           "c++",
         ]
       `)
