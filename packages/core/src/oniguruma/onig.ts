@@ -27,7 +27,7 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
       updateGlobalBufferAndViews(wasmMemory.buffer)
       return 1
     }
-    catch (e) {}
+    catch {}
   }
   function _emscripten_resize_heap(requestedSize: number) {
     const oldSize = binding.HEAPU8.length

@@ -67,6 +67,8 @@ Transformers can also access markdown 'meta' strings in [supported integrations]
 
 You can access the raw meta using:
 
+<!-- eslint-skip -->
+
 ```ts
 options.meta
 // => { meta: 'here', __raw: 'meta=here' }

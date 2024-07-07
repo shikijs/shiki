@@ -4,7 +4,7 @@ import { toHtml } from 'hast-util-to-html'
 import { codeToHtml, createHighlighter } from '../src'
 
 afterEach(() => {
-  vi.restoreAllMocks
+  vi.restoreAllMocks()
 })
 
 describe('should', () => {
