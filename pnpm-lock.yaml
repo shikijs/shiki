@@ -256,6 +256,10 @@ importers:
         version: shiki@0.14.7
 
   packages/core:
+    dependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
     devDependencies:
       hast-util-to-html:
         specifier: ^9.0.1

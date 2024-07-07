@@ -71,7 +71,9 @@ export default defineConfig([
       if (!/Circular|an empty chunk/.test(warning.message))
         warn(warning)
     },
-    external: [],
+    external: [
+      'hast',
+    ],
   },
 ])
 
