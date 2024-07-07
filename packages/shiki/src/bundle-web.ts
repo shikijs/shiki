@@ -5,6 +5,7 @@ import type { BundledTheme } from './themes'
 import { bundledLanguages } from './assets/langs-bundle-web'
 import { bundledThemes } from './themes'
 import { getWasmInlined } from './wasm-dynamic'
+import type {} from 'hast'
 
 export * from './core'
 export * from './themes'

@@ -100,7 +100,8 @@
     "test:cf": "wrangler dev test/cf.ts --port 60001"
   },
   "dependencies": {
-    "@shikijs/core": "workspace:*"
+    "@shikijs/core": "workspace:*",
+    "@types/hast": "^3.0.4"
   },
   "devDependencies": {
     "tm-grammars": "^1.13.6",
