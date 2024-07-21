@@ -34,7 +34,7 @@ export function codeToTokensWithThemes(
           offset: _token.offset,
         }
 
-        if ('includeExplanation' in options) {
+        if ('includeExplanation' in options && options.includeExplanation) {
           mergedToken.explanation = _token.explanation
         }
 
