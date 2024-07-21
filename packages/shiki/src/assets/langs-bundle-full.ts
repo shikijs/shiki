@@ -609,6 +609,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/latex')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'lean',
+    'name': 'Lean 4',
+    'aliases': [
+      'lean4'
+    ],
+    'import': (() => import('./langs/lean')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'less',
     'name': 'Less',
     'import': (() => import('./langs/less')) as DynamicImportLanguageRegistration
@@ -1388,6 +1396,8 @@ export type BundledLanguage =
   | 'kts'
   | 'kusto'
   | 'latex'
+  | 'lean'
+  | 'lean4'
   | 'less'
   | 'liquid'
   | 'lisp'

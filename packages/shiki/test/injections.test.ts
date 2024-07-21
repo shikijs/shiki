@@ -52,8 +52,7 @@ it('injections-side-effects vue', async () => {
   expect(before).not.toEqual(after)
 })
 
-// It seems that angular-html is not correctly highlighted in the recent update. Bring this back once fixed.
-it.skip('injections-side-effects angular-html', async () => {
+it('injections-side-effects angular-html', async () => {
   const highlighter = await createHighlighterCore({
     themes: [
       vl,
@@ -63,7 +62,23 @@ it.skip('injections-side-effects angular-html', async () => {
     ],
   })
 
-  const code = `<div [ ngStyle ]="{'max-width.px': i * 2 + 5}"></div>`
+  const code = `<h2>Hero List</h2>
+
+<p><em>Select a hero from the list to see details.</em></p>
+
+@if (heroes.length > 0) {
+  <ul>
+    <li *ngFor="let hero of heroes">
+      @let isSelected = hero === selectedHero;
+      <button type="button" (click)="selectHero(hero)" [class.selected]="isSelected">
+        {{hero.name}}
+      </button>
+    </li>
+  </ul>
+}
+
+<app-hero-detail *ngIf="selectedHero" [hero]="selectedHero"></app-hero-detail>
+`
 
   const before = highlighter.codeToHtml(code, { lang: 'html', theme: 'vitesse-light' })
   expect(before)
@@ -92,6 +107,7 @@ it.skip('injections-side-effects angular-html', async () => {
         "css",
         "html",
         "angular-expression",
+        "angular-let-declaration",
         "angular-template",
         "angular-template-blocks",
         "angular-html",
@@ -126,10 +142,15 @@ import { CartService } from './cart.service';
       type="button"
       [routerLink]="'/cart'"
     >
-      @if (cartService.length > 0) {
-        <div>
-          {{ cartService.length }}
-        </div>
+      @if (heroes.length > 0) {
+        <ul>
+          <li *ngFor="let hero of heroes">
+            @let isSelected = hero === selectedHero;
+            <button type="button" (click)="selectHero(hero)" [class.selected]="isSelected">
+              {{hero.name}}
+            </button>
+          </li>
+        </ul>
       }
       Cart
     </button>

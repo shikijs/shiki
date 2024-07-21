@@ -12,10 +12,15 @@
 <span class="line"><span style="color:#B56959">      type="button"</span></span>
 <span class="line"><span style="color:#B56959">      [routerLink]="'/cart'"</span></span>
 <span class="line"><span style="color:#B56959">    ></span></span>
-<span class="line"><span style="color:#B56959">      @if (cartService.length > 0) {</span></span>
-<span class="line"><span style="color:#B56959">        &#x3C;div></span></span>
-<span class="line"><span style="color:#B56959">          {{ cartService.length }}</span></span>
-<span class="line"><span style="color:#B56959">        &#x3C;/div></span></span>
+<span class="line"><span style="color:#B56959">      @if (heroes.length > 0) {</span></span>
+<span class="line"><span style="color:#B56959">        &#x3C;ul></span></span>
+<span class="line"><span style="color:#B56959">          &#x3C;li *ngFor="let hero of heroes"></span></span>
+<span class="line"><span style="color:#B56959">            @let isSelected = hero === selectedHero;</span></span>
+<span class="line"><span style="color:#B56959">            &#x3C;button type="button" (click)="selectHero(hero)" [class.selected]="isSelected"></span></span>
+<span class="line"><span style="color:#B56959">              {{hero.name}}</span></span>
+<span class="line"><span style="color:#B56959">            &#x3C;/button></span></span>
+<span class="line"><span style="color:#B56959">          &#x3C;/li></span></span>
+<span class="line"><span style="color:#B56959">        &#x3C;/ul></span></span>
 <span class="line"><span style="color:#B56959">      }</span></span>
 <span class="line"><span style="color:#B56959">      Cart</span></span>
 <span class="line"><span style="color:#B56959">    &#x3C;/button></span></span>

@@ -52,13 +52,13 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   },
   {
     "id": "dracula",
-    "displayName": "Dracula",
+    "displayName": "Dracula Theme",
     "type": "dark",
     "import": (() => import('./themes/dracula')) as unknown as DynamicImportThemeRegistration
   },
   {
     "id": "dracula-soft",
-    "displayName": "Dracula Soft",
+    "displayName": "Dracula Theme Soft",
     "type": "dark",
     "import": (() => import('./themes/dracula-soft')) as unknown as DynamicImportThemeRegistration
   },
