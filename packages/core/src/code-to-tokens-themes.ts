@@ -34,6 +34,10 @@ export function codeToTokensWithThemes(
           offset: _token.offset,
         }
 
+        if ('includeExplanation' in options && options.includeExplanation) {
+          mergedToken.explanation = _token.explanation
+        }
+
         tokens.forEach((t, themeIdx) => {
           const {
             content: _,
