@@ -10,6 +10,8 @@ Heavily inspired by [`monaco-editor-textmate`](https://github.com/zikaari/monaco
 
 ## Install
 
+Install via npm, or see [CDN](https://esm.sh/@shikijs/monaco@1.11.1).
+
 ```bash
 npm i -D @shikijs/monaco
 ```

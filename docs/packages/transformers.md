@@ -10,6 +10,8 @@ Common transformers for Shiki, inspired by [shiki-processor](https://github.com/
 
 ## Install
 
+Install via npm, or see [CDN](https://esm.sh/@shikijs/transformers@1.11.1).
+
 ```bash
 npm i -D @shikijs/transformers
 ```
