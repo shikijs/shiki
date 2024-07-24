@@ -1,4 +1,4 @@
-import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, HighlighterGeneric, TransformerOptions } from 'shiki/core'
+import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, CodeToHastOptionsCommon, HighlighterGeneric, TransformerOptions } from 'shiki/core'
 import type { Element, Root } from 'hast'
 import type { BuiltinTheme } from 'shiki'
 import type { Transformer } from 'unified'
@@ -57,6 +57,7 @@ export type RehypeShikiCoreOptions =
   & TransformerOptions
   & CodeOptionsMeta
   & RehypeShikiExtraOptions
+  & Omit<CodeToHastOptionsCommon, 'lang'>
 
 const languagePrefix = 'language-'
 
