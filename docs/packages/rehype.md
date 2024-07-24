@@ -10,6 +10,8 @@ outline: deep
 
 ## Install
 
+Install via npm, or see [CDN](https://esm.sh/@shikijs/rehype@1.11.1).
+
 ```bash
 npm i -D @shikijs/rehype
 ```
