@@ -12,7 +12,7 @@ A Shiki transformer for [Twoslash](https://github.com/twoslashes/twoslash), prov
 
 ## Install
 
-Install via npm, or see [CDN](https://esm.sh/@shikijs/transformers@1.11.1).
+Install via npm, or see [CDN](https://esm.sh/@shikijs/twoslash@1.11.1).
 
 ```bash
 npm i -D @shikijs/twoslash
