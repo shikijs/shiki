@@ -133,7 +133,7 @@ describe('decorations errors', () => {
         ],
       })
     }).rejects
-      .toThrowErrorMatchingInlineSnapshot(`[TypeError: Cannot read properties of undefined (reading 'length')]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":100,"character":0}. Lines length: 12]`)
   })
 
   it('throws when chars overflow', async () => {
@@ -146,6 +146,40 @@ describe('decorations errors', () => {
         ],
       })
     }).rejects
-      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Failed to find end index for decoration {"line":0,"character":10,"offset":10}]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":0,"character":10}. Line 0 length: 4]`)
+
+    expect(async () => {
+      await codeToHtml(code, {
+        theme: 'vitesse-light',
+        lang: 'ts',
+        decorations: [
+          {
+            start: { line: 2, character: 1 },
+            end: { line: 1, character: 36 }, // actual position is { line: 2, character: 3, offset 40 }
+          },
+        ],
+      })
+    }).rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":1,"character":36}. Line 1 length: 33]`)
+  })
+
+  it('throws when offset underflows/overflows', async () => {
+    expect(async () => {
+      await codeToHtml(code, {
+        theme: 'vitesse-light',
+        lang: 'ts',
+        decorations: [{ start: 1, end: 1000 }],
+      })
+    }).rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: 1000. Code length: 252]`)
+
+    expect(async () => {
+      await codeToHtml(code, {
+        theme: 'vitesse-light',
+        lang: 'ts',
+        decorations: [{ start: -3, end: 5 }],
+      })
+    }).rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: -3. Code length: 252]`)
   })
 })

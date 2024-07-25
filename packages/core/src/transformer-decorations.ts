@@ -21,12 +21,21 @@ export function transformerDecorations(): ShikiTransformer {
 
       function normalizePosition(p: OffsetOrPosition): ResolvedPosition {
         if (typeof p === 'number') {
+          if (p < 0 || p > shiki.source.length)
+            throw new ShikiError(`Invalid decoration offset: ${p}. Code length: ${shiki.source.length}`)
+
           return {
             ...converter.indexToPos(p),
             offset: p,
           }
         }
         else {
+          const line = converter.lines[p.line]
+          if (line === undefined)
+            throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Lines length: ${converter.lines.length}`)
+          if (p.character < 0 || p.character > line.length)
+            throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Line ${p.line} length: ${line.length}`)
+
           return {
             ...p,
             offset: converter.posToIndex(p.line, p.character),
