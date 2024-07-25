@@ -23,7 +23,7 @@ export function codeToHtml(
   let result = hastToHtml(codeToHast(internal, code, options, context))
   return result
 }
-`
+// final`
 
 describe('decorations', () => {
   it('works', async () => {
@@ -76,6 +76,13 @@ describe('decorations', () => {
         {
           start: { line: 8, character: 15 },
           end: { line: 8, character: 25 },
+          properties: { class: 'highlighted' },
+        },
+        // "// final"
+        // Testing offset === code.length edge case
+        {
+          start: code.length - 8,
+          end: code.length,
           properties: { class: 'highlighted' },
         },
       ],
