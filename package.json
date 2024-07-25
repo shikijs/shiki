@@ -2,7 +2,7 @@
   "type": "module",
   "version": "1.11.1",
   "private": true,
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp && pnpm -r publish",
@@ -14,7 +14,7 @@
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.23.1",
+    "@antfu/eslint-config": "^2.23.2",
     "@antfu/ni": "^0.22.0",
     "@antfu/utils": "^0.7.10",
     "@rollup/plugin-alias": "^5.1.0",
@@ -30,8 +30,8 @@
     "@shikijs/vitepress-twoslash": "workspace:*",
     "@types/fs-extra": "^11.0.4",
     "@types/hast": "^3.0.4",
-    "@types/node": "^20.14.11",
-    "@vitest/coverage-v8": "^2.0.3",
+    "@types/node": "^20.14.12",
+    "@vitest/coverage-v8": "^2.0.4",
     "ansi-sequence-parser": "^1.1.1",
     "bumpp": "^9.4.1",
     "eslint": "^9.7.0",
@@ -46,7 +46,7 @@
     "mdast-util-gfm": "^3.0.0",
     "mdast-util-to-hast": "^13.2.0",
     "ofetch": "^1.3.4",
-    "pnpm": "^9.5.0",
+    "pnpm": "^9.6.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "rollup": "^4.19.0",
@@ -57,14 +57,14 @@
     "shiki": "workspace:*",
     "simple-git-hooks": "^2.11.1",
     "taze": "^0.16.1",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
-    "vite": "^5.3.4",
+    "vite": "^5.3.5",
     "vite-tsconfig-paths": "^4.3.2",
     "vitepress-plugin-mermaid": "^2.0.16",
-    "vitest": "^2.0.3",
-    "vue-tsc": "^2.0.26",
-    "wrangler": "^3.65.1"
+    "vitest": "^2.0.4",
+    "vue-tsc": "^2.0.29",
+    "wrangler": "^3.67.0"
   },
   "resolutions": {
     "@shikijs/compat": "workspace:*",

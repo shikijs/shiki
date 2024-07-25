@@ -55,11 +55,11 @@ it('flat colorReplacements', async () => {
       log</span>
       <span style="color:#999999;--shiki-dark:#BABED8">
       (</span>
-      <span style="color:#B5695999;--shiki-dark:#89DDFF">
+      <span style="color:#B5695977;--shiki-dark:#89DDFF">
       "</span>
       <span style="color:#B56959;--shiki-dark:#C3E88D">
       hi</span>
-      <span style="color:#B5695999;--shiki-dark:#89DDFF">
+      <span style="color:#B5695977;--shiki-dark:#89DDFF">
       "</span>
       <span style="color:#999999;--shiki-dark:#BABED8">
       )</span>
