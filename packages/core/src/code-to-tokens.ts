@@ -60,7 +60,7 @@ export function codeToTokens(
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
   else if ('theme' in options) {
-    const colorReplacements = resolveColorReplacements(options.theme, options.colorReplacements)
+    const colorReplacements = resolveColorReplacements(options.theme, options)
 
     tokens = codeToTokensBase(
       internal,

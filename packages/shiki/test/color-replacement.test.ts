@@ -70,6 +70,20 @@ it('flat colorReplacements', async () => {
     `)
 })
 
+it('single theme colorReplacements', async () => {
+  const result = await codeToHtml('console.log("hi")', {
+    lang: 'js',
+    theme: 'vitesse-light',
+    colorReplacements: {
+      '#393a34': 'var(---replaced-1)',
+      '#b07d48': 'var(---replaced-2)',
+    },
+  })
+
+  expect(result).toContain('var(---replaced-1)')
+  expect(result).toContain('var(---replaced-2)')
+})
+
 it('scoped colorReplacements', async () => {
   const customLightTheme: ThemeRegistrationResolved = {
     name: 'custom-light',
