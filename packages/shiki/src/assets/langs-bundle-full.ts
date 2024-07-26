@@ -1086,6 +1086,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/toml')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'ts-tags',
+    'name': 'TypeScript with Tags',
+    'aliases': [
+      'lit'
+    ],
+    'import': (() => import('./langs/ts-tags')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'tsv',
     'name': 'TSV',
     'import': (() => import('./langs/tsv')) as DynamicImportLanguageRegistration
@@ -1401,6 +1409,7 @@ export type BundledLanguage =
   | 'less'
   | 'liquid'
   | 'lisp'
+  | 'lit'
   | 'log'
   | 'logo'
   | 'lua'
@@ -1505,6 +1514,7 @@ export type BundledLanguage =
   | 'tfvars'
   | 'toml'
   | 'ts'
+  | 'ts-tags'
   | 'tsp'
   | 'tsv'
   | 'tsx'

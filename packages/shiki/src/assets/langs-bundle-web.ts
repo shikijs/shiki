@@ -275,6 +275,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/toml')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'ts-tags',
+    'name': 'TypeScript with Tags',
+    'aliases': [
+      'lit'
+    ],
+    'import': (() => import('./langs/ts-tags')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'tsx',
     'name': 'TSX',
     'import': (() => import('./langs/tsx')) as DynamicImportLanguageRegistration
@@ -362,6 +370,7 @@ export type BundledLanguage =
   | 'jsx'
   | 'julia'
   | 'less'
+  | 'lit'
   | 'lua'
   | 'markdown'
   | 'marko'
@@ -389,6 +398,7 @@ export type BundledLanguage =
   | 'svelte'
   | 'toml'
   | 'ts'
+  | 'ts-tags'
   | 'tsx'
   | 'typescript'
   | 'vue'

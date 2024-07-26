@@ -174,8 +174,8 @@ importers:
         specifier: ^2.0.29
         version: 2.0.29(typescript@5.5.4)
       wrangler:
-        specifier: ^3.67.0
-        version: 3.67.0
+        specifier: ^3.67.1
+        version: 3.67.1
 
   docs:
     dependencies:
@@ -205,8 +205,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2(vue@3.4.34(typescript@5.5.4))
       pinia:
-        specifier: ^2.1.7
-        version: 2.1.7(typescript@5.5.4)(vue@3.4.34(typescript@5.5.4))
+        specifier: ^2.2.0
+        version: 2.2.0(typescript@5.5.4)(vue@3.4.34(typescript@5.5.4))
       shiki:
         specifier: workspace:*
         version: link:../packages/shiki
@@ -347,8 +347,8 @@ importers:
         version: 3.0.4
     devDependencies:
       tm-grammars:
-        specifier: ^1.14.0
-        version: 1.14.0
+        specifier: ^1.15.1
+        version: 1.15.1
       tm-themes:
         specifier: ^1.5.7
         version: 1.5.7
@@ -1985,8 +1985,8 @@ packages:
   '@vue/compiler-vue2@2.7.16':
     resolution: {integrity: sha512-qYC3Psj9S/mfu9uVi5WvNZIzq+xnXMhOwbTFKKDD7b1lhpnn71jXSFdTQ+WsIEk0ONCd7VV2IMm7ONl6tbQ86A==}
 
-  '@vue/devtools-api@6.5.1':
-    resolution: {integrity: sha512-+KpckaAQyfbvshdDW5xQylLni1asvNSGme1JFs8I1+/H5pHEhqUKMEQD/qn3Nx5+/nycBq11qAEi8lk+LXI2dA==}
+  '@vue/devtools-api@6.6.3':
+    resolution: {integrity: sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==}
 
   '@vue/devtools-api@7.3.5':
     resolution: {integrity: sha512-BSdBBu5hOIv+gBJC9jzYMh5bC27FQwjWLSb8fVAniqlL9gvsqvK27xTgczMf+hgctlszMYQnRm3bpY/j8vhPqw==}
@@ -3874,8 +3874,8 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
 
-  miniflare@3.20240718.0:
-    resolution: {integrity: sha512-TKgSeyqPBeT8TBLxbDJOKPWlq/wydoJRHjAyDdgxbw59N6wbP8JucK6AU1vXCfu21eKhrEin77ssXOpbfekzPA==}
+  miniflare@3.20240718.1:
+    resolution: {integrity: sha512-mn3MjGnpgYvarCRTfz4TQyVyY8yW0zz7f8LOAPVai78IGC/lcVcyskZcuIr7Zovb2i+IERmmsJAiEPeZHIIKbA==}
     engines: {node: '>=16.13'}
     hasBin: true
 
@@ -4179,8 +4179,8 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
-  pinia@2.1.7:
-    resolution: {integrity: sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==}
+  pinia@2.2.0:
+    resolution: {integrity: sha512-iPrIh26GMqfpUlMOGyxuDowGmYousTecbTHFwT0xZ1zJvh23oQ+Cj99ZoPQA1TnUPhU6AuRPv6/drkTCJ0VHQA==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
@@ -4862,8 +4862,8 @@ packages:
     resolution: {integrity: sha512-q5nmENpTHgiPVd1cJDDc9cVoYN5x4vCvwT3FMilvKPKneCBZAxn2YWQjDF0UMcE9k0Cay1gBiDfTMU0g+mPMQA==}
     engines: {node: '>=14.0.0'}
 
-  tm-grammars@1.14.0:
-    resolution: {integrity: sha512-U4VxAX/XEYbFrzxLu0btW82iFMf1XImNsWHNljcj/XuFs5JrlV3l0WoW95oPpdyc0LL0YxfsEdyICWyox0Vk7Q==}
+  tm-grammars@1.15.1:
+    resolution: {integrity: sha512-i8KbDaPy1wa2LIqxhF6WAp7AF2ssWN4dTBlTQnIGrxUFSY79LcO0EVgaRXOOQkd+psLyUhjAIlTpSARLnYihdw==}
 
   tm-themes@1.5.7:
     resolution: {integrity: sha512-po/2dZNyEDcPdlzHLWb8GZuCKierNUOyF5Nff6EUVqBknaoY6ksGc2xQ2/SnP4S22H/VuzN82ObABGu77RTa+w==}
@@ -5258,8 +5258,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@3.67.0:
-    resolution: {integrity: sha512-elun6p9rAmGr/CtnCixhUXWeKT+LnFbHDsLLizgAlFJbsgCPV/O1if7uMjTGD/fUJNXrwbTVRpxvInz5X9gE2Q==}
+  wrangler@3.67.1:
+    resolution: {integrity: sha512-lLVJxq/OZMfntvZ79WQJNC1OKfxOCs6PLfogqDBuPFEQ3L/Mwqvd9IZ0bB8ahrwUN/K3lSdDPXynk9HfcGZxVw==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -6931,7 +6931,7 @@ snapshots:
       de-indent: 1.0.2
       he: 1.2.0
 
-  '@vue/devtools-api@6.5.1': {}
+  '@vue/devtools-api@6.6.3': {}
 
   '@vue/devtools-api@7.3.5':
     dependencies:
@@ -9359,7 +9359,7 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  miniflare@3.20240718.0:
+  miniflare@3.20240718.1:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       acorn: 8.12.0
@@ -9668,9 +9668,9 @@ snapshots:
 
   pidtree@0.6.0: {}
 
-  pinia@2.1.7(typescript@5.5.4)(vue@3.4.34(typescript@5.5.4)):
+  pinia@2.2.0(typescript@5.5.4)(vue@3.4.34(typescript@5.5.4)):
     dependencies:
-      '@vue/devtools-api': 6.5.1
+      '@vue/devtools-api': 6.6.3
       vue: 3.4.34(typescript@5.5.4)
       vue-demi: 0.14.8(vue@3.4.34(typescript@5.5.4))
     optionalDependencies:
@@ -10363,7 +10363,7 @@ snapshots:
 
   tinyspy@3.0.0: {}
 
-  tm-grammars@1.14.0: {}
+  tm-grammars@1.15.1: {}
 
   tm-themes@1.5.7: {}
 
@@ -10859,7 +10859,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20240718.0
       '@cloudflare/workerd-windows-64': 1.20240718.0
 
-  wrangler@3.67.0:
+  wrangler@3.67.1:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
@@ -10868,7 +10868,7 @@ snapshots:
       chokidar: 3.6.0
       date-fns: 3.6.0
       esbuild: 0.17.19
-      miniflare: 3.20240718.0
+      miniflare: 3.20240718.1
       nanoid: 3.3.7
       path-to-regexp: 6.2.1
       resolve: 1.22.8
