@@ -1,6 +1,7 @@
 import type { StateStackImpl } from '../vendor/vscode-textmate/src/grammar'
 import { ShikiError } from './error'
 import type { StateStack } from './textmate'
+import { INITIAL } from './textmate'
 
 /**
  * GrammarState is a special reference object that holds the state of a grammar.
@@ -8,10 +9,17 @@ import type { StateStack } from './textmate'
  * It's used to highlight code snippets that are part of the target language.
  */
 export class GrammarState {
+  /**
+   * Static method to create a initial grammar state.
+   */
+  static initial(lang: string, theme: string) {
+    return new GrammarState(INITIAL, lang, theme)
+  }
+
   constructor(
-    private _stack: StateStack,
-    public lang: string,
-    public theme: string,
+    private readonly _stack: StateStack,
+    public readonly lang: string,
+    public readonly theme: string,
   ) {}
 
   get scopes() {
