@@ -14,8 +14,6 @@ export interface DecorationItem {
   start: OffsetOrPosition
   /**
    * End offset or position of the decoration.
-   *
-   * If the
    */
   end: OffsetOrPosition
   /**

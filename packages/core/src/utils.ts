@@ -7,7 +7,7 @@ export function toArray<T>(x: MaybeArray<T>): T[] {
 }
 
 /**
- * Slipt a string into lines, each line preserves the line ending.
+ * Split a string into lines, each line preserves the line ending.
  */
 export function splitLines(code: string, preserveEnding = false): [string, number][] {
   const parts = code.split(/(\r?\n)/g)
@@ -192,11 +192,20 @@ export function stringifyTokenStyle(token: Record<string, string>) {
 
 /**
  * Creates a converter between index and position in a code block.
+ *
+ * Overflow/underflow are unchecked.
  */
 export function createPositionConverter(code: string) {
   const lines = splitLines(code, true).map(([line]) => line)
 
   function indexToPos(index: number): Position {
+    if (index === code.length) {
+      return {
+        line: lines.length - 1,
+        character: lines[lines.length - 1].length,
+      }
+    }
+
     let character = index
     let line = 0
     for (const lineText of lines) {
