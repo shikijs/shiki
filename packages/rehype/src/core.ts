@@ -107,7 +107,10 @@ function rehypeShikiFromHighlighter(
       if (fallbackLanguage && !langs.includes(lang))
         lang = fallbackLanguage
 
-      const code = toString(head)
+      // Replace the single trailing newline that rehype/remark gives us for
+      // some reason. Only gets rid of the very last one, as any extra newlines
+      // are due to the user having blank lines in the code block.
+      const code = toString(head).replace(/\n$/, '')
       const cachedValue = cache?.get(code)
 
       if (cachedValue) {
