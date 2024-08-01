@@ -260,6 +260,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/docker')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'dotenv',
+    'name': 'dotEnv',
+    'import': (() => import('./langs/dotenv')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'dream-maker',
     'name': 'Dream Maker',
     'import': (() => import('./langs/dream-maker')) as DynamicImportLanguageRegistration
@@ -1321,6 +1326,7 @@ export type BundledLanguage =
   | 'diff'
   | 'docker'
   | 'dockerfile'
+  | 'dotenv'
   | 'dream-maker'
   | 'edge'
   | 'elisp'

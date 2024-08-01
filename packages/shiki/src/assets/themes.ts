@@ -63,6 +63,18 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/dracula-soft')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "everforest-dark",
+    "displayName": "Everforest Dark",
+    "type": "dark",
+    "import": (() => import('./themes/everforest-dark')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "everforest-light",
+    "displayName": "Everforest Light",
+    "type": "light",
+    "import": (() => import('./themes/everforest-light')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "github-dark",
     "displayName": "GitHub Dark",
     "type": "dark",
@@ -291,6 +303,8 @@ export type BundledTheme =
   | 'dark-plus'
   | 'dracula'
   | 'dracula-soft'
+  | 'everforest-dark'
+  | 'everforest-light'
   | 'github-dark'
   | 'github-dark-default'
   | 'github-dark-dimmed'
