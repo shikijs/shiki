@@ -49,3 +49,27 @@ export function replaceIncludesInCode(_map: Map<string, string>, code: string) {
   })
   return newCode
 }
+
+/**
+ * @example
+ *
+ * 'typescript twoslash include main meta=miscellaneous'
+ *
+ * We want to capture the "main", since that's the name of this reusable block.
+ * Ignore anything before and after this segment.
+ *
+ * The name should be captured in the first capturing group, i.e. match[1].
+ */
+const INCLUDE_META_REGEX = /include\s+(\w+)\b.*?/
+
+/**
+ * Given the raw meta, try to parse the include name.
+ */
+export function parseIncludeMeta(meta?: string): string | null {
+  if (!meta)
+    return null
+
+  const match = meta.match(INCLUDE_META_REGEX)
+
+  return match?.[1] ?? null
+}
