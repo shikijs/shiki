@@ -51,19 +51,15 @@ export function replaceIncludesInCode(_map: Map<string, string>, code: string) {
 }
 
 /**
- * @example
- *
- * 'typescript twoslash include main meta=miscellaneous'
- *
- * We want to capture the "main", since that's the name of this reusable block.
- * Ignore anything before and after this segment.
- *
- * The name should be captured in the first capturing group, i.e. match[1].
+ * An "include [name]" segment in a raw meta string is a sequence of words,
+ * possibly connected by dashes, following "include " and ending at a word boundary.
  */
 const INCLUDE_META_REGEX = /include\s+(\w+)\b.*?/
 
 /**
- * Given the raw meta, try to parse the include name.
+ * Given a raw meta string for code block like 'twoslash include main-hello-world meta=miscellaneous',
+ * capture the name of the reusable code block as "main-hello-world", and ignore anything
+ * before and after this segment.
  */
 export function parseIncludeMeta(meta?: string): string | null {
   if (!meta)
