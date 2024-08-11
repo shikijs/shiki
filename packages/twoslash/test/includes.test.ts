@@ -56,6 +56,20 @@ it('replaces the code', () => {
   `)
 })
 
+it('throws an error if key not found', () => {
+  const map = new Map()
+
+  const sample = `// @include: main`
+  expect(() => replaceIncludesInCode(map, sample)).toThrow()
+})
+
+it('does not throw an error if key not found but shouldThrow is false', () => {
+  const map = new Map()
+
+  const sample = `// @include: main`
+  expect(() => replaceIncludesInCode(map, sample, false)).not.toThrow()
+})
+
 it('replaces @include directives with previously transformed code blocks', async () => {
   const main = `
 export const hello = { str: "world" };
@@ -104,5 +118,7 @@ hello.
     transformers: [transformer],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/includes/replaced_directives.html')
+  expect(styleTag + html).toMatchFileSnapshot(
+    './out/includes/replaced_directives.html',
+  )
 })

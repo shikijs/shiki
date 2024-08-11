@@ -15,7 +15,7 @@ export function addIncludes(map: Map<string, string>, name: string, code: string
   map.set(name, lines.join('\n'))
 }
 
-export function replaceIncludesInCode(_map: Map<string, string>, code: string) {
+export function replaceIncludesInCode(_map: Map<string, string>, code: string, shouldThrow = true) {
   const includes = /\/\/ @include: (.*)$/gm
 
   // Basically run a regex over the code replacing any // @include: thing with
@@ -36,10 +36,12 @@ export function replaceIncludesInCode(_map: Map<string, string>, code: string) {
 
     if (!replaceWith) {
       const msg = `Could not find an include with the key: '${key}'.\nThere is: ${Array.from(_map.keys())}.`
-      throw new Error(msg)
+      if (shouldThrow)
+        throw new Error(msg)
     }
-
-    toReplace.push([match.index, match[0].length, replaceWith])
+    else {
+      toReplace.push([match.index, match[0].length, replaceWith])
+    }
   }
 
   let newCode = code.toString()
