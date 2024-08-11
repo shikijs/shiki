@@ -56,7 +56,7 @@ export function replaceIncludesInCode(_map: Map<string, string>, code: string, s
  * An "include [name]" segment in a raw meta string is a sequence of words,
  * possibly connected by dashes, following "include " and ending at a word boundary.
  */
-const INCLUDE_META_REGEX = /include\s+(\w+)\b.*?/
+const INCLUDE_META_REGEX = /include\s+([\w-]+)\b.*?/
 
 /**
  * Given a raw meta string for code block like 'twoslash include main-hello-world meta=miscellaneous',
