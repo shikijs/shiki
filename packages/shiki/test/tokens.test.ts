@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { expect, it } from 'vitest'
 import { codeToTokensBase } from '../src'
 
 it('includeExplanation', async () => {
