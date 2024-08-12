@@ -213,7 +213,11 @@ function _tokenizeWithTheme(
           offset += tokenWithScopesText.length
           token.explanation.push({
             content: tokenWithScopesText,
-            scopes: explainThemeScopes(themeSettingsSelectors, tokenWithScopes.scopes),
+            scopes: explainThemeScopes(
+              themeSettingsSelectors,
+              tokenWithScopes.scopes,
+              options.includeExplanation,
+            ),
           })
 
           tokensWithScopesIndex! += 1
@@ -236,6 +240,7 @@ function _tokenizeWithTheme(
 function explainThemeScopes(
   themeSelectors: ThemeSettingsSelectors[],
   scopes: string[],
+  includeExplanation: TokenizeWithThemeOptions['includeExplanation'],
 ): ThemedTokenScopeExplanation[] {
   const result: ThemedTokenScopeExplanation[] = []
   for (let i = 0, len = scopes.length; i < len; i++) {
@@ -243,7 +248,9 @@ function explainThemeScopes(
     const scope = scopes[i]
     result[i] = {
       scopeName: scope,
-      themeMatches: explainThemeScope(themeSelectors, scope, parentScopes),
+      themeMatches: includeExplanation === 'scopeName'
+        ? undefined
+        : explainThemeScope(themeSelectors, scope, parentScopes),
     }
   }
   return result

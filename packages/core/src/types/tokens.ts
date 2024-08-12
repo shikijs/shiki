@@ -1,4 +1,5 @@
 import type { GrammarState } from '../grammar-state'
+import type { IRawThemeSetting } from '../textmate'
 import type { SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 import type { CodeOptionsThemes } from './options'
@@ -36,7 +37,7 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
 
 export interface ThemedTokenScopeExplanation {
   scopeName: string
-  themeMatches: any[]
+  themeMatches?: IRawThemeSetting[]
 }
 
 export interface ThemedTokenExplanation {
@@ -149,9 +150,12 @@ export interface TokenizeWithThemeOptions {
   /**
    * Include explanation of why a token is given a color.
    *
+   * You can optionally pass `scopeName` to only include explanation for scopes,
+   * which is more performant than full explanation.
+   *
    * @default false
    */
-  includeExplanation?: boolean
+  includeExplanation?: boolean | 'scopeName'
 
   /**
    * A map of color names to new color values.
