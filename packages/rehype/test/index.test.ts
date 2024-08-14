@@ -63,3 +63,18 @@ it('add-custom-cache', async () => {
 
   expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
 })
+
+it('does not add extra trailing blank line', async () => {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShiki, {
+      theme: 'vitesse-light',
+      defaultLanguage: 'text',
+    })
+    .use(rehypeStringify)
+    .process('```\nthis should only have one .line\n```')
+
+  const lineCount = file.toString().match(/class="line"/g)?.length ?? 0
+  expect(lineCount).toEqual(1)
+})

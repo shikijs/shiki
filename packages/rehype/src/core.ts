@@ -29,6 +29,16 @@ export interface RehypeShikiExtraOptions {
   fallbackLanguage?: string
 
   /**
+   * `mdast-util-to-hast` adds a newline to the end of code blocks
+   *
+   * This option strips that newline from the code block
+   *
+   * @default true
+   * @see https://github.com/syntax-tree/mdast-util-to-hast/blob/f511a93817b131fb73419bf7d24d73a5b8b0f0c2/lib/handlers/code.js#L22
+   */
+  stripEndNewline?: boolean
+
+  /**
    * Custom meta string parser
    * Return an object to merge with `meta`
    */
@@ -73,6 +83,7 @@ function rehypeShikiFromHighlighter(
     defaultLanguage,
     fallbackLanguage,
     onError,
+    stripEndNewline = true,
     ...rest
   } = options
 
@@ -107,7 +118,11 @@ function rehypeShikiFromHighlighter(
       if (fallbackLanguage && !langs.includes(lang))
         lang = fallbackLanguage
 
-      const code = toString(head)
+      let code = toString(head)
+
+      if (stripEndNewline && code.endsWith('\n'))
+        code = code.slice(0, -1)
+
       const cachedValue = cache?.get(code)
 
       if (cachedValue) {
