@@ -1,0 +1,640 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`includeExplanation > false 1`] = `
+[
+  [
+    {
+      "color": "#BD976A",
+      "content": "console",
+      "fontStyle": 0,
+      "offset": 0,
+    },
+    {
+      "color": "#666666",
+      "content": ".",
+      "fontStyle": 0,
+      "offset": 7,
+    },
+    {
+      "color": "#80A665",
+      "content": "log",
+      "fontStyle": 0,
+      "offset": 8,
+    },
+    {
+      "color": "#666666",
+      "content": "(",
+      "fontStyle": 0,
+      "offset": 11,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "fontStyle": 0,
+      "offset": 12,
+    },
+    {
+      "color": "#C98A7D",
+      "content": "hello",
+      "fontStyle": 0,
+      "offset": 13,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "fontStyle": 0,
+      "offset": 18,
+    },
+    {
+      "color": "#666666",
+      "content": ")",
+      "fontStyle": 0,
+      "offset": 19,
+    },
+  ],
+]
+`;
+
+exports[`includeExplanation > scopeName 1`] = `
+[
+  [
+    {
+      "color": "#BD976A",
+      "content": "console",
+      "explanation": [
+        {
+          "content": "console",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "meta.function-call.js",
+            },
+            {
+              "scopeName": "variable.other.object.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 0,
+    },
+    {
+      "color": "#666666",
+      "content": ".",
+      "explanation": [
+        {
+          "content": ".",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "meta.function-call.js",
+            },
+            {
+              "scopeName": "punctuation.accessor.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 7,
+    },
+    {
+      "color": "#80A665",
+      "content": "log",
+      "explanation": [
+        {
+          "content": "log",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "meta.function-call.js",
+            },
+            {
+              "scopeName": "entity.name.function.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 8,
+    },
+    {
+      "color": "#666666",
+      "content": "(",
+      "explanation": [
+        {
+          "content": "(",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "meta.brace.round.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 11,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "explanation": [
+        {
+          "content": """,
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+            },
+            {
+              "scopeName": "punctuation.definition.string.begin.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 12,
+    },
+    {
+      "color": "#C98A7D",
+      "content": "hello",
+      "explanation": [
+        {
+          "content": "hello",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 13,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "explanation": [
+        {
+          "content": """,
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+            },
+            {
+              "scopeName": "punctuation.definition.string.end.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 18,
+    },
+    {
+      "color": "#666666",
+      "content": ")",
+      "explanation": [
+        {
+          "content": ")",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+            },
+            {
+              "scopeName": "meta.brace.round.js",
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 19,
+    },
+  ],
+]
+`;
+
+exports[`includeExplanation > true 1`] = `
+[
+  [
+    {
+      "color": "#BD976A",
+      "content": "console",
+      "explanation": [
+        {
+          "content": "console",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "meta.function-call.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "variable.other.object.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "variable",
+                    "identifier",
+                  ],
+                  "settings": {
+                    "foreground": "#bd976a",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 0,
+    },
+    {
+      "color": "#666666",
+      "content": ".",
+      "explanation": [
+        {
+          "content": ".",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "meta.function-call.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "punctuation.accessor.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "delimiter.bracket",
+                    "delimiter",
+                    "invalid.illegal.character-not-allowed-here.html",
+                    "keyword.operator.rest",
+                    "keyword.operator.spread",
+                    "keyword.operator.type.annotation",
+                    "keyword.operator.relational",
+                    "keyword.operator.assignment",
+                    "keyword.operator.type",
+                    "meta.brace",
+                    "meta.tag.block.any.html",
+                    "meta.tag.inline.any.html",
+                    "meta.tag.structure.input.void.html",
+                    "meta.type.annotation",
+                    "meta.embedded.block.github-actions-expression",
+                    "storage.type.function.arrow",
+                    "meta.objectliteral.ts",
+                    "punctuation",
+                    "punctuation.definition.string.begin.html.vue",
+                    "punctuation.definition.string.end.html.vue",
+                  ],
+                  "settings": {
+                    "foreground": "#666666",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 7,
+    },
+    {
+      "color": "#80A665",
+      "content": "log",
+      "explanation": [
+        {
+          "content": "log",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "meta.function-call.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "entity.name.function.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "entity",
+                    "entity.name",
+                  ],
+                  "settings": {
+                    "foreground": "#80a665",
+                  },
+                },
+                {
+                  "scope": "entity.name.function",
+                  "settings": {
+                    "foreground": "#80a665",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 8,
+    },
+    {
+      "color": "#666666",
+      "content": "(",
+      "explanation": [
+        {
+          "content": "(",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "meta.brace.round.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "delimiter.bracket",
+                    "delimiter",
+                    "invalid.illegal.character-not-allowed-here.html",
+                    "keyword.operator.rest",
+                    "keyword.operator.spread",
+                    "keyword.operator.type.annotation",
+                    "keyword.operator.relational",
+                    "keyword.operator.assignment",
+                    "keyword.operator.type",
+                    "meta.brace",
+                    "meta.tag.block.any.html",
+                    "meta.tag.inline.any.html",
+                    "meta.tag.structure.input.void.html",
+                    "meta.type.annotation",
+                    "meta.embedded.block.github-actions-expression",
+                    "storage.type.function.arrow",
+                    "meta.objectliteral.ts",
+                    "punctuation",
+                    "punctuation.definition.string.begin.html.vue",
+                    "punctuation.definition.string.end.html.vue",
+                  ],
+                  "settings": {
+                    "foreground": "#666666",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 11,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "explanation": [
+        {
+          "content": """,
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "string",
+                    "string punctuation.section.embedded source",
+                    "attribute.value",
+                  ],
+                  "settings": {
+                    "foreground": "#c98a7d",
+                  },
+                },
+              ],
+            },
+            {
+              "scopeName": "punctuation.definition.string.begin.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "delimiter.bracket",
+                    "delimiter",
+                    "invalid.illegal.character-not-allowed-here.html",
+                    "keyword.operator.rest",
+                    "keyword.operator.spread",
+                    "keyword.operator.type.annotation",
+                    "keyword.operator.relational",
+                    "keyword.operator.assignment",
+                    "keyword.operator.type",
+                    "meta.brace",
+                    "meta.tag.block.any.html",
+                    "meta.tag.inline.any.html",
+                    "meta.tag.structure.input.void.html",
+                    "meta.type.annotation",
+                    "meta.embedded.block.github-actions-expression",
+                    "storage.type.function.arrow",
+                    "meta.objectliteral.ts",
+                    "punctuation",
+                    "punctuation.definition.string.begin.html.vue",
+                    "punctuation.definition.string.end.html.vue",
+                  ],
+                  "settings": {
+                    "foreground": "#666666",
+                  },
+                },
+                {
+                  "scope": [
+                    "punctuation.definition.string",
+                  ],
+                  "settings": {
+                    "foreground": "#c98a7d77",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 12,
+    },
+    {
+      "color": "#C98A7D",
+      "content": "hello",
+      "explanation": [
+        {
+          "content": "hello",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "string",
+                    "string punctuation.section.embedded source",
+                    "attribute.value",
+                  ],
+                  "settings": {
+                    "foreground": "#c98a7d",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 13,
+    },
+    {
+      "color": "#C98A7D77",
+      "content": """,
+      "explanation": [
+        {
+          "content": """,
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "string.quoted.double.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "string",
+                    "string punctuation.section.embedded source",
+                    "attribute.value",
+                  ],
+                  "settings": {
+                    "foreground": "#c98a7d",
+                  },
+                },
+              ],
+            },
+            {
+              "scopeName": "punctuation.definition.string.end.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "delimiter.bracket",
+                    "delimiter",
+                    "invalid.illegal.character-not-allowed-here.html",
+                    "keyword.operator.rest",
+                    "keyword.operator.spread",
+                    "keyword.operator.type.annotation",
+                    "keyword.operator.relational",
+                    "keyword.operator.assignment",
+                    "keyword.operator.type",
+                    "meta.brace",
+                    "meta.tag.block.any.html",
+                    "meta.tag.inline.any.html",
+                    "meta.tag.structure.input.void.html",
+                    "meta.type.annotation",
+                    "meta.embedded.block.github-actions-expression",
+                    "storage.type.function.arrow",
+                    "meta.objectliteral.ts",
+                    "punctuation",
+                    "punctuation.definition.string.begin.html.vue",
+                    "punctuation.definition.string.end.html.vue",
+                  ],
+                  "settings": {
+                    "foreground": "#666666",
+                  },
+                },
+                {
+                  "scope": [
+                    "punctuation.definition.string",
+                  ],
+                  "settings": {
+                    "foreground": "#c98a7d77",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 18,
+    },
+    {
+      "color": "#666666",
+      "content": ")",
+      "explanation": [
+        {
+          "content": ")",
+          "scopes": [
+            {
+              "scopeName": "source.js",
+              "themeMatches": [],
+            },
+            {
+              "scopeName": "meta.brace.round.js",
+              "themeMatches": [
+                {
+                  "scope": [
+                    "delimiter.bracket",
+                    "delimiter",
+                    "invalid.illegal.character-not-allowed-here.html",
+                    "keyword.operator.rest",
+                    "keyword.operator.spread",
+                    "keyword.operator.type.annotation",
+                    "keyword.operator.relational",
+                    "keyword.operator.assignment",
+                    "keyword.operator.type",
+                    "meta.brace",
+                    "meta.tag.block.any.html",
+                    "meta.tag.inline.any.html",
+                    "meta.tag.structure.input.void.html",
+                    "meta.type.annotation",
+                    "meta.embedded.block.github-actions-expression",
+                    "storage.type.function.arrow",
+                    "meta.objectliteral.ts",
+                    "punctuation",
+                    "punctuation.definition.string.begin.html.vue",
+                    "punctuation.definition.string.end.html.vue",
+                  ],
+                  "settings": {
+                    "foreground": "#666666",
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "fontStyle": 0,
+      "offset": 19,
+    },
+  ],
+]
+`;
