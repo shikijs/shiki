@@ -182,6 +182,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/common-lisp')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'coq',
+    'name': 'Coq',
+    'import': (() => import('./langs/coq')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'cpp',
     'name': 'C++',
     'aliases': [
@@ -258,6 +263,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'dockerfile'
     ],
     'import': (() => import('./langs/docker')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'dotenv',
+    'name': 'dotEnv',
+    'import': (() => import('./langs/dotenv')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'dream-maker',
@@ -815,6 +825,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'proto',
     'name': 'Protocol Buffer 3',
+    'aliases': [
+      'protobuf'
+    ],
     'import': (() => import('./langs/proto')) as DynamicImportLanguageRegistration
   },
   {
@@ -1305,6 +1318,7 @@ export type BundledLanguage =
   | 'coffeescript'
   | 'common-lisp'
   | 'console'
+  | 'coq'
   | 'cpp'
   | 'cql'
   | 'crystal'
@@ -1321,6 +1335,7 @@ export type BundledLanguage =
   | 'diff'
   | 'docker'
   | 'dockerfile'
+  | 'dotenv'
   | 'dream-maker'
   | 'edge'
   | 'elisp'
@@ -1454,6 +1469,7 @@ export type BundledLanguage =
   | 'prolog'
   | 'properties'
   | 'proto'
+  | 'protobuf'
   | 'ps'
   | 'ps1'
   | 'pug'

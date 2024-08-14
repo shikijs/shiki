@@ -63,6 +63,18 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/dracula-soft')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "everforest-dark",
+    "displayName": "Everforest Dark",
+    "type": "dark",
+    "import": (() => import('./themes/everforest-dark')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "everforest-light",
+    "displayName": "Everforest Light",
+    "type": "light",
+    "import": (() => import('./themes/everforest-light')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "github-dark",
     "displayName": "GitHub Dark",
     "type": "dark",
@@ -81,6 +93,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/github-dark-dimmed')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "github-dark-high-contrast",
+    "displayName": "GitHub Dark High Contrast",
+    "type": "dark",
+    "import": (() => import('./themes/github-dark-high-contrast')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "github-light",
     "displayName": "GitHub Light",
     "type": "light",
@@ -91,6 +109,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "displayName": "GitHub Light Default",
     "type": "light",
     "import": (() => import('./themes/github-light-default')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "github-light-high-contrast",
+    "displayName": "GitHub Light High Contrast",
+    "type": "light",
+    "import": (() => import('./themes/github-light-high-contrast')) as unknown as DynamicImportThemeRegistration
   },
   {
     "id": "houston",
@@ -291,11 +315,15 @@ export type BundledTheme =
   | 'dark-plus'
   | 'dracula'
   | 'dracula-soft'
+  | 'everforest-dark'
+  | 'everforest-light'
   | 'github-dark'
   | 'github-dark-default'
   | 'github-dark-dimmed'
+  | 'github-dark-high-contrast'
   | 'github-light'
   | 'github-light-default'
+  | 'github-light-high-contrast'
   | 'houston'
   | 'laserwave'
   | 'light-plus'
