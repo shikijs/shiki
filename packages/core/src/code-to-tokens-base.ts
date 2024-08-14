@@ -125,28 +125,6 @@ function _tokenizeWithTheme(
   let actual: ThemedToken[] = []
   const final: ThemedToken[][] = []
 
-  const themeSettingsSelectors: ThemeSettingsSelectors[] = []
-  if (options.includeExplanation) {
-    for (const setting of theme.settings) {
-      let selectors: string[]
-      switch (typeof setting.scope) {
-        case 'string':
-          selectors = setting.scope.split(/,/).map(scope => scope.trim())
-          break
-        case 'object':
-          selectors = setting.scope
-          break
-        default:
-          continue
-      }
-
-      themeSettingsSelectors.push({
-        settings: setting,
-        selectors: selectors.map(selector => selector.split(/ /)),
-      })
-    }
-  }
-
   for (let i = 0, len = lines.length; i < len; i++) {
     const [line, lineOffset] = lines[i]
     if (line === '') {
@@ -201,6 +179,29 @@ function _tokenizeWithTheme(
       }
 
       if (options.includeExplanation) {
+        const themeSettingsSelectors: ThemeSettingsSelectors[] = []
+
+        if (options.includeExplanation !== 'scopeName') {
+          for (const setting of theme.settings) {
+            let selectors: string[]
+            switch (typeof setting.scope) {
+              case 'string':
+                selectors = setting.scope.split(/,/).map(scope => scope.trim())
+                break
+              case 'object':
+                selectors = setting.scope
+                break
+              default:
+                continue
+            }
+
+            themeSettingsSelectors.push({
+              settings: setting,
+              selectors: selectors.map(selector => selector.split(/ /)),
+            })
+          }
+        }
+
         token.explanation = []
         let offset = 0
         while (startIndex + offset < nextStartIndex) {
@@ -213,11 +214,14 @@ function _tokenizeWithTheme(
           offset += tokenWithScopesText.length
           token.explanation.push({
             content: tokenWithScopesText,
-            scopes: explainThemeScopes(
-              themeSettingsSelectors,
-              tokenWithScopes.scopes,
-              options.includeExplanation,
-            ),
+            scopes: options.includeExplanation === 'scopeName'
+              ? explainThemeScopesNameOnly(
+                tokenWithScopes.scopes,
+              )
+              : explainThemeScopesFull(
+                themeSettingsSelectors,
+                tokenWithScopes.scopes,
+              ),
           })
 
           tokensWithScopesIndex! += 1
@@ -237,20 +241,22 @@ function _tokenizeWithTheme(
   }
 }
 
-function explainThemeScopes(
+function explainThemeScopesNameOnly(
+  scopes: string[],
+): ThemedTokenScopeExplanation[] {
+  return scopes.map(scope => ({ scopeName: scope }))
+}
+
+function explainThemeScopesFull(
   themeSelectors: ThemeSettingsSelectors[],
   scopes: string[],
-  includeExplanation: TokenizeWithThemeOptions['includeExplanation'],
 ): ThemedTokenScopeExplanation[] {
   const result: ThemedTokenScopeExplanation[] = []
   for (let i = 0, len = scopes.length; i < len; i++) {
-    const parentScopes = scopes.slice(0, i)
     const scope = scopes[i]
     result[i] = {
       scopeName: scope,
-      themeMatches: includeExplanation === 'scopeName'
-        ? undefined
-        : explainThemeScope(themeSelectors, scope, parentScopes),
+      themeMatches: explainThemeScope(themeSelectors, scope, scopes.slice(0, i)),
     }
   }
   return result
