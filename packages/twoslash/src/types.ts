@@ -49,6 +49,11 @@ export interface TransformerTwoslashOptions {
    */
   renderer?: TwoslashRenderer
   /**
+   * A map to store code for `@include` directive
+   * Provide your own instance if you want to clear the map between each transformation
+   */
+  includesMap?: Map<string, string>
+  /**
    * Strictly throw when there is an error
    * @default true
    */

@@ -9,6 +9,7 @@ import type { Element, ElementContent, Text } from 'hast'
 import { splitTokens } from '@shikijs/core'
 import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
 import { ShikiTwoslashError } from './error'
+import { TwoslashIncludesManager, parseIncludeMeta } from './includes'
 
 export * from './types'
 export * from './renderer-rich'
@@ -39,6 +40,7 @@ export function createTransformerFactory(
       explicitTrigger = false,
       renderer = defaultRenderer,
       throws = true,
+      includesMap = new Map(),
     } = options
 
     const onTwoslashError = options.onTwoslashError || (
@@ -66,6 +68,9 @@ export function createTransformerFactory(
     const map = new WeakMap<ShikiTransformerContextMeta, TwoslashShikiReturn>()
 
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || trigger.test(options.meta?.__raw || '')))
+
+    const includes = new TwoslashIncludesManager(includesMap)
+
     return {
       preprocess(code) {
         let lang = this.options.lang
@@ -74,7 +79,14 @@ export function createTransformerFactory(
 
         if (filter(lang, code, this.options)) {
           try {
-            const twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, twoslashOptions)
+            const include = parseIncludeMeta(this.options.meta?.__raw)
+
+            if (include)
+              includes.add(include, code)
+
+            const codeWithIncludes = includes.applyInclude(code)
+
+            const twoslash = (twoslasher as TwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions)
             map.set(this.meta, twoslash)
             this.meta.twoslash = twoslash
             this.options.lang = twoslash.meta?.extension || lang
