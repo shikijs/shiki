@@ -80,10 +80,10 @@ hello.
 //    ^|
 `.trim()
 
-  /**
-   * Replacing @include directives only renders nicely rendererRich?
-   */
   const transformer = transformerTwoslash({
+    /**
+     * A rich-renderer is needed to see the autocomplete popup.
+     */
     renderer: rendererRich(),
   })
 
