@@ -79,12 +79,12 @@ export function createTransformerFactory(
 
         if (filter(lang, code, this.options)) {
           try {
+            const codeWithIncludes = includes.applyInclude(code)
+
             const include = parseIncludeMeta(this.options.meta?.__raw)
 
             if (include)
-              includes.add(include, code)
-
-            const codeWithIncludes = includes.applyInclude(code)
+              includes.add(include, codeWithIncludes)
 
             const twoslash = (twoslasher as TwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions)
             map.set(this.meta, twoslash)
