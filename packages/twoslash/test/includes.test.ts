@@ -115,3 +115,63 @@ hello.
     './out/includes/replaced_directives.html',
   )
 })
+
+it('handles nested include statements', async () => {
+  const a = `
+export const a = 5
+`
+
+  const b = `
+// @include: a
+export const b = 10
+`
+
+  /**
+   * The final code-block should have both `a` and `b` defined.
+   */
+  const c = `
+// @include: b
+export const c = a + b
+`
+
+  const transformer = transformerTwoslash()
+
+  const htmlA = await codeToHtml(a, {
+    lang: 'ts',
+    themes: {
+      dark: 'vitesse-dark',
+      light: 'vitesse-light',
+    },
+    transformers: [transformer],
+    meta: {
+      __raw: 'include a',
+    },
+  })
+
+  expect(styleTag + htmlA).toMatchFileSnapshot('./out/includes/nested_includes-a.html')
+
+  const htmlB = await codeToHtml(b, {
+    lang: 'ts',
+    themes: {
+      dark: 'vitesse-dark',
+      light: 'vitesse-light',
+    },
+    transformers: [transformer],
+    meta: {
+      __raw: 'include b',
+    },
+  })
+
+  expect(styleTag + htmlB).toMatchFileSnapshot('./out/includes/nested_includes-b.html')
+
+  const htmlC = await codeToHtml(c, {
+    lang: 'ts',
+    themes: {
+      dark: 'vitesse-dark',
+      light: 'vitesse-light',
+    },
+    transformers: [transformer],
+  })
+
+  expect(styleTag + htmlC).toMatchFileSnapshot('./out/includes/nested_includes-c.html')
+})
