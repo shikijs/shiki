@@ -1,4 +1,5 @@
 import { expect, it } from 'vitest'
+import type { CodeToHastOptions } from 'shiki'
 import { codeToHtml } from 'shiki'
 import { TwoslashIncludesManager } from '../src/includes'
 import { rendererRich, transformerTwoslash } from '../src'
@@ -87,7 +88,7 @@ hello.
     renderer: rendererRich(),
   })
 
-  const htmlMain = await codeToHtml(main, {
+  const options = {
     lang: 'ts',
     themes: {
       dark: 'vitesse-dark',
@@ -95,6 +96,10 @@ hello.
     },
     defaultColor: false,
     transformers: [transformer],
+  } satisfies CodeToHastOptions
+
+  const htmlMain = await codeToHtml(main, {
+    ...options,
     meta: {
       __raw: 'include main',
     },
@@ -102,14 +107,7 @@ hello.
 
   expect(styleTag + htmlMain).toMatchFileSnapshot('./out/includes/main.html')
 
-  const html = await codeToHtml(code, {
-    lang: 'ts',
-    themes: {
-      dark: 'vitesse-dark',
-      light: 'vitesse-light',
-    },
-    transformers: [transformer],
-  })
+  const html = await codeToHtml(code, { ...options })
 
   expect(styleTag + html).toMatchFileSnapshot(
     './out/includes/replaced_directives.html',
@@ -136,13 +134,17 @@ export const c = a + b
 
   const transformer = transformerTwoslash()
 
-  const htmlA = await codeToHtml(a, {
+  const options = {
     lang: 'ts',
     themes: {
       dark: 'vitesse-dark',
       light: 'vitesse-light',
     },
     transformers: [transformer],
+  } satisfies CodeToHastOptions
+
+  const htmlA = await codeToHtml(a, {
+    ...options,
     meta: {
       __raw: 'include a',
     },
@@ -151,12 +153,7 @@ export const c = a + b
   expect(styleTag + htmlA).toMatchFileSnapshot('./out/includes/nested_includes-a.html')
 
   const htmlB = await codeToHtml(b, {
-    lang: 'ts',
-    themes: {
-      dark: 'vitesse-dark',
-      light: 'vitesse-light',
-    },
-    transformers: [transformer],
+    ...options,
     meta: {
       __raw: 'include b',
     },
@@ -164,14 +161,7 @@ export const c = a + b
 
   expect(styleTag + htmlB).toMatchFileSnapshot('./out/includes/nested_includes-b.html')
 
-  const htmlC = await codeToHtml(c, {
-    lang: 'ts',
-    themes: {
-      dark: 'vitesse-dark',
-      light: 'vitesse-light',
-    },
-    transformers: [transformer],
-  })
+  const htmlC = await codeToHtml(c, { ...options })
 
   expect(styleTag + htmlC).toMatchFileSnapshot('./out/includes/nested_includes-c.html')
 })
