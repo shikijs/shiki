@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { codeToHtml } from 'shiki'
+import { type CodeToHastOptions, codeToHtml } from 'shiki'
 import { TwoslashIncludesManager } from '../src/includes'
 import { rendererRich, transformerTwoslash } from '../src'
 
@@ -80,14 +80,14 @@ hello.
 //    ^|
 `.trim()
 
-  /**
-   * Replacing @include directives only renders nicely rendererRich?
-   */
   const transformer = transformerTwoslash({
+    /**
+     * A rich-renderer is needed to see the autocomplete popup.
+     */
     renderer: rendererRich(),
   })
 
-  const htmlMain = await codeToHtml(main, {
+  const options = {
     lang: 'ts',
     themes: {
       dark: 'vitesse-dark',
@@ -95,6 +95,10 @@ hello.
     },
     defaultColor: false,
     transformers: [transformer],
+  } satisfies CodeToHastOptions
+
+  const htmlMain = await codeToHtml(main, {
+    ...options,
     meta: {
       __raw: 'include main',
     },
@@ -102,16 +106,61 @@ hello.
 
   expect(styleTag + htmlMain).toMatchFileSnapshot('./out/includes/main.html')
 
-  const html = await codeToHtml(code, {
+  const html = await codeToHtml(code, { ...options })
+
+  expect(styleTag + html).toMatchFileSnapshot(
+    './out/includes/replaced_directives.html',
+  )
+})
+
+it('handles nested include statements', async () => {
+  const a = `
+export const a = 5
+`
+
+  const b = `
+// @include: a
+export const b = 10
+`
+
+  /**
+   * The final code-block should have both `a` and `b` defined.
+   */
+  const c = `
+// @include: b
+export const c = a + b
+`
+
+  const transformer = transformerTwoslash()
+
+  const options = {
     lang: 'ts',
     themes: {
       dark: 'vitesse-dark',
       light: 'vitesse-light',
     },
     transformers: [transformer],
+  } satisfies CodeToHastOptions
+
+  const htmlA = await codeToHtml(a, {
+    ...options,
+    meta: {
+      __raw: 'include a',
+    },
   })
 
-  expect(styleTag + html).toMatchFileSnapshot(
-    './out/includes/replaced_directives.html',
-  )
+  expect(styleTag + htmlA).toMatchFileSnapshot('./out/includes/nested_includes-a.html')
+
+  const htmlB = await codeToHtml(b, {
+    ...options,
+    meta: {
+      __raw: 'include b',
+    },
+  })
+
+  expect(styleTag + htmlB).toMatchFileSnapshot('./out/includes/nested_includes-b.html')
+
+  const htmlC = await codeToHtml(c, { ...options })
+
+  expect(styleTag + htmlC).toMatchFileSnapshot('./out/includes/nested_includes-c.html')
 })
