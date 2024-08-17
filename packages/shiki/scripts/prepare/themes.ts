@@ -35,7 +35,7 @@ export default theme
     }))
   await fs.writeFile(
     'src/assets/themes.ts',
-`${COMMENT_HEAD}
+    `${COMMENT_HEAD}
 import type { DynamicImportThemeRegistration, BundledThemeInfo } from '@shikijs/core'
 
 export const bundledThemesInfo: BundledThemeInfo[] = ${JSON.stringify(themes, null, 2).replace(/"__|__"/g, '')}
@@ -45,6 +45,6 @@ ${themes.map(i => `  | '${i.id}'`).join('\n')}
 
 export const bundledThemes = Object.fromEntries(bundledThemesInfo.map(i => [i.id, i.import])) as Record<BundledTheme, DynamicImportThemeRegistration>
 `,
-'utf-8',
+    'utf-8',
   )
 }
