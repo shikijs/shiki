@@ -62,7 +62,7 @@ const INCLUDE_META_REGEX = /include\s+([\w-]+)\b.*/
 
 /**
  * @param meta The raw meta string of a code block, e.g. 'twoslash include main-hello-world meta=miscellaneous'.
- * @returns The name of the reusable code block, e.g. "main-hello-world".
+ * @returns The name of the reusable code block, e.g. "main-hello-world", if it exists.
  */
 export function parseIncludeMeta(meta?: string): string | null {
   if (!meta)
