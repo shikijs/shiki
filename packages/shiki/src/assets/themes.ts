@@ -93,6 +93,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/github-dark-dimmed')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "github-dark-high-contrast",
+    "displayName": "GitHub Dark High Contrast",
+    "type": "dark",
+    "import": (() => import('./themes/github-dark-high-contrast')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "github-light",
     "displayName": "GitHub Light",
     "type": "light",
@@ -103,6 +109,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "displayName": "GitHub Light Default",
     "type": "light",
     "import": (() => import('./themes/github-light-default')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "github-light-high-contrast",
+    "displayName": "GitHub Light High Contrast",
+    "type": "light",
+    "import": (() => import('./themes/github-light-high-contrast')) as unknown as DynamicImportThemeRegistration
   },
   {
     "id": "houston",
@@ -308,8 +320,10 @@ export type BundledTheme =
   | 'github-dark'
   | 'github-dark-default'
   | 'github-dark-dimmed'
+  | 'github-dark-high-contrast'
   | 'github-light'
   | 'github-light-default'
+  | 'github-light-high-contrast'
   | 'houston'
   | 'laserwave'
   | 'light-plus'

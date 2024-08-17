@@ -56,9 +56,9 @@ const lang = Object.freeze(${JSON.stringify(json)})
 
 export default [
 ${[
-  ...deps.map(i => `  ...${i.replace(/\W/g, '_')}`),
-  '  lang',
-].join(',\n') || ''}
+    ...deps.map(i => `  ...${i.replace(/\W/g, '_')}`),
+    '  lang',
+  ].join(',\n') || ''}
 ]
 `.replace(/\n{2,}/g, '\n\n'),
       'utf-8',
@@ -129,8 +129,8 @@ export default langs
     const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `  | '${i}'`).join('\n')
 
     await fs.writeFile(
-    `src/assets/${fileName}.ts`,
-  `${COMMENT_HEAD}
+      `src/assets/${fileName}.ts`,
+      `${COMMENT_HEAD}
 import type { DynamicImportLanguageRegistration, BundledLanguageInfo } from '@shikijs/core'
 
 export const bundledLanguagesInfo: BundledLanguageInfo[] = ${JSON.stringify(info, null, 2).replace(/"__|__"/g, '').replace(/"/g, '\'')}
@@ -147,7 +147,7 @@ export const bundledLanguages = {
   ...bundledLanguagesAlias,
 } as Record<BundledLanguage, DynamicImportLanguageRegistration>
 `,
-  'utf-8',
+      'utf-8',
     )
   }
 

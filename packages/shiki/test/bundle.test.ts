@@ -7,7 +7,7 @@ it('bundle-full', async () => {
   }))
 
   expect(highlighter.getLoadedLanguages().length)
-    .toMatchInlineSnapshot(`307`)
+    .toMatchInlineSnapshot(`309`)
 })
 
 it('bundle-web', async () => {
