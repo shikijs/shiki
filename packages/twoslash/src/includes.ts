@@ -26,8 +26,7 @@ export class TwoslashIncludesManager {
     // Basically run a regex over the code replacing any // @include: thing with
     // 'thing' from the map
 
-    // const toReplace: [index:number, length: number, str: string][] = []
-    const toReplace: [number, number, string][] = []
+    const toReplace: [index: number, length: number, replacementCode: string][] = []
 
     for (const match of code.matchAll(reMarker)) {
       const key = match[1]
@@ -43,26 +42,27 @@ export class TwoslashIncludesManager {
     }
 
     let newCode = code.toString()
+
     // Go backwards through the found changes so that we can retain index position
     toReplace
       .reverse()
-      .forEach((r) => {
-        newCode = newCode.slice(0, r[0]) + r[2] + newCode.slice(r[0] + r[1])
+      .forEach(([index, length, replacementCode]) => {
+        newCode = newCode.slice(0, index) + replacementCode + newCode.slice(index + length)
       })
+
     return newCode
   }
 }
 
 /**
- * An "include [name]" segment in a raw meta string is a sequence of words,
- * possibly connected by dashes, following "include " and ending at a word boundary.
+ * An "include [name]" segment in a raw meta string has a "name" that is a sequence of word
+ * characters, possibly connected by dashes, that ends at a word boundary.
  */
 const INCLUDE_META_REGEX = /include\s+([\w-]+)\b.*/
 
 /**
- * Given a raw meta string for code block like 'twoslash include main-hello-world meta=miscellaneous',
- * capture the name of the reusable code block as "main-hello-world", and ignore anything
- * before and after this segment.
+ * @param meta The raw meta string of a code block, e.g. 'twoslash include main-hello-world meta=miscellaneous'.
+ * @returns The name of the reusable code block, e.g. "main-hello-world".
  */
 export function parseIncludeMeta(meta?: string): string | null {
   if (!meta)
