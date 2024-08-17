@@ -40,6 +40,7 @@ export function createTransformerFactory(
       explicitTrigger = false,
       renderer = defaultRenderer,
       throws = true,
+      includesMap = new Map(),
     } = options
 
     const onTwoslashError = options.onTwoslashError || (
@@ -68,12 +69,7 @@ export function createTransformerFactory(
 
     const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || trigger.test(options.meta?.__raw || '')))
 
-    /**
-     * A set of includes which can be pulled via a set ID.
-     *
-     * @TODO: where/when to initialize includes?
-     */
-    const includes = new TwoslashIncludesManager()
+    const includes = new TwoslashIncludesManager(includesMap)
 
     return {
       preprocess(code) {

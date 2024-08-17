@@ -31,22 +31,22 @@ const c = 3
 `
 
 it('creates a set of examples', () => {
-  const map = new TwoslashIncludesManager()
-  map.add('main', multiExample)
-  expect(map.size === 3)
+  const manager = new TwoslashIncludesManager()
+  manager.add('main', multiExample)
+  expect(manager.map.size === 3)
 
-  expect(map.get('main')).toContain('const c')
-  expect(map.get('main-1')).toContain('const a = 1')
-  expect(map.get('main-2')).toContain('const b = 2')
+  expect(manager.map.get('main')).toContain('const c')
+  expect(manager.map.get('main-1')).toContain('const a = 1')
+  expect(manager.map.get('main-2')).toContain('const b = 2')
 })
 
 it('replaces the code', () => {
-  const map = new TwoslashIncludesManager()
-  map.add('main', multiExample)
-  expect(map.size === 3)
+  const manager = new TwoslashIncludesManager()
+  manager.add('main', multiExample)
+  expect(manager.map.size === 3)
 
   const sample = `// @include: main`
-  const replaced = map.applyInclude(sample)
+  const replaced = manager.applyInclude(sample)
   expect(replaced).toMatchInlineSnapshot(`
     "
     const a = 1
@@ -57,10 +57,10 @@ it('replaces the code', () => {
 })
 
 it('throws an error if key not found', () => {
-  const map = new TwoslashIncludesManager()
+  const manager = new TwoslashIncludesManager()
 
   const sample = `// @include: main`
-  expect(() => map.applyInclude(sample)).toThrow()
+  expect(() => manager.applyInclude(sample)).toThrow()
 })
 
 it('replaces @include directives with previously transformed code blocks', async () => {

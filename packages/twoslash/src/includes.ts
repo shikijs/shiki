@@ -1,4 +1,8 @@
-export class TwoslashIncludesManager extends Map<string, string> {
+export class TwoslashIncludesManager {
+  constructor(
+    public map: Map<string, string> = new Map(),
+  ) {}
+
   add(name: string, code: string) {
     const lines: string[] = []
 
@@ -7,13 +11,13 @@ export class TwoslashIncludesManager extends Map<string, string> {
 
       if (trimmed.startsWith('// - ')) {
         const key = trimmed.split('// - ')[1].split(' ')[0]
-        this.set(`${name}-${key}`, lines.join('\n'))
+        this.map.set(`${name}-${key}`, lines.join('\n'))
       }
       else {
         lines.push(l)
       }
     })
-    this.set(name, lines.join('\n'))
+    this.map.set(name, lines.join('\n'))
   }
 
   applyInclude(code: string) {
@@ -27,10 +31,10 @@ export class TwoslashIncludesManager extends Map<string, string> {
 
     for (const match of code.matchAll(reMarker)) {
       const key = match[1]
-      const replaceWith = this.get(key)
+      const replaceWith = this.map.get(key)
 
       if (!replaceWith) {
-        const msg = `Could not find an include with the key: '${key}'.\nThere is: ${Array.from(this.keys())}.`
+        const msg = `Could not find an include with the key: '${key}'.\nThere is: ${Array.from(this.map.keys())}.`
         throw new Error(msg)
       }
       else {
@@ -65,6 +69,5 @@ export function parseIncludeMeta(meta?: string): string | null {
     return null
 
   const match = meta.match(INCLUDE_META_REGEX)
-
   return match?.[1] ?? null
 }
