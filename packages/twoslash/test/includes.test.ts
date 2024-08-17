@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 import { codeToHtml } from 'shiki'
-import { addIncludes, replaceIncludesInCode } from '../src/includes'
+import { TwoslashIncludesManager } from '../src/includes'
 import { rendererRich, transformerTwoslash } from '../src'
 
 const styleTag = `
@@ -31,8 +31,8 @@ const c = 3
 `
 
 it('creates a set of examples', () => {
-  const map = new Map()
-  addIncludes(map, 'main', multiExample)
+  const map = new TwoslashIncludesManager()
+  map.add('main', multiExample)
   expect(map.size === 3)
 
   expect(map.get('main')).toContain('const c')
@@ -41,12 +41,12 @@ it('creates a set of examples', () => {
 })
 
 it('replaces the code', () => {
-  const map = new Map()
-  addIncludes(map, 'main', multiExample)
+  const map = new TwoslashIncludesManager()
+  map.add('main', multiExample)
   expect(map.size === 3)
 
   const sample = `// @include: main`
-  const replaced = replaceIncludesInCode(map, sample)
+  const replaced = map.applyInclude(sample)
   expect(replaced).toMatchInlineSnapshot(`
     "
     const a = 1
@@ -57,17 +57,10 @@ it('replaces the code', () => {
 })
 
 it('throws an error if key not found', () => {
-  const map = new Map()
+  const map = new TwoslashIncludesManager()
 
   const sample = `// @include: main`
-  expect(() => replaceIncludesInCode(map, sample)).toThrow()
-})
-
-it('does not throw an error if key not found but shouldThrow is false', () => {
-  const map = new Map()
-
-  const sample = `// @include: main`
-  expect(() => replaceIncludesInCode(map, sample, false)).not.toThrow()
+  expect(() => map.applyInclude(sample)).toThrow()
 })
 
 it('replaces @include directives with previously transformed code blocks', async () => {

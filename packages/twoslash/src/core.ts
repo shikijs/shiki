@@ -9,7 +9,7 @@ import type { Element, ElementContent, Text } from 'hast'
 import { splitTokens } from '@shikijs/core'
 import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
 import { ShikiTwoslashError } from './error'
-import { addIncludes, parseIncludeMeta, replaceIncludesInCode } from './includes'
+import { TwoslashIncludesManager, parseIncludeMeta } from './includes'
 
 export * from './types'
 export * from './renderer-rich'
@@ -73,7 +73,7 @@ export function createTransformerFactory(
      *
      * @TODO: where/when to initialize includes?
      */
-    const includes = new Map<string, string>()
+    const includes = new TwoslashIncludesManager()
 
     return {
       preprocess(code) {
@@ -86,9 +86,9 @@ export function createTransformerFactory(
             const include = parseIncludeMeta(this.options.meta?.__raw)
 
             if (include)
-              addIncludes(includes, include, code)
+              includes.add(include, code)
 
-            const codeWithIncludes = replaceIncludesInCode(includes, code)
+            const codeWithIncludes = includes.applyInclude(code)
 
             const twoslash = (twoslasher as TwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions)
             map.set(this.meta, twoslash)

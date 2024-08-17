@@ -1,66 +1,59 @@
-export function addIncludes(map: Map<string, string>, name: string, code: string) {
-  const lines: string[] = []
+export class TwoslashIncludesManager extends Map<string, string> {
+  add(name: string, code: string) {
+    const lines: string[] = []
 
-  code.split('\n').forEach((l, _i) => {
-    const trimmed = l.trim()
+    code.split('\n').forEach((l, _i) => {
+      const trimmed = l.trim()
 
-    if (trimmed.startsWith('// - ')) {
-      const key = trimmed.split('// - ')[1].split(' ')[0]
-      map.set(`${name}-${key}`, lines.join('\n'))
-    }
-    else {
-      lines.push(l)
-    }
-  })
-  map.set(name, lines.join('\n'))
-}
+      if (trimmed.startsWith('// - ')) {
+        const key = trimmed.split('// - ')[1].split(' ')[0]
+        this.set(`${name}-${key}`, lines.join('\n'))
+      }
+      else {
+        lines.push(l)
+      }
+    })
+    this.set(name, lines.join('\n'))
+  }
 
-export function replaceIncludesInCode(_map: Map<string, string>, code: string, shouldThrow = true) {
-  const includes = /\/\/ @include: (.*)$/gm
+  applyInclude(code: string) {
+    const reMarker = /\/\/ @include: (.*)$/gm
 
-  // Basically run a regex over the code replacing any // @include: thing with
-  // 'thing' from the map
+    // Basically run a regex over the code replacing any // @include: thing with
+    // 'thing' from the map
 
-  // const toReplace: [index:number, length: number, str: string][] = []
-  const toReplace: [number, number, string][] = []
+    // const toReplace: [index:number, length: number, str: string][] = []
+    const toReplace: [number, number, string][] = []
 
-  let match
-  // eslint-disable-next-line no-cond-assign
-  while ((match = includes.exec(code)) !== null) {
-    // This is necessary to avoid infinite loops with zero-width matches
-    if (match.index === includes.lastIndex) {
-      includes.lastIndex++
-    }
-    const key = match[1]
-    const replaceWith = _map.get(key)
+    for (const match of code.matchAll(reMarker)) {
+      const key = match[1]
+      const replaceWith = this.get(key)
 
-    if (!replaceWith) {
-      const msg = `Could not find an include with the key: '${key}'.\nThere is: ${Array.from(_map.keys())}.`
-      if (shouldThrow) {
+      if (!replaceWith) {
+        const msg = `Could not find an include with the key: '${key}'.\nThere is: ${Array.from(this.keys())}.`
         throw new Error(msg)
       }
       else {
-        console.error(msg)
+        toReplace.push([match.index, match[0].length, replaceWith])
       }
     }
-    else {
-      toReplace.push([match.index, match[0].length, replaceWith])
-    }
-  }
 
-  let newCode = code.toString()
-  // Go backwards through the found changes so that we can retain index position
-  toReplace.reverse().forEach((r) => {
-    newCode = newCode.substring(0, r[0]) + r[2] + newCode.substring(r[0] + r[1])
-  })
-  return newCode
+    let newCode = code.toString()
+    // Go backwards through the found changes so that we can retain index position
+    toReplace
+      .reverse()
+      .forEach((r) => {
+        newCode = newCode.slice(0, r[0]) + r[2] + newCode.slice(r[0] + r[1])
+      })
+    return newCode
+  }
 }
 
 /**
  * An "include [name]" segment in a raw meta string is a sequence of words,
  * possibly connected by dashes, following "include " and ending at a word boundary.
  */
-const INCLUDE_META_REGEX = /include\s+([\w-]+)\b.*?/
+const INCLUDE_META_REGEX = /include\s+([\w-]+)\b.*/
 
 /**
  * Given a raw meta string for code block like 'twoslash include main-hello-world meta=miscellaneous',
