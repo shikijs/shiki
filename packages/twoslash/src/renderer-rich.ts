@@ -240,6 +240,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         content,
         {
           ...this.options,
+          meta: {},
           transformers: [],
           lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
             ? 'tsx'
