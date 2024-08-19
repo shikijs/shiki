@@ -68,6 +68,9 @@ Number.parseInt(todo.title, 10);
       light: 'vitesse-light',
     },
     defaultColor: false,
+    meta: {
+      title: 'test',
+    },
     transformers: [
       transformerTwoslash({
         renderer: rendererRich(),
