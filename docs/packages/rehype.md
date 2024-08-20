@@ -97,3 +97,15 @@ console.log('3') // highlighted
 console.log('4') // highlighted
 ```
 ````
+
+### Inline Code
+
+You can also highlight inline codes with the `code{:language}` syntax.
+
+For example:
+
+```md
+`console.log("Hello World"){:js}`
+```
+
+Will give you a pretty looking JavaScript inline code.
