@@ -1,4 +1,11 @@
-import type { CodeOptionsMeta, CodeOptionsThemes, CodeToHastOptions, CodeToHastOptionsCommon, HighlighterGeneric, TransformerOptions } from 'shiki/core'
+import type {
+  CodeOptionsMeta,
+  CodeOptionsThemes,
+  CodeToHastOptions,
+  CodeToHastOptionsCommon,
+  HighlighterGeneric,
+  TransformerOptions,
+} from 'shiki/core'
 import type { Element, Root } from 'hast'
 import type { BuiltinTheme } from 'shiki'
 import type { Transformer } from 'unified'
@@ -45,7 +52,7 @@ export interface RehypeShikiExtraOptions {
   parseMetaString?: (
     metaString: string,
     node: Element,
-    tree: Root
+    tree: Root,
   ) => Record<string, any> | undefined | null
 
   /**
@@ -53,7 +60,7 @@ export interface RehypeShikiExtraOptions {
    *
    * @default undefined
    */
-  cache?: MapLike
+  cache?: MapLike<string, Root>
 
   /**
    * Chance to handle the error
@@ -62,14 +69,14 @@ export interface RehypeShikiExtraOptions {
   onError?: (error: unknown) => void
 }
 
-export type RehypeShikiCoreOptions =
-  & CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & RehypeShikiExtraOptions
-  & Omit<CodeToHastOptionsCommon, 'lang'>
+export type RehypeShikiCoreOptions = CodeOptionsThemes<BuiltinTheme> &
+  TransformerOptions &
+  CodeOptionsMeta &
+  RehypeShikiExtraOptions &
+  Omit<CodeToHastOptionsCommon, 'lang'>
 
 const languagePrefix = 'language-'
+const inlineCodeSuffix = /(.+)\{:([\w-]+)\}$/
 
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
@@ -87,83 +94,138 @@ function rehypeShikiFromHighlighter(
     ...rest
   } = options
 
-  return function (tree) {
-    visit(tree, 'element', (node, index, parent) => {
-      if (!parent || index == null || node.tagName !== 'pre')
-        return
+  /**
+   * Get the determined language of code block (with default language & fallbacks)
+   */
+  function getLanguage(lang = defaultLanguage): string | undefined {
+    if (lang && fallbackLanguage && !langs.includes(lang))
+      return fallbackLanguage
 
-      const head = node.children[0]
+    return lang
+  }
 
-      if (
-        !head
-        || head.type !== 'element'
-        || head.tagName !== 'code'
-        || !head.properties
-      ) {
-        return
-      }
+  function processCode(lang: string, metaString: string, meta: Record<string, unknown>, code: string): Root | undefined {
+    const cacheKey = `${lang}:${metaString}:${code}`
+    const cachedValue = cache?.get(cacheKey)
 
-      const classes = head.properties.className
-      const languageClass = Array.isArray(classes)
-        ? classes.find(
-          d => typeof d === 'string' && d.startsWith(languagePrefix),
-        )
-        : undefined
+    if (cachedValue) {
+      return cachedValue
+    }
 
-      let lang = typeof languageClass === 'string' ? languageClass.slice(languagePrefix.length) : defaultLanguage
+    const codeOptions: CodeToHastOptions = {
+      ...rest,
+      lang,
+      meta: {
+        ...rest.meta,
+        ...meta,
+        __raw: metaString,
+      },
+    }
 
-      if (!lang)
-        return
-
-      if (fallbackLanguage && !langs.includes(lang))
-        lang = fallbackLanguage
-
-      let code = toString(head)
-
-      if (stripEndNewline && code.endsWith('\n'))
-        code = code.slice(0, -1)
-
-      const cachedValue = cache?.get(code)
-
-      if (cachedValue) {
-        parent.children.splice(index, 1, ...cachedValue)
-        return
-      }
-
-      const metaString = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
-      const meta = parseMetaString?.(metaString, node, tree) || {}
-
-      const codeOptions: CodeToHastOptions = {
-        ...rest,
-        lang,
-        meta: {
-          ...rest.meta,
-          ...meta,
-          __raw: metaString,
-        },
-      }
-
-      if (addLanguageClass) {
-        codeOptions.transformers ||= []
-        codeOptions.transformers.push({
+    if (addLanguageClass) {
+      // always construct a new array, avoid adding the transformer repeatedly
+      codeOptions.transformers = [
+        ...codeOptions.transformers ?? [],
+        {
           name: 'rehype-shiki:code-language-class',
           code(node) {
             this.addClassToHast(node, `${languagePrefix}${lang}`)
             return node
           },
-        })
+        },
+      ]
+    }
+
+    if (stripEndNewline && code.endsWith('\n'))
+      code = code.slice(0, -1)
+
+    try {
+      const fragment = highlighter.codeToHast(code, codeOptions)
+      cache?.set(cacheKey, fragment)
+      return fragment
+    }
+    catch (error) {
+      if (onError)
+        onError(error)
+      else throw error
+    }
+  }
+
+  function processPre(tree: Root, node: Element): Root | undefined {
+    const head = node.children[0]
+
+    if (
+      !head
+      || head.type !== 'element'
+      || head.tagName !== 'code'
+      || !head.properties
+    ) {
+      return
+    }
+
+    const classes = head.properties.className
+    const languageClass = Array.isArray(classes)
+      ? classes.find(
+        d => typeof d === 'string' && d.startsWith(languagePrefix),
+      )
+      : undefined
+
+    const lang = getLanguage(typeof languageClass === 'string' ? languageClass.slice(languagePrefix.length) : undefined)
+
+    if (!lang)
+      return
+
+    const code = toString(head)
+    const metaString
+      = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
+    const meta = parseMetaString?.(metaString, node, tree) || {}
+
+    return processCode(lang, metaString, meta, code)
+  }
+
+  function processInlineCode(node: Element): Root | undefined {
+    const raw = toString(node)
+    const result = inlineCodeSuffix.exec(raw)
+    const lang = getLanguage(result?.[2])
+    if (!lang)
+      return
+
+    const code = result?.[1] ?? raw
+    const fragment = processCode(lang, '', {}, code)
+    if (!fragment)
+      return
+
+    const head = fragment.children[0]
+    if (head.type === 'element' && head.tagName === 'pre') {
+      head.tagName = 'span'
+    }
+
+    return fragment
+  }
+
+  return function (tree) {
+    visit(tree, 'element', (node, index, parent) => {
+      // needed for hast node replacement
+      if (!parent || index == null)
+        return
+
+      if (node.tagName === 'pre') {
+        const result = processPre(tree, node)
+
+        if (result) {
+          parent.children.splice(index, 1, ...result.children)
+        }
+
+        // don't look for the `code` node inside
+        return 'skip'
       }
 
-      try {
-        const fragment = highlighter.codeToHast(code, codeOptions)
-        cache?.set(code, fragment.children)
-        parent.children.splice(index, 1, ...fragment.children)
-      }
-      catch (error) {
-        if (onError)
-          onError(error)
-        else
-          throw error
+      if (node.tagName === 'code') {
+        const result = processInlineCode(node)
+
+        if (result) {
+          parent.children.splice(index, 1, ...result.children)
+        }
       }
     })
   }
