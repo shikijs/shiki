@@ -56,6 +56,13 @@ export interface RehypeShikiExtraOptions {
   ) => Record<string, any> | undefined | null
 
   /**
+   * Highlight inline code blocks
+   *
+   * @default false
+   */
+  inline?: boolean
+
+  /**
    * Custom map to cache transformed codeToHast result
    *
    * @default undefined
@@ -91,6 +98,7 @@ function rehypeShikiFromHighlighter(
     fallbackLanguage,
     onError,
     stripEndNewline = true,
+    inline = false,
     ...rest
   } = options
 
@@ -220,7 +228,7 @@ function rehypeShikiFromHighlighter(
         return 'skip'
       }
 
-      if (node.tagName === 'code') {
+      if (node.tagName === 'code' && inline) {
         const result = processInlineCode(node)
 
         if (result) {

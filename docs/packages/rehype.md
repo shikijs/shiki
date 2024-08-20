@@ -102,7 +102,26 @@ console.log('4') // highlighted
 
 You can also highlight inline codes with the `code{:language}` syntax.
 
-For example:
+Enable `inline` on the Rehype plugin:
+
+```ts twoslash
+// @noErrors: true
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import rehypeShiki from '@shikijs/rehype'
+
+const file = await unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use(rehypeShiki, {
+    inline: true,
+    // other options
+  })
+  .use(rehypeStringify)
+  .process(await fs.readFile('./input.md'))
+```
 
 ```md
 `console.log("Hello World"){:js}`
