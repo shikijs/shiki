@@ -60,7 +60,7 @@ export interface RehypeShikiExtraOptions {
    *
    * @default false
    */
-  inline?: boolean
+  inline?: false | 'tailing-curly-colon'
 
   /**
    * Custom map to cache transformed codeToHast result
@@ -76,11 +76,7 @@ export interface RehypeShikiExtraOptions {
   onError?: (error: unknown) => void
 }
 
-export type RehypeShikiCoreOptions = CodeOptionsThemes<BuiltinTheme> &
-  TransformerOptions &
-  CodeOptionsMeta &
-  RehypeShikiExtraOptions &
-  Omit<CodeToHastOptionsCommon, 'lang'>
+export type RehypeShikiCoreOptions = CodeOptionsThemes<BuiltinTheme> & TransformerOptions & CodeOptionsMeta & RehypeShikiExtraOptions & Omit<CodeToHastOptionsCommon, 'lang'>
 
 const languagePrefix = 'language-'
 const inlineCodeSuffix = /(.+)\{:([\w-]+)\}$/

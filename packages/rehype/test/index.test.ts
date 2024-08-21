@@ -70,7 +70,7 @@ it('shiki inline code', async () => {
     .use(remarkRehype)
     .use(rehypeShiki, {
       theme: 'vitesse-light',
-      inline: true,
+      inline: 'tailing-curly-colon',
     })
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/inline.md', import.meta.url)))

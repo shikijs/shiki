@@ -116,7 +116,7 @@ const file = await unified()
   .use(remarkParse)
   .use(remarkRehype)
   .use(rehypeShiki, {
-    inline: true,
+    inline: 'tailing-curly-colon',
     // other options
   })
   .use(rehypeStringify)
