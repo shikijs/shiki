@@ -207,6 +207,12 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/one-light')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "plastic",
+    "displayName": "Plastic",
+    "type": "dark",
+    "import": (() => import('./themes/plastic')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "poimandres",
     "displayName": "Poimandres",
     "type": "dark",
@@ -339,6 +345,7 @@ export type BundledTheme =
   | 'nord'
   | 'one-dark-pro'
   | 'one-light'
+  | 'plastic'
   | 'poimandres'
   | 'red'
   | 'rose-pine'
