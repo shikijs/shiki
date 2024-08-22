@@ -35,7 +35,7 @@ export function createCommentNotationTransformer(
         // comment should be at the end of line (last token)
         const last = (line.children.filter(i => i.type === 'element') as Element[]).at(-1)
 
-        if (!last)
+        if (!last || last.children.length === 0)
           return
         const text = last.children[0]
         if (text.type !== 'text')
