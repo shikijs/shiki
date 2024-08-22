@@ -4,6 +4,234 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@antfu/eslint-config':
+      specifier: ^2.27.0
+      version: 2.27.0
+    '@antfu/ni':
+      specifier: ^0.22.4
+      version: 0.22.4
+    '@antfu/utils':
+      specifier: ^0.7.10
+      version: 0.7.10
+    '@iconify-json/carbon':
+      specifier: ^1.1.37
+      version: 1.1.37
+    '@iconify-json/codicon':
+      specifier: ^1.1.51
+      version: 1.1.51
+    '@iconify-json/ph':
+      specifier: ^1.1.14
+      version: 1.1.14
+    '@iconify-json/svg-spinners':
+      specifier: ^1.1.3
+      version: 1.1.3
+    '@rollup/plugin-alias':
+      specifier: ^5.1.0
+      version: 5.1.0
+    '@rollup/plugin-commonjs':
+      specifier: ^26.0.1
+      version: 26.0.1
+    '@rollup/plugin-json':
+      specifier: ^6.1.0
+      version: 6.1.0
+    '@rollup/plugin-node-resolve':
+      specifier: ^15.2.3
+      version: 15.2.3
+    '@rollup/plugin-replace':
+      specifier: ^5.0.7
+      version: 5.0.7
+    '@rollup/plugin-terser':
+      specifier: ^0.4.4
+      version: 0.4.4
+    '@types/fs-extra':
+      specifier: ^11.0.4
+      version: 11.0.4
+    '@types/markdown-it':
+      specifier: ^14.1.2
+      version: 14.1.2
+    '@types/minimist':
+      specifier: ^1.2.5
+      version: 1.2.5
+    '@types/node':
+      specifier: ^22.5.0
+      version: 22.5.0
+    '@unocss/reset':
+      specifier: ^0.62.2
+      version: 0.62.2
+    '@vitest/coverage-v8':
+      specifier: ^2.0.5
+      version: 2.0.5
+    '@vueuse/core':
+      specifier: ^11.0.1
+      version: 11.0.1
+    ansi-sequence-parser:
+      specifier: ^1.1.1
+      version: 1.1.1
+    bumpp:
+      specifier: ^9.5.1
+      version: 9.5.1
+    chalk:
+      specifier: ^5.3.0
+      version: 5.3.0
+    eslint:
+      specifier: ^9.9.0
+      version: 9.9.0
+    eslint-plugin-format:
+      specifier: ^0.1.2
+      version: 0.1.2
+    esno:
+      specifier: ^4.7.0
+      version: 4.7.0
+    fast-glob:
+      specifier: ^3.3.2
+      version: 3.3.2
+    floating-vue:
+      specifier: ^5.2.2
+      version: 5.2.2
+    fs-extra:
+      specifier: ^11.2.0
+      version: 11.2.0
+    fuse.js:
+      specifier: ^7.0.0
+      version: 7.0.0
+    hast-util-from-html:
+      specifier: ^2.0.2
+      version: 2.0.2
+    hast-util-to-html:
+      specifier: ^9.0.1
+      version: 9.0.1
+    hast-util-to-string:
+      specifier: ^3.0.0
+      version: 3.0.0
+    jsonc-parser:
+      specifier: ^3.3.1
+      version: 3.3.1
+    lint-staged:
+      specifier: ^15.2.9
+      version: 15.2.9
+    markdown-it:
+      specifier: ^14.1.0
+      version: 14.1.0
+    mdast-util-from-markdown:
+      specifier: ^2.0.1
+      version: 2.0.1
+    mdast-util-gfm:
+      specifier: ^3.0.0
+      version: 3.0.0
+    mdast-util-to-hast:
+      specifier: ^13.2.0
+      version: 13.2.0
+    minimist:
+      specifier: ^1.2.8
+      version: 1.2.8
+    monaco-editor-core:
+      specifier: ^0.50.0
+      version: 0.50.0
+    ofetch:
+      specifier: ^1.3.4
+      version: 1.3.4
+    pinia:
+      specifier: ^2.2.2
+      version: 2.2.2
+    pnpm:
+      specifier: ^9.8.0
+      version: 9.8.0
+    prettier:
+      specifier: ^3.3.3
+      version: 3.3.3
+    rehype-raw:
+      specifier: ^7.0.0
+      version: 7.0.0
+    rehype-stringify:
+      specifier: ^10.0.0
+      version: 10.0.0
+    remark-parse:
+      specifier: ^11.0.0
+      version: 11.0.0
+    remark-rehype:
+      specifier: ^11.1.0
+      version: 11.1.0
+    rimraf:
+      specifier: ^6.0.1
+      version: 6.0.1
+    rollup:
+      specifier: ^4.21.0
+      version: 4.21.0
+    rollup-plugin-copy:
+      specifier: ^3.5.0
+      version: 3.5.0
+    rollup-plugin-dts:
+      specifier: ^6.1.1
+      version: 6.1.1
+    rollup-plugin-esbuild:
+      specifier: ^6.1.1
+      version: 6.1.1
+    rollup-plugin-typescript2:
+      specifier: ^0.36.0
+      version: 0.36.0
+    shiki-legacy:
+      specifier: npm:shiki@^0.14.7
+      version: 0.14.7
+    simple-git-hooks:
+      specifier: ^2.11.1
+      version: 2.11.1
+    taze:
+      specifier: ^0.16.6
+      version: 0.16.6
+    tm-grammars:
+      specifier: ^1.17.3
+      version: 1.17.3
+    tm-themes:
+      specifier: ^1.8.0
+      version: 1.8.0
+    twoslash:
+      specifier: ^0.2.9
+      version: 0.2.9
+    twoslash-vue:
+      specifier: ^0.2.9
+      version: 0.2.9
+    typescript:
+      specifier: ^5.5.4
+      version: 5.5.4
+    unbuild:
+      specifier: ^2.0.0
+      version: 2.0.0
+    unist-util-visit:
+      specifier: ^5.0.0
+      version: 5.0.0
+    unocss:
+      specifier: ^0.62.2
+      version: 0.62.2
+    unplugin-vue-components:
+      specifier: ^0.27.4
+      version: 0.27.4
+    vite:
+      specifier: ^5.4.2
+      version: 5.4.2
+    vite-tsconfig-paths:
+      specifier: ^5.0.1
+      version: 5.0.1
+    vitepress:
+      specifier: ^1.3.3
+      version: 1.3.3
+    vitepress-plugin-mermaid:
+      specifier: ^2.0.16
+      version: 2.0.16
+    vitest:
+      specifier: ^2.0.5
+      version: 2.0.5
+    vue:
+      specifier: ^3.4.38
+      version: 3.4.38
+    vue-tsc:
+      specifier: ^2.0.29
+      version: 2.0.29
+    wrangler:
+      specifier: ^3.72.1
+      version: 3.72.1
+
 overrides:
   '@shikijs/compat': workspace:*
   '@shikijs/core': workspace:*
@@ -24,31 +252,31 @@ importers:
   .:
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^2.27.0
+        specifier: 'catalog:'
         version: 2.27.0(@typescript-eslint/utils@8.2.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4))(@vue/compiler-sfc@3.4.38)(eslint-plugin-format@0.1.2(eslint@9.9.0(jiti@1.21.6)))(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)(vitest@2.0.5(@types/node@22.5.0)(terser@5.27.0))
       '@antfu/ni':
-        specifier: ^0.22.4
+        specifier: 'catalog:'
         version: 0.22.4
       '@antfu/utils':
-        specifier: ^0.7.10
+        specifier: 'catalog:'
         version: 0.7.10
       '@rollup/plugin-alias':
-        specifier: ^5.1.0
+        specifier: 'catalog:'
         version: 5.1.0(rollup@4.21.0)
       '@rollup/plugin-commonjs':
-        specifier: ^26.0.1
+        specifier: 'catalog:'
         version: 26.0.1(rollup@4.21.0)
       '@rollup/plugin-json':
-        specifier: ^6.1.0
+        specifier: 'catalog:'
         version: 6.1.0(rollup@4.21.0)
       '@rollup/plugin-node-resolve':
-        specifier: ^15.2.3
+        specifier: 'catalog:'
         version: 15.2.3(rollup@4.21.0)
       '@rollup/plugin-replace':
-        specifier: ^5.0.7
+        specifier: 'catalog:'
         version: 5.0.7(rollup@4.21.0)
       '@rollup/plugin-terser':
-        specifier: ^0.4.4
+        specifier: 'catalog:'
         version: 0.4.4(rollup@4.21.0)
       '@shikijs/markdown-it':
         specifier: workspace:*
@@ -66,128 +294,128 @@ importers:
         specifier: workspace:*
         version: link:packages/vitepress-twoslash
       '@types/fs-extra':
-        specifier: ^11.0.4
+        specifier: 'catalog:'
         version: 11.0.4
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
       '@types/node':
-        specifier: ^22.5.0
+        specifier: 'catalog:'
         version: 22.5.0
       '@vitest/coverage-v8':
-        specifier: ^2.0.5
+        specifier: 'catalog:'
         version: 2.0.5(vitest@2.0.5(@types/node@22.5.0)(terser@5.27.0))
       ansi-sequence-parser:
-        specifier: ^1.1.1
+        specifier: 'catalog:'
         version: 1.1.1
       bumpp:
-        specifier: ^9.5.1
+        specifier: 'catalog:'
         version: 9.5.1(magicast@0.3.4)
       eslint:
-        specifier: ^9.9.0
+        specifier: 'catalog:'
         version: 9.9.0(jiti@1.21.6)
       eslint-plugin-format:
-        specifier: ^0.1.2
+        specifier: 'catalog:'
         version: 0.1.2(eslint@9.9.0(jiti@1.21.6))
       esno:
-        specifier: ^4.7.0
+        specifier: 'catalog:'
         version: 4.7.0
       fast-glob:
-        specifier: ^3.3.2
+        specifier: 'catalog:'
         version: 3.3.2
       fs-extra:
-        specifier: ^11.2.0
+        specifier: 'catalog:'
         version: 11.2.0
       jsonc-parser:
-        specifier: ^3.3.1
+        specifier: 'catalog:'
         version: 3.3.1
       lint-staged:
-        specifier: ^15.2.9
+        specifier: 'catalog:'
         version: 15.2.9
       markdown-it:
-        specifier: ^14.1.0
+        specifier: 'catalog:'
         version: 14.1.0
       mdast-util-from-markdown:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       mdast-util-gfm:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       mdast-util-to-hast:
-        specifier: ^13.2.0
+        specifier: 'catalog:'
         version: 13.2.0
       ofetch:
-        specifier: ^1.3.4
+        specifier: 'catalog:'
         version: 1.3.4
       pnpm:
-        specifier: ^9.8.0
+        specifier: 'catalog:'
         version: 9.8.0
       prettier:
-        specifier: ^3.3.3
+        specifier: 'catalog:'
         version: 3.3.3
       rimraf:
-        specifier: ^6.0.1
+        specifier: 'catalog:'
         version: 6.0.1
       rollup:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       rollup-plugin-copy:
-        specifier: ^3.5.0
+        specifier: 'catalog:'
         version: 3.5.0
       rollup-plugin-dts:
-        specifier: ^6.1.1
+        specifier: 'catalog:'
         version: 6.1.1(rollup@4.21.0)(typescript@5.5.4)
       rollup-plugin-esbuild:
-        specifier: ^6.1.1
+        specifier: 'catalog:'
         version: 6.1.1(esbuild@0.17.19)(rollup@4.21.0)
       rollup-plugin-typescript2:
-        specifier: ^0.36.0
+        specifier: 'catalog:'
         version: 0.36.0(rollup@4.21.0)(typescript@5.5.4)
       shiki:
         specifier: workspace:*
         version: link:packages/shiki
       simple-git-hooks:
-        specifier: ^2.11.1
+        specifier: 'catalog:'
         version: 2.11.1
       taze:
-        specifier: ^0.16.6
+        specifier: 'catalog:'
         version: 0.16.6
       typescript:
-        specifier: ^5.5.4
+        specifier: 'catalog:'
         version: 5.5.4
       unbuild:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0(typescript@5.5.4)
       vite:
-        specifier: ^5.4.2
+        specifier: 'catalog:'
         version: 5.4.2(@types/node@22.5.0)(terser@5.27.0)
       vite-tsconfig-paths:
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.0.1(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.0)(terser@5.27.0))
       vitepress-plugin-mermaid:
-        specifier: ^2.0.16
+        specifier: 'catalog:'
         version: 2.0.16(mermaid@10.7.0)(vitepress@1.3.3(@algolia/client-search@4.22.1)(@types/node@22.5.0)(fuse.js@7.0.0)(postcss@8.4.41)(search-insights@2.13.0)(terser@5.27.0)(typescript@5.5.4))
       vitest:
-        specifier: ^2.0.5
+        specifier: 'catalog:'
         version: 2.0.5(@types/node@22.5.0)(terser@5.27.0)
       vue-tsc:
-        specifier: ^2.0.29
+        specifier: 'catalog:'
         version: 2.0.29(typescript@5.5.4)
       wrangler:
-        specifier: ^3.72.1
+        specifier: 'catalog:'
         version: 3.72.1
 
   docs:
     dependencies:
       '@iconify-json/ph':
-        specifier: ^1.1.14
+        specifier: 'catalog:'
         version: 1.1.14
       fuse.js:
-        specifier: ^7.0.0
+        specifier: 'catalog:'
         version: 7.0.0
     devDependencies:
       '@iconify-json/svg-spinners':
-        specifier: ^1.1.3
+        specifier: 'catalog:'
         version: 1.1.3
       '@shikijs/transformers':
         specifier: workspace:*
@@ -196,47 +424,47 @@ importers:
         specifier: workspace:*
         version: link:../packages/twoslash
       '@unocss/reset':
-        specifier: ^0.62.2
+        specifier: 'catalog:'
         version: 0.62.2
       '@vueuse/core':
-        specifier: ^11.0.1
+        specifier: 'catalog:'
         version: 11.0.1(vue@3.4.38(typescript@5.5.4))
       floating-vue:
-        specifier: ^5.2.2
+        specifier: 'catalog:'
         version: 5.2.2(vue@3.4.38(typescript@5.5.4))
       pinia:
-        specifier: ^2.2.2
+        specifier: 'catalog:'
         version: 2.2.2(typescript@5.5.4)(vue@3.4.38(typescript@5.5.4))
       shiki:
         specifier: workspace:*
         version: link:../packages/shiki
       unocss:
-        specifier: ^0.62.2
+        specifier: 'catalog:'
         version: 0.62.2(postcss@8.4.41)(rollup@4.21.0)(vite@5.4.2(@types/node@22.5.0)(terser@5.27.0))
       unplugin-vue-components:
-        specifier: ^0.27.4
+        specifier: 'catalog:'
         version: 0.27.4(@babel/parser@7.25.3)(rollup@4.21.0)(vue@3.4.38(typescript@5.5.4))
       vitepress:
-        specifier: ^1.3.3
+        specifier: 'catalog:'
         version: 1.3.3(@algolia/client-search@4.22.1)(@types/node@22.5.0)(fuse.js@7.0.0)(postcss@8.4.41)(search-insights@2.13.0)(terser@5.27.0)(typescript@5.5.4)
       vue:
-        specifier: ^3.4.38
+        specifier: 'catalog:'
         version: 3.4.38(typescript@5.5.4)
 
   packages/cli:
     dependencies:
       chalk:
-        specifier: ^5.3.0
+        specifier: 'catalog:'
         version: 5.3.0
       minimist:
-        specifier: ^1.2.8
+        specifier: 'catalog:'
         version: 1.2.8
       shiki:
         specifier: workspace:*
         version: link:../shiki
     devDependencies:
       '@types/minimist':
-        specifier: ^1.2.5
+        specifier: 'catalog:'
         version: 1.2.5
 
   packages/compat:
@@ -252,7 +480,7 @@ importers:
         version: link:../shiki
     devDependencies:
       shiki-legacy:
-        specifier: npm:shiki@^0.14.7
+        specifier: 'catalog:'
         version: shiki@0.14.7
 
   packages/core:
@@ -262,7 +490,7 @@ importers:
         version: 3.0.4
     devDependencies:
       hast-util-to-html:
-        specifier: ^9.0.1
+        specifier: 'catalog:'
         version: 9.0.1
       vscode-oniguruma:
         specifier: ^1.7.0
@@ -274,14 +502,14 @@ importers:
         specifier: workspace:*
         version: link:../transformers
       markdown-it:
-        specifier: ^14.1.0
+        specifier: 'catalog:'
         version: 14.1.0
       shiki:
         specifier: workspace:*
         version: link:../shiki
     devDependencies:
       '@types/markdown-it':
-        specifier: ^14.1.2
+        specifier: 'catalog:'
         version: 14.1.2
 
   packages/monaco:
@@ -291,16 +519,16 @@ importers:
         version: link:../core
     devDependencies:
       monaco-editor-core:
-        specifier: ^0.50.0
+        specifier: 'catalog:'
         version: 0.50.0
 
   packages/monaco/playground:
     devDependencies:
       typescript:
-        specifier: ^5.5.4
+        specifier: 'catalog:'
         version: 5.5.4
       vite:
-        specifier: ^5.4.2
+        specifier: 'catalog:'
         version: 5.4.2(@types/node@22.5.0)(terser@5.27.0)
 
   packages/rehype:
@@ -312,7 +540,7 @@ importers:
         specifier: ^3.0.4
         version: 3.0.4
       hast-util-to-string:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       shiki:
         specifier: workspace:*
@@ -321,20 +549,20 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5
       unist-util-visit:
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.0
     devDependencies:
       rehype-raw:
-        specifier: ^7.0.0
+        specifier: 'catalog:'
         version: 7.0.0
       rehype-stringify:
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.0.0
       remark-parse:
-        specifier: ^11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       remark-rehype:
-        specifier: ^11.1.0
+        specifier: 'catalog:'
         version: 11.1.0
 
   packages/shiki:
@@ -347,10 +575,10 @@ importers:
         version: 3.0.4
     devDependencies:
       tm-grammars:
-        specifier: ^1.17.3
+        specifier: 'catalog:'
         version: 1.17.3
       tm-themes:
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       vscode-oniguruma:
         specifier: ^1.7.0
@@ -368,23 +596,23 @@ importers:
         specifier: workspace:*
         version: link:../core
       twoslash:
-        specifier: ^0.2.9
+        specifier: 'catalog:'
         version: 0.2.9(typescript@5.5.4)
     devDependencies:
       '@iconify-json/carbon':
-        specifier: ^1.1.37
+        specifier: 'catalog:'
         version: 1.1.37
       '@iconify-json/codicon':
-        specifier: ^1.1.51
+        specifier: 'catalog:'
         version: 1.1.51
       '@shikijs/twoslash':
         specifier: workspace:*
         version: 'link:'
       hast-util-from-html:
-        specifier: ^2.0.2
+        specifier: 'catalog:'
         version: 2.0.2
       typescript:
-        specifier: ^5.5.4
+        specifier: 'catalog:'
         version: 5.5.4
 
   packages/vitepress-twoslash:
@@ -393,28 +621,28 @@ importers:
         specifier: workspace:*
         version: link:../twoslash
       floating-vue:
-        specifier: ^5.2.2
+        specifier: 'catalog:'
         version: 5.2.2(vue@3.4.38(typescript@5.5.4))
       mdast-util-from-markdown:
-        specifier: ^2.0.1
+        specifier: 'catalog:'
         version: 2.0.1
       mdast-util-gfm:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       mdast-util-to-hast:
-        specifier: ^13.2.0
+        specifier: 'catalog:'
         version: 13.2.0
       shiki:
         specifier: workspace:*
         version: link:../shiki
       twoslash:
-        specifier: ^0.2.9
+        specifier: 'catalog:'
         version: 0.2.9(typescript@5.5.4)
       twoslash-vue:
-        specifier: ^0.2.9
+        specifier: 'catalog:'
         version: 0.2.9(typescript@5.5.4)
       vue:
-        specifier: ^3.4.38
+        specifier: 'catalog:'
         version: 3.4.38(typescript@5.5.4)
 
 packages:
