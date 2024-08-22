@@ -13,6 +13,9 @@ export default defineBuildConfig({
         paths: {},
       },
     },
+    esbuild: {
+      minify: true,
+    },
   },
   externals: [
     'hast',

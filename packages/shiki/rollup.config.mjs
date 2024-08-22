@@ -9,6 +9,7 @@ import esbuild from 'rollup-plugin-esbuild'
 import json from '@rollup/plugin-json'
 import fs from 'fs-extra'
 import fg from 'fast-glob'
+import terser from '@rollup/plugin-terser'
 
 const entries = [
   'src/index.ts',
@@ -39,6 +40,7 @@ const plugins = [
     preferConst: true,
     compact: true,
   }),
+  terser(),
 ]
 
 export default defineConfig([

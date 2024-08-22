@@ -7,6 +7,7 @@ import dts from 'rollup-plugin-dts'
 import json from '@rollup/plugin-json'
 import fs from 'fs-extra'
 import ts from 'rollup-plugin-typescript2'
+import terser from '@rollup/plugin-terser'
 
 const entries = [
   'src/index.ts',
@@ -31,6 +32,7 @@ const plugins = [
     compact: true,
   }),
   wasmPlugin(),
+  terser(),
 ]
 
 export default defineConfig([

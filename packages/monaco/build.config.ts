@@ -12,6 +12,9 @@ export default defineBuildConfig({
         paths: {},
       },
     },
+    esbuild: {
+      minify: true,
+    },
   },
   externals: [
     'monaco-editor-core',

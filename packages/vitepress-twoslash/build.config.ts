@@ -9,6 +9,9 @@ export default defineBuildConfig({
   declaration: true,
   rollup: {
     emitCJS: false,
+    esbuild: {
+      minify: true,
+    },
   },
   externals: [
     'hast',
