@@ -13,19 +13,24 @@ export interface TransformerNotationWordHighlightOptions {
   classActivePre?: string
 }
 
+const regex = /\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]/
+
 export function transformerNotationWordHighlight(
   options: TransformerNotationWordHighlightOptions = {},
 ): ShikiTransformer {
   const {
     classActiveWord = 'highlighted-word',
-    classActivePre = undefined,
+    classActivePre,
   } = options
 
   return createCommentNotationTransformer(
     '@shikijs/transformers:notation-highlight-word',
-    // comment-start             | marker    | word           | range | comment-end
-    /^\s*(?:\/\/|\/\*|<!--|#)\s+\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]\s*(?:\*\/|-->)?/,
-    function ([_, word, range], _line, comment, lines, index) {
+    function (text, _line, comment, lines, index) {
+      const result = regex.exec(text)
+      if (!result)
+        return false
+
+      let [_, word, range] = result
       const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
 
       // escape backslashes
@@ -33,13 +38,13 @@ export function transformerNotationWordHighlight(
 
       lines
         // Don't include the comment itself
-        .slice(index + 1, index + 1 + lineNum)
+        .slice(index, index + lineNum)
         .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
 
       if (classActivePre)
         this.addClassToHast(this.pre, classActivePre)
       return true
     },
-    true, // remove empty lines
+    true,
   )
 }
