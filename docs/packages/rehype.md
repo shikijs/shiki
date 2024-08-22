@@ -100,7 +100,12 @@ console.log('4') // highlighted
 
 ### Inline Code
 
-You can also highlight inline codes with the `code{:language}` syntax.
+You can also highlight inline codes with the `inline` option.
+
+| Option                  | Example          | Description                                                 |
+| ----------------------- | ---------------- | ----------------------------------------------------------- |
+| `false`                 | -                | Disable inline code highlighting (default)                  |
+| `'tailing-curly-colon'` | `let a = 1{:js}` | Highlight with a `{:language}` marker inside the code block |
 
 Enable `inline` on the Rehype plugin:
 
@@ -116,15 +121,15 @@ const file = await unified()
   .use(remarkParse)
   .use(remarkRehype)
   .use(rehypeShiki, {
-    inline: 'tailing-curly-colon',
-    // other options
+    inline: 'tailing-curly-colon', // or other options
+    // ...
   })
   .use(rehypeStringify)
   .process(await fs.readFile('./input.md'))
 ```
 
-```md
-`console.log("Hello World"){:js}`
-```
+Then you can use inline code in markdown:
 
-Will give you a pretty looking JavaScript inline code.
+```md
+This code `console.log("Hello World"){:js}` will be highlighted.
+```

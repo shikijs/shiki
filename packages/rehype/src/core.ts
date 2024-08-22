@@ -1,90 +1,17 @@
 import type {
-  CodeOptionsMeta,
-  CodeOptionsThemes,
   CodeToHastOptions,
-  CodeToHastOptionsCommon,
   HighlighterGeneric,
-  TransformerOptions,
 } from 'shiki/core'
 import type { Element, Root } from 'hast'
-import type { BuiltinTheme } from 'shiki'
 import type { Transformer } from 'unified'
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
+import { InlineCodeProcessors } from './inline'
+import type { RehypeShikiCoreOptions } from './types'
 
-export interface MapLike<K = any, V = any> {
-  get: (key: K) => V | undefined
-  set: (key: K, value: V) => this
-}
-
-export interface RehypeShikiExtraOptions {
-  /**
-   * Add `language-*` class to code element
-   *
-   * @default false
-   */
-  addLanguageClass?: boolean
-
-  /**
-   * The default language to use when is not specified
-   */
-  defaultLanguage?: string
-
-  /**
-   * The fallback language to use when specified language is not loaded
-   */
-  fallbackLanguage?: string
-
-  /**
-   * `mdast-util-to-hast` adds a newline to the end of code blocks
-   *
-   * This option strips that newline from the code block
-   *
-   * @default true
-   * @see https://github.com/syntax-tree/mdast-util-to-hast/blob/f511a93817b131fb73419bf7d24d73a5b8b0f0c2/lib/handlers/code.js#L22
-   */
-  stripEndNewline?: boolean
-
-  /**
-   * Custom meta string parser
-   * Return an object to merge with `meta`
-   */
-  parseMetaString?: (
-    metaString: string,
-    node: Element,
-    tree: Root,
-  ) => Record<string, any> | undefined | null
-
-  /**
-   * Highlight inline code blocks
-   *
-   * @default false
-   */
-  inline?: false | 'tailing-curly-colon'
-
-  /**
-   * Custom map to cache transformed codeToHast result
-   *
-   * @default undefined
-   */
-  cache?: MapLike<string, Root>
-
-  /**
-   * Chance to handle the error
-   * If not provided, the error will be thrown
-   */
-  onError?: (error: unknown) => void
-}
-
-export type RehypeShikiCoreOptions =
-  & CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & RehypeShikiExtraOptions
-  & Omit<CodeToHastOptionsCommon, 'lang'>
+export * from './types'
 
 const languagePrefix = 'language-'
-const inlineCodeSuffix = /(.+)\{:([\w-]+)\}$/
 
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
@@ -109,11 +36,15 @@ function rehypeShikiFromHighlighter(
   function getLanguage(lang = defaultLanguage): string | undefined {
     if (lang && fallbackLanguage && !langs.includes(lang))
       return fallbackLanguage
-
     return lang
   }
 
-  function processCode(lang: string, metaString: string, meta: Record<string, unknown>, code: string): Root | undefined {
+  function highlight(
+    lang: string,
+    code: string,
+    metaString: string = '',
+    meta: Record<string, unknown> = {},
+  ): Root | undefined {
     const cacheKey = `${lang}:${metaString}:${code}`
     const cachedValue = cache?.get(cacheKey)
 
@@ -156,7 +87,8 @@ function rehypeShikiFromHighlighter(
     catch (error) {
       if (onError)
         onError(error)
-      else throw error
+      else
+        throw error
     }
   }
 
@@ -179,37 +111,20 @@ function rehypeShikiFromHighlighter(
       )
       : undefined
 
-    const lang = getLanguage(typeof languageClass === 'string' ? languageClass.slice(languagePrefix.length) : undefined)
+    const lang = getLanguage(
+      typeof languageClass === 'string'
+        ? languageClass.slice(languagePrefix.length)
+        : undefined,
+    )
 
     if (!lang)
       return
 
     const code = toString(head)
-    const metaString
-      = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
+    const metaString = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
     const meta = parseMetaString?.(metaString, node, tree) || {}
 
-    return processCode(lang, metaString, meta, code)
-  }
-
-  function processInlineCode(node: Element): Root | undefined {
-    const raw = toString(node)
-    const result = inlineCodeSuffix.exec(raw)
-    const lang = getLanguage(result?.[2])
-    if (!lang)
-      return
-
-    const code = result?.[1] ?? raw
-    const fragment = processCode(lang, '', {}, code)
-    if (!fragment)
-      return
-
-    const head = fragment.children[0]
-    if (head.type === 'element' && head.tagName === 'pre') {
-      head.tagName = 'span'
-    }
-
-    return fragment
+    return highlight(lang, code, metaString, meta)
   }
 
   return function (tree) {
@@ -230,8 +145,7 @@ function rehypeShikiFromHighlighter(
       }
 
       if (node.tagName === 'code' && inline) {
-        const result = processInlineCode(node)
-
+        const result = InlineCodeProcessors[inline]?.({ node, getLanguage, highlight })
         if (result) {
           parent.children.splice(index, 1, ...result.children)
         }
