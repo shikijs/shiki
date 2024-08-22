@@ -64,6 +64,20 @@ it('add-custom-cache', async () => {
   expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
 })
 
+it('shiki inline code', async () => {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShiki, {
+      theme: 'vitesse-light',
+      inline: 'tailing-curly-colon',
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/inline.md', import.meta.url)))
+
+  expect(file.toString()).toMatchFileSnapshot('./fixtures/inline.out.html')
+})
+
 it('does not add extra trailing blank line', async () => {
   const file = await unified()
     .use(remarkParse)

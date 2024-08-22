@@ -6,7 +6,7 @@ import { bundledLanguages, getSingletonHighlighter } from 'shiki'
 import type { Plugin } from 'unified'
 import type { Root } from 'hast'
 import rehypeShikiFromHighlighter from './core'
-import type { RehypeShikiCoreOptions } from './core'
+import type { RehypeShikiCoreOptions } from './types'
 
 export type RehypeShikiOptions = RehypeShikiCoreOptions
   & {
