@@ -40,7 +40,9 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
     )).flat()))
   }
 
-  const wasmLoader = options.loadWasm || _defaultWasmLoader
+  const wasmLoader = options.onig
+    ? null
+    : (options.loadWasm || _defaultWasmLoader)
 
   const [
     themes,
@@ -52,7 +54,7 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
   ] as const)
 
   const resolver = new Resolver(
-    Promise.resolve({
+    Promise.resolve(options.onig || {
       createOnigScanner(patterns) {
         return createOnigScanner(patterns)
       },

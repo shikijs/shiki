@@ -1,4 +1,5 @@
 import type { LoadWasmOptions } from '../oniguruma'
+import type { IOnigLib } from '../textmate'
 import type { StringLiteralUnion } from './utils'
 import type { LanguageInput, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
@@ -29,6 +30,10 @@ export interface HighlighterCoreOptions {
    * @default true
    */
   warnings?: boolean
+  /**
+   * Custom oniguruma lib.
+   */
+  onig?: IOnigLib
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> {
