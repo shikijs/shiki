@@ -4,7 +4,7 @@ import { promises as fs } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import fg from 'fast-glob'
 import type { Instance } from './types'
-import { NativeOnigScanner } from './my'
+import { JavaScriptOnigScanner } from './scanner-js'
 
 const files = await fg('*.json', {
   cwd: fileURLToPath(new URL('./__records__', import.meta.url)),
@@ -18,10 +18,16 @@ for (const file of files) {
     let i = 0
     for (const instance of instances) {
       describe(`instances ${i++}`, () => {
-        const scanner = new NativeOnigScanner(instance.constractor[0])
+        const scanner = new JavaScriptOnigScanner(instance.constractor[0], false)
         let j = 0
         for (const execution of instance.executions) {
           it(`case ${j++}`, () => {
+            // onTestFailed(() => {
+            //   console.log({
+            //     patterns: scanner.patterns,
+            //     regexps: scanner.regexps,
+            //   })
+            // })
             const result = scanner.findNextMatchSync(...execution.args)
             expect(result).toEqual(execution.result)
           })

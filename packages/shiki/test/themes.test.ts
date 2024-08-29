@@ -3,11 +3,11 @@ import type { ThemedToken } from '../src'
 import { codeToHtml, codeToTokensBase, codeToTokensWithThemes } from '../src'
 import { syncThemesTokenization } from '../../core/src/code-to-tokens-themes'
 
-describe('syncThemesTokenization', () => {
-  function stringifyTokens(tokens: ThemedToken[][]) {
-    return tokens.map(line => line.map(token => token.content).join(' ')).join('\n')
-  }
+function stringifyTokens(tokens: ThemedToken[][]) {
+  return tokens.map(line => line.map(token => token.content).join(' ')).join('\n')
+}
 
+describe('syncThemesTokenization', () => {
   it('two themes', async () => {
     const lines1 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
     const lines2 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'min-light', includeExplanation: true })

@@ -47,29 +47,6 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
     'theme': floatingVueTheme,
   }
 
-  function compose(parts: { token: Element | Text, popup: Element }): Element[] {
-    return [
-      {
-        type: 'element',
-        tagName: 'span',
-        properties: {},
-        children: [parts.token],
-      },
-      {
-        type: 'element',
-        tagName: 'template',
-        properties: {
-          'v-slot:popper': '{}',
-        },
-        content: {
-          type: 'root',
-          children: [vPre(parts.popup)],
-        },
-        children: [],
-      },
-    ]
-  }
-
   const rich = rendererRich({
     classExtra: classCopyIgnore,
     ...options,
@@ -193,4 +170,27 @@ function renderMarkdownInline(this: ShikiTransformerContextCommon, md: string, c
   if (children.length === 1 && children[0].type === 'element' && children[0].tagName === 'p')
     return children[0].children
   return children
+}
+
+function compose(parts: { token: Element | Text, popup: Element }): Element[] {
+  return [
+    {
+      type: 'element',
+      tagName: 'span',
+      properties: {},
+      children: [parts.token],
+    },
+    {
+      type: 'element',
+      tagName: 'template',
+      properties: {
+        'v-slot:popper': '{}',
+      },
+      content: {
+        type: 'root',
+        children: [vPre(parts.popup)],
+      },
+      children: [],
+    },
+  ]
 }

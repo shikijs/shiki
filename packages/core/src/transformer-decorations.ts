@@ -62,29 +62,6 @@ export function transformerDecorations(): ShikiTransformer {
     return map.get(shiki.meta)!
   }
 
-  function verifyIntersections(items: ResolvedDecorationItem[]) {
-    for (let i = 0; i < items.length; i++) {
-      const foo = items[i]
-      if (foo.start.offset > foo.end.offset)
-        throw new ShikiError(`Invalid decoration range: ${JSON.stringify(foo.start)} - ${JSON.stringify(foo.end)}`)
-
-      for (let j = i + 1; j < items.length; j++) {
-        const bar = items[j]
-        const isFooHasBarStart = foo.start.offset < bar.start.offset && bar.start.offset < foo.end.offset
-        const isFooHasBarEnd = foo.start.offset < bar.end.offset && bar.end.offset < foo.end.offset
-        const isBarHasFooStart = bar.start.offset < foo.start.offset && foo.start.offset < bar.end.offset
-        const isBarHasFooEnd = bar.start.offset < foo.end.offset && foo.end.offset < bar.end.offset
-        if (isFooHasBarStart || isFooHasBarEnd || isBarHasFooStart || isBarHasFooEnd) {
-          if (isFooHasBarEnd && isFooHasBarEnd)
-            continue // nested
-          if (isBarHasFooStart && isBarHasFooEnd)
-            continue // nested
-          throw new ShikiError(`Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
-        }
-      }
-    }
-  }
-
   return {
     name: 'shiki:decorations',
     tokens(tokens) {
@@ -110,14 +87,6 @@ export function transformerDecorations(): ShikiTransformer {
         let text = ''
         let startIndex = -1
         let endIndex = -1
-
-        function stringify(el: ElementContent): string {
-          if (el.type === 'text')
-            return el.value
-          if (el.type === 'element')
-            return el.children.map(stringify).join('')
-          return ''
-        }
 
         if (start === 0)
           startIndex = 0
@@ -205,4 +174,35 @@ export function transformerDecorations(): ShikiTransformer {
       lineApplies.forEach(i => i())
     },
   }
+}
+
+function verifyIntersections(items: ResolvedDecorationItem[]) {
+  for (let i = 0; i < items.length; i++) {
+    const foo = items[i]
+    if (foo.start.offset > foo.end.offset)
+      throw new ShikiError(`Invalid decoration range: ${JSON.stringify(foo.start)} - ${JSON.stringify(foo.end)}`)
+
+    for (let j = i + 1; j < items.length; j++) {
+      const bar = items[j]
+      const isFooHasBarStart = foo.start.offset < bar.start.offset && bar.start.offset < foo.end.offset
+      const isFooHasBarEnd = foo.start.offset < bar.end.offset && bar.end.offset < foo.end.offset
+      const isBarHasFooStart = bar.start.offset < foo.start.offset && foo.start.offset < bar.end.offset
+      const isBarHasFooEnd = bar.start.offset < foo.end.offset && foo.end.offset < bar.end.offset
+      if (isFooHasBarStart || isFooHasBarEnd || isBarHasFooStart || isBarHasFooEnd) {
+        if (isFooHasBarEnd && isFooHasBarEnd)
+          continue // nested
+        if (isBarHasFooStart && isBarHasFooEnd)
+          continue // nested
+        throw new ShikiError(`Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
+      }
+    }
+  }
+}
+
+function stringify(el: ElementContent): string {
+  if (el.type === 'text')
+    return el.value
+  if (el.type === 'element')
+    return el.children.map(stringify).join('')
+  return ''
 }

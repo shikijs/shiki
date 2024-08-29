@@ -7,7 +7,7 @@ import { createHighlighterCore } from '../../src/core'
 import type { OnigString } from '../../../core/src/oniguruma'
 import { createOnigScanner, createOnigString, loadWasm } from '../../../core/src/oniguruma'
 import type { Instance } from './types'
-import { NativeOnigLib } from './my'
+import { createJavaScriptOnigLib } from './scanner-js'
 
 await loadWasm({ instantiator: obj => WebAssembly.instantiate(wasmBinary, obj) })
 
@@ -55,11 +55,20 @@ const cases: Cases[] = [
     ],
   },
   {
-    name: 'yaml-basic',
+    name: 'html-basic',
     theme: () => import('../../src/assets/themes/nord'),
-    lang: () => import('../../src/assets/langs/yaml'),
+    lang: () => import('../../src/assets/langs/html'),
     cases: [
-      'const foo = { bar: 1 }',
+      '<div class="foo">bar</div>',
+      '<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>',
+    ],
+  },
+  {
+    name: 'ts-basic',
+    theme: () => import('../../src/assets/themes/nord'),
+    lang: () => import('../../src/assets/langs/typescript'),
+    cases: [
+      'const foo: string = "bar"',
     ],
   },
 ]
@@ -78,7 +87,7 @@ describe('cases', async () => {
   for (const c of resolved) {
     it(c.c.name, async () => {
       const wasm = createWasmOnigLibWrapper()
-      const native = NativeOnigLib
+      const native = createJavaScriptOnigLib()
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
@@ -92,15 +101,23 @@ describe('cases', async () => {
       })
 
       const lang = c.lang[0].name
-      const theme = c.theme.name
+      const theme = c.theme.name!
+
+      const compare: [any, any][] = []
 
       for (const code of c.c.cases) {
-        expect.soft(shiki1.codeToTokensBase(code, { lang, theme }))
-          .toMatchInlineSnapshot(shiki2.codeToTokensBase(code, { lang, theme }))
+        compare.push([
+          shiki1.codeToTokensBase(code, { lang, theme }),
+          shiki2.codeToTokensBase(code, { lang, theme }),
+        ])
       }
 
       await expect(JSON.stringify(wasm.instances, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
+
+      for (const [a, b] of compare) {
+        expect.soft(a).toEqual(b)
+      }
     })
   }
 })
