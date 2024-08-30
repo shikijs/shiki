@@ -1,8 +1,6 @@
 # Next.js
 
-[Next.js](https://nextjs.org) is a powerful React.js framework.
-
-Shiki does not provide an official integration for Next.js, but it is easy to use Shiki on Next.js applications.
+Shiki does not provide an official integration for [Next.js](https://nextjs.org), but it is rather straightforward to use Shiki in Next.js applications.
 
 ::: info
 Using Shiki on Edge Runtime might cause unintended problems, Shiki relies on lazy imports to load languages and themes.
