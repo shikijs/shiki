@@ -1,4 +1,14 @@
-import type { IOnigBinding, Instantiator } from './types'
+import type { IOnigBinding, Instantiator } from '.'
+
+function getHeapMax() {
+  return 2147483648
+}
+
+function _emscripten_get_now() {
+  return typeof performance !== 'undefined' ? performance.now() : Date.now()
+}
+
+const alignUp = (x: number, multiple: number) => x + ((multiple - (x % multiple)) % multiple)
 
 export default async function main(init: Instantiator): Promise<IOnigBinding> {
   let wasmMemory: any
@@ -12,15 +22,10 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     binding.HEAPU32 = new Uint32Array(buf)
   }
 
-  function _emscripten_get_now() {
-    return typeof performance !== 'undefined' ? performance.now() : Date.now()
-  }
   function _emscripten_memcpy_big(dest: number, src: number, num: number) {
     binding.HEAPU8.copyWithin(dest, src, src + num)
   }
-  function getHeapMax() {
-    return 2147483648
-  }
+
   function emscripten_realloc_buffer(size: number) {
     try {
       wasmMemory.grow((size - buffer.byteLength + 65535) >>> 16)
@@ -36,7 +41,6 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     if (requestedSize > maxHeapSize)
       return false
 
-    const alignUp = (x: number, multiple: number) => x + ((multiple - (x % multiple)) % multiple)
     for (let cutDown = 1; cutDown <= 4; cutDown *= 2) {
       let overGrownHeapSize = oldSize * (1 + 0.2 / cutDown)
       overGrownHeapSize = Math.min(overGrownHeapSize, requestedSize + 100663296)

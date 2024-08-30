@@ -2,7 +2,7 @@
   "type": "module",
   "version": "1.14.1",
   "private": true,
-  "packageManager": "pnpm@9.8.0",
+  "packageManager": "pnpm@9.9.0",
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp && pnpm -r publish",
@@ -46,6 +46,7 @@
     "mdast-util-gfm": "catalog:",
     "mdast-util-to-hast": "catalog:",
     "ofetch": "catalog:",
+    "picocolors": "catalog:",
     "pnpm": "catalog:",
     "prettier": "catalog:",
     "rimraf": "catalog:",

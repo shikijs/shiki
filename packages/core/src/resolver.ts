@@ -1,4 +1,5 @@
-import type { IOnigLib, RegistryOptions } from './textmate'
+import type { IOnigLib } from '../vendor/vscode-textmate/src/main'
+import type { RegexEngine, RegistryOptions } from './textmate'
 import type { LanguageRegistration } from './types'
 
 export class Resolver implements RegistryOptions {
@@ -8,8 +9,12 @@ export class Resolver implements RegistryOptions {
 
   private readonly _onigLibPromise: Promise<IOnigLib>
 
-  constructor(onigLibPromise: Promise<IOnigLib>, langs: LanguageRegistration[]) {
+  constructor(onigLibPromise: Promise<RegexEngine>, langs: LanguageRegistration[]) {
     this._onigLibPromise = onigLibPromise
+      .then(engine => ({
+        createOnigScanner: patterns => engine.createScanner(patterns),
+        createOnigString: s => engine.createString(s),
+      }))
     langs.forEach(i => this.addLanguage(i))
   }
 

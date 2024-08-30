@@ -2,9 +2,14 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
-import { ShikiError } from '../error'
-import type { IOnigBinding, IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString, Pointer } from './types'
+import { ShikiError } from '../../error'
+import type { LoadWasmOptions, WebAssemblyInstance, WebAssemblyInstantiator } from '../../types'
+import type { IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString } from '../../../vendor/vscode-textmate/src/main'
 import createOnigasm from './onig'
+
+export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>
+
+export type Pointer = number
 
 export const enum FindOption {
   None = 0,
@@ -20,14 +25,25 @@ export const enum FindOption {
    * equivalent of ONIG_OPTION_NOT_BEGIN_POSITION: (start) isn't considered as start position of search (* fail \G)
    */
   NotBeginPosition = 4,
-  /**
-   * used for debugging purposes.
-   */
-  DebugCall = 8,
+}
+
+export interface IOnigBinding {
+  HEAPU8: Uint8Array
+  HEAPU32: Uint32Array
+
+  UTF8ToString: (ptr: Pointer) => string
+
+  omalloc: (count: number) => Pointer
+  ofree: (ptr: Pointer) => void
+  getLastOnigError: () => Pointer
+  createOnigScanner: (strPtrsPtr: Pointer, strLenPtr: Pointer, count: number) => Pointer
+  freeOnigScanner: (ptr: Pointer) => void
+  findNextOnigScannerMatch: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
+  // findNextOnigScannerMatchDbg: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
 }
 
 let onigBinding: IOnigBinding | null = null
-let defaultDebugCall = false
+// let defaultDebugCall = false
 
 function throwLastOnigError(onigBinding: IOnigBinding): void {
   throw new ShikiError(onigBinding.UTF8ToString(onigBinding.getLastOnigError()))
@@ -294,34 +310,33 @@ export class OnigScanner implements IOnigScanner {
   public findNextMatchSync(string: string | OnigString, startPosition: number, debugCall: boolean): IOnigMatch | null
   public findNextMatchSync(string: string | OnigString, startPosition: number): IOnigMatch | null
   public findNextMatchSync(string: string | OnigString, startPosition: number, arg?: number | boolean): IOnigMatch | null {
-    let debugCall = defaultDebugCall
+    // let debugCall = defaultDebugCall
     let options = FindOption.None
     if (typeof arg === 'number') {
-      if (arg & FindOption.DebugCall)
-        debugCall = true
-
+      // if (arg & FindOption.DebugCall)
+      //   debugCall = true
       options = arg
     }
     else if (typeof arg === 'boolean') {
-      debugCall = arg
+      // debugCall = arg
     }
     if (typeof string === 'string') {
       string = new OnigString(string)
-      const result = this._findNextMatchSync(string, startPosition, debugCall, options)
+      const result = this._findNextMatchSync(string, startPosition, false, options)
       string.dispose()
       return result
     }
-    return this._findNextMatchSync(string, startPosition, debugCall, options)
+    return this._findNextMatchSync(string, startPosition, false, options)
   }
 
   private _findNextMatchSync(string: OnigString, startPosition: number, debugCall: boolean, options: number): IOnigMatch | null {
     const onigBinding = this._onigBinding
-    let resultPtr: Pointer
-    if (debugCall)
-      resultPtr = onigBinding.findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+    // let resultPtr: Pointer
+    // if (debugCall)
+    //   resultPtr = onigBinding.findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
-    else
-      resultPtr = onigBinding.findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+    // else
+    const resultPtr = onigBinding.findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
     if (resultPtr === 0) {
       // no match
@@ -348,17 +363,6 @@ export class OnigScanner implements IOnigScanner {
   }
 }
 
-export interface WebAssemblyInstantiator {
-  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssemblyInstance>
-}
-
-export type WebAssemblyInstance = WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance | WebAssembly.Instance['exports']
-
-export type OnigurumaLoadOptions =
-  | { instantiator: WebAssemblyInstantiator }
-  | { default: WebAssemblyInstantiator }
-  | { data: ArrayBufferView | ArrayBuffer | Response }
-
 function isInstantiatorOptionsObject(dataOrOptions: any): dataOrOptions is { instantiator: WebAssemblyInstantiator } {
   return (typeof dataOrOptions.instantiator === 'function')
 }
@@ -384,15 +388,6 @@ function isArrayBuffer(data: any): data is ArrayBuffer | ArrayBufferView {
 }
 
 let initPromise: Promise<void>
-
-type Awaitable<T> = T | Promise<T>
-
-export type LoadWasmOptionsPlain =
-  | OnigurumaLoadOptions
-  | WebAssemblyInstantiator
-  | ArrayBufferView | ArrayBuffer | Response
-
-export type LoadWasmOptions = Awaitable<LoadWasmOptionsPlain> | (() => Awaitable<LoadWasmOptionsPlain>)
 
 export function loadWasm(options: LoadWasmOptions): Promise<void> {
   if (initPromise)
@@ -461,14 +456,14 @@ function _makeResponseNonStreamingLoader(data: Response): WebAssemblyInstantiato
   }
 }
 
-export function createOnigString(str: string) {
-  return new OnigString(str)
-}
+// export function createOnigString(str: string) {
+//   return new OnigString(str)
+// }
 
-export function createOnigScanner(patterns: string[]) {
-  return new OnigScanner(patterns)
-}
+// export function createOnigScanner(patterns: string[]) {
+//   return new OnigScanner(patterns)
+// }
 
-export function setDefaultDebugCall(_defaultDebugCall: boolean): void {
-  defaultDebugCall = _defaultDebugCall
-}
+// export function setDefaultDebugCall(_defaultDebugCall: boolean): void {
+//   defaultDebugCall = _defaultDebugCall
+// }

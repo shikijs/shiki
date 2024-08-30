@@ -11,6 +11,7 @@ it('wasm', async () => {
   const shiki = await createHighlighterCore({
     themes: [nord],
     langs: [js as any],
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     loadWasm: Promise.resolve().then(() => obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance)),
   })
 

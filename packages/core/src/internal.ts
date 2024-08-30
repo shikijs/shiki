@@ -1,11 +1,10 @@
-import type { HighlighterCoreOptions, LanguageInput, LanguageRegistration, MaybeGetter, ShikiInternal, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
-import type { LoadWasmOptions } from './oniguruma'
-import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
+import type { HighlighterCoreOptions, LanguageInput, LanguageRegistration, LoadWasmOptions, MaybeGetter, ShikiInternal, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
 import { Registry } from './registry'
 import { Resolver } from './resolver'
 import { normalizeTheme } from './normalize'
 import { isSpecialLang, isSpecialTheme } from './utils'
 import { ShikiError } from './error'
+import { createWasmOnigEngine } from './engines/wasm'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
 /**
@@ -40,26 +39,16 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
     )).flat()))
   }
 
-  const wasmLoader = options.loadWasm || _defaultWasmLoader
-
   const [
     themes,
     langs,
   ] = await Promise.all([
     Promise.all((options.themes || []).map(normalizeGetter)).then(r => r.map(normalizeTheme)),
     resolveLangs(options.langs || []),
-    wasmLoader ? loadWasm(wasmLoader) : undefined,
   ] as const)
 
   const resolver = new Resolver(
-    Promise.resolve({
-      createOnigScanner(patterns) {
-        return createOnigScanner(patterns)
-      },
-      createOnigString(s) {
-        return createOnigString(s)
-      },
-    }),
+    Promise.resolve(options.engine || createWasmOnigEngine(options.loadWasm || _defaultWasmLoader)),
     langs,
   )
 
