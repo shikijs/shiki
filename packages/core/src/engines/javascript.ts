@@ -1,4 +1,4 @@
-import { onigurumaToRegexp } from 'oniguruma-to-js'
+import { regex } from 'regex'
 import type { PatternScanner, RegexEngine, RegexEngineString } from '../textmate'
 import type { JavaScriptRegexEngineOptions } from '../types/engines'
 
@@ -23,14 +23,14 @@ export class JavaScriptScanner implements PatternScanner {
         throw cached
       }
       try {
-        const regex = onigurumaToRegexp(
-          p
-            // YAML specific handling; TODO: move to tm-grammars
-            .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
-          { flags: 'dg' },
-        )
-        cache?.set(p, regex)
-        return regex
+        const re = regex({
+          flags: 'dg',
+          disable: {
+            x: true,
+          },
+        })({ raw: [p] })
+        cache?.set(p, re)
+        return re
       }
       catch (e) {
         cache?.set(p, e as Error)
