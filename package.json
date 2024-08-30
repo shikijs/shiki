@@ -11,6 +11,8 @@
     "build": "pnpm -r run build",
     "docs": "pnpm -C docs run docs:dev",
     "docs:build": "pnpm -C docs run docs:build",
+    "report-engine-js": "jiti scripts/report-engine-js-compat.ts",
+    "bench": "vitest bench",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "esno": "catalog:",
     "fast-glob": "catalog:",
     "fs-extra": "catalog:",
+    "jiti": "catalog:",
     "jsonc-parser": "catalog:",
     "lint-staged": "catalog:",
     "markdown-it": "catalog:",
