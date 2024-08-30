@@ -1,3 +1,7 @@
+// To run this script
+// - `pnpm run build`
+// - `pnpm run report-engine-js`
+
 import fs from 'node:fs/promises'
 import process from 'node:process'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
