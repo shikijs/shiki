@@ -9,8 +9,8 @@
 | Status          | Number |
 | :-------------- | -----: |
 | Total Languages |    213 |
-| OK              |    178 |
-| Mismatch        |     33 |
+| OK              |    179 |
+| Mismatch        |     32 |
 | Error           |      2 |
 
 | Language           | Highlight Match | Patterns Parsable | Patterns Failed |
@@ -38,6 +38,7 @@
 | cmake              | ✅ OK           | 23                | -               |
 | cobol              | ✅ OK           | 138               | -               |
 | codeowners         | ✅ OK           | 4                 | -               |
+| codeql             | ✅ OK           | 150               | -               |
 | coffee             | ✅ OK           | 120               | -               |
 | common-lisp        | ✅ OK           | 57                | -               |
 | cpp                | ✅ OK           | 220               | -               |
@@ -199,7 +200,6 @@
 | beancount          | ⚠️ Mismatch     | 39                | -               |
 | blade              | ⚠️ Mismatch     | 330               | -               |
 | cadence            | ⚠️ Mismatch     | 71                | -               |
-| codeql             | ⚠️ Mismatch     | 150               | -               |
 | coq                | ⚠️ Mismatch     | 25                | -               |
 | cue                | ⚠️ Mismatch     | 85                | -               |
 | cypher             | ⚠️ Mismatch     | 39                | -               |

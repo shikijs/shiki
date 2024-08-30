@@ -25,6 +25,8 @@ export class JavaScriptScanner implements PatternScanner {
       try {
         const regex = onigurumaToRegexp(
           p
+            .replace(/\|\\G(\||\))/g, '$1')
+            .replace(/(\(|\|)\\G\|/g, '$1')
             // YAML specific handling; TODO: move to tm-grammars
             .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
           {

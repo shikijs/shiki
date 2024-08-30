@@ -115,6 +115,31 @@ const cases: Cases[] = [
       ].join('\n'),
     ],
   },
+  {
+    name: 'markdown',
+    theme: () => import('../../src/assets/themes/nord'),
+    lang: () => import('../../src/assets/langs/markdown'),
+    cases: [
+      [
+        '# Header',
+        '',
+        'This is a paragraph',
+        '',
+        '```ts',
+        'const foo = "bar"',
+        '```',
+      ].join('\n'),
+      [
+        'look like:',
+        '',
+        '  * this one',
+        '  * that one',
+        '  * the other one',
+        '',
+        'and this',
+      ].join('\n'),
+    ],
+  },
 ]
 
 describe('cases', async () => {
