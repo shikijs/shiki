@@ -1,4 +1,4 @@
-import { construct } from 'oniguruma-to-js'
+import { onigurumaToRegexp } from 'oniguruma-to-js'
 import type { PatternScanner, RegexEngine, RegexEngineString } from '../textmate'
 import type { JavaScriptRegexEngineOptions } from '../types/engines'
 
@@ -9,13 +9,31 @@ export class JavaScriptScanner implements PatternScanner {
 
   constructor(
     public patterns: string[],
+    public cache: Map<string, RegExp | Error>,
     public forgiving: boolean,
   ) {
     this.regexps = patterns.map((p) => {
+      const cached = cache?.get(p)
+      if (cached) {
+        if (cached instanceof RegExp) {
+          return cached
+        }
+        if (forgiving)
+          return null
+        throw cached
+      }
       try {
-        return construct(p, { flags: 'dg' })
+        const regex = onigurumaToRegexp(
+          p
+            // YAML specific handling; TODO: move to tm-grammars
+            .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
+          { flags: 'dg' },
+        )
+        cache?.set(p, regex)
+        return regex
       }
       catch (e) {
+        cache?.set(p, e as Error)
         if (forgiving)
           return null
         // console.error({ ...e })
@@ -97,11 +115,14 @@ export class JavaScriptScanner implements PatternScanner {
  * @experimental
  */
 export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOptions = {}): RegexEngine {
-  const { forgiving = false } = options
+  const {
+    forgiving = false,
+    cache = new Map(),
+  } = options
 
   return {
     createScanner(patterns: string[]) {
-      return new JavaScriptScanner(patterns, forgiving)
+      return new JavaScriptScanner(patterns, cache, forgiving)
     },
     createString(s: string) {
       return {

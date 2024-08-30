@@ -133,8 +133,11 @@ catalogs:
       specifier: ^1.3.4
       version: 1.3.4
     oniguruma-to-js:
-      specifier: ^0.2.0
-      version: 0.2.0
+      specifier: ^0.2.3
+      version: 0.2.3
+    picocolors:
+      specifier: ^1.0.1
+      version: 1.0.1
     pinia:
       specifier: ^2.2.2
       version: 2.2.2
@@ -184,8 +187,8 @@ catalogs:
       specifier: ^0.16.7
       version: 0.16.7
     tm-grammars:
-      specifier: ^1.17.8
-      version: 1.17.8
+      specifier: ^1.17.9
+      version: 1.17.9
     tm-themes:
       specifier: ^1.8.1
       version: 1.8.1
@@ -350,6 +353,9 @@ importers:
       ofetch:
         specifier: 'catalog:'
         version: 1.3.4
+      picocolors:
+        specifier: 'catalog:'
+        version: 1.0.1
       pnpm:
         specifier: 'catalog:'
         version: 9.9.0
@@ -497,7 +503,7 @@ importers:
         version: 9.0.2
       oniguruma-to-js:
         specifier: 'catalog:'
-        version: 0.2.0
+        version: 0.2.3
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -582,7 +588,7 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.17.8
+        version: 1.17.9
       tm-themes:
         specifier: 'catalog:'
         version: 1.8.1
@@ -4220,8 +4226,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-js@0.2.0:
-    resolution: {integrity: sha512-i9fIjMHq4Q3wZJqzZt1l1irkn8wIyYpStS11mwXIQjXw0JJd6F0bNtcgDtWv138Yl3a6L1mZaL9HTjCtjkd4JQ==}
+  oniguruma-to-js@0.2.3:
+    resolution: {integrity: sha512-BTm2ZRpn+6A2NmaXvrkPmksLThXAX9uo2gfpetx3V/goWq68H1pXUkguBbQWxcaKGeNTfUFagxRfxDRbtZsw2Q==}
 
   optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
@@ -5030,8 +5036,8 @@ packages:
     resolution: {integrity: sha512-q5nmENpTHgiPVd1cJDDc9cVoYN5x4vCvwT3FMilvKPKneCBZAxn2YWQjDF0UMcE9k0Cay1gBiDfTMU0g+mPMQA==}
     engines: {node: '>=14.0.0'}
 
-  tm-grammars@1.17.8:
-    resolution: {integrity: sha512-Qw67JNutL9LCt8FFw5RfsogeQ40iSeqrTHDSp0ecnY/b+ZweK8izlw6y/ZMje2+I6DMtTiBOCgmXEf+2oH11jQ==}
+  tm-grammars@1.17.9:
+    resolution: {integrity: sha512-zfffNWj6Nde5FzlHRmN5AkGYfz0yTaYIpcoHB3OcvDNmn70aHN0HmkZpoItjZomk3V/noemcGXRW53Ueve++eg==}
 
   tm-themes@1.8.1:
     resolution: {integrity: sha512-jTUfDRn5TysYhkxxEWBQDo1C1n4yoHcnfNNqXkVxIMGQCgal/9poGuMBsfbnZCPEmFVcN2rtrUwaOJ8s2hVQXg==}
@@ -9637,7 +9643,7 @@ snapshots:
       execa: 8.0.1
       pathe: 1.1.2
       pkg-types: 1.1.3
-      ufo: 1.5.3
+      ufo: 1.5.4
 
   ofetch@1.3.4:
     dependencies:
@@ -9659,7 +9665,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-js@0.2.0: {}
+  oniguruma-to-js@0.2.3: {}
 
   optionator@0.9.3:
     dependencies:
@@ -10487,7 +10493,7 @@ snapshots:
 
   tinyspy@3.0.0: {}
 
-  tm-grammars@1.17.8: {}
+  tm-grammars@1.17.9: {}
 
   tm-themes@1.8.1: {}
 

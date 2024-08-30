@@ -12,6 +12,8 @@ const files = await fg('*.json', {
   onlyFiles: true,
 })
 
+const cache = new Map<string, RegExp | Error>()
+
 for (const file of files) {
   // Some token positions are off in this record
   const name = basename(file, '.json')
@@ -23,7 +25,7 @@ for (const file of files) {
     let i = 0
     for (const instance of instances) {
       describe(`instances ${i++}`, () => {
-        const scanner = new JavaScriptScanner(instance.constractor[0], false)
+        const scanner = new JavaScriptScanner(instance.constractor[0], cache, false)
         let j = 0
         for (const execution of instance.executions) {
           it(`case ${j++}`, () => {

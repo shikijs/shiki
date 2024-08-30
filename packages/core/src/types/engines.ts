@@ -23,4 +23,9 @@ export interface JavaScriptRegexEngineOptions {
    * Whether to allow invalid regex patterns.
    */
   forgiving?: boolean
+
+  /**
+   * Cache for regex patterns.
+   */
+  cache?: Map<string, RegExp | Error>
 }
