@@ -4,8 +4,7 @@ import type { RegexEngine } from '@shikijs/core/textmate'
 import type { LanguageRegistration, ThemeRegistration } from '../../src/core'
 import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../src/core'
 
-import type { OnigString } from '../../../core/src/engines/oniguruma'
-import { createOnigScanner, createOnigString } from '../../../core/src/engines/oniguruma'
+import { OnigScanner, OnigString } from '../../../core/src/engines/oniguruma'
 import type { Instance } from './types'
 
 await loadWasm({ instantiator: obj => WebAssembly.instantiate(wasmBinary, obj) })
@@ -16,7 +15,7 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
   return {
     instances,
     createScanner(patterns) {
-      const scanner = createOnigScanner(patterns)
+      const scanner = new OnigScanner(patterns)
       const instance: Instance = {
         constractor: [patterns],
         executions: [],
@@ -31,7 +30,7 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
       }
     },
     createString(s) {
-      return createOnigString(s)
+      return new OnigString(s)
     },
   }
 }

@@ -39,11 +39,11 @@ export interface IOnigBinding {
   createOnigScanner: (strPtrsPtr: Pointer, strLenPtr: Pointer, count: number) => Pointer
   freeOnigScanner: (ptr: Pointer) => void
   findNextOnigScannerMatch: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
-  findNextOnigScannerMatchDbg: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
+  // findNextOnigScannerMatchDbg: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
 }
 
 let onigBinding: IOnigBinding | null = null
-let defaultDebugCall = false
+// let defaultDebugCall = false
 
 function throwLastOnigError(onigBinding: IOnigBinding): void {
   throw new ShikiError(onigBinding.UTF8ToString(onigBinding.getLastOnigError()))
@@ -310,7 +310,7 @@ export class OnigScanner implements IOnigScanner {
   public findNextMatchSync(string: string | OnigString, startPosition: number, debugCall: boolean): IOnigMatch | null
   public findNextMatchSync(string: string | OnigString, startPosition: number): IOnigMatch | null
   public findNextMatchSync(string: string | OnigString, startPosition: number, arg?: number | boolean): IOnigMatch | null {
-    let debugCall = defaultDebugCall
+    // let debugCall = defaultDebugCall
     let options = FindOption.None
     if (typeof arg === 'number') {
       // if (arg & FindOption.DebugCall)
@@ -318,25 +318,25 @@ export class OnigScanner implements IOnigScanner {
       options = arg
     }
     else if (typeof arg === 'boolean') {
-      debugCall = arg
+      // debugCall = arg
     }
     if (typeof string === 'string') {
       string = new OnigString(string)
-      const result = this._findNextMatchSync(string, startPosition, debugCall, options)
+      const result = this._findNextMatchSync(string, startPosition, false, options)
       string.dispose()
       return result
     }
-    return this._findNextMatchSync(string, startPosition, debugCall, options)
+    return this._findNextMatchSync(string, startPosition, false, options)
   }
 
   private _findNextMatchSync(string: OnigString, startPosition: number, debugCall: boolean, options: number): IOnigMatch | null {
     const onigBinding = this._onigBinding
-    let resultPtr: Pointer
-    if (debugCall)
-      resultPtr = onigBinding.findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+    // let resultPtr: Pointer
+    // if (debugCall)
+    //   resultPtr = onigBinding.findNextOnigScannerMatchDbg(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
-    else
-      resultPtr = onigBinding.findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
+    // else
+    const resultPtr = onigBinding.findNextOnigScannerMatch(this._ptr, string.id, string.ptr, string.utf8Length, string.convertUtf16OffsetToUtf8(startPosition), options)
 
     if (resultPtr === 0) {
       // no match
@@ -456,14 +456,14 @@ function _makeResponseNonStreamingLoader(data: Response): WebAssemblyInstantiato
   }
 }
 
-export function createOnigString(str: string) {
-  return new OnigString(str)
-}
+// export function createOnigString(str: string) {
+//   return new OnigString(str)
+// }
 
-export function createOnigScanner(patterns: string[]) {
-  return new OnigScanner(patterns)
-}
+// export function createOnigScanner(patterns: string[]) {
+//   return new OnigScanner(patterns)
+// }
 
-export function setDefaultDebugCall(_defaultDebugCall: boolean): void {
-  defaultDebugCall = _defaultDebugCall
-}
+// export function setDefaultDebugCall(_defaultDebugCall: boolean): void {
+//   defaultDebugCall = _defaultDebugCall
+// }

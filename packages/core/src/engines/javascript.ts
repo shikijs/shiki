@@ -1,4 +1,4 @@
-import { expect } from 'vitest'
+import { construct } from 'oniguruma-to-js'
 import type { PatternScanner, RegexEngine, RegexEngineString } from '../textmate'
 import type { JavaScriptRegexEngineOptions } from '../types/engines'
 
@@ -13,11 +13,12 @@ export class JavaScriptScanner implements PatternScanner {
   ) {
     this.regexps = patterns.map((p) => {
       try {
-        return covertRegex(p)
+        return construct(p, { flags: 'dg' })
       }
       catch (e) {
         if (forgiving)
           return null
+        // console.error({ ...e })
         throw e
       }
     })
@@ -83,60 +84,6 @@ export class JavaScriptScanner implements PatternScanner {
     }
 
     return null
-  }
-}
-
-/**
- * Convert Oniguruma regex to JavaScript regex.
- */
-function covertRegex(pattern: string) {
-  const original = pattern
-
-  const flagSet = new Set<string>(['d', 'g'])
-
-  pattern = pattern
-    .replace(/\\A/g, '^')
-    .replace(/\(\?(-)?(\w+):/g, (_, neg, flags) => {
-      if (neg) {
-        for (const flag of flags)
-          flagSet.delete(flag)
-      }
-      else {
-        for (const flag of flags)
-          flagSet.add(flag)
-      }
-      return '(?:'
-    })
-    .replace(/\(\?(-)?(\w+)\)/g, (_, neg, flags) => {
-      if (neg) {
-        for (const flag of flags)
-          flagSet.delete(flag)
-      }
-      else {
-        for (const flag of flags)
-          flagSet.add(flag)
-      }
-      return ''
-    })
-
-  // `(?x)` stands for free-spacing mode
-  // https://www.regular-expressions.info/freespacing.html
-  // We remove comments and whitespaces
-  if (pattern.startsWith('(?x)') || pattern.includes('(?x:'))
-    throw new Error('RegExp Free-spacing mode `(?x)` is not supported by JavaScript Scanner')
-
-  if (pattern.match(/\[:\w+:\]/))
-    throw new Error('POSIX character classes are not supported by JavaScript Scanner')
-
-  // Not supported by JavaScript
-  flagSet.delete('x')
-
-  try {
-    return new RegExp(pattern, [...flagSet].join(''))
-  }
-  catch (e) {
-    expect.soft(original).toBe(pattern)
-    throw e
   }
 }
 

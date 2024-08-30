@@ -1,6 +1,6 @@
 import type { RegexEngine } from '../textmate'
 import type { LoadWasmOptions } from '../types'
-import { createOnigScanner, createOnigString, loadWasm } from './oniguruma'
+import { OnigScanner, OnigString, loadWasm } from './oniguruma'
 
 export { loadWasm }
 
@@ -10,10 +10,10 @@ export async function createWasmOnigEngine(options?: LoadWasmOptions | null): Pr
 
   return {
     createScanner(patterns) {
-      return createOnigScanner(patterns)
+      return new OnigScanner(patterns)
     },
     createString(s) {
-      return createOnigString(s)
+      return new OnigString(s)
     },
   }
 }

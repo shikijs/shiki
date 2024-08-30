@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { basename } from 'node:path'
 import { promises as fs } from 'node:fs'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, onTestFailed } from 'vitest'
 import fg from 'fast-glob'
 import { JavaScriptScanner } from '../../../core/src/engines/javascript'
 import type { Instance } from './types'
@@ -13,7 +13,12 @@ const files = await fg('*.json', {
 })
 
 for (const file of files) {
-  describe.skip(`record: ${basename(file, '.json')}`, async () => {
+  // Some token positions are off in this record
+  const name = basename(file, '.json')
+  if (name === 'ts-basic')
+    continue
+
+  describe(`record: ${name}`, async () => {
     const instances = JSON.parse(await fs.readFile(file, 'utf-8')) as Instance[]
     let i = 0
     for (const instance of instances) {
@@ -22,12 +27,12 @@ for (const file of files) {
         let j = 0
         for (const execution of instance.executions) {
           it(`case ${j++}`, () => {
-            // onTestFailed(() => {
-            //   console.log({
-            //     patterns: scanner.patterns,
-            //     regexps: scanner.regexps,
-            //   })
-            // })
+            onTestFailed(() => {
+              console.error({
+                patterns: scanner.patterns,
+                regexps: scanner.regexps,
+              })
+            })
             const result = scanner.findNextMatchSync(...execution.args)
             expect(result).toEqual(execution.result)
           })
