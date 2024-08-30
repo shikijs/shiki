@@ -22,6 +22,8 @@ export interface ReportItem {
 async function run() {
   const report: ReportItem[] = []
 
+  await fs.rm(new URL('./compares', import.meta.url), { recursive: true, force: true })
+
   for (const lang of Object.keys(bundledLanguages)) {
     const sample = await fs.readFile(`../tm-grammars-themes/samples/${lang}.sample`, 'utf-8')
       .catch(() => '')
@@ -70,6 +72,25 @@ async function run() {
 
       if (!highlightMatch) {
         console.log(c.yellow(`[${lang}] Mismatch`))
+
+        await fs.mkdir(new URL('./compares', import.meta.url), { recursive: true })
+
+        await fs.writeFile(
+          new URL(`./compares/${lang}.html`, import.meta.url),
+          [
+            '<style>',
+            'body { display: flex; }',
+            'pre { flex: 1; margin: 0; padding: 0; }',
+            '</style>',
+            '<pre>',
+            highlightA,
+            '</pre>',
+            '<pre>',
+            highlightB,
+            '</pre>',
+          ].join('\n'),
+          'utf-8',
+        )
       }
       else {
         console.log(c.green(`[${lang}] OK`))

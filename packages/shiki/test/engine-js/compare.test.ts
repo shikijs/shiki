@@ -69,6 +69,14 @@ const cases: Cases[] = [
       'const foo: string = "bar"',
     ],
   },
+  {
+    name: 'jsonc',
+    theme: () => import('../../src/assets/themes/nord'),
+    lang: () => import('../../src/assets/langs/jsonc'),
+    cases: [
+      '// comment\n{"foo":"bar"}',
+    ],
+  },
 ]
 
 describe('cases', async () => {
