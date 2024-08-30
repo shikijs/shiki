@@ -1,22 +1,21 @@
 import { describe, expect, it } from 'vitest'
 import { wasmBinary } from '@shikijs/core/wasm-inlined'
-import type { IOnigLib } from '@shikijs/core/textmate'
+import type { RegexEngine } from '@shikijs/core/textmate'
 import type { LanguageRegistration, ThemeRegistration } from '../../src/core'
-import { createHighlighterCore } from '../../src/core'
+import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../src/core'
 
-import type { OnigString } from '../../../core/src/oniguruma'
-import { createOnigScanner, createOnigString, loadWasm } from '../../../core/src/oniguruma'
+import type { OnigString } from '../../../core/src/engines/oniguruma'
+import { createOnigScanner, createOnigString } from '../../../core/src/engines/oniguruma'
 import type { Instance } from './types'
-import { createJavaScriptOnigLib } from './scanner-js'
 
 await loadWasm({ instantiator: obj => WebAssembly.instantiate(wasmBinary, obj) })
 
-function createWasmOnigLibWrapper(): IOnigLib & { instances: Instance[] } {
+function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
   const instances: Instance[] = []
 
   return {
     instances,
-    createOnigScanner(patterns) {
+    createScanner(patterns) {
       const scanner = createOnigScanner(patterns)
       const instance: Instance = {
         constractor: [patterns],
@@ -31,7 +30,7 @@ function createWasmOnigLibWrapper(): IOnigLib & { instances: Instance[] } {
         },
       }
     },
-    createOnigString(s) {
+    createString(s) {
       return createOnigString(s)
     },
   }
@@ -87,17 +86,17 @@ describe('cases', async () => {
   for (const c of resolved) {
     it(c.c.name, async () => {
       const wasm = createWasmOnigLibWrapper()
-      const native = createJavaScriptOnigLib()
+      const native = createJavaScriptRegexEngine()
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
-        onig: wasm,
+        engine: wasm,
       })
       const shiki2 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
-        onig: native,
+        engine: native,
       })
 
       const lang = c.lang[0].name

@@ -1,5 +1,5 @@
-import type { LoadWasmOptions } from '../oniguruma'
-import type { IOnigLib } from '../textmate'
+import type { LoadWasmOptions } from '../types'
+import type { RegexEngine } from '../textmate'
 import type { StringLiteralUnion } from './utils'
 import type { LanguageInput, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
@@ -31,12 +31,12 @@ export interface HighlighterCoreOptions {
    */
   warnings?: boolean
   /**
-   * Custom oniguruma lib.
+   * Custom RegExp engine.
    */
-  onig?: IOnigLib
+  engine?: RegexEngine | Promise<RegexEngine>
 }
 
-export interface BundledHighlighterOptions<L extends string, T extends string> {
+export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings' | 'engine'> {
   /**
    * Theme registation
    *

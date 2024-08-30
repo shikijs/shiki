@@ -3,7 +3,9 @@ export * from './bundle-factory'
 export * from './utils'
 export * from './types'
 
-export { loadWasm } from './oniguruma'
+export { createWasmOnigEngine, loadWasm } from './engines/wasm'
+export { createJavaScriptRegexEngine } from './engines/javascript'
+
 export { createShikiInternal, getShikiInternal, setDefaultWasmLoader } from './internal'
 export { codeToTokensBase, tokenizeWithTheme } from './code-to-tokens-base'
 export { codeToTokens } from './code-to-tokens'

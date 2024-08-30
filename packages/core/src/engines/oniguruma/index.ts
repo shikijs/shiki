@@ -2,9 +2,14 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
-import { ShikiError } from '../error'
-import type { IOnigBinding, IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString, Pointer } from './types'
+import { ShikiError } from '../../error'
+import type { LoadWasmOptions, WebAssemblyInstance, WebAssemblyInstantiator } from '../../types'
+import type { IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString } from '../../../vendor/vscode-textmate/src/main'
 import createOnigasm from './onig'
+
+export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>
+
+export type Pointer = number
 
 export const enum FindOption {
   None = 0,
@@ -20,10 +25,21 @@ export const enum FindOption {
    * equivalent of ONIG_OPTION_NOT_BEGIN_POSITION: (start) isn't considered as start position of search (* fail \G)
    */
   NotBeginPosition = 4,
-  /**
-   * used for debugging purposes.
-   */
-  DebugCall = 8,
+}
+
+export interface IOnigBinding {
+  HEAPU8: Uint8Array
+  HEAPU32: Uint32Array
+
+  UTF8ToString: (ptr: Pointer) => string
+
+  omalloc: (count: number) => Pointer
+  ofree: (ptr: Pointer) => void
+  getLastOnigError: () => Pointer
+  createOnigScanner: (strPtrsPtr: Pointer, strLenPtr: Pointer, count: number) => Pointer
+  freeOnigScanner: (ptr: Pointer) => void
+  findNextOnigScannerMatch: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
+  findNextOnigScannerMatchDbg: (scanner: Pointer, strCacheId: number, strData: Pointer, strLength: number, position: number, options: number) => number
 }
 
 let onigBinding: IOnigBinding | null = null
@@ -297,9 +313,8 @@ export class OnigScanner implements IOnigScanner {
     let debugCall = defaultDebugCall
     let options = FindOption.None
     if (typeof arg === 'number') {
-      if (arg & FindOption.DebugCall)
-        debugCall = true
-
+      // if (arg & FindOption.DebugCall)
+      //   debugCall = true
       options = arg
     }
     else if (typeof arg === 'boolean') {
@@ -348,17 +363,6 @@ export class OnigScanner implements IOnigScanner {
   }
 }
 
-export interface WebAssemblyInstantiator {
-  (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssemblyInstance>
-}
-
-export type WebAssemblyInstance = WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance | WebAssembly.Instance['exports']
-
-export type OnigurumaLoadOptions =
-  | { instantiator: WebAssemblyInstantiator }
-  | { default: WebAssemblyInstantiator }
-  | { data: ArrayBufferView | ArrayBuffer | Response }
-
 function isInstantiatorOptionsObject(dataOrOptions: any): dataOrOptions is { instantiator: WebAssemblyInstantiator } {
   return (typeof dataOrOptions.instantiator === 'function')
 }
@@ -384,15 +388,6 @@ function isArrayBuffer(data: any): data is ArrayBuffer | ArrayBufferView {
 }
 
 let initPromise: Promise<void>
-
-type Awaitable<T> = T | Promise<T>
-
-export type LoadWasmOptionsPlain =
-  | OnigurumaLoadOptions
-  | WebAssemblyInstantiator
-  | ArrayBufferView | ArrayBuffer | Response
-
-export type LoadWasmOptions = Awaitable<LoadWasmOptionsPlain> | (() => Awaitable<LoadWasmOptionsPlain>)
 
 export function loadWasm(options: LoadWasmOptions): Promise<void> {
   if (initPromise)

@@ -1,10 +1,10 @@
 import { expect } from 'vitest'
-import type { IOnigMatch, OnigScanner, OnigString } from '../../../core/src/oniguruma/types'
-import type { IOnigLib } from '../../../core/vendor/vscode-textmate/src/onigLib'
+import type { PatternScanner, RegexEngine, RegexEngineString } from '../textmate'
+import type { JavaScriptRegexEngineOptions } from '../types/engines'
 
 const MAX = 4294967295
 
-export class JavaScriptOnigScanner implements OnigScanner {
+export class JavaScriptScanner implements PatternScanner {
   regexps: (RegExp | null)[]
 
   constructor(
@@ -23,7 +23,7 @@ export class JavaScriptOnigScanner implements OnigScanner {
     })
   }
 
-  findNextMatchSync(string: string | OnigString, startPosition: number): IOnigMatch | null {
+  findNextMatchSync(string: string | RegexEngineString, startPosition: number) {
     const str = typeof string === 'string'
       ? string
       : string.content
@@ -91,6 +91,34 @@ export class JavaScriptOnigScanner implements OnigScanner {
  */
 function covertRegex(pattern: string) {
   const original = pattern
+
+  const flagSet = new Set<string>(['d', 'g'])
+
+  pattern = pattern
+    .replace(/\\A/g, '^')
+    .replace(/\(\?(-)?(\w+):/g, (_, neg, flags) => {
+      if (neg) {
+        for (const flag of flags)
+          flagSet.delete(flag)
+      }
+      else {
+        for (const flag of flags)
+          flagSet.add(flag)
+      }
+      return '(?:'
+    })
+    .replace(/\(\?(-)?(\w+)\)/g, (_, neg, flags) => {
+      if (neg) {
+        for (const flag of flags)
+          flagSet.delete(flag)
+      }
+      else {
+        for (const flag of flags)
+          flagSet.add(flag)
+      }
+      return ''
+    })
+
   // `(?x)` stands for free-spacing mode
   // https://www.regular-expressions.info/freespacing.html
   // We remove comments and whitespaces
@@ -100,8 +128,11 @@ function covertRegex(pattern: string) {
   if (pattern.match(/\[:\w+:\]/))
     throw new Error('POSIX character classes are not supported by JavaScript Scanner')
 
+  // Not supported by JavaScript
+  flagSet.delete('x')
+
   try {
-    return new RegExp(pattern, 'dg')
+    return new RegExp(pattern, [...flagSet].join(''))
   }
   catch (e) {
     expect.soft(original).toBe(pattern)
@@ -109,21 +140,23 @@ function covertRegex(pattern: string) {
   }
 }
 
-export interface JavaScriptOnigLibOptions {
-  /**
-   * Whether to allow invalid regex patterns.
-   */
-  forgiving?: boolean
-}
-
-export function createJavaScriptOnigLib(options: JavaScriptOnigLibOptions = {}): IOnigLib {
+/**
+ * Use the modern JavaScript RegExp engine to implement the OnigScanner.
+ *
+ * As Oniguruma regex is more powerful than JavaScript regex, some patterns may not be supported.
+ * Errors will be thrown when parsing TextMate grammars with unsupported patterns.
+ * Set `forgiving` to `true` to ignore these errors and skip the unsupported patterns.
+ *
+ * @experimental
+ */
+export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOptions = {}): RegexEngine {
   const { forgiving = false } = options
 
   return {
-    createOnigScanner(patterns: string[]) {
-      return new JavaScriptOnigScanner(patterns, forgiving)
+    createScanner(patterns: string[]) {
+      return new JavaScriptScanner(patterns, forgiving)
     },
-    createOnigString(s: string) {
+    createString(s: string) {
       return {
         content: s,
       }

@@ -1,4 +1,4 @@
-import type { IOnigMatch } from '../../../core/src/oniguruma/types'
+import type { IOnigMatch } from '../../../core/vendor/vscode-textmate/src/main'
 
 export interface Instance {
   constractor: [string[]]

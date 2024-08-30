@@ -1,4 +1,4 @@
-import type { IOnigBinding, Instantiator } from './types'
+import type { IOnigBinding, Instantiator } from '.'
 
 function getHeapMax() {
   return 2147483648

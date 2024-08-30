@@ -8,4 +8,8 @@ export * from './transformers'
 export * from './utils'
 export * from './decorations'
 
-export { WebAssemblyInstantiator } from '../oniguruma'
+export {
+  LoadWasmOptions,
+  WebAssemblyInstantiator,
+  WebAssemblyInstance,
+} from './engines'
