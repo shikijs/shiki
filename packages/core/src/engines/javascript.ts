@@ -27,7 +27,10 @@ export class JavaScriptScanner implements PatternScanner {
           p
             // YAML specific handling; TODO: move to tm-grammars
             .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
-          { flags: 'dgm' },
+          {
+            flags: 'dgm',
+            ignoreContiguousAnchors: true,
+          },
         )
         cache?.set(p, regex)
         return regex

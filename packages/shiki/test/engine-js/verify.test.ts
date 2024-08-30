@@ -24,16 +24,27 @@ for (const file of files) {
     const instances = JSON.parse(await fs.readFile(file, 'utf-8')) as Instance[]
     let i = 0
     for (const instance of instances) {
-      describe(`instances ${i++}`, () => {
+      i += 1
+      describe(`instances ${i}`, () => {
         const scanner = new JavaScriptScanner(instance.constractor[0], cache, false)
         let j = 0
         for (const execution of instance.executions) {
-          it(`case ${j++}`, () => {
+          j += 1
+          it(`case ${j}`, () => {
             onTestFailed(() => {
-              console.error({
-                patterns: scanner.patterns,
-                regexps: scanner.regexps,
-              })
+              console.error(execution.result?.index != null
+                ? {
+                    args: execution.args,
+                    expected: {
+                      pattern: scanner.patterns[execution.result.index],
+                      regexp: scanner.regexps[execution.result.index],
+                    },
+                  }
+                : {
+                    args: execution.args,
+                    patterns: scanner.patterns,
+                    regexps: scanner.regexps,
+                  })
             })
             const result = scanner.findNextMatchSync(...execution.args)
             expect(result).toEqual(execution.result)

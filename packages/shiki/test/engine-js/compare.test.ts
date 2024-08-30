@@ -77,6 +77,44 @@ const cases: Cases[] = [
       '// comment\n{"foo":"bar"}',
     ],
   },
+  {
+    name: 'vue',
+    theme: () => import('../../src/assets/themes/vitesse-dark'),
+    lang: () => import('../../src/assets/langs/vue'),
+    cases: [
+      `<script setup>\nimport { ref } from 'vue'\n</script>`,
+      `<template>\n<div>{{ foo }}</div>\n</template>`,
+    ],
+  },
+  {
+    name: 'toml',
+    theme: () => import('../../src/assets/themes/nord'),
+    lang: () => import('../../src/assets/langs/toml'),
+    cases: [
+      [
+        `# This is a TOML document`,
+        '',
+        `title = "TOML Example"`,
+        '',
+        '[owner]',
+        'name = "Tom Preston-Werner"',
+      ].join('\n'),
+    ],
+  },
+  {
+    name: 'sql',
+    theme: () => import('../../src/assets/themes/nord'),
+    lang: () => import('../../src/assets/langs/sql'),
+    cases: [
+      'SELECT * FROM foo',
+      [
+        'USE AdventureWorks2022;',
+        'GO',
+        'IF OBJECT_ID(\'dbo.NewProducts\', \'U\') IS NOT NULL',
+        'DROP TABLE dbo.NewProducts;',
+      ].join('\n'),
+    ],
+  },
 ]
 
 describe('cases', async () => {
@@ -92,18 +130,18 @@ describe('cases', async () => {
 
   for (const c of resolved) {
     it(c.c.name, async () => {
-      const wasm = createWasmOnigLibWrapper()
-      const native = createJavaScriptRegexEngine()
+      const engineWasm = createWasmOnigLibWrapper()
+      const engineJs = createJavaScriptRegexEngine()
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
-        engine: wasm,
+        engine: engineWasm,
       })
       const shiki2 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
-        engine: native,
+        engine: engineJs,
       })
 
       const lang = c.lang[0].name
@@ -118,12 +156,14 @@ describe('cases', async () => {
         ])
       }
 
-      await expect(JSON.stringify(wasm.instances, null, 2))
+      await expect.soft(JSON.stringify(engineWasm.instances, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
 
-      for (const [a, b] of compare) {
+      compare.forEach(([a, b]) => {
         expect.soft(a).toEqual(b)
-      }
+        // await expect.soft(a)
+        //   .toMatchFileSnapshot(`./__records__/tokens/${c.c.name}-${i}.json`)
+      })
     })
   }
 })
