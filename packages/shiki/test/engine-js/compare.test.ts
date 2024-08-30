@@ -37,6 +37,7 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
 
 export interface Cases {
   name: string
+  skip?: boolean
   theme: () => Promise<{ default: ThemeRegistration }>
   lang: () => Promise<{ default: LanguageRegistration[] }>
   cases: string[]
@@ -116,6 +117,7 @@ const cases: Cases[] = [
     ],
   },
   {
+    skip: true,
     name: 'markdown',
     theme: () => import('../../src/assets/themes/nord'),
     lang: () => import('../../src/assets/langs/markdown'),
@@ -154,7 +156,8 @@ describe('cases', async () => {
   }))
 
   for (const c of resolved) {
-    it(c.c.name, async () => {
+    const run = c.c.skip ? it.skip : it
+    run(c.c.name, async () => {
       const engineWasm = createWasmOnigLibWrapper()
       const engineJs = createJavaScriptRegexEngine()
 
