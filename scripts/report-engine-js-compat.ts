@@ -6,7 +6,7 @@ import { version } from '../package.json'
 
 const engine = createJavaScriptRegexEngine()
 
-interface ReportItem {
+export interface ReportItem {
   lang: string
   highlightMatch: boolean | 'error'
   patternsParsable: number
