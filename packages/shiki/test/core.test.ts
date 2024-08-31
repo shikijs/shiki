@@ -69,17 +69,17 @@ describe('should', () => {
       ],
     })
 
-    expect(shiki.getLoadedLanguages())
+    expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
+          "c",
+          "c++",
+          "cpp",
+          "cpp-macro",
+          "glsl",
+          "regex",
           "regexp",
           "sql",
-          "c",
-          "glsl",
-          "cpp-macro",
-          "cpp",
-          "regex",
-          "c++",
         ]
       `)
   })

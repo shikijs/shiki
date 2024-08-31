@@ -45,6 +45,9 @@ catalogs:
     '@rollup/plugin-terser':
       specifier: ^0.4.4
       version: 0.4.4
+    '@shikijs/vscode-textmate':
+      specifier: ^9.1.1
+      version: 9.1.1
     '@types/fs-extra':
       specifier: ^11.0.4
       version: 11.0.4
@@ -500,6 +503,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@shikijs/vscode-textmate':
+        specifier: 'catalog:'
+        version: 9.1.1
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -1758,6 +1764,9 @@ packages:
     resolution: {integrity: sha512-6UUxd0+SKomjdzuAcp+HAmxw1FlGBnl1v2yEPSabtx4lBfdXHDVsW7+lQkgz9cNFJGY3AWR7+V8P5BqkD9L9nA==}
     cpu: [x64]
     os: [win32]
+
+  '@shikijs/vscode-textmate@9.1.1':
+    resolution: {integrity: sha512-K/Xw/+uLXHtEp9bwTRbcwSB05du8J0k+O/n8nU7Z+J84BS9C+x6dWRUh3q2Pn8F19p+wPV1GU1xWSSimHlk9nA==}
 
   '@stylistic/eslint-plugin@2.7.1':
     resolution: {integrity: sha512-JqnHom8CP14oOgPhwTPbn0QgsBJwgNySQSe00V9GQQDlY1tEqZUlK4jM2DIOJ5nE+oXoy51vZWHnHkfZ6rEruw==}
@@ -6419,6 +6428,8 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.21.2':
     optional: true
+
+  '@shikijs/vscode-textmate@9.1.1': {}
 
   '@stylistic/eslint-plugin@2.7.1(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:

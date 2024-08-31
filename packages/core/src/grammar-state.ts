@@ -1,6 +1,5 @@
-import type { StateStackImpl } from '../vendor/vscode-textmate/src/grammar'
+import type { StateStack, StateStackImpl } from './textmate'
 import { ShikiError } from './error'
-import type { StateStack } from './textmate'
 import { INITIAL } from './textmate'
 
 /**

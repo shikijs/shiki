@@ -6,6 +6,12 @@ import type {
 } from '../textmate'
 
 export type {
+  RegexEngine,
+  PatternScanner,
+  RegexEngineString,
+} from '../textmate'
+
+export type {
   RawGrammar,
   RawTheme,
   RawThemeSetting,

@@ -48,7 +48,7 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
   ] as const)
 
   const resolver = new Resolver(
-    Promise.resolve(options.engine || createWasmOnigEngine(options.loadWasm || _defaultWasmLoader)),
+    await (options.engine || createWasmOnigEngine(options.loadWasm || _defaultWasmLoader)),
     langs,
   )
 

@@ -1,8 +1,8 @@
 # Report: JavaScript RegExp Engine Compatibility
 
-> At Fri Aug 30 2024
+> At Sat Aug 31 2024
 >
-> Version `1.15.0`
+> Version `1.15.2`
 >
 > Runtime: Node.js v20.12.2
 
