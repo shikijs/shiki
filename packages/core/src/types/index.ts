@@ -7,9 +7,4 @@ export * from './tokens'
 export * from './transformers'
 export * from './utils'
 export * from './decorations'
-
-export type {
-  LoadWasmOptions,
-  WebAssemblyInstantiator,
-  WebAssemblyInstance,
-} from './engines'
+export * from './engines'

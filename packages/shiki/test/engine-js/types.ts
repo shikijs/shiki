@@ -1,4 +1,4 @@
-import type { IOnigMatch } from '../../../core/vendor/vscode-textmate/src/main'
+import type { IOnigMatch } from '@shikijs/vscode-textmate'
 
 export interface Instance {
   constractor: [string[]]

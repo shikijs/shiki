@@ -1,3 +1,17 @@
+import type { OnigScanner, OnigString } from '@shikijs/vscode-textmate'
+
+export interface PatternScanner extends OnigScanner {}
+
+export interface RegexEngineString extends OnigString {}
+
+/**
+ * Engine for RegExp matching and scanning.
+ */
+export interface RegexEngine {
+  createScanner: (patterns: string[]) => PatternScanner
+  createString: (s: string) => RegexEngineString
+}
+
 type Awaitable<T> = T | Promise<T>
 
 export interface WebAssemblyInstantiator {

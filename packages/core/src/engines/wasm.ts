@@ -1,5 +1,4 @@
-import type { RegexEngine } from '../textmate'
-import type { LoadWasmOptions } from '../types'
+import type { LoadWasmOptions, RegexEngine } from '../types'
 import { OnigScanner, OnigString, loadWasm } from './oniguruma'
 
 export { loadWasm }

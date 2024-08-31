@@ -1,14 +1,14 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-import type { IGrammar, IRawThemeSetting, StateStack } from './textmate'
-import { INITIAL } from './textmate'
-import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from './types'
-import { StackElementMetadata } from './stack-element-metadata'
-import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from './utils'
+import { INITIAL } from '@shikijs/vscode-textmate'
+import type { IGrammar, IRawThemeSetting, StateStack } from '@shikijs/vscode-textmate'
+import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from '../types'
+import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
+import { ShikiError } from '../error'
+import { GrammarState, getGrammarStack } from '../textmate/grammar-state'
+import { StackElementMetadata } from '../textmate/stack-element-metadata'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
-import { ShikiError } from './error'
-import { GrammarState, getGrammarStack } from './grammar-state'
 
 /**
  * Code to tokens, with a simple theme.

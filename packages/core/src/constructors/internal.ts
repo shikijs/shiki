@@ -1,10 +1,22 @@
-import type { HighlighterCoreOptions, LanguageInput, LanguageRegistration, LoadWasmOptions, MaybeGetter, ShikiInternal, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
-import { Registry } from './registry'
-import { Resolver } from './resolver'
-import { normalizeTheme } from './normalize'
-import { isSpecialLang, isSpecialTheme } from './utils'
-import { ShikiError } from './error'
-import { createWasmOnigEngine } from './engines/wasm'
+import type {
+  HighlighterCoreOptions,
+  LanguageInput,
+  LanguageRegistration,
+  LoadWasmOptions,
+  MaybeGetter,
+  ShikiInternal,
+  SpecialLanguage,
+  SpecialTheme,
+  ThemeInput,
+  ThemeRegistrationAny,
+  ThemeRegistrationResolved,
+} from '../types'
+import { Registry } from '../textmate/registry'
+import { Resolver } from '../textmate/resolver'
+import { normalizeTheme } from '../textmate/normalize-theme'
+import { isSpecialLang, isSpecialTheme } from '../utils'
+import { ShikiError } from '../error'
+import { createWasmOnigEngine } from '../engines/wasm'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
 /**

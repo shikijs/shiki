@@ -3,13 +3,7 @@ import type {
   IRawGrammar as RawGrammar,
   IRawTheme as RawTheme,
   IRawThemeSetting as RawThemeSetting,
-} from '../textmate'
-
-export type {
-  RegexEngine,
-  PatternScanner,
-  RegexEngineString,
-} from '../textmate'
+} from '@shikijs/vscode-textmate'
 
 export type {
   RawGrammar,

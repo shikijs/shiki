@@ -11,7 +11,6 @@ import ts from 'rollup-plugin-typescript2'
 const entries = [
   'src/index.ts',
   'src/types.ts',
-  'src/textmate.ts',
   'src/wasm-inlined.ts',
 ]
 

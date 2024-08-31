@@ -1,6 +1,5 @@
 import { onigurumaToRegexp } from 'oniguruma-to-js'
-import type { PatternScanner, RegexEngine, RegexEngineString } from '../textmate'
-import type { JavaScriptRegexEngineOptions } from '../types/engines'
+import type { JavaScriptRegexEngineOptions, PatternScanner, RegexEngine, RegexEngineString } from '../types'
 
 const MAX = 4294967295
 

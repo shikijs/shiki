@@ -1,8 +1,8 @@
 import type { Root } from 'hast'
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
-import { isSpecialLang, isSpecialTheme } from './utils'
+import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from '../types'
+import { isSpecialLang, isSpecialTheme } from '../utils'
+import { ShikiError } from '../error'
 import { createHighlighterCore } from './highlighter'
-import { ShikiError } from './error'
 
 export type CreateHighlighterFactory<L extends string, T extends string> = (
   options: BundledHighlighterOptions<L, T>

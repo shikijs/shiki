@@ -1,18 +1,28 @@
-export * from './highlighter'
-export * from './bundle-factory'
-export * from './utils'
+// Types
 export * from './types'
 
+// Constructors
+export * from './constructors/highlighter'
+export * from './constructors/bundle-factory'
+export { createShikiInternal, getShikiInternal, setDefaultWasmLoader } from './constructors/internal'
+
+// Engines
 export { createWasmOnigEngine, loadWasm } from './engines/wasm'
 export { createJavaScriptRegexEngine } from './engines/javascript'
 
-export { createShikiInternal, getShikiInternal, setDefaultWasmLoader } from './internal'
-export { codeToTokensBase, tokenizeWithTheme } from './code-to-tokens-base'
-export { codeToTokens } from './code-to-tokens'
-export { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
-export { codeToHast, tokensToHast } from './code-to-hast'
-export { codeToHtml, hastToHtml } from './code-to-html'
-export { codeToTokensWithThemes } from './code-to-tokens-themes'
-export { normalizeTheme } from './normalize'
+// TextMate Utilities
+export { StackElementMetadata } from './textmate/stack-element-metadata'
+export { normalizeTheme } from './textmate/normalize-theme'
+
+// Low-level Highlighting
+export { codeToTokensBase, tokenizeWithTheme } from './highlight/code-to-tokens-base'
+export { codeToTokens } from './highlight/code-to-tokens'
+export { tokenizeAnsiWithTheme } from './highlight/code-to-tokens-ansi'
+export { codeToHast, tokensToHast } from './highlight/code-to-hast'
+export { codeToHtml, hastToHtml } from './highlight/code-to-html'
+export { codeToTokensWithThemes } from './highlight/code-to-tokens-themes'
+
+// Utils and Misc
+export * from './utils'
 export { transformerDecorations } from './transformer-decorations'
 export { ShikiError } from './error'

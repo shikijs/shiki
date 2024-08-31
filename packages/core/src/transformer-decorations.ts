@@ -1,5 +1,14 @@
 import type { Element, ElementContent } from 'hast'
-import type { DecorationItem, DecorationTransformType, OffsetOrPosition, ResolvedDecorationItem, ResolvedPosition, ShikiTransformer, ShikiTransformerContextMeta, ShikiTransformerContextSource } from './types'
+import type {
+  DecorationItem,
+  DecorationTransformType,
+  OffsetOrPosition,
+  ResolvedDecorationItem,
+  ResolvedPosition,
+  ShikiTransformer,
+  ShikiTransformerContextMeta,
+  ShikiTransformerContextSource,
+} from './types'
 import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 import { ShikiError } from './error'
 

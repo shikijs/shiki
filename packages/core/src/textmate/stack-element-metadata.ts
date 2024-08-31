@@ -1,4 +1,4 @@
-import { FontStyle } from './types'
+import { FontStyle } from '../types'
 
 /**
  * Helpers to manage the "collapsed" metadata of an entire StackElement stack.

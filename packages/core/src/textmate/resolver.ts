@@ -1,5 +1,5 @@
-import type { IOnigLib, RegexEngine, RegistryOptions } from './textmate'
-import type { LanguageRegistration } from './types'
+import type { IOnigLib, RegistryOptions } from '@shikijs/vscode-textmate'
+import type { LanguageRegistration, RegexEngine } from '../types'
 
 export class Resolver implements RegistryOptions {
   private readonly _langs = new Map<string, LanguageRegistration>()

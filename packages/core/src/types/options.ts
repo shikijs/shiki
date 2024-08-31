@@ -1,5 +1,4 @@
-import type { LoadWasmOptions } from '../types'
-import type { RegexEngine } from '../textmate'
+import type { LoadWasmOptions, RegexEngine } from '../types'
 import type { StringLiteralUnion } from './utils'
 import type { LanguageInput, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'

@@ -1,10 +1,10 @@
-import { codeToHast } from './code-to-hast'
-import { codeToHtml } from './code-to-html'
-import { codeToTokens } from './code-to-tokens'
-import { codeToTokensBase, getLastGrammarState } from './code-to-tokens-base'
-import { codeToTokensWithThemes } from './code-to-tokens-themes'
+import { codeToHast } from '../highlight/code-to-hast'
+import { codeToHtml } from '../highlight/code-to-html'
+import { codeToTokens } from '../highlight/code-to-tokens'
+import { codeToTokensBase, getLastGrammarState } from '../highlight/code-to-tokens-base'
+import { codeToTokensWithThemes } from '../highlight/code-to-tokens-themes'
+import type { HighlighterCore, HighlighterCoreOptions } from '../types'
 import { createShikiInternal } from './internal'
-import type { HighlighterCore, HighlighterCoreOptions } from './types'
 
 /**
  * Create a Shiki core highlighter instance, with no languages or themes bundled.

@@ -1,4 +1,4 @@
-import type { ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
+import type { ThemeRegistrationAny, ThemeRegistrationResolved } from '../types'
 
 /**
  * https://github.com/microsoft/vscode/blob/f7f05dee53fb33fe023db2e06e30a89d3094488f/src/vs/platform/theme/common/colorRegistry.ts#L258-L268
