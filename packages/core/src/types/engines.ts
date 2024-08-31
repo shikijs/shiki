@@ -1,4 +1,5 @@
 import type { OnigScanner, OnigString } from '@shikijs/vscode-textmate'
+import type { Awaitable } from './utils'
 
 export interface PatternScanner extends OnigScanner {}
 
@@ -11,8 +12,6 @@ export interface RegexEngine {
   createScanner: (patterns: string[]) => PatternScanner
   createString: (s: string) => RegexEngineString
 }
-
-type Awaitable<T> = T | Promise<T>
 
 export interface WebAssemblyInstantiator {
   (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssemblyInstance>
