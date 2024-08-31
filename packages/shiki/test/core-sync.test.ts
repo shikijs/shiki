@@ -10,7 +10,7 @@ describe('should', () => {
   it('works', () => {
     const shiki = createHighlighterCoreSync({
       themes: [nord],
-      langs: [js as any],
+      langs: [js],
       engine,
     })
 

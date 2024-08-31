@@ -13,7 +13,7 @@ describe('should', () => {
   it('works', async () => {
     const shiki = await createHighlighterCore({
       themes: [nord],
-      langs: [js as any],
+      langs: [js],
       loadWasm: {
         instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
       },
