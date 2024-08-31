@@ -42,6 +42,6 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('@media foo { .bar { padding-left: 1px; }}', { lang: 'css', theme: 'min-dark' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#B392F0">@media foo { .bar { </span><span style="color:#79B8FF">padding-left</span><span style="color:#F97583">:</span><span style="color:#F8F8F8"> 1px</span><span style="color:#B392F0">; }}</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#F97583">@media</span><span style="color:#B392F0"> foo { .bar { </span><span style="color:#79B8FF">padding-left</span><span style="color:#F97583">:</span><span style="color:#F8F8F8"> 1px</span><span style="color:#B392F0">; }}</span></span></code></pre>"`)
   })
 })

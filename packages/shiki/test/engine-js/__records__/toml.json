@@ -1,0 +1,414 @@
+[
+  {
+    "constractor": [
+      [
+        "(^[ \\t]+)?(?=#)",
+        "^\\s*(\\[)([^\\[\\]]*)(\\])",
+        "^\\s*(\\[\\[)([^\\[\\]]*)(\\]\\])",
+        "([A-Za-z0-9_-]+)\\s*(=)\\s*",
+        "((\")(.*?)(\"))\\s*(=)\\s*",
+        "((')([^']*)('))\\s*(=)\\s*",
+        "(((?:[A-Za-z0-9_-]+|\"(?:[^\"\\\\]|\\\\.)*\"|'[^']*')(?:\\s*\\.\\s*|(?=\\s*=))){2,})\\s*(=)\\s*",
+        "\\S+(\\s*(?=\\S))?"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "# This is a TOML document\n",
+          0
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 0,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "# This is a TOML document\n",
+          26
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "title = \"TOML Example\"\n",
+          0
+        ],
+        "result": {
+          "index": 3,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 8,
+              "length": 8
+            },
+            {
+              "start": 0,
+              "end": 5,
+              "length": 5
+            },
+            {
+              "start": 6,
+              "end": 7,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "title = \"TOML Example\"\n",
+          22
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "[owner]\n",
+          0
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 7,
+              "length": 7
+            },
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            },
+            {
+              "start": 1,
+              "end": 6,
+              "length": 5
+            },
+            {
+              "start": 6,
+              "end": 7,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "[owner]\n",
+          7
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "name = \"Tom Preston-Werner\"\n",
+          0
+        ],
+        "result": {
+          "index": 3,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 7,
+              "length": 7
+            },
+            {
+              "start": 0,
+              "end": 4,
+              "length": 4
+            },
+            {
+              "start": 5,
+              "end": 6,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "name = \"Tom Preston-Werner\"\n",
+          27
+        ],
+        "result": null
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "(?!\\G)",
+        "#"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "# This is a TOML document\n",
+          0
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "\\n"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "# This is a TOML document\n",
+          1
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 25,
+              "end": 26,
+              "length": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "(?!\\￿)",
+        "#"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "# This is a TOML document\n",
+          26
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 26,
+              "end": 26,
+              "length": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "(?<=\\S)(?<!=)|$",
+        "\\G\"\"\"",
+        "\\G\"",
+        "\\G'''",
+        "\\G'",
+        "\\G\\d{4}-(0[1-9]|1[012])-(?!00|3[2-9])[0-3]\\d([Tt ](?!2[5-9])[0-2]\\d:[0-5]\\d:(?!6[1-9])[0-6]\\d(\\.\\d+)?(Z|[+-](?!2[5-9])[0-2]\\d:[0-5]\\d)?)?",
+        "\\G(?!2[5-9])[0-2]\\d:[0-5]\\d:(?!6[1-9])[0-6]\\d(\\.\\d+)?",
+        "\\G(true|false)",
+        "\\G0x[ \\t]([ \\t]|_[ \\t])*",
+        "\\G0o[0-7]([0-7]|_[0-7])*",
+        "\\G0b[01]([01]|_[01])*",
+        "\\G[+-]?(inf|nan)",
+        "\\G([+-]?(0|([1-9]((\\d|_\\d)+)?)))(?=[.eE])(\\.(\\d((\\d|_\\d)+)?))?([eE]([+-]?\\d((\\d|_\\d)+)?))?",
+        "\\G([+-]?(0|([1-9]((\\d|_\\d)+)?)))",
+        "\\G\\[",
+        "\\G\\{"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "title = \"TOML Example\"\n",
+          8
+        ],
+        "result": {
+          "index": 2,
+          "captureIndices": [
+            {
+              "start": 8,
+              "end": 9,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "name = \"Tom Preston-Werner\"\n",
+          7
+        ],
+        "result": {
+          "index": 2,
+          "captureIndices": [
+            {
+              "start": 7,
+              "end": 8,
+              "length": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "\"",
+        "\\\\([btnfr\"\\\\]|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})",
+        "\\\\[^btnfr\"\\\\]"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "title = \"TOML Example\"\n",
+          9
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 21,
+              "end": 22,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "name = \"Tom Preston-Werner\"\n",
+          8
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 26,
+              "end": 27,
+              "length": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "(?<=\\S)(?<!=)|$",
+        "\\￿\"\"\"",
+        "\\￿\"",
+        "\\￿'''",
+        "\\￿'",
+        "\\￿\\d{4}-(0[1-9]|1[012])-(?!00|3[2-9])[0-3]\\d([Tt ](?!2[5-9])[0-2]\\d:[0-5]\\d:(?!6[1-9])[0-6]\\d(\\.\\d+)?(Z|[+-](?!2[5-9])[0-2]\\d:[0-5]\\d)?)?",
+        "\\￿(?!2[5-9])[0-2]\\d:[0-5]\\d:(?!6[1-9])[0-6]\\d(\\.\\d+)?",
+        "\\￿(true|false)",
+        "\\￿0x[ \\t]([ \\t]|_[ \\t])*",
+        "\\￿0o[0-7]([0-7]|_[0-7])*",
+        "\\￿0b[01]([01]|_[01])*",
+        "\\￿[+-]?(inf|nan)",
+        "\\￿([+-]?(0|([1-9]((\\d|_\\d)+)?)))(?=[.eE])(\\.(\\d((\\d|_\\d)+)?))?([eE]([+-]?\\d((\\d|_\\d)+)?))?",
+        "\\￿([+-]?(0|([1-9]((\\d|_\\d)+)?)))",
+        "\\￿\\[",
+        "\\￿\\{"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "title = \"TOML Example\"\n",
+          22
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 22,
+              "end": 22,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "name = \"Tom Preston-Werner\"\n",
+          27
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 27,
+              "end": 27,
+              "length": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "constractor": [
+      [
+        "[^\\s.]+"
+      ]
+    ],
+    "executions": [
+      {
+        "args": [
+          "[owner",
+          1
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 1,
+              "end": 6,
+              "length": 5
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "[owner",
+          6
+        ],
+        "result": null
+      }
+    ]
+  }
+]
