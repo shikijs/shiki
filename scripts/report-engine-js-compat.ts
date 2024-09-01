@@ -137,38 +137,66 @@ async function run() {
     JSON.stringify(report, null, 2),
   )
 
-  const table: readonly [string, string, string, string][] = [
-    ['Language', 'Highlight Match', 'Patterns Parsable', 'Patterns Failed'],
-    ['---', ':---', '---', '---'],
-    ...report
-      .map(item => [
-        item.lang,
-        item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : '⚠️ Mismatch',
-        item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
-        item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
-      ] as [string, string, string, string]),
-  ]
+  function createTable(report: ReportItem[]) {
+    const table: readonly [string, string, string, string][] = [
+      ['Language', 'Highlight Match', 'Patterns Parsable', 'Patterns Failed'],
+      ['---', ':---', '---:', '---:'],
+      ...report
+        .map(item => [
+          item.lang,
+          item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : '⚠️ Mismatch',
+          item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
+          item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
+        ] as [string, string, string, string]),
+    ]
+
+    return table.map(row => `| ${row.join(' | ')} |`).join('\n')
+  }
+
+  const reportOk = report.filter(item => item.highlightMatch === true && item.patternsFailed.length === 0)
+  const reportMismatch = report.filter(item => item.highlightMatch === false && item.patternsFailed.length === 0)
+  const reportError = report.filter(item => item.highlightMatch === 'error' || item.patternsFailed.length > 0)
 
   const markdown = [
-    '# Report: JavaScript RegExp Engine Compatibility',
+    '# JavaScript RegExp Engine Compatibility References',
     '',
-    `> At ${new Date().toDateString()}`,
+    `> Genreated on ${new Date().toLocaleDateString('en-US', { dateStyle: 'full' })} `,
     '>',
     `> Version \`${version}\``,
     '>',
     `> Runtime: Node.js v${process.versions.node}`,
     '',
-    '| Status | Number |',
+
+    '## Report Summary',
+    '',
+    '|  | Count |',
     '| :--- | ---: |',
     `| Total Languages | ${report.length} |`,
-    `| OK | ${report.filter(item => item.highlightMatch === true).length} |`,
-    `| Mismatch | ${report.filter(item => item.highlightMatch === false).length} |`,
-    `| Error | ${report.filter(item => item.highlightMatch === 'error').length} |`,
+    `| Fully Supported | [${reportOk.length}](#fully-supported-languages) |`,
+    `| Mismatched | [${reportMismatch.length}](#mismatched-languages) |`,
+    `| Unsupported | [${reportError.length}](#unsupported-languages) |`,
     '',
-    table.map(row => `| ${row.join(' | ')} |`).join('\n'),
+    '## Fully Supported Languages',
+    '',
+    'Languages that works with the JavaScript RegExp engine, and will produce the same result as the WASM engine.',
+    '',
+    createTable(reportOk),
+    '',
+    '## Mismatched Languages',
+    '',
+    'Languages that does not throw with the JavaScript RegExp engine, but will produce different result than the WASM engine. Please use with caution.',
+    '',
+    createTable(reportMismatch),
+    '',
+    '## Unsupported Languages',
+    '',
+    'Languages that throws with the JavaScript RegExp engine (contains syntaxes that we can\'t polyfill yet). If you need to use these languages, please use the Oniguruma engine.',
+    '',
+    createTable(reportError),
   ].join('\n')
+
   await fs.writeFile(
-    new URL('./report-engine-js-compat.md', import.meta.url),
+    new URL('../docs/references/engine-js-compat.md', import.meta.url),
     markdown,
   )
 }

@@ -17,7 +17,7 @@ Oh by the way, all the code blocks in this site are highlighted by Shiki, as you
 - All grammars/themes/wasm served as ESM, lazy-loaded on demand and bundler-friendly.
 - Portable & agnostic. Does not rely on Node.js APIs or the filesystem, works in any modern JavaScript runtime.
 - ESM-only ([CDN Usage](/guide/install#cdn-usage), [CJS Usage](/guide/install#cjs-usage)).
-- [Bundles languages/themes composedly](/guide/install#fine-grained-bundle).
+- [Bundles languages/themes composedly](/guide/bundles#fine-grained-bundle).
 - [Light/Dark themes support](/guide/dual-themes)
 - [`hast` support](/guide/transformers#codetohast)
 - [Transformers API](/guide/transformers)

@@ -11,7 +11,7 @@
     "build": "pnpm -r run build",
     "docs": "pnpm -C docs run docs:dev",
     "docs:build": "pnpm -C docs run docs:build",
-    "report-engine-js": "jiti scripts/report-engine-js-compat.ts",
+    "report-engine-js": "esno scripts/report-engine-js-compat.ts",
     "bench": "vitest bench",
     "prepare": "simple-git-hooks"
   },

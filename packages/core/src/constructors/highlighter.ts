@@ -11,7 +11,7 @@ import { createShikiInternalSync } from './internal-sync'
  * Create a Shiki core highlighter instance, with no languages or themes bundled.
  * Wasm and each language and theme must be loaded manually.
  *
- * @see http://shiki.style/guide/install#fine-grained-bundle
+ * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
 export async function createHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
   const internal = await createShikiInternal(options)
@@ -34,7 +34,7 @@ export async function createHighlighterCore(options: HighlighterCoreOptions = {}
  *
  * Synchronous version of `createHighlighterCore`, which requires to provide the engine and all themes and languages upfront.
  *
- * @see http://shiki.style/guide/install#fine-grained-bundle
+ * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
 export function createHighlighterCoreSync(options: HighlighterCoreOptions<true> = {}): HighlighterCore {
   const internal = createShikiInternalSync(options)

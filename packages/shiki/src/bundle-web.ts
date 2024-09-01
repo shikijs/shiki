@@ -23,7 +23,7 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
  * @see https://shiki.style/guide/bundles#shiki-bundle-web
  *
  * For granular control over the bundle, check:
- * @see https://shiki.style/guide/install#fine-grained-bundle
+ * @see https://shiki.style/guide/bundles#fine-grained-bundle
  */
 export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,
