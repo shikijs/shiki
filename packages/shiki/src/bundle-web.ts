@@ -1,5 +1,5 @@
 import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/core'
-import { createSingletonShorthands, createdBundledHighlighter } from './core'
+import { createSingletonShorthands, createWasmOnigEngine, createdBundledHighlighter } from './core'
 import type { BundledLanguage } from './assets/langs-bundle-web'
 import type { BundledTheme } from './themes'
 import { bundledLanguages } from './assets/langs-bundle-web'
@@ -28,11 +28,11 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
 export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,
   BundledTheme
->(
-  bundledLanguages,
-  bundledThemes,
-  getWasmInlined,
-)
+>({
+  langs: bundledLanguages,
+  themes: bundledThemes,
+  engine: () => createWasmOnigEngine(getWasmInlined),
+})
 
 export const {
   codeToHtml,
