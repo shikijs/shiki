@@ -18,9 +18,9 @@ const shiki = createHighlighterCoreSync({
 const html = shiki.highlight('console.log(1)', { lang: 'js', theme: 'nord' })
 ```
 
-When doing so, it requires all `themes` and `langs` to be provide as plain objects. Also an explicit `engine` is required to be provided. With the new [experimental JavaScript RegExp engine](http://localhost:5173/guide/regex-engines#javascript-regexp-engine-experimental) you are able to create an engine instance synchronously as well.
+When doing so, it requires all `themes` and `langs` to be provide as plain objects. Also an explicit `engine` is required to be provided. With the new [experimental JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental) you are able to create an engine instance synchronously as well.
 
-The [Oniguruma Engine](http://localhost:5173/guide/regex-engines#oniguruma-engine) can only be created asynchronously, so you need to resolve the engine promise before creating the sync highlighter.
+The [Oniguruma Engine](/guide/regex-engines#oniguruma-engine) can only be created asynchronously, so you need to resolve the engine promise before creating the sync highlighter.
 
 ```ts
 import { createHighlighterCoreSync, createWasmOnigEngine } from 'shiki/core'
