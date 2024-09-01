@@ -32,6 +32,11 @@ const plugins = [
   wasmPlugin(),
 ]
 
+const external = [
+  'hast',
+  '@shikijs/vscode-textmate',
+]
+
 export default defineConfig([
   {
     input: entries,
@@ -46,6 +51,7 @@ export default defineConfig([
     plugins: [
       ...plugins,
     ],
+    external,
   },
   {
     input: entries,
@@ -70,9 +76,7 @@ export default defineConfig([
       if (!/Circular|an empty chunk/.test(warning.message))
         warn(warning)
     },
-    external: [
-      'hast',
-    ],
+    external,
   },
 ])
 
