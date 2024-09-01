@@ -12,7 +12,6 @@ export { createWasmOnigEngine, loadWasm } from './engines/wasm'
 export { createJavaScriptRegexEngine } from './engines/javascript'
 
 // TextMate Utilities
-export { StackElementMetadata } from './textmate/stack-element-metadata'
 export { normalizeTheme } from './textmate/normalize-theme'
 
 // Low-level Highlighting
@@ -27,3 +26,11 @@ export { codeToTokensWithThemes } from './highlight/code-to-tokens-themes'
 export * from './utils'
 export { transformerDecorations } from './transformer-decorations'
 export { ShikiError } from './error'
+
+// Deprecated
+export {
+  /**
+   * @deprecated Use `EncodedTokenMetadata` from `@shikijs/vscode-textmate` instead.
+   */
+  EncodedTokenMetadata as StackElementMetadata,
+} from '@shikijs/vscode-textmate'

@@ -46,8 +46,8 @@ catalogs:
       specifier: ^0.4.4
       version: 0.4.4
     '@shikijs/vscode-textmate':
-      specifier: ^9.1.1
-      version: 9.1.1
+      specifier: ^9.2.0
+      version: 9.2.0
     '@types/fs-extra':
       specifier: ^11.0.4
       version: 11.0.4
@@ -505,7 +505,7 @@ importers:
     dependencies:
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.1.1
+        version: 9.2.0
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -543,7 +543,7 @@ importers:
         version: link:../core
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.1.1
+        version: 9.2.0
     devDependencies:
       monaco-editor-core:
         specifier: 'catalog:'
@@ -599,7 +599,7 @@ importers:
         version: link:../core
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.1.1
+        version: 9.2.0
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -1771,8 +1771,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@shikijs/vscode-textmate@9.1.1':
-    resolution: {integrity: sha512-K/Xw/+uLXHtEp9bwTRbcwSB05du8J0k+O/n8nU7Z+J84BS9C+x6dWRUh3q2Pn8F19p+wPV1GU1xWSSimHlk9nA==}
+  '@shikijs/vscode-textmate@9.2.0':
+    resolution: {integrity: sha512-5FinaOp6Vdh/dl4/yaOTh0ZeKch+rYS8DUb38V3GMKYVkdqzxw53lViRKUYkVILRiVQT7dcPC7VvAKOR73zVtQ==}
 
   '@stylistic/eslint-plugin@2.7.1':
     resolution: {integrity: sha512-JqnHom8CP14oOgPhwTPbn0QgsBJwgNySQSe00V9GQQDlY1tEqZUlK4jM2DIOJ5nE+oXoy51vZWHnHkfZ6rEruw==}
@@ -2032,8 +2032,8 @@ packages:
   '@vitest/eslint-plugin@1.1.0':
     resolution: {integrity: sha512-Ur80Y27Wbw8gFHJ3cv6vypcjXmrx6QHfw+q435h6Q2L+tf+h4Xf5pJTCL4YU/Jps9EVeggQxS85OcUZU7sdXRw==}
     peerDependencies:
-      '@typescript-eslint/utils': '>= 8.0'
-      eslint: '>= 8.57.0'
+      '@typescript-eslint/utils': ^8.3.0
+      eslint: ^9.9.1
       typescript: '>= 5.0.0'
       vitest: '*'
     peerDependenciesMeta:
@@ -2903,7 +2903,7 @@ packages:
   eslint-config-flat-gitignore@0.3.0:
     resolution: {integrity: sha512-0Ndxo4qGhcewjTzw52TK06Mc00aDtHNTdeeW2JfONgDcLkRO/n/BteMRzNVpLQYxdCC/dFEilfM9fjjpGIJ9Og==}
     peerDependencies:
-      eslint: ^9.5.0
+      eslint: ^9.9.1
 
   eslint-flat-config-utils@0.3.1:
     resolution: {integrity: sha512-eFT3EaoJN1hlN97xw4FIEX//h0TiFUobgl2l5uLkIwhVN9ahGq95Pbs+i1/B5UACA78LO3rco3JzuvxLdTUOPA==}
@@ -2949,7 +2949,7 @@ packages:
     resolution: {integrity: sha512-dBEM8fACIFNt4H7GoOaRmnH6evJW6JSTJTYYgmRd3vI4geBTjgDM/JyUDKUwIw0HDSyI+u7Vs3vFRXUo/BOAtA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      eslint: ^8.57.0 || ^9.0.0
+      eslint: ^9.9.1
 
   eslint-plugin-jsdoc@50.2.2:
     resolution: {integrity: sha512-i0ZMWA199DG7sjxlzXn5AeYZxpRfMJjDPUl7lL9eJJX8TPRoIaxJU4ys/joP5faM5AXE1eqW/dslCj3uj4Nqpg==}
@@ -2984,7 +2984,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: '>=8.0.0'
+      eslint: ^9.9.1
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.0
       vue-eslint-parser: '>=9.0.0'
@@ -6445,7 +6445,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.21.2':
     optional: true
 
-  '@shikijs/vscode-textmate@9.1.1': {}
+  '@shikijs/vscode-textmate@9.2.0': {}
 
   '@stylistic/eslint-plugin@2.7.1(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4)':
     dependencies:
