@@ -100,10 +100,10 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       .map(i => resolveLang(i as BundledLangs))
 
     const core = await createHighlighterCore({
+      engine: engine(),
       ...options,
       themes: _themes,
       langs,
-      engine: engine(),
     })
 
     return {
