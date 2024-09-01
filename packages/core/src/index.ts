@@ -4,6 +4,7 @@ export * from './types'
 // Constructors
 export * from './constructors/highlighter'
 export * from './constructors/bundle-factory'
+export { createShikiInternalSync } from './constructors/internal-sync'
 export { createShikiInternal, getShikiInternal, setDefaultWasmLoader } from './constructors/internal'
 
 // Engines

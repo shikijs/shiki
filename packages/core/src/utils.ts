@@ -1,6 +1,18 @@
 import type { Element } from 'hast'
 import { FontStyle } from './types'
-import type { MaybeArray, PlainTextLanguage, Position, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemedToken, TokenStyles, TokenizeWithThemeOptions } from './types'
+import type {
+  MaybeArray,
+  MaybeGetter,
+  PlainTextLanguage,
+  Position,
+  SpecialLanguage,
+  SpecialTheme,
+  ThemeInput,
+  ThemeRegistrationAny,
+  ThemedToken,
+  TokenStyles,
+  TokenizeWithThemeOptions,
+} from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
@@ -144,6 +156,13 @@ export function splitTokens<
       return splitToken(token, breakpointsInToken)
     })
   })
+}
+
+/**
+ * Normalize a getter to a promise.
+ */
+export async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
+  return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
 }
 
 export function resolveColorReplacements(

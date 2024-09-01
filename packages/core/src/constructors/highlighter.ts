@@ -5,6 +5,7 @@ import { codeToTokensBase, getLastGrammarState } from '../highlight/code-to-toke
 import { codeToTokensWithThemes } from '../highlight/code-to-tokens-themes'
 import type { HighlighterCore, HighlighterCoreOptions } from '../types'
 import { createShikiInternal } from './internal'
+import { createShikiInternalSync } from './internal-sync'
 
 /**
  * Create a Shiki core highlighter instance, with no languages or themes bundled.
@@ -14,6 +15,29 @@ import { createShikiInternal } from './internal'
  */
 export async function createHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
   const internal = await createShikiInternal(options)
+
+  return {
+    getLastGrammarState: (code, options) => getLastGrammarState(internal, code, options),
+    codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
+    codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
+    codeToTokens: (code, options) => codeToTokens(internal, code, options),
+    codeToHast: (code, options) => codeToHast(internal, code, options),
+    codeToHtml: (code, options) => codeToHtml(internal, code, options),
+    ...internal,
+    getInternalContext: () => internal,
+  }
+}
+
+/**
+ * Create a Shiki core highlighter instance, with no languages or themes bundled.
+ * Wasm and each language and theme must be loaded manually.
+ *
+ * Synchronous version of `createHighlighterCore`, which requires to provide the engine and all themes and languages upfront.
+ *
+ * @see http://shiki.style/guide/install#fine-grained-bundle
+ */
+export function createHighlighterCoreSync(options: HighlighterCoreOptions<true> = {}): HighlighterCore {
+  const internal = createShikiInternalSync(options)
 
   return {
     getLastGrammarState: (code, options) => getLastGrammarState(internal, code, options),

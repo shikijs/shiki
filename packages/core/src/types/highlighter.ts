@@ -4,6 +4,7 @@ import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLang
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
 import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
 import type { CodeToHastOptions } from './options'
+import type { MaybeArray } from './utils'
 
 /**
  * Internal context of Shiki, core textmate logic
@@ -14,9 +15,18 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
    */
   loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>
   /**
+   * Load a theme registration synchronously.
+   */
+  loadThemeSync: (...themes: MaybeArray<ThemeRegistrationAny>[]) => void
+
+  /**
    * Load a language to the highlighter, so later it can be used synchronously.
    */
   loadLanguage: (...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]) => Promise<void>
+  /**
+   * Load a language registration synchronously.
+   */
+  loadLanguageSync: (...langs: MaybeArray<LanguageRegistration>[]) => void
 
   /**
    * Get the registered theme object
