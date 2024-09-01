@@ -139,8 +139,8 @@ catalogs:
       specifier: ^1.3.4
       version: 1.3.4
     oniguruma-to-js:
-      specifier: ^0.2.4
-      version: 0.2.4
+      specifier: ^0.3.0
+      version: 0.3.0
     picocolors:
       specifier: ^1.0.1
       version: 1.0.1
@@ -193,8 +193,8 @@ catalogs:
       specifier: ^0.16.7
       version: 0.16.7
     tm-grammars:
-      specifier: ^1.17.11
-      version: 1.17.11
+      specifier: ^1.17.13
+      version: 1.17.13
     tm-themes:
       specifier: ^1.8.1
       version: 1.8.1
@@ -515,7 +515,7 @@ importers:
         version: 9.0.2
       oniguruma-to-js:
         specifier: 'catalog:'
-        version: 0.2.4
+        version: 0.3.0
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -606,7 +606,7 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.17.11
+        version: 1.17.13
       tm-themes:
         specifier: 'catalog:'
         version: 1.8.1
@@ -2032,8 +2032,8 @@ packages:
   '@vitest/eslint-plugin@1.1.0':
     resolution: {integrity: sha512-Ur80Y27Wbw8gFHJ3cv6vypcjXmrx6QHfw+q435h6Q2L+tf+h4Xf5pJTCL4YU/Jps9EVeggQxS85OcUZU7sdXRw==}
     peerDependencies:
-      '@typescript-eslint/utils': ^8.3.0
-      eslint: ^9.9.1
+      '@typescript-eslint/utils': '>= 8.0'
+      eslint: '>= 8.57.0'
       typescript: '>= 5.0.0'
       vitest: '*'
     peerDependenciesMeta:
@@ -2903,7 +2903,7 @@ packages:
   eslint-config-flat-gitignore@0.3.0:
     resolution: {integrity: sha512-0Ndxo4qGhcewjTzw52TK06Mc00aDtHNTdeeW2JfONgDcLkRO/n/BteMRzNVpLQYxdCC/dFEilfM9fjjpGIJ9Og==}
     peerDependencies:
-      eslint: ^9.9.1
+      eslint: ^9.5.0
 
   eslint-flat-config-utils@0.3.1:
     resolution: {integrity: sha512-eFT3EaoJN1hlN97xw4FIEX//h0TiFUobgl2l5uLkIwhVN9ahGq95Pbs+i1/B5UACA78LO3rco3JzuvxLdTUOPA==}
@@ -2949,7 +2949,7 @@ packages:
     resolution: {integrity: sha512-dBEM8fACIFNt4H7GoOaRmnH6evJW6JSTJTYYgmRd3vI4geBTjgDM/JyUDKUwIw0HDSyI+u7Vs3vFRXUo/BOAtA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
-      eslint: ^9.9.1
+      eslint: ^8.57.0 || ^9.0.0
 
   eslint-plugin-jsdoc@50.2.2:
     resolution: {integrity: sha512-i0ZMWA199DG7sjxlzXn5AeYZxpRfMJjDPUl7lL9eJJX8TPRoIaxJU4ys/joP5faM5AXE1eqW/dslCj3uj4Nqpg==}
@@ -2984,7 +2984,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: ^9.9.1
+      eslint: '>=8.0.0'
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.0
       vue-eslint-parser: '>=9.0.0'
@@ -4157,8 +4157,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-js@0.2.4:
-    resolution: {integrity: sha512-HTa2wdZZSb8J6myTmS1Oj8MTH2bgCEQQGfy93kjg6FnjlpLI+uuS3ysspO0TGd4GMfjNThWrauja1deFcMraGw==}
+  oniguruma-to-js@0.3.0:
+    resolution: {integrity: sha512-3Tj1J0E8lmJYMp2ICdi64Frcv0cqByzY4HdFf0xA+fV18TujcrmOiiHiXtsfOetXCEl5OZk5LXel3P2RaeFpzg==}
 
   optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
@@ -4962,8 +4962,8 @@ packages:
     resolution: {integrity: sha512-q5nmENpTHgiPVd1cJDDc9cVoYN5x4vCvwT3FMilvKPKneCBZAxn2YWQjDF0UMcE9k0Cay1gBiDfTMU0g+mPMQA==}
     engines: {node: '>=14.0.0'}
 
-  tm-grammars@1.17.11:
-    resolution: {integrity: sha512-qxTMAxbmY9NqBxTSaeFkI7ZCofhp+SVtrCLdf5OkcX6iiazUTL5LTLpzw0ZSFUW0RRr0Z2kMepIup/WDBha4sQ==}
+  tm-grammars@1.17.13:
+    resolution: {integrity: sha512-I6zX/ulYNjz9BaUGc7qjs+82bLZJJToaR4x+h4NU1ywVOsIOaWOeCnIIBxeeHEr+Z30OSS56TwyYTDC3kRPV4w==}
 
   tm-themes@1.8.1:
     resolution: {integrity: sha512-jTUfDRn5TysYhkxxEWBQDo1C1n4yoHcnfNNqXkVxIMGQCgal/9poGuMBsfbnZCPEmFVcN2rtrUwaOJ8s2hVQXg==}
@@ -9514,7 +9514,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-js@0.2.4: {}
+  oniguruma-to-js@0.3.0: {}
 
   optionator@0.9.3:
     dependencies:
@@ -10320,7 +10320,7 @@ snapshots:
 
   tinyspy@3.0.0: {}
 
-  tm-grammars@1.17.11: {}
+  tm-grammars@1.17.13: {}
 
   tm-themes@1.8.1: {}
 

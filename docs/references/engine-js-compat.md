@@ -11,8 +11,8 @@
 |                 |                             Count |
 | :-------------- | --------------------------------: |
 | Total Languages |                               213 |
-| Fully Supported | [177](#fully-supported-languages) |
-| Mismatched      |       [31](#mismatched-languages) |
+| Fully Supported | [178](#fully-supported-languages) |
+| Mismatched      |       [30](#mismatched-languages) |
 | Unsupported     |       [5](#unsupported-languages) |
 
 ## Fully Supported Languages
@@ -23,6 +23,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | ------------------ | :-------------- | ----------------: | --------------: |
 | abap               | ✅ OK           |                49 |               - |
 | actionscript-3     | ✅ OK           |                57 |               - |
+| angular-ts         | ✅ OK           |               366 |               - |
 | apache             | ✅ OK           |                60 |               - |
 | apl                | ✅ OK           |               179 |               - |
 | applescript        | ✅ OK           |               151 |               - |
@@ -31,7 +32,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | astro              | ✅ OK           |                59 |               - |
 | awk                | ✅ OK           |                36 |               - |
 | ballerina          | ✅ OK           |               231 |               - |
-| bash               | ✅ OK           |               147 |               - |
+| bash               | ✅ OK           |               146 |               - |
 | bat                | ✅ OK           |                58 |               - |
 | berry              | ✅ OK           |                18 |               - |
 | bibtex             | ✅ OK           |                19 |               - |
@@ -43,16 +44,16 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | cmake              | ✅ OK           |                23 |               - |
 | cobol              | ✅ OK           |               138 |               - |
 | codeowners         | ✅ OK           |                 4 |               - |
-| codeql             | ✅ OK           |               151 |               - |
+| codeql             | ✅ OK           |               150 |               - |
 | coffee             | ✅ OK           |               120 |               - |
 | common-lisp        | ✅ OK           |                57 |               - |
 | cpp                | ✅ OK           |               220 |               - |
 | crystal            | ✅ OK           |               140 |               - |
-| css                | ✅ OK           |               142 |               - |
+| css                | ✅ OK           |               141 |               - |
 | csv                | ✅ OK           |                 1 |               - |
 | d                  | ✅ OK           |               270 |               - |
 | dart               | ✅ OK           |                71 |               - |
-| dax                | ✅ OK           |                24 |               - |
+| dax                | ✅ OK           |                23 |               - |
 | desktop            | ✅ OK           |                16 |               - |
 | diff               | ✅ OK           |                16 |               - |
 | docker             | ✅ OK           |                 7 |               - |
@@ -118,7 +119,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | make               | ✅ OK           |                48 |               - |
 | marko              | ✅ OK           |                81 |               - |
 | matlab             | ✅ OK           |                77 |               - |
-| mojo               | ✅ OK           |               216 |               - |
+| mojo               | ✅ OK           |               213 |               - |
 | move               | ✅ OK           |               117 |               - |
 | narrat             | ✅ OK           |                34 |               - |
 | nextflow           | ✅ OK           |                17 |               - |
@@ -126,7 +127,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | nix                | ✅ OK           |                80 |               - |
 | nushell            | ✅ OK           |                75 |               - |
 | objective-c        | ✅ OK           |               217 |               - |
-| objective-cpp      | ✅ OK           |               298 |               - |
+| objective-cpp      | ✅ OK           |               297 |               - |
 | ocaml              | ✅ OK           |               178 |               - |
 | pascal             | ✅ OK           |                23 |               - |
 | perl               | ✅ OK           |               156 |               - |
@@ -136,7 +137,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | prolog             | ✅ OK           |                26 |               - |
 | proto              | ✅ OK           |                33 |               - |
 | puppet             | ✅ OK           |                59 |               - |
-| python             | ✅ OK           |               221 |               - |
+| python             | ✅ OK           |               218 |               - |
 | qml                | ✅ OK           |                38 |               - |
 | qmldir             | ✅ OK           |                 7 |               - |
 | qss                | ✅ OK           |                31 |               - |
@@ -155,7 +156,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | scheme             | ✅ OK           |                34 |               - |
 | scss               | ✅ OK           |               104 |               - |
 | shaderlab          | ✅ OK           |                38 |               - |
-| shellscript        | ✅ OK           |               147 |               - |
+| shellscript        | ✅ OK           |               146 |               - |
 | shellsession       | ✅ OK           |                 2 |               - |
 | smalltalk          | ✅ OK           |                31 |               - |
 | solidity           | ✅ OK           |               102 |               - |
@@ -183,11 +184,11 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | vala               | ✅ OK           |                20 |               - |
 | vb                 | ✅ OK           |                34 |               - |
 | verilog            | ✅ OK           |                33 |               - |
-| vhdl               | ✅ OK           |                83 |               - |
+| vhdl               | ✅ OK           |                82 |               - |
 | viml               | ✅ OK           |                72 |               - |
 | vue                | ✅ OK           |                69 |               - |
 | vue-html           | ✅ OK           |                36 |               - |
-| vyper              | ✅ OK           |               241 |               - |
+| vyper              | ✅ OK           |               238 |               - |
 | wasm               | ✅ OK           |                78 |               - |
 | wenyan             | ✅ OK           |                18 |               - |
 | wgsl               | ✅ OK           |                44 |               - |
@@ -197,7 +198,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | xsl                | ✅ OK           |                 5 |               - |
 | zenscript          | ✅ OK           |                21 |               - |
 | zig                | ✅ OK           |                51 |               - |
-| zsh                | ✅ OK           |               147 |               - |
+| zsh                | ✅ OK           |               146 |               - |
 
 ## Mismatched Languages
 
@@ -206,7 +207,6 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 | Language     | Highlight Match | Patterns Parsable | Patterns Failed |
 | ------------ | :-------------- | ----------------: | --------------: |
 | angular-html | ⚠️ Mismatch     |                 2 |               - |
-| angular-ts   | ⚠️ Mismatch     |               366 |               - |
 | apex         | ⚠️ Mismatch     |               189 |               - |
 | asciidoc     | ⚠️ Mismatch     |               262 |               - |
 | beancount    | ⚠️ Mismatch     |                39 |               - |
@@ -216,7 +216,7 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 | cue          | ⚠️ Mismatch     |                85 |               - |
 | cypher       | ⚠️ Mismatch     |                39 |               - |
 | haml         | ⚠️ Mismatch     |                64 |               - |
-| haskell      | ⚠️ Mismatch     |               164 |               - |
+| haskell      | ⚠️ Mismatch     |               157 |               - |
 | kusto        | ⚠️ Mismatch     |                60 |               - |
 | latex        | ⚠️ Mismatch     |               183 |               - |
 | markdown     | ⚠️ Mismatch     |               103 |               - |
@@ -235,7 +235,7 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 | stata        | ⚠️ Mismatch     |               189 |               - |
 | systemd      | ⚠️ Mismatch     |                32 |               - |
 | tex          | ⚠️ Mismatch     |                38 |               - |
-| yaml         | ⚠️ Mismatch     |                50 |               - |
+| yaml         | ⚠️ Mismatch     |                46 |               - |
 
 ## Unsupported Languages
 
@@ -246,5 +246,5 @@ Languages that throws with the JavaScript RegExp engine (contains syntaxes that 
 | ada      | ✅ OK           |               199 |               1 |
 | csharp   | ⚠️ Mismatch     |               298 |               1 |
 | razor    | ⚠️ Mismatch     |                83 |               2 |
-| swift    | ❌ Error        |               305 |               4 |
+| swift    | ❌ Error        |               302 |               4 |
 | julia    | ❌ Error        |                77 |              18 |
