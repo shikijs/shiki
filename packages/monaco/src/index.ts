@@ -18,6 +18,12 @@ export interface ShikiToMonacoOptions {
    * @default 500
    */
   tokenizeTimeLimit?: number
+  /**
+   * Mappings from Shiki language identifiers to Monaco language identifiers.
+   *
+   * @default {}
+   */
+  langMappings?: Record<string, string>
 }
 
 export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): MonacoTheme {
@@ -103,12 +109,14 @@ export function shikiToMonaco(
   const {
     tokenizeMaxLineLength = 20000,
     tokenizeTimeLimit = 500,
+    langMappings = {},
   } = options
 
   const monacoLanguageIds = new Set(monaco.languages.getLanguages().map(l => l.id))
   for (const lang of highlighter.getLoadedLanguages()) {
-    if (monacoLanguageIds.has(lang)) {
-      monaco.languages.setTokensProvider(lang, {
+    const monacoLang = langMappings[lang] || lang
+    if (monacoLanguageIds.has(monacoLang)) {
+      monaco.languages.setTokensProvider(monacoLang, {
         getInitialState() {
           return new TokenizerState(INITIAL)
         },
