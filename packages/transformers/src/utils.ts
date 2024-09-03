@@ -4,16 +4,16 @@ import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
 /**
  * Regex that matches code comments
  */
-const regex = /\s*(?:\/\/|\/\*|<!--|[#"']|--|%{1,2}|;{1,2})(.+?)(?=-->|\*\/|$)/
+const regex = /(\/\/|\/\*|<!--|[#"'%;]|--|%%|;;)(.+?)(-->|\*\/|$)/
 
 /**
  * Create a transformer to process comment notations
  *
  * @param name transformer name
- * @param onMatch function to be called when found a comment in code, remove the comment node if returns `true`.
+ * @param onMatch function to be called when found a comment in code, return the replaced text.
  * @param removeEmptyLines remove empty lines below if matched
  */
-export function createCommentNotationTransformer(
+export function createCommentNotationTransformerExperimental(
   name: string,
   onMatch: (
     this: ShikiTransformerContext,
@@ -22,7 +22,7 @@ export function createCommentNotationTransformer(
     commentNode: Element,
     lines: Element[],
     index: number,
-  ) => boolean,
+  ) => string,
   removeEmptyLines = false,
 ): ShikiTransformer {
   return {
@@ -41,24 +41,23 @@ export function createCommentNotationTransformer(
         if (text.type !== 'text')
           return
 
-        const match = regex.exec(text.value)
-        if (!match)
-          return
+        let deleteComment = false
 
-        // rest of the comment token
-        const rest = text.value.slice(0, match.index).trim()
-        // no other tokens except the comment
         const isEmptyLine = line.children.length === 1
-        const isRemoved = onMatch.call(this, match[1], line, last, lines,
-          // take the next line if the current line will be removed
-          isEmptyLine ? lineIdx + 1 : lineIdx)
+        text.value = text.value.replace(regex, (_, prefix, text, end) => {
+          // no other tokens except the comment
+          const replaced = onMatch.call(this, text, line, last, lines,
+            // take the next line if the current line will be removed
+            isEmptyLine ? lineIdx + 1 : lineIdx)
 
-        if (!isRemoved)
+          if (replaced.trim().length === 0)
+            deleteComment = true
+
+          return prefix + replaced + end
+        })
+
+        if (!deleteComment)
           return
-        if (rest.length > 0) {
-          text.value = rest
-          return
-        }
 
         line.children.splice(line.children.indexOf(last), 1)
 
@@ -78,3 +77,5 @@ export function createCommentNotationTransformer(
     },
   }
 }
+
+export { createCommentNotationTransformer } from './utils-legacy'

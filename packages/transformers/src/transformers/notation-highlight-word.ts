@@ -1,5 +1,5 @@
 import type { ShikiTransformer } from 'shiki'
-import { createCommentNotationTransformer } from '../utils'
+import { createCommentNotationTransformerExperimental } from '../utils'
 import { highlightWordInLine } from '../shared/highlight-word'
 
 export interface TransformerNotationWordHighlightOptions {
@@ -13,7 +13,7 @@ export interface TransformerNotationWordHighlightOptions {
   classActivePre?: string
 }
 
-const regex = /\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]/
+const regex = /\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]/g
 
 export function transformerNotationWordHighlight(
   options: TransformerNotationWordHighlightOptions = {},
@@ -23,27 +23,24 @@ export function transformerNotationWordHighlight(
     classActivePre,
   } = options
 
-  return createCommentNotationTransformer(
+  return createCommentNotationTransformerExperimental(
     '@shikijs/transformers:notation-highlight-word',
     function (text, _line, comment, lines, index) {
-      const result = regex.exec(text)
-      if (!result)
-        return false
+      return text.replace(regex, (_, word, range) => {
+        const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
 
-      let [_, word, range] = result
-      const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
+        // escape backslashes
+        word = word.replace(/\\(.)/g, '$1')
 
-      // escape backslashes
-      word = word.replace(/\\(.)/g, '$1')
+        lines
+          .slice(index, index + lineNum)
+          .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
 
-      lines
-        // Don't include the comment itself
-        .slice(index, index + lineNum)
-        .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
+        if (classActivePre)
+          this.addClassToHast(this.pre, classActivePre)
 
-      if (classActivePre)
-        this.addClassToHast(this.pre, classActivePre)
-      return true
+        return ''
+      })
     },
     true,
   )
