@@ -3,6 +3,23 @@ import type { JavaScriptRegexEngineOptions, PatternScanner, RegexEngine, RegexEn
 
 const MAX = 4294967295
 
+/**
+ * The default RegExp constructor for JavaScript regex engine.
+ */
+export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
+  return onigurumaToRegexp(
+    pattern
+      .replace(/\|\\G(\||\))/g, '$1')
+      .replace(/(\(|\|)\\G\|/g, '$1')
+      // YAML specific handling; TODO: move to tm-grammars
+      .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
+    {
+      flags: 'dgm',
+      ignoreContiguousAnchors: true,
+    },
+  )
+}
+
 export class JavaScriptScanner implements PatternScanner {
   regexps: (RegExp | null)[]
 
@@ -10,6 +27,7 @@ export class JavaScriptScanner implements PatternScanner {
     public patterns: string[],
     public cache: Map<string, RegExp | Error>,
     public forgiving: boolean,
+    public regexConstructor: (pattern: string) => RegExp = defaultJavaScriptRegexConstructor,
   ) {
     this.regexps = patterns.map((p) => {
       const cached = cache?.get(p)
@@ -22,17 +40,7 @@ export class JavaScriptScanner implements PatternScanner {
         throw cached
       }
       try {
-        const regex = onigurumaToRegexp(
-          p
-            .replace(/\|\\G(\||\))/g, '$1')
-            .replace(/(\(|\|)\\G\|/g, '$1')
-            // YAML specific handling; TODO: move to tm-grammars
-            .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
-          {
-            flags: 'dgm',
-            ignoreContiguousAnchors: true,
-          },
-        )
+        const regex = regexConstructor(p)
         cache?.set(p, regex)
         return regex
       }
@@ -126,7 +134,7 @@ export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOption
 
   return {
     createScanner(patterns: string[]) {
-      return new JavaScriptScanner(patterns, cache, forgiving)
+      return new JavaScriptScanner(patterns, cache, forgiving, options.regexConstructor)
     },
     createString(s: string) {
       return {

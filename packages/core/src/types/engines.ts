@@ -41,4 +41,11 @@ export interface JavaScriptRegexEngineOptions {
    * Cache for regex patterns.
    */
   cache?: Map<string, RegExp | Error>
+
+  /**
+   * Custom pattern to RegExp constructor.
+   *
+   * By default `oniguruma-to-js` is used.
+   */
+  regexConstructor?: (pattern: string) => RegExp
 }

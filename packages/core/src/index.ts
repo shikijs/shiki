@@ -9,7 +9,7 @@ export { createShikiInternal, getShikiInternal, setDefaultWasmLoader } from './c
 
 // Engines
 export { createWasmOnigEngine, loadWasm } from './engines/wasm'
-export { createJavaScriptRegexEngine } from './engines/javascript'
+export { createJavaScriptRegexEngine, defaultJavaScriptRegexConstructor } from './engines/javascript'
 
 // TextMate Utilities
 export { normalizeTheme } from './textmate/normalize-theme'
