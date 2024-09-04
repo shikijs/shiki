@@ -145,7 +145,7 @@ async function run() {
       ...report
         .map(item => [
           item.lang,
-          item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : '⚠️ Mismatch',
+          item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : `[🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=${item.lang})`,
           item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
           item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
         ] as [string, string, string, string]),
