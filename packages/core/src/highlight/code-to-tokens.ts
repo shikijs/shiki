@@ -26,7 +26,8 @@ export function codeToTokens(
       cssVariablePrefix = '--shiki-',
     } = options
 
-    const themes = Object.entries(options.themes)
+    const themes = Object
+      .entries(options.themes)
       .filter(i => i[1])
       .map(i => ({ color: i[0], theme: i[1]! }))
       .sort((a, b) => a.color === defaultColor ? -1 : b.color === defaultColor ? 1 : 0)

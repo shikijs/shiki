@@ -70,7 +70,8 @@ function dimColor(color: string) {
   if (hexMatch) {
     if (hexMatch[3]) {
       // convert from #rrggbbaa to #rrggbb(aa/2)
-      const alpha = Math.round(Number.parseInt(hexMatch[3], 16) / 2)
+      const alpha = Math
+        .round(Number.parseInt(hexMatch[3], 16) / 2)
         .toString(16)
         .padStart(2, '0')
       return `#${hexMatch[1]}${hexMatch[2]}${alpha}`
@@ -81,7 +82,8 @@ function dimColor(color: string) {
     }
     else {
       // convert from #rgb to #rrggbb80
-      return `#${Array.from(hexMatch[1])
+      return `#${Array
+        .from(hexMatch[1])
         .map(x => `${x}${x}`)
         .join('')}80`
     }

@@ -14,7 +14,8 @@ export function codeToTokensWithThemes(
   code: string,
   options: CodeToTokensWithThemesOptions,
 ): ThemedTokenWithVariants[][] {
-  const themes = Object.entries(options.themes)
+  const themes = Object
+    .entries(options.themes)
     .filter(i => i[1])
     .map(i => ({ color: i[0], theme: i[1]! }))
 

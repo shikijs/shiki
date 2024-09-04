@@ -48,7 +48,6 @@ it('run with rehype-raw', async () => {
     ],
   })
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const rehypeMetaString = () => (tree: Root) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'code' && node.data?.meta) {

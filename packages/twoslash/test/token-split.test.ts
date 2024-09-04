@@ -13,10 +13,13 @@ it('verify theme behavior', async () => {
   })
 
   // `min-dark` is less fine-grained, so that the import statement is a single token
-  expect.soft(tokens.find(i => i.find(j => j.content === ' { ref')))
+  expect
+    .soft(tokens.find(i => i.find(j => j.content === ' { ref')))
     .toBeDefined()
-  expect.soft(tokens.find(i => i.find(j => j.content === 'ref')))
-    .not.toBeDefined()
+  expect
+    .soft(tokens.find(i => i.find(j => j.content === 'ref')))
+    .not
+    .toBeDefined()
 })
 
 it('should split tokens correctly', async () => {

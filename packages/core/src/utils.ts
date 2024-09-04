@@ -137,7 +137,8 @@ export function splitToken<
 export function splitTokens<
   T extends Pick<ThemedToken, 'content' | 'offset'>,
 >(tokens: T[][], breakpoints: number[] | Set<number>) {
-  const sorted = Array.from(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))
+  const sorted = Array
+    .from(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))
     .sort((a, b) => a - b)
 
   if (!sorted.length)

@@ -25,7 +25,8 @@ async function run() {
   await fs.rm(new URL('./compares', import.meta.url), { recursive: true, force: true })
 
   for (const lang of Object.keys(bundledLanguages)) {
-    const sample = await fs.readFile(`../tm-grammars-themes/samples/${lang}.sample`, 'utf-8')
+    const sample = await fs
+      .readFile(`../tm-grammars-themes/samples/${lang}.sample`, 'utf-8')
       .catch(() => '')
 
     if (!sample) {
@@ -96,9 +97,9 @@ async function run() {
         console.log(c.green(`[${lang}] OK`))
       }
     }
-    catch (e) {
+    catch (e: any) {
       highlightMatch = 'error'
-      console.log(c.red(`[${lang}] Error ${e}`))
+      console.log(c.red(`[${lang}] Error ${e} ${e.cause || ''}`))
     }
     finally {
       report.push({

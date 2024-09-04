@@ -183,7 +183,8 @@ describe('cases', async () => {
         ])
       }
 
-      await expect.soft(JSON.stringify(engineWasm.instances, null, 2))
+      await expect
+        .soft(JSON.stringify(engineWasm.instances, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
 
       compare.forEach(([a, b]) => {

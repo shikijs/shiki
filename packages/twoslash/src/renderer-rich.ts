@@ -419,7 +419,8 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       if (node.type !== 'text')
         throw new ShikiTwoslashError(`Renderer hook nodeCompletion only works on text nodes, got ${node.type}`)
 
-      const items: Element[] = query.completions
+      const items: Element[] = query
+        .completions
         .map((i) => {
           const kind = i.kind || 'default'
           const isDeprecated = 'kindModifiers' in i && typeof i.kindModifiers === 'string' && i.kindModifiers?.split(',').includes('deprecated')

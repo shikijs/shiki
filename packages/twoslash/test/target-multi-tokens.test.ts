@@ -11,10 +11,13 @@ it('verify theme behavior', async () => {
   })
 
   // `vitesse-dark` separates the the quotes ints tokens, where the error is targeting all strings
-  expect.soft(tokens.find(i => i.find(j => j.content === '"')))
+  expect
+    .soft(tokens.find(i => i.find(j => j.content === '"')))
     .toBeDefined()
-  expect.soft(tokens.find(i => i.find(j => j.content === '"ref"')))
-    .not.toBeDefined()
+  expect
+    .soft(tokens.find(i => i.find(j => j.content === '"ref"')))
+    .not
+    .toBeDefined()
 })
 
 it('should split tokens correctly', async () => {
