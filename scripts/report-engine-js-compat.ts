@@ -6,9 +6,38 @@ import fs from 'node:fs/promises'
 import process from 'node:process'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import c from 'picocolors'
+import { rewrite } from 'regex'
+import { onigurumaToRegexp } from 'oniguruma-to-js'
 import { version } from '../package.json'
 
-const engine = createJavaScriptRegexEngine()
+const engine = createJavaScriptRegexEngine({
+  regexConstructor: (pattern) => {
+    pattern = pattern
+      .replace(/\\￿/g, '\\G')
+      .replace(/\(\{\)/g, '(\\{)')
+
+    const rewritten = rewrite(pattern, {
+      flags: 'dgm',
+      unicodeSetsPlugin: null,
+      disable: {
+        n: true,
+        v: true,
+        x: true,
+      },
+    })
+
+    try {
+      return onigurumaToRegexp(rewritten.expression, {
+        flags: rewritten.flags,
+        ignoreContiguousAnchors: true,
+      })
+    }
+    catch (e) {
+      console.error({ pattern, rewritten })
+      throw e
+    }
+  },
+})
 
 export interface ReportItem {
   lang: string
