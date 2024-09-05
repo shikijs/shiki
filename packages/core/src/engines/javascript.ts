@@ -9,8 +9,6 @@ const MAX = 4294967295
 export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
   return onigurumaToRegexp(
     pattern
-      .replace(/\|\\G(\||\))/g, '$1')
-      .replace(/(\(|\|)\\G\|/g, '$1')
       // YAML specific handling; TODO: move to tm-grammars
       .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]'),
     {
