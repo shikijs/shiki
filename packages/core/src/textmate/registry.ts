@@ -1,9 +1,9 @@
-import type { IGrammarConfiguration, IRawTheme } from './textmate'
-import { Registry as TextMateRegistry, Theme as TextMateTheme } from './textmate'
-import type { Grammar, LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
+import { Registry as TextMateRegistry, Theme as TextMateTheme } from '@shikijs/vscode-textmate'
+import type { IGrammarConfiguration, IRawTheme } from '@shikijs/vscode-textmate'
+import type { Grammar, LanguageRegistration, ThemeRegistrationAny, ThemeRegistrationResolved } from '../types'
+import { ShikiError } from '../error'
+import { normalizeTheme } from './normalize-theme'
 import type { Resolver } from './resolver'
-import { normalizeTheme } from './normalize'
-import { ShikiError } from './error'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Map<string, ThemeRegistrationResolved> = new Map()
@@ -23,8 +23,8 @@ export class Registry extends TextMateRegistry {
   ) {
     super(_resolver)
 
-    _themes.forEach(t => this.loadTheme(t))
-    _langs.forEach(l => this.loadLanguage(l))
+    this._themes.map(t => this.loadTheme(t))
+    this.loadLanguages(this._langs)
   }
 
   public getTheme(theme: ThemeRegistrationAny | string) {
@@ -79,7 +79,7 @@ export class Registry extends TextMateRegistry {
     return this._resolvedGrammars.get(name)
   }
 
-  public async loadLanguage(lang: LanguageRegistration) {
+  public loadLanguage(lang: LanguageRegistration): void {
     if (this.getGrammar(lang.name))
       return
 
@@ -97,7 +97,7 @@ export class Registry extends TextMateRegistry {
 
     // @ts-expect-error Private members, set this to override the previous grammar (that can be a stub)
     this._syncRegistry._rawGrammars.set(lang.scopeName, lang)
-    const g = await this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig) as Grammar
+    const g = this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig) as Grammar
     g.name = lang.name
     this._resolvedGrammars.set(lang.name, g)
     if (lang.aliases) {
@@ -118,14 +118,9 @@ export class Registry extends TextMateRegistry {
         this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
         // @ts-expect-error clear cache
         this._syncRegistry?._grammars?.delete(e.scopeName)
-        await this.loadLanguage(this._langMap.get(e.name)!)
+        this.loadLanguage(this._langMap.get(e.name)!)
       }
     }
-  }
-
-  async init() {
-    this._themes.map(t => this.loadTheme(t))
-    await this.loadLanguages(this._langs)
   }
 
   public override dispose(): void {
@@ -137,7 +132,7 @@ export class Registry extends TextMateRegistry {
     this._loadedThemesCache = null
   }
 
-  public async loadLanguages(langs: LanguageRegistration[]) {
+  public loadLanguages(langs: LanguageRegistration[]) {
     for (const lang of langs)
       this.resolveEmbeddedLanguages(lang)
 
@@ -155,7 +150,7 @@ export class Registry extends TextMateRegistry {
       this._resolver.addLanguage(lang)
 
     for (const [_, lang] of langsGraphArray)
-      await this.loadLanguage(lang)
+      this.loadLanguage(lang)
   }
 
   public getLoadedLanguages() {

@@ -7,11 +7,11 @@ import type {
   ShikiTransformerContextCommon,
   ShikiTransformerContextSource,
   ThemedToken,
-} from './types'
-import { FontStyle } from './types'
+} from '../types'
+import { FontStyle } from '../types'
+import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
+import { getTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'
-import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from './utils'
-import { getTransformers } from './transformers'
 
 export function codeToHast(
   internal: ShikiInternal,

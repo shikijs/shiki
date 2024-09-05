@@ -1,32 +1,30 @@
-import type { IOnigLib } from '../vendor/vscode-textmate/src/main'
-import type { RegexEngine, RegistryOptions } from './textmate'
-import type { LanguageRegistration } from './types'
+import type { IOnigLib, RegistryOptions } from '@shikijs/vscode-textmate'
+import type { LanguageRegistration, RegexEngine } from '../types'
 
 export class Resolver implements RegistryOptions {
   private readonly _langs = new Map<string, LanguageRegistration>()
   private readonly _scopeToLang = new Map<string, LanguageRegistration>()
   private readonly _injections = new Map<string, string[]>()
 
-  private readonly _onigLibPromise: Promise<IOnigLib>
+  private readonly _onigLib: IOnigLib
 
-  constructor(onigLibPromise: Promise<RegexEngine>, langs: LanguageRegistration[]) {
-    this._onigLibPromise = onigLibPromise
-      .then(engine => ({
-        createOnigScanner: patterns => engine.createScanner(patterns),
-        createOnigString: s => engine.createString(s),
-      }))
+  constructor(engine: RegexEngine, langs: LanguageRegistration[]) {
+    this._onigLib = {
+      createOnigScanner: patterns => engine.createScanner(patterns),
+      createOnigString: s => engine.createString(s),
+    }
     langs.forEach(i => this.addLanguage(i))
   }
 
-  public get onigLib(): Promise<IOnigLib> {
-    return this._onigLibPromise
+  public get onigLib(): IOnigLib {
+    return this._onigLib
   }
 
   public getLangRegistration(langIdOrAlias: string): LanguageRegistration {
     return this._langs.get(langIdOrAlias)!
   }
 
-  public async loadGrammar(scopeName: string): Promise<any> {
+  public loadGrammar(scopeName: string): any {
     return this._scopeToLang.get(scopeName)!
   }
 

@@ -42,7 +42,7 @@ The default export of `@shikijs/rehype` uses a shared instance of `shiki` from `
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import `rehypeShikiFromHighlighter` from `@shikijs/rehype/core` and pass your own highlighter:
+By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/bundles#fine-grained-bundle), you can import `rehypeShikiFromHighlighter` from `@shikijs/rehype/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true

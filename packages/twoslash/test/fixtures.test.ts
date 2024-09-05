@@ -30,11 +30,13 @@ describe('fixtures', () => {
 
       const html = hastToHtml(hast)
 
-      expect.soft(JSON.stringify(hast, null, 2))
+      expect
+        .soft(JSON.stringify(hast, null, 2))
         .toMatchFileSnapshot(`./out/${name}.json`)
 
       const style = '<link rel="stylesheet" href="../../style-rich.css" />'
-      expect.soft(style + html)
+      expect
+        .soft(style + html)
         .toMatchFileSnapshot(`./out/${name}.html`)
     })
   }

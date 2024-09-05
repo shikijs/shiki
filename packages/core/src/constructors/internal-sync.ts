@@ -1,59 +1,43 @@
-import type { HighlighterCoreOptions, LanguageInput, LanguageRegistration, LoadWasmOptions, MaybeGetter, ShikiInternal, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './types'
-import { Registry } from './registry'
-import { Resolver } from './resolver'
-import { normalizeTheme } from './normalize'
-import { isSpecialLang, isSpecialTheme } from './utils'
-import { ShikiError } from './error'
-import { createWasmOnigEngine } from './engines/wasm'
-
-let _defaultWasmLoader: LoadWasmOptions | undefined
-/**
- * Set the default wasm loader for `loadWasm`.
- * @internal
- */
-export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
-  _defaultWasmLoader = _loader
-}
+import type {
+  HighlighterCoreOptions,
+  LanguageInput,
+  LanguageRegistration,
+  MaybeArray,
+  ShikiInternal,
+  SpecialLanguage,
+  SpecialTheme,
+  ThemeInput,
+  ThemeRegistrationAny,
+  ThemeRegistrationResolved,
+} from '../types'
+import { Registry } from '../textmate/registry'
+import { Resolver } from '../textmate/resolver'
+import { normalizeTheme } from '../textmate/normalize-theme'
+import { ShikiError } from '../error'
+import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 
 let instancesCount = 0
 
 /**
  * Get the minimal shiki context for rendering.
+ *
+ * Synchronous version of `createShikiInternal`, which requires to provide the engine and all themes and languages upfront.
  */
-export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export function createShikiInternalSync(options: HighlighterCoreOptions<true>): ShikiInternal {
   instancesCount += 1
   if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
     console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call \`highlighter.dispose()\` to release unused instances.`)
 
   let isDisposed = false
 
-  async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
-    return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
-  }
+  if (!options.engine)
+    throw new ShikiError('`engine` option is required for synchronous mode')
 
-  async function resolveLangs(langs: (LanguageInput | SpecialLanguage)[]) {
-    return Array.from(new Set((await Promise.all(
-      langs
-        .filter(l => !isSpecialLang(l))
-        .map(async lang => await normalizeGetter(lang as LanguageInput).then(r => Array.isArray(r) ? r : [r])),
-    )).flat()))
-  }
+  const langs = (options.langs || []).flat(1)
+  const themes = (options.themes || []).flat(1).map(normalizeTheme)
 
-  const [
-    themes,
-    langs,
-  ] = await Promise.all([
-    Promise.all((options.themes || []).map(normalizeGetter)).then(r => r.map(normalizeTheme)),
-    resolveLangs(options.langs || []),
-  ] as const)
-
-  const resolver = new Resolver(
-    Promise.resolve(options.engine || createWasmOnigEngine(options.loadWasm || _defaultWasmLoader)),
-    langs,
-  )
-
+  const resolver = new Resolver(options.engine, langs)
   const _registry = new Registry(resolver, themes, langs, options.langAlias)
-  await _registry.init()
 
   let _lastTheme: string | ThemeRegistrationAny
 
@@ -99,20 +83,25 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
     return _registry.getLoadedLanguages()
   }
 
-  async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]) {
+  function loadLanguageSync(...langs: MaybeArray<LanguageRegistration>[]) {
     ensureNotDisposed()
-    await _registry.loadLanguages(await resolveLangs(langs))
+    _registry.loadLanguages(langs.flat(1))
+  }
+
+  async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]) {
+    return loadLanguageSync(await resolveLangs(langs))
+  }
+
+  async function loadThemeSync(...themes: MaybeArray<ThemeRegistrationAny>[]) {
+    ensureNotDisposed()
+    for (const theme of themes.flat(1)) {
+      _registry.loadTheme(theme)
+    }
   }
 
   async function loadTheme(...themes: (ThemeInput | SpecialTheme)[]) {
     ensureNotDisposed()
-    await Promise.all(
-      themes.map(async theme =>
-        isSpecialTheme(theme)
-          ? null
-          : _registry.loadTheme(await normalizeGetter(theme)),
-      ),
-    )
+    return loadThemeSync(await resolveThemes(themes))
   }
 
   function ensureNotDisposed() {
@@ -135,16 +124,10 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
     getLoadedThemes,
     getLoadedLanguages,
     loadLanguage,
+    loadLanguageSync,
     loadTheme,
+    loadThemeSync,
     dispose,
     [Symbol.dispose]: dispose,
   }
-}
-
-/**
- * @deprecated Use `createShikiInternal` instead.
- */
-export function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
-  // TODO: next: console.warn('`getShikiInternal` is deprecated. Use `createShikiInternal` instead.')
-  return createShikiInternal(options)
 }

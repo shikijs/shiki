@@ -1,7 +1,7 @@
 import type monacoNs from 'monaco-editor-core'
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
-import type { StateStack } from '@shikijs/core/textmate'
-import { INITIAL, StackElementMetadata } from '@shikijs/core/textmate'
+import type { StateStack } from '@shikijs/vscode-textmate'
+import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 
 export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
 
@@ -131,7 +131,7 @@ export function shikiToMonaco(
           for (let j = 0; j < tokensLength; j++) {
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
-            const color = normalizeColor(colorMap[StackElementMetadata.getForeground(metadata)] || '')
+            const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
             // Because Monaco only support one scope per token,
             // we workaround this to use color to trace back the scope
             const scope = findScopeByColor(color) || ''

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { wasmBinary } from '@shikijs/core/wasm-inlined'
-import type { RegexEngine } from '@shikijs/core/textmate'
-import type { LanguageRegistration, ThemeRegistration } from '../../src/core'
+import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../src/core'
 import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../src/core'
 
 import { OnigScanner, OnigString } from '../../../core/src/engines/oniguruma'
@@ -184,7 +183,8 @@ describe('cases', async () => {
         ])
       }
 
-      await expect.soft(JSON.stringify(engineWasm.instances, null, 2))
+      await expect
+        .soft(JSON.stringify(engineWasm.instances, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
 
       compare.forEach(([a, b]) => {

@@ -1,39 +1,40 @@
-import type { LoadWasmOptions } from '../types'
-import type { RegexEngine } from '../textmate'
-import type { StringLiteralUnion } from './utils'
-import type { LanguageInput, SpecialLanguage } from './langs'
+import type { LoadWasmOptions, RegexEngine } from '../types'
+import type { Awaitable, MaybeArray, StringLiteralUnion } from './utils'
+import type { LanguageInput, LanguageRegistration, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
 import type { TransformerOptions } from './transformers'
 import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
 import type { DecorationOptions } from './decorations'
 
-export interface HighlighterCoreOptions {
+export interface HighlighterCoreOptions<Sync extends boolean = false> {
+  /**
+   * Custom RegExp engine.
+   */
+  engine?: Sync extends true ? RegexEngine : Awaitable<RegexEngine>
   /**
    * Theme names, or theme registration objects to be loaded upfront.
    */
-  themes?: ThemeInput[]
+  themes?: Sync extends true ? MaybeArray<ThemeRegistrationAny>[] : ThemeInput[]
   /**
    * Language names, or language registration objects to be loaded upfront.
    */
-  langs?: LanguageInput[]
+  langs?: Sync extends true ? MaybeArray<LanguageRegistration>[] : LanguageInput[]
   /**
    * Alias of languages
    * @example { 'my-lang': 'javascript' }
    */
   langAlias?: Record<string, string>
   /**
-   * Load wasm file from a custom path or using a custom function.
-   */
-  loadWasm?: LoadWasmOptions
-  /**
    * Emit console warnings to alert users of potential issues.
    * @default true
    */
   warnings?: boolean
+
+  // TODO: Deprecate this option after docs for engines are updated.
   /**
-   * Custom RegExp engine.
+   * Load wasm file from a custom path or using a custom function.
    */
-  engine?: RegexEngine | Promise<RegexEngine>
+  loadWasm?: Sync extends true ? never : LoadWasmOptions
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings' | 'engine'> {

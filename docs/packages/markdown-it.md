@@ -28,7 +28,7 @@ md.use(await Shiki({
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `@shikijs/markdown-it/core` and pass your own highlighter:
+By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/bundles#fine-grained-bundle), you can import from `@shikijs/markdown-it/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true

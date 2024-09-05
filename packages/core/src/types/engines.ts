@@ -1,4 +1,17 @@
-type Awaitable<T> = T | Promise<T>
+import type { OnigScanner, OnigString } from '@shikijs/vscode-textmate'
+import type { Awaitable } from './utils'
+
+export interface PatternScanner extends OnigScanner {}
+
+export interface RegexEngineString extends OnigString {}
+
+/**
+ * Engine for RegExp matching and scanning.
+ */
+export interface RegexEngine {
+  createScanner: (patterns: string[]) => PatternScanner
+  createString: (s: string) => RegexEngineString
+}
 
 export interface WebAssemblyInstantiator {
   (importObject: Record<string, Record<string, WebAssembly.ImportValue>> | undefined): Promise<WebAssemblyInstance>
@@ -28,4 +41,11 @@ export interface JavaScriptRegexEngineOptions {
    * Cache for regex patterns.
    */
   cache?: Map<string, RegExp | Error>
+
+  /**
+   * Custom pattern to RegExp constructor.
+   *
+   * By default `oniguruma-to-js` is used.
+   */
+  regexConstructor?: (pattern: string) => RegExp
 }

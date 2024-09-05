@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.15.2",
+  "version": "1.16.2",
   "private": true,
   "packageManager": "pnpm@9.9.0",
   "scripts": {
@@ -11,7 +11,7 @@
     "build": "pnpm -r run build",
     "docs": "pnpm -C docs run docs:dev",
     "docs:build": "pnpm -C docs run docs:build",
-    "report-engine-js": "jiti scripts/report-engine-js-compat.ts",
+    "report-engine-js": "esno scripts/report-engine-js-compat.ts",
     "bench": "vitest bench",
     "prepare": "simple-git-hooks"
   },

@@ -41,13 +41,17 @@ it('getLastGrammarState', async () => {
     grammarState: state,
   })
 
-  expect.soft(highlightedNatural)
-    .not.toEqual(highlightedContext)
+  expect
+    .soft(highlightedNatural)
+    .not
+    .toEqual(highlightedContext)
 
-  expect.soft(highlightedContext)
+  expect
+    .soft(highlightedContext)
     .toEqual(highlightedContext2)
 
-  expect.soft(highlightedNatural)
+  expect
+    .soft(highlightedNatural)
     .toMatchInlineSnapshot(`
       {
         "bg": "#ffffff",
@@ -115,8 +119,7 @@ it('getLastGrammarState', async () => {
       }
     `)
 
-  expect.soft(highlightedContext)
-    .toMatchInlineSnapshot(`
+  expect.soft(highlightedContext).toMatchInlineSnapshot(`
       {
         "bg": "#ffffff",
         "fg": "#393a34",
@@ -203,7 +206,8 @@ it('grammarContextCode', async () => {
     .toMatchInlineSnapshot(`"<span style="color:#999999">&#x3C;</span><span style="color:#1E754F">div</span><span style="color:#999999"> :</span><span style="color:#59873A">value</span><span style="color:#999999">=</span><span style="color:#999999">"</span><span style="color:#2F798A">1</span><span style="color:#AB5959"> +</span><span style="color:#2F798A"> 2</span><span style="color:#999999">"</span><span style="color:#999999">></span><span style="color:#393A34">&#x3C;button /></span><span style="color:#999999">&#x3C;/</span><span style="color:#1E754F">div</span><span style="color:#999999">></span>"`)
 
   expect(highlightedVueTemplate)
-    .not.toEqual(highlightedVueBare)
+    .not
+    .toEqual(highlightedVueBare)
 })
 
 describe('errors', () => {

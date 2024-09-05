@@ -4,6 +4,8 @@ import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLang
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
 import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
 import type { CodeToHastOptions } from './options'
+import type { Awaitable, MaybeArray } from './utils'
+import type { RegexEngine } from './engines'
 
 /**
  * Internal context of Shiki, core textmate logic
@@ -14,9 +16,18 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
    */
   loadTheme: (...themes: (ThemeInput | BundledThemeKeys | SpecialTheme)[]) => Promise<void>
   /**
+   * Load a theme registration synchronously.
+   */
+  loadThemeSync: (...themes: MaybeArray<ThemeRegistrationAny>[]) => void
+
+  /**
    * Load a language to the highlighter, so later it can be used synchronously.
    */
   loadLanguage: (...langs: (LanguageInput | BundledLangKeys | SpecialLanguage)[]) => Promise<void>
+  /**
+   * Load a language registration synchronously.
+   */
+  loadLanguageSync: (...langs: MaybeArray<LanguageRegistration>[]) => void
 
   /**
    * Get the registered theme object
@@ -125,3 +136,12 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
  * The fine-grained core Shiki highlighter instance.
  */
 export type HighlighterCore = HighlighterGeneric<never, never>
+
+/**
+ * Options for creating a bundled highlighter.
+ */
+export interface CreatedBundledHighlighterOptions<BundledLangs extends string, BundledThemes extends string> {
+  langs: Record<BundledLangs, LanguageInput>
+  themes: Record<BundledThemes, ThemeInput>
+  engine: () => Awaitable<RegexEngine>
+}

@@ -11,7 +11,6 @@ import ts from 'rollup-plugin-typescript2'
 const entries = [
   'src/index.ts',
   'src/types.ts',
-  'src/textmate.ts',
   'src/wasm-inlined.ts',
 ]
 
@@ -33,6 +32,11 @@ const plugins = [
   wasmPlugin(),
 ]
 
+const external = [
+  'hast',
+  '@shikijs/vscode-textmate',
+]
+
 export default defineConfig([
   {
     input: entries,
@@ -47,6 +51,7 @@ export default defineConfig([
     plugins: [
       ...plugins,
     ],
+    external,
   },
   {
     input: entries,
@@ -71,9 +76,7 @@ export default defineConfig([
       if (!/Circular|an empty chunk/.test(warning.message))
         warn(warning)
     },
-    external: [
-      'hast',
-    ],
+    external,
   },
 ])
 

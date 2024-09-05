@@ -1,25 +1,72 @@
 import type { Root } from 'hast'
-import type { BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from './types'
-import { isSpecialLang, isSpecialTheme } from './utils'
+import type { Awaitable, BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, CreatedBundledHighlighterOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RegexEngine, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from '../types'
+import { isSpecialLang, isSpecialTheme } from '../utils'
+import { ShikiError } from '../error'
+import { createWasmOnigEngine } from '../engines/wasm'
 import { createHighlighterCore } from './highlighter'
-import { ShikiError } from './error'
 
 export type CreateHighlighterFactory<L extends string, T extends string> = (
   options: BundledHighlighterOptions<L, T>
 ) => Promise<HighlighterGeneric<L, T>>
 
 /**
+ * Create a `createHighlighter` function with bundled themes, languages, and engine.
+ *
+ * @example
+ * ```ts
+ * const createHighlighter = createdBundledHighlighter({
+ *   langs: {
+ *     typescript: () => import('shiki/langs/typescript.mjs'),
+ *     // ...
+ *   },
+ *   themes: {
+ *     nord: () => import('shiki/themes/nord.mjs'),
+ *     // ...
+ *   },
+ *   engine: () => createWasmOnigEngine(), // or createJavaScriptRegexEngine()
+ * })
+ * ```
+ *
+ * @param options
+ */
+export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>
+): CreateHighlighterFactory<BundledLangs, BundledThemes>
+
+/**
  * Create a `createHighlighter` function with bundled themes and languages.
  *
- * @param bundledLanguages
- * @param bundledThemes
- * @param loadWasm
+ * @deprecated Use `createdBundledHighlighter({ langs, themes, engine })` signature instead.
  */
 export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   bundledLanguages: Record<BundledLangs, LanguageInput>,
   bundledThemes: Record<BundledThemes, ThemeInput>,
   loadWasm: HighlighterCoreOptions['loadWasm'],
+): CreateHighlighterFactory<BundledLangs, BundledThemes>
+
+// Implementation
+export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+  arg1: Record<BundledLangs, LanguageInput> | CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
+  arg2?: Record<BundledThemes, ThemeInput>,
+  arg3?: HighlighterCoreOptions['loadWasm'],
 ): CreateHighlighterFactory<BundledLangs, BundledThemes> {
+  let bundledLanguages: Record<BundledLangs, LanguageInput>
+  let bundledThemes: Record<BundledThemes, ThemeInput>
+  let engine: () => Awaitable<RegexEngine>
+
+  if (arg2) {
+    // TODO: next: console.warn('`createdBundledHighlighter` signature with `bundledLanguages` and `bundledThemes` is deprecated. Use the options object signature instead.')
+    bundledLanguages = arg1 as Record<BundledLangs, LanguageInput>
+    bundledThemes = arg2
+    engine = () => createWasmOnigEngine(arg3)
+  }
+  else {
+    const options = arg1 as CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>
+    bundledLanguages = options.langs
+    bundledThemes = options.themes
+    engine = options.engine
+  }
+
   async function createHighlighter(
     options: BundledHighlighterOptions<BundledLangs, BundledThemes>,
   ): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
@@ -53,10 +100,10 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       .map(i => resolveLang(i as BundledLangs))
 
     const core = await createHighlighterCore({
+      engine: engine(),
       ...options,
       themes: _themes,
       langs,
-      loadWasm,
     })
 
     return {

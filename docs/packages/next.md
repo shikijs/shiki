@@ -135,7 +135,7 @@ export default async function Page() {
 ```
 
 ::: info
-The above example uses the `shiki/bundle/web` bundle. You can change it to [Fine-grained Bundle](/guide/install#fine-grained-bundle) to fully control the bundled languages/themes.
+The above example uses the `shiki/bundle/web` bundle. You can change it to [Fine-grained Bundle](/guide/bundles#fine-grained-bundle) to fully control the bundled languages/themes.
 :::
 
 ### Performance
