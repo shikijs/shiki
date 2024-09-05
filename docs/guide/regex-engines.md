@@ -38,6 +38,10 @@ const shiki = await createShiki({
 
 ## JavaScript RegExp Engine (Experimental)
 
+::: warning Experimental
+This feature is experimental and may change without following semver.
+:::
+
 This experimental engine uses JavaScript's native RegExp. As TextMate grammars' regular expressions are in Oniguruma flavor that might contains syntaxes that are not supported by JavaScript's RegExp, we use [`oniguruma-to-js`](https://github.com/antfu/oniguruma-to-js) to lowering the syntaxes and try to make them compatible with JavaScript's RegExp.
 
 ```ts {3,8}
