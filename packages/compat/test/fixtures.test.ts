@@ -1,14 +1,15 @@
 /// <reference types="vite/client" />
 
-import process from 'node:process'
 import { extname } from 'node:path'
+import process from 'node:process'
 import { describe, expect, it } from 'vitest'
 import getHighlighter from '../src'
 
 describe('fixtures', () => {
   const files = import.meta.glob('./input/*.*', { as: 'raw', eager: true })
   const filter = process.env.FILTER
-  Object.entries(files)
+  Object
+    .entries(files)
     .forEach(([path, content]) => {
       const run = !filter || path.includes(filter)
         ? it

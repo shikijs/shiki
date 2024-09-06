@@ -2,9 +2,11 @@
 outline: deep
 ---
 
-# Installation
+# Installation & Usage
 
 <Badges name="shiki" />
+
+## Installation
 
 Install via npm, or see [CDN Usage](#cdn-usage):
 ::: code-group
@@ -160,46 +162,7 @@ highlighter.codeToHtml('const a = 1', {
 
 When importing `shiki`, all the themes and languages are bundled as async chunks. Normally it won't be a concern to you as they are not being loaded if you don't use them. In some cases, if you want to control what to bundle, you can use the core and compose your own bundle.
 
-```ts twoslash theme:material-theme-ocean
-// @noErrors
-// `shiki/core` entry does not include any themes or languages or the wasm binary.
-import { createHighlighterCore } from 'shiki/core'
-
-// `shiki/wasm` contains the wasm binary inlined as base64 string.
-import getWasm from 'shiki/wasm'
-
-// directly import the theme and language modules, only the ones you imported will be bundled.
-import nord from 'shiki/themes/nord.mjs'
-
-const highlighter = await createHighlighterCore({
-  themes: [
-    // instead of strings, you need to pass the imported module
-    nord,
-    // or a dynamic import if you want to do chunk splitting
-    import('shiki/themes/material-theme-ocean.mjs')
-  ],
-  langs: [
-    import('shiki/langs/javascript.mjs'),
-    // shiki will try to interop the module with the default export
-    () => import('shiki/langs/css.mjs'),
-    // or a getter that returns custom grammar
-    async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))
-  ],
-  loadWasm: getWasm
-})
-
-// optionally, load themes and languages after creation
-await highlighter.loadTheme(import('shiki/themes/vitesse-light.mjs'))
-
-const code = highlighter.codeToHtml('const a = 1', {
-  lang: 'javascript',
-  theme: 'material-theme-ocean'
-})
-```
-
-::: info
-[Shorthands](#shorthands) are only avaliable in [bundled usage](#bundled-usage). For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/shikijs/shiki/blob/main/packages/core/src/bundle-factory.ts) or port it yourself.
-:::
+Check out the [Fine-grained Bundle](/guide/bundles#fine-grained-bundle) section for more details.
 
 ### Bundle Presets
 
@@ -283,8 +246,8 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 ```ts twoslash theme:nord
 // @noErrors
 import { createHighlighterCore, loadWasm } from 'shiki/core'
-import nord from 'shiki/themes/nord.mjs'
 import js from 'shiki/langs/javascript.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 // import wasm as assets
 await loadWasm(import('shiki/onig.wasm'))

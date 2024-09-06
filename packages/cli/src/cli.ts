@@ -2,8 +2,8 @@
 import fs from 'node:fs/promises'
 import { parse } from 'node:path'
 import process from 'node:process'
-import type { BundledLanguage } from 'shiki'
 import minimist from 'minimist'
+import type { BundledLanguage } from 'shiki'
 import { codeToANSI } from './code-to-ansi'
 
 export async function run(

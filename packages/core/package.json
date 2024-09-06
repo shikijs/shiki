@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/core",
   "type": "module",
-  "version": "1.14.1",
+  "version": "1.16.2",
   "description": "Core of Shiki",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -66,10 +66,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:"
   },
   "devDependencies": {
     "hast-util-to-html": "catalog:",
+    "oniguruma-to-js": "catalog:",
     "vscode-oniguruma": "catalog:"
   }
 }

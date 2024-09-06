@@ -33,7 +33,6 @@ export interface CssVariablesThemeOptions {
 /**
  * A factory function to create a css-variable-based theme
  *
- * @experimental This API is experimental and may change without following semver
  * @see https://shiki.style/guide/theme-colors#css-variables-theme
  */
 export function createCssVariablesTheme(options: CssVariablesThemeOptions = {}): ThemeRegistration {

@@ -1,6 +1,6 @@
+import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { grammars, injections } from 'tm-grammars'
-import fg from 'fast-glob'
 import type { LanguageRegistration } from '@shikijs/core'
 import { COMMENT_HEAD } from './constants'
 
@@ -118,12 +118,13 @@ export default langs
 
     const bundled = Array.from(bundledIds).map(id => grammars.find(i => i.name === id)!).filter(Boolean)
 
-    const info = bundled.map(i => ({
-      id: i.name,
-      name: i.displayName || i.name,
-      aliases: i.aliases,
-      import: `__(() => import('./langs/${i.name}')) as DynamicImportLanguageRegistration__`,
-    }) as const)
+    const info = bundled
+      .map(i => ({
+        id: i.name,
+        name: i.displayName || i.name,
+        aliases: i.aliases,
+        import: `__(() => import('./langs/${i.name}')) as DynamicImportLanguageRegistration__`,
+      }) as const)
       .sort((a, b) => a.id.localeCompare(b.id))
 
     const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `  | '${i}'`).join('\n')

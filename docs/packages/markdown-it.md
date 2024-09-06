@@ -13,8 +13,8 @@ npm i -D @shikijs/markdown-it
 ## Usage
 
 ```ts twoslash
-import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
+import MarkdownIt from 'markdown-it'
 
 const md = MarkdownIt()
 
@@ -28,12 +28,12 @@ md.use(await Shiki({
 
 ## Fine-grained Bundle
 
-By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/install#fine-grained-bundle), you can import from `@shikijs/markdown-it/core` and pass your own highlighter:
+By default, the full bundle of `shiki` will be imported. If you are using a [fine-grained bundle](/guide/bundles#fine-grained-bundle), you can import from `@shikijs/markdown-it/core` and pass your own highlighter:
 
 ```ts twoslash
 // @noErrors: true
-import MarkdownIt from 'markdown-it'
 import { fromHighlighter } from '@shikijs/markdown-it/core'
+import MarkdownIt from 'markdown-it'
 import { createHighlighterCore } from 'shiki/core'
 
 const highlighter = await createHighlighterCore({

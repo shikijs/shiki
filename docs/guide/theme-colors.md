@@ -90,17 +90,13 @@ This is only allowed for the `colorReplacements` option and not for the theme ob
 
 ## CSS Variables Theme
 
-::: warning Experimental
-This feature is experimental and may change without following semver.
-:::
-
 Shiki provides a factory function helper `createCssVariablesTheme` for creating a theme that uses CSS variables easier. Note that this theme is a lot less granular than most of the other themes and requires to define the CSS variables in your app. This is provided for easier migration from Shiki's [`css-variables theme`](https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables). For better highlighting result, we recommend construct the theme manually with [Arbitrary Color Values](#arbitrary-color-values) or use [Color Replacements](#color-replacements) to override an existing theme.
 
 This theme is **not included by default** and must be registered explicitly:
 
 ```ts twoslash
-import { createCssVariablesTheme } from 'shiki/core'
 import { createHighlighter } from 'shiki'
+import { createCssVariablesTheme } from 'shiki/core'
 
 // Create a custom CSS variables theme, the following are the default values
 const myTheme = createCssVariablesTheme({ // [!code hl:6]

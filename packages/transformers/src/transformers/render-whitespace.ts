@@ -1,5 +1,5 @@
-import type { ShikiTransformer } from 'shiki'
 import type { Element } from 'hast'
+import type { ShikiTransformer } from 'shiki'
 import { splitSpaces } from '../shared/utils'
 
 export interface TransformerRenderWhitespaceOptions {

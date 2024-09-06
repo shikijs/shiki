@@ -1,20 +1,21 @@
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
-import type { BuiltinLanguage, BuiltinTheme, CodeToTokensBaseOptions, MaybeGetter, StringLiteralUnion, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved, ThemedToken } from 'shiki'
-import { bundledLanguages, bundledThemes, createHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
 import { transformerCompactLineOptions } from '@shikijs/transformers'
-import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
+import { bundledLanguages, bundledThemes, createHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
+import type { BuiltinLanguage, BuiltinTheme, CodeToTokensBaseOptions, MaybeGetter, StringLiteralUnion, ThemedToken, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from 'shiki'
 import { ShikiCompatError } from './error'
+import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, HighlighterOptions } from './types'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
 export const BUNDLED_THEMES = bundledThemes
+
+export { ShikiCompatError } from './error'
 
 export * from './stub'
 export * from './types'
 
 export { normalizeTheme } from 'shiki'
 export { normalizeTheme as toShikiTheme } from 'shiki'
-export { ShikiCompatError } from './error'
 
 export async function getHighlighter(options: Partial<HighlighterOptions> = {}) {
   const themes = options.themes || []

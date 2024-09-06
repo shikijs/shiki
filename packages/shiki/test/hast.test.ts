@@ -1,6 +1,6 @@
 /* eslint-disable style/no-tabs */
-import { afterEach, describe, expect, it, vi } from 'vitest'
 import { toHtml } from 'hast-util-to-html'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { codeToHtml, createHighlighter } from '../src'
 
 afterEach(() => {

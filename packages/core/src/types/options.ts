@@ -1,37 +1,43 @@
-import type { LoadWasmOptions } from '../oniguruma'
-import type { StringLiteralUnion } from './utils'
-import type { LanguageInput, SpecialLanguage } from './langs'
-import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
-import type { TransformerOptions } from './transformers'
-import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
+import type { LoadWasmOptions, RegexEngine } from '../types'
 import type { DecorationOptions } from './decorations'
+import type { LanguageInput, LanguageRegistration, SpecialLanguage } from './langs'
+import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
+import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
+import type { TransformerOptions } from './transformers'
+import type { Awaitable, MaybeArray, StringLiteralUnion } from './utils'
 
-export interface HighlighterCoreOptions {
+export interface HighlighterCoreOptions<Sync extends boolean = false> {
+  /**
+   * Custom RegExp engine.
+   */
+  engine?: Sync extends true ? RegexEngine : Awaitable<RegexEngine>
   /**
    * Theme names, or theme registration objects to be loaded upfront.
    */
-  themes?: ThemeInput[]
+  themes?: Sync extends true ? MaybeArray<ThemeRegistrationAny>[] : ThemeInput[]
   /**
    * Language names, or language registration objects to be loaded upfront.
    */
-  langs?: LanguageInput[]
+  langs?: Sync extends true ? MaybeArray<LanguageRegistration>[] : LanguageInput[]
   /**
    * Alias of languages
    * @example { 'my-lang': 'javascript' }
    */
   langAlias?: Record<string, string>
   /**
-   * Load wasm file from a custom path or using a custom function.
-   */
-  loadWasm?: LoadWasmOptions
-  /**
    * Emit console warnings to alert users of potential issues.
    * @default true
    */
   warnings?: boolean
+
+  // TODO: Deprecate this option after docs for engines are updated.
+  /**
+   * Load wasm file from a custom path or using a custom function.
+   */
+  loadWasm?: Sync extends true ? never : LoadWasmOptions
 }
 
-export interface BundledHighlighterOptions<L extends string, T extends string> {
+export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings' | 'engine'> {
   /**
    * Theme registation
    *

@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from 'vitest/config'
 import { wasmPlugin } from './packages/core/rollup.config.mjs'
 
 export default defineConfig({

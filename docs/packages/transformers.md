@@ -17,14 +17,14 @@ npm i -D @shikijs/transformers
 ## Usage
 
 ```ts twoslash
-import {
-  codeToHtml,
-} from 'shiki'
 // [!code highlight:5]
 import {
   transformerNotationDiff,
   // ...
 } from '@shikijs/transformers'
+import {
+  codeToHtml,
+} from 'shiki'
 
 const code = `console.log('hello')`
 const html = await codeToHtml(code, {

@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "version": "1.14.1",
+  "version": "1.16.2",
   "private": true,
-  "packageManager": "pnpm@9.8.0",
+  "packageManager": "pnpm@9.9.0",
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp && pnpm -r publish",
@@ -11,6 +11,8 @@
     "build": "pnpm -r run build",
     "docs": "pnpm -C docs run docs:dev",
     "docs:build": "pnpm -C docs run docs:build",
+    "report-engine-js": "esno scripts/report-engine-js-compat.ts",
+    "bench": "vitest bench",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "esno": "catalog:",
     "fast-glob": "catalog:",
     "fs-extra": "catalog:",
+    "jiti": "catalog:",
     "jsonc-parser": "catalog:",
     "lint-staged": "catalog:",
     "markdown-it": "catalog:",
@@ -46,6 +49,7 @@
     "mdast-util-gfm": "catalog:",
     "mdast-util-to-hast": "catalog:",
     "ofetch": "catalog:",
+    "picocolors": "catalog:",
     "pnpm": "catalog:",
     "prettier": "catalog:",
     "rimraf": "catalog:",

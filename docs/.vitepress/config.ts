@@ -1,31 +1,34 @@
-import type { DefaultTheme } from 'vitepress'
-import { defineConfig } from 'vitepress'
 import { bundledThemes } from 'shiki'
-
+import { defineConfig } from 'vitepress'
 // @ts-expect-error missing types
 import { withMermaid } from 'vitepress-plugin-mermaid'
+import type { DefaultTheme } from 'vitepress'
+
+import { version } from '../../package.json'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
-import { version } from '../../package.json'
 import vite from './vite.config'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Getting Started', link: '/guide/' },
-  { text: 'Installation', link: '/guide/install' },
+  { text: 'Installation & Usage', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Decorations', link: '/guide/decorations' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
-  { text: 'Migration', link: '/guide/migrate' },
-  { text: 'Compatibility Build', link: '/guide/compat' },
+  { text: 'RegExp Engines', link: '/guide/regex-engines' },
+  { text: 'Synchronous Usage', link: '/guide/sync-usage' },
   { text: 'Custom Themes', link: '/guide/load-theme' },
   { text: 'Custom Languages', link: '/guide/load-lang' },
+  { text: 'Migration', link: '/guide/migrate' },
+  { text: 'Compatibility Build', link: '/guide/compat' },
 ]
 
 const REFERENCES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Themes', link: '/themes' },
   { text: 'Languages', link: '/languages' },
+  { text: 'JavaScript Engine Compatibility', link: '/references/engine-js-compat' },
 ]
 
 const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
@@ -35,6 +38,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Monaco Editor', link: '/packages/monaco' },
   { text: 'VitePress', link: '/packages/vitepress' },
   { text: 'Nuxt', link: '/packages/nuxt' },
+  { text: 'Next', link: '/packages/next' },
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'CLI', link: '/packages/cli' },

@@ -1,9 +1,9 @@
-import type { Element, ElementContent, Text } from 'hast'
 import type { ShikiTransformerContextCommon } from '@shikijs/core'
+import type { Element, ElementContent, Text } from 'hast'
 import type { NodeError, NodeHover, NodeQuery } from 'twoslash'
-import type { TwoslashRenderer } from './types'
-import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
 import { ShikiTwoslashError } from './error'
+import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
+import type { TwoslashRenderer } from './types'
 
 export interface RendererRichOptions {
   /**
@@ -419,7 +419,8 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
       if (node.type !== 'text')
         throw new ShikiTwoslashError(`Renderer hook nodeCompletion only works on text nodes, got ${node.type}`)
 
-      const items: Element[] = query.completions
+      const items: Element[] = query
+        .completions
         .map((i) => {
           const kind = i.kind || 'default'
           const isDeprecated = 'kindModifiers' in i && typeof i.kindModifiers === 'string' && i.kindModifiers?.split(',').includes('deprecated')

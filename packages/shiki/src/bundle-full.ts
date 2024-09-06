@@ -1,15 +1,15 @@
 import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/core'
-import { createSingletonShorthands, createdBundledHighlighter } from './core'
-import type { BundledLanguage } from './assets/langs-bundle-full'
-import type { BundledTheme } from './themes'
+import type {} from 'hast'
 import { bundledLanguages } from './assets/langs-bundle-full'
+import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine } from './core'
 import { bundledThemes } from './themes'
 import { getWasmInlined } from './wasm-dynamic'
-import type {} from 'hast'
+import type { BundledLanguage } from './assets/langs-bundle-full'
+import type { BundledTheme } from './themes'
 
+export * from './assets/langs-bundle-full'
 export * from './core'
 export * from './themes'
-export * from './assets/langs-bundle-full'
 
 export { getWasmInlined }
 
@@ -23,16 +23,16 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
  * @see https://shiki.style/guide/bundles#shiki-bundle-full
  *
  * For granular control over the bundle, check:
- * @see https://shiki.style/guide/install#fine-grained-bundle
+ * @see https://shiki.style/guide/bundles#fine-grained-bundle
  */
 export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
   BundledLanguage,
   BundledTheme
->(
-  bundledLanguages,
-  bundledThemes,
-  getWasmInlined,
-)
+>({
+  langs: bundledLanguages,
+  themes: bundledThemes,
+  engine: () => createWasmOnigEngine(getWasmInlined),
+})
 
 export const {
   codeToHtml,

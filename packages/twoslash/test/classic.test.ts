@@ -1,5 +1,5 @@
-import { expect, it } from 'vitest'
 import { codeToHtml } from 'shiki'
+import { expect, it } from 'vitest'
 import { rendererClassic, transformerTwoslash } from '../src'
 
 const styleTag = `

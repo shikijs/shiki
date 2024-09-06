@@ -1,7 +1,7 @@
 {
   "name": "shiki",
   "type": "module",
-  "version": "1.14.1",
+  "version": "1.16.2",
   "description": "A beautiful Syntax Highlighter.",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -101,6 +101,7 @@
   },
   "dependencies": {
     "@shikijs/core": "workspace:*",
+    "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:"
   },
   "devDependencies": {

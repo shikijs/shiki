@@ -1,6 +1,7 @@
 import type { ShikiTransformer } from 'shiki'
 import { createCommentNotationTransformerExperimental } from '../utils'
 import { highlightWordInLine } from '../shared/highlight-word'
+import { createCommentNotationTransformer } from '../utils'
 
 export interface TransformerNotationWordHighlightOptions {
   /**

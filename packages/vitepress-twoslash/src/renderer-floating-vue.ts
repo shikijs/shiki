@@ -1,10 +1,10 @@
 import { defaultHoverInfoProcessor, rendererRich } from '@shikijs/twoslash'
+import { fromMarkdown } from 'mdast-util-from-markdown'
+import { gfmFromMarkdown } from 'mdast-util-gfm'
+import { defaultHandlers, toHast } from 'mdast-util-to-hast'
 import type { RendererRichOptions, TwoslashRenderer } from '@shikijs/twoslash'
 import type { Element, ElementContent, Text } from 'hast'
 import type { ShikiTransformerContextCommon } from 'shiki'
-import { gfmFromMarkdown } from 'mdast-util-gfm'
-import { fromMarkdown } from 'mdast-util-from-markdown'
-import { defaultHandlers, toHast } from 'mdast-util-to-hast'
 
 export { defaultHoverInfoProcessor }
 
@@ -45,29 +45,6 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
     'class': 'twoslash-hover',
     'popper-class': ['shiki', classFloatingPanel, classCopyIgnore, classCode].join(' '),
     'theme': floatingVueTheme,
-  }
-
-  function compose(parts: { token: Element | Text, popup: Element }): Element[] {
-    return [
-      {
-        type: 'element',
-        tagName: 'span',
-        properties: {},
-        children: [parts.token],
-      },
-      {
-        type: 'element',
-        tagName: 'template',
-        properties: {
-          'v-slot:popper': '{}',
-        },
-        content: {
-          type: 'root',
-          children: [vPre(parts.popup)],
-        },
-        children: [],
-      },
-    ]
   }
 
   const rich = rendererRich({
@@ -193,4 +170,27 @@ function renderMarkdownInline(this: ShikiTransformerContextCommon, md: string, c
   if (children.length === 1 && children[0].type === 'element' && children[0].tagName === 'p')
     return children[0].children
   return children
+}
+
+function compose(parts: { token: Element | Text, popup: Element }): Element[] {
+  return [
+    {
+      type: 'element',
+      tagName: 'span',
+      properties: {},
+      children: [parts.token],
+    },
+    {
+      type: 'element',
+      tagName: 'template',
+      properties: {
+        'v-slot:popper': '{}',
+      },
+      content: {
+        type: 'root',
+        children: [vPre(parts.popup)],
+      },
+      children: [],
+    },
+  ]
 }
