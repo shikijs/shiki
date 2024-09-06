@@ -13,8 +13,8 @@ npm i -D @shikijs/markdown-it
 ## Usage
 
 ```ts twoslash
-import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
+import MarkdownIt from 'markdown-it'
 
 const md = MarkdownIt()
 
@@ -32,8 +32,8 @@ By default, the full bundle of `shiki` will be imported. If you are using a [fin
 
 ```ts twoslash
 // @noErrors: true
-import MarkdownIt from 'markdown-it'
 import { fromHighlighter } from '@shikijs/markdown-it/core'
+import MarkdownIt from 'markdown-it'
 import { createHighlighterCore } from 'shiki/core'
 
 const highlighter = await createHighlighterCore({

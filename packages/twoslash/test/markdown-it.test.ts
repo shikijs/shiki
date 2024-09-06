@@ -1,8 +1,8 @@
-import { describe, expect, it } from 'vitest'
-import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
-import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { transformerMetaHighlight } from '@shikijs/transformers'
+import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+import MarkdownIt from 'markdown-it'
+import { describe, expect, it } from 'vitest'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-rich.css" />

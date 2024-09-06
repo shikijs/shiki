@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { createHighlighterCoreSync, createJavaScriptRegexEngine } from '../src/core'
-
 import js from '../src/assets/langs/javascript'
+
 import nord from '../src/assets/themes/nord'
+import { createHighlighterCoreSync, createJavaScriptRegexEngine } from '../src/core'
 
 describe('should', () => {
   const engine = createJavaScriptRegexEngine()

@@ -1,9 +1,9 @@
-import { describe, expect, it } from 'vitest'
 import { wasmBinary } from '@shikijs/core/wasm-inlined'
-import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../src/core'
+import { describe, expect, it } from 'vitest'
+import { OnigScanner, OnigString } from '../../../core/src/engines/oniguruma'
 import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../src/core'
 
-import { OnigScanner, OnigString } from '../../../core/src/engines/oniguruma'
+import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../src/core'
 import type { Instance } from './types'
 
 await loadWasm({ instantiator: obj => WebAssembly.instantiate(wasmBinary, obj) })

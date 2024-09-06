@@ -3,11 +3,11 @@
  *-------------------------------------------------------- */
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import type { IGrammar, IRawThemeSetting, StateStack } from '@shikijs/vscode-textmate'
-import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemeRegistrationResolved, ThemedToken, ThemedTokenScopeExplanation, TokenizeWithThemeOptions } from '../types'
-import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
 import { ShikiError } from '../error'
-import { GrammarState, getGrammarStack } from '../textmate/grammar-state'
+import { getGrammarStack, GrammarState } from '../textmate/grammar-state'
+import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
+import type { CodeToTokensBaseOptions, FontStyle, ShikiInternal, ThemedToken, ThemedTokenScopeExplanation, ThemeRegistrationResolved, TokenizeWithThemeOptions } from '../types'
 
 /**
  * Code to tokens, with a simple theme.

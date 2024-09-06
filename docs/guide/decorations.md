@@ -78,7 +78,7 @@ function doSomethingWithCode(code: string): DecorationItem[] {
 const code: string = ''
 
 // ---cut---
-import { ShikiTransformer, codeToHtml } from 'shiki'
+import { codeToHtml, ShikiTransformer } from 'shiki'
 
 const myTransformer: ShikiTransformer = {
   name: 'my-transformer',

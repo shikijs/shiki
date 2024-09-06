@@ -1,9 +1,9 @@
-import type { Element, ElementContent, Text } from 'hast'
 import type { ShikiTransformerContextCommon } from '@shikijs/core'
+import type { Element, ElementContent, Text } from 'hast'
 import type { NodeError, NodeHover, NodeQuery } from 'twoslash'
-import type { TwoslashRenderer } from './types'
-import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
 import { ShikiTwoslashError } from './error'
+import { defaultCompletionIcons, defaultCustomTagIcons } from './icons'
+import type { TwoslashRenderer } from './types'
 
 export interface RendererRichOptions {
   /**

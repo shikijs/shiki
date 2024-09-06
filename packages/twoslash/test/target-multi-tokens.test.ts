@@ -1,5 +1,5 @@
-import { codeToHtml, codeToTokensBase } from 'shiki'
 import { transformerTwoslash } from '@shikijs/twoslash'
+import { codeToHtml, codeToTokensBase } from 'shiki'
 import { expect, it } from 'vitest'
 
 const code = `const x: [number] = ["hello"]`

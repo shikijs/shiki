@@ -246,8 +246,8 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 ```ts twoslash theme:nord
 // @noErrors
 import { createHighlighterCore, loadWasm } from 'shiki/core'
-import nord from 'shiki/themes/nord.mjs'
 import js from 'shiki/langs/javascript.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 // import wasm as assets
 await loadWasm(import('shiki/onig.wasm'))

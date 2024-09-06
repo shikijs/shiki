@@ -1,5 +1,5 @@
-import { expect, it } from 'vitest'
 import * as shikiLegacy from 'shiki-legacy'
+import { expect, it } from 'vitest'
 import * as shiki from '../src/index'
 
 it('run', async () => {

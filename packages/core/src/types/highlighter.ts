@@ -1,11 +1,11 @@
 import type { Root } from 'hast'
-import type { Grammar } from './textmate'
+import type { RegexEngine } from './engines'
 import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLanguage } from './langs'
+import type { CodeToHastOptions } from './options'
+import type { Grammar } from './textmate'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
 import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
-import type { CodeToHastOptions } from './options'
 import type { Awaitable, MaybeArray } from './utils'
-import type { RegexEngine } from './engines'
 
 /**
  * Internal context of Shiki, core textmate logic

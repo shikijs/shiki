@@ -1,13 +1,13 @@
-import { expect, it } from 'vitest'
 import { getSingletonHighlighter } from 'shiki'
-import { getSingletonHighlighterCore } from '../src/core'
-
-import js from '../src/assets/langs/javascript'
-import nord from '../src/assets/themes/nord'
-import mtp from '../src/assets/themes/material-theme-palenight'
-
+import { expect, it } from 'vitest'
 // eslint-disable-next-line antfu/no-import-dist
 import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
+
+import js from '../src/assets/langs/javascript'
+import mtp from '../src/assets/themes/material-theme-palenight'
+import nord from '../src/assets/themes/nord'
+
+import { getSingletonHighlighterCore } from '../src/core'
 
 it('getSingletonHighlighterCore', async () => {
   const shiki1 = await getSingletonHighlighterCore({

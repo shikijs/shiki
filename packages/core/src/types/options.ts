@@ -1,10 +1,10 @@
 import type { LoadWasmOptions, RegexEngine } from '../types'
-import type { Awaitable, MaybeArray, StringLiteralUnion } from './utils'
+import type { DecorationOptions } from './decorations'
 import type { LanguageInput, LanguageRegistration, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
-import type { TransformerOptions } from './transformers'
 import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
-import type { DecorationOptions } from './decorations'
+import type { TransformerOptions } from './transformers'
+import type { Awaitable, MaybeArray, StringLiteralUnion } from './utils'
 
 export interface HighlighterCoreOptions<Sync extends boolean = false> {
   /**

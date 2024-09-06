@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
-import { icons as codicon } from '@iconify-json/codicon'
 import { icons as carbon } from '@iconify-json/carbon'
+import { icons as codicon } from '@iconify-json/codicon'
 import { fromHtml } from 'hast-util-from-html'
 import type { CompletionEntry } from 'typescript'
 

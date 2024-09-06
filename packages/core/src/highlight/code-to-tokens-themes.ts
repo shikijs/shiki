@@ -1,10 +1,10 @@
+import { codeToTokensBase } from './code-to-tokens-base'
 import type {
   CodeToTokensWithThemesOptions,
   ShikiInternal,
   ThemedToken,
   ThemedTokenWithVariants,
 } from '../types'
-import { codeToTokensBase } from './code-to-tokens-base'
 
 /**
  * Get tokens with multiple themes

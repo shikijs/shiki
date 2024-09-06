@@ -4,10 +4,10 @@
 
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
+import { onigurumaToRegexp } from 'oniguruma-to-js'
 import c from 'picocolors'
 import { rewrite } from 'regex'
-import { onigurumaToRegexp } from 'oniguruma-to-js'
+import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
 const engine = createJavaScriptRegexEngine({

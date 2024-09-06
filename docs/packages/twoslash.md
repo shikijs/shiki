@@ -20,11 +20,11 @@ This package is **a transformer addon** to Shiki. This means that for every inte
 
 ```ts twoslash
 import {
-  codeToHtml,
-} from 'shiki'
-import {
   transformerTwoslash,
 } from '@shikijs/twoslash'
+import {
+  codeToHtml,
+} from 'shiki'
 
 const html = await codeToHtml(`console.log()`, {
   lang: 'ts',
@@ -177,9 +177,9 @@ We make tiny wrappers around the building blocks and provide an easy-to-use API 
 // TODO: Replace with explicit versions in production
 import { createTransformerFactory, rendererRich } from 'https://esm.sh/@shikijs/twoslash@latest/core'
 import { codeToHtml } from 'https://esm.sh/shiki@latest'
+import { createTwoslashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
 import { createStorage } from 'https://esm.sh/unstorage@latest'
 import indexedDbDriver from 'https://esm.sh/unstorage@latest/drivers/indexedb'
-import { createTwoslashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'
 
 // ============= Initialization =============
 

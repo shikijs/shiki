@@ -1,6 +1,6 @@
 import c from 'chalk'
+import { codeToTokensBase, FontStyle, getSingletonHighlighter } from 'shiki'
 import type { BundledLanguage, BundledTheme } from 'shiki'
-import { FontStyle, codeToTokensBase, getSingletonHighlighter } from 'shiki'
 import { hexApplyAlpha } from './colors'
 
 export async function codeToANSI(code: string, lang: BundledLanguage, theme: BundledTheme): Promise<string> {

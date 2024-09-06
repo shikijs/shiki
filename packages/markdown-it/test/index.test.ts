@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
-import { expect, it } from 'vitest'
-import MarkdownIt from 'markdown-it'
 import { transformerMetaHighlight } from '@shikijs/transformers'
+import MarkdownIt from 'markdown-it'
+import { expect, it } from 'vitest'
 import Shiki from '../src'
 
 it('run for base', async () => {

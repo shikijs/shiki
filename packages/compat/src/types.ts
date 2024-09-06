@@ -8,9 +8,9 @@ import type {
   LanguageRegistration,
   RawGrammar,
   StringLiteralUnion,
+  ThemedToken,
   ThemeRegistrationAny,
   ThemeRegistrationResolved,
-  ThemedToken,
 } from 'shiki'
 
 export interface LineOption {

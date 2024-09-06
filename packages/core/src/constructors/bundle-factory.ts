@@ -1,9 +1,9 @@
 import type { Root } from 'hast'
-import type { Awaitable, BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, CreatedBundledHighlighterOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RegexEngine, RequireKeys, SpecialLanguage, SpecialTheme, ThemeInput, ThemedToken, ThemedTokenWithVariants, TokensResult } from '../types'
-import { isSpecialLang, isSpecialTheme } from '../utils'
-import { ShikiError } from '../error'
 import { createWasmOnigEngine } from '../engines/wasm'
+import { ShikiError } from '../error'
+import { isSpecialLang, isSpecialTheme } from '../utils'
 import { createHighlighterCore } from './highlighter'
+import type { Awaitable, BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, CreatedBundledHighlighterOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RegexEngine, RequireKeys, SpecialLanguage, SpecialTheme, ThemedToken, ThemedTokenWithVariants, ThemeInput, TokensResult } from '../types'
 
 export type CreateHighlighterFactory<L extends string, T extends string> = (
   options: BundledHighlighterOptions<L, T>

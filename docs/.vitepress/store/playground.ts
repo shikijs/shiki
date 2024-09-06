@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
-import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { BundledLanguageInfo, BundledThemeInfo } from 'shiki'
 import { useLocalStorage } from '@vueuse/core'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'
+import type { BundledLanguageInfo, BundledThemeInfo } from 'shiki'
 
 export const usePlayground = defineStore('playground', () => {
   const lang = useLocalStorage('shiki-playground-lang', 'typescript')

@@ -1,6 +1,6 @@
-import { createHighlighter } from 'shiki'
 import { shikiToMonaco } from '@shikijs/monaco'
 import * as monaco from 'monaco-editor-core'
+import { createHighlighter } from 'shiki'
 
 // Create the highlighter, it can be reused
 const highlighter = await createHighlighter({

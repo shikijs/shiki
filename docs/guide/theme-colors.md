@@ -95,8 +95,8 @@ Shiki provides a factory function helper `createCssVariablesTheme` for creating 
 This theme is **not included by default** and must be registered explicitly:
 
 ```ts twoslash
-import { createCssVariablesTheme } from 'shiki/core'
 import { createHighlighter } from 'shiki'
+import { createCssVariablesTheme } from 'shiki/core'
 
 // Create a custom CSS variables theme, the following are the default values
 const myTheme = createCssVariablesTheme({ // [!code hl:6]

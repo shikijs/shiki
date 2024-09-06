@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
-import process from 'node:process'
 import { extname } from 'node:path'
+import process from 'node:process'
 import { describe, expect, it } from 'vitest'
 import getHighlighter from '../src'
 
