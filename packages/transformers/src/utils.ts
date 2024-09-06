@@ -4,7 +4,7 @@ import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
 /**
  * Regex that matches code comments
  */
-const regex = /(\/\/|\/\*|<!--|[#"']|--|%%|;{1,2}|%{1,2})(\s*(?:\S.*?|[\t\v\f \xA0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]))(-->|\*\/|$)/
+const regex = /((?:\/\/|\/\*|<!--|[#"']|--|%%|;{1,2}|%{1,2})\s*)(\S.*?)(-->|\*\/|$)/
 
 /**
  * Create a transformer to process comment notations
