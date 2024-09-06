@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises'
-import { unified } from 'unified'
+import { transformerMetaHighlight, transformerMetaWordHighlight } from '@shikijs/transformers'
+import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
+import { unified } from 'unified'
 import { expect, it } from 'vitest'
-import { transformerMetaHighlight, transformerMetaWordHighlight } from '@shikijs/transformers'
 import rehypeShiki from '../src'
 
 it('run', async () => {

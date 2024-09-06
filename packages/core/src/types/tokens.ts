@@ -1,8 +1,8 @@
 import type { IRawThemeSetting } from '@shikijs/vscode-textmate'
 import type { GrammarState } from '../textmate/grammar-state'
 import type { SpecialLanguage } from './langs'
-import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 import type { CodeOptionsThemes } from './options'
+import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 
 export type { GrammarState }
 

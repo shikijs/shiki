@@ -1,7 +1,7 @@
-import type monacoNs from 'monaco-editor-core'
+import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
 import type { StateStack } from '@shikijs/vscode-textmate'
-import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
+import type monacoNs from 'monaco-editor-core'
 
 export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
 

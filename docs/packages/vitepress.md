@@ -24,8 +24,8 @@ In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 
 ```ts twoslash
 // .vitepress/config.ts
-import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash' // [!code hl]
+import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   markdown: {
@@ -41,10 +41,11 @@ And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custo
 ```ts twoslash
 // @noErrors: true
 // .vitepress/theme/index.ts
-import Theme from 'vitepress/theme'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client' // [!code hl]
-import '@shikijs/vitepress-twoslash/style.css' // [!code hl]
+import Theme from 'vitepress/theme'
 import type { EnhanceAppContext } from 'vitepress'
+
+import '@shikijs/vitepress-twoslash/style.css' // [!code hl]
 
 export default {
   extends: Theme,

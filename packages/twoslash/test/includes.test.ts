@@ -1,7 +1,7 @@
-import { expect, it } from 'vitest'
 import { type CodeToHastOptions, codeToHtml } from 'shiki'
-import { TwoslashIncludesManager } from '../src/includes'
+import { expect, it } from 'vitest'
 import { rendererRich, transformerTwoslash } from '../src'
+import { TwoslashIncludesManager } from '../src/includes'
 
 const styleTag = `
 <link rel="stylesheet" href="../../../style-rich.css" />

@@ -1,6 +1,6 @@
 import { basename } from 'node:path'
-import { codeToHast, getSingletonHighlighter } from 'shiki'
 import { transformerTwoslash } from '@shikijs/twoslash'
+import { codeToHast, getSingletonHighlighter } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import { rendererFloatingVue } from '../src'
 

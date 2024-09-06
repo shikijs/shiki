@@ -1,4 +1,10 @@
 import type { Element, Root, Text } from 'hast'
+
+import { FontStyle } from '../types'
+import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
+import { getTransformers } from './_get-transformers'
+import { codeToTokens } from './code-to-tokens'
+
 import type {
   CodeToHastOptions,
   CodeToHastRenderOptions,
@@ -8,10 +14,6 @@ import type {
   ShikiTransformerContextSource,
   ThemedToken,
 } from '../types'
-import { FontStyle } from '../types'
-import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
-import { getTransformers } from './_get-transformers'
-import { codeToTokens } from './code-to-tokens'
 
 export function codeToHast(
   internal: ShikiInternal,

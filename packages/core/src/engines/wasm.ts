@@ -1,5 +1,6 @@
+import { loadWasm, OnigScanner, OnigString } from './oniguruma'
+
 import type { LoadWasmOptions, RegexEngine } from '../types'
-import { OnigScanner, OnigString, loadWasm } from './oniguruma'
 
 export { loadWasm }
 

@@ -1,8 +1,8 @@
-import { fileURLToPath } from 'node:url'
-import { basename } from 'node:path'
 import { promises as fs } from 'node:fs'
-import { describe, expect, it, onTestFailed } from 'vitest'
+import { basename } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
+import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../../../core/src/engines/javascript'
 import type { Instance } from './types'
 

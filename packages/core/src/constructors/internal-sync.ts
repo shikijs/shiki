@@ -1,3 +1,9 @@
+import { ShikiError } from '../error'
+import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
+import { normalizeTheme } from '../textmate/normalize-theme'
+import { Registry } from '../textmate/registry'
+import { Resolver } from '../textmate/resolver'
+
 import type {
   HighlighterCoreOptions,
   LanguageInput,
@@ -10,11 +16,6 @@ import type {
   ThemeRegistrationAny,
   ThemeRegistrationResolved,
 } from '../types'
-import { Registry } from '../textmate/registry'
-import { Resolver } from '../textmate/resolver'
-import { normalizeTheme } from '../textmate/normalize-theme'
-import { ShikiError } from '../error'
-import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 
 let instancesCount = 0
 

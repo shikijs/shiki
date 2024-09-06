@@ -1,15 +1,15 @@
 import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/core'
-import { createSingletonShorthands, createWasmOnigEngine, createdBundledHighlighter } from './core'
-import type { BundledLanguage } from './assets/langs-bundle-full'
-import type { BundledTheme } from './themes'
+import type {} from 'hast'
 import { bundledLanguages } from './assets/langs-bundle-full'
+import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine } from './core'
 import { bundledThemes } from './themes'
 import { getWasmInlined } from './wasm-dynamic'
-import type {} from 'hast'
+import type { BundledLanguage } from './assets/langs-bundle-full'
+import type { BundledTheme } from './themes'
 
+export * from './assets/langs-bundle-full'
 export * from './core'
 export * from './themes'
-export * from './assets/langs-bundle-full'
 
 export { getWasmInlined }
 

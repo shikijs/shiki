@@ -4,8 +4,8 @@
 
 import type { IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../error'
-import type { LoadWasmOptions, WebAssemblyInstance, WebAssemblyInstantiator } from '../../types'
 import createOnigasm from './onig'
+import type { LoadWasmOptions, WebAssemblyInstance, WebAssemblyInstantiator } from '../../types'
 
 export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>
 

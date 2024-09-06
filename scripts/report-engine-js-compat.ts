@@ -4,8 +4,8 @@
 
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import c from 'picocolors'
+import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
 const engine = createJavaScriptRegexEngine()

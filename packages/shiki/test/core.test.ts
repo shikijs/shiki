@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { createHighlighterCore } from '../src/core'
+// eslint-disable-next-line antfu/no-import-dist
+import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
 
 import js from '../src/assets/langs/javascript'
 import ts from '../src/assets/langs/typescript'
-import nord from '../src/assets/themes/nord'
 import mtp from '../src/assets/themes/material-theme-palenight'
+import nord from '../src/assets/themes/nord'
 
-// eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
+import { createHighlighterCore } from '../src/core'
 
 describe('should', () => {
   it('works', async () => {

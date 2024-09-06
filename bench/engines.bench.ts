@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import fs from 'node:fs/promises'
+import { createHighlighter, createJavaScriptRegexEngine, createWasmOnigEngine } from 'shiki'
 import { bench, describe } from 'vitest'
 import type { BundledLanguage } from 'shiki'
-import { createHighlighter, createJavaScriptRegexEngine, createWasmOnigEngine } from 'shiki'
 import type { ReportItem } from '../scripts/report-engine-js-compat'
 
 const js = createJavaScriptRegexEngine()

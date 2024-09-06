@@ -1,11 +1,11 @@
 // @ts-check
-import { defineConfig } from 'rollup'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import replace from '@rollup/plugin-replace'
-import dts from 'rollup-plugin-dts'
 import json from '@rollup/plugin-json'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import fs from 'fs-extra'
+import { defineConfig } from 'rollup'
+import dts from 'rollup-plugin-dts'
 import ts from 'rollup-plugin-typescript2'
 
 const entries = [

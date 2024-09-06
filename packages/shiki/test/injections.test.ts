@@ -1,11 +1,11 @@
 import { codeToHtml, createHighlighterCore } from 'shiki'
 import { expect, it } from 'vitest'
-import vl from '../src/assets/themes/vitesse-light'
-import html from '../src/assets/langs/html'
-import vue from '../src/assets/langs/vue'
-import ts from '../src/assets/langs/typescript'
 import angularHtml from '../src/assets/langs/angular-html'
 import angularTs from '../src/assets/langs/angular-ts'
+import html from '../src/assets/langs/html'
+import ts from '../src/assets/langs/typescript'
+import vue from '../src/assets/langs/vue'
+import vl from '../src/assets/themes/vitesse-light'
 
 // Basically we need to make sure that the syntax inside `v-if` and `{{}}` is highlighted correctly.
 // This is done by a `vue-injections` patch that injects extra grammar into HTML.

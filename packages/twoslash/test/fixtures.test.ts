@@ -1,6 +1,6 @@
 import { basename } from 'node:path'
-import { codeToHast, hastToHtml } from 'shiki'
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
+import { codeToHast, hastToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 
 const files = import.meta.glob('./fixtures/*.*', { as: 'raw', eager: true })

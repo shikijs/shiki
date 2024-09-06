@@ -18,11 +18,11 @@ npm i -D @shikijs/rehype
 
 ```ts twoslash
 // @noErrors: true
-import { unified } from 'unified'
+import rehypeShiki from '@shikijs/rehype'
+import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
-import rehypeShiki from '@shikijs/rehype'
+import { unified } from 'unified'
 
 const file = await unified()
   .use(remarkParse)
@@ -46,13 +46,13 @@ By default, the full bundle of `shiki` will be imported. If you are using a [fin
 
 ```ts twoslash
 // @noErrors: true
-import { unified } from 'unified'
+import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
+import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
-import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
-
 import { createHighlighterCore } from 'shiki/core'
+
+import { unified } from 'unified'
 
 const highlighter = await createHighlighterCore({
   themes: [
@@ -111,11 +111,11 @@ Enable `inline` on the Rehype plugin:
 
 ```ts twoslash
 // @noErrors: true
-import { unified } from 'unified'
+import rehypeShiki from '@shikijs/rehype'
+import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
-import rehypeShiki from '@shikijs/rehype'
+import { unified } from 'unified'
 
 const file = await unified()
   .use(remarkParse)

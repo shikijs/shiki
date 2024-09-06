@@ -1,11 +1,11 @@
+import { createWasmOnigEngine } from '../engines/wasm'
+import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
+import { createShikiInternalSync } from './internal-sync'
 import type {
   HighlighterCoreOptions,
   LoadWasmOptions,
   ShikiInternal,
 } from '../types'
-import { createWasmOnigEngine } from '../engines/wasm'
-import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
-import { createShikiInternalSync } from './internal-sync'
 
 let _defaultWasmLoader: LoadWasmOptions | undefined
 /**

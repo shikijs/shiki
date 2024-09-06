@@ -1,6 +1,6 @@
-import type { LanguageInput, LanguageRegistration, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationResolved } from '../types'
 import { isSpecialLang, isSpecialTheme, normalizeGetter } from '../utils'
 import { normalizeTheme } from './normalize-theme'
+import type { LanguageInput, LanguageRegistration, SpecialLanguage, SpecialTheme, ThemeInput, ThemeRegistrationResolved } from '../types'
 
 /**
  * Resolve

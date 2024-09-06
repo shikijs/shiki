@@ -7,11 +7,11 @@ import type {
   Position,
   SpecialLanguage,
   SpecialTheme,
+  ThemedToken,
   ThemeInput,
   ThemeRegistrationAny,
-  ThemedToken,
-  TokenStyles,
   TokenizeWithThemeOptions,
+  TokenStyles,
 } from './types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
