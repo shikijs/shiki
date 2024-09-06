@@ -4,14 +4,13 @@ import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
 /**
  * Regex that matches code comments
  */
-const regex = /(\/\/|\/\*|<!--|[#"'%;]|--|%%|;;)(.+?)(-->|\*\/|$)/
+const regex = /(\/\/|\/\*|<!--|[#"']|--|%%|;{1,2}|%{1,2})(\s*(?:\S.*?|[\t\v\f \xA0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]))(-->|\*\/|$)/
 
 /**
  * Create a transformer to process comment notations
  *
  * @param name transformer name
  * @param onMatch function to be called when found a comment in code, return the replaced text.
- * @param removeEmptyLines remove empty lines below if matched
  */
 export function createCommentNotationTransformerExperimental(
   name: string,
@@ -23,7 +22,6 @@ export function createCommentNotationTransformerExperimental(
     lines: Element[],
     index: number,
   ) => string,
-  removeEmptyLines = false,
 ): ShikiTransformer {
   return {
     name,
@@ -33,7 +31,7 @@ export function createCommentNotationTransformerExperimental(
 
       lines.forEach((line, lineIdx) => {
         // comment should be at the end of line (last token)
-        const last = (line.children.filter(i => i.type === 'element') as Element[]).at(-1)
+        const last = line.children.findLast(i => i.type === 'element') as Element | undefined
 
         if (!last || last.children.length === 0)
           return
@@ -59,16 +57,11 @@ export function createCommentNotationTransformerExperimental(
         if (!deleteComment)
           return
 
-        line.children.splice(line.children.indexOf(last), 1)
-
         if (isEmptyLine) {
           linesToRemove.push(line)
-
-          if (removeEmptyLines) {
-            const next = code.children[code.children.indexOf(line) + 1]
-            if (next && next.type === 'text' && next.value === '\n')
-              linesToRemove.push(next)
-          }
+        }
+        else {
+          line.children.splice(line.children.indexOf(last), 1)
         }
       })
 
