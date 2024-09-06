@@ -28,7 +28,7 @@ const engine = createJavaScriptRegexEngine({
 
     try {
       return onigurumaToRegexp(rewritten.expression, {
-        flags: rewritten.flags,
+        flags: 'dgm',
         ignoreContiguousAnchors: true,
       })
     }
