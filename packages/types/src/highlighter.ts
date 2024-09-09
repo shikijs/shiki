@@ -4,7 +4,15 @@ import type { LanguageInput, LanguageRegistration, ResolveBundleKey, SpecialLang
 import type { CodeToHastOptions } from './options'
 import type { Grammar } from './textmate'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny, ThemeRegistrationResolved } from './themes'
-import type { CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, GrammarState, ThemedToken, ThemedTokenWithVariants, TokensResult } from './tokens'
+import type {
+  CodeToTokensBaseOptions,
+  CodeToTokensOptions,
+  CodeToTokensWithThemesOptions,
+  GrammarState,
+  ThemedToken,
+  ThemedTokenWithVariants,
+  TokensResult,
+} from './tokens'
 import type { Awaitable, MaybeArray } from './utils'
 
 /**

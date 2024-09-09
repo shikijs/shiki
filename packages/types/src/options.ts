@@ -1,5 +1,5 @@
-import type { LoadWasmOptions, RegexEngine } from '../types'
 import type { DecorationOptions } from './decorations'
+import type { LoadWasmOptions, RegexEngine } from './engines'
 import type { LanguageInput, LanguageRegistration, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
 import type { TokenizeWithThemeOptions, TokensResult } from './tokens'

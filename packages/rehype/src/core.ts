@@ -1,10 +1,10 @@
 import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
-import type { Element, Root } from 'hast'
 import type {
   CodeToHastOptions,
   HighlighterGeneric,
-} from 'shiki/core'
+} from '@shikijs/types'
+import type { Element, Root } from 'hast'
 import type { Transformer } from 'unified'
 import { InlineCodeProcessors } from './inline'
 import type { RehypeShikiCoreOptions } from './types'

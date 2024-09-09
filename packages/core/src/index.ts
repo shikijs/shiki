@@ -11,21 +11,22 @@ export { createJavaScriptRegexEngine, defaultJavaScriptRegexConstructor } from '
 export { createWasmOnigEngine, loadWasm } from './engines/wasm'
 export { ShikiError } from './error'
 
+// Low-level Highlighting
 export { codeToHast, tokensToHast } from './highlight/code-to-hast'
-
 export { codeToHtml, hastToHtml } from './highlight/code-to-html'
 export { codeToTokens } from './highlight/code-to-tokens'
 export { tokenizeAnsiWithTheme } from './highlight/code-to-tokens-ansi'
-// Low-level Highlighting
 export { codeToTokensBase, tokenizeWithTheme } from './highlight/code-to-tokens-base'
 export { codeToTokensWithThemes } from './highlight/code-to-tokens-themes'
-// TextMate Utilities
-export { normalizeTheme } from './textmate/normalize-theme'
 
+export { normalizeTheme } from './textmate/normalize-theme'
 export { transformerDecorations } from './transformer-decorations'
-export * from './types'
+
 // Utils and Misc
 export * from './utils'
+
+// Types
+export * from '@shikijs/types'
 
 // Deprecated
 export {

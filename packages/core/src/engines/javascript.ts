@@ -1,6 +1,11 @@
 import { onigurumaToRegexp } from 'oniguruma-to-js'
 import { rewrite } from 'regex'
-import type { JavaScriptRegexEngineOptions, PatternScanner, RegexEngine, RegexEngineString } from '../types'
+import type {
+  JavaScriptRegexEngineOptions,
+  PatternScanner,
+  RegexEngine,
+  RegexEngineString,
+} from '@shikijs/types'
 
 const MAX = 4294967295
 

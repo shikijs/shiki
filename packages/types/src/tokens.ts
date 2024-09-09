@@ -1,10 +1,18 @@
-import type { IRawThemeSetting } from '@shikijs/vscode-textmate'
-import type { GrammarState } from '../textmate/grammar-state'
+import type { FontStyle, IRawThemeSetting } from '@shikijs/vscode-textmate'
 import type { SpecialLanguage } from './langs'
 import type { CodeOptionsThemes } from './options'
 import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 
-export type { GrammarState }
+/**
+ * GrammarState is a special reference object that holds the state of a grammar.
+ *
+ * It's used to highlight code snippets that are part of the target language.
+ */
+export interface GrammarState {
+  readonly lang: string
+  readonly theme: string
+  get scopes(): string[]
+}
 
 export interface CodeToTokensBaseOptions<Languages extends string = string, Themes extends string = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage
@@ -225,12 +233,4 @@ export interface TokensResult {
    * When specified, `fg` and `bg` will be ignored.
    */
   rootStyle?: string
-}
-
-export enum FontStyle {
-  NotSet = -1,
-  None = 0,
-  Italic = 1,
-  Bold = 2,
-  Underline = 4,
 }

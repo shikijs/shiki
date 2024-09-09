@@ -1,4 +1,5 @@
 import { INITIAL } from '@shikijs/vscode-textmate'
+import type { GrammarState as GrammarStateInterface } from '@shikijs/types'
 import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../error'
 
@@ -7,7 +8,7 @@ import { ShikiError } from '../error'
  *
  * It's used to highlight code snippets that are part of the target language.
  */
-export class GrammarState {
+export class GrammarState implements GrammarStateInterface {
   /**
    * Static method to create a initial grammar state.
    */
@@ -53,7 +54,7 @@ function getScopes(stack: StateStackImpl) {
   return scopes
 }
 
-export function getGrammarStack(state: GrammarState) {
+export function getGrammarStack(state: GrammarState | GrammarStateInterface): StateStack {
   if (!(state instanceof GrammarState))
     throw new ShikiError('Invalid grammar state')
   // @ts-expect-error _stack is private

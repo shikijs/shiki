@@ -1,3 +1,4 @@
+export * from './bundle-factory'
 export * from './decorations'
 export * from './engines'
 export * from './highlighter'

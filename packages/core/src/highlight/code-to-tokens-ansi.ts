@@ -1,7 +1,13 @@
+import { FontStyle } from '@shikijs/vscode-textmate'
 import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
-import { FontStyle } from '../types'
+
+import type {
+  ThemedToken,
+  ThemeRegistrationResolved,
+  TokenizeWithThemeOptions,
+} from '@shikijs/types'
+
 import { applyColorReplacements, resolveColorReplacements, splitLines } from '../utils'
-import type { ThemedToken, ThemeRegistrationResolved, TokenizeWithThemeOptions } from '../types'
 
 export function tokenizeAnsiWithTheme(
   theme: ThemeRegistrationResolved,
