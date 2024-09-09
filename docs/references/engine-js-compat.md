@@ -2,7 +2,7 @@
 
 > Genreated on Monday, September 9, 2024
 >
-> Version `1.16.2`
+> Version `1.16.3`
 >
 > Runtime: Node.js v20.12.2
 
