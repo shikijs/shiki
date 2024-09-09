@@ -139,7 +139,7 @@ catalogs:
       specifier: ^1.3.4
       version: 1.3.4
     oniguruma-to-js:
-      specifier: ^0.3.3
+      specifier: 0.3.3
       version: 0.3.3
     picocolors:
       specifier: ^1.1.0
@@ -148,13 +148,13 @@ catalogs:
       specifier: ^2.2.2
       version: 2.2.2
     pnpm:
-      specifier: ^9.9.0
-      version: 9.9.0
+      specifier: ^9.10.0
+      version: 9.10.0
     prettier:
       specifier: ^3.3.3
       version: 3.3.3
     regex:
-      specifier: ^4.3.2
+      specifier: 4.3.2
       version: 4.3.2
     rehype-raw:
       specifier: ^7.0.0
@@ -370,7 +370,7 @@ importers:
         version: 1.1.0
       pnpm:
         specifier: 'catalog:'
-        version: 9.9.0
+        version: 9.10.0
       prettier:
         specifier: 'catalog:'
         version: 3.3.3
@@ -515,16 +515,16 @@ importers:
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
-    devDependencies:
-      hast-util-to-html:
-        specifier: 'catalog:'
-        version: 9.0.2
       oniguruma-to-js:
         specifier: 'catalog:'
         version: 0.3.3
       regex:
         specifier: 'catalog:'
         version: 4.3.2
+    devDependencies:
+      hast-util-to-html:
+        specifier: 'catalog:'
+        version: 9.0.2
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -1628,7 +1628,7 @@ packages:
     resolution: {integrity: sha512-lpA3RZ9PdIG7qqhEfv79tBffNaoDuukFDrmhLqg9ifv99u/ehn+lOg30x2zmhf8AQqQUZaMk/B9fZraQ6/acDQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^4.21.2
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -4292,8 +4292,8 @@ packages:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
     engines: {node: '>=4'}
 
-  pnpm@9.9.0:
-    resolution: {integrity: sha512-YMGKzROL/2ldM5vmrRP36TbupnRWYNTMSndtUkfFQNDt7hpWNpXBg6ZuuRfviPK0/rH8JfMqetytx6rzQ46ZwQ==}
+  pnpm@9.10.0:
+    resolution: {integrity: sha512-c6Ka+jag0JLs5Scd5Rd+y/gxjUVOzXATQxMbjrwMGpHEh9pGq3fI5ZbWrPFGHjWUztS+zt+JIbB0+9hlPtcFHA==}
     engines: {node: '>=18.12'}
     hasBin: true
 
@@ -9606,7 +9606,7 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  pnpm@9.9.0: {}
+  pnpm@9.10.0: {}
 
   postcss-calc@9.0.1(postcss@8.4.44):
     dependencies:

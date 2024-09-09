@@ -35,6 +35,12 @@ const plugins = [
 const external = [
   'hast',
   '@shikijs/vscode-textmate',
+
+  // Externalize them to make it easier to patch and experiments
+  // Versions are pinned to avoid regressions
+  // Later we might consider to bundle them.
+  'oniguruma-to-js',
+  'regex',
 ]
 
 export default defineConfig([

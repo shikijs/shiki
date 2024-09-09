@@ -11,9 +11,9 @@
 |                 |                             Count |
 | :-------------- | --------------------------------: |
 | Total Languages |                               213 |
-| Fully Supported | [172](#fully-supported-languages) |
+| Fully Supported | [173](#fully-supported-languages) |
 | Mismatched      |       [24](#mismatched-languages) |
-| Unsupported     |      [17](#unsupported-languages) |
+| Unsupported     |      [16](#unsupported-languages) |
 
 ## Fully Supported Languages
 
@@ -191,6 +191,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | wikitext           | ✅ OK           |               104 |               - |
 | xml                | ✅ OK           |                30 |               - |
 | xsl                | ✅ OK           |                 5 |               - |
+| yaml               | ✅ OK           |                46 |               - |
 | zenscript          | ✅ OK           |                21 |               - |
 | zig                | ✅ OK           |                51 |               - |
 
@@ -239,7 +240,6 @@ Languages that throws with the JavaScript RegExp engine (contains syntaxes that 
 | razor      | ❌ Error                                                                   |                82 |               3 |
 | mdx        | ❌ Error                                                                   |               177 |               4 |
 | swift      | ❌ Error                                                                   |               302 |               4 |
-| yaml       | ❌ Error                                                                   |                42 |               4 |
 | julia      | ❌ Error                                                                   |                90 |               5 |
 | kotlin     | ❌ Error                                                                   |                52 |               6 |
 | markdown   | ❌ Error                                                                   |                96 |               7 |

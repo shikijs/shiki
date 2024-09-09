@@ -4,47 +4,11 @@
 
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import { onigurumaToRegexp } from 'oniguruma-to-js'
 import c from 'picocolors'
-import { rewrite } from 'regex'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
-const engine = createJavaScriptRegexEngine({
-  regexConstructor: (pattern) => {
-    // TODO: without combining `oniguruma-to-js`, it will get a lot more syntax errors
-    // return regex({
-    //   flags: 'dgm',
-    //   unicodeSetsPlugin: null,
-    //   disable: {
-    //     n: true,
-    //     v: true,
-    //     x: true,
-    //   },
-    // })({ raw: [pattern] })
-
-    const rewritten = rewrite(pattern, {
-      flags: 'dgm',
-      unicodeSetsPlugin: null,
-      disable: {
-        n: true,
-        v: true,
-        x: true,
-      },
-    })
-
-    try {
-      return onigurumaToRegexp(rewritten.expression, {
-        flags: 'dgm',
-        ignoreContiguousAnchors: true,
-      })
-    }
-    catch (e) {
-      console.error({ pattern, rewritten })
-      throw e
-    }
-  },
-})
+const engine = createJavaScriptRegexEngine()
 
 export interface ReportItem {
   lang: string
