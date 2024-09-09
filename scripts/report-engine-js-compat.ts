@@ -12,10 +12,6 @@ import { version } from '../package.json'
 
 const engine = createJavaScriptRegexEngine({
   regexConstructor: (pattern) => {
-    pattern = pattern
-      .replace(/\\￿/g, '\\G')
-      .replace(/\(\{\)/g, '(\\{)')
-
     const rewritten = rewrite(pattern, {
       flags: 'dgm',
       unicodeSetsPlugin: null,
