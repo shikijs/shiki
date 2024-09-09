@@ -60,20 +60,17 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "dev": "rollup -cw",
+    "build": "unbuild",
+    "dev": "unbuild --stub",
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
   "dependencies": {
+    "@shikijs/engine-javascript": "workspace:*",
+    "@shikijs/engine-oniguruma": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:",
-    "oniguruma-to-js": "catalog:",
-    "regex": "catalog:"
-  },
-  "devDependencies": {
-    "hast-util-to-html": "catalog:",
-    "vscode-oniguruma": "catalog:"
+    "hast-util-to-html": "catalog:"
   }
 }

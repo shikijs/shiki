@@ -4,7 +4,7 @@
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import type { CodeToTokensBaseOptions, ShikiInternal, ThemedToken, ThemedTokenScopeExplanation, ThemeRegistrationResolved, TokenizeWithThemeOptions } from '@shikijs/types'
 import type { FontStyle, IGrammar, IRawThemeSetting, StateStack } from '@shikijs/vscode-textmate'
-import { ShikiError } from '../error'
+import { ShikiError } from '../../../types/src/error'
 import { getGrammarStack, GrammarState } from '../textmate/grammar-state'
 import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'

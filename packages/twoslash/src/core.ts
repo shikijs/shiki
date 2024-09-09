@@ -3,7 +3,7 @@
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
 import { splitTokens } from '@shikijs/core'
-import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/core'
+import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 
 import type { TwoslashExecuteOptions, TwoslashGenericFunction } from 'twoslash'

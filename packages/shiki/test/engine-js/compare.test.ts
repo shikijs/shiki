@@ -1,6 +1,6 @@
 import { wasmBinary } from '@shikijs/core/wasm-inlined'
 import { describe, expect, it } from 'vitest'
-import { OnigScanner, OnigString } from '../../../core/src/engines/oniguruma'
+import { OnigScanner, OnigString } from '../../../engine-oniguruma/src/oniguruma'
 import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../src/core'
 
 import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../src/core'

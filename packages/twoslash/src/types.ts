@@ -1,6 +1,17 @@
-import type { CodeToHastOptions, ShikiTransformerContext } from '@shikijs/core'
+import type { CodeToHastOptions, ShikiTransformerContext } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
-import type { NodeCompletion, NodeError, NodeHighlight, NodeHover, NodeQuery, NodeTag, TwoslashExecuteOptions, TwoslashGenericFunction, TwoslashOptions, TwoslashReturn } from 'twoslash'
+import type {
+  NodeCompletion,
+  NodeError,
+  NodeHighlight,
+  NodeHover,
+  NodeQuery,
+  NodeTag,
+  TwoslashExecuteOptions,
+  TwoslashGenericFunction,
+  TwoslashOptions,
+  TwoslashReturn,
+} from 'twoslash'
 
 // We only pick necessary types to Shiki, making passing custom twoslash implementation easier
 export type TwoslashShikiReturn =

@@ -509,6 +509,12 @@ importers:
 
   packages/core:
     dependencies:
+      '@shikijs/engine-javascript':
+        specifier: workspace:*
+        version: link:../engine-javascript
+      '@shikijs/engine-oniguruma':
+        specifier: workspace:*
+        version: link:../engine-oniguruma
       '@shikijs/types':
         specifier: workspace:*
         version: link:../types
@@ -518,16 +524,31 @@ importers:
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
+      hast-util-to-html:
+        specifier: 'catalog:'
+        version: 9.0.2
+
+  packages/engine-javascript:
+    dependencies:
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
       oniguruma-to-js:
         specifier: 'catalog:'
         version: 0.3.3
       regex:
         specifier: 'catalog:'
         version: 4.3.2
-    devDependencies:
-      hast-util-to-html:
+
+  packages/engine-oniguruma:
+    dependencies:
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
+      '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.0.2
+        version: 9.2.2
+    devDependencies:
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -637,6 +658,9 @@ importers:
       '@shikijs/core':
         specifier: workspace:*
         version: link:../core
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
       twoslash:
         specifier: 'catalog:'
         version: 0.2.11(typescript@5.5.4)

@@ -2,10 +2,19 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
-import type { IOnigCaptureIndex, IOnigMatch, OnigScanner as IOnigScanner, OnigString as IOnigString } from '@shikijs/vscode-textmate'
-import { ShikiError } from '../../error'
+import { ShikiError } from '@shikijs/types'
+import type {
+  LoadWasmOptions,
+  WebAssemblyInstance,
+  WebAssemblyInstantiator,
+} from '@shikijs/types'
+import type {
+  IOnigCaptureIndex,
+  IOnigMatch,
+  OnigScanner as IOnigScanner,
+  OnigString as IOnigString,
+} from '@shikijs/vscode-textmate'
 import createOnigasm from './onig'
-import type { LoadWasmOptions, WebAssemblyInstance, WebAssemblyInstantiator } from '../../types'
 
 export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>
 

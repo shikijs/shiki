@@ -1,7 +1,7 @@
 import { INITIAL } from '@shikijs/vscode-textmate'
 import type { GrammarState as GrammarStateInterface } from '@shikijs/types'
 import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
-import { ShikiError } from '../error'
+import { ShikiError } from '../../../types/src/error'
 
 /**
  * GrammarState is a special reference object that holds the state of a grammar.

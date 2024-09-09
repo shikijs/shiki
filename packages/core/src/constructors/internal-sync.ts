@@ -11,7 +11,7 @@ import type {
   ThemeRegistrationResolved,
 } from '@shikijs/types'
 
-import { ShikiError } from '../error'
+import { ShikiError } from '../../../types/src/error'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 import { normalizeTheme } from '../textmate/normalize-theme'
 import { Registry } from '../textmate/registry'

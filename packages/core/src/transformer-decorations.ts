@@ -9,7 +9,7 @@ import type {
   ShikiTransformerContextSource,
 } from '@shikijs/types'
 import type { Element, ElementContent } from 'hast'
-import { ShikiError } from './error'
+import { ShikiError } from '../../types/src/error'
 import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 
 interface TransformerDecorationsInternalContext {

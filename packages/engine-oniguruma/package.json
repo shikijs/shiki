@@ -1,20 +1,19 @@
 {
-  "name": "@shikijs/monaco",
+  "name": "@shikijs/engine-oniguruma",
   "type": "module",
   "version": "1.16.3",
-  "description": "Use Shiki for Monaco Editor",
+  "description": "Engine for Shiki using JavaScript's native RegExp",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/shikijs/shiki#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shikijs/shiki.git",
-    "directory": "packages/shiki-monaco"
+    "directory": "packages/engine-oniguruma"
   },
   "bugs": "https://github.com/shikijs/shiki/issues",
   "keywords": [
-    "shiki",
-    "monaco-editor"
+    "shiki"
   ],
   "sideEffects": false,
   "exports": {
@@ -22,13 +21,19 @@
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     },
-    "./*": "./dist/*"
+    "./wasm-inlined": {
+      "types": "./dist/wasm-inlined.d.mts",
+      "default": "./dist/wasm-inlined.mjs"
+    }
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
+      "wasm-inlined": [
+        "./dist/wasm-inlined.d.mts"
+      ],
       "*": [
         "./dist/*",
         "./*"
@@ -39,18 +44,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
-    "prepublishOnly": "nr build",
-    "test": "vitest",
-    "play": "nr -C playground play"
+    "build": "rimraf dist && rollup -c",
+    "dev": "rollup -cw",
+    "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "@shikijs/core": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vscode-textmate": "catalog:"
   },
   "devDependencies": {
-    "monaco-editor-core": "catalog:"
+    "vscode-oniguruma": "^1.7.0"
   }
 }

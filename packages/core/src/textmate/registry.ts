@@ -6,7 +6,7 @@ import type {
   ThemeRegistrationResolved,
 } from '@shikijs/types'
 import type { IGrammarConfiguration, IRawTheme } from '@shikijs/vscode-textmate'
-import { ShikiError } from '../error'
+import { ShikiError } from '../../../types/src/error'
 import { normalizeTheme } from './normalize-theme'
 import type { Resolver } from './resolver'
 

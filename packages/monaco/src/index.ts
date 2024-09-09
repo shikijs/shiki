@@ -1,5 +1,5 @@
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
-import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/core'
+import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
 import type { StateStack } from '@shikijs/vscode-textmate'
 import type monacoNs from 'monaco-editor-core'
 
