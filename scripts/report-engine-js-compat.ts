@@ -12,6 +12,17 @@ import { version } from '../package.json'
 
 const engine = createJavaScriptRegexEngine({
   regexConstructor: (pattern) => {
+    // TODO: without combining `oniguruma-to-js`, it will get a lot more syntax errors
+    // return regex({
+    //   flags: 'dgm',
+    //   unicodeSetsPlugin: null,
+    //   disable: {
+    //     n: true,
+    //     v: true,
+    //     x: true,
+    //   },
+    // })({ raw: [pattern] })
+
     const rewritten = rewrite(pattern, {
       flags: 'dgm',
       unicodeSetsPlugin: null,
