@@ -1,6 +1,3 @@
-import type { Element, ElementContent } from 'hast'
-import { ShikiError } from './error'
-import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 import type {
   DecorationItem,
   DecorationTransformType,
@@ -10,7 +7,10 @@ import type {
   ShikiTransformer,
   ShikiTransformerContextMeta,
   ShikiTransformerContextSource,
-} from './types'
+} from '@shikijs/types'
+import type { Element, ElementContent } from 'hast'
+import { ShikiError } from '../../types/src/error'
+import { addClassToHast, createPositionConverter, splitTokens } from './utils'
 
 interface TransformerDecorationsInternalContext {
   decorations: ResolvedDecorationItem[]

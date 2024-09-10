@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { createHighlighter, createJavaScriptRegexEngine } from '../../src'
+import { createHighlighter } from '../../shiki/src/index'
+import { createJavaScriptRegexEngine } from '../src'
 
 describe('should', () => {
   it('works', async () => {

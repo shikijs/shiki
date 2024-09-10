@@ -1,13 +1,32 @@
+import { ShikiError } from '@shikijs/types'
+
+import type {
+  Awaitable,
+  BundledHighlighterOptions,
+  CodeToHastOptions,
+  CodeToTokensBaseOptions,
+  CodeToTokensOptions,
+  CodeToTokensWithThemesOptions,
+  CreatedBundledHighlighterOptions,
+  CreateHighlighterFactory,
+  GrammarState,
+  HighlighterCoreOptions,
+  HighlighterGeneric,
+  LanguageInput,
+  RegexEngine,
+  RequireKeys,
+  SpecialLanguage,
+  SpecialTheme,
+  ThemedToken,
+  ThemedTokenWithVariants,
+  ThemeInput,
+  TokensResult,
+} from '@shikijs/types'
 import type { Root } from 'hast'
-import { createWasmOnigEngine } from '../engines/wasm'
-import { ShikiError } from '../error'
+
+import { createWasmOnigEngine } from '../engines/oniguruma'
 import { isSpecialLang, isSpecialTheme } from '../utils'
 import { createHighlighterCore } from './highlighter'
-import type { Awaitable, BundledHighlighterOptions, CodeToHastOptions, CodeToTokensBaseOptions, CodeToTokensOptions, CodeToTokensWithThemesOptions, CreatedBundledHighlighterOptions, GrammarState, HighlighterCoreOptions, HighlighterGeneric, LanguageInput, RegexEngine, RequireKeys, SpecialLanguage, SpecialTheme, ThemedToken, ThemedTokenWithVariants, ThemeInput, TokensResult } from '../types'
-
-export type CreateHighlighterFactory<L extends string, T extends string> = (
-  options: BundledHighlighterOptions<L, T>
-) => Promise<HighlighterGeneric<L, T>>
 
 /**
  * Create a `createHighlighter` function with bundled themes, languages, and engine.

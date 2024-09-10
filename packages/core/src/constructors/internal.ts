@@ -1,20 +1,12 @@
-import { createWasmOnigEngine } from '../engines/wasm'
-import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
-import { createShikiInternalSync } from './internal-sync'
+import { createWasmOnigEngine } from '@shikijs/engine-oniguruma'
 import type {
   HighlighterCoreOptions,
-  LoadWasmOptions,
   ShikiInternal,
-} from '../types'
+} from '@shikijs/types'
 
-let _defaultWasmLoader: LoadWasmOptions | undefined
-/**
- * Set the default wasm loader for `loadWasm`.
- * @internal
- */
-export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
-  _defaultWasmLoader = _loader
-}
+import { getDefaultWasmLoader } from '../engines/oniguruma'
+import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
+import { createShikiInternalSync } from './internal-sync'
 
 /**
  * Get the minimal shiki context for rendering.
@@ -27,7 +19,7 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
   ] = await Promise.all([
     resolveThemes(options.themes || []),
     resolveLangs(options.langs || []),
-    (options.engine || createWasmOnigEngine(options.loadWasm || _defaultWasmLoader)),
+    (options.engine || createWasmOnigEngine(options.loadWasm || getDefaultWasmLoader())),
   ] as const)
 
   return createShikiInternalSync({

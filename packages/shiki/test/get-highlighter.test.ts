@@ -1,8 +1,5 @@
 import { getSingletonHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
-// eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
-
 import js from '../src/assets/langs/javascript'
 import mtp from '../src/assets/themes/material-theme-palenight'
 import nord from '../src/assets/themes/nord'
@@ -13,9 +10,7 @@ it('getSingletonHighlighterCore', async () => {
   const shiki1 = await getSingletonHighlighterCore({
     themes: [nord],
     langs: [js as any],
-    loadWasm: {
-      instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
-    },
+    loadWasm: import('@shikijs/core/wasm-inlined'),
   })
 
   expect(shiki1.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))

@@ -1,9 +1,4 @@
-import type { Element, Root, Text } from 'hast'
-
-import { FontStyle } from '../types'
-import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
-import { getTransformers } from './_get-transformers'
-import { codeToTokens } from './code-to-tokens'
+import { FontStyle } from '@shikijs/vscode-textmate'
 
 import type {
   CodeToHastOptions,
@@ -13,7 +8,12 @@ import type {
   ShikiTransformerContextCommon,
   ShikiTransformerContextSource,
   ThemedToken,
-} from '../types'
+} from '@shikijs/types'
+import type { Element, Root, Text } from 'hast'
+
+import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
+import { getTransformers } from './_get-transformers'
+import { codeToTokens } from './code-to-tokens'
 
 export function codeToHast(
   internal: ShikiInternal,

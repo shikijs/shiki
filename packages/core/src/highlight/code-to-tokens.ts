@@ -1,8 +1,8 @@
-import { ShikiError } from '../error'
+import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '@shikijs/types'
+import { ShikiError } from '../../../types/src/error'
 import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements, stringifyTokenStyle } from '../utils'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
-import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '../types'
 
 /**
  * High-level code-to-tokens API.

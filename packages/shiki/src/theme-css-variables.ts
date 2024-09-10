@@ -1,4 +1,4 @@
-import type { ThemeRegistration } from '@shikijs/core'
+import type { ThemeRegistration } from '@shikijs/types'
 
 export interface CssVariablesThemeOptions {
   /**

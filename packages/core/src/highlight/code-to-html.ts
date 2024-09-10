@@ -1,8 +1,13 @@
 import { toHtml as hastToHtml } from 'hast-util-to-html'
+import type {
+  CodeToHastOptions,
+  ShikiInternal,
+  ShikiTransformerContextCommon,
+} from '@shikijs/types'
+
 import { getTransformers } from './_get-transformers'
 import { codeToHast } from './code-to-hast'
 import { codeToTokens } from './code-to-tokens'
-import type { CodeToHastOptions, ShikiInternal, ShikiTransformerContextCommon } from '../types'
 
 export { hastToHtml }
 

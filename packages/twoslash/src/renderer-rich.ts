@@ -1,4 +1,4 @@
-import type { ShikiTransformerContextCommon } from '@shikijs/core'
+import type { ShikiTransformerContextCommon } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 import type { NodeError, NodeHover, NodeQuery } from 'twoslash'
 import { ShikiTwoslashError } from './error'

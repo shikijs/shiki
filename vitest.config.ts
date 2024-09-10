@@ -44,10 +44,9 @@ export default defineConfig({
         '**/scripts/**',
 
         // Vendored code
-        '**/vendor/**',
-        '**/stack-element-metadata.ts',
-        '**/src/oniguruma/**',
+        'packages/engine-oniguruma/src/oniguruma/onig.ts',
         '**/src/assets/**',
+        '**/wasm-inlined.ts',
 
         // Integration packages that are hard to cover, or tested elsewhere
         'packages/cli/**',

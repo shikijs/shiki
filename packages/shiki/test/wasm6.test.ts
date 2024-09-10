@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 // eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../../core/dist/wasm-inlined.mjs'
+import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
 
 import js from '../src/assets/langs/javascript'
 import nord from '../src/assets/themes/nord'

@@ -3,7 +3,7 @@ import { basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import { describe, expect, it, onTestFailed } from 'vitest'
-import { JavaScriptScanner } from '../../../core/src/engines/javascript'
+import { JavaScriptScanner } from '../src'
 import type { Instance } from './types'
 
 const files = await fg('*.json', {

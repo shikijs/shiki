@@ -1,5 +1,7 @@
+export * from './bundle-factory'
 export * from './decorations'
 export * from './engines'
+export * from './error'
 export * from './highlighter'
 export * from './langs'
 export * from './options'

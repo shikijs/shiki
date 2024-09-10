@@ -1,4 +1,4 @@
-import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/core'
+import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/types'
 import type {} from 'hast'
 import { bundledLanguages } from './assets/langs-bundle-full'
 import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine } from './core'
