@@ -28,6 +28,7 @@ describe('markdown-it', () => {
     const md = MarkdownIt()
 
     md.use(await Shiki({
+      langs: ['ts'],
       themes: {
         light: 'vitesse-light',
         dark: 'vitesse-dark',
@@ -66,6 +67,7 @@ const a = 123
     const md = MarkdownIt()
 
     md.use(await Shiki({
+      langs: ['ts'],
       themes: {
         light: 'vitesse-light',
         dark: 'vitesse-dark',
