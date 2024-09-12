@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp",
-    "publish:ci": "pnpm -r publish --access public",
+    "publish:ci": "pnpm -r publish --access public --no-git-checks",
     "test": "vitest",
     "typecheck": "vue-tsc --noEmit",
     "build": "pnpm -r run build",
