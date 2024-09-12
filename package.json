@@ -5,7 +5,8 @@
   "packageManager": "pnpm@9.10.0",
   "scripts": {
     "lint": "eslint . --cache",
-    "release": "bumpp && pnpm -r publish",
+    "release": "bumpp",
+    "publish:ci": "pnpm -r publish --access public",
     "test": "vitest",
     "typecheck": "vue-tsc --noEmit",
     "build": "pnpm -r run build",
