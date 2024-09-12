@@ -41,6 +41,7 @@ export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
 
 export class JavaScriptScanner implements PatternScanner {
   regexps: (RegExp | null)[]
+  contiguousAnchorSimulation: boolean[]
 
   constructor(
     public patterns: string[],
@@ -48,7 +49,10 @@ export class JavaScriptScanner implements PatternScanner {
     public forgiving: boolean,
     public regexConstructor: (pattern: string) => RegExp = defaultJavaScriptRegexConstructor,
   ) {
-    this.regexps = patterns.map((p) => {
+    this.contiguousAnchorSimulation = Array.from({ length: patterns.length }, () => false)
+    this.regexps = patterns.map((p, idx) => {
+      if (p.startsWith('(^|\\G)') || p.startsWith('(\\G|^)'))
+        this.contiguousAnchorSimulation[idx] = true
       const cached = cache?.get(p)
       if (cached) {
         if (cached instanceof RegExp) {
@@ -77,9 +81,9 @@ export class JavaScriptScanner implements PatternScanner {
     const str = typeof string === 'string'
       ? string
       : string.content
-    const pending: [index: number, match: RegExpExecArray][] = []
+    const pending: [index: number, match: RegExpExecArray, offset: number][] = []
 
-    function toResult(index: number, match: RegExpExecArray) {
+    function toResult(index: number, match: RegExpExecArray, offset = 0) {
       return {
         index,
         captureIndices: match.indices!.map((indice) => {
@@ -91,9 +95,9 @@ export class JavaScriptScanner implements PatternScanner {
             }
           }
           return {
-            start: indice[0],
+            start: indice[0] + offset,
             length: indice[1] - indice[0],
-            end: indice[1],
+            end: indice[1] + offset,
           }
         }),
       }
@@ -104,16 +108,25 @@ export class JavaScriptScanner implements PatternScanner {
       if (!regexp)
         continue
       try {
+        let offset = 0
         regexp.lastIndex = startPosition
-        const match = regexp.exec(str)
+        let match = regexp.exec(str)
+
+        // If a regex starts with `(^|\\G)` or `(\\G|^)`, we simulate the behavior by cutting the string
+        if (!match && this.contiguousAnchorSimulation[i]) {
+          offset = startPosition
+          regexp.lastIndex = 0
+          match = regexp.exec(str.slice(startPosition))
+        }
         if (!match)
           continue
+
         // If the match is at the start position, return it immediately
         if (match.index === startPosition) {
-          return toResult(i, match)
+          return toResult(i, match, offset)
         }
         // Otherwise, store it for later
-        pending.push([i, match])
+        pending.push([i, match, offset])
       }
       catch (e) {
         if (this.forgiving)
@@ -125,9 +138,9 @@ export class JavaScriptScanner implements PatternScanner {
     // Find the closest match to the start position
     if (pending.length) {
       const minIndex = Math.min(...pending.map(m => m[1].index))
-      for (const [i, match] of pending) {
+      for (const [i, match, offset] of pending) {
         if (match.index === minIndex) {
-          return toResult(i, match)
+          return toResult(i, match, offset)
         }
       }
     }

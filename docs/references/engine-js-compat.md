@@ -200,30 +200,30 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 
 | Language      | Highlight Match                                                                    | Patterns Parsable | Patterns Failed | Diff |
 | ------------- | :--------------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| angular-html  | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=angular-html)  |                 2 |               - |    6 |
-| bash          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=bash)          |               148 |               - |   13 |
-| beancount     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=beancount)     |                39 |               - |    4 |
-| c             | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=c)             |               178 |               - |   35 |
-| crystal       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=crystal)       |               143 |               - |    2 |
-| elixir        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=elixir)        |               105 |               - |   43 |
-| erlang        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=erlang)        |               147 |               - |   50 |
-| glsl          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=glsl)          |                 9 |               - |   74 |
-| haml          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=haml)          |                66 |               - |    6 |
-| kusto         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)         |                60 |               - |    1 |
-| latex         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=latex)         |               183 |               - |    5 |
-| mermaid       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mermaid)       |               129 |               - |    2 |
-| nginx         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)         |               104 |               - |    3 |
-| objective-cpp | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=objective-cpp) |               309 |               - |   22 |
-| php           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=php)           |               342 |               - |   37 |
-| po            | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)            |                23 |               - |   11 |
-| pug           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=pug)           |                91 |               - |    6 |
-| rst           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=rst)           |                64 |               - |    4 |
+| angular-html  | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=angular-html)  |                 2 |               - |  330 |
+| bash          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=bash)          |               148 |               - |   56 |
+| beancount     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=beancount)     |                39 |               - |  171 |
+| c             | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=c)             |               178 |               - |  209 |
+| crystal       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=crystal)       |               143 |               - |   40 |
+| elixir        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=elixir)        |               105 |               - |  179 |
+| erlang        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=erlang)        |               147 |               - |  470 |
+| glsl          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=glsl)          |                 9 |               - |  306 |
+| haml          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=haml)          |                66 |               - |   48 |
+| kusto         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)         |                60 |               - |   40 |
+| latex         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=latex)         |               183 |               - |   25 |
+| mermaid       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mermaid)       |               129 |               - |   38 |
+| nginx         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)         |               104 |               - |    4 |
+| objective-cpp | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=objective-cpp) |               309 |               - |  172 |
+| php           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=php)           |               342 |               - |  605 |
+| po            | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)            |                23 |               - |  336 |
+| pug           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=pug)           |                91 |               - |  164 |
+| rst           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=rst)           |                64 |               - |   62 |
 | ruby          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=ruby)          |               154 |               - |    1 |
-| shellscript   | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=shellscript)   |               148 |               - |   13 |
-| smalltalk     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=smalltalk)     |                35 |               - |    8 |
-| splunk        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=splunk)        |                17 |               - |    4 |
-| stata         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=stata)         |               194 |               - |    4 |
-| zsh           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=zsh)           |               148 |               - |   26 |
+| shellscript   | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=shellscript)   |               148 |               - |   56 |
+| smalltalk     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=smalltalk)     |                35 |               - |   40 |
+| splunk        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=splunk)        |                17 |               - |    8 |
+| stata         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=stata)         |               194 |               - |   32 |
+| zsh           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=zsh)           |               148 |               - |  117 |
 
 ## Unsupported Languages
 
@@ -234,17 +234,17 @@ Languages that throws with the JavaScript RegExp engine (contains syntaxes that 
 | ada        | ✅ OK                                                                      |               201 |               1 |      |
 | sass       | ✅ OK                                                                      |                67 |               2 |      |
 | blade      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=blade) |               336 |               2 |      |
-| mdc        | ❌ Error                                                                   |                37 |               - |   22 |
+| mdc        | ❌ Error                                                                   |                37 |               - |  377 |
 | powershell | ❌ Error                                                                   |                87 |               1 |      |
-| wolfram    | ❌ Error                                                                   |               500 |               1 |    2 |
-| razor      | ❌ Error                                                                   |                82 |               3 |    7 |
+| wolfram    | ❌ Error                                                                   |               500 |               1 |   12 |
+| razor      | ❌ Error                                                                   |                82 |               3 |   26 |
 | mdx        | ❌ Error                                                                   |               193 |               4 |      |
-| swift      | ❌ Error                                                                   |               325 |               4 |    4 |
-| julia      | ❌ Error                                                                   |                90 |               5 |    5 |
-| kotlin     | ❌ Error                                                                   |                52 |               6 |   81 |
-| purescript | ❌ Error                                                                   |                67 |               6 |  169 |
-| markdown   | ❌ Error                                                                   |               111 |               7 |   41 |
-| apex       | ❌ Error                                                                   |               173 |              14 |   44 |
-| haskell    | ❌ Error                                                                   |               136 |              21 |    3 |
-| cpp        | ❌ Error                                                                   |               238 |              22 |    5 |
-| csharp     | ❌ Error                                                                   |               278 |              33 |   34 |
+| swift      | ❌ Error                                                                   |               325 |               4 |   18 |
+| julia      | ❌ Error                                                                   |                90 |               5 |   49 |
+| kotlin     | ❌ Error                                                                   |                52 |               6 | 2986 |
+| purescript | ❌ Error                                                                   |                67 |               6 | 1488 |
+| markdown   | ❌ Error                                                                   |               111 |               7 |  584 |
+| apex       | ❌ Error                                                                   |               173 |              14 |  242 |
+| haskell    | ❌ Error                                                                   |               136 |              21 |   12 |
+| cpp        | ❌ Error                                                                   |               238 |              22 |   25 |
+| csharp     | ❌ Error                                                                   |               278 |              33 |  232 |

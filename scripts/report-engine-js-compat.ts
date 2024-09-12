@@ -66,7 +66,7 @@ async function run() {
     }
 
     const highlightA = serializeTokens(shikiWasm, sample, lang)
-    let highlightB: string | undefined
+    let highlightB: { tokens: string, html: string } | undefined
     let highlightDiff: Diff[] = []
 
     try {
@@ -103,13 +103,13 @@ async function run() {
     }
 
     if (highlightMatch !== 'error')
-      highlightMatch = highlightA === highlightB
+      highlightMatch = highlightA.html === highlightB?.html
     highlightDiff = highlightB && highlightA !== highlightB
-      ? diffMain(highlightA, highlightB)
+      ? diffMain(highlightA.tokens, highlightB.tokens)
       : []
     diffCleanupSemantic(highlightDiff)
 
-    if (!highlightMatch) {
+    if (highlightB && highlightMatch !== true) {
       console.log(c.yellow(`[${lang}] Mismatch`))
 
       await fs.mkdir(new URL('./compares', import.meta.url), { recursive: true })
@@ -122,10 +122,10 @@ async function run() {
           'pre { flex: 1; margin: 0; padding: 0; }',
           '</style>',
           '<pre>',
-          highlightA,
+          highlightA.html,
           '</pre>',
           '<pre>',
-          highlightB,
+          highlightB?.html,
           '</pre>',
         ].join('\n'),
         'utf-8',
@@ -143,8 +143,8 @@ async function run() {
       ...highlightMatch === true
         ? {}
         : {
-            highlightA,
-            highlightB,
+            highlightA: highlightA.html,
+            highlightB: highlightB?.html,
           },
       diff: highlightDiff,
     })
@@ -177,13 +177,13 @@ async function run() {
       ['---', ':---', '---:', '---:', '---:'],
       ...report
         .map((item) => {
-          const diffCount = item.diff.filter(diff => diff[0] === 1).length
+          const diffChars = item.diff.map(diff => diff[0] === 1 ? diff[1].length : 0).reduce((a, b) => a + b, 0)
           return [
             item.lang,
             item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : `[🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=${item.lang})`,
             item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
             item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
-            diffCount ? diffCount.toString() : '',
+            diffChars ? diffChars.toString() : '',
           ] as [string, string, string, string, string]
         }),
     ]
@@ -250,9 +250,17 @@ async function run() {
 }
 
 function serializeTokens(shiki: HighlighterGeneric<BundledLanguage, BundledTheme>, sample: string, lang: string) {
-  const tokens = shiki.codeToTokensBase(sample, { lang: lang as any, theme: 'vitesse-dark' })
-  const str = tokens.flat(1).map(t => t.color?.padEnd(18, ' ') + t.content).join('\n')
-  return str
+  const tokens = shiki
+    .codeToTokensBase(sample, { lang: lang as any, theme: 'vitesse-dark' })
+    .flat(1)
+    .map(t => t.color?.padEnd(18, ' ') + t.content)
+    .join('\n')
+  const html = shiki
+    .codeToHtml(sample, { lang: lang as any, theme: 'vitesse-dark' })
+  return {
+    tokens,
+    html,
+  }
 }
 
 function getPatternsOfGrammar(grammar: any): Set<string> {
