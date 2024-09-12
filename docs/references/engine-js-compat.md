@@ -1,8 +1,8 @@
 # JavaScript RegExp Engine Compatibility References
 
-> Genreated on Monday, September 9, 2024
+> Genreated on Thursday, September 12, 2024
 >
-> Version `1.16.3`
+> Version `1.17.0`
 >
 > Runtime: Node.js v20.12.2
 
@@ -242,9 +242,9 @@ Languages that throws with the JavaScript RegExp engine (contains syntaxes that 
 | swift      | ❌ Error                                                                   |               302 |               4 |
 | julia      | ❌ Error                                                                   |                90 |               5 |
 | kotlin     | ❌ Error                                                                   |                52 |               6 |
+| purescript | ❌ Error                                                                   |                66 |               6 |
 | markdown   | ❌ Error                                                                   |                96 |               7 |
-| purescript | ❌ Error                                                                   |                63 |               9 |
 | apex       | ❌ Error                                                                   |               173 |              14 |
+| haskell    | ❌ Error                                                                   |               136 |              21 |
 | cpp        | ❌ Error                                                                   |               198 |              22 |
 | csharp     | ❌ Error                                                                   |               263 |              32 |
-| haskell    | ❌ Error                                                                   |               113 |              44 |

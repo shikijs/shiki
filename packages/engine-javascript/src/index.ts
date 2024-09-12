@@ -1,10 +1,9 @@
-import { onigurumaToRegexp } from 'oniguruma-to-js'
-import { rewrite } from 'regex'
 import type {
   PatternScanner,
   RegexEngine,
   RegexEngineString,
 } from '@shikijs/types'
+import { onigurumaToRegexp } from 'oniguruma-to-js'
 
 export interface JavaScriptRegexEngineOptions {
   /**
@@ -31,22 +30,8 @@ const MAX = 4294967295
  * The default RegExp constructor for JavaScript regex engine.
  */
 export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
-  pattern = pattern
-    // YAML specific handling; TODO: move to tm-grammars
-    .replaceAll('[^\\s[-?:,\\[\\]{}#&*!|>\'"%@`]]', '[^\\s\\-?:,\\[\\]{}#&*!|>\'"%@`]')
-
-  const rewritten = rewrite(pattern, {
-    flags: 'dgm',
-    unicodeSetsPlugin: null,
-    disable: {
-      n: true,
-      v: true,
-      x: true,
-    },
-  })
-
   return onigurumaToRegexp(
-    rewritten.expression,
+    pattern,
     {
       flags: 'dgm',
       ignoreContiguousAnchors: true,
