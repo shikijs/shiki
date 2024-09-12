@@ -43,6 +43,18 @@
       "types": "./dist/theme-css-variables.d.mts",
       "default": "./dist/theme-css-variables.mjs"
     },
+    "./engine/javascript": {
+      "types": "./dist/engine-javascript.d.mts",
+      "default": "./dist/engine-javascript.mjs"
+    },
+    "./engine/oniguruma": {
+      "types": "./dist/engine-oniguruma.d.mts",
+      "default": "./dist/engine-oniguruma.mjs"
+    },
+    "./textmate": {
+      "types": "./dist/textmate.d.mts",
+      "default": "./dist/textmate.mjs"
+    },
     "./bundle/full": {
       "types": "./dist/bundle-full.d.mts",
       "default": "./dist/bundle-full.mjs"
@@ -79,6 +91,15 @@
       "bundle/web": [
         "./dist/bundle-web.d.mts"
       ],
+      "engine/javascript": [
+        "./dist/engine-javascript.d.mts"
+      ],
+      "engine/oniguruma": [
+        "./dist/engine-oniguruma.d.mts"
+      ],
+      "textmate": [
+        "./dist/textmate.d.mts"
+      ],
       "theme-css-variables": [
         "./dist/theme-css-variables.d.mts"
       ],
@@ -101,6 +122,8 @@
   },
   "dependencies": {
     "@shikijs/core": "workspace:*",
+    "@shikijs/engine-javascript": "workspace:*",
+    "@shikijs/engine-oniguruma": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:"

@@ -21,6 +21,9 @@ const entries = [
   'src/bundle-full.ts',
   'src/bundle-web.ts',
   'src/theme-css-variables.ts',
+  'src/engine-javascript.ts',
+  'src/engine-oniguruma.ts',
+  'src/textmate.ts',
 ]
 
 const external = [
@@ -28,6 +31,9 @@ const external = [
   '@shikijs/core',
   '@shikijs/core/wasm-inlined',
   '@shikijs/core/types',
+  '@shikijs/engine-javascript',
+  '@shikijs/engine-oniguruma',
+  '@shikijs/vscode-textmate',
   'shiki/wasm',
 ]
 
