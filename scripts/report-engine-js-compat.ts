@@ -2,8 +2,10 @@
 // - `pnpm run build`
 // - `pnpm run report-engine-js`
 
+import type { Diff } from 'diff-match-patch-es'
 import fs from 'node:fs/promises'
 import process from 'node:process'
+import { diffCleanupMerge, diffMain } from 'diff-match-patch-es'
 import c from 'picocolors'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
@@ -17,6 +19,7 @@ export interface ReportItem {
   patternsFailed: [string, unknown][]
   highlightA?: string
   highlightB?: string
+  diff: Diff[]
 }
 
 async function run() {
@@ -59,6 +62,7 @@ async function run() {
 
     const highlightA = shikiWasm.codeToHtml(sample, { lang, theme: 'vitesse-dark' })
     let highlightB: string | undefined
+    let highlightDiff: Diff[] = []
 
     try {
       shiki = await createHighlighter({
@@ -70,6 +74,8 @@ async function run() {
       highlightB = shiki.codeToHtml(sample, { lang, theme: 'vitesse-dark' })
 
       highlightMatch = highlightA === highlightB
+      highlightDiff = diffMain(highlightA, highlightB)
+      diffCleanupMerge(highlightDiff)
 
       if (!highlightMatch) {
         console.log(c.yellow(`[${lang}] Mismatch`))
@@ -113,6 +119,7 @@ async function run() {
               highlightA,
               highlightB,
             },
+        diff: highlightDiff,
       })
 
       shikiWasm?.dispose()
@@ -139,16 +146,17 @@ async function run() {
   )
 
   function createTable(report: ReportItem[]) {
-    const table: readonly [string, string, string, string][] = [
-      ['Language', 'Highlight Match', 'Patterns Parsable', 'Patterns Failed'],
-      ['---', ':---', '---:', '---:'],
+    const table: readonly [string, string, string, string, string][] = [
+      ['Language', 'Highlight Match', 'Patterns Parsable', 'Patterns Failed', 'Diff'],
+      ['---', ':---', '---:', '---:', '---:'],
       ...report
         .map(item => [
           item.lang,
           item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : `[🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=${item.lang})`,
           item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
           item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
-        ] as [string, string, string, string]),
+          item.diff.length > 1 ? (item.diff.length - 1).toString() : '',
+        ] as [string, string, string, string, string]),
     ]
 
     return table.map(row => `| ${row.join(' | ')} |`).join('\n')
