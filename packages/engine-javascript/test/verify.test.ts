@@ -28,7 +28,7 @@ for (const file of files) {
     for (const instance of instances) {
       i += 1
       describe(`instances ${i}`, () => {
-        const scanner = new JavaScriptScanner(instance.constractor[0], cache, false)
+        const scanner = new JavaScriptScanner(instance.constractor[0], { cache })
         let j = 0
         for (const execution of instance.executions) {
           j += 1

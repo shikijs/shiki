@@ -8,13 +8,22 @@ import { onigurumaToRegexp } from 'oniguruma-to-js'
 export interface JavaScriptRegexEngineOptions {
   /**
    * Whether to allow invalid regex patterns.
+   *
+   * @default false
    */
   forgiving?: boolean
 
   /**
+   * Use JavaScript to simulate some unsupported regex features.
+   *
+   * @default true
+   */
+  simulation?: boolean
+
+  /**
    * Cache for regex patterns.
    */
-  cache?: Map<string, RegExp | Error>
+  cache?: Map<string, RegExp | Error> | null
 
   /**
    * Custom pattern to RegExp constructor.
@@ -45,13 +54,18 @@ export class JavaScriptScanner implements PatternScanner {
 
   constructor(
     public patterns: string[],
-    public cache: Map<string, RegExp | Error>,
-    public forgiving: boolean,
-    public regexConstructor: (pattern: string) => RegExp = defaultJavaScriptRegexConstructor,
+    public options: JavaScriptRegexEngineOptions = {},
   ) {
+    const {
+      forgiving = false,
+      cache,
+      simulation = true,
+      regexConstructor = defaultJavaScriptRegexConstructor,
+    } = options
+
     this.contiguousAnchorSimulation = Array.from({ length: patterns.length }, () => false)
     this.regexps = patterns.map((p, idx) => {
-      if (p.startsWith('(^|\\G)') || p.startsWith('(\\G|^)'))
+      if (simulation && (p.startsWith('(^|\\G)') || p.startsWith('(\\G|^)')))
         this.contiguousAnchorSimulation[idx] = true
       const cached = cache?.get(p)
       if (cached) {
@@ -129,7 +143,7 @@ export class JavaScriptScanner implements PatternScanner {
         pending.push([i, match, offset])
       }
       catch (e) {
-        if (this.forgiving)
+        if (this.options.forgiving)
           continue
         throw e
       }
@@ -159,14 +173,14 @@ export class JavaScriptScanner implements PatternScanner {
  * @experimental
  */
 export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOptions = {}): RegexEngine {
-  const {
-    forgiving = false,
-    cache = new Map(),
-  } = options
+  const _options = {
+    cache: new Map(),
+    ...options,
+  }
 
   return {
     createScanner(patterns: string[]) {
-      return new JavaScriptScanner(patterns, cache, forgiving, options.regexConstructor)
+      return new JavaScriptScanner(patterns, _options)
     },
     createString(s: string) {
       return {
