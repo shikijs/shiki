@@ -255,24 +255,53 @@ function serializeTokens(shiki: HighlighterGeneric<BundledLanguage, BundledTheme
   return str
 }
 
-function getPatternsOfGrammar(grammar: any) {
+function getPatternsOfGrammar(grammar: any): Set<string> {
   const patterns = new Set<string>()
 
-  const scan = (obj: any) => {
-    if (!obj)
+  function traverse(a: any): void {
+    if (Array.isArray(a)) {
+      a.forEach((j: any) => {
+        traverse(j)
+      })
       return
-    if (typeof obj.match === 'string')
-      patterns.add(obj.match)
-    if (typeof obj.begin === 'string')
-      patterns.add(obj.begin)
-    if (typeof obj.end === 'string')
-      patterns.add(obj.end)
-    if (obj.patterns)
-      obj.patterns.forEach(scan)
-    Object.values(obj.repository || {}).forEach(scan)
+    }
+    if (!a || typeof a !== 'object')
+      return
+    if (a.foldingStartMarker) {
+      patterns.add(a.foldingStartMarker)
+    }
+    if (a.foldingStopMarker) {
+      patterns.add(a.foldingStopMarker)
+    }
+    if (a.firstLineMatch) {
+      patterns.add(a.firstLineMatch)
+    }
+    if (a.match)
+      patterns.add(a.match)
+    if (a.begin)
+      patterns.add(a.begin)
+    if (a.end)
+      patterns.add(a.end)
+    if (a.while)
+      patterns.add(a.while)
+    if (a.patterns) {
+      traverse(a.patterns)
+    }
+    if (a.captures) {
+      traverse(Object.values(a.captures))
+    }
+    if (a.beginCaptures) {
+      traverse(Object.values(a.beginCaptures))
+    }
+    if (a.endCaptures) {
+      traverse(Object.values(a.endCaptures))
+    }
+    Object.values(a.repository || {}).forEach((j: any) => {
+      traverse(j)
+    })
   }
 
-  scan(grammar)
+  traverse(grammar)
 
   return patterns
 }
