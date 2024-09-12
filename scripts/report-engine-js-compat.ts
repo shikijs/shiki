@@ -7,6 +7,7 @@ import fs from 'node:fs/promises'
 import process from 'node:process'
 import { diffCleanupMerge, diffMain } from 'diff-match-patch-es'
 import c from 'picocolors'
+import { format } from 'prettier'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
@@ -166,7 +167,7 @@ async function run() {
   const reportMismatch = report.filter(item => item.highlightMatch === false && item.patternsFailed.length === 0)
   const reportError = report.filter(item => item.highlightMatch === 'error' || item.patternsFailed.length > 0)
 
-  const markdown = [
+  let markdown = [
     '# JavaScript RegExp Engine Compatibility References',
     '',
     `> Genreated on ${new Date().toLocaleDateString('en-US', { dateStyle: 'full' })} `,
@@ -203,6 +204,16 @@ async function run() {
     '',
     createTable(reportError),
   ].join('\n')
+
+  markdown = await format(
+    markdown,
+    {
+      parser: 'markdown',
+      singleQuote: true,
+      semi: false,
+      printWidth: 100,
+    },
+  )
 
   await fs.writeFile(
     new URL('../docs/references/engine-js-compat.md', import.meta.url),
