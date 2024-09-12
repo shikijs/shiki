@@ -1,5 +1,3 @@
-import { FontStyle } from '@shikijs/vscode-textmate'
-
 import type {
   MaybeArray,
   MaybeGetter,
@@ -13,7 +11,9 @@ import type {
   TokenizeWithThemeOptions,
   TokenStyles,
 } from '@shikijs/types'
+
 import type { Element } from 'hast'
+import { FontStyle } from '@shikijs/vscode-textmate'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]

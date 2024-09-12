@@ -1,4 +1,3 @@
-import { Registry as TextMateRegistry, Theme as TextMateTheme } from '@shikijs/vscode-textmate'
 import type {
   Grammar,
   LanguageRegistration,
@@ -6,9 +5,10 @@ import type {
   ThemeRegistrationResolved,
 } from '@shikijs/types'
 import type { IGrammarConfiguration, IRawTheme } from '@shikijs/vscode-textmate'
+import type { Resolver } from './resolver'
+import { Registry as TextMateRegistry, Theme as TextMateTheme } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
 import { normalizeTheme } from './normalize-theme'
-import type { Resolver } from './resolver'
 
 export class Registry extends TextMateRegistry {
   private _resolvedThemes: Map<string, ThemeRegistrationResolved> = new Map()

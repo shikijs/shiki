@@ -1,3 +1,4 @@
+import type { Root } from 'hast'
 import fs from 'node:fs/promises'
 import rehypeRaw from 'rehype-raw'
 import rehypeStringify from 'rehype-stringify'
@@ -5,10 +6,9 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { createHighlighter } from 'shiki'
 import { unified } from 'unified'
-import { visit } from 'unist-util-visit'
 
+import { visit } from 'unist-util-visit'
 import { expect, it } from 'vitest'
-import type { Root } from 'hast'
 import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 

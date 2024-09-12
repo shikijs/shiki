@@ -1,5 +1,5 @@
-import FloatingVue, { recomputeAllPoppers } from 'floating-vue'
 import type { App } from 'vue'
+import FloatingVue, { recomputeAllPoppers } from 'floating-vue'
 
 const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 

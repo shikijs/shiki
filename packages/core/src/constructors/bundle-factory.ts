@@ -1,5 +1,3 @@
-import { ShikiError } from '@shikijs/types'
-
 import type {
   Awaitable,
   BundledHighlighterOptions,
@@ -22,7 +20,9 @@ import type {
   ThemeInput,
   TokensResult,
 } from '@shikijs/types'
+
 import type { Root } from 'hast'
+import { ShikiError } from '@shikijs/types'
 
 import { createWasmOnigEngine } from '../engines/oniguruma'
 import { isSpecialLang, isSpecialTheme } from '../utils'

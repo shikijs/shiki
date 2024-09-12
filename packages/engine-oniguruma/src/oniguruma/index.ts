@@ -2,7 +2,6 @@
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
 
-import { ShikiError } from '@shikijs/types'
 import type {
   LoadWasmOptions,
   WebAssemblyInstance,
@@ -14,6 +13,7 @@ import type {
   OnigScanner as IOnigScanner,
   OnigString as IOnigString,
 } from '@shikijs/vscode-textmate'
+import { ShikiError } from '@shikijs/types'
 import createOnigasm from './onig'
 
 export type Instantiator = (importObject: Record<string, Record<string, WebAssembly.ImportValue>>) => Promise<WebAssembly.Exports>

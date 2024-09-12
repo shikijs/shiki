@@ -1,6 +1,6 @@
 // @ts-expect-error this will be compiled to ArrayBuffer
-import binary from 'vscode-oniguruma/release/onig.wasm'
 import type { WebAssemblyInstantiator } from '@shikijs/types'
+import binary from 'vscode-oniguruma/release/onig.wasm'
 
 export const wasmBinary = binary as ArrayBuffer
 

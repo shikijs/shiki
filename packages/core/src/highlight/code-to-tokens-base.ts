@@ -1,8 +1,6 @@
 /* ---------------------------------------------------------
  * Copyright (C) Microsoft Corporation. All rights reserved.
  *-------------------------------------------------------- */
-import { ShikiError } from '@shikijs/types'
-import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import type {
   CodeToTokensBaseOptions,
   ShikiInternal,
@@ -17,6 +15,9 @@ import type {
   IRawThemeSetting,
   StateStack,
 } from '@shikijs/vscode-textmate'
+
+import { ShikiError } from '@shikijs/types'
+import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 
 import { getGrammarStack, GrammarState } from '../textmate/grammar-state'
 import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'

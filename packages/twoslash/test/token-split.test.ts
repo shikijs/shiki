@@ -1,8 +1,8 @@
+import type { Node } from 'hast'
 import { transformerTwoslash } from '@shikijs/twoslash'
 import { codeToHast, codeToTokensBase } from 'shiki'
 import { visit } from 'unist-util-visit'
 import { expect, it } from 'vitest'
-import type { Node } from 'hast'
 
 const code = `import { ref, computed } from "vue"`
 

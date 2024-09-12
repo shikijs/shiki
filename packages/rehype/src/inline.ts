@@ -1,6 +1,6 @@
-import { toString } from 'hast-util-to-string'
 import type { Element, Root } from 'hast'
 import type { RehypeShikiCoreOptions } from './types'
+import { toString } from 'hast-util-to-string'
 
 interface InlineCodeProcessorContext {
   node: Element

@@ -2,14 +2,14 @@
  * This file is the core of the @shikijs/twoslash package,
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
-import { splitTokens } from '@shikijs/core'
 import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
-
 import type { TwoslashExecuteOptions, TwoslashGenericFunction } from 'twoslash'
+
+import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
+import { splitTokens } from '@shikijs/core'
 import { ShikiTwoslashError } from './error'
 import { parseIncludeMeta, TwoslashIncludesManager } from './includes'
-import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
 
 export * from './error'
 export * from './icons'

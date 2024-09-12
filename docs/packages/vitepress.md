@@ -42,8 +42,8 @@ And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custo
 // @noErrors: true
 // .vitepress/theme/index.ts
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client' // [!code hl]
-import Theme from 'vitepress/theme'
 import type { EnhanceAppContext } from 'vitepress'
+import Theme from 'vitepress/theme'
 
 import '@shikijs/vitepress-twoslash/style.css' // [!code hl]
 

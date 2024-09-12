@@ -1,8 +1,8 @@
-import { bundledLanguages, createHighlighter } from 'shiki'
 import type MarkdownIt from 'markdown-it'
 import type { BuiltinLanguage, BuiltinTheme, LanguageInput } from 'shiki'
-import { setupMarkdownIt } from './core'
 import type { MarkdownItShikiSetupOptions } from './core'
+import { bundledLanguages, createHighlighter } from 'shiki'
+import { setupMarkdownIt } from './core'
 
 export * from './core'
 

@@ -1,7 +1,7 @@
-import { createTwoslasher } from 'twoslash'
 import type { CreateTwoslashOptions } from 'twoslash'
-import { createTransformerFactory, rendererRich } from './core'
 import type { RendererRichOptions, TransformerTwoslashOptions } from './core'
+import { createTwoslasher } from 'twoslash'
+import { createTransformerFactory, rendererRich } from './core'
 
 export * from './core'
 

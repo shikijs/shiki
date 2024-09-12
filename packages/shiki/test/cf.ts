@@ -1,8 +1,8 @@
-import { createHighlighterCore, loadWasm } from 'shiki/core'
-import js from 'shiki/langs/javascript.mjs'
-
-import nord from 'shiki/themes/nord.mjs'
 import type { LanguageRegistration } from 'shiki'
+import { createHighlighterCore, loadWasm } from 'shiki/core'
+
+import js from 'shiki/langs/javascript.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 // @ts-expect-error no types
 // eslint-disable-next-line antfu/no-import-dist

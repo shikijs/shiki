@@ -1,12 +1,12 @@
 /* eslint-disable node/prefer-global/process */
-import { createTransformerFactory } from '@shikijs/twoslash/core'
-import { removeTwoslashNotations } from 'twoslash'
-import { createTwoslasher } from 'twoslash-vue'
 import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
 import type { ShikiTransformer } from 'shiki'
 import type { VueSpecificOptions } from 'twoslash-vue'
-import { rendererFloatingVue } from './renderer-floating-vue'
 import type { TwoslashFloatingVueRendererOptions } from './renderer-floating-vue'
+import { createTransformerFactory } from '@shikijs/twoslash/core'
+import { removeTwoslashNotations } from 'twoslash'
+import { createTwoslasher } from 'twoslash-vue'
+import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
 

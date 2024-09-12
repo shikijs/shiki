@@ -1,7 +1,7 @@
+import type { ThemedToken } from '../src'
 import { describe, expect, it } from 'vitest'
 import { syncThemesTokenization } from '../../core/src/highlight/code-to-tokens-themes'
 import { codeToHtml, codeToTokensBase, codeToTokensWithThemes } from '../src'
-import type { ThemedToken } from '../src'
 
 function stringifyTokens(tokens: ThemedToken[][]) {
   return tokens.map(line => line.map(token => token.content).join(' ')).join('\n')

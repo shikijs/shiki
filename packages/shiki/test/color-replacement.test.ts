@@ -1,6 +1,6 @@
+import type { ThemeRegistrationResolved } from '../src'
 import { expect, it } from 'vitest'
 import { codeToHtml, resolveColorReplacements } from '../src'
-import type { ThemeRegistrationResolved } from '../src'
 
 it('resolveColorReplacements', async () => {
   expect(resolveColorReplacements('nord', {

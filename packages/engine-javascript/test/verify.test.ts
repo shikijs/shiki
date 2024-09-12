@@ -1,10 +1,10 @@
+import type { Instance } from './types'
 import { promises as fs } from 'node:fs'
 import { basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
-import type { Instance } from './types'
 
 const files = await fg('*.json', {
   cwd: fileURLToPath(new URL('./__records__', import.meta.url)),

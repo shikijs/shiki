@@ -1,11 +1,11 @@
-import { FontStyle } from '@shikijs/vscode-textmate'
-import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
-
 import type {
   ThemedToken,
   ThemeRegistrationResolved,
   TokenizeWithThemeOptions,
 } from '@shikijs/types'
+
+import { FontStyle } from '@shikijs/vscode-textmate'
+import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-sequence-parser'
 
 import { applyColorReplacements, resolveColorReplacements, splitLines } from '../utils'
 

@@ -1,8 +1,8 @@
-import { createWasmOnigEngine } from '@shikijs/engine-oniguruma'
 import type {
   HighlighterCoreOptions,
   ShikiInternal,
 } from '@shikijs/types'
+import { createWasmOnigEngine } from '@shikijs/engine-oniguruma'
 
 import { getDefaultWasmLoader } from '../engines/oniguruma'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'

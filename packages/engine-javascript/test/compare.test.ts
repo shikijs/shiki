@@ -1,9 +1,9 @@
-import { describe, expect, it } from 'vitest'
-import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
-import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../shiki/src/core'
-
 import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../shiki/src/core'
 import type { Instance } from './types'
+import { describe, expect, it } from 'vitest'
+
+import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
+import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../shiki/src/core'
 
 await loadWasm(import('@shikijs/core/wasm-inlined'))
 

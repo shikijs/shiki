@@ -1,6 +1,7 @@
-import { INITIAL } from '@shikijs/vscode-textmate'
 import type { GrammarState as GrammarStateInterface } from '@shikijs/types'
 import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
+
+import { INITIAL } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
 
 /**

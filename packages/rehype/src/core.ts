@@ -1,13 +1,13 @@
-import { toString } from 'hast-util-to-string'
-import { visit } from 'unist-util-visit'
 import type {
   CodeToHastOptions,
   HighlighterGeneric,
 } from '@shikijs/types'
 import type { Element, Root } from 'hast'
 import type { Transformer } from 'unified'
-import { InlineCodeProcessors } from './inline'
 import type { RehypeShikiCoreOptions } from './types'
+import { toString } from 'hast-util-to-string'
+import { visit } from 'unist-util-visit'
+import { InlineCodeProcessors } from './inline'
 
 export * from './types'
 

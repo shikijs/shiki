@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
 
+import type { ShikiTransformer } from 'shiki'
 import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import type { ShikiTransformer } from 'shiki'
 import {
   transformerCompactLineOptions,
   transformerNotationDiff,

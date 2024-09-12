@@ -1,7 +1,7 @@
+import type { LanguageRegistration } from '@shikijs/core'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { grammars, injections } from 'tm-grammars'
-import type { LanguageRegistration } from '@shikijs/core'
 import { COMMENT_HEAD } from './constants'
 
 /**
