@@ -4,6 +4,7 @@ import type {
   RegexEngineString,
 } from '@shikijs/types'
 import { onigurumaToRegexp } from 'oniguruma-to-js'
+import { replacements } from './replacements'
 
 export interface JavaScriptRegexEngineOptions {
   /**
@@ -77,7 +78,13 @@ export class JavaScriptScanner implements PatternScanner {
         throw cached
       }
       try {
-        const regex = regexConstructor(p)
+        let pattern = p
+        if (simulation) {
+          for (const [from, to] of replacements) {
+            pattern = pattern.replaceAll(from, to)
+          }
+        }
+        const regex = regexConstructor(pattern)
         cache?.set(p, regex)
         return regex
       }
