@@ -51,8 +51,9 @@ async function run() {
       themes: ['vitesse-dark'],
     })
 
-    const grammar = shikiWasm.getLanguage(lang) as any
-    const patterns = getPatternsOfGrammar(grammar._grammar)
+    const grammars = shikiWasm.getLoadedLanguages().map(l => shikiWasm.getLanguage(l))
+    const patterns = new Set<string>()
+    grammars.map((grammar: any) => getPatternsOfGrammar(grammar._grammar, patterns))
     let highlightMatch: boolean | 'error' = false
 
     for (const pattern of patterns) {
@@ -263,9 +264,7 @@ function serializeTokens(shiki: HighlighterGeneric<BundledLanguage, BundledTheme
   }
 }
 
-function getPatternsOfGrammar(grammar: any): Set<string> {
-  const patterns = new Set<string>()
-
+function getPatternsOfGrammar(grammar: any, set = new Set<string>()): Set<string> {
   function traverse(a: any): void {
     if (Array.isArray(a)) {
       a.forEach((j: any) => {
@@ -276,22 +275,22 @@ function getPatternsOfGrammar(grammar: any): Set<string> {
     if (!a || typeof a !== 'object')
       return
     if (a.foldingStartMarker) {
-      patterns.add(a.foldingStartMarker)
+      set.add(a.foldingStartMarker)
     }
     if (a.foldingStopMarker) {
-      patterns.add(a.foldingStopMarker)
+      set.add(a.foldingStopMarker)
     }
     if (a.firstLineMatch) {
-      patterns.add(a.firstLineMatch)
+      set.add(a.firstLineMatch)
     }
     if (a.match)
-      patterns.add(a.match)
+      set.add(a.match)
     if (a.begin)
-      patterns.add(a.begin)
+      set.add(a.begin)
     if (a.end)
-      patterns.add(a.end)
+      set.add(a.end)
     if (a.while)
-      patterns.add(a.while)
+      set.add(a.while)
     if (a.patterns) {
       traverse(a.patterns)
     }
@@ -311,7 +310,7 @@ function getPatternsOfGrammar(grammar: any): Set<string> {
 
   traverse(grammar)
 
-  return patterns
+  return set
 }
 
 run()
