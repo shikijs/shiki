@@ -1,23 +1,26 @@
 # JavaScript RegExp Engine Compatibility References
 
+Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
+
 > Genreated on Friday, September 13, 2024
 >
-> Version `1.17.5`
+> Version `1.17.6`
 >
 > Runtime: Node.js v20.12.2
 
 ## Report Summary
 
-|                 |                             Count |
-| :-------------- | --------------------------------: |
-| Total Languages |                               213 |
-| Fully Supported | [172](#fully-supported-languages) |
-| Mismatched      |       [23](#mismatched-languages) |
-| Unsupported     |      [18](#unsupported-languages) |
+|                 |                        Count |
+| :-------------- | ---------------------------: |
+| Total Languages |                          213 |
+| Supported       |  [172](#supported-languages) |
+| Mismatched      |  [23](#mismatched-languages) |
+| Unsupported     | [18](#unsupported-languages) |
 
-## Fully Supported Languages
+## Supported Languages
 
-Languages that works with the JavaScript RegExp engine, and will produce the same result as the WASM engine.
+Languages that works with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).
+In some edge cases, it's not guaranteed that the the highlight will be 100% the same. If that happens, please create an issue with the sample snippet.
 
 | Language           | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ------------------ | :-------------- | ----------------: | --------------: | ---: |
@@ -193,6 +196,13 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | yaml               | ✅ OK           |                48 |               - |      |
 | zenscript          | ✅ OK           |                21 |               - |      |
 | zig                | ✅ OK           |                51 |               - |      |
+
+###### Table Field Explanations
+
+- **Highlight Match**: Highlight results match with the WASM engine with the [sample snippets](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples).
+- **Patterns Parsable**: Number of regex patterns that can be parsed by the JavaScript RegExp engine.
+- **Patterns Failed**: Number of regex patterns that can't be parsed by the JavaScript RegExp engine (throws error).
+- **Diff**: Length of characters that are different between the highlight result of two engines.
 
 ## Mismatched Languages
 
