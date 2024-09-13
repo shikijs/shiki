@@ -20,7 +20,7 @@ type Replacement = ReplacementRecursiveBackReference | ReplacementStatic
 const replacements: Replacement[] = [
   {
     // Subroutine recursive reference are not supported in JavaScript regex engine.
-    // We expand a few levels of recursion to literals to simulate the behavior (incomplete)
+    // We expand a few levels of recursion to literals to simulate the behavior (it's incomplete tho)
     type: 'recursive-back-reference',
     regex: '(?<square>[^\\[\\]\\\\]|\\\\.|\\[\\g<square>*+\\])',
     groupName: 'square',
@@ -30,7 +30,7 @@ const replacements: Replacement[] = [
     type: 'recursive-back-reference',
     regex: '(?<url>(?>[^\\s()]+)|\\(\\g<url>*\\))',
     groupName: 'url',
-    fallback: '[^\\s\\(\\)]',
+    fallback: '(?>[^\\s()]+)',
   },
 ]
 

@@ -11,8 +11,8 @@
 |                 |                             Count |
 | :-------------- | --------------------------------: |
 | Total Languages |                               213 |
-| Fully Supported | [171](#fully-supported-languages) |
-| Mismatched      |       [24](#mismatched-languages) |
+| Fully Supported | [172](#fully-supported-languages) |
+| Mismatched      |       [23](#mismatched-languages) |
 | Unsupported     |      [18](#unsupported-languages) |
 
 ## Fully Supported Languages
@@ -115,6 +115,7 @@ Languages that works with the JavaScript RegExp engine, and will produce the sam
 | make               | ✅ OK           |                51 |               - |      |
 | marko              | ✅ OK           |               926 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
+| mdc                | ✅ OK           |               784 |               - |      |
 | mojo               | ✅ OK           |               213 |               - |      |
 | move               | ✅ OK           |               120 |               - |      |
 | narrat             | ✅ OK           |                34 |               - |      |
@@ -209,8 +210,7 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 | glsl          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=glsl)          |               186 |               - |  306 |
 | haml          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=haml)          |              1612 |               - |   48 |
 | kusto         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)         |                60 |               - |   40 |
-| markdown      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=markdown)      |               118 |               - |  648 |
-| mdc           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mdc)           |               784 |               - |  407 |
+| markdown      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=markdown)      |               118 |               - |   78 |
 | mermaid       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mermaid)       |               129 |               - |   38 |
 | nginx         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)         |               378 |               - |    4 |
 | objective-cpp | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=objective-cpp) |               309 |               - |  172 |

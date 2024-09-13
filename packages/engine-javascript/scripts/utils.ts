@@ -15,7 +15,6 @@ export function expandRecursiveBackReference(
 
   out = out
     .replace(refMarker, fallback)
-    .replace(groupMaker, '(?:')
 
   return out
 }

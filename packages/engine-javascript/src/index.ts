@@ -66,8 +66,21 @@ export class JavaScriptScanner implements PatternScanner {
 
     this.contiguousAnchorSimulation = Array.from({ length: patterns.length }, () => false)
     this.regexps = patterns.map((p, idx) => {
+      /**
+       * vscode-textmate replace anchors to \uFFFF, where we still not sure how to handle it correctly
+       *
+       * @see https://github.com/shikijs/vscode-textmate/blob/8d2e84a3aad21afd6b08fd53c7acd421c7f5aa44/src/rule.ts#L687-L702
+       *
+       * This is a temporary workaround for markdown grammar
+       */
+      if (simulation)
+        p = p.replaceAll('(^|\\\uFFFF)', '(^|\\G)')
+
+      // Detect contiguous anchors for simulation
       if (simulation && (p.startsWith('(^|\\G)') || p.startsWith('(\\G|^)')))
         this.contiguousAnchorSimulation[idx] = true
+
+      // Cache
       const cached = cache?.get(p)
       if (cached) {
         if (cached instanceof RegExp) {
