@@ -6,8 +6,8 @@ In some extreme cases that you need to run Shiki completely synchronously, since
 
 ```ts
 import { createHighlighterCoreSync, createJavaScriptRegexEngine } from 'shiki/core'
-import js from 'shiki/core/langs/javascript.mjs'
-import nord from 'shiki/core/themes/nord.mjs'
+import js from 'shiki/langs/javascript.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 const shiki = createHighlighterCoreSync({
   themes: [nord],
@@ -24,8 +24,8 @@ The [Oniguruma Engine](/guide/regex-engines#oniguruma-engine) can only be create
 
 ```ts
 import { createHighlighterCoreSync, createWasmOnigEngine } from 'shiki/core'
-import js from 'shiki/core/langs/javascript.mjs'
-import nord from 'shiki/core/themes/nord.mjs'
+import js from 'shiki/langs/javascript.mjs'
+import nord from 'shiki/themes/nord.mjs'
 
 // Load this somewhere beforehand
 const engine = await createWasmOnigEngine(import('shiki/wasm'))
