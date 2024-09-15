@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type { BundledLanguageInfo, BundledThemeInfo } from 'shiki'
+import type { BundledLanguageInfo, BundledThemeInfo } from '@shikijs/types'
 import { useLocalStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'
@@ -31,7 +31,7 @@ export const usePlayground = defineStore('playground', () => {
   const preStyle = ref('')
   const isLoading = ref(true)
 
-  function randomize() {
+  function randomize(): void {
     if (allLanguages.value.length && allThemes.value.length) {
       lang.value = allLanguages.value[Math.floor(Math.random() * allLanguages.value.length)].id as any
       theme.value = allThemes.value[Math.floor(Math.random() * allThemes.value.length)].id as any
@@ -46,7 +46,7 @@ export const usePlayground = defineStore('playground', () => {
 
     const samplesCache = new Map<string, Promise<string | undefined>>()
 
-    function fetchSample(id: string) {
+    function fetchSample(id: string): Promise<string | undefined> {
       if (!samplesCache.has(id)) {
         samplesCache.set(id, fetch(`https://raw.githubusercontent.com/antfu/textmate-grammars-themes/main/samples/${id}.sample`)
           .then(r => r.text())
@@ -86,7 +86,7 @@ export const usePlayground = defineStore('playground', () => {
         run()
       }, { immediate: true })
 
-      function run() {
+      function run(): void {
         output.value = highlighter.codeToHtml(input.value, {
           lang: lang.value,
           theme: theme.value,

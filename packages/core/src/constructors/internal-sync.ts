@@ -1,4 +1,5 @@
 import type {
+  Grammar,
   HighlighterCoreOptions,
   LanguageInput,
   LanguageRegistration,
@@ -42,7 +43,7 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
 
   let _lastTheme: string | ThemeRegistrationAny
 
-  function getLanguage(name: string | LanguageRegistration) {
+  function getLanguage(name: string | LanguageRegistration): Grammar {
     ensureNotDisposed()
     const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
     if (!_lang)
@@ -60,7 +61,10 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     return _theme
   }
 
-  function setTheme(name: string | ThemeRegistrationAny) {
+  function setTheme(name: string | ThemeRegistrationAny): {
+    theme: ThemeRegistrationResolved
+    colorMap: string[]
+  } {
     ensureNotDisposed()
     const theme = getTheme(name)
     if (_lastTheme !== name) {
@@ -74,43 +78,43 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     }
   }
 
-  function getLoadedThemes() {
+  function getLoadedThemes(): string[] {
     ensureNotDisposed()
     return _registry.getLoadedThemes()
   }
 
-  function getLoadedLanguages() {
+  function getLoadedLanguages(): string[] {
     ensureNotDisposed()
     return _registry.getLoadedLanguages()
   }
 
-  function loadLanguageSync(...langs: MaybeArray<LanguageRegistration>[]) {
+  function loadLanguageSync(...langs: MaybeArray<LanguageRegistration>[]): void {
     ensureNotDisposed()
     _registry.loadLanguages(langs.flat(1))
   }
 
-  async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]) {
+  async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]): Promise<void> {
     return loadLanguageSync(await resolveLangs(langs))
   }
 
-  async function loadThemeSync(...themes: MaybeArray<ThemeRegistrationAny>[]) {
+  function loadThemeSync(...themes: MaybeArray<ThemeRegistrationAny>[]): void {
     ensureNotDisposed()
     for (const theme of themes.flat(1)) {
       _registry.loadTheme(theme)
     }
   }
 
-  async function loadTheme(...themes: (ThemeInput | SpecialTheme)[]) {
+  async function loadTheme(...themes: (ThemeInput | SpecialTheme)[]): Promise<void> {
     ensureNotDisposed()
     return loadThemeSync(await resolveThemes(themes))
   }
 
-  function ensureNotDisposed() {
+  function ensureNotDisposed(): void {
     if (isDisposed)
       throw new ShikiError('Shiki instance has been disposed')
   }
 
-  function dispose() {
+  function dispose(): void {
     if (isDisposed)
       return
     isDisposed = true

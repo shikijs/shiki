@@ -32,7 +32,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     explicitTrigger = true,
   } = options
 
-  const onError = (error: any, code: string) => {
+  const onError = (error: any, code: string): void => {
     const isCI = typeof process !== 'undefined' && process?.env?.CI
     const isDev = typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development'
     const shouldThrow = (options.throws || isCI || !isDev) && options.throws !== false
@@ -41,7 +41,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
       throw error
     else
       console.error(error)
-    return removeTwoslashNotations(code)
+    removeTwoslashNotations(code)
   }
 
   const twoslash = createTransformerFactory(

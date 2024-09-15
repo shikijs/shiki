@@ -1,8 +1,8 @@
-export function separateContinuousSpaces(inputs: string[]) {
+export function separateContinuousSpaces(inputs: string[]): string[] {
   const result: string[] = []
   let current = ''
 
-  function bump() {
+  function bump(): void {
     if (current.length)
       result.push(current)
     current = ''
@@ -27,11 +27,11 @@ export function separateContinuousSpaces(inputs: string[]) {
   return result
 }
 
-export function isTab(part: string) {
+export function isTab(part: string): boolean {
   return part === '\t'
 }
 
-export function isSpace(part: string) {
+export function isSpace(part: string): boolean {
   return part === ' ' || part === '\t'
 }
 
@@ -39,7 +39,7 @@ export function splitSpaces(
   parts: string[],
   type: 'all' | 'boundary' | 'trailing',
   renderContinuousSpaces = true,
-) {
+): string[] {
   if (type === 'all')
     return parts
   let leftCount = 0

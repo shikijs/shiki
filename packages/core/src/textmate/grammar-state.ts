@@ -13,7 +13,7 @@ export class GrammarState implements GrammarStateInterface {
   /**
    * Static method to create a initial grammar state.
    */
-  static initial(lang: string, theme: string) {
+  static initial(lang: string, theme: string): GrammarState {
     return new GrammarState(INITIAL, lang, theme)
   }
 
@@ -23,11 +23,15 @@ export class GrammarState implements GrammarStateInterface {
     public readonly theme: string,
   ) {}
 
-  get scopes() {
+  get scopes(): string[] {
     return getScopes(this._stack as StateStackImpl)
   }
 
-  toJSON() {
+  toJSON(): {
+    lang: string
+    theme: string
+    scopes: string[]
+  } {
     return {
       lang: this.lang,
       theme: this.theme,
@@ -36,11 +40,11 @@ export class GrammarState implements GrammarStateInterface {
   }
 }
 
-function getScopes(stack: StateStackImpl) {
+function getScopes(stack: StateStackImpl): string[] {
   const scopes: string[] = []
   const visited = new Set<StateStackImpl>()
 
-  function pushScope(stack: StateStackImpl) {
+  function pushScope(stack: StateStackImpl): void {
     if (visited.has(stack))
       return
     visited.add(stack)

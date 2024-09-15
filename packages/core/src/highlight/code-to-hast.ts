@@ -29,7 +29,7 @@ export function codeToHast(
     codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
     codeToTokens: (_code, _options) => codeToTokens(internal, _code, _options),
   },
-) {
+): Root {
   let input = code
 
   for (const transformer of getTransformers(options))
@@ -79,7 +79,7 @@ export function tokensToHast(
   tokens: ThemedToken[][],
   options: CodeToHastRenderOptions,
   transformerContext: ShikiTransformerContextSource,
-) {
+): Root {
   const transformers = getTransformers(options)
 
   const lines: (Element | Text)[] = []
@@ -212,7 +212,7 @@ export function tokensToHast(
   return result
 }
 
-function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
+function mergeWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
   return tokens.map((line) => {
     const newLine: ThemedToken[] = []
     let carryOnContent = ''
@@ -255,7 +255,7 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]) {
   })
 }
 
-function splitWhitespaceTokens(tokens: ThemedToken[][]) {
+function splitWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
   return tokens.map((line) => {
     return line.flatMap((token) => {
       if (token.content.match(/^\s+$/))

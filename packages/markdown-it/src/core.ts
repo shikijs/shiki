@@ -55,7 +55,7 @@ export function setupMarkdownIt(
   markdownit: MarkdownIt,
   highlighter: HighlighterGeneric<any, any>,
   options: MarkdownItShikiSetupOptions,
-) {
+): void {
   const {
     parseMetaString,
     trimEndingNewline = true,

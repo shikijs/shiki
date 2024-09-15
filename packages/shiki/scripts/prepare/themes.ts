@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import { themes as allThemes } from 'tm-themes'
 import { COMMENT_HEAD } from './constants'
 
-export async function prepareTheme() {
+export async function prepareTheme(): Promise<void> {
   const themes = await Promise.all(allThemes
     .map(async (t) => {
       const theme = await fs.readJSON(`./node_modules/tm-themes/themes/${t.name}.json`)

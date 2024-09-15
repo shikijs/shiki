@@ -1,3 +1,4 @@
+import type { ShikiTransformer } from '@shikijs/types'
 import type { CreateTwoslashOptions } from 'twoslash'
 import type { RendererRichOptions, TransformerTwoslashOptions } from './core'
 import { createTwoslasher } from 'twoslash'
@@ -17,7 +18,7 @@ export interface TransformerTwoslashIndexOptions extends TransformerTwoslashOpti
 /**
  * Factory function to create a Shiki transformer for twoslash integrations.
  */
-export function transformerTwoslash(options: TransformerTwoslashIndexOptions = {}) {
+export function transformerTwoslash(options: TransformerTwoslashIndexOptions = {}): ShikiTransformer {
   return createTransformerFactory(
     createTwoslasher({ cache: options?.cache }),
     rendererRich(options.rendererRich),

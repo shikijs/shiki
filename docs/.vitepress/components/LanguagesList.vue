@@ -5,7 +5,7 @@ import { usePlayground } from '../store/playground'
 const play = usePlayground()
 const showModel = ref(false)
 
-function preview(id: string) {
+function preview(id: string): void {
   play.lang = id
   showModel.value = true
 }

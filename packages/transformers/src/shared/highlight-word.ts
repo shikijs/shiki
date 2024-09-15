@@ -25,7 +25,14 @@ function getTextContent(element: ElementContent): string {
  * @param index highlight beginning index
  * @param len highlight length
  */
-function highlightRange(this: ShikiTransformerContext, elements: ElementContent[], ignoredElement: Element | null, index: number, len: number, className: string) {
+function highlightRange(
+  this: ShikiTransformerContext,
+  elements: ElementContent[],
+  ignoredElement: Element | null,
+  index: number,
+  len: number,
+  className: string,
+): void {
   let currentIdx = 0
 
   for (let i = 0; i < elements.length; i++) {
@@ -68,7 +75,7 @@ function separateToken(span: Element, textNode: Text, index: number, len: number
 ] {
   const text = textNode.value
 
-  const createNode = (value: string) => inheritElement(span, {
+  const createNode = (value: string): Element => inheritElement(span, {
     children: [
       {
         type: 'text',

@@ -1,4 +1,4 @@
-function normalizeHex(hex: string) {
+function normalizeHex(hex: string): string {
   hex = hex.replace(/#/, '')
   if (hex.length === 3)
     hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
@@ -9,7 +9,7 @@ function normalizeHex(hex: string) {
   return hex.toLowerCase()
 }
 
-function hexToRgba(hex: string) {
+function hexToRgba(hex: string): { r: number, g: number, b: number, a: number } {
   hex = normalizeHex(hex)
   const r = Number.parseInt(hex.slice(0, 2), 16)
   const g = Number.parseInt(hex.slice(2, 4), 16)
@@ -18,7 +18,7 @@ function hexToRgba(hex: string) {
   return { r, g, b, a }
 }
 
-function RgbToHex(r: number, g: number, b: number) {
+function RgbToHex(r: number, g: number, b: number): string {
   return [r, g, b]
     .map((x) => {
       const hex = x.toString(16)
@@ -27,7 +27,7 @@ function RgbToHex(r: number, g: number, b: number) {
     .join('')
 }
 
-export function hexApplyAlpha(hex: string, type: 'dark' | 'light' = 'dark') {
+export function hexApplyAlpha(hex: string, type: 'dark' | 'light' = 'dark'): string {
   const { r, g, b, a } = hexToRgba(hex)
   if (type === 'dark')
     return RgbToHex(r * a, g * a, b * a)

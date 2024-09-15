@@ -42,7 +42,7 @@ export function createCssVariablesTheme(options: CssVariablesThemeOptions = {}):
     fontStyle = true,
   } = options
 
-  const variable = (name: string) => {
+  const variable = (name: string): string => {
     if (options.variableDefaults?.[name])
       return `var(${variablePrefix}${name}, ${options.variableDefaults[name]})`
     return `var(${variablePrefix}${name})`

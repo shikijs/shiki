@@ -92,7 +92,7 @@ function mergeToken(
   variantsOrder: string[],
   cssVariablePrefix: string,
   defaultColor: string | boolean,
-) {
+): ThemedToken {
   const token: ThemedToken = {
     content: merged.content,
     explanation: merged.explanation,

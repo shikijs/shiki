@@ -53,12 +53,14 @@ export function createHighlighterCoreSync(options: HighlighterCoreOptions<true> 
   }
 }
 
-export function makeSingletonHighlighterCore(createHighlighter: typeof createHighlighterCore) {
+export function makeSingletonHighlighterCore(
+  createHighlighter: typeof createHighlighterCore,
+): (options?: Partial<HighlighterCoreOptions>) => Promise<HighlighterCore> {
   let _shiki: ReturnType<typeof createHighlighterCore>
 
   async function getSingletonHighlighterCore(
     options: Partial<HighlighterCoreOptions> = {},
-  ) {
+  ): Promise<HighlighterCore> {
     if (!_shiki) {
       _shiki = createHighlighter({
         ...options,

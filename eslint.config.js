@@ -3,6 +3,7 @@ import antfu from '@antfu/eslint-config'
 
 export default antfu(
   {
+    type: 'lib',
     formatters: {
       html: false,
       markdown: true,
@@ -12,6 +13,12 @@ export default antfu(
       overrides: {
         'unicorn/prefer-node-protocol': 'off',
         'import/first': 'off',
+        'ts/explicit-function-return-type': 'off',
+      },
+    },
+    vue: {
+      overrides: {
+        'ts/explicit-function-return-type': 'off',
       },
     },
     ignores: [
@@ -27,6 +34,12 @@ export default antfu(
     rules: {
       'no-restricted-syntax': 'off',
       'ts/no-invalid-this': 'off',
+    },
+  },
+  {
+    files: ['docs/**/*.([cm])?[jt]s(x)?'],
+    rules: {
+      'ts/explicit-function-return-type': 'off',
     },
   },
 )

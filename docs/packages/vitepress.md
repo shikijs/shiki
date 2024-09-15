@@ -39,10 +39,10 @@ export default defineConfig({
 And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme), install the Vue plugin and import the css with `@shikijs/vitepress-twoslash/styles.css`.
 
 ```ts twoslash
+import type { EnhanceAppContext } from 'vitepress' // [!code hl]
 // @noErrors: true
 // .vitepress/theme/index.ts
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client' // [!code hl]
-import type { EnhanceAppContext } from 'vitepress'
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import Theme from 'vitepress/theme'
 
 import '@shikijs/vitepress-twoslash/style.css' // [!code hl]

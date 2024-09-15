@@ -125,7 +125,7 @@ export function createTransformerFactory(
         if (!twoslash)
           return
 
-        const insertAfterLine = (line: number, nodes: ElementContent[]) => {
+        const insertAfterLine = (line: number, nodes: ElementContent[]): void => {
           if (!nodes.length)
             return
           let index: number
@@ -165,7 +165,7 @@ export function createTransformerFactory(
           line: number,
           character: number,
           length: number,
-        ) => {
+        ): (Element | Text)[] => {
           const start = character
           const end = character + length
           // When the length is 0 (completion), we find the token that contains it
@@ -200,7 +200,7 @@ export function createTransformerFactory(
           }
 
           // Wrap tokens with new elements, all tokens has to be in the same line
-          const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]) => {
+          const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]): void => {
             const line = this.lines[node.line]
             let charIndex = 0
             let itemStart = line.children.length

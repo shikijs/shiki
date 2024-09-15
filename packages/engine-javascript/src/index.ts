@@ -3,6 +3,7 @@ import type {
   RegexEngine,
   RegexEngineString,
 } from '@shikijs/types'
+import type { IOnigMatch } from '@shikijs/vscode-textmate'
 import { onigurumaToRegexp } from 'oniguruma-to-js'
 import { replacements } from './replacements'
 
@@ -111,13 +112,13 @@ export class JavaScriptScanner implements PatternScanner {
     })
   }
 
-  findNextMatchSync(string: string | RegexEngineString, startPosition: number) {
+  findNextMatchSync(string: string | RegexEngineString, startPosition: number): IOnigMatch | null {
     const str = typeof string === 'string'
       ? string
       : string.content
     const pending: [index: number, match: RegExpExecArray, offset: number][] = []
 
-    function toResult(index: number, match: RegExpExecArray, offset = 0) {
+    function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
       return {
         index,
         captureIndices: match.indices!.map((indice) => {

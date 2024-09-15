@@ -24,7 +24,7 @@ interface TransformerDecorationsInternalContext {
 export function transformerDecorations(): ShikiTransformer {
   const map = new WeakMap<ShikiTransformerContextMeta, TransformerDecorationsInternalContext>()
 
-  function getContext(shiki: ShikiTransformerContextSource) {
+  function getContext(shiki: ShikiTransformerContextSource): TransformerDecorationsInternalContext {
     if (!map.has(shiki.meta)) {
       const converter = createPositionConverter(shiki.source)
 
@@ -91,7 +91,7 @@ export function transformerDecorations(): ShikiTransformer {
       if (lines.length !== ctx.converter.lines.length)
         throw new ShikiError(`Number of lines in code element (${lines.length}) does not match the number of lines in the source (${ctx.converter.lines.length}). Failed to apply decorations.`)
 
-      function applyLineSection(line: number, start: number, end: number, decoration: DecorationItem) {
+      function applyLineSection(line: number, start: number, end: number, decoration: DecorationItem): void {
         const lineEl = lines[line]
         let text = ''
         let startIndex = -1
@@ -143,11 +143,11 @@ export function transformerDecorations(): ShikiTransformer {
         }
       }
 
-      function applyLine(line: number, decoration: DecorationItem) {
+      function applyLine(line: number, decoration: DecorationItem): void {
         lines[line] = applyDecoration(lines[line], decoration, 'line')
       }
 
-      function applyDecoration(el: Element, decoration: DecorationItem, type: DecorationTransformType) {
+      function applyDecoration(el: Element, decoration: DecorationItem, type: DecorationTransformType): Element {
         const properties = decoration.properties || {}
         const transform = decoration.transform || (i => i)
 
@@ -185,7 +185,7 @@ export function transformerDecorations(): ShikiTransformer {
   }
 }
 
-function verifyIntersections(items: ResolvedDecorationItem[]) {
+function verifyIntersections(items: ResolvedDecorationItem[]): void {
   for (let i = 0; i < items.length; i++) {
     const foo = items[i]
     if (foo.start.offset > foo.end.offset)

@@ -9,7 +9,7 @@ export interface TransformerNotationMapOptions {
   classActivePre?: string
 }
 
-function escapeRegExp(str: string) {
+function escapeRegExp(str: string): string {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 

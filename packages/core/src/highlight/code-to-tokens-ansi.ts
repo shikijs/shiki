@@ -71,7 +71,7 @@ export function tokenizeAnsiWithTheme(
 /**
  * Adds 50% alpha to a hex color string or the "-dim" postfix to a CSS variable
  */
-function dimColor(color: string) {
+function dimColor(color: string): string {
   const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/)
   if (hexMatch) {
     if (hexMatch[3]) {

@@ -28,7 +28,7 @@ export class Resolver implements RegistryOptions {
     return this._scopeToLang.get(scopeName)!
   }
 
-  public addLanguage(l: LanguageRegistration) {
+  public addLanguage(l: LanguageRegistration): void {
     this._langs.set(l.name, l)
     if (l.aliases) {
       l.aliases.forEach((a) => {

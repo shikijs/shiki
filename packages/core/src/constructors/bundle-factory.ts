@@ -192,12 +192,14 @@ export interface ShorthandsBundle<L extends string, T extends string> {
   getLastGrammarState: (code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>
 }
 
-export function makeSingletonHighlighter<L extends string, T extends string>(createHighlighter: CreateHighlighterFactory<L, T>) {
+export function makeSingletonHighlighter<L extends string, T extends string>(
+  createHighlighter: CreateHighlighterFactory<L, T>,
+): (options?: Partial<BundledHighlighterOptions<L, T>>) => Promise<HighlighterGeneric<L, T>> {
   let _shiki: ReturnType<typeof createHighlighter>
 
   async function getSingletonHighlighter(
     options: Partial<BundledHighlighterOptions<L, T>> = {},
-  ) {
+  ): Promise<HighlighterGeneric<L, T>> {
     if (!_shiki) {
       _shiki = createHighlighter({
         ...options,

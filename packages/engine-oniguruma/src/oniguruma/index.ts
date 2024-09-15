@@ -402,7 +402,7 @@ export function loadWasm(options: LoadWasmOptions): Promise<void> {
   if (initPromise)
     return initPromise
 
-  async function _load() {
+  async function _load(): Promise<void> {
     onigBinding = await createOnigasm(async (info) => {
       let instance: LoadWasmOptions | WebAssemblyInstance = options
       instance = await instance

@@ -223,7 +223,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
   function highlightPopupContent(
     this: ShikiTransformerContextCommon,
     info: NodeHover | NodeQuery,
-  ) {
+  ): ElementContent[] {
     if (!info.text)
       return []
     const content = processHoverInfo(info.text)
@@ -705,7 +705,7 @@ const regexFunction = /^\w*\(/
 /**
  * The default hover info processor, which will do some basic cleanup
  */
-export function defaultHoverInfoProcessor(type: string) {
+export function defaultHoverInfoProcessor(type: string): string {
   let content = type
     // remove leading `(property)` or `(method)` on each line
     .replace(/^\(([\w-]+)\)\s+/gm, '')
@@ -724,7 +724,7 @@ export function defaultHoverInfoProcessor(type: string) {
   return content
 }
 
-function getErrorLevelClass(error: NodeError) {
+function getErrorLevelClass(error: NodeError): string {
   switch (error.level) {
     case 'warning':
       return 'twoslash-error-level-warning'

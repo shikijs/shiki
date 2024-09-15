@@ -3,7 +3,7 @@ export class TwoslashIncludesManager {
     public map: Map<string, string> = new Map(),
   ) {}
 
-  add(name: string, code: string) {
+  add(name: string, code: string): void {
     const lines: string[] = []
 
     code.split('\n').forEach((l, _i) => {
@@ -20,7 +20,7 @@ export class TwoslashIncludesManager {
     this.map.set(name, lines.join('\n'))
   }
 
-  applyInclude(code: string) {
+  applyInclude(code: string): string {
     const reMarker = /\/\/ @include: (.*)$/gm
 
     // Basically run a regex over the code replacing any // @include: thing with

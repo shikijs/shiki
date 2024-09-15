@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { BundledLanguage } from 'shiki'
 import fs from 'node:fs/promises'
 import { parse } from 'node:path'
@@ -9,7 +8,7 @@ import { codeToANSI } from './code-to-ansi'
 export async function run(
   argv = process.argv.slice(2),
   log = console.log,
-) {
+): Promise<void> {
   const options = minimist(argv)
   const {
     theme = 'vitesse-dark',

@@ -8,13 +8,13 @@ let _defaultWasmLoader: LoadWasmOptions | undefined
  * Set the default wasm loader for `loadWasm`.
  * @internal
  */
-export function setDefaultWasmLoader(_loader: LoadWasmOptions) {
+export function setDefaultWasmLoader(_loader: LoadWasmOptions): void {
   _defaultWasmLoader = _loader
 }
 
 /**
  * @internal
  */
-export function getDefaultWasmLoader() {
+export function getDefaultWasmLoader(): LoadWasmOptions | undefined {
   return _defaultWasmLoader
 }

@@ -84,7 +84,7 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
   // Push non-hex colors to color replacements, as `vscode-textmate` doesn't support them
   let replacementCount = 0
   const replacementMap = new Map<string, string>()
-  function getReplacementColor(value: string) {
+  function getReplacementColor(value: string): string {
     if (replacementMap.has(value))
       return replacementMap.get(value)!
     replacementCount += 1
