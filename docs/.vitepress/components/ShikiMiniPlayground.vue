@@ -55,9 +55,9 @@ function onInput() {
         :class="play.isLoading ? 'op100' : 'op0'"
         flex-none transition-opacity
       />
-      <div op50 text-xs mx-2>
+      <a op50 text-xs mx-2 hover="op75" href="https://textmate-grammars-themes.netlify.app/" target="_blank" title="Full Playground" class="decoration-none! text-inherit!">
         Playground
-      </div>
+      </a>
       <button title="Randomize" hover="bg-gray/10" p1 rounded @click="play.randomize">
         <div i-carbon:shuffle op50 />
       </button>
