@@ -553,9 +553,6 @@ importers:
 
   packages/markdown-it:
     dependencies:
-      '@shikijs/transformers':
-        specifier: workspace:*
-        version: link:../transformers
       markdown-it:
         specifier: 'catalog:'
         version: 14.1.0
@@ -563,6 +560,9 @@ importers:
         specifier: workspace:*
         version: link:../shiki
     devDependencies:
+      '@shikijs/transformers':
+        specifier: workspace:*
+        version: link:../transformers
       '@types/markdown-it':
         specifier: 'catalog:'
         version: 14.1.2
@@ -594,9 +594,6 @@ importers:
 
   packages/rehype:
     dependencies:
-      '@shikijs/transformers':
-        specifier: workspace:*
-        version: link:../transformers
       '@shikijs/types':
         specifier: workspace:*
         version: link:../types
@@ -616,6 +613,9 @@ importers:
         specifier: 'catalog:'
         version: 5.0.0
     devDependencies:
+      '@shikijs/transformers':
+        specifier: workspace:*
+        version: link:../transformers
       rehype-raw:
         specifier: 'catalog:'
         version: 7.0.0

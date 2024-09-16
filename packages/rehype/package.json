@@ -50,7 +50,6 @@
     "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "@shikijs/transformers": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@types/hast": "catalog:",
     "hast-util-to-string": "catalog:",
@@ -59,6 +58,7 @@
     "unist-util-visit": "catalog:"
   },
   "devDependencies": {
+    "@shikijs/transformers": "workspace:*",
     "rehype-raw": "catalog:",
     "rehype-stringify": "catalog:",
     "remark-parse": "catalog:",
