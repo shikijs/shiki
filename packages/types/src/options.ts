@@ -153,6 +153,15 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    * @default 'classic'
    */
   structure?: 'classic' | 'inline'
+
+  /**
+   * Tab index of the root `<pre>` element.
+   *
+   * Set to `false` to disable tab index.
+   *
+   * @default 0
+   */
+  tabindex?: number | string | false
 }
 
 export interface CodeOptionsMeta {

@@ -90,6 +90,7 @@ export function tokensToHast(
 
   const {
     structure = 'classic',
+    tabindex = '0',
   } = options
 
   let preNode: Element = {
@@ -98,7 +99,11 @@ export function tokensToHast(
     properties: {
       class: `shiki ${options.themeName || ''}`,
       style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
-      tabindex: '0',
+      ...(tabindex !== false && tabindex != null)
+        ? {
+            tabindex: tabindex.toString(),
+          }
+        : {},
       ...Object.fromEntries(
         Array.from(
           Object.entries(options.meta || {}),

@@ -48,6 +48,7 @@ it('hasfocus support', async () => {
   const code = await codeToHtml(snippet, {
     lang: 'php',
     theme: 'vitesse-light',
+    tabindex: false,
     transformers: [
       {
         code(node) {
@@ -67,7 +68,7 @@ it('hasfocus support', async () => {
 
   expect(code)
     .toMatchInlineSnapshot(`
-      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-php"><span class="line"><span style="color:#999999">$</span><span style="color:#B07D48">foo</span><span style="color:#999999"> =</span><span style="color:#B5695977"> "</span><span style="color:#B56959">bar</span><span style="color:#B5695977">"</span><span style="color:#999999">;</span></span>
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34"><code class="language-php"><span class="line"><span style="color:#999999">$</span><span style="color:#B07D48">foo</span><span style="color:#999999"> =</span><span style="color:#B5695977"> "</span><span style="color:#B56959">bar</span><span style="color:#B5695977">"</span><span style="color:#999999">;</span></span>
       <span class="line" data-has-focus="true"><span style="color:#999999">$</span><span style="color:#B07D48">test</span><span style="color:#999999"> =</span><span style="color:#B5695977"> "</span><span style="color:#B56959">owo</span><span style="color:#B5695977">"</span><span style="color:#999999">;</span><span style="color:#A0ADA0"></span></span>
       <span class="line"><span style="color:#999999">$</span><span style="color:#B07D48">bar</span><span style="color:#999999"> =</span><span style="color:#B5695977"> "</span><span style="color:#B56959">baz</span><span style="color:#B5695977">"</span><span style="color:#999999">;</span></span></code></pre>"
     `)
