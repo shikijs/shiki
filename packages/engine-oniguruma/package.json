@@ -2,7 +2,7 @@
   "name": "@shikijs/engine-oniguruma",
   "type": "module",
   "version": "1.17.6",
-  "description": "Engine for Shiki using JavaScript's native RegExp",
+  "description": "Engine for Shiki using Oniguruma RegExp engine in WebAssembly",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/shikijs/shiki#readme",
@@ -13,7 +13,9 @@
   },
   "bugs": "https://github.com/shikijs/shiki/issues",
   "keywords": [
-    "shiki"
+    "shiki",
+    "shiki-engine",
+    "oniguruma"
   ],
   "sideEffects": false,
   "exports": {

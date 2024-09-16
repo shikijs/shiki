@@ -27,7 +27,8 @@ Shiki come with two built-in engines:
 This is the default engine that uses the compiled Oniguruma WebAssembly. The most accurate and robust engine.
 
 ```ts
-import { createHighlighter, createWasmOnigEngine } from 'shiki'
+import { createHighlighter } from 'shiki'
+import { createWasmOnigEngine } from 'shiki/engine/oniguruma'
 
 const shiki = await createShiki({
   themes: ['nord'],
@@ -44,8 +45,9 @@ This feature is experimental and may change without following semver.
 
 This experimental engine uses JavaScript's native RegExp. As TextMate grammars' regular expressions are in Oniguruma flavor that might contains syntaxes that are not supported by JavaScript's RegExp, we use [`oniguruma-to-js`](https://github.com/antfu/oniguruma-to-js) to lowering the syntaxes and try to make them compatible with JavaScript's RegExp.
 
-```ts {3,8}
-import { createHighlighter, createJavaScriptRegexEngine } from 'shiki'
+```ts {2,4,9}
+import { createHighlighter } from 'shiki'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
 const jsEngine = createJavaScriptRegexEngine()
 
