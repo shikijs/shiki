@@ -2,7 +2,7 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Genreated on Friday, September 13, 2024
+> Genreated on Monday, September 16, 2024
 >
 > Version `1.17.6`
 >
