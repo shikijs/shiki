@@ -52,7 +52,7 @@ export async function prepareLangs() {
       `${COMMENT_HEAD}
 ${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}'`).join('\n')}
 
-const lang = Object.freeze(${JSON.stringify(json)})
+const lang = Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(json))}))
 
 export default [
 ${[

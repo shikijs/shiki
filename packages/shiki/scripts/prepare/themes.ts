@@ -10,7 +10,7 @@ export async function prepareTheme(): Promise<void> {
       await fs.writeFile(
         `./src/assets/themes/${t.name}.js`,
         `${COMMENT_HEAD}
-export default Object.freeze(${JSON.stringify(theme, null, 2)})
+export default Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(theme))}))
 `,
         'utf-8',
       )
