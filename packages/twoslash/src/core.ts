@@ -38,6 +38,7 @@ export function createTransformerFactory(
       },
       twoslasher = defaultTwoslasher,
       explicitTrigger = false,
+      disableTriggers = ['notwoslash', 'no-twoslash'],
       renderer = defaultRenderer,
       throws = true,
       includesMap = new Map(),
@@ -67,7 +68,13 @@ export function createTransformerFactory(
 
     const map = new WeakMap<ShikiTransformerContextMeta, TwoslashShikiReturn>()
 
-    const filter = options.filter || ((lang, _, options) => langs.includes(lang) && (!explicitTrigger || trigger.test(options.meta?.__raw || '')))
+    const {
+      filter = (lang, _, options) => {
+        return langs.includes(lang)
+          && (!explicitTrigger || trigger.test(options.meta?.__raw || ''))
+          && !disableTriggers.some(i => typeof i === 'string' ? options.meta?.__raw?.includes(i) : i.test(options.meta?.__raw || ''))
+      },
+    } = options
 
     const includes = new TwoslashIncludesManager(includesMap)
 

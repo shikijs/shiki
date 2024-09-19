@@ -39,12 +39,18 @@ export interface TransformerTwoslashOptions {
    */
   explicitTrigger?: boolean | RegExp
   /**
+   * Triggers that skip Twoslash transformation on the code block meta
+   *
+   * @default ['notwoslash', 'no-twoslash']
+   */
+  disableTriggers?: (string | RegExp)[]
+  /**
    * Mapping from language alias to language name
    */
   langAlias?: Record<string, string>
   /**
    * Custom filter function to apply this transformer to
-   * When specified, `langs` and `explicitTrigger` will be ignored
+   * When specified, `langs`, `explicitTrigger`, and `disableTriggers` will be ignored
    */
   filter?: (lang: string, code: string, options: CodeToHastOptions) => boolean
   /**
