@@ -180,7 +180,7 @@ export function tokensToHast(
         tokenNode.properties.style = style
 
       for (const transformer of transformers)
-        tokenNode = transformer?.span?.call(context, tokenNode, idx + 1, col, lineNode) || tokenNode
+        tokenNode = transformer?.span?.call(context, tokenNode, idx + 1, col, lineNode, token) || tokenNode
 
       if (structure === 'inline')
         root.children.push(tokenNode)
