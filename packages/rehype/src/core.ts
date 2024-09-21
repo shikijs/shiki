@@ -2,16 +2,13 @@ import type {
   CodeToHastOptions,
   HighlighterGeneric,
 } from '@shikijs/types'
-import type { Element, Root } from 'hast'
+import type { Root } from 'hast'
 import type { Transformer } from 'unified'
 import type { RehypeShikiCoreOptions } from './types'
-import { toString } from 'hast-util-to-string'
 import { visit } from 'unist-util-visit'
-import { InlineCodeProcessors } from './inline'
+import { InlineCodeHandlers, PreHandler, type RehypeShikiHandler } from './handlers'
 
 export * from './types'
-
-const languagePrefix = 'language-'
 
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
@@ -27,17 +24,9 @@ function rehypeShikiFromHighlighter(
     onError,
     stripEndNewline = true,
     inline = false,
+    lazy = false,
     ...rest
   } = options
-
-  /**
-   * Get the determined language of code block (with default language & fallbacks)
-   */
-  function getLanguage(lang = defaultLanguage): string | undefined {
-    if (lang && fallbackLanguage && !langs.includes(lang))
-      return fallbackLanguage
-    return lang
-  }
 
   function highlight(
     lang: string,
@@ -69,7 +58,7 @@ function rehypeShikiFromHighlighter(
         {
           name: 'rehype-shiki:code-language-class',
           code(node) {
-            this.addClassToHast(node, `${languagePrefix}${lang}`)
+            this.addClassToHast(node, `language-${lang}`)
             return node
           },
         },
@@ -92,65 +81,81 @@ function rehypeShikiFromHighlighter(
     }
   }
 
-  function processPre(tree: Root, node: Element): Root | undefined {
-    const head = node.children[0]
+  return (tree) => {
+    // use this queue if lazy is enabled
+    const languageQueue: string[] = []
+    const queue: (() => void)[] = []
 
-    if (
-      !head
-      || head.type !== 'element'
-      || head.tagName !== 'code'
-      || !head.properties
-    ) {
-      return
+    function getLanguage(lang: string | undefined): string | undefined {
+      if (!lang)
+        return defaultLanguage
+      if (langs.includes(lang))
+        return lang
+
+      if (lazy) {
+        languageQueue.push(lang)
+        return lang
+      }
+
+      if (fallbackLanguage)
+        return fallbackLanguage
     }
 
-    const classes = head.properties.className
-    const languageClass = Array.isArray(classes)
-      ? classes.find(
-        d => typeof d === 'string' && d.startsWith(languagePrefix),
-      )
-      : undefined
-
-    const lang = getLanguage(
-      typeof languageClass === 'string'
-        ? languageClass.slice(languagePrefix.length)
-        : undefined,
-    )
-
-    if (!lang)
-      return
-
-    const code = toString(head)
-    const metaString = head.data?.meta ?? head.properties.metastring?.toString() ?? ''
-    const meta = parseMetaString?.(metaString, node, tree) || {}
-
-    return highlight(lang, code, metaString, meta)
-  }
-
-  return function (tree) {
     visit(tree, 'element', (node, index, parent) => {
+      let handler: RehypeShikiHandler | undefined
+
       // needed for hast node replacement
       if (!parent || index == null)
         return
 
       if (node.tagName === 'pre') {
-        const result = processPre(tree, node)
-
-        if (result) {
-          parent.children.splice(index, 1, ...result.children)
-        }
-
-        // don't look for the `code` node inside
-        return 'skip'
+        handler = PreHandler
       }
 
       if (node.tagName === 'code' && inline) {
-        const result = InlineCodeProcessors[inline]?.({ node, getLanguage, highlight })
-        if (result) {
-          parent.children.splice(index, 1, ...result.children)
+        handler = InlineCodeHandlers[inline]
+      }
+
+      const processNode = (): void => {
+        const res = handler?.(tree, node)
+        if (!res)
+          return
+
+        const lang = getLanguage(res.lang)
+        if (!lang)
+          return
+
+        const meta = res.meta ? parseMetaString?.(res.meta, node, tree) : undefined
+
+        const fragment = highlight(lang, res.code, res.meta, meta ?? {})
+        if (!fragment)
+          return
+
+        if (res.type === 'inline') {
+          const head = fragment.children[0]
+          if (head.type === 'element' && head.tagName === 'pre') {
+            head.tagName = 'span'
+          }
         }
+
+        parent.children.splice(index, 1, ...fragment.children)
+      }
+
+      if (handler) {
+        if (lazy)
+          queue.push(processNode)
+        else processNode()
+
+        // don't visit processed nodes
+        return 'skip'
       }
     })
+
+    if (lazy) {
+      return highlighter.loadLanguage(...languageQueue).then((_) => {
+        queue.forEach(fn => fn())
+      })
+    }
   }
 }
 

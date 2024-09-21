@@ -27,8 +27,17 @@ export interface RehypeShikiExtraOptions {
 
   /**
    * The fallback language to use when specified language is not loaded
+   *
+   * Ignored if `lazy` is enabled
    */
   fallbackLanguage?: string
+
+  /**
+   * Load languages and themes on-demand
+   *
+   * @default false
+   */
+  lazy?: boolean
 
   /**
    * `mdast-util-to-hast` adds a newline to the end of code blocks

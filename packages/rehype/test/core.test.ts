@@ -38,6 +38,33 @@ it('run', async () => {
   expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
+it('run with lazy', async () => {
+  const highlighter = await createHighlighter({
+    themes: [
+      'vitesse-light',
+    ],
+    langs: [
+      'javascript',
+    ],
+  })
+
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, highlighter, {
+      lazy: true,
+      theme: 'vitesse-light',
+      defaultLanguage: 'text',
+      transformers: [
+        transformerMetaHighlight(),
+      ],
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
+
+  expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
+})
+
 it('run with rehype-raw', async () => {
   const highlighter = await createHighlighter({
     themes: [
