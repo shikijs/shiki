@@ -14,7 +14,6 @@ function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
   options: RehypeShikiCoreOptions,
 ): Transformer<Root, Root> {
-  const langs = highlighter.getLoadedLanguages()
   const {
     addLanguageClass = false,
     parseMetaString,
@@ -89,7 +88,8 @@ function rehypeShikiFromHighlighter(
     function getLanguage(lang: string | undefined): string | undefined {
       if (!lang)
         return defaultLanguage
-      if (langs.includes(lang))
+
+      if (highlighter.getLoadedLanguages().includes(lang))
         return lang
 
       if (lazy) {
