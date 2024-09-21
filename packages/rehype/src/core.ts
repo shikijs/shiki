@@ -152,7 +152,7 @@ function rehypeShikiFromHighlighter(
     })
 
     if (lazy) {
-      return highlighter.loadLanguage(...languageQueue).then((_) => {
+      return highlighter.loadLanguage(...languageQueue).then(() => {
         queue.forEach(fn => fn())
       })
     }
