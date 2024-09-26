@@ -21,6 +21,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Synchronous Usage', link: '/guide/sync-usage' },
   { text: 'Custom Themes', link: '/guide/load-theme' },
   { text: 'Custom Languages', link: '/guide/load-lang' },
+  { text: 'Future', link: '/guide/future' },
   { text: 'Migration', link: '/guide/migrate' },
   { text: 'Compatibility Build', link: '/guide/compat' },
 ]

@@ -174,7 +174,7 @@ Luckily, Twoslash implemented a virtual file system, which allow you to provide 
 We make tiny wrappers around the building blocks and provide an easy-to-use API in [`twoslash-cdn`](https://twoslash.netlify.app/packages/cdn). For example:
 
 ```js
-// TODO: Replace with explicit versions in production
+// FIXME: Replace with explicit versions in production
 import { createTransformerFactory, rendererRich } from 'https://esm.sh/@shikijs/twoslash@latest/core'
 import { codeToHtml } from 'https://esm.sh/shiki@latest'
 import { createTwoslashFromCDN } from 'https://esm.sh/twoslash-cdn@latest'

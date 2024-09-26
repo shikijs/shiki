@@ -1,4 +1,4 @@
-import type { LanguageRegistration } from 'shiki'
+import type { LanguageRegistration } from '@shikijs/types'
 import { createHighlighterCore, loadWasm } from 'shiki/core'
 
 import js from 'shiki/langs/javascript.mjs'

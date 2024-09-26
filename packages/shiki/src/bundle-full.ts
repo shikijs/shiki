@@ -3,7 +3,7 @@ import type {} from 'hast'
 import type { BundledLanguage } from './assets/langs-bundle-full'
 import type { BundledTheme } from './themes'
 import { bundledLanguages } from './assets/langs-bundle-full'
-import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine } from './core'
+import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine, warnDeprecated } from './core'
 import { bundledThemes } from './themes'
 import { getWasmInlined } from './wasm-dynamic'
 
@@ -53,6 +53,6 @@ export const {
  * @deprecated Use `createHighlighter` or `getSingletonHighlighter` instead.
  */
 export const getHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme> = /* @__PURE__ */ (options) => {
-  // TODO: next:  console.warn('`getHighlighter` is deprecated. Use `createHighlighter` or `getSingletonHighlighter` instead.')
+  warnDeprecated('`getHighlighter` is deprecated. Use `createHighlighter` or `getSingletonHighlighter` instead.')
   return createHighlighter(options)
 }

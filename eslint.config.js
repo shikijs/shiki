@@ -42,4 +42,27 @@ export default antfu(
       'ts/explicit-function-return-type': 'off',
     },
   },
+  {
+    files: [
+      'packages/shiki/**/*.ts',
+      'packages/core/**/*.ts',
+      'packages/engine-javascript/**/*.ts',
+      'packages/engine-oniguruma/**/*.ts',
+    ],
+    ignores: [
+      '**/*.test.ts',
+    ],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'shiki',
+            },
+          ],
+        },
+      ],
+    },
+  },
 )
