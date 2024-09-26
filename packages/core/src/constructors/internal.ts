@@ -2,7 +2,7 @@ import type {
   HighlighterCoreOptions,
   ShikiInternal,
 } from '@shikijs/types'
-import { createWasmOnigEngine, getDefaultWasmLoader } from '@shikijs/engine-oniguruma'
+import { createOnigurumaEngine, getDefaultWasmLoader } from '@shikijs/engine-oniguruma'
 
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 import { warnDeprecated } from '../warn'
@@ -13,7 +13,7 @@ import { createShikiInternalSync } from './internal-sync'
  */
 export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
   if (options.loadWasm) {
-    warnDeprecated('`loadWasm` option is deprecated. Use `engine: createWasmOnigEngine(loadWasm)` instead.')
+    warnDeprecated('`loadWasm` option is deprecated. Use `engine: createOnigurumaEngine(loadWasm)` instead.')
   }
 
   const [
@@ -23,7 +23,7 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
   ] = await Promise.all([
     resolveThemes(options.themes || []),
     resolveLangs(options.langs || []),
-    (options.engine || createWasmOnigEngine(options.loadWasm || getDefaultWasmLoader())),
+    (options.engine || createOnigurumaEngine(options.loadWasm || getDefaultWasmLoader())),
   ] as const)
 
   return createShikiInternalSync({

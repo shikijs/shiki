@@ -2,11 +2,11 @@
 import type { BundledLanguage } from 'shiki'
 import type { ReportItem } from '../scripts/report-engine-js-compat'
 import fs from 'node:fs/promises'
-import { createHighlighter, createJavaScriptRegexEngine, createWasmOnigEngine } from 'shiki'
+import { createHighlighter, createJavaScriptRegexEngine, createOnigurumaEngine } from 'shiki'
 import { bench, describe } from 'vitest'
 
 const js = createJavaScriptRegexEngine()
-const wasm = await createWasmOnigEngine(() => import('shiki/wasm'))
+const wasm = await createOnigurumaEngine(() => import('shiki/wasm'))
 
 const RANGE = [0, 20]
 

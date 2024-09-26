@@ -7,7 +7,7 @@ export { createShikiInternalSync } from './constructors/internal-sync'
 
 // Engines
 export { createJavaScriptRegexEngine, defaultJavaScriptRegexConstructor } from './engines/javascript'
-export { createWasmOnigEngine, loadWasm } from './engines/oniguruma'
+export { createOnigurumaEngine, createWasmOnigEngine, loadWasm } from './engines/oniguruma'
 
 // Low-level Highlighting
 export { codeToHast, tokensToHast } from './highlight/code-to-hast'

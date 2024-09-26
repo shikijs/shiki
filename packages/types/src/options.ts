@@ -33,7 +33,7 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
   /**
    * Load wasm file from a custom path or using a custom function.
    *
-   * @deprecated Use `engine: createWasmOnigEngine(loadWasm)` instead.
+   * @deprecated Use `engine: createOnigurumaEngine(loadWasm)` instead.
    */
   loadWasm?: Sync extends true ? never : LoadWasmOptions
 }

@@ -4,8 +4,8 @@ import type {} from 'hast'
 import type { BundledLanguage } from './assets/langs-bundle-web'
 import type { BundledTheme } from './themes'
 import { bundledLanguages } from './assets/langs-bundle-web'
-
-import { createdBundledHighlighter, createSingletonShorthands, createWasmOnigEngine, warnDeprecated } from './core'
+import { createdBundledHighlighter, createSingletonShorthands, warnDeprecated } from './core'
+import { createOnigurumaEngine } from './engine-oniguruma'
 import { bundledThemes } from './themes'
 import { getWasmInlined } from './wasm-dynamic'
 
@@ -33,7 +33,7 @@ export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
 >({
   langs: bundledLanguages,
   themes: bundledThemes,
-  engine: () => createWasmOnigEngine(getWasmInlined),
+  engine: () => createOnigurumaEngine(getWasmInlined),
 })
 
 export const {

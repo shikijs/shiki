@@ -43,11 +43,11 @@ import { loadWasm } from 'shiki/engine/oniguruma' // [!code ++]
 
 ```ts
 import { createHighlighter } from 'shiki'
-import { createWasmOnigEngine } from 'shiki/engine/oniguruma' // [!code ++]
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma' // [!code ++]
 
 const shiki = await createHighlighter({
   // ...
   loadWasm: () => import('shiki/wasm'), // [!code --]
-  engine: createWasmOnigEngine(() => import('shiki/wasm')), // [!code ++]
+  engine: createOnigurumaEngine(() => import('shiki/wasm')), // [!code ++]
 })
 ```

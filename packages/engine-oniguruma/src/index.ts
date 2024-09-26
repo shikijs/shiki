@@ -21,7 +21,7 @@ export function getDefaultWasmLoader(): LoadWasmOptions | undefined {
   return _defaultWasmLoader
 }
 
-export async function createWasmOnigEngine(options?: LoadWasmOptions | null): Promise<RegexEngine> {
+export async function createOnigurumaEngine(options?: LoadWasmOptions | null): Promise<RegexEngine> {
   if (options)
     await loadWasm(options)
 
@@ -33,4 +33,11 @@ export async function createWasmOnigEngine(options?: LoadWasmOptions | null): Pr
       return new OnigString(s)
     },
   }
+}
+
+/**
+ * Deprecated. Use `createOnigurumaEngine` instead.
+ */
+export async function createWasmOnigEngine(options?: LoadWasmOptions | null): Promise<RegexEngine> {
+  return createOnigurumaEngine(options)
 }

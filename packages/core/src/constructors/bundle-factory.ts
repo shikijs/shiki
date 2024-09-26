@@ -24,7 +24,7 @@ import type {
 import type { Root } from 'hast'
 import { ShikiError } from '@shikijs/types'
 
-import { createWasmOnigEngine } from '../engines/oniguruma'
+import { createOnigurumaEngine } from '../engines/oniguruma'
 import { isSpecialLang, isSpecialTheme } from '../utils'
 import { warnDeprecated } from '../warn'
 import { createHighlighterCore } from './highlighter'
@@ -43,7 +43,7 @@ import { createHighlighterCore } from './highlighter'
  *     nord: () => import('shiki/themes/nord.mjs'),
  *     // ...
  *   },
- *   engine: () => createWasmOnigEngine(), // or createJavaScriptRegexEngine()
+ *   engine: () => createOnigurumaEngine(), // or createJavaScriptRegexEngine()
  * })
  * ```
  *
@@ -78,7 +78,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
     warnDeprecated('`createdBundledHighlighter` signature with `bundledLanguages` and `bundledThemes` is deprecated. Use the options object signature instead.')
     bundledLanguages = arg1 as Record<BundledLangs, LanguageInput>
     bundledThemes = arg2
-    engine = () => createWasmOnigEngine(arg3)
+    engine = () => createOnigurumaEngine(arg3)
   }
   else {
     const options = arg1 as CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>
