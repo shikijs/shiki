@@ -1,7 +1,6 @@
 import type { DefaultTheme } from 'vitepress'
 import { bundledThemes } from 'shiki'
 import { defineConfig } from 'vitepress'
-// @ts-expect-error missing types
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 import { version } from '../../package.json'
