@@ -43,9 +43,7 @@ it('run with lazy', async () => {
     themes: [
       'vitesse-light',
     ],
-    langs: [
-      'javascript',
-    ],
+    langs: [],
   })
 
   const file = await unified()

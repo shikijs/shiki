@@ -4,9 +4,10 @@ import type {
 } from '@shikijs/types'
 import type { Root } from 'hast'
 import type { Transformer } from 'unified'
+import type { RehypeShikiHandler } from './handlers'
 import type { RehypeShikiCoreOptions } from './types'
 import { visit } from 'unist-util-visit'
-import { InlineCodeHandlers, PreHandler, type RehypeShikiHandler } from './handlers'
+import { InlineCodeHandlers, PreHandler } from './handlers'
 
 export * from './types'
 
