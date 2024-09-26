@@ -81,7 +81,7 @@ export interface ShikiTransformer {
   /**
    * Transform each token `<span>` element.
    */
-  span?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element) => Element | void
+  span?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element, token: ThemedToken) => Element | void
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
