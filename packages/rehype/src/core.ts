@@ -94,7 +94,7 @@ function rehypeShikiFromHighlighter(
 
       if (highlighter.getLoadedLanguages().includes(lang))
         return lang
-
+  
       if (lazy) {
         languageQueue.push(lang)
         return lang
@@ -119,15 +119,18 @@ function rehypeShikiFromHighlighter(
         handler = InlineCodeHandlers[inline]
       }
 
+      if (!handler)
+        return
+
+      const res = handler?.(tree, node)
+      if (!res)
+        return
+
+      const lang = getLanguage(res.lang)
+      if (!lang)
+        return
+
       const processNode = (): void => {
-        const res = handler?.(tree, node)
-        if (!res)
-          return
-
-        const lang = getLanguage(res.lang)
-        if (!lang)
-          return
-
         const meta = res.meta ? parseMetaString?.(res.meta, node, tree) : undefined
 
         const fragment = highlight(lang, res.code, res.meta, meta ?? {})
@@ -144,14 +147,12 @@ function rehypeShikiFromHighlighter(
         parent.children.splice(index, 1, ...fragment.children)
       }
 
-      if (handler) {
-        if (lazy)
-          queue.push(processNode)
-        else processNode()
+      if (lazy)
+        queue.push(processNode)
+      else processNode()
 
-        // don't visit processed nodes
-        return 'skip'
-      }
+      // don't visit processed nodes
+      return 'skip'
     })
 
     if (lazy) {
