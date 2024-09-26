@@ -1,2 +1,2 @@
-export { default } from '@shikijs/core/wasm-inlined'
-export * from '@shikijs/core/wasm-inlined'
+export { default } from '@shikijs/engine-oniguruma/wasm-inlined'
+export * from '@shikijs/engine-oniguruma/wasm-inlined'

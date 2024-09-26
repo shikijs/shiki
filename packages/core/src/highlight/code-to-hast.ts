@@ -16,6 +16,7 @@ import type {
 import { FontStyle } from '@shikijs/vscode-textmate'
 
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
+import { warnDeprecated } from '../warn'
 import { getTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'
 
@@ -177,7 +178,9 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      // TODO: Shiki2: Deprecate `string` type of `htmlStyle`
+      if (typeof token.htmlStyle === 'string')
+        warnDeprecated('`htmlStyle` as a string is deprecated. Use an object instead.')
+
       const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
       if (style)
         tokenNode.properties.style = style

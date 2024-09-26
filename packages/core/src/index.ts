@@ -7,7 +7,7 @@ export { createShikiInternalSync } from './constructors/internal-sync'
 
 // Engines
 export { createJavaScriptRegexEngine, defaultJavaScriptRegexConstructor } from './engines/javascript'
-export { createWasmOnigEngine, loadWasm, setDefaultWasmLoader } from './engines/oniguruma'
+export { createWasmOnigEngine, loadWasm } from './engines/oniguruma'
 
 // Low-level Highlighting
 export { codeToHast, tokensToHast } from './highlight/code-to-hast'
@@ -22,6 +22,7 @@ export { transformerDecorations } from './transformer-decorations'
 
 // Utils and Misc
 export * from './utils'
+export { enableDeprecationWarnings, warnDeprecated } from './warn'
 
 // Types
 export * from '@shikijs/types'

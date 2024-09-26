@@ -5,8 +5,9 @@ import { codeToHtml } from '../highlight/code-to-html'
 import { codeToTokens } from '../highlight/code-to-tokens'
 import { codeToTokensBase, getLastGrammarState } from '../highlight/code-to-tokens-base'
 import { codeToTokensWithThemes } from '../highlight/code-to-tokens-themes'
-import { createShikiInternal } from './internal'
+import { warnDeprecated } from '../warn'
 
+import { createShikiInternal } from './internal'
 import { createShikiInternalSync } from './internal-sync'
 
 /**
@@ -89,6 +90,6 @@ export const getSingletonHighlighterCore = /* @__PURE__ */ makeSingletonHighligh
  */
 /* v8 ignore next 5 */
 export function getHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
-  // TODO: next:  console.warn('`getHighlighterCore` is deprecated. Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.')
+  warnDeprecated('`getHighlighterCore` is deprecated. Use `createHighlighterCore` or `getSingletonHighlighterCore` instead.')
   return createHighlighterCore(options)
 }

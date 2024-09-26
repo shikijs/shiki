@@ -30,9 +30,10 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
    */
   warnings?: boolean
 
-  // TODO: Deprecate this option after docs for engines are updated.
   /**
    * Load wasm file from a custom path or using a custom function.
+   *
+   * @deprecated Use `engine: createWasmOnigEngine(loadWasm)` instead.
    */
   loadWasm?: Sync extends true ? never : LoadWasmOptions
 }
