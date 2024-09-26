@@ -33,7 +33,8 @@ export interface RehypeShikiExtraOptions {
   fallbackLanguage?: string
 
   /**
-   * Load languages and themes on-demand
+   * Load languages and themes on-demand.
+   * When enable, this would make requires the unified pipeline to be async.
    *
    * @default false
    */

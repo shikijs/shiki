@@ -149,16 +149,19 @@ function rehypeShikiFromHighlighter(
 
       if (lazy)
         queue.push(processNode)
-      else processNode()
+      else
+        processNode()
 
       // don't visit processed nodes
       return 'skip'
     })
 
     if (lazy) {
-      return highlighter.loadLanguage(...languageQueue).then(() => {
-        queue.forEach(fn => fn())
-      })
+      return highlighter
+        .loadLanguage(...languageQueue)
+        .then(() => {
+          queue.forEach(fn => fn())
+        })
     }
   }
 }
