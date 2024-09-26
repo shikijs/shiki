@@ -16,8 +16,8 @@ export { codeToTokens } from './highlight/code-to-tokens'
 export { tokenizeAnsiWithTheme } from './highlight/code-to-tokens-ansi'
 export { codeToTokensBase, tokenizeWithTheme } from './highlight/code-to-tokens-base'
 export { codeToTokensWithThemes } from './highlight/code-to-tokens-themes'
-
 export { normalizeTheme } from './textmate/normalize-theme'
+export * from './theme-css-variables'
 export { transformerDecorations } from './transformer-decorations'
 
 // Utils and Misc
