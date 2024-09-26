@@ -10,6 +10,8 @@ import { InlineCodeHandlers, PreHandler, type RehypeShikiHandler } from './handl
 
 export * from './types'
 
+const languagePrefix = 'language-'
+
 function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
   options: RehypeShikiCoreOptions,
@@ -57,7 +59,7 @@ function rehypeShikiFromHighlighter(
         {
           name: 'rehype-shiki:code-language-class',
           code(node) {
-            this.addClassToHast(node, `language-${lang}`)
+            this.addClassToHast(node, `${languagePrefix}${lang}`)
             return node
           },
         },
