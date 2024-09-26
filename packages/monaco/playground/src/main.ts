@@ -3,6 +3,7 @@ import * as monaco from 'monaco-editor-core'
 import { createHighlighter } from 'shiki'
 
 // Create the highlighter, it can be reused
+// eslint-disable-next-line antfu/no-top-level-await
 const highlighter = await createHighlighter({
   themes: [
     'min-dark',

@@ -17,7 +17,6 @@ export default defineBuildConfig({
   ],
   hooks: {
     'rollup:done': async () => {
-      // eslint-disable-next-line no-console
       console.log('Building style.css')
       const floatingVue = await fs.readFile(new URL('./node_modules/floating-vue/dist/style.css', import.meta.url), 'utf-8')
       const twoslash = await fs.readFile(new URL('./../twoslash/style-rich.css', import.meta.url), 'utf-8')

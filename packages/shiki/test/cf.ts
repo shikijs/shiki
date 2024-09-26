@@ -1,5 +1,6 @@
 import type { LanguageRegistration } from '@shikijs/types'
-import { createHighlighterCore, loadWasm } from 'shiki/core'
+import { loadWasm } from '@shikijs/engine-oniguruma'
+import { createHighlighterCore } from 'shiki/core'
 
 import js from 'shiki/langs/javascript.mjs'
 import nord from 'shiki/themes/nord.mjs'
@@ -8,6 +9,7 @@ import nord from 'shiki/themes/nord.mjs'
 // eslint-disable-next-line antfu/no-import-dist
 import wasm from '../dist/onig.wasm'
 
+// eslint-disable-next-line antfu/no-top-level-await
 await loadWasm(wasm)
 
 // cloudflare also supports dynamic import

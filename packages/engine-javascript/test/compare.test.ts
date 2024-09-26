@@ -2,10 +2,10 @@ import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../..
 import type { Instance } from './types'
 import { describe, expect, it } from 'vitest'
 
+import { createJavaScriptRegexEngine } from '../../engine-javascript'
+import { loadWasm } from '../../engine-oniguruma'
 import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
-import { createHighlighterCore, createJavaScriptRegexEngine, loadWasm } from '../../shiki/src/core'
-
-await loadWasm(import('@shikijs/core/wasm-inlined'))
+import { createHighlighterCore } from '../../shiki/src/core'
 
 function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
   const instances: Instance[] = []
@@ -143,6 +143,8 @@ const cases: Cases[] = [
 ]
 
 describe('cases', async () => {
+  await loadWasm(import('@shikijs/core/wasm-inlined'))
+
   const resolved = await Promise.all(cases.map(async (c) => {
     const theme = await c.theme().then(r => r.default)
     const lang = await c.lang().then(r => r.default)
