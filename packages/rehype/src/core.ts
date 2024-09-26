@@ -94,7 +94,7 @@ function rehypeShikiFromHighlighter(
 
       if (highlighter.getLoadedLanguages().includes(lang))
         return lang
-  
+
       if (lazy) {
         languageQueue.push(lang)
         return lang
@@ -122,7 +122,7 @@ function rehypeShikiFromHighlighter(
       if (!handler)
         return
 
-      const res = handler?.(tree, node)
+      const res = handler(tree, node)
       if (!res)
         return
 
