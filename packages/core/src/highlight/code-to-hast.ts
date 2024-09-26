@@ -171,11 +171,14 @@ export function tokensToHast(
       let tokenNode: Element = {
         type: 'element',
         tagName: 'span',
-        properties: {},
+        properties: {
+          ...token.htmlAttrs,
+        },
         children: [{ type: 'text', value: token.content }],
       }
 
-      const style = token.htmlStyle || stringifyTokenStyle(getTokenStyleObject(token))
+      // TODO: Shiki2: Deprecate `string` type of `htmlStyle`
+      const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
       if (style)
         tokenNode.properties.style = style
 

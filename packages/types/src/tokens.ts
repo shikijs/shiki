@@ -143,8 +143,13 @@ export interface TokenStyles {
   /**
    * Override with custom inline style for HTML renderer.
    * When specified, `color` and `fontStyle` will be ignored.
+   * Prefer use object style for merging with other styles.
    */
-  htmlStyle?: string
+  htmlStyle?: string | Record<string, string>
+  /**
+   * Extra HTML attributes for the token.
+   */
+  htmlAttrs?: Record<string, string>
 }
 
 export interface ThemedTokenWithVariants extends TokenBase {

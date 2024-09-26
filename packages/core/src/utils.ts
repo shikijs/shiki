@@ -210,7 +210,9 @@ export function getTokenStyleObject(token: TokenStyles): Record<string, string> 
   return styles
 }
 
-export function stringifyTokenStyle(token: Record<string, string>): string {
+export function stringifyTokenStyle(token: string | Record<string, string>): string {
+  if (typeof token === 'string')
+    return token
   return Object.entries(token).map(([key, value]) => `${key}:${value}`).join(';')
 }
 

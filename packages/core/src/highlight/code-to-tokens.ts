@@ -1,6 +1,6 @@
 import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '@shikijs/types'
 import { ShikiError } from '../../../types/src/error'
-import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements, stringifyTokenStyle } from '../utils'
+import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements } from '../utils'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 
@@ -103,27 +103,23 @@ function mergeToken(
 
   // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
   const styleKeys = new Set(styles.flatMap(t => Object.keys(t)))
-  const mergedStyles = styles.reduce((acc, cur, idx) => {
+  const mergedStyles: Record<string, string> = {}
+
+  styles.forEach((cur, idx) => {
     for (const key of styleKeys) {
       const value = cur[key] || 'inherit'
 
       if (idx === 0 && defaultColor) {
-        acc[key] = value
+        mergedStyles[key] = value
       }
       else {
         const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
         const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
-        if (acc[key])
-          acc[key] += `;${varKey}:${value}`
-        else
-          acc[key] = `${varKey}:${value}`
+        mergedStyles[varKey] = value
       }
     }
-    return acc
-  }, {} as Record<string, string>)
+  })
 
-  token.htmlStyle = defaultColor
-    ? stringifyTokenStyle(mergedStyles)
-    : Object.values(mergedStyles).join(';')
+  token.htmlStyle = mergedStyles
   return token
 }

@@ -183,7 +183,9 @@ function toggleTheme() {
     })
 
     expect(code1)
-      .toContain('font-style:italic;--shiki-dark-font-style:inherit')
+      .toContain('font-style:italic')
+    expect(code1)
+      .toContain('--shiki-dark-font-style:inherit')
 
     const code2 = await codeToHtml(input, {
       lang: 'js',
@@ -195,7 +197,9 @@ function toggleTheme() {
     })
 
     expect(code2)
-      .toContain('font-style:inherit;--shiki-light-font-style:italic')
+      .toContain('font-style:inherit')
+    expect(code2)
+      .toContain('--shiki-light-font-style:italic')
   })
 
   it('should not have empty style', async () => {
