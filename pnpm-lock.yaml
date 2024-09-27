@@ -193,11 +193,11 @@ catalogs:
       specifier: ^0.16.9
       version: 0.16.9
     tm-grammars:
-      specifier: ^1.17.25
-      version: 1.17.25
+      specifier: ^1.17.26
+      version: 1.17.26
     tm-themes:
-      specifier: ^1.8.4
-      version: 1.8.4
+      specifier: ^1.8.5
+      version: 1.8.5
     twoslash:
       specifier: ^0.2.11
       version: 0.2.11
@@ -652,10 +652,10 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.17.25
+        version: 1.17.26
       tm-themes:
         specifier: 'catalog:'
-        version: 1.8.4
+        version: 1.8.5
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -3043,7 +3043,7 @@ packages:
     resolution: {integrity: sha512-P7qDB/RckdKETpBM4CtjHRQ5qXByPmFhRi86sN3E+J+tySchq+RSOGGhI2hDIefmmKFuTi/1ACjqsnDJDDDfzg==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: ^9.11.1
+      eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
   eslint-plugin-jsonc@2.16.0:
     resolution: {integrity: sha512-Af/ZL5mgfb8FFNleH6KlO4/VdmDuTqmM+SPnWcdoWywTetv7kq+vQe99UyQb9XO3b0OWLVuTH7H0d/PXYCMdSg==}
@@ -3066,7 +3066,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: ^9.11.1
+      eslint: '>=8.0.0'
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.1
       vue-eslint-parser: '>=9.0.0'
@@ -4939,11 +4939,11 @@ packages:
     resolution: {integrity: sha512-q5nmENpTHgiPVd1cJDDc9cVoYN5x4vCvwT3FMilvKPKneCBZAxn2YWQjDF0UMcE9k0Cay1gBiDfTMU0g+mPMQA==}
     engines: {node: '>=14.0.0'}
 
-  tm-grammars@1.17.25:
-    resolution: {integrity: sha512-YrdY5WwAzcBxm41sunTA1QJKSQwd6AOwHrM6hqYP9/UjO625rd7gmeQFIZmXESy0WroJazMKULbT0duO11TtTQ==}
+  tm-grammars@1.17.26:
+    resolution: {integrity: sha512-kyJQIgfZJGkSd0bdi+Kri1wHlXffjtYr2H/3yVdxppHch+PJhXqioQ0MO0MZHLFPgBTva63DZSCMeSJoviPljg==}
 
-  tm-themes@1.8.4:
-    resolution: {integrity: sha512-oGf917k4TPdDNoGnqFP38zGHskMdEXR+uSbhcQhLGVdEYE6LKfHd1jQ8HwMKj0Vg+9I6wsnTu0xRSrKPyEaUNg==}
+  tm-themes@1.8.5:
+    resolution: {integrity: sha512-d2jaV9NI7e4KsXTh3JuIs9S0FOxKj9rkLZITrKFJd4pMVT0dZ6PbbOP8Ti6/h39N5kWiuP+K/tFGiP+R3oiyeA==}
 
   to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
@@ -10103,9 +10103,9 @@ snapshots:
 
   tinyspy@3.0.0: {}
 
-  tm-grammars@1.17.25: {}
+  tm-grammars@1.17.26: {}
 
-  tm-themes@1.8.4: {}
+  tm-themes@1.8.5: {}
 
   to-fast-properties@2.0.0: {}
 

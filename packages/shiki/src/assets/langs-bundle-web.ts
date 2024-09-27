@@ -123,11 +123,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/json')) as DynamicImportLanguageRegistration
   },
   {
-    'id': 'json5',
-    'name': 'JSON5',
-    'import': (() => import('./langs/json5')) as DynamicImportLanguageRegistration
-  },
-  {
     'id': 'jsonc',
     'name': 'JSON with Comments',
     'import': (() => import('./langs/jsonc')) as DynamicImportLanguageRegistration
@@ -154,11 +149,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'less',
     'name': 'Less',
     'import': (() => import('./langs/less')) as DynamicImportLanguageRegistration
-  },
-  {
-    'id': 'lua',
-    'name': 'Lua',
-    'import': (() => import('./langs/lua')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'markdown',
@@ -223,14 +213,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/regexp')) as DynamicImportLanguageRegistration
   },
   {
-    'id': 'ruby',
-    'name': 'Ruby',
-    'aliases': [
-      'rb'
-    ],
-    'import': (() => import('./langs/ruby')) as DynamicImportLanguageRegistration
-  },
-  {
     'id': 'sass',
     'name': 'Sass',
     'import': (() => import('./langs/sass')) as DynamicImportLanguageRegistration
@@ -268,11 +250,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'svelte',
     'name': 'Svelte',
     'import': (() => import('./langs/svelte')) as DynamicImportLanguageRegistration
-  },
-  {
-    'id': 'toml',
-    'name': 'TOML',
-    'import': (() => import('./langs/toml')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'ts-tags',
@@ -364,14 +341,12 @@ export type BundledLanguage =
   | 'jl'
   | 'js'
   | 'json'
-  | 'json5'
   | 'jsonc'
   | 'jsonl'
   | 'jsx'
   | 'julia'
   | 'less'
   | 'lit'
-  | 'lua'
   | 'markdown'
   | 'marko'
   | 'md'
@@ -383,10 +358,8 @@ export type BundledLanguage =
   | 'py'
   | 'python'
   | 'r'
-  | 'rb'
   | 'regex'
   | 'regexp'
-  | 'ruby'
   | 'sass'
   | 'scss'
   | 'sh'
@@ -396,7 +369,6 @@ export type BundledLanguage =
   | 'styl'
   | 'stylus'
   | 'svelte'
-  | 'toml'
   | 'ts'
   | 'ts-tags'
   | 'tsx'

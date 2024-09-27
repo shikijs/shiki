@@ -5,12 +5,49 @@ import { grammars, injections } from 'tm-grammars'
 import { COMMENT_HEAD } from './constants'
 
 /**
- * Languages that includes a lot of embedded langs,
- * We only load on-demand for these langs.
+ * Document-like languages that have embedded langs
  */
-const LANGS_LAZY_EMBEDDED = [
+const LANGS_LAZY_EMBEDDED_ALL = {
+  markdown: [],
+  mdx: [],
+  wikitext: [],
+  asciidoc: [],
+  latex: ['tex'],
+} as Record<string, string[]>
+
+/**
+ * Single-file-component-like languages that have embedded langs
+ * For these langs, we exclude the standalone embedded langs from the main bundle
+ */
+const LANGS_LAZY_EMBEDDED_PARTIAL = [
+  'vue',
+  'vue-html',
+  'svelte',
+  'pug',
+  'haml',
+  'astro',
+]
+
+/**
+ * Languages to be excluded from SFC langs
+ */
+const STANDALONG_LANGS_EMBEDDED = [
+  'pug',
+  'stylus',
+  'sass',
+  'scss',
+  'coffee',
+  'jsonc',
+  'json5',
+  'yaml',
+  'toml',
+  'scss',
+  'graphql',
   'markdown',
-  'mdx',
+  'less',
+  'jsx',
+  'tsx',
+  'ruby',
 ]
 
 export async function prepareLangs() {
@@ -21,6 +58,8 @@ export async function prepareLangs() {
   })
 
   allLangFiles.sort()
+
+  const resolvedLangs: LanguageRegistration[] = []
 
   for (const file of allLangFiles) {
     const content = await fs.readJSON(file)
@@ -40,12 +79,21 @@ export async function prepareLangs() {
     }
 
     // We don't load all the embedded langs for markdown
-    if (LANGS_LAZY_EMBEDDED.includes(lang.name)) {
-      json.embeddedLangsLazy = json.embeddedLangs
-      json.embeddedLangs = []
+    if (LANGS_LAZY_EMBEDDED_ALL[lang.name]) {
+      const includes = LANGS_LAZY_EMBEDDED_ALL[lang.name]
+      json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
+      json.embeddedLangs = includes
+    }
+    else if (LANGS_LAZY_EMBEDDED_PARTIAL.includes(lang.name)) {
+      json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => STANDALONG_LANGS_EMBEDDED.includes(i)) || []
+      json.embeddedLangs = (json.embeddedLangs || []).filter(i => !STANDALONG_LANGS_EMBEDDED.includes(i)) || []
     }
 
     const deps: string[] = json.embeddedLangs || []
+    resolvedLangs.push(json)
+
+    if (deps.length > 10)
+      console.log(json.name, json.embeddedLangs)
 
     await fs.writeFile(
       `./src/assets/langs/${lang.name}.js`,
@@ -102,12 +150,10 @@ export default langs
     while (changed) {
       changed = false
       for (const id of bundledIds) {
-        if (LANGS_LAZY_EMBEDDED.includes(id))
-          continue
-        const lang = grammars.find(i => i.name === id)
+        const lang = resolvedLangs.find(i => i.name === id)
         if (!lang)
           continue
-        for (const e of lang.embedded || []) {
+        for (const e of lang.embeddedLangs || []) {
           if (!bundledIds.has(e)) {
             bundledIds.add(e)
             changed = true
