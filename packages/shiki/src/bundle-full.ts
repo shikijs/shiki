@@ -32,7 +32,7 @@ export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
 >({
   langs: bundledLanguages,
   themes: bundledThemes,
-  engine: () => createOnigurumaEngine(getWasmInlined),
+  engine: () => createOnigurumaEngine(import('shiki/wasm')),
 })
 
 export const {
