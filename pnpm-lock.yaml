@@ -190,8 +190,8 @@ catalogs:
       specifier: ^2.11.1
       version: 2.11.1
     taze:
-      specifier: ^0.16.9
-      version: 0.16.9
+      specifier: ^0.17.0
+      version: 0.17.0
     tm-grammars:
       specifier: ^1.17.26
       version: 1.17.26
@@ -398,7 +398,7 @@ importers:
         version: 2.11.1
       taze:
         specifier: 'catalog:'
-        version: 0.16.9
+        version: 0.17.0
       typescript:
         specifier: ^5.6.2
         version: 5.6.2
@@ -3043,7 +3043,7 @@ packages:
     resolution: {integrity: sha512-P7qDB/RckdKETpBM4CtjHRQ5qXByPmFhRi86sN3E+J+tySchq+RSOGGhI2hDIefmmKFuTi/1ACjqsnDJDDDfzg==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
+      eslint: ^9.11.1
 
   eslint-plugin-jsonc@2.16.0:
     resolution: {integrity: sha512-Af/ZL5mgfb8FFNleH6KlO4/VdmDuTqmM+SPnWcdoWywTetv7kq+vQe99UyQb9XO3b0OWLVuTH7H0d/PXYCMdSg==}
@@ -3066,7 +3066,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: '>=8.0.0'
+      eslint: ^9.11.1
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.1
       vue-eslint-parser: '>=9.0.0'
@@ -4901,8 +4901,8 @@ packages:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
 
-  taze@0.16.9:
-    resolution: {integrity: sha512-5dROtuXIaP3HOHy7f2jTvnfHbHO8ubCoqfv1At3UOo7QB63y8oLNwpuj7w/4IdVY+lkzQSDV6f5L5Bhl3kq9QQ==}
+  taze@0.17.0:
+    resolution: {integrity: sha512-spUIZfc5nHeCZhDhgx28/pvDj45bmG51OeVulyARWGBAVODpMxrjk00sWwNQWRnl1TQS4uFrjjCkdvrf0aUlmg==}
     hasBin: true
 
   terser@5.32.0:
@@ -10061,7 +10061,7 @@ snapshots:
       mkdirp: 1.0.4
       yallist: 4.0.0
 
-  taze@0.16.9:
+  taze@0.17.0:
     dependencies:
       '@antfu/ni': 0.23.0
       js-yaml: 4.1.0
