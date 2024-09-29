@@ -85,8 +85,8 @@ catalogs:
       specifier: ^0.1.2
       version: 0.1.2
     esno:
-      specifier: ^4.7.0
-      version: 4.7.0
+      specifier: ^4.8.0
+      version: 4.8.0
     fast-glob:
       specifier: ^3.3.2
       version: 3.3.2
@@ -196,8 +196,8 @@ catalogs:
       specifier: ^1.17.27
       version: 1.17.27
     tm-themes:
-      specifier: ^1.8.5
-      version: 1.8.5
+      specifier: ^1.8.6
+      version: 1.8.6
     twoslash:
       specifier: ^0.2.12
       version: 0.2.12
@@ -332,7 +332,7 @@ importers:
         version: 0.1.2(eslint@9.11.1(jiti@2.0.0))
       esno:
         specifier: 'catalog:'
-        version: 4.7.0
+        version: 4.8.0
       fast-glob:
         specifier: 'catalog:'
         version: 3.3.2
@@ -658,7 +658,7 @@ importers:
         version: 1.17.27
       tm-themes:
         specifier: 'catalog:'
-        version: 1.8.5
+        version: 1.8.6
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -3047,7 +3047,7 @@ packages:
     resolution: {integrity: sha512-P7qDB/RckdKETpBM4CtjHRQ5qXByPmFhRi86sN3E+J+tySchq+RSOGGhI2hDIefmmKFuTi/1ACjqsnDJDDDfzg==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: ^9.11.1
+      eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
   eslint-plugin-jsonc@2.16.0:
     resolution: {integrity: sha512-Af/ZL5mgfb8FFNleH6KlO4/VdmDuTqmM+SPnWcdoWywTetv7kq+vQe99UyQb9XO3b0OWLVuTH7H0d/PXYCMdSg==}
@@ -3070,7 +3070,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: ^9.11.1
+      eslint: '>=8.0.0'
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.1
       vue-eslint-parser: '>=9.0.0'
@@ -3155,8 +3155,8 @@ packages:
       jiti:
         optional: true
 
-  esno@4.7.0:
-    resolution: {integrity: sha512-81owrjxIxOwqcABt20U09Wn8lpBo9K6ttqbGvQcB3VYNLJyaV1fvKkDtpZd3Rj5BX3WXiGiJCjUevKQGNICzJg==}
+  esno@4.8.0:
+    resolution: {integrity: sha512-acMtooReAQGzLU0zcuEDHa8S62meh5aIyi8jboYxyvAePdmuWx2Mpwmt0xjwO0bs9/SXf+dvXJ0QJoDWw814Iw==}
     hasBin: true
 
   espree@10.1.0:
@@ -4945,8 +4945,8 @@ packages:
   tm-grammars@1.17.27:
     resolution: {integrity: sha512-tRL0QH4YqJQSAViTMWSfzpG7zYWCyDoHzVApcUxlw91xxfY6RAxN5vEdKLJPL5edVuKLnshH9/x7nMYvZ2qjuw==}
 
-  tm-themes@1.8.5:
-    resolution: {integrity: sha512-d2jaV9NI7e4KsXTh3JuIs9S0FOxKj9rkLZITrKFJd4pMVT0dZ6PbbOP8Ti6/h39N5kWiuP+K/tFGiP+R3oiyeA==}
+  tm-themes@1.8.6:
+    resolution: {integrity: sha512-gl0qBBxWw2tCfHOCy9ash10uxkYakkjyCBUhfnXr1G6Jw+8JxRXlymTBrTgRSx4x+YlyOj0DGU5O9bNUs0PqSw==}
 
   to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
@@ -7994,7 +7994,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  esno@4.7.0:
+  esno@4.8.0:
     dependencies:
       tsx: 4.19.1
 
@@ -10110,7 +10110,7 @@ snapshots:
 
   tm-grammars@1.17.27: {}
 
-  tm-themes@1.8.5: {}
+  tm-themes@1.8.6: {}
 
   to-fast-properties@2.0.0: {}
 
