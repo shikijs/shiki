@@ -55,39 +55,19 @@ describe('should', () => {
     expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
-          "coffee",
-          "coffeescript",
           "css",
-          "gql",
-          "graphql",
           "html",
           "html-derivative",
-          "jade",
           "javascript",
           "js",
           "json",
-          "json5",
-          "jsonc",
-          "jsx",
-          "less",
-          "markdown",
           "markdown-vue",
-          "md",
-          "pug",
-          "sass",
-          "scss",
-          "styl",
-          "stylus",
-          "toml",
           "ts",
-          "tsx",
           "typescript",
           "vue",
           "vue-directives",
           "vue-interpolations",
           "vue-sfc-style-variable-injection",
-          "yaml",
-          "yml",
         ]
       `)
   })
@@ -148,6 +128,49 @@ describe('should', () => {
         <span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> a </span><span style="color:#F97583">=</span><span style="color:#F8F8F8"> 1</span><span style="color:#B392F0">;</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
+  })
+
+  it('dynamic load lang with vue', async () => {
+    const shiki = await createHighlighter({
+      langs: [],
+      themes: [],
+    })
+
+    await shiki.loadTheme('vitesse-dark')
+    await shiki.loadLanguage('vue')
+
+    expect(shiki.getLoadedLanguages())
+      .not
+      .includes('scss')
+
+    const code = `
+      <template>
+        <h1>Hello</h1>
+      </template>
+
+      <script setup lang="ts">
+      const a: number = 1
+      </script>
+
+      <style lang="scss">
+      h1 {
+        span {
+          color: red;
+        }
+      }
+      </style>
+    `
+
+    const html1 = shiki.codeToHtml(code, { lang: 'vue', theme: 'vitesse-dark' })
+
+    await shiki.loadLanguage('scss')
+
+    expect(shiki.getLoadedLanguages())
+      .includes('scss')
+
+    const html2 = shiki.codeToHtml(code, { lang: 'vue', theme: 'vitesse-dark' })
+
+    expect(html1).not.toEqual(html2)
   })
 
   it('monokai underline', async () => {
