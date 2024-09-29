@@ -22,12 +22,17 @@ export default antfu(
       },
     },
     ignores: [
-      'packages/shiki/src/assets/*.ts',
       '**/fixtures/**',
       '**/vendor/**',
       '**/test/out/**',
       'docs/languages.md',
       'docs/themes.md',
+      // Generated Files
+      'packages/shiki/src/langs/**',
+      'packages/shiki/src/themes/**',
+      'packages/shiki/src/langs-bundle-full.ts',
+      'packages/shiki/src/langs-bundle-web.ts',
+      'packages/shiki/src/themes.ts',
     ],
   },
   {

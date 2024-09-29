@@ -1,10 +1,9 @@
 import { getSingletonHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
-import js from '../src/assets/langs/javascript'
-import mtp from '../src/assets/themes/material-theme-palenight'
-import nord from '../src/assets/themes/nord'
-
 import { getSingletonHighlighterCore } from '../src/core'
+import js from '../src/langs/javascript.mjs'
+import mtp from '../src/themes/material-theme-palenight.mjs'
+import nord from '../src/themes/nord.mjs'
 
 it('getSingletonHighlighterCore', async () => {
   const shiki1 = await getSingletonHighlighterCore({

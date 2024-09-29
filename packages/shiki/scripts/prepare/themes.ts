@@ -8,18 +8,16 @@ export async function prepareTheme(): Promise<void> {
       const theme = await fs.readJSON(`./node_modules/tm-themes/themes/${t.name}.json`)
 
       await fs.writeFile(
-        `./src/assets/themes/${t.name}.js`,
-        `${COMMENT_HEAD}
+        `./src/themes/${t.name}.mjs`,
+        `/* Theme: ${theme.name} */
 export default Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(theme))}))
 `,
         'utf-8',
       )
 
       await fs.writeFile(
-        `./src/assets/themes/${t.name}.d.ts`,
-        `${COMMENT_HEAD}
-import type { ThemeRegistration } from '@shikijs/core'
-
+        `./src/themes/${t.name}.d.mts`,
+        `import type { ThemeRegistration } from '@shikijs/core'
 const theme: ThemeRegistration
 export default theme
 `,
@@ -30,11 +28,11 @@ export default theme
         id: t.name,
         displayName: theme.displayName,
         type: theme.type,
-        import: `__(() => import('./themes/${t.name}')) as unknown as DynamicImportThemeRegistration__`,
+        import: `__(() => import('./themes/${t.name}.mjs')) as unknown as DynamicImportThemeRegistration__`,
       }
     }))
   await fs.writeFile(
-    'src/assets/themes.ts',
+    'src/themes.ts',
     `${COMMENT_HEAD}
 import type { DynamicImportThemeRegistration, BundledThemeInfo } from '@shikijs/core'
 

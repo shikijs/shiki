@@ -46,8 +46,8 @@ export interface Cases {
 const cases: Cases[] = [
   {
     name: 'json-basic',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/json'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/json.mjs'),
     cases: [
       '{"foo":{"bar":1}}',
       '[undefined, null, true, false, 0, 1, 1.1, "foo", [], {}]',
@@ -55,8 +55,8 @@ const cases: Cases[] = [
   },
   {
     name: 'html-basic',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/html'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/html.mjs'),
     cases: [
       '<div class="foo">bar</div>',
       '<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>',
@@ -64,24 +64,24 @@ const cases: Cases[] = [
   },
   {
     name: 'ts-basic',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/typescript'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/typescript.mjs'),
     cases: [
       'const foo: string = "bar"',
     ],
   },
   {
     name: 'jsonc',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/jsonc'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/jsonc.mjs'),
     cases: [
       '// comment\n{"foo":"bar"}',
     ],
   },
   {
     name: 'vue',
-    theme: () => import('../../shiki/src/assets/themes/vitesse-dark'),
-    lang: () => import('../../shiki/src/assets/langs/vue'),
+    theme: () => import('../../shiki/src/themes/vitesse-dark.mjs'),
+    lang: () => import('../../shiki/src/langs/vue.mjs'),
     cases: [
       `<script setup>\nimport { ref } from 'vue'\n</script>`,
       `<template>\n<div>{{ foo }}</div>\n</template>`,
@@ -89,8 +89,8 @@ const cases: Cases[] = [
   },
   {
     name: 'toml',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/toml'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/toml.mjs'),
     cases: [
       [
         `# This is a TOML document`,
@@ -104,8 +104,8 @@ const cases: Cases[] = [
   },
   {
     name: 'sql',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/sql'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/sql.mjs'),
     cases: [
       'SELECT * FROM foo',
       [
@@ -119,8 +119,8 @@ const cases: Cases[] = [
   {
     skip: true,
     name: 'markdown',
-    theme: () => import('../../shiki/src/assets/themes/nord'),
-    lang: () => import('../../shiki/src/assets/langs/markdown'),
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/markdown.mjs'),
     cases: [
       [
         '# Header',

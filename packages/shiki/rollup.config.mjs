@@ -35,6 +35,7 @@ const external = [
   '@shikijs/engine-oniguruma',
   '@shikijs/vscode-textmate',
   'shiki/wasm',
+  /[/\\]src[/\\](langs|themes)[/\\]/g,
 ]
 
 const plugins = [
@@ -52,27 +53,20 @@ export default defineConfig([
   {
     input: [
       ...entries,
-      // add language files entries
-      ...fg.sync('src/assets/langs/*.js'),
     ],
     output: {
       dir: 'dist',
       format: 'esm',
-      entryFileNames: (f) => {
-        if (f.facadeModuleId?.match(/[\\/]langs[\\/]/))
-          return `langs/${f.name}.mjs`
-        return '[name].mjs'
-      },
-      chunkFileNames: (f) => {
-        if (f.moduleIds.some(i => i.match(/[\\/]langs[\\/]/)))
-          return `langs/${f.name}.mjs`
-        else if (f.moduleIds.some(i => i.match(/[\\/]themes[\\/]/)))
-          return 'themes/[name].mjs'
-        return 'chunks/[name].mjs'
-      },
+      entryFileNames: '[name].mjs',
     },
     plugins: [
       ...plugins,
+      copy({
+        targets: [
+          { src: './src/langs', dest: 'dist' },
+          { src: './src/themes', dest: 'dist' },
+        ],
+      }),
     ],
     external,
   },
