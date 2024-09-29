@@ -1,19 +1,16 @@
 import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/types'
 import type {} from 'hast'
-
-import type { BundledLanguage } from './assets/langs-bundle-web'
+import type { BundledLanguage } from './langs-bundle-web'
 import type { BundledTheme } from './themes'
-import { bundledLanguages } from './assets/langs-bundle-web'
 import { createdBundledHighlighter, createSingletonShorthands, warnDeprecated } from './core'
 import { createOnigurumaEngine } from './engine-oniguruma'
+import { bundledLanguages } from './langs-bundle-web'
 import { bundledThemes } from './themes'
-import { getWasmInlined } from './wasm-dynamic'
 
-export * from './assets/langs-bundle-web'
 export * from './core'
+export * from './langs-bundle-web'
 export * from './themes'
-
-export { getWasmInlined }
+export { getWasmInlined } from './wasm-dynamic'
 
 export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
 

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import js from '../src/assets/langs/javascript'
-
-import nord from '../src/assets/themes/nord'
-import { createHighlighterCoreSync, createJavaScriptRegexEngine } from '../src/core'
+import { createJavaScriptRegexEngine } from '../../engine-javascript/src'
+import { createHighlighterCoreSync } from '../src/core'
+import js from '../src/langs/javascript.mjs'
+import nord from '../src/themes/nord.mjs'
 
 describe('should', () => {
   const engine = createJavaScriptRegexEngine()
@@ -24,12 +24,12 @@ describe('should', () => {
       langs: [
         js,
         // Load the grammar upfront (await outside of the function)
-        await import('../src/assets/langs/c').then(r => r.default),
+        await import('../src/langs/c.mjs').then(r => r.default),
       ],
       engine,
     })
 
-    shiki.loadLanguageSync(await import('../src/assets/langs/python').then(m => m.default))
+    shiki.loadLanguageSync(await import('../src/langs/python.mjs').then(m => m.default))
     shiki.loadThemeSync(await import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())

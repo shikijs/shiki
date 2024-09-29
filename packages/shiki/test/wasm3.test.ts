@@ -1,11 +1,9 @@
 import { expect, it } from 'vitest'
 // eslint-disable-next-line antfu/no-import-dist
 import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
-
-import js from '../src/assets/langs/javascript'
-import nord from '../src/assets/themes/nord'
-
 import { createHighlighterCore } from '../src/core'
+import js from '../src/langs/javascript.mjs'
+import nord from '../src/themes/nord.mjs'
 
 it('wasm', async () => {
   const shiki = await createHighlighterCore({

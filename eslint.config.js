@@ -22,7 +22,8 @@ export default antfu(
       },
     },
     ignores: [
-      'packages/shiki/src/assets/*.ts',
+      'packages/shiki/src/langs/**',
+      'packages/shiki/src/themes/**',
       '**/fixtures/**',
       '**/vendor/**',
       '**/test/out/**',

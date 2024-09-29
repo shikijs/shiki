@@ -96,9 +96,8 @@ export async function prepareLangs() {
       console.log(json.name, json.embeddedLangs)
 
     await fs.writeFile(
-      `./src/assets/langs/${lang.name}.js`,
-      `${COMMENT_HEAD}
-${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}'`).join('\n')}
+      `./src/langs/${lang.name}.mjs`,
+      `${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}.mjs'`).join('\n')}
 
 const lang = Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(json))}))
 
@@ -108,7 +107,7 @@ ${[
     '  lang',
   ].join(',\n') || ''}
 ]
-`.replace(/\n{2,}/g, '\n\n'),
+`.replace(/\n{2,}/g, '\n\n').trimStart(),
       'utf-8',
     )
 
@@ -116,10 +115,9 @@ ${[
       if (isInvalidFilename(alias))
         continue
       await fs.writeFile(
-        `./src/assets/langs/${alias}.js`,
-        `${COMMENT_HEAD}
-// ${alias} is an alias of ${lang.name}
-export { default } from './${lang.name}'
+        `./src/langs/${alias}.mjs`,
+        `/* Alias ${alias} for ${lang.name} */
+export { default } from './${lang.name}.mjs'
 `,
         'utf-8',
       )
@@ -129,9 +127,8 @@ export { default } from './${lang.name}'
       if (isInvalidFilename(name))
         continue
       await fs.writeFile(
-        `./src/assets/langs/${name}.d.ts`,
-        `${COMMENT_HEAD}
-import type { LanguageRegistration } from '@shikijs/core'
+        `./src/langs/${name}.d.mts`,
+        `import type { LanguageRegistration } from '@shikijs/core'
 const langs: LanguageRegistration []
 export default langs
 `,
@@ -169,14 +166,14 @@ export default langs
         id: i.name,
         name: i.displayName || i.name,
         aliases: i.aliases,
-        import: `__(() => import('./langs/${i.name}')) as DynamicImportLanguageRegistration__`,
+        import: `__(() => import('./langs/${i.name}.mjs')) as DynamicImportLanguageRegistration__`,
       }) as const)
       .sort((a, b) => a.id.localeCompare(b.id))
 
     const type = info.flatMap(i => [...i.aliases || [], i.id]).sort().map(i => `  | '${i}'`).join('\n')
 
     await fs.writeFile(
-      `src/assets/${fileName}.ts`,
+      `src/${fileName}.ts`,
       `${COMMENT_HEAD}
 import type { DynamicImportLanguageRegistration, BundledLanguageInfo } from '@shikijs/core'
 

@@ -2,12 +2,11 @@ import { describe, expect, it } from 'vitest'
 // eslint-disable-next-line antfu/no-import-dist
 import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
 
-import js from '../src/assets/langs/javascript'
-import ts from '../src/assets/langs/typescript'
-import mtp from '../src/assets/themes/material-theme-palenight'
-import nord from '../src/assets/themes/nord'
-
 import { createHighlighterCore } from '../src/core'
+import js from '../src/langs/javascript.mjs'
+import ts from '../src/langs/typescript.mjs'
+import mtp from '../src/themes/material-theme-palenight.mjs'
+import nord from '../src/themes/nord.mjs'
 
 describe('should', () => {
   it('works', async () => {
@@ -28,7 +27,7 @@ describe('should', () => {
       themes: [nord],
       langs: [
         js,
-        import('../src/assets/langs/c'),
+        import('../src/langs/c.mjs'),
       ],
       loadWasm: {
         // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
@@ -36,7 +35,7 @@ describe('should', () => {
       },
     })
 
-    await shiki.loadLanguage(() => import('../src/assets/langs/python'))
+    await shiki.loadLanguage(() => import('../src/langs/python.mjs'))
     await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())
@@ -65,7 +64,7 @@ describe('should', () => {
     const shiki = await createHighlighterCore({
       themes: [nord],
       langs: [
-        import('../src/assets/langs/cpp'),
+        import('../src/langs/cpp.mjs'),
       ],
     })
 

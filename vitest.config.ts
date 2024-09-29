@@ -45,7 +45,8 @@ export default defineConfig({
 
         // Vendored code
         'packages/engine-oniguruma/src/oniguruma/onig.ts',
-        '**/src/assets/**',
+        '**/src/langs/**',
+        '**/src/themes/**',
         '**/wasm-inlined.ts',
 
         // Integration packages that are hard to cover, or tested elsewhere
