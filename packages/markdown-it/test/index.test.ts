@@ -1,12 +1,18 @@
 import fs from 'node:fs/promises'
 import { transformerMetaHighlight } from '@shikijs/transformers'
 import MarkdownIt from 'markdown-it'
+import { createHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
 import Shiki from '../src'
+import { fromHighlighter } from '../src/core'
 
-it('run for base', async () => {
+it('run for base', { timeout: 10_000 }, async () => {
   const md = MarkdownIt()
-  md.use(await Shiki({
+  const shiki = await createHighlighter({
+    langs: ['js'],
+    themes: ['vitesse-light', 'vitesse-dark'],
+  })
+  md.use(fromHighlighter(shiki, {
     themes: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
@@ -19,11 +25,12 @@ it('run for base', async () => {
   const result = md.render(await fs.readFile(new URL('./fixtures/a.md', import.meta.url), 'utf-8'))
 
   expect(result).toMatchFileSnapshot('./fixtures/a.out.html')
-}, { timeout: 10_000 })
+})
 
-it('run for fallback language', async () => {
+it('run for fallback language', { timeout: 10_000 }, async () => {
   const md = MarkdownIt()
   md.use(await Shiki({
+    langs: ['js'],
     themes: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
@@ -37,15 +44,16 @@ it('run for fallback language', async () => {
   const result = md.render(await fs.readFile(new URL('./fixtures/b.md', import.meta.url), 'utf-8'))
 
   expect(result).toMatchFileSnapshot('./fixtures/b.out.html')
-}, { timeout: 10_000 })
+})
 
-it('run for default language', async () => {
+it('run for default language', { timeout: 10_000 }, async () => {
   const md = MarkdownIt()
   md.use(await Shiki({
     themes: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
+    langs: ['js', 'ts'],
     defaultLanguage: 'js',
     transformers: [
       transformerMetaHighlight(),
@@ -55,4 +63,4 @@ it('run for default language', async () => {
   const result = md.render(await fs.readFile(new URL('./fixtures/c.md', import.meta.url), 'utf-8'))
 
   expect(result).toMatchFileSnapshot('./fixtures/c.out.html')
-}, { timeout: 10_000 })
+})
