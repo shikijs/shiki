@@ -3,8 +3,11 @@ import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
 import type { ShikiTransformer } from 'shiki'
 import type { VueSpecificOptions } from 'twoslash-vue'
 import type { TwoslashFloatingVueRendererOptions } from './renderer-floating-vue'
+import { createHash } from 'node:crypto'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { createTransformerFactory } from '@shikijs/twoslash/core'
-import { removeTwoslashNotations } from 'twoslash'
+import { removeTwoslashNotations, type TwoslashExecuteOptions, type TwoslashReturn } from 'twoslash'
 import { createTwoslasher } from 'twoslash-vue'
 import { rendererFloatingVue } from './renderer-floating-vue'
 
@@ -20,6 +23,12 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
    * @default true
    */
   explicitTrigger?: TransformerTwoslashOptions['explicitTrigger']
+
+  /**
+   * Directory path for caching types
+   * @default false
+   */
+  typesCacheDir?: string | false
 }
 
 /**
@@ -30,6 +39,7 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
 export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}): ShikiTransformer {
   const {
     explicitTrigger = true,
+    typesCacheDir = false,
   } = options
 
   const onError = (error: any, code: string): void => {
@@ -44,8 +54,24 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     removeTwoslashNotations(code)
   }
 
+  const defaultTwoslasher = createTwoslasher(options.twoslashOptions)
+  const twoslasherWithCache = (code: string, extension?: string, options?: TwoslashExecuteOptions): TwoslashReturn => {
+    if (!typesCacheDir) {
+      throw new TypeError('Unreachable error')
+    }
+    const hash = createHash('SHA256').update(code).digest('hex')
+    const twoslashed = defaultTwoslasher(code, extension, options)
+    const cachedPath = join(typesCacheDir, `${hash}.json`)
+    if (existsSync(cachedPath)) {
+      return JSON.parse(readFileSync(cachedPath, { encoding: 'utf-8' }))
+    }
+    writeFileSync(cachedPath, JSON.stringify(twoslashed))
+    return twoslashed
+  }
+  twoslasherWithCache.getCacheMap = defaultTwoslasher.getCacheMap
+
   const twoslash = createTransformerFactory(
-    createTwoslasher(options.twoslashOptions),
+    typesCacheDir ? twoslasherWithCache : defaultTwoslasher,
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
@@ -58,6 +84,13 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   const trigger = explicitTrigger instanceof RegExp
     ? explicitTrigger
     : /\btwoslash\b/
+
+  if (typesCacheDir) {
+    try {
+      mkdirSync(typesCacheDir)
+    }
+    catch {}
+  }
 
   return {
     ...twoslash,
