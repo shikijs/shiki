@@ -41,6 +41,9 @@ export interface CodeToTokensWithThemesOptions<Languages = string, Themes = stri
    * ```
    */
   themes: Partial<Record<string, Themes | ThemeRegistrationAny | SpecialTheme>>
+
+  // TODO:
+  grammarStates?: Partial<Record<string, GrammarState>>
 }
 
 export interface ThemedTokenScopeExplanation {

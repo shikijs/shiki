@@ -22,6 +22,7 @@ export function codeToTokensWithThemes(
   const tokens = syncThemesTokenization(
     ...themes.map(t => codeToTokensBase(internal, code, {
       ...options,
+      grammarState: options.grammarStates?.[t.color],
       theme: t.theme,
     })),
   )
