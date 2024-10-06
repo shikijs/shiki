@@ -123,6 +123,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/json.mjs')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'json5',
+    'name': 'JSON5',
+    'import': (() => import('./langs/json5.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'jsonc',
     'name': 'JSON with Comments',
     'import': (() => import('./langs/jsonc.mjs')) as DynamicImportLanguageRegistration
@@ -341,6 +346,7 @@ export type BundledLanguage =
   | 'jl'
   | 'js'
   | 'json'
+  | 'json5'
   | 'jsonc'
   | 'jsonl'
   | 'jsx'

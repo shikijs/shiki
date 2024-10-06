@@ -7,7 +7,7 @@ it('bundle-full', async () => {
   }))
 
   expect(highlighter.getLoadedLanguages().length)
-    .toMatchInlineSnapshot(`309`)
+    .toMatchInlineSnapshot(`312`)
 })
 
 it('bundle-web', async () => {
@@ -17,5 +17,5 @@ it('bundle-web', async () => {
   }))
 
   expect(highlighter.getLoadedLanguages().length)
-    .toMatchInlineSnapshot(`86`)
+    .toMatchInlineSnapshot(`87`)
 })
