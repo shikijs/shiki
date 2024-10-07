@@ -202,6 +202,88 @@
       },
       {
         "args": [
+          "<div class=\"foo\">bar</div>\n",
+          0
+        ],
+        "result": {
+          "index": 35,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 0,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 1,
+              "end": 4,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          0
+        ],
+        "result": {
+          "index": 77,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
           "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
           0
         ],
@@ -226,6 +308,118 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          0
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 0,
+              "length": 0
+            },
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 1,
+              "end": 4,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          26
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 26,
+              "end": 26,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "<div class=\"foo\">bar</div>\n",
@@ -476,6 +670,134 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          0
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 4,
+              "length": 4
+            },
+            {
+              "start": 0,
+              "end": 1,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 1,
+              "end": 4,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          16
+        ],
+        "result": {
+          "index": 2,
+          "captureIndices": [
+            {
+              "start": 16,
+              "end": 17,
+              "length": 1
+            },
+            {
+              "start": 16,
+              "end": 17,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          20
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 20,
+              "end": 26,
+              "length": 6
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 20,
+              "end": 22,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 22,
+              "end": 25,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 25,
+              "end": 26,
+              "length": 1
+            }
+          ]
+        }
       }
     ]
   },
@@ -491,6 +813,38 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          4
+        ],
+        "result": {
+          "index": 5,
+          "captureIndices": [
+            {
+              "start": 4,
+              "end": 5,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          16
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 16,
+              "end": 16,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "<div class=\"foo\">bar</div>\n",
@@ -619,6 +973,85 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          5
+        ],
+        "result": {
+          "index": 4,
+          "captureIndices": [
+            {
+              "start": 5,
+              "end": 10,
+              "length": 5
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 5,
+              "end": 10,
+              "length": 5
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          10
+        ],
+        "result": {
+          "index": 5,
+          "captureIndices": [
+            {
+              "start": 10,
+              "end": 11,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          11
+        ],
+        "result": {
+          "index": 6,
+          "captureIndices": [
+            {
+              "start": 11,
+              "end": 12,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          16
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 16,
+              "end": 16,
+              "length": 0
+            }
+          ]
+        }
       }
     ]
   },
@@ -630,6 +1063,22 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          12
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 15,
+              "end": 16,
+              "length": 1
+            }
+          ]
+        }
+      },
       {
         "args": [
           "<div class=\"foo\">bar</div>\n",
@@ -659,6 +1108,22 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          17
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 20,
+              "end": 20,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "<div class=\"foo\">bar</div>\n",
@@ -816,6 +1281,135 @@
         "args": [
           "<div class=\"foo\">bar</div>\n",
           26
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "<div class=\"foo\">bar</div>\n",
+          26
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          1
+        ],
+        "result": {
+          "index": 79,
+          "captureIndices": [
+            {
+              "start": 1,
+              "end": 2,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          2
+        ],
+        "result": {
+          "index": 115,
+          "captureIndices": [
+            {
+              "start": 2,
+              "end": 9,
+              "length": 7
+            },
+            {
+              "start": 2,
+              "end": 9,
+              "length": 7
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          9
+        ],
+        "result": {
+          "index": 116,
+          "captureIndices": [
+            {
+              "start": 10,
+              "end": 14,
+              "length": 4
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          14
+        ],
+        "result": {
+          "index": 77,
+          "captureIndices": [
+            {
+              "start": 14,
+              "end": 15,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          15
+        ],
+        "result": {
+          "index": 34,
+          "captureIndices": [
+            {
+              "start": 15,
+              "end": 15,
+              "length": 0
+            },
+            {
+              "start": 15,
+              "end": 16,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 16,
+              "end": 20,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 20,
+              "end": 21,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          75
         ],
         "result": null
       },
@@ -1042,6 +1636,98 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          15
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 15,
+              "end": 21,
+              "length": 6
+            },
+            {
+              "start": 15,
+              "end": 16,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 16,
+              "end": 20,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 20,
+              "end": 21,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          75
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 75,
+              "end": 75,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
       }
     ]
   },
@@ -1056,6 +1742,328 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          21
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 21,
+              "end": 27,
+              "length": 6
+            },
+            {
+              "start": 21,
+              "end": 22,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 22,
+              "end": 26,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 26,
+              "end": 27,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          27
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 27,
+              "end": 34,
+              "length": 7
+            },
+            {
+              "start": 27,
+              "end": 28,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 28,
+              "end": 33,
+              "length": 5
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 33,
+              "end": 34,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          34
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 37,
+              "end": 45,
+              "length": 8
+            },
+            {
+              "start": 37,
+              "end": 39,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 39,
+              "end": 44,
+              "length": 5
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 44,
+              "end": 45,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          45
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 45,
+              "end": 52,
+              "length": 7
+            },
+            {
+              "start": 45,
+              "end": 47,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 47,
+              "end": 51,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 51,
+              "end": 52,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          52
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 52,
+              "end": 58,
+              "length": 6
+            },
+            {
+              "start": 52,
+              "end": 53,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 53,
+              "end": 57,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 57,
+              "end": 58,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          58
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 61,
+              "end": 68,
+              "length": 7
+            },
+            {
+              "start": 61,
+              "end": 63,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 63,
+              "end": 67,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 67,
+              "end": 68,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",
+          68
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 68,
+              "end": 75,
+              "length": 7
+            },
+            {
+              "start": 68,
+              "end": 70,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 70,
+              "end": 74,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 74,
+              "end": 75,
+              "length": 1
+            }
+          ]
+        }
+      },
       {
         "args": [
           "<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>\n",

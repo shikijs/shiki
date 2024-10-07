@@ -1,5 +1,6 @@
-import type { CodeToTokensOptions, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '@shikijs/types'
-import { ShikiError } from '../../../types/src/error'
+import type { CodeToTokensOptions, GrammarState, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '@shikijs/types'
+import { ShikiError } from '@shikijs/types'
+import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements } from '../utils'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
@@ -19,6 +20,7 @@ export function codeToTokens(
   let tokens: ThemedToken[][]
   let themeName: string
   let rootStyle: string | undefined
+  let grammarState: GrammarState | undefined
 
   if ('themes' in options) {
     const {
@@ -41,6 +43,8 @@ export function codeToTokens(
       options,
     )
 
+    grammarState = getLastGrammarStateFromMap(themeTokens)
+
     if (defaultColor && !themes.find(t => t.color === defaultColor))
       throw new ShikiError(`\`themes\` option must contain the defaultColor key \`${defaultColor}\``)
 
@@ -48,6 +52,9 @@ export function codeToTokens(
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
       .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
+
+    if (grammarState)
+      setLastGrammarStateToMap(tokens, grammarState)
 
     const themeColorReplacements = themes.map(t => resolveColorReplacements(t.theme, options))
 
@@ -73,6 +80,7 @@ export function codeToTokens(
     bg = applyColorReplacements(_theme.bg, colorReplacements)
     fg = applyColorReplacements(_theme.fg, colorReplacements)
     themeName = _theme.name
+    grammarState = getLastGrammarStateFromMap(tokens)
   }
   else {
     throw new ShikiError('Invalid options, either `theme` or `themes` must be provided')
@@ -84,6 +92,7 @@ export function codeToTokens(
     bg,
     themeName,
     rootStyle,
+    grammarState,
   }
 }
 

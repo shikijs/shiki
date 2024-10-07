@@ -163,6 +163,37 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          0
+        ],
+        "result": {
+          "index": 3,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 0,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 0,
+              "end": 5,
+              "length": 5
+            }
+          ]
+        }
       }
     ]
   },
@@ -185,6 +216,130 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          0
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 6,
+              "length": 6
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 0,
+              "end": 5,
+              "length": 5
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          6
+        ],
+        "result": {
+          "index": 5,
+          "captureIndices": [
+            {
+              "start": 6,
+              "end": 9,
+              "length": 3
+            },
+            {
+              "start": 6,
+              "end": 9,
+              "length": 3
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          18
+        ],
+        "result": {
+          "index": 6,
+          "captureIndices": [
+            {
+              "start": 18,
+              "end": 19,
+              "length": 1
+            },
+            {
+              "start": 18,
+              "end": 19,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          25
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 25,
+              "end": 25,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 25,
+              "end": 25,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 25,
+              "end": 25,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "const foo: string = \"bar\"\n",
@@ -333,6 +488,22 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          6
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 6,
+              "end": 6,
+              "length": 0
+            }
+          ]
+        }
       }
     ]
   },
@@ -353,6 +524,58 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          9
+        ],
+        "result": {
+          "index": 1,
+          "captureIndices": [
+            {
+              "start": 9,
+              "end": 10,
+              "length": 1
+            },
+            {
+              "start": 9,
+              "end": 10,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          18
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 18,
+              "end": 18,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "const foo: string = \"bar\"\n",
@@ -450,6 +673,53 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          10
+        ],
+        "result": {
+          "index": 13,
+          "captureIndices": [
+            {
+              "start": 11,
+              "end": 17,
+              "length": 6
+            },
+            {
+              "start": 11,
+              "end": 17,
+              "length": 6
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          17
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 18,
+              "end": 18,
+              "length": 0
+            },
+            {
+              "start": 18,
+              "end": 18,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "const foo: string = \"bar\"\n",
@@ -631,6 +901,48 @@
             }
           ]
         }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          19
+        ],
+        "result": {
+          "index": 2,
+          "captureIndices": [
+            {
+              "start": 20,
+              "end": 21,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          25
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 25,
+              "end": 25,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
       }
     ]
   },
@@ -642,6 +954,32 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          21
+        ],
+        "result": {
+          "index": 0,
+          "captureIndices": [
+            {
+              "start": 24,
+              "end": 25,
+              "length": 1
+            },
+            {
+              "start": 24,
+              "end": 25,
+              "length": 1
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
       {
         "args": [
           "const foo: string = \"bar\"\n",
@@ -804,6 +1142,13 @@
       ]
     ],
     "executions": [
+      {
+        "args": [
+          "const foo: string = \"bar\"\n",
+          25
+        ],
+        "result": null
+      },
       {
         "args": [
           "const foo: string = \"bar\"\n",

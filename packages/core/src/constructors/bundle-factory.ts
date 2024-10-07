@@ -190,7 +190,9 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    * Shorthand for `getLastGrammarState` with auto-loaded theme and language.
    * A singleton highlighter it maintained internally.
    */
-  getLastGrammarState: (code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>
+  getLastGrammarState:
+    | ((element: ThemedToken[][] | Root) => GrammarState)
+    | ((code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>)
 }
 
 export function makeSingletonHighlighter<L extends string, T extends string>(

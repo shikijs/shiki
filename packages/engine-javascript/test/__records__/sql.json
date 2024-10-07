@@ -240,6 +240,513 @@
       },
       {
         "args": [
+          "SELECT * FROM foo\n",
+          0
+        ],
+        "result": {
+          "index": 12,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 6,
+              "length": 6
+            },
+            {
+              "start": 0,
+              "end": 6,
+              "length": 6
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "SELECT * FROM foo\n",
+          6
+        ],
+        "result": {
+          "index": 21,
+          "captureIndices": [
+            {
+              "start": 7,
+              "end": 8,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "SELECT * FROM foo\n",
+          8
+        ],
+        "result": {
+          "index": 12,
+          "captureIndices": [
+            {
+              "start": 9,
+              "end": 13,
+              "length": 4
+            },
+            {
+              "start": 9,
+              "end": 13,
+              "length": 4
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "SELECT * FROM foo\n",
+          13
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "USE AdventureWorks2022;\n",
+          0
+        ],
+        "result": {
+          "index": 56,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 3,
+              "length": 3
+            },
+            {
+              "start": 0,
+              "end": 3,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "USE AdventureWorks2022;\n",
+          3
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "GO\n",
+          0
+        ],
+        "result": {
+          "index": 56,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 2,
+              "length": 2
+            },
+            {
+              "start": 0,
+              "end": 2,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "GO\n",
+          2
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          0
+        ],
+        "result": {
+          "index": 56,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 2,
+              "length": 2
+            },
+            {
+              "start": 0,
+              "end": 2,
+              "length": 2
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          2
+        ],
+        "result": {
+          "index": 39,
+          "captureIndices": [
+            {
+              "start": 3,
+              "end": 13,
+              "length": 10
+            },
+            {
+              "start": 3,
+              "end": 12,
+              "length": 9
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          13
+        ],
+        "result": {
+          "index": 47,
+          "captureIndices": [
+            {
+              "start": 13,
+              "end": 30,
+              "length": 17
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 13,
+              "end": 14,
+              "length": 1
+            },
+            {
+              "start": 29,
+              "end": 30,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          30
+        ],
+        "result": {
+          "index": 47,
+          "captureIndices": [
+            {
+              "start": 32,
+              "end": 35,
+              "length": 3
+            },
+            {
+              "start": 4294967295,
+              "end": 4294967295,
+              "length": 0
+            },
+            {
+              "start": 32,
+              "end": 33,
+              "length": 1
+            },
+            {
+              "start": 34,
+              "end": 35,
+              "length": 1
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          35
+        ],
+        "result": {
+          "index": 13,
+          "captureIndices": [
+            {
+              "start": 37,
+              "end": 48,
+              "length": 11
+            },
+            {
+              "start": 37,
+              "end": 48,
+              "length": 11
+            },
+            {
+              "start": 37,
+              "end": 44,
+              "length": 7
+            },
+            {
+              "start": 37,
+              "end": 40,
+              "length": 3
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "IF OBJECT_ID('dbo.NewProducts', 'U') IS NOT NULL\n",
+          48
+        ],
+        "result": null
+      },
+      {
+        "args": [
+          "DROP TABLE dbo.NewProducts;\n",
+          0
+        ],
+        "result": {
+          "index": 6,
+          "captureIndices": [
+            {
+              "start": 0,
+              "end": 10,
+              "length": 10
+            },
+            {
+              "start": 0,
+              "end": 4,
+              "length": 4
+            },
+            {
+              "start": 5,
+              "end": 10,
+              "length": 5
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "DROP TABLE dbo.NewProducts;\n",
+          10
+        ],
+        "result": {
+          "index": 46,
+          "captureIndices": [
+            {
+              "start": 11,
+              "end": 26,
+              "length": 15
+            },
+            {
+              "start": 11,
+              "end": 14,
+              "length": 3
+            },
+            {
+              "start": 15,
+              "end": 26,
+              "length": 11
+            }
+          ]
+        }
+      },
+      {
+        "args": [
+          "DROP TABLE dbo.NewProducts;\n",
+          26
+        ],
+        "result": null
+      },
+      {
+        "args": [
           "USE AdventureWorks2022;\n",
           0
         ],

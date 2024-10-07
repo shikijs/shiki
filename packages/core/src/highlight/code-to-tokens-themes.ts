@@ -4,6 +4,7 @@ import type {
   ThemedToken,
   ThemedTokenWithVariants,
 } from '@shikijs/types'
+import { getLastGrammarStateFromMap, GrammarState, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { codeToTokensBase } from './code-to-tokens-base'
 
 /**
@@ -19,11 +20,24 @@ export function codeToTokensWithThemes(
     .filter(i => i[1])
     .map(i => ({ color: i[0], theme: i[1]! }))
 
-  const tokens = syncThemesTokenization(
-    ...themes.map(t => codeToTokensBase(internal, code, {
+  const themedTokens = themes.map((t) => {
+    const tokens = codeToTokensBase(internal, code, {
       ...options,
       theme: t.theme,
-    })),
+    })
+    const state = getLastGrammarStateFromMap(tokens)
+    const theme = typeof t.theme === 'string'
+      ? t.theme
+      : t.theme.name
+    return {
+      tokens,
+      state,
+      theme,
+    }
+  })
+
+  const tokens = syncThemesTokenization(
+    ...themedTokens.map(i => i.tokens),
   )
 
   const mergedTokens: ThemedTokenWithVariants[][] = tokens[0]
@@ -53,6 +67,15 @@ export function codeToTokensWithThemes(
         return mergedToken
       }),
     )
+
+  const mergedGrammarState = themedTokens[0].state
+    ? new GrammarState(
+      Object.fromEntries(themedTokens.map(s => [s.theme, s.state?.getInternalStack(s.theme)])),
+      themedTokens[0].state.lang,
+    )
+    : undefined
+  if (mergedGrammarState)
+    setLastGrammarStateToMap(mergedTokens, mergedGrammarState)
 
   return mergedTokens
 }

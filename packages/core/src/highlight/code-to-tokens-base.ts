@@ -3,6 +3,8 @@
  *-------------------------------------------------------- */
 import type {
   CodeToTokensBaseOptions,
+  Grammar,
+  GrammarState,
   ShikiInternal,
   ThemedToken,
   ThemedTokenScopeExplanation,
@@ -11,15 +13,15 @@ import type {
 } from '@shikijs/types'
 import type {
   FontStyle,
-  IGrammar,
   IRawThemeSetting,
   StateStack,
 } from '@shikijs/vscode-textmate'
 
+import type { Root } from 'hast'
 import { ShikiError } from '@shikijs/types'
-import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 
-import { getGrammarStack, GrammarState } from '../textmate/grammar-state'
+import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
+import { getGrammarStack, getLastGrammarStateFromMap, GrammarState as GrammarStateImpl, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
 
@@ -50,8 +52,8 @@ export function codeToTokensBase(
     if (options.grammarState.lang !== _grammar.name) {
       throw new ShikiError(`Grammar state language "${options.grammarState.lang}" does not match highlight language "${_grammar.name}"`)
     }
-    if (options.grammarState.theme !== themeName) {
-      throw new ShikiError(`Grammar state theme "${options.grammarState.theme}" does not match highlight theme "${themeName}"`)
+    if (!options.grammarState.themes.includes(theme.name)) {
+      throw new ShikiError(`Grammar state themes "${options.grammarState.themes}" do not contain highlight theme "${theme.name}"`)
     }
   }
 
@@ -60,9 +62,19 @@ export function codeToTokensBase(
 
 export function getLastGrammarState(
   internal: ShikiInternal,
+  element: ThemedToken[][] | Root
+): GrammarState | undefined
+export function getLastGrammarState(
+  internal: ShikiInternal,
   code: string,
-  options: CodeToTokensBaseOptions = {},
-): GrammarState {
+  options?: CodeToTokensBaseOptions
+): GrammarState
+export function getLastGrammarState(...args: any[]): GrammarState | undefined {
+  if (args.length === 2) {
+    return getLastGrammarStateFromMap(args[1])
+  }
+
+  const [internal, code, options = {}] = args as [ShikiInternal, string, CodeToTokensBaseOptions]
   const {
     lang = 'text',
     theme: themeName = internal.getLoadedThemes()[0],
@@ -77,7 +89,7 @@ export function getLastGrammarState(
 
   const _grammar = internal.getLanguage(lang)
 
-  return new GrammarState(
+  return new GrammarStateImpl(
     _tokenizeWithTheme(code, _grammar, theme, colorMap, options).stateStack,
     _grammar.name,
     theme.name,
@@ -92,17 +104,27 @@ interface ThemeSettingsSelectors {
 
 export function tokenizeWithTheme(
   code: string,
-  grammar: IGrammar,
+  grammar: Grammar,
   theme: ThemeRegistrationResolved,
   colorMap: string[],
   options: TokenizeWithThemeOptions,
 ): ThemedToken[][] {
-  return _tokenizeWithTheme(code, grammar, theme, colorMap, options).tokens
+  const result = _tokenizeWithTheme(code, grammar, theme, colorMap, options)
+
+  const grammarState = new GrammarStateImpl(
+    _tokenizeWithTheme(code, grammar, theme, colorMap, options).stateStack,
+    grammar.name,
+    theme.name,
+  )
+
+  setLastGrammarStateToMap(result.tokens, grammarState)
+
+  return result.tokens
 }
 
 function _tokenizeWithTheme(
   code: string,
-  grammar: IGrammar,
+  grammar: Grammar,
   theme: ThemeRegistrationResolved,
   colorMap: string[],
   options: TokenizeWithThemeOptions,
@@ -120,7 +142,7 @@ function _tokenizeWithTheme(
   const lines = splitLines(code)
 
   let stateStack = options.grammarState
-    ? getGrammarStack(options.grammarState)
+    ? getGrammarStack(options.grammarState, theme.name) ?? INITIAL
     : options.grammarContextCode != null
       ? _tokenizeWithTheme(
         options.grammarContextCode,
