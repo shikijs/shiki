@@ -1,6 +1,7 @@
 import type {
   CodeToHastOptions,
   CodeToHastRenderOptions,
+  GrammarState,
   ShikiInternal,
   ShikiTransformerContext,
   ShikiTransformerContextCommon,
@@ -14,7 +15,7 @@ import type {
 } from 'hast'
 
 import { FontStyle } from '@shikijs/vscode-textmate'
-
+import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
 import { warnDeprecated } from '../warn'
 import { getTransformers } from './_get-transformers'
@@ -42,6 +43,7 @@ export function codeToHast(
     bg,
     themeName,
     rootStyle,
+    grammarState,
   } = codeToTokens(internal, input, options)
 
   const {
@@ -73,6 +75,7 @@ export function codeToHast(
       rootStyle,
     },
     contextSource,
+    grammarState,
   )
 }
 
@@ -80,6 +83,7 @@ export function tokensToHast(
   tokens: ThemedToken[][],
   options: CodeToHastRenderOptions,
   transformerContext: ShikiTransformerContextSource,
+  grammarState: GrammarState | undefined = getLastGrammarStateFromMap(tokens),
 ): Root {
   const transformers = getTransformers(options)
 
@@ -219,6 +223,9 @@ export function tokensToHast(
   let result = root
   for (const transformer of transformers)
     result = transformer?.root?.call(context, result) || result
+
+  if (grammarState)
+    setLastGrammarStateToMap(result, grammarState)
 
   return result
 }

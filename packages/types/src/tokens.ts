@@ -1,4 +1,4 @@
-import type { FontStyle, IRawThemeSetting } from '@shikijs/vscode-textmate'
+import type { FontStyle, IRawThemeSetting, StateStack } from '@shikijs/vscode-textmate'
 import type { SpecialLanguage } from './langs'
 import type { CodeOptionsThemes } from './options'
 import type { SpecialTheme, ThemeRegistrationAny } from './themes'
@@ -11,6 +11,15 @@ import type { SpecialTheme, ThemeRegistrationAny } from './themes'
 export interface GrammarState {
   readonly lang: string
   readonly theme: string
+  readonly themes: string[]
+  /**
+   * @internal
+   */
+  getInternalStack: (theme?: string) => StateStack | undefined
+  getScopes: (theme?: string) => string[] | undefined
+  /**
+   * @deprecated Use `getScopes` instead.
+   */
   get scopes(): string[]
 }
 
@@ -238,4 +247,9 @@ export interface TokensResult {
    * When specified, `fg` and `bg` will be ignored.
    */
   rootStyle?: string
+
+  /**
+   * The last grammar state of the code snippet.
+   */
+  grammarState?: GrammarState
 }

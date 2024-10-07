@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createHighlighter } from '../src'
+import { createHighlighter, hastToHtml } from '../src'
 
 it('getLastGrammarState', async () => {
   const shiki = await createHighlighter({
@@ -19,6 +19,9 @@ it('getLastGrammarState', async () => {
         "source.ts",
       ],
       "theme": "vitesse-light",
+      "themes": [
+        "vitesse-light",
+      ],
     }
   `)
 
@@ -56,6 +59,16 @@ it('getLastGrammarState', async () => {
       {
         "bg": "#ffffff",
         "fg": "#393a34",
+        "grammarState": {
+          "lang": "typescript",
+          "scopes": [
+            "source.ts",
+          ],
+          "theme": "vitesse-light",
+          "themes": [
+            "vitesse-light",
+          ],
+        },
         "rootStyle": undefined,
         "themeName": "vitesse-light",
         "tokens": [
@@ -120,53 +133,66 @@ it('getLastGrammarState', async () => {
     `)
 
   expect.soft(highlightedContext).toMatchInlineSnapshot(`
-      {
-        "bg": "#ffffff",
-        "fg": "#393a34",
-        "rootStyle": undefined,
-        "themeName": "vitesse-light",
-        "tokens": [
-          [
-            {
-              "color": "#2E8F82",
-              "content": "Omit",
-              "fontStyle": 0,
-              "offset": 0,
-            },
-            {
-              "color": "#999999",
-              "content": "<{}, ",
-              "fontStyle": 0,
-              "offset": 4,
-            },
-            {
-              "color": "#2E8F82",
-              "content": "string",
-              "fontStyle": 0,
-              "offset": 9,
-            },
-            {
-              "color": "#999999",
-              "content": " | ",
-              "fontStyle": 0,
-              "offset": 15,
-            },
-            {
-              "color": "#2E8F82",
-              "content": "number",
-              "fontStyle": 0,
-              "offset": 18,
-            },
-            {
-              "color": "#999999",
-              "content": ">",
-              "fontStyle": 0,
-              "offset": 24,
-            },
-          ],
+    {
+      "bg": "#ffffff",
+      "fg": "#393a34",
+      "grammarState": {
+        "lang": "typescript",
+        "scopes": [
+          "meta.type.annotation.ts",
+          "meta.var-single-variable.expr.ts",
+          "meta.var.expr.ts",
+          "source.ts",
         ],
-      }
-    `)
+        "theme": "vitesse-light",
+        "themes": [
+          "vitesse-light",
+        ],
+      },
+      "rootStyle": undefined,
+      "themeName": "vitesse-light",
+      "tokens": [
+        [
+          {
+            "color": "#2E8F82",
+            "content": "Omit",
+            "fontStyle": 0,
+            "offset": 0,
+          },
+          {
+            "color": "#999999",
+            "content": "<{}, ",
+            "fontStyle": 0,
+            "offset": 4,
+          },
+          {
+            "color": "#2E8F82",
+            "content": "string",
+            "fontStyle": 0,
+            "offset": 9,
+          },
+          {
+            "color": "#999999",
+            "content": " | ",
+            "fontStyle": 0,
+            "offset": 15,
+          },
+          {
+            "color": "#2E8F82",
+            "content": "number",
+            "fontStyle": 0,
+            "offset": 18,
+          },
+          {
+            "color": "#999999",
+            "content": ">",
+            "fontStyle": 0,
+            "offset": 24,
+          },
+        ],
+      ],
+    }
+  `)
 })
 
 it('grammarContextCode', async () => {
@@ -210,6 +236,86 @@ it('grammarContextCode', async () => {
     .toEqual(highlightedVueBare)
 })
 
+it('getLastGrammarState with multiple themes', async () => {
+  const shiki = await createHighlighter({
+    themes: ['vitesse-light', 'vitesse-dark'],
+    langs: ['typescript'],
+  })
+
+  const tokens = shiki.codeToTokens('let a:', {
+    lang: 'typescript',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+  })
+
+  expect(tokens.grammarState).toBeDefined()
+
+  const input = 'Omit<{}, string | number>'
+
+  const highlightedWithState = shiki.codeToHtml(input, {
+    lang: 'typescript',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+    grammarState: tokens.grammarState,
+  })
+
+  const highlightedWithoutState = shiki.codeToHtml(input, {
+    lang: 'typescript',
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+  })
+
+  expect(highlightedWithoutState)
+    .not
+    .toEqual(highlightedWithState)
+
+  const highlightedWithSingleTheme = shiki.codeToHtml(input, {
+    lang: 'typescript',
+    theme: 'vitesse-light',
+    grammarState: tokens.grammarState,
+  })
+
+  expect(highlightedWithSingleTheme).toBeDefined()
+})
+
+it('getLastGrammarState from hast', async () => {
+  const shiki = await createHighlighter({
+    themes: ['vitesse-light'],
+    langs: ['typescript'],
+  })
+
+  const part1 = 'let a = "'
+  const part2 = 'console.log(a)"'
+
+  const highlightedFull = shiki.codeToHast(part1 + part2, {
+    lang: 'typescript',
+    theme: 'vitesse-light',
+  })
+
+  const highlightedPart1 = shiki.codeToHast(part1, {
+    lang: 'typescript',
+    theme: 'vitesse-light',
+  })
+
+  const state = shiki.getLastGrammarState(highlightedPart1)
+  expect(state).toBeDefined()
+
+  const highlighted = shiki.codeToHtml(part2, {
+    lang: 'typescript',
+    theme: 'vitesse-light',
+    grammarState: state,
+  })
+
+  expect(hastToHtml(highlightedFull)).toContain('console.log')
+  expect(highlighted).toContain('console.log')
+})
+
 describe('errors', () => {
   it('should throw on wrong language', async () => {
     const shiki = await createHighlighter({
@@ -247,6 +353,6 @@ describe('errors', () => {
       theme: 'vitesse-dark',
       grammarState: state,
     }))
-      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Grammar state theme "vitesse-light" does not match highlight theme "vitesse-dark"]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Grammar state themes "vitesse-light" do not contain highlight theme "vitesse-dark"]`)
   })
 })

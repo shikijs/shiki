@@ -16,6 +16,11 @@ import type {
 import type { Awaitable, MaybeArray } from './utils'
 
 /**
+ * Type of object that can be bound to a grammar state
+ */
+export type GrammarStateMapKey = Root | ThemedToken[][]
+
+/**
  * Internal context of Shiki, core textmate logic
  */
 export interface ShikiInternal<BundledLangKeys extends string = never, BundledThemeKeys extends string = never> {
@@ -127,10 +132,10 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * Get the last grammar state of a code snippet.
    * You can pass the grammar state to `codeToTokens` as `grammarState` to continue tokenizing from an intermediate state.
    */
-  getLastGrammarState: (
-    code: string,
-    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
-  ) => GrammarState
+  getLastGrammarState: {
+    (element: GrammarStateMapKey, options?: never): GrammarState | undefined
+    (code: string, options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>): GrammarState
+  }
 
   /**
    * Get internal context object
