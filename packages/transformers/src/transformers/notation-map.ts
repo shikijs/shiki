@@ -1,5 +1,5 @@
 import type { ShikiTransformer } from 'shiki'
-import { createCommentNotationTransformer } from '../utils'
+import { createCommentNotationTransformerExperimental } from '../utils'
 
 export interface TransformerNotationMapOptions {
   classMap?: Record<string, string | string[]>
@@ -22,19 +22,25 @@ export function transformerNotationMap(
     classActivePre = undefined,
   } = options
 
-  return createCommentNotationTransformer(
+  const regex = new RegExp(`\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:\\d+)?\\]`, 'g')
+
+  return createCommentNotationTransformerExperimental(
     name,
-    new RegExp(`\\s*(?://|/\\*|<!--|#|--|%{1,2}|;{1,2}|"|')\\s+\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:\\d+)?\\]\\s*(?:\\*/|-->)?\\s*$`),
-    function ([_, match, range = ':1'], _line, _comment, lines, index) {
-      const lineNum = Number.parseInt(range.slice(1), 10)
-      lines
-        .slice(index, index + lineNum)
-        .forEach((line) => {
-          this.addClassToHast(line, classMap[match])
-        })
-      if (classActivePre)
-        this.addClassToHast(this.pre, classActivePre)
-      return true
+    function (text, _line, _comment, lines, index) {
+      return text.replace(regex, (_, group, range = ':1') => {
+        const lineNum = Number.parseInt(range.slice(1), 10)
+
+        lines
+          .slice(index, index + lineNum)
+          .forEach((line) => {
+            this.addClassToHast(line, classMap[group])
+          })
+
+        if (classActivePre)
+          this.addClassToHast(this.pre, classActivePre)
+
+        return ''
+      })
     },
   )
 }
