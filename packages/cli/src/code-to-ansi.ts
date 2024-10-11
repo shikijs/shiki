@@ -23,7 +23,7 @@ export async function codeToANSI(code: string, lang: BundledLanguage, theme: Bun
         text = c.hex(hexApplyAlpha(color, themeReg.type))(text)
       if (token.fontStyle === FontStyle.Bold)
         text = c.bold(text)
-      if (token.fontStyle === FontStyle.Italic)
+      else if (token.fontStyle === FontStyle.Italic)
         text = c.italic(text)
       output += text
     }
