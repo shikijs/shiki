@@ -12,3 +12,7 @@ console.log(a)
 ```
 Should fallback to default language
 ```
+
+```plaintext
+Special languages should be styled
+```
