@@ -196,8 +196,8 @@ catalogs:
       specifier: ^1.18.0
       version: 1.18.0
     tm-themes:
-      specifier: ^1.8.7
-      version: 1.8.7
+      specifier: ^1.9.0
+      version: 1.9.0
     twoslash:
       specifier: ^0.2.12
       version: 0.2.12
@@ -658,7 +658,7 @@ importers:
         version: 1.18.0
       tm-themes:
         specifier: 'catalog:'
-        version: 1.8.7
+        version: 1.9.0
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
@@ -3055,7 +3055,7 @@ packages:
     resolution: {integrity: sha512-P7qDB/RckdKETpBM4CtjHRQ5qXByPmFhRi86sN3E+J+tySchq+RSOGGhI2hDIefmmKFuTi/1ACjqsnDJDDDfzg==}
     engines: {node: '>=18'}
     peerDependencies:
-      eslint: ^9.11.1
+      eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
   eslint-plugin-jsonc@2.16.0:
     resolution: {integrity: sha512-Af/ZL5mgfb8FFNleH6KlO4/VdmDuTqmM+SPnWcdoWywTetv7kq+vQe99UyQb9XO3b0OWLVuTH7H0d/PXYCMdSg==}
@@ -3078,7 +3078,7 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       astro-eslint-parser: ^1.0.2
-      eslint: ^9.11.1
+      eslint: '>=8.0.0'
       svelte: '>=3.0.0'
       svelte-eslint-parser: ^0.41.1
       vue-eslint-parser: '>=9.0.0'
@@ -4956,8 +4956,8 @@ packages:
   tm-grammars@1.18.0:
     resolution: {integrity: sha512-FteVgJAt5FzDlceKVNm3kO+XB5cnRtqzBrbGIOA+46NkpUcylt7gPouqgmjljAdvj2UY+zPyx/TnKNJsjaqagg==}
 
-  tm-themes@1.8.7:
-    resolution: {integrity: sha512-JdABosHlB36PMrF+0VySYnNZRwVAmpaN2NhZPCQjCnWYHkq3NLBKYRepY3B6sgOmvnKOhtk1uxRe4Is5bf3cpg==}
+  tm-themes@1.9.0:
+    resolution: {integrity: sha512-9YCdDxh6+21D14QYUC1MEnAyptL6xFLl4fHj/xJbic04JjmekI1bXR0bR+IkP5MY1w0npe9Sr3QOJ/7gozTmqg==}
 
   to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
@@ -10141,7 +10141,7 @@ snapshots:
 
   tm-grammars@1.18.0: {}
 
-  tm-themes@1.8.7: {}
+  tm-themes@1.9.0: {}
 
   to-fast-properties@2.0.0: {}
 
