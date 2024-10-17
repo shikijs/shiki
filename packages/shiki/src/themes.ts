@@ -123,6 +123,24 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('./themes/houston.mjs')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "kanagawa-dragon",
+    "displayName": "Kanagawa Dragon",
+    "type": "dark",
+    "import": (() => import('./themes/kanagawa-dragon.mjs')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "kanagawa-lotus",
+    "displayName": "Kanagawa Lotus",
+    "type": "light",
+    "import": (() => import('./themes/kanagawa-lotus.mjs')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "kanagawa-wave",
+    "displayName": "Kanagawa Wave",
+    "type": "dark",
+    "import": (() => import('./themes/kanagawa-wave.mjs')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "laserwave",
     "displayName": "LaserWave",
     "type": "dark",
@@ -331,6 +349,9 @@ export type BundledTheme =
   | 'github-light-default'
   | 'github-light-high-contrast'
   | 'houston'
+  | 'kanagawa-dragon'
+  | 'kanagawa-lotus'
+  | 'kanagawa-wave'
   | 'laserwave'
   | 'light-plus'
   | 'material-theme'
