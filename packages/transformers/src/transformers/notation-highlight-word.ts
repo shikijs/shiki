@@ -1,6 +1,6 @@
 import type { ShikiTransformer } from 'shiki'
 import { highlightWordInLine } from '../shared/highlight-word'
-import { createCommentNotationTransformer } from '../utils'
+import { createCommentNotationTransformerExperimental } from '../utils'
 
 export interface TransformerNotationWordHighlightOptions {
   /**
@@ -13,33 +13,34 @@ export interface TransformerNotationWordHighlightOptions {
   classActivePre?: string
 }
 
+const regex = /\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]/g
+
 export function transformerNotationWordHighlight(
   options: TransformerNotationWordHighlightOptions = {},
 ): ShikiTransformer {
   const {
     classActiveWord = 'highlighted-word',
-    classActivePre = undefined,
+    classActivePre,
   } = options
 
-  return createCommentNotationTransformer(
+  return createCommentNotationTransformerExperimental(
     '@shikijs/transformers:notation-highlight-word',
-    // comment-start             | marker    | word           | range | comment-end
-    /^\s*(?:\/\/|\/\*|<!--|#)\s+\[!code word:((?:\\.|[^:\]])+)(:\d+)?\]\s*(?:\*\/|-->)?/,
-    function ([_, word, range], _line, comment, lines, index) {
-      const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
+    function (text, _line, comment, lines, index) {
+      return text.replace(regex, (_, word, range) => {
+        const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
 
-      // escape backslashes
-      word = word.replace(/\\(.)/g, '$1')
+        // escape backslashes
+        word = word.replace(/\\(.)/g, '$1')
 
-      lines
-        // Don't include the comment itself
-        .slice(index + 1, index + 1 + lineNum)
-        .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
+        lines
+          .slice(index, index + lineNum)
+          .forEach(line => highlightWordInLine.call(this, line, comment, word, classActiveWord))
 
-      if (classActivePre)
-        this.addClassToHast(this.pre, classActivePre)
-      return true
+        if (classActivePre)
+          this.addClassToHast(this.pre, classActivePre)
+
+        return ''
+      })
     },
-    true, // remove empty lines
   )
 }
