@@ -94,3 +94,26 @@ it('render whitespace', async () => {
       <span class="line"><span style="color:#59873A">		tab</span><span style="color:#999999">()</span></span></code></pre>"
     `)
 })
+
+it('render-lang-class', async () => {
+  const snippet = `
+    \`\`\`js
+    console.log('hello')
+    \`\`\`
+  `
+
+  const code = await codeToHtml(snippet, {
+    lang: 'js',
+    theme: 'vitesse-light',
+    addLanguageClass: true,
+  })
+
+  expect(code)
+    .toMatchInlineSnapshot(`
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line"></span>
+      <span class="line"><span style="color:#B5695977">    \`\`\`</span><span style="color:#B56959">js</span></span>
+      <span class="line"><span style="color:#B56959">    console.log('hello')</span></span>
+      <span class="line"><span style="color:#B5695977">    \`\`\`</span></span>
+      <span class="line"><span style="color:#393A34">  </span></span></code></pre>"
+    `)
+})

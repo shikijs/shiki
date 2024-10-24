@@ -163,6 +163,13 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    * @default 0
    */
   tabindex?: number | string | false
+
+  /**
+   * Add `language-*` class to code element
+   *
+   * @default false
+   */
+  addLanguageClass?: boolean
 }
 
 export interface CodeOptionsMeta {
