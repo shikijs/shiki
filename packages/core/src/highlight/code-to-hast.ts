@@ -34,7 +34,9 @@ export function codeToHast(
 ): Root {
   let input = code
 
-  for (const transformer of getTransformers(options))
+  const transformers = getTransformers(options)
+
+  for (const transformer of transformers)
     input = transformer.preprocess?.call(transformerContext, input, options) || input
 
   let {
@@ -62,7 +64,7 @@ export function codeToHast(
     },
   }
 
-  for (const transformer of getTransformers(options))
+  for (const transformer of transformers)
     tokens = transformer.tokens?.call(contextSource, tokens) || tokens
 
   return tokensToHast(
@@ -96,14 +98,23 @@ export function tokensToHast(
   const {
     structure = 'classic',
     tabindex = '0',
+    themeName,
+    lang,
+    rootStyle,
+    bg,
+    fg,
+    meta = {},
+    addLanguageClass,
   } = options
+
+  const classes = `shiki ${themeName || ''}`
 
   let preNode: Element = {
     type: 'element',
     tagName: 'pre',
     properties: {
-      class: `shiki ${options.themeName || ''}`,
-      style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
+      class: classes,
+      style: rootStyle || `background-color:${bg};color:${fg}`,
       ...(tabindex !== false && tabindex != null)
         ? {
             tabindex: tabindex.toString(),
@@ -111,7 +122,7 @@ export function tokensToHast(
         : {},
       ...Object.fromEntries(
         Array.from(
-          Object.entries(options.meta || {}),
+          Object.entries(meta),
         )
           .filter(([key]) => !key.startsWith('_')),
       ),
@@ -122,7 +133,11 @@ export function tokensToHast(
   let codeNode: Element = {
     type: 'element',
     tagName: 'code',
-    properties: {},
+    properties: addLanguageClass
+      ? {
+          class: `${options.lang ? `language-${lang}` : ''}`,
+        }
+      : {},
     children: lines,
   }
 
