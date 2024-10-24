@@ -95,18 +95,18 @@ export async function prepareLangs() {
     if (deps.length > 10)
       console.log(json.name, json.embeddedLangs)
 
+    const depsStr = [
+      ...deps.map(i => `...${i.replace(/\W/g, '_')}`),
+      'lang',
+    ].join(',\n') || ''
+
     await fs.writeFile(
       `./src/langs/${lang.name}.mjs`,
       `${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}.mjs'`).join('\n')}
 
 const lang = Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(json))}))
 
-export default [
-${[
-    ...deps.map(i => `  ...${i.replace(/\W/g, '_')}`),
-    '  lang',
-  ].join(',\n') || ''}
-]
+export default [\n${depsStr}\n]
 `.replace(/\n{2,}/g, '\n\n').trimStart(),
       'utf-8',
     )
