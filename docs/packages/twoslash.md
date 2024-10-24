@@ -161,7 +161,7 @@ While you can set up Twoslash with Shiki on your own with the instructions above
 - [VitePress](/packages/vitepress#twoslash) - A plugin to enable Twoslash support in VitePress.
 - [Nuxt](/packages/nuxt#twoslash) - A module to enable Twoslash for Nuxt Content.
 - [Vocs](https://vocs.dev/docs/guides/twoslash) - Vocs has TwoSlash support built-in.
-- [Slidev](https://sli.dev/custom/highlighters.html#twoslash-integration) - Slidev has TwoSlash support built-in.
+- [Slidev](https://sli.dev/features/twoslash#twoslash-integration) - Slidev has TwoSlash support built-in.
 
 ## Recipes
 
