@@ -95,7 +95,7 @@ it('render whitespace', async () => {
     `)
 })
 
-it('render-lang-class', async () => {
+it('render lang class', async () => {
   const snippet = `
     \`\`\`js
     console.log('hello')
