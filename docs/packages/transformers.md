@@ -348,3 +348,15 @@ Remove line breaks between `<span class="line">`. Useful when you set `display: 
 
 Transform `// [\!code ...]` to `// [!code ...]`.
 Avoid rendering the escaped notation syntax as it is.
+
+---
+
+### `transformerLanguageClass`
+
+````md
+```ts
+console.log('Hello Shiki')
+```
+````
+
+- The outer `<code>` tag is modified: `<code class="language-ts">`

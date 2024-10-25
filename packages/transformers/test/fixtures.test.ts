@@ -5,6 +5,7 @@ import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import {
   transformerCompactLineOptions,
+  transformerLanguageClass,
   transformerNotationDiff,
   transformerNotationErrorLevel,
   transformerNotationFocus,
@@ -100,6 +101,13 @@ body { margin: 0; }
 .line { display: block; width: 100%; height: 1.2em; }
 .highlighted { background-color: #8885; }
 </style>`,
+)
+
+suite(
+  'lang-class',
+  import.meta.glob('./fixtures/highlight/*.*', { as: 'raw', eager: true }),
+  [transformerLanguageClass({ prefixClass: 'shiki-lang-' })],
+  code => `${code}`,
 )
 
 suite(
