@@ -2,18 +2,18 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Genreated on Sunday, September 29, 2024
+> Genreated on Monday, October 28, 2024
 >
-> Version `1.20.0`
+> Version `1.22.2`
 >
-> Runtime: Node.js v20.12.2
+> Runtime: Node.js v20.18.0
 
 ## Report Summary
 
 |                 |                        Count |
 | :-------------- | ---------------------------: |
-| Total Languages |                          213 |
-| Supported       |  [175](#supported-languages) |
+| Total Languages |                          214 |
+| Supported       |  [176](#supported-languages) |
 | Mismatched      |  [23](#mismatched-languages) |
 | Unsupported     | [15](#unsupported-languages) |
 
@@ -96,7 +96,7 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | html               | ✅ OK           |               611 |               - |      |
 | http               | ✅ OK           |               753 |               - |      |
 | hxml               | ✅ OK           |               182 |               - |      |
-| hy                 | ✅ OK           |                 9 |               - |      |
+| hy                 | ✅ OK           |                12 |               - |      |
 | imba               | ✅ OK           |               516 |               - |      |
 | ini                | ✅ OK           |                11 |               - |      |
 | java               | ✅ OK           |               142 |               - |      |
@@ -121,6 +121,7 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | marko              | ✅ OK           |               926 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
 | mdc                | ✅ OK           |               784 |               - |      |
+| mipsasm            | ✅ OK           |                17 |               - |      |
 | mojo               | ✅ OK           |               213 |               - |      |
 | move               | ✅ OK           |               120 |               - |      |
 | narrat             | ✅ OK           |                34 |               - |      |
@@ -153,7 +154,7 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | rust               | ✅ OK           |                89 |               - |      |
 | sas                | ✅ OK           |               101 |               - |      |
 | sass               | ✅ OK           |                69 |               - |      |
-| scala              | ✅ OK           |               112 |               - |      |
+| scala              | ✅ OK           |               117 |               - |      |
 | scheme             | ✅ OK           |                34 |               - |      |
 | scss               | ✅ OK           |               234 |               - |      |
 | shaderlab          | ✅ OK           |                87 |               - |      |
