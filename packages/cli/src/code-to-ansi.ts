@@ -21,10 +21,14 @@ export async function codeToANSI(code: string, lang: BundledLanguage, theme: Bun
       const color = token.color || themeReg.fg
       if (color)
         text = c.hex(hexApplyAlpha(color, themeReg.type))(text)
-      if (token.fontStyle === FontStyle.Bold)
-        text = c.bold(text)
-      if (token.fontStyle === FontStyle.Italic)
-        text = c.italic(text)
+      if (token.fontStyle) {
+        if (token.fontStyle & FontStyle.Bold)
+          text = c.bold(text)
+        if (token.fontStyle & FontStyle.Italic)
+          text = c.italic(text)
+        if (token.fontStyle & FontStyle.Underline)
+          text = c.underline(text)
+      }
       output += text
     }
     output += '\n'
