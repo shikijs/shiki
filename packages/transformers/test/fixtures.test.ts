@@ -105,7 +105,7 @@ body { margin: 0; }
 
 suite(
   'lang-class',
-  import.meta.glob('./fixtures/highlight/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/lang-class/*.*', { as: 'raw', eager: true }),
   [transformerLanguageClass({ prefixClass: 'shiki-lang-' })],
   code => `${code}`,
 )
