@@ -50,11 +50,11 @@ import rehypeShikiFromHighlighter from '@shikijs/rehype/core'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import { createHighlighterCore } from 'shiki/core'
+import { createHighlighter } from 'shiki'
 
 import { unified } from 'unified'
 
-const highlighter = await createHighlighterCore({
+const highlighter = await createHighlighter({
   themes: [
     import('shiki/themes/vitesse-light.mjs')
   ],
