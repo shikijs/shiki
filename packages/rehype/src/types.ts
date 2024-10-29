@@ -28,7 +28,6 @@ export interface RehypeShikiExtraOptions {
   /**
    * The fallback language to use when specified language is not loaded
    *
-   * Ignored if `lazy` is enabled
    */
   fallbackLanguage?: string
 

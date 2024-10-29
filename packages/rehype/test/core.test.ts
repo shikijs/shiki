@@ -63,6 +63,30 @@ it('run with lazy', async () => {
   expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
+it('run with lazy and fallback', async () => {
+  const highlighter = await createHighlighter({
+    themes: [
+      'vitesse-light',
+    ],
+    langs: [],
+  })
+
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, highlighter, {
+      lazy: true,
+      theme: 'vitesse-light',
+      fallbackLanguage: 'text',
+      transformers: [
+        transformerMetaHighlight(),
+      ],
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/d.md', import.meta.url)))
+
+  expect(file.toString()).toMatchFileSnapshot('./fixtures/d.core.out.html')
+})
 it('run with rehype-raw', async () => {
   const highlighter = await createHighlighter({
     themes: [
