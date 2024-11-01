@@ -97,13 +97,27 @@ const code = await codeToHtml('console.log("hello")', {
 })
 ```
 
-A token would be generated like:
+`span` tokens would be generated with respective theme's css variables:
 
 ```html
 <span style="color:#1976D2;--shiki-dark:#D8DEE9;--shiki-dim:#566575">console</span>
 ```
 
-Then update your CSS snippet to control when each theme takes effect. Here is an example:
+After that, you need to apply theme's css variables on element with `shiki` class and tokens under it, for example, based on parent's `data-theme` property:
+
+```css
+[data-theme='dark'] .shiki,
+[data-theme='dark'] .shiki span {
+  background-color: var(--s-dark-bg) !important;
+  color: var(--s-dark) !important;
+}
+
+[data-theme='dim'] .shiki,
+[data-theme='dim'] .shiki span {
+  background-color: var(--s-dim-bg) !important;
+  color: var(--s-dim) !important;
+}
+```
 
 [Demo preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/shikijs/shiki/main/packages/shiki/test/out/multiple-themes.html)
 
