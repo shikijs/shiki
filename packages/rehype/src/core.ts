@@ -94,11 +94,16 @@ function rehypeShikiFromHighlighter(
       if (!lang)
         return defaultLanguage
 
-      if (highlighter.getLoadedLanguages().includes(lang) || isSpecialLang(lang))
+      const isLoadedLanguage = highlighter.getLoadedLanguages().includes(lang)
+      if (isLoadedLanguage || isSpecialLang(lang))
         return lang
 
       if (lazy) {
-        if (fallbackLanguage && !(Object.keys(bundledLanguages) as string[]).includes(lang)) {
+        const isBundledLanguage = (Object.keys(bundledLanguages) as string[]).includes(lang)
+
+        if (fallbackLanguage
+          && !isLoadedLanguage
+          && !isBundledLanguage) {
           lang = fallbackLanguage as string
         }
         languageQueue.push(lang)
