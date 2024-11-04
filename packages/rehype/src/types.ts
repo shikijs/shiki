@@ -26,7 +26,7 @@ export interface RehypeShikiExtraOptions {
   defaultLanguage?: string
 
   /**
-   * The fallback language to use when specified language is not loaded
+   * The fallback language to use when specified language is not loaded or unavailable
    *
    */
   fallbackLanguage?: string
