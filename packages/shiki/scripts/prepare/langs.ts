@@ -31,7 +31,7 @@ const LANGS_LAZY_EMBEDDED_PARTIAL = [
 /**
  * Languages to be excluded from SFC langs
  */
-const STANDALONG_LANGS_EMBEDDED = [
+const STANDALONE_LANGS_EMBEDDED = [
   'pug',
   'stylus',
   'sass',
@@ -85,8 +85,8 @@ export async function prepareLangs() {
       json.embeddedLangs = includes
     }
     else if (LANGS_LAZY_EMBEDDED_PARTIAL.includes(lang.name)) {
-      json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => STANDALONG_LANGS_EMBEDDED.includes(i)) || []
-      json.embeddedLangs = (json.embeddedLangs || []).filter(i => !STANDALONG_LANGS_EMBEDDED.includes(i)) || []
+      json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => STANDALONE_LANGS_EMBEDDED.includes(i)) || []
+      json.embeddedLangs = (json.embeddedLangs || []).filter(i => !STANDALONE_LANGS_EMBEDDED.includes(i)) || []
     }
 
     const deps: string[] = json.embeddedLangs || []
