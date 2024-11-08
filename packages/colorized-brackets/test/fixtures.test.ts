@@ -40,7 +40,7 @@ describe('file-driven tests', async () => {
     )
     .map<[string]>(fileName => [fileName])
   const langs = Array.from(
-    new Set(testCaseFiles.map(fileName => fileName[0].split('/')[0])),
+    new Set(testCaseFiles.map(fileName => fileName[0].split(sep)[0])),
   )
   const highlighter = await createHighlighter({
     langs,
