@@ -30,13 +30,13 @@ import {
  * In the final line, there's not room underneath the `}` to annotate the color, so an explicit index `0=Y` is used after `@colors`.
  */
 describe('file-driven tests', async () => {
-  const testCaseFiles: [string][] = readdirSync('./test/fixtures', {
+  const testCaseFiles: [string][] = readdirSync(join(import.meta.dirname, 'fixtures'), {
     recursive: true,
   })
     .filter(
       (fileName): fileName is string =>
         typeof fileName === 'string'
-        && lstatSync(join('./test/fixtures', fileName)).isFile(),
+        && lstatSync(join(import.meta.dirname, 'fixtures', fileName)).isFile(),
     )
     .map<[string]>(fileName => [fileName])
   const langs = Array.from(
@@ -48,7 +48,7 @@ describe('file-driven tests', async () => {
   })
 
   it.each(testCaseFiles)('%s', async (fileName) => {
-    const path = join('./test/fixtures', fileName)
+    const path = join(import.meta.dirname, 'fixtures', fileName)
     const lang = fileName.split('/').at(0) ?? 'text'
     const content = await readFile(path, { encoding: 'utf-8' })
     const expectedBrackets = parseExpectedBrackets(content)
