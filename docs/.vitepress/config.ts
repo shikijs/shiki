@@ -41,6 +41,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Next', link: '/packages/next' },
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
+  { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
   { text: 'CLI', link: '/packages/cli' },
 ]
 

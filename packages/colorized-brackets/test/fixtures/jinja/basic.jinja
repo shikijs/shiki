@@ -1,0 +1,12 @@
+{% if test %}
+  {# @colors 0-1=Y 11-12=Y #}
+  <p>
+    {{test(foo[1])}}
+    {# @colors 4-5=Y 10=P 14=B 16=B 17=P 18-19=Y #}
+  </p>
+{% endif %}
+{# @colors 0-1=Y 9-10=Y #}
+<script>
+  let bar = [1,2,3];
+  //        Y     Y @colors
+</script>
