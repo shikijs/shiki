@@ -1,6 +1,6 @@
 import { lstatSync, readdirSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, sep } from 'node:path'
 import c from 'picocolors'
 import { createHighlighter } from 'shiki'
 import { describe, expect, it } from 'vitest'
@@ -49,7 +49,7 @@ describe('file-driven tests', async () => {
 
   it.each(testCaseFiles)('%s', async (fileName) => {
     const path = join(import.meta.dirname, 'fixtures', fileName)
-    const lang = fileName.split('/').at(0) ?? 'text'
+    const lang = fileName.split(sep).at(0) ?? 'text'
     const content = await readFile(path, { encoding: 'utf-8' })
     const expectedBrackets = parseExpectedBrackets(content)
     const html = highlighter.codeToHtml(content, {
