@@ -2,30 +2,31 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Genreated on Monday, October 28, 2024
+> Genreated on Sunday, November 10, 2024
 >
 > Version `1.22.2`
 >
-> Runtime: Node.js v20.18.0
+> Runtime: Node.js v22.11.0
 
 ## Report Summary
 
 |                 |                        Count |
 | :-------------- | ---------------------------: |
 | Total Languages |                          214 |
-| Supported       |  [176](#supported-languages) |
-| Mismatched      |  [23](#mismatched-languages) |
-| Unsupported     | [15](#unsupported-languages) |
+| Supported       |  [178](#supported-languages) |
+| Mismatched      |  [18](#mismatched-languages) |
+| Unsupported     | [18](#unsupported-languages) |
 
 ## Supported Languages
 
-Languages that works with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).
-In some edge cases, it's not guaranteed that the the highlight will be 100% the same. If that happens, please create an issue with the sample snippet.
+Languages that work with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).
+In some edge cases, it's not guaranteed that the the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.
 
 | Language           | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ------------------ | :-------------- | ----------------: | --------------: | ---: |
 | abap               | ✅ OK           |                51 |               - |      |
 | actionscript-3     | ✅ OK           |                57 |               - |      |
+| angular-html       | ✅ OK           |               670 |               - |      |
 | angular-ts         | ✅ OK           |               779 |               - |      |
 | apache             | ✅ OK           |                60 |               - |      |
 | apl                | ✅ OK           |               917 |               - |      |
@@ -65,14 +66,13 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | dream-maker        | ✅ OK           |                56 |               - |      |
 | edge               | ✅ OK           |               632 |               - |      |
 | elm                | ✅ OK           |               244 |               - |      |
-| emacs-lisp         | ✅ OK           |               153 |               - |      |
+| emacs-lisp         | ✅ OK           |               153 |               - |   22 |
 | erb                | ✅ OK           |              1312 |               - |      |
 | fennel             | ✅ OK           |                31 |               - |      |
 | fish               | ✅ OK           |                25 |               - |      |
 | fluent             | ✅ OK           |                23 |               - |      |
 | fortran-fixed-form | ✅ OK           |               332 |               - |      |
 | fortran-free-form  | ✅ OK           |               328 |               - |      |
-| fsharp             | ✅ OK           |               239 |               - |      |
 | fsl                | ✅ OK           |                30 |               - |      |
 | gdresource         | ✅ OK           |               157 |               - |      |
 | gdscript           | ✅ OK           |                93 |               - |      |
@@ -86,7 +86,6 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | go                 | ✅ OK           |               123 |               - |      |
 | graphql            | ✅ OK           |               448 |               - |      |
 | groovy             | ✅ OK           |               133 |               - |      |
-| hack               | ✅ OK           |               948 |               - |      |
 | haml               | ✅ OK           |               562 |               - |      |
 | handlebars         | ✅ OK           |               699 |               - |      |
 | haxe               | ✅ OK           |               174 |               - |      |
@@ -110,6 +109,7 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | jsonnet            | ✅ OK           |                33 |               - |      |
 | jssm               | ✅ OK           |                30 |               - |      |
 | jsx                | ✅ OK           |               376 |               - |      |
+| latex              | ✅ OK           |               283 |               - |      |
 | lean               | ✅ OK           |                32 |               - |      |
 | less               | ✅ OK           |               280 |               - |      |
 | liquid             | ✅ OK           |               684 |               - |      |
@@ -120,13 +120,12 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | make               | ✅ OK           |                51 |               - |      |
 | marko              | ✅ OK           |               926 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
-| mdc                | ✅ OK           |               784 |               - |      |
 | mipsasm            | ✅ OK           |                17 |               - |      |
 | mojo               | ✅ OK           |               213 |               - |      |
 | move               | ✅ OK           |               120 |               - |      |
 | narrat             | ✅ OK           |                34 |               - |      |
 | nextflow           | ✅ OK           |                17 |               - |      |
-| nim                | ✅ OK           |              1126 |               - |      |
+| nginx              | ✅ OK           |               378 |               - |      |
 | nix                | ✅ OK           |                80 |               - |      |
 | nushell            | ✅ OK           |                81 |               - |      |
 | objective-c        | ✅ OK           |               223 |               - |      |
@@ -136,6 +135,7 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | plsql              | ✅ OK           |                45 |               - |      |
 | postcss            | ✅ OK           |                49 |               - |      |
 | powerquery         | ✅ OK           |                30 |               - |      |
+| powershell         | ✅ OK           |                88 |               - |      |
 | prisma             | ✅ OK           |                26 |               - |      |
 | prolog             | ✅ OK           |                26 |               - |      |
 | proto              | ✅ OK           |                33 |               - |      |
@@ -162,8 +162,10 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 | solidity           | ✅ OK           |               102 |               - |      |
 | soy                | ✅ OK           |               649 |               - |      |
 | sparql             | ✅ OK           |                19 |               - |      |
+| splunk             | ✅ OK           |                17 |               - |      |
 | sql                | ✅ OK           |                67 |               - |      |
 | ssh-config         | ✅ OK           |                12 |               - |      |
+| stata              | ✅ OK           |               253 |               - |      |
 | stylus             | ✅ OK           |               107 |               - |      |
 | svelte             | ✅ OK           |               636 |               - |      |
 | system-verilog     | ✅ OK           |               102 |               - |      |
@@ -203,18 +205,17 @@ In some edge cases, it's not guaranteed that the the highlight will be 100% the 
 
 ###### Table Field Explanations
 
-- **Highlight Match**: Highlight results match with the WASM engine with the [sample snippets](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples).
+- **Highlight Match**: Whether the highlighting results matched with the WASM engine for the [sample snippet](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples).
 - **Patterns Parsable**: Number of regex patterns that can be parsed by the JavaScript RegExp engine.
 - **Patterns Failed**: Number of regex patterns that can't be parsed by the JavaScript RegExp engine (throws error).
-- **Diff**: Length of characters that are different between the highlight result of two engines.
+- **Diff**: Length of characters that are different between the highlighting results of the two engines.
 
 ## Mismatched Languages
 
-Languages that does not throw with the JavaScript RegExp engine, but will produce different result than the WASM engine. Please use with caution.
+Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine. Please use with caution.
 
 | Language      | Highlight Match                                                                    | Patterns Parsable | Patterns Failed | Diff |
 | ------------- | :--------------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| angular-html  | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=angular-html)  |               670 |               - |  330 |
 | bash          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=bash)          |               148 |               - |   56 |
 | beancount     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=beancount)     |                39 |               - |  171 |
 | c             | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=c)             |               177 |               - |  209 |
@@ -222,40 +223,39 @@ Languages that does not throw with the JavaScript RegExp engine, but will produc
 | elixir        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=elixir)        |               708 |               - |  179 |
 | erlang        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=erlang)        |               147 |               - |  470 |
 | glsl          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=glsl)          |               186 |               - |  306 |
+| kotlin        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kotlin)        |                58 |               - | 1953 |
 | kusto         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)         |                60 |               - |   40 |
-| latex         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=latex)         |               283 |               - |   25 |
-| markdown      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=markdown)      |               118 |               - |   78 |
 | mermaid       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mermaid)       |               129 |               - |   38 |
-| nginx         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)         |               378 |               - |    4 |
 | objective-cpp | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=objective-cpp) |               309 |               - |  172 |
 | php           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=php)           |              1131 |               - |  605 |
-| po            | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)            |                23 |               - |  336 |
+| po            | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)            |                23 |               - |  423 |
 | pug           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=pug)           |               686 |               - |  164 |
 | ruby          | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=ruby)          |              1307 |               - |    1 |
 | shellscript   | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=shellscript)   |               148 |               - |   56 |
 | smalltalk     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=smalltalk)     |                35 |               - |   40 |
-| splunk        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=splunk)        |                17 |               - |    8 |
-| stata         | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=stata)         |               253 |               - |   32 |
 | zsh           | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=zsh)           |               148 |               - |  117 |
 
 ## Unsupported Languages
 
-Languages that throws with the JavaScript RegExp engine (contains syntaxes that we can't polyfill yet). If you need to use these languages, please use the Oniguruma engine.
+Languages that throw with the JavaScript RegExp engine, either because they contain syntax we can't polyfill yet or because the grammar contains an invalid Oniguruma regex (that would also fail when using the WASM engine, but silently). You can try these languages with the `forgiving` option to skip errors, but usually it's best to use the Oniguruma engine instead.
 
-| Language   | Highlight Match                                                            | Patterns Parsable | Patterns Failed | Diff |
-| ---------- | :------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| ada        | ✅ OK                                                                      |               201 |               1 |      |
-| blade      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=blade) |              1124 |               2 |      |
-| rst        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=rst)   |              1835 |              22 |   62 |
-| powershell | ❌ Error                                                                   |                87 |               1 |      |
-| wolfram    | ❌ Error                                                                   |               500 |               1 |   12 |
-| mdx        | ❌ Error                                                                   |               193 |               4 |      |
-| swift      | ❌ Error                                                                   |               325 |               4 |   18 |
-| kotlin     | ❌ Error                                                                   |                52 |               6 | 2986 |
-| purescript | ❌ Error                                                                   |                67 |               6 | 1488 |
-| apex       | ❌ Error                                                                   |               173 |              14 |  242 |
-| haskell    | ❌ Error                                                                   |               136 |              21 |   12 |
-| cpp        | ❌ Error                                                                   |               490 |              22 |   25 |
-| julia      | ❌ Error                                                                   |              1141 |              27 |   49 |
-| csharp     | ❌ Error                                                                   |               276 |              33 |  232 |
-| razor      | ❌ Error                                                                   |               922 |              35 |   26 |
+| Language   | Highlight Match                                                          | Patterns Parsable | Patterns Failed | Diff |
+| ---------- | :----------------------------------------------------------------------- | ----------------: | --------------: | ---: |
+| ada        | ✅ OK                                                                    |               201 |               1 |      |
+| blade      | ✅ OK                                                                    |              1125 |               1 |      |
+| fsharp     | ✅ OK                                                                    |               234 |               5 |      |
+| nim        | ✅ OK                                                                    |              1121 |               5 |      |
+| julia      | ✅ OK                                                                    |              1147 |              21 |      |
+| rst        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=rst) |              1836 |              21 |   62 |
+| hack       | ❌ Error                                                                 |               947 |               1 |  114 |
+| haskell    | ❌ Error                                                                 |               156 |               1 |  143 |
+| wolfram    | ❌ Error                                                                 |               500 |               1 |   12 |
+| purescript | ❌ Error                                                                 |                71 |               2 |   36 |
+| swift      | ❌ Error                                                                 |               326 |               3 |   40 |
+| mdx        | ❌ Error                                                                 |               193 |               4 |      |
+| markdown   | ❌ Error                                                                 |               113 |               5 |  193 |
+| mdc        | ❌ Error                                                                 |               778 |               6 |  389 |
+| apex       | ❌ Error                                                                 |               175 |              12 |  269 |
+| cpp        | ❌ Error                                                                 |               491 |              21 |   25 |
+| csharp     | ❌ Error                                                                 |               281 |              28 |  207 |
+| razor      | ❌ Error                                                                 |               927 |              30 |   26 |

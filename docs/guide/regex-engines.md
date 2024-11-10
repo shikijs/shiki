@@ -4,7 +4,7 @@ outline: deep
 
 # RegExp Engines
 
-TextMate grammars is based on regular expressions to match tokens. Usually, we use [Oniguruma](https://github.com/kkos/oniguruma) (a regular expression engine written in C) to parse the grammar. To make it work in JavaScript, we compile Oniguruma to WebAssembly to run in the browser or Node.js.
+TextMate grammars are based on regular expressions to match tokens. Usually, we use [Oniguruma](https://github.com/kkos/oniguruma) (a regular expression engine written in C) to parse the grammar. To make it work in JavaScript, we compile Oniguruma to WebAssembly to run in the browser or Node.js.
 
 Since v1.15, we expose the ability to for users to switch the RegExp engine and provide custom implementations.
 
@@ -20,7 +20,7 @@ const shiki = await createShiki({
 })
 ```
 
-Shiki come with two built-in engines:
+Shiki comes with two built-in engines:
 
 ## Oniguruma Engine
 
@@ -43,7 +43,7 @@ const shiki = await createShiki({
 This feature is experimental and may change without following semver.
 :::
 
-This experimental engine uses JavaScript's native RegExp. As TextMate grammars' regular expressions are in Oniguruma flavor that might contains syntaxes that are not supported by JavaScript's RegExp, we use [`oniguruma-to-js`](https://github.com/antfu/oniguruma-to-js) to lowering the syntaxes and try to make them compatible with JavaScript's RegExp.
+This engine uses JavaScript's native RegExp. As regular expressions used by TextMate grammars are written for Oniguruma, they might contain syntax that is not supported by JavaScript's RegExp, or expect different behavior for the same syntax. So we use [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) to transpile Oniguruma patterns to native JavaScript RegExp.
 
 ```ts {2,4,9}
 import { createHighlighter } from 'shiki'
@@ -60,9 +60,9 @@ const shiki = await createHighlighter({
 const html = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
 ```
 
-Please check the [compatibility table](/references/engine-js-compat) to check the support status of the languages you are using.
+Please check the [compatibility table](/references/engine-js-compat) for the support status of the languages you are using.
 
-If mismatches are acceptable and you want it to get results whatever it can, you can enable the `forgiving` option to suppress any errors happened during the conversion:
+If mismatches are acceptable and you want best-effort results whenever possible, you can enable the `forgiving` option to suppress any errors that happened during the conversion:
 
 ```ts
 const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
@@ -70,7 +70,7 @@ const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 ```
 
 ::: info
-If you runs Shiki on Node.js (or at build time), we still recommend using the Oniguruma engine for the best result, as most of the time bundle size or WebAssembly support is not a concern.
+If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, we still recommend using the Oniguruma engine for the best result.
 
-The JavaScript engine is more suitable for running in the browser in some cases that you want to control the bundle size.
+The JavaScript engine is best when running in the browser and in cases when you want to control the bundle size.
 :::

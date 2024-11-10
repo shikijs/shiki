@@ -36,11 +36,9 @@ const external = [
   'hast',
   '@shikijs/vscode-textmate',
 
-  // Externalize them to make it easier to patch and experiments
+  // Externalize to make it easier to patch and experiment
   // Versions are pinned to avoid regressions
-  // Later we might consider to bundle them.
-  'oniguruma-to-js',
-  'regex',
+  'oniguruma-to-es',
 ]
 
 export default defineConfig([
