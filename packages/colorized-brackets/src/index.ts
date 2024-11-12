@@ -57,15 +57,25 @@ export function transformerColorizedBrackets(
       liquid: { bracketPairs: jinjaLikeBracketPairs },
       ...options.langs,
     },
+    explicitTrigger: options.explicitTrigger ?? false,
   }
+
   const transformer: ShikiTransformer = {
     name: 'colorizedBrackets',
     preprocess(code, options) {
+      if (!isEnabled(config, this.options.meta?.__raw)) {
+        return
+      }
+
       // includeExplanation is a valid option for codeToTokens
       // but is missing from the type definition here
       (options as CodeToTokensOptions).includeExplanation ||= 'scopeName'
     },
     tokens: function transformTokens(tokens) {
+      if (!isEnabled(config, this.options.meta?.__raw)) {
+        return
+      }
+
       const lang = this.options.lang
 
       for (let lineIndex = 0; lineIndex < tokens.length; lineIndex++) {
@@ -80,4 +90,9 @@ export function transformerColorizedBrackets(
     },
   }
   return transformer
+}
+
+const EXPLICIT_TRIGGER_REGEX = /(^|\s)colorize-brackets($|\s)/
+function isEnabled(config: TransformerColorizedBracketsOptions, meta: string | undefined): boolean {
+  return !config.explicitTrigger || meta?.match(EXPLICIT_TRIGGER_REGEX) != null
 }
