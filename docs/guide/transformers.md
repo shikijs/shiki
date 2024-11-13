@@ -62,7 +62,7 @@ Transformers can also access markdown 'meta' strings in [supported integrations]
 
 ````markdown
 <!-- [!code word:meta=here] -->
-```html meta=here
+```html foo=bar baz-qux="qu ux"
 ````
 
 You can access the raw meta using:
@@ -71,5 +71,5 @@ You can access the raw meta using:
 
 ```ts
 options.meta
-// => { meta: 'here', __raw: 'meta=here' }
+// => { __raw: 'foo=bar baz-qux="qu ux"' }
 ```
