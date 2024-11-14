@@ -695,7 +695,18 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'mermaid',
     'name': 'Mermaid',
+    'aliases': [
+      'mmd'
+    ],
     'import': (() => import('./langs/mermaid.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'mipsasm',
+    'name': 'MIPS Assembly',
+    'aliases': [
+      'mips'
+    ],
+    'import': (() => import('./langs/mipsasm.mjs')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'mojo',
@@ -1439,6 +1450,9 @@ export type BundledLanguage =
   | 'mdx'
   | 'mediawiki'
   | 'mermaid'
+  | 'mips'
+  | 'mipsasm'
+  | 'mmd'
   | 'mojo'
   | 'move'
   | 'nar'

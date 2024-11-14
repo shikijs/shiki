@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { parseMetaHighlightWords } from '../src/transformers/transformer-meta-highlight-word'
+import { parseMetaHighlightWords } from '../src/transformers/meta-highlight-word'
 
 it('parseHighlightWords', () => {
   expect(parseMetaHighlightWords('')).toEqual([])

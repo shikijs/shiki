@@ -169,9 +169,9 @@ CSS variables example:
 }
 ```
 
-If you are migrating from Shiki, some variables are renamed from Shiki's `css-variables`:
+If you are migrating from Shiki v0, some variables are renamed:
 
-| Shiki                      | Shiki                |
+| Shiki v0                   | Shiki v1.0           |
 | -------------------------- | -------------------- |
 | `--shiki-color-text`       | `--shiki-foreground` |
 | `--shiki-color-background` | `--shiki-background` |

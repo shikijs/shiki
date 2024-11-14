@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
@@ -16,6 +16,14 @@ const langs = computed(() => {
   if (bundle.value === 'web')
     return play.bundledLangsWeb
   return play.bundledLangsFull
+})
+watch(showModel, () => {
+  if (showModel.value) {
+    (document.scrollingElement as HTMLElement).style.overflow = 'hidden'
+  }
+  else {
+    (document.scrollingElement as HTMLElement).style.overflow = 'initial'
+  }
 })
 </script>
 

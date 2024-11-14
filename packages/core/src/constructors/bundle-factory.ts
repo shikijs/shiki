@@ -120,7 +120,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       .map(i => resolveLang(i as BundledLangs))
 
     const core = await createHighlighterCore({
-      engine: engine(),
+      engine: options.engine ?? engine(),
       ...options,
       themes: _themes,
       langs,
@@ -190,7 +190,9 @@ export interface ShorthandsBundle<L extends string, T extends string> {
    * Shorthand for `getLastGrammarState` with auto-loaded theme and language.
    * A singleton highlighter it maintained internally.
    */
-  getLastGrammarState: (code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>
+  getLastGrammarState:
+    | ((element: ThemedToken[][] | Root) => GrammarState)
+    | ((code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>)
 }
 
 export function makeSingletonHighlighter<L extends string, T extends string>(

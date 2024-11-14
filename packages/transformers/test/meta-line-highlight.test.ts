@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { parseMetaHighlightString } from '../src/transformers/transformer-meta-highlight'
+import { parseMetaHighlightString } from '../src/transformers/meta-highlight'
 
 it('parseHighlightLines', () => {
   expect(parseMetaHighlightString('')).toBe(null)

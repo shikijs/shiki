@@ -1,8 +1,24 @@
-import type { GrammarState as GrammarStateInterface } from '@shikijs/types'
+import type { GrammarState as GrammarStateInterface, GrammarStateMapKey } from '@shikijs/types'
 import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
 
 import { INITIAL } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
+import { toArray } from '../utils'
+
+const _grammarStateMap = new WeakMap<GrammarStateMapKey, GrammarStateInterface>()
+
+export function setLastGrammarStateToMap(
+  keys: GrammarStateMapKey,
+  state: GrammarStateInterface,
+): void {
+  _grammarStateMap.set(keys, state)
+}
+
+export function getLastGrammarStateFromMap(
+  keys: GrammarStateMapKey,
+): GrammarStateInterface | undefined {
+  return _grammarStateMap.get(keys)
+}
 
 /**
  * GrammarState is a special reference object that holds the state of a grammar.
@@ -11,30 +27,84 @@ import { ShikiError } from '../../../types/src/error'
  */
 export class GrammarState implements GrammarStateInterface {
   /**
+   * Theme to Stack mapping
+   */
+  private _stacks: Record<string, StateStack> = {}
+  public readonly lang: string
+
+  get themes(): string[] {
+    return Object.keys(this._stacks)
+  }
+
+  get theme(): string {
+    return this.themes[0]
+  }
+
+  private get _stack(): StateStack {
+    return this._stacks[this.theme]
+  }
+
+  /**
    * Static method to create a initial grammar state.
    */
-  static initial(lang: string, theme: string): GrammarState {
-    return new GrammarState(INITIAL, lang, theme)
+  static initial(lang: string, themes: string | string[]): GrammarState {
+    return new GrammarState(
+      Object.fromEntries(toArray(themes).map(theme => [theme, INITIAL])),
+      lang,
+    )
   }
 
   constructor(
-    private readonly _stack: StateStack,
-    public readonly lang: string,
-    public readonly theme: string,
-  ) {}
+    stack: StateStack,
+    lang: string,
+    theme: string,
+  )
+  constructor(
+    stacksMap: Record<string, StateStack>,
+    lang: string,
+  )
+  constructor(...args: any[]) {
+    if (args.length === 2) {
+      const [stacksMap, lang] = args as [Record<string, StateStack>, string]
+      this.lang = lang
+      this._stacks = stacksMap
+    }
+    else {
+      const [stack, lang, theme] = args as [StateStack, string, string]
+      this.lang = lang
+      this._stacks = { [theme]: stack }
+    }
+  }
 
+  /**
+   * Get the internal stack object.
+   * @internal
+   */
+  getInternalStack(theme = this.theme): StateStack | undefined {
+    return this._stacks[theme]
+  }
+
+  /**
+   * @deprecated use `getScopes` instead
+   */
   get scopes(): string[] {
-    return getScopes(this._stack as StateStackImpl)
+    return getScopes(this._stacks[this.theme] as StateStackImpl)
+  }
+
+  getScopes(theme: string = this.theme): string[] {
+    return getScopes(this._stacks[theme] as StateStackImpl)
   }
 
   toJSON(): {
     lang: string
     theme: string
+    themes: string[]
     scopes: string[]
   } {
     return {
       lang: this.lang,
       theme: this.theme,
+      themes: this.themes,
       scopes: this.scopes,
     }
   }
@@ -59,9 +129,11 @@ function getScopes(stack: StateStackImpl): string[] {
   return scopes
 }
 
-export function getGrammarStack(state: GrammarState | GrammarStateInterface): StateStack {
+export function getGrammarStack(
+  state: GrammarState | GrammarStateInterface,
+  theme?: string,
+): StateStack | undefined {
   if (!(state instanceof GrammarState))
     throw new ShikiError('Invalid grammar state')
-  // @ts-expect-error _stack is private
-  return state._stack
+  return state.getInternalStack(theme)
 }
