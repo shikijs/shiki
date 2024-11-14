@@ -348,3 +348,84 @@ Remove line breaks between `<span class="line">`. Useful when you set `display: 
 
 Transform `// [\!code ...]` to `// [!code ...]`.
 Avoid rendering the escaped notation syntax as it is.
+
+---
+
+### `transformerStyleToClass`
+
+Convert Shiki's inline styles to unique classes.
+
+Class names are generated based on the hash value of the style object with the prefix/suffix you provide. You can put this transformer in multiple highlights passes and then get the CSS at the end to reuse the exact same styles. As Shiki doesn't handle CSS, it's on your integration to decide how to extract and apply/bundle the CSS.
+
+For example:
+
+```ts
+import { transformerStyleToClass } from '@shikijs/transformers'
+import { codeToHtml } from 'shiki'
+
+const toClass = transformerStyleToClass({ // [!code highlight:3]
+  classPrefix: '__shiki_',
+})
+
+const code = `console.log('hello')`
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  themes: {
+    dark: 'vitesse-dark',
+    light: 'vitesse-light',
+  },
+  defaultColor: false,
+  transformers: [toClass], // [!code highlight]
+})
+
+// The transformer instance exposes some methods to get the CSS
+const css = toClass.getCSS() // [!code highlight]
+
+// use `html` and `css` in your app
+```
+
+HTML output:
+
+```html
+<pre class="shiki shiki-themes vitesse-dark vitesse-light __shiki_9knfln" tabindex="0"><code><span class="line">
+  <span class="__shiki_14cn0u">console</span>
+  <span class="__shiki_ps5uht">.</span>
+  <span class="__shiki_1zrdwt">log</span>
+  <span class="__shiki_ps5uht">(</span>
+  <span class="__shiki_236mh3">'</span>
+  <span class="__shiki_1g4r39">hello</span>
+  <span class="__shiki_236mh3">'</span>
+  <span class="__shiki_ps5uht">)</span>
+</span></code></pre>
+```
+
+CSS output:
+
+```css
+.__shiki_14cn0u {
+  --shiki-dark: #bd976a;
+  --shiki-light: #b07d48;
+}
+.__shiki_ps5uht {
+  --shiki-dark: #666666;
+  --shiki-light: #999999;
+}
+.__shiki_1zrdwt {
+  --shiki-dark: #80a665;
+  --shiki-light: #59873a;
+}
+.__shiki_236mh3 {
+  --shiki-dark: #c98a7d77;
+  --shiki-light: #b5695977;
+}
+.__shiki_1g4r39 {
+  --shiki-dark: #c98a7d;
+  --shiki-light: #b56959;
+}
+.__shiki_9knfln {
+  --shiki-dark: #dbd7caee;
+  --shiki-light: #393a34;
+  --shiki-dark-bg: #121212;
+  --shiki-light-bg: #ffffff;
+}
+```
