@@ -18,7 +18,7 @@ export * from './types'
 export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}): ShikiTransformer {
   const {
     explicitTrigger = true,
-    resultCache,
+    typesCache,
   } = options
 
   const onError = (error: any, code: string): void => {
@@ -37,14 +37,14 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
 
   let twoslasher = defaultTwoslasher
   // Wrap twoslasher with cache when `resultCache` is provided
-  if (resultCache) {
+  if (typesCache) {
     twoslasher = ((code: string, extension?: string, options?: TwoslashExecuteOptions): TwoslashReturn => {
-      const cached = resultCache.read(code) // Restore cache
+      const cached = typesCache.read(code) // Restore cache
       if (cached)
         return cached
 
       const twoslashResult = defaultTwoslasher(code, extension, options)
-      resultCache.write(code, twoslashResult)
+      typesCache.write(code, twoslashResult)
       return twoslashResult
     }) as typeof defaultTwoslasher
     twoslasher.getCacheMap = defaultTwoslasher.getCacheMap
@@ -63,7 +63,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     ? explicitTrigger
     : /\btwoslash\b/
 
-  resultCache?.init?.()
+  typesCache?.init?.()
 
   return {
     ...twoslash,

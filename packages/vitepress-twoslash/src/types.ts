@@ -29,10 +29,10 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
    * })
    * ```
    */
-  resultCache?: TypeResultCache
+  typesCache?: TwoslashTypesCache
 }
 
-export interface TypeResultCache {
+export interface TwoslashTypesCache {
   /**
    * Read cached result
    *
