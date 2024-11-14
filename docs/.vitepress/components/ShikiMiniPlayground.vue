@@ -27,10 +27,10 @@ function onInput() {
 
 <template>
   <div
-    class="language-ts vp-adaptive-theme mini-playground transition-none!" shadow
+    class="language-ts vp-adaptive-theme transition-none! mini-playground" shadow
     :style="[play.preStyle, { colorScheme: currentThemeType }]"
   >
-    <div absolute z-10 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5">
+    <div sticky z-12 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5" bg-inherit>
       <div i-carbon:chevron-down op50 />
       <select v-model="play.lang" font-mono :style="play.preStyle">
         <option v-for="lang in play.allLanguages" :key="lang.id" :value="lang.id">
@@ -62,7 +62,7 @@ function onInput() {
         <div i-carbon:shuffle op50 />
       </button>
     </div>
-    <div relative mt-10 min-h-100>
+    <div relative min-h-100 float-left min-w-full>
       <span ref="highlightContainerRef" v-html="play.output" />
       <textarea
         ref="textAreaRef"
@@ -80,15 +80,11 @@ function onInput() {
 </template>
 
 <style>
-.mini-playground {
-  overflow: hidden;
-}
-
 .mini-playground select {
   background: transparent;
   color: inherit;
   min-width: 8em;
-  padding: 0 !important;
+  padding: 0px !important;
   position: relative;
 }
 .mini-playground select:focus {
