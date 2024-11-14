@@ -20,7 +20,7 @@ export function createCommentNotationTransformer(
       const lines = code.children.filter(i => i.type === 'element')
       const linesToRemove: (Element | Text)[] = []
 
-      code.data ??= {}
+      code.data ??= {} as any
       const data = code.data as {
         _shiki_notation?: ParsedComments
       }
