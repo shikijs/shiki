@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
 import { version } from '../../package.json'
+import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
@@ -41,6 +42,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Next', link: '/packages/next' },
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
+  { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
   { text: 'CLI', link: '/packages/cli' },
 ]
 
@@ -125,6 +127,7 @@ export default withMermaid(defineConfig({
         },
       }),
       transformerRemoveNotationEscape(),
+      transformerColorizedBrackets({ explicitTrigger: true }),
     ],
   },
 

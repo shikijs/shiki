@@ -1,0 +1,16 @@
+<h3>Recommended Products</h3>
+<ul class="recommended_products">
+  {% assign recommended_products =  product.metafields.my_fields.rec_products.value %}
+  <!-- @colors 2-3=Y 84-85=Y -->
+  {% for product in recommended_products  %}
+    <!-- @colors 2-3=Y 42-43=Y -->
+    <li>
+      <a href="{{ product.url }}">
+        <!-- @colors 15-16=Y 30-31=Y -->
+        {{product.title[0]}}
+        <!-- @colors 8-9=Y 23=P 25=P 26-27=Y -->
+      </a>
+    </li>
+  {% endfor %}
+  <!-- @colors 2-3=Y 12-13=Y -->
+</ul>
