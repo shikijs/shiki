@@ -12,8 +12,8 @@ export function parseMetaHighlightString(meta: string): number[] | null {
       const num = v.split('-').map(v => Number.parseInt(v, 10))
       if (num.length === 1)
         return [num[0]]
-      else
-        return Array.from({ length: num[1] - num[0] + 1 }, (_, i) => i + num[0])
+
+      return Array.from({ length: num[1] - num[0] + 1 }, (_, i) => i + num[0])
     })
   return lines
 }
@@ -45,8 +45,13 @@ export function transformerMetaHighlight(
       if (!this.options.meta?.__raw) {
         return
       }
-      ;(this.meta as any)[symbol] ||= parseMetaHighlightString(this.options.meta.__raw)
-      const lines: number[] = (this.meta as any)[symbol] || []
+      const meta = this.meta as {
+        [symbol]: number[] | null
+      }
+
+      meta[symbol] ??= parseMetaHighlightString(this.options.meta.__raw)
+      const lines: number[] = meta[symbol] ?? []
+
       if (lines.includes(line))
         this.addClassToHast(node, className)
       return node
