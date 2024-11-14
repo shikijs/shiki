@@ -4,7 +4,7 @@ Compatibility reference of all built-in grammars with the [JavaScript RegExp eng
 
 > Genreated on Sunday, November 10, 2024
 >
-> Version `1.22.2`
+> Version `1.23.0`
 >
 > Runtime: Node.js v22.11.0
 
