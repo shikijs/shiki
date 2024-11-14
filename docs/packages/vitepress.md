@@ -127,7 +127,7 @@ In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 ```ts twoslash
 // .vitepress/config.ts
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
-import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/fs-cache' // [!code hl]
+import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs' // [!code hl]
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
