@@ -5,6 +5,7 @@ export default defineBuildConfig({
   entries: [
     'src/index.ts',
     'src/client.ts',
+    'src/cache-fs.ts',
   ],
   declaration: true,
   rollup: {
