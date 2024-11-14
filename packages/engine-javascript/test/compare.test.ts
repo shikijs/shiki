@@ -7,8 +7,6 @@ import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src'
 
-await loadWasm(import('@shikijs/core/wasm-inlined'))
-
 function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
   const instances: Instance[] = []
 
@@ -144,7 +142,11 @@ const cases: Cases[] = [
   },
 ]
 
-describe('cases', async () => {
+describe.skipIf(
+  +process.versions.node.split('.')[0] < 20,
+)('cases', async () => {
+  await loadWasm(import('@shikijs/core/wasm-inlined'))
+
   const resolved = await Promise.all(cases.map(async (c) => {
     const theme = await c.theme().then(r => r.default)
     const lang = await c.lang().then(r => r.default)
