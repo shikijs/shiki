@@ -13,6 +13,52 @@ import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
 
+export function createFileSystemTypesCache(options: {
+  dir: string
+}): TypesCache {
+  return {
+    read(hash) {
+      const filePath = join(options.dir, `${hash}.json`)
+      if (!existsSync(filePath)) {
+        return null
+      }
+      return JSON.parse(readFileSync(filePath, { encoding: 'utf-8' }))
+    },
+    write(hash, data) {
+      const filePath = join(options.dir, `${hash}.json`)
+      const json = JSON.stringify(data)
+
+      writeFileSync(filePath, json, { encoding: 'utf-8' })
+    },
+    preprocess() {
+      try {
+        mkdirSync(options.dir)
+      }
+      catch {} // Dir has already existed
+    },
+  }
+}
+
+export interface TypesCache {
+  /**
+   * Read hash JSON
+   * @param hash Code hash
+   */
+  read: (hash: string) => TwoslashReturn | null
+
+  /**
+   * Write cache JSON
+   * @param hash Code hash
+   * @param data Twoslash data
+   */
+  write: (hash: string, data: TwoslashReturn) => void
+
+  /**
+   * This function is called when transformerTwoslash initialized.
+   */
+  preprocess?: () => void
+}
+
 interface TransformerTwoslashVueOptions extends TransformerTwoslashOptions {
   twoslashOptions?: TransformerTwoslashOptions['twoslashOptions'] & VueSpecificOptions
 }
@@ -25,10 +71,19 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
   explicitTrigger?: TransformerTwoslashOptions['explicitTrigger']
 
   /**
-   * Directory path for caching types
+   * The options for caching types
    * @default false
+   * @example
+   * ```ts
+   * import { transformerTwoslash, createFileSystemTypesCache } from '@shikijs/vitepress-twoslash'
+   * transformerTwoslash({
+   *   typesCache: createFileSystemTypesCache({
+   *     dir: './my-cache-dir'
+   *   })
+   * })
+   * ```
    */
-  typesCacheDir?: string | false
+  typesCache?: TypesCache | false
 }
 
 /**
@@ -39,7 +94,7 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
 export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}): ShikiTransformer {
   const {
     explicitTrigger = true,
-    typesCacheDir = false,
+    typesCache = false,
   } = options
 
   const onError = (error: any, code: string): void => {
@@ -56,22 +111,26 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
 
   const defaultTwoslasher = createTwoslasher(options.twoslashOptions)
   const twoslasherWithCache = (code: string, extension?: string, options?: TwoslashExecuteOptions): TwoslashReturn => {
-    if (!typesCacheDir) {
+    if (!typesCache) {
+      // This function is called if typesCache is not false.
       throw new TypeError('Unreachable error')
     }
     const hash = createHash('SHA256').update(code).digest('hex')
-    const twoslashed = defaultTwoslasher(code, extension, options)
-    const cachedPath = join(typesCacheDir, `${hash}.json`)
-    if (existsSync(cachedPath)) {
-      return JSON.parse(readFileSync(cachedPath, { encoding: 'utf-8' }))
+
+    const cachedTwoslashResult = typesCache.read(hash) // Restore cache
+    if (cachedTwoslashResult) {
+      return cachedTwoslashResult
     }
-    writeFileSync(cachedPath, JSON.stringify(twoslashed))
-    return twoslashed
+
+    const twoslashResult = defaultTwoslasher(code, extension, options)
+    typesCache.write(hash, twoslashResult)
+
+    return twoslashResult
   }
   twoslasherWithCache.getCacheMap = defaultTwoslasher.getCacheMap
 
   const twoslash = createTransformerFactory(
-    typesCacheDir ? twoslasherWithCache : defaultTwoslasher,
+    typesCache ? twoslasherWithCache : defaultTwoslasher,
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
@@ -85,12 +144,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     ? explicitTrigger
     : /\btwoslash\b/
 
-  if (typesCacheDir) {
-    try {
-      mkdirSync(typesCacheDir)
-    }
-    catch {}
-  }
+  typesCache && typesCache.preprocess?.()
 
   return {
     ...twoslash,
