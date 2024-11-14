@@ -62,12 +62,16 @@ const html = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord'
 
 Please check the [compatibility table](/references/engine-js-compat) for the support status of the languages you are using.
 
-If mismatches are acceptable and you want best-effort results whenever possible, you can enable the `forgiving` option to suppress any errors that happened during the conversion:
+Unlike the Oniguruma engine, the JavaScript engine is strict by default. It will throw an error if it encounters a pattern that it cannot convert. If mismatches are acceptable and you want best-effort results whenever possible, you can enable the `forgiving` option to suppress any errors that happened during the conversion:
 
 ```ts
 const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 // ...use the engine
 ```
+
+::: info
+The JavaScript engine requires the [RegExp `v` flag support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024. [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)
+:::
 
 ::: info
 If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, we still recommend using the Oniguruma engine for the best result.
