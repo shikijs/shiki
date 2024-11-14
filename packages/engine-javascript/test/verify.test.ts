@@ -6,9 +6,12 @@ import fg from 'fast-glob'
 import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
 
-describe.skipIf(
-  +process.versions.node.split('.')[0] < 20,
-)('verify', async () => {
+describe('verify', async () => {
+  if (+process.versions.node.split('.')[0] < 20) {
+    it('skip', () => {})
+    return
+  }
+
   const files = await fg('*.json', {
     cwd: fileURLToPath(new URL('./__records__', import.meta.url)),
     absolute: true,
