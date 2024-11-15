@@ -161,7 +161,10 @@ describe.skipIf(
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
       const engineWasm = createWasmOnigLibWrapper()
-      const engineJs = createJavaScriptRegexEngine()
+      const engineJs = createJavaScriptRegexEngine({
+        forgiving: true,
+        target: 'ES2024',
+      })
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
