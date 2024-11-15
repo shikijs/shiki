@@ -4,8 +4,8 @@ import type {
   RegexEngineString,
 } from '@shikijs/types'
 import type { IOnigMatch } from '@shikijs/vscode-textmate'
-import { onigurumaToRegexp } from 'oniguruma-to-js'
-import { replacements } from './replacements'
+import type { Options as OnigurumaToEsOptions } from 'oniguruma-to-es'
+import { toRegExp } from 'oniguruma-to-es'
 
 export interface JavaScriptRegexEngineOptions {
   /**
@@ -16,11 +16,26 @@ export interface JavaScriptRegexEngineOptions {
   forgiving?: boolean
 
   /**
-   * Use JavaScript to simulate some unsupported regex features.
+   * Cleanup some grammar patterns before use.
    *
    * @default true
    */
   simulation?: boolean
+
+  /**
+   * The target ECMAScript version.
+   *
+   * For the best accuracy, Oniguruma-to-ES needs the `v` flag support in RegExp which is landed in ES2024.
+   * Which requires Node.js 20+ or Chrome 112+.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets
+   *
+   * For the maximum compatibility, you can set it to `ES2018`. Which will use the `u` flag to simulate and will be less accurate.
+   *
+   * Set to `auto` to detect the target version automatically.
+   *
+   * @default 'auto'
+   */
+  target?: 'ES2024' | 'ES2025' | 'ES2018' | 'auto'
 
   /**
    * Cache for regex patterns.
@@ -30,29 +45,53 @@ export interface JavaScriptRegexEngineOptions {
   /**
    * Custom pattern to RegExp constructor.
    *
-   * By default `oniguruma-to-js` is used.
+   * By default `oniguruma-to-es` is used.
    */
   regexConstructor?: (pattern: string) => RegExp
 }
 
+type NonNullable<T> = T extends null | undefined ? never : T
+
 const MAX = 4294967295
+
+let supportedRegExpTarget: OnigurumaToEsOptions['target'] | undefined
+
+function detectRegExpTarget(): NonNullable<OnigurumaToEsOptions['target']> {
+  if (supportedRegExpTarget != null)
+    return supportedRegExpTarget
+
+  supportedRegExpTarget = 'ES2018'
+
+  try {
+    // eslint-disable-next-line prefer-regex-literals, no-new
+    new RegExp('a', 'v')
+    supportedRegExpTarget = 'ES2024'
+  }
+  catch {
+    supportedRegExpTarget = 'ES2018'
+  }
+
+  return supportedRegExpTarget
+}
 
 /**
  * The default RegExp constructor for JavaScript regex engine.
  */
-export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
-  return onigurumaToRegexp(
+export function defaultJavaScriptRegexConstructor(pattern: string, options?: OnigurumaToEsOptions): RegExp {
+  return toRegExp(
     pattern,
     {
-      flags: 'dgm',
-      ignoreContiguousAnchors: true,
+      accuracy: 'loose',
+      global: true,
+      hasIndices: true,
+      tmGrammar: true,
+      ...options,
     },
   )
 }
 
 export class JavaScriptScanner implements PatternScanner {
   regexps: (RegExp | null)[]
-  contiguousAnchorSimulation: boolean[]
 
   constructor(
     public patterns: string[],
@@ -61,12 +100,16 @@ export class JavaScriptScanner implements PatternScanner {
     const {
       forgiving = false,
       cache,
+      target = 'auto',
       simulation = true,
-      regexConstructor = defaultJavaScriptRegexConstructor,
+      regexConstructor = (pattern: string) => defaultJavaScriptRegexConstructor(pattern, {
+        target: target === 'auto'
+          ? detectRegExpTarget()
+          : target,
+      }),
     } = options
 
-    this.contiguousAnchorSimulation = Array.from({ length: patterns.length }, () => false)
-    this.regexps = patterns.map((p, idx) => {
+    this.regexps = patterns.map((p) => {
       /**
        * vscode-textmate replace anchors to \uFFFF, where we still not sure how to handle it correctly
        *
@@ -76,10 +119,6 @@ export class JavaScriptScanner implements PatternScanner {
        */
       if (simulation)
         p = p.replaceAll('(^|\\\uFFFF)', '(^|\\G)')
-
-      // Detect contiguous anchors for simulation
-      if (simulation && (p.startsWith('(^|\\G)') || p.startsWith('(\\G|^)')))
-        this.contiguousAnchorSimulation[idx] = true
 
       // Cache
       const cached = cache?.get(p)
@@ -92,13 +131,7 @@ export class JavaScriptScanner implements PatternScanner {
         throw cached
       }
       try {
-        let pattern = p
-        if (simulation) {
-          for (const [from, to] of replacements) {
-            pattern = pattern.replaceAll(from, to)
-          }
-        }
-        const regex = regexConstructor(pattern)
+        const regex = regexConstructor(p)
         cache?.set(p, regex)
         return regex
       }
@@ -143,25 +176,18 @@ export class JavaScriptScanner implements PatternScanner {
       if (!regexp)
         continue
       try {
-        let offset = 0
         regexp.lastIndex = startPosition
-        let match = regexp.exec(str)
+        const match = regexp.exec(str)
 
-        // If a regex starts with `(^|\\G)` or `(\\G|^)`, we simulate the behavior by cutting the string
-        if (!match && this.contiguousAnchorSimulation[i]) {
-          offset = startPosition
-          regexp.lastIndex = 0
-          match = regexp.exec(str.slice(startPosition))
-        }
         if (!match)
           continue
 
         // If the match is at the start position, return it immediately
         if (match.index === startPosition) {
-          return toResult(i, match, offset)
+          return toResult(i, match, 0)
         }
         // Otherwise, store it for later
-        pending.push([i, match, offset])
+        pending.push([i, match, 0])
       }
       catch (e) {
         if (this.options.forgiving)
@@ -187,9 +213,10 @@ export class JavaScriptScanner implements PatternScanner {
 /**
  * Use the modern JavaScript RegExp engine to implement the OnigScanner.
  *
- * As Oniguruma regex is more powerful than JavaScript regex, some patterns may not be supported.
- * Errors will be thrown when parsing TextMate grammars with unsupported patterns.
- * Set `forgiving` to `true` to ignore these errors and skip the unsupported patterns.
+ * As Oniguruma supports some features that can't be emulated using native JavaScript regexes, some
+ * patterns are not supported. Errors will be thrown when parsing TextMate grammars with
+ * unsupported patterns, and when the grammar includes patterns that use invalid Oniguruma syntax.
+ * Set `forgiving` to `true` to ignore these errors and skip any unsupported or invalid patterns.
  *
  * @experimental
  */

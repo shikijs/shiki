@@ -12,8 +12,11 @@ import { format } from 'prettier'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
-const engine = createJavaScriptRegexEngine()
+const engine = createJavaScriptRegexEngine({
+  target: 'ES2024',
+})
 const engineForgiving = createJavaScriptRegexEngine({
+  target: 'ES2024',
   forgiving: true,
 })
 
@@ -219,27 +222,27 @@ async function run() {
     '',
     '## Supported Languages',
     '',
-    'Languages that works with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).',
-    'In some edge cases, it\'s not guaranteed that the the highlight will be 100% the same. If that happens, please create an issue with the sample snippet.',
+    'Languages that work with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).',
+    'In some edge cases, it\'s not guaranteed that the the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.',
     '',
     createTable(reportOk),
     '',
     '###### Table Field Explanations',
     '',
-    '- **Highlight Match**: Highlight results match with the WASM engine with the [sample snippets](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples).',
+    '- **Highlight Match**: Whether the highlighting results matched with the WASM engine for the [sample snippet](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples).',
     '- **Patterns Parsable**: Number of regex patterns that can be parsed by the JavaScript RegExp engine.',
     '- **Patterns Failed**: Number of regex patterns that can\'t be parsed by the JavaScript RegExp engine (throws error).',
-    '- **Diff**: Length of characters that are different between the highlight result of two engines.',
+    '- **Diff**: Length of characters that are different between the highlighting results of the two engines.',
     '',
     '## Mismatched Languages',
     '',
-    'Languages that does not throw with the JavaScript RegExp engine, but will produce different result than the WASM engine. Please use with caution.',
+    'Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine. Please use with caution.',
     '',
     createTable(reportMismatch),
     '',
     '## Unsupported Languages',
     '',
-    'Languages that throws with the JavaScript RegExp engine (contains syntaxes that we can\'t polyfill yet). If you need to use these languages, please use the Oniguruma engine.',
+    'Languages that throw with the JavaScript RegExp engine, either because they contain syntax we can\'t polyfill yet or because the grammar contains an invalid Oniguruma regex (that would also fail when using the WASM engine, but silently). You can try these languages with the `forgiving` option to skip errors, but usually it\'s best to use the Oniguruma engine instead.',
     '',
     createTable(reportError),
   ].join('\n')
