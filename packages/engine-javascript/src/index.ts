@@ -4,6 +4,7 @@ import type {
   RegexEngineString,
 } from '@shikijs/types'
 import type { IOnigMatch } from '@shikijs/vscode-textmate'
+import type { Options as OnigurumaToEsOptions } from 'oniguruma-to-es'
 import { toRegExp } from 'oniguruma-to-es'
 
 export interface JavaScriptRegexEngineOptions {
@@ -22,6 +23,21 @@ export interface JavaScriptRegexEngineOptions {
   simulation?: boolean
 
   /**
+   * The target ECMAScript version.
+   *
+   * For the best accuracy, Oniguruma-to-ES needs the `v` flag support in RegExp which is landed in ES2024.
+   * Which requires Node.js 20+ or Chrome 112+.
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets
+   *
+   * For the maximum compatibility, you can set it to `ES2018`. Which will use the `u` flag to simulate and will be less accurate.
+   *
+   * Set to `auto` to detect the target version automatically.
+   *
+   * @default 'auto'
+   */
+  target?: 'ES2024' | 'ES2025' | 'ES2018' | 'auto'
+
+  /**
    * Cache for regex patterns.
    */
   cache?: Map<string, RegExp | Error> | null
@@ -34,12 +50,34 @@ export interface JavaScriptRegexEngineOptions {
   regexConstructor?: (pattern: string) => RegExp
 }
 
+type NonNullable<T> = T extends null | undefined ? never : T
+
 const MAX = 4294967295
+
+let supportedRegExpTarget: OnigurumaToEsOptions['target'] | undefined
+
+function detectRegExpTarget(): NonNullable<OnigurumaToEsOptions['target']> {
+  if (supportedRegExpTarget != null)
+    return supportedRegExpTarget
+
+  supportedRegExpTarget = 'ES2018'
+
+  try {
+    // eslint-disable-next-line prefer-regex-literals, no-new
+    new RegExp('a', 'v')
+    supportedRegExpTarget = 'ES2024'
+  }
+  catch {
+    supportedRegExpTarget = 'ES2018'
+  }
+
+  return supportedRegExpTarget
+}
 
 /**
  * The default RegExp constructor for JavaScript regex engine.
  */
-export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
+export function defaultJavaScriptRegexConstructor(pattern: string, options?: OnigurumaToEsOptions): RegExp {
   return toRegExp(
     pattern,
     {
@@ -47,6 +85,7 @@ export function defaultJavaScriptRegexConstructor(pattern: string): RegExp {
       global: true,
       hasIndices: true,
       tmGrammar: true,
+      ...options,
     },
   )
 }
@@ -61,8 +100,13 @@ export class JavaScriptScanner implements PatternScanner {
     const {
       forgiving = false,
       cache,
+      target = 'auto',
       simulation = true,
-      regexConstructor = defaultJavaScriptRegexConstructor,
+      regexConstructor = (pattern: string) => defaultJavaScriptRegexConstructor(pattern, {
+        target: target === 'auto'
+          ? detectRegExpTarget()
+          : target,
+      }),
     } = options
 
     this.regexps = patterns.map((p) => {
