@@ -124,7 +124,7 @@ To speed up the build process, you can enable the file system cache for the gene
 
 In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 
-```ts twoslash
+```ts
 // .vitepress/config.ts
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs' // [!code hl]
