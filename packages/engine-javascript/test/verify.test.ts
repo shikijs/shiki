@@ -21,7 +21,7 @@ describe('verify', async () => {
   const cache = new Map<string, RegExp | Error>()
 
   for (const file of files) {
-  // Some token positions are off in this record
+    // Some token positions are off in this record
     const name = basename(file, '.json')
 
     // TODO: markdown support is still problematic
