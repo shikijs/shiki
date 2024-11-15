@@ -130,6 +130,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/cadence.mjs')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'cairo',
+    'name': 'Cairo',
+    'import': (() => import('./langs/cairo.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'clarity',
     'name': 'Clarity',
     'import': (() => import('./langs/clarity.mjs')) as DynamicImportLanguageRegistration
@@ -1315,6 +1320,7 @@ export type BundledLanguage =
   | 'c#'
   | 'c++'
   | 'cadence'
+  | 'cairo'
   | 'cdc'
   | 'clarity'
   | 'clj'
