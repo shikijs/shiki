@@ -2,11 +2,11 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Genreated on Sunday, November 10, 2024
+> Genreated on Friday, November 15, 2024
 >
 > Version `1.23.0`
 >
-> Runtime: Node.js v22.11.0
+> Runtime: Node.js v20.18.0
 
 ## Report Summary
 

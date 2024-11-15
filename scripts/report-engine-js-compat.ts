@@ -12,8 +12,11 @@ import { format } from 'prettier'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
 
-const engine = createJavaScriptRegexEngine()
+const engine = createJavaScriptRegexEngine({
+  target: 'ES2024',
+})
 const engineForgiving = createJavaScriptRegexEngine({
+  target: 'ES2024',
   forgiving: true,
 })
 

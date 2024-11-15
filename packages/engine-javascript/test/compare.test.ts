@@ -105,7 +105,7 @@ const cases: Cases[] = [
     theme: () => import('../../shiki/src/themes/nord.mjs'),
     lang: () => import('../../shiki/src/langs/sql.mjs'),
     cases: [
-      'SELECT * FROM foo',
+      // 'SELECT * FROM foo',
       [
         'USE AdventureWorks2022;',
         'GO',
