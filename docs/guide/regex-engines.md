@@ -70,11 +70,21 @@ const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 ```
 
 ::: info
-The JavaScript engine requires the [RegExp `v` flag support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024. [Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)
-:::
-
-::: info
 If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, we still recommend using the Oniguruma engine for the best result.
 
 The JavaScript engine is best when running in the browser and in cases when you want to control the bundle size.
 :::
+
+### JavaScript Runtime Target
+
+For the most accurate result, [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) requires the [RegExp `v` flag support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024 ([Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)).
+
+For older environments, it can simulate the behavior but `u` flag but might yield less accurate results.
+
+By default, it automatically detects the runtime target and uses the appropriate behavior. You can override this behavior by setting the `target` option:
+
+```ts
+const jsEngine = createJavaScriptRegexEngine({
+  target: 'ES2018', // or 'ES2024', default is 'auto'
+})
+```
