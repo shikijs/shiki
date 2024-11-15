@@ -244,6 +244,8 @@ catalogs:
 overrides:
   '@shikijs/compat': workspace:*
   '@shikijs/core': workspace:*
+  '@shikijs/engine-javascript': workspace:*
+  '@shikijs/engine-oniguruma': workspace:*
   '@shikijs/markdown-it': workspace:*
   '@shikijs/rehype': workspace:*
   '@shikijs/transformers': workspace:*
@@ -288,6 +290,12 @@ importers:
       '@rollup/plugin-terser':
         specifier: 'catalog:'
         version: 0.4.4(rollup@4.24.2)
+      '@shikijs/engine-javascript':
+        specifier: workspace:*
+        version: link:packages/engine-javascript
+      '@shikijs/engine-oniguruma':
+        specifier: workspace:*
+        version: link:packages/engine-oniguruma
       '@shikijs/markdown-it':
         specifier: workspace:*
         version: link:packages/markdown-it

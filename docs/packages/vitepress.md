@@ -117,3 +117,26 @@ onMounted(() => {
   </button>
 </template>
 ```
+
+### File System Cache
+
+To speed up the build process, you can enable the file system cache for the generated types, that shares across multiple builds. By default the cache is stored in the `.vitepress/cache/twoslash` along with other VitePress caches.
+
+In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
+
+```ts
+// .vitepress/config.ts
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs' // [!code hl]
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  markdown: {
+    codeTransformers: [
+      transformerTwoslash({
+        typesCache: createFileSystemTypesCache() // [!code hl]
+      })
+    ]
+  }
+})
+```
