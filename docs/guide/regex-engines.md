@@ -77,11 +77,11 @@ The JavaScript engine is best when running in the browser and in cases when you 
 
 ### JavaScript Runtime Target
 
-For the most accurate result, [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) requires the [RegExp `v` flag support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024 ([Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)).
+For the best result, [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) uses the [RegExp `v` flag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024 ([Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)).
 
-For older environments, it can simulate the behavior but `u` flag but might yield less accurate results.
+For older environments, it can use the `u` flag but somewhat fewer grammars are supported.
 
-By default, it automatically detects the runtime target and uses the appropriate behavior. You can override this behavior by setting the `target` option:
+By default, the runtime target is automatically detected. You can override this behavior by setting the `target` option:
 
 ```ts
 const jsEngine = createJavaScriptRegexEngine({

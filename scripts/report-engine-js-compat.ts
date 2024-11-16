@@ -204,7 +204,7 @@ async function run() {
     '',
     'Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).',
     '',
-    `> Genreated on ${new Date().toLocaleDateString('en-US', { dateStyle: 'full' })} `,
+    `> Generated on ${new Date().toLocaleDateString('en-US', { dateStyle: 'full' })} `,
     '>',
     `> Version \`${version}\``,
     '>',
