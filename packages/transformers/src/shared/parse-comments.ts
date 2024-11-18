@@ -21,34 +21,42 @@ const matchers: [re: RegExp, endOfLine: boolean][] = [
   [/^(\*)(.+)$/, true],
 ]
 
-export function parseComments(lines: Element[], jsx: boolean): ParsedComments {
+/**
+ * @param lines line tokens
+ * @param jsx enable JSX parsing
+ * @param legacy support legacy behaviours, force to parse all tokens.
+ */
+export function parseComments(lines: Element[], jsx: boolean, legacy = false): ParsedComments {
   const out: ParsedComments = []
 
   for (const line of lines) {
     const elements = line.children
-    // one step further for JSX as it's inside `{}`
-    const start = jsx ? elements.length - 2 : elements.length - 1
+    let start = elements.length - 1
+    if (legacy)
+      start = 0
+    else if (jsx)
+      // one step further for JSX as comment is inside curly brackets
+      start = elements.length - 2
 
     for (let i = Math.max(start, 0); i < elements.length; i++) {
       const token = elements[i]
-
       if (token.type !== 'element')
+        continue
+      const head = token.children.at(0)
+      if (head?.type !== 'text')
         continue
 
       const isLast = i === elements.length - 1
-      const match = matchToken(token, isLast)
+      const match = matchToken(head.value, isLast)
       if (!match)
         continue
 
       if (jsx && !isLast && i !== 0) {
-        const left = elements[i - 1]
-        const right = elements[i + 1]
-
         out.push({
           info: match,
           line,
           token,
-          isJsxStyle: isValue(left, '{') && isValue(right, '}'),
+          isJsxStyle: isValue(elements[i - 1], '{') && isValue(elements[i + 1], '}'),
         })
       }
       else {
@@ -76,25 +84,21 @@ function isValue(element: ElementContent, value: string): boolean {
 }
 
 /**
- * @param token the token node (children of line)
+ * @param text text value of comment node
  * @param isLast whether the token is located at the end of line
  */
-function matchToken(token: Element, isLast: boolean): [prefix: string, content: string, suffix?: string] | undefined {
-  const text = token.children[0]
-  if (text.type !== 'text')
-    return
+function matchToken(text: string, isLast: boolean): [prefix: string, content: string, suffix?: string] | undefined {
+  // no leading and trailing spaces allowed for matchers
+  // we extract the spaces
+  let trimmed = text.trimStart()
+  const spaceFront = text.length - trimmed.length
+
+  trimmed = trimmed.trimEnd()
+  const spaceEnd = text.length - trimmed.length - spaceFront
 
   for (const [matcher, endOfLine] of matchers) {
     if (endOfLine && !isLast)
       continue
-
-    // no leading and trailing spaces allowed for matchers
-    // we extract the spaces
-    let trimmed = text.value.trimStart()
-    const spaceFront = text.value.length - trimmed.length
-
-    trimmed = trimmed.trimEnd()
-    const spaceEnd = text.value.length - trimmed.length - spaceFront
 
     const result = matcher.exec(trimmed)
     if (!result)
@@ -106,4 +110,18 @@ function matchToken(token: Element, isLast: boolean): [prefix: string, content: 
       result[3] ? result[3] + ' '.repeat(spaceEnd) : undefined,
     ]
   }
+}
+
+/**
+ * Remove empty comment prefixes at line end, e.g. `// `
+ */
+export function legacyClearEndCommentPrefix(text: string): string {
+  const regex = /(?:\/\/|["'#]|;{1,2}|%{1,2}|--)(.*)$/
+  const result = regex.exec(text)
+
+  if (result && result[1].trim().length === 0) {
+    return text.slice(0, result.index)
+  }
+
+  return text
 }

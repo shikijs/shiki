@@ -1,6 +1,6 @@
 import type { Element, Text } from 'hast'
 import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
-import { parseComments, type ParsedComments } from './parse-comments'
+import { legacyClearEndCommentPrefix, parseComments, type ParsedComments } from './parse-comments'
 
 export function createCommentNotationTransformer(
   name: string,
@@ -13,6 +13,7 @@ export function createCommentNotationTransformer(
     lines: Element[],
     index: number
   ) => boolean,
+  legacy = false,
 ): ShikiTransformer {
   return {
     name,
@@ -25,7 +26,7 @@ export function createCommentNotationTransformer(
         _shiki_notation?: ParsedComments
       }
 
-      data._shiki_notation ??= parseComments(lines, ['jsx', 'tsx'].includes(this.options.lang))
+      data._shiki_notation ??= parseComments(lines, ['jsx', 'tsx'].includes(this.options.lang), legacy)
       const parsed = data._shiki_notation
 
       for (const comment of parsed) {
@@ -34,16 +35,25 @@ export function createCommentNotationTransformer(
 
         const isLineCommentOnly = comment.line.children.length === (comment.isJsxStyle ? 3 : 1)
         let lineIdx = lines.indexOf(comment.line)
-        if (isLineCommentOnly)
+        if (isLineCommentOnly && !legacy)
           lineIdx++
 
+        let replaced = false
         comment.info[1] = comment.info[1].replace(regex, (...match) => {
           if (onMatch.call(this, match, comment.line, comment.token, lines, lineIdx)) {
+            replaced = true
             return ''
           }
 
           return match[0]
         })
+
+        if (!replaced)
+          continue
+
+        if (legacy) {
+          comment.info[1] = legacyClearEndCommentPrefix(comment.info[1])
+        }
 
         const isEmpty = comment.info[1].trim().length === 0
         // ignore comment node

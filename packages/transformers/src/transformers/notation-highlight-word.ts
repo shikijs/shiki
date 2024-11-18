@@ -11,6 +11,8 @@ export interface TransformerNotationWordHighlightOptions {
    * Class added to the root element when the code has highlighted words
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 export function transformerNotationWordHighlight(
@@ -19,6 +21,7 @@ export function transformerNotationWordHighlight(
   const {
     classActiveWord = 'highlighted-word',
     classActivePre = undefined,
+    legacy,
   } = options
 
   return createCommentNotationTransformer(
@@ -37,5 +40,6 @@ export function transformerNotationWordHighlight(
         this.addClassToHast(this.pre, classActivePre)
       return true
     },
+    legacy,
   )
 }

@@ -7,6 +7,8 @@ export interface TransformerNotationErrorLevelOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 /**
@@ -21,12 +23,14 @@ export function transformerNotationErrorLevel(
       warning: ['highlighted', 'warning'],
     },
     classActivePre = 'has-highlighted',
+    legacy,
   } = options
 
   return transformerNotationMap(
     {
       classMap,
       classActivePre,
+      legacy,
     },
     '@shikijs/transformers:notation-error-level',
   )

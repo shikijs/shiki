@@ -7,6 +7,8 @@ export interface TransformerNotationMapOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 function escapeRegExp(str: string): string {
@@ -20,6 +22,7 @@ export function transformerNotationMap(
   const {
     classMap = {},
     classActivePre = undefined,
+    legacy,
   } = options
 
   return createCommentNotationTransformer(
@@ -36,5 +39,6 @@ export function transformerNotationMap(
         this.addClassToHast(this.pre, classActivePre)
       return true
     },
+    legacy,
   )
 }
