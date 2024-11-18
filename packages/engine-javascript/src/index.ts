@@ -4,7 +4,7 @@ import type {
   RegexEngineString,
 } from '@shikijs/types'
 import type { IOnigMatch } from '@shikijs/vscode-textmate'
-import type { Options as OnigurumaToEsOptions } from 'oniguruma-to-es'
+import type { OnigurumaToEsOptions } from 'oniguruma-to-es'
 import { toRegExp } from 'oniguruma-to-es'
 
 export interface JavaScriptRegexEngineOptions {
@@ -16,26 +16,21 @@ export interface JavaScriptRegexEngineOptions {
   forgiving?: boolean
 
   /**
-   * Cleanup some grammar patterns before use.
-   *
-   * @default true
-   */
-  simulation?: boolean
-
-  /**
    * The target ECMAScript version.
    *
-   * For the best accuracy, Oniguruma-to-ES needs the `v` flag support in RegExp which is landed in ES2024.
-   * Which requires Node.js 20+ or Chrome 112+.
+   * Oniguruma-To-ES uses RegExp features from later versions of ECMAScript to provide improved
+   * accuracy and add support for more grammars. If using target `ES2024` or later, the RegExp `v`
+   * flag is used which requires Node.js 20+ or Chrome 112+.
    * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets
    *
-   * For the maximum compatibility, you can set it to `ES2018`. Which will use the `u` flag to simulate and will be less accurate.
+   * For maximum compatibility, you can set it to `ES2018` which uses the RegExp `u` flag but
+   * supports a few less grammars.
    *
-   * Set to `auto` to detect the target version automatically.
+   * Set to `auto` to automatically detect the latest version supported by the environment.
    *
    * @default 'auto'
    */
-  target?: 'ES2024' | 'ES2025' | 'ES2018' | 'auto'
+  target?: 'auto' | 'ES2025' | 'ES2024' | 'ES2018'
 
   /**
    * Cache for regex patterns.
@@ -50,29 +45,7 @@ export interface JavaScriptRegexEngineOptions {
   regexConstructor?: (pattern: string) => RegExp
 }
 
-type NonNullable<T> = T extends null | undefined ? never : T
-
 const MAX = 4294967295
-
-let supportedRegExpTarget: OnigurumaToEsOptions['target'] | undefined
-
-function detectRegExpTarget(): NonNullable<OnigurumaToEsOptions['target']> {
-  if (supportedRegExpTarget != null)
-    return supportedRegExpTarget
-
-  supportedRegExpTarget = 'ES2018'
-
-  try {
-    // eslint-disable-next-line prefer-regex-literals, no-new
-    new RegExp('a', 'v')
-    supportedRegExpTarget = 'ES2024'
-  }
-  catch {
-    supportedRegExpTarget = 'ES2018'
-  }
-
-  return supportedRegExpTarget
-}
 
 /**
  * The default RegExp constructor for JavaScript regex engine.
@@ -101,25 +74,10 @@ export class JavaScriptScanner implements PatternScanner {
       forgiving = false,
       cache,
       target = 'auto',
-      simulation = true,
-      regexConstructor = (pattern: string) => defaultJavaScriptRegexConstructor(pattern, {
-        target: target === 'auto'
-          ? detectRegExpTarget()
-          : target,
-      }),
+      regexConstructor = (pattern: string) => defaultJavaScriptRegexConstructor(pattern, { target }),
     } = options
 
     this.regexps = patterns.map((p) => {
-      /**
-       * vscode-textmate replace anchors to \uFFFF, where we still not sure how to handle it correctly
-       *
-       * @see https://github.com/shikijs/vscode-textmate/blob/8d2e84a3aad21afd6b08fd53c7acd421c7f5aa44/src/rule.ts#L687-L702
-       *
-       * This is a temporary workaround for markdown grammar
-       */
-      if (simulation)
-        p = p.replaceAll('(^|\\\uFFFF)', '(^|\\G)')
-
       // Cache
       const cached = cache?.get(p)
       if (cached) {
