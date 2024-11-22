@@ -139,8 +139,8 @@ catalogs:
       specifier: ^1.4.1
       version: 1.4.1
     oniguruma-to-es:
-      specifier: 0.4.1
-      version: 0.4.1
+      specifier: 0.6.0
+      version: 0.6.0
     picocolors:
       specifier: ^1.1.1
       version: 1.1.1
@@ -553,7 +553,7 @@ importers:
         version: 9.3.0
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 0.4.1
+        version: 0.6.0
 
   packages/engine-oniguruma:
     dependencies:
@@ -4250,8 +4250,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-es@0.4.1:
-    resolution: {integrity: sha512-rNcEohFz095QKGRovP/yqPIKc+nP+Sjs4YTHMv33nMePGKrq/r2eu9Yh4646M5XluGJsUnmwoXuiXE69KDs+fQ==}
+  oniguruma-to-es@0.6.0:
+    resolution: {integrity: sha512-YaRxSzO6b7hnCzpq3IiyImHPnTNnhqFvhRdhg68gFMAaTEiFm0Wa8vUKSWqVz89a691o14KBPVJTcybjdRA6aQ==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -4645,8 +4645,8 @@ packages:
   regex-utilities@2.3.0:
     resolution: {integrity: sha512-8VhliFJAWRaUiVvREIiW2NXXTmHs4vMNnSzuJVhscgmGav3g9VDxLrQndI3dZZVVdp0ZO/5v0xmX516/7M9cng==}
 
-  regex@5.0.0:
-    resolution: {integrity: sha512-LO5oiSc2Kgbw1qlSQIkzeqapoPeOP3y4DxNoxjTDpuECk6xNcADfN2rJhmOxJSgrv8vQOcgbKSFuyfyPfMmlxw==}
+  regex@5.0.2:
+    resolution: {integrity: sha512-/pczGbKIQgfTMRV0XjABvc5RzLqQmwqxLHdQao2RTXPk+pmTXB2P0IaUHYdYyk412YLwUIkaeMd5T+RzVgTqnQ==}
 
   regexp-ast-analysis@0.7.1:
     resolution: {integrity: sha512-sZuz1dYW/ZsfG17WSAG7eS85r5a0dDsvg+7BiiYR5o6lKCAtUrEwdmRmaGF6rwVj3LcmAeYkOWKEPlbPzN3Y3A==}
@@ -9502,10 +9502,10 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-es@0.4.1:
+  oniguruma-to-es@0.6.0:
     dependencies:
       emoji-regex-xs: 1.0.0
-      regex: 5.0.0
+      regex: 5.0.2
       regex-recursion: 4.2.1
 
   optionator@0.9.4:
@@ -9855,7 +9855,9 @@ snapshots:
 
   regex-utilities@2.3.0: {}
 
-  regex@5.0.0: {}
+  regex@5.0.2:
+    dependencies:
+      regex-utilities: 2.3.0
 
   regexp-ast-analysis@0.7.1:
     dependencies:

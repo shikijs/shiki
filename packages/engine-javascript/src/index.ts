@@ -54,10 +54,13 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
   return toRegExp(
     pattern,
     {
-      accuracy: 'loose',
       global: true,
       hasIndices: true,
-      tmGrammar: true,
+      rules: {
+        allowOrphanBackrefs: true,
+        allowUnhandledGAnchors: true,
+        asciiWordBoundaries: true,
+      },
       ...options,
     },
   )
