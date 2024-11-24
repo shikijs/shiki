@@ -2,9 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createHighlighter } from '../../shiki/src/index'
 import { createJavaScriptRegexEngine } from '../src'
 
-describe.skipIf(
-  +process.versions.node.split('.')[0] < 20,
-)('should', () => {
+describe('should', () => {
   it('works', async () => {
     const shiki = await createHighlighter({
       themes: ['vitesse-light'],

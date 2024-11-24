@@ -223,7 +223,7 @@ async function run() {
     '## Supported Languages',
     '',
     'Languages that work with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).',
-    'In some edge cases, it\'s not guaranteed that the the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.',
+    'In some edge cases, it\'s not guaranteed that the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.',
     '',
     createTable(reportOk),
     '',

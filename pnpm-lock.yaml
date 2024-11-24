@@ -139,8 +139,8 @@ catalogs:
       specifier: ^1.4.1
       version: 1.4.1
     oniguruma-to-es:
-      specifier: 0.6.0
-      version: 0.6.0
+      specifier: 0.6.1
+      version: 0.6.1
     picocolors:
       specifier: ^1.1.1
       version: 1.1.1
@@ -553,7 +553,7 @@ importers:
         version: 9.3.0
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 0.6.0
+        version: 0.6.1
 
   packages/engine-oniguruma:
     dependencies:
@@ -4250,8 +4250,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-es@0.6.0:
-    resolution: {integrity: sha512-YaRxSzO6b7hnCzpq3IiyImHPnTNnhqFvhRdhg68gFMAaTEiFm0Wa8vUKSWqVz89a691o14KBPVJTcybjdRA6aQ==}
+  oniguruma-to-es@0.6.1:
+    resolution: {integrity: sha512-YQmbeCaNmSrSwuMuTq1oYCvb+jkISsruMu2XQTJAgLvHQkFKEMqJI33NVtq8EGPuRvFa0CHcH32l2CpTS9Fs/Q==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -9502,7 +9502,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-es@0.6.0:
+  oniguruma-to-es@0.6.1:
     dependencies:
       emoji-regex-xs: 1.0.0
       regex: 5.0.2

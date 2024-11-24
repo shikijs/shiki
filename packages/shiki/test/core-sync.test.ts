@@ -4,10 +4,7 @@ import { createHighlighterCoreSync } from '../src/core'
 import js from '../src/langs/javascript.mjs'
 import nord from '../src/themes/nord.mjs'
 
-describe.skipIf(
-  // JavaScript engine requires Node v20+
-  +process.versions.node.split('.')[0] < 20,
-)('should', () => {
+describe('should', () => {
   const engine = createJavaScriptRegexEngine()
 
   it('works', () => {

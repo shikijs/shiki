@@ -142,9 +142,7 @@ const cases: Cases[] = [
   },
 ]
 
-describe.skipIf(
-  +process.versions.node.split('.')[0] < 20,
-)('cases', async () => {
+describe('cases', async () => {
   await loadWasm(import('@shikijs/core/wasm-inlined'))
 
   const resolved = await Promise.all(cases.map(async (c) => {
@@ -163,7 +161,6 @@ describe.skipIf(
       const engineWasm = createWasmOnigLibWrapper()
       const engineJs = createJavaScriptRegexEngine({
         forgiving: true,
-        target: 'ES2024',
       })
 
       const shiki1 = await createHighlighterCore({
