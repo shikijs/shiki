@@ -2,7 +2,7 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Generated on Friday, November 22, 2024
+> Generated on Sunday, November 24, 2024
 >
 > Version `1.23.1`
 >
@@ -20,7 +20,7 @@ Compatibility reference of all built-in grammars with the [JavaScript RegExp eng
 ## Supported Languages
 
 Languages that work with the JavaScript RegExp engine, and will produce the same result as the WASM engine (with the [sample snippets in the registry](https://github.com/shikijs/textmate-grammars-themes/tree/main/samples)).
-In some edge cases, it's not guaranteed that the the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.
+In some edge cases, it's not guaranteed that the highlighting will be 100% the same. If that happens, please create an issue with the sample snippet.
 
 | Language           | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ------------------ | :-------------- | ----------------: | --------------: | ---: |
@@ -210,7 +210,7 @@ In some edge cases, it's not guaranteed that the the highlighting will be 100% t
 | wenyan             | ✅ OK           |                18 |               - |      |
 | wgsl               | ✅ OK           |                44 |               - |      |
 | wikitext           | ✅ OK           |               104 |               - |      |
-| wolfram            | ✅ OK           |               501 |               - |      |
+| wolfram            | ✅ OK           |               501 |               - |   10 |
 | xml                | ✅ OK           |               169 |               - |      |
 | xsl                | ✅ OK           |               171 |               - |      |
 | yaml               | ✅ OK           |                48 |               - |      |
@@ -254,7 +254,7 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 | rst        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=rst) |              1855 |               2 |   62 |
 | hack       | ❌ Error                                                                 |               947 |               1 |  114 |
 | purescript | ❌ Error                                                                 |                72 |               1 |   42 |
-| cpp        | ❌ Error                                                                 |               510 |               2 |   27 |
+| cpp        | ❌ Error                                                                 |               510 |               2 |    8 |
 | csharp     | ❌ Error                                                                 |               306 |               3 |  204 |
 | markdown   | ❌ Error                                                                 |               115 |               3 |  857 |
 | swift      | ❌ Error                                                                 |               326 |               3 |   40 |

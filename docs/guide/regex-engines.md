@@ -79,7 +79,7 @@ The JavaScript engine is best when running in the browser and in cases when you 
 
 For the best result, [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) uses the [RegExp `v` flag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets), which is available in Node.js v20+ and ES2024 ([Browser compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets#browser_compatibility)).
 
-For older environments, it can use the `u` flag but somewhat fewer grammars are supported.
+For older environments, it can use the `u` flag but this results in a few less grammars being supported.
 
 By default, the runtime target is automatically detected. You can override this behavior by setting the `target` option:
 
