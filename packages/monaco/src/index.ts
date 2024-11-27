@@ -3,7 +3,7 @@ import type { StateStack } from '@shikijs/vscode-textmate'
 import type monacoNs from 'monaco-editor-core'
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 
-export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData {}
+export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData { }
 
 export interface ShikiToMonacoOptions {
   /**
@@ -28,13 +28,15 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
   if (!rules) {
     rules = []
     const themeSettings = theme.settings || theme.tokenColors
-    for (const { scope, settings } of themeSettings) {
+    for (const { scope, settings: { foreground, background, fontStyle } } of themeSettings) {
       const scopes = Array.isArray(scope) ? scope : [scope]
       for (const s of scopes) {
-        if (settings.foreground && s) {
+        if (s && (foreground || background || fontStyle)) {
           rules.push({
             token: s,
-            foreground: normalizeColor(settings.foreground),
+            foreground: normalizeColor(foreground),
+            background: normalizeColor(background),
+            fontStyle,
           })
         }
       }
@@ -148,7 +150,7 @@ export function shikiToMonaco(
 class TokenizerState implements monacoNs.languages.IState {
   constructor(
     private _ruleStack: StateStack,
-  ) {}
+  ) { }
 
   public get ruleStack(): StateStack {
     return this._ruleStack
