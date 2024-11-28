@@ -117,6 +117,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/blade.mjs')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'bsl',
+    'name': '1C (Enterprise)',
+    'aliases': [
+      '1c'
+    ],
+    'import': (() => import('./langs/bsl.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'c',
     'name': 'C',
     'import': (() => import('./langs/c.mjs')) as DynamicImportLanguageRegistration
@@ -980,6 +988,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('./langs/scss.mjs')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'sdbl',
+    'name': '1C (Query)',
+    'aliases': [
+      '1c-query'
+    ],
+    'import': (() => import('./langs/sdbl.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'shaderlab',
     'name': 'ShaderLab',
     'aliases': [
@@ -1079,6 +1095,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'systemd',
     'name': 'Systemd Units',
     'import': (() => import('./langs/systemd.mjs')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'talonscript',
+    'name': 'TalonScript',
+    'aliases': [
+      'talon'
+    ],
+    'import': (() => import('./langs/talonscript.mjs')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'tasl',
@@ -1291,6 +1315,8 @@ export const bundledLanguagesBase = Object.fromEntries(bundledLanguagesInfo.map(
 export const bundledLanguagesAlias = Object.fromEntries(bundledLanguagesInfo.flatMap(i => i.aliases?.map(a => [a, i.import]) || []))
 
 export type BundledLanguage =
+  | '1c'
+  | '1c-query'
   | 'abap'
   | 'actionscript-3'
   | 'ada'
@@ -1316,6 +1342,7 @@ export type BundledLanguage =
   | 'bibtex'
   | 'bicep'
   | 'blade'
+  | 'bsl'
   | 'c'
   | 'c#'
   | 'c++'
@@ -1520,6 +1547,7 @@ export type BundledLanguage =
   | 'scala'
   | 'scheme'
   | 'scss'
+  | 'sdbl'
   | 'sh'
   | 'shader'
   | 'shaderlab'
@@ -1541,6 +1569,8 @@ export type BundledLanguage =
   | 'swift'
   | 'system-verilog'
   | 'systemd'
+  | 'talon'
+  | 'talonscript'
   | 'tasl'
   | 'tcl'
   | 'templ'
