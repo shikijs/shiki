@@ -185,3 +185,27 @@ body { margin: 0; }
 .space::before { content: "\\B7"; position: absolute; opacity: 0.3; }
 </style>`,
 )
+
+suite(
+  'all',
+  import.meta.glob('./fixtures/legacy/*.*', { as: 'raw', eager: true }),
+  [
+    transformerNotationFocus({ legacy: true }),
+    transformerNotationHighlight({ legacy: true }),
+    transformerNotationErrorLevel({ legacy: true }),
+    transformerNotationWordHighlight({ legacy: true }),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+* { tab-size: 4; }
+body { margin: 0; }
+.line { display: block; width: 100%; height: 1.2em; }
+.shiki { padding: 1em; }
+.has-focused .focused { background-color: #8805; }
+.highlighted { background-color: #8885; }
+.highlighted-word { background-color: #8885; }
+.highlighted.warning { background-color: #9905; }
+.highlighted.error { background-color: #8005; }
+</style>`,
+)
