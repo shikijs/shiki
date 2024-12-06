@@ -40,7 +40,6 @@ You can also call `codeToHast` to get the HTML abstract syntax tree, and render 
 ```tsx
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
-// @ts-expect-error -- untyped
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki'
 
@@ -80,7 +79,6 @@ Create a `shared.ts` for highlighter:
 ```ts
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
-// @ts-expect-error -- untyped
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki/bundle/web'
 
