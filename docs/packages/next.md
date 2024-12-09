@@ -13,19 +13,26 @@ Serverless Runtime is recommended.
 Since Server Components are server-only, you can use the bundled highlighter without worrying the bundle size.
 
 ```tsx
-import { codeToHtml } from 'shiki'
+import { type BundledLanguage, codeToHtml } from 'shiki'
 
 export default function Page() {
   return (
     <main>
-      <CodeBlock />
+      <CodeBlock lang="ts">
+        {'console.log("Hello World")'}
+      </CodeBlock>
     </main>
   )
 }
 
-async function CodeBlock() {
-  const out = await codeToHtml('console.log("Hello World")', {
-    lang: 'ts',
+type Props = {
+  children: string;
+  lang: BundledLanguage;
+}
+
+async function CodeBlock(props: Props) {
+  const out = await codeToHtml(props.children, {
+    lang: props.lang,
     theme: 'github-dark'
   })
 
@@ -41,19 +48,26 @@ You can also call `codeToHast` to get the HTML abstract syntax tree, and render 
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { codeToHast } from 'shiki'
+import { type BundledLanguage, codeToHast } from 'shiki'
 
 export default function Page() {
   return (
     <main>
-      <CodeBlock />
+      <CodeBlock lang="ts">
+        {'console.log("Hello World")'}
+      </CodeBlock>
     </main>
   )
 }
 
-async function CodeBlock() {
-  const out = await codeToHast('console.log("Hello World")', {
-    lang: 'ts',
+type Props = {
+  children: string;
+  lang: BundledLanguage;
+}
+
+async function CodeBlock(props: Props) {
+  const out = await codeToHtml(props.children, {
+    lang: props.lang,
     theme: 'github-dark'
   })
 
@@ -80,11 +94,11 @@ Create a `shared.ts` for highlighter:
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { codeToHast } from 'shiki/bundle/web'
+import { type BundledLanguage, codeToHast } from 'shiki/bundle/web'
 
-export async function highlight(code: string) {
+export async function highlight(code: string, lang: BundledLanguage) {
   const out = await codeToHast(code, {
-    lang: 'ts',
+    lang: lang,
     theme: 'github-dark'
   })
 
@@ -107,7 +121,7 @@ export function CodeBlock({ initial }: { initial?: JSX.Element }) {
   const [nodes, setNodes] = useState(initial)
 
   useLayoutEffect(() => {
-    void highlight('console.log("Rendered on client")').then(setNodes)
+    void highlight('console.log("Rendered on client")', 'ts').then(setNodes)
   }, [])
 
   return nodes ?? <p>Loading...</p>
@@ -126,7 +140,7 @@ export default async function Page() {
   // `initial` is optional.
   return (
     <main>
-      <CodeBlock initial={await highlight('console.log("Rendered on server")')} />
+      <CodeBlock initial={await highlight('console.log("Rendered on server")', 'ts')} />
     </main>
   )
 }
