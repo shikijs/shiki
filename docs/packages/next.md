@@ -19,15 +19,18 @@ export default function Page() {
   return (
     <main>
       <CodeBlock lang="ts">
-        {'console.log("Hello World")'}
+        {`
+          console.log("Hello")
+          console.log("World")
+        `}
       </CodeBlock>
     </main>
   )
 }
 
-type Props = {
-  children: string;
-  lang: BundledLanguage;
+interface Props {
+  children: string
+  lang: BundledLanguage
 }
 
 async function CodeBlock(props: Props) {
@@ -54,15 +57,18 @@ export default function Page() {
   return (
     <main>
       <CodeBlock lang="ts">
-        {'console.log("Hello World")'}
+        {`
+          console.log("Hello")
+          console.log("World")
+        `}
       </CodeBlock>
     </main>
   )
 }
 
-type Props = {
-  children: string;
-  lang: BundledLanguage;
+interface Props {
+  children: string
+  lang: BundledLanguage
 }
 
 async function CodeBlock(props: Props) {
@@ -98,7 +104,7 @@ import { type BundledLanguage, codeToHast } from 'shiki/bundle/web'
 
 export async function highlight(code: string, lang: BundledLanguage) {
   const out = await codeToHast(code, {
-    lang: lang,
+    lang,
     theme: 'github-dark'
   })
 
