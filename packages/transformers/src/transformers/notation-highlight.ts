@@ -10,6 +10,8 @@ export interface TransformerNotationHighlightOptions {
    * Class added to the root element when the code has highlighted lines
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 /**
@@ -21,6 +23,7 @@ export function transformerNotationHighlight(
   const {
     classActiveLine = 'highlighted',
     classActivePre = 'has-highlighted',
+    legacy,
   } = options
 
   return transformerNotationMap(
@@ -29,6 +32,7 @@ export function transformerNotationHighlight(
         highlight: classActiveLine,
         hl: classActiveLine,
       },
+      legacy,
       classActivePre,
     },
     '@shikijs/transformers:notation-highlight',

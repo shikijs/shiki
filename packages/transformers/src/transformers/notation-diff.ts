@@ -14,6 +14,8 @@ export interface TransformerNotationDiffOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 /**
@@ -26,6 +28,7 @@ export function transformerNotationDiff(
     classLineAdd = 'diff add',
     classLineRemove = 'diff remove',
     classActivePre = 'has-diff',
+    legacy,
   } = options
 
   return transformerNotationMap(
@@ -34,6 +37,7 @@ export function transformerNotationDiff(
         '++': classLineAdd,
         '--': classLineRemove,
       },
+      legacy,
       classActivePre,
     },
     '@shikijs/transformers:notation-diff',
