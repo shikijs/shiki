@@ -13,16 +13,17 @@ Serverless Runtime is recommended.
 Since Server Components are server-only, you can use the bundled highlighter without worrying the bundle size.
 
 ```tsx
-import { type BundledLanguage, codeToHtml } from 'shiki'
+import type { BundledLanguage } from 'shiki'
+import { codeToHtml } from 'shiki'
 
 export default function Page() {
   return (
     <main>
       <CodeBlock lang="ts">
-        {`
-          console.log("Hello")
-          console.log("World")
-        `}
+        {[
+          'console.log("Hello")',
+          'console.log("World")',
+        ].join('\n')}
       </CodeBlock>
     </main>
   )
@@ -48,19 +49,20 @@ async function CodeBlock(props: Props) {
 You can also call `codeToHast` to get the HTML abstract syntax tree, and render it using [`hast-util-to-jsx-runtime`](https://github.com/syntax-tree/hast-util-to-jsx-runtime). With this method, you can render your own `pre` and `code` components.
 
 ```tsx
+import type { BundledLanguage } from 'shiki'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { type BundledLanguage, codeToHast } from 'shiki'
+import { codeToHast } from 'shiki'
 
 export default function Page() {
   return (
     <main>
       <CodeBlock lang="ts">
-        {`
-          console.log("Hello")
-          console.log("World")
-        `}
+        {[
+          'console.log("Hello")',
+          'console.log("World")',
+        ].join('\n')}
       </CodeBlock>
     </main>
   )
@@ -97,10 +99,11 @@ We can start by creating a client `CodeBlock` component.
 Create a `shared.ts` for highlighter:
 
 ```ts
+import type { BundledLanguage } from 'shiki/bundle/web'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { type BundledLanguage, codeToHast } from 'shiki/bundle/web'
+import { codeToHast } from 'shiki/bundle/web'
 
 export async function highlight(code: string, lang: BundledLanguage) {
   const out = await codeToHast(code, {
