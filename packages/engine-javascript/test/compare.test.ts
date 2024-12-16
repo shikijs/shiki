@@ -33,6 +33,36 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
   }
 }
 
+function createJsOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
+  const instances: Instance[] = []
+
+  const JsOnigScanner = createJavaScriptRegexEngine({
+    forgiving: true,
+  })
+
+  return {
+    instances,
+    createScanner(patterns) {
+      const scanner = JsOnigScanner.createScanner(patterns)
+      const instance: Instance = {
+        constractor: [patterns],
+        executions: [],
+      }
+      instances.push(instance)
+      return {
+        findNextMatchSync(string: string | OnigString, startPosition: number) {
+          const result = scanner.findNextMatchSync(string, startPosition)
+          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition], result })
+          return result
+        },
+      }
+    },
+    createString(s) {
+      return JsOnigScanner.createString(s)
+    },
+  }
+}
+
 export interface Cases {
   name: string
   skip?: boolean
@@ -42,6 +72,22 @@ export interface Cases {
 }
 
 const cases: Cases[] = [
+  {
+    name: 'beancount',
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/beancount.mjs'),
+    cases: [
+      `2012-11-03 * "Transfer to pay credit card"
+  Assets:MyBank:Checking            -400.00 USD
+  Liabilities:CreditCard             400.00 USD
+
+2012-11-03 * "Transfer to account in Canada"
+  Assets:MyBank:Checking            -400.00 USD @ 1.09 CAD
+  Assets:FR:SocGen:Checking          436.01 CAD
+
+; https://beancount.github.io/docs/beancount_language_syntax.html#costs-and-prices`,
+    ],
+  },
   {
     name: 'json-basic',
     theme: () => import('../../shiki/src/themes/nord.mjs'),
@@ -159,9 +205,7 @@ describe('cases', async () => {
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
       const engineWasm = createWasmOnigLibWrapper()
-      const engineJs = createJavaScriptRegexEngine({
-        forgiving: true,
-      })
+      const engineJs = createJsOnigLibWrapper()
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
@@ -189,6 +233,10 @@ describe('cases', async () => {
       await expect
         .soft(JSON.stringify(engineWasm.instances, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
+
+      await expect
+        .soft(JSON.stringify(engineJs.instances, null, 2))
+        .toMatchFileSnapshot(`./__records__/${c.c.name}.js.json`)
 
       // compare.forEach(([a, b]) => {
       //   expect.soft(a).toEqual(b)

@@ -7,11 +7,6 @@ import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
 
 describe('verify', async () => {
-  if (+process.versions.node.split('.')[0] < 20) {
-    it('skip', () => {})
-    return
-  }
-
   const files = await fg('*.json', {
     cwd: fileURLToPath(new URL('./__records__', import.meta.url)),
     absolute: true,

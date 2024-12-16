@@ -2,9 +2,9 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
 
-> Generated on Wednesday, November 27, 2024
+> Generated on Monday, December 16, 2024
 >
-> Version `1.23.1`
+> Version `1.24.2`
 >
 > Runtime: Node.js v22.11.0
 
@@ -12,9 +12,9 @@ Compatibility reference of all built-in grammars with the [JavaScript RegExp eng
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
-| Total Languages |                         215 |
-| Supported       | [197](#supported-languages) |
-| Mismatched      | [12](#mismatched-languages) |
+| Total Languages |                         218 |
+| Supported       | [199](#supported-languages) |
+| Mismatched      | [13](#mismatched-languages) |
 | Unsupported     | [6](#unsupported-languages) |
 
 ## Supported Languages
@@ -43,9 +43,10 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | bibtex             | ✅ OK           |                19 |               - |      |
 | bicep              | ✅ OK           |                27 |               - |      |
 | blade              | ✅ OK           |              1126 |               - |      |
+| bsl                | ✅ OK           |                96 |               - |      |
 | c                  | ✅ OK           |               177 |               - |      |
 | cadence            | ✅ OK           |                71 |               - |      |
-| cairo              | ✅ OK           |                80 |               - |      |
+| cairo              | ✅ OK           |               236 |               - |      |
 | clarity            | ✅ OK           |                43 |               - |      |
 | clj                | ✅ OK           |                38 |               - |      |
 | clojure            | ✅ OK           |                38 |               - |      |
@@ -55,14 +56,14 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | codeql             | ✅ OK           |               151 |               - |      |
 | coffee             | ✅ OK           |               469 |               - |      |
 | common-lisp        | ✅ OK           |                60 |               - |      |
-| coq                | ✅ OK           |                25 |               - |      |
+| coq                | ✅ OK           |                26 |               - |      |
 | crystal            | ✅ OK           |              1067 |               - |      |
 | css                | ✅ OK           |               141 |               - |      |
 | csv                | ✅ OK           |                 1 |               - |      |
 | cue                | ✅ OK           |                85 |               - |      |
 | cypher             | ✅ OK           |                39 |               - |      |
 | d                  | ✅ OK           |               270 |               - |      |
-| dart               | ✅ OK           |                72 |               - |      |
+| dart               | ✅ OK           |                76 |               - |      |
 | dax                | ✅ OK           |                23 |               - |      |
 | desktop            | ✅ OK           |                16 |               - |      |
 | diff               | ✅ OK           |                16 |               - |      |
@@ -82,8 +83,8 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | fortran-free-form  | ✅ OK           |               328 |               - |      |
 | fsharp             | ✅ OK           |               239 |               - |      |
 | fsl                | ✅ OK           |                30 |               - |      |
-| gdresource         | ✅ OK           |               157 |               - |      |
-| gdscript           | ✅ OK           |                93 |               - |      |
+| gdresource         | ✅ OK           |               159 |               - |      |
+| gdscript           | ✅ OK           |                95 |               - |      |
 | gdshader           | ✅ OK           |                39 |               - |      |
 | genie              | ✅ OK           |                20 |               - |      |
 | gherkin            | ✅ OK           |                19 |               - |      |
@@ -92,7 +93,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | glimmer-ts         | ✅ OK           |               676 |               - |      |
 | glsl               | ✅ OK           |               186 |               - |      |
 | gnuplot            | ✅ OK           |                82 |               - |      |
-| go                 | ✅ OK           |               123 |               - |      |
+| go                 | ✅ OK           |               125 |               - |      |
 | graphql            | ✅ OK           |               448 |               - |      |
 | groovy             | ✅ OK           |               133 |               - |      |
 | haml               | ✅ OK           |               562 |               - |      |
@@ -122,7 +123,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | latex              | ✅ OK           |               283 |               - |      |
 | lean               | ✅ OK           |                32 |               - |      |
 | less               | ✅ OK           |               280 |               - |      |
-| liquid             | ✅ OK           |               684 |               - |      |
+| liquid             | ✅ OK           |               689 |               - |      |
 | log                | ✅ OK           |                30 |               - |      |
 | logo               | ✅ OK           |                 9 |               - |      |
 | lua                | ✅ OK           |               278 |               - |      |
@@ -130,9 +131,8 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | make               | ✅ OK           |                51 |               - |      |
 | marko              | ✅ OK           |               926 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
-| mdc                | ✅ OK           |               783 |               - |      |
 | mdx                | ✅ OK           |               197 |               - |      |
-| mermaid            | ✅ OK           |               129 |               - |      |
+| mermaid            | ✅ OK           |               134 |               - |      |
 | mipsasm            | ✅ OK           |                17 |               - |      |
 | mojo               | ✅ OK           |               213 |               - |      |
 | move               | ✅ OK           |               120 |               - |      |
@@ -159,7 +159,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | qmldir             | ✅ OK           |                 7 |               - |      |
 | qss                | ✅ OK           |                31 |               - |      |
 | r                  | ✅ OK           |                71 |               - |      |
-| racket             | ✅ OK           |                69 |               - |      |
+| racket             | ✅ OK           |                69 |               - |    8 |
 | raku               | ✅ OK           |                52 |               - |      |
 | reg                | ✅ OK           |                 9 |               - |      |
 | regexp             | ✅ OK           |                34 |               - |      |
@@ -172,6 +172,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | scala              | ✅ OK           |               117 |               - |      |
 | scheme             | ✅ OK           |                34 |               - |      |
 | scss               | ✅ OK           |               234 |               - |      |
+| sdbl               | ✅ OK           |                23 |               - |      |
 | shaderlab          | ✅ OK           |                87 |               - |      |
 | shellscript        | ✅ OK           |               148 |               - |      |
 | shellsession       | ✅ OK           |               150 |               - |      |
@@ -187,9 +188,10 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | svelte             | ✅ OK           |               637 |               - |      |
 | system-verilog     | ✅ OK           |               102 |               - |      |
 | systemd            | ✅ OK           |                32 |               - |      |
+| talonscript        | ✅ OK           |                44 |               - |      |
 | tasl               | ✅ OK           |                23 |               - |      |
 | tcl                | ✅ OK           |                34 |               - |      |
-| templ              | ✅ OK           |               673 |               - |      |
+| templ              | ✅ OK           |               675 |               - |      |
 | terraform          | ✅ OK           |                68 |               - |      |
 | tex                | ✅ OK           |               106 |               - |      |
 | toml               | ✅ OK           |                44 |               - |      |
@@ -242,6 +244,7 @@ Languages that do not throw with the JavaScript RegExp engine, but will produce 
 | kotlin    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kotlin)    |                58 |               - | 1953 |
 | kusto     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)     |                60 |               - |   40 |
 | markdown  | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=markdown)  |               118 |               - |  915 |
+| mdc       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=mdc)       |               783 |               - |  702 |
 | nginx     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)     |               378 |               - |    4 |
 | php       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=php)       |              1131 |               - |  605 |
 | po        | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)        |                23 |               - |  423 |
