@@ -51,6 +51,7 @@ You can also call `codeToHast` to get the HTML abstract syntax tree, and render 
 ```tsx
 import type { BundledLanguage } from 'shiki'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
+import type { JSX } from 'react'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki'
@@ -87,7 +88,7 @@ async function CodeBlock(props: Props) {
       // your custom `pre` element
       pre: props => <pre data-custom-codeblock {...props} />
     },
-  })
+  }) as JSX.Element
 }
 ```
 
@@ -101,6 +102,7 @@ Create a `shared.ts` for highlighter:
 ```ts
 import type { BundledLanguage } from 'shiki/bundle/web'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
+import type { JSX } from 'react'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 import { codeToHast } from 'shiki/bundle/web'
@@ -115,7 +117,7 @@ export async function highlight(code: string, lang: BundledLanguage) {
     Fragment,
     jsx,
     jsxs,
-  })
+  }) as JSX.Element
 }
 ```
 
