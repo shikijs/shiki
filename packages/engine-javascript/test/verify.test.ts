@@ -23,6 +23,10 @@ describe('verify', async () => {
     if (name === 'markdown')
       continue
 
+    // TODO: https://github.com/shikijs/shiki/pull/866
+    if (name === 'beancount')
+      continue
+
     describe(`record: ${name}`, async () => {
       const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
       let i = 0
@@ -31,9 +35,6 @@ describe('verify', async () => {
 
       for (const execution of executions) {
         i += 1
-
-        if (!(i === 2 && name === 'beancount'))
-          continue
 
         it(`case ${i}`, () => {
           const scanner = new JavaScriptScanner(execution.patterns, { cache })
