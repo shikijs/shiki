@@ -110,7 +110,7 @@ export class JavaScriptScanner implements PatternScanner {
     })
   }
 
-  findNextMatchSync(string: string | RegexEngineString, startPosition: number): IOnigMatch | null {
+  findNextMatchSync(string: string | RegexEngineString, startPosition: number, _options: number): IOnigMatch | null {
     const str = typeof string === 'string'
       ? string
       : string.content

@@ -6,6 +6,6 @@ export interface Instance {
 }
 
 export interface Executions {
-  args: [str: string, start: number]
+  args: [str: string, start: number, options: number]
   result: IOnigMatch | null
 }

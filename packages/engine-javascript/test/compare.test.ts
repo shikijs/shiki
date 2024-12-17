@@ -20,9 +20,9 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
       }
       instances.push(instance)
       return {
-        findNextMatchSync(string: string | OnigString, startPosition: number) {
-          const result = scanner.findNextMatchSync(string, startPosition)
-          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition], result })
+        findNextMatchSync(string: string | OnigString, startPosition: number, options) {
+          const result = scanner.findNextMatchSync(string, startPosition, options)
+          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition, options], result })
           return result
         },
       }
@@ -50,9 +50,9 @@ function createJsOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
       }
       instances.push(instance)
       return {
-        findNextMatchSync(string: string | OnigString, startPosition: number) {
-          const result = scanner.findNextMatchSync(string, startPosition)
-          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition], result })
+        findNextMatchSync(string: string | OnigString, startPosition: number, options) {
+          const result = scanner.findNextMatchSync(string, startPosition, options)
+          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition, options], result })
           return result
         },
       }
