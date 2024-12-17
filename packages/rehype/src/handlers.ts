@@ -46,8 +46,8 @@ export const PreHandler: RehypeShikiHandler = (_tree, node) => {
   const classes = head.properties.className
   const languageClass = Array.isArray(classes)
     ? classes.find(
-      d => typeof d === 'string' && d.startsWith(languagePrefix),
-    )
+        d => typeof d === 'string' && d.startsWith(languagePrefix),
+      )
     : undefined
 
   return {
