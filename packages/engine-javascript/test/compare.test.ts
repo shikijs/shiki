@@ -22,7 +22,10 @@ function createEngineWrapper(engine: RegexEngine): RegexEngine & { instances: In
       return {
         findNextMatchSync(string: string | OnigString, startPosition: number, options) {
           const result = scanner.findNextMatchSync(string, startPosition, options)
-          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition, options], result })
+          instance.executions.push({
+            args: [typeof string === 'string' ? string : string.content, startPosition, options],
+            result,
+          })
           return result
         },
       }
