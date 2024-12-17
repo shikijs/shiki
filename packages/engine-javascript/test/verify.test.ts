@@ -1,4 +1,4 @@
-import type { Instance } from './types'
+import type { Execution } from './types'
 import { promises as fs } from 'node:fs'
 import { basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -7,12 +7,7 @@ import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
 
 describe('verify', async () => {
-  if (+process.versions.node.split('.')[0] < 20) {
-    it('skip', () => {})
-    return
-  }
-
-  const files = await fg('*.json', {
+  const files = await fg('*.wasm.json', {
     cwd: fileURLToPath(new URL('./__records__', import.meta.url)),
     absolute: true,
     onlyFiles: true,
@@ -22,42 +17,45 @@ describe('verify', async () => {
 
   for (const file of files) {
     // Some token positions are off in this record
-    const name = basename(file, '.json')
+    const name = basename(file, '.wasm.json')
 
     // TODO: markdown support is still problematic
     if (name === 'markdown')
       continue
 
+    // TODO: https://github.com/shikijs/shiki/pull/866
+    if (name === 'beancount')
+      continue
+
     describe(`record: ${name}`, async () => {
-      const instances = JSON.parse(await fs.readFile(file, 'utf-8')) as Instance[]
+      const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
       let i = 0
-      for (const instance of instances) {
+
+      it('', () => {})
+
+      for (const execution of executions) {
         i += 1
-        describe(`instances ${i}`, () => {
-          const scanner = new JavaScriptScanner(instance.constractor[0], { cache })
-          let j = 0
-          for (const execution of instance.executions) {
-            j += 1
-            it(`case ${j}`, () => {
-              onTestFailed(() => {
-                console.error(execution.result?.index != null
-                  ? {
-                      args: execution.args,
-                      expected: {
-                        pattern: scanner.patterns[execution.result.index],
-                        regexp: scanner.regexps[execution.result.index],
-                      },
-                    }
-                  : {
-                      args: execution.args,
-                      patterns: scanner.patterns,
-                      regexps: scanner.regexps,
-                    })
-              })
-              const result = scanner.findNextMatchSync(...execution.args)
-              expect(result).toEqual(execution.result)
-            })
-          }
+
+        it(`case ${i}`, () => {
+          const scanner = new JavaScriptScanner(execution.patterns, { cache })
+
+          onTestFailed(() => {
+            console.error(execution.result?.index != null
+              ? {
+                  args: execution.args,
+                  expected: {
+                    pattern: scanner.patterns[execution.result.index],
+                    regexp: scanner.regexps[execution.result.index],
+                  },
+                }
+              : {
+                  args: execution.args,
+                  patterns: scanner.patterns,
+                  regexps: scanner.regexps,
+                })
+          })
+          const result = scanner.findNextMatchSync(...execution.args)
+          expect(result).toEqual(execution.result)
         })
       }
     })

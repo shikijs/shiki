@@ -1,0 +1,2764 @@
+[
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      0,
+      0
+    ],
+    "result": {
+      "index": 4,
+      "captureIndices": [
+        {
+          "start": 0,
+          "end": 1,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      1,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 1,
+          "end": 2,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      2,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 5,
+          "end": 6,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      6,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 6,
+          "end": 7,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      7,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 7,
+          "end": 8,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      8,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 8,
+          "end": 9,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      9,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 12,
+          "end": 13,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      13,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 13,
+          "end": 14,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      14,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 14,
+          "end": 15,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      15,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 15,
+          "end": 15,
+          "length": 0
+        },
+        {
+          "start": 4294967295,
+          "end": 4294967295,
+          "length": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      15,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 15,
+          "end": 16,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 16,
+          "length": 0
+        },
+        {
+          "start": 4294967295,
+          "end": 4294967295,
+          "length": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 17,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      17,
+      0
+    ],
+    "result": null
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      0,
+      0
+    ],
+    "result": {
+      "index": 4,
+      "captureIndices": [
+        {
+          "start": 0,
+          "end": 1,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      1,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 1,
+          "end": 2,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      2,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 5,
+          "end": 6,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      6,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 6,
+          "end": 7,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      7,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 7,
+          "end": 8,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      8,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 8,
+          "end": 9,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      9,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 12,
+          "end": 13,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      13,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 13,
+          "end": 14,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      14,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 14,
+          "end": 15,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      15,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 15,
+          "end": 15,
+          "length": 0
+        },
+        {
+          "start": 4294967295,
+          "end": 4294967295,
+          "length": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      15,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 15,
+          "end": 16,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "8dHOYq6QEt",
+    "patterns": [
+      "(,)|(?=\\})",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      "[^\\s,]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 16,
+          "length": 0
+        },
+        {
+          "start": 4294967295,
+          "end": 4294967295,
+          "length": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 17,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "{\"foo\":{\"bar\":1}}\n",
+      17,
+      0
+    ],
+    "result": null
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      0,
+      0
+    ],
+    "result": {
+      "index": 3,
+      "captureIndices": [
+        {
+          "start": 0,
+          "end": 1,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      1,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 1,
+          "end": 2,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      2,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 2,
+          "end": 3,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      3,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 3,
+          "end": 4,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      4,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 4,
+          "end": 5,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      5,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 5,
+          "end": 6,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      6,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 6,
+          "end": 7,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      7,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 7,
+          "end": 8,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      8,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 8,
+          "end": 9,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      9,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 9,
+          "end": 10,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      10,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 10,
+          "end": 11,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      11,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 12,
+          "end": 16,
+          "length": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 17,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      17,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 18,
+          "end": 22,
+          "length": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      22,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 22,
+          "end": 23,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      23,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 24,
+          "end": 29,
+          "length": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      29,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 29,
+          "end": 30,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      30,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 31,
+          "end": 32,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      32,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 32,
+          "end": 33,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      33,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 34,
+          "end": 35,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      35,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 35,
+          "end": 36,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      36,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 37,
+          "end": 40,
+          "length": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      40,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 40,
+          "end": 41,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      41,
+      0
+    ],
+    "result": {
+      "index": 3,
+      "captureIndices": [
+        {
+          "start": 42,
+          "end": 43,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      43,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 46,
+          "end": 47,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      47,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 47,
+          "end": 48,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      48,
+      0
+    ],
+    "result": {
+      "index": 4,
+      "captureIndices": [
+        {
+          "start": 49,
+          "end": 50,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      50,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 50,
+          "end": 51,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      51,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 51,
+          "end": 52,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      52,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 53,
+          "end": 54,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      54,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 54,
+          "end": 55,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      55,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 55,
+          "end": 56,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      56,
+      0
+    ],
+    "result": null
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      0,
+      0
+    ],
+    "result": {
+      "index": 3,
+      "captureIndices": [
+        {
+          "start": 0,
+          "end": 1,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      1,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 1,
+          "end": 2,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      2,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 2,
+          "end": 3,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      3,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 3,
+          "end": 4,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      4,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 4,
+          "end": 5,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      5,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 5,
+          "end": 6,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      6,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 6,
+          "end": 7,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      7,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 7,
+          "end": 8,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      8,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 8,
+          "end": 9,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      9,
+      0
+    ],
+    "result": {
+      "index": 10,
+      "captureIndices": [
+        {
+          "start": 9,
+          "end": 10,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      10,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 10,
+          "end": 11,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      11,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 12,
+          "end": 16,
+          "length": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      16,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 16,
+          "end": 17,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      17,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 18,
+          "end": 22,
+          "length": 4
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      22,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 22,
+          "end": 23,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      23,
+      0
+    ],
+    "result": {
+      "index": 1,
+      "captureIndices": [
+        {
+          "start": 24,
+          "end": 29,
+          "length": 5
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      29,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 29,
+          "end": 30,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      30,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 31,
+          "end": 32,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      32,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 32,
+          "end": 33,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      33,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 34,
+          "end": 35,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      35,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 35,
+          "end": 36,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      36,
+      0
+    ],
+    "result": {
+      "index": 2,
+      "captureIndices": [
+        {
+          "start": 37,
+          "end": 40,
+          "length": 3
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      40,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 40,
+          "end": 41,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      41,
+      0
+    ],
+    "result": {
+      "index": 3,
+      "captureIndices": [
+        {
+          "start": 42,
+          "end": 43,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "ZBsCOymwtL",
+    "patterns": [
+      "\"",
+      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\."
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      43,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 46,
+          "end": 47,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      47,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 47,
+          "end": 48,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      48,
+      0
+    ],
+    "result": {
+      "index": 4,
+      "captureIndices": [
+        {
+          "start": 49,
+          "end": 50,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      50,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 50,
+          "end": 51,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      51,
+      0
+    ],
+    "result": {
+      "index": 9,
+      "captureIndices": [
+        {
+          "start": 51,
+          "end": 52,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      52,
+      0
+    ],
+    "result": {
+      "index": 5,
+      "captureIndices": [
+        {
+          "start": 53,
+          "end": 54,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "iqxJKWKHPI",
+    "patterns": [
+      "\\}",
+      "\"",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ":",
+      "[^\\s}]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      54,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 54,
+          "end": 55,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "OQfoNsNjMP",
+    "patterns": [
+      "\\]",
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?",
+      ",",
+      "[^\\s\\]]"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      55,
+      0
+    ],
+    "result": {
+      "index": 0,
+      "captureIndices": [
+        {
+          "start": 55,
+          "end": 56,
+          "length": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "YBFJlRXogY",
+    "patterns": [
+      "\\b(?:true|false|null)\\b",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "\"",
+      "\\[",
+      "\\{",
+      "/\\*\\*(?!/)",
+      "/\\*",
+      "(//).*$\\n?"
+    ],
+    "args": [
+      "[undefined, null, true, false, 0, 1, 1.1, \"foo\", [], {}]\n",
+      56,
+      0
+    ],
+    "result": null
+  }
+]

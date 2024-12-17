@@ -58,7 +58,11 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
       hasIndices: true,
       rules: {
         allowOrphanBackrefs: true,
+        // Dropping unhandled `\G` anchors without erroring allows more grammars to pass but also
+        // allows some false positive and negative matches. It's mostly because this is true that
+        // the JS engine is marked as experimental
         allowUnhandledGAnchors: true,
+        // Improves search performance for generated regexes
         asciiWordBoundaries: true,
       },
       ...options,
@@ -106,7 +110,7 @@ export class JavaScriptScanner implements PatternScanner {
     })
   }
 
-  findNextMatchSync(string: string | RegexEngineString, startPosition: number): IOnigMatch | null {
+  findNextMatchSync(string: string | RegexEngineString, startPosition: number, _options: number): IOnigMatch | null {
     const str = typeof string === 'string'
       ? string
       : string.content
@@ -118,15 +122,15 @@ export class JavaScriptScanner implements PatternScanner {
         captureIndices: match.indices!.map((indice) => {
           if (indice == null) {
             return {
-              end: MAX,
               start: MAX,
+              end: MAX,
               length: 0,
             }
           }
           return {
             start: indice[0] + offset,
-            length: indice[1] - indice[0],
             end: indice[1] + offset,
+            length: indice[1] - indice[0],
           }
         }),
       }

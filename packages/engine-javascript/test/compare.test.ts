@@ -1,34 +1,36 @@
+import type { OnigString } from '../../core/src/textmate'
 import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../shiki/src/core'
-import type { Instance } from './types'
-import { describe, expect, it } from 'vitest'
+import type { Execution } from './types'
 
-import { loadWasm } from '../../engine-oniguruma/src'
-import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
+import { hash as createHash } from 'ohash'
+import { describe, expect, it } from 'vitest'
+import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src'
 
-function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
-  const instances: Instance[] = []
+function createEngineWrapper(engine: RegexEngine): RegexEngine & { executions: Execution[] } {
+  const executions: Execution[] = []
 
   return {
-    instances,
+    executions,
     createScanner(patterns) {
-      const scanner = new OnigScanner(patterns)
-      const instance: Instance = {
-        constractor: [patterns],
-        executions: [],
-      }
-      instances.push(instance)
+      const scanner = engine.createScanner(patterns)
+
       return {
-        findNextMatchSync(string: string | OnigString, startPosition: number) {
-          const result = scanner.findNextMatchSync(string, startPosition)
-          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition], result })
+        findNextMatchSync(string: string | OnigString, startPosition: number, options) {
+          const result = scanner.findNextMatchSync(string, startPosition, options)
+          executions.push({
+            id: createHash({ patterns }),
+            patterns,
+            args: [typeof string === 'string' ? string : string.content, startPosition, options],
+            result,
+          })
           return result
         },
       }
     },
     createString(s) {
-      return new OnigString(s)
+      return engine.createString(s)
     },
   }
 }
@@ -42,6 +44,22 @@ export interface Cases {
 }
 
 const cases: Cases[] = [
+  {
+    name: 'beancount',
+    theme: () => import('../../shiki/src/themes/nord.mjs'),
+    lang: () => import('../../shiki/src/langs/beancount.mjs'),
+    cases: [
+      `2012-11-03 * "Transfer to pay credit card"
+  Assets:MyBank:Checking            -400.00 USD
+  Liabilities:CreditCard             400.00 USD
+
+2012-11-03 * "Transfer to account in Canada"
+  Assets:MyBank:Checking            -400.00 USD @ 1.09 CAD
+  Assets:FR:SocGen:Checking          436.01 CAD
+
+; https://beancount.github.io/docs/beancount_language_syntax.html#costs-and-prices`,
+    ],
+  },
   {
     name: 'json-basic',
     theme: () => import('../../shiki/src/themes/nord.mjs'),
@@ -115,7 +133,6 @@ const cases: Cases[] = [
     ],
   },
   {
-    skip: true,
     name: 'markdown',
     theme: () => import('../../shiki/src/themes/nord.mjs'),
     lang: () => import('../../shiki/src/langs/markdown.mjs'),
@@ -158,10 +175,14 @@ describe('cases', async () => {
   for (const c of resolved) {
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
-      const engineWasm = createWasmOnigLibWrapper()
-      const engineJs = createJavaScriptRegexEngine({
-        forgiving: true,
-      })
+      const engineWasm = createEngineWrapper(
+        await createWasmOnigEngine(),
+      )
+      const engineJs = createEngineWrapper(
+        createJavaScriptRegexEngine({
+          forgiving: true,
+        }),
+      )
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
@@ -187,8 +208,12 @@ describe('cases', async () => {
       }
 
       await expect
-        .soft(JSON.stringify(engineWasm.instances, null, 2))
-        .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
+        .soft(JSON.stringify(engineWasm.executions, null, 2))
+        .toMatchFileSnapshot(`./__records__/${c.c.name}.wasm.json`)
+
+      await expect
+        .soft(JSON.stringify(engineJs.executions, null, 2))
+        .toMatchFileSnapshot(`./__records__/${c.c.name}.js.json`)
 
       // compare.forEach(([a, b]) => {
       //   expect.soft(a).toEqual(b)
