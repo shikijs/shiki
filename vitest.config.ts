@@ -8,6 +8,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   test: {
+    reporters: 'dot',
     exclude: [
       '**/vendor/**',
       '**/node_modules/**',

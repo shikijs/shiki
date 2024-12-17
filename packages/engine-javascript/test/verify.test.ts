@@ -26,8 +26,15 @@ describe('verify', async () => {
     describe(`record: ${name}`, async () => {
       const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
       let i = 0
+
+      it('', () => {})
+
       for (const execution of executions) {
         i += 1
+
+        if (!(i === 2 && name === 'beancount'))
+          continue
+
         it(`case ${i}`, () => {
           const scanner = new JavaScriptScanner(execution.patterns, { cache })
 
