@@ -1,19 +1,19 @@
+import type { OnigString } from '../../core/src/textmate'
 import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../shiki/src/core'
 import type { Instance } from './types'
-import { describe, expect, it } from 'vitest'
 
-import { loadWasm } from '../../engine-oniguruma/src'
-import { OnigScanner, OnigString } from '../../engine-oniguruma/src/oniguruma'
+import { describe, expect, it } from 'vitest'
+import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src'
 
-function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
+function createEngineWrapper(engine: RegexEngine): RegexEngine & { instances: Instance[] } {
   const instances: Instance[] = []
 
   return {
     instances,
     createScanner(patterns) {
-      const scanner = new OnigScanner(patterns)
+      const scanner = engine.createScanner(patterns)
       const instance: Instance = {
         constractor: [patterns],
         executions: [],
@@ -28,37 +28,7 @@ function createWasmOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
       }
     },
     createString(s) {
-      return new OnigString(s)
-    },
-  }
-}
-
-function createJsOnigLibWrapper(): RegexEngine & { instances: Instance[] } {
-  const instances: Instance[] = []
-
-  const JsOnigScanner = createJavaScriptRegexEngine({
-    forgiving: true,
-  })
-
-  return {
-    instances,
-    createScanner(patterns) {
-      const scanner = JsOnigScanner.createScanner(patterns)
-      const instance: Instance = {
-        constractor: [patterns],
-        executions: [],
-      }
-      instances.push(instance)
-      return {
-        findNextMatchSync(string: string | OnigString, startPosition: number, options) {
-          const result = scanner.findNextMatchSync(string, startPosition, options)
-          instance.executions.push({ args: [typeof string === 'string' ? string : string.content, startPosition, options], result })
-          return result
-        },
-      }
-    },
-    createString(s) {
-      return JsOnigScanner.createString(s)
+      return engine.createString(s)
     },
   }
 }
@@ -161,7 +131,6 @@ const cases: Cases[] = [
     ],
   },
   {
-    skip: true,
     name: 'markdown',
     theme: () => import('../../shiki/src/themes/nord.mjs'),
     lang: () => import('../../shiki/src/langs/markdown.mjs'),
@@ -204,8 +173,14 @@ describe('cases', async () => {
   for (const c of resolved) {
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
-      const engineWasm = createWasmOnigLibWrapper()
-      const engineJs = createJsOnigLibWrapper()
+      const engineWasm = createEngineWrapper(
+        await createWasmOnigEngine(),
+      )
+      const engineJs = createEngineWrapper(
+        createJavaScriptRegexEngine({
+          forgiving: true,
+        }),
+      )
 
       const shiki1 = await createHighlighterCore({
         langs: c.lang,
@@ -232,7 +207,7 @@ describe('cases', async () => {
 
       await expect
         .soft(JSON.stringify(engineWasm.instances, null, 2))
-        .toMatchFileSnapshot(`./__records__/${c.c.name}.json`)
+        .toMatchFileSnapshot(`./__records__/${c.c.name}.wasm.json`)
 
       await expect
         .soft(JSON.stringify(engineJs.instances, null, 2))

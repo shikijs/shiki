@@ -7,7 +7,7 @@ import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
 
 describe('verify', async () => {
-  const files = await fg('*.json', {
+  const files = await fg('*.wasm.json', {
     cwd: fileURLToPath(new URL('./__records__', import.meta.url)),
     absolute: true,
     onlyFiles: true,
@@ -17,7 +17,7 @@ describe('verify', async () => {
 
   for (const file of files) {
     // Some token positions are off in this record
-    const name = basename(file, '.json')
+    const name = basename(file, '.wasm.json')
 
     // TODO: markdown support is still problematic
     if (name === 'markdown')
