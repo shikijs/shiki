@@ -49,6 +49,7 @@ async function CodeBlock(props: Props) {
 You can also call `codeToHast` to get the HTML abstract syntax tree, and render it using [`hast-util-to-jsx-runtime`](https://github.com/syntax-tree/hast-util-to-jsx-runtime). With this method, you can render your own `pre` and `code` components.
 
 ```tsx
+import type { JSX } from 'react'
 import type { BundledLanguage } from 'shiki'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
@@ -87,7 +88,7 @@ async function CodeBlock(props: Props) {
       // your custom `pre` element
       pre: props => <pre data-custom-codeblock {...props} />
     },
-  })
+  }) as JSX.Element
 }
 ```
 
@@ -99,6 +100,7 @@ We can start by creating a client `CodeBlock` component.
 Create a `shared.ts` for highlighter:
 
 ```ts
+import type { JSX } from 'react'
 import type { BundledLanguage } from 'shiki/bundle/web'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
@@ -115,7 +117,7 @@ export async function highlight(code: string, lang: BundledLanguage) {
     Fragment,
     jsx,
     jsxs,
-  })
+  }) as JSX.Element
 }
 ```
 
