@@ -1,11 +1,8 @@
 import type { IOnigMatch } from '@shikijs/vscode-textmate'
 
-export interface Instance {
-  constractor: [string[]]
-  executions: Executions[]
-}
-
-export interface Executions {
+export interface Execution {
+  id: string
+  patterns: string[]
   args: [str: string, start: number, options: number]
   result: IOnigMatch | null
 }

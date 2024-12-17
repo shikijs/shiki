@@ -1,28 +1,27 @@
 import type { OnigString } from '../../core/src/textmate'
 import type { LanguageRegistration, RegexEngine, ThemeRegistration } from '../../shiki/src/core'
-import type { Instance } from './types'
+import type { Execution } from './types'
 
+import { hash as createHash } from 'ohash'
 import { describe, expect, it } from 'vitest'
 import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src'
 
-function createEngineWrapper(engine: RegexEngine): RegexEngine & { instances: Instance[] } {
-  const instances: Instance[] = []
+function createEngineWrapper(engine: RegexEngine): RegexEngine & { executions: Execution[] } {
+  const executions: Execution[] = []
 
   return {
-    instances,
+    executions,
     createScanner(patterns) {
       const scanner = engine.createScanner(patterns)
-      const instance: Instance = {
-        constractor: [patterns],
-        executions: [],
-      }
-      instances.push(instance)
+
       return {
         findNextMatchSync(string: string | OnigString, startPosition: number, options) {
           const result = scanner.findNextMatchSync(string, startPosition, options)
-          instance.executions.push({
+          executions.push({
+            id: createHash({ patterns }),
+            patterns,
             args: [typeof string === 'string' ? string : string.content, startPosition, options],
             result,
           })
@@ -209,11 +208,11 @@ describe('cases', async () => {
       }
 
       await expect
-        .soft(JSON.stringify(engineWasm.instances, null, 2))
+        .soft(JSON.stringify(engineWasm.executions, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.wasm.json`)
 
       await expect
-        .soft(JSON.stringify(engineJs.instances, null, 2))
+        .soft(JSON.stringify(engineJs.executions, null, 2))
         .toMatchFileSnapshot(`./__records__/${c.c.name}.js.json`)
 
       // compare.forEach(([a, b]) => {
