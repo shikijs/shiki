@@ -23,10 +23,6 @@ describe('verify', async () => {
     if (name === 'markdown')
       continue
 
-    // TODO: https://github.com/shikijs/shiki/pull/866
-    if (name === 'beancount')
-      continue
-
     describe(`record: ${name}`, async () => {
       const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
       let i = 0
