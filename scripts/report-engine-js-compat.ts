@@ -242,7 +242,7 @@ async function run() {
     '',
     '## Unsupported Languages',
     '',
-    'Languages that throw with the JavaScript RegExp engine, either because they contain syntax we can\'t polyfill yet or because the grammar contains an invalid Oniguruma regex (that would also fail when using the WASM engine, but silently). You can try these languages with the `forgiving` option to skip errors, but usually it\'s best to use the Oniguruma engine instead.',
+    'Languages that throw with the JavaScript RegExp engine, either because they contain syntax we can\'t polyfill yet or because the grammar contains an invalid Oniguruma regex (that would also fail when using the WASM engine, but silently). You can try these languages with the `forgiving` option to skip errors.',
     '',
     createTable(reportError),
   ].join('\n')

@@ -57,13 +57,15 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
       global: true,
       hasIndices: true,
       rules: {
+        // Needed since TextMate grammars merge backrefs across patterns
         allowOrphanBackrefs: true,
-        // Dropping unhandled `\G` anchors without erroring allows more grammars to pass but also
-        // allows some false positive and negative matches. It's mostly because this is true that
-        // the JS engine is marked as experimental
+        // Removing `\G` anchors in cases when they're not supported for emulation allows
+        // supporting more grammars, but also allows some mismatches
         allowUnhandledGAnchors: true,
         // Improves search performance for generated regexes
         asciiWordBoundaries: true,
+        // Follow `vscode-oniguruma` which enables this Oniguruma option by default
+        captureGroup: true,
       },
       ...options,
     },
