@@ -37,11 +37,7 @@ const shiki = await createShiki({
 })
 ```
 
-## JavaScript RegExp Engine (Experimental)
-
-::: warning Experimental
-This feature is experimental and may change without following semver.
-:::
+## JavaScript RegExp Engine
 
 This engine uses JavaScript's native RegExp. As regular expressions used by TextMate grammars are written for Oniguruma, they might contain syntax that is not supported by JavaScript's RegExp, or expect different behavior for the same syntax. So we use [Oniguruma-To-ES](https://github.com/slevithan/oniguruma-to-es) to transpile Oniguruma patterns to native JavaScript RegExp.
 

@@ -184,8 +184,6 @@ export class JavaScriptScanner implements PatternScanner {
  * patterns are not supported. Errors will be thrown when parsing TextMate grammars with
  * unsupported patterns, and when the grammar includes patterns that use invalid Oniguruma syntax.
  * Set `forgiving` to `true` to ignore these errors and skip any unsupported or invalid patterns.
- *
- * @experimental
  */
 export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOptions = {}): RegexEngine {
   const _options = {

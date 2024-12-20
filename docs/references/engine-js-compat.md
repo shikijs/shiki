@@ -1,6 +1,6 @@
 # JavaScript RegExp Engine Compatibility References
 
-Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine-experimental).
+Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
 > Generated on Thursday, December 19, 2024
 >
