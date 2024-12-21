@@ -2,9 +2,9 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Thursday, December 19, 2024
+> Generated on Saturday, December 21, 2024
 >
-> Version `1.24.2`
+> Version `1.24.3`
 >
 > Runtime: Node.js v22.11.0
 
@@ -13,8 +13,8 @@ Compatibility reference of all built-in grammars with the [JavaScript RegExp eng
 |                 |                       Count |
 | :-------------- | --------------------------: |
 | Total Languages |                         218 |
-| Supported       | [206](#supported-languages) |
-| Mismatched      |  [6](#mismatched-languages) |
+| Supported       | [208](#supported-languages) |
+| Mismatched      |  [4](#mismatched-languages) |
 | Unsupported     | [6](#unsupported-languages) |
 
 ## Supported Languages
@@ -132,6 +132,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | lua                | ✅ OK           |               278 |               - |      |
 | luau               | ✅ OK           |                88 |               - |      |
 | make               | ✅ OK           |                51 |               - |      |
+| markdown           | ✅ OK           |               118 |               - |      |
 | marko              | ✅ OK           |               926 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
 | mdc                | ✅ OK           |               783 |               - |      |
@@ -152,6 +153,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | perl               | ✅ OK           |               941 |               - |      |
 | php                | ✅ OK           |              1131 |               - |      |
 | plsql              | ✅ OK           |                45 |               - |      |
+| po                 | ✅ OK           |                23 |               - |      |
 | postcss            | ✅ OK           |                49 |               - |      |
 | powerquery         | ✅ OK           |                30 |               - |      |
 | powershell         | ✅ OK           |                88 |               - |      |
@@ -242,14 +244,12 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 
 Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine. Please use with caution.
 
-| Language | Highlight Match                                                               | Patterns Parsable | Patterns Failed | Diff |
-| -------- | :---------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| apex     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=apex)     |               187 |               - |   33 |
-| cpp      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=cpp)      |               512 |               - |    8 |
-| kusto    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto)    |                60 |               - |   40 |
-| markdown | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=markdown) |               118 |               - |  100 |
-| nginx    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx)    |               378 |               - |  122 |
-| po       | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=po)       |                23 |               - |  114 |
+| Language | Highlight Match                                                            | Patterns Parsable | Patterns Failed | Diff |
+| -------- | :------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
+| apex     | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=apex)  |               187 |               - |   33 |
+| cpp      | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=cpp)   |               512 |               - |    8 |
+| kusto    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto) |                60 |               - |   40 |
+| nginx    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx) |               378 |               - |  122 |
 
 ## Unsupported Languages
 
