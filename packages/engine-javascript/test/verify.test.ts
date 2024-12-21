@@ -19,10 +19,6 @@ describe('verify', async () => {
     // Some token positions are off in this record
     const name = basename(file, '.wasm.json')
 
-    // TODO: markdown support is still problematic
-    if (name === 'markdown')
-      continue
-
     describe(`record: ${name}`, async () => {
       const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
       let i = 0
