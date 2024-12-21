@@ -75,7 +75,7 @@ interface Props {
 }
 
 async function CodeBlock(props: Props) {
-  const out = await codeToHtml(props.children, {
+  const out = await codeToHast(props.children, {
     lang: props.lang,
     theme: 'github-dark'
   })
