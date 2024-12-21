@@ -54,7 +54,7 @@ import type { BundledLanguage } from 'shiki'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { codeToHast } from 'shiki'
+import { codeToHtml } from 'shiki'
 
 export default function Page() {
   return (
