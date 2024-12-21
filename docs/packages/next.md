@@ -125,7 +125,7 @@ In your `codeblock.tsx`:
 
 ```tsx
 'use client'
-import { useLayoutEffect, useState } from 'react'
+import { JSX, useLayoutEffect, useState } from 'react'
 import { highlight } from './shared'
 
 export function CodeBlock({ initial }: { initial?: JSX.Element }) {
