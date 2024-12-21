@@ -10,6 +10,8 @@ export interface TransformerNotationFocusOptions {
    * Class added to the root element when the code has focused lines
    */
   classActivePre?: string
+
+  legacy?: boolean
 }
 
 /**
@@ -21,6 +23,7 @@ export function transformerNotationFocus(
   const {
     classActiveLine = 'focused',
     classActivePre = 'has-focused',
+    legacy,
   } = options
 
   return transformerNotationMap(
@@ -29,6 +32,7 @@ export function transformerNotationFocus(
         focus: classActiveLine,
       },
       classActivePre,
+      legacy,
     },
     '@shikijs/transformers:notation-focus',
   )
