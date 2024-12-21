@@ -54,7 +54,7 @@ import type { BundledLanguage } from 'shiki'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
 import { Fragment } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { codeToHtml } from 'shiki'
+import { codeToHast } from 'shiki'
 
 export default function Page() {
   return (
@@ -75,7 +75,7 @@ interface Props {
 }
 
 async function CodeBlock(props: Props) {
-  const out = await codeToHtml(props.children, {
+  const out = await codeToHast(props.children, {
     lang: props.lang,
     theme: 'github-dark'
   })
