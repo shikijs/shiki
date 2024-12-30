@@ -570,6 +570,16 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
 
+  packages/langs:
+    dependencies:
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      tm-grammars:
+        specifier: ^1.21.10
+        version: 1.21.10
+
   packages/markdown-it:
     dependencies:
       markdown-it:
@@ -659,6 +669,12 @@ importers:
       '@shikijs/engine-oniguruma':
         specifier: workspace:*
         version: link:../engine-oniguruma
+      '@shikijs/langs':
+        specifier: workspace:*
+        version: link:../langs
+      '@shikijs/themes':
+        specifier: workspace:*
+        version: link:../themes
       '@shikijs/types':
         specifier: workspace:*
         version: link:../types
@@ -681,6 +697,16 @@ importers:
       vscode-oniguruma:
         specifier: ^1.7.0
         version: 1.7.0
+
+  packages/themes:
+    dependencies:
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
+    devDependencies:
+      tm-themes:
+        specifier: 'catalog:'
+        version: 1.9.5
 
   packages/transformers:
     dependencies:
@@ -4804,6 +4830,9 @@ packages:
   tinyspy@3.0.0:
     resolution: {integrity: sha512-q5nmENpTHgiPVd1cJDDc9cVoYN5x4vCvwT3FMilvKPKneCBZAxn2YWQjDF0UMcE9k0Cay1gBiDfTMU0g+mPMQA==}
     engines: {node: '>=14.0.0'}
+
+  tm-grammars@1.21.10:
+    resolution: {integrity: sha512-0TSAeQ90vvh0xRGdLw/HZG3K4M9gE1rwhGDB29QtoA5h2eRRD8tlGwukBJKx/y23l9EDbMP3+2QFeJqMsVOgBQ==}
 
   tm-grammars@1.21.9:
     resolution: {integrity: sha512-9kT/ehl3KPmxAeD0JVsCKpZOh+ANWj1RVvNFlsIU88ruUTF1XBWaFeFZUcgA5asJYiKtgD48ddb7VWQVOSOx+g==}
@@ -9850,6 +9879,8 @@ snapshots:
   tinyrainbow@1.2.0: {}
 
   tinyspy@3.0.0: {}
+
+  tm-grammars@1.21.10: {}
 
   tm-grammars@1.21.9: {}
 
