@@ -12,11 +12,8 @@ import { JavaScriptScanner } from './scanner'
 export function createJavaScriptRawEngine(): RegexEngine {
   const options: JavaScriptRegexScannerOptions = {
     cache: new Map(),
-    regexConstructor: (pattern) => {
-      if (typeof pattern !== 'string') {
-        return pattern
-      }
-      throw new Error('JavaScriptRawEngine: only support precompiled regex')
+    regexConstructor: () => {
+      throw new Error('JavaScriptRawEngine: only support precompiled grammar')
     },
   }
 
