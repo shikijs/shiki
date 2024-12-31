@@ -1,9 +1,9 @@
+import type { JavaScriptRegexEngineOptions } from '@shikijs/engine-javascript'
 import type { RegexEngine } from '@shikijs/types'
-import type { JavaScriptRegexEngineOptions } from '../../../engine-javascript/src/engine-compile'
 import {
   createJavaScriptRegexEngine as _createJavaScriptRegexEngine,
   defaultJavaScriptRegexConstructor as _defaultJavaScriptRegexConstructor,
-} from '../../../engine-javascript/src/engine-compile'
+} from '@shikijs/engine-javascript'
 import { warnDeprecated } from '../warn'
 
 /**
