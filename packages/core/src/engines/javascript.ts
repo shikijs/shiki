@@ -1,4 +1,6 @@
-import type { JavaScriptRegexEngineOptions } from '@shikijs/engine-javascript'
+import type {
+  JavaScriptRegexEngineOptions,
+} from '@shikijs/engine-javascript'
 import type { RegexEngine } from '@shikijs/types'
 import {
   createJavaScriptRegexEngine as _createJavaScriptRegexEngine,

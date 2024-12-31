@@ -1,20 +1,14 @@
 import type {
-  PatternScanner,
   RegexEngine,
-  RegexEngineString,
 } from '@shikijs/types'
-import type { IOnigMatch } from '@shikijs/vscode-textmate'
 import type { OnigurumaToEsOptions } from 'oniguruma-to-es'
+import type { JavaScriptRegexScannerOptions } from './scanner'
 import { toRegExp } from 'oniguruma-to-es'
+import { JavaScriptScanner } from './scanner'
 
-export interface JavaScriptRegexEngineOptions {
-  /**
-   * Whether to allow invalid regex patterns.
-   *
-   * @default false
-   */
-  forgiving?: boolean
+export * from './scanner'
 
+export interface JavaScriptRegexEngineOptions extends JavaScriptRegexScannerOptions {
   /**
    * The target ECMAScript version.
    *
@@ -31,21 +25,7 @@ export interface JavaScriptRegexEngineOptions {
    * @default 'auto'
    */
   target?: 'auto' | 'ES2025' | 'ES2024' | 'ES2018'
-
-  /**
-   * Cache for regex patterns.
-   */
-  cache?: Map<string, RegExp | Error> | null
-
-  /**
-   * Custom pattern to RegExp constructor.
-   *
-   * By default `oniguruma-to-es` is used.
-   */
-  regexConstructor?: (pattern: string) => RegExp
 }
-
-const MAX = 4294967295
 
 /**
  * The default RegExp constructor for JavaScript regex engine.
@@ -72,111 +52,6 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
   )
 }
 
-export class JavaScriptScanner implements PatternScanner {
-  regexps: (RegExp | null)[]
-
-  constructor(
-    public patterns: string[],
-    public options: JavaScriptRegexEngineOptions = {},
-  ) {
-    const {
-      forgiving = false,
-      cache,
-      target = 'auto',
-      regexConstructor = (pattern: string) => defaultJavaScriptRegexConstructor(pattern, { target }),
-    } = options
-
-    this.regexps = patterns.map((p) => {
-      // Cache
-      const cached = cache?.get(p)
-      if (cached) {
-        if (cached instanceof RegExp) {
-          return cached
-        }
-        if (forgiving)
-          return null
-        throw cached
-      }
-      try {
-        const regex = regexConstructor(p)
-        cache?.set(p, regex)
-        return regex
-      }
-      catch (e) {
-        cache?.set(p, e as Error)
-        if (forgiving)
-          return null
-        // console.error({ ...e })
-        throw e
-      }
-    })
-  }
-
-  findNextMatchSync(string: string | RegexEngineString, startPosition: number, _options: number): IOnigMatch | null {
-    const str = typeof string === 'string'
-      ? string
-      : string.content
-    const pending: [index: number, match: RegExpExecArray, offset: number][] = []
-
-    function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
-      return {
-        index,
-        captureIndices: match.indices!.map((indice) => {
-          if (indice == null) {
-            return {
-              start: MAX,
-              end: MAX,
-              length: 0,
-            }
-          }
-          return {
-            start: indice[0] + offset,
-            end: indice[1] + offset,
-            length: indice[1] - indice[0],
-          }
-        }),
-      }
-    }
-
-    for (let i = 0; i < this.regexps.length; i++) {
-      const regexp = this.regexps[i]
-      if (!regexp)
-        continue
-      try {
-        regexp.lastIndex = startPosition
-        const match = regexp.exec(str)
-
-        if (!match)
-          continue
-
-        // If the match is at the start position, return it immediately
-        if (match.index === startPosition) {
-          return toResult(i, match, 0)
-        }
-        // Otherwise, store it for later
-        pending.push([i, match, 0])
-      }
-      catch (e) {
-        if (this.options.forgiving)
-          continue
-        throw e
-      }
-    }
-
-    // Find the closest match to the start position
-    if (pending.length) {
-      const minIndex = Math.min(...pending.map(m => m[1].index))
-      for (const [i, match, offset] of pending) {
-        if (match.index === minIndex) {
-          return toResult(i, match, offset)
-        }
-      }
-    }
-
-    return null
-  }
-}
-
 /**
  * Use the modern JavaScript RegExp engine to implement the OnigScanner.
  *
@@ -186,13 +61,17 @@ export class JavaScriptScanner implements PatternScanner {
  * Set `forgiving` to `true` to ignore these errors and skip any unsupported or invalid patterns.
  */
 export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOptions = {}): RegexEngine {
-  const _options = {
-    cache: new Map(),
-    ...options,
-  }
+  const _options: JavaScriptRegexEngineOptions = Object.assign(
+    {
+      target: 'auto',
+      cache: new Map(),
+    },
+    options,
+  )
+  _options.regexConstructor ||= pattern => defaultJavaScriptRegexConstructor(pattern, { target: _options.target })
 
   return {
-    createScanner(patterns: string[]) {
+    createScanner(patterns) {
       return new JavaScriptScanner(patterns, _options)
     },
     createString(s: string) {

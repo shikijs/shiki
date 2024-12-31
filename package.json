@@ -75,6 +75,12 @@
     "vue-tsc": "catalog:",
     "wrangler": "catalog:"
   },
+  "pnpm": {
+    "patchedDependencies": {
+      "oniguruma-to-es": "patches/oniguruma-to-es.patch",
+      "@shikijs/vscode-textmate": "patches/@shikijs__vscode-textmate.patch"
+    }
+  },
   "resolutions": {
     "@shikijs/compat": "workspace:*",
     "@shikijs/core": "workspace:*",

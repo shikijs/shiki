@@ -9,7 +9,7 @@ export interface RegexEngineString extends OnigString {}
  * Engine for RegExp matching and scanning.
  */
 export interface RegexEngine {
-  createScanner: (patterns: string[]) => PatternScanner
+  createScanner: (patterns: (string | RegExp)[]) => PatternScanner
   createString: (s: string) => RegexEngineString
 }
 

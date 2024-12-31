@@ -1,0 +1,369 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+index e71b322e1210a8827ed5d2533898e4f13fffec9b..41dd1102309d7d3045208f860b3d42ec8e7406d7 100644
+--- a/dist/index.d.mts
++++ b/dist/index.d.mts
+@@ -1,5 +1,134 @@
++declare const ruleIdSymbol: unique symbol;
++type RuleId = {
++    __brand: typeof ruleIdSymbol;
++};
++declare const endRuleId = -1;
++interface IRuleRegistry {
++    getRule(ruleId: RuleId): Rule;
++    registerRule<T extends Rule>(factory: (id: RuleId) => T): T;
++}
++interface IGrammarRegistry {
++    getExternalGrammar(scopeName: string, repository: IRawRepository): IRawGrammar | null | undefined;
++}
++interface IRuleFactoryHelper extends IRuleRegistry, IGrammarRegistry {
++}
++declare abstract class Rule {
++    readonly $location: ILocation | undefined;
++    readonly id: RuleId;
++    private readonly _nameIsCapturing;
++    private readonly _name;
++    private readonly _contentNameIsCapturing;
++    private readonly _contentName;
++    constructor($location: ILocation | undefined, id: RuleId, name: string | null | undefined, contentName: string | null | undefined);
++    abstract dispose(): void;
++    get debugName(): string;
++    getName(lineText: string | null, captureIndices: IOnigCaptureIndex[] | null): string | null;
++    getContentName(lineText: string, captureIndices: IOnigCaptureIndex[]): string | null;
++    abstract collectPatterns(grammar: IRuleRegistry, out: RegExpSourceList): void;
++    abstract compile(grammar: IRuleRegistry & IOnigLib, endRegexSource: RegExpString | null): CompiledRule;
++    abstract compileAG(grammar: IRuleRegistry & IOnigLib, endRegexSource: RegExpString | null, allowA: boolean, allowG: boolean): CompiledRule;
++}
++declare class RegExpSource<TRuleId = RuleId | typeof endRuleId> {
++    source: RegExpString;
++    readonly ruleId: TRuleId;
++    hasAnchor: boolean;
++    readonly hasBackReferences: boolean;
++    private _anchorCache;
++    constructor(regExpSource: RegExpString, ruleId: TRuleId);
++    clone(): RegExpSource<TRuleId>;
++    setSource(newSource: RegExpString): void;
++    resolveBackReferences(lineText: string, captureIndices: IOnigCaptureIndex[]): string;
++    private _buildAnchorCache;
++    resolveAnchors(allowA: boolean, allowG: boolean): RegExpString;
++}
++declare class RegExpSourceList<TRuleId = RuleId | typeof endRuleId> {
++    private readonly _items;
++    private _hasAnchors;
++    private _cached;
++    private _anchorCache;
++    constructor();
++    dispose(): void;
++    private _disposeCaches;
++    push(item: RegExpSource<TRuleId>): void;
++    unshift(item: RegExpSource<TRuleId>): void;
++    length(): number;
++    setSource(index: number, newSource: RegExpString): void;
++    compile(onigLib: IOnigLib): CompiledRule<TRuleId>;
++    compileAG(onigLib: IOnigLib, allowA: boolean, allowG: boolean): CompiledRule<TRuleId>;
++    private _resolveAnchors;
++}
++declare class CompiledRule<TRuleId = RuleId | typeof endRuleId> {
++    private readonly regExps;
++    private readonly rules;
++    private readonly scanner;
++    constructor(onigLib: IOnigLib, regExps: RegExpString[], rules: TRuleId[]);
++    dispose(): void;
++    toString(): string;
++    findNextMatchSync(string: string | OnigString, startPosition: number, options: OrMask<FindOption>): IFindNextMatchResult<TRuleId> | null;
++}
++interface IFindNextMatchResult<TRuleId = RuleId | typeof endRuleId> {
++    ruleId: TRuleId;
++    captureIndices: IOnigCaptureIndex[];
++}
++
++interface IRawGrammar extends ILocatable {
++    repository: IRawRepository;
++    readonly scopeName: ScopeName;
++    readonly patterns: IRawRule[];
++    readonly injections?: {
++        [expression: string]: IRawRule;
++    };
++    readonly injectionSelector?: string;
++    readonly fileTypes?: string[];
++    readonly name?: string;
++    readonly firstLineMatch?: string;
++}
++/**
++ * Allowed values:
++ * * Scope Name, e.g. `source.ts`
++ * * Top level scope reference, e.g. `source.ts#entity.name.class`
++ * * Relative scope reference, e.g. `#entity.name.class`
++ * * self, e.g. `$self`
++ * * base, e.g. `$base`
++ */
++type IncludeString = string;
++type RegExpString = string | RegExp;
++interface IRawRepositoryMap {
++    [name: string]: IRawRule;
++}
++type IRawRepository = IRawRepositoryMap & ILocatable;
++interface IRawRule extends ILocatable {
++    id?: RuleId;
++    readonly include?: IncludeString;
++    readonly name?: ScopeName;
++    readonly contentName?: ScopeName;
++    readonly match?: RegExpString;
++    readonly captures?: IRawCaptures;
++    readonly begin?: RegExpString;
++    readonly beginCaptures?: IRawCaptures;
++    readonly end?: RegExpString;
++    readonly endCaptures?: IRawCaptures;
++    readonly while?: RegExpString;
++    readonly whileCaptures?: IRawCaptures;
++    readonly patterns?: IRawRule[];
++    readonly repository?: IRawRepository;
++    readonly applyEndPatternLast?: boolean;
++}
++type IRawCaptures = IRawCapturesMap & ILocatable;
++interface IRawCapturesMap {
++    [captureId: string]: IRawRule;
++}
++interface ILocation {
++    readonly filename: string;
++    readonly line: number;
++    readonly char: number;
++}
++interface ILocatable {
++    readonly $vscodeTextmateLocation?: ILocation;
++}
++
+ interface IOnigLib {
+-    createOnigScanner(sources: string[]): OnigScanner;
++    createOnigScanner(sources: RegExpString[]): OnigScanner;
+     createOnigString(str: string): OnigString;
+ }
+ interface IOnigCaptureIndex {
+@@ -195,135 +324,6 @@ interface Matcher<T> {
+     (matcherInput: T): boolean;
+ }
+ 
+-declare const ruleIdSymbol: unique symbol;
+-type RuleId = {
+-    __brand: typeof ruleIdSymbol;
+-};
+-declare const endRuleId = -1;
+-interface IRuleRegistry {
+-    getRule(ruleId: RuleId): Rule;
+-    registerRule<T extends Rule>(factory: (id: RuleId) => T): T;
+-}
+-interface IGrammarRegistry {
+-    getExternalGrammar(scopeName: string, repository: IRawRepository): IRawGrammar | null | undefined;
+-}
+-interface IRuleFactoryHelper extends IRuleRegistry, IGrammarRegistry {
+-}
+-declare abstract class Rule {
+-    readonly $location: ILocation | undefined;
+-    readonly id: RuleId;
+-    private readonly _nameIsCapturing;
+-    private readonly _name;
+-    private readonly _contentNameIsCapturing;
+-    private readonly _contentName;
+-    constructor($location: ILocation | undefined, id: RuleId, name: string | null | undefined, contentName: string | null | undefined);
+-    abstract dispose(): void;
+-    get debugName(): string;
+-    getName(lineText: string | null, captureIndices: IOnigCaptureIndex[] | null): string | null;
+-    getContentName(lineText: string, captureIndices: IOnigCaptureIndex[]): string | null;
+-    abstract collectPatterns(grammar: IRuleRegistry, out: RegExpSourceList): void;
+-    abstract compile(grammar: IRuleRegistry & IOnigLib, endRegexSource: string | null): CompiledRule;
+-    abstract compileAG(grammar: IRuleRegistry & IOnigLib, endRegexSource: string | null, allowA: boolean, allowG: boolean): CompiledRule;
+-}
+-declare class RegExpSource<TRuleId = RuleId | typeof endRuleId> {
+-    source: string;
+-    readonly ruleId: TRuleId;
+-    hasAnchor: boolean;
+-    readonly hasBackReferences: boolean;
+-    private _anchorCache;
+-    constructor(regExpSource: string, ruleId: TRuleId);
+-    clone(): RegExpSource<TRuleId>;
+-    setSource(newSource: string): void;
+-    resolveBackReferences(lineText: string, captureIndices: IOnigCaptureIndex[]): string;
+-    private _buildAnchorCache;
+-    resolveAnchors(allowA: boolean, allowG: boolean): string;
+-}
+-declare class RegExpSourceList<TRuleId = RuleId | typeof endRuleId> {
+-    private readonly _items;
+-    private _hasAnchors;
+-    private _cached;
+-    private _anchorCache;
+-    constructor();
+-    dispose(): void;
+-    private _disposeCaches;
+-    push(item: RegExpSource<TRuleId>): void;
+-    unshift(item: RegExpSource<TRuleId>): void;
+-    length(): number;
+-    setSource(index: number, newSource: string): void;
+-    compile(onigLib: IOnigLib): CompiledRule<TRuleId>;
+-    compileAG(onigLib: IOnigLib, allowA: boolean, allowG: boolean): CompiledRule<TRuleId>;
+-    private _resolveAnchors;
+-}
+-declare class CompiledRule<TRuleId = RuleId | typeof endRuleId> {
+-    private readonly regExps;
+-    private readonly rules;
+-    private readonly scanner;
+-    constructor(onigLib: IOnigLib, regExps: string[], rules: TRuleId[]);
+-    dispose(): void;
+-    toString(): string;
+-    findNextMatchSync(string: string | OnigString, startPosition: number, options: OrMask<FindOption>): IFindNextMatchResult<TRuleId> | null;
+-}
+-interface IFindNextMatchResult<TRuleId = RuleId | typeof endRuleId> {
+-    ruleId: TRuleId;
+-    captureIndices: IOnigCaptureIndex[];
+-}
+-
+-interface IRawGrammar extends ILocatable {
+-    repository: IRawRepository;
+-    readonly scopeName: ScopeName;
+-    readonly patterns: IRawRule[];
+-    readonly injections?: {
+-        [expression: string]: IRawRule;
+-    };
+-    readonly injectionSelector?: string;
+-    readonly fileTypes?: string[];
+-    readonly name?: string;
+-    readonly firstLineMatch?: string;
+-}
+-/**
+- * Allowed values:
+- * * Scope Name, e.g. `source.ts`
+- * * Top level scope reference, e.g. `source.ts#entity.name.class`
+- * * Relative scope reference, e.g. `#entity.name.class`
+- * * self, e.g. `$self`
+- * * base, e.g. `$base`
+- */
+-type IncludeString = string;
+-type RegExpString = string;
+-interface IRawRepositoryMap {
+-    [name: string]: IRawRule;
+-}
+-type IRawRepository = IRawRepositoryMap & ILocatable;
+-interface IRawRule extends ILocatable {
+-    id?: RuleId;
+-    readonly include?: IncludeString;
+-    readonly name?: ScopeName;
+-    readonly contentName?: ScopeName;
+-    readonly match?: RegExpString;
+-    readonly captures?: IRawCaptures;
+-    readonly begin?: RegExpString;
+-    readonly beginCaptures?: IRawCaptures;
+-    readonly end?: RegExpString;
+-    readonly endCaptures?: IRawCaptures;
+-    readonly while?: RegExpString;
+-    readonly whileCaptures?: IRawCaptures;
+-    readonly patterns?: IRawRule[];
+-    readonly repository?: IRawRepository;
+-    readonly applyEndPatternLast?: boolean;
+-}
+-type IRawCaptures = IRawCapturesMap & ILocatable;
+-interface IRawCapturesMap {
+-    [captureId: string]: IRawRule;
+-}
+-interface ILocation {
+-    readonly filename: string;
+-    readonly line: number;
+-    readonly char: number;
+-}
+-interface ILocatable {
+-    readonly $vscodeTextmateLocation?: ILocation;
+-}
+-
+ declare class BasicScopeAttributes {
+     readonly languageId: number;
+     readonly tokenType: OptionalStandardTokenType;
+@@ -361,7 +361,7 @@ declare class Grammar implements IGrammar, IRuleFactoryHelper, IOnigLib {
+     get themeProvider(): IThemeProvider;
+     constructor(_rootScopeName: ScopeName, grammar: IRawGrammar, initialLanguage: number, embeddedLanguages: IEmbeddedLanguagesMap | null, tokenTypes: ITokenTypeMap | null, balancedBracketSelectors: BalancedBracketSelectors | null, grammarRepository: IGrammarRepository & IThemeProvider, _onigLib: IOnigLib);
+     dispose(): void;
+-    createOnigScanner(sources: string[]): OnigScanner;
++    createOnigScanner(sources: RegExpString[]): OnigScanner;
+     createOnigString(sources: string): OnigString;
+     getMetadataForScope(scope: string): BasicScopeAttributes;
+     private _collectInjections;
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 1f67e0070e309c669d28f1a0644e2fc285034f97..d3e361a1de55be1c2068fe06e6f3cc6b4d91ee9f 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -6,6 +6,9 @@ function doClone(something) {
+   if (Array.isArray(something)) {
+     return cloneArray(something);
+   }
++  if (something instanceof RegExp) {
++    return something;
++  }
+   if (typeof something === "object") {
+     return cloneObj(something);
+   }
+@@ -1383,7 +1386,7 @@ var RuleFactory = class _RuleFactory {
+ };
+ var RegExpSource = class _RegExpSource {
+   constructor(regExpSource, ruleId) {
+-    if (regExpSource) {
++    if (regExpSource && typeof regExpSource === "string") {
+       const len = regExpSource.length;
+       let lastPushedPos = 0;
+       let output = [];
+@@ -1421,7 +1424,11 @@ var RegExpSource = class _RegExpSource {
+       this._anchorCache = null;
+     }
+     this.ruleId = ruleId;
+-    this.hasBackReferences = HAS_BACK_REFERENCES.test(this.source);
++    if (typeof this.source === "string") {
++      this.hasBackReferences = HAS_BACK_REFERENCES.test(this.source);
++    } else {
++      this.hasBackReferences = false;
++    }
+   }
+   clone() {
+     return new _RegExpSource(this.source, this.ruleId);
+@@ -1436,6 +1443,9 @@ var RegExpSource = class _RegExpSource {
+     }
+   }
+   resolveBackReferences(lineText, captureIndices) {
++    if (typeof this.source !== "string") {
++      throw new Error("This method should only be called if the source is a string");
++    }
+     let capturedValues = captureIndices.map((capture) => {
+       return lineText.substring(capture.start, capture.end);
+     });
+@@ -1445,6 +1455,9 @@ var RegExpSource = class _RegExpSource {
+     });
+   }
+   _buildAnchorCache() {
++    if (typeof this.source !== "string") {
++      throw new Error("This method should only be called if the source is a string");
++    }
+     let A0_G0_result = [];
+     let A0_G1_result = [];
+     let A1_G0_result = [];
+@@ -1487,7 +1500,7 @@ var RegExpSource = class _RegExpSource {
+     };
+   }
+   resolveAnchors(allowA, allowG) {
+-    if (!this.hasAnchor || !this._anchorCache) {
++    if (!this.hasAnchor || !this._anchorCache || typeof this.source !== "string") {
+       return this.source;
+     }
+     if (allowA) {
+diff --git a/package.json b/package.json
+index 5579f50c311a32d1a5da608ced8d1cd1534dae9c..05f9a42c3fc3fe09b2b28262d228085b9bba20c0 100644
+--- a/package.json
++++ b/package.json
+@@ -46,5 +46,14 @@
+     "tsup": "^8.3.5",
+     "typescript": "^4.3.5",
+     "vscode-oniguruma": "^1.7.0"
++  },
++  "dependencies": {
++    "@types/mocha": "^9.1.1",
++    "@types/node": "^16.18.121",
++    "bumpp": "^9.9.0",
++    "mocha": "^9.2.2",
++    "tsup": "^8.3.5",
++    "typescript": "^4.3.5",
++    "vscode-oniguruma": "^1.7.0"
+   }
+ }
