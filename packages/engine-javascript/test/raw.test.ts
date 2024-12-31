@@ -1,6 +1,6 @@
-import { createHighlighterCore } from 'shiki/core'
+import { createHighlighterCore } from '@shikijs/core'
 import { expect, it } from 'vitest'
-import { createJavaScriptRegexEngine } from '../src'
+import { createJavaScriptRawEngine } from '../src/engine-raw'
 
 it('work with precompile grammar', async () => {
   const shiki = await createHighlighterCore({
@@ -10,7 +10,7 @@ it('work with precompile grammar', async () => {
     langs: [
       import('@shikijs/langs-precompiled/js'),
     ],
-    engine: createJavaScriptRegexEngine(),
+    engine: createJavaScriptRawEngine(),
   })
 
   expect(

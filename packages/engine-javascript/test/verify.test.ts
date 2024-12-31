@@ -4,7 +4,8 @@ import { basename } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import { describe, expect, it, onTestFailed } from 'vitest'
-import { defaultJavaScriptRegexConstructor, JavaScriptScanner } from '../src'
+import { JavaScriptScanner } from '../src'
+import { defaultJavaScriptRegexConstructor } from '../src/engine-compile'
 
 describe('verify', async () => {
   const files = await fg('*.wasm.json', {
