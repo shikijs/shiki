@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/langs",
   "type": "module",
-  "version": "1.24.4",
+  "version": "1.25.0",
   "description": "TextMate grammars for Shiki in ESM",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -217,6 +217,7 @@
     "./pot": "./dist/pot.mjs",
     "./potx": "./dist/potx.mjs",
     "./po": "./dist/po.mjs",
+    "./polar": "./dist/polar.mjs",
     "./postcss": "./dist/postcss.mjs",
     "./powerquery": "./dist/powerquery.mjs",
     "./ps": "./dist/ps.mjs",
@@ -350,6 +351,6 @@
     "@shikijs/types": "workspace:*"
   },
   "devDependencies": {
-    "tm-grammars": "^1.21.10"
+    "tm-grammars": "catalog:"
   }
 }

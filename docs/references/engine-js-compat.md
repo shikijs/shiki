@@ -2,20 +2,20 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Friday, December 27, 2024
+> Generated on Thursday, January 2, 2025
 >
 > Version `1.24.4`
 >
-> Runtime: Node.js v22.11.0
+> Runtime: Node.js v20.18.0
 
 ## Report Summary
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
-| Total Languages |                         218 |
-| Supported       | [210](#supported-languages) |
-| Mismatched      |  [2](#mismatched-languages) |
-| Unsupported     | [6](#unsupported-languages) |
+| Total Languages |                         219 |
+| Supported       | [213](#supported-languages) |
+| Mismatched      |  [1](#mismatched-languages) |
+| Unsupported     | [5](#unsupported-languages) |
 
 ## Supported Languages
 
@@ -24,8 +24,9 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 
 | Language           | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ------------------ | :-------------- | ----------------: | --------------: | ---: |
-| abap               | ✅ OK           |                51 |               - |      |
+| abap               | ✅ OK           |                52 |               - |      |
 | actionscript-3     | ✅ OK           |                57 |               - |      |
+| ada                | ✅ OK           |               201 |               - |      |
 | angular-html       | ✅ OK           |               670 |               - |      |
 | angular-ts         | ✅ OK           |               779 |               - |      |
 | apache             | ✅ OK           |                60 |               - |      |
@@ -125,11 +126,12 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | jsx                | ✅ OK           |               376 |               - |      |
 | julia              | ✅ OK           |              1168 |               - |      |
 | kotlin             | ✅ OK           |                58 |               - |      |
+| kusto              | ✅ OK           |                60 |               - |      |
 | latex              | ✅ OK           |               283 |               - |      |
 | lean               | ✅ OK           |                32 |               - |      |
 | less               | ✅ OK           |               280 |               - |      |
 | liquid             | ✅ OK           |               689 |               - |      |
-| log                | ✅ OK           |                30 |               - |      |
+| log                | ✅ OK           |                31 |               - |      |
 | logo               | ✅ OK           |                 9 |               - |      |
 | lua                | ✅ OK           |               278 |               - |      |
 | luau               | ✅ OK           |                88 |               - |      |
@@ -156,6 +158,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | php                | ✅ OK           |              1131 |               - |      |
 | plsql              | ✅ OK           |                45 |               - |      |
 | po                 | ✅ OK           |                23 |               - |      |
+| polar              | ✅ OK           |                30 |               - |      |
 | postcss            | ✅ OK           |                49 |               - |      |
 | powerquery         | ✅ OK           |                30 |               - |      |
 | powershell         | ✅ OK           |                88 |               - |      |
@@ -248,7 +251,6 @@ Languages that do not throw with the JavaScript RegExp engine, but will produce 
 
 | Language | Highlight Match                                                            | Patterns Parsable | Patterns Failed | Diff |
 | -------- | :------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| kusto    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=kusto) |                60 |               - |   40 |
 | nginx    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx) |               378 |               - |  122 |
 
 ## Unsupported Languages
@@ -257,7 +259,6 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 
 | Language   | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ---------- | :-------------- | ----------------: | --------------: | ---: |
-| ada        | ✅ OK           |               201 |               1 |      |
 | hack       | ❌ Error        |               947 |               1 |  114 |
 | purescript | ❌ Error        |                72 |               1 |      |
 | csharp     | ❌ Error        |               306 |               3 |  137 |

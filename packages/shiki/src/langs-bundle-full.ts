@@ -818,6 +818,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/po')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'polar',
+    'name': 'Polar',
+    'import': (() => import('@shikijs/langs/polar')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'postcss',
     'name': 'PostCSS',
     'import': (() => import('@shikijs/langs/postcss')) as DynamicImportLanguageRegistration
@@ -1507,6 +1512,7 @@ export type BundledLanguage =
   | 'php'
   | 'plsql'
   | 'po'
+  | 'polar'
   | 'postcss'
   | 'pot'
   | 'potx'
