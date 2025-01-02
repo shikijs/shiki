@@ -16,5 +16,6 @@ export default defineBuildConfig({
   externals: [
     'hast',
     'shiki',
+    /^@shikijs[\\/].*/,
   ],
 })

@@ -12,6 +12,7 @@ export default defineConfig({
     exclude: [
       '**/vendor/**',
       '**/node_modules/**',
+      '**/tm-grammars-themes/**',
     ],
     server: {
       deps: {
