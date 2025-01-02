@@ -513,9 +513,21 @@ importers:
       '@shikijs/core':
         specifier: workspace:*
         version: link:../core
+      '@shikijs/langs':
+        specifier: workspace:*
+        version: link:../langs
+      '@shikijs/themes':
+        specifier: workspace:*
+        version: link:../themes
       '@shikijs/transformers':
         specifier: workspace:*
         version: link:../transformers
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
+      '@shikijs/vscode-textmate':
+        specifier: 'catalog:'
+        version: 10.0.1
       shiki:
         specifier: workspace:*
         version: link:../shiki
