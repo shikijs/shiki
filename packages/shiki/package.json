@@ -35,6 +35,10 @@
       "types": "./dist/langs.d.mts",
       "default": "./dist/langs.mjs"
     },
+    "./langs/*": {
+      "types": "./dist/langs/*.d.mts",
+      "default": "./dist/langs/*.mjs"
+    },
     "./themes": {
       "types": "./dist/themes.d.mts",
       "default": "./dist/themes.mjs"
