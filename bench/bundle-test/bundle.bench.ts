@@ -1,7 +1,10 @@
+/* eslint-disable ts/ban-ts-comment */
 /* eslint-disable antfu/no-import-dist */
 
 import { bench, describe } from 'vitest'
+// @ts-ignore - ignore type error
 import { highlight as highlightA } from './dist/index-lite.min.mjs'
+// @ts-ignore - ignore type error
 import { highlight as highlightB } from './dist/index-wasm.min.mjs'
 
 const code = `
