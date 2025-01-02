@@ -46,8 +46,8 @@ catalogs:
       specifier: ^0.4.4
       version: 0.4.4
     '@shikijs/vscode-textmate':
-      specifier: ^9.3.1
-      version: 9.3.1
+      specifier: ^10.0.1
+      version: 10.0.1
     '@types/fs-extra':
       specifier: ^11.0.4
       version: 11.0.4
@@ -257,11 +257,6 @@ overrides:
   unified: ^11.0.5
   vite: ^6.0.6
   vscode-oniguruma: ^1.7.0
-
-patchedDependencies:
-  '@shikijs/vscode-textmate':
-    hash: fv3krgy3yyqrhoyjgi2fqp76wm
-    path: patches/@shikijs__vscode-textmate.patch
 
 importers:
 
@@ -492,7 +487,7 @@ importers:
     dependencies:
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
       chalk:
         specifier: 'catalog:'
         version: 5.4.1
@@ -542,7 +537,7 @@ importers:
         version: link:../types
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -557,7 +552,7 @@ importers:
         version: link:../types
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
       oniguruma-to-es:
         specifier: 'catalog:'
         version: 0.10.0
@@ -569,7 +564,7 @@ importers:
         version: link:../types
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
     devDependencies:
       vscode-oniguruma:
         specifier: ^1.7.0
@@ -624,7 +619,7 @@ importers:
         version: link:../types
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
     devDependencies:
       monaco-editor-core:
         specifier: 'catalog:'
@@ -698,7 +693,7 @@ importers:
         version: link:../types
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -764,7 +759,7 @@ importers:
     dependencies:
       '@shikijs/vscode-textmate':
         specifier: 'catalog:'
-        version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+        version: 10.0.1
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -1842,6 +1837,9 @@ packages:
 
   '@shikijs/types@1.22.2':
     resolution: {integrity: sha512-NCWDa6LGZqTuzjsGfXOBWfjS/fDIbDdmVDug+7ykVe1IKT4c1gakrvlfFYp5NhAXH/lyqLM8wsAPo5wNy73Feg==}
+
+  '@shikijs/vscode-textmate@10.0.1':
+    resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
 
   '@shikijs/vscode-textmate@9.3.1':
     resolution: {integrity: sha512-79QfK1393x9Ho60QFyLti+QfdJzRQCVLFb97kOIV7Eo9vQU/roINgk7m24uv0a7AUvN//RDH36FLjjK48v0s9g==}
@@ -6195,10 +6193,12 @@ snapshots:
 
   '@shikijs/types@1.22.2':
     dependencies:
-      '@shikijs/vscode-textmate': 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
+      '@shikijs/vscode-textmate': 9.3.1
       '@types/hast': 3.0.4
 
-  '@shikijs/vscode-textmate@9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)': {}
+  '@shikijs/vscode-textmate@10.0.1': {}
+
+  '@shikijs/vscode-textmate@9.3.1': {}
 
   '@stylistic/eslint-plugin@2.12.1(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)':
     dependencies:
