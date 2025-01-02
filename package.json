@@ -26,12 +26,14 @@
     "@rollup/plugin-node-resolve": "catalog:",
     "@rollup/plugin-replace": "catalog:",
     "@rollup/plugin-terser": "catalog:",
+    "@shikijs/colorized-brackets": "workspace:*",
     "@shikijs/engine-javascript": "workspace:*",
     "@shikijs/engine-oniguruma": "workspace:*",
     "@shikijs/markdown-it": "workspace:*",
     "@shikijs/monaco": "workspace:*",
     "@shikijs/rehype": "workspace:*",
     "@shikijs/transformers": "workspace:*",
+    "@shikijs/twoslash": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vitepress-twoslash": "workspace:*",
     "@types/fs-extra": "catalog:",
@@ -76,6 +78,7 @@
     "wrangler": "catalog:"
   },
   "resolutions": {
+    "@shikijs/colorized-brackets": "workspace:*",
     "@shikijs/compat": "workspace:*",
     "@shikijs/core": "workspace:*",
     "@shikijs/engine-javascript": "workspace:*",
