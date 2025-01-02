@@ -1,6 +1,6 @@
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
-import { wasmPlugin } from './packages/core/rollup.config.mjs'
+import { wasmPlugin } from './packages/engine-oniguruma/rollup.config.mjs'
 
 export default defineConfig({
   plugins: [
