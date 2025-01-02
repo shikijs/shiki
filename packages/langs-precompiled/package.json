@@ -342,6 +342,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "prepare": "esno scripts/prepare.ts",
     "build": "pnpm prepare",

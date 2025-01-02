@@ -4,7 +4,9 @@ import { expect, it } from 'vitest'
 import { toJsLiteral } from './langs'
 import { precompileGrammar } from './precompile'
 
-it('precompile', async () => {
+const isNode20andUp = process.version.replace(/^v/, '').split('.').map(Number)[0] >= 20
+
+it.runIf(isNode20andUp)('precompile', async () => {
   const grammar = await import('@shikijs/langs/yaml').then(m => m.default[0])
   const precompiled = precompileGrammar(grammar)
   expect(
@@ -14,7 +16,7 @@ it('precompile', async () => {
   ).toMatchSnapshot()
 })
 
-it('should EmulatedRegExp inherits from RegExp', async () => {
+it.runIf(isNode20andUp)('should EmulatedRegExp inherits from RegExp', async () => {
   const regex = new EmulatedRegExp('a', 'g')
   expect(regex instanceof RegExp).toBe(true)
 })
