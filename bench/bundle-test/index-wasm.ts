@@ -7,12 +7,12 @@ const shiki = createShikiInternal(
       import('@shikijs/langs/ts'),
     ],
     themes: [
-      import('@shikijs/themes/nord'),
+      import('@shikijs/themes/vitesse-dark'),
     ],
     engine: createWasmOnigEngine(import('@shikijs/engine-oniguruma/wasm-inlined')),
   },
 )
 
 export async function highlight(code: string): Promise<string> {
-  return codeToHtml(await shiki, code, { lang: 'ts', theme: 'nord' })
+  return codeToHtml(await shiki, code, { lang: 'ts', theme: 'vitesse-dark' })
 }

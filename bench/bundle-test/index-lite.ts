@@ -7,12 +7,12 @@ const shiki = createShikiInternal(
       import('@shikijs/langs-precompiled/ts'),
     ],
     themes: [
-      import('@shikijs/themes/nord'),
+      import('@shikijs/themes/vitesse-dark'),
     ],
     engine: createJavaScriptRawEngine(),
   },
 )
 
 export async function highlight(code: string): Promise<string> {
-  return codeToHtml(await shiki, code, { lang: 'ts', theme: 'nord' })
+  return codeToHtml(await shiki, code, { lang: 'ts', theme: 'vitesse-dark' })
 }

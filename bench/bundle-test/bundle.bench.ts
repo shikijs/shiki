@@ -1,5 +1,6 @@
 /* eslint-disable antfu/no-import-dist */
-/* eslint-disable no-console */
+
+import { bench, describe } from 'vitest'
 import { highlight as highlightA } from './dist/index-lite.min.mjs'
 import { highlight as highlightB } from './dist/index-wasm.min.mjs'
 
@@ -19,30 +20,12 @@ function notify() {
 }
 `
 
-async function run() {
-  // Warn up
-  for (let i = 0; i < 200; i++) {
+describe('bundle', () => {
+  bench('js-precompiled', async () => {
     await highlightA(code)
+  })
+
+  bench('wasm', async () => {
     await highlightB(code)
-  }
-
-  let tA = 0
-  let tB = 0
-
-  const startA = performance.now()
-  for (let i = 0; i < 1000; i++) {
-    await highlightA(code)
-  }
-  tA += performance.now() - startA
-
-  const startB = performance.now()
-  for (let i = 0; i < 1000; i++) {
-    await highlightB(code)
-  }
-  tB += performance.now() - startB
-
-  console.log('A', tA)
-  console.log('B', tB)
-}
-
-run()
+  })
+})

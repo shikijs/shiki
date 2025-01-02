@@ -13,7 +13,7 @@
     "docs": "pnpm -C docs run docs:dev",
     "docs:build": "pnpm -C docs run docs:build",
     "report-engine-js": "esno scripts/report-engine-js-compat.ts",
-    "bench": "vitest bench",
+    "bench": "pnpm -r run bench:prepare && vitest bench",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
