@@ -8,6 +8,7 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: false,
     dts: {
+      respectExternal: true,
       compilerOptions: {
         paths: {},
       },
@@ -16,5 +17,7 @@ export default defineBuildConfig({
   externals: [
     'hast',
     'shiki',
+    '@shikijs/types',
+    /^@shikijs[\\/].*/,
   ],
 })

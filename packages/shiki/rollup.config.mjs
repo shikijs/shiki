@@ -28,6 +28,7 @@ const entries = [
 
 const external = [
   'shiki/wasm',
+  '@shikijs/types',
   /^@shikijs[/\\].*/g,
   /[/\\](langs|themes)[/\\]/g,
 ]

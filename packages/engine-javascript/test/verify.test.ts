@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import { describe, expect, it, onTestFailed } from 'vitest'
 import { JavaScriptScanner } from '../src'
+import { defaultJavaScriptRegexConstructor } from '../src/engine-compile'
 
 describe('verify', async () => {
   const files = await fg('*.wasm.json', {
@@ -29,7 +30,10 @@ describe('verify', async () => {
         i += 1
 
         it(`case ${i}`, () => {
-          const scanner = new JavaScriptScanner(execution.patterns, { cache })
+          const scanner = new JavaScriptScanner(execution.patterns, {
+            cache,
+            regexConstructor: pattern => defaultJavaScriptRegexConstructor(pattern),
+          })
 
           onTestFailed(() => {
             console.error(execution.result?.index != null

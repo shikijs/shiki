@@ -11,6 +11,7 @@ import c from 'picocolors'
 import { format } from 'prettier'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
+import { traverseGrammarPatterns } from './utils'
 
 const engine = createJavaScriptRegexEngine({
   target: 'ES2024',
@@ -278,50 +279,9 @@ function serializeTokens(shiki: HighlighterGeneric<BundledLanguage, BundledTheme
 }
 
 function getPatternsOfGrammar(grammar: any, set = new Set<string>()): Set<string> {
-  function traverse(a: any): void {
-    if (Array.isArray(a)) {
-      a.forEach((j: any) => {
-        traverse(j)
-      })
-      return
-    }
-    if (!a || typeof a !== 'object')
-      return
-    if (a.foldingStartMarker) {
-      set.add(a.foldingStartMarker)
-    }
-    if (a.foldingStopMarker) {
-      set.add(a.foldingStopMarker)
-    }
-    if (a.firstLineMatch) {
-      set.add(a.firstLineMatch)
-    }
-    if (a.match)
-      set.add(a.match)
-    if (a.begin)
-      set.add(a.begin)
-    if (a.end)
-      set.add(a.end)
-    if (a.while)
-      set.add(a.while)
-    if (a.patterns) {
-      traverse(a.patterns)
-    }
-    if (a.captures) {
-      traverse(Object.values(a.captures))
-    }
-    if (a.beginCaptures) {
-      traverse(Object.values(a.beginCaptures))
-    }
-    if (a.endCaptures) {
-      traverse(Object.values(a.endCaptures))
-    }
-    Object.values(a.repository || {}).forEach((j: any) => {
-      traverse(j)
-    })
-  }
-
-  traverse(grammar)
+  traverseGrammarPatterns(grammar, (pattern) => {
+    set.add(pattern)
+  })
 
   return set
 }

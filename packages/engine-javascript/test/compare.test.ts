@@ -6,7 +6,7 @@ import { hash as createHash } from 'ohash'
 import { describe, expect, it } from 'vitest'
 import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
-import { createJavaScriptRegexEngine } from '../src'
+import { createJavaScriptRegexEngine } from '../src/engine-compile'
 
 function createEngineWrapper(engine: RegexEngine): RegexEngine & { executions: Execution[] } {
   const executions: Execution[] = []

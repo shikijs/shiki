@@ -6,7 +6,7 @@ import { grammars, injections } from 'tm-grammars'
 /**
  * Document-like languages that have embedded langs
  */
-const LANGS_LAZY_EMBEDDED_ALL = {
+export const LANGS_LAZY_EMBEDDED_ALL = {
   markdown: [],
   mdx: [],
   wikitext: [],
@@ -18,7 +18,7 @@ const LANGS_LAZY_EMBEDDED_ALL = {
  * Single-file-component-like languages that have embedded langs
  * For these langs, we exclude the standalone embedded langs from the main bundle
  */
-const LANGS_LAZY_EMBEDDED_PARTIAL = [
+export const LANGS_LAZY_EMBEDDED_PARTIAL = [
   'vue',
   'vue-html',
   'svelte',
@@ -30,7 +30,7 @@ const LANGS_LAZY_EMBEDDED_PARTIAL = [
 /**
  * Languages to be excluded from SFC langs
  */
-const STANDALONE_LANGS_EMBEDDED = [
+export const STANDALONE_LANGS_EMBEDDED = [
   'pug',
   'stylus',
   'sass',
@@ -49,7 +49,7 @@ const STANDALONE_LANGS_EMBEDDED = [
   'ruby',
 ]
 
-export async function prepareLangs() {
+export async function loadLangs() {
   const allLangFiles = await fg('*.json', {
     cwd: './node_modules/tm-grammars/grammars',
     absolute: true,
@@ -59,7 +59,6 @@ export async function prepareLangs() {
   allLangFiles.sort()
 
   const resolvedLangs: LanguageRegistration[] = []
-  const exportedFileNames: string[] = []
 
   for (const file of allLangFiles) {
     const content = await fs.readJSON(file)
@@ -89,9 +88,18 @@ export async function prepareLangs() {
       json.embeddedLangs = (json.embeddedLangs || []).filter(i => !STANDALONE_LANGS_EMBEDDED.includes(i)) || []
     }
 
-    const deps: string[] = json.embeddedLangs || []
     resolvedLangs.push(json)
+  }
 
+  return resolvedLangs
+}
+
+export async function prepareLangs() {
+  const resolvedLangs = await loadLangs()
+  const exportedFileNames: string[] = []
+
+  for (const json of resolvedLangs) {
+    const deps: string[] = json.embeddedLangs || []
     if (deps.length > 10)
       console.log(json.name, json.embeddedLangs)
 
@@ -101,7 +109,7 @@ export async function prepareLangs() {
     ].join(',\n') || ''
 
     await fs.writeFile(
-      `./dist/${lang.name}.mjs`,
+      `./dist/${json.name}.mjs`,
       `${deps.map(i => `import ${i.replace(/\W/g, '_')} from './${i}.mjs'`).join('\n')}
 
 const lang = Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(json))}))
@@ -116,14 +124,14 @@ export default [\n${depsStr}\n]
         continue
       await fs.writeFile(
         `./dist/${alias}.mjs`,
-        `/* Alias ${alias} for ${lang.name} */
-export { default } from './${lang.name}.mjs'
+        `/* Alias ${alias} for ${json.name} */
+export { default } from './${json.name}.mjs'
 `,
         'utf-8',
       )
     }
 
-    for (const name of [...json.aliases || [], lang.name]) {
+    for (const name of [...json.aliases || [], json.name]) {
       if (isInvalidFilename(name))
         continue
       exportedFileNames.push(name)
