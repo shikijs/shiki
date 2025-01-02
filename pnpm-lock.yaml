@@ -247,6 +247,7 @@ overrides:
   '@shikijs/rehype': workspace:*
   '@shikijs/transformers': workspace:*
   '@shikijs/twoslash': workspace:*
+  '@shikijs/types': workspace:*
   '@shikijs/vitepress-twoslash': workspace:*
   '@types/hast': ^3.0.4
   '@types/mdast': ^4.0.4
@@ -307,6 +308,9 @@ importers:
       '@shikijs/transformers':
         specifier: workspace:*
         version: link:packages/transformers
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:packages/types
       '@shikijs/vitepress-twoslash':
         specifier: workspace:*
         version: link:packages/vitepress-twoslash
