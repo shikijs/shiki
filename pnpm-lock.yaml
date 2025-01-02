@@ -262,9 +262,6 @@ patchedDependencies:
   '@shikijs/vscode-textmate':
     hash: fv3krgy3yyqrhoyjgi2fqp76wm
     path: patches/@shikijs__vscode-textmate.patch
-  oniguruma-to-es:
-    hash: rzw3ujmiye7l4ulf2cjfrtq4sy
-    path: patches/oniguruma-to-es.patch
 
 importers:
 
@@ -563,7 +560,7 @@ importers:
         version: 9.3.1(patch_hash=fv3krgy3yyqrhoyjgi2fqp76wm)
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 0.10.0(patch_hash=rzw3ujmiye7l4ulf2cjfrtq4sy)
+        version: 0.10.0
 
   packages/engine-oniguruma:
     dependencies:
@@ -595,7 +592,7 @@ importers:
         version: link:../types
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 0.10.0(patch_hash=rzw3ujmiye7l4ulf2cjfrtq4sy)
+        version: 0.10.0
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
@@ -9142,7 +9139,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-es@0.10.0(patch_hash=rzw3ujmiye7l4ulf2cjfrtq4sy):
+  oniguruma-to-es@0.10.0:
     dependencies:
       emoji-regex-xs: 1.0.0
       regex: 5.1.1

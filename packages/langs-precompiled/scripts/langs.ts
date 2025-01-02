@@ -119,7 +119,7 @@ export function toJsLiteral(value: any, seen = new Set()): string {
   }
 
   if (value instanceof EmulatedRegExp) {
-    return `new EmulatedRegExp(${JSON.stringify(value.source)},${JSON.stringify(value.flags)},${JSON.stringify(value.rawOptions)})`
+    return `new EmulatedRegExp(${JSON.stringify(value.rawArgs.pattern)},${JSON.stringify(value.rawArgs.flags)},${JSON.stringify(value.rawArgs.options)})`
   }
 
   // RegExp
