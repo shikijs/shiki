@@ -2,7 +2,10 @@ import { createHighlighterCore } from '@shikijs/core'
 import { expect, it } from 'vitest'
 import { createJavaScriptRawEngine } from '../src/engine-raw'
 
-it('work with precompile grammar', async () => {
+// Only run this test on Node.js 20+
+it.runIf(
+  process.version.replace(/^v/, '').split('.').map(Number)[0] >= 20,
+)('work with precompile grammar', async () => {
   const shiki = await createHighlighterCore({
     themes: [
       import('@shikijs/themes/vitesse-light'),
