@@ -1,9 +1,8 @@
 import type { LanguageRegistration } from '@shikijs/types'
 import { loadWasm } from '@shikijs/engine-oniguruma'
+import js from '@shikijs/langs/javascript'
+import nord from '@shikijs/themes/nord'
 import { createHighlighterCore } from 'shiki/core'
-
-import js from 'shiki/langs/javascript.mjs'
-import nord from 'shiki/themes/nord.mjs'
 
 // @ts-expect-error no types
 // eslint-disable-next-line antfu/no-import-dist

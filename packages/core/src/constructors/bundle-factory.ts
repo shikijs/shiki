@@ -36,11 +36,11 @@ import { createHighlighterCore } from './highlighter'
  * ```ts
  * const createHighlighter = createdBundledHighlighter({
  *   langs: {
- *     typescript: () => import('shiki/langs/typescript.mjs'),
+ *     typescript: () => import('@shikijs/langs/typescript'),
  *     // ...
  *   },
  *   themes: {
- *     nord: () => import('shiki/themes/nord.mjs'),
+ *     nord: () => import('@shikijs/themes/nord'),
  *     // ...
  *   },
  *   engine: () => createOnigurumaEngine(), // or createJavaScriptRegexEngine()

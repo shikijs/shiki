@@ -56,10 +56,10 @@ import { unified } from 'unified'
 
 const highlighter = await createHighlighterCore({
   themes: [
-    import('shiki/themes/vitesse-light.mjs')
+    import('@shikijs/themes/vitesse-light')
   ],
   langs: [
-    import('shiki/langs/javascript.mjs'),
+    import('@shikijs/langs/javascript'),
   ],
   loadWasm: import('shiki/wasm')
 })

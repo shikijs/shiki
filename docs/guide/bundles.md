@@ -44,24 +44,24 @@ When importing `shiki`, all the themes and languages are bundled as async chunks
 
 ```ts twoslash
 // @noErrors
+// directly import the theme and language modules, only the ones you imported will be bundled.
+import nord from '@shikijs/themes/nord'
+
 // `shiki/core` entry does not include any themes or languages or the wasm binary.
 import { createHighlighterCore } from 'shiki/core'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
-
-// directly import the theme and language modules, only the ones you imported will be bundled.
-import nord from 'shiki/themes/nord.mjs'
 
 const highlighter = await createHighlighterCore({
   themes: [
     // instead of strings, you need to pass the imported module
     nord,
     // or a dynamic import if you want to do chunk splitting
-    import('shiki/themes/material-theme-ocean.mjs')
+    import('@shikijs/themes/material-theme-ocean')
   ],
   langs: [
-    import('shiki/langs/javascript.mjs'),
+    import('@shikijs/langs/javascript'),
     // shiki will try to interop the module with the default export
-    () => import('shiki/langs/css.mjs'),
+    () => import('@shikijs/langs/css'),
     // or a getter that returns custom grammar
     async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))
   ],
@@ -70,7 +70,7 @@ const highlighter = await createHighlighterCore({
 })
 
 // optionally, load themes and languages after creation
-await highlighter.loadTheme(import('shiki/themes/vitesse-light.mjs'))
+await highlighter.loadTheme(import('@shikijs/themes/vitesse-light'))
 
 const code = highlighter.codeToHtml('const a = 1', {
   lang: 'javascript',

@@ -233,7 +233,7 @@ To use `shiki` in the browser via CDN, you can use [esm.run](https://esm.run) or
 </body>
 ```
 
-It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shiki`, `shiki/themes/vitesse-light.mjs`, `shiki/langs/javascript.mjs`, `shiki/wasm.mjs`), with around 200KB data transferred in total.
+It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shiki`, `@shikijs/themes/vitesse-light`, `@shikijs/langs/javascript`, `shiki/wasm.mjs`), with around 200KB data transferred in total.
 
 [Demo](https://jsfiddle.net/t7brz23v/)
 
@@ -245,9 +245,9 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 
 ```ts twoslash theme:nord
 // @noErrors
+import js from '@shikijs/langs/javascript'
+import nord from '@shikijs/themes/nord'
 import { createHighlighterCore, loadWasm } from 'shiki/core'
-import js from 'shiki/langs/javascript.mjs'
-import nord from 'shiki/themes/nord.mjs'
 
 // import wasm as assets
 await loadWasm(import('shiki/onig.wasm'))

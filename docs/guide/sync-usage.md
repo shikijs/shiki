@@ -5,10 +5,10 @@ The `await createHighlighter()` and `highlighter.codeToHtml()` are already the e
 In some extreme cases that you need to run Shiki completely synchronously, since v1.16, we provide a synchronous version of the core API. You can use `createHighlighterCoreSync` to create a highlighter instance synchronously.
 
 ```ts
+import js from '@shikijs/langs/javascript'
+import nord from '@shikijs/themes/nord'
 import { createHighlighterCoreSync } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
-import js from 'shiki/langs/javascript.mjs'
-import nord from 'shiki/themes/nord.mjs'
 
 const shiki = createHighlighterCoreSync({
   themes: [nord],
@@ -24,10 +24,10 @@ When doing so, it requires all `themes` and `langs` to be provide as plain objec
 The [Oniguruma Engine](/guide/regex-engines#oniguruma-engine) can only be created asynchronously, so you need to resolve the engine promise before creating the sync highlighter.
 
 ```ts
+import js from '@shikijs/langs/javascript'
+import nord from '@shikijs/themes/nord'
 import { createHighlighterCoreSync } from 'shiki/core'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
-import js from 'shiki/langs/javascript.mjs'
-import nord from 'shiki/themes/nord.mjs'
 
 // Load this somewhere beforehand
 const engine = await createOnigurumaEngine(import('shiki/wasm'))
