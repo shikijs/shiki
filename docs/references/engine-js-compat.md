@@ -2,20 +2,20 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Thursday, January 2, 2025
+> Generated on Wednesday, January 8, 2025
 >
-> Version `1.24.4`
+> Version `1.26.1`
 >
-> Runtime: Node.js v20.18.0
+> Runtime: Node.js v22.11.0
 
 ## Report Summary
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
 | Total Languages |                         219 |
-| Supported       | [213](#supported-languages) |
+| Supported       | [212](#supported-languages) |
 | Mismatched      |  [1](#mismatched-languages) |
-| Unsupported     | [5](#unsupported-languages) |
+| Unsupported     | [6](#unsupported-languages) |
 
 ## Supported Languages
 
@@ -56,7 +56,6 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | cmake              | ✅ OK           |                23 |               - |      |
 | cobol              | ✅ OK           |               863 |               - |      |
 | codeowners         | ✅ OK           |                 4 |               - |      |
-| codeql             | ✅ OK           |               151 |               - |      |
 | coffee             | ✅ OK           |               469 |               - |      |
 | common-lisp        | ✅ OK           |                60 |               - |      |
 | coq                | ✅ OK           |                26 |               - |      |
@@ -259,6 +258,7 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 
 | Language   | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ---------- | :-------------- | ----------------: | --------------: | ---: |
+| codeql     | ✅ OK           |               150 |               1 |      |
 | hack       | ❌ Error        |               947 |               1 |  114 |
 | purescript | ❌ Error        |                72 |               1 |      |
 | csharp     | ❌ Error        |               306 |               3 |  137 |
