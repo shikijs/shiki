@@ -495,6 +495,15 @@ importers:
         specifier: 'catalog:'
         version: 1.2.5
 
+  packages/codegen:
+    dependencies:
+      prettier:
+        specifier: ^3.4.2
+        version: 3.4.2
+      shiki:
+        specifier: workspace:*
+        version: link:../shiki
+
   packages/colorized-brackets:
     dependencies:
       shiki:
