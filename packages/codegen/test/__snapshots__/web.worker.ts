@@ -1,11 +1,11 @@
 import type {
-  HighlighterGeneric,
-  DynamicImportThemeRegistration,
   DynamicImportLanguageRegistration,
+  DynamicImportThemeRegistration,
+  HighlighterGeneric,
 } from '@shikijs/types'
 import {
-  createdBundledHighlighter,
   createSingletonShorthands,
+  createdBundledHighlighter,
 } from '@shikijs/core'
 import { createJavaScriptRawEngine } from '@shikijs/engine-javascript/raw'
 import { createBirpc } from 'birpc'

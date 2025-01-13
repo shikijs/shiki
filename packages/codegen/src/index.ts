@@ -273,7 +273,7 @@ export async function codegen(options: ShikiCodegenOptions): Promise<{
   // Imports
   lines.unshift(
     Object.entries(imports).map(([module, imports]) => {
-      return `import { ${imports.join(', ')} } from '${module}'`
+      return `import { ${imports.sort().join(', ')} } from '${module}'`
     },
     ).join('\n'),
   )
@@ -281,7 +281,7 @@ export async function codegen(options: ShikiCodegenOptions): Promise<{
   if (typescript) {
     lines.unshift(
       Object.entries(typeImports).map(([module, types]) => {
-        return `import type { ${types.join(', ')} } from '${module}'`
+        return `import type { ${types.sort().join(', ')} } from '${module}'`
       },
       ).join('\n'),
     )

@@ -1,6 +1,6 @@
 import {
-  createdBundledHighlighter,
   createSingletonShorthands,
+  createdBundledHighlighter,
 } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 

@@ -1,7 +1,7 @@
 import type {
-  HighlighterGeneric,
-  DynamicImportThemeRegistration,
   DynamicImportLanguageRegistration,
+  DynamicImportThemeRegistration,
+  HighlighterGeneric,
 } from '@shikijs/types'
 import { createdBundledHighlighter } from '@shikijs/core'
 import { createJavaScriptRawEngine } from '@shikijs/engine-javascript/raw'
