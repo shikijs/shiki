@@ -74,12 +74,12 @@ export default function splitBracketTokens(
       else if (i === 0) {
         length
           = (rawToken.content.match(/^\s*/)?.[0].length ?? 0)
-          + explanation.content.trimStart().length
+            + explanation.content.trimStart().length
       }
       else if (i === explanations.length - 1) {
         length
           = explanation.content.trimEnd().length
-          + (rawToken.content.match(/\s*$/)?.[0].length ?? 0)
+            + (rawToken.content.match(/\s*$/)?.[0].length ?? 0)
       }
       currentExplanationStart += length
       return {
