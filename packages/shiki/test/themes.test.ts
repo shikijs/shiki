@@ -168,7 +168,7 @@ function toggleTheme() {
 <button onclick="toggleTheme()">Toggle theme</button>
 `
 
-    expect(snippet + code)
+    await expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes-no-default.html')
   })
 

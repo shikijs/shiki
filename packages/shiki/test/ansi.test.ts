@@ -13,7 +13,7 @@ Packages: [0;32m+952[0m
 Progress: resolved [0;104m952[0m, reused [0;104m910[0m, downloaded [0;104m42[0m, added [0;104m952[0m, done
 Done in 15.7s`, { theme: 'monokai', lang: 'ansi' })
 
-  expect(out).toMatchFileSnapshot('./out/ansi.html')
+  await expect(out).toMatchFileSnapshot('./out/ansi.html')
 })
 
 // https://github.com/shikijs/shiki/issues/432
@@ -29,7 +29,7 @@ Packages: [0;32m+1038[0m[0m
 
   const out = await codeToHtml(code, { theme: 'monokai', lang: 'ansi' })
 
-  expect(out).toMatchFileSnapshot('./out/ansi-background.html')
+  await expect(out).toMatchFileSnapshot('./out/ansi-background.html')
 })
 
 // https://github.com/shikijs/shiki/issues/597
@@ -42,5 +42,5 @@ Packages: [0;32m+952[0m
 Progress: resolved [0;104m952[0m, reused [0;104m910[0m, downloaded [0;104m42[0m, added [0;104m952[0m, done
 Done in 15.7s`, { theme: 'dark-plus', lang: 'ansi' })
 
-  expect(out).toMatchFileSnapshot('./out/ansi-dark-plus.html')
+  await expect(out).toMatchFileSnapshot('./out/ansi-dark-plus.html')
 })

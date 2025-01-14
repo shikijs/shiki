@@ -38,7 +38,7 @@ function suite(
         if (replace)
           code = replace(code)
 
-        expect(code)
+        await expect(code)
           .toMatchFileSnapshot(`${path}${outputSuffix}.output.html`)
       })
     }

@@ -90,14 +90,14 @@ describe('decorations', () => {
 
     expect(transformMock).toBeCalledTimes(4)
 
-    expect(style + html)
+    await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/basic.html')
   })
 })
 
 describe('decorations errors', () => {
   it('throws when start is higher than end', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',

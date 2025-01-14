@@ -34,7 +34,7 @@ describe('fixtures', () => {
           ],
         })
 
-        expect(code)
+        await expect(code)
           .toMatchFileSnapshot(path.replace('input', 'output').replace(/\.\w+$/, '.html'))
 
         expect(code).toBe(code2)

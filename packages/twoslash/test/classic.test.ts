@@ -29,7 +29,7 @@ const b = "345"
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/classic/simple.html')
+  await expect(styleTag + html).toMatchFileSnapshot('./out/classic/simple.html')
 })
 
 it('compiler_errors', async () => {
@@ -52,7 +52,7 @@ fn(42)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/classic/compiler_errors.html')
+  await expect(styleTag + html).toMatchFileSnapshot('./out/classic/compiler_errors.html')
 })
 
 it('completions', async () => {
@@ -69,7 +69,7 @@ const a = Number.isNaN(123)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/classic/completions.html')
+  await expect(styleTag + html).toMatchFileSnapshot('./out/classic/completions.html')
 })
 
 it('cuts_out_unnecessary_code', async () => {
@@ -106,7 +106,7 @@ let c = createLabel(Math.random() ? "hello" : 42)
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/classic/cuts_out_unnecessary_code.html')
+  await expect(styleTag + html).toMatchFileSnapshot('./out/classic/cuts_out_unnecessary_code.html')
 })
 
 it('console_log', async () => {
@@ -124,5 +124,5 @@ console.error("This is an error")
     ],
   })
 
-  expect(styleTag + html).toMatchFileSnapshot('./out/classic/console_log.html')
+  await expect(styleTag + html).toMatchFileSnapshot('./out/classic/console_log.html')
 })

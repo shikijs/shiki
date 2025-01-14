@@ -174,7 +174,7 @@ describe('should', () => {
   })
 
   it('monokai underline', async () => {
-    expect(await codeToHtml('type Foo = { bar: string }', {
+    await expect(await codeToHtml('type Foo = { bar: string }', {
       theme: 'monokai',
       lang: 'ts',
     }))
