@@ -35,7 +35,7 @@ it('should split tokens correctly', async () => {
     ],
   })
 
-  expect(
+  await expect(
     `<link rel="stylesheet" href="../../style-rich.css" />\n${html}`,
   )
     .toMatchFileSnapshot('./out/error-multi-tokens.html')

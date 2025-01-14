@@ -90,14 +90,14 @@ describe('decorations', () => {
 
     expect(transformMock).toBeCalledTimes(4)
 
-    expect(style + html)
+    await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/basic.html')
   })
 })
 
 describe('decorations errors', () => {
   it('throws when start is higher than end', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
@@ -111,7 +111,7 @@ describe('decorations errors', () => {
   })
 
   it('throws when decorations intersect', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
@@ -120,11 +120,13 @@ describe('decorations errors', () => {
           { start: 5, end: 15 },
         ],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
   })
 
   it('throws when lines overflow', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
@@ -132,11 +134,13 @@ describe('decorations errors', () => {
           { start: { line: 100, character: 0 }, end: { line: 100, character: 1 } },
         ],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":100,"character":0}. Lines length: 12]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":100,"character":0}. Lines length: 12]`)
   })
 
   it('throws when chars overflow', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
@@ -144,9 +148,11 @@ describe('decorations errors', () => {
           { start: { line: 0, character: 0 }, end: { line: 0, character: 10 } },
         ],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":0,"character":10}. Line 0 length: 4]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":0,"character":10}. Line 0 length: 4]`)
 
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
@@ -157,24 +163,30 @@ describe('decorations errors', () => {
           },
         ],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":1,"character":36}. Line 1 length: 33]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration position {"line":1,"character":36}. Line 1 length: 33]`)
   })
 
   it('throws when offset underflows/overflows', async () => {
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
         decorations: [{ start: 1, end: 1000 }],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: 1000. Code length: 252]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: 1000. Code length: 252]`)
 
-    expect(async () => {
+    await expect(async () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
         decorations: [{ start: -3, end: 5 }],
       })
-    }).rejects.toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: -3. Code length: 252]`)
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: -3. Code length: 252]`)
   })
 })

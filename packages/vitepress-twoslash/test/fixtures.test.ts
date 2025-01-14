@@ -32,7 +32,8 @@ describe('fixtures', async () => {
         ],
       })
 
-      expect.soft(JSON.stringify(hast, null, 2)).toMatchFileSnapshot(`./out/${name}.json`)
+      await expect.soft(JSON.stringify(hast, null, 2))
+        .toMatchFileSnapshot(`./out/${name}.json`)
     })
   }
 })

@@ -31,7 +31,7 @@ it('run', async () => {
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/a.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.out.html')
 })
 
 it('code-add-language-class', async () => {
@@ -45,7 +45,7 @@ it('code-add-language-class', async () => {
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/b.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/b.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/b.out.html')
 })
 
 it('add-custom-cache', async () => {
@@ -61,7 +61,7 @@ it('add-custom-cache', async () => {
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/c.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
 })
 
 it('shiki inline code', async () => {
@@ -75,7 +75,7 @@ it('shiki inline code', async () => {
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/inline.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/inline.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/inline.out.html')
 })
 
 it('does not add extra trailing blank line', async () => {

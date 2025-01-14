@@ -78,7 +78,7 @@ Number.parseInt(todo.title, 10);
     ],
   })
 
-  expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich/rich.html')
+  await expect(styleTag + html + colorToggle).toMatchFileSnapshot('./out/rich/rich.html')
 
   const htmlNoTheme = await codeToHtml(code, {
     lang: 'ts',
@@ -90,7 +90,7 @@ Number.parseInt(todo.title, 10);
     ],
   })
 
-  expect(styleTag + htmlNoTheme).toMatchFileSnapshot('./out/rich/rich-none-theme.html')
+  await expect(styleTag + htmlNoTheme).toMatchFileSnapshot('./out/rich/rich-none-theme.html')
 })
 
 it('error rendering hover', async () => {
@@ -119,7 +119,7 @@ todo.title = "Hello";
     ],
   })
 
-  expect(styleTag + htmlErrorsHover).toMatchFileSnapshot('./out/rich/rich-error-hover.html')
+  await expect(styleTag + htmlErrorsHover).toMatchFileSnapshot('./out/rich/rich-error-hover.html')
 })
 
 it('no-icons', async () => {
@@ -146,7 +146,7 @@ obj.boo
     ],
   })
 
-  expect(
+  await expect(
     /* eslint-disable prefer-template */
     styleTag
     + html
@@ -183,7 +183,7 @@ const c = 1
     ],
   })
 
-  expect(
+  await expect(
     styleTag
     + html
     + colorToggle,
@@ -225,5 +225,6 @@ Number.parseInt(todo.title, 10);
     ],
   })
 
-  expect(styleTag + htmlWithSeparateLine + colorToggle).toMatchFileSnapshot('./out/rich/line-query.html')
+  await expect(styleTag + htmlWithSeparateLine + colorToggle)
+    .toMatchFileSnapshot('./out/rich/line-query.html')
 })

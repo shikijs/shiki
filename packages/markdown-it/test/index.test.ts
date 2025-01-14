@@ -24,7 +24,7 @@ it('run for base', { timeout: 10_000 }, async () => {
 
   const result = md.render(await fs.readFile(new URL('./fixtures/a.md', import.meta.url), 'utf-8'))
 
-  expect(result).toMatchFileSnapshot('./fixtures/a.out.html')
+  await expect(result).toMatchFileSnapshot('./fixtures/a.out.html')
 })
 
 it('run for fallback language', { timeout: 10_000 }, async () => {
@@ -43,7 +43,7 @@ it('run for fallback language', { timeout: 10_000 }, async () => {
 
   const result = md.render(await fs.readFile(new URL('./fixtures/b.md', import.meta.url), 'utf-8'))
 
-  expect(result).toMatchFileSnapshot('./fixtures/b.out.html')
+  await expect(result).toMatchFileSnapshot('./fixtures/b.out.html')
 })
 
 it('run for default language', { timeout: 10_000 }, async () => {
@@ -62,5 +62,5 @@ it('run for default language', { timeout: 10_000 }, async () => {
 
   const result = md.render(await fs.readFile(new URL('./fixtures/c.md', import.meta.url), 'utf-8'))
 
-  expect(result).toMatchFileSnapshot('./fixtures/c.out.html')
+  await expect(result).toMatchFileSnapshot('./fixtures/c.out.html')
 })

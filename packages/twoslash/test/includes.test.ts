@@ -104,11 +104,11 @@ hello.
     },
   })
 
-  expect(styleTag + htmlMain).toMatchFileSnapshot('./out/includes/main.html')
+  await expect(styleTag + htmlMain).toMatchFileSnapshot('./out/includes/main.html')
 
   const html = await codeToHtml(code, { ...options })
 
-  expect(styleTag + html).toMatchFileSnapshot(
+  await expect(styleTag + html).toMatchFileSnapshot(
     './out/includes/replaced_directives.html',
   )
 })
@@ -149,7 +149,7 @@ export const c = a + b
     },
   })
 
-  expect(styleTag + htmlA).toMatchFileSnapshot('./out/includes/nested_includes-a.html')
+  await expect(styleTag + htmlA).toMatchFileSnapshot('./out/includes/nested_includes-a.html')
 
   const htmlB = await codeToHtml(b, {
     ...options,
@@ -158,9 +158,9 @@ export const c = a + b
     },
   })
 
-  expect(styleTag + htmlB).toMatchFileSnapshot('./out/includes/nested_includes-b.html')
+  await expect(styleTag + htmlB).toMatchFileSnapshot('./out/includes/nested_includes-b.html')
 
   const htmlC = await codeToHtml(c, { ...options })
 
-  expect(styleTag + htmlC).toMatchFileSnapshot('./out/includes/nested_includes-c.html')
+  await expect(styleTag + htmlC).toMatchFileSnapshot('./out/includes/nested_includes-c.html')
 })
