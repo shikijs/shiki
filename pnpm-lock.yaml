@@ -497,6 +497,9 @@ importers:
 
   packages/codegen:
     dependencies:
+      cac:
+        specifier: ^6.7.14
+        version: 6.7.14
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -6939,7 +6942,7 @@ snapshots:
       globals: 15.14.0
       kolorist: 1.8.0
       local-pkg: 0.5.1
-      mlly: 1.7.3
+      mlly: 1.7.4
     transitivePeerDependencies:
       - supports-color
 

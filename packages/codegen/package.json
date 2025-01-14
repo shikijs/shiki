@@ -1,5 +1,5 @@
 {
-  "name": "@shikijs/codegen",
+  "name": "shiki-codegen",
   "type": "module",
   "version": "1.26.2",
   "description": "Codegen for fine-grained Shiki bundles.",
@@ -21,11 +21,18 @@
     ".": {
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.mts",
+      "default": "./dist/cli.mjs"
     }
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
+  "bin": {
+    "shiki-codegen": "bin.mjs"
+  },
   "files": [
     "dist"
   ],
@@ -36,6 +43,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "cac": "^6.7.14",
     "prettier": "^3.4.2",
     "shiki": "workspace:*"
   }
