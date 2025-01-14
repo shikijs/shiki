@@ -2,19 +2,19 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Monday, January 13, 2025
+> Generated on Tuesday, January 14, 2025
 >
-> Version `1.26.1`
+> Version `1.27.0`
 >
-> Runtime: Node.js v22.12.0
+> Runtime: Node.js v22.11.0
 
 ## Report Summary
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
 | Total Languages |                         219 |
-| Supported       | [212](#supported-languages) |
-| Mismatched      |  [1](#mismatched-languages) |
+| Supported       | [213](#supported-languages) |
+| Mismatched      |  [0](#mismatched-languages) |
 | Unsupported     | [6](#unsupported-languages) |
 
 ## Supported Languages
@@ -147,6 +147,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | move               | ✅ OK           |               120 |               - |      |
 | narrat             | ✅ OK           |                34 |               - |      |
 | nextflow           | ✅ OK           |                32 |               - |      |
+| nginx              | ✅ OK           |               378 |               - |      |
 | nim                | ✅ OK           |              1130 |               - |      |
 | nix                | ✅ OK           |                80 |               - |      |
 | nushell            | ✅ OK           |                81 |               - |      |
@@ -204,7 +205,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | talonscript        | ✅ OK           |                44 |               - |      |
 | tasl               | ✅ OK           |                23 |               - |      |
 | tcl                | ✅ OK           |                34 |               - |      |
-| templ              | ✅ OK           |               680 |               - |      |
+| templ              | ✅ OK           |               682 |               - |      |
 | terraform          | ✅ OK           |                68 |               - |      |
 | tex                | ✅ OK           |               106 |               - |      |
 | toml               | ✅ OK           |                44 |               - |      |
@@ -246,11 +247,10 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 
 ## Mismatched Languages
 
-Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine. Please use with caution.
+Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine.
 
-| Language | Highlight Match                                                            | Patterns Parsable | Patterns Failed | Diff |
-| -------- | :------------------------------------------------------------------------- | ----------------: | --------------: | ---: |
-| nginx    | [🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=nginx) |               378 |               - |  122 |
+| Language | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
+| -------- | :-------------- | ----------------: | --------------: | ---: |
 
 ## Unsupported Languages
 
@@ -262,5 +262,5 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 | sass       | ✅ OK           |                67 |               2 |      |
 | purescript | ❌ Error        |                72 |               1 |      |
 | csharp     | ❌ Error        |               310 |               3 |  137 |
-| swift      | ❌ Error        |               326 |               3 |    8 |
+| swift      | ❌ Error        |               326 |               3 |      |
 | razor      | ❌ Error        |               957 |               5 |      |

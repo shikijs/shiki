@@ -56,8 +56,6 @@ const html = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord'
 
 The advantages of using the JavaScript engine are that it doesn't require loading a large WebAssembly file for Oniguruma and it is faster for some grammars (since the regular expressions run as native JavaScript).
 
-Although the JavaScript engine's Oniguruma emulation is quite robust, it's not guaranteed that the highlighting will be 100% the same in some edge cases. Additionally, a few grammars are unsupported.
-
 Please check the [compatibility table](/references/engine-js-compat) for the support status of languages you are using.
 
 The JavaScript engine is strict by default, and will throw an error if it encounters a pattern that it cannot convert. If mismatches are acceptable and you want best-effort results for unsupported grammars, you can enable the `forgiving` option to suppress any conversion errors:
@@ -68,7 +66,7 @@ const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 ```
 
 ::: info
-If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, we still recommend using the Oniguruma engine for best results.
+If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, we still recommend using the Oniguruma engine.
 
 The JavaScript engine is best when running in the browser and in cases when you want to control the bundle size.
 :::
