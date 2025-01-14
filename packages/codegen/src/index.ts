@@ -4,9 +4,17 @@ import { bundledLanguagesInfo, bundledThemesInfo } from 'shiki/bundle/full'
 
 export interface ShikiCodegenOptions {
   /**
+   * The header to add to the generated code.
+   *
+   * @default '/* Generate by @shikijs/codegen *\/'
+   */
+  header?: string
+
+  /**
    * The languages to bundle.
    */
   langs: readonly BundledLanguage[]
+
   /**
    * The themes to bundle.
    */
@@ -49,6 +57,7 @@ export interface ShikiCodegenResult {
 
 export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodegenResult> {
   const {
+    header = '/* Generate by @shikijs/codegen */',
     typescript = true,
     precompiled = false,
     format: _format = true,
@@ -189,6 +198,8 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
       `export type { ${typeExports.sort().join(', ')} }`,
     )
   }
+
+  lines.unshift(header)
 
   // Format code
   let code = lines.join('\n')

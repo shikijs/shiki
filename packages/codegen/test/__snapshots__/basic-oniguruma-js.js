@@ -1,3 +1,4 @@
+/* Generate by @shikijs/codegen */
 import {
   createSingletonShorthands,
   createdBundledHighlighter,

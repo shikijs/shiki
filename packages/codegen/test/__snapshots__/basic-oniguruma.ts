@@ -1,3 +1,4 @@
+/* Generate by @shikijs/codegen */
 import type {
   DynamicImportLanguageRegistration,
   DynamicImportThemeRegistration,
