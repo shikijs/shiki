@@ -163,13 +163,13 @@ export class CartButtonComponent {
 `
 
   const before = highlighter.codeToHtml(code, { lang: 'ts', theme: 'vitesse-light' })
-  expect(before)
+  await expect(before)
     .toMatchFileSnapshot('./out/injections-side-effects-angular-ts-before.html')
 
   await highlighter.loadLanguage(angularTs)
 
   const after = highlighter.codeToHtml(code, { lang: 'angular-ts', theme: 'vitesse-light' })
-  expect(after)
+  await expect(after)
     .toMatchFileSnapshot('./out/injections-side-effects-angular-ts-after.html')
 
   expect(before).not.toEqual(after)
