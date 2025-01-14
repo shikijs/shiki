@@ -41,58 +41,24 @@ export interface ShikiCodegenOptions {
    * Use Prettier to format the generated code.
    */
   format?: boolean | PrettierOptions
-
-  /**
-   * Generate code for worker
-   *
-   * @default false
-   */
-  worker?: 'web' | 'node' | false
-
-  /**
-   * Worker RPC protocol, currently only 'birpc' is supported.
-   *
-   * @default 'birpc'
-   */
-  workerRpc?: 'birpc'
-
-  /**
-   * Path to the worker script.
-   *
-   * @default './shiki.worker'
-   */
-  workerPath?: string
 }
 
-const WORKER_FUNCTIONS = [
-  'codeToHast',
-  'codeToHtml',
-  'codeToTokens',
-  'codeToTokensBase',
-  'codeToTokensWithThemes',
-]
-
-export async function codegen(options: ShikiCodegenOptions): Promise<{
+export interface ShikiCodegenResult {
   code: string
-  host?: string
-}> {
+}
+
+export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodegenResult> {
   const {
     typescript = true,
     precompiled = false,
     format: _format = true,
     shorthands = true,
-    worker = false,
-    // workerRpc = 'birpc',
-    workerPath = './shiki.worker',
   } = options
 
   const ts = (code: string): string => typescript ? code : ''
 
   if (precompiled && options.engine !== 'javascript' && options.engine !== 'javascript-raw')
     throw new Error('Precompiled grammars are only available when using the JavaScript engine')
-
-  if (worker && !shorthands)
-    throw new Error('Shorthands are required for worker')
 
   const langs = options.langs.map((lang) => {
     const info = bundledLanguagesInfo.find(i => i.id === lang || i.aliases?.includes(lang))
@@ -196,80 +162,6 @@ export async function codegen(options: ShikiCodegenOptions): Promise<{
     )
   }
 
-  let host: string | undefined
-
-  // Worker
-  if (worker) {
-    if (worker === 'web') {
-      imports.birpc = ['createBirpc']
-      lines.push(
-        '',
-        `const functions = { ${WORKER_FUNCTIONS.sort().join(',')} }`,
-        `const rpc = createBirpc(functions, {`,
-        `  on(fn) { self.onmessage = (e) => { fn(e.data) } },`,
-        `  post(data) { self.postMessage(data) },`,
-        `  serialize(data) { return JSON.stringify(data) },`,
-        `  deserialize(data) { return JSON.parse(data) },`,
-        `})`,
-        '',
-      )
-
-      if (typescript)
-        lines.push(`export type RpcFunctions = typeof functions`)
-
-      exports.push('rpc')
-
-      host = [
-        `import { createBirpc } from 'birpc'`,
-        ts(`import type { RpcFunctions } from ${JSON.stringify(workerPath)}`),
-        ``,
-        `export const worker = new Worker(new URL(${JSON.stringify(workerPath)}, import.meta.url))`,
-        `export const rpc = createBirpc${ts('<RpcFunctions>')}({}, {`,
-        `  on(fn) { worker.onmessage = (e) => { fn(e.data) } },`,
-        `  post(data) { worker.postMessage(data) },`,
-        `  serialize(data) { return JSON.stringify(data) },`,
-        `  deserialize(data) { return JSON.parse(data) },`,
-        `})`,
-        ``,
-        WORKER_FUNCTIONS.map(e => `export const ${e} = rpc.${e}`).join('\n'),
-      ].join('\n')
-    }
-    else if (worker === 'node') {
-      imports.birpc = ['createBirpc']
-      imports.worker_threads = ['parentPort']
-      lines.push(
-        '',
-        `const functions = { ${WORKER_FUNCTIONS.sort().join(',')} }`,
-        `const rpc = createBirpc(functions, {`,
-        `  on(fn) { parentPort?.on('message', fn) },`,
-        `  post(data) { parentPort?.postMessage(data) },`,
-        `})`,
-        ``,
-      )
-      if (typescript)
-        lines.push(`export type RpcFunctions = typeof functions`)
-
-      exports.push('rpc', 'worker')
-
-      host = [
-        `import { createBirpc } from 'birpc'`,
-        `import { Worker } from 'worker_threads'`,
-        ts(`import type { RpcFunctions } from ${JSON.stringify(workerPath)}`),
-        ``,
-        `export const worker = new Worker(${JSON.stringify(workerPath)})`,
-        `export const rpc = createBirpc${ts('<RpcFunctions>')}({}, {`,
-        `  on(fn) { worker.on('message', fn) },`,
-        `  post(data) { worker.postMessage(data) },`,
-        `})`,
-        ``,
-        WORKER_FUNCTIONS.map(e => `export const ${e} = rpc.${e}`).join('\n'),
-      ].join('\n')
-    }
-    else {
-      throw new Error(`Invalid worker type: ${worker}`)
-    }
-  }
-
   // Imports
   lines.unshift(
     Object.entries(imports).map(([module, imports]) => {
@@ -312,12 +204,9 @@ export async function codegen(options: ShikiCodegenOptions): Promise<{
       ...(_format === true ? {} : _format),
     }
     code = await format(code, prettierOptions)
-    if (host)
-      host = await format(host, prettierOptions)
   }
 
   return {
     code,
-    host,
   }
 }
