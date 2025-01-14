@@ -8,6 +8,7 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   test: {
+    testTimeout: 15_000,
     reporters: 'dot',
     exclude: [
       '**/vendor/**',
