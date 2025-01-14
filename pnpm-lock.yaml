@@ -75,9 +75,15 @@ catalogs:
     bumpp:
       specifier: ^9.10.0
       version: 9.10.0
+    cac:
+      specifier: ^6.7.14
+      version: 6.7.14
     chalk:
       specifier: ^5.4.1
       version: 5.4.1
+    diff-match-patch-es:
+      specifier: ^1.0.1
+      version: 1.0.1
     eslint:
       specifier: ^9.18.0
       version: 9.18.0
@@ -255,7 +261,7 @@ overrides:
   typescript: ^5.7.3
   unified: ^11.0.5
   vite: ^6.0.7
-  vscode-oniguruma: ^1.7.0
+  vscode-oniguruma: 1.7.0
 
 importers:
 
@@ -337,7 +343,7 @@ importers:
         specifier: 'catalog:'
         version: 9.10.0(magicast@0.3.5)
       diff-match-patch-es:
-        specifier: ^1.0.1
+        specifier: 'catalog:'
         version: 1.0.1
       eslint:
         specifier: 'catalog:'
@@ -495,6 +501,18 @@ importers:
         specifier: 'catalog:'
         version: 1.2.5
 
+  packages/codegen:
+    dependencies:
+      cac:
+        specifier: 'catalog:'
+        version: 6.7.14
+      prettier:
+        specifier: 'catalog:'
+        version: 3.4.2
+      shiki:
+        specifier: workspace:*
+        version: link:../shiki
+
   packages/colorized-brackets:
     dependencies:
       shiki:
@@ -572,7 +590,7 @@ importers:
         version: 10.0.1
     devDependencies:
       vscode-oniguruma:
-        specifier: ^1.7.0
+        specifier: 1.7.0
         version: 1.7.0
 
   packages/langs:
@@ -713,7 +731,7 @@ importers:
         specifier: 'catalog:'
         version: 1.9.8
       vscode-oniguruma:
-        specifier: ^1.7.0
+        specifier: 1.7.0
         version: 1.7.0
 
   packages/themes:
@@ -6930,7 +6948,7 @@ snapshots:
       globals: 15.14.0
       kolorist: 1.8.0
       local-pkg: 0.5.1
-      mlly: 1.7.3
+      mlly: 1.7.4
     transitivePeerDependencies:
       - supports-color
 
