@@ -4,7 +4,7 @@ import { codeToHast, getSingletonHighlighter } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import { rendererFloatingVue } from '../src'
 
-const files = import.meta.glob('../../twoslash/test/fixtures/*.*', { as: 'raw', eager: true })
+const files = import.meta.glob<string>('../../twoslash/test/fixtures/*.*', { query: '?raw', import: 'default', eager: true })
 
 describe('fixtures', async () => {
   const shiki = await getSingletonHighlighter()

@@ -3,7 +3,7 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { codeToHast, hastToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 
-const files = import.meta.glob('./fixtures/*.*', { as: 'raw', eager: true })
+const files = import.meta.glob<string>('./fixtures/*.*', { query: '?raw', import: 'default', eager: true })
 
 describe('fixtures', () => {
   for (const file in files) {
