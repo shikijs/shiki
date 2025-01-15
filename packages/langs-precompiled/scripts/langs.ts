@@ -126,7 +126,7 @@ export function toJsLiteral(value: any, seen = new Set()): string {
   }
 
   if (value instanceof EmulatedRegExp) {
-    return `new EmulatedRegExp(${JSON.stringify(value.rawArgs.pattern)},${JSON.stringify(value.rawArgs.flags)},${JSON.stringify(value.rawArgs.options)})`
+    return `/*@__PURE__*/ new EmulatedRegExp(${JSON.stringify(value.rawArgs.pattern)},${JSON.stringify(value.rawArgs.flags)},${JSON.stringify(value.rawArgs.options)})`
   }
 
   // RegExp

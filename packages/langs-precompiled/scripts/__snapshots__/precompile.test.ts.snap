@@ -91,9 +91,11 @@ exports[`precompile 1`] = `
           ],
         },
       },
-      end: new EmulatedRegExp("(?<=^|\\\\n(?!$))(?=\\\\P{space})|(?!^)", "dgv", {
-        strategy: "search_start_clip",
-      }),
+      end: /*@__PURE__*/ new EmulatedRegExp(
+        "(?<=^|\\\\n(?!$))(?=\\\\P{space})|(?!^)",
+        "dgv",
+        { strategy: "search_start_clip" },
+      ),
       patterns: [
         {
           begin: /(?<=^|\\n(?!$))([ ]+)(?! )/dgv,
@@ -112,7 +114,7 @@ exports[`precompile 1`] = `
       beginCaptures: {
         "1": { name: "punctuation.whitespace.comment.leading.yaml" },
       },
-      end: new EmulatedRegExp("(?!^)", "dgv", {
+      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
         strategy: "search_start_clip",
       }),
       patterns: [
@@ -377,7 +379,7 @@ exports[`precompile 1`] = `
     node: { patterns: [{ include: "#block-node" }] },
     property: {
       begin: /(?=!|&)/dgv,
-      end: new EmulatedRegExp("(?!^)", "dgv", {
+      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
         strategy: "search_start_clip",
       }),
       name: "meta.property.yaml",
