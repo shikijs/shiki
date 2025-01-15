@@ -38,9 +38,6 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
         asciiWordBoundaries: true,
         // Follow `vscode-oniguruma` which enables this Oniguruma option by default
         captureGroup: true,
-        // Removing `\G` anchors in cases when they're not supported for emulation allows
-        // supporting more grammars, but also allows some mismatches
-        ignoreUnsupportedGAnchors: true,
         // Oniguruma uses depth limit `20`; lowered here to keep regexes shorter and maybe
         // sometimes faster, but can be increased if issues reported due to low limit
         recursionLimit: 5,

@@ -237,7 +237,7 @@ async function run() {
     '',
     '## Mismatched Languages',
     '',
-    'Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine. Please use with caution.',
+    'Languages that do not throw with the JavaScript RegExp engine, but will produce different results than the WASM engine.',
     '',
     createTable(reportMismatch),
     '',
