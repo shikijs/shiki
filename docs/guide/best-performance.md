@@ -62,7 +62,7 @@ Learn more about [Fine-Grained Bundles](/guide/bundles#fine-grained-bundle).
 
 ## Use Shorthands
 
-`createHighlighter` and `createHighlighterCore` will load all the themes and languages upfront to ensure the subsequent highlight operations are synchronous. This can add a significant overhead to the startup time specially when you have a lot of themes and languages.
+`createHighlighter` and `createHighlighterCore` loads all the themes and languages **upfront** to ensure the subsequent highlight operations are synchronous. This can add a significant overhead to the startup time specially when you have a lot of themes and languages. Shorthands abstract the theme and language loading process and maintains an internal highlighter instance underneath, and only load the necessary themes and languages when needed. When your highlight process can be asynchronous, you can use the shorthands to reduce the startup time.
 
 ```ts
 import { codeToHtml } from 'shiki'
@@ -82,6 +82,8 @@ Shiki provides [two engines](/guide/regex-engines) for executing Regular Express
 
 If you are bundling Shiki for the web, using the JavaScript engine would be smaller in bundle size and faster in startup time. Meanwhile, the [precompiled languages](/guide/regex-engines#pre-compiled-languages) can also reduce the bundle size and startup time, if your target browsers support the latest RegExp features.
 
+Check the [RegExp Engines](/guide/regex-engines) guide for more details.
+
 ## Use Workers
 
 Shiki hightlights the code using Regular Expressions, which can be CPU-intensive. You can offload the highlighting work to a Web Worker/Node Worker to avoid blocking the main thread.
@@ -91,11 +93,3 @@ Shiki hightlights the code using Regular Expressions, which can be CPU-intensive
 🚧 We are still working on a guide for creating workers easily.
 
 :::
-
-```
-
-```
-
-```
-
-```
