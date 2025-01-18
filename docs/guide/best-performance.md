@@ -56,9 +56,9 @@ const highlighter = await createHighlighterCore({
 })
 ```
 
-To compose the fine-grained bundles easily, we also provide the [`shiki-codegen`](/integrations/codegen) tool to generate the fine-grained bundles for you.
+To compose the fine-grained bundles easily, we also provide the [`shiki-codegen`](/packages/codegen) tool to generate the fine-grained bundles for you.
 
-Learn more about [Fine-Grained Bundles](/guides/bundles#fine-grained-bundle).
+Learn more about [Fine-Grained Bundles](/guide/bundles#fine-grained-bundle).
 
 ## Use Shorthands
 

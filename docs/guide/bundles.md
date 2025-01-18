@@ -7,7 +7,7 @@ outline: deep
 The main `shiki` entries bundles all supported themes and languages via lazy dynamic imports. The efficiency shouldn't be a concern to most of the scenarios as the grammar would only be imported/downloaded when it is used. However, when you bundle Shiki into browsers runtime or web workers, even those files are not imported, they still add up to your dist size. We provide the [fine-grained bundle](#fine-grained-bundle) to help you compose languages and themes one-by-one as you need.
 
 ::: info
-If you are building a web application, or in a performance-sensitive environment, it's always better to use the [fine-grained bundles](<(#fine-grained-bundle)>) to reduce the bundle size and memory usage. Learn more about [Best Performance Practices](/guide/best-performance).
+If you are building a web application, or in a performance-sensitive environment, it's always better to use the [fine-grained bundles](#fine-grained-bundle) to reduce the bundle size and memory usage. Learn more about [Best Performance Practices](/guide/best-performance).
 :::
 
 ## Bundle Presets

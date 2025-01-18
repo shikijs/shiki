@@ -115,4 +115,4 @@ const highlighter = await createHighlighterCore({
 
 If you are not using the custom grammars that requires transpilation, you can use the `createJavaScriptRawEngine` to skip the transpilation step further reducing bundle size.
 
-If you are using [`shiki-codegen`](/integrations/codegen), you can generate the pre-compiled languages with the `--precompiled` and `--engine=javascript-raw` flags.
+If you are using [`shiki-codegen`](/packages/codegen), you can generate the pre-compiled languages with the `--precompiled` and `--engine=javascript-raw` flags.

@@ -57,4 +57,4 @@ export const {
 )
 ```
 
-You can also use [`shiki-codegen`](/integrations/codegen) to generate the fine-grained bundles for you.
+You can also use [`shiki-codegen`](/packages/codegen) to generate the fine-grained bundles for you.
