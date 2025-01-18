@@ -28,6 +28,8 @@ const html = await codeToHtml(code, { lang: 'typescript', theme: 'light-plus' })
 
 ### Programmatic
 
+You can also use `shiki-codegen` programmatically, and write the generated code to a file:
+
 ```ts
 import { codegen } from 'shiki-codegen'
 

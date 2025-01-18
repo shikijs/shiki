@@ -82,3 +82,37 @@ const jsEngine = createJavaScriptRegexEngine({
   target: 'ES2018', // or 'auto' (default), 'ES2024', 'ES2025'
 })
 ```
+
+### Pre-compiled Languages
+
+Instead of compiling the regular expressions at on-the-fly, we also provided pre-compiled languages for the JavaScript engine to further reduce the startup time.
+
+::: info
+Pre-compiled languages requires RegExp uncoide sets support (`v` flag), which is targeting **ES2024** or Node.js 20+, and may not work in older environments. [Can I use](https://caniuse.com/mdn-javascript_builtins_regexp_unicode).
+:::
+
+You can install them with `@shikijs/langs-precompiled`, and change your `@shikijs/langs` imports to `@shikijs/langs-precompiled`:
+
+```ts
+import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRawEngine } from 'shiki/engine/javascript'
+
+const highlighter = await createHighlighterCore({
+  langs: [
+    import('@shikijs/langs/javascript'), // [!code --]
+    import('@shikijs/langs/typescript'), // [!code --]
+    import('@shikijs/langs-precompiled/javascript'), // [!code ++]
+    import('@shikijs/langs-precompiled/typescript'), // [!code ++]
+    // ...
+  ],
+  themes: [
+    import('@shikijs/themes/nord'),
+  ],
+  engine: createJavaScriptRegexEngine(), // [!code --]
+  engine: createJavaScriptRawEngine(), // [!code ++]
+})
+```
+
+If you are not using the custom grammars that requires transpilation, you can use the `createJavaScriptRawEngine` to skip the transpilation step further reducing bundle size.
+
+If you are using [`shiki-codegen`](/integrations/codegen), you can generate the pre-compiled languages with the `--precompiled` and `--engine=javascript-raw` flags.

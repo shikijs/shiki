@@ -15,6 +15,8 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Installation & Usage', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
+  { text: 'Shorthands', link: '/guide/shorthands' },
+  { text: 'Best Performance Practices', link: '/guide/best-performance' },
   { text: 'Decorations', link: '/guide/decorations' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
@@ -44,6 +46,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
+  { text: 'Codegen', link: '/packages/codegen' },
   { text: 'CLI', link: '/packages/cli' },
 ]
 
