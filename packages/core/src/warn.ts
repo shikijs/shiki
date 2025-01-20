@@ -1,4 +1,4 @@
-let _emitDeprecation: DeprecationTarget | boolean = false
+let _emitDeprecation: DeprecationTarget | boolean = 3
 let _emitError = false
 
 export type DeprecationTarget = 3

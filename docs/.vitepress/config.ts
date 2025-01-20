@@ -24,7 +24,6 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Synchronous Usage', link: '/guide/sync-usage' },
   { text: 'Custom Themes', link: '/guide/load-theme' },
   { text: 'Custom Languages', link: '/guide/load-lang' },
-  { text: 'Future', link: '/guide/future' },
   { text: 'Migration', link: '/guide/migrate' },
   { text: 'Compatibility Build', link: '/guide/compat' },
 ]
@@ -50,12 +49,18 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'CLI', link: '/packages/cli' },
 ]
 
+const BLOGS: DefaultTheme.NavItemWithLink[] = [
+  { text: 'Shiki v2.0', link: '/blog/v2' },
+  { text: 'The Evolution of Shiki v1.0', link: 'https://nuxt.com/blog/shiki-v1' },
+]
+
 const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] = [
   { text: `v${version} (current)`, link: '/' },
   { text: `Release Notes`, link: 'https://github.com/shikijs/shiki/releases' },
   { text: `Contributing`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
   {
     items: [
+      { text: 'Migration from v1.0', link: '/blog/v2' },
       { text: 'Migration from v0.14', link: '/guide/migrate#migrate-from-v0-14' },
       { text: 'Migration from Shikiji', link: '/guide/migrate#migrate-from-shikiji' },
     ],
@@ -157,10 +162,10 @@ export default withMermaid(defineConfig({
         text: 'References',
         items: REFERENCES,
       },
-      // {
-      //   text: 'Play',
-      //   link: '/play',
-      // },
+      {
+        text: 'Blog',
+        items: BLOGS,
+      },
       {
         text: `v${version}`,
         items: VERSIONS,
@@ -196,6 +201,7 @@ export default withMermaid(defineConfig({
     },
 
     socialLinks: [
+      { icon: 'bluesky', link: 'https://bsky.app/profile/shiki.style' },
       { icon: 'github', link: 'https://github.com/shikijs/shiki' },
     ],
 
