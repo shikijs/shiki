@@ -4,7 +4,7 @@ import type { AnsiToHtmlOptions, CodeToHtmlOptions, CodeToHtmlOptionsExtra, High
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import { transformerCompactLineOptions } from '@shikijs/transformers'
-import { bundledLanguages, bundledThemes, createHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme } from 'shiki'
+import { bundledLanguages, bundledThemes, createHighlighter as getShiki, normalizeTheme, tokenizeAnsiWithTheme, warnDeprecated } from 'shiki'
 import { ShikiCompatError } from './error'
 
 export const BUNDLED_LANGUAGES = bundledLanguages
@@ -35,6 +35,8 @@ export interface ShikiCompatHighlighter {
 }
 
 export async function getHighlighter(options: Partial<HighlighterOptions> = {}): Promise<ShikiCompatHighlighter> {
+  warnDeprecated(`@shikijs/compat is deprecated and will be removed in v3, please migrate to the main shiki package`)
+
   const themes = options.themes || []
   const langs = options.langs || []
 

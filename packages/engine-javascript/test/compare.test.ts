@@ -160,7 +160,7 @@ const cases: Cases[] = [
 ]
 
 describe('cases', async () => {
-  await loadWasm(import('@shikijs/core/wasm-inlined'))
+  await loadWasm(import('@shikijs/engine-oniguruma/wasm-inlined'))
 
   const resolved = await Promise.all(cases.map(async (c) => {
     const theme = await c.theme().then(r => r.default)
