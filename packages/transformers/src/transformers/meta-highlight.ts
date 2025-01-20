@@ -12,7 +12,6 @@ export function parseMetaHighlightString(meta: string): number[] | null {
       const num = v.split('-').map(v => Number.parseInt(v, 10))
       if (num.length === 1)
         return [num[0]]
-
       return Array.from({ length: num[1] - num[0] + 1 }, (_, i) => i + num[0])
     })
   return lines

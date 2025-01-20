@@ -186,18 +186,7 @@ body { margin: 0; }
 </style>`,
 )
 
-suite(
-  'all',
-  import.meta.glob('./fixtures/legacy/*.*', { as: 'raw', eager: true }),
-  [
-    transformerNotationFocus({ legacy: true }),
-    transformerNotationHighlight({ legacy: true }),
-    transformerNotationErrorLevel({ legacy: true }),
-    transformerNotationWordHighlight({ legacy: true }),
-    transformerRemoveLineBreak(),
-  ],
-  code => `${code}
-<style>
+const CSS_COMPARE = `<style>
 * { tab-size: 4; }
 body { margin: 0; }
 .line { display: block; width: 100%; height: 1.2em; }
@@ -207,5 +196,30 @@ body { margin: 0; }
 .highlighted-word { background-color: #8885; }
 .highlighted.warning { background-color: #9905; }
 .highlighted.error { background-color: #8005; }
-</style>`,
+</style>`
+
+suite(
+  'compare-legacy',
+  import.meta.glob('./fixtures/legacy/legacy*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerNotationFocus({ legacy: true }),
+    transformerNotationHighlight({ legacy: true }),
+    transformerNotationErrorLevel({ legacy: true }),
+    transformerNotationWordHighlight({ legacy: true }),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}${CSS_COMPARE}`,
+)
+
+suite(
+  'compare-new',
+  import.meta.glob('./fixtures/legacy/new*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerNotationFocus({ legacy: false }),
+    transformerNotationHighlight({ legacy: false }),
+    transformerNotationErrorLevel({ legacy: false }),
+    transformerNotationWordHighlight({ legacy: false }),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}${CSS_COMPARE}`,
 )

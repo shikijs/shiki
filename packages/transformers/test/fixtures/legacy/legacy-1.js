@@ -12,6 +12,9 @@ console.log('focus')
 console.log('highlighted')
 console.log('highlighted')
 
+console.log('highlighted') // [!code highlight:2]
+console.log('highlighted')
+
 // [!code word:options:4]
 let options = 'options'
 options = {}, // [!code word:log]
