@@ -208,11 +208,11 @@ describe('cases', async () => {
       }
 
       await expect
-        .soft(JSON.stringify(engineWasm.executions, null, 2))
+        .soft(`${JSON.stringify(engineWasm.executions, null, 2)}\n`)
         .toMatchFileSnapshot(`./__records__/${c.c.name}.wasm.json`)
 
       await expect
-        .soft(JSON.stringify(engineJs.executions, null, 2))
+        .soft(`${JSON.stringify(engineJs.executions, null, 2)}\n`)
         .toMatchFileSnapshot(`./__records__/${c.c.name}.js.json`)
 
       // compare.forEach(([a, b]) => {
