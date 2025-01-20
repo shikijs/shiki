@@ -10,7 +10,7 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
   /**
    * Custom RegExp engine.
    */
-  engine?: Sync extends true ? RegexEngine : Awaitable<RegexEngine>
+  engine: Sync extends true ? RegexEngine : Awaitable<RegexEngine>
   /**
    * Theme names, or theme registration objects to be loaded upfront.
    */
@@ -38,7 +38,11 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
   loadWasm?: Sync extends true ? never : LoadWasmOptions
 }
 
-export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings' | 'engine'> {
+export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings'> {
+  /**
+   * Custom RegExp engine.
+   */
+  engine?: Awaitable<RegexEngine>
   /**
    * Theme registation
    *

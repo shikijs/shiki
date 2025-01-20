@@ -1,7 +1,7 @@
+import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
 import { wasmBinary } from '@shikijs/engine-oniguruma/wasm-inlined'
-
 import js from '@shikijs/langs/javascript'
 import ts from '@shikijs/langs/typescript'
 import mtp from '@shikijs/themes/material-theme-palenight'
@@ -67,6 +67,7 @@ describe('should', () => {
       langs: [
         import('@shikijs/langs/cpp'),
       ],
+      engine: createJavaScriptRegexEngine(),
     })
 
     expect(shiki.getLoadedLanguages().sort())
@@ -85,7 +86,9 @@ describe('should', () => {
   })
 
   it('works without no initial langs and themes', async () => {
-    using shiki = await createHighlighterCore()
+    using shiki = await createHighlighterCore({
+      engine: createJavaScriptRegexEngine(),
+    })
 
     await shiki.loadLanguage(js)
     await shiki.loadTheme(nord)
@@ -101,6 +104,7 @@ describe('should', () => {
         mylang: 'javascript',
         mylang2: 'js', // nested alias
       },
+      engine: createJavaScriptRegexEngine(),
     })
 
     await shiki.loadLanguage(js)
@@ -117,6 +121,7 @@ describe('should', () => {
       langAlias: {
         js: 'typescript',
       },
+      engine: createJavaScriptRegexEngine(),
     })
 
     await shiki.loadLanguage(ts)
@@ -132,6 +137,7 @@ describe('errors', () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
+      engine: createJavaScriptRegexEngine(),
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'invalid' }))
@@ -142,6 +148,7 @@ describe('errors', () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
+      engine: createJavaScriptRegexEngine(),
     })
 
     await expect(() => shiki.codeToHtml('console.log("Hi")', { lang: 'abc', theme: 'nord' }))
@@ -175,6 +182,7 @@ describe('errors', () => {
         mylang: 'mylang2',
         mylang2: 'mylang',
       },
+      engine: createJavaScriptRegexEngine(),
     })
 
     await shiki.loadLanguage(js)
@@ -187,7 +195,8 @@ describe('errors', () => {
   it('throw on using disposed instance', async () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
-      langs: [js as any],
+      langs: [js],
+      engine: createJavaScriptRegexEngine(),
     })
 
     expect(shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))

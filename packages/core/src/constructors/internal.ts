@@ -11,9 +11,12 @@ import { createShikiInternalSync } from './internal-sync'
 /**
  * Get the minimal shiki context for rendering.
  */
-export async function createShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export async function createShikiInternal(options: HighlighterCoreOptions): Promise<ShikiInternal> {
   if (options.loadWasm) {
     warnDeprecated('`loadWasm` option is deprecated. Use `engine: createOnigurumaEngine(loadWasm)` instead.')
+  }
+  if (!options.engine) {
+    throw new Error('`engine` option is required.')
   }
 
   const [
@@ -38,7 +41,7 @@ export async function createShikiInternal(options: HighlighterCoreOptions = {}):
 /**
  * @deprecated Use `createShikiInternal` instead.
  */
-export function getShikiInternal(options: HighlighterCoreOptions = {}): Promise<ShikiInternal> {
+export function getShikiInternal(options: HighlighterCoreOptions): Promise<ShikiInternal> {
   warnDeprecated('`getShikiInternal` is deprecated. Use `createShikiInternal` instead.')
   return createShikiInternal(options)
 }
