@@ -22,6 +22,7 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
   { text: 'RegExp Engines', link: '/guide/regex-engines' },
   { text: 'Synchronous Usage', link: '/guide/sync-usage' },
+  { text: 'Grammar State', link: '/guide/grammar-state' },
   { text: 'Custom Themes', link: '/guide/load-theme' },
   { text: 'Custom Languages', link: '/guide/load-lang' },
   { text: 'Migration', link: '/guide/migrate' },

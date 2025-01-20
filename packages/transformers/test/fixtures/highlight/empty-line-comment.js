@@ -1,5 +1,5 @@
 export function transformerNotationFocus(
-  // [!code highlight:5]
+  // [!code highlight:4]
   options = {},
 ) {
   const {

@@ -464,15 +464,3 @@ function _makeResponseNonStreamingLoader(data: Response): WebAssemblyInstantiato
     return WebAssembly.instantiate(arrayBuffer, importObject)
   }
 }
-
-// export function createOnigString(str: string) {
-//   return new OnigString(str)
-// }
-
-// export function createOnigScanner(patterns: string[]) {
-//   return new OnigScanner(patterns)
-// }
-
-// export function setDefaultDebugCall(_defaultDebugCall: boolean): void {
-//   defaultDebugCall = _defaultDebugCall
-// }

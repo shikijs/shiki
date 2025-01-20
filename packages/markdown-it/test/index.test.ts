@@ -8,7 +8,7 @@ import { fromHighlighter } from '../src/core'
 
 it('run for base', { timeout: 10_000 }, async () => {
   const md = MarkdownIt()
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     langs: ['js'],
     themes: ['vitesse-light', 'vitesse-dark'],
   })

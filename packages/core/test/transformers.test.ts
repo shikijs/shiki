@@ -1,10 +1,16 @@
+import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import { expect, it } from 'vitest'
-import { createHighlighter } from '../src'
+import { createHighlighterCore } from '../src'
 
 it('transformers tokens', async () => {
-  const shiki = await createHighlighter({
-    themes: ['vitesse-light'],
-    langs: ['javascript'],
+  using shiki = await createHighlighterCore({
+    themes: [
+      import('@shikijs/themes/vitesse-light'),
+    ],
+    langs: [
+      import('@shikijs/langs/javascript'),
+    ],
+    engine: createJavaScriptRegexEngine(),
   })
 
   expect(shiki.codeToHtml('console.log', {

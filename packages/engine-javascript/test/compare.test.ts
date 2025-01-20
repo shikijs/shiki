@@ -4,7 +4,7 @@ import type { Execution } from './types'
 
 import { hash as createHash } from 'ohash'
 import { describe, expect, it } from 'vitest'
-import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
+import { createOnigurumaEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src/engine-compile'
 
@@ -46,8 +46,8 @@ export interface Cases {
 const cases: Cases[] = [
   {
     name: 'beancount',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/beancount.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/beancount'),
     cases: [
       `2012-11-03 * "Transfer to pay credit card"
   Assets:MyBank:Checking            -400.00 USD
@@ -62,8 +62,8 @@ const cases: Cases[] = [
   },
   {
     name: 'json-basic',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/json.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/json'),
     cases: [
       '{"foo":{"bar":1}}',
       '[undefined, null, true, false, 0, 1, 1.1, "foo", [], {}]',
@@ -71,8 +71,8 @@ const cases: Cases[] = [
   },
   {
     name: 'html-basic',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/html.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/html'),
     cases: [
       '<div class="foo">bar</div>',
       '<!DOCTYPE html><html><head><title>foo</title></head><body>bar</body></html>',
@@ -80,24 +80,24 @@ const cases: Cases[] = [
   },
   {
     name: 'ts-basic',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/typescript.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/typescript'),
     cases: [
       'const foo: string = "bar"',
     ],
   },
   {
     name: 'jsonc',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/jsonc.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/jsonc'),
     cases: [
       '// comment\n{"foo":"bar"}',
     ],
   },
   {
     name: 'vue',
-    theme: () => import('../../shiki/src/themes/vitesse-dark.mjs'),
-    lang: () => import('../../shiki/src/langs/vue.mjs'),
+    theme: () => import('@shikijs/themes/vitesse-dark'),
+    lang: () => import('@shikijs/langs/vue'),
     cases: [
       `<script setup>\nimport { ref } from 'vue'\n</script>`,
       `<template>\n<div>{{ foo }}</div>\n</template>`,
@@ -105,8 +105,8 @@ const cases: Cases[] = [
   },
   {
     name: 'toml',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/toml.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/toml'),
     cases: [
       [
         `# This is a TOML document`,
@@ -120,8 +120,8 @@ const cases: Cases[] = [
   },
   {
     name: 'sql',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/sql.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/sql'),
     cases: [
       'SELECT * FROM foo',
       [
@@ -134,8 +134,8 @@ const cases: Cases[] = [
   },
   {
     name: 'markdown',
-    theme: () => import('../../shiki/src/themes/nord.mjs'),
-    lang: () => import('../../shiki/src/langs/markdown.mjs'),
+    theme: () => import('@shikijs/themes/nord'),
+    lang: () => import('@shikijs/langs/markdown'),
     cases: [
       [
         '# Header',
@@ -176,7 +176,7 @@ describe('cases', async () => {
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
       const engineWasm = createEngineWrapper(
-        await createWasmOnigEngine(),
+        await createOnigurumaEngine(),
       )
       const engineJs = createEngineWrapper(
         createJavaScriptRegexEngine({
@@ -184,12 +184,12 @@ describe('cases', async () => {
         }),
       )
 
-      const shiki1 = await createHighlighterCore({
+      using shiki1 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
         engine: engineWasm,
       })
-      const shiki2 = await createHighlighterCore({
+      using shiki2 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
         engine: engineJs,

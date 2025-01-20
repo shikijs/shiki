@@ -25,9 +25,14 @@ export function createCommentNotationTransformer(
     lines: Element[],
     index: number
   ) => boolean,
-  matchAlgorithm: MatchAlgorithm = 'v3',
+  matchAlgorithm: MatchAlgorithm | undefined,
 ): ShikiTransformer {
+  if (matchAlgorithm == null) {
+    matchAlgorithm = 'v3'
+  }
+
   return {
+    name,
     code(code) {
       const lines = code.children.filter(i => i.type === 'element')
       const linesToRemove: (Element | Text)[] = []

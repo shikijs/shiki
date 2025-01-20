@@ -98,7 +98,7 @@ export class GrammarState implements GrammarStateInterface {
       lang: this.lang,
       theme: this.theme,
       themes: this.themes,
-      scopes: this.scopes,
+      scopes: this.getScopes(),
     }
   }
 }

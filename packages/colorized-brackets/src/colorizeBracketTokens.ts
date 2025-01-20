@@ -105,7 +105,9 @@ function assignColorToToken(
   else {
     const { defaultColor = 'light', cssVariablePrefix = '--shiki-' }
       = shikiOptions
-    const styles: string[] = []
+    const styles: Record<string, string> = typeof token.htmlStyle === 'string'
+      ? {}
+      : token.htmlStyle || {}
 
     for (const [colorName, theme] of Object.entries(shikiOptions.themes)) {
       const themeName = typeof theme === 'string' ? theme : theme?.name
@@ -113,10 +115,10 @@ function assignColorToToken(
         = colorName === defaultColor
           ? 'color'
           : `${cssVariablePrefix}${colorName}`
-      styles.push(`${cssProperty}:${getColor(themes, themeName, level)}`)
+      styles[cssProperty] = getColor(themes, themeName, level)
     }
 
-    token.htmlStyle = styles.join(';')
+    token.htmlStyle = styles
   }
 }
 

@@ -3,7 +3,7 @@ import { expect, it } from 'vitest'
 import { createHighlighter } from '../dist/index.mjs'
 
 it('should works', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-light'],
     langs: ['javascript'],
   })

@@ -3,7 +3,7 @@ import { expect, it } from 'vitest'
 import { transformerStyleToClass } from '../src/transformers/style-to-class'
 
 it('transformerStyleToClass', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-dark', 'vitesse-light', 'nord'],
     langs: ['typescript'],
   })
