@@ -2,9 +2,9 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Tuesday, January 14, 2025
+> Generated on Monday, January 20, 2025
 >
-> Version `1.27.0`
+> Version `1.27.2`
 >
 > Runtime: Node.js v22.11.0
 
@@ -262,5 +262,5 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 | sass       | ✅ OK           |                67 |               2 |      |
 | purescript | ❌ Error        |                72 |               1 |      |
 | csharp     | ❌ Error        |               310 |               3 |  137 |
+| razor      | ❌ Error        |               959 |               3 |      |
 | swift      | ❌ Error        |               326 |               3 |      |
-| razor      | ❌ Error        |               957 |               5 |      |
