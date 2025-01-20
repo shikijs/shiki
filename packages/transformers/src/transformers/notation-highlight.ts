@@ -1,7 +1,8 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { transformerNotationMap } from './notation-map'
 
-export interface TransformerNotationHighlightOptions {
+export interface TransformerNotationHighlightOptions extends MatchAlgorithmOptions {
   /**
    * Class for highlighted lines
    */
@@ -30,6 +31,7 @@ export function transformerNotationHighlight(
         hl: classActiveLine,
       },
       classActivePre,
+      matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-highlight',
   )

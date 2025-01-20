@@ -1,7 +1,8 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { transformerNotationMap } from './notation-map'
 
-export interface TransformerNotationErrorLevelOptions {
+export interface TransformerNotationErrorLevelOptions extends MatchAlgorithmOptions {
   classMap?: Record<string, string | string[]>
   /**
    * Class added to the <pre> element when the current code has diff
@@ -27,6 +28,7 @@ export function transformerNotationErrorLevel(
     {
       classMap,
       classActivePre,
+      matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-error-level',
   )

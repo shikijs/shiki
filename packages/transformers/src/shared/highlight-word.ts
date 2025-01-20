@@ -24,6 +24,7 @@ function getTextContent(element: ElementContent): string {
  * @param ignoredElement
  * @param index highlight beginning index
  * @param len highlight length
+ * @param className class name to add to highlighted nodes
  */
 function highlightRange(
   this: ShikiTransformerContext,
@@ -64,14 +65,14 @@ function highlightRange(
   }
 }
 
-function hasOverlap(range1: [number, number], range2: [ number, number]): boolean {
+function hasOverlap(range1: [number, number], range2: [number, number]): boolean {
   return (range1[0] <= range2[1]) && (range1[1]) >= range2[0]
 }
 
 function separateToken(span: Element, textNode: Text, index: number, len: number): [
-  before: Element | undefined,
-  med: Element,
-  after: Element | undefined,
+    before: Element | undefined,
+    med: Element,
+    after: Element | undefined,
 ] {
   const text = textNode.value
 
