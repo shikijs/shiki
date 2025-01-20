@@ -746,9 +746,12 @@ importers:
 
   packages/transformers:
     dependencies:
-      shiki:
+      '@shikijs/core':
         specifier: workspace:*
-        version: link:../shiki
+        version: link:../core
+      '@shikijs/types':
+        specifier: workspace:*
+        version: link:../types
 
   packages/twoslash:
     dependencies:

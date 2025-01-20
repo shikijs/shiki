@@ -1,10 +1,10 @@
 import type { GrammarState as GrammarStateInterface, GrammarStateMapKey } from '@shikijs/types'
 import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
 
-import { warnDeprecated } from '@shikijs/core'
 import { INITIAL } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
 import { toArray } from '../utils'
+import { warnDeprecated } from '../warn'
 
 const _grammarStateMap = new WeakMap<GrammarStateMapKey, GrammarStateInterface>()
 
