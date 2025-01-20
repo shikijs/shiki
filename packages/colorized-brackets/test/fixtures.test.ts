@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { lstatSync, readdirSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { join, sep } from 'node:path'
@@ -10,6 +11,8 @@ import {
   parseExpectedBrackets,
   prettifyBrackets,
 } from './utils'
+
+const SHOULD_LOG = false
 
 /**
  * `tests/samples` contains code snippets that annotate expected colors with `@colors` comments.
@@ -63,11 +66,11 @@ describe('file-driven tests', async () => {
     })
     const actualBrackets = parseActualBrackets(html)
     // Logging the colored brackets is much easier to read
-    /* eslint-disable no-console */
-    console.log(c.bold(fileName))
-    console.log('  Expected:', prettifyBrackets(expectedBrackets))
-    console.log('  Actual:  ', prettifyBrackets(actualBrackets))
-    /* eslint-enable no-console */
+    if (SHOULD_LOG) {
+      console.log(c.bold(fileName))
+      console.log('  Expected:', prettifyBrackets(expectedBrackets))
+      console.log('  Actual:  ', prettifyBrackets(actualBrackets))
+    }
     expect(prettifyBrackets(actualBrackets, { noAnsi: true })).toEqual(
       prettifyBrackets(expectedBrackets, { noAnsi: true }),
     )
