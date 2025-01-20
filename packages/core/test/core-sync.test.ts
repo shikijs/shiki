@@ -1,8 +1,8 @@
+import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
+import js from '@shikijs/langs/javascript'
+import nord from '@shikijs/themes/nord'
 import { describe, expect, it } from 'vitest'
-import { createJavaScriptRegexEngine } from '../../engine-javascript/src/engine-compile'
-import { createHighlighterCoreSync } from '../src/core'
-import js from '../src/langs/javascript.mjs'
-import nord from '../src/themes/nord.mjs'
+import { createHighlighterCoreSync } from '../src'
 
 describe('should', () => {
   const engine = createJavaScriptRegexEngine()
@@ -24,13 +24,13 @@ describe('should', () => {
       langs: [
         js,
         // Load the grammar upfront (await outside of the function)
-        await import('../src/langs/c.mjs').then(r => r.default),
+        await import('@shikijs/langs/c').then(r => r.default),
       ],
       engine,
     })
 
-    shiki.loadLanguageSync(await import('../src/langs/python.mjs').then(m => m.default))
-    shiki.loadThemeSync(await import('../dist/themes/vitesse-light.mjs').then(m => m.default))
+    shiki.loadLanguageSync(await import('@shikijs/langs/python').then(m => m.default))
+    shiki.loadThemeSync(await import('@shikijs/themes/vitesse-light').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())
       .toMatchInlineSnapshot(`

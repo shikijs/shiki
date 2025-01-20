@@ -1,13 +1,13 @@
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
-import { describe, expect, it } from 'vitest'
 
-// eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
-import { createHighlighterCore } from '../src/core'
-import js from '../src/langs/javascript.mjs'
-import ts from '../src/langs/typescript.mjs'
-import mtp from '../src/themes/material-theme-palenight.mjs'
-import nord from '../src/themes/nord.mjs'
+import { wasmBinary } from '@shikijs/engine-oniguruma/wasm-inlined'
+
+import js from '@shikijs/langs/javascript'
+import ts from '@shikijs/langs/typescript'
+import mtp from '@shikijs/themes/material-theme-palenight'
+import nord from '@shikijs/themes/nord'
+import { describe, expect, it } from 'vitest'
+import { createHighlighterCore } from '../src'
 
 describe('should', () => {
   it('works', async () => {
@@ -28,7 +28,7 @@ describe('should', () => {
       themes: [nord],
       langs: [
         js,
-        import('../src/langs/c.mjs'),
+        import('@shikijs/langs/c'),
       ],
       engine: createOnigurumaEngine({
         // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
@@ -36,8 +36,8 @@ describe('should', () => {
       }),
     })
 
-    await shiki.loadLanguage(() => import('../src/langs/python.mjs'))
-    await shiki.loadTheme(() => import('../dist/themes/vitesse-light.mjs').then(m => m.default))
+    await shiki.loadLanguage(() => import('@shikijs/langs/python'))
+    await shiki.loadTheme(() => import('@shikijs/themes/vitesse-light').then(m => m.default))
 
     expect(shiki.getLoadedLanguages())
       .toMatchInlineSnapshot(`
@@ -65,7 +65,7 @@ describe('should', () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
       langs: [
-        import('../src/langs/cpp.mjs'),
+        import('@shikijs/langs/cpp'),
       ],
     })
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createHighlighter, hastToHtml } from '../src'
 
 it('getLastGrammarState', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-light'],
     langs: ['typescript'],
   })
@@ -196,7 +196,7 @@ it('getLastGrammarState', async () => {
 })
 
 it('grammarContextCode', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-light'],
     langs: ['typescript', 'vue', 'html'],
   })
@@ -237,7 +237,7 @@ it('grammarContextCode', async () => {
 })
 
 it('getLastGrammarState with multiple themes', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-light', 'vitesse-dark'],
     langs: ['typescript'],
   })
@@ -285,7 +285,7 @@ it('getLastGrammarState with multiple themes', async () => {
 })
 
 it('getLastGrammarState from hast', async () => {
-  const shiki = await createHighlighter({
+  using shiki = await createHighlighter({
     themes: ['vitesse-light'],
     langs: ['typescript'],
   })
@@ -318,7 +318,7 @@ it('getLastGrammarState from hast', async () => {
 
 describe('errors', () => {
   it('should throw on wrong language', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['typescript', 'javascript'],
     })
@@ -341,7 +341,7 @@ describe('errors', () => {
   })
 
   it('should throw on wrong themes', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light', 'vitesse-dark'],
       langs: ['typescript', 'javascript'],
     })

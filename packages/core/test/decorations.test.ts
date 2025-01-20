@@ -1,5 +1,5 @@
+import { codeToHtml } from 'shiki/bundle/full'
 import { describe, expect, it, vi } from 'vitest'
-import { codeToHtml } from '../src'
 
 const style = `
 <style>

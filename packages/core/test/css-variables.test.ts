@@ -1,9 +1,11 @@
+import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
+import { codeToHtml } from 'shiki/bundle/full'
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, createCssVariablesTheme, createHighlighter } from '../src'
+import { createCssVariablesTheme, createHighlighterCore } from '../src'
 
 describe('css-variables', () => {
   it('theme auto-patch', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighterCore({
       themes: [
         Object.freeze({
           name: 'my-css-variables',
@@ -27,7 +29,10 @@ describe('css-variables', () => {
           ],
         }),
       ],
-      langs: ['javascript'],
+      langs: [
+        import('@shikijs/langs/js'),
+      ],
+      engine: createJavaScriptRegexEngine(),
     })
 
     const theme = shiki.getTheme('my-css-variables')

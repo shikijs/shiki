@@ -4,7 +4,7 @@ import { createJavaScriptRegexEngine } from '../src/engine-compile'
 
 describe('should', () => {
   it('works', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
       engine: createJavaScriptRegexEngine(),
@@ -15,7 +15,7 @@ describe('should', () => {
   })
 
   it('dynamic load theme and lang', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript', 'ts'],
       engine: createJavaScriptRegexEngine(),

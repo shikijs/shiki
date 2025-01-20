@@ -3,7 +3,7 @@ import { codeToHtml, createHighlighter } from '../src'
 
 describe('should', () => {
   it('works', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript'],
     })
@@ -13,7 +13,7 @@ describe('should', () => {
   })
 
   it('dynamic load theme and lang', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['vitesse-light'],
       langs: ['javascript', 'ts'],
     })
@@ -45,7 +45,7 @@ describe('should', () => {
   })
 
   it('requires nested lang', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['nord'],
       langs: [
         'vue',
@@ -74,7 +74,7 @@ describe('should', () => {
 
   // https://github.com/shikijs/shiki/issues/35
   it('dynamic load theme and lang with md', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       langs: [],
       themes: [],
     })
@@ -131,7 +131,7 @@ describe('should', () => {
   })
 
   it('dynamic load lang with vue', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       langs: [],
       themes: [],
     })
@@ -182,7 +182,7 @@ describe('should', () => {
   })
 
   it('should have correct offset', async () => {
-    const shiki = await createHighlighter({
+    using shiki = await createHighlighter({
       themes: ['nord'],
       langs: ['html'],
     })
