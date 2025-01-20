@@ -41,6 +41,9 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: Oni
         // Oniguruma uses depth limit `20`; lowered here to keep regexes shorter and maybe
         // sometimes faster, but can be increased if issues reported due to low limit
         recursionLimit: 5,
+        // Oniguruma option for `^`->`\A`, `$`->`\Z`; improves search performance without any
+        // change in meaning since TM grammars search line by line
+        singleline: true,
       },
       ...options,
     },

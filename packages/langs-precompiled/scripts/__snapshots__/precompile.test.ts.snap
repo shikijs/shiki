@@ -13,14 +13,14 @@ exports[`precompile 1`] = `
     "syntax",
     "sublime-syntax",
   ],
-  firstLineMatch: /(?<=^|\\n(?!$))%YAML( ?1[^\\n]\\p{Nd}+)?/dgv,
+  firstLineMatch: /^%YAML( ?1[^\\n]\\p{Nd}+)?/dgv,
   name: "yaml",
   patterns: [
     { include: "#comment" },
     { include: "#property" },
     { include: "#directive" },
-    { match: /(?<=^|\\n(?!$))---/dgv, name: "entity.other.document.begin.yaml" },
-    { match: /(?<=^|\\n(?!$))\\.{3}/dgv, name: "entity.other.document.end.yaml" },
+    { match: /^---/dgv, name: "entity.other.document.begin.yaml" },
+    { match: /^\\.{3}/dgv, name: "entity.other.document.end.yaml" },
     { include: "#node" },
   ],
   repository: {
@@ -44,7 +44,7 @@ exports[`precompile 1`] = `
           beginCaptures: {
             "1": { name: "punctuation.definition.key-value.begin.yaml" },
           },
-          end: /(?=\\?)|(?<=^|\\n(?!$)) *(:)|(:)/dgv,
+          end: /(?=\\?)|^ *(:)|(:)/dgv,
           endCaptures: {
             "1": { name: "punctuation.separator.key-value.mapping.yaml" },
             "2": { name: "invalid.illegal.expected-newline.yaml" },
@@ -54,8 +54,8 @@ exports[`precompile 1`] = `
         },
         {
           begin:
-            /(?=(?:[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-]\\P{space})([^\\p{space}\\:]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
-          end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
+            /(?=(?:[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-]\\P{space})([^\\p{space}\\:]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           patterns: [
             { include: "#flow-scalar-plain-out-implicit-type" },
             {
@@ -63,13 +63,13 @@ exports[`precompile 1`] = `
                 /[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-]\\P{space}/dgv,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
-              end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
+              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
               name: "string.unquoted.plain.out.yaml",
             },
           ],
         },
         {
-          match: /:(?=\\p{space}|(?=$|\\n))/dgv,
+          match: /:(?=\\p{space}|(?=\\n?$))/dgv,
           name: "punctuation.separator.key-value.mapping.yaml",
         },
       ],
@@ -91,15 +91,13 @@ exports[`precompile 1`] = `
           ],
         },
       },
-      end: /*@__PURE__*/ new EmulatedRegExp(
-        "(?<=^|\\\\n(?!$))(?=\\\\P{space})|(?!^)",
-        "dgv",
-        { strategy: "search_start_clip" },
-      ),
+      end: /*@__PURE__*/ new EmulatedRegExp("^(?=\\\\P{space})|(?!^)", "dgv", {
+        strategy: "search_start_clip",
+      }),
       patterns: [
         {
-          begin: /(?<=^|\\n(?!$))([ ]+)(?! )/dgv,
-          end: /(?<=^|\\n(?!$))(?!\\1|\\p{space}*(?=$|\\n))()/dgv,
+          begin: /^([ ]+)(?! )/dgv,
+          end: /^(?!\\1|\\p{space}*(?=\\n?$))()/dgv,
           name: "string.unquoted.block.yaml",
         },
       ],
@@ -110,7 +108,7 @@ exports[`precompile 1`] = `
     },
     comment: {
       begin:
-        /(?:((?<=^|\\n(?!$))[ \\t]*)|[ \\t]+)(?=#[[\\P{space}&&\\P{cntrl}&&\\P{Cn}&&\\P{Cs}]\\p{Zs}]*(?=$|\\n))/dgv,
+        /(?:(^[ \\t]*)|[ \\t]+)(?=#[[\\P{space}&&\\P{cntrl}&&\\P{Cn}&&\\P{Cs}]\\p{Zs}]*(?=\\n?$))/dgv,
       beginCaptures: {
         "1": { name: "punctuation.whitespace.comment.leading.yaml" },
       },
@@ -129,11 +127,11 @@ exports[`precompile 1`] = `
       ],
     },
     directive: {
-      begin: /(?<=^|\\n(?!$))%/dgv,
+      begin: /^%/dgv,
       beginCaptures: {
         "0": { name: "punctuation.definition.directive.begin.yaml" },
       },
-      end: /(?=(?=$|\\n)|[ \\t]+((?=$|\\n)|#))/dgv,
+      end: /(?=(?=\\n?$)|[ \\t]+((?=\\n?$)|#))/dgv,
       name: "meta.directive.yaml",
       patterns: [
         {
@@ -213,7 +211,7 @@ exports[`precompile 1`] = `
             { include: "#flow-pair" },
             { include: "#flow-node" },
             {
-              begin: /:(?=\\p{space}|(?=$|\\n)|[\\[\\]\\{\\}\\,])/dgv,
+              begin: /:(?=\\p{space}|(?=\\n?$)|[\\[\\]\\{\\}\\,])/dgv,
               beginCaptures: {
                 "0": { name: "punctuation.separator.key-value.mapping.yaml" },
               },
@@ -224,8 +222,8 @@ exports[`precompile 1`] = `
         },
         {
           begin:
-            /(?=(?:[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-][^\\p{space}\\[\\]\\{\\}\\,])([^\\p{space}\\:\\[\\]\\{\\}\\,]|:[^\\p{space}\\[\\]\\{\\}\\,]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
-          end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
+            /(?=(?:[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-][^\\p{space}\\[\\]\\{\\}\\,])([^\\p{space}\\:\\[\\]\\{\\}\\,]|:[^\\p{space}\\[\\]\\{\\}\\,]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
           name: "meta.flow-pair.key.yaml",
           patterns: [
             { include: "#flow-scalar-plain-in-implicit-type" },
@@ -234,14 +232,14 @@ exports[`precompile 1`] = `
                 /[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-][^\\p{space}\\[\\]\\{\\}\\,]/dgv,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
-              end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
+              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
               name: "string.unquoted.plain.in.yaml",
             },
           ],
         },
         { include: "#flow-node" },
         {
-          begin: /:(?=\\p{space}|(?=$|\\n)|[\\[\\]\\{\\}\\,])/dgv,
+          begin: /:(?=\\p{space}|(?=\\n?$)|[\\[\\]\\{\\}\\,])/dgv,
           captures: {
             "0": { name: "punctuation.separator.key-value.mapping.yaml" },
           },
@@ -284,7 +282,7 @@ exports[`precompile 1`] = `
         {
           begin:
             /[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-][^\\p{space}\\[\\]\\{\\}\\,]/dgv,
-          end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
           name: "string.unquoted.plain.in.yaml",
         },
       ],
@@ -302,7 +300,7 @@ exports[`precompile 1`] = `
             "7": { name: "constant.language.merge.yaml" },
           },
           match:
-            /(?:(null|Null|NULL|~)|(y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|((?:[\\-\\+]?0b[0-1_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[0-9a-fA-F_]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+))|((?:[\\-\\+]?(?:[0-9][0-9_]*)?\\.[0-9\\.]*(?:[eE][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN)))|((?:\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[ \\t]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[ \\t]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?))|(=)|(<<))(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
+            /(?:(null|Null|NULL|~)|(y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|((?:[\\-\\+]?0b[0-1_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[0-9a-fA-F_]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+))|((?:[\\-\\+]?(?:[0-9][0-9_]*)?\\.[0-9\\.]*(?:[eE][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN)))|((?:\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[ \\t]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[ \\t]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?))|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\[\\]\\{\\}\\,]|\\p{space}*[\\[\\]\\{\\}\\,])/dgv,
         },
       ],
     },
@@ -312,7 +310,7 @@ exports[`precompile 1`] = `
         {
           begin:
             /[^\\p{space}\\-\\?\\:\\,\\[\\]\\{\\}\\#\\&\\*\\!\\|\\>'"\\%\\@\\\`]|[\\?\\:\\-]\\P{space}/dgv,
-          end: /(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           name: "string.unquoted.plain.out.yaml",
         },
       ],
@@ -330,7 +328,7 @@ exports[`precompile 1`] = `
             "7": { name: "constant.language.merge.yaml" },
           },
           match:
-            /(?:(null|Null|NULL|~)|(y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|((?:[\\-\\+]?0b[0-1_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[0-9a-fA-F_]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+))|((?:[\\-\\+]?(?:[0-9][0-9_]*)?\\.[0-9\\.]*(?:[eE][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN)))|((?:\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[ \\t]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[ \\t]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?))|(=)|(<<))(?=\\p{space}*(?=$|\\n)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=$|\\n)))/dgv,
+            /(?:(null|Null|NULL|~)|(y|Y|yes|Yes|YES|n|N|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|((?:[\\-\\+]?0b[0-1_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[0-9a-fA-F_]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+))|((?:[\\-\\+]?(?:[0-9][0-9_]*)?\\.[0-9\\.]*(?:[eE][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN)))|((?:\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[ \\t]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[ \\t]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?))|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
         },
       ],
     },
@@ -395,7 +393,7 @@ exports[`precompile 1`] = `
         },
         {
           match:
-            /(?:!<(?:%[0-9A-Fa-f]{2}|[0-9A-Za-z\\-\\#\\;\\/\\?\\:\\@\\&\\=\\+\\$\\,_\\.\\!\\~\\*'\\(\\)\\[\\]])+>|!(?:[0-9A-Za-z\\-]*!)?(?:%[0-9A-Fa-f]{2}|[0-9A-Za-z\\-\\#\\;\\/\\?\\:\\@\\&\\=\\+\\$_\\.\\~\\*'\\(\\)])+|!)(?= |\\t|(?=$|\\n))/dgvy,
+            /(?:!<(?:%[0-9A-Fa-f]{2}|[0-9A-Za-z\\-\\#\\;\\/\\?\\:\\@\\&\\=\\+\\$\\,_\\.\\!\\~\\*'\\(\\)\\[\\]])+>|!(?:[0-9A-Za-z\\-]*!)?(?:%[0-9A-Fa-f]{2}|[0-9A-Za-z\\-\\#\\;\\/\\?\\:\\@\\&\\=\\+\\$_\\.\\~\\*'\\(\\)])+|!)(?= |\\t|(?=\\n?$))/dgvy,
           name: "storage.type.tag-handle.yaml",
         },
         { match: /\\P{space}+/dgv, name: "invalid.illegal.tag-handle.yaml" },
