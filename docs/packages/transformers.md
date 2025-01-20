@@ -41,6 +41,44 @@ const html = await codeToHtml(code, {
 
 Transformers only applies classes and does not come with styles; you can provide your own CSS rules to style them properly.
 
+## Matching Algorithm
+
+We found that the algorithm for matching comments in v1 is sometime conterintuitive, where we are trying to fix it in a progressive way. Since v1.29.0, we introduced a new `matchAlgorithm` option to most of the transformer for you to toggle between different matching algorithms. Right now, the default is `v1` which is the old algorithm, and `v3` is the new algorithm. When Shiki v3 is landed, the default will be `v3`.
+
+```ts
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  theme: 'nord',
+  transformers: [
+    transformerNotationDiff({
+      matchAlgorithm: 'v3', // [!code hl]
+    }),
+  ],
+})
+```
+
+### `matchAlgorithm: 'v1'`
+
+The matching algorithm mostly affects the single-line comment matching, in `v1`, it will count the comment line as the first line, while in `v3`, it will count start from the comment line:
+
+```ts
+// [\!code highlight:3]
+console.log('highlighted') // [!code hl]
+console.log('highlighted') // [!code hl]
+console.log('not highlighted')
+```
+
+### `matchAlgorithm: 'v3'`
+
+In `v3`, the matching algorithm will start counting from the line below the comment:
+
+```ts
+// [\!code highlight:2]
+console.log('highlighted') // [!code hl]
+console.log('highlighted') // [!code hl]
+console.log('not highlighted')
+```
+
 ## Transformers
 
 ### `transformerNotationDiff`

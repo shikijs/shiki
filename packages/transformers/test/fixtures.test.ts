@@ -61,7 +61,10 @@ body { margin: 0; }
 suite(
   'diff',
   import.meta.glob('./fixtures/diff/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerNotationDiff(), transformerRemoveLineBreak()],
+  [
+    transformerNotationDiff(),
+    transformerRemoveLineBreak(),
+  ],
   code => `${code}
 <style>
 body { margin: 0; }
@@ -79,7 +82,10 @@ body { margin: 0; }
 suite(
   'focus',
   import.meta.glob('./fixtures/focus/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerNotationFocus(), transformerRemoveLineBreak()],
+  [
+    transformerNotationFocus(),
+    transformerRemoveLineBreak(),
+  ],
   code => `${code}
 <style>
 body { margin: 0; }
@@ -92,7 +98,10 @@ body { margin: 0; }
 suite(
   'highlight',
   import.meta.glob('./fixtures/highlight/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerNotationHighlight(), transformerRemoveLineBreak()],
+  [
+    transformerNotationHighlight(),
+    transformerRemoveLineBreak(),
+  ],
   code => `${code}
 <style>
 body { margin: 0; }
@@ -105,7 +114,10 @@ body { margin: 0; }
 suite(
   'highlight-word',
   import.meta.glob('./fixtures/highlight-word/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerNotationWordHighlight(), transformerRemoveLineBreak()],
+  [
+    transformerNotationWordHighlight(),
+    transformerRemoveLineBreak(),
+  ],
   code => `${code}
 <style>
 body { margin: 0; }
@@ -118,7 +130,10 @@ body { margin: 0; }
 suite(
   'error-level',
   import.meta.glob('./fixtures/error-level/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerNotationErrorLevel(), transformerRemoveLineBreak()],
+  [
+    transformerNotationErrorLevel(),
+    transformerRemoveLineBreak(),
+  ],
   code => `${code}
 <style>
 body { margin: 0; }
@@ -132,7 +147,9 @@ body { margin: 0; }
 suite(
   'whitespace:all',
   import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerRenderWhitespace({ position: 'all' })],
+  [
+    transformerRenderWhitespace({ position: 'all' }),
+  ],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.all',
 )
@@ -140,7 +157,9 @@ suite(
 suite(
   'whitespace:boundary',
   import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerRenderWhitespace({ position: 'boundary' })],
+  [
+    transformerRenderWhitespace({ position: 'boundary' }),
+  ],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.boundary',
 )
@@ -148,7 +167,9 @@ suite(
 suite(
   'whitespace:trailing',
   import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
-  [transformerRenderWhitespace({ position: 'trailing' })],
+  [
+    transformerRenderWhitespace({ position: 'trailing' }),
+  ],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.trailing',
 )
@@ -199,26 +220,26 @@ body { margin: 0; }
 </style>`
 
 suite(
-  'compare-legacy',
-  import.meta.glob('./fixtures/legacy/legacy*.*', { query: '?raw', import: 'default', eager: true }),
+  'compare-v1',
+  import.meta.glob('./fixtures/match-algorithm/v1.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationFocus({ legacy: true }),
-    transformerNotationHighlight({ legacy: true }),
-    transformerNotationErrorLevel({ legacy: true }),
-    transformerNotationWordHighlight({ legacy: true }),
+    transformerNotationFocus({ matchAlgorithm: 'v1' }),
+    transformerNotationHighlight({ matchAlgorithm: 'v1' }),
+    transformerNotationErrorLevel({ matchAlgorithm: 'v1' }),
+    transformerNotationWordHighlight({ matchAlgorithm: 'v1' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}${CSS_COMPARE}`,
 )
 
 suite(
-  'compare-new',
-  import.meta.glob('./fixtures/legacy/new*.*', { query: '?raw', import: 'default', eager: true }),
+  'compare-v3',
+  import.meta.glob('./fixtures/match-algorithm/v3.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationFocus({ legacy: false }),
-    transformerNotationHighlight({ legacy: false }),
-    transformerNotationErrorLevel({ legacy: false }),
-    transformerNotationWordHighlight({ legacy: false }),
+    transformerNotationFocus({ matchAlgorithm: 'v3' }),
+    transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+    transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
+    transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}${CSS_COMPARE}`,

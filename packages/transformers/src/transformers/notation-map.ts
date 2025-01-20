@@ -1,14 +1,13 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { createCommentNotationTransformer } from '../shared/notation-transformer'
 
-export interface TransformerNotationMapOptions {
+export interface TransformerNotationMapOptions extends MatchAlgorithmOptions {
   classMap?: Record<string, string | string[]>
   /**
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
-
-  legacy?: boolean
 }
 
 function escapeRegExp(str: string): string {
@@ -22,7 +21,6 @@ export function transformerNotationMap(
   const {
     classMap = {},
     classActivePre = undefined,
-    legacy,
   } = options
 
   return createCommentNotationTransformer(
@@ -39,6 +37,6 @@ export function transformerNotationMap(
         this.addClassToHast(this.pre, classActivePre)
       return true
     },
-    legacy,
+    options.matchAlgorithm,
   )
 }

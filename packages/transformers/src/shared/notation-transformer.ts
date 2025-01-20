@@ -1,6 +1,18 @@
 import type { Element, Text } from 'hast'
 import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
-import { legacyClearEndCommentPrefix, parseComments, type ParsedComments } from './parse-comments'
+import { parseComments, type ParsedComments, v1ClearEndCommentPrefix } from './parse-comments'
+
+export type MatchAlgorithm = 'v1' | 'v3'
+
+export interface MatchAlgorithmOptions {
+  /**
+   * Match algorithm to use
+   *
+   * @see https://shiki.style/packages/transformers#matching-algorithm
+   * @default 'v1'
+   */
+  matchAlgorithm?: MatchAlgorithm
+}
 
 export function createCommentNotationTransformer(
   name: string,
@@ -13,7 +25,7 @@ export function createCommentNotationTransformer(
     lines: Element[],
     index: number
   ) => boolean,
-  legacy = false,
+  matchAlgorithm: MatchAlgorithm = 'v1',
 ): ShikiTransformer {
   return {
     name,
@@ -26,7 +38,7 @@ export function createCommentNotationTransformer(
         _shiki_notation?: ParsedComments
       }
 
-      data._shiki_notation ??= parseComments(lines, ['jsx', 'tsx'].includes(this.options.lang), legacy)
+      data._shiki_notation ??= parseComments(lines, ['jsx', 'tsx'].includes(this.options.lang), matchAlgorithm)
       const parsed = data._shiki_notation
 
       for (const comment of parsed) {
@@ -35,7 +47,7 @@ export function createCommentNotationTransformer(
 
         const isLineCommentOnly = comment.line.children.length === (comment.isJsxStyle ? 3 : 1)
         let lineIdx = lines.indexOf(comment.line)
-        if (isLineCommentOnly && !legacy)
+        if (isLineCommentOnly && matchAlgorithm !== 'v1')
           lineIdx++
 
         let replaced = false
@@ -51,8 +63,8 @@ export function createCommentNotationTransformer(
         if (!replaced)
           continue
 
-        if (legacy) {
-          comment.info[1] = legacyClearEndCommentPrefix(comment.info[1])
+        if (matchAlgorithm === 'v1') {
+          comment.info[1] = v1ClearEndCommentPrefix(comment.info[1])
         }
 
         const isEmpty = comment.info[1].trim().length === 0

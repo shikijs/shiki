@@ -1,8 +1,9 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { highlightWordInLine } from '../shared/highlight-word'
 import { createCommentNotationTransformer } from '../shared/notation-transformer'
 
-export interface TransformerNotationWordHighlightOptions {
+export interface TransformerNotationWordHighlightOptions extends MatchAlgorithmOptions {
   /**
    * Class for highlighted words
    */
@@ -11,8 +12,6 @@ export interface TransformerNotationWordHighlightOptions {
    * Class added to the root element when the code has highlighted words
    */
   classActivePre?: string
-
-  legacy?: boolean
 }
 
 export function transformerNotationWordHighlight(
@@ -21,7 +20,6 @@ export function transformerNotationWordHighlight(
   const {
     classActiveWord = 'highlighted-word',
     classActivePre = undefined,
-    legacy,
   } = options
 
   return createCommentNotationTransformer(
@@ -40,6 +38,6 @@ export function transformerNotationWordHighlight(
         this.addClassToHast(this.pre, classActivePre)
       return true
     },
-    legacy,
+    options.matchAlgorithm,
   )
 }

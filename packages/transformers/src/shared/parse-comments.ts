@@ -1,4 +1,5 @@
 import type { Element, ElementContent } from 'hast'
+import type { MatchAlgorithm } from './notation-transformer'
 
 export type ParsedComments = {
   line: Element
@@ -24,15 +25,19 @@ const matchers: [re: RegExp, endOfLine: boolean][] = [
 /**
  * @param lines line tokens
  * @param jsx enable JSX parsing
- * @param legacy support legacy behaviours, force to parse all tokens.
+ * @param matchAlgorithm matching algorithm
  */
-export function parseComments(lines: Element[], jsx: boolean, legacy = false): ParsedComments {
+export function parseComments(
+  lines: Element[],
+  jsx: boolean,
+  matchAlgorithm: MatchAlgorithm,
+): ParsedComments {
   const out: ParsedComments = []
 
   for (const line of lines) {
     const elements = line.children
     let start = elements.length - 1
-    if (legacy)
+    if (matchAlgorithm === 'v1')
       start = 0
     else if (jsx)
       // one step further for JSX as comment is inside curly brackets
@@ -114,8 +119,10 @@ function matchToken(text: string, isLast: boolean): [prefix: string, content: st
 
 /**
  * Remove empty comment prefixes at line end, e.g. `// `
+ *
+ * For matchAlgorithm v1
  */
-export function legacyClearEndCommentPrefix(text: string): string {
+export function v1ClearEndCommentPrefix(text: string): string {
   const regex = /(?:\/\/|["'#]|;{1,2}|%{1,2}|--)(.*)$/
   const result = regex.exec(text)
 

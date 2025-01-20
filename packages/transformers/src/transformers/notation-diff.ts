@@ -1,7 +1,8 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { transformerNotationMap } from './notation-map'
 
-export interface TransformerNotationDiffOptions {
+export interface TransformerNotationDiffOptions extends MatchAlgorithmOptions {
   /**
    * Class for added lines
    */
@@ -14,8 +15,6 @@ export interface TransformerNotationDiffOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
-
-  legacy?: boolean
 }
 
 /**
@@ -28,7 +27,6 @@ export function transformerNotationDiff(
     classLineAdd = 'diff add',
     classLineRemove = 'diff remove',
     classActivePre = 'has-diff',
-    legacy,
   } = options
 
   return transformerNotationMap(
@@ -37,8 +35,8 @@ export function transformerNotationDiff(
         '++': classLineAdd,
         '--': classLineRemove,
       },
-      legacy,
       classActivePre,
+      matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-diff',
   )
