@@ -1,4 +1,4 @@
-import { getSingletonHighlighter } from 'shiki'
+import { createOnigurumaEngine, getSingletonHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
 import { getSingletonHighlighterCore } from '../src/core'
 import js from '../src/langs/javascript.mjs'
@@ -9,7 +9,7 @@ it('getSingletonHighlighterCore', async () => {
   const shiki1 = await getSingletonHighlighterCore({
     themes: [nord],
     langs: [js as any],
-    loadWasm: import('@shikijs/core/wasm-inlined'),
+    engine: createOnigurumaEngine(import('@shikijs/engine-oniguruma/wasm-inlined')),
   })
 
   expect(shiki1.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))

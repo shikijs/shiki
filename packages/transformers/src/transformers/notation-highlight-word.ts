@@ -1,4 +1,4 @@
-import type { ShikiTransformer } from 'shiki'
+import type { ShikiTransformer } from '@shikijs/types'
 import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { highlightWordInLine } from '../shared/highlight-word'
 import { createCommentNotationTransformer } from '../shared/notation-transformer'

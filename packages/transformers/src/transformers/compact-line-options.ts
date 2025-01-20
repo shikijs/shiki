@@ -1,4 +1,4 @@
-import type { ShikiTransformer } from 'shiki'
+import type { ShikiTransformer } from '@shikijs/types'
 
 export interface TransformerCompactLineOption {
   /**
