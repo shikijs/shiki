@@ -3,5 +3,5 @@ publish = "docs/.vitepress/dist"
 command = "pnpm run build && pnpm run docs:build"
 
 [build.environment]
-NODE_VERSION = "20"
+NODE_VERSION = "22"
 NODE_OPTIONS = "--max_old_space_size=8192"
