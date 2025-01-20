@@ -251,12 +251,12 @@ function _tokenizeWithTheme(
             content: tokenWithScopesText,
             scopes: options.includeExplanation === 'scopeName'
               ? explainThemeScopesNameOnly(
-                tokenWithScopes.scopes,
-              )
+                  tokenWithScopes.scopes,
+                )
               : explainThemeScopesFull(
-                themeSettingsSelectors,
-                tokenWithScopes.scopes,
-              ),
+                  themeSettingsSelectors,
+                  tokenWithScopes.scopes,
+                ),
           })
 
           tokensWithScopesIndex! += 1

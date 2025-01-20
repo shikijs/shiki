@@ -86,24 +86,7 @@ function rehypeShikiFromHighlighter(
 
   return (tree) => {
     // use this queue if lazy is enabled
-    const languageQueue: string[] = []
-    const queue: (() => void)[] = []
-
-    function getLanguage(lang: string | undefined): string | undefined {
-      if (!lang)
-        return defaultLanguage
-
-      if (highlighter.getLoadedLanguages().includes(lang) || isSpecialLang(lang))
-        return lang
-
-      if (lazy) {
-        languageQueue.push(lang)
-        return lang
-      }
-
-      if (fallbackLanguage)
-        return fallbackLanguage
-    }
+    const queue: Promise<void>[] = []
 
     visit(tree, 'element', (node, index, parent) => {
       let handler: RehypeShikiHandler | undefined
@@ -127,7 +110,23 @@ function rehypeShikiFromHighlighter(
       if (!res)
         return
 
-      const lang = getLanguage(res.lang)
+      let lang: string | undefined
+      let lazyLoad = false
+
+      if (!res.lang) {
+        lang = defaultLanguage
+      }
+      else if (highlighter.getLoadedLanguages().includes(res.lang) || isSpecialLang(res.lang)) {
+        lang = res.lang
+      }
+      else if (lazy) {
+        lazyLoad = true
+        lang = res.lang
+      }
+      else if (fallbackLanguage) {
+        lang = fallbackLanguage
+      }
+
       if (!lang)
         return
 
@@ -145,24 +144,26 @@ function rehypeShikiFromHighlighter(
           }
         }
 
-        parent.children.splice(index, 1, ...fragment.children)
+        parent.children[index] = fragment as any
       }
 
-      if (lazy)
-        queue.push(processNode)
-      else
+      if (lazyLoad) {
+        queue.push(highlighter.loadLanguage(lang).then(() => processNode()))
+      }
+      else {
         processNode()
+      }
 
       // don't visit processed nodes
       return 'skip'
     })
 
-    if (lazy) {
-      return highlighter
-        .loadLanguage(...languageQueue)
-        .then(() => {
-          queue.forEach(fn => fn())
-        })
+    if (queue.length > 0) {
+      async function run(): Promise<void> {
+        await Promise.all(queue)
+      }
+
+      return run()
     }
   }
 }

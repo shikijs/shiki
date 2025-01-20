@@ -1,0 +1,51 @@
+{
+  "name": "shiki-codegen",
+  "type": "module",
+  "version": "1.28.0",
+  "description": "Codegen for fine-grained Shiki bundles.",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/shikijs/shiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikijs/shiki.git",
+    "directory": "packages/codegen"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
+  "keywords": [
+    "shiki",
+    "codegen"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.mts",
+      "default": "./dist/cli.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "shiki-codegen": "bin.mjs"
+  },
+  "files": [
+    "bin.mjs",
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "cac": "catalog:",
+    "prettier": "catalog:",
+    "shiki": "workspace:*"
+  }
+}

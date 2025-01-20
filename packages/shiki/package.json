@@ -1,7 +1,7 @@
 {
   "name": "shiki",
   "type": "module",
-  "version": "1.22.2",
+  "version": "1.28.0",
   "description": "A beautiful Syntax Highlighter.",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -124,12 +124,14 @@
     "@shikijs/core": "workspace:*",
     "@shikijs/engine-javascript": "workspace:*",
     "@shikijs/engine-oniguruma": "workspace:*",
+    "@shikijs/langs": "workspace:*",
+    "@shikijs/themes": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:"
   },
   "devDependencies": {
-    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-copy": "catalog:",
     "tm-grammars": "catalog:",
     "tm-themes": "catalog:",
     "vscode-oniguruma": "catalog:"

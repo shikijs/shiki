@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import getHighlighter from '../src'
 
 describe('fixtures', () => {
-  const files = import.meta.glob('./input/*.*', { as: 'raw', eager: true })
+  const files = import.meta.glob<string>('./input/*.*', { query: '?raw', import: 'default', eager: true })
   const filter = process.env.FILTER
   Object
     .entries(files)
@@ -34,7 +34,7 @@ describe('fixtures', () => {
           ],
         })
 
-        expect(code)
+        await expect(code)
           .toMatchFileSnapshot(path.replace('input', 'output').replace(/\.\w+$/, '.html'))
 
         expect(code).toBe(code2)

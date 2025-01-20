@@ -1,30 +1,19 @@
-import { existsSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
-import { wasmPlugin } from './packages/core/rollup.config.mjs'
-
-const localOnigurumaToJs = fileURLToPath(new URL('../oniguruma-to-js/src/index.ts', import.meta.url))
+import { wasmPlugin } from './packages/engine-oniguruma/rollup.config.mjs'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      // For local developement
-      ...existsSync(localOnigurumaToJs)
-        ? {
-            'oniguruma-to-js': localOnigurumaToJs,
-          }
-        : {},
-    },
-  },
   plugins: [
     wasmPlugin(),
     tsconfigPaths(),
   ],
   test: {
+    testTimeout: 30_000,
+    reporters: 'dot',
     exclude: [
       '**/vendor/**',
       '**/node_modules/**',
+      '**/tm-grammars-themes/**',
     ],
     server: {
       deps: {

@@ -78,9 +78,9 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
       }
       else {
         u0 = ((u0 & 7) << 18)
-        | (u1 << 12)
-        | (u2 << 6)
-        | (heapOrArray[idx++] & 63)
+          | (u1 << 12)
+          | (u2 << 6)
+          | (heapOrArray[idx++] & 63)
       }
       if (u0 < 65536) {
         str += String.fromCharCode(u0)

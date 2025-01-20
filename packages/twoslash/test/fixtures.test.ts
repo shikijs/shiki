@@ -3,7 +3,7 @@ import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
 import { codeToHast, hastToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 
-const files = import.meta.glob('./fixtures/*.*', { as: 'raw', eager: true })
+const files = import.meta.glob<string>('./fixtures/*.*', { query: '?raw', import: 'default', eager: true })
 
 describe('fixtures', () => {
   for (const file in files) {
@@ -30,12 +30,12 @@ describe('fixtures', () => {
 
       const html = hastToHtml(hast)
 
-      expect
+      await expect
         .soft(JSON.stringify(hast, null, 2))
         .toMatchFileSnapshot(`./out/${name}.json`)
 
       const style = '<link rel="stylesheet" href="../../style-rich.css" />'
-      expect
+      await expect
         .soft(style + html)
         .toMatchFileSnapshot(`./out/${name}.html`)
     })

@@ -28,7 +28,7 @@ const code = await codeToHtml('foo\bar', {
 })
 ```
 
-We also provide some common transformers for you to use, see [`@shikijs/transforms`](/packages/transformers) and [`@shikijs/colorized-brackets](/packages/colorized-brackets) for more details.
+We also provide some common transformers for you to use, see [`@shikijs/transformers`](/packages/transformers) and [`@shikijs/colorized-brackets](/packages/colorized-brackets) for more details.
 
 ## Transformer Hooks
 

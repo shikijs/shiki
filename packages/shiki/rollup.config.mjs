@@ -27,15 +27,10 @@ const entries = [
 ]
 
 const external = [
-  '@shikijs/types',
-  '@shikijs/core',
-  '@shikijs/core/wasm-inlined',
-  '@shikijs/core/types',
-  '@shikijs/engine-javascript',
-  '@shikijs/engine-oniguruma',
-  '@shikijs/vscode-textmate',
   'shiki/wasm',
-  /[/\\]src[/\\](langs|themes)[/\\]/g,
+  '@shikijs/types',
+  /^@shikijs[/\\].*/g,
+  /[/\\](langs|themes)[/\\]/g,
 ]
 
 const plugins = [

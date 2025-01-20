@@ -60,7 +60,7 @@ const a = 123
 \`\`\`
     `.trim())
 
-    expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/works.html')
+    await expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/works.html')
   })
 
   it('with highlight lines', async () => {
@@ -100,7 +100,7 @@ const v = 123
 \`\`\`
     `.trim())
 
-    expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/highlight-lines.html')
+    await expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/highlight-lines.html')
   })
 
   it('with disable triggers', async () => {
@@ -140,6 +140,6 @@ const v = 123
 \`\`\`
     `.trim())
 
-    expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/highlight-disable-triggers.html')
+    await expect(styleTag + html).toMatchFileSnapshot('./out/markdown-it/highlight-disable-triggers.html')
   })
 })

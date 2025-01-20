@@ -23,7 +23,7 @@ const count = ref(0)
 </template>
 `
 
-  expect(`${await codeToHtml(code, { lang: 'vue', theme: 'vitesse-dark' })}<style>html{color-scheme:dark}</style>`)
+  await expect(`${await codeToHtml(code, { lang: 'vue', theme: 'vitesse-dark' })}<style>html{color-scheme:dark}</style>`)
     .toMatchFileSnapshot('./out/vue-injections.html')
 })
 
@@ -40,13 +40,13 @@ it('injections-side-effects vue', async () => {
   const code = `<h1 v-if="count == 1 ? true : 'str'.toUpperCase()">{{ count * 2 }}</h1>`
 
   const before = highlighter.codeToHtml(code, { lang: 'html', theme: 'vitesse-light' })
-  expect(before)
+  await expect(before)
     .toMatchFileSnapshot('./out/injections-side-effects-vue-before.html')
 
   await highlighter.loadLanguage(vue)
 
   const after = highlighter.codeToHtml(code, { lang: 'vue', theme: 'vitesse-light' })
-  expect(after)
+  await expect(after)
     .toMatchFileSnapshot('./out/injections-side-effects-vue-after.html')
 
   expect(before).not.toEqual(after)
@@ -81,10 +81,10 @@ it('injections-side-effects angular-html', async () => {
 `
 
   const before = highlighter.codeToHtml(code, { lang: 'html', theme: 'vitesse-light' })
-  expect(before)
+  await expect(before)
     .toMatchFileSnapshot('./out/injections-side-effects-angular-before.html')
 
-  await expect(highlighter.getLoadedLanguages())
+  expect(highlighter.getLoadedLanguages())
     .toMatchInlineSnapshot(`
       [
         "javascript",
@@ -163,13 +163,13 @@ export class CartButtonComponent {
 `
 
   const before = highlighter.codeToHtml(code, { lang: 'ts', theme: 'vitesse-light' })
-  expect(before)
+  await expect(before)
     .toMatchFileSnapshot('./out/injections-side-effects-angular-ts-before.html')
 
   await highlighter.loadLanguage(angularTs)
 
   const after = highlighter.codeToHtml(code, { lang: 'angular-ts', theme: 'vitesse-light' })
-  expect(after)
+  await expect(after)
     .toMatchFileSnapshot('./out/injections-side-effects-angular-ts-after.html')
 
   expect(before).not.toEqual(after)

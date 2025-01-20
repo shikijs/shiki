@@ -69,7 +69,7 @@ describe('codeToHtml', () => {
 <button onclick="document.body.classList.toggle('dark')">Toggle theme</button>
 `
 
-    expect(snippet + code)
+    await expect(snippet + code)
       .toMatchFileSnapshot('./out/dual-themes.html')
   })
 
@@ -117,7 +117,7 @@ function toggleTheme() {
 <button onclick="toggleTheme()">Toggle theme</button>
 `
 
-    expect(snippet + code)
+    await expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes.html')
   })
 
@@ -168,7 +168,7 @@ function toggleTheme() {
 <button onclick="toggleTheme()">Toggle theme</button>
 `
 
-    expect(snippet + code)
+    await expect(snippet + code)
       .toMatchFileSnapshot('./out/multiple-themes-no-default.html')
   })
 
@@ -320,7 +320,7 @@ describe('codeToTokensWithThemes', () => {
 
 describe('errors', () => {
   it('throws on empty theme', async () => {
-    expect(() => codeToHtml('console.log("hello")', {
+    await expect(() => codeToHtml('console.log("hello")', {
       lang: 'js',
       themes: {},
     }))
@@ -329,7 +329,7 @@ describe('errors', () => {
   })
 
   it('throws on missing default color', async () => {
-    expect(() => codeToHtml('console.log("hello")', {
+    await expect(() => codeToHtml('console.log("hello")', {
       lang: 'js',
       themes: {
         dark: 'nord',
@@ -338,7 +338,7 @@ describe('errors', () => {
       .rejects
       .toThrowErrorMatchingInlineSnapshot(`[ShikiError: \`themes\` option must contain the defaultColor key \`light\`]`)
 
-    expect(() => codeToHtml('console.log("hello")', {
+    await expect(() => codeToHtml('console.log("hello")', {
       lang: 'js',
       themes: {
         light: 'nord',

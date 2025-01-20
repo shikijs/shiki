@@ -5,7 +5,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import fs from 'fs-extra'
 import { defineConfig } from 'rollup'
 import dts from 'rollup-plugin-dts'
-import ts from 'rollup-plugin-typescript2'
+import esbuild from 'rollup-plugin-esbuild'
 
 const entries = [
   'src/index.ts',
@@ -13,9 +13,7 @@ const entries = [
 ]
 
 const plugins = [
-  ts({
-    check: false,
-  }),
+  esbuild(),
   nodeResolve(),
   commonjs(),
   json({

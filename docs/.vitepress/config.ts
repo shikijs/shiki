@@ -6,6 +6,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
+import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
@@ -14,6 +15,8 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Installation & Usage', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
+  { text: 'Shorthands', link: '/guide/shorthands' },
+  { text: 'Best Performance Practices', link: '/guide/best-performance' },
   { text: 'Decorations', link: '/guide/decorations' },
   { text: 'Transformers', link: '/guide/transformers' },
   { text: 'Theme Colors Manipulation', link: '/guide/theme-colors' },
@@ -43,6 +46,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
+  { text: 'Codegen', link: '/packages/codegen' },
   { text: 'CLI', link: '/packages/cli' },
 ]
 
@@ -125,6 +129,7 @@ export default withMermaid(defineConfig({
             // Remove shiki_core namespace
             .replace(/_shikijs_core\w*\./g, '')
         },
+        typesCache: createFileSystemTypesCache(),
       }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),

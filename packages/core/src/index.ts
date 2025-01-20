@@ -30,11 +30,11 @@ export * from '@shikijs/types'
 // Deprecated
 export {
   /**
-   * @deprecated Use `EncodedTokenMetadata` from `@shikijs/vscode-textmate` instead.
-   */
-  EncodedTokenMetadata as StackElementMetadata,
-  /**
    * @deprecated Import `FontStyle` from `@shikijs/vscode-textmate` instead.
    */
   FontStyle,
+  /**
+   * @deprecated Use `EncodedTokenMetadata` from `@shikijs/vscode-textmate` instead.
+   */
+  EncodedTokenMetadata as StackElementMetadata,
 } from '@shikijs/vscode-textmate'

@@ -38,7 +38,7 @@ function suite(
         if (replace)
           code = replace(code)
 
-        expect(code)
+        await expect(code)
           .toMatchFileSnapshot(`${path}${outputSuffix}.output.html`)
       })
     }
@@ -60,7 +60,7 @@ body { margin: 0; }
 
 suite(
   'diff',
-  import.meta.glob('./fixtures/diff/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/diff/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerNotationDiff(), transformerRemoveLineBreak()],
   code => `${code}
 <style>
@@ -78,7 +78,7 @@ body { margin: 0; }
 
 suite(
   'focus',
-  import.meta.glob('./fixtures/focus/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/focus/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerNotationFocus(), transformerRemoveLineBreak()],
   code => `${code}
 <style>
@@ -91,7 +91,7 @@ body { margin: 0; }
 
 suite(
   'highlight',
-  import.meta.glob('./fixtures/highlight/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/highlight/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerNotationHighlight(), transformerRemoveLineBreak()],
   code => `${code}
 <style>
@@ -104,7 +104,7 @@ body { margin: 0; }
 
 suite(
   'highlight-word',
-  import.meta.glob('./fixtures/highlight-word/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/highlight-word/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerNotationWordHighlight(), transformerRemoveLineBreak()],
   code => `${code}
 <style>
@@ -117,7 +117,7 @@ body { margin: 0; }
 
 suite(
   'error-level',
-  import.meta.glob('./fixtures/error-level/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/error-level/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerNotationErrorLevel(), transformerRemoveLineBreak()],
   code => `${code}
 <style>
@@ -131,7 +131,7 @@ body { margin: 0; }
 
 suite(
   'whitespace:all',
-  import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerRenderWhitespace({ position: 'all' })],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.all',
@@ -139,7 +139,7 @@ suite(
 
 suite(
   'whitespace:boundary',
-  import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerRenderWhitespace({ position: 'boundary' })],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.boundary',
@@ -147,7 +147,7 @@ suite(
 
 suite(
   'whitespace:trailing',
-  import.meta.glob('./fixtures/whitespace/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
   [transformerRenderWhitespace({ position: 'trailing' })],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.trailing',
@@ -155,7 +155,7 @@ suite(
 
 suite(
   'all',
-  import.meta.glob('./fixtures/all/*.*', { as: 'raw', eager: true }),
+  import.meta.glob('./fixtures/all/*.*', { query: '?raw', import: 'default', eager: true }),
   [
     transformerNotationDiff(),
     transformerNotationFocus(),

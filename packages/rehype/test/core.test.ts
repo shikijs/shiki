@@ -35,7 +35,7 @@ it('run', async () => {
     .use(rehypeStringify)
     .processSync(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
 it('run with lazy', async () => {
@@ -60,7 +60,7 @@ it('run with lazy', async () => {
     .use(rehypeStringify)
     .process(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
 it('run with rehype-raw', async () => {
@@ -97,5 +97,5 @@ it('run with rehype-raw', async () => {
     .use(rehypeStringify)
     .processSync(await fs.readFile(new URL('./fixtures/a.md', import.meta.url)))
 
-  expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })

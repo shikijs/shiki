@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createJavaScriptRegexEngine } from '../../engine-javascript/src'
+import { createJavaScriptRegexEngine } from '../../engine-javascript/src/engine-compile'
 import { createHighlighterCoreSync } from '../src/core'
 import js from '../src/langs/javascript.mjs'
 import nord from '../src/themes/nord.mjs'
@@ -8,7 +8,7 @@ describe('should', () => {
   const engine = createJavaScriptRegexEngine()
 
   it('works', () => {
-    const shiki = createHighlighterCoreSync({
+    using shiki = createHighlighterCoreSync({
       themes: [nord],
       langs: [js],
       engine,
@@ -19,7 +19,7 @@ describe('should', () => {
   })
 
   it('dynamic load sync theme and lang', async () => {
-    const shiki = createHighlighterCoreSync({
+    using shiki = createHighlighterCoreSync({
       themes: [nord],
       langs: [
         js,
