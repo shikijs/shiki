@@ -5,7 +5,6 @@ export default defineBuildConfig({
     'src/index.ts',
     'src/types.ts',
     'src/textmate.ts',
-    'src/wasm-inlined.ts',
   ],
   declaration: true,
   rollup: {

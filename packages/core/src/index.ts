@@ -2,12 +2,8 @@
 export * from './constructors/bundle-factory'
 // Constructors
 export * from './constructors/highlighter'
-export { createShikiInternal, getShikiInternal } from './constructors/internal'
+export { createShikiInternal } from './constructors/internal'
 export { createShikiInternalSync } from './constructors/internal-sync'
-
-// Engines
-export { createJavaScriptRegexEngine, defaultJavaScriptRegexConstructor } from './engines/javascript'
-export { createOnigurumaEngine, createWasmOnigEngine, loadWasm } from './engines/oniguruma'
 
 // Low-level Highlighting
 export { codeToHast, tokensToHast } from './highlight/code-to-hast'
@@ -26,15 +22,3 @@ export { enableDeprecationWarnings, warnDeprecated } from './warn'
 
 // Types
 export * from '@shikijs/types'
-
-// Deprecated
-export {
-  /**
-   * @deprecated Import `FontStyle` from `@shikijs/vscode-textmate` instead.
-   */
-  FontStyle,
-  /**
-   * @deprecated Use `EncodedTokenMetadata` from `@shikijs/vscode-textmate` instead.
-   */
-  EncodedTokenMetadata as StackElementMetadata,
-} from '@shikijs/vscode-textmate'

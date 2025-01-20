@@ -17,10 +17,6 @@ export interface GrammarState {
    */
   getInternalStack: (theme?: string) => StateStack | undefined
   getScopes: (theme?: string) => string[] | undefined
-  /**
-   * @deprecated Use `getScopes` instead.
-   */
-  get scopes(): string[]
 }
 
 export interface CodeToTokensBaseOptions<Languages extends string = string, Themes extends string = string> extends TokenizeWithThemeOptions {
@@ -154,7 +150,7 @@ export interface TokenStyles {
    * When specified, `color` and `fontStyle` will be ignored.
    * Prefer use object style for merging with other styles.
    */
-  htmlStyle?: string | Record<string, string>
+  htmlStyle?: Record<string, string>
   /**
    * Extra HTML attributes for the token.
    */

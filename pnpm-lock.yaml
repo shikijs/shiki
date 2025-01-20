@@ -186,9 +186,6 @@ catalogs:
     rollup-plugin-esbuild:
       specifier: ^6.1.1
       version: 6.1.1
-    shiki-legacy:
-      specifier: npm:shiki@^0.14.7
-      version: 0.14.7
     simple-git-hooks:
       specifier: ^2.11.1
       version: 2.11.1
@@ -519,42 +516,8 @@ importers:
         specifier: workspace:*
         version: link:../shiki
 
-  packages/compat:
-    dependencies:
-      '@shikijs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@shikijs/langs':
-        specifier: workspace:*
-        version: link:../langs
-      '@shikijs/themes':
-        specifier: workspace:*
-        version: link:../themes
-      '@shikijs/transformers':
-        specifier: workspace:*
-        version: link:../transformers
-      '@shikijs/types':
-        specifier: workspace:*
-        version: link:../types
-      '@shikijs/vscode-textmate':
-        specifier: 'catalog:'
-        version: 10.0.1
-      shiki:
-        specifier: workspace:*
-        version: link:../shiki
-    devDependencies:
-      shiki-legacy:
-        specifier: 'catalog:'
-        version: shiki@0.14.7
-
   packages/core:
     dependencies:
-      '@shikijs/engine-javascript':
-        specifier: workspace:*
-        version: link:../engine-javascript
-      '@shikijs/engine-oniguruma':
-        specifier: workspace:*
-        version: link:../engine-oniguruma
       '@shikijs/types':
         specifier: workspace:*
         version: link:../types
@@ -4655,9 +4618,6 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shiki@0.14.7:
-    resolution: {integrity: sha512-dNPAPrxSc87ua2sKJ3H5dQ/6ZaY8RNnaAqK+t0eG7p0Soi2ydiqbGOTaZCqaYvA/uZYfS1LJnemt3Q+mSfcPCg==}
-
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
@@ -5173,9 +5133,6 @@ packages:
 
   vscode-oniguruma@1.7.0:
     resolution: {integrity: sha512-L9WMGRfrjOhgHSdOYgCt/yRMsXzLDJSL7BPrOZt73gU0iWO4mpqzqQzOz5srxqTvMBaR0XZTSrVWo4j55Rc6cA==}
-
-  vscode-textmate@8.0.0:
-    resolution: {integrity: sha512-AFbieoL7a5LMqcnOF04ji+rpXadgOXnZsxQr//r83kLPr7biP7am3g9zbaZIaBGwBRWeSvoMD4mgPdX3e4NWBg==}
 
   vscode-uri@3.0.8:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
@@ -9677,13 +9634,6 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shiki@0.14.7:
-    dependencies:
-      ansi-sequence-parser: 1.1.1
-      jsonc-parser: 3.3.1
-      vscode-oniguruma: 1.7.0
-      vscode-textmate: 8.0.0
-
   siginfo@2.0.0: {}
 
   signal-exit@4.1.0: {}
@@ -10309,8 +10259,6 @@ snapshots:
       - yaml
 
   vscode-oniguruma@1.7.0: {}
-
-  vscode-textmate@8.0.0: {}
 
   vscode-uri@3.0.8: {}
 

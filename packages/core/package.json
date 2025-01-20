@@ -21,10 +21,6 @@
       "types": "./dist/index.d.mts",
       "default": "./dist/index.mjs"
     },
-    "./wasm-inlined": {
-      "types": "./dist/wasm-inlined.d.mts",
-      "default": "./dist/wasm-inlined.mjs"
-    },
     "./textmate": {
       "types": "./dist/textmate.d.mts",
       "default": "./dist/textmate.mjs"
@@ -41,9 +37,6 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
-      "wasm-inlined": [
-        "./dist/wasm-inlined.d.mts"
-      ],
       "types": [
         "./dist/types.d.mts"
       ],
@@ -66,8 +59,6 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@shikijs/engine-javascript": "workspace:*",
-    "@shikijs/engine-oniguruma": "workspace:*",
     "@shikijs/types": "workspace:*",
     "@shikijs/vscode-textmate": "catalog:",
     "@types/hast": "catalog:",

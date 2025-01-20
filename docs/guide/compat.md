@@ -4,6 +4,10 @@ outline: deep
 
 # Compatibility Build
 
+::: warn
+This is a compatibility build for v0.x users. And this package is no longer maintained since v3. Please migrate to the latest version.
+:::
+
 To make deep migration easier, we provide a compatibility build that shimmed the breaking changes from v0.x. You can use it as a drop-in replacement for `shiki` and migrate step by step.
 
 ## Installations

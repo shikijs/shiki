@@ -1,5 +1,5 @@
 import type { DecorationOptions } from './decorations'
-import type { LoadWasmOptions, RegexEngine } from './engines'
+import type { RegexEngine } from './engines'
 import type { LanguageInput, LanguageRegistration, SpecialLanguage } from './langs'
 import type { SpecialTheme, ThemeInput, ThemeRegistrationAny } from './themes'
 import type { TokenizeWithThemeOptions, TokensResult } from './tokens'
@@ -29,13 +29,6 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
    * @default true
    */
   warnings?: boolean
-
-  /**
-   * Load wasm file from a custom path or using a custom function.
-   *
-   * @deprecated Use `engine: createOnigurumaEngine(loadWasm)` instead.
-   */
-  loadWasm?: Sync extends true ? never : LoadWasmOptions
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings'> {
