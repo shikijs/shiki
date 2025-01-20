@@ -582,9 +582,6 @@ importers:
 
   packages/engine-oniguruma:
     dependencies:
-      '@shikijs/core':
-        specifier: workspace:*
-        version: link:../core
       '@shikijs/types':
         specifier: workspace:*
         version: link:../types

@@ -1,6 +1,5 @@
 import type { LoadWasmOptions, RegexEngine } from '@shikijs/types'
 
-import { warnDeprecated } from '@shikijs/core'
 import { loadWasm, OnigScanner, OnigString } from './oniguruma'
 
 export { loadWasm }
@@ -40,6 +39,5 @@ export async function createOnigurumaEngine(options?: LoadWasmOptions | null): P
  * @deprecated Use `createOnigurumaEngine` instead.
  */
 export async function createWasmOnigEngine(options?: LoadWasmOptions | null): Promise<RegexEngine> {
-  warnDeprecated('Use `createOnigurumaEngine` instead.')
   return createOnigurumaEngine(options)
 }
