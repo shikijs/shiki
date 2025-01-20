@@ -4,7 +4,6 @@ import type { StateStack, StateStackImpl } from '@shikijs/vscode-textmate'
 import { INITIAL } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
 import { toArray } from '../utils'
-import { warnDeprecated } from '../warn'
 
 const _grammarStateMap = new WeakMap<GrammarStateMapKey, GrammarStateInterface>()
 
@@ -83,14 +82,6 @@ export class GrammarState implements GrammarStateInterface {
    */
   getInternalStack(theme = this.theme): StateStack | undefined {
     return this._stacks[theme]
-  }
-
-  /**
-   * @deprecated use `getScopes` instead
-   */
-  get scopes(): string[] {
-    warnDeprecated('GrammarState.scopes is deprecated, use GrammarState.getScopes() instead')
-    return getScopes(this._stacks[this.theme] as StateStackImpl)
   }
 
   getScopes(theme: string = this.theme): string[] {
