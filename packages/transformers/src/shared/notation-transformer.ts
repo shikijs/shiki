@@ -1,5 +1,6 @@
+import type { ShikiTransformer, ShikiTransformerContext } from '@shikijs/core'
 import type { Element, Text } from 'hast'
-import type { ShikiTransformer, ShikiTransformerContext } from 'shiki'
+import { warnDeprecated } from '@shikijs/core'
 import { parseComments, type ParsedComments, v1ClearEndCommentPrefix } from './parse-comments'
 
 export type MatchAlgorithm = 'v1' | 'v3'
@@ -27,6 +28,10 @@ export function createCommentNotationTransformer(
   ) => boolean,
   matchAlgorithm: MatchAlgorithm = 'v1',
 ): ShikiTransformer {
+  if (matchAlgorithm === 'v1') {
+    warnDeprecated('`matchAlgorithm: "v1"` is deprecated and will be removed in the future. Please explicitly set `matchAlgorithm: "v3"` in the transformer options.', 3)
+  }
+
   return {
     name,
     code(code) {
