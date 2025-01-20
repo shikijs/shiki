@@ -15,7 +15,7 @@ import { createShikiInternalSync } from './internal-sync'
  *
  * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
-export async function createHighlighterCore(options: HighlighterCoreOptions = {}): Promise<HighlighterCore> {
+export async function createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore> {
   const internal = await createShikiInternal(options)
 
   return {
@@ -38,7 +38,7 @@ export async function createHighlighterCore(options: HighlighterCoreOptions = {}
  *
  * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
-export function createHighlighterCoreSync(options: HighlighterCoreOptions<true> = {}): HighlighterCore {
+export function createHighlighterCoreSync(options: HighlighterCoreOptions<true>): HighlighterCore {
   const internal = createShikiInternalSync(options)
 
   return {
@@ -55,11 +55,11 @@ export function createHighlighterCoreSync(options: HighlighterCoreOptions<true> 
 
 export function makeSingletonHighlighterCore(
   createHighlighter: typeof createHighlighterCore,
-): (options?: Partial<HighlighterCoreOptions>) => Promise<HighlighterCore> {
+): (options: HighlighterCoreOptions) => Promise<HighlighterCore> {
   let _shiki: ReturnType<typeof createHighlighterCore>
 
   async function getSingletonHighlighterCore(
-    options: Partial<HighlighterCoreOptions> = {},
+    options: HighlighterCoreOptions,
   ): Promise<HighlighterCore> {
     if (!_shiki) {
       _shiki = createHighlighter({

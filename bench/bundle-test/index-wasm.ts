@@ -1,5 +1,5 @@
 import { codeToHtml, createShikiInternal } from '@shikijs/core'
-import { createWasmOnigEngine } from '@shikijs/engine-oniguruma'
+import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
 const shiki = createShikiInternal(
   {
@@ -9,7 +9,7 @@ const shiki = createShikiInternal(
     themes: [
       import('@shikijs/themes/vitesse-dark'),
     ],
-    engine: createWasmOnigEngine(import('@shikijs/engine-oniguruma/wasm-inlined')),
+    engine: createOnigurumaEngine(import('@shikijs/engine-oniguruma/wasm-inlined')),
   },
 )
 

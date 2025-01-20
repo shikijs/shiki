@@ -4,7 +4,7 @@ import html from '@shikijs/langs/html'
 import ts from '@shikijs/langs/typescript'
 import vue from '@shikijs/langs/vue'
 import vl from '@shikijs/themes/vitesse-light'
-import { codeToHtml, createHighlighterCore } from 'shiki'
+import { codeToHtml, createHighlighterCore, createJavaScriptRegexEngine } from 'shiki'
 import { expect, it } from 'vitest'
 
 // Basically we need to make sure that the syntax inside `v-if` and `{{}}` is highlighted correctly.
@@ -35,6 +35,7 @@ it('injections-side-effects vue', async () => {
     langs: [
       html,
     ],
+    engine: createJavaScriptRegexEngine(),
   })
 
   const code = `<h1 v-if="count == 1 ? true : 'str'.toUpperCase()">{{ count * 2 }}</h1>`
@@ -60,6 +61,7 @@ it('injections-side-effects angular-html', async () => {
     langs: [
       html,
     ],
+    engine: createJavaScriptRegexEngine(),
   })
 
   const code = `<h2>Hero List</h2>
@@ -126,6 +128,7 @@ it('injections-side-effects angular-ts', async () => {
     langs: [
       ts,
     ],
+    engine: createJavaScriptRegexEngine(),
   })
 
   const code = `

@@ -1,4 +1,4 @@
-import { createOnigurumaEngine, getSingletonHighlighter } from 'shiki'
+import { createJavaScriptRegexEngine, createOnigurumaEngine, getSingletonHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
 import { getSingletonHighlighterCore } from '../src/core'
 import js from '../src/langs/javascript.mjs'
@@ -17,6 +17,7 @@ it('getSingletonHighlighterCore', async () => {
 
   const shiki2 = await getSingletonHighlighterCore({
     themes: [mtp],
+    engine: createJavaScriptRegexEngine(),
   })
 
   expect(shiki1).toBe(shiki2)

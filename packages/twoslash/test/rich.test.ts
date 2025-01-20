@@ -158,8 +158,12 @@ obj.boo
 it('custom-tags', async () => {
   const code = `
 import { createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
-const shiki = await createHighlighterCore({})
+const shiki = await createHighlighterCore({
+  engine: createJavaScriptRegexEngine(),
+})
+
 // @log: Custom log message
 const a = 1
 // @error: Custom error message
