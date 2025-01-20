@@ -201,6 +201,7 @@ export default withMermaid(defineConfig({
     },
 
     socialLinks: [
+      { icon: 'bluesky', link: 'https://bsky.app/profile/shiki.style' },
       { icon: 'github', link: 'https://github.com/shikijs/shiki' },
     ],
 
