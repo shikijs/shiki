@@ -4,7 +4,7 @@ import type { Execution } from './types'
 
 import { hash as createHash } from 'ohash'
 import { describe, expect, it } from 'vitest'
-import { createWasmOnigEngine, loadWasm } from '../../engine-oniguruma/src'
+import { createOnigurumaEngine, loadWasm } from '../../engine-oniguruma/src'
 import { createHighlighterCore } from '../../shiki/src/core'
 import { createJavaScriptRegexEngine } from '../src/engine-compile'
 
@@ -176,7 +176,7 @@ describe('cases', async () => {
     const run = c.c.skip ? it.skip : it
     run(c.c.name, async () => {
       const engineWasm = createEngineWrapper(
-        await createWasmOnigEngine(),
+        await createOnigurumaEngine(),
       )
       const engineJs = createEngineWrapper(
         createJavaScriptRegexEngine({
@@ -184,12 +184,12 @@ describe('cases', async () => {
         }),
       )
 
-      const shiki1 = await createHighlighterCore({
+      using shiki1 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
         engine: engineWasm,
       })
-      const shiki2 = await createHighlighterCore({
+      using shiki2 = await createHighlighterCore({
         langs: c.lang,
         themes: [c.theme],
         engine: engineJs,

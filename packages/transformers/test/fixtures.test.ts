@@ -62,7 +62,7 @@ suite(
   'diff',
   import.meta.glob('./fixtures/diff/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationDiff(),
+    transformerNotationDiff({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
@@ -83,7 +83,7 @@ suite(
   'focus',
   import.meta.glob('./fixtures/focus/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationFocus(),
+    transformerNotationFocus({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
@@ -99,7 +99,7 @@ suite(
   'highlight',
   import.meta.glob('./fixtures/highlight/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationHighlight(),
+    transformerNotationHighlight({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
@@ -115,7 +115,7 @@ suite(
   'highlight-word',
   import.meta.glob('./fixtures/highlight-word/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationWordHighlight(),
+    transformerNotationWordHighlight({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
@@ -131,7 +131,7 @@ suite(
   'error-level',
   import.meta.glob('./fixtures/error-level/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationErrorLevel(),
+    transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
@@ -178,10 +178,10 @@ suite(
   'all',
   import.meta.glob('./fixtures/all/*.*', { query: '?raw', import: 'default', eager: true }),
   [
-    transformerNotationDiff(),
-    transformerNotationFocus(),
-    transformerNotationHighlight(),
-    transformerNotationErrorLevel(),
+    transformerNotationDiff({ matchAlgorithm: 'v3' }),
+    transformerNotationFocus({ matchAlgorithm: 'v3' }),
+    transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+    transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
     transformerCompactLineOptions([
       {
         line: 2,

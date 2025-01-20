@@ -26,10 +26,11 @@ export function createCommentNotationTransformer(
     lines: Element[],
     index: number
   ) => boolean,
-  matchAlgorithm: MatchAlgorithm = 'v1',
+  matchAlgorithm: MatchAlgorithm | undefined,
 ): ShikiTransformer {
-  if (matchAlgorithm === 'v1') {
-    warnDeprecated('`matchAlgorithm: "v1"` is deprecated and will be removed in the future. Please explicitly set `matchAlgorithm: "v3"` in the transformer options.', 3)
+  if (matchAlgorithm == null) {
+    matchAlgorithm = 'v1'
+    warnDeprecated('The default `matchAlgorithm: "v1"` is deprecated and will be removed in the future. Please explicitly set `matchAlgorithm: "v3"` in the transformer options.', 3)
   }
 
   return {

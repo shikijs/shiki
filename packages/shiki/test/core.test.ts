@@ -1,7 +1,8 @@
+import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 import { describe, expect, it } from 'vitest'
+
 // eslint-disable-next-line antfu/no-import-dist
 import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
-
 import { createHighlighterCore } from '../src/core'
 import js from '../src/langs/javascript.mjs'
 import ts from '../src/langs/typescript.mjs'
@@ -13,9 +14,9 @@ describe('should', () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js],
-      loadWasm: {
+      engine: createOnigurumaEngine({
         instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
-      },
+      }),
     })
 
     expect(shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord' }))
@@ -29,10 +30,10 @@ describe('should', () => {
         js,
         import('../src/langs/c.mjs'),
       ],
-      loadWasm: {
+      engine: createOnigurumaEngine({
         // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
         instantiator: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance.exports),
-      },
+      }),
     })
 
     await shiki.loadLanguage(() => import('../src/langs/python.mjs'))
@@ -151,9 +152,9 @@ describe('errors', () => {
     using shiki = await createHighlighterCore({
       themes: [nord],
       langs: [js as any],
-      loadWasm: {
+      engine: createOnigurumaEngine({
         instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
-      },
+      }),
     })
 
     const code = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: mtp })

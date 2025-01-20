@@ -1,15 +1,19 @@
+import { createHighlighterCore } from '@shikijs/core'
+import js from '@shikijs/langs/js'
+import nord from '@shikijs/themes/nord'
+import { createOnigurumaEngine } from 'shiki'
 import { expect, it } from 'vitest'
+
 // eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../../engine-oniguruma/dist/wasm-inlined.mjs'
-import { createHighlighterCore } from '../src/core'
-import js from '../src/langs/javascript.mjs'
-import nord from '../src/themes/nord.mjs'
+import { wasmBinary } from '../dist/wasm-inlined.mjs'
 
 it('wasm', async () => {
   const shiki = await createHighlighterCore({
     themes: [nord],
     langs: [js as any],
-    loadWasm: Promise.resolve().then(() => obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance)),
+    engine: createOnigurumaEngine({
+      default: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance.exports),
+    }),
   })
 
   expect(shiki.codeToHtml('1 + 1', { lang: 'javascript', theme: 'nord' }))
