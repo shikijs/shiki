@@ -1,7 +1,8 @@
 import type { ShikiTransformer } from 'shiki'
+import type { MatchAlgorithmOptions } from '../shared/notation-transformer'
 import { transformerNotationMap } from './notation-map'
 
-export interface TransformerNotationFocusOptions {
+export interface TransformerNotationFocusOptions extends MatchAlgorithmOptions {
   /**
    * Class for focused lines
    */
@@ -29,6 +30,7 @@ export function transformerNotationFocus(
         focus: classActiveLine,
       },
       classActivePre,
+      matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-focus',
   )
