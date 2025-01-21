@@ -148,8 +148,8 @@ catalogs:
       specifier: ^1.1.4
       version: 1.1.4
     oniguruma-to-es:
-      specifier: ^2.2.0
-      version: 2.2.0
+      specifier: ^2.3.0
+      version: 2.3.0
     picocolors:
       specifier: ^1.1.1
       version: 1.1.1
@@ -196,8 +196,8 @@ catalogs:
       specifier: ^18.2.0
       version: 18.2.0
     tm-grammars:
-      specifier: ^1.22.8
-      version: 1.22.8
+      specifier: ^1.22.9
+      version: 1.22.9
     tm-themes:
       specifier: ^1.9.8
       version: 1.9.8
@@ -578,7 +578,7 @@ importers:
         version: 10.0.1
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 2.2.0
+        version: 2.3.0
 
   packages/engine-oniguruma:
     dependencies:
@@ -601,7 +601,7 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.22.8
+        version: 1.22.9
 
   packages/langs-precompiled:
     dependencies:
@@ -610,11 +610,11 @@ importers:
         version: link:../types
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 2.2.0
+        version: 2.3.0
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.22.8
+        version: 1.22.9
 
   packages/markdown-it:
     dependencies:
@@ -726,7 +726,7 @@ importers:
         version: 3.5.0
       tm-grammars:
         specifier: 'catalog:'
-        version: 1.22.8
+        version: 1.22.9
       tm-themes:
         specifier: 'catalog:'
         version: 1.9.8
@@ -4116,8 +4116,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-es@2.2.0:
-    resolution: {integrity: sha512-EEsso27ri0sf+t4uRFEj5C5gvXQj0d0w1Y2qq06b+hDLBnvzO1rWTwEW4C7ytan6nhg4WPwE26eLoiPhHUbvKg==}
+  oniguruma-to-es@2.3.0:
+    resolution: {integrity: sha512-bwALDxriqfKGfUufKGGepCzu9x7nJQuoRoAFp4AnwehhC2crqrDIAP/uN2qdlsAvSMpeRC3+Yzhqc7hLmle5+g==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -4866,8 +4866,8 @@ packages:
     resolution: {integrity: sha512-n1cw8k1k0x4pgA2+9XrOkFydTerNcJ1zWCO5Nn9scWHTD+5tp8dghT2x1uduQePZTZgd3Tupf+x9BxJjeJi77Q==}
     engines: {node: '>=14.0.0'}
 
-  tm-grammars@1.22.8:
-    resolution: {integrity: sha512-htD1bhek5kDiwkjZcNxBTQea5I9zmXR7cWcqZ7jzMGlR4Wdgrba4RDFRIhf3pfpUiKjFOOeyqtd0W2CcWSG6cg==}
+  tm-grammars@1.22.9:
+    resolution: {integrity: sha512-PhznAxT+NBe22Gvwozs9KTWLYFlXFeOVmEpFYbcOgJQYJ1XNGZwDjsrPpIMjta+FRmCJNKLyJhzRZ9Ap6Ewchw==}
 
   tm-themes@1.9.8:
     resolution: {integrity: sha512-XbsuHkBCRBAt/MYXYFDHLfBH70SHa55TwJ50Qsw5UE6w9s12RDNNFyA3wkljkJw/LTG1F672QaO3BOMcIGBfJQ==}
@@ -9140,7 +9140,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-es@2.2.0:
+  oniguruma-to-es@2.3.0:
     dependencies:
       emoji-regex-xs: 1.0.0
       regex: 5.1.1
@@ -9892,7 +9892,7 @@ snapshots:
 
   tinyspy@3.0.2: {}
 
-  tm-grammars@1.22.8: {}
+  tm-grammars@1.22.9: {}
 
   tm-themes@1.9.8: {}
 
