@@ -25,6 +25,10 @@
     "./core": {
       "types": "./dist/core.d.mts",
       "default": "./dist/core.mjs"
+    },
+    "./async": {
+      "types": "./dist/async.d.mts",
+      "default": "./dist/async.mjs"
     }
   },
   "main": "./dist/index.mjs",
@@ -34,6 +38,9 @@
     "*": {
       "core": [
         "./dist/core.d.mts"
+      ],
+      "async": [
+        "./dist/async.d.mts"
       ],
       "*": [
         "./dist/*",
@@ -49,12 +56,21 @@
     "dev": "unbuild --stub",
     "prepublishOnly": "nr build"
   },
+  "peerDependencies": {
+    "markdown-it-async": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "markdown-it-async": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "markdown-it": "catalog:",
     "shiki": "workspace:*"
   },
   "devDependencies": {
     "@shikijs/transformers": "workspace:*",
-    "@types/markdown-it": "catalog:"
+    "@types/markdown-it": "catalog:",
+    "markdown-it-async": "catalog:"
   }
 }

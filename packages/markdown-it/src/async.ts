@@ -1,31 +1,23 @@
-import type MarkdownIt from 'markdown-it'
-import type {
-  CodeToHastOptions,
-  HighlighterGeneric,
-  ShikiTransformer,
-} from 'shiki'
-import type { MarkdownItShikiSetupOptions } from './common'
+import type { MarkdownItAsync } from 'markdown-it-async'
+import type { CodeToHastOptions, ShikiTransformer } from 'shiki'
+import type { MarkdownItShikiSetupOptions } from './core'
 
 export type { MarkdownItShikiExtraOptions, MarkdownItShikiSetupOptions } from './common'
 
-export function setupMarkdownIt(
-  markdownit: MarkdownIt,
-  highlighter: HighlighterGeneric<any, any>,
+export function setupMarkdownWithCodeToHtml(
+  markdownit: MarkdownItAsync,
+  codeToHtml: (code: string, options: CodeToHastOptions<any, any>) => Promise<string>,
   options: MarkdownItShikiSetupOptions,
 ): void {
   const {
     parseMetaString,
     trimEndingNewline = true,
     defaultLanguage = 'text',
-    fallbackLanguage,
   } = options
-  const langs = highlighter.getLoadedLanguages()
-  markdownit.options.highlight = (code, lang = 'text', attrs) => {
+
+  markdownit.options.highlight = async (code, lang = 'text', attrs) => {
     if (lang === '') {
       lang = defaultLanguage as string
-    }
-    if (fallbackLanguage && !langs.includes(lang)) {
-      lang = fallbackLanguage as string
     }
     const meta = parseMetaString?.(attrs, code, lang) || {}
     const codeOptions: CodeToHastOptions = {
@@ -52,7 +44,7 @@ export function setupMarkdownIt(
         code = code.slice(0, -1)
     }
 
-    return highlighter.codeToHtml(
+    return await codeToHtml(
       code,
       {
         ...codeOptions,
@@ -65,11 +57,16 @@ export function setupMarkdownIt(
   }
 }
 
-export function fromHighlighter(
-  highlighter: HighlighterGeneric<any, any>,
+/**
+ * Create a markdown-it-async plugin from a codeToHtml function.
+ *
+ * This plugin requires to be installed against a markdown-it-async instance.
+ */
+export function fromAsyncCodeToHtml(
+  codeToHtml: (code: string, options: CodeToHastOptions<any, any>) => Promise<string>,
   options: MarkdownItShikiSetupOptions,
 ) {
-  return function (markdownit: MarkdownIt) {
-    setupMarkdownIt(markdownit, highlighter, options)
+  return async function (markdownit: MarkdownItAsync) {
+    return setupMarkdownWithCodeToHtml(markdownit, codeToHtml, options)
   }
 }
