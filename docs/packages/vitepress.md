@@ -22,7 +22,7 @@ npm i -D @shikijs/vitepress-twoslash
 
 In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 
-```ts twoslash
+```ts
 // .vitepress/config.ts
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash' // [!code hl]
 import { defineConfig } from 'vitepress'
@@ -31,7 +31,10 @@ export default defineConfig({
   markdown: {
     codeTransformers: [
       transformerTwoslash() // [!code hl]
-    ]
+    ],
+    // [!code hl:2]
+    // Explicitly load these languages for types hightlighting
+    languages: ['js', 'jsx', 'ts', 'tsx',]
   }
 })
 ```
