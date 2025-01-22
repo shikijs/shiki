@@ -126,6 +126,9 @@ catalogs:
     markdown-it:
       specifier: ^14.1.0
       version: 14.1.0
+    markdown-it-async:
+      specifier: ^1.1.1
+      version: 1.1.1
     mdast-util-from-markdown:
       specifier: ^2.0.2
       version: 2.0.2
@@ -631,6 +634,9 @@ importers:
       '@types/markdown-it':
         specifier: 'catalog:'
         version: 14.1.2
+      markdown-it-async:
+        specifier: 'catalog:'
+        version: 1.1.1
 
   packages/monaco:
     dependencies:
@@ -3727,6 +3733,9 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
+
+  markdown-it-async@1.1.1:
+    resolution: {integrity: sha512-wTGXuxaDbZdKOg7cAJSWQcp/zyY/eUOD7Gbgp2hVWp7xv4GLmlK6kghsjKY4eKoiFFTfKa3nsyDvg1lS5zDAkA==}
 
   markdown-it@14.1.0:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
@@ -8469,6 +8478,11 @@ snapshots:
       semver: 7.6.3
 
   mark.js@8.11.1: {}
+
+  markdown-it-async@1.1.1:
+    dependencies:
+      '@types/markdown-it': 14.1.2
+      markdown-it: 14.1.0
 
   markdown-it@14.1.0:
     dependencies:
