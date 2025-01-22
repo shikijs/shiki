@@ -34,7 +34,7 @@ export default defineConfig({
     ],
     // [!code hl:2]
     // Explicitly load these languages for types hightlighting
-    languages: ['js', 'jsx', 'ts', 'tsx',]
+    languages: ['js', 'jsx', 'ts', 'tsx']
   }
 })
 ```

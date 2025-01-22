@@ -82,7 +82,9 @@ export default withMermaid(defineConfig({
     },
     codeTransformers: [
       transformerMetaWordHighlight(),
-      transformerNotationWordHighlight(),
+      transformerNotationWordHighlight({
+        matchAlgorithm: 'v3',
+      }),
       {
         // Render custom themes with codeblocks
         name: 'shiki:inline-theme',
@@ -140,6 +142,8 @@ export default withMermaid(defineConfig({
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
+    // @ts-expect-error Waits for https://github.com/vuejs/vitepress/pull/4507
+    languages: ['js', 'jsx', 'ts', 'tsx'],
   },
 
   cleanUrls: true,
