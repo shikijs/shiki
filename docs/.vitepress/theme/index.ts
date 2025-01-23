@@ -11,6 +11,7 @@ import '../../../packages/vitepress-twoslash/src/style.css'
 import 'uno.css'
 import './style.css'
 import './transformers.css'
+import 'virtual:group-icons.css'
 
 // @unocss-include
 

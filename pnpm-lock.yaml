@@ -228,6 +228,9 @@ catalogs:
     vitepress:
       specifier: ^1.6.2
       version: 1.6.2
+    vitepress-plugin-group-icons:
+      specifier: ^1.3.5
+      version: 1.3.5
     vitepress-plugin-mermaid:
       specifier: ^2.0.17
       version: 2.0.17
@@ -481,6 +484,9 @@ importers:
       vitepress:
         specifier: 'catalog:'
         version: 1.6.2(@algolia/client-search@5.17.1)(@types/node@22.10.7)(fuse.js@7.0.0)(jiti@2.4.2)(postcss@8.4.49)(search-insights@2.17.1)(terser@5.32.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.6.1)
+      vitepress-plugin-group-icons:
+        specifier: 'catalog:'
+        version: 1.3.5
       vue:
         specifier: 'catalog:'
         version: 3.5.13(typescript@5.7.3)
@@ -1652,6 +1658,9 @@ packages:
   '@iconify-json/codicon@1.2.8':
     resolution: {integrity: sha512-JTNIQj1zmLgTiCNPr+4d2IBpwJkskRGq8UBxtgfQ3pIUd/suto128Omc75GJy2q/nCrrgA8d8RaMvRbU1DijRA==}
 
+  '@iconify-json/logos@1.2.4':
+    resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
+
   '@iconify-json/ph@1.2.2':
     resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
 
@@ -1660,6 +1669,9 @@ packages:
 
   '@iconify-json/svg-spinners@1.2.2':
     resolution: {integrity: sha512-DIErwfBWWzLfmAG2oQnbUOSqZhDxlXvr8941itMCrxQoMB0Hiv8Ww6Bln/zIgxwjDvSem2dKJtap+yKKwsB/2A==}
+
+  '@iconify-json/vscode-icons@1.2.10':
+    resolution: {integrity: sha512-qjp/j2RcHEZkesuAT6RP8BfcuHa+oERr7K1twfsulrIHrKZlpxxBeEyFm+3evZSAOgD+sjgU5CuTYS3RfCL+Pg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -5160,6 +5172,9 @@ packages:
       yaml:
         optional: true
 
+  vitepress-plugin-group-icons@1.3.5:
+    resolution: {integrity: sha512-1f1NP7osRYlNTR0yS5CAqcaasKHRSAzFKpeCUOfCPwYLAFxhCxsEbRtPBm0U1CfrDVa303MsjX18ngGpFGxIMA==}
+
   vitepress-plugin-mermaid@2.0.17:
     resolution: {integrity: sha512-IUzYpwf61GC6k0XzfmAmNrLvMi9TRrVRMsUyCA8KNXhg/mQ1VqWnO0/tBVPiX5UoKF1mDUwqn5QV4qAJl6JnUg==}
     peerDependencies:
@@ -5284,6 +5299,7 @@ packages:
   wrangler@3.104.0:
     resolution: {integrity: sha512-txxgkKZwPQrX1PDgY+ATWnnx4GSeNxUrnBumudWPRmXG0JdLzCf09R+723slMMT1m+CKQXU1KvuUHc/GxTnTyA==}
     engines: {node: '>=16.17.0'}
+    deprecated: Downgrade to 3.103.2
     hasBin: true
     peerDependencies:
       '@cloudflare/workers-types': ^4.20241230.0
@@ -6038,6 +6054,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
+  '@iconify-json/logos@1.2.4':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-json/ph@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
@@ -6047,6 +6067,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/svg-spinners@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/vscode-icons@1.2.10':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -10252,6 +10276,14 @@ snapshots:
       terser: 5.32.0
       tsx: 4.19.2
       yaml: 2.6.1
+
+  vitepress-plugin-group-icons@1.3.5:
+    dependencies:
+      '@iconify-json/logos': 1.2.4
+      '@iconify-json/vscode-icons': 1.2.10
+      '@iconify/utils': 2.2.1
+    transitivePeerDependencies:
+      - supports-color
 
   vitepress-plugin-mermaid@2.0.17(mermaid@10.9.1)(vitepress@1.6.2(@algolia/client-search@5.17.1)(@types/node@22.10.7)(fuse.js@7.0.0)(jiti@2.4.2)(postcss@8.4.49)(search-insights@2.17.1)(terser@5.32.0)(tsx@4.19.2)(typescript@5.7.3)(yaml@2.6.1)):
     dependencies:

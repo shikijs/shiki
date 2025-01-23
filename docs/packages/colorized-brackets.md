@@ -10,9 +10,25 @@ VSCode-style colorized brackets transformer for Shiki.
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/colorized-brackets
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/colorized-brackets
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/colorized-brackets
+```
+
+```sh [bun]
+bun add -D @shikijs/colorized-brackets
+```
+
+:::
 
 ## Usage
 

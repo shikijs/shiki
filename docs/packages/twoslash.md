@@ -12,9 +12,25 @@ A Shiki transformer for [Twoslash](https://github.com/twoslashes/twoslash), prov
 
 ## Install
 
-```bash
-npm i -D @shikijs/twoslash
+::: code-group
+
+```sh [npm]
+npm install -D @shikijs/twoslash
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/twoslash
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/twoslash
+```
+
+```sh [bun]
+bun add -D @shikijs/twoslash
+```
+
+:::
 
 This package is **a transformer addon** to Shiki. This means that for every integration that supports passing Shiki transformers, you can use this package.
 

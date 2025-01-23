@@ -10,9 +10,25 @@ Heavily inspired by [`monaco-editor-textmate`](https://github.com/zikaari/monaco
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/monaco
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/monaco
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/monaco
+```
+
+```sh [bun]
+bun add -D @shikijs/monaco
+```
+
+:::
 
 ```ts
 import { shikiToMonaco } from '@shikijs/monaco'
