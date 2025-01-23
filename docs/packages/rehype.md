@@ -10,9 +10,25 @@ outline: deep
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/rehype
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/rehype
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/rehype
+```
+
+```sh [bun]
+bun add -D @shikijs/rehype
+```
+
+:::
 
 ## Usage
 

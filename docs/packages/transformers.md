@@ -10,9 +10,25 @@ Common transformers for Shiki, inspired by [shiki-processor](https://github.com/
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/transformers
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/transformers
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/transformers
+```
+
+```sh [bun]
+bun add -D @shikijs/transformers
+```
+
+:::
 
 ## Usage
 

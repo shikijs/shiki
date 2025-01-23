@@ -6,9 +6,25 @@
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/markdown-it
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/markdown-it
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/markdown-it
+```
+
+```sh [bun]
+bun add -D @shikijs/markdown-it
+```
+
+:::
 
 ## Usage
 
