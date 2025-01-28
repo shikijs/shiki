@@ -166,7 +166,7 @@ export function transformerDecorations(): ShikiTransformer {
       const lineApplies: (() => void)[] = []
 
       // Apply decorations in reverse order so the nested ones get applied first.
-      const sorted = ctx.decorations.sort((a, b) => b.start.offset - a.start.offset)
+      const sorted = ctx.decorations.sort((a, b) => b.start.offset - a.start.offset || a.end.offset - b.end.offset)
       for (const decoration of sorted) {
         const { start, end } = decoration
         if (start.line === end.line) {
@@ -193,12 +193,12 @@ function verifyIntersections(items: ResolvedDecorationItem[]): void {
 
     for (let j = i + 1; j < items.length; j++) {
       const bar = items[j]
-      const isFooHasBarStart = foo.start.offset < bar.start.offset && bar.start.offset < foo.end.offset
-      const isFooHasBarEnd = foo.start.offset < bar.end.offset && bar.end.offset < foo.end.offset
-      const isBarHasFooStart = bar.start.offset < foo.start.offset && foo.start.offset < bar.end.offset
-      const isBarHasFooEnd = bar.start.offset < foo.end.offset && foo.end.offset < bar.end.offset
+      const isFooHasBarStart = foo.start.offset <= bar.start.offset && bar.start.offset < foo.end.offset
+      const isFooHasBarEnd = foo.start.offset < bar.end.offset && bar.end.offset <= foo.end.offset
+      const isBarHasFooStart = bar.start.offset <= foo.start.offset && foo.start.offset < bar.end.offset
+      const isBarHasFooEnd = bar.start.offset < foo.end.offset && foo.end.offset <= bar.end.offset
       if (isFooHasBarStart || isFooHasBarEnd || isBarHasFooStart || isBarHasFooEnd) {
-        if (isFooHasBarEnd && isFooHasBarEnd)
+        if (isFooHasBarStart && isFooHasBarEnd)
           continue // nested
         if (isBarHasFooStart && isBarHasFooEnd)
           continue // nested
