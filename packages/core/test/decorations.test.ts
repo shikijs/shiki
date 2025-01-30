@@ -78,6 +78,20 @@ describe('decorations', () => {
           end: { line: 8, character: 25 },
           properties: { class: 'highlighted' },
         },
+        // "hast"
+        // Testing nested decorations with shared start.
+        {
+          start: { line: 8, character: 15 },
+          end: { line: 8, character: 19 },
+          properties: { class: 'highlighted' },
+        },
+        // "Html"
+        // Testing nested decorations with shared end.
+        {
+          start: { line: 8, character: 21 },
+          end: { line: 8, character: 25 },
+          properties: { class: 'highlighted' },
+        },
         // "// final"
         // Testing offset === code.length edge case
         {
@@ -117,12 +131,12 @@ describe('decorations errors', () => {
         lang: 'ts',
         decorations: [
           { start: 0, end: 10 },
-          { start: 5, end: 15 },
+          { start: 1, end: 11 },
         ],
       })
     })
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":0,"character":1,"offset":1} intersect.]`)
   })
 
   it('throws when lines overflow', async () => {

@@ -6,9 +6,25 @@
 
 ## Install
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/markdown-it
 ```
+
+```sh [yarn]
+yarn add -D @shikijs/markdown-it
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/markdown-it
+```
+
+```sh [bun]
+bun add -D @shikijs/markdown-it
+```
+
+:::
 
 ## Usage
 
@@ -50,3 +66,34 @@ const md = MarkdownIt()
 
 md.use(fromHighlighter(highlighter, { /* options */ }))
 ```
+
+## With Shorthands
+
+Shiki's [shorthands](/guide/shorthands) provides on-demand loading of themes and languages, but also makes the highlighting process asynchronous. Unfortunately, `markdown-it` itself [does NOT support async highlighting](https://github.com/markdown-it/markdown-it/blob/master/docs/development.md#i-need-async-rule-how-to-do-it) out of the box.
+
+To workaround this, you can use [`markdown-it-async`](https://github.com/antfu/markdown-it-async) by [Anthony Fu](https://github.com/antfu). Where Shiki also provides an integration with it, you can import `fromAsyncCodeToHtml` from `@shikijs/markdown-it/async`.
+
+````ts twoslash
+import { fromAsyncCodeToHtml } from '@shikijs/markdown-it/async'
+import MarkdownItAsync from 'markdown-it-async'
+import { codeToHtml } from 'shiki' // Or your custom shorthand bundle
+
+// Initialize MarkdownIt instance with markdown-it-async
+const md = MarkdownItAsync()
+
+md.use(
+  fromAsyncCodeToHtml(
+    // Pass the codeToHtml function
+    codeToHtml,
+    {
+      themes: {
+        light: 'vitesse-light',
+        dark: 'vitesse-dark',
+      }
+    }
+  )
+)
+
+// Use `md.renderAsync` instead of `md.render`
+const html = await md.renderAsync('# Title\n```ts\nconsole.log("Hello, World!")\n```')
+````

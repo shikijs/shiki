@@ -16,14 +16,29 @@ To enable [TypeScript Twoslash](/packages/twoslash) (type hover on code snippets
 
 ### Setup
 
-```bash
+::: code-group
+
+```sh [npm]
 npm i -D @shikijs/vitepress-twoslash
 ```
 
+```sh [yarn]
+yarn add -D @shikijs/vitepress-twoslash
+```
+
+```sh [pnpm]
+pnpm add -D @shikijs/vitepress-twoslash
+```
+
+```sh [bun]
+bun add -D @shikijs/vitepress-twoslash
+```
+
+:::
+
 In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 
-```ts twoslash
-// .vitepress/config.ts
+```ts [.vitepress/config.ts]
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash' // [!code hl]
 import { defineConfig } from 'vitepress'
 
@@ -31,16 +46,18 @@ export default defineConfig({
   markdown: {
     codeTransformers: [
       transformerTwoslash() // [!code hl]
-    ]
+    ],
+    // [!code hl:2]
+    // Explicitly load these languages for types hightlighting
+    languages: ['js', 'jsx', 'ts', 'tsx']
   }
 })
 ```
 
 And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custom-theme), install the Vue plugin and import the css with `@shikijs/vitepress-twoslash/styles.css`.
 
-```ts twoslash
+```ts twoslash [.vitepress/theme/index.ts]
 // @noErrors: true
-// .vitepress/theme/index.ts
 import type { EnhanceAppContext } from 'vitepress' // [!code hl]
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import Theme from 'vitepress/theme'
@@ -124,8 +141,7 @@ To speed up the build process, you can enable the file system cache for the gene
 
 In your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config):
 
-```ts
-// .vitepress/config.ts
+```ts [.vitepress/config.ts]
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs' // [!code hl]
 import { defineConfig } from 'vitepress'

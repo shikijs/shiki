@@ -91,7 +91,7 @@ Instead of compiling regular expressions on-the-fly, we also provide pre-compile
 Pre-compiled languages require support for RegExp UnicodeSets (the `v` flag), which requires **ES2024** or Node.js 20+, and may not work in older environments. [Can I use](https://caniuse.com/mdn-javascript_builtins_regexp_unicodesets).
 :::
 
-You can install them with `@shikijs/langs-precompiled`, and then change your `@shikijs/langs` imports to `@shikijs/langs-precompiled`:
+You can install them with `@shikijs/langs-precompiled`, and change your `@shikijs/langs` imports to `@shikijs/langs-precompiled`:
 
 ```ts
 import { createHighlighterCore } from 'shiki/core'

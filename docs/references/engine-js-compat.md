@@ -2,9 +2,9 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Monday, January 20, 2025
+> Generated on Tuesday, January 21, 2025
 >
-> Version `1.27.2`
+> Version `2.0.3`
 >
 > Runtime: Node.js v22.11.0
 
@@ -13,9 +13,9 @@ Compatibility reference of all built-in grammars with the [JavaScript RegExp eng
 |                 |                       Count |
 | :-------------- | --------------------------: |
 | Total Languages |                         219 |
-| Supported       | [213](#supported-languages) |
+| Supported       | [214](#supported-languages) |
 | Mismatched      |  [0](#mismatched-languages) |
-| Unsupported     | [6](#unsupported-languages) |
+| Unsupported     | [5](#unsupported-languages) |
 
 ## Supported Languages
 
@@ -54,7 +54,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | clj                | ✅ OK           |                38 |               - |      |
 | clojure            | ✅ OK           |                38 |               - |      |
 | cmake              | ✅ OK           |                23 |               - |      |
-| cobol              | ✅ OK           |               867 |               - |      |
+| cobol              | ✅ OK           |               868 |               - |      |
 | codeowners         | ✅ OK           |                 4 |               - |      |
 | coffee             | ✅ OK           |               471 |               - |      |
 | common-lisp        | ✅ OK           |                60 |               - |      |
@@ -183,7 +183,8 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | ruby               | ✅ OK           |              1787 |               - |      |
 | rust               | ✅ OK           |                89 |               - |      |
 | sas                | ✅ OK           |               101 |               - |      |
-| scala              | ✅ OK           |               117 |               - |      |
+| sass               | ✅ OK           |                69 |               - |      |
+| scala              | ✅ OK           |               118 |               - |      |
 | scheme             | ✅ OK           |                34 |               - |      |
 | scss               | ✅ OK           |               234 |               - |      |
 | sdbl               | ✅ OK           |                23 |               - |      |
@@ -259,8 +260,7 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 | Language   | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ---------- | :-------------- | ----------------: | --------------: | ---: |
 | codeql     | ✅ OK           |               150 |               1 |      |
-| sass       | ✅ OK           |                67 |               2 |      |
+| csharp     | ❌ Error        |               312 |               1 |  137 |
 | purescript | ❌ Error        |                72 |               1 |      |
-| csharp     | ❌ Error        |               310 |               3 |  137 |
-| razor      | ❌ Error        |               959 |               3 |      |
-| swift      | ❌ Error        |               326 |               3 |      |
+| razor      | ❌ Error        |               961 |               1 |      |
+| swift      | ❌ Error        |               330 |               1 |      |

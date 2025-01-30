@@ -11,7 +11,7 @@ import { createShikiInternalSync } from './internal-sync'
  */
 export async function createShikiInternal(options: HighlighterCoreOptions): Promise<ShikiInternal> {
   if (!options.engine) {
-    throw new Error('`engine` option is required.')
+    warnDeprecated('`engine` option is required. Use `createOnigurumaEngine` or `createJavaScriptRegexEngine` to create an engine.')
   }
 
   const [
