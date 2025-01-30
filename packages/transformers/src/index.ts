@@ -1,3 +1,5 @@
+export { createCommentNotationTransformer } from './shared/notation-transformer'
+
 export * from './transformers/compact-line-options'
 export * from './transformers/meta-highlight'
 export * from './transformers/meta-highlight-word'
