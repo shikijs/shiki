@@ -98,30 +98,29 @@ function rehypeShikiFromHighlighter(
       if (node.tagName === 'pre') {
         handler = PreHandler
       }
-
-      if (node.tagName === 'code' && inline) {
+      else if (node.tagName === 'code' && inline) {
         handler = InlineCodeHandlers[inline]
       }
-
-      if (!handler)
+      else {
         return
+      }
 
-      const res = handler(tree, node)
-      if (!res)
+      const parsed = handler(tree, node)
+      if (!parsed)
         return
 
       let lang: string | undefined
       let lazyLoad = false
 
-      if (!res.lang) {
+      if (!parsed.lang) {
         lang = defaultLanguage
       }
-      else if (highlighter.getLoadedLanguages().includes(res.lang) || isSpecialLang(res.lang)) {
-        lang = res.lang
+      else if (highlighter.getLoadedLanguages().includes(parsed.lang) || isSpecialLang(parsed.lang)) {
+        lang = parsed.lang
       }
       else if (lazy) {
         lazyLoad = true
-        lang = res.lang
+        lang = parsed.lang
       }
       else if (fallbackLanguage) {
         lang = fallbackLanguage
@@ -130,14 +129,14 @@ function rehypeShikiFromHighlighter(
       if (!lang)
         return
 
-      const processNode = (): void => {
-        const meta = res.meta ? parseMetaString?.(res.meta, node, tree) : undefined
+      const meta = parsed.meta ? parseMetaString?.(parsed.meta, node, tree) : undefined
 
-        const fragment = highlight(lang, res.code, res.meta, meta ?? {})
+      const processNode = (targetLang: string): void => {
+        const fragment = highlight(targetLang, parsed.code, parsed.meta, meta ?? {})
         if (!fragment)
           return
 
-        if (res.type === 'inline') {
+        if (parsed.type === 'inline') {
           const head = fragment.children[0]
           if (head.type === 'element' && head.tagName === 'pre') {
             head.tagName = 'span'
@@ -148,10 +147,20 @@ function rehypeShikiFromHighlighter(
       }
 
       if (lazyLoad) {
-        queue.push(highlighter.loadLanguage(lang).then(() => processNode()))
+        try {
+          // passed language is checked in sync, promise `.catch()` wouldn't work
+          queue.push(highlighter.loadLanguage(lang).then(() => processNode(lang)))
+        }
+        catch (error) {
+          if (fallbackLanguage)
+            return processNode(fallbackLanguage)
+          else if (onError)
+            onError(error)
+          else throw error
+        }
       }
       else {
-        processNode()
+        processNode(lang)
       }
 
       // don't visit processed nodes
