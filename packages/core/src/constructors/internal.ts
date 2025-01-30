@@ -1,9 +1,6 @@
-import type {
-  HighlighterCoreOptions,
-  ShikiInternal,
-} from '@shikijs/types'
-
+import type { HighlighterCoreOptions, ShikiInternal } from '@shikijs/types'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
+import { warnDeprecated } from '../warn'
 import { createShikiInternalSync } from './internal-sync'
 
 /**
