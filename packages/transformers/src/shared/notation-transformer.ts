@@ -1,7 +1,8 @@
 import type { ShikiTransformer, ShikiTransformerContext } from '@shikijs/core'
 import type { Element, Text } from 'hast'
+import type { ParsedComments } from './parse-comments'
 import { warnDeprecated } from '@shikijs/core'
-import { parseComments, type ParsedComments, v1ClearEndCommentPrefix } from './parse-comments'
+import { parseComments, v1ClearEndCommentPrefix } from './parse-comments'
 
 export type MatchAlgorithm = 'v1' | 'v3'
 

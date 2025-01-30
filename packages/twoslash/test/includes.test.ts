@@ -1,4 +1,5 @@
-import { type CodeToHastOptions, codeToHtml } from 'shiki'
+import type { CodeToHastOptions } from 'shiki'
+import { codeToHtml } from 'shiki'
 import { expect, it } from 'vitest'
 import { rendererRich, transformerTwoslash } from '../src'
 import { TwoslashIncludesManager } from '../src/includes'

@@ -224,7 +224,7 @@ export function makeSingletonHighlighter<L extends string, T extends string>(
   return getSingletonHighlighter
 }
 
-export function createSingletonShorthands<L extends string, T extends string >(
+export function createSingletonShorthands<L extends string, T extends string>(
   createHighlighter: CreateHighlighterFactory<L, T>,
 ): ShorthandsBundle<L, T> {
   const getSingletonHighlighter = makeSingletonHighlighter(createHighlighter)
