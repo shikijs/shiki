@@ -1,5 +1,5 @@
 import type { RegexEngine } from '@shikijs/types'
-import type { OnigurumaToEsOptions } from 'oniguruma-to-es'
+import type { ToRegExpOptions } from 'oniguruma-to-es'
 import type { JavaScriptRegexScannerOptions } from './scanner'
 import { toRegExp } from 'oniguruma-to-es'
 import { JavaScriptScanner } from './scanner'
@@ -25,12 +25,15 @@ export interface JavaScriptRegexEngineOptions extends JavaScriptRegexScannerOpti
 /**
  * The default regex constructor for the JavaScript RegExp engine.
  */
-export function defaultJavaScriptRegexConstructor(pattern: string, options?: OnigurumaToEsOptions): RegExp {
+export function defaultJavaScriptRegexConstructor(pattern: string, options?: ToRegExpOptions): RegExp {
   return toRegExp(
     pattern,
     {
       global: true,
       hasIndices: true,
+      // This has no benefit for the standard JS engine, but it avoids a perf penalty for
+      // precompiled grammars when constructing extremely long patterns that aren't always used
+      lazyCompileLength: 3000,
       rules: {
         // Needed since TextMate grammars merge backrefs across patterns
         allowOrphanBackrefs: true,

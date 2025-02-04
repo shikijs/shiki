@@ -2,20 +2,20 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Tuesday, January 21, 2025
+> Generated on Monday, February 3, 2025
 >
-> Version `2.0.3`
+> Version `2.2.0`
 >
-> Runtime: Node.js v22.11.0
+> Runtime: Node.js v22.13.1
 
 ## Report Summary
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
 | Total Languages |                         219 |
-| Supported       | [214](#supported-languages) |
+| Supported       | [215](#supported-languages) |
 | Mismatched      |  [0](#mismatched-languages) |
-| Unsupported     | [5](#unsupported-languages) |
+| Unsupported     | [4](#unsupported-languages) |
 
 ## Supported Languages
 
@@ -56,6 +56,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | cmake              | ✅ OK           |                23 |               - |      |
 | cobol              | ✅ OK           |               868 |               - |      |
 | codeowners         | ✅ OK           |                 4 |               - |      |
+| codeql             | ✅ OK           |               151 |               - |      |
 | coffee             | ✅ OK           |               471 |               - |      |
 | common-lisp        | ✅ OK           |                60 |               - |      |
 | coq                | ✅ OK           |                26 |               - |      |
@@ -259,7 +260,6 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 
 | Language   | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | ---------- | :-------------- | ----------------: | --------------: | ---: |
-| codeql     | ✅ OK           |               150 |               1 |      |
 | csharp     | ❌ Error        |               312 |               1 |  137 |
 | purescript | ❌ Error        |                72 |               1 |      |
 | razor      | ❌ Error        |               961 |               1 |      |
