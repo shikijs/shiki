@@ -1,8 +1,8 @@
 import { EmulatedRegExp } from 'oniguruma-to-es'
 import { format } from 'prettier'
 import { expect, it } from 'vitest'
-import { toJsLiteral } from './langs'
-import { precompileGrammar } from './precompile'
+import { toJsLiteral } from '../scripts/langs'
+import { precompileGrammar } from '../scripts/precompile'
 
 const isNode20andUp = process.version.replace(/^v/, '').split('.').map(Number)[0] >= 20
 

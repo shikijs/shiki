@@ -7,6 +7,7 @@ export function traverseGrammarPatterns(a: any, callback: (pattern: string) => a
   }
   if (!a || typeof a !== 'object')
     return
+
   if (a.foldingStartMarker) {
     const pattern = callback(a.foldingStartMarker)
     if (pattern != null)
@@ -53,6 +54,9 @@ export function traverseGrammarPatterns(a: any, callback: (pattern: string) => a
   }
   if (a.endCaptures) {
     traverseGrammarPatterns(Object.values(a.endCaptures), callback)
+  }
+  if (a.injections) {
+    traverseGrammarPatterns(Object.values(a.injections), callback)
   }
   Object.values(a.repository || {}).forEach((j: any) => {
     traverseGrammarPatterns(j, callback)
