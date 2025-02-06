@@ -175,11 +175,17 @@ class TokenizerState implements monacoNs.languages.IState {
 }
 
 function normalizeColor(color: undefined): undefined
-function normalizeColor(color: string): string
-function normalizeColor(color: string | undefined): string | undefined
-function normalizeColor(color: string | undefined): string | undefined {
+function normalizeColor(color: string | string[]): string
+function normalizeColor(color: string | string[] | undefined): string | undefined
+function normalizeColor(color: string | string[] | undefined): string | undefined {
+  // Some themes have an array of colors (not yet sure why), here we pick the first one
+  // https://github.com/shikijs/shiki/issues/894
+  // https://github.com/shikijs/textmate-grammars-themes/pull/117
+  if (Array.isArray(color))
+    color = color[0]
+
   if (!color)
-    return color
+    return undefined
 
   color = (color.charCodeAt(0) === 35 ? color.slice(1) : color).toLowerCase()
 
