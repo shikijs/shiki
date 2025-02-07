@@ -42,6 +42,9 @@
       "client": [
         "./dist/client.d.mts"
       ],
+      "cache-fs": [
+        "./dist/cache-fs.d.mts"
+      ],
       "*": [
         "./dist/index.d.mts"
       ]
@@ -49,6 +52,7 @@
   },
   "files": [
     "*.css",
+    "*.css.d.ts",
     "dist"
   ],
   "scripts": {
