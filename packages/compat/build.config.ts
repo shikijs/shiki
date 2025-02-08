@@ -4,7 +4,7 @@ export default defineBuildConfig({
   entries: [
     'src/index.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
     dts: {

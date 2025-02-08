@@ -75,44 +75,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "core": [
-        "./dist/core.d.mts"
-      ],
-      "wasm": [
-        "./dist/wasm.d.mts"
-      ],
-      "langs": [
-        "./dist/langs.d.mts"
-      ],
-      "themes": [
-        "./dist/themes.d.mts"
-      ],
-      "bundle/full": [
-        "./dist/bundle-full.d.mts"
-      ],
-      "bundle/web": [
-        "./dist/bundle-web.d.mts"
-      ],
-      "engine/javascript": [
-        "./dist/engine-javascript.d.mts"
-      ],
-      "engine/oniguruma": [
-        "./dist/engine-oniguruma.d.mts"
-      ],
-      "textmate": [
-        "./dist/textmate.d.mts"
-      ],
-      "theme-css-variables": [
-        "./dist/theme-css-variables.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],

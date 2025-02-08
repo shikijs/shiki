@@ -39,23 +39,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "wasm-inlined": [
-        "./dist/wasm-inlined.d.mts"
-      ],
-      "types": [
-        "./dist/types.d.mts"
-      ],
-      "textmate": [
-        "./dist/textmate.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],

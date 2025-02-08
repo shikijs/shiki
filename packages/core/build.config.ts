@@ -7,7 +7,7 @@ export default defineBuildConfig({
     'src/textmate.ts',
     'src/wasm-inlined.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
     dts: {
