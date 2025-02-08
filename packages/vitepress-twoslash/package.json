@@ -39,20 +39,17 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
-      "client": [
-        "./dist/client.d.mts"
-      ],
-      "cache-fs": [
-        "./dist/cache-fs.d.mts"
+      "*.css": [
+        "./*.css"
       ],
       "*": [
-        "./dist/index.d.mts"
+        "./dist/*.mts",
+        "./dist/index.mts"
       ]
     }
   },
   "files": [
     "*.css",
-    "*.css.d.ts",
     "dist"
   ],
   "scripts": {

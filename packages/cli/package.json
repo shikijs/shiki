@@ -31,6 +31,13 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "cli": [
+        "./dist/cli.mts"
+      ]
+    }
+  },
   "bin": {
     "shiki": "bin.mjs",
     "shiki-cli": "bin.mjs",
