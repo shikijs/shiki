@@ -25,16 +25,29 @@ export function transformerNotationMap(
 
   return createCommentNotationTransformer(
     name,
-    new RegExp(`\\s*\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:\\d+)?\\]`),
+    new RegExp(`\\s*\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:(\\d+)(-\\d+)?)?\\]`),
     function ([_, match, range = ':1'], _line, _comment, lines, index) {
-      const lineNum = Number.parseInt(range.slice(1), 10)
+      let [startOffset, endOffset] = [1, 1]
 
-      for (let i = index; i < Math.min(index + lineNum, lines.length); i++) {
+      if (range) {
+        const rangeParts = range.slice(1).split('-')
+        if (rangeParts.length === 2) {
+          [startOffset, endOffset] = rangeParts.map(part => Number.parseInt(part, 10))
+          if (startOffset === 0)
+            return false
+        }
+        else {
+          endOffset = Number.parseInt(rangeParts[0], 10)
+        }
+      }
+
+      for (let i = index + startOffset - 1; i < Math.min(index + endOffset, lines.length); i++) {
         this.addClassToHast(lines[i], classMap[match])
       }
 
-      if (classActivePre)
+      if (classActivePre) {
         this.addClassToHast(this.pre, classActivePre)
+      }
       return true
     },
     options.matchAlgorithm,
