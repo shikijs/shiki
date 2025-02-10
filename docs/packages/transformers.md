@@ -143,6 +143,52 @@ console.log('goodbye')
 
 :::
 
+You can also mark multiple lines with a start offset and an end offset in a single comment:
+
+````md
+```ts
+// [\!code ++:2-4]
+console.log('goodbye')
+console.log('hello')
+console.log('hello')
+console.log('hello')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts
+// [!code ++:2-4]
+console.log('goodbye')
+console.log('hello')
+console.log('hello')
+console.log('hello')
+```
+
+The start offset is optional, and defaults to `1`:
+
+````md
+```ts
+// [\!code --:3]
+console.log('hewwo')
+console.log('hewwo')
+console.log('hewwo')
+console.log('goodbye')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts
+// [!code --:3]
+console.log('hewwo')
+console.log('hewwo')
+console.log('hewwo')
+console.log('goodbye')
+```
+
+The multiple lines comment syntax also works with [`transformerNotationHighlight`](#transformernotationhighlight), [`transformerNotationFocus`](#transformernotationfocus) and [`transformerNotationErrorLevel`](#transformernotationerrorlevel).
+
 ---
 
 ### `transformerNotationHighlight`
@@ -167,26 +213,6 @@ console.log('Not highlighted')
 
 - `// [!code highlight]` outputs: `<span class="line highlighted">`
 - The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
-
-You can also highlight multiple lines with a single comment:
-
-````md
-```ts
-// [\!code highlight:3]
-console.log('Highlighted')
-console.log('Highlighted')
-console.log('Not highlighted')
-```
-````
-
-Renders:
-
-```ts
-// [!code highlight:3]
-console.log('Highlighted')
-console.log('Highlighted')
-console.log('Not highlighted')
-```
 
 ---
 
@@ -254,26 +280,6 @@ console.log('Not focused')
 
 - Outputs: `<span class="line focused">`
 - The outer `<pre>` tag is modified: `<pre class="has-focused">`
-
-You can also focus multiple lines with a single comment:
-
-````md
-```ts
-// [\!code focus:3]
-console.log('Focused')
-console.log('Focused')
-console.log('Not focused')
-```
-````
-
-Renders:
-
-```ts
-// [!code focus:3]
-console.log('Focused')
-console.log('Focused')
-console.log('Not focused')
-```
 
 ---
 
