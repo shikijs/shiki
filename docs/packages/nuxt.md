@@ -5,7 +5,7 @@
 On top of that, Nuxt also provide some module integrations for Shiki allowing you use it easier:
 
 - [`nuxt-shiki`](https://github.com/pi0/nuxt-shiki) - Shiki integration for client and server sides, with component usage.
-- [`@nuxt/content`](https://github.com/nuxt/content) - Nuxt Content has Shiki built-in for markdown files. [You can enable it with the `highlight` option](https://content.nuxt.com/get-started/configuration#highlight).
+- [`@nuxt/content`](https://github.com/nuxt/content) - Nuxt Content has Shiki built-in for markdown files. [You can enable it with the `highlight` option](https://content.nuxt.com/docs/getting-started/configuration#highlight).
   - [`@nuxtjs/mdc`](https://github.com/nuxt-modules/mdc) - The underlying module of `@nuxt/content` that provides Markdown Component (MDC) syntax as well as Shiki for syntax highlighting.
 
 ## TwoSlash Integration
