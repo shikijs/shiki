@@ -4,6 +4,7 @@ import type { BundledLanguage } from './langs-bundle-full'
 import type { BundledTheme } from './themes'
 import { createdBundledHighlighter, createSingletonShorthands, warnDeprecated } from './core'
 import { createOnigurumaEngine } from './engine-oniguruma'
+import { guessEmbeddedLanguages } from './guess'
 import { bundledLanguages } from './langs-bundle-full'
 import { bundledThemes } from './themes'
 
@@ -46,6 +47,7 @@ export const {
   BundledTheme
 >(
   createHighlighter,
+  { guessEmbeddedLanguages },
 )
 
 /**
