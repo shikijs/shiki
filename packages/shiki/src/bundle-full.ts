@@ -2,9 +2,9 @@ import type { CreateHighlighterFactory, HighlighterGeneric } from '@shikijs/type
 import type {} from 'hast'
 import type { BundledLanguage } from './langs-bundle-full'
 import type { BundledTheme } from './themes'
+import { guessEmbeddedLanguages } from '@shikijs/core'
 import { createdBundledHighlighter, createSingletonShorthands, warnDeprecated } from './core'
 import { createOnigurumaEngine } from './engine-oniguruma'
-import { guessEmbeddedLanguages } from './guess'
 import { bundledLanguages } from './langs-bundle-full'
 import { bundledThemes } from './themes'
 

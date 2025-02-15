@@ -1,4 +1,5 @@
 import type {
+  HighlighterGeneric,
   MaybeArray,
   MaybeGetter,
   PlainTextLanguage,
@@ -261,4 +262,37 @@ export function createPositionConverter(code: string): {
     indexToPos,
     posToIndex,
   }
+}
+
+/**
+ * Guess embedded languages from given code and highlighter.
+ *
+ * When highlighter is provided, only bundled languages will be included.
+ */
+export function guessEmbeddedLanguages(
+  code: string,
+  _lang: string | undefined,
+  highlighter?: HighlighterGeneric<any, any>,
+): string[] {
+  const langs = new Set<string>()
+  // For HTML code blocks like Vue SFC
+  for (const match of code.matchAll(/lang=["']([\w-]+)["']/g)) {
+    langs.add(match[1])
+  }
+  // For markdown code blocks
+  for (const match of code.matchAll(/(?:```|~~~)([\w-]+)/g)) {
+    langs.add(match[1])
+  }
+  // For latex
+  for (const match of code.matchAll(/\\begin\{([\w-]+)\}/g)) {
+    langs.add(match[1])
+  }
+
+  if (!highlighter)
+    return Array.from(langs)
+
+  // Only include known languages
+  const bundle = highlighter.getBundledLanguages()
+  return Array.from(langs)
+    .filter(l => l && bundle[l])
 }
