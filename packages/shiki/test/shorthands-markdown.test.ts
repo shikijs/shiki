@@ -8,14 +8,9 @@ This is a markdown file
 console.log("hello")
 \`\`\`
 
-~~~vue
-<template>
-  <div class="foo">bar</div>
-</template>
-
-<script lang="ts">
-let a: number = 1
-</script>
+~~~pug
+div
+  p hello
 ~~~
 
 Even those grammars in markdown are lazy loaded, \`codeToHtml\` shorthand should capture them and load automatically.
@@ -24,12 +19,21 @@ Even those grammars in markdown are lazy loaded, \`codeToHtml\` shorthand should
 const inputMarkdown2 = `
 Some other languages
 
-~~~ruby
-puts "hello"
+\`\`\`js
+console.log("hello")
+\`\`\`
+
+~~~python
+print("hello")
 ~~~
 
 \`\`\`html
 <div class="foo">bar</div>
+<style>
+  .foo {
+    color: red;
+  }
+</style>
 \`\`\`
 `
 
@@ -41,21 +45,32 @@ it('codeToHtml', async () => {
   await expect(await codeToHtml(inputMarkdown1, { lang: 'markdown', theme: 'vitesse-light' }))
     .toMatchFileSnapshot(`out/shorthand-markdown1.html`)
 
-  expect.soft(highlighter.getLoadedLanguages().sort())
-    .toContainEqual([
-      'javascript',
-      'vue',
-      'md',
-      'markdown',
-      'typescript',
-    ].sort())
+  expect.soft(highlighter.getLoadedLanguages())
+    .toContain('javascript')
+  expect.soft(highlighter.getLoadedLanguages())
+    .toContain('pug')
 
   await expect(await codeToHtml(inputMarkdown2, { lang: 'markdown', theme: 'vitesse-light' }))
     .toMatchFileSnapshot(`out/shorthand-markdown2.html`)
 
-  expect.soft(highlighter.getLoadedLanguages().sort())
-    .toContainEqual([
-      'ruby',
-      'html',
-    ].sort())
+  expect.soft(highlighter.getLoadedLanguages())
+    .toContain('python')
+  expect.soft(highlighter.getLoadedLanguages())
+    .toContain('html')
+
+  expect.soft(highlighter.getLoadedLanguages())
+    .toMatchInlineSnapshot(`
+      [
+        "javascript",
+        "css",
+        "html",
+        "pug",
+        "python",
+        "markdown",
+        "md",
+        "js",
+        "jade",
+        "py",
+      ]
+    `)
 })

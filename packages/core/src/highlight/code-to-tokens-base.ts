@@ -185,7 +185,7 @@ function _tokenizeWithTheme(
     let tokensWithScopesIndex
 
     if (options.includeExplanation) {
-      resultWithScopes = grammar.tokenizeLine(line, stateStack)
+      resultWithScopes = grammar.tokenizeLine(line, stateStack, tokenizeTimeLimit)
       tokensWithScopes = resultWithScopes.tokens
       tokensWithScopesIndex = 0
     }
