@@ -2,7 +2,7 @@
 import { lstatSync, readdirSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { join, sep } from 'node:path'
-import c from 'picocolors'
+import c from 'ansis'
 import { createHighlighter } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import { transformerColorizedBrackets } from '../src'
