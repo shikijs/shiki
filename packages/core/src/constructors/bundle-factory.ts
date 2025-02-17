@@ -1,4 +1,5 @@
 import type {
+  Awaitable,
   BundledHighlighterOptions,
   CodeToHastOptions,
   CodeToTokensBaseOptions,
