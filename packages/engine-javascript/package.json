@@ -18,14 +18,8 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./raw": {
-      "types": "./dist/engine-raw.d.mts",
-      "default": "./dist/engine-raw.mjs"
-    }
+    ".": "./dist/index.mjs",
+    "./raw": "./dist/engine-raw.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",

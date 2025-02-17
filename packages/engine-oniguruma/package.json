@@ -19,14 +19,8 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./wasm-inlined": {
-      "types": "./dist/wasm-inlined.d.mts",
-      "default": "./dist/wasm-inlined.mjs"
-    }
+    ".": "./dist/index.mjs",
+    "./wasm-inlined": "./dist/wasm-inlined.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
