@@ -52,6 +52,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
 ]
 
 const BLOGS: DefaultTheme.NavItemWithLink[] = [
+  { text: 'Shiki v3.0', link: '/blog/v3' },
   { text: 'Shiki v2.0', link: '/blog/v2' },
   { text: 'The Evolution of Shiki v1.0', link: 'https://nuxt.com/blog/shiki-v1' },
 ]
@@ -143,7 +144,6 @@ export default withMermaid(defineConfig({
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
-    // @ts-expect-error Waits for https://github.com/vuejs/vitepress/pull/4507
     languages: ['js', 'jsx', 'ts', 'tsx'],
     config: (md) => {
       md.use(groupIconMdPlugin)
