@@ -19,14 +19,8 @@
   "sideEffects": false,
   "exports": {
     ".": "./dist/index.mjs",
-    "./core": {
-      "types": "./dist/core.d.mts",
-      "default": "./dist/core.mjs"
-    },
-    "./async": {
-      "types": "./dist/async.d.mts",
-      "default": "./dist/async.mjs"
-    }
+    "./core": "./dist/core.mjs",
+    "./async": "./dist/async.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
