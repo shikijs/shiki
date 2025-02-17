@@ -1,7 +1,9 @@
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
-import type { StateStack } from '@shikijs/vscode-textmate'
 import type monacoNs from 'monaco-editor-core'
+import type { MonacoLineToken } from './types'
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
+import { TokenizerState } from './tokenizer'
+import { normalizeColor } from './utils'
 
 export interface MonacoTheme extends monacoNs.editor.IStandaloneThemeData { }
 
@@ -28,8 +30,10 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
   if (!rules) {
     rules = []
     const themeSettings = theme.settings || theme.tokenColors
+
     for (const { scope, settings: { foreground, background, fontStyle } } of themeSettings) {
       const scopes = Array.isArray(scope) ? scope : [scope]
+
       for (const s of scopes) {
         if (s && (foreground || background || fontStyle)) {
           rules.push({
@@ -108,13 +112,15 @@ export function shikiToMonaco(
   } = options
 
   const monacoLanguageIds = new Set(monaco.languages.getLanguages().map(l => l.id))
+
   for (const lang of highlighter.getLoadedLanguages()) {
     if (monacoLanguageIds.has(lang)) {
       monaco.languages.setTokensProvider(lang, {
         getInitialState() {
           return new TokenizerState(INITIAL)
         },
-        tokenize(line, state: TokenizerState) {
+
+        tokenize(line: string, state: TokenizerState) {
           if (line.length >= tokenizeMaxLineLength) {
             return {
               endState: state,
@@ -129,11 +135,13 @@ export function shikiToMonaco(
             console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
 
           const tokensLength = result.tokens.length / 2
-          const tokens: any[] = []
+          const tokens: MonacoLineToken[] = []
+
           for (let j = 0; j < tokensLength; j++) {
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
             const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
+
             // Because Monaco only support one scope per token,
             // we workaround this to use color to trace back the scope
             const scope = findScopeByColor(color) || ''
@@ -145,53 +153,4 @@ export function shikiToMonaco(
       })
     }
   }
-}
-
-class TokenizerState implements monacoNs.languages.IState {
-  constructor(
-    private _ruleStack: StateStack,
-  ) { }
-
-  public get ruleStack(): StateStack {
-    return this._ruleStack
-  }
-
-  public clone(): TokenizerState {
-    return new TokenizerState(this._ruleStack)
-  }
-
-  public equals(other: monacoNs.languages.IState): boolean {
-    if (
-      !other
-      || !(other instanceof TokenizerState)
-      || other !== this
-      || other._ruleStack !== this._ruleStack
-    ) {
-      return false
-    }
-
-    return true
-  }
-}
-
-function normalizeColor(color: undefined): undefined
-function normalizeColor(color: string | string[]): string
-function normalizeColor(color: string | string[] | undefined): string | undefined
-function normalizeColor(color: string | string[] | undefined): string | undefined {
-  // Some themes have an array of colors (not yet sure why), here we pick the first one
-  // https://github.com/shikijs/shiki/issues/894
-  // https://github.com/shikijs/textmate-grammars-themes/pull/117
-  if (Array.isArray(color))
-    color = color[0]
-
-  if (!color)
-    return undefined
-
-  color = (color.charCodeAt(0) === 35 ? color.slice(1) : color).toLowerCase()
-
-  // #RGB => #RRGGBB - Monaco does not support hex color with 3 or 4 digits
-  if (color.length === 3 || color.length === 4)
-    color = color.split('').map(c => c + c).join('')
-
-  return color
 }

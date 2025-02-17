@@ -143,6 +143,14 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * @deprecated
    */
   getInternalContext: () => ShikiInternal
+  /**
+   * Get bundled languages object
+   */
+  getBundledLanguages: () => Record<BundledLangKeys, LanguageInput>
+  /**
+   * Get bundled themes object
+   */
+  getBundledThemes: () => Record<BundledThemeKeys, ThemeInput>
 }
 
 /**
