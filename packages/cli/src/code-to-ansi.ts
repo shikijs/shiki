@@ -1,6 +1,6 @@
 import type { BundledLanguage, BundledTheme } from 'shiki'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import c from 'chalk'
+import c from 'ansis'
 import { codeToTokensBase, getSingletonHighlighter } from 'shiki'
 import { hexApplyAlpha } from './colors'
 

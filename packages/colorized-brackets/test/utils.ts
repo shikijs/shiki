@@ -1,4 +1,4 @@
-import c from 'picocolors'
+import c from 'ansis'
 
 interface ColoredBracket {
   bracket: string
