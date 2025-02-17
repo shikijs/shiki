@@ -143,7 +143,6 @@ export default withMermaid(defineConfig({
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
-    // @ts-expect-error Waits for https://github.com/vuejs/vitepress/pull/4507
     languages: ['js', 'jsx', 'ts', 'tsx'],
     config: (md) => {
       md.use(groupIconMdPlugin)
