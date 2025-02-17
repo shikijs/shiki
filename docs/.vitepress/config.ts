@@ -52,6 +52,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
 ]
 
 const BLOGS: DefaultTheme.NavItemWithLink[] = [
+  { text: 'Shiki v3.0', link: '/blog/v3' },
   { text: 'Shiki v2.0', link: '/blog/v2' },
   { text: 'The Evolution of Shiki v1.0', link: 'https://nuxt.com/blog/shiki-v1' },
 ]
