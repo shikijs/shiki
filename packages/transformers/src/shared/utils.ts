@@ -1,3 +1,11 @@
+function isTab(part: string): boolean {
+  return part === '\t'
+}
+
+function isSpace(part: string): boolean {
+  return part === ' ' || part === '\t'
+}
+
 export function separateContinuousSpaces(inputs: string[]): string[] {
   const result: string[] = []
   let current = ''
@@ -25,14 +33,6 @@ export function separateContinuousSpaces(inputs: string[]): string[] {
   bump()
 
   return result
-}
-
-export function isTab(part: string): boolean {
-  return part === '\t'
-}
-
-export function isSpace(part: string): boolean {
-  return part === ' ' || part === '\t'
 }
 
 export function splitSpaces(

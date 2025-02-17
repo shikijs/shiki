@@ -6,8 +6,8 @@ import type { Diff } from 'diff-match-patch-es'
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from 'shiki'
 import fs from 'node:fs/promises'
 import process from 'node:process'
+import c from 'ansis'
 import { diffCleanupSemantic, diffMain } from 'diff-match-patch-es'
-import c from 'picocolors'
 import { format } from 'prettier'
 import { bundledLanguages, createHighlighter, createJavaScriptRegexEngine } from 'shiki'
 import { version } from '../package.json'
@@ -42,7 +42,7 @@ async function run() {
       .catch(() => '')
 
     if (!sample) {
-      console.log(c.dim(`[${lang}] Sample not found`))
+      console.log(c.dim`[${lang}] Sample not found`)
       continue
     }
 
@@ -85,7 +85,7 @@ async function run() {
     }
     catch (e: any) {
       highlightMatch = 'error'
-      console.log(c.red(`[${lang}] Error ${e} ${e.cause || ''}`))
+      console.log(c.red`[${lang}] Error ${e} ${e.cause || ''}`)
     }
     finally {
       shiki?.dispose()
@@ -101,7 +101,7 @@ async function run() {
       highlightB = serializeTokens(shiki, sample, lang)
     }
     catch (e: any) {
-      console.log(c.red(`[${lang}] Error ${e} ${e.cause || ''}`))
+      console.log(c.red`[${lang}] Error ${e} ${e.cause || ''}`)
     }
     finally {
       shiki?.dispose()
@@ -115,7 +115,7 @@ async function run() {
     diffCleanupSemantic(highlightDiff)
 
     if (highlightB && highlightMatch !== true) {
-      console.log(c.yellow(`[${lang}] Mismatch`))
+      console.log(c.yellow`[${lang}] Mismatch`)
 
       await fs.mkdir(new URL('./compares', import.meta.url), { recursive: true })
 
@@ -137,7 +137,7 @@ async function run() {
       )
     }
     else {
-      console.log(c.green(`[${lang}] OK`))
+      console.log(c.green`[${lang}] OK`)
     }
 
     report.push({

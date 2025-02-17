@@ -2,7 +2,7 @@ import type { HighlighterGeneric } from '@shikijs/types'
 import type {} from 'hast'
 import type { BundledLanguage } from './langs-bundle-web'
 import type { BundledTheme } from './themes'
-import { createdBundledHighlighter, createSingletonShorthands } from './core'
+import { createdBundledHighlighter, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
 import { createOnigurumaEngine } from './engine-oniguruma'
 import { bundledLanguages } from './langs-bundle-web'
 import { bundledThemes } from './themes'
@@ -45,4 +45,5 @@ export const {
   BundledTheme
 >(
   createHighlighter,
+  { guessEmbeddedLanguages },
 )

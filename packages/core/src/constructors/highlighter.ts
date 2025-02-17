@@ -25,6 +25,8 @@ export async function createHighlighterCore(options: HighlighterCoreOptions<fals
     codeToTokens: (code, options) => codeToTokens(internal, code, options),
     codeToHast: (code, options) => codeToHast(internal, code, options),
     codeToHtml: (code, options) => codeToHtml(internal, code, options),
+    getBundledLanguages: () => ({}),
+    getBundledThemes: () => ({}),
     ...internal,
     getInternalContext: () => internal,
   }
@@ -48,6 +50,8 @@ export function createHighlighterCoreSync(options: HighlighterCoreOptions<true>)
     codeToTokens: (code, options) => codeToTokens(internal, code, options),
     codeToHast: (code, options) => codeToHast(internal, code, options),
     codeToHtml: (code, options) => codeToHtml(internal, code, options),
+    getBundledLanguages: () => ({}),
+    getBundledThemes: () => ({}),
     ...internal,
     getInternalContext: () => internal,
   }

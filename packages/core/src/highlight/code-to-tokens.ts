@@ -1,7 +1,7 @@
-import type { CodeToTokensOptions, GrammarState, ShikiInternal, ThemedToken, ThemedTokenWithVariants, TokensResult } from '@shikijs/types'
+import type { CodeToTokensOptions, GrammarState, ShikiInternal, ThemedToken, TokensResult } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
-import { applyColorReplacements, getTokenStyleObject, resolveColorReplacements } from '../utils'
+import { applyColorReplacements, flatTokenVariants, resolveColorReplacements } from '../utils'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 
@@ -51,7 +51,7 @@ export function codeToTokens(
     const themeRegs = themes.map(t => internal.getTheme(t.theme))
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
-      .map(line => line.map(token => mergeToken(token, themesOrder, cssVariablePrefix, defaultColor)))
+      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor)))
 
     if (grammarState)
       setLastGrammarStateToMap(tokens, grammarState)
@@ -94,41 +94,4 @@ export function codeToTokens(
     rootStyle,
     grammarState,
   }
-}
-
-function mergeToken(
-  merged: ThemedTokenWithVariants,
-  variantsOrder: string[],
-  cssVariablePrefix: string,
-  defaultColor: string | boolean,
-): ThemedToken {
-  const token: ThemedToken = {
-    content: merged.content,
-    explanation: merged.explanation,
-    offset: merged.offset,
-  }
-
-  const styles = variantsOrder.map(t => getTokenStyleObject(merged.variants[t]))
-
-  // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
-  const styleKeys = new Set(styles.flatMap(t => Object.keys(t)))
-  const mergedStyles: Record<string, string> = {}
-
-  styles.forEach((cur, idx) => {
-    for (const key of styleKeys) {
-      const value = cur[key] || 'inherit'
-
-      if (idx === 0 && defaultColor) {
-        mergedStyles[key] = value
-      }
-      else {
-        const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
-        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
-        mergedStyles[varKey] = value
-      }
-    }
-  })
-
-  token.htmlStyle = mergedStyles
-  return token
 }
