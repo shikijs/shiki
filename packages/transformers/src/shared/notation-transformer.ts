@@ -10,7 +10,7 @@ export interface MatchAlgorithmOptions {
    * Match algorithm to use
    *
    * @see https://shiki.style/packages/transformers#matching-algorithm
-   * @default 'v1'
+   * @default 'v3'
    */
   matchAlgorithm?: MatchAlgorithm
 }
