@@ -57,11 +57,15 @@ export function transformerMetaWordHighlight(
 
 export function findAllSubstringIndexes(str: string, substr: string): number[] {
   const indexes = []
-  const re = new RegExp(substr, 'g')
-  let match = re.exec(str)
-  while (match !== null) {
-    indexes.push(match.index)
-    match = re.exec(str)
+  let cursor = 0
+  while (true) {
+    const index = str.indexOf(substr, cursor)
+    if (index === -1 || index >= str.length)
+      break
+    if (index < cursor)
+      break
+    indexes.push(cursor)
+    cursor = index + substr.length
   }
   return indexes
 }
