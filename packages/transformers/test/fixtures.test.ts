@@ -14,6 +14,10 @@ import {
   transformerRenderWhitespace,
 } from '../src'
 
+const ONLY: string[] = [
+  // 'comment-highlight',
+]
+
 function suite(
   name: string,
   files: Record<string, string>,
@@ -26,7 +30,8 @@ function suite(
       if (path.endsWith('.output.html'))
         continue
 
-      it(path, async () => {
+      const skip = ONLY.length && !ONLY.some(i => path.includes(i))
+      it.skipIf(skip)(path, async () => {
         const ext = path.split('.').pop()!
 
         let code = await codeToHtml(files[path], {

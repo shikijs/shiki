@@ -5,6 +5,7 @@ export type ParsedComments = {
   line: Element
   token: Element
   info: [prefix: string, content: string, suffix?: string]
+  isLineCommentOnly: boolean
   isJsxStyle: boolean
 }[]
 
@@ -35,6 +36,49 @@ export function parseComments(
   const out: ParsedComments = []
 
   for (const line of lines) {
+    // We split nested comments
+    if (matchAlgorithm === 'v3') {
+      const splittedElements = line.children.flatMap((element, idx) => {
+        if (element.type !== 'element')
+          return element
+
+        const token = element.children[0]
+        if (token.type !== 'text')
+          return element
+
+        const isLast = idx === line.children.length - 1
+        const isComment = matchToken(token.value, isLast)
+        if (!isComment)
+          return element
+        const rawSplits = token.value.split(/(\s+\/\/)/)
+        if (rawSplits.length <= 1)
+          return element
+
+        let splits: string[] = [rawSplits[0]]
+        for (let i = 1; i < rawSplits.length; i += 2) {
+          splits.push(rawSplits[i] + (rawSplits[i + 1] || ''))
+        }
+        splits = splits.filter(Boolean)
+        if (splits.length <= 1)
+          return element
+
+        return splits.map((split) => {
+          return <Element>{
+            ...element,
+            children: [
+              {
+                type: 'text',
+                value: split,
+              },
+            ],
+          }
+        })
+      })
+
+      if (splittedElements.length !== line.children.length)
+        line.children = splittedElements
+    }
+
     const elements = line.children
     let start = elements.length - 1
     if (matchAlgorithm === 'v1')
@@ -57,11 +101,13 @@ export function parseComments(
         continue
 
       if (jsx && !isLast && i !== 0) {
+        const isJsxStyle = isValue(elements[i - 1], '{') && isValue(elements[i + 1], '}')
         out.push({
           info: match,
           line,
           token,
-          isJsxStyle: isValue(elements[i - 1], '{') && isValue(elements[i + 1], '}'),
+          isLineCommentOnly: elements.length === 3 && token.children.length === 1,
+          isJsxStyle,
         })
       }
       else {
@@ -69,6 +115,7 @@ export function parseComments(
           info: match,
           line,
           token,
+          isLineCommentOnly: elements.length === 1 && token.children.length === 1,
           isJsxStyle: false,
         })
       }
@@ -123,11 +170,25 @@ function matchToken(text: string, isLast: boolean): [prefix: string, content: st
  * For matchAlgorithm v1
  */
 export function v1ClearEndCommentPrefix(text: string): string {
-  const regex = /(?:\/\/|["'#]|;{1,2}|%{1,2}|--)(.*)$/
-  const result = regex.exec(text)
+  const match = text.match(/(?:\/\/|["'#]|;{1,2}|%{1,2}|--)(\s*)$/)
 
-  if (result && result[1].trim().length === 0) {
-    return text.slice(0, result.index)
+  if (match && match[1].trim().length === 0) {
+    return text.slice(0, match.index)
+  }
+
+  return text
+}
+
+/**
+ * Remove empty comment prefixes at line end, e.g. `// `
+ *
+ * For matchAlgorithm v3
+ */
+export function v3ClearEndCommentPrefix(text: string): string {
+  const match = text.match(/(?:\/\/|#|;{1,2}|%{1,2}|--)(\s*)$/)
+
+  if (match && match[1].trim().length === 0) {
+    return text.slice(0, match.index).trimEnd()
   }
 
   return text
