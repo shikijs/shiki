@@ -56,7 +56,7 @@ export function transformerMetaWordHighlight(
 }
 
 export function findAllSubstringIndexes(str: string, substr: string): number[] {
-  const indexes = []
+  const indexes: number[] = []
   let cursor = 0
   while (true) {
     const index = str.indexOf(substr, cursor)
@@ -64,7 +64,7 @@ export function findAllSubstringIndexes(str: string, substr: string): number[] {
       break
     if (index < cursor)
       break
-    indexes.push(cursor)
+    indexes.push(index)
     cursor = index + substr.length
   }
   return indexes
