@@ -6,7 +6,7 @@ export default defineBuildConfig({
     'src/types.ts',
     'src/textmate.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
     dts: {

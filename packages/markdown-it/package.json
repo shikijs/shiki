@@ -18,36 +18,13 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./core": {
-      "types": "./dist/core.d.mts",
-      "default": "./dist/core.mjs"
-    },
-    "./async": {
-      "types": "./dist/async.d.mts",
-      "default": "./dist/async.mjs"
-    }
+    ".": "./dist/index.mjs",
+    "./core": "./dist/core.mjs",
+    "./async": "./dist/async.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "core": [
-        "./dist/core.d.mts"
-      ],
-      "async": [
-        "./dist/async.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
