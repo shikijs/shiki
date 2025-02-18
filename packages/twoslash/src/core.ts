@@ -6,6 +6,7 @@ import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/typ
 import type { Element, ElementContent, Text } from 'hast'
 import type { TwoslashExecuteOptions, TwoslashGenericFunction } from 'twoslash'
 
+import type { ModuleResolutionKind } from 'typescript'
 import type { TransformerTwoslashOptions, TwoslashRenderer, TwoslashShikiFunction, TwoslashShikiReturn } from './types'
 import { splitTokens } from '@shikijs/core'
 import { ShikiTwoslashError } from './error'
@@ -20,6 +21,9 @@ export * from './types'
 export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   return {
     customTags: ['annotate', 'log', 'warn', 'error'],
+    compilerOptions: {
+      moduleResolution: 100 satisfies ModuleResolutionKind.Bundler,
+    },
   }
 }
 
