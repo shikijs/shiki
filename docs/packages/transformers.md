@@ -177,6 +177,13 @@ console.log('Highlighted')
 console.log('Highlighted')
 console.log('Not highlighted')
 ```
+
+```ts
+console.log('Not highlighted')
+// [\!code highlight:1]
+console.log('Highlighted')
+console.log('Not highlighted')
+```
 ````
 
 Renders:
@@ -184,6 +191,13 @@ Renders:
 ```ts
 // [!code highlight:3]
 console.log('Highlighted')
+console.log('Highlighted')
+console.log('Not highlighted')
+```
+
+```ts
+console.log('Not highlighted')
+// [!code highlight:1]
 console.log('Highlighted')
 console.log('Not highlighted')
 ```

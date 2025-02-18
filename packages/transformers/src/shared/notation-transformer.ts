@@ -97,8 +97,14 @@ export function createCommentNotationTransformer(
         }
       }
 
-      for (const line of linesToRemove)
-        code.children.splice(code.children.indexOf(line), 1)
+      for (const line of linesToRemove) {
+        const index = code.children.indexOf(line)
+        const nextLine = code.children[index + 1]
+        let removeLength = 1
+        if (nextLine?.type === 'text' && nextLine?.value === '\n')
+          removeLength = 2
+        code.children.splice(index, removeLength)
+      }
     },
   }
 }
