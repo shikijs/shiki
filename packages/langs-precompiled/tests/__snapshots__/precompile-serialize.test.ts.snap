@@ -92,7 +92,7 @@ exports[`precompile 1`] = `
         },
       },
       end: /*@__PURE__*/ new EmulatedRegExp("^(?=\\\\P{space})|(?!^)", "dgv", {
-        strategy: "search_start_clip",
+        strategy: "clip_search",
       }),
       patterns: [
         {
@@ -113,7 +113,7 @@ exports[`precompile 1`] = `
         "1": { name: "punctuation.whitespace.comment.leading.yaml" },
       },
       end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
-        strategy: "search_start_clip",
+        strategy: "clip_search",
       }),
       patterns: [
         {
@@ -378,7 +378,7 @@ exports[`precompile 1`] = `
     property: {
       begin: /(?=!|&)/dgv,
       end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
-        strategy: "search_start_clip",
+        strategy: "clip_search",
       }),
       name: "meta.property.yaml",
       patterns: [

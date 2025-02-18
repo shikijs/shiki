@@ -6,7 +6,7 @@ export default defineBuildConfig({
     'src/engine-compile.ts',
     'src/engine-raw.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
     dts: {

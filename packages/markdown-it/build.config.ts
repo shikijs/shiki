@@ -6,7 +6,7 @@ export default defineBuildConfig({
     'src/core.ts',
     'src/async.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
     dts: {

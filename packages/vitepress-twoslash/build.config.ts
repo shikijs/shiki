@@ -7,7 +7,7 @@ export default defineBuildConfig({
     'src/client.ts',
     'src/cache-fs.ts',
   ],
-  declaration: true,
+  declaration: 'node16',
   rollup: {
     emitCJS: false,
   },

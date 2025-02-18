@@ -6,9 +6,13 @@ outline: deep
 
 We suggest you to migrate step by step, following each version's migration guide.
 
+## Migrate from v2.0
+
+If you are on v2.0 and there is no warning in your usage, you should be able to directly bump to v3.0, read [Shiki v3.0](/blog/v3) for more details.
+
 ## Migrate from v1.0
 
-There is no hard breaking changes in v2.0, read [Shiki v2.0](/blog/v2) for more details.
+We recommend you to [migrate to v2.0 first](/blog/v2), then to v3.0.
 
 ## Migrate from v0.14
 
