@@ -31,7 +31,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
     rules = []
     const themeSettings = theme.settings || theme.tokenColors
 
-    for (const { scope, settings: { foreground, background, fontStyle } } of themeSettings) {
+    for (const { scope, settings: { foreground, background, fontStyle } = {} } of themeSettings) {
       const scopes = Array.isArray(scope) ? scope : [scope]
 
       for (const s of scopes) {
