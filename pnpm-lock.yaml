@@ -151,8 +151,8 @@ catalogs:
       specifier: ^1.1.4
       version: 1.1.4
     oniguruma-to-es:
-      specifier: ^3.1.0
-      version: 3.1.0
+      specifier: ^3.1.1
+      version: 3.1.1
     pinia:
       specifier: ^3.0.1
       version: 3.0.1
@@ -550,7 +550,7 @@ importers:
         version: 10.0.2
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 3.1.0
+        version: 3.1.1
 
   packages/engine-oniguruma:
     dependencies:
@@ -582,7 +582,7 @@ importers:
         version: link:../types
       oniguruma-to-es:
         specifier: 'catalog:'
-        version: 3.1.0
+        version: 3.1.1
     devDependencies:
       tm-grammars:
         specifier: 'catalog:'
@@ -4273,8 +4273,8 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-to-es@3.1.0:
-    resolution: {integrity: sha512-BJ3Jy22YlgejHSO7Fvmz1kKazlaPmRSUH+4adTDUS/dKQ4wLxI+gALZ8updbaux7/m7fIlpgOZ5fp/Inq5jUAw==}
+  oniguruma-to-es@3.1.1:
+    resolution: {integrity: sha512-bUH8SDvPkH3ho3dvwJwfonjlQ4R80vjyvrU8YpxuROddv55vAEJrTuCuCVUhhsHbtlD9tGGbaNApGQckXhS8iQ==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -9384,7 +9384,7 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-to-es@3.1.0:
+  oniguruma-to-es@3.1.1:
     dependencies:
       emoji-regex-xs: 1.0.0
       regex: 6.0.1

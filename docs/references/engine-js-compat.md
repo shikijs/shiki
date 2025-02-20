@@ -2,11 +2,11 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Wednesday, February 5, 2025
+> Generated on Thursday, February 20, 2025
 >
-> Version `2.3.1`
+> Version `3.0.0`
 >
-> Runtime: Node.js v22.13.1
+> Runtime: Node.js v22.14.0
 
 ## Report Summary
 
@@ -206,7 +206,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | svelte             | ✅ OK           |               645 |               - |      |
 | system-verilog     | ✅ OK           |               102 |               - |      |
 | systemd            | ✅ OK           |                32 |               - |      |
-| talonscript        | ✅ OK           |                44 |               - |      |
+| talonscript        | ✅ OK           |                45 |               - |      |
 | tasl               | ✅ OK           |                23 |               - |      |
 | tcl                | ✅ OK           |                34 |               - |      |
 | templ              | ✅ OK           |               682 |               - |      |
