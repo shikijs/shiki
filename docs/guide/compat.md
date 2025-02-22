@@ -4,7 +4,7 @@ outline: deep
 
 # Compatibility Build
 
-::: warn
+::: warning
 This is a compatibility build for v0.x users. And this package is no longer maintained since v3. Please migrate to the latest version.
 :::
 
