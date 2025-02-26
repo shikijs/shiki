@@ -37,6 +37,9 @@
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
+  "peerDependencies": {
+    "typescript": ">4"
+  },
   "dependencies": {
     "@shikijs/core": "workspace:*",
     "@shikijs/types": "workspace:*",
@@ -48,8 +51,5 @@
     "@shikijs/twoslash": "workspace:*",
     "hast-util-from-html": "catalog:",
     "typescript": "catalog:"
-  },
-  "peerDependencies": {
-    "typescript": ">4"
   }
 }
