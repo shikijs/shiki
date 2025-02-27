@@ -37,6 +37,9 @@
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
+  "peerDependencies": {
+    "typescript": ">=5.5.0"
+  },
   "dependencies": {
     "@shikijs/core": "workspace:*",
     "@shikijs/types": "workspace:*",
