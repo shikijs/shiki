@@ -58,8 +58,8 @@ And then in your [`.vitepress/theme/index.ts`](https://vitepress.dev/guide/custo
 
 ```ts twoslash [.vitepress/theme/index.ts]
 // @noErrors: true
-import type { EnhanceAppContext } from 'vitepress' // [!code hl]
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import type { EnhanceAppContext } from 'vitepress'
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client' // [!code hl]
 import Theme from 'vitepress/theme'
 
 import '@shikijs/vitepress-twoslash/style.css' // [!code hl]
