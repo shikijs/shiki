@@ -1,12 +1,20 @@
 import type { Element, Root } from 'hast'
 import type { CodeToHastOptions } from './options'
 import type { CodeToTokensOptions, ThemedToken, TokensResult } from './tokens'
+import type { Awaitable } from './utils'
 
 export interface TransformerOptions {
   /**
    * Transformers for the Shiki pipeline.
    */
   transformers?: ShikiTransformer[]
+}
+
+export interface AsyncTransformerOptions {
+  /**
+   * Async transformers for the Shiki pipeline.
+   */
+  transformers?: ShikiAsyncTransformer[]
 }
 
 export interface ShikiTransformerContextMeta { }
@@ -87,4 +95,48 @@ export interface ShikiTransformer {
    * This hook will only be called with `codeToHtml`.
    */
   postprocess?: (this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => string | void
+}
+
+export interface ShikiAsyncTransformer {
+  /**
+   * Name of the transformer
+   */
+  name?: string
+  /**
+   * Transform the raw input code before passing to the highlighter.
+   */
+  preprocess?: (this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions) => Awaitable<string | void>
+  /**
+   * Transform the full tokens list before converting to HAST.
+   * Return a new tokens list will replace the original one.
+   */
+  tokens?: (this: ShikiTransformerContextSource, tokens: ThemedToken[][]) => Awaitable<ThemedToken[][] | void>
+  /**
+   * Transform the entire generated HAST tree. Return a new Node will replace the original one.
+   */
+  root?: (this: ShikiTransformerContext, hast: Root) => Awaitable<Root | void>
+  /**
+   * Transform the `<pre>` element. Return a new Node will replace the original one.
+   */
+  pre?: (this: ShikiTransformerContext, hast: Element) => Awaitable<Element | void>
+  /**
+   * Transform the `<code>` element. Return a new Node will replace the original one.
+   */
+  code?: (this: ShikiTransformerContext, hast: Element) => Awaitable<Element | void>
+  /**
+   * Transform each line `<span class="line">` element.
+   *
+   * @param hast
+   * @param line 1-based line number
+   */
+  line?: (this: ShikiTransformerContext, hast: Element, line: number) => Awaitable<Element | void>
+  /**
+   * Transform each token `<span>` element.
+   */
+  span?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element, token: ThemedToken) => Awaitable<Element | void>
+  /**
+   * Transform the generated HTML string before returning.
+   * This hook will only be called with `codeToHtml`.
+   */
+  postprocess?: (this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => Awaitable<string | void>
 }
