@@ -15,18 +15,18 @@ import type {
   Text,
 } from 'hast'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import { quansync, toGenerator } from 'quansync'
+import { quansync } from 'quansync/macro'
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
 import { getAsyncTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'
 
-const $tokensToHast = quansync(function* (
+const $tokensToHast = quansync(async (
   tokens: ThemedToken[][],
   options: CodeToHastRenderOptions & AsyncTransformerOptions,
   transformerContext: ShikiTransformerContextSource,
   grammarState: GrammarState | undefined = getLastGrammarStateFromMap(tokens),
-): Generator<unknown, Root> {
+): Promise<Root> => {
   const transformers = getAsyncTransformers(options)
 
   const lines: (Element | Text)[] = []
@@ -131,7 +131,7 @@ const $tokensToHast = quansync(function* (
 
       for (const transformer of transformers) {
         if (transformer?.span)
-          tokenNode = (yield* toGenerator(transformer.span.call(context, tokenNode, idx + 1, col, lineNode, token))) || tokenNode
+          tokenNode = (await transformer.span.call(context, tokenNode, idx + 1, col, lineNode, token)) || tokenNode
       }
 
       if (structure === 'inline')
@@ -144,7 +144,7 @@ const $tokensToHast = quansync(function* (
     if (structure === 'classic') {
       for (const transformer of transformers) {
         if (transformer?.line)
-          lineNode = (yield* toGenerator(transformer.line.call(context, lineNode, idx + 1))) || lineNode
+          lineNode = await transformer.line.call(context, lineNode, idx + 1) || lineNode
       }
 
       lineNodes.push(lineNode)
@@ -155,14 +155,14 @@ const $tokensToHast = quansync(function* (
   if (structure === 'classic') {
     for (const transformer of transformers) {
       if (transformer?.code)
-        codeNode = (yield* toGenerator(transformer.code.call(context, codeNode))) || codeNode
+        codeNode = await transformer.code.call(context, codeNode) || codeNode
     }
 
     preNode.children.push(codeNode)
 
     for (const transformer of transformers) {
       if (transformer?.pre)
-        preNode = (yield* toGenerator(transformer.pre.call(context, preNode))) || preNode
+        preNode = await transformer.pre.call(context, preNode) || preNode
     }
 
     root.children.push(preNode)
@@ -171,7 +171,7 @@ const $tokensToHast = quansync(function* (
   let result = root
   for (const transformer of transformers) {
     if (transformer?.root)
-      result = (yield* toGenerator(transformer.root.call(context, result))) || result
+      result = await transformer.root.call(context, result) || result
   }
 
   if (grammarState)
@@ -182,7 +182,7 @@ const $tokensToHast = quansync(function* (
 
 export const tokensToHast = $tokensToHast.sync
 
-const $codeToHast = quansync(function* (
+const $codeToHast = quansync(async (
   internal: ShikiInternal,
   code: string,
   options: CodeToHastOptions & AsyncTransformerOptions,
@@ -192,14 +192,14 @@ const $codeToHast = quansync(function* (
     codeToHast: (_code, _options) => $codeToHast.sync(internal, _code, _options),
     codeToTokens: (_code, _options) => codeToTokens(internal, _code, _options),
   },
-): Generator<unknown, Root> {
+): Promise<Root> => {
   let input = code
 
   const transformers = getAsyncTransformers(options)
 
   for (const transformer of transformers) {
     if (transformer?.preprocess)
-      input = (yield* toGenerator(transformer.preprocess.call(transformerContext, input, options))) || input
+      input = await transformer.preprocess.call(transformerContext, input, options) || input
   }
 
   let {
@@ -229,10 +229,10 @@ const $codeToHast = quansync(function* (
 
   for (const transformer of transformers) {
     if (transformer?.tokens)
-      tokens = (yield* toGenerator(transformer.tokens.call(contextSource, tokens))) || tokens
+      tokens = await transformer.tokens.call(contextSource, tokens) || tokens
   }
 
-  const hast = yield* $tokensToHast(
+  const hast = await $tokensToHast(
     tokens,
     {
       ...options,

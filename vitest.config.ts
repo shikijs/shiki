@@ -1,9 +1,11 @@
+import Quansync from 'unplugin-quansync/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 import { wasmPlugin } from './packages/engine-oniguruma/rollup.config.mjs'
 
 export default defineConfig({
   plugins: [
+    Quansync(),
     wasmPlugin(),
     tsconfigPaths(),
   ],
