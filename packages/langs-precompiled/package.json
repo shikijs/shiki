@@ -178,6 +178,7 @@
     "./lean": "./dist/lean.mjs",
     "./less": "./dist/less.mjs",
     "./liquid": "./dist/liquid.mjs",
+    "./llvm": "./dist/llvm.mjs",
     "./log": "./dist/log.mjs",
     "./logo": "./dist/logo.mjs",
     "./lua": "./dist/lua.mjs",
@@ -327,6 +328,7 @@
     "./mediawiki": "./dist/mediawiki.mjs",
     "./wiki": "./dist/wiki.mjs",
     "./wikitext": "./dist/wikitext.mjs",
+    "./wit": "./dist/wit.mjs",
     "./wl": "./dist/wl.mjs",
     "./wolfram": "./dist/wolfram.mjs",
     "./xml": "./dist/xml.mjs",
@@ -346,15 +348,15 @@
     "node": ">=20"
   },
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
+    "prepare": "tsx scripts/prepare.ts",
     "build": "pnpm prepare",
     "prepublishOnly": "nr prepare"
   },
   "dependencies": {
     "@shikijs/types": "workspace:*",
-    "oniguruma-to-es": "catalog:"
+    "oniguruma-to-es": "catalog:prod"
   },
   "devDependencies": {
-    "tm-grammars": "catalog:"
+    "tm-grammars": "catalog:inlined"
   }
 }

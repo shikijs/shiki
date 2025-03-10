@@ -43,13 +43,13 @@
   "dependencies": {
     "@shikijs/core": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "twoslash": "catalog:"
+    "twoslash": "catalog:integrations"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "catalog:",
-    "@iconify-json/codicon": "catalog:",
+    "@iconify-json/carbon": "catalog:icons",
+    "@iconify-json/codicon": "catalog:icons",
     "@shikijs/twoslash": "workspace:*",
-    "hast-util-from-html": "catalog:",
-    "typescript": "catalog:"
+    "hast-util-from-html": "catalog:inlined",
+    "typescript": "catalog:cli"
   }
 }

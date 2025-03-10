@@ -42,12 +42,12 @@
     }
   },
   "dependencies": {
-    "markdown-it": "catalog:",
+    "markdown-it": "catalog:integrations",
     "shiki": "workspace:*"
   },
   "devDependencies": {
     "@shikijs/transformers": "workspace:*",
-    "@types/markdown-it": "catalog:",
-    "markdown-it-async": "catalog:"
+    "@types/markdown-it": "catalog:types",
+    "markdown-it-async": "catalog:integrations"
   }
 }

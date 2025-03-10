@@ -46,7 +46,7 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
+    "prepare": "tsx scripts/prepare.ts",
     "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=4096 rollup -c",
     "dev": "rollup -cw",
     "prepublishOnly": "nr build",
@@ -60,13 +60,13 @@
     "@shikijs/langs": "workspace:*",
     "@shikijs/themes": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "@shikijs/vscode-textmate": "catalog:",
-    "@types/hast": "catalog:"
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "@types/hast": "catalog:types"
   },
   "devDependencies": {
-    "rollup-plugin-copy": "catalog:",
-    "tm-grammars": "catalog:",
-    "tm-themes": "catalog:",
-    "vscode-oniguruma": "catalog:"
+    "rollup-plugin-copy": "catalog:bundling",
+    "tm-grammars": "catalog:inlined",
+    "tm-themes": "catalog:inlined",
+    "vscode-oniguruma": "catalog:inlined"
   }
 }

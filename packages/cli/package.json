@@ -41,12 +41,12 @@
     "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "@shikijs/vscode-textmate": "catalog:",
-    "ansis": "catalog:",
-    "minimist": "catalog:",
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "ansis": "catalog:prod",
+    "minimist": "catalog:prod",
     "shiki": "workspace:*"
   },
   "devDependencies": {
-    "@types/minimist": "catalog:"
+    "@types/minimist": "catalog:types"
   }
 }

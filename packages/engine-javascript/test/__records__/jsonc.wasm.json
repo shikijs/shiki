@@ -1,9 +1,9 @@
 [
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -33,10 +33,10 @@
     }
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -52,10 +52,10 @@
     "result": null
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -80,15 +80,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -107,10 +107,10 @@
     }
   },
   {
-    "id": "cUzVuXcqOPRT_qWTcXB9xNbgCeeBK3HHlLbRcWOl6rA",
+    "id": "DEX44nVHXTSEuJUI3vHJk-W0EqZrBXM0q3ixc7wcS0Q",
     "patterns": [
       "\"",
-      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\(?:[\"\\\\/bfnrt]|u\\h{4})",
       "\\\\."
     ],
     "args": [
@@ -130,15 +130,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -157,11 +157,11 @@
     }
   },
   {
-    "id": "_E6s271bk5s_03VDbUssLB5fZniMvRmw1ic5M-DNsW0",
+    "id": "ssuZrzQF6FUnv80HtkNiR9KV3DAklZazWAYhaGA06Sk",
     "patterns": [
-      "(,)|(?=\\})",
+      "(,)|(?=})",
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -187,10 +187,10 @@
     }
   },
   {
-    "id": "cUzVuXcqOPRT_qWTcXB9xNbgCeeBK3HHlLbRcWOl6rA",
+    "id": "DEX44nVHXTSEuJUI3vHJk-W0EqZrBXM0q3ixc7wcS0Q",
     "patterns": [
       "\"",
-      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\(?:[\"\\\\/bfnrt]|u\\h{4})",
       "\\\\."
     ],
     "args": [
@@ -210,11 +210,11 @@
     }
   },
   {
-    "id": "_E6s271bk5s_03VDbUssLB5fZniMvRmw1ic5M-DNsW0",
+    "id": "ssuZrzQF6FUnv80HtkNiR9KV3DAklZazWAYhaGA06Sk",
     "patterns": [
-      "(,)|(?=\\})",
+      "(,)|(?=})",
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -245,15 +245,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -272,10 +272,10 @@
     }
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -291,10 +291,10 @@
     "result": null
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -324,10 +324,10 @@
     }
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -343,10 +343,10 @@
     "result": null
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -371,15 +371,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -398,10 +398,10 @@
     }
   },
   {
-    "id": "cUzVuXcqOPRT_qWTcXB9xNbgCeeBK3HHlLbRcWOl6rA",
+    "id": "DEX44nVHXTSEuJUI3vHJk-W0EqZrBXM0q3ixc7wcS0Q",
     "patterns": [
       "\"",
-      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\(?:[\"\\\\/bfnrt]|u\\h{4})",
       "\\\\."
     ],
     "args": [
@@ -421,15 +421,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -448,11 +448,11 @@
     }
   },
   {
-    "id": "_E6s271bk5s_03VDbUssLB5fZniMvRmw1ic5M-DNsW0",
+    "id": "ssuZrzQF6FUnv80HtkNiR9KV3DAklZazWAYhaGA06Sk",
     "patterns": [
-      "(,)|(?=\\})",
+      "(,)|(?=})",
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -478,10 +478,10 @@
     }
   },
   {
-    "id": "cUzVuXcqOPRT_qWTcXB9xNbgCeeBK3HHlLbRcWOl6rA",
+    "id": "DEX44nVHXTSEuJUI3vHJk-W0EqZrBXM0q3ixc7wcS0Q",
     "patterns": [
       "\"",
-      "\\\\(?:[\"\\\\/bfnrt]|u[0-9a-fA-F]{4})",
+      "\\\\(?:[\"\\\\/bfnrt]|u\\h{4})",
       "\\\\."
     ],
     "args": [
@@ -501,11 +501,11 @@
     }
   },
   {
-    "id": "_E6s271bk5s_03VDbUssLB5fZniMvRmw1ic5M-DNsW0",
+    "id": "ssuZrzQF6FUnv80HtkNiR9KV3DAklZazWAYhaGA06Sk",
     "patterns": [
-      "(,)|(?=\\})",
+      "(,)|(?=})",
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",
@@ -536,15 +536,15 @@
     }
   },
   {
-    "id": "sn3Yk067whOddxXLhW9yqfvxKwUUQwTC24H-CoqGwvA",
+    "id": "ARTIzpZR2iTVzh9Cy2O7qe64NZfbg_znZYXe3X0KBCk",
     "patterns": [
-      "\\}",
+      "}",
       "\"",
       "/\\*\\*(?!/)",
       "/\\*",
       "(//).*$\\n?",
       ":",
-      "[^\\s\\}]"
+      "[^\\s}]"
     ],
     "args": [
       "{\"foo\":\"bar\"}\n",
@@ -563,10 +563,10 @@
     }
   },
   {
-    "id": "n9wQABDjtOJJyN_p9nP2p_GVfbMhC70ssy6p3Q0lvx8",
+    "id": "hutdxDYDSFRZ1hhLtML6uBqx-TvDm07mG5M1wvnDHoo",
     "patterns": [
       "\\b(?:true|false|null)\\b",
-      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?",
+      "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+\\-]?\\d+)?)?",
       "\"",
       "\\[",
       "\\{",

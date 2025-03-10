@@ -29,7 +29,7 @@
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
-    "prepare": "esno scripts/prepare.ts",
+    "prepare": "tsx scripts/prepare.ts",
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
