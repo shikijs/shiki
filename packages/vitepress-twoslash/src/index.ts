@@ -33,7 +33,7 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
     removeTwoslashNotations(code)
   }
 
-  const defaultTwoslasher = createTwoslasher(options.twoslashOptions)
+  const defaultTwoslasher = options.twoslasher || createTwoslasher(options.twoslashOptions)
 
   let twoslasher = defaultTwoslasher
   // Wrap twoslasher with cache when `resultCache` is provided

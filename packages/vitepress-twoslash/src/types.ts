@@ -1,5 +1,5 @@
 import type { TransformerTwoslashOptions } from '@shikijs/twoslash/core'
-import type { TwoslashReturn } from 'twoslash'
+import type { TwoslashInstance, TwoslashReturn } from 'twoslash'
 import type { VueSpecificOptions } from 'twoslash-vue'
 import type { TwoslashFloatingVueRendererOptions } from './renderer-floating-vue'
 
@@ -30,6 +30,12 @@ export interface VitePressPluginTwoslashOptions extends TransformerTwoslashVueOp
    * ```
    */
   typesCache?: TwoslashTypesCache
+
+  /**
+   * Custom twoslasher instance
+   * @default twoslash-vue
+   */
+  twoslasher?: TwoslashInstance
 }
 
 export interface TwoslashTypesCache {
