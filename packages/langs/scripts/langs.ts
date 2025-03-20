@@ -138,7 +138,7 @@ export { default } from './${json.name}.mjs'
       await fs.writeFile(
         `./dist/${name}.d.mts`,
         `import type { LanguageRegistration } from '@shikijs/types'
-const langs: LanguageRegistration []
+declare const langs: LanguageRegistration []
 export default langs
 `,
         'utf-8',
