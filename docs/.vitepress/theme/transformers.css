@@ -22,3 +22,17 @@
   margin: -1px -3px;
   border-radius: 4px;
 }
+
+.vp-code,
+.vp-code span {
+  /* background-color: var(--shiki-bg, inherit); */
+  text-decoration: var(--shiki-text-decoration, inherit);
+  font-weight: var(--shiki-font-weight, inherit);
+}
+
+.dark .vp-code,
+.dark .vp-code span {
+  /* background-color: var(--shiki-dark-bg, inherit); */
+  text-decoration: var(--shiki-dark-text-decoration, inherit);
+  font-weight: var(--shiki-dark-font-weight, inherit);
+}
