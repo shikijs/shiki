@@ -47,8 +47,8 @@
   ],
   "scripts": {
     "prepare": "tsx scripts/prepare.ts",
-    "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=4096 rollup -c",
-    "dev": "rollup -cw",
+    "build": "unbuild",
+    "dev": "unbuild --stub",
     "prepublishOnly": "nr build",
     "test": "vitest",
     "test:cf": "wrangler dev test/cf.ts --port 60001"
