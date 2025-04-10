@@ -232,8 +232,11 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
     let carryOnContent = ''
     let firstOffset = 0
     line.forEach((token, idx) => {
-      const isUnderline = token.fontStyle && token.fontStyle & FontStyle.Underline
-      const couldMerge = !isUnderline
+      const isDecorated = token.fontStyle && (
+        (token.fontStyle & FontStyle.Underline)
+        || (token.fontStyle & FontStyle.Strikethrough)
+      )
+      const couldMerge = !isDecorated
       if (couldMerge && token.content.match(/^\s+$/) && line[idx + 1]) {
         if (!firstOffset)
           firstOffset = token.offset

@@ -116,8 +116,13 @@ export function getTokenStyleObject(token: TokenStyles): Record<string, string> 
       styles['font-style'] = 'italic'
     if (token.fontStyle & FontStyle.Bold)
       styles['font-weight'] = 'bold'
+    const decorations = []
     if (token.fontStyle & FontStyle.Underline)
-      styles['text-decoration'] = 'underline'
+      decorations.push('underline')
+    if (token.fontStyle & FontStyle.Strikethrough)
+      decorations.push('line-through')
+    if (decorations.length)
+      styles['text-decoration'] = decorations.join(' ')
   }
   return styles
 }
