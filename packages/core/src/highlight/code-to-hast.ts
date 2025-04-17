@@ -47,12 +47,17 @@ export function codeToHast(
 
   const {
     mergeWhitespaces = true,
+    mergeSameStyleTokens = false,
   } = options
 
   if (mergeWhitespaces === true)
     tokens = mergeWhitespaceTokens(tokens)
   else if (mergeWhitespaces === 'never')
     tokens = splitWhitespaceTokens(tokens)
+
+  if (mergeSameStyleTokens) {
+    tokens = mergeAdjacentStyledTokens(tokens)
+  }
 
   const contextSource = {
     ...transformerContext,
@@ -304,5 +309,37 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
       }
       return expanded
     })
+  })
+}
+
+function mergeAdjacentStyledTokens(tokens: ThemedToken[][]): ThemedToken[][] {
+  return tokens.map((line) => {
+    const newLine: ThemedToken[] = []
+    for (const token of line) {
+      if (newLine.length === 0) {
+        newLine.push({ ...token })
+        continue
+      }
+
+      const prevToken = newLine[newLine.length - 1]
+      const prevStyle = prevToken.htmlStyle || stringifyTokenStyle(getTokenStyleObject(prevToken))
+      const currentStyle = token.htmlStyle || stringifyTokenStyle(getTokenStyleObject(token))
+      const isPrevDecorated = prevToken.fontStyle && (
+        (prevToken.fontStyle & FontStyle.Underline)
+        || (prevToken.fontStyle & FontStyle.Strikethrough)
+      )
+      const isDecorated = token.fontStyle && (
+        (token.fontStyle & FontStyle.Underline)
+        || (token.fontStyle & FontStyle.Strikethrough)
+      )
+
+      if (!isPrevDecorated && !isDecorated && prevStyle === currentStyle) {
+        prevToken.content += token.content
+      }
+      else {
+        newLine.push({ ...token })
+      }
+    }
+    return newLine
   })
 }

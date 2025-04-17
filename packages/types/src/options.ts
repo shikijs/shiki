@@ -143,6 +143,14 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   mergeWhitespaces?: boolean | 'never'
 
   /**
+   * Merge consecutive tokens with the same style to reduce the number of DOM nodes.
+   * This can improve rendering performance but may affect the structure of the output.
+   *
+   * @default false
+   */
+  mergeSameStyleTokens?: boolean
+
+  /**
    * The structure of the generated HAST and HTML.
    *
    * - `classic`: The classic structure with `<pre>` and `<code>` elements, each line wrapped with a `<span class="line">` element.
