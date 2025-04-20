@@ -44,7 +44,6 @@ export function transformerRenderWhitespace(
     root(root) {
       const pre = root.children[0] as Element
       const code = pre.tagName === 'pre' ? pre.children[0] as Element : { children: [root] }
-      // if (pre.tagName !== 'pre')
       code.children.forEach((line) => {
         if (line.type !== 'element' && line.type !== 'root')
           return
