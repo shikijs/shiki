@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises'
-import { transformerMetaHighlight } from '@shikijs/transformers'
+import { transformerMetaDiff, transformerMetaFocus, transformerMetaHighlight } from '@shikijs/transformers'
 import MarkdownIt from 'markdown-it'
 import { createHighlighter } from 'shiki'
 import { expect, it } from 'vitest'
@@ -19,6 +19,8 @@ it('run for base', { timeout: 10_000 }, async () => {
     },
     transformers: [
       transformerMetaHighlight(),
+      transformerMetaDiff(),
+      transformerMetaFocus(),
     ],
   }))
 
