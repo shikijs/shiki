@@ -87,6 +87,10 @@ const jsEngine = createJavaScriptRegexEngine({
 
 Instead of compiling regular expressions on-the-fly, we also provide pre-compiled languages for the JavaScript engine to further reduce startup time.
 
+::: warning
+Pre-compiled languages are not yet supported, due to a [known issue](https://github.com/shikijs/shiki/issues/918) that affects many languages. Please use with caution.
+:::
+
 ::: info
 Pre-compiled languages require support for RegExp UnicodeSets (the `v` flag), which requires **ES2024** or Node.js 20+, and may not work in older environments. [Can I use](https://caniuse.com/mdn-javascript_builtins_regexp_unicodesets).
 :::

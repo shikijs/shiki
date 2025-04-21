@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/twoslash",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "Shiki transformer for twoslash",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -18,14 +18,8 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./core": {
-      "types": "./dist/core.d.mts",
-      "default": "./dist/core.mjs"
-    },
+    ".": "./dist/index.mjs",
+    "./core": "./dist/core.mjs",
     "./style-rich.css": "./style-rich.css",
     "./style-classic.css": "./style-classic.css",
     "./*": "./dist/*"
@@ -33,17 +27,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "./core": [
-        "./dist/core.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "*.css",
     "dist"
@@ -54,16 +37,19 @@
     "prepublishOnly": "nr build",
     "test": "vitest"
   },
+  "peerDependencies": {
+    "typescript": ">=5.5.0"
+  },
   "dependencies": {
     "@shikijs/core": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "twoslash": "catalog:"
+    "twoslash": "catalog:integrations"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "catalog:",
-    "@iconify-json/codicon": "catalog:",
+    "@iconify-json/carbon": "catalog:icons",
+    "@iconify-json/codicon": "catalog:icons",
     "@shikijs/twoslash": "workspace:*",
-    "hast-util-from-html": "catalog:",
-    "typescript": "catalog:"
+    "hast-util-from-html": "catalog:inlined",
+    "typescript": "catalog:cli"
   }
 }

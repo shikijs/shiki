@@ -51,6 +51,7 @@ By default, the full bundle of `shiki` will be imported. If you are using a [fin
 import { fromHighlighter } from '@shikijs/markdown-it/core'
 import MarkdownIt from 'markdown-it'
 import { createHighlighterCore } from 'shiki/core'
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 const highlighter = await createHighlighterCore({
   themes: [
@@ -59,7 +60,7 @@ const highlighter = await createHighlighterCore({
   langs: [
     import('@shikijs/langs/javascript'),
   ],
-  loadWasm: import('shiki/wasm')
+  engine: createOnigurumaEngine(() => import('shiki/wasm'))
 })
 
 const md = MarkdownIt()

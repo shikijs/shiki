@@ -18,6 +18,7 @@ export default defineConfig({
     server: {
       deps: {
         inline: [
+          'vitest-package-exports',
           /\.wasm/,
         ],
       },

@@ -1,6 +1,6 @@
 import type { BundledLanguage, BundledTheme } from 'shiki'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import c from 'chalk'
+import c from 'ansis'
 import { codeToTokensBase, getSingletonHighlighter } from 'shiki'
 import { hexApplyAlpha } from './colors'
 
@@ -28,6 +28,8 @@ export async function codeToANSI(code: string, lang: BundledLanguage, theme: Bun
           text = c.italic(text)
         if (token.fontStyle & FontStyle.Underline)
           text = c.underline(text)
+        if (token.fontStyle & FontStyle.Strikethrough)
+          text = c.strikethrough(text)
       }
       output += text
     }

@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/vitepress-twoslash",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "Enable Twoslash support in VitePress",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -19,34 +19,15 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./client": {
-      "types": "./dist/client.d.mts",
-      "default": "./dist/client.mjs"
-    },
-    "./cache-fs": {
-      "types": "./dist/cache-fs.d.mts",
-      "default": "./dist/cache-fs.mjs"
-    },
+    ".": "./dist/index.mjs",
+    "./client": "./dist/client.mjs",
+    "./cache-fs": "./dist/cache-fs.mjs",
     "./style.css": "./style.css",
     "./style-core.css": "./style-core.css"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "client": [
-        "./dist/client.d.mts"
-      ],
-      "*": [
-        "./dist/index.d.mts"
-      ]
-    }
-  },
   "files": [
     "*.css",
     "dist"
@@ -58,13 +39,13 @@
   },
   "dependencies": {
     "@shikijs/twoslash": "workspace:",
-    "floating-vue": "catalog:",
-    "mdast-util-from-markdown": "catalog:",
-    "mdast-util-gfm": "catalog:",
-    "mdast-util-to-hast": "catalog:",
+    "floating-vue": "catalog:docs",
+    "mdast-util-from-markdown": "catalog:integrations",
+    "mdast-util-gfm": "catalog:integrations",
+    "mdast-util-to-hast": "catalog:integrations",
     "shiki": "workspace:*",
-    "twoslash": "catalog:",
-    "twoslash-vue": "catalog:",
-    "vue": "catalog:"
+    "twoslash": "catalog:integrations",
+    "twoslash-vue": "catalog:integrations",
+    "vue": "catalog:docs"
   }
 }

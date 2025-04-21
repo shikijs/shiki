@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/core",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "Core of Shiki",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -17,14 +17,7 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./wasm-inlined": {
-      "types": "./dist/wasm-inlined.d.mts",
-      "default": "./dist/wasm-inlined.mjs"
-    },
+    ".": "./dist/index.mjs",
     "./textmate": {
       "types": "./dist/textmate.d.mts",
       "default": "./dist/textmate.mjs"
@@ -39,23 +32,6 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "wasm-inlined": [
-        "./dist/wasm-inlined.d.mts"
-      ],
-      "types": [
-        "./dist/types.d.mts"
-      ],
-      "textmate": [
-        "./dist/textmate.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
@@ -66,11 +42,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@shikijs/engine-javascript": "workspace:*",
-    "@shikijs/engine-oniguruma": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "@shikijs/vscode-textmate": "catalog:",
-    "@types/hast": "catalog:",
-    "hast-util-to-html": "catalog:"
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "@types/hast": "catalog:types",
+    "hast-util-to-html": "catalog:inlined"
   }
 }

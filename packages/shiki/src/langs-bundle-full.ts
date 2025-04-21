@@ -650,6 +650,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/liquid')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'llvm',
+    'name': 'LLVM IR',
+    'import': (() => import('@shikijs/langs/llvm')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'log',
     'name': 'Log file',
     'import': (() => import('@shikijs/langs/log')) as DynamicImportLanguageRegistration
@@ -1278,6 +1283,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/wikitext')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'wit',
+    'name': 'WebAssembly Interface Types',
+    'import': (() => import('@shikijs/langs/wit')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'wolfram',
     'name': 'Wolfram',
     'aliases': [
@@ -1474,6 +1484,7 @@ export type BundledLanguage =
   | 'liquid'
   | 'lisp'
   | 'lit'
+  | 'llvm'
   | 'log'
   | 'logo'
   | 'lua'
@@ -1613,6 +1624,7 @@ export type BundledLanguage =
   | 'wgsl'
   | 'wiki'
   | 'wikitext'
+  | 'wit'
   | 'wl'
   | 'wolfram'
   | 'xml'

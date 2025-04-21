@@ -67,7 +67,6 @@ export class Registry extends TextMateRegistry {
       this._textmateThemeCache.set(theme, textmateTheme)
     }
 
-    // @ts-expect-error Access private `_syncRegistry`, but should work in runtime
     this._syncRegistry.setTheme(textmateTheme)
   }
 
@@ -100,7 +99,6 @@ export class Registry extends TextMateRegistry {
       unbalancedBracketSelectors: lang.unbalancedBracketSelectors || [],
     }
 
-    // @ts-expect-error Private members, set this to override the previous grammar (that can be a stub)
     this._syncRegistry._rawGrammars.set(lang.scopeName, lang)
     const g = this.loadGrammarWithConfiguration(lang.scopeName, 1, grammarConfig) as Grammar
     g.name = lang.name
@@ -119,9 +117,7 @@ export class Registry extends TextMateRegistry {
         this._resolvedGrammars.delete(e.name)
         // Reset cache
         this._loadedLanguagesCache = null
-        // @ts-expect-error clear cache
         this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
-        // @ts-expect-error clear cache
         this._syncRegistry?._grammars?.delete(e.scopeName)
         this.loadLanguage(this._langMap.get(e.name)!)
       }

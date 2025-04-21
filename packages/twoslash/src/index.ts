@@ -1,5 +1,6 @@
 import type { ShikiTransformer } from '@shikijs/types'
 import type { CreateTwoslashOptions } from 'twoslash'
+import type { ModuleResolutionKind } from 'typescript'
 import type { RendererRichOptions, TransformerTwoslashOptions } from './core'
 import { createTwoslasher } from 'twoslash'
 import { createTransformerFactory, rendererRich } from './core'
@@ -20,7 +21,12 @@ export interface TransformerTwoslashIndexOptions extends TransformerTwoslashOpti
  */
 export function transformerTwoslash(options: TransformerTwoslashIndexOptions = {}): ShikiTransformer {
   return createTransformerFactory(
-    createTwoslasher({ cache: options?.cache }),
+    createTwoslasher({
+      cache: options?.cache,
+      compilerOptions: {
+        moduleResolution: 100 satisfies ModuleResolutionKind.Bundler,
+      },
+    }),
     rendererRich(options.rendererRich),
   )(options)
 }

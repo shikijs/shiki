@@ -4,13 +4,13 @@ import type {
   ShikiTransformerContextCommon,
 } from '@shikijs/types'
 
-import { toHtml as hastToHtml } from 'hast-util-to-html'
+import { toHtml } from 'hast-util-to-html'
 
 import { getTransformers } from './_get-transformers'
 import { codeToHast } from './code-to-hast'
 import { codeToTokens } from './code-to-tokens'
 
-export { hastToHtml }
+export const hastToHtml = toHtml
 
 /**
  * Get highlighted code in HTML.

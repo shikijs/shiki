@@ -55,11 +55,17 @@ export function transformerMetaWordHighlight(
   }
 }
 
-function findAllSubstringIndexes(str: string, substr: string): number[] {
-  const indexes = []
-  let i = -1
-  // eslint-disable-next-line no-cond-assign
-  while ((i = str.indexOf(substr, i + 1)) !== -1)
-    indexes.push(i)
+export function findAllSubstringIndexes(str: string, substr: string): number[] {
+  const indexes: number[] = []
+  let cursor = 0
+  while (true) {
+    const index = str.indexOf(substr, cursor)
+    if (index === -1 || index >= str.length)
+      break
+    if (index < cursor)
+      break
+    indexes.push(index)
+    cursor = index + substr.length
+  }
   return indexes
 }

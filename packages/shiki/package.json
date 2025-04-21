@@ -1,7 +1,7 @@
 {
   "name": "shiki",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "A beautiful Syntax Highlighter.",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -17,56 +17,23 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
+    ".": "./dist/index.mjs",
     "./core": {
-      "types": "./dist/core.d.mts",
       "unwasm": "./dist/core-unwasm.mjs",
       "default": "./dist/core.mjs"
     },
     "./wasm": {
       "unwasm": "./dist/onig.wasm",
-      "types": "./dist/wasm.d.mts",
       "default": "./dist/wasm.mjs"
     },
-    "./langs": {
-      "types": "./dist/langs.d.mts",
-      "default": "./dist/langs.mjs"
-    },
-    "./themes": {
-      "types": "./dist/themes.d.mts",
-      "default": "./dist/themes.mjs"
-    },
-    "./types": {
-      "types": "./dist/types.d.mts",
-      "default": "./dist/types.mjs"
-    },
-    "./theme-css-variables": {
-      "types": "./dist/theme-css-variables.d.mts",
-      "default": "./dist/theme-css-variables.mjs"
-    },
-    "./engine/javascript": {
-      "types": "./dist/engine-javascript.d.mts",
-      "default": "./dist/engine-javascript.mjs"
-    },
-    "./engine/oniguruma": {
-      "types": "./dist/engine-oniguruma.d.mts",
-      "default": "./dist/engine-oniguruma.mjs"
-    },
-    "./textmate": {
-      "types": "./dist/textmate.d.mts",
-      "default": "./dist/textmate.mjs"
-    },
-    "./bundle/full": {
-      "types": "./dist/bundle-full.d.mts",
-      "default": "./dist/bundle-full.mjs"
-    },
-    "./bundle/web": {
-      "types": "./dist/bundle-web.d.mts",
-      "default": "./dist/bundle-web.mjs"
-    },
+    "./langs": "./dist/langs.mjs",
+    "./themes": "./dist/themes.mjs",
+    "./types": "./dist/types.mjs",
+    "./engine/javascript": "./dist/engine-javascript.mjs",
+    "./engine/oniguruma": "./dist/engine-oniguruma.mjs",
+    "./textmate": "./dist/textmate.mjs",
+    "./bundle/full": "./dist/bundle-full.mjs",
+    "./bundle/web": "./dist/bundle-web.mjs",
     "./onig.wasm": "./dist/onig.wasm",
     "./dist/*": "./dist/*",
     "./package.json": "./package.json",
@@ -75,51 +42,13 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "core": [
-        "./dist/core.d.mts"
-      ],
-      "wasm": [
-        "./dist/wasm.d.mts"
-      ],
-      "langs": [
-        "./dist/langs.d.mts"
-      ],
-      "themes": [
-        "./dist/themes.d.mts"
-      ],
-      "bundle/full": [
-        "./dist/bundle-full.d.mts"
-      ],
-      "bundle/web": [
-        "./dist/bundle-web.d.mts"
-      ],
-      "engine/javascript": [
-        "./dist/engine-javascript.d.mts"
-      ],
-      "engine/oniguruma": [
-        "./dist/engine-oniguruma.d.mts"
-      ],
-      "textmate": [
-        "./dist/textmate.d.mts"
-      ],
-      "theme-css-variables": [
-        "./dist/theme-css-variables.d.mts"
-      ],
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
-    "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=4096 rollup -c",
-    "dev": "rollup -cw",
+    "prepare": "tsx scripts/prepare.ts",
+    "build": "unbuild",
+    "dev": "unbuild --stub",
     "prepublishOnly": "nr build",
     "test": "vitest",
     "test:cf": "wrangler dev test/cf.ts --port 60001"
@@ -131,13 +60,13 @@
     "@shikijs/langs": "workspace:*",
     "@shikijs/themes": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "@shikijs/vscode-textmate": "catalog:",
-    "@types/hast": "catalog:"
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "@types/hast": "catalog:types"
   },
   "devDependencies": {
-    "rollup-plugin-copy": "catalog:",
-    "tm-grammars": "catalog:",
-    "tm-themes": "catalog:",
-    "vscode-oniguruma": "catalog:"
+    "rollup-plugin-copy": "catalog:bundling",
+    "tm-grammars": "catalog:inlined",
+    "tm-themes": "catalog:inlined",
+    "vscode-oniguruma": "catalog:inlined"
   }
 }

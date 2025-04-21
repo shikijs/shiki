@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/engine-javascript",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "Engine for Shiki using JavaScript's native RegExp",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -18,14 +18,8 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "./raw": {
-      "types": "./dist/engine-raw.d.mts",
-      "default": "./dist/engine-raw.mjs"
-    }
+    ".": "./dist/index.mjs",
+    "./raw": "./dist/engine-raw.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -40,7 +34,7 @@
   },
   "dependencies": {
     "@shikijs/types": "workspace:*",
-    "@shikijs/vscode-textmate": "catalog:",
-    "oniguruma-to-es": "catalog:"
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "oniguruma-to-es": "catalog:prod"
   }
 }

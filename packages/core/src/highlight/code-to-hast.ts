@@ -17,7 +17,6 @@ import type {
 import { FontStyle } from '@shikijs/vscode-textmate'
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
-import { warnDeprecated } from '../warn'
 import { getTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'
 
@@ -182,9 +181,6 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      if (typeof token.htmlStyle === 'string')
-        warnDeprecated('`htmlStyle` as a string is deprecated. Use an object instead.')
-
       const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
       if (style)
         tokenNode.properties.style = style
@@ -236,8 +232,11 @@ function mergeWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
     let carryOnContent = ''
     let firstOffset = 0
     line.forEach((token, idx) => {
-      const isUnderline = token.fontStyle && token.fontStyle & FontStyle.Underline
-      const couldMerge = !isUnderline
+      const isDecorated = token.fontStyle && (
+        (token.fontStyle & FontStyle.Underline)
+        || (token.fontStyle & FontStyle.Strikethrough)
+      )
+      const couldMerge = !isDecorated
       if (couldMerge && token.content.match(/^\s+$/) && line[idx + 1]) {
         if (!firstOffset)
           firstOffset = token.offset

@@ -117,6 +117,42 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
     "import": (() => import('@shikijs/themes/github-light-high-contrast')) as unknown as DynamicImportThemeRegistration
   },
   {
+    "id": "gruvbox-dark-hard",
+    "displayName": "Gruvbox Dark Hard",
+    "type": "dark",
+    "import": (() => import('@shikijs/themes/gruvbox-dark-hard')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "gruvbox-dark-medium",
+    "displayName": "Gruvbox Dark Medium",
+    "type": "dark",
+    "import": (() => import('@shikijs/themes/gruvbox-dark-medium')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "gruvbox-dark-soft",
+    "displayName": "Gruvbox Dark Soft",
+    "type": "dark",
+    "import": (() => import('@shikijs/themes/gruvbox-dark-soft')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "gruvbox-light-hard",
+    "displayName": "Gruvbox Light Hard",
+    "type": "light",
+    "import": (() => import('@shikijs/themes/gruvbox-light-hard')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "gruvbox-light-medium",
+    "displayName": "Gruvbox Light Medium",
+    "type": "light",
+    "import": (() => import('@shikijs/themes/gruvbox-light-medium')) as unknown as DynamicImportThemeRegistration
+  },
+  {
+    "id": "gruvbox-light-soft",
+    "displayName": "Gruvbox Light Soft",
+    "type": "light",
+    "import": (() => import('@shikijs/themes/gruvbox-light-soft')) as unknown as DynamicImportThemeRegistration
+  },
+  {
     "id": "houston",
     "displayName": "Houston",
     "type": "dark",
@@ -348,6 +384,12 @@ export type BundledTheme =
   | 'github-light'
   | 'github-light-default'
   | 'github-light-high-contrast'
+  | 'gruvbox-dark-hard'
+  | 'gruvbox-dark-medium'
+  | 'gruvbox-dark-soft'
+  | 'gruvbox-light-hard'
+  | 'gruvbox-light-medium'
+  | 'gruvbox-light-soft'
   | 'houston'
   | 'kanagawa-dragon'
   | 'kanagawa-lotus'

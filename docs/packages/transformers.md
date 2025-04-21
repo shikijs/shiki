@@ -201,6 +201,13 @@ console.log('Not highlighted')
 console.log('Highlighted') // [\!code highlight]
 console.log('Not highlighted')
 ```
+
+```ts
+console.log('Not highlighted')
+// [\!code highlight:1]
+console.log('Highlighted')
+console.log('Not highlighted')
+```
 ````
 
 Renders (with custom CSS rules):
@@ -210,9 +217,6 @@ console.log('Not highlighted')
 console.log('Highlighted') // [!code highlight]
 console.log('Not highlighted')
 ```
-
-- `// [!code highlight]` outputs: `<span class="line highlighted">`
-- The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
 
 ---
 

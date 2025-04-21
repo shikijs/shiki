@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/transformers",
   "type": "module",
-  "version": "2.3.2",
+  "version": "3.2.2",
   "description": "Collective of common transformers transformers for Shiki",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -18,10 +18,7 @@
   ],
   "sideEffects": false,
   "exports": {
-    ".": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
+    ".": "./dist/index.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
