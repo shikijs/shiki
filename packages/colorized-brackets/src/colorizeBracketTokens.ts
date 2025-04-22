@@ -144,7 +144,7 @@ function getColor(
   const colors
     = themeName == null
       ? DEFAULT_BRACKETS_COLORS
-      : themes[themeName] ?? builtInThemes[themeName] ?? DEFAULT_BRACKETS_COLORS
+      : getThemeColors(themeName, themes) ?? getThemeColors(themeName, builtInThemes) ?? DEFAULT_BRACKETS_COLORS
 
   const isUnexpected = level === -1
   if (isUnexpected) {
@@ -153,4 +153,17 @@ function getColor(
   else {
     return colors[level % (colors.length - 1)]
   }
+}
+
+function getThemeColors(themeName: string, themes: Record<string, string[]>): string[] | null {
+  if (themes[themeName])
+    return themes[themeName]
+
+  // check if the start of the name matches any themes
+  // this improves compatibility with "Expressive Code", which appends unique IDs to the end of themeNames
+  const startsWithName = Object.keys(themes).sort().reverse().find(key => themeName.startsWith(key))
+  if (startsWithName)
+    return themes[startsWithName]
+
+  return null
 }
