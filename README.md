@@ -12,10 +12,11 @@ A beautiful syntax highlighter based on TextMate grammar, accurate and powerful.
 
 ## Branch
 
-The main branch is currently at _v2.x_.
+The main branch is currently at _v3.x_.
 
 | Branch                                         | Description                        |
 | ---------------------------------------------- | ---------------------------------- |
+| [v2](https://github.com/shikijs/shiki/tree/v2) | v2.5 of Shiki                      |
 | [v1](https://github.com/shikijs/shiki/tree/v1) | v1.29 of Shiki                     |
 | [v0](https://github.com/shikijs/shiki/tree/v0) | v0.14 of Shiki, the legacy version |
 
