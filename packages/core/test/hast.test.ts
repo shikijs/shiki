@@ -94,3 +94,44 @@ it('render whitespace', async () => {
       <span class="line"><span style="color:#59873A">		tab</span><span style="color:#999999">()</span></span></code></pre>"
     `)
 })
+
+describe('merge same style', () => {
+  it('merges adjacent tokens with same style', async () => {
+    using shiki = await createHighlighter({
+      themes: ['min-light'],
+      langs: ['yaml'],
+    })
+
+    const code = 'name: CI'
+    const html = await shiki.codeToHtml(code, {
+      lang: 'yaml',
+      theme: 'min-light',
+      mergeSameStyleTokens: true,
+    })
+
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">name:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
+  })
+
+  it('does not merge tokens with decorations', async () => {
+    using shiki = await createHighlighter({
+      themes: ['min-light'],
+      langs: ['yaml'],
+    })
+
+    const code = 'name: CI'
+    const html = await shiki.codeToHtml(code, {
+      lang: 'yaml',
+      theme: 'min-light',
+      mergeSameStyleTokens: true,
+      decorations: [
+        {
+          start: { line: 0, character: 0 },
+          end: { line: 0, character: 4 },
+          properties: { class: 'highlighted-word' },
+        },
+      ],
+    })
+
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F" class="highlighted-word">name</span><span style="color:#D32F2F">:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
+  })
+})
