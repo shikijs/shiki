@@ -98,7 +98,7 @@ md.use(
 const html = await md.renderAsync('# Title\n```ts\nconsole.log("Hello, World!")\n```')
 ````
 
-## Transforms
+## Transformer Caveats
 
 `markdown-it` defaults to enforcing `<pre><code>` as the outermost wrappers of code block html. If you use a custom Shiki [transformer](/guide/transformers), this behavior may be undesirable. For example, if the transformer produces
 
