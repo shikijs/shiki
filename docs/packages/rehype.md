@@ -67,6 +67,7 @@ import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { createHighlighterCore } from 'shiki/core'
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
 import { unified } from 'unified'
 
@@ -77,7 +78,7 @@ const highlighter = await createHighlighterCore({
   langs: [
     import('@shikijs/langs/javascript'),
   ],
-  loadWasm: import('shiki/wasm')
+  engine: createOnigurumaEngine(() => import('shiki/wasm'))
 })
 
 const raw = await fs.readFile('./input.md')

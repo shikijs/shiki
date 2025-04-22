@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/langs",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.2.2",
   "description": "TextMate grammars for Shiki in ESM",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -178,6 +178,7 @@
     "./lean": "./dist/lean.mjs",
     "./less": "./dist/less.mjs",
     "./liquid": "./dist/liquid.mjs",
+    "./llvm": "./dist/llvm.mjs",
     "./log": "./dist/log.mjs",
     "./logo": "./dist/logo.mjs",
     "./lua": "./dist/lua.mjs",
@@ -327,6 +328,7 @@
     "./mediawiki": "./dist/mediawiki.mjs",
     "./wiki": "./dist/wiki.mjs",
     "./wikitext": "./dist/wikitext.mjs",
+    "./wit": "./dist/wit.mjs",
     "./wl": "./dist/wl.mjs",
     "./wolfram": "./dist/wolfram.mjs",
     "./xml": "./dist/xml.mjs",
@@ -343,7 +345,7 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
+    "prepare": "tsx scripts/prepare.ts",
     "build": "pnpm prepare",
     "prepublishOnly": "nr prepare"
   },
@@ -351,6 +353,6 @@
     "@shikijs/types": "workspace:*"
   },
   "devDependencies": {
-    "tm-grammars": "catalog:"
+    "tm-grammars": "catalog:inlined"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "shiki",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.2.2",
   "description": "A beautiful Syntax Highlighter.",
   "author": "Pine Wu <octref@gmail.com>; Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -46,9 +46,9 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
-    "build": "rimraf dist && NODE_OPTIONS=--max-old-space-size=4096 rollup -c",
-    "dev": "rollup -cw",
+    "prepare": "tsx scripts/prepare.ts",
+    "build": "unbuild",
+    "dev": "unbuild --stub",
     "prepublishOnly": "nr build",
     "test": "vitest",
     "test:cf": "wrangler dev test/cf.ts --port 60001"
@@ -60,13 +60,13 @@
     "@shikijs/langs": "workspace:*",
     "@shikijs/themes": "workspace:*",
     "@shikijs/types": "workspace:*",
-    "@shikijs/vscode-textmate": "catalog:",
-    "@types/hast": "catalog:"
+    "@shikijs/vscode-textmate": "catalog:prod",
+    "@types/hast": "catalog:types"
   },
   "devDependencies": {
-    "rollup-plugin-copy": "catalog:",
-    "tm-grammars": "catalog:",
-    "tm-themes": "catalog:",
-    "vscode-oniguruma": "catalog:"
+    "rollup-plugin-copy": "catalog:bundling",
+    "tm-grammars": "catalog:inlined",
+    "tm-themes": "catalog:inlined",
+    "vscode-oniguruma": "catalog:inlined"
   }
 }

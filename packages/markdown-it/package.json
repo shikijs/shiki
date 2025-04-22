@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/markdown-it",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.2.2",
   "description": "markdown-it integration for shiki",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "prepublishOnly": "nr build"
   },
   "peerDependencies": {
-    "markdown-it-async": "catalog:"
+    "markdown-it-async": "catalog:integrations"
   },
   "peerDependenciesMeta": {
     "markdown-it-async": {
@@ -42,12 +42,12 @@
     }
   },
   "dependencies": {
-    "markdown-it": "catalog:",
+    "markdown-it": "catalog:integrations",
     "shiki": "workspace:*"
   },
   "devDependencies": {
     "@shikijs/transformers": "workspace:*",
-    "@types/markdown-it": "catalog:",
-    "markdown-it-async": "catalog:"
+    "@types/markdown-it": "catalog:types",
+    "markdown-it-async": "catalog:integrations"
   }
 }

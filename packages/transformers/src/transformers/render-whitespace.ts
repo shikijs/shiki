@@ -43,9 +43,9 @@ export function transformerRenderWhitespace(
     // We use `root` hook here to ensure it runs after all other transformers
     root(root) {
       const pre = root.children[0] as Element
-      const code = pre.children[0] as Element
+      const code = pre.tagName === 'pre' ? pre.children[0] as Element : { children: [root] }
       code.children.forEach((line) => {
-        if (line.type !== 'element')
+        if (line.type !== 'element' && line.type !== 'root')
           return
         const elements = line.children.filter(token => token.type === 'element')
         const last = elements.length - 1

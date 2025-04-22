@@ -107,7 +107,8 @@ function assignColorToToken(
       = shikiOptions
     const styles: Record<string, string> = typeof token.htmlStyle === 'string'
       ? {}
-      : token.htmlStyle || {}
+      // clone to make sure we're not mutating a shared style object
+      : structuredClone(token.htmlStyle ?? {})
 
     for (const [colorName, theme] of Object.entries(shikiOptions.themes)) {
       const themeName = typeof theme === 'string' ? theme : theme?.name
@@ -143,7 +144,7 @@ function getColor(
   const colors
     = themeName == null
       ? DEFAULT_BRACKETS_COLORS
-      : themes[themeName] ?? builtInThemes[themeName] ?? DEFAULT_BRACKETS_COLORS
+      : getThemeColors(themeName, themes) ?? getThemeColors(themeName, builtInThemes) ?? DEFAULT_BRACKETS_COLORS
 
   const isUnexpected = level === -1
   if (isUnexpected) {
@@ -152,4 +153,17 @@ function getColor(
   else {
     return colors[level % (colors.length - 1)]
   }
+}
+
+function getThemeColors(themeName: string, themes: Record<string, string[]>): string[] | null {
+  if (themes[themeName])
+    return themes[themeName]
+
+  // check if the start of the name matches any themes
+  // this improves compatibility with "Expressive Code", which appends unique IDs to the end of themeNames
+  const startsWithName = Object.keys(themes).sort().reverse().find(key => themeName.startsWith(key))
+  if (startsWithName)
+    return themes[startsWithName]
+
+  return null
 }

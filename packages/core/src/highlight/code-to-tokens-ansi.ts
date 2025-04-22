@@ -57,6 +57,9 @@ export function tokenizeAnsiWithTheme(
       if (token.decorations.has('underline'))
         fontStyle |= FontStyle.Underline
 
+      if (token.decorations.has('strikethrough'))
+        fontStyle |= FontStyle.Strikethrough
+
       return {
         content: token.value,
         offset: line[1], // TODO: more accurate offset? might need to fork ansi-sequence-parser

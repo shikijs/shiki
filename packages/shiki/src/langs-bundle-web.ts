@@ -298,6 +298,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/wgsl')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'wit',
+    'name': 'WebAssembly Interface Types',
+    'import': (() => import('@shikijs/langs/wit')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'xml',
     'name': 'XML',
     'import': (() => import('@shikijs/langs/xml')) as DynamicImportLanguageRegistration
@@ -383,6 +388,7 @@ export type BundledLanguage =
   | 'vue-html'
   | 'wasm'
   | 'wgsl'
+  | 'wit'
   | 'xml'
   | 'yaml'
   | 'yml'

@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/themes",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.2.2",
   "description": "TextMate themes for Shiki in ESM",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -38,6 +38,12 @@
     "./github-light": "./dist/github-light.mjs",
     "./github-light-default": "./dist/github-light-default.mjs",
     "./github-light-high-contrast": "./dist/github-light-high-contrast.mjs",
+    "./gruvbox-dark-hard": "./dist/gruvbox-dark-hard.mjs",
+    "./gruvbox-dark-medium": "./dist/gruvbox-dark-medium.mjs",
+    "./gruvbox-dark-soft": "./dist/gruvbox-dark-soft.mjs",
+    "./gruvbox-light-hard": "./dist/gruvbox-light-hard.mjs",
+    "./gruvbox-light-medium": "./dist/gruvbox-light-medium.mjs",
+    "./gruvbox-light-soft": "./dist/gruvbox-light-soft.mjs",
     "./houston": "./dist/houston.mjs",
     "./kanagawa-dragon": "./dist/kanagawa-dragon.mjs",
     "./kanagawa-lotus": "./dist/kanagawa-lotus.mjs",
@@ -81,7 +87,7 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "esno scripts/prepare.ts",
+    "prepare": "tsx scripts/prepare.ts",
     "build": "pnpm prepare",
     "prepublishOnly": "nr prepare"
   },
@@ -89,6 +95,6 @@
     "@shikijs/types": "workspace:*"
   },
   "devDependencies": {
-    "tm-themes": "catalog:"
+    "tm-themes": "catalog:inlined"
   }
 }

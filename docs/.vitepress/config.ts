@@ -144,7 +144,7 @@ export default withMermaid(defineConfig({
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
-    languages: ['js', 'jsx', 'ts', 'tsx'],
+    languages: ['js', 'jsx', 'ts', 'tsx', 'html'],
     config: (md) => {
       md.use(groupIconMdPlugin)
     },
