@@ -107,7 +107,8 @@ function assignColorToToken(
       = shikiOptions
     const styles: Record<string, string> = typeof token.htmlStyle === 'string'
       ? {}
-      : token.htmlStyle || {}
+      // clone to make sure we're not mutating a shared style object
+      : structuredClone(token.htmlStyle ?? {})
 
     for (const [colorName, theme] of Object.entries(shikiOptions.themes)) {
       const themeName = typeof theme === 'string' ? theme : theme?.name

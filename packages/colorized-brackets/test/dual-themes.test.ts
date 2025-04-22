@@ -16,7 +16,7 @@ describe('dual themes', async () => {
   })
 
   it('light and dark', () => {
-    const htmlStr = highlighter.codeToHtml('{}', {
+    const htmlStr = highlighter.codeToHtml('[({})](', {
       lang,
       themes: { light: 'light-plus', dark: 'dark-plus' },
       transformers: [
@@ -28,7 +28,14 @@ describe('dual themes', async () => {
         }),
       ],
     })
-    expect(htmlStr).toContain('<span style="color:Y;--shiki-dark:y">{</span>')
+
+    expect(htmlStr).toContain('<span style="color:Y;--shiki-dark:y">[</span>')
+    expect(htmlStr).toContain('<span style="color:P;--shiki-dark:p">(</span>')
+    expect(htmlStr).toContain('<span style="color:B;--shiki-dark:b">{</span>')
+    expect(htmlStr).toContain('<span style="color:B;--shiki-dark:b">}</span>')
+    expect(htmlStr).toContain('<span style="color:P;--shiki-dark:p">)</span>')
+    expect(htmlStr).toContain('<span style="color:Y;--shiki-dark:y">]</span>')
+    expect(htmlStr).toContain('<span style="color:R;--shiki-dark:r">(</span>')
   })
 
   it('custom prefix', () => {
