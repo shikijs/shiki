@@ -54,13 +54,13 @@ exports[`precompile 1`] = `
         },
         {
           begin:
-            /(?=(?:[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?]\\P{space})([^\\:\\p{space}]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space})([^\\:\\p{space}]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           patterns: [
             { include: "#flow-scalar-plain-out-implicit-type" },
             {
               begin:
-                /[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
+                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
               end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
@@ -222,14 +222,14 @@ exports[`precompile 1`] = `
         },
         {
           begin:
-            /(?=(?:[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}])([^\\]\\,\\:\\[\\{\\}\\p{space}]|:[^\\]\\,\\[\\{\\}\\p{space}]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}])([^\\]\\,\\:\\[\\{\\}\\p{space}]|:[^\\]\\,\\[\\{\\}\\p{space}]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
           name: "meta.flow-pair.key.yaml",
           patterns: [
             { include: "#flow-scalar-plain-in-implicit-type" },
             {
               begin:
-                /[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
+                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
               end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
@@ -281,7 +281,7 @@ exports[`precompile 1`] = `
         { include: "#flow-scalar-plain-in-implicit-type" },
         {
           begin:
-            /[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
+            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
           end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
           name: "string.unquoted.plain.in.yaml",
         },
@@ -309,7 +309,7 @@ exports[`precompile 1`] = `
         { include: "#flow-scalar-plain-out-implicit-type" },
         {
           begin:
-            /[^\\-\\]\\!-\\#\\%-'\\*\\,\\:\\>-\\@\\[\\\`\\{-\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
+            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
           end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
           name: "string.unquoted.plain.out.yaml",
         },
