@@ -1,10 +1,22 @@
 import { expect, it } from 'vitest'
-import { parseMetaHighlightString } from '../src/transformers/meta-highlight'
+import { parseMetaString } from '../src/shared/parse-meta'
 
-it('parseHighlightLines', () => {
-  expect(parseMetaHighlightString('')).toBe(null)
-  expect(parseMetaHighlightString('{1}')).toEqual([1])
-  expect(parseMetaHighlightString('{1,2}')).toEqual([1, 2])
-  expect(parseMetaHighlightString('{1,2-4,5}')).toEqual([1, 2, 3, 4, 5])
-  expect(parseMetaHighlightString('{1-1}')).toEqual([1])
+it('no meta', () => {
+  expect(parseMetaString('', ['highlight', 'hl'])).toBe(null)
+})
+
+it('meta with no key specified', () => {
+  expect(parseMetaString('{1,2}', ['highlight', 'hl'])).toEqual({ highlight: [1, 2] })
+})
+
+it('meta with matchable key', () => {
+  expect(parseMetaString('highlight={1,2}', ['highlight', 'hl'])).toEqual({ highlight: [1, 2] })
+})
+
+it('all matchable', () => {
+  expect(parseMetaString('highlight={1,2} hl={3,4}', ['highlight', 'hl'])).toEqual({ highlight: [1, 2], hl: [3, 4] })
+})
+
+it('same key', () => {
+  expect(parseMetaString('highlight={1,2} highlight={3,4}', ['highlight', 'hl'])).toEqual({ highlight: [1, 2, 3, 4] })
 })
