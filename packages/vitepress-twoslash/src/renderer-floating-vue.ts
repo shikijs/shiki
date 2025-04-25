@@ -173,6 +173,10 @@ function renderMarkdownInline(this: ShikiTransformerContextCommon, md: string, c
 }
 
 function compose(parts: { token: Element | Text, popup: Element }): Element[] {
+  if (parts.token.type === 'element' && parts.token.children.length < 1) {
+    const classes = parts.token.properties.class || ''
+    parts.token.properties.class = `${classes} twoslash-empty`
+  }
   return [
     {
       type: 'element',
