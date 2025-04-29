@@ -202,8 +202,8 @@ catalogs:
       specifier: ^6.7.14
       version: 6.7.14
     oniguruma-to-es:
-      specifier: ^4.2.0
-      version: 4.2.0
+      specifier: ^4.3.1
+      version: 4.3.1
   testing:
     '@vitest/coverage-v8':
       specifier: ^3.1.2
@@ -552,7 +552,7 @@ importers:
         version: 10.0.2
       oniguruma-to-es:
         specifier: catalog:prod
-        version: 4.2.0
+        version: 4.3.1
 
   packages/engine-oniguruma:
     dependencies:
@@ -584,7 +584,7 @@ importers:
         version: link:../types
       oniguruma-to-es:
         specifier: catalog:prod
-        version: 4.2.0
+        version: 4.3.1
     devDependencies:
       tm-grammars:
         specifier: catalog:inlined
@@ -2894,9 +2894,6 @@ packages:
   electron-to-chromium@1.5.76:
     resolution: {integrity: sha512-CjVQyG7n7Sr+eBXE86HIulnL5N8xZY1sgmOPGuq/F0Rr0FJq63lg0kEtOIDfZBk44FnDLf6FUJ+dsJcuiUDdDQ==}
 
-  emoji-regex-xs@1.0.0:
-    resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
-
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
 
@@ -3975,11 +3972,11 @@ packages:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
 
-  oniguruma-parser@0.11.0:
-    resolution: {integrity: sha512-9M+tFRnJWtRxsgh4XFlkw+AVFtzEtI8UfTifx6sDbtt47SpEl/K65PunQyp/jvfp0xwLGjtbE5aKQcL8j6AXYw==}
+  oniguruma-parser@0.12.0:
+    resolution: {integrity: sha512-fD9o5ebCmEAA9dLysajdQvuKzLL7cj+w7DQjuO3Cb6IwafENfx6iL+RGkmyW82pVRsvgzixsWinHvgxTMJvdIA==}
 
-  oniguruma-to-es@4.2.0:
-    resolution: {integrity: sha512-MDPs6KSOLS0tKQ7joqg44dRIRZUyotfTy0r+7oEEs6VwWWP0+E2PPDYWMFN0aqOjRyWHBYq7RfKw9GQk2S2z5g==}
+  oniguruma-to-es@4.3.1:
+    resolution: {integrity: sha512-VtX1kepWO+7HG7IWV5v72JhiqofK7XsiHmtgnvurnNOTdIvE5mrdWYtsOrQyrXCv1L2Ckm08hywp+MFO7rC4Ug==}
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -7341,8 +7338,6 @@ snapshots:
 
   electron-to-chromium@1.5.76: {}
 
-  emoji-regex-xs@1.0.0: {}
-
   emoji-regex@10.4.0: {}
 
   emoji-regex@8.0.0: {}
@@ -8774,12 +8769,11 @@ snapshots:
     dependencies:
       mimic-function: 5.0.1
 
-  oniguruma-parser@0.11.0: {}
+  oniguruma-parser@0.12.0: {}
 
-  oniguruma-to-es@4.2.0:
+  oniguruma-to-es@4.3.1:
     dependencies:
-      emoji-regex-xs: 1.0.0
-      oniguruma-parser: 0.11.0
+      oniguruma-parser: 0.12.0
       regex: 6.0.1
       regex-recursion: 6.0.2
 
