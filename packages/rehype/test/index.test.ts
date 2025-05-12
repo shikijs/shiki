@@ -64,6 +64,24 @@ it('add-custom-cache', async () => {
   await expect(file.toString()).toMatchFileSnapshot('./fixtures/c.out.html')
 })
 
+it('lang-alias', async () => {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShiki, {
+      theme: 'vitesse-light',
+      addLanguageClass: true,
+      langAlias: {
+        mylang: 'javascript',
+        mylang2: 'js', // nested alias
+      },
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/lang-alias.md', import.meta.url)))
+
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/lang-alias.out.html')
+})
+
 it('shiki inline code', async () => {
   const file = await unified()
     .use(remarkParse)
