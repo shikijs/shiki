@@ -322,8 +322,8 @@ function mergeAdjacentStyledTokens(tokens: ThemedToken[][]): ThemedToken[][] {
       }
 
       const prevToken = newLine[newLine.length - 1]
-      const prevStyle = prevToken.htmlStyle || stringifyTokenStyle(getTokenStyleObject(prevToken))
-      const currentStyle = token.htmlStyle || stringifyTokenStyle(getTokenStyleObject(token))
+      const prevStyle = stringifyTokenStyle(prevToken.htmlStyle || getTokenStyleObject(prevToken))
+      const currentStyle = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
       const isPrevDecorated = prevToken.fontStyle && (
         (prevToken.fontStyle & FontStyle.Underline)
         || (prevToken.fontStyle & FontStyle.Strikethrough)
