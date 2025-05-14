@@ -16,6 +16,11 @@ export type RehypeShikiOptions = RehypeShikiCoreOptions
      * @default Object.keys(bundledLanguages)
      */
     langs?: Array<LanguageInput | BuiltinLanguage>
+    /**
+     * Alias of languages
+     * @example { 'my-lang': 'javascript' }
+     */
+    langAlias?: Record<string, string>
   }
 
 const rehypeShiki: Plugin<[RehypeShikiOptions], Root> = function (
@@ -23,6 +28,7 @@ const rehypeShiki: Plugin<[RehypeShikiOptions], Root> = function (
 ) {
   const themeNames = ('themes' in options ? Object.values(options.themes) : [options.theme]).filter(Boolean) as BuiltinTheme[]
   const langs = options.langs || Object.keys(bundledLanguages)
+  const langAlias = options.langAlias || {}
 
   let getHandler: Promise<any>
 
@@ -31,6 +37,7 @@ const rehypeShiki: Plugin<[RehypeShikiOptions], Root> = function (
       getHandler = getSingletonHighlighter({
         themes: themeNames,
         langs,
+        langAlias,
       })
         .then(highlighter => rehypeShikiFromHighlighter.call(this, highlighter, options))
     }
