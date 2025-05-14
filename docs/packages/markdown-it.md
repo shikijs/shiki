@@ -98,3 +98,35 @@ md.use(
 // Use `md.renderAsync` instead of `md.render`
 const html = await md.renderAsync('# Title\n```ts\nconsole.log("Hello, World!")\n```')
 ````
+
+## Transformer Caveats
+
+`markdown-it` defaults to enforcing `<pre><code>` as the outermost wrappers of code block html. If you use a custom Shiki [transformer](/guide/transformers), this behavior may be undesirable. For example, if the transformer produces
+
+```html
+<div class="fenced-code-block">
+  <pre>
+    <code>
+      …
+    </code>
+  </pre>
+</div>
+```
+
+the result after `markdown-it` processing will be
+
+```html
+<pre>
+  <code>
+    <div class="fenced-code-block">
+      <pre>
+        <code>
+          …
+        </code>
+      </pre>
+    </div>
+  </code>
+</pre>
+```
+
+Work around this by adding [olets/markdown-it-wrapperless-fence-rule](https://github.com/olets/markdown-it-wrapperless-fence-rule) to your `markdown-it` configuration, or by writing your own `markdown-it` fence rule (see [markdown-it#269](https://github.com/markdown-it/markdown-it/issues/269)).
