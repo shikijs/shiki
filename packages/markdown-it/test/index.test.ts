@@ -64,3 +64,19 @@ it('run for default language', { timeout: 10_000 }, async () => {
 
   await expect(result).toMatchFileSnapshot('./fixtures/c.out.html')
 })
+
+it('lang-alias', async () => {
+  const md = MarkdownIt()
+  md.use(await Shiki({
+    langs: ['js'],
+    theme: 'vitesse-light',
+    langAlias: {
+      mylang: 'javascript',
+      mylang2: 'js', // nested alias
+    },
+  }))
+
+  const result = md.render(await fs.readFile(new URL('./fixtures/lang-alias.md', import.meta.url), 'utf-8'))
+
+  await expect(result).toMatchFileSnapshot('./fixtures/lang-alias.out.html')
+})
