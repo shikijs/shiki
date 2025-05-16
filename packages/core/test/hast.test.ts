@@ -112,6 +112,38 @@ describe('merge same style', () => {
     expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">name:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
   })
 
+  it('merges adjacent tokens with dual themes', async () => {
+    using shiki = await createHighlighter({
+      themes: ['min-light', 'min-dark'],
+      langs: ['yaml'],
+    })
+
+    const code = 'name: CI'
+    const html = await shiki.codeToHtml(code, {
+      lang: 'yaml',
+      themes: { dark: 'min-dark', light: 'min-light' },
+      mergeSameStyleTokens: true,
+    })
+
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-dark" style="background-color:#ffffff;--shiki-dark-bg:#1f1f1f;color:#24292eff;--shiki-dark:#b392f0" tabindex="0"><code><span class="line"><span style="color:#D32F2F;--shiki-dark:#F8F8F8">name</span><span style="color:#D32F2F;--shiki-dark:#F97583">:</span><span style="color:#22863A;--shiki-dark:#FFAB70"> CI</span></span></code></pre>"`)
+  })
+
+  it('merges adjacent tokens with the same dual themes', async () => {
+    using shiki = await createHighlighter({
+      themes: ['min-light'],
+      langs: ['yaml'],
+    })
+
+    const code = 'name: CI'
+    const html = await shiki.codeToHtml(code, {
+      lang: 'yaml',
+      themes: { dark: 'min-light', light: 'min-light' },
+      mergeSameStyleTokens: true,
+    })
+
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-light" style="background-color:#ffffff;--shiki-dark-bg:#ffffff;color:#24292eff;--shiki-dark:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F;--shiki-dark:#D32F2F">name:</span><span style="color:#22863A;--shiki-dark:#22863A"> CI</span></span></code></pre>"`)
+  })
+
   it('does not merge tokens with decorations', async () => {
     using shiki = await createHighlighter({
       themes: ['min-light'],
