@@ -358,7 +358,7 @@ With some additional CSS rules, you can make it look like this:
 Highlight lines based on the [meta string](/guide/transformers#meta) provided on the code snippet.
 
 ````md
-```js {1,3-4}
+```ts {1,3-4}
 console.log('1')
 console.log('2')
 console.log('3')
@@ -368,14 +368,109 @@ console.log('4')
 
 Renders (with custom CSS rules):
 
-```js {1,3-4}
+```ts {1,3-4}
 console.log('1')
 console.log('2')
 console.log('3')
 console.log('4')
 ```
 
+You can also explicitly specify the key `highlight` in the meta string:
+
+````md
+```ts highlight={1,3-4}
+console.log('1')
+console.log('2')
+console.log('3')
+console.log('4')
+```
+````
+
+Renders the same way as above.
+
 - Outputs: `<span class="line highlighted">` for included lines.
+- The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
+
+---
+
+### `transformerMetaDiff`
+
+Use meta string to mark added and removed lines.
+
+````md
+```ts add={2} remove={1}
+console.log('hewwo')
+console.log('hello')
+console.log('goodbye')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts add={2} remove={1}
+console.log('hewwo')
+console.log('hello')
+console.log('goodbye')
+```
+
+- `<span class="line diff add">` for added lines.
+- `<span class="line diff remove">` for removed lines.
+- The outer `<pre>` tag is modified: `<pre class="has-diff">`
+
+---
+
+### `transformerMetaFocus`
+
+Use meta string to mark a line as focused.
+
+````md
+```ts focus={2}
+console.log('Not focused')
+console.log('Focused')
+console.log('Not focused')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts focus={2}
+console.log('Not focused')
+console.log('Focused')
+console.log('Not focused')
+```
+
+- Outputs: `<span class="line focused">` for focused lines.
+- The outer `<pre>` tag is modified: `<pre class="has-focused">`
+
+---
+
+### `transformerMetaErrorLevel`
+
+Use meta string to mark a line with an error and warning levels.
+
+````md
+```ts error={2-3} warning={4}
+console.log('No errors or warnings')
+console.error('Error')
+console.error('Error')
+console.warn('Warning')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts error={2-3} warning={4}
+console.log('No errors or warnings')
+console.error('Error')
+console.error('Error')
+console.warn('Warning')
+```
+
+- `<span class="line highlighted error">` for errors.
+- `<span class="line highlighted warning">` for warnings.
+- The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
+
+---
 
 ### `transformerMetaWordHighlight`
 
