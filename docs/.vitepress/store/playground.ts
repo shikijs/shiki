@@ -100,7 +100,6 @@ export const usePlayground = defineStore('playground', () => {
                   return `${code}\n`
               },
               pre(node) {
-                this.addClassToHast(node, 'vp-code')
                 preStyle.value = node.properties?.style as string || ''
               },
             },
