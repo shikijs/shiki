@@ -70,6 +70,6 @@ You can access the raw meta using:
 <!-- eslint-skip -->
 
 ```ts
-options.meta
+this.options.meta
 // => { __raw: 'foo=bar baz-qux="qu ux"' }
 ```
