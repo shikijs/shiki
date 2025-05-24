@@ -11,7 +11,6 @@ export { defaultHoverInfoProcessor }
 export interface TwoslashFloatingVueOptions {
   classCopyIgnore?: string
   classFloatingPanel?: string
-  classCode?: string
   classMarkdown?: string
 
   floatingVueTheme?: string
@@ -30,7 +29,6 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
   const {
     classCopyIgnore = 'vp-copy-ignore',
     classFloatingPanel = 'twoslash-floating',
-    classCode = 'vp-code',
     classMarkdown = 'vp-doc',
     floatingVueTheme = 'twoslash',
     floatingVueThemeQuery = 'twoslash-query',
@@ -43,7 +41,7 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
 
   const hoverBasicProps = {
     'class': 'twoslash-hover',
-    'popper-class': ['shiki', classFloatingPanel, classCopyIgnore, classCode].join(' '),
+    'popper-class': ['shiki', classFloatingPanel, classCopyIgnore].join(' '),
     'theme': floatingVueTheme,
   }
 
