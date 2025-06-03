@@ -112,6 +112,13 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * @default '--shiki-'
    */
   cssVariablePrefix?: string
+
+  /**
+   * Use `light-dark()` CSS function along with CSS variables to toggle themes.
+   *
+   * @default false
+   */
+  useLightDarkFunction?: boolean
 }
 
 export type CodeOptionsThemes<Themes extends string = string> =

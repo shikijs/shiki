@@ -26,6 +26,7 @@ export function codeToTokens(
     const {
       defaultColor = 'light',
       cssVariablePrefix = '--shiki-',
+      useLightDarkFunction = false,
     } = options
 
     const themes = Object
@@ -51,19 +52,27 @@ export function codeToTokens(
     const themeRegs = themes.map(t => internal.getTheme(t.theme))
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
-      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor)))
+      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor, useLightDarkFunction)))
 
     if (grammarState)
       setLastGrammarStateToMap(tokens, grammarState)
 
     const themeColorReplacements = themes.map(t => resolveColorReplacements(t.theme, options))
 
-    fg = themes.map((t, idx) => (idx === 0 && defaultColor
-      ? ''
-      : `${cssVariablePrefix + t.color}:`) + (applyColorReplacements(themeRegs[idx].fg, themeColorReplacements[idx]) || 'inherit')).join(';')
-    bg = themes.map((t, idx) => (idx === 0 && defaultColor
-      ? ''
-      : `${cssVariablePrefix + t.color}-bg:`) + (applyColorReplacements(themeRegs[idx].bg, themeColorReplacements[idx]) || 'inherit')).join(';')
+    fg = themes.map((t, idx) => {
+      const value = applyColorReplacements(themeRegs[idx].fg, themeColorReplacements[idx]) || 'inherit'
+      if (idx === 0 && defaultColor) {
+        return useLightDarkFunction && themes.length > 1 ? `light-dark(${value}, ${applyColorReplacements(themeRegs[idx + 1].fg, themeColorReplacements[idx + 1]) || 'inherit'});${cssVariablePrefix + t.color}:${value}` : value
+      }
+      return `${cssVariablePrefix + t.color}:${value}`
+    }).join(';')
+    bg = themes.map((t, idx) => {
+      const value = applyColorReplacements(themeRegs[idx].bg, themeColorReplacements[idx]) || 'inherit'
+      if (idx === 0 && defaultColor) {
+        return useLightDarkFunction && themes.length > 1 ? `light-dark(${value}, ${applyColorReplacements(themeRegs[idx + 1].bg, themeColorReplacements[idx + 1]) || 'inherit'});${cssVariablePrefix + t.color}-bg:${value}` : value
+      }
+      return `${cssVariablePrefix + t.color}-bg:${value}`
+    }).join(';')
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }

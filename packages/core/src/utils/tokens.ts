@@ -73,6 +73,7 @@ export function flatTokenVariants(
   variantsOrder: string[],
   cssVariablePrefix: string,
   defaultColor: string | boolean,
+  useLightDarkFunction: boolean,
 ): ThemedToken {
   const token: ThemedToken = {
     content: merged.content,
@@ -91,7 +92,15 @@ export function flatTokenVariants(
       const value = cur[key] || 'inherit'
 
       if (idx === 0 && defaultColor) {
-        mergedStyles[key] = value
+        if (useLightDarkFunction && styles.length > 1) {
+          mergedStyles[key] = `light-dark(${value}, ${styles[idx + 1][key] || 'inherit'})`
+          const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
+          const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
+          mergedStyles[varKey] = value
+        }
+        else {
+          mergedStyles[key] = value
+        }
       }
       else {
         const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
