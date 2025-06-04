@@ -147,3 +147,26 @@ With it, a token would be generated like:
 In that case, the generated HTML would have no style out of the box, you need to add your own CSS to control the colors.
 
 It's also possible to control the theme in CSS variables. For more, refer to the great research and examples by [@mayank99](https://github.com/mayank99) in [this issue #6](https://github.com/antfu/shikiji/issues/6).
+
+## `light-dark()` Function
+
+You can also use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) function to avoid manually maintaining the CSS variables.
+
+Set `defaultColor` to a special value `light-dark()` to use it. When using this, it requires both `light` and `dark` themes to be provided.
+
+```ts twoslash
+import { codeToHtml } from 'shiki'
+
+const code = await codeToHtml('console.log("hello")', {
+  lang: 'javascript',
+  themes: {
+    light: 'min-light',
+    dark: 'nord',
+  },
+  defaultColor: 'light-dark()', // [!code hl]
+})
+```
+
+:::info Compatibility Note
+The `light-dark()` function is relatively new and may not be supported in older browsers. [Can I use?](https://caniuse.com/?search=css-light-dark)
+:::

@@ -1,5 +1,7 @@
 import type { ThemedToken, ThemedTokenWithVariants, TokenStyles } from '@shikijs/types'
+import { ShikiError } from '@shikijs/types'
 import { FontStyle } from '@shikijs/vscode-textmate'
+import { DEFAULT_COLOR_LIGHT_DARK } from './_constants'
 
 /**
  * Split a token into multiple tokens by given offsets.
@@ -72,7 +74,7 @@ export function flatTokenVariants(
   merged: ThemedTokenWithVariants,
   variantsOrder: string[],
   cssVariablePrefix: string,
-  defaultColor: string | boolean,
+  defaultColor: string | boolean | 'light-dark()',
 ): ThemedToken {
   const token: ThemedToken = {
     content: merged.content,
@@ -91,7 +93,23 @@ export function flatTokenVariants(
       const value = cur[key] || 'inherit'
 
       if (idx === 0 && defaultColor) {
-        mergedStyles[key] = value
+        // light-dark()
+        if (defaultColor === DEFAULT_COLOR_LIGHT_DARK && styles.length > 1) {
+          const lightIndex = variantsOrder.findIndex(t => t === 'light')
+          const darkIndex = variantsOrder.findIndex(t => t === 'dark')
+          if (lightIndex === -1 || darkIndex === -1)
+            throw new ShikiError('When using `defaultColor: "light-dark()"`, you must provide both `light` and `dark` themes')
+          const lightValue = styles[lightIndex][key] || 'inherit'
+          const darkValue = styles[darkIndex][key] || 'inherit'
+          mergedStyles[key] = `light-dark(${lightValue}, ${darkValue})`
+
+          const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
+          const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
+          mergedStyles[varKey] = value
+        }
+        else {
+          mergedStyles[key] = value
+        }
       }
       else {
         const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
