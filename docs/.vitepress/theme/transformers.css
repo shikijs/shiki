@@ -1,21 +1,21 @@
-.vp-code .tab,
-.vp-code .space {
+pre.shiki .tab,
+pre.shiki .space {
   position: relative;
 }
 
-.vp-code .tab::before {
+pre.shiki .tab::before {
   content: '⇥';
   position: absolute;
   opacity: 0.3;
 }
 
-.vp-code .space::before {
+pre.shiki .space::before {
   content: '·';
   position: absolute;
   opacity: 0.3;
 }
 
-.vp-code .highlighted-word {
+pre.shiki .highlighted-word {
   background-color: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-border);
   padding: 1px 3px;
@@ -31,15 +31,15 @@
   background-color: var(--shiki-dark-bg, inherit);
 }
 
-.vp-code,
-.vp-code span:not(.line.highlighted):not(.line.highlighted *) {
+pre.shiki,
+pre.shiki span:not(.line.highlighted):not(.line.highlighted *) {
   background-color: var(--shiki-light-bg, inherit);
   text-decoration: var(--shiki-light-text-decoration, inherit);
   font-weight: var(--shiki-light-font-weight, inherit);
 }
 
-.dark .vp-code,
-.dark .vp-code span:not(.line.highlighted):not(.line.highlighted *) {
+.dark pre.shiki,
+.dark pre.shiki span:not(.line.highlighted):not(.line.highlighted *) {
   background-color: var(--shiki-dark-bg, inherit);
   text-decoration: var(--shiki-dark-text-decoration, inherit);
   font-weight: var(--shiki-dark-font-weight, inherit);
