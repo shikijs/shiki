@@ -1,5 +1,423 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`defaultColor light-dark() > basic > css-vars 1`] = `
+{
+  "bg": "--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212",
+  "fg": "--shiki-light:#393a34;--shiki-dark:#dbd7caee",
+  "grammarState": {
+    "lang": "javascript",
+    "scopes": [
+      "source.js",
+    ],
+    "theme": "vitesse-light",
+    "themes": [
+      "vitesse-light",
+      "vitesse-dark",
+    ],
+  },
+  "rootStyle": "--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212",
+  "themeName": "shiki-themes vitesse-light vitesse-dark",
+  "tokens": [
+    [
+      {
+        "content": "console",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#BD976A",
+          "--shiki-light": "#B07D48",
+        },
+        "offset": 0,
+      },
+      {
+        "content": ".",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 7,
+      },
+      {
+        "content": "log",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#80A665",
+          "--shiki-light": "#59873A",
+        },
+        "offset": 8,
+      },
+      {
+        "content": "(",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 11,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+        },
+        "offset": 12,
+      },
+      {
+        "content": "hello",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D",
+          "--shiki-light": "#B56959",
+        },
+        "offset": 13,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+        },
+        "offset": 18,
+      },
+      {
+        "content": ")",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 19,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`defaultColor light-dark() > basic > light-dark() 1`] = `
+{
+  "bg": "light-dark(#ffffff, #121212);--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212",
+  "fg": "light-dark(#393a34, #dbd7caee);--shiki-light:#393a34;--shiki-dark:#dbd7caee",
+  "grammarState": {
+    "lang": "javascript",
+    "scopes": [
+      "source.js",
+    ],
+    "theme": "vitesse-light",
+    "themes": [
+      "vitesse-light",
+      "vitesse-dark",
+    ],
+  },
+  "rootStyle": undefined,
+  "themeName": "shiki-themes vitesse-light vitesse-dark",
+  "tokens": [
+    [
+      {
+        "content": "console",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#BD976A",
+          "--shiki-light": "#B07D48",
+          "color": "light-dark(#B07D48, #BD976A)",
+        },
+        "offset": 0,
+      },
+      {
+        "content": ".",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 7,
+      },
+      {
+        "content": "log",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#80A665",
+          "--shiki-light": "#59873A",
+          "color": "light-dark(#59873A, #80A665)",
+        },
+        "offset": 8,
+      },
+      {
+        "content": "(",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 11,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+          "color": "light-dark(#B5695977, #C98A7D77)",
+        },
+        "offset": 12,
+      },
+      {
+        "content": "hello",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D",
+          "--shiki-light": "#B56959",
+          "color": "light-dark(#B56959, #C98A7D)",
+        },
+        "offset": 13,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+          "color": "light-dark(#B5695977, #C98A7D77)",
+        },
+        "offset": 18,
+      },
+      {
+        "content": ")",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 19,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`defaultColor light-dark() > defaultColor light-dark() with multiple themes > css-vars 1`] = `
+{
+  "bg": "--shiki-dark-bg:#121212;--shiki-light-bg:#ffffff;--shiki-custom-bg:#24292e",
+  "fg": "--shiki-dark:#dbd7caee;--shiki-light:#393a34;--shiki-custom:#e1e4e8",
+  "grammarState": {
+    "lang": "javascript",
+    "scopes": [
+      "source.js",
+    ],
+    "theme": "vitesse-dark",
+    "themes": [
+      "vitesse-dark",
+      "vitesse-light",
+      "github-dark",
+    ],
+  },
+  "rootStyle": "--shiki-dark:#dbd7caee;--shiki-light:#393a34;--shiki-custom:#e1e4e8;--shiki-dark-bg:#121212;--shiki-light-bg:#ffffff;--shiki-custom-bg:#24292e",
+  "themeName": "shiki-themes vitesse-dark vitesse-light github-dark",
+  "tokens": [
+    [
+      {
+        "content": "console",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#BD976A",
+          "--shiki-light": "#B07D48",
+        },
+        "offset": 0,
+      },
+      {
+        "content": ".",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 7,
+      },
+      {
+        "content": "log",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#B392F0",
+          "--shiki-dark": "#80A665",
+          "--shiki-light": "#59873A",
+        },
+        "offset": 8,
+      },
+      {
+        "content": "(",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 11,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+        },
+        "offset": 12,
+      },
+      {
+        "content": "hello",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D",
+          "--shiki-light": "#B56959",
+        },
+        "offset": 13,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+        },
+        "offset": 18,
+      },
+      {
+        "content": ")",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+        },
+        "offset": 19,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`defaultColor light-dark() > defaultColor light-dark() with multiple themes > light-dark() 1`] = `
+{
+  "bg": "light-dark(#ffffff, #121212);--shiki-dark-bg:#121212;--shiki-light-bg:#ffffff;--shiki-custom-bg:#24292e",
+  "fg": "light-dark(#393a34, #dbd7caee);--shiki-dark:#dbd7caee;--shiki-light:#393a34;--shiki-custom:#e1e4e8",
+  "grammarState": {
+    "lang": "javascript",
+    "scopes": [
+      "source.js",
+    ],
+    "theme": "vitesse-dark",
+    "themes": [
+      "vitesse-dark",
+      "vitesse-light",
+      "github-dark",
+    ],
+  },
+  "rootStyle": undefined,
+  "themeName": "shiki-themes vitesse-dark vitesse-light github-dark",
+  "tokens": [
+    [
+      {
+        "content": "console",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#BD976A",
+          "--shiki-light": "#B07D48",
+          "color": "light-dark(#B07D48, #BD976A)",
+        },
+        "offset": 0,
+      },
+      {
+        "content": ".",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 7,
+      },
+      {
+        "content": "log",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#B392F0",
+          "--shiki-dark": "#80A665",
+          "--shiki-light": "#59873A",
+          "color": "light-dark(#59873A, #80A665)",
+        },
+        "offset": 8,
+      },
+      {
+        "content": "(",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 11,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+          "color": "light-dark(#B5695977, #C98A7D77)",
+        },
+        "offset": 12,
+      },
+      {
+        "content": "hello",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D",
+          "--shiki-light": "#B56959",
+          "color": "light-dark(#B56959, #C98A7D)",
+        },
+        "offset": 13,
+      },
+      {
+        "content": """,
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#9ECBFF",
+          "--shiki-dark": "#C98A7D77",
+          "--shiki-light": "#B5695977",
+          "color": "light-dark(#B5695977, #C98A7D77)",
+        },
+        "offset": 18,
+      },
+      {
+        "content": ")",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-custom": "#E1E4E8",
+          "--shiki-dark": "#666666",
+          "--shiki-light": "#999999",
+          "color": "light-dark(#999999, #666666)",
+        },
+        "offset": 19,
+      },
+    ],
+  ],
+}
+`;
+
 exports[`includeExplanation > false 1`] = `
 [
   [
@@ -637,204 +1055,4 @@ exports[`includeExplanation > true 1`] = `
     },
   ],
 ]
-`;
-
-exports[`useLightDarkFunction > false 1`] = `
-{
-  "bg": "#ffffff;--shiki-dark-bg:#121212",
-  "fg": "#393a34;--shiki-dark:#dbd7caee",
-  "grammarState": {
-    "lang": "javascript",
-    "scopes": [
-      "source.js",
-    ],
-    "theme": "vitesse-light",
-    "themes": [
-      "vitesse-light",
-      "vitesse-dark",
-    ],
-  },
-  "rootStyle": undefined,
-  "themeName": "shiki-themes vitesse-light vitesse-dark",
-  "tokens": [
-    [
-      {
-        "content": "console",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#BD976A",
-          "color": "#B07D48",
-        },
-        "offset": 0,
-      },
-      {
-        "content": ".",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "color": "#999999",
-        },
-        "offset": 7,
-      },
-      {
-        "content": "log",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#80A665",
-          "color": "#59873A",
-        },
-        "offset": 8,
-      },
-      {
-        "content": "(",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "color": "#999999",
-        },
-        "offset": 11,
-      },
-      {
-        "content": """,
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D77",
-          "color": "#B5695977",
-        },
-        "offset": 12,
-      },
-      {
-        "content": "hello",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D",
-          "color": "#B56959",
-        },
-        "offset": 13,
-      },
-      {
-        "content": """,
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D77",
-          "color": "#B5695977",
-        },
-        "offset": 18,
-      },
-      {
-        "content": ")",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "color": "#999999",
-        },
-        "offset": 19,
-      },
-    ],
-  ],
-}
-`;
-
-exports[`useLightDarkFunction > true 1`] = `
-{
-  "bg": "light-dark(#ffffff, #121212);--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212",
-  "fg": "light-dark(#393a34, #dbd7caee);--shiki-light:#393a34;--shiki-dark:#dbd7caee",
-  "grammarState": {
-    "lang": "javascript",
-    "scopes": [
-      "source.js",
-    ],
-    "theme": "vitesse-light",
-    "themes": [
-      "vitesse-light",
-      "vitesse-dark",
-    ],
-  },
-  "rootStyle": undefined,
-  "themeName": "shiki-themes vitesse-light vitesse-dark",
-  "tokens": [
-    [
-      {
-        "content": "console",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#BD976A",
-          "--shiki-light": "#B07D48",
-          "color": "light-dark(#B07D48, #BD976A)",
-        },
-        "offset": 0,
-      },
-      {
-        "content": ".",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "--shiki-light": "#999999",
-          "color": "light-dark(#999999, #666666)",
-        },
-        "offset": 7,
-      },
-      {
-        "content": "log",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#80A665",
-          "--shiki-light": "#59873A",
-          "color": "light-dark(#59873A, #80A665)",
-        },
-        "offset": 8,
-      },
-      {
-        "content": "(",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "--shiki-light": "#999999",
-          "color": "light-dark(#999999, #666666)",
-        },
-        "offset": 11,
-      },
-      {
-        "content": """,
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D77",
-          "--shiki-light": "#B5695977",
-          "color": "light-dark(#B5695977, #C98A7D77)",
-        },
-        "offset": 12,
-      },
-      {
-        "content": "hello",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D",
-          "--shiki-light": "#B56959",
-          "color": "light-dark(#B56959, #C98A7D)",
-        },
-        "offset": 13,
-      },
-      {
-        "content": """,
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#C98A7D77",
-          "--shiki-light": "#B5695977",
-          "color": "light-dark(#B5695977, #C98A7D77)",
-        },
-        "offset": 18,
-      },
-      {
-        "content": ")",
-        "explanation": undefined,
-        "htmlStyle": {
-          "--shiki-dark": "#666666",
-          "--shiki-light": "#999999",
-          "color": "light-dark(#999999, #666666)",
-        },
-        "offset": 19,
-      },
-    ],
-  ],
-}
 `;

@@ -77,7 +77,9 @@ html.dark .shiki span {
 
 ## `light-dark()` Function
 
-If you want to use the [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) function along with the `--shiki-*` CSS variables, you can do so by using the `useLightDarkFunction` option in `codeToHtml`:
+You can also use [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) function to avoid manually maintaining the CSS variables.
+
+Set `defaultColor` to a special value `light-dark()` to use it. When using this, it requires both `light` and `dark` themes to be provided.
 
 ```ts twoslash
 import { codeToHtml } from 'shiki'
@@ -88,12 +90,12 @@ const code = await codeToHtml('console.log("hello")', {
     light: 'min-light',
     dark: 'nord',
   },
-  useLightDarkFunction: true, // [!code hl]
+  defaultColor: 'light-dark()', // [!code hl]
 })
 ```
 
 :::info Compatibility Note
-The `light-dark()` function is relatively new and may not be supported in older browsers. If you need to support older browsers, consider using the class-based or query-based dark mode methods instead.
+The `light-dark()` function is relatively new and may not be supported in older browsers. [Can I use?](https://caniuse.com/?search=css-light-dark)
 :::
 
 ## Multiple Themes

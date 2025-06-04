@@ -101,10 +101,15 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * <span style="--shiki-light:#{light};--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
    * ```
    *
+   * When set to `light-dark()`, the default color will be rendered as `light-dark(#{light}, #{dark})`.
+   *
+   * ```html
+   * <span style="color:light-dark(#{light}, #{dark});--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
+   * ```
    *
    * @default 'light'
    */
-  defaultColor?: StringLiteralUnion<'light' | 'dark'> | false
+  defaultColor?: StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | false
 
   /**
    * Prefix of CSS variables used to store the color of the other theme.
@@ -112,13 +117,6 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * @default '--shiki-'
    */
   cssVariablePrefix?: string
-
-  /**
-   * Use `light-dark()` CSS function along with CSS variables to toggle themes.
-   *
-   * @default false
-   */
-  useLightDarkFunction?: boolean
 }
 
 export type CodeOptionsThemes<Themes extends string = string> =

@@ -1,7 +1,7 @@
-import type { CodeToTokensOptions, GrammarState, ShikiInternal, ThemedToken, TokensResult } from '@shikijs/types'
+import type { CodeToTokensOptions, GrammarState, ShikiInternal, StringLiteralUnion, ThemedToken, ThemeRegistrationAny, TokensResult } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
-import { applyColorReplacements, flatTokenVariants, resolveColorReplacements } from '../utils'
+import { applyColorReplacements, DEFAULT_THEME_LIGHT_DARK, flatTokenVariants, resolveColorReplacements } from '../utils'
 import { codeToTokensBase } from './code-to-tokens-base'
 import { codeToTokensWithThemes } from './code-to-tokens-themes'
 
@@ -26,7 +26,6 @@ export function codeToTokens(
     const {
       defaultColor = 'light',
       cssVariablePrefix = '--shiki-',
-      useLightDarkFunction = false,
     } = options
 
     const themes = Object
@@ -46,33 +45,22 @@ export function codeToTokens(
 
     grammarState = getLastGrammarStateFromMap(themeTokens)
 
-    if (defaultColor && !themes.find(t => t.color === defaultColor))
+    if (defaultColor && DEFAULT_THEME_LIGHT_DARK !== defaultColor && !themes.find(t => t.color === defaultColor))
       throw new ShikiError(`\`themes\` option must contain the defaultColor key \`${defaultColor}\``)
 
     const themeRegs = themes.map(t => internal.getTheme(t.theme))
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
-      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor, useLightDarkFunction)))
+      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor)))
 
     if (grammarState)
       setLastGrammarStateToMap(tokens, grammarState)
 
     const themeColorReplacements = themes.map(t => resolveColorReplacements(t.theme, options))
 
-    fg = themes.map((t, idx) => {
-      const value = applyColorReplacements(themeRegs[idx].fg, themeColorReplacements[idx]) || 'inherit'
-      if (idx === 0 && defaultColor) {
-        return useLightDarkFunction && themes.length > 1 ? `light-dark(${value}, ${applyColorReplacements(themeRegs[idx + 1].fg, themeColorReplacements[idx + 1]) || 'inherit'});${cssVariablePrefix + t.color}:${value}` : value
-      }
-      return `${cssVariablePrefix + t.color}:${value}`
-    }).join(';')
-    bg = themes.map((t, idx) => {
-      const value = applyColorReplacements(themeRegs[idx].bg, themeColorReplacements[idx]) || 'inherit'
-      if (idx === 0 && defaultColor) {
-        return useLightDarkFunction && themes.length > 1 ? `light-dark(${value}, ${applyColorReplacements(themeRegs[idx + 1].bg, themeColorReplacements[idx + 1]) || 'inherit'});${cssVariablePrefix + t.color}-bg:${value}` : value
-      }
-      return `${cssVariablePrefix + t.color}-bg:${value}`
-    }).join(';')
+    fg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'fg')
+    bg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'bg')
+
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
   }
@@ -103,4 +91,34 @@ export function codeToTokens(
     rootStyle,
     grammarState,
   }
+}
+
+function mapThemeColors(
+  themes: Array<{ color: string, theme: ThemeRegistrationAny | StringLiteralUnion<string> }>,
+  themeRegs: any[],
+  themeColorReplacements: any[],
+  cssVariablePrefix: string,
+  defaultColor: false | StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | undefined,
+  property: 'fg' | 'bg',
+): string {
+  return themes
+    .map((t, idx) => {
+      const value = applyColorReplacements(themeRegs[idx][property], themeColorReplacements[idx]) || 'inherit'
+      const cssVar = `${cssVariablePrefix + t.color}${property === 'bg' ? '-bg' : ''}:${value}`
+      if (idx === 0 && defaultColor) {
+        // light-dark()
+        if (defaultColor === DEFAULT_THEME_LIGHT_DARK && themes.length > 1) {
+          const lightIndex = themes.findIndex(t => t.color === 'light')
+          const darkIndex = themes.findIndex(t => t.color === 'dark')
+          if (lightIndex === -1 || darkIndex === -1)
+            throw new ShikiError('When using `defaultColor: "light-dark()"`, you must provide both `light` and `dark` themes')
+          const lightValue = applyColorReplacements(themeRegs[lightIndex][property], themeColorReplacements[lightIndex]) || 'inherit'
+          const darkValue = applyColorReplacements(themeRegs[darkIndex][property], themeColorReplacements[darkIndex]) || 'inherit'
+          return `light-dark(${lightValue}, ${darkValue});${cssVar}`
+        }
+        return value
+      }
+      return cssVar
+    })
+    .join(';')
 }
