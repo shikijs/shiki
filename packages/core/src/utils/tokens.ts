@@ -1,4 +1,4 @@
-import type { ThemedToken, ThemedTokenWithVariants, TokenStyles } from '@shikijs/types'
+import type { CodeOptionsMultipleThemes, ThemedToken, ThemedTokenWithVariants, TokenStyles } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { FontStyle } from '@shikijs/vscode-textmate'
 import { DEFAULT_COLOR_LIGHT_DARK } from './_constants'
@@ -74,7 +74,8 @@ export function flatTokenVariants(
   merged: ThemedTokenWithVariants,
   variantsOrder: string[],
   cssVariablePrefix: string,
-  defaultColor: string | boolean | 'light-dark()',
+  defaultColor: CodeOptionsMultipleThemes['defaultColor'],
+  colorsRendering: CodeOptionsMultipleThemes['colorsRendering'] = 'css-vars',
 ): ThemedToken {
   const token: ThemedToken = {
     content: merged.content,
@@ -87,6 +88,11 @@ export function flatTokenVariants(
   // Get all style keys, for themes that missing some style, we put `inherit` to override as needed
   const styleKeys = new Set(styles.flatMap(t => Object.keys(t)))
   const mergedStyles: Record<string, string> = {}
+
+  const varKey = (idx: number, key: string): string => {
+    const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
+    return cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
+  }
 
   styles.forEach((cur, idx) => {
     for (const key of styleKeys) {
@@ -103,18 +109,16 @@ export function flatTokenVariants(
           const darkValue = styles[darkIndex][key] || 'inherit'
           mergedStyles[key] = `light-dark(${lightValue}, ${darkValue})`
 
-          const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
-          const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
-          mergedStyles[varKey] = value
+          if (colorsRendering === 'css-vars')
+            mergedStyles[varKey(idx, key)] = value
         }
         else {
           mergedStyles[key] = value
         }
       }
       else {
-        const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
-        const varKey = cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
-        mergedStyles[varKey] = value
+        if (colorsRendering === 'css-vars')
+          mergedStyles[varKey(idx, key)] = value
       }
     }
   })

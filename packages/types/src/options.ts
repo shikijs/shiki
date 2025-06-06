@@ -112,6 +112,16 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
   defaultColor?: StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | false
 
   /**
+   * The strategy to render multiple colors.
+   *
+   * - `css-vars`: Render the colors via CSS variables.
+   * - `none`: Do not render the colors, only use the default color.
+   *
+   * @default 'css-vars'
+   */
+  colorsRendering?: 'css-vars' | 'none'
+
+  /**
    * Prefix of CSS variables used to store the color of the other theme.
    *
    * @default '--shiki-'

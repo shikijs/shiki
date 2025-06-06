@@ -1,5 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`colorsRendering none > colorsRendering none 1`] = `"<pre class="shiki shiki-themes vitesse-light vitesse-dark" style=";" tabindex="0"><code><span class="line"><span>console</span><span>.</span><span>log</span><span>(</span><span>"</span><span>hello</span><span>"</span><span>)</span></span></code></pre>"`;
+
+exports[`colorsRendering none > colorsRendering none with defaultColor 1`] = `"<pre class="shiki shiki-themes vitesse-light vitesse-dark" style="background-color:light-dark(#ffffff, #121212);--shiki-light-bg:#ffffff;color:light-dark(#393a34, #dbd7caee);--shiki-light:#393a34" tabindex="0"><code><span class="line"><span style="color:light-dark(#B07D48, #BD976A)">console</span><span style="color:light-dark(#999999, #666666)">.</span><span style="color:light-dark(#59873A, #80A665)">log</span><span style="color:light-dark(#999999, #666666)">(</span><span style="color:light-dark(#B5695977, #C98A7D77)">"</span><span style="color:light-dark(#B56959, #C98A7D)">hello</span><span style="color:light-dark(#B5695977, #C98A7D77)">"</span><span style="color:light-dark(#999999, #666666)">)</span></span></code></pre>"`;
+
 exports[`defaultColor light-dark() > basic > css-vars 1`] = `
 {
   "bg": "--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212",

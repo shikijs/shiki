@@ -1,6 +1,6 @@
 import { createJavaScriptRegexEngine } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import { codeToTokens, codeToTokensBase, createShikiInternal } from '../src'
+import { codeToHtml, codeToTokens, codeToTokensBase, createShikiInternal } from '../src'
 
 it('includeExplanation', async () => {
   using engine = await createShikiInternal({
@@ -135,4 +135,36 @@ describe('defaultColor light-dark()', () => {
       defaultColor: 'light-dark()',
     })
   })
+})
+
+it('colorsRendering none', async () => {
+  using engine = await createShikiInternal({
+    themes: [
+      import('@shikijs/themes/vitesse-light'),
+      import('@shikijs/themes/vitesse-dark'),
+    ],
+    langs: [
+      import('@shikijs/langs/javascript'),
+    ],
+    engine: createJavaScriptRegexEngine(),
+  })
+
+  const code = 'console.log("hello")'
+  expect(
+    codeToHtml(engine, code, {
+      lang: 'js',
+      themes: { light: 'vitesse-light', dark: 'vitesse-dark' },
+      defaultColor: 'light-dark()',
+      colorsRendering: 'none',
+    }),
+  ).toMatchSnapshot('colorsRendering none with defaultColor')
+
+  expect(
+    codeToHtml(engine, code, {
+      lang: 'js',
+      themes: { light: 'vitesse-light', dark: 'vitesse-dark' },
+      colorsRendering: 'none',
+      defaultColor: false,
+    }),
+  ).toMatchSnapshot('colorsRendering none')
 })

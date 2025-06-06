@@ -1,4 +1,4 @@
-import type { CodeToTokensOptions, GrammarState, ShikiInternal, StringLiteralUnion, ThemedToken, ThemeRegistrationAny, TokensResult } from '@shikijs/types'
+import type { CodeOptionsMultipleThemes, CodeToTokensOptions, GrammarState, ShikiInternal, StringLiteralUnion, ThemedToken, ThemeRegistrationAny, TokensResult } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { applyColorReplacements, flatTokenVariants, resolveColorReplacements } from '../utils'
@@ -27,6 +27,7 @@ export function codeToTokens(
     const {
       defaultColor = 'light',
       cssVariablePrefix = '--shiki-',
+      colorsRendering = 'css-vars',
     } = options
 
     const themes = Object
@@ -52,15 +53,15 @@ export function codeToTokens(
     const themeRegs = themes.map(t => internal.getTheme(t.theme))
     const themesOrder = themes.map(t => t.color)
     tokens = themeTokens
-      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor)))
+      .map(line => line.map(token => flatTokenVariants(token, themesOrder, cssVariablePrefix, defaultColor, colorsRendering)))
 
     if (grammarState)
       setLastGrammarStateToMap(tokens, grammarState)
 
     const themeColorReplacements = themes.map(t => resolveColorReplacements(t.theme, options))
 
-    fg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'fg')
-    bg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'bg')
+    fg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'fg', colorsRendering)
+    bg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'bg', colorsRendering)
 
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
     rootStyle = defaultColor ? undefined : [fg, bg].join(';')
@@ -101,6 +102,7 @@ function mapThemeColors(
   cssVariablePrefix: string,
   defaultColor: false | StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | undefined,
   property: 'fg' | 'bg',
+  colorsRendering: CodeOptionsMultipleThemes['colorsRendering'],
 ): string {
   return themes
     .map((t, idx) => {
@@ -119,7 +121,11 @@ function mapThemeColors(
         }
         return value
       }
-      return cssVar
+      if (colorsRendering === 'css-vars') {
+        return cssVar
+      }
+      return null
     })
+    .filter(i => !!i)
     .join(';')
 }
