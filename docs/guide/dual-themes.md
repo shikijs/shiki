@@ -6,7 +6,7 @@ outline: deep
 
 Shiki supports outputting light/dark dual or multiple themes. Shiki's dual themes approach uses CSS variables to store the colors on each token.
 
-Change the `theme` option in `codeToHtml` to `options` with `light` and `dark` keys to generate two themes.
+Change the `theme` option in `codeToHtml` to `themes` with `light` and `dark` keys to generate two themes.
 
 ```ts twoslash
 import { codeToHtml } from 'shiki'
