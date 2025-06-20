@@ -36,10 +36,34 @@ export const LANGS_LAZY_EMBEDDED_PARTIAL = {
     'graphql',
   ],
   'vue-html': [],
-  'svelte': ['coffee', 'stylus', 'sass', 'scss', 'less', 'pug', 'markdown'],
-  'pug': ['sass', 'scss', 'stylus', 'coffee'],
-  'haml': ['ruby', 'sass', 'coffee', 'markdown'],
-  'astro': ['sass', 'scss', 'stylus', 'less'],
+  'svelte': [
+    'coffee',
+    'stylus',
+    'sass',
+    'scss',
+    'less',
+    'pug',
+    'markdown',
+  ],
+  'pug': [
+    'sass',
+    'scss',
+    'stylus',
+    'coffee',
+  ],
+  'haml': [
+    'ruby',
+    'sass',
+    'coffee',
+    'markdown',
+  ],
+  // Since Astro is a extension of MDX, we don't exclude `jsx` here.
+  'astro': [
+    'sass',
+    'scss',
+    'stylus',
+    'less',
+  ],
 } as Record<string, string[]>
 
 export async function loadLangs() {
