@@ -64,6 +64,7 @@ export function createdBundledHighlighter<BundledLangs extends string, BundledTh
       if (typeof lang === 'string') {
         if (isSpecialLang(lang))
           return []
+        lang = (options.langAlias?.[lang] || lang) as LanguageInput | BundledLangs | SpecialLanguage
         const bundle = bundledLanguages[lang as BundledLangs]
         if (!bundle)
           throw new ShikiError(`Language \`${lang}\` is not included in this bundle. You may want to load it from external source.`)
