@@ -72,6 +72,7 @@ Meanwhile, if you want to append decorations within a transformer, you can do th
 ```ts twoslash
 /* eslint-disable import/no-duplicates */
 import { DecorationItem } from 'shiki'
+
 function doSomethingWithCode(code: string): DecorationItem[] {
   return []
 }

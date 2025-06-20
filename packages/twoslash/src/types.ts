@@ -14,8 +14,8 @@ import type {
 } from 'twoslash'
 
 // We only pick necessary types to Shiki, making passing custom twoslash implementation easier
-export type TwoslashShikiReturn =
-  Pick<TwoslashReturn, 'nodes' | 'code'> & {
+export type TwoslashShikiReturn
+  = Pick<TwoslashReturn, 'nodes' | 'code'> & {
     meta?: Partial<Pick<TwoslashReturn['meta'], 'extension'>>
   }
 

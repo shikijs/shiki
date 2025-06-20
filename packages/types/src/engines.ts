@@ -19,14 +19,14 @@ export interface WebAssemblyInstantiator {
 
 export type WebAssemblyInstance = WebAssembly.WebAssemblyInstantiatedSource | WebAssembly.Instance | WebAssembly.Instance['exports']
 
-export type OnigurumaLoadOptions =
-  | { instantiator: WebAssemblyInstantiator }
-  | { default: WebAssemblyInstantiator }
-  | { data: ArrayBufferView | ArrayBuffer | Response }
+export type OnigurumaLoadOptions
+  = | { instantiator: WebAssemblyInstantiator }
+    | { default: WebAssemblyInstantiator }
+    | { data: ArrayBufferView | ArrayBuffer | Response }
 
-export type LoadWasmOptionsPlain =
-  | OnigurumaLoadOptions
-  | WebAssemblyInstantiator
-  | ArrayBufferView | ArrayBuffer | Response
+export type LoadWasmOptionsPlain
+  = | OnigurumaLoadOptions
+    | WebAssemblyInstantiator
+    | ArrayBufferView | ArrayBuffer | Response
 
 export type LoadWasmOptions = Awaitable<LoadWasmOptionsPlain> | (() => Awaitable<LoadWasmOptionsPlain>)

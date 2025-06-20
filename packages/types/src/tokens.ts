@@ -24,8 +24,8 @@ export interface CodeToTokensBaseOptions<Languages extends string = string, Them
   theme?: Themes | ThemeRegistrationAny | SpecialTheme
 }
 
-export type CodeToTokensOptions<Languages extends string = string, Themes extends string = string> = Omit<CodeToTokensBaseOptions<Languages, Themes>, 'theme'> &
-  CodeOptionsThemes<Themes>
+export type CodeToTokensOptions<Languages extends string = string, Themes extends string = string> = Omit<CodeToTokensBaseOptions<Languages, Themes>, 'theme'>
+  & CodeOptionsThemes<Themes>
 
 export interface CodeToTokensWithThemesOptions<Languages = string, Themes = string> extends TokenizeWithThemeOptions {
   lang?: Languages | SpecialLanguage

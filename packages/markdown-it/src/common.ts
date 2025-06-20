@@ -41,8 +41,8 @@ export interface MarkdownItShikiExtraOptions {
   fallbackLanguage?: LanguageInput | BuiltinLanguage
 }
 
-export type MarkdownItShikiSetupOptions =
-  & CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & MarkdownItShikiExtraOptions
+export type MarkdownItShikiSetupOptions
+  = & CodeOptionsThemes<BuiltinTheme>
+    & TransformerOptions
+    & CodeOptionsMeta
+    & MarkdownItShikiExtraOptions

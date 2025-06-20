@@ -114,6 +114,7 @@ Additionally, if you want to load themes and languages after the highlighter is 
 
 ```ts twoslash
 import { createHighlighter } from 'shiki'
+
 const highlighter = await createHighlighter({ themes: [], langs: [] })
 // ---cut---
 // load themes and languages after creation

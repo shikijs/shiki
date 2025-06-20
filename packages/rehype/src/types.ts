@@ -83,9 +83,9 @@ export interface RehypeShikiExtraOptions {
   onError?: (error: unknown) => void
 }
 
-export type RehypeShikiCoreOptions =
-  & CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & RehypeShikiExtraOptions
-  & Omit<CodeToHastOptionsCommon, 'lang'>
+export type RehypeShikiCoreOptions
+  = & CodeOptionsThemes<BuiltinTheme>
+    & TransformerOptions
+    & CodeOptionsMeta
+    & RehypeShikiExtraOptions
+    & Omit<CodeToHastOptionsCommon, 'lang'>
