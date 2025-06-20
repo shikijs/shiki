@@ -52,6 +52,35 @@ describe('defaultColor light-dark()', () => {
     expect(caseLightDark).toMatchSnapshot('light-dark()')
   })
 
+  it('with font style', async () => {
+    using engine = await createShikiInternal({
+      themes: [
+        import('@shikijs/themes/dracula'),
+        import('@shikijs/themes/dracula-soft'),
+      ],
+      langs: [
+        import('@shikijs/langs/markdown'),
+      ],
+      engine: createJavaScriptRegexEngine(),
+    })
+
+    const code = 'text *italic* **bold**'
+    const caseCssVars = codeToTokens(engine, code, {
+      lang: 'md',
+      themes: { light: 'dracula', dark: 'dracula-soft' },
+      defaultColor: false,
+    })
+    const caseLightDark = codeToTokens(engine, code, {
+      lang: 'md',
+      themes: { light: 'dracula', dark: 'dracula-soft' },
+      defaultColor: 'light-dark()',
+      colorsRendering: 'none',
+    })
+
+    expect(caseCssVars).toMatchSnapshot('css-vars')
+    expect(caseLightDark).toMatchSnapshot('light-dark()')
+  })
+
   it('defaultColor light-dark() with multiple themes', async () => {
     using engine = await createShikiInternal({
       themes: [

@@ -1,7 +1,7 @@
 import type { CodeOptionsMultipleThemes, ThemedToken, ThemedTokenWithVariants, TokenStyles } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import { DEFAULT_COLOR_LIGHT_DARK } from './_constants'
+import { COLOR_KEYS, DEFAULT_COLOR_LIGHT_DARK } from './_constants'
 
 /**
  * Split a token into multiple tokens by given offsets.
@@ -98,7 +98,7 @@ export function flatTokenVariants(
     for (const key of styleKeys) {
       const value = cur[key] || 'inherit'
 
-      if (idx === 0 && defaultColor) {
+      if (idx === 0 && defaultColor && COLOR_KEYS.includes(key)) {
         // light-dark()
         if (defaultColor === DEFAULT_COLOR_LIGHT_DARK && styles.length > 1) {
           const lightIndex = variantsOrder.findIndex(t => t === 'light')
@@ -108,7 +108,6 @@ export function flatTokenVariants(
           const lightValue = styles[lightIndex][key] || 'inherit'
           const darkValue = styles[darkIndex][key] || 'inherit'
           mergedStyles[key] = `light-dark(${lightValue}, ${darkValue})`
-
           if (colorsRendering === 'css-vars')
             mergedStyles[varKey(idx, key)] = value
         }

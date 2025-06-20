@@ -422,6 +422,128 @@ exports[`defaultColor light-dark() > defaultColor light-dark() with multiple the
 }
 `;
 
+exports[`defaultColor light-dark() > with font style > css-vars 1`] = `
+{
+  "bg": "--shiki-light-bg:#282A36;--shiki-dark-bg:#282A36",
+  "fg": "--shiki-light:#F8F8F2;--shiki-dark:#f6f6f4",
+  "grammarState": {
+    "lang": "markdown",
+    "scopes": [
+      "meta.paragraph.markdown",
+      "text.html.markdown",
+    ],
+    "theme": "dracula",
+    "themes": [
+      "dracula",
+      "dracula-soft",
+    ],
+  },
+  "rootStyle": "--shiki-light:#F8F8F2;--shiki-dark:#f6f6f4;--shiki-light-bg:#282A36;--shiki-dark-bg:#282A36",
+  "themeName": "shiki-themes dracula dracula-soft",
+  "tokens": [
+    [
+      {
+        "content": "text ",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#F6F6F4",
+          "--shiki-light": "#F8F8F2",
+        },
+        "offset": 0,
+      },
+      {
+        "content": "*italic*",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#E7EE98",
+          "--shiki-dark-font-style": "italic",
+          "--shiki-light": "#F1FA8C",
+          "--shiki-light-font-style": "italic",
+        },
+        "offset": 5,
+      },
+      {
+        "content": " ",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#F6F6F4",
+          "--shiki-light": "#F8F8F2",
+        },
+        "offset": 13,
+      },
+      {
+        "content": "**bold**",
+        "explanation": undefined,
+        "htmlStyle": {
+          "--shiki-dark": "#FFB86C",
+          "--shiki-dark-font-weight": "bold",
+          "--shiki-light": "#FFB86C",
+          "--shiki-light-font-weight": "bold",
+        },
+        "offset": 14,
+      },
+    ],
+  ],
+}
+`;
+
+exports[`defaultColor light-dark() > with font style > light-dark() 1`] = `
+{
+  "bg": "light-dark(#282A36, #282A36);--shiki-light-bg:#282A36",
+  "fg": "light-dark(#F8F8F2, #f6f6f4);--shiki-light:#F8F8F2",
+  "grammarState": {
+    "lang": "markdown",
+    "scopes": [
+      "meta.paragraph.markdown",
+      "text.html.markdown",
+    ],
+    "theme": "dracula",
+    "themes": [
+      "dracula",
+      "dracula-soft",
+    ],
+  },
+  "rootStyle": undefined,
+  "themeName": "shiki-themes dracula dracula-soft",
+  "tokens": [
+    [
+      {
+        "content": "text ",
+        "explanation": undefined,
+        "htmlStyle": {
+          "color": "light-dark(#F8F8F2, #F6F6F4)",
+        },
+        "offset": 0,
+      },
+      {
+        "content": "*italic*",
+        "explanation": undefined,
+        "htmlStyle": {
+          "color": "light-dark(#F1FA8C, #E7EE98)",
+        },
+        "offset": 5,
+      },
+      {
+        "content": " ",
+        "explanation": undefined,
+        "htmlStyle": {
+          "color": "light-dark(#F8F8F2, #F6F6F4)",
+        },
+        "offset": 13,
+      },
+      {
+        "content": "**bold**",
+        "explanation": undefined,
+        "htmlStyle": {
+          "color": "light-dark(#FFB86C, #FFB86C)",
+        },
+        "offset": 14,
+      },
+    ],
+  ],
+}
+`;
+
 exports[`includeExplanation > false 1`] = `
 [
   [

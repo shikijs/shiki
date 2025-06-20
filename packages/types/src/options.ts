@@ -129,14 +129,14 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
   cssVariablePrefix?: string
 }
 
-export type CodeOptionsThemes<Themes extends string = string> =
-  | CodeOptionsSingleTheme<Themes>
-  | CodeOptionsMultipleThemes<Themes>
+export type CodeOptionsThemes<Themes extends string = string>
+  = | CodeOptionsSingleTheme<Themes>
+    | CodeOptionsMultipleThemes<Themes>
 
-export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
-  & CodeToHastOptionsCommon<Languages>
-  & CodeOptionsThemes<Themes>
-  & CodeOptionsMeta
+export type CodeToHastOptions<Languages extends string = string, Themes extends string = string>
+  = & CodeToHastOptionsCommon<Languages>
+    & CodeOptionsThemes<Themes>
+    & CodeOptionsMeta
 
 export interface CodeToHastOptionsCommon<Languages extends string = string>
   extends
