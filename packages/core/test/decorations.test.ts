@@ -36,13 +36,6 @@ describe('decorations', () => {
       theme: 'vitesse-light',
       lang: 'ts',
       decorations: [
-        // Empty decoration adjacent to the trailing decoration.
-        // Testing empty decorations before non empty decoration.
-        {
-          start: { line: 3, character: 0 },
-          end: { line: 3, character: 0 },
-          properties: { class: 'highlighted-border' },
-        },
         // The `e` letter in `export` is highlighted.
         // Testing decorations that break tokens.
         {
@@ -50,13 +43,6 @@ describe('decorations', () => {
           end: { line: 3, character: 1 },
           tagName: 'div',
           properties: { class: 'highlighted' },
-        },
-        // Empty decoration adjacent to the leading decoration.
-        // Testing empty decorations after non empty decoration.
-        {
-          start: { line: 3, character: 1 },
-          end: { line: 3, character: 1 },
-          properties: { class: 'highlighted-border' },
         },
         // The space below `export` is highlighted.
         // Testing decorations with whitespace.
@@ -123,6 +109,42 @@ describe('decorations', () => {
 
     await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/basic.html')
+  })
+
+  it('adjacent', async () => {
+    const html = await codeToHtml('hello', {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      decorations: [
+        // Empty decoration adjacent to the trailing decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 1 },
+          properties: { class: 'highlighted-border' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 2 },
+          properties: { class: 'highlighted' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 2 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-body' },
+        },
+        // Empty decoration adjacent to the leading decoration.
+        {
+          start: { line: 0, character: 3 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-border' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/adjacent.html')
   })
 })
 
