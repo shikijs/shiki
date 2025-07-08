@@ -10,6 +10,9 @@ const style = `
 .highlighted-body {
   background-color: #8883;
 }
+.highlighted-border {
+  border: 1px solid #ff0000;
+}
 </style>`
 
 const code = `/**
@@ -33,6 +36,13 @@ describe('decorations', () => {
       theme: 'vitesse-light',
       lang: 'ts',
       decorations: [
+        // Empty decoration adjacent to the trailing decoration.
+        // Testing empty decorations before non empty decoration.
+        {
+          start: { line: 3, character: 0 },
+          end: { line: 3, character: 0 },
+          properties: { class: 'highlighted-border' },
+        },
         // The `e` letter in `export` is highlighted.
         // Testing decorations that break tokens.
         {
@@ -40,6 +50,13 @@ describe('decorations', () => {
           end: { line: 3, character: 1 },
           tagName: 'div',
           properties: { class: 'highlighted' },
+        },
+        // Empty decoration adjacent to the leading decoration.
+        // Testing empty decorations after non empty decoration.
+        {
+          start: { line: 3, character: 1 },
+          end: { line: 3, character: 1 },
+          properties: { class: 'highlighted-border' },
         },
         // The space below `export` is highlighted.
         // Testing decorations with whitespace.

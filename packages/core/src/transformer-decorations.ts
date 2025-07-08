@@ -193,10 +193,10 @@ function verifyIntersections(items: ResolvedDecorationItem[]): void {
 
     for (let j = i + 1; j < items.length; j++) {
       const bar = items[j]
-      const isFooHasBarStart = foo.start.offset <= bar.start.offset && bar.start.offset < foo.end.offset
+      const isFooHasBarStart = foo.start.offset <= bar.start.offset && bar.start.offset <= foo.end.offset
       const isFooHasBarEnd = foo.start.offset < bar.end.offset && bar.end.offset <= foo.end.offset
       const isBarHasFooStart = bar.start.offset <= foo.start.offset && foo.start.offset < bar.end.offset
-      const isBarHasFooEnd = bar.start.offset < foo.end.offset && foo.end.offset <= bar.end.offset
+      const isBarHasFooEnd = bar.start.offset <= foo.end.offset && foo.end.offset <= bar.end.offset
       if (isFooHasBarStart || isFooHasBarEnd || isBarHasFooStart || isBarHasFooEnd) {
         if (isFooHasBarStart && isFooHasBarEnd)
           continue // nested
