@@ -288,6 +288,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/vue-html')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'vue-vine',
+    'name': 'Vue Vine',
+    'import': (() => import('@shikijs/langs/vue-vine')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'wasm',
     'name': 'WebAssembly',
     'import': (() => import('@shikijs/langs/wasm')) as DynamicImportLanguageRegistration
@@ -386,6 +391,7 @@ export type BundledLanguage =
   | 'typescript'
   | 'vue'
   | 'vue-html'
+  | 'vue-vine'
   | 'wasm'
   | 'wgsl'
   | 'wit'

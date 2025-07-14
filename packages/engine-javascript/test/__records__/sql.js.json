@@ -1,6 +1,6 @@
 [
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -12,7 +12,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -20,7 +20,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -139,7 +139,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -151,7 +151,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -159,7 +159,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -218,7 +218,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -230,7 +230,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -238,7 +238,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -357,7 +357,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -369,7 +369,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -377,7 +377,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -427,7 +427,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -439,7 +439,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -447,7 +447,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -566,7 +566,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -578,7 +578,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -586,7 +586,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -645,7 +645,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -657,7 +657,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -665,7 +665,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -784,7 +784,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -796,7 +796,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -804,7 +804,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -854,7 +854,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -866,7 +866,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -874,7 +874,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -963,7 +963,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -975,7 +975,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -983,7 +983,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1033,7 +1033,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1045,7 +1045,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1053,7 +1053,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1142,7 +1142,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1154,7 +1154,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1162,7 +1162,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1212,7 +1212,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1224,7 +1224,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1232,7 +1232,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1321,7 +1321,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1333,7 +1333,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1341,7 +1341,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1405,7 +1405,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1417,7 +1417,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1425,7 +1425,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1499,7 +1499,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1511,7 +1511,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1519,7 +1519,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1593,7 +1593,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1605,7 +1605,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1613,7 +1613,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1687,7 +1687,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1699,7 +1699,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1707,7 +1707,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1757,7 +1757,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1769,7 +1769,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1777,7 +1777,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1846,7 +1846,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1858,7 +1858,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1866,7 +1866,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -1935,7 +1935,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -1947,7 +1947,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -1955,7 +1955,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2005,7 +2005,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2017,7 +2017,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2025,7 +2025,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2114,7 +2114,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2126,7 +2126,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2134,7 +2134,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2184,7 +2184,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2196,7 +2196,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2204,7 +2204,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2293,7 +2293,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2305,7 +2305,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2313,7 +2313,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2363,7 +2363,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2375,7 +2375,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2383,7 +2383,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2472,7 +2472,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2484,7 +2484,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2492,7 +2492,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2556,7 +2556,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2568,7 +2568,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2576,7 +2576,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2650,7 +2650,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2662,7 +2662,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2670,7 +2670,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2744,7 +2744,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2756,7 +2756,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2764,7 +2764,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2838,7 +2838,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2850,7 +2850,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2858,7 +2858,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2908,7 +2908,7 @@
     "result": null
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -2920,7 +2920,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -2928,7 +2928,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -2997,7 +2997,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -3009,7 +3009,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -3017,7 +3017,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
@@ -3086,7 +3086,7 @@
     }
   },
   {
-    "id": "_o2SmqyshCF35vBfymP19xp4DPz7vOz0AMfYdE2-7r8",
+    "id": "9OJaXmjmRMtevAykLuFWpxWmAXk4FyomkjsBGRNN9UU",
     "patterns": [
       "((?<!@)@)\\b(\\w+)\\b",
       "(\\[)[^]]*(])",
@@ -3098,7 +3098,7 @@
       "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
       "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|proc(edure)?|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
       "(?i)\\b(bigint|bigserial|bit|boolean|box|bytea|cidr|circle|date|double\\sprecision|inet|int|integer|line|lseg|macaddr|money|oid|path|point|polygon|real|serial|smallint|sysdate|text)\\b|\\b(bit\\svarying|character\\s(?:varying)?|tinyint|var\\schar|float|interval)\\((\\d+)\\)|\\b(char|number|varchar\\d?)\\b(?:\\((\\d+)\\))?|\\b(numeric|decimal)\\b(?:\\((\\d+),(\\d+)\\))?|\\b(times?)\\b(?:\\((\\d+)\\))?(\\swith(?:out)?\\stime\\szone\\b)?|\\b(timestamp)(s|tz)?\\b(?:\\((\\d+)\\))?(\\s(with(?:|out))\\stime\\szone\\b)?",
-      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
+      "(?i:\\b((?:primary|foreign)\\s+key|references|on\\s+(delete|update)(\\s+cascade)?|nocheck|check|constraint|collate|default)\\b)",
       "\\b\\d+\\b",
       "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
       "(?i:\\b(on|off|((is\\s+)?not\\s+)?null)\\b)",
@@ -3106,7 +3106,7 @@
       "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
       "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
       "(?i:\\bin\\b)",
-      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+      "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+)",
       "(?i)\\bAS\\b",
       "(?i)\\b(DESC|ASC)\\b",
       "\\*",
