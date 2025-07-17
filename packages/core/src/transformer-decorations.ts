@@ -202,6 +202,10 @@ function verifyIntersections(items: ResolvedDecorationItem[]): void {
           continue // nested
         if (isBarHasFooStart && isBarHasFooEnd)
           continue // nested
+        if (isBarHasFooStart && foo.start.offset === foo.end.offset)
+          continue // leading adjacent empty
+        if (isFooHasBarEnd && bar.start.offset === bar.end.offset)
+          continue // trailing adjacent empty
         throw new ShikiError(`Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
       }
     }

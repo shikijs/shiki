@@ -10,6 +10,9 @@ const style = `
 .highlighted-body {
   background-color: #8883;
 }
+.highlighted-border {
+  border: 1px solid #ff0000;
+}
 </style>`
 
 const code = `/**
@@ -106,6 +109,42 @@ describe('decorations', () => {
 
     await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/basic.html')
+  })
+
+  it('adjacent', async () => {
+    const html = await codeToHtml('hello', {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      decorations: [
+        // Empty decoration adjacent to the trailing decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 1 },
+          properties: { class: 'highlighted-border' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 2 },
+          properties: { class: 'highlighted' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 2 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-body' },
+        },
+        // Empty decoration adjacent to the leading decoration.
+        {
+          start: { line: 0, character: 3 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-border' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/adjacent.html')
   })
 })
 
