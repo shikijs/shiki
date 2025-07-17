@@ -129,9 +129,9 @@ function _tokenizeWithTheme(
   colorMap: string[],
   options: TokenizeWithThemeOptions,
 ): {
-    tokens: ThemedToken[][]
-    stateStack: StateStack
-  } {
+  tokens: ThemedToken[][]
+  stateStack: StateStack
+} {
   const colorReplacements = resolveColorReplacements(theme, options)
 
   const {

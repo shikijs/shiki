@@ -1248,6 +1248,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/vue-html')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'vue-vine',
+    'name': 'Vue Vine',
+    'import': (() => import('@shikijs/langs/vue-vine')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'vyper',
     'name': 'Vyper',
     'aliases': [
@@ -1617,6 +1622,7 @@ export type BundledLanguage =
   | 'vimscript'
   | 'vue'
   | 'vue-html'
+  | 'vue-vine'
   | 'vy'
   | 'vyper'
   | 'wasm'
