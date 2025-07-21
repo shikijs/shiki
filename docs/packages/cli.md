@@ -57,3 +57,46 @@ Language is auto-inferred from the file extension. You can override it with `--l
 ```bash
 npx @shikijs/cli src/index.js --lang=ts
 ```
+
+## Node.js API
+
+The `@shikijs/cli` package also exports a Node.js API you can import.
+
+::: code-group
+
+```sh [npm]
+npm i @shikijs/cli
+```
+
+```sh [yarn]
+yarn add @shikijs/cli
+```
+
+```sh [pnpm]
+pnpm add @shikijs/cli
+```
+
+```sh [bun]
+bun add @shikijs/cli
+```
+
+:::
+
+### `codeToANSI`
+
+The asynchronous `codeToANSI` function allows you to convert code to ANSI escape codes for terminal output.
+This is useful for rendering syntax-highlighted code in the terminal.
+
+```ts
+import { codeToANSI } from "@shikijs/cli";
+
+const highlighted = await codeToANSI(source, "typescript", "nord");
+
+console.log(highlighted);
+```
+
+`codeToANSI` takes three required parameters:
+
+1. `code: string`
+2. `lang: BundledLanguage`
+3. `theme: BundledTheme`
