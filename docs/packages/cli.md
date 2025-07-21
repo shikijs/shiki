@@ -60,7 +60,7 @@ npx @shikijs/cli src/index.js --lang=ts
 
 ## Node.js API
 
-The `@shikijs/cli` package also exports a Node.js API you can import.
+The `@shikijs/cli` package also provides a Node.js API.
 
 ::: code-group
 
@@ -88,11 +88,11 @@ The asynchronous `codeToANSI` function allows you to convert code to ANSI escape
 This is useful for rendering syntax-highlighted code in the terminal.
 
 ```ts
-import { codeToANSI } from "@shikijs/cli";
+import { codeToANSI } from '@shikijs/cli'
 
-const highlighted = await codeToANSI(source, "typescript", "nord");
+const highlighted = await codeToANSI(source, 'typescript', 'nord')
 
-console.log(highlighted);
+console.log(highlighted)
 ```
 
 `codeToANSI` takes three required parameters:
