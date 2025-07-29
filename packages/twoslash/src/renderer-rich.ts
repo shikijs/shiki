@@ -232,6 +232,12 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
 
     const popupContents: ElementContent[] = []
 
+    let lang = this.options.lang
+    if (lang === 'jsx')
+      lang = 'tsx'
+    else if (lang === 'js' || lang === 'javascript')
+      lang = 'ts'
+
     const typeCode: Element = {
       type: 'element',
       tagName: 'code',
@@ -242,9 +248,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           ...this.options,
           meta: {},
           transformers: [],
-          lang: (this.options.lang === 'tsx' || this.options.lang === 'jsx')
-            ? 'tsx'
-            : 'ts',
+          lang,
           structure: content.trim().includes('\n') ? 'classic' : 'inline',
         },
       ).children as ElementContent[],
