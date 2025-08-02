@@ -6,7 +6,7 @@ outline: deep
 
 TextMate grammars are based on regular expressions that match tokens. More specifically, they assume that [Oniguruma](https://github.com/kkos/oniguruma) (a powerful regex engine written in C) will be used to interpret the regular expressions. To make this work in JavaScript, we compile Oniguruma to WebAssembly to run in the browser or Node.js.
 
-Since v1.15, we expose the ability for users to switch the regex engine or provide a custom implementation. To do so, add an `engine` option to `createHighlighter` or `createHighlighterCore`. For example:
+Shiki also offers the ability to switch the regex engine or provide a custom implementation. To do so, add an `engine` option to `createHighlighter` or `createHighlighterCore`. For example:
 
 ```ts
 import { createHighlighter } from 'shiki'
@@ -54,9 +54,9 @@ const shiki = await createHighlighter({
 const html = shiki.codeToHtml('const a = 1', { lang: 'javascript', theme: 'nord' })
 ```
 
-The advantages of using the JavaScript engine are that it doesn't require loading a large WebAssembly file for Oniguruma and it is faster for some languages (since the regular expressions run as native JavaScript).
+The advantage of using the JavaScript engine is that it doesn't require loading a large WebAssembly file for Oniguruma. It is also faster for some languages, since the regular expressions run as native JavaScript.
 
-Please check the [compatibility table](/references/engine-js-compat) for the support status of languages you are using. Almost all languages are supported.
+Please check the [compatibility table](/references/engine-js-compat) for the support status of languages you are using. As of Shiki 3.9.1, all built-in languages are supported.
 
 ::: info
 The JavaScript engine is best when running in the browser and in cases when you want to control the bundle size. If you run Shiki on Node.js (or at build time) and bundle size or WebAssembly support is not a concern, the Oniguruma engine ensures maximum language compatibility.
@@ -71,7 +71,7 @@ const jsEngine = createJavaScriptRegexEngine({ forgiving: true })
 // ...use the engine
 ```
 
-Please use this option with caution as highlighting mismatches may occur.
+This can result in highlighting mismatches, so check your results.
 
 ### JavaScript Runtime Target
 
