@@ -42,12 +42,14 @@ export function transformerDecorations(): ShikiTransformer {
           const line = converter.lines[p.line]
           if (line === undefined)
             throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Lines length: ${converter.lines.length}`)
-          if (p.character < 0 || p.character > line.length)
+          // Negative numbers are positions from the end of the line
+          const tp = { ...p, character: (p.character < 0 ? line.length + p.character : p.character) }
+          if (tp.character < 0 || tp.character > line.length)
             throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Line ${p.line} length: ${line.length}`)
 
           return {
-            ...p,
-            offset: converter.posToIndex(p.line, p.character),
+            ...tp,
+            offset: converter.posToIndex(tp.line, tp.character),
           }
         }
       }
