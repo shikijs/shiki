@@ -8,6 +8,7 @@ import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
+import { twoslashFencePathMdPlugin } from '../../packages/vitepress-twoslash/src/fence-path'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
@@ -148,6 +149,7 @@ export default withMermaid(defineConfig({
     languages: ['js', 'jsx', 'ts', 'tsx', 'html'],
     config: (md) => {
       md.use(groupIconMdPlugin)
+        .use(twoslashFencePathMdPlugin)
     },
   },
 
