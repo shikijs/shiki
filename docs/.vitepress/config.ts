@@ -8,6 +8,7 @@ import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
+import { createTwoslashMdCache } from '../../packages/vitepress-twoslash/src/cache-md'
 import { twoslashFencePathMdPlugin } from '../../packages/vitepress-twoslash/src/fence-path'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
@@ -142,6 +143,7 @@ export default withMermaid(defineConfig({
             .replace(/_shikijs_core\w*\./g, '')
         },
         typesCache: createFileSystemTypesCache(),
+        twoslashCache: createTwoslashMdCache(),
       }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
