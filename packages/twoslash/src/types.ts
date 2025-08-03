@@ -12,6 +12,7 @@ import type {
   TwoslashOptions,
   TwoslashReturn,
 } from 'twoslash'
+import type { TwoslashTypesCache } from './cache'
 
 // We only pick necessary types to Shiki, making passing custom twoslash implementation easier
 export type TwoslashShikiReturn
@@ -86,6 +87,8 @@ export interface TransformerTwoslashOptions {
    * When specified, `throws` will be ignored
    */
   onShikiError?: (error: unknown, code: string, lang: string) => void
+
+  twoslashCache?: TwoslashTypesCache
 }
 
 export interface TwoslashRenderer {

@@ -2,7 +2,7 @@
  * This file is the core of the @shikijs/twoslash package,
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
-import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
+import type { CodeToHastOptions, ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 import type { TwoslashExecuteOptions, TwoslashGenericFunction } from 'twoslash'
 
@@ -12,6 +12,7 @@ import { splitTokens } from '@shikijs/core'
 import { ShikiTwoslashError } from './error'
 import { parseIncludeMeta, TwoslashIncludesManager } from './includes'
 
+export * from './cache'
 export * from './error'
 export * from './icons'
 export * from './renderer-classic'
@@ -46,6 +47,7 @@ export function createTransformerFactory(
       renderer = defaultRenderer,
       throws = true,
       includesMap = new Map(),
+      twoslashCache,
     } = options
 
     const onTwoslashError = options.onTwoslashError || (
@@ -82,6 +84,18 @@ export function createTransformerFactory(
 
     const includes = new TwoslashIncludesManager(includesMap)
 
+    const cacheableTwoslasher = (code: string, extension: string, options?: TwoslashExecuteOptions, meta?: CodeToHastOptions['meta']): TwoslashShikiReturn => {
+      let twoslash = twoslashCache?.read(code, extension, options, meta)
+      if (!twoslash) {
+        twoslash = (twoslasher as TwoslashShikiFunction)(code, extension, options)
+        twoslash = pickTwoslashShikiReturn(twoslash)
+        twoslashCache?.write(twoslash, code, extension, options, meta)
+      }
+      return twoslash
+    }
+
+    twoslashCache?.init?.()
+
     return {
       preprocess(code) {
         let lang = this.options.lang
@@ -97,7 +111,7 @@ export function createTransformerFactory(
             if (include)
               includes.add(include, codeWithIncludes)
 
-            const twoslash = (twoslasher as TwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions)
+            const twoslash = cacheableTwoslasher(codeWithIncludes, lang, twoslashOptions, this.options.meta)
             map.set(this.meta, twoslash)
             this.meta.twoslash = twoslash
             this.options.lang = twoslash.meta?.extension || lang
@@ -318,4 +332,12 @@ function getTokenString(token: ElementContent): string {
   if ('value' in token)
     return token.value
   return token.children?.map(getTokenString).join('') || ''
+}
+
+function pickTwoslashShikiReturn(ret: TwoslashShikiReturn): TwoslashShikiReturn {
+  return {
+    nodes: ret.nodes,
+    code: ret.code,
+    meta: ret.meta ? { extension: ret.meta.extension } : undefined,
+  }
 }
