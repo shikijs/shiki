@@ -1,0 +1,561 @@
+{
+  "version": 1,
+  "fileHash": "a24587b443dc6cefbbd3e37b98094f18d00537766d129e9218e22ed77bb99e09",
+  "cache": {
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:14b60b5f2a4347c8f4ea36ed597f2e2380f616caaace30aaccaa0ae5c399424c": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) function transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 11,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 1,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) const codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => Promise<string>\nimport codeToHtml",
+          "start": 70,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 4,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "const html: string",
+          "start": 104,
+          "length": 4,
+          "target": "html",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) codeToHtml(code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>): Promise<string>\nimport codeToHtml",
+          "start": 117,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 7,
+          "character": 19
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: \"ts\"",
+          "start": 149,
+          "length": 4,
+          "target": "lang",
+          "line": 8,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>",
+          "start": 163,
+          "length": 5,
+          "target": "theme",
+          "line": 9,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) TransformerOptions.transformers?: ShikiTransformer[] | undefined",
+          "docs": "Transformers for the Shiki pipeline.",
+          "start": 188,
+          "length": 12,
+          "target": "transformers",
+          "line": 10,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 208,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 11,
+          "character": 4
+        }
+      ],
+      "code": "import {\n  transformerTwoslash,\n} from '@shikijs/twoslash'\nimport {\n  codeToHtml,\n} from 'shiki'\n\nconst html = await codeToHtml(`console.log()`, {\n  lang: 'ts',\n  theme: 'vitesse-dark',\n  transformers: [\n    transformerTwoslash(), // <-- here\n    // ...\n  ],\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:7262d0f2da47edaaaef946e4f0ff2d88f34242b31d1aaed88bfb34ad03d21ca5": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) function rendererRich(options?: RendererRichOptions): TwoslashRenderer\nimport rendererRich",
+          "docs": "An alternative renderer that providers better prefixed class names,\nwith syntax highlight for the info text.",
+          "start": 9,
+          "length": 12,
+          "target": "rendererRich",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 23,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 0,
+          "character": 23
+        },
+        {
+          "type": "hover",
+          "text": "(alias) transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 71,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 2,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "(property) TransformerTwoslashOptions.renderer?: TwoslashRenderer | undefined",
+          "docs": "Custom renderers to decide how each info should be rendered",
+          "start": 95,
+          "length": 8,
+          "target": "renderer",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) rendererRich(options?: RendererRichOptions): TwoslashRenderer\nimport rendererRich",
+          "docs": "An alternative renderer that providers better prefixed class names,\nwith syntax highlight for the info text.",
+          "start": 105,
+          "length": 12,
+          "target": "rendererRich",
+          "line": 3,
+          "character": 12
+        }
+      ],
+      "code": "import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'\n\ntransformerTwoslash({\n  renderer: rendererRich() // <--\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:c9ad803bfead2290c31c8e4c9d17c91419bb2dbc071b95a0a6f7146d3d3f8bc7": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "interface Todo",
+          "start": 10,
+          "length": 4,
+          "target": "Todo",
+          "line": 0,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "(property) Todo.title: string",
+          "start": 19,
+          "length": 5,
+          "target": "title",
+          "line": 1,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "const todo: Readonly<Todo>",
+          "start": 42,
+          "length": 4,
+          "target": "todo",
+          "line": 4,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "type Readonly<T> = { readonly [P in keyof T]: T[P]; }",
+          "docs": "Make all properties in T readonly",
+          "start": 48,
+          "length": 8,
+          "target": "Readonly",
+          "line": 4,
+          "character": 12
+        },
+        {
+          "type": "hover",
+          "text": "interface Todo",
+          "start": 57,
+          "length": 4,
+          "target": "Todo",
+          "line": 4,
+          "character": 21
+        },
+        {
+          "type": "hover",
+          "text": "(property) title: string",
+          "start": 69,
+          "length": 5,
+          "target": "title",
+          "line": 5,
+          "character": 2
+        },
+        {
+          "type": "query",
+          "text": "(property) title: string",
+          "start": 69,
+          "length": 5,
+          "target": "title",
+          "line": 5,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(method) String.toUpperCase(): string",
+          "docs": "Converts all the alphabetic characters in a string to uppercase.",
+          "start": 100,
+          "length": 11,
+          "target": "toUpperCase",
+          "line": 5,
+          "character": 33
+        },
+        {
+          "type": "hover",
+          "text": "const todo: Readonly<Todo>",
+          "start": 118,
+          "length": 4,
+          "target": "todo",
+          "line": 8,
+          "character": 0
+        },
+        {
+          "type": "error",
+          "start": 123,
+          "length": 5,
+          "code": 2540,
+          "filename": "index.ts",
+          "id": "err-2540-147-5",
+          "text": "Cannot assign to 'title' because it is a read-only property.",
+          "level": "error",
+          "line": 8,
+          "character": 5
+        },
+        {
+          "type": "hover",
+          "text": "(property) title: any",
+          "start": 123,
+          "length": 5,
+          "target": "title",
+          "line": 8,
+          "character": 5
+        },
+        {
+          "type": "hover",
+          "text": "var Number: NumberConstructor",
+          "docs": "An object that represents a number of any kind. All JavaScript numbers are 64-bit floating-point numbers.",
+          "start": 140,
+          "length": 6,
+          "target": "Number",
+          "line": 10,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "(method) NumberConstructor.parseInt(string: string, radix?: number): number",
+          "docs": "Converts A string to an integer.",
+          "tags": [
+            [
+              "param",
+              "string A string to convert into a number."
+            ],
+            [
+              "param",
+              "radix A value between 2 and 36 that specifies the base of the number in `string`.\nIf this argument is not supplied, strings with a prefix of '0x' are considered hexadecimal.\nAll other strings are considered decimal."
+            ]
+          ],
+          "start": 147,
+          "length": 8,
+          "target": "parseInt",
+          "line": 10,
+          "character": 7
+        },
+        {
+          "type": "completion",
+          "start": 148,
+          "length": 0,
+          "completions": [
+            {
+              "name": "parseFloat",
+              "kind": "method",
+              "kindModifiers": "declare",
+              "sortText": "11"
+            },
+            {
+              "name": "parseInt",
+              "kind": "method",
+              "kindModifiers": "declare",
+              "sortText": "11"
+            },
+            {
+              "name": "prototype",
+              "kind": "property",
+              "kindModifiers": "declare",
+              "sortText": "11"
+            }
+          ],
+          "completionsPrefix": "p",
+          "line": 10,
+          "character": 8
+        }
+      ],
+      "code": "interface Todo {\n  title: string\n}\n\nconst todo: Readonly<Todo> = {\n  title: 'Delete inactive users'.toUpperCase(),\n}\n\ntodo.title = 'Hello'\n\nNumber.parseInt('123', 10)\n\n               //\n               //",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:fef750a9b9a96f96d38388dc49eecbbb5b2fd76dfaca48fcca227c956818d5c8": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) function createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore>\nimport createHighlighterCore",
+          "docs": "Create a Shiki core highlighter instance, with no languages or themes bundled.\nWasm and each language and theme must be loaded manually.",
+          "tags": [
+            [
+              "see",
+              "http://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 9,
+          "length": 21,
+          "target": "createHighlighterCore",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function createJavaScriptRegexEngine(options?: JavaScriptRegexEngineOptions): RegexEngine\nimport createJavaScriptRegexEngine",
+          "docs": "Use the modern JavaScript RegExp engine to implement the OnigScanner.\n\nAs Oniguruma supports some features that can't be emulated using native JavaScript regexes, some\npatterns are not supported. Errors will be thrown when parsing TextMate grammars with\nunsupported patterns, and when the grammar includes patterns that use invalid Oniguruma syntax.\nSet `forgiving` to `true` to ignore these errors and skip any unsupported or invalid patterns.",
+          "start": 60,
+          "length": 27,
+          "target": "createJavaScriptRegexEngine",
+          "line": 1,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterCore",
+          "start": 128,
+          "length": 11,
+          "target": "highlighter",
+          "line": 3,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore>\nimport createHighlighterCore",
+          "docs": "Create a Shiki core highlighter instance, with no languages or themes bundled.\nWasm and each language and theme must be loaded manually.",
+          "tags": [
+            [
+              "see",
+              "http://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 148,
+          "length": 21,
+          "target": "createHighlighterCore",
+          "line": 3,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterCoreOptions<false>.engine: Awaitable<RegexEngine>",
+          "docs": "Custom RegExp engine.",
+          "start": 174,
+          "length": 6,
+          "target": "engine",
+          "line": 4,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createJavaScriptRegexEngine(options?: JavaScriptRegexEngineOptions): RegexEngine\nimport createJavaScriptRegexEngine",
+          "docs": "Use the modern JavaScript RegExp engine to implement the OnigScanner.\n\nAs Oniguruma supports some features that can't be emulated using native JavaScript regexes, some\npatterns are not supported. Errors will be thrown when parsing TextMate grammars with\nunsupported patterns, and when the grammar includes patterns that use invalid Oniguruma syntax.\nSet `forgiving` to `true` to ignore these errors and skip any unsupported or invalid patterns.",
+          "start": 182,
+          "length": 27,
+          "target": "createJavaScriptRegexEngine",
+          "line": 4,
+          "character": 10
+        },
+        {
+          "type": "tag",
+          "name": "log",
+          "start": 216,
+          "length": 0,
+          "text": "Custom log message",
+          "line": 7,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "const a: 1",
+          "start": 222,
+          "length": 1,
+          "target": "a",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "tag",
+          "name": "error",
+          "start": 228,
+          "length": 0,
+          "text": "Custom error message",
+          "line": 8,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "const b: 1",
+          "start": 234,
+          "length": 1,
+          "target": "b",
+          "line": 8,
+          "character": 6
+        },
+        {
+          "type": "tag",
+          "name": "warn",
+          "start": 240,
+          "length": 0,
+          "text": "Custom warning message",
+          "line": 9,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "const c: 1",
+          "start": 246,
+          "length": 1,
+          "target": "c",
+          "line": 9,
+          "character": 6
+        },
+        {
+          "type": "tag",
+          "name": "annotate",
+          "start": 252,
+          "length": 0,
+          "text": "Custom annotation message",
+          "line": 11,
+          "character": 0
+        }
+      ],
+      "code": "import { createHighlighterCore } from 'shiki/core'\nimport { createJavaScriptRegexEngine } from 'shiki/engine/javascript'\n\nconst highlighter = await createHighlighterCore({\n  engine: createJavaScriptRegexEngine()\n})\n\nconst a = 1\nconst b = 1\nconst c = 1\n",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:b096e0c3aabbf323dd8b9aaa4324b415ad507d9dfcf9c901881c573fd86a8d0b": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) function rendererClassic(): TwoslashRenderer\nimport rendererClassic",
+          "docs": "The default renderer aligning with the original `@shikijs/twoslash` output.",
+          "start": 9,
+          "length": 15,
+          "target": "rendererClassic",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 26,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 0,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(alias) transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 74,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 2,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "(property) TransformerTwoslashOptions.renderer?: TwoslashRenderer | undefined",
+          "docs": "Custom renderers to decide how each info should be rendered",
+          "start": 98,
+          "length": 8,
+          "target": "renderer",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) rendererClassic(): TwoslashRenderer\nimport rendererClassic",
+          "docs": "The default renderer aligning with the original `@shikijs/twoslash` output.",
+          "start": 108,
+          "length": 15,
+          "target": "rendererClassic",
+          "line": 3,
+          "character": 12
+        }
+      ],
+      "code": "import { rendererClassic, transformerTwoslash } from '@shikijs/twoslash'\n\ntransformerTwoslash({\n  renderer: rendererClassic() // <--\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:2b5d2a3db70296f70a31db36c04f6bd6d0041b0f2382f9c5a61bfd1dc9b0a8c3": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) function transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 9,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) transformerTwoslash(options?: TransformerTwoslashIndexOptions): ShikiTransformer\nimport transformerTwoslash",
+          "docs": "Factory function to create a Shiki transformer for twoslash integrations.",
+          "start": 57,
+          "length": 19,
+          "target": "transformerTwoslash",
+          "line": 2,
+          "character": 0
+        },
+        {
+          "type": "hover",
+          "text": "(property) TransformerTwoslashOptions.explicitTrigger?: boolean | RegExp | undefined",
+          "docs": "Requires `twoslash` to be presented in the code block meta to apply this transformer",
+          "tags": [
+            [
+              "default",
+              "false"
+            ]
+          ],
+          "start": 81,
+          "length": 15,
+          "target": "explicitTrigger",
+          "line": 3,
+          "character": 2
+        }
+      ],
+      "code": "import { transformerTwoslash } from '@shikijs/twoslash'\n\ntransformerTwoslash({\n  explicitTrigger: true // <--\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    }
+  }
+}

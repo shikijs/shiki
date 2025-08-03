@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "fileHash": "60537531eb0ae97cf1f29eb0b07b3c7e8905f136bc2459c1243f9240d678604f",
+  "cache": {
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:f460417b015200114b2871cb12086bae8258941f623f52d02d2c0fb40a7a4fd7": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) const codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => Promise<string>\nimport codeToHtml",
+          "start": 9,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const code: string",
+          "start": 42,
+          "length": 4,
+          "target": "code",
+          "line": 2,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) codeToHtml(code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>): Promise<string>\nimport codeToHtml",
+          "start": 55,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 2,
+          "character": 19
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: \"js\"",
+          "start": 81,
+          "length": 4,
+          "target": "lang",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>",
+          "start": 95,
+          "length": 5,
+          "target": "theme",
+          "line": 4,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) TransformerOptions.transformers?: ShikiTransformer[] | undefined",
+          "docs": "Transformers for the Shiki pipeline.",
+          "start": 121,
+          "length": 12,
+          "target": "transformers",
+          "line": 5,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiTransformer.code?: ((this: ShikiTransformerContext, hast: Element) => Element | void) | undefined",
+          "docs": "Transform the `<code>` element. Return a new Node will replace the original one.",
+          "start": 149,
+          "length": 4,
+          "target": "code",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 154,
+          "length": 4,
+          "target": "node",
+          "line": 7,
+          "character": 11
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiTransformerContext.addClassToHast: (hast: Element, className: string | string[]) => Element",
+          "docs": "Utility to append class to a hast node\n\nIf the `property.class` is a string, it will be splitted by space and converted to an array.",
+          "start": 175,
+          "length": 14,
+          "target": "addClassToHast",
+          "line": 8,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 190,
+          "length": 4,
+          "target": "node",
+          "line": 8,
+          "character": 28
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiTransformer.line?: ((this: ShikiTransformerContext, hast: Element, line: number) => Element | void) | undefined",
+          "docs": "Transform each line `<span class=\"line\">` element.",
+          "tags": [
+            [
+              "param",
+              "hast"
+            ],
+            [
+              "param",
+              "line 1-based line number"
+            ]
+          ],
+          "start": 226,
+          "length": 4,
+          "target": "line",
+          "line": 10,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 231,
+          "length": 4,
+          "target": "node",
+          "line": 10,
+          "character": 11
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) line: number",
+          "start": 237,
+          "length": 4,
+          "target": "line",
+          "line": 10,
+          "character": 17
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 253,
+          "length": 4,
+          "target": "node",
+          "line": 11,
+          "character": 8
+        },
+        {
+          "type": "hover",
+          "text": "(property) Element.properties: Properties",
+          "docs": "Info associated with the element.",
+          "start": 258,
+          "length": 10,
+          "target": "properties",
+          "line": 11,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) line: number",
+          "start": 284,
+          "length": 4,
+          "target": "line",
+          "line": 11,
+          "character": 39
+        },
+        {
+          "type": "hover",
+          "text": "(method) Array<number>.includes(searchElement: number, fromIndex?: number): boolean",
+          "docs": "Determines whether an array includes a certain element, returning true or false as appropriate.",
+          "tags": [
+            [
+              "param",
+              "searchElement The element to search for."
+            ],
+            [
+              "param",
+              "fromIndex The position in this array at which to begin searching for searchElement."
+            ]
+          ],
+          "start": 311,
+          "length": 8,
+          "target": "includes",
+          "line": 12,
+          "character": 22
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) line: number",
+          "start": 320,
+          "length": 4,
+          "target": "line",
+          "line": 12,
+          "character": 31
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiTransformerContext.addClassToHast: (hast: Element, className: string | string[]) => Element",
+          "docs": "Utility to append class to a hast node\n\nIf the `property.class` is a string, it will be splitted by space and converted to an array.",
+          "start": 342,
+          "length": 14,
+          "target": "addClassToHast",
+          "line": 13,
+          "character": 15
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 357,
+          "length": 4,
+          "target": "node",
+          "line": 13,
+          "character": 30
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiTransformer.span?: ((this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element, token: ThemedToken) => Element | void) | undefined",
+          "docs": "Transform each token `<span>` element.",
+          "start": 391,
+          "length": 4,
+          "target": "span",
+          "line": 15,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 396,
+          "length": 4,
+          "target": "node",
+          "line": 15,
+          "character": 11
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) line: number",
+          "start": 402,
+          "length": 4,
+          "target": "line",
+          "line": 15,
+          "character": 17
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) col: number",
+          "start": 408,
+          "length": 3,
+          "target": "col",
+          "line": 15,
+          "character": 23
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) node: Element",
+          "start": 423,
+          "length": 4,
+          "target": "node",
+          "line": 16,
+          "character": 8
+        },
+        {
+          "type": "hover",
+          "text": "(property) Element.properties: Properties",
+          "docs": "Info associated with the element.",
+          "start": 428,
+          "length": 10,
+          "target": "properties",
+          "line": 16,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) line: number",
+          "start": 464,
+          "length": 4,
+          "target": "line",
+          "line": 16,
+          "character": 49
+        },
+        {
+          "type": "hover",
+          "text": "(parameter) col: number",
+          "start": 472,
+          "length": 3,
+          "target": "col",
+          "line": 16,
+          "character": 57
+        }
+      ],
+      "code": "import { codeToHtml } from 'shiki'\n\nconst code = await codeToHtml('foo\\bar', {\n  lang: 'js',\n  theme: 'vitesse-light',\n  transformers: [\n    {\n      code(node) {\n        this.addClassToHast(node, 'language-js')\n      },\n      line(node, line) {\n        node.properties['data-line'] = line\n        if ([1, 3, 4].includes(line))\n          this.addClassToHast(node, 'highlight')\n      },\n      span(node, line, col) {\n        node.properties['data-token'] = `token:${line}:${col}`\n      },\n    },\n  ]\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    }
+  }
+}

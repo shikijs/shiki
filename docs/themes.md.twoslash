@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "fileHash": "651d447dfd30df952b6e6990705df8322c5267872ae2ecbdce66a98e05117ae7",
+  "cache": {
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:7114194f448623262b5f4233f823d758b13f7e052497340c10cf22f693c85d06": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) const codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => Promise<string>\nimport codeToHtml",
+          "start": 9,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const html: Promise<string>",
+          "start": 42,
+          "length": 4,
+          "target": "html",
+          "line": 2,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) codeToHtml(code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>): Promise<string>\nimport codeToHtml",
+          "start": 49,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 2,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: \"javascript\"",
+          "start": 94,
+          "length": 4,
+          "target": "lang",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>",
+          "start": 116,
+          "length": 5,
+          "target": "theme",
+          "line": 4,
+          "character": 2
+        }
+      ],
+      "code": "import { codeToHtml } from 'shiki'\n\nconst html = codeToHtml('console.log(\"Hello World\")', {\n  lang: 'javascript',\n  theme: 'none', // [!code hl]\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    }
+  }
+}

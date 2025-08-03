@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "fileHash": "1a95b2ccde07da1e769ff57a3235d020b5832078c542fca9c1484e9f0ef4a4e5",
+  "cache": {
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:d84e39463691d6f5d1576fc012a8667a2e2c9b2385c65312eeb73613d7f84358": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) type BundledLanguage = \"angular-html\" | \"angular-ts\" | \"astro\" | \"bash\" | \"blade\" | \"c\" | \"c++\" | \"coffee\" | \"coffeescript\" | \"cpp\" | \"css\" | \"glsl\" | \"gql\" | \"graphql\" | \"haml\" | \"handlebars\" | \"hbs\" | \"html\" | \"html-derivative\" | \"http\" | \"imba\" | \"jade\" | \"java\" | \"javascript\" | \"jinja\" | \"jison\" | \"jl\" | \"js\" | \"json\" | \"json5\" | \"jsonc\" | \"jsonl\" | \"jsx\" | \"julia\" | \"less\" | \"lit\" | \"markdown\" | \"marko\" | \"md\" | \"mdc\" | \"mdx\" | \"php\" | \"postcss\" | \"pug\" | \"py\" | \"python\" | \"r\" | \"regex\" | \"regexp\" | \"sass\" | \"scss\" | \"sh\" | \"shell\" | \"shellscript\" | \"sql\" | \"styl\" | \"stylus\" | ... 14 more ... | \"zsh\"\nimport BundledLanguage",
+          "start": 11,
+          "length": 15,
+          "target": "BundledLanguage",
+          "line": 1,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) type BundledTheme = \"andromeeda\" | \"aurora-x\" | \"ayu-dark\" | \"catppuccin-frappe\" | \"catppuccin-latte\" | \"catppuccin-macchiato\" | \"catppuccin-mocha\" | \"dark-plus\" | \"dracula\" | \"dracula-soft\" | \"everforest-dark\" | \"everforest-light\" | \"github-dark\" | \"github-dark-default\" | \"github-dark-dimmed\" | \"github-dark-high-contrast\" | \"github-light\" | \"github-light-default\" | \"github-light-high-contrast\" | \"gruvbox-dark-hard\" | \"gruvbox-dark-medium\" | \"gruvbox-dark-soft\" | \"gruvbox-light-hard\" | \"gruvbox-light-medium\" | \"gruvbox-light-soft\" | \"houston\" | ... 33 more ... | \"vitesse-light\"\nimport BundledTheme",
+          "start": 30,
+          "length": 12,
+          "target": "BundledTheme",
+          "line": 2,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) const codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => Promise<string>\nimport codeToHtml",
+          "start": 46,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) const createHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-web\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 60,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 4,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>",
+          "start": 132,
+          "length": 11,
+          "target": "highlighter",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createHighlighter(options: BundledHighlighterOptions<BundledLanguage, BundledTheme>): Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-web\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 152,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 7,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.langs: (LanguageInput | SpecialLanguage | StringLiteralUnion<BundledLanguage, string>)[]",
+          "docs": "Language registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 174,
+          "length": 5,
+          "target": "langs",
+          "line": 8,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.themes: (ThemeInput | \"none\" | StringLiteralUnion<BundledTheme, string>)[]",
+          "docs": "Theme registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 206,
+          "length": 6,
+          "target": "themes",
+          "line": 9,
+          "character": 2
+        }
+      ],
+      "code": "import {\n  BundledLanguage,\n  BundledTheme,\n  codeToHtml,\n  createHighlighter\n} from 'shiki/bundle/web' // [!code highlight]\n\nconst highlighter = await createHighlighter({\n  langs: ['html', 'css', 'js'],\n  themes: ['github-dark', 'github-light'],\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:9216108e77c6d1e76e7277f9081fb3ad55c8551f1af09071721d469b9f26cac2": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) const nord: ThemeRegistration\nimport nord",
+          "start": 102,
+          "length": 4,
+          "target": "nord",
+          "line": 1,
+          "character": 7
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore>\nimport createHighlighterCore",
+          "docs": "Create a Shiki core highlighter instance, with no languages or themes bundled.\nWasm and each language and theme must be loaded manually.",
+          "tags": [
+            [
+              "see",
+              "http://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 228,
+          "length": 21,
+          "target": "createHighlighterCore",
+          "line": 4,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function createOnigurumaEngine(options?: LoadWasmOptions | null): Promise<RegexEngine>\nimport createOnigurumaEngine",
+          "start": 279,
+          "length": 21,
+          "target": "createOnigurumaEngine",
+          "line": 5,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterCore",
+          "start": 340,
+          "length": 11,
+          "target": "highlighter",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore>\nimport createHighlighterCore",
+          "docs": "Create a Shiki core highlighter instance, with no languages or themes bundled.\nWasm and each language and theme must be loaded manually.",
+          "tags": [
+            [
+              "see",
+              "http://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 360,
+          "length": 21,
+          "target": "createHighlighterCore",
+          "line": 7,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterCoreOptions<false>.themes?: ThemeInput[] | undefined",
+          "docs": "Theme names, or theme registration objects to be loaded upfront.",
+          "start": 386,
+          "length": 6,
+          "target": "themes",
+          "line": 8,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) const nord: ThemeRegistration\nimport nord",
+          "start": 464,
+          "length": 4,
+          "target": "nord",
+          "line": 10,
+          "character": 4
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterCoreOptions<false>.langs?: LanguageInput[] | undefined",
+          "docs": "Language names, or language registration objects to be loaded upfront.",
+          "start": 589,
+          "length": 5,
+          "target": "langs",
+          "line": 14,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "var JSON: JSON",
+          "docs": "An intrinsic object that provides functions to convert JavaScript values to and from the JavaScript Object Notation (JSON) format.",
+          "start": 810,
+          "length": 4,
+          "target": "JSON",
+          "line": 19,
+          "character": 16
+        },
+        {
+          "type": "hover",
+          "text": "(method) JSON.parse(text: string, reviver?: (this: any, key: string, value: any) => any): any",
+          "docs": "Converts a JavaScript Object Notation (JSON) string into an object.",
+          "tags": [
+            [
+              "param",
+              "text A valid JSON string."
+            ],
+            [
+              "param",
+              "reviver A function that transforms the results. This function is called for each member of the object.\nIf a member contains nested objects, the nested objects are transformed before the parent object is."
+            ],
+            [
+              "throws",
+              "{SyntaxError} If `text` is not valid JSON."
+            ]
+          ],
+          "start": 815,
+          "length": 5,
+          "target": "parse",
+          "line": 19,
+          "character": 21
+        },
+        {
+          "type": "hover",
+          "text": "any",
+          "start": 827,
+          "length": 2,
+          "target": "fs",
+          "line": 19,
+          "character": 33
+        },
+        {
+          "type": "hover",
+          "text": "any",
+          "start": 830,
+          "length": 8,
+          "target": "readFile",
+          "line": 19,
+          "character": 36
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterCoreOptions<false>.engine: Awaitable<RegexEngine>",
+          "docs": "Custom RegExp engine.",
+          "start": 944,
+          "length": 6,
+          "target": "engine",
+          "line": 22,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createOnigurumaEngine(options?: LoadWasmOptions | null): Promise<RegexEngine>\nimport createOnigurumaEngine",
+          "start": 952,
+          "length": 21,
+          "target": "createOnigurumaEngine",
+          "line": 22,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterCore",
+          "start": 1062,
+          "length": 11,
+          "target": "highlighter",
+          "line": 26,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(property) ShikiInternal<never, never>.loadTheme: (...themes: (ThemeInput | \"none\")[]) => Promise<void>",
+          "docs": "Load a theme to the highlighter, so later it can be used synchronously.",
+          "start": 1074,
+          "length": 9,
+          "target": "loadTheme",
+          "line": 26,
+          "character": 18
+        },
+        {
+          "type": "hover",
+          "text": "const code: string",
+          "start": 1132,
+          "length": 4,
+          "target": "code",
+          "line": 28,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterCore",
+          "start": 1139,
+          "length": 11,
+          "target": "highlighter",
+          "line": 28,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterGeneric<never, never>.codeToHtml: (code: string, options: CodeToHastOptions<string, string>) => string",
+          "docs": "Get highlighted code in HTML string",
+          "start": 1151,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 28,
+          "character": 25
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: string",
+          "start": 1181,
+          "length": 4,
+          "target": "lang",
+          "line": 29,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<string>.theme: ThemeRegistrationAny | StringLiteralUnion<string, string>",
+          "start": 1203,
+          "length": 5,
+          "target": "theme",
+          "line": 30,
+          "character": 2
+        }
+      ],
+      "code": "// directly import the theme and language modules, only the ones you imported will be bundled.\nimport nord from '@shikijs/themes/nord'\n\n// `shiki/core` entry does not include any themes or languages or the wasm binary.\nimport { createHighlighterCore } from 'shiki/core'\nimport { createOnigurumaEngine } from 'shiki/engine/oniguruma'\n\nconst highlighter = await createHighlighterCore({\n  themes: [\n    // instead of strings, you need to pass the imported module\n    nord,\n    // or a dynamic import if you want to do chunk splitting\n    import('@shikijs/themes/material-theme-ocean')\n  ],\n  langs: [\n    import('@shikijs/langs/javascript'),\n    // shiki will try to interop the module with the default export\n    () => import('@shikijs/langs/css'),\n    // or a getter that returns custom grammar\n    async () => JSON.parse(await fs.readFile('my-grammar.json', 'utf-8'))\n  ],\n  // `shiki/wasm` contains the wasm binary inlined as base64 string.\n  engine: createOnigurumaEngine(import('shiki/wasm'))\n})\n\n// optionally, load themes and languages after creation\nawait highlighter.loadTheme(import('@shikijs/themes/vitesse-light'))\n\nconst code = highlighter.codeToHtml('const a = 1', {\n  lang: 'javascript',\n  theme: 'material-theme-ocean'\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    }
+  }
+}

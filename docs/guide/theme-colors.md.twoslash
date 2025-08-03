@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "fileHash": "5e70aac48642fa8e0aa16feda47afd532b69cb9e13a2a4d1654ceb448f1a5d76",
+  "cache": {
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:355c792083f31324250037f33722cd4d9816d6e28afa3e457fc9df1cc6ce41b9": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) const createHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-full\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 9,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>",
+          "start": 49,
+          "length": 11,
+          "target": "highlighter",
+          "line": 2,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createHighlighter(options: BundledHighlighterOptions<BundledLanguage, BundledTheme>): Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-full\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 69,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 2,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.langs: (LanguageInput | SpecialLanguage | StringLiteralUnion<BundledLanguage, string>)[]",
+          "docs": "Language registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 91,
+          "length": 5,
+          "target": "langs",
+          "line": 3,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.themes: (ThemeInput | \"none\" | StringLiteralUnion<BundledTheme, string>)[]",
+          "docs": "Theme registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 116,
+          "length": 6,
+          "target": "themes",
+          "line": 4,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) name: string",
+          "start": 138,
+          "length": 4,
+          "target": "name",
+          "line": 6,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(property) settings: {\n    scope: string[];\n    settings: {\n        foreground: string;\n    };\n}[]",
+          "start": 162,
+          "length": 8,
+          "target": "settings",
+          "line": 7,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(property) IRawThemeSetting.scope?: string | string[] | undefined",
+          "start": 194,
+          "length": 5,
+          "target": "scope",
+          "line": 9,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "(property) IRawThemeSetting.settings: {\n    readonly fontStyle?: string;\n    readonly foreground?: string;\n    readonly background?: string;\n}",
+          "start": 224,
+          "length": 8,
+          "target": "settings",
+          "line": 10,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "(property) foreground?: string | undefined",
+          "start": 363,
+          "length": 10,
+          "target": "foreground",
+          "line": 13,
+          "character": 12
+        },
+        {
+          "type": "hover",
+          "text": "(property) IRawThemeSetting.scope?: string | string[] | undefined",
+          "start": 439,
+          "length": 5,
+          "target": "scope",
+          "line": 17,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "(property) IRawThemeSetting.settings: {\n    readonly fontStyle?: string;\n    readonly foreground?: string;\n    readonly background?: string;\n}",
+          "start": 468,
+          "length": 8,
+          "target": "settings",
+          "line": 18,
+          "character": 10
+        },
+        {
+          "type": "hover",
+          "text": "(property) foreground?: string | undefined",
+          "start": 492,
+          "length": 10,
+          "target": "foreground",
+          "line": 19,
+          "character": 12
+        },
+        {
+          "type": "hover",
+          "text": "(property) bg: string",
+          "start": 672,
+          "length": 2,
+          "target": "bg",
+          "line": 25,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(property) fg: string",
+          "start": 700,
+          "length": 2,
+          "target": "fg",
+          "line": 26,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "const html: string",
+          "start": 741,
+          "length": 4,
+          "target": "html",
+          "line": 31,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>",
+          "start": 748,
+          "length": 11,
+          "target": "highlighter",
+          "line": 31,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterGeneric<BundledLanguage, BundledTheme>.codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => string",
+          "docs": "Get highlighted code in HTML string",
+          "start": 760,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 31,
+          "character": 25
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: \"javascript\"",
+          "start": 794,
+          "length": 4,
+          "target": "lang",
+          "line": 31,
+          "character": 59
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>",
+          "start": 814,
+          "length": 5,
+          "target": "theme",
+          "line": 31,
+          "character": 79
+        }
+      ],
+      "code": "import { createHighlighter } from 'shiki'\n\nconst highlighter = await createHighlighter({\n  langs: ['javascript'],\n  themes: [\n    {\n      name: 'my-theme',\n      settings: [\n        {\n          scope: ['comment'],\n          settings: {\n            // use `rgb`, `hsl`, `hsla`, // [!code hl:3]\n            // or any anything supported by your renderer\n            foreground: 'rgb(128, 128, 128)'\n          }\n        },\n        {\n          scope: ['string'],\n          settings: {\n            foreground: 'var(--code-string)' // CSS variable // [!code hl:1]\n          }\n        },\n        // ...more\n      ],\n      // Background and foreground colors // [!code hl:3]\n      bg: 'var(--code-bg)',\n      fg: 'var(--code-fg)'\n    }\n  ]\n})\n\nconst html = highlighter.codeToHtml('const foo = \"bar\"', { lang: 'javascript', theme: 'my-theme' })",
+      "meta": {
+        "extension": "ts"
+      }
+    },
+    "teojfmu_VVDND9IjD9xcgqoGUXo2btP4q2ZCFuTG5Ro:ts:b4997b7f167e1deb7fb81fd9462bacef3e0f72bb00f7efd21a60eeb00e42ea9a": {
+      "nodes": [
+        {
+          "type": "hover",
+          "text": "(alias) const createHighlighter: CreateHighlighterFactory<BundledLanguage, BundledTheme>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-full\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 9,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 0,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "(alias) function createCssVariablesTheme(options?: CssVariablesThemeOptions): ThemeRegistration\nimport createCssVariablesTheme",
+          "docs": "A factory function to create a css-variable-based theme",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/theme-colors#css-variables-theme"
+            ]
+          ],
+          "start": 51,
+          "length": 23,
+          "target": "createCssVariablesTheme",
+          "line": 1,
+          "character": 9
+        },
+        {
+          "type": "hover",
+          "text": "const myTheme: ThemeRegistration",
+          "start": 179,
+          "length": 7,
+          "target": "myTheme",
+          "line": 4,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createCssVariablesTheme(options?: CssVariablesThemeOptions): ThemeRegistration\nimport createCssVariablesTheme",
+          "docs": "A factory function to create a css-variable-based theme",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/theme-colors#css-variables-theme"
+            ]
+          ],
+          "start": 189,
+          "length": 23,
+          "target": "createCssVariablesTheme",
+          "line": 4,
+          "character": 16
+        },
+        {
+          "type": "hover",
+          "text": "(property) CssVariablesThemeOptions.name?: string | undefined",
+          "docs": "Theme name. Need to unique if multiple css variables themes are created",
+          "tags": [
+            [
+              "default",
+              "'css-variables'"
+            ]
+          ],
+          "start": 233,
+          "length": 4,
+          "target": "name",
+          "line": 5,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CssVariablesThemeOptions.variablePrefix?: string | undefined",
+          "docs": "Prefix for css variables",
+          "tags": [
+            [
+              "default",
+              "'--shiki-'"
+            ]
+          ],
+          "start": 258,
+          "length": 14,
+          "target": "variablePrefix",
+          "line": 6,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CssVariablesThemeOptions.variableDefaults?: Record<string, string> | undefined",
+          "docs": "Default value for css variables, the key is without the prefix",
+          "tags": [
+            [
+              "example",
+              "`{ 'token-comment': '#888' }` will generate `var(--shiki-token-comment, #888)` for comments"
+            ]
+          ],
+          "start": 288,
+          "length": 16,
+          "target": "variableDefaults",
+          "line": 7,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CssVariablesThemeOptions.fontStyle?: boolean | undefined",
+          "docs": "Enable font style",
+          "tags": [
+            [
+              "default",
+              "true"
+            ]
+          ],
+          "start": 312,
+          "length": 9,
+          "target": "fontStyle",
+          "line": 8,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>",
+          "start": 338,
+          "length": 11,
+          "target": "highlighter",
+          "line": 11,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "(alias) createHighlighter(options: BundledHighlighterOptions<BundledLanguage, BundledTheme>): Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>\nimport createHighlighter",
+          "docs": "Initiate a highlighter instance and load the specified languages and themes.\nLater it can be used synchronously to highlight code.\n\nImporting this function will bundle all languages and themes.",
+          "tags": [
+            [
+              "see",
+              "https://shiki.style/guide/bundles#shiki-bundle-full\n\nFor granular control over the bundle, check:"
+            ],
+            [
+              "see",
+              "https://shiki.style/guide/bundles#fine-grained-bundle"
+            ]
+          ],
+          "start": 358,
+          "length": 17,
+          "target": "createHighlighter",
+          "line": 11,
+          "character": 26
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.langs: (LanguageInput | SpecialLanguage | StringLiteralUnion<BundledLanguage, string>)[]",
+          "docs": "Language registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 380,
+          "length": 5,
+          "target": "langs",
+          "line": 12,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) BundledHighlighterOptions<BundledLanguage, BundledTheme>.themes: (ThemeInput | \"none\" | StringLiteralUnion<BundledTheme, string>)[]",
+          "docs": "Theme registation",
+          "tags": [
+            [
+              "default",
+              "[]"
+            ]
+          ],
+          "start": 405,
+          "length": 6,
+          "target": "themes",
+          "line": 13,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "const myTheme: ThemeRegistration",
+          "start": 414,
+          "length": 7,
+          "target": "myTheme",
+          "line": 13,
+          "character": 11
+        },
+        {
+          "type": "hover",
+          "text": "const html: string",
+          "start": 469,
+          "length": 4,
+          "target": "html",
+          "line": 16,
+          "character": 6
+        },
+        {
+          "type": "hover",
+          "text": "const highlighter: HighlighterGeneric<BundledLanguage, BundledTheme>",
+          "start": 476,
+          "length": 11,
+          "target": "highlighter",
+          "line": 16,
+          "character": 13
+        },
+        {
+          "type": "hover",
+          "text": "(property) HighlighterGeneric<BundledLanguage, BundledTheme>.codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => string",
+          "docs": "Get highlighted code in HTML string",
+          "start": 488,
+          "length": 10,
+          "target": "codeToHtml",
+          "line": 16,
+          "character": 25
+        },
+        {
+          "type": "hover",
+          "text": "(property) lang: \"javascript\"",
+          "start": 524,
+          "length": 4,
+          "target": "lang",
+          "line": 17,
+          "character": 2
+        },
+        {
+          "type": "hover",
+          "text": "(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>",
+          "start": 546,
+          "length": 5,
+          "target": "theme",
+          "line": 18,
+          "character": 2
+        }
+      ],
+      "code": "import { createHighlighter } from 'shiki'\nimport { createCssVariablesTheme } from 'shiki/core'\n\n// Create a custom CSS variables theme, the following are the default values\nconst myTheme = createCssVariablesTheme({ // [!code hl:6]\n  name: 'css-variables',\n  variablePrefix: '--shiki-',\n  variableDefaults: {},\n  fontStyle: true\n})\n\nconst highlighter = await createHighlighter({\n  langs: ['javascript'],\n  themes: [myTheme] // register the theme // [!code hl]\n})\n\nconst html = highlighter.codeToHtml('const foo = \"bar\"', {\n  lang: 'javascript',\n  theme: 'css-variables' // use the theme // [!code hl]\n})",
+      "meta": {
+        "extension": "ts"
+      }
+    }
+  }
+}
