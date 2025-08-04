@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Badges: typeof import('./.vitepress/components/Badges.vue')['default']
+    FundingButton: typeof import('./.vitepress/components/FundingButton.vue')['default']
     HomeDemo: typeof import('./.vitepress/components/HomeDemo.vue')['default']
     LanguagesList: typeof import('./.vitepress/components/LanguagesList.vue')['default']
     ShikiMiniPlayground: typeof import('./.vitepress/components/ShikiMiniPlayground.vue')['default']

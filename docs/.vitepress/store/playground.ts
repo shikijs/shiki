@@ -1,30 +1,19 @@
 /// <reference types="vite/client" />
 
-import type { BundledLanguageInfo, BundledThemeInfo } from '@shikijs/types'
+import type { BundledLanguage, BundledTheme } from 'shiki'
+import type { GrammarInfo } from 'tm-grammars'
+import type { ThemeInfo } from 'tm-themes'
 import { useLocalStorage } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, shallowRef, watch } from 'vue'
 
 export const usePlayground = defineStore('playground', () => {
-  const lang = useLocalStorage('shiki-playground-lang', 'typescript')
-  const theme = useLocalStorage('shiki-playground-theme', 'vitesse-dark')
-  const allThemes = shallowRef<BundledThemeInfo[]>([
-    {
-      id: 'vitesse-dark',
-      displayName: 'Vitesse Dark',
-      type: 'dark',
-      import: undefined!,
-    },
-  ])
-  const allLanguages = shallowRef<BundledLanguageInfo[]>([
-    {
-      id: 'typescript',
-      name: 'TypeScript',
-      import: undefined!,
-    },
-  ])
-  const bundledLangsFull = shallowRef<BundledLanguageInfo[]>([])
-  const bundledLangsWeb = shallowRef<BundledLanguageInfo[]>([])
+  const lang = useLocalStorage<BundledLanguage>('shiki-playground-lang', 'typescript')
+  const theme = useLocalStorage<BundledTheme>('shiki-playground-theme', 'vitesse-dark')
+  const allThemes = shallowRef<ThemeInfo[]>([])
+  const allLanguages = shallowRef<GrammarInfo[]>([])
+  const bundledLangsFull = shallowRef<GrammarInfo[]>([])
+  const bundledLangsWeb = shallowRef<GrammarInfo[]>([])
 
   const input = useLocalStorage('shiki-playground-input', '')
   const output = ref('<pre></pre>')
@@ -33,16 +22,16 @@ export const usePlayground = defineStore('playground', () => {
 
   function randomize(): void {
     if (allLanguages.value.length && allThemes.value.length) {
-      lang.value = allLanguages.value[Math.floor(Math.random() * allLanguages.value.length)].id as any
-      theme.value = allThemes.value[Math.floor(Math.random() * allThemes.value.length)].id as any
+      lang.value = allLanguages.value[Math.floor(Math.random() * allLanguages.value.length)].name as BundledLanguage
+      theme.value = allThemes.value[Math.floor(Math.random() * allThemes.value.length)].name as BundledTheme
     }
   }
 
   ;(async () => {
     const { createHighlighter } = await import('shiki')
-    const { bundledLanguagesInfo: bundleFull } = await import('shiki/bundle/full')
-    const { bundledLanguagesInfo: bundleWeb } = await import('shiki/bundle/web')
-    const { bundledThemesInfo } = await import('shiki/themes')
+    const allGrammars = await import('tm-grammars')
+    const webGrammars = allGrammars.grammars.filter(grammar => grammar.categories?.includes('web'))
+    const { themes: bundledThemesInfo } = await import('tm-themes')
 
     const samplesCache = new Map<string, Promise<string | undefined>>()
 
@@ -59,9 +48,9 @@ export const usePlayground = defineStore('playground', () => {
     }
 
     allThemes.value = bundledThemesInfo
-    allLanguages.value = bundleFull
-    bundledLangsFull.value = bundleFull
-    bundledLangsWeb.value = bundleWeb
+    allLanguages.value = allGrammars.grammars
+    bundledLangsFull.value = allGrammars.grammars
+    bundledLangsWeb.value = webGrammars
 
     if (typeof window !== 'undefined') {
       const highlighter = await createHighlighter({
@@ -74,8 +63,8 @@ export const usePlayground = defineStore('playground', () => {
       watch([lang, theme], async (n, o) => {
         isLoading.value = true
         await Promise.all([
-          highlighter.loadTheme(theme.value as any),
-          highlighter.loadLanguage(lang.value as any),
+          highlighter.loadTheme(theme.value),
+          highlighter.loadLanguage(lang.value),
         ])
         // Fetch sample if language changed
         if ((o[0] || !input.value) && n[0] !== o[0]) {
