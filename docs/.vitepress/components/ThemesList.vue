@@ -24,7 +24,9 @@ function preview(id: string) {
       </thead>
       <tbody>
         <tr v-for="l in play.allThemes" :key="l.name">
-          <td>{{ l.displayName }}  <FundingButton :name="`${l.displayName} theme`" :funding="l.funding" /></td>
+          <td>
+            {{ l.displayName }} <FundingButton :name="`${l.displayName} theme`" :funding="l.funding" />
+          </td>
           <td><code>{{ l.name }}</code></td>
           <td>
             <div flex>
