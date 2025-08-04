@@ -102,6 +102,13 @@ describe('decorations', () => {
           end: code.length,
           properties: { class: 'highlighted' },
         },
+        // "ult" from "return result"
+        // Testing negative character positions
+        {
+          start: { line: 9, character: -4 },
+          end: { line: 9, character: -1 },
+          properties: { class: 'highlighted' },
+        },
       ],
     })
 

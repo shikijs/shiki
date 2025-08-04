@@ -63,6 +63,26 @@ const x = 10
 console.log(x)
 ```
 
+Negative character positions denote characters from the end of a line, starting with the line end:
+
+```ts twoslash
+import { DecorationItem } from 'shiki'
+// ---cut---
+const item: DecorationItem = {
+  start: { line: 0, character: 0 },
+  end: { line: 0, character: -1 },
+  properties: { class: 'highlighted-word' }
+}
+```
+
+This highlights the entire first line:
+
+```ts
+// @decorations:[{"start":{"line":0,"character":0},"end":{"line":0,"character":-1},"properties":{"class":"highlighted-word"}}]
+const x = 10
+console.log(x)
+```
+
 ## Use Decorations in Transformers
 
 For advanced use cases, you can use the [Transformers API](./transformers.md) to have full access to the tokens and the HAST tree.
