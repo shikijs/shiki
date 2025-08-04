@@ -10,8 +10,8 @@ import { ref, shallowRef, watch } from 'vue'
 export const usePlayground = defineStore('playground', () => {
   const lang = useLocalStorage<BundledLanguage>('shiki-playground-lang', 'typescript')
   const theme = useLocalStorage<BundledTheme>('shiki-playground-theme', 'vitesse-dark')
-  const allThemes = shallowRef<ThemeInfo[]>([/* TODO? */])
-  const allLanguages = shallowRef<GrammarInfo[]>([/* TODO? */])
+  const allThemes = shallowRef<ThemeInfo[]>([])
+  const allLanguages = shallowRef<GrammarInfo[]>([])
   const bundledLangsFull = shallowRef<GrammarInfo[]>([])
   const bundledLangsWeb = shallowRef<GrammarInfo[]>([])
 
