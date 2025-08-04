@@ -3,7 +3,7 @@ import { computed, nextTick, ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
 const play = usePlayground()
-const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
+const currentThemeType = computed(() => play.allThemes.find(i => i.name === play.theme)?.type || 'inherit')
 
 const textAreaRef = ref<HTMLDivElement>()
 const highlightContainerRef = ref<HTMLSpanElement>()
@@ -33,19 +33,19 @@ function onInput() {
     <div sticky z-12 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5" bg-inherit>
       <div i-carbon:chevron-down op50 />
       <select v-model="play.lang" font-mono :style="play.preStyle">
-        <option v-for="lang in play.allLanguages" :key="lang.id" :value="lang.id">
+        <option v-for="lang in play.allLanguages" :key="lang.name" :value="lang.name">
           {{ lang.name }}
         </option>
       </select>
       <div i-carbon:chevron-down op50 />
       <select v-model="play.theme" font-mono :style="play.preStyle">
-        <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.id" :value="theme.id">
+        <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.name" :value="theme.name">
           {{ theme.displayName }}
         </option>
         <option disabled>
           ──────────
         </option>
-        <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.id" :value="theme.id">
+        <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.name" :value="theme.name">
           {{ theme.displayName }}
         </option>
       </select>
