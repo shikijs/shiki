@@ -35,7 +35,7 @@ bun add -g @shikijs/cli
 ```
 
 ```sh [deno]
-deno install -gAn skat npm:@shikijs/cli
+deno install -gREn skat npm:@shikijs/cli
 ```
 
 :::
