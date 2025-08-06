@@ -28,6 +28,10 @@ pnpm add -D @shikijs/transformers
 bun add -D @shikijs/transformers
 ```
 
+```sh [bun]
+deno add npm:@shikijs/transformers
+```
+
 :::
 
 ## Usage

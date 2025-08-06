@@ -28,6 +28,10 @@ pnpm add -D @shikijs/rehype
 bun add -D @shikijs/rehype
 ```
 
+```sh [bun]
+deno add npm:@shikijs/rehype
+```
+
 :::
 
 ## Usage

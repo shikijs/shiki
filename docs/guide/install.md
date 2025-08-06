@@ -27,6 +27,10 @@ pnpm add -D shiki
 bun add -D shiki
 ```
 
+```sh [deno]
+deno add npm:shiki
+```
+
 :::
 
 ## Integrations

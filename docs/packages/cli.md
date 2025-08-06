@@ -34,6 +34,10 @@ pnpm add -g @shikijs/cli
 bun add -g @shikijs/cli
 ```
 
+```sh [deno]
+deno install -gAn skat npm:@shikijs/cli
+```
+
 :::
 
 ```sh
@@ -78,6 +82,10 @@ pnpm add @shikijs/cli
 
 ```sh [bun]
 bun add @shikijs/cli
+```
+
+```sh [deno]
+deno add npm:@shikijs/cli
 ```
 
 :::
