@@ -30,7 +30,7 @@ pnpm add -D @shikijs/twoslash
 bun add -D @shikijs/twoslash
 ```
 
-```sh [bun]
+```sh [deno]
 deno add npm:@shikijs/twoslash
 ```
 

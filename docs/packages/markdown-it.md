@@ -24,7 +24,7 @@ pnpm add -D @shikijs/markdown-it
 bun add -D @shikijs/markdown-it
 ```
 
-```sh [bun]
+```sh [deno]
 deno add npm:@shikijs/markdown-it
 ```
 
