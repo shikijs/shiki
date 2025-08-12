@@ -34,7 +34,7 @@ pnpm add -D @shikijs/vitepress-twoslash
 bun add -D @shikijs/vitepress-twoslash
 ```
 
-```sh [bun]
+```sh [deno]
 deno add npm:@shikijs/vitepress-twoslash
 ```
 

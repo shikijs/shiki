@@ -28,7 +28,7 @@ pnpm add -D @shikijs/rehype
 bun add -D @shikijs/rehype
 ```
 
-```sh [bun]
+```sh [deno]
 deno add npm:@shikijs/rehype
 ```
 
