@@ -12,15 +12,20 @@ export interface TransformerRenderIndentGuidesOptions {
 export function transformerRenderIndentGuides(
   options: TransformerRenderIndentGuidesOptions = {},
 ): ShikiTransformer {
-  const {
-    indent = 2,
-  } = options
-
-  const indentRegex = new RegExp(` {${indent}}| {0,${indent - 1}}\t| {1,}$`, 'g')
-
   return {
     name: '@shikijs/transformers:render-indent-guides',
     code(hast) {
+      let { indent = 2 } = options
+
+      const match = this.options.meta?.__raw?.match(/\{indent:(\d+|false)\}/)
+      if (match) {
+        if (match[1] === 'false') {
+          return hast
+        }
+        indent = Number(match[1])
+      }
+      const indentRegex = new RegExp(` {${indent}}| {0,${indent - 1}}\t| {1,}$`, 'g')
+
       const emptyLines: [Element, number][] = []
       let level = 0
 
@@ -51,7 +56,7 @@ export function transformerRenderIndentGuides(
             tagName: 'span',
             properties: {
               class: 'indent',
-              style: `--indent-left: ${i * indent}ch;`,
+              style: `--indent-offset: ${i * indent}ch;`,
             },
             children: [],
           } satisfies Element)))
