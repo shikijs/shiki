@@ -41,10 +41,10 @@ export function transformerRenderIndentGuides(
         }
 
         const text = first.children[0]
-        const leading = text.value.split(/[^ \t]/, 1)[0]
+        const blanks = text.value.split(/[^ \t]/, 1)[0]
 
         const ranges: [number, number][] = []
-        for (const match of leading.matchAll(indentRegex)) {
+        for (const match of blanks.matchAll(indentRegex)) {
           const start = match.index
           const end = start + match[0].length
           ranges.push([start, end])

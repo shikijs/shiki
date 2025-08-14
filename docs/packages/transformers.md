@@ -359,7 +359,7 @@ pre.shiki .space::before {
 
 ### `transformerRenderIndentGuides`
 
-Render indentations as individual spans, with classes `indent`.
+Render indentations as individual spans, with class `indent`.
 
 With some additional CSS rules, you can make it look like this:
 
