@@ -6,7 +6,7 @@ export interface TransformerRenderIndentGuidesOptions {
 }
 
 /**
- * Render indents as separate tokens.
+ * Render indentations as separate tokens.
  * Apply with CSS, it can be used to render indent guides visually.
  */
 export function transformerRenderIndentGuides(
