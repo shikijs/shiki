@@ -23,19 +23,18 @@ declare module '@shikijs/core' {
 }
 
 export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache {
-  const optionsKeyCache = new WeakMap<TwoslashExecuteOptions, string>()
-  function resolveOptionsKey(options: TwoslashExecuteOptions = {}): string {
-    let key = optionsKeyCache.get(options)
-    if (!key) {
-      key = createOHash(options)
-      optionsKeyCache.set(options, key)
+  const optionsHashCache = new WeakMap<TwoslashExecuteOptions, string>()
+  function getOptionsHash(options: TwoslashExecuteOptions = {}): string {
+    let hash = optionsHashCache.get(options)
+    if (!hash) {
+      hash = createOHash(options)
+      optionsHashCache.set(options, hash)
     }
-    return key
+    return hash
   }
 
   function cacheHash(code: string, lang: string, options?: TwoslashExecuteOptions): string {
-    const optionsKey = resolveOptionsKey(options)
-    return `${optionsKey}:${lang}:${getStrHash(code)}`
+    return sha256Hash(`${getOptionsHash(options)}:${lang}:${code}`)
   }
 
   function generateCodeCache(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
@@ -164,6 +163,6 @@ export class FilePatcher {
 
 // Private Utils
 
-function getStrHash(str: string): string {
+function sha256Hash(str: string): string {
   return createHash('SHA256').update(str).digest('hex')
 }
