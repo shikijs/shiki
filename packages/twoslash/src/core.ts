@@ -2,7 +2,7 @@
  * This file is the core of the @shikijs/twoslash package,
  * Decoupled from twoslash's implementation and allowing to introduce custom implementation or cache system.
  */
-import type { CodeToHastOptions, ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
+import type { ShikiTransformer, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 import type { TwoslashExecuteOptions, TwoslashGenericFunction } from 'twoslash'
 
@@ -84,7 +84,11 @@ export function createTransformerFactory(
 
     const includes = new TwoslashIncludesManager(includesMap)
 
-    const cacheableTwoslasher = (code: string, extension: string, options?: TwoslashExecuteOptions, meta?: CodeToHastOptions['meta']): TwoslashShikiReturn => {
+    const cacheableTwoslasher = (code: string, extension: string, options: TwoslashExecuteOptions, meta: ShikiTransformerContextMeta): TwoslashShikiReturn => {
+      const preprocessed = twoslashCache?.preprocess?.(code, extension, options, meta)
+      if (preprocessed !== undefined)
+        code = preprocessed
+
       let twoslash = twoslashCache?.read(code, extension, options, meta)
       if (!twoslash) {
         twoslash = (twoslasher as TwoslashShikiFunction)(code, extension, options)
@@ -111,7 +115,7 @@ export function createTransformerFactory(
             if (include)
               includes.add(include, codeWithIncludes)
 
-            const twoslash = cacheableTwoslasher(codeWithIncludes, lang, twoslashOptions, this.options.meta)
+            const twoslash = cacheableTwoslasher(codeWithIncludes, lang, twoslashOptions, this.meta)
             map.set(this.meta, twoslash)
             this.meta.twoslash = twoslash
             this.options.lang = twoslash.meta?.extension || lang

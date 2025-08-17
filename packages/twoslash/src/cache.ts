@@ -1,11 +1,13 @@
-import type { CodeToHastOptions } from '@shikijs/types'
+import type { ShikiTransformerContextMeta } from '@shikijs/types'
 import type { TwoslashExecuteOptions } from 'twoslash'
 import type { TwoslashShikiReturn } from '.'
 
 export interface TwoslashTypesCache {
-  read: (code: string, lang: string, options?: TwoslashExecuteOptions, meta?: CodeToHastOptions['meta']) => TwoslashShikiReturn | null
-
-  write: (data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions, meta?: CodeToHastOptions['meta']) => void
-
   init?: () => void
+
+  preprocess?: (code: string, lang: string, options: TwoslashExecuteOptions, meta: ShikiTransformerContextMeta) => string | void
+
+  read: (code: string, lang: string, options: TwoslashExecuteOptions, meta: ShikiTransformerContextMeta) => TwoslashShikiReturn | null
+
+  write: (data: TwoslashShikiReturn, code: string, lang: string, options: TwoslashExecuteOptions, meta: ShikiTransformerContextMeta) => void
 }

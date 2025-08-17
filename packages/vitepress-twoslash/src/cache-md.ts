@@ -1,22 +1,29 @@
 import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
 import type { TwoslashExecuteOptions } from 'twoslash'
+import type { FenceSource } from './fence-source'
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import MagicString from 'magic-string'
 import { hash as createOHash } from 'ohash'
-import { resolveMetaFilePath } from './fence-path'
 
-interface TwoslashFilePayload {
+interface TwoslashCodePayload {
   version: number
-  fileHash: string
-  cache: Record<string, TwoslashShikiReturn>
+  hash: string
+  twoslash: TwoslashShikiReturn
 }
 
-export function createTwoslashMdCache(): TwoslashTypesCache {
-  // TODO: LRU cache
-  const payloads = new Map<string, TwoslashFilePayload>()
-  const optionsKeyCache = new WeakMap<TwoslashExecuteOptions, string>()
-  const mdFileChecksumCache = new Map<string, string>()
+const CODE_INLINE_CACHE_KEY = '@cache'
+const CODE_INLINE_CACHE_REGEX = new RegExp(`// ${CODE_INLINE_CACHE_KEY}: (.*)\\n`, 'g')
 
+declare module '@shikijs/core' {
+  interface ShikiTransformerContextMeta {
+    __cache?: TwoslashShikiReturn
+    __patch?: (newCache: string) => void
+  }
+}
+
+export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache {
+  const optionsKeyCache = new WeakMap<TwoslashExecuteOptions, string>()
   function resolveOptionsKey(options: TwoslashExecuteOptions = {}): string {
     let key = optionsKeyCache.get(options)
     if (!key) {
@@ -26,92 +33,136 @@ export function createTwoslashMdCache(): TwoslashTypesCache {
     return key
   }
 
-  function resolveMdFileChecksum(filePath: string): string {
-    let hash = mdFileChecksumCache.get(filePath)
-    if (!hash) {
-      const data = readFileSync(filePath, { encoding: 'utf-8' })
-      hash = getStrHash(data)
-      mdFileChecksumCache.set(filePath, hash)
-    }
-    return hash
-  }
-
-  function resolveCacheKey(code: string, lang: string, options?: TwoslashExecuteOptions): string {
+  function cacheHash(code: string, lang: string, options?: TwoslashExecuteOptions): string {
     const optionsKey = resolveOptionsKey(options)
     return `${optionsKey}:${lang}:${getStrHash(code)}`
   }
 
-  function resolveMdPayload(filePath: string): TwoslashFilePayload {
-    let payload = payloads.get(filePath)
-    if (!payload) {
-      const fileHash = resolveMdFileChecksum(filePath)
-
-      const cacheFile = `${filePath}.twoslash`
-      if (existsSync(cacheFile)) {
-        const data = readFileSync(cacheFile, { encoding: 'utf-8' })
-        const payload: TwoslashFilePayload = JSON.parse(data)
-
-        // TODO: payload validation
-        if (payload) {
-          if (payload.fileHash === fileHash) {
-            payloads.set(filePath, payload)
-            return payload
-          }
-          else {
-            // file outdated
-          }
-        }
-      }
-
-      // create new payload
-      payload = {
-        version: 1,
-        fileHash,
-        cache: {},
-      }
-      payloads.set(filePath, payload)
+  function generateCodeCache(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
+    const hash = cacheHash(code, lang, options)
+    const payload: TwoslashCodePayload = {
+      version: 1,
+      hash,
+      twoslash: data,
     }
-    return payload
+    return JSON.stringify(payload)
   }
 
-  function savePayload(filePath: string, payload: TwoslashFilePayload): void {
-    const cacheFile = `${filePath}.twoslash`
-    const data = JSON.stringify(payload, null, 2)
-    writeFileSync(cacheFile, data, { encoding: 'utf-8' })
+  function resolveCodePayload(cache: string): TwoslashCodePayload | null {
+    // TODO: verify version
+    try {
+      const payload = JSON.parse(cache) as TwoslashCodePayload
+      if (payload.version === 1) {
+        return payload
+      }
+    }
+    catch {
+      // ignore
+    }
+    return null
+  }
+
+  function resolveSourcePatcher(source: FenceSource, search?: string): (newCache: string) => void {
+    const file = patcher.load(source.path)
+    let patchKey = FilePatcher.key(source.from)
+
+    if (search) {
+      const cachePos = file.content.indexOf(search, source.from)
+      if (cachePos !== -1 && cachePos < source.to) {
+        // found a match
+        patchKey = FilePatcher.key(cachePos, cachePos + search.length)
+      }
+    }
+
+    return (newCache: string) => {
+      file.patches.set(patchKey, newCache)
+    }
   }
 
   return {
-    init() {
-      // Initialization logic if needed
-    },
-    read(code, lang, options, meta) {
-      const path = resolveMetaFilePath(meta?.__raw)
-      if (!path) {
-        return null
+    preprocess(code, lang, options, meta) {
+      let rawCache = ''
+      let cacheString = ''
+
+      code = code.replaceAll(CODE_INLINE_CACHE_REGEX, (full, p1: string) => {
+        // save the first occurrence only
+        if (!rawCache.length) {
+          cacheString = p1
+          rawCache = full
+        }
+
+        // replace all occurrences
+        return ''
+      })
+
+      if (cacheString) {
+        const cache = resolveCodePayload(cacheString)
+        if (cache?.hash === cacheHash(code, lang, options))
+          meta.__cache = cache.twoslash
       }
 
-      const payload = resolveMdPayload(path)
+      if (meta.source)
+        meta.__patch = resolveSourcePatcher(meta.source, rawCache)
 
-      const cacheKey = resolveCacheKey(code, lang, options)
-      if (payload.cache[cacheKey])
-        return payload.cache[cacheKey]
-
-      return null
+      return code
     },
-
+    read(code, lang, options, meta) {
+      return meta.__cache ?? null
+    },
     write(data, code, lang, options, meta) {
-      const path = resolveMetaFilePath(meta?.__raw)
-      if (!path)
-        return
-
-      const payload = resolveMdPayload(path)
-      const cacheKey = resolveCacheKey(code, lang, options)
-      payload.cache[cacheKey] = data
-
-      savePayload(path, payload)
+      const cacheStr = `// @cache: ${generateCodeCache(data, code, lang, options)}\n`
+      meta.__patch?.(cacheStr)
     },
   }
 }
+
+export class FilePatcher {
+  private files = new Map<string, { content: string, patches: Map<string, string> }>()
+
+  static key(from: number, to?: number): string {
+    return `${from}${to ? `:${to}` : ''}`
+  }
+
+  load(path: string): { content: string, patches: Map<string, string> } {
+    let file = this.files.get(path)
+    if (!file) {
+      const content = existsSync(path) ? readFileSync(path, { encoding: 'utf-8' }) : ''
+      file = { content, patches: new Map() }
+      this.files.set(path, file)
+    }
+    return file
+  }
+
+  patch(path: string): void {
+    const file = this.files.get(path)
+    if (file) {
+      if (file.patches.size) {
+        const s = new MagicString(file.content)
+
+        // apply patches
+        for (const [key, value] of file.patches) {
+          const [from, to] = key.split(':').map(s => s !== '' ? Number(s) : undefined)
+          if (from === undefined)
+            continue
+
+          if (to !== undefined) {
+            s.update(from, to, value)
+          }
+          else {
+            s.appendRight(from, value)
+          }
+        }
+
+        // write the patched content back to the file
+        const content = s.toString()
+        writeFileSync(path, content, { encoding: 'utf-8' })
+      }
+      this.files.delete(path)
+    }
+  }
+}
+
+// Private Utils
 
 function getStrHash(str: string): string {
   return createHash('SHA256').update(str).digest('hex')

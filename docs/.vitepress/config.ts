@@ -8,8 +8,7 @@ import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
-import { createTwoslashMdCache } from '../../packages/vitepress-twoslash/src/cache-md'
-import { twoslashFencePathMdPlugin } from '../../packages/vitepress-twoslash/src/fence-path'
+import { createTwoslashConfig } from '../../packages/vitepress-twoslash/src/config'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
@@ -73,8 +72,10 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   },
 ]
 
+const { withTwoslash, twoslashCache } = createTwoslashConfig()
+
 // https://vitepress.dev/reference/site-config
-export default withMermaid(defineConfig({
+export default withTwoslash(withMermaid(defineConfig({
   title: 'Shiki',
   description: 'A beautiful and powerful syntax highlighter',
   markdown: {
@@ -143,7 +144,7 @@ export default withMermaid(defineConfig({
             .replace(/_shikijs_core\w*\./g, '')
         },
         typesCache: createFileSystemTypesCache(),
-        twoslashCache: createTwoslashMdCache(),
+        twoslashCache,
       }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
@@ -151,7 +152,6 @@ export default withMermaid(defineConfig({
     languages: ['js', 'jsx', 'ts', 'tsx', 'html'],
     config: (md) => {
       md.use(groupIconMdPlugin)
-        .use(twoslashFencePathMdPlugin)
     },
   },
 
@@ -246,4 +246,4 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'twitter:image', content: 'https://shiki.style/og.png' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
   ],
-}))
+})))
