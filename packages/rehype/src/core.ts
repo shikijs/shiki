@@ -143,7 +143,7 @@ function rehypeShikiFromHighlighter(
           }
         }
 
-        parent.children[index] = fragment as any
+        parent.children.splice(index, 1, ...fragment.children)
       }
 
       if (lazyLoad) {
