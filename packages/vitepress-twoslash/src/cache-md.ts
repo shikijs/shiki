@@ -3,13 +3,14 @@ import type { TwoslashExecuteOptions } from 'twoslash'
 import type { FenceSource } from './fence-source'
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import LZString from 'lz-string'
 import MagicString from 'magic-string'
 import { hash as createOHash } from 'ohash'
 
-interface TwoslashCodePayload {
-  version: number
+interface TwoslashCachePayload {
+  v: number
   hash: string
-  twoslash: TwoslashShikiReturn
+  data: string
 }
 
 const CODE_INLINE_CACHE_KEY = '@cache'
@@ -44,19 +45,32 @@ export function createTwoslashMdCache(): {
 
   function generateCodeCache(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
     const hash = cacheHash(code, lang, options)
-    const payload: TwoslashCodePayload = {
-      version: 1,
+    const payload: TwoslashCachePayload = {
+      v: 1,
       hash,
-      twoslash: data,
+      data: LZString.compressToBase64(JSON.stringify(data)),
     }
     return JSON.stringify(payload)
   }
 
-  function resolveCodePayload(cache: string): TwoslashCodePayload | null {
+  function resolveCodePayload(cache: string): {
+    payload: TwoslashCachePayload
+    twoslash: () => TwoslashShikiReturn | null
+  } | null {
     try {
-      const payload = JSON.parse(cache) as TwoslashCodePayload
-      if (payload.version === 1) {
-        return payload
+      const payload = JSON.parse(cache) as TwoslashCachePayload
+      if (payload.v === 1) {
+        return {
+          payload,
+          twoslash: () => {
+            try {
+              return JSON.parse(LZString.decompressFromBase64(payload.data))
+            }
+            catch {
+              return null
+            }
+          },
+        }
       }
     }
     catch {
@@ -100,8 +114,11 @@ export function createTwoslashMdCache(): {
 
       if (cacheString) {
         const cache = resolveCodePayload(cacheString)
-        if (cache?.hash === cacheHash(code, lang, options))
-          meta.__cache = cache.twoslash
+        if (cache?.payload.hash === cacheHash(code, lang, options)) {
+          const twoslash = cache.twoslash()
+          if (twoslash)
+            meta.__cache = twoslash
+        }
       }
 
       if (meta.source)
@@ -113,7 +130,7 @@ export function createTwoslashMdCache(): {
       return meta.__cache ?? null
     },
     write(data, code, lang, options, meta) {
-      const cacheStr = `// @cache: ${generateCodeCache(data, code, lang, options)}\n`
+      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${generateCodeCache(data, code, lang, options)}\n`
       meta.__patch?.(cacheStr)
     },
   }

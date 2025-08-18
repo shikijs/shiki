@@ -152,6 +152,9 @@ catalogs:
       specifier: ^1.10.7
       version: 1.10.7
   integrations:
+    lz-string:
+      specifier: ^1.5.0
+      version: 1.5.0
     markdown-it:
       specifier: ^14.1.0
       version: 14.1.0
@@ -775,6 +778,9 @@ importers:
       floating-vue:
         specifier: catalog:docs
         version: 5.2.2(vue@3.5.18(typescript@5.9.2))
+      lz-string:
+        specifier: catalog:integrations
+        version: 1.5.0
       mdast-util-from-markdown:
         specifier: catalog:integrations
         version: 2.0.2
@@ -3488,6 +3494,10 @@ packages:
   lru-cache@11.0.2:
     resolution: {integrity: sha512-123qHRfJBmo2jXDbo/a5YOQrJoHF/GNQTLzQ5+IdK5pWpceK17yRc6ozlWd25FxvGKQbIUs91fDFkXmDHTKcyA==}
     engines: {node: 20 || >=22}
+
+  lz-string@1.5.0:
+    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
+    hasBin: true
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -7819,6 +7829,8 @@ snapshots:
   lru-cache@10.4.3: {}
 
   lru-cache@11.0.2: {}
+
+  lz-string@1.5.0: {}
 
   magic-string@0.30.17:
     dependencies:
