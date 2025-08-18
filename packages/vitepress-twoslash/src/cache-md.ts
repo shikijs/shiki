@@ -23,7 +23,9 @@ declare module '@shikijs/core' {
   }
 }
 
-export function createTwoslashMdCache(): {
+export function createTwoslashMdCache({ prune }: {
+  prune?: boolean
+} = {}): {
   twoslashCache: TwoslashTypesCache
   patcher: FilePatcher
 } {
@@ -81,19 +83,27 @@ export function createTwoslashMdCache(): {
 
   function resolveSourcePatcher(source: FenceSource, search?: string): (newCache: string) => void {
     const file = patcher.load(source.path)
-    let patchKey = FilePatcher.key(source.from)
+    const range: { from: number, to?: number } = { from: source.from }
     let linebreak = true
 
     if (search) {
       const cachePos = file.content.indexOf(search, source.from)
       if (cachePos !== -1 && cachePos < source.to) {
         // found a match
-        patchKey = FilePatcher.key(cachePos, cachePos + search.length)
+        range.from = cachePos
+        range.to = cachePos + search.length
         linebreak = search.endsWith('\n')
       }
     }
 
+    const patchKey = FilePatcher.key(range.from, range.to)
     return (newCache: string) => {
+      if (newCache === '') {
+        // prune if found match
+        if (range.to !== undefined)
+          file.patches.set(patchKey, '')
+        return
+      }
       file.patches.set(patchKey, newCache + (linebreak ? '\n' : ''))
     }
   }
@@ -117,6 +127,7 @@ export function createTwoslashMdCache(): {
         return ''
       })
 
+      // resolve cache from string
       if (cacheString) {
         const cache = resolveCodePayload(cacheString)
         if (cache?.payload.hash === cacheHash(code, lang, options)) {
@@ -132,9 +143,16 @@ export function createTwoslashMdCache(): {
       return code
     },
     read(code, lang, options, meta) {
+      if (prune) {
+        return null
+      }
       return meta.__cache ?? null
     },
     write(data, code, lang, options, meta) {
+      if (prune) {
+        meta.__patch?.('')
+        return
+      }
       const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${generateCodeCache(data, code, lang, options)}`
       meta.__patch?.(cacheStr)
     },
