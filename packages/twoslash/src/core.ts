@@ -97,7 +97,6 @@ export function createTransformerFactory(
         let twoslash = typesCache?.read(code, lang, options, meta)
         if (!twoslash) {
           twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, options)
-          twoslash = pickTwoslashShikiReturn(twoslash)
           typesCache?.write(code, twoslash, lang, options, meta)
         }
         return twoslash
@@ -342,12 +341,4 @@ function getTokenString(token: ElementContent): string {
   if ('value' in token)
     return token.value
   return token.children?.map(getTokenString).join('') || ''
-}
-
-function pickTwoslashShikiReturn(ret: TwoslashShikiReturn): TwoslashShikiReturn {
-  return {
-    nodes: ret.nodes,
-    code: ret.code,
-    meta: ret.meta ? { extension: ret.meta.extension } : undefined,
-  }
 }

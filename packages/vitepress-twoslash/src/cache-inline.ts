@@ -1,5 +1,5 @@
 import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
-import type { TwoslashExecuteOptions } from 'twoslash'
+import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { FenceSourceMap } from './fence-source-map'
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -156,7 +156,9 @@ export function createInlineTypesCache({ prune }: {
         meta?.__patch?.('')
         return
       }
-      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${stringifyCachePayload(data, code, lang, options)}`
+
+      const twoslashShiki = simplifyTwoslashReturn(data)
+      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${stringifyCachePayload(twoslashShiki, code, lang, options)}`
       meta?.__patch?.(cacheStr)
     },
   }
@@ -214,4 +216,13 @@ export class FilePatcher {
 
 function sha256Hash(str: string): string {
   return createHash('SHA256').update(str).digest('hex')
+}
+
+// pick necessary types to Shiki, converter of TwoslashShikiReturn
+function simplifyTwoslashReturn(ret: TwoslashReturn | TwoslashShikiReturn): TwoslashShikiReturn {
+  return {
+    nodes: ret.nodes,
+    code: ret.code,
+    meta: ret.meta ? { extension: ret.meta.extension } : undefined,
+  }
 }
