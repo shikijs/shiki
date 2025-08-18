@@ -6,8 +6,8 @@ import { readFileSync } from 'node:fs'
 import { createInlineTypesCache } from './cache-inline'
 import { createFenceSourceMap } from './fence-source-map'
 
-export function createTwoslashConfig(): {
-  withTwoslash: (config: UserConfig) => UserConfig
+export function createTwoslashInlineCache(): {
+  withTwoslashInlineCache: (config: UserConfig) => UserConfig
   typesCache: TwoslashTypesCache
 } {
   const { inject: injectFenceSourceMap, extract: extractFenceSourceMap } = createFenceSourceMap()
@@ -25,7 +25,7 @@ export function createTwoslashConfig(): {
   }
 
   // extract and remove source map from fence
-  const transformerFenceInfo: ShikiTransformer = {
+  const transformerFenceSourceMap: ShikiTransformer = {
     name: '@shikijs/vitepress-twoslash-fence',
     preprocess(code) {
       const { code: transformedCode, sourceMap } = extractFenceSourceMap(code)
@@ -48,10 +48,10 @@ export function createTwoslashConfig(): {
     },
   }
 
-  function withTwoslash(config: UserConfig): UserConfig {
+  function withTwoslashInlineCache(config: UserConfig): UserConfig {
     // config markdown code transformers
     const codeTransformers = (config.markdown ??= {}).codeTransformers ??= []
-    codeTransformers.unshift(transformerFenceInfo)
+    codeTransformers.unshift(transformerFenceSourceMap)
 
     // config vite plugins
     const plugins = (config.vite ??= {}).plugins ??= []
@@ -61,7 +61,7 @@ export function createTwoslashConfig(): {
   }
 
   return {
-    withTwoslash,
+    withTwoslashInlineCache,
     typesCache,
   }
 }

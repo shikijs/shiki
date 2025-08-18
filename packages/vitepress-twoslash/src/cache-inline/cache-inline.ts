@@ -2,10 +2,9 @@ import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
 import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { FenceSourceMap } from './fence-source-map'
 import { createHash } from 'node:crypto'
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import LZString from 'lz-string'
-import MagicString from 'magic-string'
 import { hash as createOHash } from 'ohash'
+import { FilePatcher } from './file-patcher'
 
 interface TwoslashCachePayload {
   v: number
@@ -167,54 +166,6 @@ export function createInlineTypesCache({ prune, ignoreCache }: {
 
   return { typesCache, patcher }
 }
-
-export class FilePatcher {
-  private files = new Map<string, { content: string, patches: Map<string, string> }>()
-
-  static key(from: number, to?: number): string {
-    return `${from}${to ? `:${to}` : ''}`
-  }
-
-  load(path: string): { content: string, patches: Map<string, string> } {
-    let file = this.files.get(path)
-    if (!file) {
-      const content = existsSync(path) ? readFileSync(path, { encoding: 'utf-8' }) : ''
-      file = { content, patches: new Map() }
-      this.files.set(path, file)
-    }
-    return file
-  }
-
-  patch(path: string): void {
-    const file = this.files.get(path)
-    if (file) {
-      if (file.patches.size) {
-        const s = new MagicString(file.content)
-
-        // apply patches
-        for (const [key, value] of file.patches) {
-          const [from, to] = key.split(':').map(s => s !== '' ? Number(s) : undefined)
-          if (from === undefined)
-            continue
-
-          if (to !== undefined) {
-            s.update(from, to, value)
-          }
-          else {
-            s.appendRight(from, value)
-          }
-        }
-
-        // write the patched content back to the file
-        const content = s.toString()
-        writeFileSync(path, content, { encoding: 'utf-8' })
-      }
-      this.files.delete(path)
-    }
-  }
-}
-
-// Private Utils
 
 function sha256Hash(str: string): string {
   return createHash('SHA256').update(str).digest('hex')

@@ -7,7 +7,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
-import { createTwoslashConfig } from '../../packages/vitepress-twoslash/src/cache-inline'
+import { createTwoslashInlineCache } from '../../packages/vitepress-twoslash/src/cache-inline'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
@@ -71,10 +71,10 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   },
 ]
 
-const { withTwoslash, typesCache } = createTwoslashConfig()
+const { withTwoslashInlineCache, typesCache } = createTwoslashInlineCache()
 
 // https://vitepress.dev/reference/site-config
-export default withTwoslash(withMermaid(defineConfig({
+export default withTwoslashInlineCache(withMermaid(defineConfig({
   title: 'Shiki',
   description: 'A beautiful and powerful syntax highlighter',
   markdown: {
