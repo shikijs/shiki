@@ -14,7 +14,7 @@ interface TwoslashCachePayload {
 }
 
 const CODE_INLINE_CACHE_KEY = '@twoslash-cache'
-const CODE_INLINE_CACHE_REGEX = new RegExp(`// ${CODE_INLINE_CACHE_KEY}: (.*)\\n`, 'g')
+const CODE_INLINE_CACHE_REGEX = new RegExp(`// ${CODE_INLINE_CACHE_KEY}: (.*)(?:\n|$)`, 'g')
 
 declare module '@shikijs/core' {
   interface ShikiTransformerContextMeta {
@@ -82,17 +82,19 @@ export function createTwoslashMdCache(): {
   function resolveSourcePatcher(source: FenceSource, search?: string): (newCache: string) => void {
     const file = patcher.load(source.path)
     let patchKey = FilePatcher.key(source.from)
+    let linebreak = true
 
     if (search) {
       const cachePos = file.content.indexOf(search, source.from)
       if (cachePos !== -1 && cachePos < source.to) {
         // found a match
         patchKey = FilePatcher.key(cachePos, cachePos + search.length)
+        linebreak = search.endsWith('\n')
       }
     }
 
     return (newCache: string) => {
-      file.patches.set(patchKey, newCache)
+      file.patches.set(patchKey, newCache + (linebreak ? '\n' : ''))
     }
   }
 
@@ -106,6 +108,9 @@ export function createTwoslashMdCache(): {
         if (!rawCache.length) {
           cacheString = p1
           rawCache = full
+        }
+        else {
+          console.warn('ignore duplicate inline cache:', meta.source?.path)
         }
 
         // replace all occurrences
@@ -130,7 +135,7 @@ export function createTwoslashMdCache(): {
       return meta.__cache ?? null
     },
     write(data, code, lang, options, meta) {
-      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${generateCodeCache(data, code, lang, options)}\n`
+      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${generateCodeCache(data, code, lang, options)}`
       meta.__patch?.(cacheStr)
     },
   }
