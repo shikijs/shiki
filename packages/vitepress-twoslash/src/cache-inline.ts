@@ -23,8 +23,9 @@ declare module '@shikijs/core' {
   }
 }
 
-export function createInlineTypesCache({ prune }: {
+export function createInlineTypesCache({ prune, ignoreCache }: {
   prune?: boolean
+  ignoreCache?: boolean
 } = {}): {
   typesCache: TwoslashTypesCache
   patcher: FilePatcher
@@ -59,6 +60,9 @@ export function createInlineTypesCache({ prune }: {
     payload: TwoslashCachePayload
     twoslash: () => TwoslashShikiReturn | null
   } | null {
+    if (!cache)
+      return null
+
     try {
       const payload = JSON.parse(cache) as TwoslashCachePayload
       if (payload.v === 1) {
@@ -131,7 +135,8 @@ export function createInlineTypesCache({ prune }: {
       })
 
       // resolve cache from string
-      if (cacheString) {
+      const shouldLoadCache = !ignoreCache && !prune
+      if (shouldLoadCache) {
         const cache = resolveCachePayload(cacheString)
         if (cache?.payload.hash === cacheHash(code, lang, options)) {
           const twoslash = cache.twoslash()
@@ -146,9 +151,6 @@ export function createInlineTypesCache({ prune }: {
       return code
     },
     read(code, lang, options, meta) {
-      if (prune) {
-        return null
-      }
       return meta?.__cache ?? null
     },
     write(code, data, lang, options, meta) {
