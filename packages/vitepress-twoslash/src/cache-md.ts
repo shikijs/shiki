@@ -13,7 +13,7 @@ interface TwoslashCachePayload {
   data: string
 }
 
-const CODE_INLINE_CACHE_KEY = '@cache'
+const CODE_INLINE_CACHE_KEY = '@twoslash-cache'
 const CODE_INLINE_CACHE_REGEX = new RegExp(`// ${CODE_INLINE_CACHE_KEY}: (.*)\\n`, 'g')
 
 declare module '@shikijs/core' {
