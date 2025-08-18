@@ -1,4 +1,4 @@
-import type { CodeToHastOptions, ShikiTransformerContext } from '@shikijs/types'
+import type { CodeToHastOptions, ShikiTransformerContext, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 import type {
   NodeCompletion,
@@ -12,7 +12,6 @@ import type {
   TwoslashOptions,
   TwoslashReturn,
 } from 'twoslash'
-import type { TwoslashTypesCache } from './cache'
 
 // We only pick necessary types to Shiki, making passing custom twoslash implementation easier
 export type TwoslashShikiReturn
@@ -26,6 +25,30 @@ declare module '@shikijs/core' {
   interface ShikiTransformerContextMeta {
     twoslash?: TwoslashShikiReturn
   }
+}
+
+export interface TwoslashTypesCache {
+  /**
+   * On initialization
+   */
+  init?: () => void
+
+  preprocess?: (code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta) => string | void
+
+  /**
+   * Read cached result
+   *
+   * @param code Source code
+   */
+  read: (code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta) => TwoslashShikiReturn | null
+
+  /**
+   * Save result to cache
+   *
+   * @param code Source code
+   * @param data Twoslash data
+   */
+  write: (code: string, data: TwoslashShikiReturn, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta) => void
 }
 
 export interface TransformerTwoslashOptions {
@@ -88,7 +111,22 @@ export interface TransformerTwoslashOptions {
    */
   onShikiError?: (error: unknown, code: string, lang: string) => void
 
-  twoslashCache?: TwoslashTypesCache
+  /**
+   * The options for caching resolved types
+   *
+   * @example
+   * ```ts
+   * import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+   * import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
+   *
+   * transformerTwoslash({
+   *   typesCache: createFileSystemTypesCache({
+   *     dir: './my-cache-dir'
+   *   })
+   * })
+   * ```
+   */
+  typesCache?: TwoslashTypesCache
 }
 
 export interface TwoslashRenderer {

@@ -8,7 +8,7 @@ import { createFenceSourceMap } from './fence-source-map'
 
 export function createTwoslashConfig(): {
   withTwoslash: (config: UserConfig) => UserConfig
-  twoslashCache: TwoslashTypesCache
+  typesCache: TwoslashTypesCache
 } {
   const { inject: injectFenceSourceMap, extract: extractFenceSourceMap } = createFenceSourceMap()
 
@@ -35,7 +35,7 @@ export function createTwoslashConfig(): {
   }
 
   // provide twoslash cache reader and writer
-  const { twoslashCache, patcher } = createInlineTypesCache()
+  const { typesCache, patcher } = createInlineTypesCache()
 
   // patch magic files changes after transform
   const post: Plugin = {
@@ -62,6 +62,6 @@ export function createTwoslashConfig(): {
 
   return {
     withTwoslash,
-    twoslashCache,
+    typesCache,
   }
 }

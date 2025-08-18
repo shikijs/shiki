@@ -7,7 +7,6 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
-import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
 import { createTwoslashConfig } from '../../packages/vitepress-twoslash/src/config'
 import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
@@ -72,7 +71,7 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   },
 ]
 
-const { withTwoslash, twoslashCache } = createTwoslashConfig()
+const { withTwoslash, typesCache } = createTwoslashConfig()
 
 // https://vitepress.dev/reference/site-config
 export default withTwoslash(withMermaid(defineConfig({
@@ -143,8 +142,7 @@ export default withTwoslash(withMermaid(defineConfig({
             // Remove shiki_core namespace
             .replace(/_shikijs_core\w*\./g, '')
         },
-        typesCache: createFileSystemTypesCache(),
-        twoslashCache,
+        typesCache,
       }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),

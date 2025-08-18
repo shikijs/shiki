@@ -26,7 +26,7 @@ declare module '@shikijs/core' {
 export function createInlineTypesCache({ prune }: {
   prune?: boolean
 } = {}): {
-  twoslashCache: TwoslashTypesCache
+  typesCache: TwoslashTypesCache
   patcher: FilePatcher
 } {
   const patcher = new FilePatcher()
@@ -41,11 +41,11 @@ export function createInlineTypesCache({ prune }: {
     return hash
   }
 
-  function cacheHash(code: string, lang: string, options?: TwoslashExecuteOptions): string {
-    return sha256Hash(`${getOptionsHash(options)}:${lang}:${code}`)
+  function cacheHash(code: string, lang?: string, options?: TwoslashExecuteOptions): string {
+    return sha256Hash(`${getOptionsHash(options)}:${lang ?? ''}:${code}`)
   }
 
-  function stringifyCachePayload(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
+  function stringifyCachePayload(data: TwoslashShikiReturn, code: string, lang?: string, options?: TwoslashExecuteOptions): string {
     const hash = cacheHash(code, lang, options)
     const payload: TwoslashCachePayload = {
       v: 1,
@@ -108,8 +108,11 @@ export function createInlineTypesCache({ prune }: {
     }
   }
 
-  const twoslashCache: TwoslashTypesCache = {
+  const typesCache: TwoslashTypesCache = {
     preprocess(code, lang, options, meta) {
+      if (!meta)
+        return
+
       let rawCache = ''
       let cacheString = ''
 
@@ -120,7 +123,7 @@ export function createInlineTypesCache({ prune }: {
           rawCache = full
         }
         else {
-          console.warn('ignore duplicate inline cache:', meta.sourceMap?.path)
+          console.warn('ignore duplicate inline cache:', meta?.sourceMap?.path)
         }
 
         // replace all occurrences
@@ -146,19 +149,19 @@ export function createInlineTypesCache({ prune }: {
       if (prune) {
         return null
       }
-      return meta.__cache ?? null
+      return meta?.__cache ?? null
     },
-    write(data, code, lang, options, meta) {
+    write(code, data, lang, options, meta) {
       if (prune) {
-        meta.__patch?.('')
+        meta?.__patch?.('')
         return
       }
       const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${stringifyCachePayload(data, code, lang, options)}`
-      meta.__patch?.(cacheStr)
+      meta?.__patch?.(cacheStr)
     },
   }
 
-  return { twoslashCache, patcher }
+  return { typesCache, patcher }
 }
 
 export class FilePatcher {

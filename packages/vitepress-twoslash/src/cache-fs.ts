@@ -1,4 +1,4 @@
-import type { TwoslashTypesCache } from './types'
+import type { TwoslashTypesCache } from '@shikijs/twoslash'
 import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'

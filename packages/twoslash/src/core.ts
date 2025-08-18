@@ -12,12 +12,14 @@ import { splitTokens } from '@shikijs/core'
 import { ShikiTwoslashError } from './error'
 import { parseIncludeMeta, TwoslashIncludesManager } from './includes'
 
-export * from './cache'
 export * from './error'
 export * from './icons'
 export * from './renderer-classic'
 export * from './renderer-rich'
 export * from './types'
+
+// internal
+type _CacheableTwoslashShikiFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta) => TwoslashShikiReturn
 
 export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   return {
@@ -47,7 +49,7 @@ export function createTransformerFactory(
       renderer = defaultRenderer,
       throws = true,
       includesMap = new Map(),
-      twoslashCache,
+      typesCache,
     } = options
 
     const onTwoslashError = options.onTwoslashError || (
@@ -84,21 +86,25 @@ export function createTransformerFactory(
 
     const includes = new TwoslashIncludesManager(includesMap)
 
-    const cacheableTwoslasher = (code: string, extension: string, options: TwoslashExecuteOptions, meta: ShikiTransformerContextMeta): TwoslashShikiReturn => {
-      const preprocessed = twoslashCache?.preprocess?.(code, extension, options, meta)
-      if (preprocessed !== undefined)
-        code = preprocessed
+    let _twoslasher = twoslasher
 
-      let twoslash = twoslashCache?.read(code, extension, options, meta)
-      if (!twoslash) {
-        twoslash = (twoslasher as TwoslashShikiFunction)(code, extension, options)
-        twoslash = pickTwoslashShikiReturn(twoslash)
-        twoslashCache?.write(twoslash, code, extension, options, meta)
-      }
-      return twoslash
+    if (typesCache) {
+      _twoslasher = ((code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta): TwoslashShikiReturn => {
+        const preprocessed = typesCache?.preprocess?.(code, lang, options, meta)
+        if (preprocessed !== undefined)
+          code = preprocessed
+
+        let twoslash = typesCache?.read(code, lang, options, meta)
+        if (!twoslash) {
+          twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, options)
+          twoslash = pickTwoslashShikiReturn(twoslash)
+          typesCache?.write(code, twoslash, lang, options, meta)
+        }
+        return twoslash
+      }) satisfies _CacheableTwoslashShikiFunction & TwoslashShikiFunction & TwoslashGenericFunction
+
+      typesCache.init?.()
     }
-
-    twoslashCache?.init?.()
 
     return {
       preprocess(code) {
@@ -115,7 +121,7 @@ export function createTransformerFactory(
             if (include)
               includes.add(include, codeWithIncludes)
 
-            const twoslash = cacheableTwoslasher(codeWithIncludes, lang, twoslashOptions, this.meta)
+            const twoslash = (_twoslasher as _CacheableTwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions, this.meta)
             map.set(this.meta, twoslash)
             this.meta.twoslash = twoslash
             this.options.lang = twoslash.meta?.extension || lang
