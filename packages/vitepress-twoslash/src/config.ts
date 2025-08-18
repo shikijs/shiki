@@ -3,7 +3,7 @@ import type { ShikiTransformer } from 'shiki'
 import type { Plugin } from 'vite'
 import type { UserConfig } from 'vitepress'
 import { readFileSync } from 'node:fs'
-import { createTwoslashMdCache, FilePatcher } from './cache-md'
+import { createTwoslashMdCache } from './cache-md'
 import { resolveFenceSource, transformFenceSource } from './fence-source'
 
 export function createTwoslashConfig(): {
@@ -33,9 +33,7 @@ export function createTwoslashConfig(): {
   }
 
   // provide twoslash cache reader and writer
-  const patcher = new FilePatcher()
-
-  const twoslashCache = createTwoslashMdCache(patcher)
+  const { twoslashCache, patcher } = createTwoslashMdCache()
 
   // patch magic files changes after transform
   const post: Plugin = {

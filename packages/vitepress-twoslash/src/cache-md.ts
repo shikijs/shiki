@@ -22,7 +22,12 @@ declare module '@shikijs/core' {
   }
 }
 
-export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache {
+export function createTwoslashMdCache(): {
+  twoslashCache: TwoslashTypesCache
+  patcher: FilePatcher
+} {
+  const patcher = new FilePatcher()
+
   const optionsHashCache = new WeakMap<TwoslashExecuteOptions, string>()
   function getOptionsHash(options: TwoslashExecuteOptions = {}): string {
     let hash = optionsHashCache.get(options)
@@ -48,7 +53,6 @@ export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache 
   }
 
   function resolveCodePayload(cache: string): TwoslashCodePayload | null {
-    // TODO: verify version
     try {
       const payload = JSON.parse(cache) as TwoslashCodePayload
       if (payload.version === 1) {
@@ -78,7 +82,7 @@ export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache 
     }
   }
 
-  return {
+  const twoslashCache: TwoslashTypesCache = {
     preprocess(code, lang, options, meta) {
       let rawCache = ''
       let cacheString = ''
@@ -113,6 +117,8 @@ export function createTwoslashMdCache(patcher: FilePatcher): TwoslashTypesCache 
       meta.__patch?.(cacheStr)
     },
   }
+
+  return { twoslashCache, patcher }
 }
 
 export class FilePatcher {
