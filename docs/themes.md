@@ -15,7 +15,6 @@ For loading your custom themes, please reference to [this guide](/guide/load-the
 You can set theme to `none` to bypass highlighting. This is useful as the fallback when you receive user specified theme names that are not available. For example:
 
 ```ts twoslash theme:none
-// @cache: {"version":1,"hash":"86ec614e5e60566b55ed222e8e581ca015d4e3a6c7f2bd3716fca6224c3c0fda","twoslash":{"nodes":[{"type":"hover","text":"(alias) const codeToHtml: (code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>) => Promise<string>\nimport codeToHtml","start":9,"length":10,"target":"codeToHtml","line":0,"character":9},{"type":"hover","text":"const html: Promise<string>","start":42,"length":4,"target":"html","line":2,"character":6},{"type":"hover","text":"(alias) codeToHtml(code: string, options: CodeToHastOptions<BundledLanguage, BundledTheme>): Promise<string>\nimport codeToHtml","start":49,"length":10,"target":"codeToHtml","line":2,"character":13},{"type":"hover","text":"(property) lang: \"javascript\"","start":94,"length":4,"target":"lang","line":3,"character":2},{"type":"hover","text":"(property) CodeOptionsSingleTheme<BundledTheme>.theme: ThemeRegistrationAny | StringLiteralUnion<BundledTheme, string>","start":116,"length":5,"target":"theme","line":4,"character":2}],"code":"import { codeToHtml } from 'shiki'\n\nconst html = codeToHtml('console.log(\"Hello World\")', {\n  lang: 'javascript',\n  theme: 'none', // [!code hl]\n})","meta":{"extension":"ts"}}}
 import { codeToHtml } from 'shiki'
 
 const html = codeToHtml('console.log("Hello World")', {
