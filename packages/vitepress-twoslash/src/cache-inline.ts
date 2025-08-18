@@ -1,6 +1,6 @@
 import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
 import type { TwoslashExecuteOptions } from 'twoslash'
-import type { FenceSource } from './fence-source'
+import type { FenceSourceMap } from './fence-source-map'
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import LZString from 'lz-string'
@@ -23,7 +23,7 @@ declare module '@shikijs/core' {
   }
 }
 
-export function createTwoslashMdCache({ prune }: {
+export function createInlineTypesCache({ prune }: {
   prune?: boolean
 } = {}): {
   twoslashCache: TwoslashTypesCache
@@ -45,7 +45,7 @@ export function createTwoslashMdCache({ prune }: {
     return sha256Hash(`${getOptionsHash(options)}:${lang}:${code}`)
   }
 
-  function generateCodeCache(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
+  function stringifyCachePayload(data: TwoslashShikiReturn, code: string, lang: string, options?: TwoslashExecuteOptions): string {
     const hash = cacheHash(code, lang, options)
     const payload: TwoslashCachePayload = {
       v: 1,
@@ -55,7 +55,7 @@ export function createTwoslashMdCache({ prune }: {
     return JSON.stringify(payload)
   }
 
-  function resolveCodePayload(cache: string): {
+  function resolveCachePayload(cache: string): {
     payload: TwoslashCachePayload
     twoslash: () => TwoslashShikiReturn | null
   } | null {
@@ -81,7 +81,7 @@ export function createTwoslashMdCache({ prune }: {
     return null
   }
 
-  function resolveSourcePatcher(source: FenceSource, search?: string): (newCache: string) => void {
+  function resolveSourcePatcher(source: FenceSourceMap, search?: string): (newCache: string) => void {
     const file = patcher.load(source.path)
     const range: { from: number, to?: number } = { from: source.from }
     let linebreak = true
@@ -120,7 +120,7 @@ export function createTwoslashMdCache({ prune }: {
           rawCache = full
         }
         else {
-          console.warn('ignore duplicate inline cache:', meta.source?.path)
+          console.warn('ignore duplicate inline cache:', meta.sourceMap?.path)
         }
 
         // replace all occurrences
@@ -129,7 +129,7 @@ export function createTwoslashMdCache({ prune }: {
 
       // resolve cache from string
       if (cacheString) {
-        const cache = resolveCodePayload(cacheString)
+        const cache = resolveCachePayload(cacheString)
         if (cache?.payload.hash === cacheHash(code, lang, options)) {
           const twoslash = cache.twoslash()
           if (twoslash)
@@ -137,8 +137,8 @@ export function createTwoslashMdCache({ prune }: {
         }
       }
 
-      if (meta.source)
-        meta.__patch = resolveSourcePatcher(meta.source, rawCache)
+      if (meta.sourceMap)
+        meta.__patch = resolveSourcePatcher(meta.sourceMap, rawCache)
 
       return code
     },
@@ -153,7 +153,7 @@ export function createTwoslashMdCache({ prune }: {
         meta.__patch?.('')
         return
       }
-      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${generateCodeCache(data, code, lang, options)}`
+      const cacheStr = `// ${CODE_INLINE_CACHE_KEY}: ${stringifyCachePayload(data, code, lang, options)}`
       meta.__patch?.(cacheStr)
     },
   }

@@ -3,37 +3,39 @@ import type { ShikiTransformer } from 'shiki'
 import type { Plugin } from 'vite'
 import type { UserConfig } from 'vitepress'
 import { readFileSync } from 'node:fs'
-import { createTwoslashMdCache } from './cache-md'
-import { resolveFenceSource, transformFenceSource } from './fence-source'
+import { createInlineTypesCache } from './cache-inline'
+import { createFenceSourceMap } from './fence-source-map'
 
 export function createTwoslashConfig(): {
   withTwoslash: (config: UserConfig) => UserConfig
   twoslashCache: TwoslashTypesCache
 } {
-  // inject info to all fences in markdown file on load
+  const { inject: injectFenceSourceMap, extract: extractFenceSourceMap } = createFenceSourceMap()
+
+  // inject source map to all fences on load
   const pre: Plugin = {
     name: 'vitepress-twoslash:fence-source',
     enforce: 'pre',
     load(id) {
       if (id.endsWith('.md')) {
         const code = readFileSync(id, 'utf-8')
-        return transformFenceSource(code, id)
+        return injectFenceSourceMap(code, id)
       }
     },
   }
 
-  // extract source info from fence
+  // extract and remove source map from fence
   const transformerFenceInfo: ShikiTransformer = {
     name: '@shikijs/vitepress-twoslash-fence',
     preprocess(code) {
-      const info = resolveFenceSource(code)
-      this.meta.source = info.source
-      return info.code
+      const { code: transformedCode, sourceMap } = extractFenceSourceMap(code)
+      this.meta.sourceMap = sourceMap
+      return transformedCode
     },
   }
 
   // provide twoslash cache reader and writer
-  const { twoslashCache, patcher } = createTwoslashMdCache()
+  const { twoslashCache, patcher } = createInlineTypesCache()
 
   // patch magic files changes after transform
   const post: Plugin = {
