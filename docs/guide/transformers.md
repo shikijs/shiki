@@ -84,15 +84,14 @@ For compatibility or fine-grained control, it may be necessary to enforce the or
 
 Example:
 
-```ts
+```ts twoslash
 import type { ShikiTransformer } from 'shiki'
 
 const customTransformer: ShikiTransformer = {
   name: 'my-transformer',
   enforce: 'pre',
-  transform(code, options) {
-    // your transform logic
-    return code
+  code(node) {
+    // ...
   },
 }
 ```
