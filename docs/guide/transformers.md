@@ -73,3 +73,25 @@ You can access the raw meta using:
 this.options.meta
 // => { __raw: 'foo=bar baz-qux="qu ux"' }
 ```
+
+## Enforcing Transformer Ordering
+
+For compatibility or fine-grained control, it may be necessary to enforce the order of a Shiki transformer. You can control the position of a transformer with the `enforce` modifier:
+
+- `pre`: invoked before normal transformers
+- default: invoked as a normal transformers
+- `post`: invoked after normal transformers
+
+Example:
+
+```ts twoslash
+import type { ShikiTransformer } from 'shiki'
+
+const customTransformer: ShikiTransformer = {
+  name: 'my-transformer',
+  enforce: 'pre',
+  code(node) {
+    // ...
+  },
+}
+```
