@@ -11,7 +11,6 @@ export function getTransformers(options: TransformerOptions): ShikiTransformer[]
     ...transformers.pre,
     ...transformers.normal,
     ...transformers.post,
-    // TODO: sort builtInTransformers if needed
     ...builtInTransformers,
   ]
 }
