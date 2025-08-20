@@ -21,12 +21,12 @@ export function createFenceSourceMap(): {
   inject: (code: string, path?: string) => { code: string }
   extract: (code: string) => { code: string, sourceMap: FenceSourceMap | null }
 } {
-  const FENCE_SOURCE_PREFIX = `__VPTS__${Math.random().toString(36).slice(2)}`
-  const FENCE_SOURCE_REGEX = new RegExp(`^${FENCE_SOURCE_PREFIX}:(.*)\n`, 'm')
+  const FENCE_SOURCE_WRAP = `<fsm-${Math.random().toString(36).slice(2)}>`
+  const FENCE_SOURCE_REGEX = new RegExp(`${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}`)
 
   function stringifyFenceSourceMap(source: FenceSourceMap): string {
     const data = JSON.stringify(source)
-    return `${FENCE_SOURCE_PREFIX}:${data}`
+    return `${FENCE_SOURCE_WRAP}${data}${FENCE_SOURCE_WRAP}`
   }
 
   function inject(code: string, path: string = ''): { code: string } {
@@ -50,7 +50,7 @@ export function createFenceSourceMap(): {
         const codeEnd = pos[token.map[1] - 1].from
 
         const payload: FenceSourceMap = { path, from: codeStart, to: codeEnd }
-        s.appendRight(codeStart, `${stringifyFenceSourceMap(payload)}\n`)
+        s.appendRight(codeStart, stringifyFenceSourceMap(payload))
       }
     }
 
