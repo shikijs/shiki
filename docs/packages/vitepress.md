@@ -160,3 +160,54 @@ export default defineConfig({
   }
 })
 ```
+
+### Inline Cache (experimental)
+
+You can enable inline caching for the generated types. The `@twoslash-cache: ...` will auto insert into your fenced code block during development and build time.
+
+````md [./your-file.md]{2}
+```ts twoslash
+// @twoslash-cache: [auto generated]
+const a: string = 'foo'
+```
+````
+
+To enable the inline cache in your [`.vitepress/config.ts`](https://vitepress.dev/reference/site-config), please use the config wrapper created by `createTwoslashWithInlineCache`.
+
+```ts [.vitepress/config.ts]
+import { createTwoslashWithInlineCache } from '@shikijs/vitepress-twoslash/cache-inline' // [!code hl]
+import { defineConfig } from 'vitepress'
+
+const withTwoslashInlineCache = createTwoslashWithInlineCache({ // [!code hl]
+  // ... config of transformerTwoslash // [!code hl]
+}) // [!code hl]
+
+export default withTwoslashInlineCache( // [!code hl]
+  defineConfig({
+    markdown: {
+      codeTransformers: [
+        // move config to the `createTwoslashWithInlineCache()` // [!code error]
+        // transformerTwoslash({ ... }) // [!code error]
+      ]
+    }
+  })
+) // [!code hl]
+```
+
+#### Force re-generate inline cache
+
+To force re-generate the inline cache and ignore the existing cache, you can use the `TWOSLASH_INLINE_CACHE_IGNORE` environment variable when running the `vitepress` cli.
+
+```bash
+TWOSLASH_INLINE_CACHE_IGNORE=1 vitepress dev
+TWOSLASH_INLINE_CACHE_IGNORE=1 vitepress build
+```
+
+#### Remove inline cache
+
+To remove all inline cache, you can use the `TWOSLASH_INLINE_CACHE_REMOVE` environment variable when running the `vitepress` cli.
+
+```bash
+TWOSLASH_INLINE_CACHE_REMOVE=1 vitepress dev
+TWOSLASH_INLINE_CACHE_REMOVE=1 vitepress build
+```
