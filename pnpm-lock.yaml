@@ -155,6 +155,9 @@ catalogs:
     lz-string:
       specifier: ^1.5.0
       version: 1.5.0
+    magic-string:
+      specifier: ^0.30.17
+      version: 0.30.17
     markdown-it:
       specifier: ^14.1.0
       version: 14.1.0
@@ -173,6 +176,9 @@ catalogs:
     monaco-editor-core:
       specifier: ^0.52.2
       version: 0.52.2
+    ohash:
+      specifier: ^2.0.11
+      version: 2.0.11
     rehype-raw:
       specifier: ^7.0.0
       version: 7.0.0
@@ -223,9 +229,6 @@ catalogs:
     js-yaml:
       specifier: ^4.1.0
       version: 4.1.0
-    ohash:
-      specifier: ^2.0.11
-      version: 2.0.11
     vitest:
       specifier: ^3.2.4
       version: 3.2.4
@@ -394,7 +397,7 @@ importers:
         specifier: catalog:integrations
         version: 13.2.0
       ohash:
-        specifier: catalog:testing
+        specifier: catalog:integrations
         version: 2.0.11
       pnpm:
         specifier: catalog:cli
@@ -787,6 +790,12 @@ importers:
       lz-string:
         specifier: catalog:integrations
         version: 1.5.0
+      magic-string:
+        specifier: catalog:integrations
+        version: 0.30.17
+      markdown-it:
+        specifier: ^14.1.0
+        version: 14.1.0
       mdast-util-from-markdown:
         specifier: catalog:integrations
         version: 2.0.2
@@ -796,6 +805,9 @@ importers:
       mdast-util-to-hast:
         specifier: catalog:integrations
         version: 13.2.0
+      ohash:
+        specifier: catalog:integrations
+        version: 2.0.11
       shiki:
         specifier: workspace:*
         version: link:../shiki
