@@ -150,6 +150,14 @@ export function createInlineTypesCache({ prune, ignoreCache }: {
       return code
     },
     read(code, lang, options, meta) {
+      if (meta?.__cache) {
+        // eslint-disable-next-line no-console
+        console.log('DEBUG: hit cache')
+      }
+      else {
+        // eslint-disable-next-line no-console
+        console.log('DEBUG: miss cache')
+      }
       return meta?.__cache ?? null
     },
     write(code, data, lang, options, meta) {
