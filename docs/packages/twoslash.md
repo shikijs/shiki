@@ -30,6 +30,10 @@ pnpm add -D @shikijs/twoslash
 bun add -D @shikijs/twoslash
 ```
 
+```sh [deno]
+deno add npm:@shikijs/twoslash
+```
+
 :::
 
 This package is **a transformer addon** to Shiki. This means that for every integration that supports passing Shiki transformers, you can use this package.

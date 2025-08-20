@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { BundledTheme } from 'shiki'
 import { ref } from 'vue'
 import { usePlayground } from '../store/playground'
 
@@ -6,7 +7,7 @@ const play = usePlayground()
 const showModel = ref(false)
 
 function preview(id: string) {
-  play.theme = id
+  play.theme = id as BundledTheme
   showModel.value = true
 }
 </script>
@@ -22,15 +23,17 @@ function preview(id: string) {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="l in play.allThemes" :key="l.id">
-          <td>{{ l.displayName }}</td>
-          <td><code>{{ l.id }}</code></td>
+        <tr v-for="l in play.allThemes" :key="l.name">
+          <td>
+            {{ l.displayName }} <FundingButton :name="`${l.displayName} theme`" :funding="l.funding" />
+          </td>
+          <td><code>{{ l.name }}</code></td>
           <td>
             <div flex>
               <button
                 title="Preview Example"
                 ma text-lg
-                @click="preview(l.id)"
+                @click="preview(l.name)"
               >
                 <div i-carbon:code />
               </button>

@@ -28,6 +28,10 @@ pnpm add -D @shikijs/monaco
 bun add -D @shikijs/monaco
 ```
 
+```sh [deno]
+deno add npm:@shikijs/monaco
+```
+
 :::
 
 ```ts

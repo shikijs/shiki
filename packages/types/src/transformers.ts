@@ -51,6 +51,17 @@ export interface ShikiTransformer {
    */
   name?: string
   /**
+   * Enforce plugin invocation tier similar to webpack loaders. Hooks ordering
+   * is still subject to the `order` property in the hook object.
+   *
+   * Plugin invocation order:
+   * - `enforce: 'pre'` plugins
+   * - normal plugins
+   * - `enforce: 'post'` plugins
+   * - shiki post plugins
+   */
+  enforce?: 'pre' | 'post'
+  /**
    * Transform the raw input code before passing to the highlighter.
    */
   preprocess?: (this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions) => string | void

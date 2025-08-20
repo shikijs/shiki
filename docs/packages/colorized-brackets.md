@@ -28,6 +28,10 @@ pnpm add -D @shikijs/colorized-brackets
 bun add -D @shikijs/colorized-brackets
 ```
 
+```sh [deno]
+deno add npm:@shikijs/colorized-brackets
+```
+
 :::
 
 ## Usage

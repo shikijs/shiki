@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed, nextTick, ref } from 'vue'
 import { usePlayground } from '../store/playground'
+import FundingButton from './FundingButton.vue'
 
 const play = usePlayground()
-const currentThemeType = computed(() => play.allThemes.find(i => i.id === play.theme)?.type || 'inherit')
+const currentLang = computed(() => play.allLanguages.find(i => i.name === play.lang))
+const currentTheme = computed(() => play.allThemes.find(i => i.name === play.theme))
 
 const textAreaRef = ref<HTMLDivElement>()
 const highlightContainerRef = ref<HTMLSpanElement>()
@@ -28,27 +30,35 @@ function onInput() {
 <template>
   <div
     class="language-ts vp-adaptive-theme transition-none! mini-playground" shadow
-    :style="[play.preStyle, { colorScheme: currentThemeType }]"
+    :style="[play.preStyle, { colorScheme: currentTheme?.type || 'inherit' }]"
   >
-    <div sticky z-12 p2 px3 pl5 flex="~ gap-1 items-center" left-0 top-0 right-0 border="b-solid gray/5" bg-inherit>
-      <div i-carbon:chevron-down op50 />
-      <select v-model="play.lang" font-mono :style="play.preStyle">
-        <option v-for="lang in play.allLanguages" :key="lang.id" :value="lang.id">
-          {{ lang.name }}
-        </option>
-      </select>
-      <div i-carbon:chevron-down op50 />
-      <select v-model="play.theme" font-mono :style="play.preStyle">
-        <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.id" :value="theme.id">
-          {{ theme.displayName }}
-        </option>
-        <option disabled>
-          ──────────
-        </option>
-        <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.id" :value="theme.id">
-          {{ theme.displayName }}
-        </option>
-      </select>
+    <div sticky z-12 p2 px3 pl5 flex="~ gap-4 items-center" left-0 top-0 right-0 border="b-solid gray/5" bg-inherit>
+      <label relative flex="~ gap-1 items-center" justify-start class="min-w-[8em]">
+        <div i-carbon:chevron-down op50 />
+        <span font-mono text-xs>{{ currentLang?.name }}</span>
+        <select v-model="play.lang" font-mono :style="play.preStyle" absolute inset-0 min-w-0 op0>
+          <option v-for="lang in play.allLanguages" :key="lang.name" :value="lang.name">
+            {{ lang.name }}
+          </option>
+        </select>
+        <FundingButton :name="`${currentLang?.displayName} grammar`" :funding="currentLang?.funding" />
+      </label>
+      <label relative flex="~ gap-1 items-center" justify-start class="min-w-[8em]">
+        <div i-carbon:chevron-down op50 />
+        <span font-mono text-xs>{{ currentTheme?.displayName }}</span>
+        <select v-model="play.theme" font-mono :style="play.preStyle" absolute inset-0 min-w-0 op0>
+          <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.name" :value="theme.name">
+            {{ theme.displayName }}
+          </option>
+          <option disabled>
+            ──────────
+          </option>
+          <option v-for="theme in play.allThemes.filter(i => i.type === 'dark')" :key="theme.name" :value="theme.name">
+            {{ theme.displayName }}
+          </option>
+        </select>
+        <FundingButton :name="`${currentTheme?.displayName} theme`" :funding="currentTheme?.funding" />
+      </label>
       <div flex-auto />
       <div
         i-svg-spinners-3-dots-fade
@@ -83,9 +93,7 @@ function onInput() {
 .mini-playground select {
   background: transparent;
   color: inherit;
-  min-width: 8em;
   padding: 0px !important;
-  position: relative;
 }
 .mini-playground select:focus {
   outline: none;
