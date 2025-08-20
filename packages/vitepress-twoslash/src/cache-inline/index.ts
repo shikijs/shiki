@@ -13,7 +13,7 @@ export function createTwoslashWithInlineCache(options: VitePressPluginTwoslashOp
 
     // provide twoslash cache reader and writer
     const { typesCache, patcher } = createInlineTypesCache({
-      prune: isEnabledEnv('TWOSLASH_INLINE_CACHE_PRUNE') === true,
+      remove: isEnabledEnv('TWOSLASH_INLINE_CACHE_REMOVE') === true,
       ignoreCache: isEnabledEnv('TWOSLASH_INLINE_CACHE_IGNORE') === true,
     })
 
