@@ -3,12 +3,19 @@ import type { UserConfig } from 'vitepress'
 import type { VitePressPluginTwoslashOptions } from '../types'
 import { transformerTwoslash } from '..'
 import { createInlineTypesCache } from './cache-inline'
+import { isEnabledEnv } from './env'
 import { withFenceSourceMap } from './fence-source-map'
 
 export function createTwoslashWithInlineCache(options: VitePressPluginTwoslashOptions = {}): (config: UserConfig) => UserConfig {
   return function (config: UserConfig): UserConfig {
+    if (isEnabledEnv('TWOSLASH_INLINE_CACHE') === false)
+      return config
+
     // provide twoslash cache reader and writer
-    const { typesCache, patcher } = createInlineTypesCache()
+    const { typesCache, patcher } = createInlineTypesCache({
+      prune: isEnabledEnv('TWOSLASH_INLINE_CACHE_PRUNE') === true,
+      ignoreCache: isEnabledEnv('TWOSLASH_INLINE_CACHE_IGNORE') === true,
+    })
 
     const transformer = transformerTwoslash({ ...options, typesCache })
 
