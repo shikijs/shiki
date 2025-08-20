@@ -7,8 +7,8 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
-import { createTwoslashInlineCache } from '../../packages/vitepress-twoslash/src/cache-inline'
-import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
+import { createTwoslashWithInlineCache } from '../../packages/vitepress-twoslash/src/cache-inline'
+import { defaultHoverInfoProcessor } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
@@ -71,7 +71,14 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   },
 ]
 
-const { withTwoslashInlineCache, typesCache } = createTwoslashInlineCache()
+const withTwoslashInlineCache = createTwoslashWithInlineCache({
+  // errorRendering: 'hover',
+  processHoverInfo(info) {
+    return defaultHoverInfoProcessor(info)
+    // Remove shiki_core namespace
+      .replace(/_shikijs_core\w*\./g, '')
+  },
+})
 
 // https://vitepress.dev/reference/site-config
 export default withTwoslashInlineCache(withMermaid(defineConfig({
@@ -135,15 +142,6 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
           return code
         },
       },
-      transformerTwoslash({
-        // errorRendering: 'hover',
-        processHoverInfo(info) {
-          return defaultHoverInfoProcessor(info)
-            // Remove shiki_core namespace
-            .replace(/_shikijs_core\w*\./g, '')
-        },
-        typesCache,
-      }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],

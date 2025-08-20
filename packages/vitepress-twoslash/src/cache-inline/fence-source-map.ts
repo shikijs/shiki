@@ -1,3 +1,7 @@
+import type { ShikiTransformer } from 'shiki'
+import type { Plugin } from 'vite'
+import type { UserConfig } from 'vitepress'
+import { readFileSync } from 'node:fs'
 import MagicString from 'magic-string'
 import MarkdownIt from 'markdown-it'
 
@@ -75,6 +79,43 @@ export function createFenceSourceMap(): {
     inject,
     extract,
   }
+}
+
+export function withFenceSourceMap(config: UserConfig): UserConfig {
+  const { inject: injectFenceSourceMap, extract: extractFenceSourceMap } = createFenceSourceMap()
+
+  // inject source map to all fences on load
+  const InjectPlugin: Plugin = {
+    name: 'vitepress-twoslash:inject-fence-source-map',
+    enforce: 'pre',
+    load(id) {
+      if (id.endsWith('.md')) {
+        const code = readFileSync(id, 'utf-8')
+        return injectFenceSourceMap(code, id)
+      }
+    },
+  }
+
+  // TODO: enforce: 'pre',
+  // extract and remove source map from fence
+  const transformer: ShikiTransformer = {
+    name: 'vitepress-twoslash:extract-fence-source-map',
+    preprocess(code) {
+      const { code: transformedCode, sourceMap } = extractFenceSourceMap(code)
+      this.meta.sourceMap = sourceMap
+      return transformedCode
+    },
+  }
+
+  // config markdown code transformers
+  const codeTransformers = (config.markdown ??= {}).codeTransformers ??= []
+  codeTransformers.unshift(transformer)
+
+  // config vite plugins
+  const plugins = (config.vite ??= {}).plugins ??= []
+  plugins.push(InjectPlugin)
+
+  return config
 }
 
 function getLineStartPositions(text: string): { from: number, to: number }[] {
