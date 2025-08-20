@@ -75,7 +75,7 @@ const withTwoslashInlineCache = createTwoslashWithInlineCache({
   // errorRendering: 'hover',
   processHoverInfo(info) {
     return defaultHoverInfoProcessor(info)
-    // Remove shiki_core namespace
+      // Remove shiki_core namespace
       .replace(/_shikijs_core\w*\./g, '')
   },
 })
