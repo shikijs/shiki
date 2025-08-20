@@ -96,10 +96,10 @@ export function withFenceSourceMap(config: UserConfig): UserConfig {
     },
   }
 
-  // TODO: enforce: 'pre',
   // extract and remove source map from fence
   const transformer: ShikiTransformer = {
     name: 'vitepress-twoslash:extract-fence-source-map',
+    enforce: 'pre',
     preprocess(code) {
       const { code: transformedCode, sourceMap } = extractFenceSourceMap(code)
       this.meta.sourceMap = sourceMap
