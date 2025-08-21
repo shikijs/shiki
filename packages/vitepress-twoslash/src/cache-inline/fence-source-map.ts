@@ -22,11 +22,11 @@ export function createFenceSourceMap(): {
   extract: (code: string) => { code: string, sourceMap: FenceSourceMap | null }
 } {
   const FENCE_SOURCE_WRAP = `<fsm-${Math.random().toString(36).slice(2)}>`
-  const FENCE_SOURCE_REGEX = new RegExp(`${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}`)
+  const FENCE_SOURCE_REGEX = new RegExp(`\/\/ ${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}\\n`)
 
   function stringifyFenceSourceMap(source: FenceSourceMap): string {
     const data = JSON.stringify(source)
-    return `${FENCE_SOURCE_WRAP}${data}${FENCE_SOURCE_WRAP}`
+    return `// ${FENCE_SOURCE_WRAP}${data}${FENCE_SOURCE_WRAP}\n`
   }
 
   function inject(code: string, path: string = ''): { code: string } {
