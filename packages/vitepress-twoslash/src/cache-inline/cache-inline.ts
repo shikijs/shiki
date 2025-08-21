@@ -126,7 +126,7 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
           rawCache = full
         }
         else {
-          console.warn('ignore duplicate inline cache:', meta?.sourceMap?.path)
+          // ignore duplicate inline cache (maybe using @include)
         }
 
         // replace all occurrences
