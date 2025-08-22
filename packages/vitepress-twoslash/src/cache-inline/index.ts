@@ -2,22 +2,24 @@ import type { ShikiTransformer } from 'shiki'
 import type { Plugin } from 'vite'
 import type { UserConfig } from 'vitepress'
 import type { VitePressPluginTwoslashOptions } from '../types'
-import type { MarkdownFenceSourceMapCodec } from './markdown-fence'
+import type { MarkdownFenceSourceMapCodec, MarkdownFencesSourceMapper } from './markdown-fence'
 import { readFileSync } from 'node:fs'
 import { transformerTwoslash } from '..'
 import { createInlineTypesCache } from './cache-inline'
 import { isEnabledEnv } from './env'
-import { markdownItLocator } from './locator-markdown-it'
 import { createMarkdownFenceSourceCodec } from './markdown-fence'
+import { markdownItMapper } from './markdown-it-mapper'
 
 export interface TwoslashInlineCacheOptions {
+  sourceMapper?: MarkdownFencesSourceMapper
   sourceMapCodec?: MarkdownFenceSourceMapCodec
 }
 
 export function createTwoslashWithInlineCache(
   twoslashOptions: VitePressPluginTwoslashOptions = {},
   {
-    sourceMapCodec = createMarkdownFenceSourceCodec(markdownItLocator),
+    sourceMapper = markdownItMapper,
+    sourceMapCodec = createMarkdownFenceSourceCodec(sourceMapper),
   }: TwoslashInlineCacheOptions = {},
 ): (config: UserConfig) => UserConfig {
   return function (config: UserConfig): UserConfig {

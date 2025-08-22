@@ -1,11 +1,13 @@
-import type { MarkdownFenceRange, MarkdownFencesLocator } from './markdown-fence'
+import type { MarkdownFenceSourceMap, MarkdownFencesSourceMapper } from './markdown-fence'
 import MarkdownIt from 'markdown-it'
 
-export const markdownItLocator: MarkdownFencesLocator = function (code) {
+export const markdownItMapper: MarkdownFencesSourceMapper = function (code, path) {
   const md = new MarkdownIt()
   const result = md.parse(code, {})
   const pos = getLineStartPositions(code)
-  const ranges: MarkdownFenceRange[] = []
+
+  // create inject position map (key is insert position)
+  const injects = new Map<number, MarkdownFenceSourceMap>()
 
   for (const token of result) {
     if (token.type === 'fence') {
@@ -21,10 +23,11 @@ export const markdownItLocator: MarkdownFencesLocator = function (code) {
       // start of end codeblock mark
       const codeEnd = pos[token.map[1] - 1].from
 
-      ranges.push({ from: codeStart, to: codeEnd })
+      injects.set(codeStart, { path, from: codeStart, to: codeEnd })
     }
   }
-  return ranges
+
+  return injects
 }
 
 function getLineStartPositions(text: string): { from: number, to: number }[] {

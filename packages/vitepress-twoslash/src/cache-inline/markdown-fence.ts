@@ -1,13 +1,16 @@
-export interface MarkdownFenceRange {
+export interface MarkdownFenceSourceMap {
+  path: string
   from: number
   to: number
 }
 
-export interface MarkdownFenceSourceMap extends MarkdownFenceRange {
-  path: string
-}
-
-export type MarkdownFencesLocator = (code: string) => MarkdownFenceRange[]
+/**
+ * Maps markdown code to its source map positions.
+ * @param code markdown source
+ * @param path markdown file path
+ * @returns map of inject positions to source maps
+ */
+export type MarkdownFencesSourceMapper = (code: string, path: string) => Map<number, MarkdownFenceSourceMap>
 
 export interface MarkdownFenceSourceMapCodec {
   /**
@@ -26,7 +29,7 @@ export interface MarkdownFenceSourceMapCodec {
   extractFromFence: (code: string) => { code: string, sourceMap: MarkdownFenceSourceMap | null }
 }
 
-export function createMarkdownFenceSourceCodec(locator: MarkdownFencesLocator): MarkdownFenceSourceMapCodec {
+export function createMarkdownFenceSourceCodec(mapper: MarkdownFencesSourceMapper): MarkdownFenceSourceMapCodec {
   const FENCE_SOURCE_WRAP = `<fsm-${Math.random().toString(36).slice(2)}>`
   const FENCE_SOURCE_REGEX = new RegExp(`\/\/ ${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}\\n`)
 
@@ -36,12 +39,7 @@ export function createMarkdownFenceSourceCodec(locator: MarkdownFencesLocator): 
   }
 
   function injectToMarkdown(code: string, path: string): string {
-    const ranges = locator(code)
-
-    // create inject position map (key is insert position)
-    const injects = new Map<number, MarkdownFenceSourceMap>()
-    for (const range of ranges)
-      injects.set(range.from, { ...range, path })
+    const injects = mapper(code, path)
 
     // start injection, process in descending order to preserve offsets
     let newCode = code
