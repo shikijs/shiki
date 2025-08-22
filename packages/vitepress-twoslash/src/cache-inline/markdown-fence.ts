@@ -9,16 +9,14 @@ export interface MarkdownFenceSourceMap extends MarkdownFenceRange {
 
 export type MarkdownFencesLocator = (code: string) => MarkdownFenceRange[]
 
-export type MarkdownInjectPosition = number
-
-export function createMarkdownFenceSourceCodec(): {
+export interface MarkdownFenceSourceMapCodec {
   /**
    * Injects source map data into the markdown source.
    * @param code markdown source
    * @param injects map of inject positions to source maps
    * @returns markdown source with injected source maps
    */
-  injectToMarkdown: (code: string, injects: Map<MarkdownInjectPosition, MarkdownFenceSourceMap>) => string
+  injectToMarkdown: (code: string, path: string) => string
 
   /**
    * Extract source map from fence code snippet.
@@ -26,7 +24,9 @@ export function createMarkdownFenceSourceCodec(): {
    * @returns extracted code and source map
    */
   extractFromFence: (code: string) => { code: string, sourceMap: MarkdownFenceSourceMap | null }
-} {
+}
+
+export function createMarkdownFenceSourceCodec(locator: MarkdownFencesLocator): MarkdownFenceSourceMapCodec {
   const FENCE_SOURCE_WRAP = `<fsm-${Math.random().toString(36).slice(2)}>`
   const FENCE_SOURCE_REGEX = new RegExp(`\/\/ ${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}\\n`)
 
@@ -35,12 +35,17 @@ export function createMarkdownFenceSourceCodec(): {
     return `// ${FENCE_SOURCE_WRAP}${data}${FENCE_SOURCE_WRAP}\n`
   }
 
-  function injectToMarkdown(code: string, injects: Map<number, MarkdownFenceSourceMap>): string {
+  function injectToMarkdown(code: string, path: string): string {
+    const ranges = locator(code)
+
+    // create inject position map (key is insert position)
+    const injects = new Map<number, MarkdownFenceSourceMap>()
+    for (const range of ranges)
+      injects.set(range.from, { ...range, path })
+
+    // start injection, process in descending order to preserve offsets
     let newCode = code
-
-    // process in descending order to preserve offsets
     const injectAts = Array.from(injects.keys()).sort((a, b) => b - a)
-
     for (const at of injectAts) {
       const sourceMap = injects.get(at)!
       const data = stringifyFenceSourceMap(sourceMap)

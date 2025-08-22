@@ -2,7 +2,7 @@ import type { ShikiTransformer } from 'shiki'
 import type { Plugin } from 'vite'
 import type { UserConfig } from 'vitepress'
 import type { VitePressPluginTwoslashOptions } from '../types'
-import type { MarkdownFencesLocator, MarkdownFenceSourceMap } from './markdown-fence'
+import type { MarkdownFenceSourceMapCodec } from './markdown-fence'
 import { readFileSync } from 'node:fs'
 import { transformerTwoslash } from '..'
 import { createInlineTypesCache } from './cache-inline'
@@ -11,13 +11,13 @@ import { markdownItLocator } from './locator-markdown-it'
 import { createMarkdownFenceSourceCodec } from './markdown-fence'
 
 export interface TwoslashInlineCacheOptions {
-  mdFencesLocator?: MarkdownFencesLocator
+  sourceMapCodec?: MarkdownFenceSourceMapCodec
 }
 
 export function createTwoslashWithInlineCache(
   twoslashOptions: VitePressPluginTwoslashOptions = {},
   {
-    mdFencesLocator = markdownItLocator,
+    sourceMapCodec = createMarkdownFenceSourceCodec(markdownItLocator),
   }: TwoslashInlineCacheOptions = {},
 ): (config: UserConfig) => UserConfig {
   return function (config: UserConfig): UserConfig {
@@ -44,7 +44,7 @@ export function createTwoslashWithInlineCache(
     }
 
     // add source map to markdown fence
-    config = withFenceSourceMap(config, mdFencesLocator)
+    config = withFenceSourceMap(config, sourceMapCodec)
 
     // config markdown code transformers
     const codeTransformers = (config.markdown ??= {}).codeTransformers ??= []
@@ -58,9 +58,7 @@ export function createTwoslashWithInlineCache(
   }
 }
 
-function withFenceSourceMap(config: UserConfig, locator: MarkdownFencesLocator): UserConfig {
-  const codec = createMarkdownFenceSourceCodec()
-
+function withFenceSourceMap(config: UserConfig, codec: MarkdownFenceSourceMapCodec): UserConfig {
   // inject source map to all fences on load
   const InjectPlugin: Plugin = {
     name: 'vitepress-twoslash:inject-fence-source-map',
@@ -68,13 +66,9 @@ function withFenceSourceMap(config: UserConfig, locator: MarkdownFencesLocator):
     load(id) {
       if (id.endsWith('.md')) {
         const code = readFileSync(id, 'utf-8')
-        const ranges = locator(code)
-        const injects = new Map<number, MarkdownFenceSourceMap>()
-        for (const range of ranges)
-          injects.set(range.from, { ...range, path: id })
 
         return {
-          code: codec.injectToMarkdown(code, injects),
+          code: codec.injectToMarkdown(code, id),
         }
       }
     },
