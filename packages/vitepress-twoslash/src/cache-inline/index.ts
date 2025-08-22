@@ -74,7 +74,7 @@ function withFenceSourceMap(config: UserConfig, locator: MarkdownFencesLocator):
           injects.set(range.from, { ...range, path: id })
 
         return {
-          code: codec.inject(code, injects),
+          code: codec.injectToMarkdown(code, injects),
         }
       }
     },
@@ -85,7 +85,7 @@ function withFenceSourceMap(config: UserConfig, locator: MarkdownFencesLocator):
     name: 'vitepress-twoslash:extract-fence-source-map',
     enforce: 'pre',
     preprocess(code) {
-      const { code: transformedCode, sourceMap } = codec.extract(code)
+      const { code: transformedCode, sourceMap } = codec.extractFromFence(code)
       this.meta.sourceMap = sourceMap
       return transformedCode
     },

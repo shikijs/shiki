@@ -12,8 +12,20 @@ export type MarkdownFencesLocator = (code: string) => MarkdownFenceRange[]
 export type MarkdownInjectPosition = number
 
 export function createMarkdownFenceSourceCodec(): {
-  inject: (code: string, injects: Map<MarkdownInjectPosition, MarkdownFenceSourceMap>) => string
-  extract: (code: string) => { code: string, sourceMap: MarkdownFenceSourceMap | null }
+  /**
+   * Injects source map data into the markdown source.
+   * @param code markdown source
+   * @param injects map of inject positions to source maps
+   * @returns markdown source with injected source maps
+   */
+  injectToMarkdown: (code: string, injects: Map<MarkdownInjectPosition, MarkdownFenceSourceMap>) => string
+
+  /**
+   * Extract source map from fence code snippet.
+   * @param code fence code snippet
+   * @returns extracted code and source map
+   */
+  extractFromFence: (code: string) => { code: string, sourceMap: MarkdownFenceSourceMap | null }
 } {
   const FENCE_SOURCE_WRAP = `<fsm-${Math.random().toString(36).slice(2)}>`
   const FENCE_SOURCE_REGEX = new RegExp(`\/\/ ${FENCE_SOURCE_WRAP}(.+?)${FENCE_SOURCE_WRAP}\\n`)
@@ -23,13 +35,7 @@ export function createMarkdownFenceSourceCodec(): {
     return `// ${FENCE_SOURCE_WRAP}${data}${FENCE_SOURCE_WRAP}\n`
   }
 
-  /**
-   * Injects source map data into the markdown source.
-   * @param code markdown source
-   * @param injects map of inject positions to source maps
-   * @returns markdown source with injected source maps
-   */
-  function inject(code: string, injects: Map<number, MarkdownFenceSourceMap>): string {
+  function injectToMarkdown(code: string, injects: Map<number, MarkdownFenceSourceMap>): string {
     let newCode = code
 
     // process in descending order to preserve offsets
@@ -46,12 +52,7 @@ export function createMarkdownFenceSourceCodec(): {
     return newCode
   }
 
-  /**
-   * Extract source map from fence code snippet.
-   * @param code fence code snippet
-   * @returns extracted code and source map
-   */
-  function extract(code: string): { code: string, sourceMap: MarkdownFenceSourceMap | null } {
+  function extractFromFence(code: string): { code: string, sourceMap: MarkdownFenceSourceMap | null } {
     let sourceMap: MarkdownFenceSourceMap | null = null
 
     try {
@@ -68,7 +69,7 @@ export function createMarkdownFenceSourceCodec(): {
   }
 
   return {
-    inject,
-    extract,
+    injectToMarkdown,
+    extractFromFence,
   }
 }
