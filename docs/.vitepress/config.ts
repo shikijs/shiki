@@ -7,8 +7,8 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
 import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
-import { createFileSystemTypesCache } from '../../packages/vitepress-twoslash/src/cache-fs'
-import { defaultHoverInfoProcessor, transformerTwoslash } from '../../packages/vitepress-twoslash/src/index'
+import { createTwoslashWithInlineCache } from '../../packages/vitepress-twoslash/src/cache-inline'
+import { defaultHoverInfoProcessor } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
 const GUIDES: DefaultTheme.NavItemWithLink[] = [
@@ -71,8 +71,17 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   },
 ]
 
+const withTwoslashInlineCache = createTwoslashWithInlineCache({
+  // errorRendering: 'hover',
+  processHoverInfo(info) {
+    return defaultHoverInfoProcessor(info)
+      // Remove shiki_core namespace
+      .replace(/_shikijs_core\w*\./g, '')
+  },
+})
+
 // https://vitepress.dev/reference/site-config
-export default withMermaid(defineConfig({
+export default withTwoslashInlineCache(withMermaid(defineConfig({
   title: 'Shiki',
   description: 'A beautiful and powerful syntax highlighter',
   markdown: {
@@ -133,15 +142,6 @@ export default withMermaid(defineConfig({
           return code
         },
       },
-      transformerTwoslash({
-        // errorRendering: 'hover',
-        processHoverInfo(info) {
-          return defaultHoverInfoProcessor(info)
-            // Remove shiki_core namespace
-            .replace(/_shikijs_core\w*\./g, '')
-        },
-        typesCache: createFileSystemTypesCache(),
-      }),
       transformerRemoveNotationEscape(),
       transformerColorizedBrackets({ explicitTrigger: true }),
     ],
@@ -242,4 +242,4 @@ export default withMermaid(defineConfig({
     ['meta', { name: 'twitter:image', content: 'https://shiki.style/og.png' }],
     ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
   ],
-}))
+})))
