@@ -85,8 +85,11 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
     return null
   }
 
-  function resolveSourcePatcher(source: MarkdownFenceSourceMap, search?: string): (newCache: string) => void {
+  function resolveSourcePatcher(source: MarkdownFenceSourceMap, search?: string): ((newCache: string) => void) | undefined {
     const file = patcher.load(source.path)
+    if (file === null)
+      return undefined
+
     const range: { from: number, to?: number } = { from: source.from }
     let linebreak = true
 
