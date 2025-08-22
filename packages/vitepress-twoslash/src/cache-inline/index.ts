@@ -4,7 +4,7 @@ import type { VitePressPluginTwoslashOptions } from '../types'
 import { transformerTwoslash } from '..'
 import { createInlineTypesCache } from './cache-inline'
 import { isEnabledEnv } from './env'
-import { withFenceSourceMap } from './fence-source-map'
+import { withFenceSourceMap } from './vitepress-fence-source-map'
 
 export function createTwoslashWithInlineCache(options: VitePressPluginTwoslashOptions = {}): (config: UserConfig) => UserConfig {
   return function (config: UserConfig): UserConfig {
