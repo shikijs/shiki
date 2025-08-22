@@ -1,6 +1,6 @@
 import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
 import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
-import type { FenceSourceMap } from './fence-source-map'
+import type { MarkdownFenceSourceMap } from './markdown-fence'
 import { createHash } from 'node:crypto'
 import LZString from 'lz-string'
 import { hash as createOHash } from 'ohash'
@@ -17,6 +17,7 @@ const CODE_INLINE_CACHE_REGEX = new RegExp(`// ${CODE_INLINE_CACHE_KEY}: (.*)(?:
 
 declare module '@shikijs/core' {
   interface ShikiTransformerContextMeta {
+    sourceMap?: MarkdownFenceSourceMap | null
     __cache?: TwoslashShikiReturn
     __patch?: (newCache: string) => void
   }
@@ -84,7 +85,7 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
     return null
   }
 
-  function resolveSourcePatcher(source: FenceSourceMap, search?: string): (newCache: string) => void {
+  function resolveSourcePatcher(source: MarkdownFenceSourceMap, search?: string): (newCache: string) => void {
     const file = patcher.load(source.path)
     const range: { from: number, to?: number } = { from: source.from }
     let linebreak = true
