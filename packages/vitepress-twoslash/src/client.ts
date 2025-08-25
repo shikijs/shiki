@@ -56,6 +56,8 @@ const TwoslashFloatingVue = {
           arrowOverflow: true,
           ...options.themes?.['twoslash-completion'] ?? {},
         },
+        /** @deprecated */
+        ...options.theme,
       },
     })
   },
