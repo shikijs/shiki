@@ -15,6 +15,9 @@ export interface TwoslashInlineCacheOptions {
   sourceMapCodec?: MarkdownFenceSourceMapCodec
 }
 
+/**
+ * @experimental This API is experimental and may be changed in the future.
+ */
 export function createTwoslashWithInlineCache(
   twoslashOptions: VitePressPluginTwoslashOptions = {},
   {
