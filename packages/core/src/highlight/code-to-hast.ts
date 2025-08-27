@@ -106,7 +106,7 @@ export function tokensToHast(
     type: 'element',
     tagName: 'pre',
     properties: {
-      class: `shiki ${options.themeName || ''}`,
+      className: `shiki ${options.themeName || ''}`,
       style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
       ...(tabindex !== false && tabindex != null)
         ? {
@@ -170,13 +170,17 @@ export function tokensToHast(
     let lineNode: Element = {
       type: 'element',
       tagName: 'span',
-      properties: { class: 'line' },
+      properties: { className: 'line' },
       children: [],
     }
 
     let col = 0
 
     for (const token of line) {
+      if (token.htmlAttrs?.class) {
+        token.htmlAttrs.className = token.htmlAttrs.class
+        delete token.htmlAttrs.class
+      }
       let tokenNode: Element = {
         type: 'element',
         tagName: 'span',
