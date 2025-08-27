@@ -6,6 +6,7 @@ export default defineBuildConfig({
     'src/index.ts',
     'src/client.ts',
     'src/cache-fs.ts',
+    'src/cache-inline/index.ts',
   ],
   declaration: 'node16',
   rollup: {
@@ -15,6 +16,7 @@ export default defineBuildConfig({
     'hast',
     '@shikijs/vitepress-twoslash',
     '@shikijs/vitepress-twoslash/style.css',
+    'vitepress',
   ],
   hooks: {
     'rollup:done': async () => {
