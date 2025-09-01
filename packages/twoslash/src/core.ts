@@ -129,7 +129,7 @@ export function createTransformerFactory(
           catch (error) {
             const result = onTwoslashError(error, code, lang, this.options)
             if (typeof result === 'string')
-              return code
+              return result
           }
         }
       },
