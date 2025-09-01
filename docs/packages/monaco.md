@@ -80,7 +80,7 @@ const editor = monaco.editor.create(document.getElementById('container'), {
 
 <Badges name="modern-monaco" />
 
-We highly recommend using [modern-monaco](https://github.com/esm-dev/modern-monaco?tab=readme-ov-file#modern-monaco) that includes built-in Shiki integration. It provides a more convenient API for building Monaco Editor.
+We highly recommend using [modern-monaco](https://github.com/esm-dev/modern-monaco) that includes built-in Shiki integration. It provides a more convenient API for building Monaco Editor.
 
 ### Install
 
