@@ -15,6 +15,27 @@ pre.shiki .space::before {
   opacity: 0.3;
 }
 
+pre.shiki .indent {
+  display: inline-block;
+  position: relative;
+  left: var(--indent-offset);
+  text-indent: 0;
+}
+
+pre.shiki .indent:empty {
+  height: 1lh;
+  vertical-align: bottom;
+}
+
+pre.shiki .indent::before {
+  content: '';
+  position: absolute;
+  opacity: 0.15;
+  width: 1px;
+  height: 100%;
+  background-color: currentColor;
+}
+
 pre.shiki .highlighted-word {
   background-color: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-border);
