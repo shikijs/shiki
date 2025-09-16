@@ -37,7 +37,7 @@ export const usePlayground = defineStore('playground', () => {
 
     function fetchSample(id: string): Promise<string | undefined> {
       if (!samplesCache.has(id)) {
-        samplesCache.set(id, fetch(`https://raw.githubusercontent.com/antfu/textmate-grammars-themes/main/samples/${id}.sample`)
+        samplesCache.set(id, fetch(`https://raw.githubusercontent.com/shikijs/textmate-grammars-themes/main/samples/${id}.sample`)
           .then(r => r.text())
           .catch((e) => {
             console.error(e)
