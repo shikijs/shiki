@@ -1,7 +1,7 @@
 {
   "name": "@shikijs/vitepress-twoslash",
   "type": "module",
-  "version": "3.9.2",
+  "version": "3.12.2",
   "description": "Enable Twoslash support in VitePress",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -22,6 +22,7 @@
     ".": "./dist/index.mjs",
     "./client": "./dist/client.mjs",
     "./cache-fs": "./dist/cache-fs.mjs",
+    "./cache-inline": "./dist/cache-inline/index.mjs",
     "./style.css": "./style.css",
     "./style-core.css": "./style-core.css"
   },
@@ -38,11 +39,15 @@
     "prepublishOnly": "nr build"
   },
   "dependencies": {
-    "@shikijs/twoslash": "workspace:",
+    "@shikijs/twoslash": "workspace:*",
     "floating-vue": "catalog:docs",
+    "lz-string": "catalog:integrations",
+    "magic-string": "catalog:integrations",
+    "markdown-it": "catalog:integrations",
     "mdast-util-from-markdown": "catalog:integrations",
     "mdast-util-gfm": "catalog:integrations",
     "mdast-util-to-hast": "catalog:integrations",
+    "ohash": "catalog:integrations",
     "shiki": "workspace:*",
     "twoslash": "catalog:integrations",
     "twoslash-vue": "catalog:integrations",

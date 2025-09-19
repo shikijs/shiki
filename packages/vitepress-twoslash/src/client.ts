@@ -24,6 +24,7 @@ const TwoslashFloatingVue = {
     app.use(FloatingVue, {
       ...options,
       themes: {
+        ...options.themes,
         'twoslash': {
           $extend: 'dropdown',
           triggers: isMobile ? ['touch'] : ['hover', 'touch'],
@@ -37,12 +38,14 @@ const TwoslashFloatingVue = {
           flip: false,
           arrowPadding: 8,
           autoBoundaryMaxSize: true,
+          ...options.themes?.twoslash ?? {},
         },
         'twoslash-query': {
           $extend: 'twoslash',
           triggers: ['click'],
           popperTriggers: ['click'],
           autoHide: false,
+          ...options.themes?.['twoslash-query'] ?? {},
         },
         'twoslash-completion': {
           $extend: 'twoslash-query',
@@ -51,7 +54,9 @@ const TwoslashFloatingVue = {
           autoHide: false,
           distance: 0,
           arrowOverflow: true,
+          ...options.themes?.['twoslash-completion'] ?? {},
         },
+        /** @deprecated */
         ...options.theme,
       },
     })

@@ -1,6 +1,5 @@
 /* eslint-disable node/prefer-global/process */
 import type { ShikiTransformer } from 'shiki'
-import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { VitePressPluginTwoslashOptions } from './types'
 import { createTransformerFactory } from '@shikijs/twoslash/core'
 import { removeTwoslashNotations } from 'twoslash'
@@ -18,10 +17,9 @@ export * from './types'
 export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}): ShikiTransformer {
   const {
     explicitTrigger = true,
-    typesCache,
   } = options
 
-  const onError = (error: any, code: string): void => {
+  const onError = (error: any, code: string): string | void => {
     const isCI = typeof process !== 'undefined' && process?.env?.CI
     const isDev = typeof process !== 'undefined' && process?.env?.NODE_ENV === 'development'
     const shouldThrow = (options.throws || isCI || !isDev) && options.throws !== false
@@ -30,27 +28,12 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
       throw error
     else
       console.error(error)
-    removeTwoslashNotations(code)
+    return removeTwoslashNotations(code)
   }
 
-  const defaultTwoslasher = createTwoslasher(options.twoslashOptions)
-
-  let twoslasher = defaultTwoslasher
-  // Wrap twoslasher with cache when `resultCache` is provided
-  if (typesCache) {
-    twoslasher = ((code: string, extension?: string, options?: TwoslashExecuteOptions): TwoslashReturn => {
-      const cached = typesCache.read(code) // Restore cache
-      if (cached)
-        return cached
-
-      const twoslashResult = defaultTwoslasher(code, extension, options)
-      typesCache.write(code, twoslashResult)
-      return twoslashResult
-    }) as typeof defaultTwoslasher
-    twoslasher.getCacheMap = defaultTwoslasher.getCacheMap
-  }
-
-  const twoslash = createTransformerFactory(twoslasher)({
+  const twoslash = createTransformerFactory(
+    createTwoslasher(options.twoslashOptions),
+  )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
     onTwoslashError: onError,
@@ -62,8 +45,6 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   const trigger = explicitTrigger instanceof RegExp
     ? explicitTrigger
     : /\btwoslash\b/
-
-  typesCache?.init?.()
 
   return {
     ...twoslash,

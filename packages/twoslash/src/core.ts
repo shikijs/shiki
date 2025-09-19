@@ -18,6 +18,9 @@ export * from './renderer-classic'
 export * from './renderer-rich'
 export * from './types'
 
+// internal
+type _CacheableTwoslashShikiFunction = (code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta) => TwoslashShikiReturn
+
 export function defaultTwoslashOptions(): TwoslashExecuteOptions {
   return {
     customTags: ['annotate', 'log', 'warn', 'error'],
@@ -46,6 +49,7 @@ export function createTransformerFactory(
       renderer = defaultRenderer,
       throws = true,
       includesMap = new Map(),
+      typesCache,
     } = options
 
     const onTwoslashError = options.onTwoslashError || (
@@ -82,6 +86,25 @@ export function createTransformerFactory(
 
     const includes = new TwoslashIncludesManager(includesMap)
 
+    let _twoslasher = twoslasher
+
+    if (typesCache) {
+      _twoslasher = ((code: string, lang?: string, options?: TwoslashExecuteOptions, meta?: ShikiTransformerContextMeta): TwoslashShikiReturn => {
+        const preprocessed = typesCache?.preprocess?.(code, lang, options, meta)
+        if (preprocessed !== undefined)
+          code = preprocessed
+
+        let twoslash = typesCache?.read(code, lang, options, meta)
+        if (!twoslash) {
+          twoslash = (twoslasher as TwoslashShikiFunction)(code, lang, options)
+          typesCache?.write(code, twoslash, lang, options, meta)
+        }
+        return twoslash
+      }) satisfies _CacheableTwoslashShikiFunction & TwoslashShikiFunction & TwoslashGenericFunction
+
+      typesCache.init?.()
+    }
+
     return {
       preprocess(code) {
         let lang = this.options.lang
@@ -97,7 +120,7 @@ export function createTransformerFactory(
             if (include)
               includes.add(include, codeWithIncludes)
 
-            const twoslash = (twoslasher as TwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions)
+            const twoslash = (_twoslasher as _CacheableTwoslashShikiFunction)(codeWithIncludes, lang, twoslashOptions, this.meta)
             map.set(this.meta, twoslash)
             this.meta.twoslash = twoslash
             this.options.lang = twoslash.meta?.extension || lang
@@ -106,7 +129,7 @@ export function createTransformerFactory(
           catch (error) {
             const result = onTwoslashError(error, code, lang, this.options)
             if (typeof result === 'string')
-              return code
+              return result
           }
         }
       },

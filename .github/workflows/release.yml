@@ -26,7 +26,9 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: pnpm run publish:ci
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+
+      - name: Upgrade npm
+        run: npm i -g npm@latest
+
+      - name: Publish to NPM
+        run: pnpm run publish:ci
