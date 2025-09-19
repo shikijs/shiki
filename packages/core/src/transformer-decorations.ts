@@ -158,14 +158,19 @@ export function transformerDecorations(): ShikiTransformer {
         const properties = decoration.properties || {}
         const transform = decoration.transform || (i => i)
 
+        if (properties.class && properties.className === undefined) {
+          properties.className = properties.class
+          delete properties.class
+        }
+
         el.tagName = decoration.tagName || 'span'
         el.properties = {
           ...el.properties,
           ...properties,
-          class: el.properties.class,
+          className: el.properties.className,
         }
-        if (decoration.properties?.class)
-          addClassToHast(el, decoration.properties.class as string[])
+        if (decoration.properties?.className)
+          addClassToHast(el, decoration.properties.className as string[])
         el = transform(el, type) || el
         return el
       }
