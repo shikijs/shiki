@@ -518,6 +518,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/http')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'hurl',
+    'name': 'Hurl',
+    'import': (() => import('@shikijs/langs/hurl')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'hxml',
     'name': 'HXML',
     'import': (() => import('@shikijs/langs/hxml')) as DynamicImportLanguageRegistration
@@ -549,7 +554,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'javascript',
     'name': 'JavaScript',
     'aliases': [
-      'js'
+      'js',
+      'cjs',
+      'mjs'
     ],
     'import': (() => import('@shikijs/langs/javascript')) as DynamicImportLanguageRegistration
   },
@@ -608,6 +615,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'jl'
     ],
     'import': (() => import('@shikijs/langs/julia')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'kdl',
+    'name': 'KDL',
+    'import': (() => import('@shikijs/langs/kdl')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'kotlin',
@@ -809,6 +821,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/php')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'pkl',
+    'name': 'Pkl',
+    'import': (() => import('@shikijs/langs/pkl')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'plsql',
     'name': 'PL/SQL',
     'import': (() => import('@shikijs/langs/plsql')) as DynamicImportLanguageRegistration
@@ -950,6 +967,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'riscv',
     'name': 'RISC-V',
     'import': (() => import('@shikijs/langs/riscv')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'rosmsg',
+    'name': 'ROS Interface',
+    'import': (() => import('@shikijs/langs/rosmsg')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'rst',
@@ -1180,7 +1202,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'typescript',
     'name': 'TypeScript',
     'aliases': [
-      'ts'
+      'ts',
+      'cts',
+      'mts'
     ],
     'import': (() => import('@shikijs/langs/typescript')) as DynamicImportLanguageRegistration
   },
@@ -1369,6 +1393,7 @@ export type BundledLanguage =
   | 'cadence'
   | 'cairo'
   | 'cdc'
+  | 'cjs'
   | 'clarity'
   | 'clj'
   | 'clojure'
@@ -1390,6 +1415,7 @@ export type BundledLanguage =
   | 'csharp'
   | 'css'
   | 'csv'
+  | 'cts'
   | 'cue'
   | 'cypher'
   | 'd'
@@ -1458,6 +1484,7 @@ export type BundledLanguage =
   | 'html'
   | 'html-derivative'
   | 'http'
+  | 'hurl'
   | 'hxml'
   | 'hy'
   | 'imba'
@@ -1477,6 +1504,7 @@ export type BundledLanguage =
   | 'jssm'
   | 'jsx'
   | 'julia'
+  | 'kdl'
   | 'kotlin'
   | 'kql'
   | 'kt'
@@ -1506,9 +1534,11 @@ export type BundledLanguage =
   | 'mermaid'
   | 'mips'
   | 'mipsasm'
+  | 'mjs'
   | 'mmd'
   | 'mojo'
   | 'move'
+  | 'mts'
   | 'nar'
   | 'narrat'
   | 'nextflow'
@@ -1526,6 +1556,7 @@ export type BundledLanguage =
   | 'perl'
   | 'perl6'
   | 'php'
+  | 'pkl'
   | 'plsql'
   | 'po'
   | 'polar'
@@ -1560,6 +1591,7 @@ export type BundledLanguage =
   | 'regexp'
   | 'rel'
   | 'riscv'
+  | 'rosmsg'
   | 'rs'
   | 'rst'
   | 'ruby'
