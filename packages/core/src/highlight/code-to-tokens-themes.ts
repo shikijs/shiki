@@ -70,9 +70,9 @@ export function codeToTokensWithThemes(
 
   const mergedGrammarState = themedTokens[0].state
     ? new GrammarState(
-      Object.fromEntries(themedTokens.map(s => [s.theme, s.state?.getInternalStack(s.theme)])),
-      themedTokens[0].state.lang,
-    )
+        Object.fromEntries(themedTokens.map(s => [s.theme, s.state?.getInternalStack(s.theme)])),
+        themedTokens[0].state.lang,
+      )
     : undefined
   if (mergedGrammarState)
     setLastGrammarStateToMap(mergedTokens, mergedGrammarState)

@@ -62,12 +62,12 @@ export function codeToTokensBase(
 
 export function getLastGrammarState(
   internal: ShikiInternal,
-  element: ThemedToken[][] | Root
+  element: ThemedToken[][] | Root,
 ): GrammarState | undefined
 export function getLastGrammarState(
   internal: ShikiInternal,
   code: string,
-  options?: CodeToTokensBaseOptions
+  options?: CodeToTokensBaseOptions,
 ): GrammarState
 export function getLastGrammarState(...args: any[]): GrammarState | undefined {
   if (args.length === 2) {

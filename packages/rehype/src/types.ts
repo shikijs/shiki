@@ -55,7 +55,7 @@ export interface RehypeShikiExtraOptions {
   parseMetaString?: (
     metaString: string,
     node: Element,
-    tree: Root
+    tree: Root,
   ) => Record<string, any> | undefined | null
 
   /**

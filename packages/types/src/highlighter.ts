@@ -92,7 +92,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    */
   codeToHtml: (
     code: string,
-    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>,
   ) => string
   /**
    * Get highlighted code in HAST.
@@ -100,14 +100,14 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    */
   codeToHast: (
     code: string,
-    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToHastOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>,
   ) => Root
   /**
    * Get highlighted code in tokens. Uses `codeToTokensWithThemes` or `codeToTokensBase` based on the options.
    */
   codeToTokens: (
     code: string,
-    options: CodeToTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToTokensOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>,
   ) => TokensResult
   /**
    * Get highlighted code in tokens with a single theme.
@@ -115,7 +115,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    */
   codeToTokensBase: (
     code: string,
-    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToTokensBaseOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>,
   ) => ThemedToken[][]
   /**
    * Get highlighted code in tokens with multiple themes.
@@ -126,7 +126,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    */
   codeToTokensWithThemes: (
     code: string,
-    options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>
+    options: CodeToTokensWithThemesOptions<ResolveBundleKey<BundledLangKeys>, ResolveBundleKey<BundledThemeKeys>>,
   ) => ThemedTokenWithVariants[][]
   /**
    * Get the last grammar state of a code snippet.

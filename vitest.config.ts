@@ -45,10 +45,5 @@ export default defineConfig({
         'packages/vitepress-twoslash/**',
       ],
     },
-    poolOptions: {
-      threads: {
-        singleThread: true,
-      },
-    },
   },
 })

@@ -46,7 +46,7 @@ import { createHighlighterCore } from './highlighter'
  * @param options
  */
 export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
-  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>
+  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes>
 
 // Implementation

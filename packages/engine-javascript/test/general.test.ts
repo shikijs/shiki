@@ -31,7 +31,11 @@ describe('should', () => {
           "typescript",
           "css",
           "js",
+          "cjs",
+          "mjs",
           "ts",
+          "cts",
+          "mts",
         ]
       `)
     expect(shiki.getLoadedThemes())
