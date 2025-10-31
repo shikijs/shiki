@@ -52,7 +52,7 @@ export default defineConfig({
       transformerTwoslash() // [!code hl]
     ],
     // [!code hl:2]
-    // Explicitly load these languages for types hightlighting
+    // Explicitly load these languages for types highlighting
     languages: ['js', 'jsx', 'ts', 'tsx']
   }
 })
