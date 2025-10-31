@@ -2,7 +2,7 @@ import type { ShikiTransformer } from '@shikijs/types'
 import type { Element } from 'hast'
 
 export interface TransformerRenderIndentGuidesOptions {
-  indent?: number
+  indent?: number | false
 }
 
 /**
@@ -15,14 +15,15 @@ export function transformerRenderIndentGuides(
   return {
     name: '@shikijs/transformers:render-indent-guides',
     code(hast) {
-      let { indent = 2 } = options
+      const indent = Number(
+        this.options.meta?.indent
+        ?? this.options.meta?.__raw?.match(/\{indent:(\d+|false)\}/)?.[1]
+        ?? options.indent
+        ?? 2,
+      )
 
-      const match = this.options.meta?.__raw?.match(/\{indent:(\d+|false)\}/)
-      if (match) {
-        if (match[1] === 'false') {
-          return hast
-        }
-        indent = Number(match[1])
+      if (Number.isNaN(indent) || indent <= 0) {
+        return hast
       }
       const indentRegex = new RegExp(` {${indent}}| {0,${indent - 1}}\t| {1,}$`, 'g')
 
