@@ -19,6 +19,47 @@ const TwoslashFloatingVue = {
         if (path.some((el: any) => el?.classList?.contains?.('vp-code-group') || el?.classList?.contains?.('tabs')))
           recomputeAllPoppers()
       }, { passive: true })
+
+      // On desktop where the poppers are shown on hover, make sure that they do
+      // not show or hide while we're dragging (selecting text) so they don't
+      // interfere with the selection.
+      if (!isMobile) {
+        let isDragging = false
+        window.addEventListener('mousedown', () => {
+          isDragging = true
+        }, { passive: true })
+        window.addEventListener('mouseup', () => {
+          isDragging = false
+        }, { passive: true })
+
+        const _component = app.component
+        app.component = function (this: typeof app, ...rest: any[]) {
+          // @ts-expect-error type mismatch for `rest`
+          const comp = _component.apply(this, rest)
+          if (rest.length >= 2 && rest[0] === 'VMenu') {
+            try {
+              const PopperVue = rest[1].components.Popper
+              const PopperTs = PopperVue.extends
+
+              const _show = PopperTs.methods.show
+              PopperTs.methods.show = function (...args: any[]) {
+                if (!isDragging)
+                  return _show.apply(this, args)
+              }
+
+              const _hide = PopperTs.methods.hide
+              PopperTs.methods.hide = function (...args: any[]) {
+                if (!isDragging)
+                  return _hide.apply(this, args)
+              }
+            }
+            catch (e) {
+              console.error('Failed to patch FloatingVue', e)
+            }
+          }
+          return comp
+        }
+      }
     }
 
     app.use(FloatingVue, {
@@ -34,6 +75,7 @@ const TwoslashFloatingVue = {
           delay: 0,
           handleResize: false,
           autoHide: true,
+          noAutoFocus: true,
           instantMove: true,
           flip: false,
           arrowPadding: 8,
@@ -45,6 +87,7 @@ const TwoslashFloatingVue = {
           triggers: ['click'],
           popperTriggers: ['click'],
           autoHide: false,
+          noAutoFocus: true,
           ...options.themes?.['twoslash-query'] ?? {},
         },
         'twoslash-completion': {
@@ -52,6 +95,7 @@ const TwoslashFloatingVue = {
           triggers: ['click'],
           popperTriggers: ['click'],
           autoHide: false,
+          noAutoFocus: true,
           distance: 0,
           arrowOverflow: true,
           ...options.themes?.['twoslash-completion'] ?? {},
