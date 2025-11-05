@@ -13,14 +13,14 @@ exports[`precompile 1`] = `
     "syntax",
     "sublime-syntax",
   ],
-  firstLineMatch: /^%YAML( ?1[^\\n]\\p{Nd}+)?/dgv,
+  firstLineMatch: /^%YAML( ?1[^\\n]\\p{Nd}+)?/dgu,
   name: "yaml",
   patterns: [
     { include: "#comment" },
     { include: "#property" },
     { include: "#directive" },
-    { match: /^---/dgv, name: "entity.other.document.begin.yaml" },
-    { match: /^\\.{3}/dgv, name: "entity.other.document.end.yaml" },
+    { match: /^---/dgu, name: "entity.other.document.begin.yaml" },
+    { match: /^\\.{3}/dgu, name: "entity.other.document.end.yaml" },
     { include: "#node" },
   ],
   repository: {
@@ -40,11 +40,11 @@ exports[`precompile 1`] = `
     "block-pair": {
       patterns: [
         {
-          begin: /\\?/dgv,
+          begin: /\\?/dgu,
           beginCaptures: {
             "1": { name: "punctuation.definition.key-value.begin.yaml" },
           },
-          end: /(?=\\?)|^ *(:)|(:)/dgv,
+          end: /(?=\\?)|^ *(:)|(:)/dgu,
           endCaptures: {
             "1": { name: "punctuation.separator.key-value.mapping.yaml" },
             "2": { name: "invalid.illegal.expected-newline.yaml" },
@@ -54,28 +54,28 @@ exports[`precompile 1`] = `
         },
         {
           begin:
-            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space})([^\\:\\p{space}]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
-          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space})([^\\:\\p{space}]|:\\P{space}|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
           patterns: [
             { include: "#flow-scalar-plain-out-implicit-type" },
             {
               begin:
-                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
+                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgu,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
-              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
               name: "string.unquoted.plain.out.yaml",
             },
           ],
         },
         {
-          match: /:(?=\\p{space}|(?=\\n?$))/dgv,
+          match: /:(?=\\p{space}|(?=\\n?$))/dgu,
           name: "punctuation.separator.key-value.mapping.yaml",
         },
       ],
     },
     "block-scalar": {
-      begin: /(?:(\\|)|(>))([1-9])?([\\-\\+])?([^\\n]*\\n?)/dgv,
+      begin: /(?:(\\|)|(>))([1-9])?([\\-\\+])?([^\\n]*\\n?)/dgu,
       beginCaptures: {
         "1": { name: "keyword.control.flow.block-scalar.literal.yaml" },
         "2": { name: "keyword.control.flow.block-scalar.folded.yaml" },
@@ -85,53 +85,53 @@ exports[`precompile 1`] = `
           patterns: [
             { include: "#comment" },
             {
-              match: /[^\\n]+/dgv,
+              match: /[^\\n]+/dgu,
               name: "invalid.illegal.expected-comment-or-newline.yaml",
             },
           ],
         },
       },
-      end: /*@__PURE__*/ new EmulatedRegExp("^(?=\\\\P{space})|(?!^)", "dgv", {
+      end: /*@__PURE__*/ new EmulatedRegExp("^(?=\\\\P{space})|(?!^)", "dgu", {
         strategy: "clip_search",
       }),
       patterns: [
         {
-          begin: /^( +)(?! )/dgv,
-          end: /^(?!\\1|\\p{space}*(?=\\n?$))()/dgv,
+          begin: /^( +)(?! )/dgu,
+          end: /^(?!\\1|\\p{space}*(?=\\n?$))()/dgu,
           name: "string.unquoted.block.yaml",
         },
       ],
     },
     "block-sequence": {
-      match: /(-)(?!\\P{space})/dgv,
+      match: /(-)(?!\\P{space})/dgu,
       name: "punctuation.definition.block.sequence.item.yaml",
     },
     comment: {
       begin:
-        /(?:^([\\t ]*)|[\\t ]+)(?=#[[\\P{space}&&\\P{Cc}&&\\P{Cn}&&\\P{Cs}]\\p{Zs}]*(?=\\n?$))/dgv,
+        /(?:^([\\t ]*)|[\\t ]+)(?=#[[\\P{space}&&\\P{Cc}&&\\P{Cn}&&\\P{Cs}]\\p{Zs}]*(?=\\n?$))/dgu,
       beginCaptures: {
         "1": { name: "punctuation.whitespace.comment.leading.yaml" },
       },
-      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
+      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgu", {
         strategy: "clip_search",
       }),
       patterns: [
         {
-          begin: /#/dgv,
+          begin: /#/dgu,
           beginCaptures: {
             "0": { name: "punctuation.definition.comment.yaml" },
           },
-          end: /\\n/dgv,
+          end: /\\n/dgu,
           name: "comment.line.number-sign.yaml",
         },
       ],
     },
     directive: {
-      begin: /^%/dgv,
+      begin: /^%/dgu,
       beginCaptures: {
         "0": { name: "punctuation.definition.directive.begin.yaml" },
       },
-      end: /(?=(?=\\n?$)|[\\t ]+((?=\\n?$)|#))/dgv,
+      end: /(?=(?=\\n?$)|[\\t ]+((?=\\n?$)|#))/dgu,
       name: "meta.directive.yaml",
       patterns: [
         {
@@ -139,7 +139,7 @@ exports[`precompile 1`] = `
             "1": { name: "keyword.other.directive.yaml.yaml" },
             "2": { name: "constant.numeric.yaml-version.yaml" },
           },
-          match: /(YAML)[\\t ]+(\\p{Nd}+\\.\\p{Nd}+)/dgvy,
+          match: /(YAML)[\\t ]+(\\p{Nd}+\\.\\p{Nd}+)/dguy,
         },
         {
           captures: {
@@ -148,7 +148,7 @@ exports[`precompile 1`] = `
             "3": { name: "support.type.tag-prefix.yaml" },
           },
           match:
-            /(TAG)(?:[\\t ]+(!(?:[\\-0-9A-Za-z]*!)?)(?:[\\t ]+(!(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])*|(?![\\]\\!\\,\\[\\{\\}])(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])+))?)?/dgvy,
+            /(TAG)(?:[\\t ]+(!(?:[\\-0-9A-Za-z]*!)?)(?:[\\t ]+(!(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])*|(?![\\]\\!\\,\\[\\{\\}])(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])+))?)?/dguy,
         },
         {
           captures: {
@@ -157,9 +157,9 @@ exports[`precompile 1`] = `
             "3": { name: "string.unquoted.directive-parameter.yaml" },
           },
           match:
-            /([\\p{L}\\p{M}\\p{N}\\p{Pc}]+)(?:[\\t ]+([\\p{L}\\p{M}\\p{N}\\p{Pc}]+)(?:[\\t ]+([\\p{L}\\p{M}\\p{N}\\p{Pc}]+))?)?/dgvy,
+            /([\\p{L}\\p{M}\\p{N}\\p{Pc}]+)(?:[\\t ]+([\\p{L}\\p{M}\\p{N}\\p{Pc}]+)(?:[\\t ]+([\\p{L}\\p{M}\\p{N}\\p{Pc}]+))?)?/dguy,
         },
-        { match: /\\P{space}+/dgv, name: "invalid.illegal.unrecognized.yaml" },
+        { match: /\\P{space}+/dgu, name: "invalid.illegal.unrecognized.yaml" },
       ],
     },
     "flow-alias": {
@@ -170,22 +170,22 @@ exports[`precompile 1`] = `
         "4": { name: "invalid.illegal.character.anchor.yaml" },
       },
       match:
-        /((\\*))([^\\]\\,\\/\\[\\{\\}\\p{space}]+)([^\\]\\,\\}\\p{space}]\\P{space}*)?/dgv,
+        /((\\*))([^\\]\\,\\/\\[\\{\\}\\p{space}]+)([^\\]\\,\\}\\p{space}]\\P{space}*)?/dgu,
     },
     "flow-collection": {
       patterns: [{ include: "#flow-sequence" }, { include: "#flow-mapping" }],
     },
     "flow-mapping": {
-      begin: /\\{/dgv,
+      begin: /\\{/dgu,
       beginCaptures: {
         "0": { name: "punctuation.definition.mapping.begin.yaml" },
       },
-      end: /\\}/dgv,
+      end: /\\}/dgu,
       endCaptures: { "0": { name: "punctuation.definition.mapping.end.yaml" } },
       name: "meta.flow-mapping.yaml",
       patterns: [
         { include: "#prototype" },
-        { match: /,/dgv, name: "punctuation.separator.mapping.yaml" },
+        { match: /,/dgu, name: "punctuation.separator.mapping.yaml" },
         { include: "#flow-pair" },
       ],
     },
@@ -200,50 +200,50 @@ exports[`precompile 1`] = `
     "flow-pair": {
       patterns: [
         {
-          begin: /\\?/dgv,
+          begin: /\\?/dgu,
           beginCaptures: {
             "0": { name: "punctuation.definition.key-value.begin.yaml" },
           },
-          end: /(?=[\\]\\,\\}])/dgv,
+          end: /(?=[\\]\\,\\}])/dgu,
           name: "meta.flow-pair.explicit.yaml",
           patterns: [
             { include: "#prototype" },
             { include: "#flow-pair" },
             { include: "#flow-node" },
             {
-              begin: /:(?=\\p{space}|(?=\\n?$)|[\\]\\,\\[\\{\\}])/dgv,
+              begin: /:(?=\\p{space}|(?=\\n?$)|[\\]\\,\\[\\{\\}])/dgu,
               beginCaptures: {
                 "0": { name: "punctuation.separator.key-value.mapping.yaml" },
               },
-              end: /(?=[\\]\\,\\}])/dgv,
+              end: /(?=[\\]\\,\\}])/dgu,
               patterns: [{ include: "#flow-value" }],
             },
           ],
         },
         {
           begin:
-            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}])([^\\]\\,\\:\\[\\{\\}\\p{space}]|:[^\\]\\,\\[\\{\\}\\p{space}]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
-          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
+            /(?=(?:[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}])([^\\]\\,\\:\\[\\{\\}\\p{space}]|:[^\\]\\,\\[\\{\\}\\p{space}]|\\p{space}+(?![\\#\\p{space}]))*\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgu,
           name: "meta.flow-pair.key.yaml",
           patterns: [
             { include: "#flow-scalar-plain-in-implicit-type" },
             {
               begin:
-                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
+                /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgu,
               beginCaptures: { "0": { name: "entity.name.tag.yaml" } },
               contentName: "entity.name.tag.yaml",
-              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
+              end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgu,
               name: "string.unquoted.plain.in.yaml",
             },
           ],
         },
         { include: "#flow-node" },
         {
-          begin: /:(?=\\p{space}|(?=\\n?$)|[\\]\\,\\[\\{\\}])/dgv,
+          begin: /:(?=\\p{space}|(?=\\n?$)|[\\]\\,\\[\\{\\}])/dgu,
           captures: {
             "0": { name: "punctuation.separator.key-value.mapping.yaml" },
           },
-          end: /(?=[\\]\\,\\}])/dgv,
+          end: /(?=[\\]\\,\\}])/dgu,
           name: "meta.flow-pair.yaml",
           patterns: [{ include: "#flow-value" }],
         },
@@ -257,21 +257,21 @@ exports[`precompile 1`] = `
       ],
     },
     "flow-scalar-double-quoted": {
-      begin: /"/dgv,
+      begin: /"/dgu,
       beginCaptures: {
         "0": { name: "punctuation.definition.string.begin.yaml" },
       },
-      end: /"/dgv,
+      end: /"/dgu,
       endCaptures: { "0": { name: "punctuation.definition.string.end.yaml" } },
       name: "string.quoted.double.yaml",
       patterns: [
         {
           match:
-            /\\\\([ "\\/0LN\\\\_abefnprtv]|x\\p{Nd}\\p{Nd}|u\\p{Nd}{4}|U\\p{Nd}{8})/dgv,
+            /\\\\([ "\\/0LN\\\\_abefnprtv]|x\\p{Nd}\\p{Nd}|u\\p{Nd}{4}|U\\p{Nd}{8})/dgu,
           name: "constant.character.escape.yaml",
         },
         {
-          match: /\\\\\\n/dgv,
+          match: /\\\\\\n/dgu,
           name: "constant.character.escape.double-quoted.newline.yaml",
         },
       ],
@@ -281,8 +281,8 @@ exports[`precompile 1`] = `
         { include: "#flow-scalar-plain-in-implicit-type" },
         {
           begin:
-            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgv,
-          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
+            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?][^\\]\\,\\[\\{\\}\\p{space}]/dgu,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgu,
           name: "string.unquoted.plain.in.yaml",
         },
       ],
@@ -300,7 +300,7 @@ exports[`precompile 1`] = `
             "7": { name: "constant.language.merge.yaml" },
           },
           match:
-            /(?:(null|Null|NULL|~)|([Yy]|yes|Yes|YES|[Nn]|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|([\\-\\+]?0b[01_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[_\\p{AHex}]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+)|([\\-\\+]?(?:[0-9][0-9_]*)?\\.[\\.0-9]*(?:[Ee][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))|(\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[\\t ]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[\\t ]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?)|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgv,
+            /(?:(null|Null|NULL|~)|([Yy]|yes|Yes|YES|[Nn]|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|([\\-\\+]?0b[01_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[_\\p{AHex}]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+)|([\\-\\+]?(?:[0-9][0-9_]*)?\\.[\\.0-9]*(?:[Ee][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))|(\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[\\t ]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[\\t ]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?)|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$))|\\p{space}*:[\\]\\,\\[\\{\\}]|\\p{space}*[\\]\\,\\[\\{\\}])/dgu,
         },
       ],
     },
@@ -309,8 +309,8 @@ exports[`precompile 1`] = `
         { include: "#flow-scalar-plain-out-implicit-type" },
         {
           begin:
-            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgv,
-          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+            /[^\\-\\]\\!"\\#\\%\\&'\\*\\,\\:\\>\\?\\@\\[\\\`\\{\\|\\}\\p{space}]|[\\-\\:\\?]\\P{space}/dgu,
+          end: /(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
           name: "string.unquoted.plain.out.yaml",
         },
       ],
@@ -328,38 +328,38 @@ exports[`precompile 1`] = `
             "7": { name: "constant.language.merge.yaml" },
           },
           match:
-            /(?:(null|Null|NULL|~)|([Yy]|yes|Yes|YES|[Nn]|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|([\\-\\+]?0b[01_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[_\\p{AHex}]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+)|([\\-\\+]?(?:[0-9][0-9_]*)?\\.[\\.0-9]*(?:[Ee][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))|(\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[\\t ]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[\\t ]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?)|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgv,
+            /(?:(null|Null|NULL|~)|([Yy]|yes|Yes|YES|[Nn]|no|No|NO|true|True|TRUE|false|False|FALSE|on|On|ON|off|Off|OFF)|([\\-\\+]?0b[01_]+|[\\-\\+]?0[0-7_]+|[\\-\\+]?(?:0|[1-9][0-9_]*)|[\\-\\+]?0x[_\\p{AHex}]+|[\\-\\+]?[1-9][0-9_]*(?::[0-5]?[0-9])+)|([\\-\\+]?(?:[0-9][0-9_]*)?\\.[\\.0-9]*(?:[Ee][\\-\\+][0-9]+)?|[\\-\\+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\\.[0-9_]*|[\\-\\+]?\\.(?:inf|Inf|INF)|\\.(?:nan|NaN|NAN))|(\\p{Nd}{4}-\\p{Nd}{2}-\\p{Nd}{2}|\\p{Nd}{4}-\\p{Nd}{1,2}-\\p{Nd}{1,2}(?:[Tt]|[\\t ]+)\\p{Nd}{1,2}:\\p{Nd}{2}:\\p{Nd}{2}(?:\\.\\p{Nd}*)?(?:[\\t ]*Z|[\\-\\+]\\p{Nd}{1,2}(?::\\p{Nd}{1,2})?)?)|(=)|(<<))(?=\\p{space}*(?=\\n?$)|\\p{space}+#|\\p{space}*:(\\p{space}|(?=\\n?$)))/dgu,
         },
       ],
     },
     "flow-scalar-single-quoted": {
-      begin: /'/dgv,
+      begin: /'/dgu,
       beginCaptures: {
         "0": { name: "punctuation.definition.string.begin.yaml" },
       },
-      end: /'(?!')/dgv,
+      end: /'(?!')/dgu,
       endCaptures: { "0": { name: "punctuation.definition.string.end.yaml" } },
       name: "string.quoted.single.yaml",
       patterns: [
         {
-          match: /''/dgv,
+          match: /''/dgu,
           name: "constant.character.escape.single-quoted.yaml",
         },
       ],
     },
     "flow-sequence": {
-      begin: /\\[/dgv,
+      begin: /\\[/dgu,
       beginCaptures: {
         "0": { name: "punctuation.definition.sequence.begin.yaml" },
       },
-      end: /\\]/dgv,
+      end: /\\]/dgu,
       endCaptures: {
         "0": { name: "punctuation.definition.sequence.end.yaml" },
       },
       name: "meta.flow-sequence.yaml",
       patterns: [
         { include: "#prototype" },
-        { match: /,/dgv, name: "punctuation.separator.sequence.yaml" },
+        { match: /,/dgu, name: "punctuation.separator.sequence.yaml" },
         { include: "#flow-pair" },
         { include: "#flow-node" },
       ],
@@ -367,8 +367,8 @@ exports[`precompile 1`] = `
     "flow-value": {
       patterns: [
         {
-          begin: /(?![\\]\\,\\}])/dgvy,
-          end: /(?=[\\]\\,\\}])/dgv,
+          begin: /(?![\\]\\,\\}])/dguy,
+          end: /(?=[\\]\\,\\}])/dgu,
           name: "meta.flow-pair.value.yaml",
           patterns: [{ include: "#flow-node" }],
         },
@@ -376,8 +376,8 @@ exports[`precompile 1`] = `
     },
     node: { patterns: [{ include: "#block-node" }] },
     property: {
-      begin: /(?=[\\!\\&])/dgv,
-      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgv", {
+      begin: /(?=[\\!\\&])/dgu,
+      end: /*@__PURE__*/ new EmulatedRegExp("(?!^)", "dgu", {
         strategy: "clip_search",
       }),
       name: "meta.property.yaml",
@@ -389,14 +389,14 @@ exports[`precompile 1`] = `
             "3": { name: "entity.name.type.anchor.yaml" },
             "4": { name: "invalid.illegal.character.anchor.yaml" },
           },
-          match: /((&))([^\\]\\,\\/\\[\\{\\}\\p{space}]+)(\\P{space}+)?/dgvy,
+          match: /((&))([^\\]\\,\\/\\[\\{\\}\\p{space}]+)(\\P{space}+)?/dguy,
         },
         {
           match:
-            /!(?:<(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])+>|(?:[\\-0-9A-Za-z]*!)?(?:%\\p{AHex}{2}|[\\#\\$\\&-\\+\\--\\;\\=\\?-Z_a-z\\~])+|)(?=[\\t ]|(?=\\n?$))/dgvy,
+            /!(?:<(?:%\\p{AHex}{2}|[\\]\\!\\#\\$\\&-\\;\\=\\?-\\[_a-z\\~])+>|(?:[\\-0-9A-Za-z]*!)?(?:%\\p{AHex}{2}|[\\#\\$\\&-\\+\\--\\;\\=\\?-Z_a-z\\~])+|)(?=[\\t ]|(?=\\n?$))/dguy,
           name: "storage.type.tag-handle.yaml",
         },
-        { match: /\\P{space}+/dgv, name: "invalid.illegal.tag-handle.yaml" },
+        { match: /\\P{space}+/dgu, name: "invalid.illegal.tag-handle.yaml" },
       ],
     },
     prototype: {
