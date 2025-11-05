@@ -94,18 +94,13 @@ jobs:
       - name: Build
         run: nr build
 
-      - name: Test
-        run: |
-          NODE_VERSION=$(node -v)
-          NODE_MAJOR=$(echo "$NODE_VERSION" | cut -d. -f1 | sed 's/v//')
-          echo "Node version: $NODE_VERSION, Major: $NODE_MAJOR"
-          if [ "$NODE_MAJOR" -lt 19 ]; then
-            echo "Running tests without coverage (Node < 19)"
-            nr test
-          else
-            echo "Running tests with coverage (Node >= 19)"
-            nr test --coverage
-          fi
+      - name: Test (Node 18.x without coverage)
+        if: matrix.node == '18.x'
+        run: nr test
+
+      - name: Test (Node 20.x+ with coverage)
+        if: matrix.node != '18.x'
+        run: nr test --coverage
 
       - name: Upload coverage reports to Codecov
         if: matrix.node != '18.x'
