@@ -183,10 +183,15 @@ export function makeSingletonHighlighter<L extends string, T extends string>(
     if (!_shiki) {
       _shiki = createHighlighter({
         ...options,
-        themes: options.themes || [],
-        langs: options.langs || [],
+        themes: [],
+        langs: [],
       })
-      return _shiki
+      const s = await _shiki
+      await Promise.all([
+        s.loadTheme(...(options.themes as T[] || [])),
+        s.loadLanguage(...(options.langs as L[] || [])),
+      ])
+      return s
     }
     else {
       const s = await _shiki
