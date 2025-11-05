@@ -97,8 +97,8 @@ export function shikiToMonaco(
     _setTheme(themeName)
   }
 
-  // Set the first theme as the default theme
-  monaco.editor.setTheme(themeIds[0])
+  const lastTheme = themeIds[themeIds.length - 1]
+  monaco.editor.setTheme(lastTheme)
 
   function findScopeByColor(color: string): string | undefined {
     return colorToScopeMap.get(color)
