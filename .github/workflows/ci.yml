@@ -95,9 +95,16 @@ jobs:
         run: nr build
 
       - name: Test
-        run: nr test --coverage
+        run: |
+          NODE_MAJOR=$(node -v | cut -d. -f1 | sed 's/v//')
+          if [ "$NODE_MAJOR" -lt 19 ]; then
+            nr test
+          else
+            nr test --coverage
+          fi
 
       - name: Upload coverage reports to Codecov
+        if: matrix.node != '18.x' && matrix.node != '18'
         uses: codecov/codecov-action@v5
         with:
           use_oidc: true

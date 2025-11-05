@@ -8,8 +8,10 @@ export function precompileGrammar(grammar: LanguageRegistration): LanguageRegist
   traverseGrammarPatterns(precompiled, (pattern) => {
     if (typeof pattern !== 'string')
       return pattern
+    // Use ES2018 target for maximum compatibility (Node 18+)
+    // ES2024+ requires Node 20+ due to RegExp 'v' flag
     return defaultJavaScriptRegexConstructor(pattern, {
-      target: 'ES2024',
+      target: 'ES2018',
     })
   })
 
