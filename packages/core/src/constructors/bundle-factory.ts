@@ -171,7 +171,6 @@ export interface ShorthandsBundle<L extends string, T extends string> {
     | ((element: ThemedToken[][] | Root) => GrammarState)
     | ((code: string, options: CodeToTokensBaseOptions<L, T>) => Promise<GrammarState>)
 }
-
 export function makeSingletonHighlighter<L extends string, T extends string>(
   createHighlighter: CreateHighlighterFactory<L, T>,
 ): (options?: Partial<BundledHighlighterOptions<L, T>>) => Promise<HighlighterGeneric<L, T>> {
@@ -180,27 +179,32 @@ export function makeSingletonHighlighter<L extends string, T extends string>(
   async function getSingletonHighlighter(
     options: Partial<BundledHighlighterOptions<L, T>> = {},
   ): Promise<HighlighterGeneric<L, T>> {
+    // Case 1: First call — create new highlighter
     if (!_shiki) {
       _shiki = createHighlighter({
         ...options,
         themes: [],
-        langs: [],
+        langs: [], // don't load anything initially
       })
+
       const s = await _shiki
-      await Promise.all([
-        s.loadTheme(...(options.themes as T[] || [])),
-        s.loadLanguage(...(options.langs as L[] || [])),
+
+      // Load safely — ignore invalid ones
+      await Promise.allSettled([
+        options.themes?.length ? s.loadTheme(...(options.themes as T[])) : Promise.resolve(),
+        options.langs?.length ? s.loadLanguage(...(options.langs as L[])) : Promise.resolve(),
       ])
+
       return s
     }
-    else {
-      const s = await _shiki
-      await Promise.all([
-        s.loadTheme(...(options.themes as T[] || [])),
-        s.loadLanguage(...(options.langs as L[] || [])),
-      ])
-      return s
-    }
+
+    // Case 2: Reuse existing singleton safely
+    const s = await _shiki
+    await Promise.allSettled([
+      options.themes?.length ? s.loadTheme(...(options.themes as T[])) : Promise.resolve(),
+      options.langs?.length ? s.loadLanguage(...(options.langs as L[])) : Promise.resolve(),
+    ])
+    return s
   }
 
   return getSingletonHighlighter
