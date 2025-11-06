@@ -45,8 +45,6 @@ export function tokenizeAnsiWithTheme(
     namedColors.map((name) => {
       const key = `terminal.ansi${name[0].toUpperCase()}${name.substring(1)}`
       const themeColor = theme.colors?.[key]
-
-      // ✅ Use theme color if exists, otherwise fallback
       return [name, themeColor || defaultAnsiColors[name]]
     }),
   ) as Record<string, string>
@@ -117,6 +115,7 @@ function dimColor(color: string): string {
       return `#${hexMatch[1]}${hexMatch[2]}80`
     }
     else {
+      // convert from #rgb to #rrggbb80
       return `#${Array
         .from(hexMatch[1])
         .map(x => `${x}${x}`)
