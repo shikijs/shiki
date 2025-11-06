@@ -52,8 +52,19 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
       .map(([key, value]) => [key, `#${normalizeColor(value)}`]),
   )
 
+  // Detect high-contrast themes and set appropriate Monaco base
+  const isHighContrast = theme.name?.toLowerCase().includes('high-contrast')
+  let base: 'vs' | 'vs-dark' | 'hc-black' | 'hc-light'
+
+  if (isHighContrast) {
+    base = theme.type === 'light' ? 'hc-light' : 'hc-black'
+  }
+  else {
+    base = theme.type === 'light' ? 'vs' : 'vs-dark'
+  }
+
   return {
-    base: theme.type === 'light' ? 'vs' : 'vs-dark',
+    base,
     inherit: false,
     colors,
     rules,
