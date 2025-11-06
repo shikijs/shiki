@@ -1,7 +1,7 @@
 /* Generate by @shikijs/codegen */
 import {
   createSingletonShorthands,
-  createdBundledHighlighter,
+  createBundledHighlighter,
 } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
@@ -22,7 +22,7 @@ const bundledThemes = {
   'vitesse-dark': () => import('@shikijs/themes/vitesse-dark'),
 }
 
-const createHighlighter = /* @__PURE__ */ createdBundledHighlighter({
+const createHighlighter = /* @__PURE__ */ createBundledHighlighter({
   langs: bundledLanguages,
   themes: bundledThemes,
   engine: () => createOnigurumaEngine(import('shiki/wasm')),

@@ -30,7 +30,7 @@ import { createHighlighterCore } from './highlighter'
  *
  * @example
  * ```ts
- * const createHighlighter = createdBundledHighlighter({
+ * const createHighlighter = createBundledHighlighter({
  *   langs: {
  *     typescript: () => import('@shikijs/langs/typescript'),
  *     // ...
@@ -45,12 +45,12 @@ import { createHighlighterCore } from './highlighter'
  *
  * @param options
  */
-export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes>
 
 // Implementation
-export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes> {
   const bundledLanguages = options.langs
