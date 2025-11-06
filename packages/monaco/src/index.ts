@@ -77,6 +77,7 @@ export function shikiToMonaco(
 
   const colorMap: string[] = []
   const colorToScopeMap = new Map<string, string>()
+  const colorToStyledScopeMap = new Map<string, string>()
 
   // Because Monaco does not have the API of reading the current theme,
   // We hijack it here to keep track of the current theme.
@@ -89,10 +90,15 @@ export function shikiToMonaco(
       colorMap[i] = color
     })
     colorToScopeMap.clear()
+    colorToStyledScopeMap.clear()
     theme?.rules.forEach((rule) => {
       const c = normalizeColor(rule.foreground)
-      if (c && !colorToScopeMap.has(c))
+      if (!c)
+        return
+      if (!colorToScopeMap.has(c))
         colorToScopeMap.set(c, rule.token)
+      if (rule.fontStyle && !colorToStyledScopeMap.has(c))
+        colorToStyledScopeMap.set(c, rule.token)
     })
     _setTheme(themeName)
   }
@@ -102,6 +108,10 @@ export function shikiToMonaco(
 
   function findScopeByColor(color: string): string | undefined {
     return colorToScopeMap.get(color)
+  }
+
+  function findStyledScopeByColor(color: string): string | undefined {
+    return colorToStyledScopeMap.get(color)
   }
 
   // Do not attempt to tokenize if a line is too long
@@ -141,10 +151,12 @@ export function shikiToMonaco(
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
             const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
+            const hasStyle = EncodedTokenMetadata.getFontStyle(metadata) !== 0
 
-            // Because Monaco only support one scope per token,
-            // we workaround this to use color to trace back the scope
-            const scope = findScopeByColor(color) || ''
+            // Prefer a scope that declares fontStyle when token has style; fallback to general mapping.
+            const scope = (hasStyle ? findStyledScopeByColor(color) : undefined)
+              || findScopeByColor(color)
+              || ''
             tokens.push({ startIndex, scopes: scope })
           }
 
