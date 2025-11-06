@@ -5,8 +5,8 @@ import type {
   HighlighterGeneric,
 } from '@shikijs/types'
 import {
-  createSingletonShorthands,
   createBundledHighlighter,
+  createSingletonShorthands,
 } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
