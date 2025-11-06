@@ -207,6 +207,10 @@ export function tokensToHast(
       lineNodes.push(lineNode)
       lines.push(lineNode)
     }
+    else if (structure === 'inline') {
+      // For inline structure, still track line nodes for transformers that need them
+      lineNodes.push(lineNode)
+    }
   })
 
   if (structure === 'classic') {
@@ -219,6 +223,19 @@ export function tokensToHast(
       preNode = transformer?.pre?.call(context, preNode) || preNode
 
     root.children.push(preNode)
+  }
+  else if (structure === 'inline') {
+    const virtualCode: Element = {
+      type: 'element',
+      tagName: 'code',
+      properties: {},
+      children: root.children,
+    }
+    codeNode = virtualCode
+
+    for (const transformer of transformers)
+      codeNode = transformer?.code?.call(context, codeNode) || codeNode
+    root.children = codeNode.children
   }
 
   let result = root
