@@ -229,7 +229,7 @@ export function tokensToHast(
       type: 'element',
       tagName: 'code',
       properties: {},
-      children: root.children,
+      children: root.children as Element[],
     }
     codeNode = virtualCode
 
