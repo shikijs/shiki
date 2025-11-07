@@ -143,6 +143,54 @@ function rehypeShikiFromHighlighter(
           }
         }
 
+        // Preserve original node's data and properties
+        const preElement = fragment.children[0]
+        if (preElement && preElement.type === 'element' && preElement.tagName === 'pre') {
+          // Merge properties from original pre node
+          if (node.properties) {
+            preElement.properties = {
+              ...node.properties,
+              ...preElement.properties,
+            }
+          }
+          // Preserve data from original pre node
+          if (node.data) {
+            preElement.data = {
+              ...node.data,
+              ...preElement.data,
+            }
+          }
+          // Preserve position information
+          if (node.position) {
+            preElement.position = node.position
+          }
+
+          // Also preserve code element's data and properties if they exist
+          const codeElement = preElement.children[0]
+          if (codeElement && codeElement.type === 'element' && codeElement.tagName === 'code') {
+            const originalCodeNode = node.children.find(
+              (child): child is typeof codeElement => child.type === 'element' && child.tagName === 'code',
+            )
+            if (originalCodeNode) {
+              if (originalCodeNode.properties) {
+                codeElement.properties = {
+                  ...originalCodeNode.properties,
+                  ...codeElement.properties,
+                }
+              }
+              if (originalCodeNode.data) {
+                codeElement.data = {
+                  ...originalCodeNode.data,
+                  ...codeElement.data,
+                }
+              }
+              if (originalCodeNode.position) {
+                codeElement.position = originalCodeNode.position
+              }
+            }
+          }
+        }
+
         parent.children[index] = fragment as any
       }
 
