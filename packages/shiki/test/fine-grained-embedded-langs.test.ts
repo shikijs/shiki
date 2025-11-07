@@ -1,4 +1,4 @@
-import { createHighlighterCore, createSingletonShorthands, createdBundledHighlighter, guessEmbeddedLanguages } from '@shikijs/core'
+import { createHighlighterCore, createdBundledHighlighter, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 import { expect, it } from 'vitest'
 

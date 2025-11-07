@@ -196,7 +196,9 @@ const html = await codeToHtml(markdownCode, {
 
 ::: tip
 The `guessEmbeddedLanguages` function detects languages from:
+
 - Markdown fenced code blocks: ` ```lang ` or `~~~lang`
 - HTML/Vue language attributes: `lang="javascript"`
 - LaTeX environments: `\begin{language}`
+
 :::
