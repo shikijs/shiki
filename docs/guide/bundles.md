@@ -151,7 +151,7 @@ const html = highlighter.codeToHtml(markdownCode, {
 
 For the best user experience similar to the bundle presets, create custom shorthands with automatic embedded language detection:
 
-````ts
+```ts
 import {
   createdBundledHighlighter,
   createSingletonShorthands,
@@ -192,7 +192,7 @@ const html = await codeToHtml(markdownCode, {
   theme: 'nord',
 })
 // Embedded languages in the markdown will be automatically detected and loaded!
-````
+```
 
 ::: tip
 The `guessEmbeddedLanguages` function detects languages from:
