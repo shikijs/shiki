@@ -118,7 +118,7 @@ const highlighter = await createHighlighterCore({
 
 Use the `guessEmbeddedLanguages` utility to detect and load embedded languages dynamically:
 
-```ts
+````ts
 import { createHighlighterCore, guessEmbeddedLanguages } from 'shiki/core'
 
 const highlighter = await createHighlighterCore({
@@ -145,13 +145,13 @@ const html = highlighter.codeToHtml(markdownCode, {
   lang: 'markdown',
   theme: 'nord',
 })
-```
+````
 
 #### Option 3: Create Custom Shorthands with Auto-Loading ⭐ **RECOMMENDED**
 
 For the best user experience similar to the bundle presets, create custom shorthands with automatic embedded language detection:
 
-```ts
+````ts
 import {
   createdBundledHighlighter,
   createSingletonShorthands,
@@ -192,7 +192,7 @@ const html = await codeToHtml(markdownCode, {
   theme: 'nord',
 })
 // Embedded languages in the markdown will be automatically detected and loaded!
-```
+````
 
 ::: tip
 The `guessEmbeddedLanguages` function detects languages from:
