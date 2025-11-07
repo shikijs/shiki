@@ -87,3 +87,118 @@ const code = highlighter.codeToHtml('const a = 1', {
 ::: info
 [Shorthands](/guide/install#shorthands) are only avaliable in bundle presets. For a fine-grained bundle, you can create your own shorthands using [`createSingletonShorthands`](https://github.com/shikijs/shiki/blob/main/packages/core/src/constructors/bundle-factory.ts#L203) or port it yourself.
 :::
+
+### Handling Embedded Languages
+
+Some languages like `markdown`, `vue`, `svelte`, `mdx`, etc. contain embedded languages (e.g., code blocks in markdown can contain JavaScript, Python, HTML, etc.). When using fine-grained bundles, **these embedded languages are not loaded automatically** to keep the bundle size small and give you full control.
+
+If you want to highlight embedded languages in your code, you have several options:
+
+#### Option 1: Manually Load Embedded Languages
+
+You can manually load all the languages you expect to use:
+
+```ts
+import { createHighlighterCore } from 'shiki/core'
+
+const highlighter = await createHighlighterCore({
+  themes: [import('@shikijs/themes/nord')],
+  langs: [
+    import('@shikijs/langs/markdown'),
+    import('@shikijs/langs/javascript'),
+    import('@shikijs/langs/typescript'),
+    import('@shikijs/langs/python'),
+    // ...add other languages you need
+  ],
+  engine: createOnigurumaEngine(import('shiki/wasm'))
+})
+```
+
+#### Option 2: Dynamically Load Based on Content
+
+Use the `guessEmbeddedLanguages` utility to detect and load embedded languages dynamically:
+
+```ts
+import { createHighlighterCore, guessEmbeddedLanguages } from 'shiki/core'
+
+const highlighter = await createHighlighterCore({
+  themes: [import('@shikijs/themes/nord')],
+  langs: [import('@shikijs/langs/markdown')],
+  engine: createOnigurumaEngine(import('shiki/wasm'))
+})
+
+// Get your markdown content
+const markdownCode = '```js\nconsole.log("hello")\n```'
+
+// Detect embedded languages
+const embeddedLangs = guessEmbeddedLanguages(markdownCode, 'markdown', highlighter)
+
+// Load them dynamically
+await Promise.all(
+  embeddedLangs.map(lang => 
+    highlighter.loadLanguage(import(`@shikijs/langs/${lang}`))
+  )
+)
+
+// Now highlight with all required languages loaded
+const html = highlighter.codeToHtml(markdownCode, {
+  lang: 'markdown',
+  theme: 'nord'
+})
+```
+
+#### Option 3: Create Custom Shorthands with Auto-Loading
+
+For the best user experience similar to the bundle presets, create custom shorthands with automatic embedded language detection:
+
+```ts
+import { 
+  createHighlighterCore,
+  createSingletonShorthands,
+  createdBundledHighlighter,
+  guessEmbeddedLanguages 
+} from 'shiki/core'
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
+
+// Define your bundled languages
+const bundledLanguages = {
+  javascript: () => import('@shikijs/langs/javascript'),
+  typescript: () => import('@shikijs/langs/typescript'),
+  python: () => import('@shikijs/langs/python'),
+  markdown: () => import('@shikijs/langs/markdown'),
+  // ... add more languages as needed
+}
+
+const bundledThemes = {
+  nord: () => import('@shikijs/themes/nord'),
+  // ... add more themes as needed
+}
+
+// Create a custom highlighter factory
+const createHighlighter = createdBundledHighlighter({
+  langs: bundledLanguages,
+  themes: bundledThemes,
+  engine: () => createOnigurumaEngine(import('shiki/wasm'))
+})
+
+// Create shorthands with auto-loading embedded languages
+export const { codeToHtml, codeToHast, getSingletonHighlighter } = 
+  createSingletonShorthands(createHighlighter, {
+    guessEmbeddedLanguages
+  })
+
+// Now you can use it like the bundle presets
+const html = await codeToHtml(markdownCode, {
+  lang: 'markdown',
+  theme: 'nord'
+})
+// Embedded languages in the markdown will be automatically detected and loaded!
+```
+
+::: tip
+The `guessEmbeddedLanguages` function detects languages from:
+- Markdown fenced code blocks: ` ```lang ` or `~~~lang`
+- HTML/Vue language attributes: `lang="javascript"`
+- LaTeX environments: `\begin{language}`
+:::
+
