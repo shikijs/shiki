@@ -35,6 +35,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "unbuild",
     "dev": "unbuild --stub",
