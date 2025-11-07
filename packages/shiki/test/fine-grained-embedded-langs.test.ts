@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { createHighlighterCore, createSingletonShorthands, createdBundledHighlighter, guessEmbeddedLanguages } from '@shikijs/core'
+import { createdBundledHighlighter, createHighlighterCore, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
 const markdownWithEmbedded = `
@@ -41,7 +41,7 @@ it('fine-grained bundle - manually load embedded languages', async () => {
   expect(html).toContain('console')
   expect(html).toContain('print')
   expect(html).toContain('<div')
-  
+
   // Verify syntax highlighting is applied (color styles present)
   expect(html).toMatch(/style="[^"]*color:[^"]*"/)
 })
@@ -62,7 +62,7 @@ it('fine-grained bundle - dynamically load embedded languages', async () => {
 
   // Detect embedded languages
   const embeddedLangs = guessEmbeddedLanguages(markdownWithEmbedded, 'markdown', highlighter)
-  
+
   // Should detect javascript, python, html
   expect(embeddedLangs).toContain('javascript')
   expect(embeddedLangs).toContain('python')
@@ -92,14 +92,14 @@ it('fine-grained bundle - dynamically load embedded languages', async () => {
 it('fine-grained bundle - custom shorthands with auto-loading', async () => {
   // Create a bundled highlighter with custom languages
   const bundledLanguages = {
-    'javascript': () => import('@shikijs/langs/javascript'),
-    'python': () => import('@shikijs/langs/python'),
-    'html': () => import('@shikijs/langs/html'),
-    'markdown': () => import('@shikijs/langs/markdown'),
+    javascript: () => import('@shikijs/langs/javascript'),
+    python: () => import('@shikijs/langs/python'),
+    html: () => import('@shikijs/langs/html'),
+    markdown: () => import('@shikijs/langs/markdown'),
   }
 
   const bundledThemes = {
-    'nord': () => import('@shikijs/themes/nord'),
+    nord: () => import('@shikijs/themes/nord'),
   }
 
   const createHighlighter = createdBundledHighlighter({
@@ -127,7 +127,7 @@ it('fine-grained bundle - custom shorthands with auto-loading', async () => {
   // Check that highlighter now has all languages loaded
   const finalHighlighter = await getSingletonHighlighter()
   const loadedLangs = finalHighlighter.getLoadedLanguages()
-  
+
   expect(loadedLangs).toContain('markdown')
   expect(loadedLangs).toContain('javascript')
   expect(loadedLangs).toContain('python')
@@ -140,7 +140,7 @@ it('fine-grained bundle - custom shorthands with auto-loading', async () => {
 it('guessEmbeddedLanguages - detects markdown code blocks', () => {
   const code = '```js\ncode\n```\n~~~python\ncode\n~~~'
   const langs = guessEmbeddedLanguages(code, 'markdown')
-  
+
   expect(langs).toContain('js')
   expect(langs).toContain('python')
 })
@@ -148,7 +148,7 @@ it('guessEmbeddedLanguages - detects markdown code blocks', () => {
 it('guessEmbeddedLanguages - detects HTML lang attributes', () => {
   const code = '<script lang="ts">code</script><style lang="scss">code</style>'
   const langs = guessEmbeddedLanguages(code, 'vue')
-  
+
   expect(langs).toContain('ts')
   expect(langs).toContain('scss')
 })
@@ -165,7 +165,7 @@ it('guessEmbeddedLanguages - only returns bundled languages when highlighter pro
 
   const code = '```js\ncode\n```\n```python\ncode\n```\n```ts\ncode\n```'
   const langs = guessEmbeddedLanguages(code, 'markdown', highlighter)
-  
+
   // Should include js and ts (bundled) but not python (not bundled)
   expect(langs).toContain('js')
   expect(langs).toContain('ts')

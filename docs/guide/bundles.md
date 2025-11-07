@@ -112,8 +112,6 @@ const highlighter = await createHighlighterCore({
   ],
   engine: createOnigurumaEngine(import('shiki/wasm'))
 })
-```
-
 #### Option 2: Dynamically Load Based on Content
 
 Use the `guessEmbeddedLanguages` utility to detect and load embedded languages dynamically:
@@ -124,7 +122,7 @@ import { createHighlighterCore, guessEmbeddedLanguages } from 'shiki/core'
 const highlighter = await createHighlighterCore({
   themes: [import('@shikijs/themes/nord')],
   langs: [import('@shikijs/langs/markdown')],
-  engine: createOnigurumaEngine(import('shiki/wasm'))
+  engine: createOnigurumaEngine(import('shiki/wasm')),
 })
 
 // Get your markdown content
@@ -135,28 +133,27 @@ const embeddedLangs = guessEmbeddedLanguages(markdownCode, 'markdown', highlight
 
 // Load them dynamically
 await Promise.all(
-  embeddedLangs.map(lang => 
-    highlighter.loadLanguage(import(`@shikijs/langs/${lang}`))
-  )
+  embeddedLangs.map(lang =>
+    highlighter.loadLanguage(import(`@shikijs/langs/${lang}`)),
+  ),
 )
 
 // Now highlight with all required languages loaded
 const html = highlighter.codeToHtml(markdownCode, {
   lang: 'markdown',
-  theme: 'nord'
+  theme: 'nord',
 })
 ```
 
-#### Option 3: Create Custom Shorthands with Auto-Loading
+#### Option 3: Create Custom Shorthands with Auto-Loading ⭐ **RECOMMENDED**
 
 For the best user experience similar to the bundle presets, create custom shorthands with automatic embedded language detection:
 
 ```ts
-import { 
-  createHighlighterCore,
-  createSingletonShorthands,
+import {
   createdBundledHighlighter,
-  guessEmbeddedLanguages 
+  createSingletonShorthands,
+  guessEmbeddedLanguages,
 } from 'shiki/core'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
@@ -178,19 +175,19 @@ const bundledThemes = {
 const createHighlighter = createdBundledHighlighter({
   langs: bundledLanguages,
   themes: bundledThemes,
-  engine: () => createOnigurumaEngine(import('shiki/wasm'))
+  engine: () => createOnigurumaEngine(import('shiki/wasm')),
 })
 
 // Create shorthands with auto-loading embedded languages
-export const { codeToHtml, codeToHast, getSingletonHighlighter } = 
-  createSingletonShorthands(createHighlighter, {
-    guessEmbeddedLanguages
+export const { codeToHtml, codeToHast, getSingletonHighlighter }
+  = createSingletonShorthands(createHighlighter, {
+    guessEmbeddedLanguages,
   })
 
 // Now you can use it like the bundle presets
 const html = await codeToHtml(markdownCode, {
   lang: 'markdown',
-  theme: 'nord'
+  theme: 'nord',
 })
 // Embedded languages in the markdown will be automatically detected and loaded!
 ```
@@ -201,4 +198,3 @@ The `guessEmbeddedLanguages` function detects languages from:
 - HTML/Vue language attributes: `lang="javascript"`
 - LaTeX environments: `\begin{language}`
 :::
-
