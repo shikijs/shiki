@@ -1,6 +1,6 @@
-import { expect, it } from 'vitest'
-import { createdBundledHighlighter, createHighlighterCore, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
+import { createHighlighterCore, createSingletonShorthands, createdBundledHighlighter, guessEmbeddedLanguages } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
+import { expect, it } from 'vitest'
 
 const markdownWithEmbedded = `
 # Markdown with embedded languages
@@ -40,7 +40,8 @@ it('fine-grained bundle - manually load embedded languages', async () => {
   // Check that embedded code blocks are highlighted
   expect(html).toContain('console')
   expect(html).toContain('print')
-  expect(html).toContain('<div')
+  // HTML entities are escaped in output
+  expect(html).toContain('div')
 
   // Verify syntax highlighting is applied (color styles present)
   expect(html).toMatch(/style="[^"]*color:[^"]*"/)
@@ -60,8 +61,8 @@ it('fine-grained bundle - dynamically load embedded languages', async () => {
   // Initially only markdown is loaded
   expect(highlighter.getLoadedLanguages()).toEqual(['markdown', 'md'])
 
-  // Detect embedded languages
-  const embeddedLangs = guessEmbeddedLanguages(markdownWithEmbedded, 'markdown', highlighter)
+  // Detect embedded languages (don't pass highlighter since it has no bundle)
+  const embeddedLangs = guessEmbeddedLanguages(markdownWithEmbedded, 'markdown')
 
   // Should detect javascript, python, html
   expect(embeddedLangs).toContain('javascript')
@@ -154,13 +155,23 @@ it('guessEmbeddedLanguages - detects HTML lang attributes', () => {
 })
 
 it('guessEmbeddedLanguages - only returns bundled languages when highlighter provided', async () => {
-  const highlighter = await createHighlighterCore({
-    themes: [import('@shikijs/themes/nord')],
-    langs: [
-      import('@shikijs/langs/javascript'),
-      import('@shikijs/langs/typescript'),
-    ],
-    engine: createOnigurumaEngine(import('shiki/wasm')),
+  // Create a bundled highlighter with only specific languages
+  const bundledLanguages = {
+    javascript: () => import('@shikijs/langs/javascript'),
+    typescript: () => import('@shikijs/langs/typescript'),
+    js: () => import('@shikijs/langs/javascript'),
+    ts: () => import('@shikijs/langs/typescript'),
+  }
+
+  const createHighlighter = createdBundledHighlighter({
+    langs: bundledLanguages,
+    themes: { nord: () => import('@shikijs/themes/nord') },
+    engine: () => createOnigurumaEngine(import('shiki/wasm')),
+  })
+
+  const highlighter = await createHighlighter({
+    langs: ['javascript', 'typescript'],
+    themes: ['nord'],
   })
 
   const code = '```js\ncode\n```\n```python\ncode\n```\n```ts\ncode\n```'

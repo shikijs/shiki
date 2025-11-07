@@ -110,8 +110,10 @@ const highlighter = await createHighlighterCore({
     import('@shikijs/langs/python'),
     // ...add other languages you need
   ],
-  engine: createOnigurumaEngine(import('shiki/wasm'))
+  engine: createOnigurumaEngine(import('shiki/wasm')),
 })
+```
+
 #### Option 2: Dynamically Load Based on Content
 
 Use the `guessEmbeddedLanguages` utility to detect and load embedded languages dynamically:
