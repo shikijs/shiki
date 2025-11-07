@@ -173,8 +173,12 @@ function rehypeShikiFromHighlighter(
             )
             if (originalCodeNode) {
               if (originalCodeNode.properties) {
+                // Exclude className and metastring from original properties
+                // className: Shiki generates its own for syntax highlighting
+                // metastring: Should be in data.meta, not as an HTML attribute
+                const { className, metastring, ...otherProps } = originalCodeNode.properties
                 codeElement.properties = {
-                  ...originalCodeNode.properties,
+                  ...otherProps,
                   ...codeElement.properties,
                 }
               }
