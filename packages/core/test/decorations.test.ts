@@ -153,6 +153,64 @@ describe('decorations', () => {
     await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/adjacent.html')
   })
+
+  it('works with structure inline', async () => {
+    const html = await codeToHtml('const foo = "bar"', {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      structure: 'inline',
+      decorations: [
+        {
+          start: { line: 0, character: 6 },
+          end: { line: 0, character: 9 },
+          properties: { class: 'highlighted' },
+        },
+        {
+          start: { line: 0, character: 12 },
+          end: { line: 0, character: 17 },
+          properties: { class: 'highlighted-body' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/inline.html')
+  })
+
+  it('works with structure inline multiline', async () => {
+    const multilineCode = `const x = 1
+const y = 2
+const z = 3`
+
+    const html = await codeToHtml(multilineCode, {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      structure: 'inline',
+      decorations: [
+        // Highlight "x" in first line
+        {
+          start: { line: 0, character: 6 },
+          end: { line: 0, character: 7 },
+          properties: { class: 'highlighted' },
+        },
+        // Highlight "y" in second line
+        {
+          start: { line: 1, character: 6 },
+          end: { line: 1, character: 7 },
+          properties: { class: 'highlighted-body' },
+        },
+        // Highlight across lines
+        {
+          start: { line: 1, character: 10 },
+          end: { line: 2, character: 6 },
+          properties: { class: 'highlighted-border' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/inline-multiline.html')
+  })
 })
 
 describe('decorations errors', () => {
