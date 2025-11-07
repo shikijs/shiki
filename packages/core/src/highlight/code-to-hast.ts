@@ -207,6 +207,9 @@ export function tokensToHast(
       lineNodes.push(lineNode)
       lines.push(lineNode)
     }
+    else if (structure === 'inline') {
+      lineNodes.push(lineNode)
+    }
   })
 
   if (structure === 'classic') {
@@ -219,6 +222,55 @@ export function tokensToHast(
       preNode = transformer?.pre?.call(context, preNode) || preNode
 
     root.children.push(preNode)
+  }
+  else if (structure === 'inline') {
+    // For inline structure, we need to invoke code hooks for transformers like decorations
+    // Build a synthetic code structure from the root's children
+    const syntheticLines: Element[] = []
+    let currentLine: Element = {
+      type: 'element',
+      tagName: 'span',
+      properties: { class: 'line' },
+      children: [],
+    }
+
+    for (const child of root.children) {
+      if (child.type === 'element' && child.tagName === 'br') {
+        syntheticLines.push(currentLine)
+        currentLine = {
+          type: 'element',
+          tagName: 'span',
+          properties: { class: 'line' },
+          children: [],
+        }
+      }
+      else if (child.type === 'element' || child.type === 'text') {
+        currentLine.children.push(child)
+      }
+    }
+    syntheticLines.push(currentLine)
+
+    const syntheticCode: Element = {
+      type: 'element',
+      tagName: 'code',
+      properties: {},
+      children: syntheticLines,
+    }
+
+    let transformedCode = syntheticCode
+    for (const transformer of transformers)
+      transformedCode = transformer?.code?.call(context, transformedCode) || transformedCode
+
+    // Extract the transformed children back to root
+    root.children = []
+    for (let i = 0; i < transformedCode.children.length; i++) {
+      if (i > 0)
+        root.children.push({ type: 'element', tagName: 'br', properties: {}, children: [] })
+
+      const line = transformedCode.children[i]
+      if (line.type === 'element')
+        root.children.push(...line.children)
+    }
   }
 
   let result = root
