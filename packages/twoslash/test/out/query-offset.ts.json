@@ -52,14 +52,17 @@
                       "value": "foo",
                       "tagName": "span",
                       "properties": {
-                        "class": "twoslash-hover twoslash-query-presisted"
+                        "class": "twoslash-hover twoslash-query-persisted",
+                        "data-twoslash-query": "true",
+                        "data-persistent": "true"
                       },
                       "children": [
                         {
                           "type": "element",
                           "tagName": "span",
                           "properties": {
-                            "class": "twoslash-popup-container"
+                            "class": "twoslash-popup-container",
+                            "data-twoslash-popup-type": "query"
                           },
                           "children": [
                             {
@@ -293,14 +296,17 @@
                       "value": "bar",
                       "tagName": "span",
                       "properties": {
-                        "class": "twoslash-hover twoslash-query-presisted"
+                        "class": "twoslash-hover twoslash-query-persisted",
+                        "data-twoslash-query": "true",
+                        "data-persistent": "true"
                       },
                       "children": [
                         {
                           "type": "element",
                           "tagName": "span",
                           "properties": {
-                            "class": "twoslash-popup-container"
+                            "class": "twoslash-popup-container",
+                            "data-twoslash-popup-type": "query"
                           },
                           "children": [
                             {
@@ -534,14 +540,17 @@
                       "value": "baz",
                       "tagName": "span",
                       "properties": {
-                        "class": "twoslash-hover twoslash-query-presisted"
+                        "class": "twoslash-hover twoslash-query-persisted",
+                        "data-twoslash-query": "true",
+                        "data-persistent": "true"
                       },
                       "children": [
                         {
                           "type": "element",
                           "tagName": "span",
                           "properties": {
-                            "class": "twoslash-popup-container"
+                            "class": "twoslash-popup-container",
+                            "data-twoslash-popup-type": "query"
                           },
                           "children": [
                             {

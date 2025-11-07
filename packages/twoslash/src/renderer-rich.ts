@@ -390,7 +390,8 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'span',
           properties: {
-            class: ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
+            'class': ['twoslash-popup-container', classExtra].filter(Boolean).join(' '),
+            'data-twoslash-popup-type': 'query',
           },
           children: [
             {
@@ -410,7 +411,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'span',
           properties: {
-            class: 'twoslash-hover twoslash-query-presisted',
+            'class': 'twoslash-hover twoslash-query-persisted',
+            'data-twoslash-query': 'true',
+            'data-persistent': 'true',
           },
           children: hast?.queryCompose
             ? hast?.queryCompose({ popup, token: node })
