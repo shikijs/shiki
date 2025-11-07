@@ -16,6 +16,9 @@
     "bench": "pnpm -r run bench:prepare && vitest bench",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "monaco-editor": "catalog:"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:cli",
     "@antfu/ni": "catalog:cli",

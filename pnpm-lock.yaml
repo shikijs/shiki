@@ -275,6 +275,10 @@ overrides:
 importers:
 
   .:
+    dependencies:
+      monaco-editor:
+        specifier: ^0.54.0
+        version: 0.54.0
     devDependencies:
       '@antfu/eslint-config':
         specifier: catalog:cli
@@ -3820,6 +3824,9 @@ packages:
 
   monaco-editor-core@0.54.0:
     resolution: {integrity: sha512-0zQ0Ny1QguMdOicIyRgvgK5le2jxf6sOI6lpFlCXoYD2eQDuD+C3hvAxXDCCzzZkDaIN38BcXxCRu1gj9ZWPZA==}
+
+  monaco-editor@0.54.0:
+    resolution: {integrity: sha512-hx45SEUoLatgWxHKCmlLJH81xBo0uXP4sRkESUpmDQevfi+e7K1VuiSprK6UpQ8u4zOcKNiH0pMvHvlMWA/4cw==}
 
   mrmime@2.0.0:
     resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==}
@@ -8432,6 +8439,11 @@ snapshots:
       ufo: 1.6.1
 
   monaco-editor-core@0.54.0:
+    dependencies:
+      dompurify: 3.1.7
+      marked: 14.0.0
+
+  monaco-editor@0.54.0:
     dependencies:
       dompurify: 3.1.7
       marked: 14.0.0
