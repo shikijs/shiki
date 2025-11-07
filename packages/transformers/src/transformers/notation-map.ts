@@ -25,7 +25,7 @@ export function transformerNotationMap(
 
   return createCommentNotationTransformer(
     name,
-    new RegExp(`\\s*\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:\\d+)?\\]`),
+    new RegExp(`#?\\s*\\[!code (${Object.keys(classMap).map(escapeRegExp).join('|')})(:\\d+)?\\]`, 'gi'),
     function ([_, match, range = ':1'], _line, _comment, lines, index) {
       const lineNum = Number.parseInt(range.slice(1), 10)
 
