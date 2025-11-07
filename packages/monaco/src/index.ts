@@ -36,11 +36,12 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 
       for (const s of scopes) {
         if (s && (foreground || background || fontStyle)) {
+          const normalizedFontStyle = normalizeFontStyleString(fontStyle)
           rules.push({
             token: s,
             foreground: normalizeColor(foreground),
             background: normalizeColor(background),
-            fontStyle,
+            fontStyle: normalizedFontStyle,
           })
         }
       }
@@ -76,8 +77,7 @@ export function shikiToMonaco(
   }
 
   const colorMap: string[] = []
-  const colorToScopeMap = new Map<string, string>()
-  const colorAndStyleToScopeMap = new Map<string, string>()
+  const colorStyleToScopeMap = new Map<string, string>()
 
   // Because Monaco does not have the API of reading the current theme,
   // We hijack it here to keep track of the current theme.
@@ -89,7 +89,7 @@ export function shikiToMonaco(
     ret.colorMap.forEach((color, i) => {
       colorMap[i] = color
     })
-    colorToScopeMap.clear()
+    colorStyleToScopeMap.clear()
     theme?.rules.forEach((rule) => {
       const c = normalizeColor(rule.foreground)
       if (!c)
@@ -97,14 +97,10 @@ export function shikiToMonaco(
 
       const normalizedStyle = normalizeFontStyleString(rule.fontStyle)
 
-      if (normalizedStyle) {
-        const key = makeColorAndStyleKey(c, normalizedStyle)
-        if (!colorAndStyleToScopeMap.has(key))
-          colorAndStyleToScopeMap.set(key, rule.token)
-      }
+      const key = normalizedStyle ? `${c}|${normalizedStyle}` : c
 
-      if (!colorToScopeMap.has(c))
-        colorToScopeMap.set(c, rule.token)
+      if (!colorStyleToScopeMap.has(key))
+        colorStyleToScopeMap.set(key, rule.token)
     })
     _setTheme(themeName)
   }
@@ -115,12 +111,11 @@ export function shikiToMonaco(
   function findScopeByColorAndStyle(color: string, fontStyle: FontStyle): string | undefined {
     const normalizedStyle = normalizeFontStyleBits(fontStyle)
     if (normalizedStyle) {
-      const key = makeColorAndStyleKey(color, normalizedStyle)
-      const scoped = colorAndStyleToScopeMap.get(key)
+      const scoped = colorStyleToScopeMap.get(`${color}|${normalizedStyle}`)
       if (scoped)
         return scoped
     }
-    return colorToScopeMap.get(color)
+    return colorStyleToScopeMap.get(color)
   }
 
   // Do not attempt to tokenize if a line is too long
@@ -203,7 +198,7 @@ function normalizeFontStyleString(fontStyle?: string): string {
       .map(style => style.trim().toLowerCase())
       .filter(Boolean),
   )
-
+  // Remove default or empty style markers sometimes present in theme data
   styles.delete('')
   styles.delete('normal')
   styles.delete('none')
@@ -219,8 +214,4 @@ function normalizeFontStyleString(fontStyle?: string): string {
     ordered.push('strikethrough')
 
   return ordered.join(' ')
-}
-
-function makeColorAndStyleKey(color: string, style: string): string {
-  return `${color}|${style}`
 }
