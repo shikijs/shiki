@@ -26,20 +26,14 @@ import { codeToHtml } from './shiki.bundle'
 const html = await codeToHtml(code, { lang: 'typescript', theme: 'light-plus' })
 ```
 
-::: warning pnpm Users
-If you're using pnpm, you may need to enable dependency hoisting for the generated bundle to work correctly. Add the following to your `.npmrc` file:
+::: tip
+Make sure to install the necessary Shiki packages in your `package.json` that the generated bundle depends on:
 
-```ini
-shamefully-hoist=true
+```bash
+npm install shiki
 ```
 
-Or use the `public-hoist-pattern` option for more granular control:
-
-```ini
-public-hoist-pattern[]=@shikijs/*
-```
-
-This ensures that Shiki's dependencies are accessible to the generated bundle.
+This ensures all dependencies are properly resolved.
 :::
 
 ### Programmatic
