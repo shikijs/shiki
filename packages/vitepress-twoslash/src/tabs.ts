@@ -36,7 +36,7 @@ function waitForActiveClass(el: Element): Promise<void> {
   })
 }
 
-/** Recompute the code group poppers once they're active */
+/** Recompute group's poppers once group becomes active */
 function recomputeCodeGroupPoppers(el: HTMLInputElement): boolean {
   const next = getNextCodeGroup(el)
   if (!next)
@@ -52,7 +52,7 @@ function recomputeCodeGroupPoppers(el: HTMLInputElement): boolean {
 }
 
 /**
- * Get upcoming group's codeblcok element
+ * Get upcoming group's codeblock element
  * @note Based on https://github.com/vuejs/vitepress/blob/main/src/client/app/composables/codeGroups.ts#L16
  */
 function getNextCodeGroup(el: HTMLInputElement): Element | undefined {
