@@ -250,34 +250,25 @@ To use `shiki` in the browser via CDN, you can use [esm.run](https://esm.run) or
 It's quite efficient as it will only load the languages and themes on demand. For the code snippet above, only four requests will be fired (`shiki`, `@shikijs/themes/vitesse-light`, `@shikijs/langs/javascript`, `shiki/wasm.mjs`), with around 200KB data transferred in total.
 
 [Demo](https://jsfiddle.net/t7brz23v/)
+// Updated Example: Using Shiki in Cloudflare Workers (v1+ compatible)
 
-### Cloudflare Workers
+import { codeToHtml, setOnigasmWasm } from 'shiki'
 
-Cloudflare Workers [does not support initializing WebAssembly from binary data](https://community.cloudflare.com/t/fixed-cloudflare-workers-slow-with-moderate-sized-webassembly-bindings/184668/3), so the default wasm build won't work. You need to upload the wasm as assets and import it directly.
-
-Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-bundle) approach to reduce the bundle size.
-
-```ts twoslash theme:nord
-// @twoslash-cache: {"v":1,"hash":"bfe5872ac6921f803b571ba86b1e03cfb73567b00d834a8de253d59ebf892256","data":"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"}
-// @noErrors
-import js from '@shikijs/langs/javascript'
-import nord from '@shikijs/themes/nord'
-import { createHighlighterCore, loadWasm } from 'shiki/core'
-
-// import wasm as assets
-await loadWasm(import('shiki/onig.wasm'))
+// Cloudflare Workers cannot import binary modules directly.
+// Instead, host `onig.wasm` as a static asset and fetch it.
+const wasm = await fetch('/onig.wasm')
+await setOnigasmWasm(await wasm.arrayBuffer())
 
 export default {
-  async fetch() {
-    const highlighter = await createHighlighterCore({
-      themes: [nord],
-      langs: [js],
+async fetch() {
+const html = await codeToHtml('console.log("Hello, Shiki!");', {
+lang: 'js',
+theme: 'nord',
+})
+
+    return new Response(html, {
+      headers: { 'content-type': 'text/html; charset=utf-8' },
     })
 
-    return new Response(highlighter.codeToHtml('console.log(\'shiki\');', {
-      theme: 'nord',
-      lang: 'js'
-    }))
-  },
+},
 }
-```
