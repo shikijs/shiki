@@ -64,11 +64,6 @@ jobs:
       matrix:
         node: [22.x, 20.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          - node: 20.x
-            os: ubuntu-latest
-          - node: 18.x
-            os: ubuntu-latest
       fail-fast: false
 
     permissions:
