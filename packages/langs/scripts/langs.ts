@@ -106,6 +106,13 @@ export async function loadLangs() {
       json.embeddedLangs = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
     }
 
+    if (lang.name === 'shellscript') {
+      json.repository.argument_context = {
+        ...json.repository.argument_context,
+        name: 'string.unquoted.argument.shell',
+      }
+    }
+
     resolvedLangs.push(json)
   }
 
