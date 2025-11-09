@@ -1,5 +1,6 @@
 import type { App } from 'vue'
-import FloatingVue, { recomputeAllPoppers } from 'floating-vue'
+import FloatingVue from 'floating-vue'
+import { handleTabClicks } from './tabs'
 
 const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -14,10 +15,8 @@ const TwoslashFloatingVue = {
   install: (app: App, options: FloatingVueConfig = {}) => {
     if (typeof window !== 'undefined') {
       // Recompute poppers when clicking on a tab
-      window.addEventListener('click', (e) => {
-        const path = e.composedPath()
-        if (path.some((el: any) => el?.classList?.contains?.('vp-code-group') || el?.classList?.contains?.('tabs')))
-          recomputeAllPoppers()
+      window.addEventListener('click', async (e) => {
+        handleTabClicks(e)
       }, { passive: true })
 
       // On desktop where the poppers are shown on hover, make sure that they do
