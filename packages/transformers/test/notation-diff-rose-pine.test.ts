@@ -198,4 +198,26 @@ const c = 3 // [!code highlight]`
     expect(html).toContain('diff add')
     expect(html).not.toContain('[!code ++]')
   })
+
+  it('handles actual multi-token comment scenario from rose-pine theme', async () => {
+    const highlighter = await createHighlighter({
+      themes: ['rose-pine'],
+      langs: ['javascript'],
+    })
+
+    // This specifically tests the case where rose-pine theme splits the comment
+    // into separate tokens: "//" and " [!code --]"
+    const code = 'const i = 9 // [!code --]'
+
+    const html = highlighter.codeToHtml(code, {
+      lang: 'javascript',
+      theme: 'rose-pine',
+      transformers: [transformerNotationDiff()],
+    })
+
+    // Verify the multi-token handling works
+    expect(html).toContain('has-diff')
+    expect(html).toContain('diff remove')
+    expect(html).not.toContain('[!code --]')
+  })
 })
