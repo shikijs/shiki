@@ -161,4 +161,41 @@ const c = 3 // [!code highlight]`
     expect(html).not.toContain('has-diff')
     expect(html).toContain('regular comment')
   })
+
+  it('handles JSX parsing without notation', async () => {
+    const highlighter = await createHighlighter({
+      themes: ['rose-pine'],
+      langs: ['jsx'],
+    })
+
+    const code = 'const g = 7 {/* regular comment */}'
+
+    const html = highlighter.codeToHtml(code, {
+      lang: 'jsx',
+      theme: 'rose-pine',
+      transformers: [transformerNotationDiff()],
+    })
+
+    expect(html).not.toContain('has-diff')
+    expect(html).toContain('regular comment')
+  })
+
+  it('handles v1 match algorithm', async () => {
+    const highlighter = await createHighlighter({
+      themes: ['rose-pine'],
+      langs: ['javascript'],
+    })
+
+    const code = 'const h = 8 // [!code ++]'
+
+    const html = highlighter.codeToHtml(code, {
+      lang: 'javascript',
+      theme: 'rose-pine',
+      transformers: [transformerNotationDiff({ matchAlgorithm: 'v1' })],
+    })
+
+    expect(html).toContain('has-diff')
+    expect(html).toContain('diff add')
+    expect(html).not.toContain('[!code ++]')
+  })
 })
