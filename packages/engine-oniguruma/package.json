@@ -28,6 +28,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -cw",
