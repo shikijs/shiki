@@ -72,7 +72,27 @@ function rehypeShikiFromHighlighter(
       code = code.slice(0, -1)
 
     try {
+      // NOTE: per the `@shikijs/types` contract the `postprocess` hook is only
+      // invoked when producing HTML strings (i.e. `codeToHtml`). Rehype
+      // integrations operate on HAST. Running `postprocess` here would require
+      // converting HAST -> HTML -> run postprocess -> parse back to HAST which
+      // changes the semantics and surprises users expecting HAST-only
+      // transformers.
+      //
+      // If you need to run HTML-based postprocessing with rehype, apply a
+      // root transformer that converts the HAST fragment to HTML using
+      // `hast-util-to-html`, runs your HTML transformers, then converts back
+      // with `hast-util-from-html`.
+      //
+      // Example (inside a root transformer):
+      //   const html = toHtml(fragment)
+      //   const newHtml = myPostprocess(html)
+      //   fragment = fromHtml(newHtml, { fragment: true })
+      //
+      // We therefore keep the HAST-only path here.
+
       const fragment = highlighter.codeToHast(code, codeOptions)
+
       cache?.set(cacheKey, fragment)
       return fragment
     }
@@ -85,13 +105,11 @@ function rehypeShikiFromHighlighter(
   }
 
   return (tree) => {
-    // use this queue if lazy is enabled
     const queue: Promise<void>[] = []
 
     visit(tree, 'element', (node, index, parent) => {
       let handler: RehypeShikiHandler | undefined
 
-      // needed for hast node replacement
       if (!parent || index == null)
         return
 
@@ -148,7 +166,6 @@ function rehypeShikiFromHighlighter(
 
       if (lazyLoad) {
         try {
-          // passed language is checked in sync, promise `.catch()` wouldn't work
           queue.push(highlighter.loadLanguage(lang).then(() => processNode(lang)))
         }
         catch (error) {
@@ -163,7 +180,6 @@ function rehypeShikiFromHighlighter(
         processNode(lang)
       }
 
-      // don't visit processed nodes
       return 'skip'
     })
 
