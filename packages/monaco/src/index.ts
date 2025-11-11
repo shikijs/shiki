@@ -1,7 +1,7 @@
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
 import type monacoNs from 'monaco-editor-core'
 import type { MonacoLineToken } from './types'
-import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
+import { EncodedTokenMetadata, FontStyle, INITIAL } from '@shikijs/vscode-textmate'
 import { TokenizerState } from './tokenizer'
 import { normalizeColor } from './utils'
 
@@ -36,11 +36,12 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 
       for (const s of scopes) {
         if (s && (foreground || background || fontStyle)) {
+          const normalizedFontStyle = normalizeFontStyleString(fontStyle)
           rules.push({
             token: s,
             foreground: normalizeColor(foreground),
             background: normalizeColor(background),
-            fontStyle,
+            fontStyle: normalizedFontStyle,
           })
         }
       }
@@ -76,7 +77,7 @@ export function shikiToMonaco(
   }
 
   const colorMap: string[] = []
-  const colorToScopeMap = new Map<string, string>()
+  const colorStyleToScopeMap = new Map<string, string>()
 
   // Because Monaco does not have the API of reading the current theme,
   // We hijack it here to keep track of the current theme.
@@ -88,11 +89,18 @@ export function shikiToMonaco(
     ret.colorMap.forEach((color, i) => {
       colorMap[i] = color
     })
-    colorToScopeMap.clear()
+    colorStyleToScopeMap.clear()
     theme?.rules.forEach((rule) => {
       const c = normalizeColor(rule.foreground)
-      if (c && !colorToScopeMap.has(c))
-        colorToScopeMap.set(c, rule.token)
+      if (!c)
+        return
+
+      const normalizedStyle = normalizeFontStyleString(rule.fontStyle)
+
+      const key = normalizedStyle ? `${c}|${normalizedStyle}` : c
+
+      if (!colorStyleToScopeMap.has(key))
+        colorStyleToScopeMap.set(key, rule.token)
     })
     _setTheme(themeName)
   }
@@ -100,8 +108,14 @@ export function shikiToMonaco(
   // Set the first theme as the default theme
   monaco.editor.setTheme(themeIds[0])
 
-  function findScopeByColor(color: string): string | undefined {
-    return colorToScopeMap.get(color)
+  function findScopeByColorAndStyle(color: string, fontStyle: FontStyle): string | undefined {
+    const normalizedStyle = normalizeFontStyleBits(fontStyle)
+    if (normalizedStyle) {
+      const scoped = colorStyleToScopeMap.get(`${color}|${normalizedStyle}`)
+      if (scoped)
+        return scoped
+    }
+    return colorStyleToScopeMap.get(color)
   }
 
   // Do not attempt to tokenize if a line is too long
@@ -141,10 +155,11 @@ export function shikiToMonaco(
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
             const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
+            const fontStyle = EncodedTokenMetadata.getFontStyle(metadata)
 
             // Because Monaco only support one scope per token,
-            // we workaround this to use color to trace back the scope
-            const scope = findScopeByColor(color) || ''
+            // we workaround this to use color (and font style when available) to trace back the scope
+            const scope = color ? (findScopeByColorAndStyle(color, fontStyle) || '') : ''
             tokens.push({ startIndex, scopes: scope })
           }
 
@@ -153,4 +168,50 @@ export function shikiToMonaco(
       })
     }
   }
+}
+
+function normalizeFontStyleBits(fontStyle: FontStyle): string {
+  if (fontStyle <= FontStyle.None)
+    return ''
+
+  const styles: string[] = []
+
+  if (fontStyle & FontStyle.Italic)
+    styles.push('italic')
+  if (fontStyle & FontStyle.Bold)
+    styles.push('bold')
+  if (fontStyle & FontStyle.Underline)
+    styles.push('underline')
+  if (fontStyle & FontStyle.Strikethrough)
+    styles.push('strikethrough')
+
+  return styles.join(' ')
+}
+
+function normalizeFontStyleString(fontStyle?: string): string {
+  if (!fontStyle)
+    return ''
+
+  const styles = new Set(
+    fontStyle
+      .split(/[\s,]+/)
+      .map(style => style.trim().toLowerCase())
+      .filter(Boolean),
+  )
+  // Remove default or empty style markers sometimes present in theme data
+  styles.delete('')
+  styles.delete('normal')
+  styles.delete('none')
+
+  const ordered: string[] = []
+  if (styles.has('italic'))
+    ordered.push('italic')
+  if (styles.has('bold'))
+    ordered.push('bold')
+  if (styles.has('underline'))
+    ordered.push('underline')
+  if (styles.has('strikethrough') || styles.has('line-through'))
+    ordered.push('strikethrough')
+
+  return ordered.join(' ')
 }
