@@ -93,6 +93,22 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
       await shiki.loadTheme(...Object.keys(bundledThemes) as any)
     },
     codeTransformers: [
+      {
+        name: 'shiki:fix-shell-angle-placeholders',
+        enforce: 'pre',
+        preprocess(code, options) {
+          const lang = options.lang as string | undefined
+          if (!lang)
+            return
+          if (!/^(?:sh|bash|zsh|shell|shellscript)$/.test(lang))
+            return
+
+          return code.replaceAll(/<[\w-]+>/g, (match) => {
+            const inner = match.slice(1, -1) // remove < and >
+            return `&lt;${inner}&gt;`
+          })
+        },
+      },
       transformerMetaWordHighlight(),
       transformerNotationWordHighlight({
         matchAlgorithm: 'v3',
