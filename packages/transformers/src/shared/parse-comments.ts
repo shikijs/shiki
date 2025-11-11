@@ -7,6 +7,8 @@ export type ParsedComments = {
   info: [prefix: string, content: string, suffix?: string]
   isLineCommentOnly: boolean
   isJsxStyle: boolean
+  // For multi-token comments, store the additional tokens that need to be processed
+  additionalTokens?: Element[]
 }[]
 
 /**
@@ -96,7 +98,38 @@ export function parseComments(
         continue
 
       const isLast = i === elements.length - 1
-      const match = matchToken(head.value, isLast)
+      let match = matchToken(head.value, isLast)
+      let additionalTokens: Element[] | undefined
+
+      // Handle multi-token comments (e.g., rose-pine theme splits "//" and " [!code --]")
+      // Check if current token might be the second part of a split comment
+      if (!match && i > 0 && head.value.trim().startsWith('[!code')) {
+        // Look back to see if the previous token contains the comment prefix
+        const prevToken = elements[i - 1]
+        if (prevToken?.type === 'element') {
+          const prevHead = prevToken.children.at(0)
+          if (prevHead?.type === 'text' && prevHead.value.includes('//')) {
+            const combinedValue = prevHead.value + head.value
+            const combinedMatch = matchToken(combinedValue, isLast)
+            if (combinedMatch) {
+              match = combinedMatch
+              // We need to use the previous token as the main token and this as additional
+              // But we need to adjust our approach since we're processing the second token
+              // Let's create a special case for this
+              out.push({
+                info: combinedMatch,
+                line,
+                token: prevToken, // Use the previous token as the main token
+                isLineCommentOnly: elements.length === 2 && prevToken.children.length === 1 && token.children.length === 1,
+                isJsxStyle: false,
+                additionalTokens: [token], // Current token is the additional one
+              })
+              continue // Skip normal processing for this token
+            }
+          }
+        }
+      }
+
       if (!match)
         continue
 
@@ -108,6 +141,7 @@ export function parseComments(
           token,
           isLineCommentOnly: elements.length === 3 && token.children.length === 1,
           isJsxStyle,
+          additionalTokens,
         })
       }
       else {
@@ -117,6 +151,7 @@ export function parseComments(
           token,
           isLineCommentOnly: elements.length === 1 && token.children.length === 1,
           isJsxStyle: false,
+          additionalTokens,
         })
       }
     }
