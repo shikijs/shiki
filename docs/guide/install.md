@@ -262,16 +262,18 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 // @noErrors
 import js from '@shikijs/langs/javascript'
 import nord from '@shikijs/themes/nord'
-import { createHighlighterCore, loadWasm } from 'shiki/core'
+import { createHighlighterCore } from 'shiki/core'
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
-// import wasm as assets
-await loadWasm(import('shiki/onig.wasm'))
+// import wasm as assets (Cloudflare Workers requires importing the wasm file)
+const engine = createOnigurumaEngine(() => import('shiki/onig.wasm'))
 
 export default {
   async fetch() {
     const highlighter = await createHighlighterCore({
       themes: [nord],
       langs: [js],
+      engine,
     })
 
     return new Response(highlighter.codeToHtml('console.log(\'shiki\');', {
