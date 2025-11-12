@@ -28,11 +28,16 @@ pnpm add -D @shikijs/transformers
 bun add -D @shikijs/transformers
 ```
 
+```sh [deno]
+deno add npm:@shikijs/transformers
+```
+
 :::
 
 ## Usage
 
 ```ts twoslash
+// @twoslash-cache: {"v":1,"hash":"8efec5d385627b3d23e03e4c9bdf13f9a3c80178f3105cfb878cd54cef1eacb9","data":"N4Igdg9gJgpgziAXAbVAFwJ4AcZJACwgDcYAnEAGhDRgA808AKAQwBsBLZuASgAIAzAK5gAxmnYQwvNKWZg4/CKQC2ZAHIQ0zcZIAi7fv0YQsO+QH5EvACqz5iles3aJYfYYDyp1zysBlfHYAa3ZbOQUlVVIAHTB2ZSwlNGk7CMdSDS0zd35KECgIEQREEABVOBheAANkAEIRaEqAaiaAXSreOShquobYXgBaAfbpCF5lZlIgzqhYbq7eUhhlYhhujjB4ADo8uC1SBkQAZgAWKlYYMABzNHwkACYjqn2rmEPqVIcozJc9A1zzuxNg8qCJ8JNmGIyA8AL4UdDYXAlQgkcjPOjvFgcLh8BryZJ9GDWCAACTQylYVkYhKse1IQKuFF4JjMcCsAGFGsSSVw0F5WQAeABCwigFygABk5FdBMxXkyRWAxWtrPhljAAHx8AC8Gt4AAVSBBlOwKgK6QyNbF4okDrxCdzyaxdvtDgBGN0ABnOlxud0QXuek1e7wdpKdeQ2SIAbKDwbIoeREPc4QicHgUdD0fQ8Hi9vbGlZoiA8xALltWBArowAORq1iVmvcYsuybuk5nEAXa63JCdl5vXONSNApEATjjEMTSGjqeoiIzqzR1AxQ/xvHwTtpMgZrYOSDdAA5vV3fb3EP3g4PkRHAcCAyewVOaEnZ/D5+nkUu8jQcyUsZwPAFrAjoUtSha8Ba1xMiyPgclypK8vyPjCqK4pStcsryrwirKlAqrqlqViGsapowOaO7XFacQJEkwFEuGFJ7u6Y5PKePb+oG1BXqGCFkkxd5IlxT4Ji+B5jnOmCfgQ37Zrx640rwxaluWlbVnWMANhATYtlQextg8nqdt2fp9kGpAhkOsAjvewnxpCYnHJ6kkLl+qI/qu/5YEaOAHBgfCsNKRbUHAukgPp+7Jm6xlnv6l4WdeXbSjZQlupOonQsmLnSZmy6/pi3kmGQmB8JysDIZIcB+AyFwEaoqFKuKdWalstzqlYzUAEowFcpoyL8YAAIJgBgvAAD68H4lFXBK7AvmwpRxJIDV4c1TJQVcGrMQ89yHj6HFIAArOZlklG1qgpQe9zpQ5mUpu+UlIjJ7lyUwhW+SVNifJEZAVfIrXfekcCWJNgQhGE9g/aQyCtONvCijA/CjlAeQFEUeAQ2kURwAISjSGqoPBOwvBYOwOBRjsemug8JzHexpkBtd3EJe8/WQ0Dl0BmxIm3Um91pk9uUeX+IAATiKThF8ThZK4OTGN4lUg5jUsZM42T/H9viE+DgNRNatF2mzWPSwNOSo4UxRlBUPT1I0vAtCMCw1Lb/RDCMaBjBMUwzHMnRKosyyrOso5wJT4XU8m0Z0yZ56PCdiVGyrPzq4YnPRTd04XjCrSgsOJQAPT57wvR24EVz4Bw5doIgh2tPrtrJMAsS8BL7PfGrsv/BQze8IXvBbAPsQwgIRrKLwNYAAJwGD7AAFZwPnidQ3ANb13RTdSPRoGsN3YDD/wo/j9PROr2AsR5gSdvatUKkwBWVa1vWjbcFU5+Vckm4Urw1/MAA7swc0t6MVYOBWATIN4t0CtcKwNY0Ar13i3c6MAYGQFIFAGsCDW7G1IGyYuPdEG6xNinIw3AmR9xLv0MuFd2BVzrpvFufcB5bB7jnIe3A8iqC0EgUAGJLhwFcHgOBIAYQwiAA==="}
 // [!code highlight:5]
 import {
   transformerNotationDiff,
@@ -323,7 +328,7 @@ Render whitespaces (tabs and spaces) as individual spans, with classes `tab` and
 
 With some additional CSS rules, you can make it look like this:
 
-<div class="language-js vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki shiki-themes vitesse-light vitesse-dark vp-code" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;" tabindex="0"><code><span class="line"><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676;">function</span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">block</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">{</span></span>
+<div class="language-js vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki shiki-themes vitesse-light vitesse-dark" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;" tabindex="0"><code><span class="line"><span style="--shiki-light:#AB5959;--shiki-dark:#CB7676;">function</span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">block</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">{</span></span>
 <span class="line"><span class="space"> </span><span class="space"> </span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">space</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span></span>
 <span class="line"><span class="tab">&#9;</span><span class="tab">&#9;</span><span style="--shiki-light:#59873A;--shiki-dark:#80A665;">tab</span><span style="--shiki-light:#999999;--shiki-dark:#666666;">(</span><span class="space"> </span><span style="--shiki-light:#999999;--shiki-dark:#666666;">)</span><span style="--shiki-light:#393A34;--shiki-dark:#DBD7CAEE;"> </span></span>
 <span class="line"><span style="--shiki-light:#999999;--shiki-dark:#666666;">}</span></span></code></pre></div>
@@ -331,21 +336,63 @@ With some additional CSS rules, you can make it look like this:
 ::: details Example CSS
 
 ```css
-.vp-code .tab,
-.vp-code .space {
+pre.shiki .tab,
+pre.shiki .space {
   position: relative;
 }
 
-.vp-code .tab::before {
+pre.shiki .tab::before {
   content: '⇥';
   position: absolute;
   opacity: 0.3;
 }
 
-.vp-code .space::before {
+pre.shiki .space::before {
   content: '·';
   position: absolute;
   opacity: 0.3;
+}
+```
+
+:::
+
+---
+
+### `transformerRenderIndentGuides`
+
+Render indentations as individual spans, with class `indent`.
+
+With some additional CSS rules, you can make it look like this:
+
+<div class="language-js vp-adaptive-theme"><button title="Copy Code" class="copy"></button><span class="lang">js</span><pre v-pre class="shiki shiki-themes vitesse-light vitesse-dark" style="--shiki-light:#393a34;--shiki-dark:#dbd7caee;--shiki-light-bg:#ffffff;--shiki-dark-bg:#121212;" tabindex="0"><code><span class="line"><span style="color:#CB7676">function</span><span style="color:#80A665"> func</span><span style="color:#666666">()</span><span style="color:#666666"> {</span></span>
+<span class="line"><span class="indent">  </span><span style="color:#BD976A">console</span><span style="color:#666666">.</span><span style="color:#80A665">log</span><span style="color:#666666">(</span><span style="color:#4C9A91">1</span><span style="color:#666666">);</span></span>
+<span class="line"><span class="indent" style="--indent-offset: 0ch;"></span></span>
+<span class="line"><span class="indent">  </span><span style="color:#4D9375">for</span><span style="color:#666666"> (</span><span style="color:#CB7676">const </span><span style="color:#BD976A">i</span><span style="color:#CB7676"> of</span><span style="color:#666666"> [])</span><span style="color:#666666"> {</span></span>
+<span class="line"><span class="indent">  </span><span class="indent">  </span><span style="color:#BD976A">console</span><span style="color:#666666">.</span><span style="color:#80A665">log</span><span style="color:#666666">(</span><span style="color:#4C9A91">2</span><span style="color:#666666">);</span></span>
+<span class="line"><span class="indent">  </span><span style="color:#666666">}</span></span>
+<span class="line"><span style="color:#666666">}</span></span></code></pre></div>
+
+::: details Example CSS
+
+```css
+pre.shiki .indent {
+  display: inline-block;
+  position: relative;
+  left: var(--indent-offset);
+}
+
+pre.shiki .indent:empty {
+  height: 1lh;
+  vertical-align: bottom;
+}
+
+pre.shiki .indent::before {
+  content: '';
+  position: absolute;
+  opacity: 0.15;
+  width: 1px;
+  height: 100%;
+  background-color: currentColor;
 }
 ```
 

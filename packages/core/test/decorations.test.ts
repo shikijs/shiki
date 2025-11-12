@@ -10,6 +10,9 @@ const style = `
 .highlighted-body {
   background-color: #8883;
 }
+.highlighted-border {
+  border: 1px solid #ff0000;
+}
 </style>`
 
 const code = `/**
@@ -99,6 +102,13 @@ describe('decorations', () => {
           end: code.length,
           properties: { class: 'highlighted' },
         },
+        // "ult" from "return result"
+        // Testing negative character positions
+        {
+          start: { line: 9, character: -4 },
+          end: { line: 9, character: -1 },
+          properties: { class: 'highlighted' },
+        },
       ],
     })
 
@@ -106,6 +116,100 @@ describe('decorations', () => {
 
     await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/basic.html')
+  })
+
+  it('adjacent', async () => {
+    const html = await codeToHtml('hello', {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      decorations: [
+        // Empty decoration adjacent to the trailing decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 1 },
+          properties: { class: 'highlighted-border' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 1 },
+          end: { line: 0, character: 2 },
+          properties: { class: 'highlighted' },
+        },
+        // Non empty decoration adjacent to non empty decoration.
+        {
+          start: { line: 0, character: 2 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-body' },
+        },
+        // Empty decoration adjacent to the leading decoration.
+        {
+          start: { line: 0, character: 3 },
+          end: { line: 0, character: 3 },
+          properties: { class: 'highlighted-border' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/adjacent.html')
+  })
+
+  it('works with structure inline', async () => {
+    const html = await codeToHtml('const foo = "bar"', {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      structure: 'inline',
+      decorations: [
+        {
+          start: { line: 0, character: 6 },
+          end: { line: 0, character: 9 },
+          properties: { class: 'highlighted' },
+        },
+        {
+          start: { line: 0, character: 12 },
+          end: { line: 0, character: 17 },
+          properties: { class: 'highlighted-body' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/inline.html')
+  })
+
+  it('works with structure inline multiline', async () => {
+    const multilineCode = `const x = 1
+const y = 2
+const z = 3`
+
+    const html = await codeToHtml(multilineCode, {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      structure: 'inline',
+      decorations: [
+        // Highlight "x" in first line
+        {
+          start: { line: 0, character: 6 },
+          end: { line: 0, character: 7 },
+          properties: { class: 'highlighted' },
+        },
+        // Highlight "y" in second line
+        {
+          start: { line: 1, character: 6 },
+          end: { line: 1, character: 7 },
+          properties: { class: 'highlighted-body' },
+        },
+        // Highlight across lines
+        {
+          start: { line: 1, character: 10 },
+          end: { line: 2, character: 6 },
+          properties: { class: 'highlighted-border' },
+        },
+      ],
+    })
+
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/inline-multiline.html')
   })
 })
 

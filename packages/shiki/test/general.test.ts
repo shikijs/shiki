@@ -28,7 +28,11 @@ describe('should', () => {
           "typescript",
           "python",
           "js",
+          "cjs",
+          "mjs",
           "ts",
+          "cts",
+          "mts",
           "py",
         ]
       `)
@@ -55,13 +59,17 @@ describe('should', () => {
     expect(shiki.getLoadedLanguages().sort())
       .toMatchInlineSnapshot(`
         [
+          "cjs",
           "css",
+          "cts",
           "html",
           "html-derivative",
           "javascript",
           "js",
           "json",
           "markdown-vue",
+          "mjs",
+          "mts",
           "ts",
           "typescript",
           "vue",
@@ -85,7 +93,7 @@ describe('should', () => {
     await shiki.loadLanguage('ts')
 
     expect(shiki.getLoadedLanguages().length)
-      .toMatchInlineSnapshot(`6`)
+      .toMatchInlineSnapshot(`10`)
 
     expect(shiki.getLoadedThemes())
       .toMatchInlineSnapshot(`

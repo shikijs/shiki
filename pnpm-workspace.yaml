@@ -4,111 +4,106 @@ packages:
   - playground
   - examples/*
   - docs
-  - packages/@shikijs/core/vendor/*
 catalogs:
   bundling:
-    '@rollup/plugin-alias': ^5.1.1
-    '@rollup/plugin-commonjs': ^28.0.3
+    '@rollup/plugin-alias': ^6.0.0
+    '@rollup/plugin-commonjs': ^29.0.0
     '@rollup/plugin-json': ^6.1.0
-    '@rollup/plugin-node-resolve': ^16.0.1
-    '@rollup/plugin-replace': ^6.0.2
+    '@rollup/plugin-node-resolve': ^16.0.3
+    '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^0.4.4
-    esbuild: ^0.25.2
-    rollup: ^4.40.0
+    esbuild: ^0.25.12
+    rollup: ^4.53.2
     rollup-plugin-copy: ^3.5.0
-    rollup-plugin-dts: ^6.2.1
+    rollup-plugin-dts: ^6.2.3
     rollup-plugin-esbuild: ^6.2.1
-    unbuild: ^3.5.0
-    vite: ^6.3.2
+    unbuild: ^3.6.1
+    vite: ^7.2.2
     vite-tsconfig-paths: ^5.1.4
-
   cli:
-    '@antfu/eslint-config': ^4.12.0
-    '@antfu/ni': ^24.3.0
-    bumpp: ^10.1.0
-    eslint: ^9.25.1
-    eslint-plugin-format: ^1.0.1
-    jiti: ^2.4.2
-    lint-staged: ^15.5.1
-    pinia: ^3.0.2
-    pnpm: ^10.9.0
-    prettier: ^3.5.3
-    rimraf: ^6.0.1
-    simple-git-hooks: ^2.12.1
-    taze: ^19.0.4
-    tsx: ^4.19.3
-    typescript: ^5.8.3
-    vue-tsc: ^2.2.8
-    wrangler: ^4.12.0
-
+    '@antfu/eslint-config': ^6.2.0
+    '@antfu/ni': ^27.0.1
+    bumpp: ^10.3.1
+    eslint: ^9.39.1
+    eslint-plugin-format: ^1.0.2
+    jiti: ^2.6.1
+    lint-staged: ^16.2.6
+    pinia: ^3.0.4
+    pnpm: ^10.21.0
+    prettier: ^3.6.2
+    rimraf: ^6.1.0
+    simple-git-hooks: ^2.13.1
+    taze: ^19.9.0
+    tsx: ^4.20.6
+    typescript: ^5.9.3
+    vue-tsc: ^3.1.3
+    wrangler: ^4.46.0
   docs:
-    '@unocss/reset': ^65.5.0
-    '@vueuse/core': ^13.1.0
+    '@unocss/reset': ^66.5.5
+    '@vueuse/core': ^14.0.0
     floating-vue: ^5.2.2
     fuse.js: ^7.1.0
-    unocss: ^65.5.0
-    unplugin-vue-components: ^28.5.0
-    vitepress: ^2.0.0-alpha.5
-    vitepress-plugin-group-icons: ^1.5.2
+    unocss: ^66.5.5
+    unplugin-vue-components: ^30.0.0
+    vitepress: ^2.0.0-alpha.12
+    vitepress-plugin-group-icons: ^1.6.5
     vitepress-plugin-mermaid: ^2.0.17
-    vue: ^3.5.13
-
+    vue: ^3.5.24
   icons:
-    '@iconify-json/carbon': ^1.2.8
-    '@iconify-json/codicon': ^1.2.15
+    '@iconify-json/carbon': ^1.2.14
+    '@iconify-json/codicon': ^1.2.31
     '@iconify-json/ph': ^1.2.2
-    '@iconify-json/svg-spinners': ^1.2.2
+    '@iconify-json/svg-spinners': ^1.2.4
   inlined:
     ansi-sequence-parser: ^1.1.3
     hast-util-from-html: ^2.0.3
     hast-util-to-html: ^9.0.5
     hast-util-to-string: ^3.0.1
-    tm-grammars: ^1.23.15
-    tm-themes: ^1.10.5
+    tm-grammars: ^1.25.3
+    tm-themes: ^1.10.12
     vscode-oniguruma: 1.7.0
   integrations:
+    lz-string: ^1.5.0
+    magic-string: ^0.30.21
     markdown-it: ^14.1.0
     markdown-it-async: ^2.2.0
     mdast-util-from-markdown: ^2.0.2
     mdast-util-gfm: ^3.1.0
     mdast-util-to-hast: ^13.2.0
-    monaco-editor-core: ^0.52.2
+    monaco-editor-core: ^0.54.0
+    ohash: ^2.0.11
     rehype-raw: ^7.0.0
     rehype-stringify: ^10.0.1
     remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
-    twoslash: ^0.3.1
-    twoslash-vue: ^0.3.1
+    twoslash: ^0.3.4
+    twoslash-vue: ^0.3.4
     unified: ^11.0.5
     unist-util-visit: ^5.0.0
-
   prod:
     '@shikijs/vscode-textmate': ^10.0.2
-    ansis: ^3.17.0
+    ansis: ^4.2.0
     cac: ^6.7.14
-    oniguruma-to-es: ^4.2.0
-
+    oniguruma-to-es: ^4.3.3
   testing:
-    '@vitest/coverage-v8': ^3.1.2
+    '@vitest/coverage-v8': ^3.2.4
     diff-match-patch-es: ^1.0.1
     fast-glob: ^3.3.3
-    fs-extra: ^11.3.0
+    fs-extra: ^11.3.2
     js-yaml: ^4.1.0
-    ohash: ^2.0.11
-    vitest: ^3.1.2
+    vitest: ^3.2.4
     vitest-package-exports: ^0.1.1
-
   types:
     '@types/fs-extra': ^11.0.4
     '@types/hast': ^3.0.4
     '@types/js-yaml': ^4.0.9
     '@types/markdown-it': ^14.1.2
     '@types/mdast': ^4.0.4
-    '@types/node': ^22.14.1
+    '@types/node': ^24.10.0
     '@types/unist': ^3.0.3
-
 onlyBuiltDependencies:
   - esbuild
   - sharp
   - simple-git-hooks
+  - unrs-resolver
   - workerd

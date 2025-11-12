@@ -6,7 +6,7 @@ type Truthy<T> = T extends false | '' | 0 | null | undefined ? never : T
 
 export type RehypeShikiHandler = (
   tree: Root,
-  node: Element
+  node: Element,
 ) => {
   type: 'inline' | 'pre'
   meta?: string

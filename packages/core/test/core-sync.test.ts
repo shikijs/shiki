@@ -39,6 +39,8 @@ describe('should', () => {
           "c",
           "python",
           "js",
+          "cjs",
+          "mjs",
           "py",
         ]
       `)

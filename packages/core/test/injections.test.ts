@@ -93,6 +93,8 @@ it('injections-side-effects angular-html', async () => {
         "css",
         "html",
         "js",
+        "cjs",
+        "mjs",
       ]
     `)
 
@@ -114,6 +116,8 @@ it('injections-side-effects angular-html', async () => {
         "angular-template-blocks",
         "angular-html",
         "js",
+        "cjs",
+        "mjs",
       ]
     `)
 

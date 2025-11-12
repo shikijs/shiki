@@ -9,6 +9,30 @@ import { createAnsiSequenceParser, createColorPalette, namedColors } from 'ansi-
 
 import { applyColorReplacements, resolveColorReplacements, splitLines } from '../utils'
 
+/**
+ * Default ANSI palette (VSCode compatible fallbacks)
+ * Used when the theme does not define terminal.ansi* colors.
+ */
+const defaultAnsiColors: Record<string, string> = {
+  black: '#000000',
+  red: '#cd3131',
+  green: '#0DBC79',
+  yellow: '#E5E510',
+  blue: '#2472C8',
+  magenta: '#BC3FBC',
+  cyan: '#11A8CD',
+  white: '#E5E5E5',
+
+  brightBlack: '#666666',
+  brightRed: '#F14C4C',
+  brightGreen: '#23D18B',
+  brightYellow: '#F5F543',
+  brightBlue: '#3B8EEA',
+  brightMagenta: '#D670D6',
+  brightCyan: '#29B8DB',
+  brightWhite: '#FFFFFF',
+}
+
 export function tokenizeAnsiWithTheme(
   theme: ThemeRegistrationResolved,
   fileContents: string,
@@ -17,21 +41,22 @@ export function tokenizeAnsiWithTheme(
   const colorReplacements = resolveColorReplacements(theme, options)
   const lines = splitLines(fileContents)
 
-  const colorPalette = createColorPalette(
-    Object.fromEntries(
-      namedColors.map(name => [
-        name,
-        theme.colors?.[`terminal.ansi${name[0].toUpperCase()}${name.substring(1)}`],
-      ]),
-    ) as any,
-  )
+  const ansiPalette = Object.fromEntries(
+    namedColors.map((name) => {
+      const key = `terminal.ansi${name[0].toUpperCase()}${name.substring(1)}`
+      const themeColor = theme.colors?.[key]
+      return [name, themeColor || defaultAnsiColors[name]]
+    }),
+  ) as Record<string, string>
 
+  const colorPalette = createColorPalette(ansiPalette)
   const parser = createAnsiSequenceParser()
 
   return lines.map(line =>
     parser.parse(line[0]).map((token): ThemedToken => {
       let color: string
       let bgColor: string | undefined
+
       if (token.decorations.has('reverse')) {
         color = token.background ? colorPalette.value(token.background) : theme.bg
         bgColor = token.foreground ? colorPalette.value(token.foreground) : theme.fg
@@ -75,7 +100,7 @@ export function tokenizeAnsiWithTheme(
  * Adds 50% alpha to a hex color string or the "-dim" postfix to a CSS variable
  */
 function dimColor(color: string): string {
-  const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/)
+  const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/i)
   if (hexMatch) {
     if (hexMatch[3]) {
       // convert from #rrggbbaa to #rrggbb(aa/2)

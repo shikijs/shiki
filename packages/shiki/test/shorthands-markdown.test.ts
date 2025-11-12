@@ -69,6 +69,8 @@ it('codeToHtml', async () => {
         "markdown",
         "md",
         "js",
+        "cjs",
+        "mjs",
         "jade",
         "py",
       ]

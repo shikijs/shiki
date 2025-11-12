@@ -2,20 +2,20 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Tuesday, March 11, 2025
+> Generated on Saturday, August 2, 2025
 >
-> Version `3.1.0`
+> Version `3.9.1`
 >
-> Runtime: Node.js v22.13.1
+> Runtime: Node.js v23.11.0
 
 ## Report Summary
 
 |                 |                       Count |
 | :-------------- | --------------------------: |
-| Total Languages |                         221 |
-| Supported       | [220](#supported-languages) |
+| Total Languages |                         222 |
+| Supported       | [222](#supported-languages) |
 | Mismatched      |  [0](#mismatched-languages) |
-| Unsupported     | [1](#unsupported-languages) |
+| Unsupported     | [0](#unsupported-languages) |
 
 ## Supported Languages
 
@@ -26,43 +26,43 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | ------------------ | :-------------- | ----------------: | --------------: | ---: |
 | abap               | ✅ OK           |                52 |               - |      |
 | actionscript-3     | ✅ OK           |                57 |               - |      |
-| ada                | ✅ OK           |               201 |               - |      |
-| angular-html       | ✅ OK           |               665 |               - |      |
-| angular-ts         | ✅ OK           |               772 |               - |      |
+| ada                | ✅ OK           |               200 |               - |      |
+| angular-html       | ✅ OK           |               669 |               - |      |
+| angular-ts         | ✅ OK           |               776 |               - |      |
 | apache             | ✅ OK           |                60 |               - |      |
 | apex               | ✅ OK           |               186 |               - |      |
 | apl                | ✅ OK           |               912 |               - |      |
 | applescript        | ✅ OK           |               152 |               - |      |
 | ara                | ✅ OK           |                54 |               - |      |
 | asciidoc           | ✅ OK           |               262 |               - |      |
-| asm                | ✅ OK           |               297 |               - |      |
+| asm                | ✅ OK           |               298 |               - |      |
 | astro              | ✅ OK           |               610 |               - |      |
 | awk                | ✅ OK           |                36 |               - |      |
-| ballerina          | ✅ OK           |               223 |               - |      |
-| bash               | ✅ OK           |               148 |               - |      |
+| ballerina          | ✅ OK           |               224 |               - |      |
+| bash               | ✅ OK           |               147 |               - |      |
 | bat                | ✅ OK           |                58 |               - |      |
 | beancount          | ✅ OK           |                39 |               - |      |
 | berry              | ✅ OK           |                18 |               - |      |
 | bibtex             | ✅ OK           |                19 |               - |      |
 | bicep              | ✅ OK           |                27 |               - |      |
-| blade              | ✅ OK           |              1121 |               - |      |
+| blade              | ✅ OK           |              1120 |               - |      |
 | bsl                | ✅ OK           |                96 |               - |      |
 | c                  | ✅ OK           |               176 |               - |      |
 | cadence            | ✅ OK           |                71 |               - |      |
 | cairo              | ✅ OK           |               236 |               - |      |
-| clarity            | ✅ OK           |                43 |               - |      |
+| clarity            | ✅ OK           |                42 |               - |      |
 | clj                | ✅ OK           |                38 |               - |      |
 | clojure            | ✅ OK           |                38 |               - |      |
 | cmake              | ✅ OK           |                23 |               - |      |
 | cobol              | ✅ OK           |               858 |               - |      |
 | codeowners         | ✅ OK           |                 4 |               - |      |
-| codeql             | ✅ OK           |               148 |               - |      |
-| coffee             | ✅ OK           |               467 |               - |      |
+| codeql             | ✅ OK           |               147 |               - |      |
+| coffee             | ✅ OK           |               466 |               - |      |
 | common-lisp        | ✅ OK           |                60 |               - |      |
-| coq                | ✅ OK           |                26 |               - |      |
-| cpp                | ✅ OK           |               505 |               - |      |
-| crystal            | ✅ OK           |              1056 |               - |      |
-| csharp             | ✅ OK           |               302 |               - |      |
+| coq                | ✅ OK           |                27 |               - |      |
+| cpp                | ✅ OK           |               506 |               - |      |
+| crystal            | ✅ OK           |              1054 |               - |      |
+| csharp             | ✅ OK           |               301 |               - |      |
 | css                | ✅ OK           |               141 |               - |      |
 | csv                | ✅ OK           |                 1 |               - |      |
 | cue                | ✅ OK           |                85 |               - |      |
@@ -79,17 +79,17 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | elixir             | ✅ OK           |               704 |               - |      |
 | elm                | ✅ OK           |               241 |               - |      |
 | emacs-lisp         | ✅ OK           |               153 |               - |   22 |
-| erb                | ✅ OK           |              1767 |               - |      |
-| erlang             | ✅ OK           |               144 |               - |      |
+| erb                | ✅ OK           |              1764 |               - |      |
+| erlang             | ✅ OK           |               265 |               - |      |
 | fennel             | ✅ OK           |                31 |               - |      |
 | fish               | ✅ OK           |                25 |               - |      |
 | fluent             | ✅ OK           |                23 |               - |      |
-| fortran-fixed-form | ✅ OK           |               331 |               - |      |
-| fortran-free-form  | ✅ OK           |               327 |               - |      |
+| fortran-fixed-form | ✅ OK           |               330 |               - |      |
+| fortran-free-form  | ✅ OK           |               326 |               - |      |
 | fsharp             | ✅ OK           |               238 |               - |      |
 | fsl                | ✅ OK           |                30 |               - |      |
-| gdresource         | ✅ OK           |               158 |               - |      |
-| gdscript           | ✅ OK           |                95 |               - |      |
+| gdresource         | ✅ OK           |               157 |               - |      |
+| gdscript           | ✅ OK           |                94 |               - |      |
 | gdshader           | ✅ OK           |                39 |               - |      |
 | genie              | ✅ OK           |                20 |               - |      |
 | gherkin            | ✅ OK           |                19 |               - |      |
@@ -98,19 +98,19 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | glimmer-ts         | ✅ OK           |               673 |               - |      |
 | glsl               | ✅ OK           |               185 |               - |      |
 | gnuplot            | ✅ OK           |                82 |               - |      |
-| go                 | ✅ OK           |               123 |               - |      |
+| go                 | ✅ OK           |               126 |               - |      |
 | graphql            | ✅ OK           |               445 |               - |      |
 | groovy             | ✅ OK           |               130 |               - |      |
-| hack               | ✅ OK           |               943 |               - |      |
+| hack               | ✅ OK           |               941 |               - |      |
 | haml               | ✅ OK           |               559 |               - |      |
 | handlebars         | ✅ OK           |               696 |               - |      |
-| haskell            | ✅ OK           |               163 |               - |      |
+| haskell            | ✅ OK           |               157 |               - |      |
 | haxe               | ✅ OK           |               173 |               - |      |
 | hcl                | ✅ OK           |                67 |               - |      |
 | hjson              | ✅ OK           |                57 |               - |      |
 | hlsl               | ✅ OK           |                52 |               - |      |
 | html               | ✅ OK           |               608 |               - |      |
-| http               | ✅ OK           |               747 |               - |      |
+| http               | ✅ OK           |               746 |               - |      |
 | hxml               | ✅ OK           |               181 |               - |      |
 | hy                 | ✅ OK           |                12 |               - |      |
 | imba               | ✅ OK           |               239 |               - |      |
@@ -126,40 +126,40 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | jsonnet            | ✅ OK           |                33 |               - |      |
 | jssm               | ✅ OK           |                30 |               - |      |
 | jsx                | ✅ OK           |               375 |               - |      |
-| julia              | ✅ OK           |              1159 |               - |      |
+| julia              | ✅ OK           |              1167 |               - |      |
 | kotlin             | ✅ OK           |                58 |               - |      |
 | kusto              | ✅ OK           |                60 |               - |      |
-| latex              | ✅ OK           |               286 |               - |      |
+| latex              | ✅ OK           |               327 |               - |      |
 | lean               | ✅ OK           |                32 |               - |      |
 | less               | ✅ OK           |               279 |               - |      |
 | liquid             | ✅ OK           |               689 |               - |      |
 | llvm               | ✅ OK           |                25 |               - |      |
 | log                | ✅ OK           |                31 |               - |      |
 | logo               | ✅ OK           |                 9 |               - |      |
-| lua                | ✅ OK           |               277 |               - |      |
+| lua                | ✅ OK           |               276 |               - |      |
 | luau               | ✅ OK           |                88 |               - |      |
 | make               | ✅ OK           |                51 |               - |      |
 | markdown           | ✅ OK           |               118 |               - |      |
-| marko              | ✅ OK           |               915 |               - |      |
+| marko              | ✅ OK           |               929 |               - |      |
 | matlab             | ✅ OK           |                88 |               - |      |
 | mdc                | ✅ OK           |               780 |               - |      |
 | mdx                | ✅ OK           |               197 |               - |      |
-| mermaid            | ✅ OK           |               134 |               - |      |
+| mermaid            | ✅ OK           |               138 |               - |      |
 | mipsasm            | ✅ OK           |                17 |               - |      |
 | mojo               | ✅ OK           |               213 |               - |      |
-| move               | ✅ OK           |               118 |               - |      |
+| move               | ✅ OK           |               116 |               - |      |
 | narrat             | ✅ OK           |                34 |               - |      |
 | nextflow           | ✅ OK           |                32 |               - |      |
-| nginx              | ✅ OK           |               376 |               - |      |
-| nim                | ✅ OK           |              1118 |               - |      |
+| nginx              | ✅ OK           |               375 |               - |      |
+| nim                | ✅ OK           |              1117 |               - |      |
 | nix                | ✅ OK           |                80 |               - |      |
-| nushell            | ✅ OK           |                81 |               - |      |
+| nushell            | ✅ OK           |                85 |               - |      |
 | objective-c        | ✅ OK           |               222 |               - |      |
-| objective-cpp      | ✅ OK           |               307 |               - |      |
+| objective-cpp      | ✅ OK           |               306 |               - |      |
 | ocaml              | ✅ OK           |               178 |               - |      |
 | pascal             | ✅ OK           |                23 |               - |      |
-| perl               | ✅ OK           |               936 |               - |      |
-| php                | ✅ OK           |              1125 |               - |      |
+| perl               | ✅ OK           |               937 |               - |      |
+| php                | ✅ OK           |              1124 |               - |      |
 | plsql              | ✅ OK           |                45 |               - |      |
 | po                 | ✅ OK           |                23 |               - |      |
 | polar              | ✅ OK           |                31 |               - |      |
@@ -171,55 +171,56 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | proto              | ✅ OK           |                33 |               - |      |
 | pug                | ✅ OK           |               683 |               - |      |
 | puppet             | ✅ OK           |                60 |               - |      |
-| purescript         | ✅ OK           |                84 |               - |      |
+| purescript         | ✅ OK           |                87 |               - |      |
 | python             | ✅ OK           |               218 |               - |      |
 | qml                | ✅ OK           |               407 |               - |      |
 | qmldir             | ✅ OK           |                 7 |               - |      |
 | qss                | ✅ OK           |                31 |               - |      |
-| r                  | ✅ OK           |                71 |               - |      |
+| r                  | ✅ OK           |                85 |               - |      |
 | racket             | ✅ OK           |                69 |               - |      |
 | raku               | ✅ OK           |                52 |               - |      |
-| razor              | ✅ OK           |               943 |               - |      |
+| razor              | ✅ OK           |               941 |               - |      |
 | reg                | ✅ OK           |                 9 |               - |      |
 | regexp             | ✅ OK           |                34 |               - |      |
 | rel                | ✅ OK           |                17 |               - |      |
 | riscv              | ✅ OK           |                36 |               - |      |
-| rst                | ✅ OK           |              2008 |               - |      |
-| ruby               | ✅ OK           |              1759 |               - |      |
+| rst                | ✅ OK           |              2005 |               - |      |
+| ruby               | ✅ OK           |              1756 |               - |      |
 | rust               | ✅ OK           |                89 |               - |      |
-| sas                | ✅ OK           |                99 |               - |      |
+| sas                | ✅ OK           |               100 |               - |      |
 | sass               | ✅ OK           |                69 |               - |      |
 | scala              | ✅ OK           |               116 |               - |      |
 | scheme             | ✅ OK           |                34 |               - |      |
 | scss               | ✅ OK           |               233 |               - |      |
 | sdbl               | ✅ OK           |                23 |               - |      |
 | shaderlab          | ✅ OK           |                87 |               - |      |
-| shellscript        | ✅ OK           |               148 |               - |      |
-| shellsession       | ✅ OK           |               150 |               - |      |
-| smalltalk          | ✅ OK           |                35 |               - |      |
-| solidity           | ✅ OK           |               102 |               - |      |
+| shellscript        | ✅ OK           |               147 |               - |      |
+| shellsession       | ✅ OK           |               149 |               - |      |
+| smalltalk          | ✅ OK           |                44 |               - |      |
+| solidity           | ✅ OK           |               103 |               - |      |
 | soy                | ✅ OK           |               646 |               - |      |
 | sparql             | ✅ OK           |                19 |               - |      |
 | splunk             | ✅ OK           |                17 |               - |      |
-| sql                | ✅ OK           |                67 |               - |      |
+| sql                | ✅ OK           |                68 |               - |      |
 | ssh-config         | ✅ OK           |                12 |               - |      |
-| stata              | ✅ OK           |               253 |               - |      |
+| stata              | ✅ OK           |               254 |               - |      |
 | stylus             | ✅ OK           |               106 |               - |      |
-| svelte             | ✅ OK           |               636 |               - |      |
+| svelte             | ✅ OK           |               642 |               - |      |
+| swift              | ✅ OK           |               334 |               - |      |
 | system-verilog     | ✅ OK           |               102 |               - |      |
 | systemd            | ✅ OK           |                32 |               - |      |
-| talonscript        | ✅ OK           |                45 |               - |      |
+| talonscript        | ✅ OK           |                46 |               - |      |
 | tasl               | ✅ OK           |                23 |               - |      |
 | tcl                | ✅ OK           |                34 |               - |      |
-| templ              | ✅ OK           |               671 |               - |      |
+| templ              | ✅ OK           |               674 |               - |      |
 | terraform          | ✅ OK           |                68 |               - |      |
-| tex                | ✅ OK           |               106 |               - |      |
+| tex                | ✅ OK           |               120 |               - |      |
 | toml               | ✅ OK           |                44 |               - |      |
 | ts-tags            | ✅ OK           |               990 |               - |      |
 | tsv                | ✅ OK           |                 1 |               - |      |
 | tsx                | ✅ OK           |               375 |               - |      |
 | turtle             | ✅ OK           |                15 |               - |      |
-| twig               | ✅ OK           |              2397 |               - |      |
+| twig               | ✅ OK           |              2391 |               - |      |
 | typescript         | ✅ OK           |               362 |               - |      |
 | typespec           | ✅ OK           |                73 |               - |      |
 | typst              | ✅ OK           |                78 |               - |      |
@@ -227,15 +228,16 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | vala               | ✅ OK           |                20 |               - |      |
 | vb                 | ✅ OK           |                34 |               - |      |
 | verilog            | ✅ OK           |                33 |               - |      |
-| vhdl               | ✅ OK           |                81 |               - |      |
+| vhdl               | ✅ OK           |                82 |               - |      |
 | viml               | ✅ OK           |                72 |               - |      |
 | vue                | ✅ OK           |               690 |               - |      |
 | vue-html           | ✅ OK           |               714 |               - |      |
+| vue-vine           | ✅ OK           |              1203 |               - |      |
 | vyper              | ✅ OK           |               238 |               - |      |
 | wasm               | ✅ OK           |                78 |               - |      |
 | wenyan             | ✅ OK           |                18 |               - |      |
 | wgsl               | ✅ OK           |                44 |               - |      |
-| wikitext           | ✅ OK           |               104 |               - |      |
+| wikitext           | ✅ OK           |               105 |               - |      |
 | wit                | ✅ OK           |                81 |               - |      |
 | wolfram            | ✅ OK           |               501 |               - |      |
 | xml                | ✅ OK           |               168 |               - |      |
@@ -243,7 +245,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | yaml               | ✅ OK           |                48 |               - |      |
 | zenscript          | ✅ OK           |                21 |               - |      |
 | zig                | ✅ OK           |                51 |               - |      |
-| zsh                | ✅ OK           |               148 |               - |      |
+| zsh                | ✅ OK           |               147 |               - |      |
 
 ###### Table Field Explanations
 
@@ -265,4 +267,3 @@ Languages that throw with the JavaScript RegExp engine, either because they cont
 
 | Language | Highlight Match | Patterns Parsable | Patterns Failed | Diff |
 | -------- | :-------------- | ----------------: | --------------: | ---: |
-| swift    | ❌ Error        |               330 |               1 |      |

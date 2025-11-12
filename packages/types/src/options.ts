@@ -101,10 +101,25 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * <span style="--shiki-light:#{light};--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
    * ```
    *
+   * When set to `light-dark()`, the default color will be rendered as `light-dark(#{light}, #{dark})`.
+   *
+   * ```html
+   * <span style="color:light-dark(#{light}, #{dark});--shiki-dark:#{dark};--shiki-custom:#{custom};">code</span>
+   * ```
    *
    * @default 'light'
    */
-  defaultColor?: StringLiteralUnion<'light' | 'dark'> | false
+  defaultColor?: StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | false
+
+  /**
+   * The strategy to render multiple colors.
+   *
+   * - `css-vars`: Render the colors via CSS variables.
+   * - `none`: Do not render the colors, only use the default color.
+   *
+   * @default 'css-vars'
+   */
+  colorsRendering?: 'css-vars' | 'none'
 
   /**
    * Prefix of CSS variables used to store the color of the other theme.
@@ -114,14 +129,14 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
   cssVariablePrefix?: string
 }
 
-export type CodeOptionsThemes<Themes extends string = string> =
-  | CodeOptionsSingleTheme<Themes>
-  | CodeOptionsMultipleThemes<Themes>
+export type CodeOptionsThemes<Themes extends string = string>
+  = | CodeOptionsSingleTheme<Themes>
+    | CodeOptionsMultipleThemes<Themes>
 
-export type CodeToHastOptions<Languages extends string = string, Themes extends string = string> =
-  & CodeToHastOptionsCommon<Languages>
-  & CodeOptionsThemes<Themes>
-  & CodeOptionsMeta
+export type CodeToHastOptions<Languages extends string = string, Themes extends string = string>
+  = & CodeToHastOptionsCommon<Languages>
+    & CodeOptionsThemes<Themes>
+    & CodeOptionsMeta
 
 export interface CodeToHastOptionsCommon<Languages extends string = string>
   extends

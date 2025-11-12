@@ -42,12 +42,19 @@ export function transformerDecorations(): ShikiTransformer {
           const line = converter.lines[p.line]
           if (line === undefined)
             throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Lines length: ${converter.lines.length}`)
-          if (p.character < 0 || p.character > line.length)
+
+          let character = p.character
+          // Negative numbers are positions from the end of the line
+          if (character < 0)
+            character = line.length + character
+
+          if (character < 0 || character > line.length)
             throw new ShikiError(`Invalid decoration position ${JSON.stringify(p)}. Line ${p.line} length: ${line.length}`)
 
           return {
             ...p,
-            offset: converter.posToIndex(p.line, p.character),
+            character,
+            offset: converter.posToIndex(p.line, character),
           }
         }
       }
@@ -202,6 +209,10 @@ function verifyIntersections(items: ResolvedDecorationItem[]): void {
           continue // nested
         if (isBarHasFooStart && isBarHasFooEnd)
           continue // nested
+        if (isBarHasFooStart && foo.start.offset === foo.end.offset)
+          continue // leading adjacent empty
+        if (isFooHasBarEnd && bar.start.offset === bar.end.offset)
+          continue // trailing adjacent empty
         throw new ShikiError(`Decorations ${JSON.stringify(foo.start)} and ${JSON.stringify(bar.start)} intersect.`)
       }
     }

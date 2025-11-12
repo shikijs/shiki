@@ -55,7 +55,7 @@ export interface RehypeShikiExtraOptions {
   parseMetaString?: (
     metaString: string,
     node: Element,
-    tree: Root
+    tree: Root,
   ) => Record<string, any> | undefined | null
 
   /**
@@ -83,9 +83,9 @@ export interface RehypeShikiExtraOptions {
   onError?: (error: unknown) => void
 }
 
-export type RehypeShikiCoreOptions =
-  & CodeOptionsThemes<BuiltinTheme>
-  & TransformerOptions
-  & CodeOptionsMeta
-  & RehypeShikiExtraOptions
-  & Omit<CodeToHastOptionsCommon, 'lang'>
+export type RehypeShikiCoreOptions
+  = & CodeOptionsThemes<BuiltinTheme>
+    & TransformerOptions
+    & CodeOptionsMeta
+    & RehypeShikiExtraOptions
+    & Omit<CodeToHastOptionsCommon, 'lang'>

@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { BundledLanguage } from 'shiki'
 import { computed, ref, watch } from 'vue'
 import { usePlayground } from '../store/playground'
+import FundingButton from './FundingButton.vue'
 
 const play = usePlayground()
 const showModel = ref(false)
 
 function preview(id: string): void {
-  play.lang = id
+  play.lang = id as BundledLanguage
   showModel.value = true
 }
 
@@ -48,9 +50,11 @@ watch(showModel, () => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="l in langs" :key="l.id">
-          <td>{{ l.name }}</td>
-          <td><code>{{ l.id }}</code></td>
+        <tr v-for="l in langs" :key="l.name">
+          <td>
+            {{ l.displayName }} <FundingButton :name="`${l.displayName} grammar`" :funding="l.funding" />
+          </td>
+          <td><code>{{ l.name }}</code></td>
           <td>
             <code v-for="alias in l.aliases" :key="alias">{{ alias }}</code>
           </td>
@@ -59,7 +63,7 @@ watch(showModel, () => {
               <button
                 title="Preview Example"
                 ma text-lg
-                @click="preview(l.id)"
+                @click="preview(l.name)"
               >
                 <div i-carbon:code />
               </button>

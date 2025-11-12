@@ -67,4 +67,22 @@ describe('should', () => {
         ]
       `)
   })
+
+  it('should allow subsequent valid calls after first invalid language', async () => {
+    const lang = 'invalid'
+    const code = 'console.log("hello")'
+    const theme = 'vitesse-light'
+
+    // First call with invalid language should throw
+    await expect(codeToHtml(code, { lang, theme }))
+      .rejects
+      .toThrow(/Language `invalid` is not included in this bundle/)
+
+    // Subsequent call with valid language should succeed
+    const result = await codeToHtml(code, { lang: 'javascript', theme })
+    expect(result).toBeTruthy()
+    // The HTML contains the code in structured format, check for "console" which appears in the output
+    expect(result).toContain('console')
+    expect(result).toContain('shiki')
+  })
 })

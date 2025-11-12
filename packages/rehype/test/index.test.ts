@@ -7,6 +7,24 @@ import { unified } from 'unified'
 import { expect, it } from 'vitest'
 import rehypeShiki from '../src'
 
+it('lang-alias', async () => {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShiki, {
+      theme: 'vitesse-light',
+      addLanguageClass: true,
+      langAlias: {
+        mylang: 'javascript',
+        mylang2: 'js', // nested alias
+      },
+    })
+    .use(rehypeStringify)
+    .process(await fs.readFile(new URL('./fixtures/lang-alias.md', import.meta.url)))
+
+  await expect(file.toString()).toMatchFileSnapshot('./fixtures/lang-alias.out.html')
+})
+
 it('run', async () => {
   const file = await unified()
     .use(remarkParse)

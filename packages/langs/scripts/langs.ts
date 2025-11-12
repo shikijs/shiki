@@ -18,36 +18,53 @@ export const LANGS_LAZY_EMBEDDED_ALL = {
  * Single-file-component-like languages that have embedded langs
  * For these langs, we exclude the standalone embedded langs from the main bundle
  */
-export const LANGS_LAZY_EMBEDDED_PARTIAL = [
-  'vue',
-  'vue-html',
-  'svelte',
-  'pug',
-  'haml',
-  'astro',
-]
-
-/**
- * Languages to be excluded from SFC langs
- */
-export const STANDALONE_LANGS_EMBEDDED = [
-  'pug',
-  'stylus',
-  'sass',
-  'scss',
-  'coffee',
-  'jsonc',
-  'json5',
-  'yaml',
-  'toml',
-  'scss',
-  'graphql',
-  'markdown',
-  'less',
-  'jsx',
-  'tsx',
-  'ruby',
-]
+export const LANGS_LAZY_EMBEDDED_PARTIAL = {
+  'vue': [
+    'markdown',
+    'pug',
+    'stylus',
+    'sass',
+    'scss',
+    'less',
+    'jsx',
+    'tsx',
+    'coffee',
+    'jsonc',
+    'json5',
+    'yaml',
+    'toml',
+    'graphql',
+  ],
+  'vue-html': [],
+  'svelte': [
+    'coffee',
+    'stylus',
+    'sass',
+    'scss',
+    'less',
+    'pug',
+    'markdown',
+  ],
+  'pug': [
+    'sass',
+    'scss',
+    'stylus',
+    'coffee',
+  ],
+  'haml': [
+    'ruby',
+    'sass',
+    'coffee',
+    'markdown',
+  ],
+  // Since Astro is a extension of MDX, we don't exclude `jsx` here.
+  'astro': [
+    'sass',
+    'scss',
+    'stylus',
+    'less',
+  ],
+} as Record<string, string[]>
 
 export async function loadLangs() {
   const allLangFiles = await fg('*.json', {
@@ -83,9 +100,10 @@ export async function loadLangs() {
       json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
       json.embeddedLangs = includes
     }
-    else if (LANGS_LAZY_EMBEDDED_PARTIAL.includes(lang.name)) {
-      json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => STANDALONE_LANGS_EMBEDDED.includes(i)) || []
-      json.embeddedLangs = (json.embeddedLangs || []).filter(i => !STANDALONE_LANGS_EMBEDDED.includes(i)) || []
+    else if (LANGS_LAZY_EMBEDDED_PARTIAL[lang.name]) {
+      const includes = LANGS_LAZY_EMBEDDED_PARTIAL[lang.name]
+      json.embeddedLangsLazy = includes
+      json.embeddedLangs = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
     }
 
     resolvedLangs.push(json)

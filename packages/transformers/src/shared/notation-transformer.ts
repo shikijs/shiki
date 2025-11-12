@@ -24,7 +24,7 @@ export function createCommentNotationTransformer(
     line: Element,
     commentNode: Element,
     lines: Element[],
-    index: number
+    index: number,
   ) => boolean,
   matchAlgorithm: MatchAlgorithm | undefined,
 ): ShikiTransformer {

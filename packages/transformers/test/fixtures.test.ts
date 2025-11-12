@@ -11,6 +11,7 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
   transformerRemoveLineBreak,
+  transformerRemoveNotationEscape,
   transformerRenderWhitespace,
 } from '../src'
 
@@ -248,4 +249,19 @@ suite(
     transformerRemoveLineBreak(),
   ],
   code => `${code}${CSS_COMPARE}`,
+)
+
+suite(
+  'remove-notation-escape',
+  import.meta.glob('./fixtures/remove-notation-escape/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRemoveNotationEscape(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+</style>`,
 )

@@ -8,8 +8,12 @@ import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 const bundledLanguages = {
   javascript: () => import('@shikijs/langs/javascript'),
   js: () => import('@shikijs/langs/javascript'),
+  cjs: () => import('@shikijs/langs/javascript'),
+  mjs: () => import('@shikijs/langs/javascript'),
   typescript: () => import('@shikijs/langs/typescript'),
   ts: () => import('@shikijs/langs/typescript'),
+  cts: () => import('@shikijs/langs/typescript'),
+  mts: () => import('@shikijs/langs/typescript'),
   tsx: () => import('@shikijs/langs/tsx'),
 }
 

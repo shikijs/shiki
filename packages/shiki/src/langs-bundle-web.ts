@@ -49,6 +49,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/css')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'csv',
+    'name': 'CSV',
+    'import': (() => import('@shikijs/langs/csv')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'glsl',
     'name': 'GLSL',
     'import': (() => import('@shikijs/langs/glsl')) as DynamicImportLanguageRegistration
@@ -90,6 +95,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/http')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'hurl',
+    'name': 'Hurl',
+    'import': (() => import('@shikijs/langs/hurl')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'imba',
     'name': 'Imba',
     'import': (() => import('@shikijs/langs/imba')) as DynamicImportLanguageRegistration
@@ -103,7 +113,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'javascript',
     'name': 'JavaScript',
     'aliases': [
-      'js'
+      'js',
+      'cjs',
+      'mjs'
     ],
     'import': (() => import('@shikijs/langs/javascript')) as DynamicImportLanguageRegistration
   },
@@ -273,7 +285,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'typescript',
     'name': 'TypeScript',
     'aliases': [
-      'ts'
+      'ts',
+      'cts',
+      'mts'
     ],
     'import': (() => import('@shikijs/langs/typescript')) as DynamicImportLanguageRegistration
   },
@@ -286,6 +300,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'vue-html',
     'name': 'Vue HTML',
     'import': (() => import('@shikijs/langs/vue-html')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'vue-vine',
+    'name': 'Vue Vine',
+    'import': (() => import('@shikijs/langs/vue-vine')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'wasm',
@@ -329,10 +348,13 @@ export type BundledLanguage =
   | 'blade'
   | 'c'
   | 'c++'
+  | 'cjs'
   | 'coffee'
   | 'coffeescript'
   | 'cpp'
   | 'css'
+  | 'csv'
+  | 'cts'
   | 'glsl'
   | 'gql'
   | 'graphql'
@@ -342,6 +364,7 @@ export type BundledLanguage =
   | 'html'
   | 'html-derivative'
   | 'http'
+  | 'hurl'
   | 'imba'
   | 'jade'
   | 'java'
@@ -363,6 +386,8 @@ export type BundledLanguage =
   | 'md'
   | 'mdc'
   | 'mdx'
+  | 'mjs'
+  | 'mts'
   | 'php'
   | 'postcss'
   | 'pug'
@@ -386,6 +411,7 @@ export type BundledLanguage =
   | 'typescript'
   | 'vue'
   | 'vue-html'
+  | 'vue-vine'
   | 'wasm'
   | 'wgsl'
   | 'wit'

@@ -1,5 +1,6 @@
 import type { CodeOptionsSingleTheme, CodeOptionsThemes, ThemedToken } from 'shiki'
 import type { TransformerColorizedBracketsOptions } from './types'
+import { ShikiError } from 'shiki'
 import builtInThemes from './themes'
 import { getEmbeddedLang, resolveConfig, shouldIgnoreToken } from './utils'
 
@@ -117,6 +118,15 @@ function assignColorToToken(
           ? 'color'
           : `${cssVariablePrefix}${colorName}`
       styles[cssProperty] = getColor(themes, themeName, level)
+    }
+
+    if (defaultColor === 'light-dark()') {
+      const lightColor = styles[`${cssVariablePrefix}light`]
+      const darkColor = styles[`${cssVariablePrefix}dark`]
+      if (!lightColor || !darkColor) {
+        throw new ShikiError('When using `defaultColor: "light-dark()"`, you must provide both `light` and `dark` themes')
+      }
+      styles.color = `light-dark(${lightColor},${darkColor})`
     }
 
     token.htmlStyle = styles
