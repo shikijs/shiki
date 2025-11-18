@@ -8,8 +8,8 @@ describe('should', () => {
       langs: ['javascript'],
     })
 
-    expect(shiki.codeToHtml('console.log', { lang: 'js', theme: 'vitesse-light' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span></code></pre>"`)
+    expect(shiki.codeToHtml('import { Xlsx } from "@qui/icons/application/outline";', { lang: 'js', theme: 'vitesse-light' }))
+      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#1E754F">import</span><span style="color:#B07D48"> { Xlsx } </span><span style="color:#1E754F">from</span><span style="color:#B5695977"> "</span><span style="color:#B56959">@qui/icons/application/outline</span><span style="color:#B5695977">"</span><span style="color:#999999">;</span></span></code></pre>"`)
   })
 
   it('dynamic load theme and lang', async () => {
