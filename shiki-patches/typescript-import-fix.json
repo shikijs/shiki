@@ -1,0 +1,16 @@
+{
+  "repository": {
+    "import-block": {
+      "patterns": [
+        {
+          "match": "\\b(import)\\s+\\{[^}]+\\}\\s+from",
+          "captures": { "1": { "name": "keyword.control.import.ts" } }
+        },
+        {
+          "match": "\\{\\s*([A-Za-z0-9_]+)\\s*\\}",
+          "captures": { "1": { "name": "entity.name.type.import.ts" } }
+        }
+      ]
+    }
+  }
+}
