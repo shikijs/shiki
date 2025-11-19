@@ -27,8 +27,10 @@ let instancesCount = 0
  */
 export function createShikiInternalSync(options: HighlighterCoreOptions<true>): ShikiInternal {
   instancesCount += 1
-  if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
+  if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0) {
+    // eslint-disable-next-line no-console
     console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call \`highlighter.dispose()\` to release unused instances.`)
+  }
 
   let isDisposed = false
 
