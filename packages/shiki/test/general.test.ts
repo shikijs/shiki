@@ -217,7 +217,7 @@ describe('should', () => {
     expect(await codeToHtml(`const long = ${longText}`, {
       theme: 'vitesse-light',
       lang: 'javascript',
-    })).toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> long</span><span style="color:#999999"> =</span><span style="color:#B07D48"> ${longText}</span></span></code></pre>"`)
+    })).toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> long</span><span style="color:#999999"> =</span><span style="color:#B07D48"> foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo</span></span></code></pre>"`)
 
     expect(await codeToHtml(`const short = ""\nconst long = ${longText}`, {
       theme: 'vitesse-light',

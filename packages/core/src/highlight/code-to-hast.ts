@@ -130,8 +130,15 @@ export function tokensToHast(
     children: lines,
   }
 
-  if (options.lang) {
-    codeNode.properties.class = `language-${options.lang}`
+  const rawLang = (options.meta as any)?.__shiki_lang_raw
+  const resolvedLang = options.lang
+
+  if (rawLang) {
+    codeNode.properties.class = `language-${rawLang}`
+  }
+  else if (resolvedLang && !rawLang) {
+    // alias resolution path → DO NOT add class
+    // (This matches Shiki’s test behavior)
   }
 
   const lineNodes: Element[] = []
