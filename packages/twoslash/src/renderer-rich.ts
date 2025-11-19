@@ -410,7 +410,11 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'span',
           properties: {
-            class: 'twoslash-hover twoslash-query-presisted',
+            'class': 'twoslash-hover twoslash-query-persisted',
+            'data-persistent': 'true',
+            'data-twoslash-query': 'true',
+            'data-twoslash-popup-type': 'query',
+
           },
           children: hast?.queryCompose
             ? hast?.queryCompose({ popup, token: node })
