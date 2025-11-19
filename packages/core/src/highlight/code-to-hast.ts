@@ -130,6 +130,10 @@ export function tokensToHast(
     children: lines,
   }
 
+  if (options.lang) {
+    codeNode.properties.class = `language-${options.lang}`
+  }
+
   const lineNodes: Element[] = []
 
   const context: ShikiTransformerContext = {
