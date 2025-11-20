@@ -1,7 +1,7 @@
 import type { RawGrammar } from './textmate'
 import type { MaybeArray, MaybeGetter } from './utils'
 
-export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
+export type PlainTextLanguage = 'text' | 'plaintext' | 'txt' | 'plain'
 export type AnsiLanguage = 'ansi'
 export type SpecialLanguage = PlainTextLanguage | AnsiLanguage
 
