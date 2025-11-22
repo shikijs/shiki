@@ -47,10 +47,16 @@ import { createHighlighterCore } from './highlighter'
  */
 export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
+): CreateHighlighterFactory<BundledLangs, BundledThemes> {
+  return createBundledHighlighter(options)
+}
+
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes>
 
 // Implementation
-export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
   options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes> {
   const bundledLanguages = options.langs
