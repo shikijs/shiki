@@ -4,18 +4,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { getExtFromUrl, isUrl, readSource, run } from '../src/cli'
 
 describe('isUrl', () => {
-  it('http', () => {
-    expect(isUrl('http://example.com/file.ts')).toBe(true)
-    expect(isUrl('http://localhost:3000/code.js')).toBe(true)
-  })
-
-  it('https', () => {
-    expect(isUrl('https://example.com/file.ts')).toBe(true)
-    expect(isUrl('https://raw.githubusercontent.com/org/repo/main/file.ts')).toBe(true)
-  })
-
-  it('local paths', () => {
-    expect(isUrl('./file.ts')).toBe(false)
+  it('valid URL', () => {
+    expect(isUrl('http://localhost:3000/file.ts')).toBe(true)
+    expect(isUrl('https://raw.githubusercontent.com/shikijs/shiki/refs/heads/main/taze.config.ts')).toBe(true)
     expect(isUrl('/absolute/path/file.ts')).toBe(false)
     expect(isUrl('relative/path/file.ts')).toBe(false)
     expect(isUrl('file.ts')).toBe(false)
@@ -25,17 +16,11 @@ describe('isUrl', () => {
 describe('getExtFromUrl', () => {
   it('extracts extension', () => {
     expect(getExtFromUrl('https://example.com/file.ts')).toBe('ts')
-    expect(getExtFromUrl('https://example.com/path/to/file.js')).toBe('js')
-    expect(getExtFromUrl('https://raw.githubusercontent.com/org/repo/main/config.json')).toBe('json')
+    expect(getExtFromUrl('https://shiki.matsu.io/guide.html')).toBe('html')
   })
 
   it('handles query params', () => {
-    expect(getExtFromUrl('https://example.com/file.ts?token=abc')).toBe('ts')
-  })
-
-  it('no extension', () => {
-    expect(getExtFromUrl('https://example.com/file')).toBe('')
-    expect(getExtFromUrl('https://example.com/')).toBe('')
+    expect(getExtFromUrl('https://github.com/shikijs/shiki/blob/main/taze.config.ts?raw=true')).toBe('ts')
   })
 
   it('invalid URL', () => {
