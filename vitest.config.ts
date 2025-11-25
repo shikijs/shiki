@@ -7,6 +7,11 @@ export default defineConfig({
     wasmPlugin(),
     tsconfigPaths(),
   ],
+  resolve: {
+    alias: {
+      '@shikijs/engine-oniguruma/wasm-inlined': new URL('./packages/engine-oniguruma/src/wasm-inlined.ts', import.meta.url).pathname,
+    },
+  },
   test: {
     testTimeout: 30_000,
     reporters: 'dot',
