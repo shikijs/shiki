@@ -14,6 +14,7 @@ export default defineBuildConfig({
     'src/wasm.ts',
     'src/bundle-full.ts',
     'src/bundle-web.ts',
+    'src/bundle-react-native.ts',
     'src/engine-javascript.ts',
     'src/engine-oniguruma.ts',
     'src/textmate.ts',

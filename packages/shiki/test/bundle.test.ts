@@ -19,3 +19,22 @@ it('bundle-web', async () => {
   expect(highlighter.getLoadedLanguages().length)
     .toMatchInlineSnapshot(`95`)
 })
+
+it('bundle-react-native', async () => {
+  const highlighter = await import('shiki/bundle/react-native').then(r => r.createHighlighter({
+    langs: Object.keys(r.bundledLanguages),
+    themes: ['nord'],
+  }))
+
+  expect(highlighter.getLoadedLanguages().length)
+    .toMatchInlineSnapshot(`95`)
+
+  // Test that it actually works
+  const html = highlighter.codeToHtml('console.log("Hello")', {
+    lang: 'javascript',
+    theme: 'nord',
+  })
+
+  expect(html).toContain('console')
+  expect(html).toContain('log')
+})
