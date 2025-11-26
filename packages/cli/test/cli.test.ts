@@ -16,7 +16,7 @@ describe('isUrl', () => {
 describe('getExtFromUrl', () => {
   it('extracts extension', () => {
     expect(getExtFromUrl('https://example.com/file.ts')).toBe('ts')
-    expect(getExtFromUrl('https://shiki.matsu.io/guide.html')).toBe('html')
+    expect(getExtFromUrl('https://shiki.style/guide.html')).toBe('html')
   })
 
   it('handles query params', () => {
