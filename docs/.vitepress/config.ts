@@ -6,7 +6,7 @@ import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { version } from '../../package.json'
 import { transformerColorizedBrackets } from '../../packages/colorized-brackets/src'
-import { transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
+import { transformerMetaDiff, transformerMetaErrorLevel, transformerMetaFocus, transformerMetaWordHighlight, transformerNotationWordHighlight, transformerRemoveNotationEscape } from '../../packages/transformers/src'
 import { createTwoslashWithInlineCache } from '../../packages/vitepress-twoslash/src/cache-inline'
 import { defaultHoverInfoProcessor } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
@@ -94,6 +94,11 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
     },
     codeTransformers: [
       transformerMetaWordHighlight(),
+      transformerMetaDiff(),
+      transformerMetaErrorLevel(),
+      transformerMetaFocus(
+        { classActiveLine: 'has-focus', classActivePre: 'has-focused-lines' },
+      ),
       transformerNotationWordHighlight({
         matchAlgorithm: 'v3',
       }),
