@@ -44,6 +44,7 @@ const INTEGRATIONS = [
   { text: 'VitePress', link: '/packages/vitepress' },
   { text: 'Nuxt', link: '/packages/nuxt' },
   { text: 'Next', link: '/packages/next' },
+  { text: 'React', link: '/packages/react' },
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
