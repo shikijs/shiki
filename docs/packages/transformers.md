@@ -544,3 +544,22 @@ CSS output:
   --shiki-light-bg: #ffffff;
 }
 ```
+
+### `transformerRemoveComments`
+
+Remove comments from the code.
+
+```ts
+import { transformerRemoveComments } from '@shikijs/transformers'
+
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  transformers: [
+    transformerRemoveComments(),
+  ],
+})
+```
+
+Options:
+
+- `removeEmptyLines`: Remove lines that become empty after removing comments. Default `true`.

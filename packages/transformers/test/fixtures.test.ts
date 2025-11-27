@@ -10,6 +10,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
   transformerNotationWordHighlight,
+  transformerRemoveComments,
   transformerRemoveLineBreak,
   transformerRemoveNotationEscape,
   transformerRenderWhitespace,
@@ -256,6 +257,21 @@ suite(
   import.meta.glob('./fixtures/remove-notation-escape/*.*', { query: '?raw', import: 'default', eager: true }),
   [
     transformerRemoveNotationEscape(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+</style>`,
+)
+
+suite(
+  'remove-comments',
+  import.meta.glob('./fixtures/remove-comments/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRemoveComments(),
     transformerRemoveLineBreak(),
   ],
   code => `${code}
