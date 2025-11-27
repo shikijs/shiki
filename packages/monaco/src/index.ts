@@ -1,7 +1,7 @@
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
-import type monacoNs from 'monaco-editor-core'
+import type * as monacoNs from 'monaco-editor-core'
 import type { MonacoLineToken } from './types'
-import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
+import { EncodedTokenMetadata, FontStyle, INITIAL } from '@shikijs/vscode-textmate'
 import { TokenizerState } from './tokenizer'
 import { normalizeColor } from './utils'
 
@@ -32,18 +32,20 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
     const themeSettings = theme.settings || theme.tokenColors
 
     for (const { scope, settings: { foreground, background, fontStyle } = {} } of themeSettings) {
-      const scopes = Array.isArray(scope) ? scope : [scope]
+      if (!foreground && !background && !fontStyle)
+        continue
+      const scopes = Array.isArray(scope) ? scope : scope ? [scope] : []
 
-      for (const s of scopes) {
-        if (s && (foreground || background || fontStyle)) {
-          rules.push({
-            token: s,
-            foreground: normalizeColor(foreground),
-            background: normalizeColor(background),
-            fontStyle,
-          })
-        }
-      }
+      const normalizedFontStyle = normalizeFontStyleString(fontStyle)
+      const normalizedForeground = normalizeColor(foreground)
+      const normalizedBackground = normalizeColor(background)
+
+      rules.push(...scopes.map(s => ({
+        token: s,
+        foreground: normalizedForeground,
+        background: normalizedBackground,
+        fontStyle: normalizedFontStyle,
+      })))
     }
   }
 
@@ -76,7 +78,7 @@ export function shikiToMonaco(
   }
 
   const colorMap: string[] = []
-  const colorToScopeMap = new Map<string, string>()
+  const colorStyleToScopeMap = new Map<string, string>()
 
   // Because Monaco does not have the API of reading the current theme,
   // We hijack it here to keep track of the current theme.
@@ -88,11 +90,15 @@ export function shikiToMonaco(
     ret.colorMap.forEach((color, i) => {
       colorMap[i] = color
     })
-    colorToScopeMap.clear()
+    colorStyleToScopeMap.clear()
     theme?.rules.forEach((rule) => {
       const c = normalizeColor(rule.foreground)
-      if (c && !colorToScopeMap.has(c))
-        colorToScopeMap.set(c, rule.token)
+      if (!c)
+        return
+
+      const key = getColorStyleKey(c, normalizeFontStyleString(rule.fontStyle))
+      if (!colorStyleToScopeMap.has(key))
+        colorStyleToScopeMap.set(key, rule.token)
     })
     _setTheme(themeName)
   }
@@ -100,8 +106,9 @@ export function shikiToMonaco(
   // Set the first theme as the default theme
   monaco.editor.setTheme(themeIds[0])
 
-  function findScopeByColor(color: string): string | undefined {
-    return colorToScopeMap.get(color)
+  function findScopeByColorAndStyle(color: string, fontStyle: FontStyle): string | undefined {
+    const key = getColorStyleKey(color, normalizeFontStyleBits(fontStyle))
+    return colorStyleToScopeMap.get(key)
   }
 
   // Do not attempt to tokenize if a line is too long
@@ -141,10 +148,11 @@ export function shikiToMonaco(
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
             const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
+            const fontStyle = EncodedTokenMetadata.getFontStyle(metadata)
 
             // Because Monaco only support one scope per token,
-            // we workaround this to use color to trace back the scope
-            const scope = findScopeByColor(color) || ''
+            // we workaround this to use color (and font style when available) to trace back the scope
+            const scope = color ? (findScopeByColorAndStyle(color, fontStyle) || '') : ''
             tokens.push({ startIndex, scopes: scope })
           }
 
@@ -153,4 +161,56 @@ export function shikiToMonaco(
       })
     }
   }
+}
+
+function normalizeFontStyleBits(fontStyle: FontStyle): string {
+  if (fontStyle <= FontStyle.None)
+    return ''
+
+  const styles: string[] = []
+
+  if (fontStyle & FontStyle.Italic)
+    styles.push('italic')
+  if (fontStyle & FontStyle.Bold)
+    styles.push('bold')
+  if (fontStyle & FontStyle.Underline)
+    styles.push('underline')
+  if (fontStyle & FontStyle.Strikethrough)
+    styles.push('strikethrough')
+
+  return styles.join(' ')
+}
+
+const VALID_FONT_STYLES = [
+  'italic',
+  'bold',
+  'underline',
+  'strikethrough',
+] as const
+
+const VALID_FONT_ALIASES: Record<string, typeof VALID_FONT_STYLES[number]> = {
+  'line-through': 'strikethrough',
+}
+
+function normalizeFontStyleString(fontStyle?: string): string {
+  if (!fontStyle)
+    return ''
+
+  const styles = new Set(
+    fontStyle
+      .split(/[\s,]+/)
+      .map(style => style.trim().toLowerCase())
+      .map(style => VALID_FONT_ALIASES[style] || style)
+      .filter(Boolean),
+  )
+
+  return VALID_FONT_STYLES
+    .filter(style => styles.has(style))
+    .join(' ')
+}
+
+function getColorStyleKey(color: string, fontStyle: string): string {
+  if (!fontStyle)
+    return color
+  return `${color}|${fontStyle}`
 }
