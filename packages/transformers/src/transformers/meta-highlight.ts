@@ -24,6 +24,12 @@ export interface TransformerMetaHighlightOptions {
    * @default 'highlighted'
    */
   className?: string
+  /**
+   * 0-indexed line numbers
+   *
+   * @default false
+   */
+  zeroIndexed?: boolean
 }
 
 const symbol = Symbol('highlighted-lines')
@@ -36,6 +42,7 @@ export function transformerMetaHighlight(
 ): ShikiTransformer {
   const {
     className = 'highlighted',
+    zeroIndexed = false,
   } = options
 
   return {
@@ -51,7 +58,7 @@ export function transformerMetaHighlight(
       meta[symbol] ??= parseMetaHighlightString(this.options.meta.__raw)
       const lines: number[] = meta[symbol] ?? []
 
-      if (lines.includes(line))
+      if (lines.some(l => l + (zeroIndexed ? 1 : 0) === line))
         this.addClassToHast(node, className)
       return node
     },
