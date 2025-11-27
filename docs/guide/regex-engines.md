@@ -11,7 +11,7 @@ Shiki also offers the ability to switch the regex engine or provide a custom imp
 ```ts
 import { createHighlighter } from 'shiki'
 
-const shiki = await createShiki({
+const shiki = await createHighlighter({
   themes: ['nord'],
   langs: ['javascript'],
   engine: { /* custom engine */ }
@@ -28,7 +28,7 @@ This is the default engine that uses the compiled Oniguruma WebAssembly.
 import { createHighlighter } from 'shiki'
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
 
-const shiki = await createShiki({
+const shiki = await createHighlighter({
   themes: ['nord'],
   langs: ['javascript'],
   engine: createOnigurumaEngine(import('shiki/wasm'))
