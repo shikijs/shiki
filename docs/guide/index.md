@@ -37,7 +37,7 @@ Here is a little playground for you to try out how Shiki highlights your code. T
 
 You can inspect the bundle size in detail on [pkg-size.dev/shiki](https://pkg-size.dev/shiki).
 
-As of `v1.1.6`, measured at 22th, February 2024:
+As of `v1.1.6`, measured at 22nd, February 2024:
 
 | Bundle              | Size (minified) | Size (gzip) | Notes                                                            |
 | ------------------- | --------------: | ----------: | ---------------------------------------------------------------- |

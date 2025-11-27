@@ -4,9 +4,12 @@
 
 Themes listed below are re-distributed via [`tm-themes`](https://github.com/shikijs/textmate-grammars-themes/tree/main/packages/tm-themes) into the `shiki` package.
 
+> [!NOTE]
+> Shiki does NOT control/maintain the themes. If you want to contribute to the themes, please refer to [`textmate-grammars-themes`](https://github.com/shikijs/textmate-grammars-themes#contribute).
+
 <ThemesList />
 
-Themes are covered by their repositories’ respective licenses, which are permissive (apache-2.0, mit, etc), and made available in [this NOTICE](https://github.com/shikijs/textmate-grammars-themes/blob/main/packages/tm-themes/NOTICE).
+Themes are covered by their repositories' respective licenses, which are permissive (apache-2.0, mit, etc), and made available in [this NOTICE](https://github.com/shikijs/textmate-grammars-themes/blob/main/packages/tm-themes/NOTICE).
 
 For loading your custom themes, please reference to [this guide](/guide/load-theme).
 

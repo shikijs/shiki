@@ -262,7 +262,8 @@ Meanwhile, it's also recommended to use the [Fine-grained Bundle](#fine-grained-
 // @noErrors
 import js from '@shikijs/langs/javascript'
 import nord from '@shikijs/themes/nord'
-import { createHighlighterCore, loadWasm } from 'shiki/core'
+import { createHighlighterCore } from 'shiki/core'
+import { loadWasm } from 'shiki/engine/oniguruma'
 
 // import wasm as assets
 await loadWasm(import('shiki/onig.wasm'))

@@ -4,7 +4,7 @@ import type {
   DynamicImportThemeRegistration,
   HighlighterGeneric,
 } from '@shikijs/types'
-import { createdBundledHighlighter } from '@shikijs/core'
+import { createBundledHighlighter } from '@shikijs/core'
 import { createJavaScriptRawEngine } from '@shikijs/engine-javascript/raw'
 
 type BundledLanguage =
@@ -37,7 +37,7 @@ const bundledThemes = {
   'vitesse-dark': () => import('@shikijs/themes/vitesse-dark'),
 } as Record<BundledTheme, DynamicImportThemeRegistration>
 
-const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >({

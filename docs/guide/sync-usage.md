@@ -1,6 +1,6 @@
 # Synchronous Usage
 
-The `await createHighlighter()` and `highlighter.codeToHtml()` are already the effort to do the seperations of asynchronism and synchronism. For most of the cases, you should be able to resolve the async part in the initialization phase and use the highlighter synchronously later.
+The `await createHighlighter()` and `highlighter.codeToHtml()` are already the effort to do the separations of asynchronism and synchronism. For most of the cases, you should be able to resolve the async part in the initialization phase and use the highlighter synchronously later.
 
 In some extreme cases that you need to run Shiki completely synchronously, since v1.16, we provide a synchronous version of the core API. You can use `createHighlighterCoreSync` to create a highlighter instance synchronously.
 
