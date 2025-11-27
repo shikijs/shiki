@@ -38,13 +38,6 @@ it('run', async () => {
   await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
-// The `postprocess` transformer hook is only called for HTML-producing
-// flows (see `@shikijs/types`), so it is not exercised here. If users want
-// to run HTML-based postprocessing in rehype, they should apply a root
-// transformer that converts the HAST fragment to HTML, runs postprocess
-// logic, then parses the HTML back to HAST. We intentionally do not run
-// `postprocess` here to preserve HAST semantics.
-
 it('run with lazy', async () => {
   const highlighter = await createHighlighter({
     themes: [
