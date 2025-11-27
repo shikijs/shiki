@@ -158,12 +158,9 @@ catalogs:
     magic-string:
       specifier: ^0.30.21
       version: 0.30.21
-    markdown-it:
-      specifier: ^14.1.0
-      version: 14.1.0
-    markdown-it-async:
-      specifier: ^2.2.0
-      version: 2.2.0
+    markdown-it-ts:
+      specifier: ^0.0.2-beta.7
+      version: 0.0.2-beta.7
     mdast-util-from-markdown:
       specifier: ^2.0.2
       version: 2.0.2
@@ -242,9 +239,6 @@ catalogs:
     '@types/js-yaml':
       specifier: ^4.0.9
       version: 4.0.9
-    '@types/markdown-it':
-      specifier: ^14.1.2
-      version: 14.1.2
     '@types/node':
       specifier: ^24.10.0
       version: 24.10.0
@@ -384,9 +378,9 @@ importers:
       lint-staged:
         specifier: catalog:cli
         version: 16.2.6
-      markdown-it:
+      markdown-it-ts:
         specifier: catalog:integrations
-        version: 14.1.0
+        version: 0.0.2-beta.7
       mdast-util-from-markdown:
         specifier: catalog:integrations
         version: 2.0.2
@@ -604,9 +598,9 @@ importers:
 
   packages/markdown-it:
     dependencies:
-      markdown-it:
+      markdown-it-ts:
         specifier: catalog:integrations
-        version: 14.1.0
+        version: 0.0.2-beta.7
       shiki:
         specifier: workspace:*
         version: link:../shiki
@@ -614,12 +608,6 @@ importers:
       '@shikijs/transformers':
         specifier: workspace:*
         version: link:../transformers
-      '@types/markdown-it':
-        specifier: catalog:types
-        version: 14.1.2
-      markdown-it-async:
-        specifier: catalog:integrations
-        version: 2.2.0
 
   packages/monaco:
     dependencies:
@@ -793,9 +781,9 @@ importers:
       magic-string:
         specifier: catalog:integrations
         version: 0.30.21
-      markdown-it:
+      markdown-it-ts:
         specifier: catalog:integrations
-        version: 14.1.0
+        version: 0.0.2-beta.7
       mdast-util-from-markdown:
         specifier: catalog:integrations
         version: 2.0.2
@@ -3633,12 +3621,9 @@ packages:
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
 
-  markdown-it-async@2.2.0:
-    resolution: {integrity: sha512-sITME+kf799vMeO/ww/CjH6q+c05f6TLpn6VOmmWCGNqPJzSh+uFgZoMB9s0plNtW6afy63qglNAC3MhrhP/gg==}
-
-  markdown-it@14.1.0:
-    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
-    hasBin: true
+  markdown-it-ts@0.0.2-beta.7:
+    resolution: {integrity: sha512-2CSbb9ZYarUsAQl4w5bxxlPAf8ZLs5oFaasyAK1zNWmifmSIymVn4D1rTWMCzKp9jMvkhdtLNdFyguyWscXjcg==}
+    engines: {node: '>=18'}
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
@@ -8108,14 +8093,8 @@ snapshots:
 
   mark.js@8.11.1: {}
 
-  markdown-it-async@2.2.0:
+  markdown-it-ts@0.0.2-beta.7:
     dependencies:
-      '@types/markdown-it': 14.1.2
-      markdown-it: 14.1.0
-
-  markdown-it@14.1.0:
-    dependencies:
-      argparse: 2.0.1
       entities: 4.5.0
       linkify-it: 5.0.0
       mdurl: 2.0.0

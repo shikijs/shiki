@@ -14,7 +14,8 @@
   "bugs": "https://github.com/shikijs/shiki/issues",
   "keywords": [
     "shiki",
-    "markdown-it"
+    "markdown-it",
+    "markdown-it-ts"
   ],
   "sideEffects": false,
   "exports": {
@@ -33,21 +34,11 @@
     "dev": "unbuild --stub",
     "prepublishOnly": "nr build"
   },
-  "peerDependencies": {
-    "markdown-it-async": "catalog:integrations"
-  },
-  "peerDependenciesMeta": {
-    "markdown-it-async": {
-      "optional": true
-    }
-  },
   "dependencies": {
-    "markdown-it": "catalog:integrations",
+    "markdown-it-ts": "catalog:integrations",
     "shiki": "workspace:*"
   },
   "devDependencies": {
-    "@shikijs/transformers": "workspace:*",
-    "@types/markdown-it": "catalog:types",
-    "markdown-it-async": "catalog:integrations"
+    "@shikijs/transformers": "workspace:*"
   }
 }
