@@ -11,7 +11,7 @@ import { createTwoslashWithInlineCache } from '../../packages/vitepress-twoslash
 import { defaultHoverInfoProcessor } from '../../packages/vitepress-twoslash/src/index'
 import vite from './vite.config'
 
-const GUIDES: DefaultTheme.NavItemWithLink[] = [
+const GUIDES = [
   { text: 'Getting Started', link: '/guide/' },
   { text: 'Installation & Usage', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
@@ -28,15 +28,15 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
   { text: 'Custom Languages', link: '/guide/load-lang' },
   { text: 'Migration', link: '/guide/migrate' },
   { text: 'Compatibility Build', link: '/guide/compat' },
-]
+] as const satisfies (DefaultTheme.NavItemWithLink | DefaultTheme.SidebarItem)[]
 
-const REFERENCES: DefaultTheme.NavItemWithLink[] = [
+const REFERENCES = [
   { text: 'Themes', link: '/themes' },
   { text: 'Languages', link: '/languages' },
   { text: 'JavaScript Engine Compatibility', link: '/references/engine-js-compat' },
-]
+] as const satisfies (DefaultTheme.NavItemWithLink | DefaultTheme.SidebarItem)[]
 
-const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
+const INTEGRATIONS = [
   { text: 'TypeScript Twoslash', link: '/packages/twoslash' },
   { text: 'markdown-it', link: '/packages/markdown-it' },
   { text: 'Rehype', link: '/packages/rehype' },
@@ -49,7 +49,7 @@ const INTEGRATIONS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
   { text: 'Codegen', link: '/packages/codegen' },
   { text: 'CLI', link: '/packages/cli' },
-]
+] as const satisfies (DefaultTheme.NavItemWithLink | DefaultTheme.SidebarItem)[]
 
 const BLOGS: DefaultTheme.NavItemWithLink[] = [
   { text: 'Shiki v3.0', link: '/blog/v3' },
@@ -182,25 +182,20 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
       },
     ],
 
-    sidebar: Object.assign(
-      {},
+    sidebar: [
       {
-        '/': [
-          {
-            text: 'Guide',
-            items: GUIDES,
-          },
-          {
-            text: 'Integrations',
-            items: INTEGRATIONS,
-          },
-          {
-            text: 'References',
-            items: REFERENCES,
-          },
-        ],
+        text: 'Guide',
+        items: GUIDES,
       },
-    ),
+      {
+        text: 'Integrations',
+        items: INTEGRATIONS,
+      },
+      {
+        text: 'References',
+        items: REFERENCES,
+      },
+    ] satisfies DefaultTheme.SidebarItem[],
 
     editLink: {
       pattern: 'https://github.com/shikijs/shiki/edit/main/docs/:path',
