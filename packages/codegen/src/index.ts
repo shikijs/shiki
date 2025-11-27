@@ -98,7 +98,7 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
     '@shikijs/types': ['HighlighterGeneric', 'DynamicImportThemeRegistration', 'DynamicImportLanguageRegistration'],
   }
   const imports: Record<string, string[]> = {
-    '@shikijs/core': ['createdBundledHighlighter'],
+    '@shikijs/core': ['createBundledHighlighter'],
   }
   const lines: string[] = [
     '',
@@ -143,7 +143,7 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
 
   lines.push(
     '',
-    `const createHighlighter = /* @__PURE__ */ createdBundledHighlighter${ts('<BundledLanguage, BundledTheme>')}({`,
+    `const createHighlighter = /* @__PURE__ */ createBundledHighlighter${ts('<BundledLanguage, BundledTheme>')}({`,
     `  langs: bundledLanguages,`,
     `  themes: bundledThemes,`,
     `  engine: () => ${engine}`,
