@@ -166,8 +166,9 @@ export class Registry extends TextMateRegistry {
   private resolveEmbeddedLanguages(lang: LanguageRegistration): void {
     this._langMap.set(lang.name, lang)
     this._langGraph.set(lang.name, lang)
-    if (lang.embeddedLangs) {
-      for (const embeddedLang of lang.embeddedLangs)
+    const embedded = lang.embeddedLanguages ?? lang.embeddedLangs
+    if (embedded) {
+      for (const embeddedLang of embedded)
         this._langGraph.set(embeddedLang, this._langMap.get(embeddedLang)!)
     }
   }
