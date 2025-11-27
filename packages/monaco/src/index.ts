@@ -103,8 +103,8 @@ export function shikiToMonaco(
     _setTheme(themeName)
   }
 
-  // Set the first theme as the default theme
-  monaco.editor.setTheme(themeIds[0])
+  const lastTheme = themeIds[themeIds.length - 1]
+  monaco.editor.setTheme(lastTheme)
 
   function findScopeByColorAndStyle(color: string, fontStyle: FontStyle): string | undefined {
     const key = getColorStyleKey(color, normalizeFontStyleBits(fontStyle))
