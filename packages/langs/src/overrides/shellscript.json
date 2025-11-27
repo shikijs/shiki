@@ -1,0 +1,36 @@
+{
+  "repository": {
+    "argument_context": {
+      "patterns": [
+        {
+          "captures": {
+            "1": {
+              "name": "string.unquoted.argument.shell",
+              "patterns": [
+                {
+                  "match": "\\*",
+                  "name": "variable.language.special.wildcard.shell"
+                },
+                {
+                  "include": "#variable"
+                },
+                {
+                  "include": "#numeric_literal"
+                },
+                {
+                  "captures": {
+                    "1": {
+                      "name": "constant.language.$1.shell"
+                    }
+                  },
+                  "match": "(?<!\\w)\\b(true|false)\\b(?!\\w)"
+                }
+              ]
+            }
+          },
+          "match": "[\\t ]*+([^\\t\\n \"$\\&-);<>\\\\`|]+)"
+        }
+      ]
+    }
+  }
+}
