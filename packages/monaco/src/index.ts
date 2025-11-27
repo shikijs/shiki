@@ -188,17 +188,25 @@ const VALID_FONT_STYLES = [
   'strikethrough',
 ] as const
 
+const VALID_FONT_ALIASES: Record<string, typeof VALID_FONT_STYLES[number]> = {
+  'line-through': 'strikethrough',
+}
+
 function normalizeFontStyleString(fontStyle?: string): string {
   if (!fontStyle)
     return ''
 
-  const styles = new Set(fontStyle
-    .split(/[\s,]+/)
-    .map(style => style.trim().toLowerCase())
-    .filter(Boolean),
+  const styles = new Set(
+    fontStyle
+      .split(/[\s,]+/)
+      .map(style => style.trim().toLowerCase())
+      .map(style => VALID_FONT_ALIASES[style] || style)
+      .filter(Boolean),
   )
 
-  return VALID_FONT_STYLES.filter(style => styles.has(style)).join(' ')
+  return VALID_FONT_STYLES
+    .filter(style => styles.has(style))
+    .join(' ')
 }
 
 function getColorStyleKey(color: string, fontStyle: string): string {
