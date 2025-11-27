@@ -1,4 +1,6 @@
 import type { LanguageRegistration } from '@shikijs/core'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import fg from 'fast-glob'
 import fs from 'fs-extra'
 import { grammars, injections } from 'tm-grammars'
@@ -66,6 +68,10 @@ export const LANGS_LAZY_EMBEDDED_PARTIAL = {
   ],
 } as Record<string, string[]>
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const overridesDir = path.resolve(__dirname, '../src/overrides')
+
 export async function loadLangs() {
   const allLangFiles = await fg('*.json', {
     cwd: './node_modules/tm-grammars/grammars',
@@ -93,6 +99,8 @@ export async function loadLangs() {
       embeddedLangs: lang.embedded,
       aliases: lang.aliases,
     }
+
+    await applyLanguageOverride(json)
 
     // We don't load all the embedded langs for markdown
     if (LANGS_LAZY_EMBEDDED_ALL[lang.name]) {
@@ -275,4 +283,39 @@ export const bundledLanguages = {
 
 function isInvalidFilename(filename: string) {
   return !filename.match(/^[\w-]+$/)
+}
+
+async function applyLanguageOverride(json: LanguageRegistration) {
+  if (!json.name)
+    return
+  const overridePath = path.join(overridesDir, `${json.name}.json`)
+  if (!await fs.pathExists(overridePath))
+    return
+
+  const override = await fs.readJSON(overridePath)
+  mergeOverrideObject(json as Record<string, any>, override)
+}
+
+function mergeOverrideObject(target: Record<string, any>, source: Record<string, any>) {
+  for (const [key, value] of Object.entries(source)) {
+    target[key] = mergeOverrideValue(target[key], value)
+  }
+}
+
+function mergeOverrideValue(current: any, value: any): any {
+  if (Array.isArray(value))
+    return Array.isArray(current) ? [...value, ...current] : [...value]
+
+  if (isPlainObject(value)) {
+    const base = isPlainObject(current) ? current : {}
+    for (const [childKey, childValue] of Object.entries(value))
+      base[childKey] = mergeOverrideValue(base[childKey], childValue)
+    return base
+  }
+
+  return value
+}
+
+function isPlainObject(value: unknown): value is Record<string, any> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
