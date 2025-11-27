@@ -1,5 +1,5 @@
 import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
-import type monacoNs from 'monaco-editor-core'
+import type * as monacoNs from 'monaco-editor-core'
 import type { MonacoLineToken } from './types'
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import { TokenizerState } from './tokenizer'
@@ -32,18 +32,16 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
     const themeSettings = theme.settings || theme.tokenColors
 
     for (const { scope, settings: { foreground, background, fontStyle } = {} } of themeSettings) {
-      const scopes = Array.isArray(scope) ? scope : [scope]
+      if (!foreground && !background && !fontStyle)
+        continue
+      const scopes = Array.isArray(scope) ? scope : scope ? [scope] : []
 
-      for (const s of scopes) {
-        if (s && (foreground || background || fontStyle)) {
-          rules.push({
-            token: s,
-            foreground: normalizeColor(foreground),
-            background: normalizeColor(background),
-            fontStyle,
-          })
-        }
-      }
+      rules.push(...scopes.map(s => ({
+        token: s,
+        foreground: normalizeColor(foreground),
+        background: normalizeColor(background),
+        fontStyle,
+      })))
     }
   }
 
