@@ -159,8 +159,8 @@ catalogs:
       specifier: ^0.30.21
       version: 0.30.21
     markdown-it-ts:
-      specifier: ^0.0.2-beta.7
-      version: 0.0.2-beta.7
+      specifier: ^0.0.2-beta.8
+      version: 0.0.2-beta.8
     mdast-util-from-markdown:
       specifier: ^2.0.2
       version: 2.0.2
@@ -379,7 +379,7 @@ importers:
         specifier: catalog:cli
         version: 16.2.7
       markdown-it-ts:
-        specifier: 0.0.2-beta.8
+        specifier: catalog:integrations
         version: 0.0.2-beta.8
       mdast-util-from-markdown:
         specifier: catalog:integrations
@@ -600,7 +600,7 @@ importers:
     dependencies:
       markdown-it-ts:
         specifier: catalog:integrations
-        version: 0.0.2-beta.7
+        version: 0.0.2-beta.8
       shiki:
         specifier: workspace:*
         version: link:../shiki
@@ -783,7 +783,7 @@ importers:
         version: 0.30.21
       markdown-it-ts:
         specifier: catalog:integrations
-        version: 0.0.2-beta.7
+        version: 0.0.2-beta.8
       mdast-util-from-markdown:
         specifier: catalog:integrations
         version: 2.0.2
@@ -3580,10 +3580,6 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
-
-  markdown-it-ts@0.0.2-beta.7:
-    resolution: {integrity: sha512-2CSbb9ZYarUsAQl4w5bxxlPAf8ZLs5oFaasyAK1zNWmifmSIymVn4D1rTWMCzKp9jMvkhdtLNdFyguyWscXjcg==}
-    engines: {node: '>=18'}
 
   markdown-it-ts@0.0.2-beta.8:
     resolution: {integrity: sha512-Muef2Pd7onDeVPIy0oPeIkLBqyQG8R8r87LicVWHTjX5Aww+3JYARlMbRlpKprWH5PWS1s0/osZdTdZtj+Q7Yg==}
@@ -8010,14 +8006,6 @@ snapshots:
       semver: 7.7.3
 
   mark.js@8.11.1: {}
-
-  markdown-it-ts@0.0.2-beta.7:
-    dependencies:
-      entities: 4.5.0
-      linkify-it: 5.0.0
-      mdurl: 2.0.0
-      punycode.js: 2.3.1
-      uc.micro: 2.1.0
 
   markdown-it-ts@0.0.2-beta.8:
     dependencies:
