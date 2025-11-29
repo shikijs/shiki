@@ -34,9 +34,9 @@ import { Shiki } from 'react-shiki'
 function App() {
   return (
     <Shiki
-      code='console.log("Hello World")'
-      lang='ts'
-      theme='vitesse-dark'
+      code="console.log(&quot;Hello World&quot;)"
+      lang="ts"
+      theme="vitesse-dark"
     />
   )
 }
