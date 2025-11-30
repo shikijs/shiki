@@ -90,7 +90,7 @@ export interface RendererRichOptions {
   queryRendering?: 'popup' | 'line'
 
   /**
-   * Extensions for the genreated HAST tree.
+   * Extensions for the generated HAST tree.
    */
   hast?: {
     /**
