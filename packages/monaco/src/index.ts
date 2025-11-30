@@ -103,6 +103,14 @@ export function shikiToMonaco(
     _setTheme(themeName)
   }
 
+  const _create = monaco.editor.create
+  monaco.editor.create = (element: HTMLElement, options?: monacoNs.editor.IStandaloneEditorConstructionOptions, override?: monacoNs.editor.IEditorOverrideServices) => {
+    if (options?.theme) {
+      monaco.editor.setTheme(options.theme)
+    }
+    return _create(element, options, override)
+  }
+
   // Set the first theme as the default theme
   monaco.editor.setTheme(themeIds[0])
 
@@ -147,7 +155,8 @@ export function shikiToMonaco(
           for (let j = 0; j < tokensLength; j++) {
             const startIndex = result.tokens[2 * j]
             const metadata = result.tokens[2 * j + 1]
-            const color = normalizeColor(colorMap[EncodedTokenMetadata.getForeground(metadata)] || '')
+            const colorIdx = EncodedTokenMetadata.getForeground(metadata)
+            const color = normalizeColor(colorMap[colorIdx] || '')
             const fontStyle = EncodedTokenMetadata.getFontStyle(metadata)
 
             // Because Monaco only support one scope per token,

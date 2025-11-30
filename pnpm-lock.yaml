@@ -638,6 +638,16 @@ importers:
         version: 0.55.1
 
   packages/monaco/playground:
+    dependencies:
+      '@shikijs/monaco':
+        specifier: workspace:*
+        version: link:..
+      monaco-editor-core:
+        specifier: catalog:integrations
+        version: 0.55.1
+      shiki:
+        specifier: workspace:*
+        version: link:../../shiki
     devDependencies:
       typescript:
         specifier: ^5.9.3
