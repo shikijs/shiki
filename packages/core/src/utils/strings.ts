@@ -2,11 +2,30 @@ import type { HighlighterGeneric, Position } from '@shikijs/types'
 
 /**
  * Split a string into lines, each line preserves the line ending.
+ *
+ * @param code - The code string to split into lines
+ * @param preserveEnding - Whether to preserve line endings in the result
+ * @returns Array of tuples containing [line content, offset index]
+ *
+ * @example
+ * ```ts
+ * splitLines('hello\nworld', false)
+ * // => [['hello', 0], ['world', 6]]
+ *
+ * splitLines('hello\nworld', true)
+ * // => [['hello\n', 0], ['world', 6]]
+ * ```
  */
 export function splitLines(code: string, preserveEnding = false): [string, number][] {
+  // Handle empty string edge case
+  if (code.length === 0) {
+    return [['', 0]]
+  }
+
   const parts = code.split(/(\r?\n)/g)
   let index = 0
   const lines: [string, number][] = []
+
   for (let i = 0; i < parts.length; i += 2) {
     const line = preserveEnding
       ? parts[i] + (parts[i + 1] || '')
@@ -15,6 +34,7 @@ export function splitLines(code: string, preserveEnding = false): [string, numbe
     index += parts[i].length
     index += parts[i + 1]?.length || 0
   }
+
   return lines
 }
 
@@ -69,6 +89,20 @@ export function createPositionConverter(code: string): {
  * Guess embedded languages from given code and highlighter.
  *
  * When highlighter is provided, only bundled languages will be included.
+ *
+ * @param code - The code string to analyze
+ * @param _lang - The primary language of the code (currently unused)
+ * @param highlighter - Optional highlighter instance to validate languages
+ * @returns Array of detected language identifiers
+ *
+ * @example
+ * ```ts
+ * // Detects 'javascript' from Vue SFC
+ * guessEmbeddedLanguages('<script lang="javascript">')
+ *
+ * // Detects 'python' from markdown code block
+ * guessEmbeddedLanguages('```python\nprint("hi")\n```')
+ * ```
  */
 export function guessEmbeddedLanguages(
   code: string,
@@ -76,17 +110,41 @@ export function guessEmbeddedLanguages(
   highlighter?: HighlighterGeneric<any, any>,
 ): string[] {
   const langs = new Set<string>()
-  // For HTML code blocks like Vue SFC
-  for (const match of code.matchAll(/lang=["']([\w-]+)["']/g)) {
-    langs.add(match[1])
+
+  // For HTML code blocks like Vue SFC, support both single and double quotes
+  // Matches: lang="js", lang='ts', :lang="typescript", etc.
+  // Allow spaces around the language name
+  for (const match of code.matchAll(/:?lang=["']([^"']+)["']/g)) {
+    const lang = match[1].toLowerCase().trim()
+    if (lang)
+      langs.add(lang)
   }
-  // For markdown code blocks
+
+  // For markdown code blocks, support both ``` and ~~~ fences
+  // Matches: ```typescript, ~~~javascript, etc.
   for (const match of code.matchAll(/(?:```|~~~)([\w-]+)/g)) {
-    langs.add(match[1])
+    const lang = match[1].toLowerCase().trim()
+    if (lang)
+      langs.add(lang)
   }
-  // For latex
+
+  // For LaTeX environments
+  // Matches: \begin{equation}, \begin{align}, etc.
   for (const match of code.matchAll(/\\begin\{([\w-]+)\}/g)) {
-    langs.add(match[1])
+    const lang = match[1].toLowerCase().trim()
+    if (lang)
+      langs.add(lang)
+  }
+
+  // For script tags in HTML/Vue
+  // Matches: <script type="text/javascript">, <script lang="ts">, etc.
+  // Allow spaces around the language name
+  for (const match of code.matchAll(/<script\s+(?:type|lang)=["']([^"']+)["']/gi)) {
+    // Extract language from MIME types like 'text/javascript' or 'application/typescript'
+    const fullType = match[1].toLowerCase().trim()
+    const lang = fullType.includes('/') ? fullType.split('/').pop() : fullType
+    if (lang)
+      langs.add(lang)
   }
 
   if (!highlighter)
