@@ -7,9 +7,15 @@ Shiki in the command line.
 ## Usage
 
 The Shiki CLI works like `cat` command, but with syntax highlighting.
+It also supports remote files.
 
 ```bash
 npx @shikijs/cli README.md
+```
+
+```bash
+npx @shikijs/cli \
+  'https://github.com/shikijs/shiki/blob/main/taze.config.ts?raw=true'
 ```
 
 ## Install

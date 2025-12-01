@@ -2,7 +2,7 @@ import type { HighlighterGeneric } from '@shikijs/types'
 import type {} from 'hast'
 import type { BundledLanguage } from './langs-bundle-full'
 import type { BundledTheme } from './themes'
-import { createdBundledHighlighter, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
+import { createBundledHighlighter, createSingletonShorthands, guessEmbeddedLanguages } from '@shikijs/core'
 import { createOnigurumaEngine } from './engine-oniguruma'
 import { bundledLanguages } from './langs-bundle-full'
 import { bundledThemes } from './themes'
@@ -23,7 +23,7 @@ export type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>
  * For granular control over the bundle, check:
  * @see https://shiki.style/guide/bundles#fine-grained-bundle
  */
-export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+export const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >({

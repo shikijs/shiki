@@ -5,7 +5,7 @@ import type {
   CodeToTokensBaseOptions,
   CodeToTokensOptions,
   CodeToTokensWithThemesOptions,
-  CreatedBundledHighlighterOptions,
+  CreateBundledHighlighterOptions,
   CreateHighlighterFactory,
   GrammarState,
   HighlighterGeneric,
@@ -30,7 +30,7 @@ import { createHighlighterCore } from './highlighter'
  *
  * @example
  * ```ts
- * const createHighlighter = createdBundledHighlighter({
+ * const createHighlighter = createBundledHighlighter({
  *   langs: {
  *     typescript: () => import('@shikijs/langs/typescript'),
  *     // ...
@@ -45,13 +45,13 @@ import { createHighlighterCore } from './highlighter'
  *
  * @param options
  */
-export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
-  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+  options: CreateBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes>
 
 // Implementation
-export function createdBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
-  options: CreatedBundledHighlighterOptions<BundledLangs, BundledThemes>,
+export function createBundledHighlighter<BundledLangs extends string, BundledThemes extends string>(
+  options: CreateBundledHighlighterOptions<BundledLangs, BundledThemes>,
 ): CreateHighlighterFactory<BundledLangs, BundledThemes> {
   const bundledLanguages = options.langs
   const bundledThemes = options.themes
@@ -270,3 +270,8 @@ export function createSingletonShorthands<L extends string, T extends string>(
     },
   }
 }
+
+/**
+ * @deprecated Use `createBundledHighlighter` instead.
+ */
+export const createdBundledHighlighter = createBundledHighlighter

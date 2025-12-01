@@ -90,7 +90,7 @@ export interface RendererRichOptions {
   queryRendering?: 'popup' | 'line'
 
   /**
-   * Extensions for the genreated HAST tree.
+   * Extensions for the generated HAST tree.
    */
   hast?: {
     /**
@@ -410,7 +410,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'span',
           properties: {
-            class: 'twoslash-hover twoslash-query-presisted',
+            // TODO: `twoslash-query-presisted` was a typo before v3.17. We keep it for backward compatibility.
+            // We should remove it in the next major version.
+            class: 'twoslash-hover twoslash-query-persisted twoslash-query-presisted',
           },
           children: hast?.queryCompose
             ? hast?.queryCompose({ popup, token: node })

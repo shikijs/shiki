@@ -80,7 +80,7 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * <span style="color:#111;--shiki-dark:#fff;">code</span>
    * ```
    *
-   * @see https://github.com/shikijs/shiki#lightdark-dual-themes
+   * @see https://shiki.style/guide/dual-themes
    */
   themes: Partial<Record<string, ThemeRegistrationAny | StringLiteralUnion<Themes>>>
 
