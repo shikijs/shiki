@@ -12,8 +12,7 @@ const RESOLVED_KEY = '__shiki_resolved'
  * Normalize a textmate theme to shiki theme
  */
 export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistrationResolved {
-  // @ts-expect-error private field
-  if (rawTheme?.[RESOLVED_KEY])
+  if ((rawTheme as any)?.[RESOLVED_KEY])
     return rawTheme as ThemeRegistrationResolved
 
   const theme = {
@@ -53,11 +52,11 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
      * If there's no global `tokenColor` without `name` or `scope`
      * Use `editor.foreground` and `editor.background`
      */
-    if (!fg && (<any>theme)?.colors?.['editor.foreground'])
-      fg = (<any>theme).colors['editor.foreground']
+    if (!fg && theme.colors?.['editor.foreground'])
+      fg = theme.colors['editor.foreground']
 
-    if (!bg && (<any>theme)?.colors?.['editor.background'])
-      bg = (<any>theme).colors['editor.background']
+    if (!bg && theme.colors?.['editor.background'])
+      bg = theme.colors['editor.background']
 
     /**
      * Last try:

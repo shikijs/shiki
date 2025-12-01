@@ -34,8 +34,7 @@ const TwoslashFloatingVue = {
 
         const _component = app.component
         app.component = function (this: typeof app, ...rest: any[]) {
-          // @ts-expect-error type mismatch for `rest`
-          const comp = _component.apply(this, rest)
+          const comp = _component.apply(this, rest as any)
           if (rest.length >= 2 && rest[0] === 'VMenu') {
             try {
               const PopperVue = rest[1].components.Popper

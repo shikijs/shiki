@@ -108,7 +108,7 @@ export function tokensToHast(
     properties: {
       class: `shiki ${options.themeName || ''}`,
       style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
-      ...(tabindex !== false && tabindex != null)
+      ...(tabindex !== false && tabindex !== null && tabindex !== undefined)
         ? {
             tabindex: tabindex.toString(),
           }

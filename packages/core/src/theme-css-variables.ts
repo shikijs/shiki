@@ -266,8 +266,7 @@ export function createCssVariablesTheme(options: CssVariablesThemeOptions = {}):
   if (!fontStyle) {
     theme.tokenColors = theme.tokenColors?.map((tokenColor) => {
       if (tokenColor.settings?.fontStyle)
-        // @ts-expect-error force delete readonly property
-        delete tokenColor.settings.fontStyle
+        delete (tokenColor.settings as any).fontStyle
       return tokenColor
     })
   }

@@ -7,6 +7,9 @@ import type {
   ThemeInput,
 } from '@shikijs/types'
 
+/**
+ * Convert a value or array to an array.
+ */
 export function toArray<T>(x: MaybeArray<T>): T[] {
   return Array.isArray(x) ? x : [x]
 }
@@ -32,8 +35,8 @@ export function isPlainLang(lang: string | null | undefined): lang is PlainTextL
  *
  * Hard-coded languages: `ansi` and plaintexts like `plaintext`, `txt`, `text`, `plain`.
  */
-export function isSpecialLang(lang: any): lang is SpecialLanguage {
-  return lang === 'ansi' || isPlainLang(lang)
+export function isSpecialLang(lang: unknown): lang is SpecialLanguage {
+  return lang === 'ansi' || (typeof lang === 'string' && isPlainLang(lang))
 }
 
 /**

@@ -143,7 +143,7 @@ function _tokenizeWithTheme(
 
   let stateStack = options.grammarState
     ? getGrammarStack(options.grammarState, theme.name) ?? INITIAL
-    : options.grammarContextCode != null
+    : options.grammarContextCode !== null && options.grammarContextCode !== undefined
       ? _tokenizeWithTheme(
         options.grammarContextCode,
         grammar,

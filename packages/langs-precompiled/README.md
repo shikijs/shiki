@@ -8,8 +8,6 @@ Requires ES2024+ environment.
 
 ## Unsupported Languages
 
-<!-- TODOs -->
-
 ## License
 
 MIT

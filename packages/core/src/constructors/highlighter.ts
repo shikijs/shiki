@@ -19,7 +19,7 @@ export async function createHighlighterCore(options: HighlighterCoreOptions<fals
   const internal = await createShikiInternal(options)
 
   return {
-    getLastGrammarState: (...args: any[]) => getLastGrammarState(internal, ...args as [any])!,
+    getLastGrammarState: (...args: any[]) => getLastGrammarState(internal, ...args as [any, any]),
     codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
     codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
     codeToTokens: (code, options) => codeToTokens(internal, code, options),

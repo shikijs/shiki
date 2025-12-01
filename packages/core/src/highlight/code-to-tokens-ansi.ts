@@ -87,7 +87,7 @@ export function tokenizeAnsiWithTheme(
 
       return {
         content: token.value,
-        offset: line[1], // TODO: more accurate offset? might need to fork ansi-sequence-parser
+        offset: line[1],
         color,
         bgColor,
         fontStyle,

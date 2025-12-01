@@ -410,8 +410,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'span',
           properties: {
-            // TODO: `twoslash-query-presisted` was a typo before v3.17. We keep it for backward compatibility.
-            // We should remove it in the next major version.
+            // NOTE: `twoslash-query-presisted` was a typo before v3.17. We keep it for backward compatibility.
             class: 'twoslash-hover twoslash-query-persisted twoslash-query-presisted',
           },
           children: hast?.queryCompose

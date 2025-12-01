@@ -24,7 +24,7 @@ export class Resolver implements RegistryOptions {
     return this._langs.get(langIdOrAlias)!
   }
 
-  public loadGrammar(scopeName: string): any {
+  public loadGrammar(scopeName: string): LanguageRegistration {
     return this._scopeToLang.get(scopeName)!
   }
 
