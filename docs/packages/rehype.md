@@ -157,3 +157,56 @@ Then you can use inline code in markdown:
 ```md
 This code `console.log("Hello World"){:js}` will be highlighted.
 ```
+
+## Postprocess Transformers
+
+::: info
+The `postprocess` transformer hook is only invoked when producing HTML strings (i.e., when using `codeToHtml`). Since `@shikijs/rehype` operates on HAST (Hypertext Abstract Syntax Tree) rather than HTML strings, postprocess transformers will not be executed.
+:::
+
+This design is intentional: running `postprocess` hooks in rehype would require converting HAST → HTML → running postprocess → parsing back to HAST, which changes the semantics and could surprise users expecting HAST-only transformers.
+
+### Workaround for HTML-based Postprocessing
+
+If you need to run HTML-based postprocessing with rehype, you can apply a `root` transformer that:
+
+1. Converts the HAST fragment to HTML using `hast-util-to-html`
+2. Runs your HTML transformers
+3. Converts back to HAST using `hast-util-from-html`
+
+Example:
+
+```ts
+import { fromHtml } from 'hast-util-from-html'
+import { toHtml } from 'hast-util-to-html'
+
+const file = await unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use(rehypeShiki, {
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+    transformers: [
+      {
+        name: 'custom-html-postprocessor',
+        root(node) {
+          // Convert HAST to HTML
+          const html = toHtml(node)
+
+          // Apply your HTML transformations
+          const processedHtml = myCustomPostprocess(html)
+
+          // Parse back to HAST
+          const newNode = fromHtml(processedHtml, { fragment: true })
+
+          // Replace the node
+          return newNode
+        }
+      }
+    ]
+  })
+  .use(rehypeStringify)
+  .process(await fs.readFile('./input.md'))
+```
