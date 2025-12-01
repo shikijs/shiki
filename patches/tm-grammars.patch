@@ -1,0 +1,13 @@
+diff --git a/grammars/sql.json b/grammars/sql.json
+index 7dae3f3ef239d8edbdbc501f3c2a8c36d398ad0b..4f0b623f2f3f0b1e060d4485ade829fac826acd0 100644
+--- a/grammars/sql.json
++++ b/grammars/sql.json
+@@ -129,7 +129,7 @@
+       "name": "constant.numeric.sql"
+     },
+     {
+-      "match": "(?i:\\b(select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
++      "match": "(?i:\\b(show|select(\\s+(all|distinct))?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\s+by|or|like|and|union(\\s+all)?|having|order\\s+by|limit|cross\\s+join|join|straight_join|(inner|(left|right|full)(\\s+outer)?)\\s+join|natural(\\s+(inner|(left|right|full)(\\s+outer)?))?\\s+join)\\b)",
+       "name": "keyword.other.DML.sql"
+     },
+     {

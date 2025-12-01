@@ -272,6 +272,11 @@ overrides:
   vite: ^7.2.4
   vscode-oniguruma: 1.7.0
 
+patchedDependencies:
+  tm-grammars:
+    hash: edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f
+    path: patches/tm-grammars.patch
+
 importers:
 
   .:
@@ -486,7 +491,7 @@ importers:
         version: 3.0.4(typescript@5.9.3)(vue@3.5.25(typescript@5.9.3))
       tm-grammars:
         specifier: catalog:inlined
-        version: 1.26.0
+        version: 1.26.0(patch_hash=edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f)
       tm-themes:
         specifier: catalog:inlined
         version: 1.10.13
@@ -587,7 +592,7 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: catalog:inlined
-        version: 1.26.0
+        version: 1.26.0(patch_hash=edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f)
 
   packages/langs-precompiled:
     dependencies:
@@ -600,7 +605,7 @@ importers:
     devDependencies:
       tm-grammars:
         specifier: catalog:inlined
-        version: 1.26.0
+        version: 1.26.0(patch_hash=edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f)
 
   packages/markdown-it:
     dependencies:
@@ -725,7 +730,7 @@ importers:
         version: 3.5.0
       tm-grammars:
         specifier: catalog:inlined
-        version: 1.26.0
+        version: 1.26.0(patch_hash=edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f)
       tm-themes:
         specifier: catalog:inlined
         version: 1.10.13
@@ -9261,7 +9266,7 @@ snapshots:
 
   tinyspy@4.0.4: {}
 
-  tm-grammars@1.26.0: {}
+  tm-grammars@1.26.0(patch_hash=edf22357d3947e9da71cb2a93bf59b1e4d540d8f9afe027c869f2743a30b918f): {}
 
   tm-themes@1.10.13: {}
 

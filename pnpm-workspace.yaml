@@ -4,6 +4,9 @@ packages:
   - playground
   - examples/*
   - docs
+
+patchedDependencies:
+  tm-grammars: patches/tm-grammars.patch
 catalogs:
   bundling:
     '@rollup/plugin-alias': ^6.0.0
@@ -101,6 +104,7 @@ catalogs:
     '@types/mdast': ^4.0.4
     '@types/node': ^24.10.1
     '@types/unist': ^3.0.3
+
 onlyBuiltDependencies:
   - esbuild
   - sharp
