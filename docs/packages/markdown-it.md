@@ -46,14 +46,15 @@ md.use(await Shiki({
   }
 }))
 ```
+
 ## Transformers
 
 You can pass [transformers](/guide/transformers) to the plugin options to customize the highlighted code.
 
 ```ts twoslash
 import Shiki from '@shikijs/markdown-it'
-import MarkdownIt from 'markdown-it'
 import { transformerNotationDiff } from '@shikijs/transformers'
+import MarkdownIt from 'markdown-it'
 
 const md = MarkdownIt()
 
