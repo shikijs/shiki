@@ -4,15 +4,15 @@ Shiki is often compared to other popular syntax highlighting libraries like [Pri
 
 ## Summary
 
-| Feature | Shiki | Prism.js / Highlight.js |
-| --- | --- | --- |
-| **Engine** | TextMate Grammar (Oniguruma) | Regex |
-| **Accuracy** | High (Same as VS Code) | Good |
-| **Themes** | VS Code Themes | CSS |
-| **Languages** | VS Code Languages | Built-in / Plugins |
-| **Output** | HTML with inline styles | HTML with classes |
-| **Runtime** | Node.js / Modern Browsers (WASM) | Browser / Node.js |
-| **Bundle Size** | Heavy (WASM + Grammars) | Light |
+| Feature         | Shiki                            | Prism.js / Highlight.js |
+| --------------- | -------------------------------- | ----------------------- |
+| **Engine**      | TextMate Grammar (Oniguruma)     | Regex                   |
+| **Accuracy**    | High (Same as VS Code)           | Good                    |
+| **Themes**      | VS Code Themes                   | CSS                     |
+| **Languages**   | VS Code Languages                | Built-in / Plugins      |
+| **Output**      | HTML with inline styles          | HTML with classes       |
+| **Runtime**     | Node.js / Modern Browsers (WASM) | Browser / Node.js       |
+| **Bundle Size** | Heavy (WASM + Grammars)          | Light                   |
 
 ## Why Shiki?
 
