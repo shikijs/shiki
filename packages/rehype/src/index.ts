@@ -6,7 +6,9 @@ import type { BuiltinLanguage, BuiltinTheme } from 'shiki'
 import type { Plugin } from 'unified'
 import type { RehypeShikiCoreOptions } from './types'
 import { bundledLanguages, getSingletonHighlighter } from 'shiki'
-import rehypeShikiFromHighlighter from './core'
+import { rehypeShikiFromHighlighter } from './core'
+
+export { rehypeShikiFromHighlighter }
 
 export type RehypeShikiOptions = RehypeShikiCoreOptions
   & {

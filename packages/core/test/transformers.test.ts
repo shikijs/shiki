@@ -34,5 +34,5 @@ it('transformers tokens', async () => {
       },
     ],
   }))
-    .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span class="test" style="display:block">console</span><span class="test" style="display:block">.</span><span class="test" style="display:block">log</span></span></code></pre>"`)
+    .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line"><span class="test" style="display:block">console</span><span class="test" style="display:block">.</span><span class="test" style="display:block">log</span></span></code></pre>"`)
 })

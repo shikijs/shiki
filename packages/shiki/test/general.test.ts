@@ -9,7 +9,7 @@ describe('should', () => {
     })
 
     expect(shiki.codeToHtml('console.log', { lang: 'js', theme: 'vitesse-light' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span></code></pre>"`)
   })
 
   it('dynamic load theme and lang', async () => {
@@ -45,7 +45,7 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('print 1', { lang: 'python', theme: 'min-dark' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#B392F0">print </span><span style="color:#F8F8F8">1</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-python"><span class="line"><span style="color:#B392F0">print </span><span style="color:#F8F8F8">1</span></span></code></pre>"`)
   })
 
   it('requires nested lang', async () => {
@@ -103,18 +103,18 @@ describe('should', () => {
       `)
 
     expect(shiki.codeToHtml('console.log(1)', { lang: 'js', theme: 'min-dark' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-js"><span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span></code></pre>"`)
 
     expect(shiki.codeToHtml('```js\nconsole.log(1)\n```', { lang: 'md', theme: 'min-dark' }))
       .toMatchInlineSnapshot(`
-        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`js</span></span>
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-md"><span class="line"><span style="color:#9DB1C5">\`\`\`js</span></span>
         <span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
 
     expect(shiki.codeToHtml('```ts\nconsole.log(1)\n```', { lang: 'md', theme: 'min-dark' }))
       .toMatchInlineSnapshot(`
-        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`ts</span></span>
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-md"><span class="line"><span style="color:#9DB1C5">\`\`\`ts</span></span>
         <span class="line"><span style="color:#79B8FF">console</span><span style="color:#B392F0">.log(</span><span style="color:#F8F8F8">1</span><span style="color:#B392F0">)</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
@@ -122,7 +122,7 @@ describe('should', () => {
     // This should be unstyled
     expect(shiki.codeToHtml('```cpp\nint a = 1;\n```', { lang: 'md', theme: 'min-dark' }))
       .toMatchInlineSnapshot(`
-        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-md"><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
         <span class="line"><span style="color:#9DB1C5">int a = 1;</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
@@ -132,7 +132,7 @@ describe('should', () => {
     // This should be styled
     expect(shiki.codeToHtml('```cpp\nint a = 1;\n```', { lang: 'md', theme: 'min-dark' }))
       .toMatchInlineSnapshot(`
-        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
+        "<pre class="shiki min-dark" style="background-color:#1f1f1f;color:#b392f0" tabindex="0"><code class="language-md"><span class="line"><span style="color:#9DB1C5">\`\`\`cpp</span></span>
         <span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> a </span><span style="color:#F97583">=</span><span style="color:#F8F8F8"> 1</span><span style="color:#B392F0">;</span></span>
         <span class="line"><span style="color:#9DB1C5">\`\`\`</span></span></code></pre>"
       `)
@@ -217,14 +217,14 @@ describe('should', () => {
     expect(await codeToHtml(`const long = ${longText}`, {
       theme: 'vitesse-light',
       lang: 'javascript',
-    })).toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> long</span><span style="color:#999999"> =</span><span style="color:#B07D48"> foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo</span></span></code></pre>"`)
+    })).toMatchInlineSnapshot(`"<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-javascript"><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> long</span><span style="color:#999999"> =</span><span style="color:#B07D48"> foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo</span></span></code></pre>"`)
 
     expect(await codeToHtml(`const short = ""\nconst long = ${longText}`, {
       theme: 'vitesse-light',
       lang: 'javascript',
       tokenizeMaxLineLength: 100,
     })).toMatchInlineSnapshot(`
-      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> short</span><span style="color:#999999"> =</span><span style="color:#B5695977"> ""</span></span>
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-javascript"><span class="line"><span style="color:#AB5959">const</span><span style="color:#B07D48"> short</span><span style="color:#999999"> =</span><span style="color:#B5695977"> ""</span></span>
       <span class="line"><span>const long = foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo</span></span></code></pre>"
     `)
   })

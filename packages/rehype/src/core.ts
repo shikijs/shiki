@@ -14,7 +14,7 @@ export * from './types'
 
 const languagePrefix = 'language-'
 
-function rehypeShikiFromHighlighter(
+export function rehypeShikiFromHighlighter(
   highlighter: HighlighterGeneric<any, any>,
   options: RehypeShikiCoreOptions,
 ): Transformer<Root, Root> {

@@ -14,7 +14,7 @@ const title = "Astro";
 <p>{title}</p>
 `
     expect(highlighter.codeToHtml(code, { lang: 'astro', theme: 'vitesse-dark' })).toMatchInlineSnapshot(`
-      "<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"><span style="color:#758575DD">---</span></span>
+      "<pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code class="language-astro"><span class="line"><span style="color:#758575DD">---</span></span>
       <span class="line"><span style="color:#CB7676">const </span><span style="color:#BD976A">title</span><span style="color:#666666"> =</span><span style="color:#C98A7D77"> "</span><span style="color:#C98A7D">Astro</span><span style="color:#C98A7D77">"</span><span style="color:#666666">;</span></span>
       <span class="line"><span style="color:#758575DD">---</span></span>
       <span class="line"></span>

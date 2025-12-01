@@ -9,7 +9,7 @@ describe('none theme', () => {
     })
 
     expect(shiki.codeToHtml('console.log', { lang: 'js', theme: 'none' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki none" style="background-color:;color:" tabindex="0"><code><span class="line"><span>console.log</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki none" style="background-color:;color:" tabindex="0"><code class="language-js"><span class="line"><span>console.log</span></span></code></pre>"`)
   })
 
   it('multiple-themes', async () => {
@@ -25,6 +25,6 @@ describe('none theme', () => {
         dark: 'none',
       },
     }))
-      .toMatchInlineSnapshot(`"<pre class="shiki shiki-themes vitesse-light none" style="background-color:#ffffff;--shiki-dark-bg:inherit;color:#393a34;--shiki-dark:inherit" tabindex="0"><code><span class="line"><span style="color:#B07D48;--shiki-dark:inherit">console</span><span style="color:#999999;--shiki-dark:inherit">.</span><span style="color:#B07D48;--shiki-dark:inherit">log</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki shiki-themes vitesse-light none" style="background-color:#ffffff;--shiki-dark-bg:inherit;color:#393a34;--shiki-dark:inherit" tabindex="0"><code class="language-ts"><span class="line"><span style="color:#B07D48;--shiki-dark:inherit">console</span><span style="color:#999999;--shiki-dark:inherit">.</span><span style="color:#B07D48;--shiki-dark:inherit">log</span></span></code></pre>"`)
   })
 })

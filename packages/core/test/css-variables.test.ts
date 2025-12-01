@@ -75,7 +75,7 @@ describe('css-variables', () => {
     `)
 
     expect(shiki.codeToHtml('if ("Hello") {}', { lang: 'js', theme: 'my-css-variables' }))
-      .toMatchInlineSnapshot(`"<pre class="shiki my-css-variables" style="background-color:var(--bg);color:var(--fg)" tabindex="0"><code><span class="line"><span style="color:var(--keyword)">if</span><span style="color:var(--fg)"> (</span><span style="color:var(--string)">"Hello"</span><span style="color:var(--fg)">) {}</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki my-css-variables" style="background-color:var(--bg);color:var(--fg)" tabindex="0"><code class="language-js"><span class="line"><span style="color:var(--keyword)">if</span><span style="color:var(--fg)"> (</span><span style="color:var(--string)">"Hello"</span><span style="color:var(--fg)">) {}</span></span></code></pre>"`)
 
     expect(shiki.codeToHtml('if ("Hello") {}', {
       lang: 'js',
@@ -84,7 +84,7 @@ describe('css-variables', () => {
         '#00000003': 'var(--keyword-override)',
       },
     }))
-      .toMatchInlineSnapshot(`"<pre class="shiki my-css-variables" style="background-color:var(--bg);color:var(--fg)" tabindex="0"><code><span class="line"><span style="color:var(--keyword-override)">if</span><span style="color:var(--fg)"> (</span><span style="color:var(--string)">"Hello"</span><span style="color:var(--fg)">) {}</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki my-css-variables" style="background-color:var(--bg);color:var(--fg)" tabindex="0"><code class="language-js"><span class="line"><span style="color:var(--keyword-override)">if</span><span style="color:var(--fg)"> (</span><span style="color:var(--string)">"Hello"</span><span style="color:var(--fg)">) {}</span></span></code></pre>"`)
   })
 
   it('css-variable-factory', async () => {
@@ -101,7 +101,7 @@ describe('css-variables', () => {
     })
 
     expect(html)
-      .toMatchInlineSnapshot(`"<pre class="shiki css-variables" style="background-color:var(--my-background, #000);color:var(--my-foreground)" tabindex="0"><code><span class="line"><span style="color:var(--my-token-keyword)">const</span><span style="color:var(--my-token-constant)"> a</span><span style="color:var(--my-token-keyword)"> =</span><span style="color:var(--my-token-constant)"> 1</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki css-variables" style="background-color:var(--my-background, #000);color:var(--my-foreground)" tabindex="0"><code class="language-js"><span class="line"><span style="color:var(--my-token-keyword)">const</span><span style="color:var(--my-token-constant)"> a</span><span style="color:var(--my-token-keyword)"> =</span><span style="color:var(--my-token-constant)"> 1</span></span></code></pre>"`)
   })
 
   it('css-variable-factory 2', async () => {
@@ -119,6 +119,6 @@ describe('css-variables', () => {
     })
 
     expect(html)
-      .toMatchInlineSnapshot(`"<pre class="shiki foo" style="background-color:var(--shiki-background, #000);color:var(--shiki-foreground)" tabindex="0"><code><span class="line"><span style="color:var(--shiki-token-keyword)">const</span><span style="color:var(--shiki-token-constant)"> a</span><span style="color:var(--shiki-token-keyword)"> =</span><span style="color:var(--shiki-token-constant)"> 1</span></span></code></pre>"`)
+      .toMatchInlineSnapshot(`"<pre class="shiki foo" style="background-color:var(--shiki-background, #000);color:var(--shiki-foreground)" tabindex="0"><code class="language-js"><span class="line"><span style="color:var(--shiki-token-keyword)">const</span><span style="color:var(--shiki-token-constant)"> a</span><span style="color:var(--shiki-token-keyword)"> =</span><span style="color:var(--shiki-token-constant)"> 1</span></span></code></pre>"`)
   })
 })

@@ -27,7 +27,7 @@ it('transformerStyleToClass', async () => {
 
   expect(result.replace(/<span/g, '\n<span'))
     .toMatchInlineSnapshot(`
-      "<pre class="shiki shiki-themes vitesse-dark vitesse-light nord __shiki_uywmyh" tabindex="0"><code>
+      "<pre class="shiki shiki-themes vitesse-dark vitesse-light nord __shiki_uywmyh" tabindex="0"><code class="language-typescript">
       <span class="line">
       <span class="__shiki_223nhr">const</span>
       <span class="__shiki_u5wfov"> a</span>

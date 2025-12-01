@@ -45,7 +45,7 @@ it('flat colorReplacements', async () => {
   expect(result.replace(/>/g, '>\n'))
     .toMatchInlineSnapshot(`
       "<pre class="shiki shiki-themes vitesse-light material-theme-palenight" style="background-color:#ffffff;--shiki-dark-bg:#292D3E;color:var(---replaced-1);--shiki-dark:#babed8" tabindex="0">
-      <code>
+      <code class="language-js">
       <span class="line">
       <span style="color:var(---replaced-2);--shiki-dark:#BABED8">
       console</span>
@@ -126,7 +126,7 @@ it('scoped colorReplacements', async () => {
   expect(result.replace(/>/g, '>\n'))
     .toMatchInlineSnapshot(`
       "<pre class="shiki shiki-themes custom-light custom-dark" style="background-color:var(---replaced-3);--shiki-dark-bg:var(---replaced-1);color:var(---replaced-4);--shiki-dark:var(---replaced-4)" tabindex="0">
-      <code>
+      <code class="language-js">
       <span class="line">
       <span style="color:var(---replaced-4);--shiki-dark:var(---replaced-4)">
       console.log(</span>

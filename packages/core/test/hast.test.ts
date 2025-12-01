@@ -18,7 +18,7 @@ describe('should', () => {
 
     expect(toHtml(hast))
       .toMatchInlineSnapshot(`
-        "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span>
+        "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line"><span style="color:#B07D48">console</span><span style="color:#999999">.</span><span style="color:#B07D48">log</span></span>
         <span class="line"><span style="color:#B07D48">foo</span><span style="color:#999999">.</span><span style="color:#B07D48">bar</span></span></code></pre>"
       `)
   })
@@ -90,7 +90,7 @@ it('render whitespace', async () => {
 
   expect(code)
     .toMatchInlineSnapshot(`
-      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#59873A">  space</span><span style="color:#999999">()</span></span>
+      "<pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code class="language-js"><span class="line"><span style="color:#59873A">  space</span><span style="color:#999999">()</span></span>
       <span class="line"><span style="color:#59873A">		tab</span><span style="color:#999999">()</span></span></code></pre>"
     `)
 })
@@ -109,7 +109,7 @@ describe('merge same style', () => {
       mergeSameStyleTokens: true,
     })
 
-    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F">name:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code class="language-yaml"><span class="line"><span style="color:#D32F2F">name:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
   })
 
   it('merges adjacent tokens with dual themes', async () => {
@@ -125,7 +125,7 @@ describe('merge same style', () => {
       mergeSameStyleTokens: true,
     })
 
-    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-dark" style="background-color:#ffffff;--shiki-dark-bg:#1f1f1f;color:#24292eff;--shiki-dark:#b392f0" tabindex="0"><code><span class="line"><span style="color:#D32F2F;--shiki-dark:#F8F8F8">name</span><span style="color:#D32F2F;--shiki-dark:#F97583">:</span><span style="color:#22863A;--shiki-dark:#FFAB70"> CI</span></span></code></pre>"`)
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-dark" style="background-color:#ffffff;--shiki-dark-bg:#1f1f1f;color:#24292eff;--shiki-dark:#b392f0" tabindex="0"><code class="language-yaml"><span class="line"><span style="color:#D32F2F;--shiki-dark:#F8F8F8">name</span><span style="color:#D32F2F;--shiki-dark:#F97583">:</span><span style="color:#22863A;--shiki-dark:#FFAB70"> CI</span></span></code></pre>"`)
   })
 
   it('merges adjacent tokens with the same dual themes', async () => {
@@ -141,7 +141,7 @@ describe('merge same style', () => {
       mergeSameStyleTokens: true,
     })
 
-    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-light" style="background-color:#ffffff;--shiki-dark-bg:#ffffff;color:#24292eff;--shiki-dark:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F;--shiki-dark:#D32F2F">name:</span><span style="color:#22863A;--shiki-dark:#22863A"> CI</span></span></code></pre>"`)
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki shiki-themes min-light min-light" style="background-color:#ffffff;--shiki-dark-bg:#ffffff;color:#24292eff;--shiki-dark:#24292eff" tabindex="0"><code class="language-yaml"><span class="line"><span style="color:#D32F2F;--shiki-dark:#D32F2F">name:</span><span style="color:#22863A;--shiki-dark:#22863A"> CI</span></span></code></pre>"`)
   })
 
   it('does not merge tokens with decorations', async () => {
@@ -164,6 +164,6 @@ describe('merge same style', () => {
       ],
     })
 
-    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F" class="highlighted-word">name</span><span style="color:#D32F2F">:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
+    expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code class="language-yaml"><span class="line"><span style="color:#D32F2F" class="highlighted-word">name</span><span style="color:#D32F2F">:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
   })
 })
