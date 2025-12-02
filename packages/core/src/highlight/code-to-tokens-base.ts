@@ -38,7 +38,7 @@ export function codeToTokensBase(
     theme: themeName = internal.getLoadedThemes()[0],
   } = options
 
-  if (isPlainLang(lang) || isNoneTheme(themeName))
+  if (isPlainLang(lang) || isPlainLang(internal.getLanguageAlias(lang)) || isNoneTheme(themeName))
     return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
 
   const { theme, colorMap } = internal.setTheme(themeName)
@@ -80,7 +80,7 @@ export function getLastGrammarState(...args: any[]): GrammarState | undefined {
     theme: themeName = internal.getLoadedThemes()[0],
   } = options
 
-  if (isPlainLang(lang) || isNoneTheme(themeName))
+  if (isPlainLang(lang) || isPlainLang(internal.getLanguageAlias(lang)) || isNoneTheme(themeName))
     throw new ShikiError('Plain language does not have grammar state')
   if (lang === 'ansi')
     throw new ShikiError('ANSI language does not have grammar state')

@@ -83,6 +83,20 @@ export class Registry extends TextMateRegistry {
     return this._resolvedGrammars.get(name)
   }
 
+  public getAlias(name: string): string | undefined {
+    if (this._alias[name]) {
+      const resolved = new Set<string>([name])
+      while (this._alias[name]) {
+        name = this._alias[name]
+        if (resolved.has(name))
+          throw new ShikiError(`Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
+        resolved.add(name)
+      }
+      return name
+    }
+    return undefined
+  }
+
   public loadLanguage(lang: LanguageRegistration): void {
     if (this.getGrammar(lang.name))
       return

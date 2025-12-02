@@ -52,6 +52,11 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
   getLanguage: (name: string | LanguageRegistration) => Grammar
 
   /**
+   * Get the alias of a language
+   */
+  getLanguageAlias: (lang: string) => string | undefined
+
+  /**
    * Set the current theme and get the resolved theme object and color map.
    * @internal
    */

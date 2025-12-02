@@ -51,6 +51,11 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     return _lang
   }
 
+  function getLanguageAlias(name: string): string | undefined {
+    ensureNotDisposed()
+    return _registry.getAlias(name)
+  }
+
   function getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved {
     if (name === 'none')
       return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
@@ -126,6 +131,7 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     setTheme,
     getTheme,
     getLanguage,
+    getLanguageAlias,
     getLoadedThemes,
     getLoadedLanguages,
     loadLanguage,
