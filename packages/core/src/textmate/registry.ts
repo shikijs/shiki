@@ -135,7 +135,12 @@ export class Registry extends TextMateRegistry {
     const missingLangs = langsGraphArray.filter(([_, lang]) => !lang)
     if (missingLangs.length) {
       const dependents = langsGraphArray
-        .filter(([_, lang]) => lang && lang.embeddedLangs?.some(l => missingLangs.map(([name]) => name).includes(l)))
+        .filter(([_, lang]) => {
+          if (!lang)
+            return false
+          const embedded = lang.embeddedLanguages || lang.embeddedLangs
+          return embedded?.some(l => missingLangs.map(([name]) => name).includes(l))
+        })
         .filter(lang => !missingLangs.includes(lang))
       throw new ShikiError(`Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
     }
