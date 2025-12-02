@@ -4,6 +4,9 @@ packages:
   - playground
   - examples/*
   - docs
+overrides:
+  postcss: 8.4.38
+  sass: 1.77.8
 catalogs:
   bundling:
     '@rollup/plugin-alias': ^6.0.0
