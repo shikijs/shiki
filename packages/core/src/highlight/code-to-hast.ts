@@ -107,7 +107,7 @@ export function tokensToHast(
     tagName: 'pre',
     properties: {
       class: `shiki ${options.themeName || ''}`,
-      style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
+      style: options.rootStyle || (options.bg ? `color:${options.fg}` : `color:${options.fg}`),
       ...(tabindex !== false && tabindex != null)
         ? {
             tabindex: tabindex.toString(),
@@ -186,7 +186,10 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
+      let style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
+      if (style && options.bg) {
+        style = style.replace(`background-color:${options.bg};`, '')
+      }
       if (style)
         tokenNode.properties.style = style
 
