@@ -8,6 +8,7 @@ import type { IGrammarConfiguration, IRawTheme } from '@shikijs/vscode-textmate'
 import type { Resolver } from './resolver'
 import { Registry as TextMateRegistry, Theme as TextMateTheme } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
+import { resolveLangAlias } from '../constructors/_alias'
 import { normalizeTheme } from './normalize-theme'
 
 export class Registry extends TextMateRegistry {
@@ -71,15 +72,7 @@ export class Registry extends TextMateRegistry {
   }
 
   public getGrammar(name: string): Grammar | undefined {
-    if (this._alias[name]) {
-      const resolved = new Set<string>([name])
-      while (this._alias[name]) {
-        name = this._alias[name]
-        if (resolved.has(name))
-          throw new ShikiError(`Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
-        resolved.add(name)
-      }
-    }
+    name = resolveLangAlias(name, this._alias)
     return this._resolvedGrammars.get(name)
   }
 
