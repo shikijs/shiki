@@ -1,6 +1,7 @@
 import type {
   CodeToHastOptions,
   HighlighterGeneric,
+  ShikiTransformer,
 } from '@shikijs/types'
 import type { Root } from 'hast'
 import type { Transformer } from 'unified'
@@ -54,19 +55,28 @@ export function rehypeShikiFromHighlighter(
       },
     }
 
-    if (addLanguageClass) {
-      // always construct a new array, avoid adding the transformer repeatedly
-      codeOptions.transformers = [
-        ...codeOptions.transformers ?? [],
-        {
-          name: 'rehype-shiki:code-language-class',
-          code(node) {
-            this.addClassToHast(node, `${languagePrefix}${lang}`)
-            return node
-          },
+    // Always add language class to maintain backward compatibility
+    // (previously added automatically by code-to-hast.ts)
+    const builtInTransformers: ShikiTransformer[] = [
+      {
+        name: 'rehype-shiki:code-language-class',
+        code(node) {
+          this.addClassToHast(node, `${languagePrefix}${lang}`)
+          return node
         },
-      ]
+      },
+    ]
+
+    if (addLanguageClass) {
+      // For backward compatibility, keep the addLanguageClass option
+      // but it's now redundant as the class is always added
     }
+
+    // Always construct a new array, avoid adding the transformer repeatedly
+    codeOptions.transformers = [
+      ...builtInTransformers,
+      ...codeOptions.transformers ?? [],
+    ]
 
     if (stripEndNewline && code.endsWith('\n'))
       code = code.slice(0, -1)
