@@ -107,7 +107,8 @@ export function tokensToHast(
     tagName: 'pre',
     properties: {
       class: `shiki ${options.themeName || ''}`,
-      style: options.rootStyle || (options.bg ? `color:${options.fg}` : `color:${options.fg}`),
+      style: options.rootStyle || `color:${options.fg}`,
+
       ...(tabindex !== false && tabindex != null)
         ? {
             tabindex: tabindex.toString(),
