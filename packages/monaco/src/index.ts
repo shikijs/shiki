@@ -87,9 +87,9 @@ export function shikiToMonaco(
     const ret = highlighter.setTheme(themeName)
     const theme = themeMap.get(themeName)
     colorMap.length = ret.colorMap.length
-    ret.colorMap.forEach((color, i) => {
-      colorMap[i] = color
-    })
+    for (let i = 0; i < ret.colorMap.length; i++) {
+      colorMap[i] = ret.colorMap[i]
+    }
     colorStyleToScopeMap.clear()
     theme?.rules.forEach((rule) => {
       const c = normalizeColor(rule.foreground)
