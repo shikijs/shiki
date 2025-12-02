@@ -66,7 +66,8 @@ export function transformerDecorations(): ShikiTransformer {
           end: normalizePosition(d.end),
         }))
 
-      verifyIntersections(decorations)
+      if (shiki.options.checkIntersections !== false)
+        verifyIntersections(decorations)
 
       map.set(shiki.meta, {
         decorations,
@@ -100,7 +101,7 @@ export function transformerDecorations(): ShikiTransformer {
 
       function applyLineSection(line: number, start: number, end: number, decoration: DecorationItem): void {
         const lineEl = lines[line]
-        let text = ''
+
         let startIndex = -1
         let endIndex = -1
 
@@ -112,12 +113,44 @@ export function transformerDecorations(): ShikiTransformer {
           endIndex = lineEl.children.length
 
         if (startIndex === -1 || endIndex === -1) {
-          for (let i = 0; i < lineEl.children.length; i++) {
-            text += stringify(lineEl.children[i])
-            if (startIndex === -1 && text.length === start)
-              startIndex = i + 1
-            if (endIndex === -1 && text.length === end)
-              endIndex = i + 1
+          let cumLength = 0
+          let i = 0
+          while (i < lineEl.children.length) {
+            const child = lineEl.children[i]
+            const childLength = stringify(child).length
+
+            if (startIndex === -1) {
+              if (cumLength + childLength === start) {
+                startIndex = i + 1
+              }
+              else if (cumLength < start && cumLength + childLength > start) {
+                const offset = start - cumLength
+                const [head, tail] = splitElement(child, offset)
+                lineEl.children.splice(i, 1, head, tail)
+                startIndex = i + 1
+                cumLength += stringify(head).length
+                i++
+                continue
+              }
+            }
+
+            if (endIndex === -1) {
+              if (cumLength + childLength === end) {
+                endIndex = i + 1
+              }
+              else if (cumLength < end && cumLength + childLength > end) {
+                const offset = end - cumLength
+                const [head, tail] = splitElement(child, offset)
+                lineEl.children.splice(i, 1, head, tail)
+                endIndex = i + 1
+                cumLength += stringify(head).length
+                i++
+                continue
+              }
+            }
+
+            cumLength += childLength
+            i++
           }
         }
 
@@ -138,15 +171,34 @@ export function transformerDecorations(): ShikiTransformer {
         }
         // Create a wrapper for the decoration
         else {
-          const wrapper: Element = {
-            type: 'element',
-            tagName: 'span',
-            properties: {},
-            children,
+          if (children.length === 0) {
+            const wrapper: Element = {
+              type: 'element',
+              tagName: 'span',
+              properties: {},
+              children: [],
+            }
+            applyDecoration(wrapper, decoration, 'wrapper')
+            lineEl.children.splice(startIndex, 0, wrapper)
           }
-
-          applyDecoration(wrapper, decoration, 'wrapper')
-          lineEl.children.splice(startIndex, children.length, wrapper)
+          else {
+            const newChildren: ElementContent[] = []
+            for (const child of children) {
+              if (child.type === 'element') {
+                newChildren.push(applyDecoration(child, decoration, 'token'))
+              }
+              else if (child.type === 'text') {
+                const wrapper: Element = {
+                  type: 'element',
+                  tagName: 'span',
+                  properties: {},
+                  children: [child],
+                }
+                newChildren.push(applyDecoration(wrapper, decoration, 'token'))
+              }
+            }
+            lineEl.children.splice(startIndex, children.length, ...newChildren)
+          }
         }
       }
 
@@ -225,4 +277,31 @@ function stringify(el: ElementContent): string {
   if (el.type === 'element')
     return el.children.map(stringify).join('')
   return ''
+}
+
+function splitElement(element: ElementContent, offset: number): [ElementContent, ElementContent] {
+  if (element.type === 'text') {
+    return [
+      { type: 'text', value: element.value.slice(0, offset) },
+      { type: 'text', value: element.value.slice(offset) },
+    ]
+  }
+  if (element.type === 'element') {
+    let cumLength = 0
+    for (let i = 0; i < element.children.length; i++) {
+      const child = element.children[i]
+      const childLength = stringify(child).length
+      if (cumLength + childLength > offset) {
+        const [head, tail] = splitElement(child, offset - cumLength)
+        const headChildren = [...element.children.slice(0, i), head]
+        const tailChildren = [tail, ...element.children.slice(i + 1)]
+        return [
+          { ...element, children: headChildren },
+          { ...element, children: tailChildren },
+        ]
+      }
+      cumLength += childLength
+    }
+  }
+  throw new ShikiError(`Failed to split element at offset ${offset}`)
 }

@@ -5,6 +5,12 @@ export interface DecorationOptions {
    * Custom decorations to wrap highlighted tokens with.
    */
   decorations?: DecorationItem[]
+  /**
+   * Whether to check for intersecting decorations.
+   *
+   * @default true
+   */
+  checkIntersections?: boolean
 }
 
 export interface DecorationItem {
