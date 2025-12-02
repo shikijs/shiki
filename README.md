@@ -23,3 +23,27 @@ The main branch is currently at _v3.x_.
 ## License
 
 [MIT](./LICENSE)
+
+## Get all tokens for a filetype
+
+You can use Shiki's `codeToTokens()` API to get all tokens for a given file:
+
+```ts
+import { getHighlighter } from "shiki";
+
+async function showTokens() {
+  const highlighter = await getHighlighter({ theme: "nord" });
+
+  const code = `
+function hello() {
+  console.log("Hello, world!");
+}
+  `;
+
+  // Get tokens for JavaScript
+  const tokens = highlighter.codeToTokens(code, "javascript");
+
+  console.log(tokens);
+}
+
+showTokens();
