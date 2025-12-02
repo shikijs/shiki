@@ -12,11 +12,13 @@ import type {
   ThemeRegistrationResolved,
 } from '@shikijs/types'
 
+import { INITIAL } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 import { normalizeTheme } from '../textmate/normalize-theme'
 import { Registry } from '../textmate/registry'
 import { Resolver } from '../textmate/resolver'
+import { isSpecialLang } from '../utils'
 
 let instancesCount = 0
 
@@ -46,8 +48,20 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
   function getLanguage(name: string | LanguageRegistration): Grammar {
     ensureNotDisposed()
     const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
-    if (!_lang)
+    if (!_lang) {
+      if (typeof name === 'string') {
+        const resolved = resolveAlias(name)
+        if (isSpecialLang(resolved)) {
+          return {
+            name: resolved,
+            scopeName: 'text.plain',
+            tokenizeLine: () => ({ tokens: [], ruleStack: INITIAL }),
+            tokenizeLine2: () => ({ tokens: new Uint32Array(0), ruleStack: INITIAL }),
+          } as unknown as Grammar
+        }
+      }
       throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
+    }
     return _lang
   }
 
@@ -93,8 +107,24 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     _registry.loadLanguages(langs.flat(1))
   }
 
+  function resolveAlias(name: string): string {
+    if (!options.langAlias)
+      return name
+
+    let current = name
+    const visited = new Set<string>()
+    while (options.langAlias[current]) {
+      if (visited.has(current))
+        return current
+      visited.add(current)
+      current = options.langAlias[current]
+    }
+    return current
+  }
+
   async function loadLanguage(...langs: (LanguageInput | SpecialLanguage)[]): Promise<void> {
-    return loadLanguageSync(await resolveLangs(langs))
+    const resolved = langs.map(lang => typeof lang === 'string' ? resolveAlias(lang) : lang) as (LanguageInput | SpecialLanguage)[]
+    return loadLanguageSync(await resolveLangs(resolved))
   }
 
   function loadThemeSync(...themes: MaybeArray<ThemeRegistrationAny>[]): void {
