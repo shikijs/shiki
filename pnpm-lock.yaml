@@ -101,12 +101,6 @@ catalogs:
     fuse.js:
       specifier: ^7.1.0
       version: 7.1.0
-    postcss:
-      specifier: 8.4.38
-      version: 8.4.38
-    sass:
-      specifier: 1.77.8
-      version: 1.77.8
     unocss:
       specifier: ^66.5.9
       version: 66.5.9
@@ -490,12 +484,6 @@ importers:
       pinia:
         specifier: catalog:cli
         version: 3.0.4(typescript@5.9.3)(vue@3.5.25(typescript@5.9.3))
-      postcss:
-        specifier: catalog:docs
-        version: 8.4.38
-      sass:
-        specifier: catalog:docs
-        version: 1.77.8
       tm-grammars:
         specifier: catalog:inlined
         version: 1.26.0
@@ -504,13 +492,13 @@ importers:
         version: 1.10.13
       unocss:
         specifier: catalog:docs
-        version: 66.5.9(postcss@8.4.38)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1))
+        version: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1))
       unplugin-vue-components:
         specifier: catalog:docs
         version: 30.0.0(@babel/parser@7.28.5)(vue@3.5.25(typescript@5.9.3))
       vitepress:
         specifier: catalog:docs
-        version: 2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.4.38)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+        version: 2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
       vitepress-plugin-group-icons:
         specifier: catalog:docs
         version: 1.6.5(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1))
@@ -4234,10 +4222,6 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
-  postcss@8.4.38:
-    resolution: {integrity: sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
@@ -6207,13 +6191,13 @@ snapshots:
       sirv: 3.0.2
       vue-flow-layout: 0.2.0
 
-  '@unocss/postcss@66.5.9(postcss@8.4.38)':
+  '@unocss/postcss@66.5.9(postcss@8.5.6)':
     dependencies:
       '@unocss/config': 66.5.9
       '@unocss/core': 66.5.9
       '@unocss/rule-utils': 66.5.9
       css-tree: 3.1.0
-      postcss: 8.4.38
+      postcss: 8.5.6
       tinyglobby: 0.2.15
 
   '@unocss/preset-attributify@66.5.9':
@@ -7812,7 +7796,8 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  immutable@4.3.7: {}
+  immutable@4.3.7:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -8855,12 +8840,6 @@ snapshots:
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.4.38:
-    dependencies:
-      nanoid: 3.3.11
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
-
   postcss@8.5.6:
     dependencies:
       nanoid: 3.3.11
@@ -9063,6 +9042,7 @@ snapshots:
       chokidar: 3.6.0
       immutable: 4.3.7
       source-map-js: 1.2.1
+    optional: true
 
   scslre@0.3.0:
     dependencies:
@@ -9467,12 +9447,12 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss@66.5.9(postcss@8.4.38)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1)):
+  unocss@66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1)):
     dependencies:
       '@unocss/astro': 66.5.9(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1))
       '@unocss/cli': 66.5.9
       '@unocss/core': 66.5.9
-      '@unocss/postcss': 66.5.9(postcss@8.4.38)
+      '@unocss/postcss': 66.5.9(postcss@8.5.6)
       '@unocss/preset-attributify': 66.5.9
       '@unocss/preset-icons': 66.5.9
       '@unocss/preset-mini': 66.5.9
@@ -9626,58 +9606,11 @@ snapshots:
   vitepress-plugin-mermaid@2.0.17(mermaid@11.4.1)(vitepress@2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)):
     dependencies:
       mermaid: 11.4.1
-      vitepress: 2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
+      vitepress: 2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1)
     optionalDependencies:
       '@mermaid-js/mermaid-mindmap': 9.3.0
 
-  vitepress@2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.4.38)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1):
-    dependencies:
-      '@docsearch/css': 4.3.2
-      '@docsearch/js': 4.3.2
-      '@iconify-json/simple-icons': 1.2.60
-      '@shikijs/core': link:packages/core
-      '@shikijs/transformers': link:packages/transformers
-      '@shikijs/types': link:packages/types
-      '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 6.0.1(vite@7.2.4(@types/node@24.10.1)(jiti@2.6.1)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
-      '@vue/devtools-api': 8.0.5
-      '@vue/shared': 3.5.25
-      '@vueuse/core': 14.1.0(vue@3.5.25(typescript@5.9.3))
-      '@vueuse/integrations': 14.1.0(change-case@5.4.4)(focus-trap@7.6.6)(fuse.js@7.1.0)(vue@3.5.25(typescript@5.9.3))
-      focus-trap: 7.6.6
-      mark.js: 8.11.1
-      minisearch: 7.2.0
-      shiki: link:packages/shiki
-      vite: 7.2.4(@types/node@24.10.1)(jiti@2.6.1)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(yaml@2.8.1)
-      vue: 3.5.25(typescript@5.9.3)
-    optionalDependencies:
-      postcss: 8.4.38
-    transitivePeerDependencies:
-      - '@types/node'
-      - async-validator
-      - axios
-      - change-case
-      - drauu
-      - fuse.js
-      - idb-keyval
-      - jiti
-      - jwt-decode
-      - less
-      - lightningcss
-      - nprogress
-      - qrcode
-      - sass
-      - sass-embedded
-      - sortablejs
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - typescript
-      - universal-cookie
-      - yaml
-
-  vitepress@2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1):
+  vitepress@2.0.0-alpha.15(@types/node@24.10.1)(change-case@5.4.4)(fuse.js@7.1.0)(jiti@2.6.1)(postcss@8.5.6)(sass@1.77.8)(terser@5.39.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.8.1):
     dependencies:
       '@docsearch/css': 4.3.2
       '@docsearch/js': 4.3.2
