@@ -62,9 +62,9 @@ export function createBundledHighlighter<BundledLangs extends string, BundledThe
   ): Promise<HighlighterGeneric<BundledLangs, BundledThemes>> {
     function resolveLang(lang: LanguageInput | BundledLangs | SpecialLanguage): LanguageInput {
       if (typeof lang === 'string') {
+        lang = (options.langAlias?.[lang] || lang) as LanguageInput | BundledLangs | SpecialLanguage
         if (isSpecialLang(lang))
           return []
-        lang = (options.langAlias?.[lang] || lang) as LanguageInput | BundledLangs | SpecialLanguage
         const bundle = bundledLanguages[lang as BundledLangs]
         if (!bundle)
           throw new ShikiError(`Language \`${lang}\` is not included in this bundle. You may want to load it from external source.`)

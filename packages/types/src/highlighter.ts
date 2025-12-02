@@ -61,6 +61,10 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
   }
 
   /**
+   * Resolve a language alias
+   */
+  resolveLangAlias: (lang: string) => string
+  /**
    * Get the names of loaded languages
    *
    * Special-handled languages like `text`, `plain` and `ansi` are not included.

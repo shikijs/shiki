@@ -132,6 +132,34 @@ describe('should', () => {
     const code = shiki.codeToHtml('const a: Foo = 1', { lang: 'js', theme: 'nord' })
     expect(code).toMatchInlineSnapshot(`"<pre class="shiki nord" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"><span style="color:#81A1C1">const</span><span style="color:#D8DEE9"> a</span><span style="color:#81A1C1">:</span><span style="color:#8FBCBB"> Foo</span><span style="color:#81A1C1"> =</span><span style="color:#B48EAD"> 1</span></span></code></pre>"`)
   })
+
+  it('works with alias and special langs', async () => {
+    using shiki = await createHighlighterCore({
+      langAlias: {
+        lang1: 'text',
+        lang2: 'ansi',
+        lang3: 'lang4',
+        lang4: 'lang5',
+        lang5: 'ansi',
+      },
+      engine: createJavaScriptRegexEngine(),
+    })
+
+    await shiki.loadTheme(nord)
+
+    const original1 = shiki.codeToHtml('console.log("Hi")', { lang: 'text', theme: 'nord' })
+    const code1 = shiki.codeToHtml('console.log("Hi")', { lang: 'lang1', theme: 'nord' })
+    expect(code1).toBe(original1)
+
+    const ansiCode = '[0;32mcolored foreground[0m[0;42mcolored background[0m[0;1mbold text[0m[0;2mdimmed text[0m[0;4munderlined text[0m[0;7mreversed text[0m[0;9mstrikethrough text[0m[0;4;9munderlined + strikethrough text[0m'
+    const original2 = shiki.codeToHtml(ansiCode, { lang: 'ansi', theme: 'nord' })
+    const code2 = shiki.codeToHtml(ansiCode, { lang: 'lang2', theme: 'nord' })
+    expect(code2).toBe(original2)
+
+    // nested alias
+    const code3 = shiki.codeToHtml(ansiCode, { lang: 'lang3', theme: 'nord' })
+    expect(code3).toBe(original2)
+  })
 })
 
 describe('errors', () => {

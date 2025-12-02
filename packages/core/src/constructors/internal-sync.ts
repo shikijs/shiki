@@ -11,12 +11,12 @@ import type {
   ThemeRegistrationAny,
   ThemeRegistrationResolved,
 } from '@shikijs/types'
-
 import { ShikiError } from '../../../types/src/error'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 import { normalizeTheme } from '../textmate/normalize-theme'
 import { Registry } from '../textmate/registry'
 import { Resolver } from '../textmate/resolver'
+import { resolveLangAlias as _resolveLangAlias } from './_alias'
 
 let instancesCount = 0
 
@@ -42,6 +42,10 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
   const _registry = new Registry(resolver, themes, langs, options.langAlias)
 
   let _lastTheme: string | ThemeRegistrationAny
+
+  function resolveLangAlias(name: string): string {
+    return _resolveLangAlias(name, options.langAlias)
+  }
 
   function getLanguage(name: string | LanguageRegistration): Grammar {
     ensureNotDisposed()
@@ -128,6 +132,7 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     getLanguage,
     getLoadedThemes,
     getLoadedLanguages,
+    resolveLangAlias,
     loadLanguage,
     loadLanguageSync,
     loadTheme,
