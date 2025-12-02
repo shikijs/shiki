@@ -29,21 +29,21 @@ The main branch is currently at _v3.x_.
 You can use Shiki's `codeToTokens()` API to get all tokens for a given file:
 
 ```ts
-import { getHighlighter } from "shiki";
+import { getHighlighter } from 'shiki'
 
 async function showTokens() {
-  const highlighter = await getHighlighter({ theme: "nord" });
+  const highlighter = await getHighlighter({ theme: 'nord' })
 
   const code = `
 function hello() {
-  console.log("Hello, world!");
+  console.log('Hello, world!')
 }
-  `;
+  `
 
   // Get tokens for JavaScript
-  const tokens = highlighter.codeToTokens(code, "javascript");
+  const tokens = highlighter.codeToTokens(code, 'javascript')
 
-  console.log(tokens);
+  console.log(tokens)
 }
 
-showTokens();
+showTokens()
