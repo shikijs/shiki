@@ -18,9 +18,39 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/ada')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'angular-expression',
+    'name': 'angular-expression',
+    'import': (() => import('@shikijs/langs/angular-expression')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'angular-html',
     'name': 'Angular HTML',
     'import': (() => import('@shikijs/langs/angular-html')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'angular-inline-style',
+    'name': 'angular-inline-style',
+    'import': (() => import('@shikijs/langs/angular-inline-style')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'angular-inline-template',
+    'name': 'angular-inline-template',
+    'import': (() => import('@shikijs/langs/angular-inline-template')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'angular-let-declaration',
+    'name': 'angular-let-declaration',
+    'import': (() => import('@shikijs/langs/angular-let-declaration')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'angular-template',
+    'name': 'angular-template',
+    'import': (() => import('@shikijs/langs/angular-template')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'angular-template-blocks',
+    'name': 'angular-template-blocks',
+    'import': (() => import('@shikijs/langs/angular-template-blocks')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'angular-ts',
@@ -208,6 +238,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/cpp')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'cpp-macro',
+    'name': 'C++',
+    'import': (() => import('@shikijs/langs/cpp-macro')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'crystal',
     'name': 'Crystal',
     'import': (() => import('@shikijs/langs/crystal')) as DynamicImportLanguageRegistration
@@ -322,6 +357,31 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'erl'
     ],
     'import': (() => import('@shikijs/langs/erlang')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'es-tag-css',
+    'name': 'es-tag-css',
+    'import': (() => import('@shikijs/langs/es-tag-css')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'es-tag-glsl',
+    'name': 'es-tag-glsl',
+    'import': (() => import('@shikijs/langs/es-tag-glsl')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'es-tag-html',
+    'name': 'es-tag-html',
+    'import': (() => import('@shikijs/langs/es-tag-html')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'es-tag-sql',
+    'name': 'es-tag-sql',
+    'import': (() => import('@shikijs/langs/es-tag-sql')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'es-tag-xml',
+    'name': 'es-tag-xml',
+    'import': (() => import('@shikijs/langs/es-tag-xml')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'fennel',
@@ -566,6 +626,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/jinja')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'jinja-html',
+    'name': 'jinja-html',
+    'import': (() => import('@shikijs/langs/jinja-html')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'jison',
     'name': 'Jison',
     'import': (() => import('@shikijs/langs/jison')) as DynamicImportLanguageRegistration
@@ -703,6 +768,16 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/markdown')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'markdown-nix',
+    'name': 'markdown-nix',
+    'import': (() => import('@shikijs/langs/markdown-nix')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'markdown-vue',
+    'name': 'markdown-vue',
+    'import': (() => import('@shikijs/langs/markdown-vue')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'marko',
     'name': 'Marko',
     'import': (() => import('@shikijs/langs/marko')) as DynamicImportLanguageRegistration
@@ -812,6 +887,12 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'scad'
     ],
     'import': (() => import('@shikijs/langs/openscad')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'p4',
+    'name': 'P4',
+    'aliases': [],
+    'import': (() => import('@shikijs/langs/p4')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'pascal',
@@ -1275,9 +1356,24 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/vue')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'vue-directives',
+    'name': 'vue-directives',
+    'import': (() => import('@shikijs/langs/vue-directives')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'vue-html',
     'name': 'Vue HTML',
     'import': (() => import('@shikijs/langs/vue-html')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'vue-interpolations',
+    'name': 'vue-interpolations',
+    'import': (() => import('@shikijs/langs/vue-interpolations')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'vue-sfc-style-variable-injection',
+    'name': 'vue-sfc-style-variable-injection',
+    'import': (() => import('@shikijs/langs/vue-sfc-style-variable-injection')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'vue-vine',
@@ -1373,7 +1469,13 @@ export type BundledLanguage =
   | 'actionscript-3'
   | 'ada'
   | 'adoc'
+  | 'angular-expression'
   | 'angular-html'
+  | 'angular-inline-style'
+  | 'angular-inline-template'
+  | 'angular-let-declaration'
+  | 'angular-template'
+  | 'angular-template-blocks'
   | 'angular-ts'
   | 'apache'
   | 'apex'
@@ -1417,6 +1519,7 @@ export type BundledLanguage =
   | 'console'
   | 'coq'
   | 'cpp'
+  | 'cpp-macro'
   | 'cql'
   | 'crystal'
   | 'cs'
@@ -1443,6 +1546,11 @@ export type BundledLanguage =
   | 'erb'
   | 'erl'
   | 'erlang'
+  | 'es-tag-css'
+  | 'es-tag-glsl'
+  | 'es-tag-html'
+  | 'es-tag-sql'
+  | 'es-tag-xml'
   | 'f'
   | 'f#'
   | 'f03'
@@ -1501,6 +1609,7 @@ export type BundledLanguage =
   | 'java'
   | 'javascript'
   | 'jinja'
+  | 'jinja-html'
   | 'jison'
   | 'jl'
   | 'js'
@@ -1533,6 +1642,8 @@ export type BundledLanguage =
   | 'make'
   | 'makefile'
   | 'markdown'
+  | 'markdown-nix'
+  | 'markdown-vue'
   | 'marko'
   | 'matlab'
   | 'md'
@@ -1561,6 +1672,7 @@ export type BundledLanguage =
   | 'objective-cpp'
   | 'ocaml'
   | 'openscad'
+  | 'p4'
   | 'pascal'
   | 'perl'
   | 'perl6'
@@ -1663,7 +1775,10 @@ export type BundledLanguage =
   | 'viml'
   | 'vimscript'
   | 'vue'
+  | 'vue-directives'
   | 'vue-html'
+  | 'vue-interpolations'
+  | 'vue-sfc-style-variable-injection'
   | 'vue-vine'
   | 'vy'
   | 'vyper'
