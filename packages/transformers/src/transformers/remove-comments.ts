@@ -29,11 +29,12 @@ export function transformerRemoveComments(
         let hasComment = false
         for (const token of line) {
           const isComment = token.explanation?.some(exp =>
-            exp.scopes.some(s => s.scopeName.startsWith('comment'))
+            exp.scopes.some(s => s.scopeName.startsWith('comment')),
           )
           if (isComment) {
             hasComment = true
-          } else {
+          }
+          else {
             filteredLine.push(token)
           }
         }
