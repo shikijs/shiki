@@ -1,0 +1,332 @@
+{
+  "$schema": "./tmLanguage.json",
+  "name": "p4",
+  "displayName": "P4",
+  "variables": {
+    "identifier": "[_\\w][\\w\\d_]*"
+  },
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#builtin_types"
+    },
+    {
+      "include": "#buildin_variables"
+    },
+    {
+      "include": "#numerics"
+    },
+    {
+      "include": "#bits"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#macros"
+    },
+    {
+      "include": "#imports"
+    },
+    {
+      "include": "#typedefs"
+    },
+    {
+      "include": "#headers"
+    },
+    {
+      "include": "#structs"
+    },
+    {
+      "include": "#applys"
+    },
+    {
+      "include": "#parsers"
+    },
+    {
+      "include": "#controls"
+    },
+    {
+      "include": "#states"
+    },
+    {
+      "include": "#actions"
+    },
+    {
+      "include": "#tables"
+    },
+    {
+      "include": "#member_visits"
+    },
+    {
+      "include": "#lineComments"
+    },
+    {
+      "include": "#blockComments"
+    },
+    {
+      "include": "#annotations"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "match": "\\b(if|else|return|error|default|transition|select)\\b",
+      "captures": {
+        "1": {
+          "name": "keyword.control.p4"
+        }
+      }
+    },
+    "builtin_types": {
+      "match": "\\b(tuple|inout|in|out|packet_in|packet_out|bool|void|extern|enum|const|match_kind|package)\\b",
+      "captures": {
+        "1": {
+          "name": "storage.type.p4"
+        }
+      }
+    },
+    "buildin_variables": {
+      "name": "storage.type.p4",
+      "match": "\\b(true|false)\\b"
+    },
+    "numerics": {
+      "match": "\\b(0x(\\d|[a-e])+|\\d+w\\d+|\\d+)\\b",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.p4"
+        }
+      }
+    },
+    "bits": {
+      "match": "(bit)<([0-9]+)>",
+      "captures": {
+        "1": {
+          "name": "storage.type.p4"
+        },
+        "2": {
+          "name": "constant.numeric.p4"
+        }
+      }
+    },
+    "strings": {
+      "name": "string.quoted.double.p4",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.p4",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "imports": {
+      "match": "(#include)\\s*(<)(.*)(>)",
+      "captures": {
+        "1": {
+          "name": "keyword.control.p4"
+        },
+        "2": {
+          "name": "string.quoted.double.p4"
+        },
+        "3": {
+          "name": "string.quoted.double.p4"
+        },
+        "4": {
+          "name": "string.quoted.double.p4"
+        }
+      }
+    },
+    "macros": {
+      "match": "(#include|#else|#endif|#if\\s+|#define|#ifndef)",
+      "captures": {
+        "1": {
+          "name": "keyword.control.p4"
+        }
+      }
+    },
+    "typedefs": {
+      "match": "(typedef|type)\\s+(.*)\\s+(.*)\\s*;",
+      "captures": {
+        "1": {
+          "name": "keyword.control.p4"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#bits"
+            },
+            {
+              "include": "#typeNames"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.name.type.other.p4"
+        }
+      }
+    },
+    "typeNames": {
+      "name": "entity.name.type.other.p4",
+      "match": "\\b[_\\w][\\w\\d_]*\\b"
+    },
+    "headers": {
+      "name": "meta.header.p4",
+      "match": "\\s*(header)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.header.p4"
+        },
+        "2": {
+          "name": "entity.name.type.header.p4"
+        }
+      }
+    },
+    "structs": {
+      "name": "meta.struct.p4",
+      "match": "\\s*(struct)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.struct.p4"
+        },
+        "2": {
+          "name": "entity.name.type.structs.p4"
+        }
+      }
+    },
+    "controls": {
+      "name": "meta.control.p4",
+      "match": "\\s*(control)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.control.p4"
+        },
+        "2": {
+          "name": "entity.name.type.control.p4"
+        }
+      }
+    },
+    "parsers": {
+      "name": "meta.parser.p4",
+      "match": "\\s*(parser)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.parser.p4"
+        },
+        "2": {
+          "name": "entity.name.type.parser.p4"
+        }
+      }
+    },
+    "states": {
+      "name": "meta.state.p4",
+      "match": "\\s*(state)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.state.p4"
+        },
+        "2": {
+          "name": "entity.name.type.states.p4"
+        }
+      }
+    },
+    "actions": {
+      "name": "meta.state.p4",
+      "match": "\\s*(action)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.function.p4"
+        },
+        "2": {
+          "name": "entity.name.function.action.p4"
+        }
+      }
+    },
+    "tables": {
+      "name": "meta.table.p4",
+      "match": "\\s*(table)\\s+([_\\w][\\w\\d_]*)\\s*",
+      "captures": {
+        "1": {
+          "name": "storage.type.table.p4"
+        },
+        "2": {
+          "name": "variable.other.table.p4"
+        }
+      }
+    },
+    "applys": {
+      "match": "\\s*(apply)\\s*\\{",
+      "captures": {
+        "1": {
+          "name": "keyword.control.p4"
+        }
+      }
+    },
+    "member_visiteds": {
+      "match": "\\s*\\.\\s*([_\\w][\\w\\d_]*)",
+      "captures": {
+        "1": {
+          "name": "variable.name.p4"
+        }
+      }
+    },
+    "member_visits": {
+      "match": "\\s*([_\\w][\\w\\d_]*)(\\.[\\w.]+)\\s*",
+      "captures": {
+        "1": {
+          "name": "variable.name.p4"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#member_visits"
+            },
+            {
+              "include": "#function_calls"
+            },
+            {
+              "include": "#member_visiteds"
+            }
+          ]
+        }
+      }
+    },
+    "lineComments": {
+      "name": "comment.line.double-slash.p4",
+      "begin": "//",
+      "end": "(?:\\n)"
+    },
+    "blockComments": {
+      "name": "comment.block6.p4",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.paren.open"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.paren.close"
+        }
+      },
+      "patterns": [
+        {
+          "name": "comment.block.p4",
+          "match": "\\b[^\\*/]*|[^*]+/"
+        }
+      ]
+    },
+    "annotations": {
+      "name": "meta.type.annotation.P4",
+      "match": "@([_\\w][\\w\\d_]*)",
+      "captures": {
+        "1": {
+          "name": "storage.type.annotation.java"
+        }
+      }
+    }
+  },
+  "scopeName": "source.p4"
+}

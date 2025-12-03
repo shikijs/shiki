@@ -73,16 +73,34 @@ export async function loadLangs() {
     onlyFiles: true,
   })
 
+  const localGrammars = await fg('*.json', {
+    cwd: './grammars',
+    absolute: true,
+    onlyFiles: true,
+  })
+  allLangFiles.push(...localGrammars)
+
   allLangFiles.sort()
 
   const resolvedLangs: LanguageRegistration[] = []
 
   for (const file of allLangFiles) {
     const content = await fs.readJSON(file)
-    const lang = grammars.find(i => i.name === content.name) || injections.find(i => i.name === content.name)
+    let lang = grammars.find(i => i.name === content.name) || injections.find(i => i.name === content.name)
     if (!lang) {
-      console.warn(`unknown ${content.name}`)
-      continue
+      if (content.displayName && content.scopeName) {
+        lang = {
+          name: content.name,
+          scopeName: content.scopeName,
+          displayName: content.displayName,
+          aliases: content.aliases || [],
+          embedded: content.embeddedLangs || [],
+        } as any
+      }
+      else {
+        console.warn(`unknown ${content.name}`)
+        continue
+      }
     }
 
     const json: LanguageRegistration = {
@@ -222,7 +240,7 @@ export const languageAliasNames: string[]
       }
     }
 
-    const bundled = Array.from(bundledIds).map(id => grammars.find(i => i.name === id)!).filter(Boolean)
+    const bundled = Array.from(bundledIds).map(id => resolvedLangs.find(i => i.name === id)!).filter(Boolean)
 
     const info = bundled
       .map(i => ({
@@ -262,7 +280,7 @@ export const bundledLanguages = {
 
   await writeLanguageBundleIndex(
     'langs-bundle-full',
-    grammars.map(i => i.name),
+    resolvedLangs.map(i => i.name),
   )
   await writeLanguageBundleIndex(
     'langs-bundle-web',
