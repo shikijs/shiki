@@ -25,16 +25,18 @@ export function transformerRemoveComments(
     tokens(tokens) {
       const result = []
       for (const line of tokens) {
-        const hasComment = line.some(token =>
-          token.explanation?.some(exp => exp.scopes.some(s => s.scopeName.startsWith('comment'))),
-        )
-
-        const filteredLine = line.filter((token) => {
+        const filteredLine = []
+        let hasComment = false
+        for (const token of line) {
           const isComment = token.explanation?.some(exp =>
-            exp.scopes.some(s => s.scopeName.startsWith('comment')),
+            exp.scopes.some(s => s.scopeName.startsWith('comment'))
           )
-          return !isComment
-        })
+          if (isComment) {
+            hasComment = true
+          } else {
+            filteredLine.push(token)
+          }
+        }
 
         if (removeEmptyLines && hasComment) {
           const isAllWhitespace = filteredLine.every(token => !token.content.trim())
