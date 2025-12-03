@@ -143,8 +143,17 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   TransformerOptions,
   DecorationOptions,
   Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode'> {
-
+  /**
+   * The grammar name for the code.
+   */
   lang: StringLiteralUnion<Languages | SpecialLanguage>
+
+  /**
+   * Custom style string to be applied to the root `<pre>` element.
+   *
+   * When set to `false`, no style will be applied.
+   */
+  rootStyle?: string | false
 
   /**
    * Merge whitespace tokens to saving extra `<span>`.
