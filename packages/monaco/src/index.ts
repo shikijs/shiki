@@ -127,48 +127,72 @@ export function shikiToMonaco(
   } = options
 
   const monacoLanguageIds = new Set(monaco.languages.getLanguages().map(l => l.id))
+  const loadedLanguages = highlighter.getLoadedLanguages()
 
-  for (const lang of highlighter.getLoadedLanguages()) {
-    if (monacoLanguageIds.has(lang)) {
-      monaco.languages.setTokensProvider(lang, {
-        getInitialState() {
-          return new TokenizerState(INITIAL)
-        },
-
-        tokenize(line: string, state: TokenizerState) {
-          if (line.length >= tokenizeMaxLineLength) {
-            return {
-              endState: state,
-              tokens: [{ startIndex: 0, scopes: '' }],
-            }
-          }
-
-          const grammar = highlighter.getLanguage(lang)
-          const result = grammar.tokenizeLine2(line, state.ruleStack, tokenizeTimeLimit)
-
-          if (result.stoppedEarly)
-            console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
-
-          const tokensLength = result.tokens.length / 2
-          const tokens: MonacoLineToken[] = []
-
-          for (let j = 0; j < tokensLength; j++) {
-            const startIndex = result.tokens[2 * j]
-            const metadata = result.tokens[2 * j + 1]
-            const colorIdx = EncodedTokenMetadata.getForeground(metadata)
-            const color = normalizeColor(colorMap[colorIdx] || '')
-            const fontStyle = EncodedTokenMetadata.getFontStyle(metadata)
-
-            // Because Monaco only support one scope per token,
-            // we workaround this to use color (and font style when available) to trace back the scope
-            const scope = color ? (findScopeByColorAndStyle(color, fontStyle) || '') : ''
-            tokens.push({ startIndex, scopes: scope })
-          }
-
-          return { endState: new TokenizerState(result.ruleStack), tokens }
-        },
-      })
+  // Register language aliases in Monaco if they don't exist
+  // This ensures that aliases like 'shellscript', 'bash', 'sh', 'zsh' work
+  for (const lang of loadedLanguages) {
+    if (!monacoLanguageIds.has(lang)) {
+      // Resolve the alias to get the base language name
+      const baseLang = highlighter.resolveLangAlias(lang)
+      
+      // Register the alias as a Monaco language
+      monaco.languages.register({ id: lang })
+      
+      // If the base language is different and exists in Monaco, set it as an alias
+      if (baseLang !== lang && monacoLanguageIds.has(baseLang)) {
+        // Monaco doesn't have a direct alias API, but registering it as a separate language works
+        // The tokenizer will be set for each alias individually
+      }
+      
+      monacoLanguageIds.add(lang)
     }
+  }
+
+  // Set up tokenizers for all loaded languages (including aliases)
+  for (const lang of loadedLanguages) {
+    // Resolve to the base language to get the correct grammar
+    const baseLang = highlighter.resolveLangAlias(lang)
+    
+    monaco.languages.setTokensProvider(lang, {
+      getInitialState() {
+        return new TokenizerState(INITIAL)
+      },
+
+      tokenize(line: string, state: TokenizerState) {
+        if (line.length >= tokenizeMaxLineLength) {
+          return {
+            endState: state,
+            tokens: [{ startIndex: 0, scopes: '' }],
+          }
+        }
+
+        // Use the base language to get the grammar
+        const grammar = highlighter.getLanguage(baseLang)
+        const result = grammar.tokenizeLine2(line, state.ruleStack, tokenizeTimeLimit)
+
+        if (result.stoppedEarly)
+          console.warn(`Time limit reached when tokenizing line: ${line.substring(0, 100)}`)
+
+        const tokensLength = result.tokens.length / 2
+        const tokens: MonacoLineToken[] = []
+
+        for (let j = 0; j < tokensLength; j++) {
+          const startIndex = result.tokens[2 * j]
+          const metadata = result.tokens[2 * j + 1]
+          const colorIdx = EncodedTokenMetadata.getForeground(metadata)
+          const color = normalizeColor(colorMap[colorIdx] || '')
+          const fontStyle = EncodedTokenMetadata.getFontStyle(metadata)
+
+          // Because Monaco only support one scope per token,
+          // we workaround this to use color (and font style when available) to trace back the scope
+          const scope = color ? (findScopeByColorAndStyle(color, fontStyle) || '') : ''
+          tokens.push({ startIndex, scopes: scope })
+        }
+
+        return { endState: new TokenizerState(result.ruleStack), tokens }
+      },
+    })
   }
 }
 

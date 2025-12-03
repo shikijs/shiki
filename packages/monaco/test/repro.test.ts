@@ -128,4 +128,67 @@ describe('shikiToMonaco', () => {
 
     // So the failure mode is likely empty scopes or incorrect scopes.
   })
+
+  it('registers language aliases correctly', () => {
+    const highlighter = {
+      getLoadedThemes: () => ['theme1'],
+      getTheme: () => ({
+        type: 'dark',
+        colors: {},
+        rules: [{ token: 'keyword', foreground: '#ff0000' }],
+      }),
+      setTheme: () => ({ colorMap: ['#000000', '#ff0000'] }),
+      // Return both base language and aliases
+      getLoadedLanguages: () => ['shell', 'shellscript', 'bash', 'sh', 'zsh'],
+      // resolveLangAlias should resolve aliases to base language
+      resolveLangAlias: (lang: string) => {
+        const aliases = ['shellscript', 'bash', 'sh', 'zsh']
+        return aliases.includes(lang) ? 'shell' : lang
+      },
+      getLanguage: (lang: string) => ({
+        tokenizeLine2: (line: string, stack: any) => ({
+          tokens: new Uint32Array([0, 0]),
+          ruleStack: stack,
+        }),
+      }),
+    } as any
+
+    const monaco = {
+      editor: {
+        defineTheme: vi.fn(),
+        setTheme: vi.fn(),
+        create: vi.fn(),
+      },
+      languages: {
+        register: vi.fn(),
+        // Monaco only knows about 'shell' initially
+        getLanguages: () => [{ id: 'shell' }],
+        setTokensProvider: vi.fn(),
+      },
+    } as any
+
+    shikiToMonaco(highlighter, monaco)
+
+    // Verify that aliases were registered in Monaco
+    const registerCalls = monaco.languages.register.mock.calls
+    expect(registerCalls.length).toBeGreaterThan(0)
+
+    // Check that aliases like 'shellscript', 'bash', etc. were registered
+    const registeredIds = registerCalls.map((call: any) => call[0].id)
+    expect(registeredIds).toContain('shellscript')
+    expect(registeredIds).toContain('bash')
+    expect(registeredIds).toContain('sh')
+    expect(registeredIds).toContain('zsh')
+
+    // Verify that tokenizers were set for all languages (base + aliases)
+    const setTokensProviderCalls = monaco.languages.setTokensProvider.mock.calls
+    expect(setTokensProviderCalls.length).toBe(5) // shell + 4 aliases
+
+    const languagesWithTokenizers = setTokensProviderCalls.map((call: any) => call[0])
+    expect(languagesWithTokenizers).toContain('shell')
+    expect(languagesWithTokenizers).toContain('shellscript')
+    expect(languagesWithTokenizers).toContain('bash')
+    expect(languagesWithTokenizers).toContain('sh')
+    expect(languagesWithTokenizers).toContain('zsh')
+  })
 })
