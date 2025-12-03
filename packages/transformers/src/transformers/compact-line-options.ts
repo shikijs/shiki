@@ -14,12 +14,20 @@ export interface TransformerCompactLineOption {
 export function transformerCompactLineOptions(
   lineOptions: TransformerCompactLineOption[] = [],
 ): ShikiTransformer {
+  const lineOptionsMap = new Map<number, string[]>()
+
+  for (const option of lineOptions) {
+    if (!lineOptionsMap.has(option.line) && option.classes) {
+      lineOptionsMap.set(option.line, option.classes)
+    }
+  }
+
   return {
     name: '@shikijs/transformers:compact-line-options',
     line(node, line) {
-      const lineOption = lineOptions.find(o => o.line === line)
-      if (lineOption?.classes)
-        this.addClassToHast(node, lineOption.classes)
+      const classes = lineOptionsMap.get(line)
+      if (classes)
+        this.addClassToHast(node, classes)
       return node
     },
   }
