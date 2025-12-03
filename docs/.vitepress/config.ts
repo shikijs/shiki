@@ -13,6 +13,7 @@ import vite from './vite.config'
 
 const GUIDES = [
   { text: 'Getting Started', link: '/guide/' },
+  { text: 'Comparison with Other Highlighters', link: '/guide/comparison' },
   { text: 'Installation & Usage', link: '/guide/install' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
