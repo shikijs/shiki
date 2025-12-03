@@ -806,6 +806,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/ocaml')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'openscad',
+    'name': 'OpenSCAD',
+    'aliases': [
+      'scad'
+    ],
+    'import': (() => import('@shikijs/langs/openscad')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'pascal',
     'name': 'Pascal',
     'import': (() => import('@shikijs/langs/pascal')) as DynamicImportLanguageRegistration
@@ -1552,6 +1560,7 @@ export type BundledLanguage =
   | 'objective-c'
   | 'objective-cpp'
   | 'ocaml'
+  | 'openscad'
   | 'pascal'
   | 'perl'
   | 'perl6'
@@ -1598,6 +1607,7 @@ export type BundledLanguage =
   | 'rust'
   | 'sas'
   | 'sass'
+  | 'scad'
   | 'scala'
   | 'scheme'
   | 'scss'

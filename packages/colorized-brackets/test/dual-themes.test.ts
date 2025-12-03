@@ -92,14 +92,16 @@ describe('dual themes', async () => {
   })
 
   it('light-dark() throws error if light and dark themes are not provided', () => {
-    expect(() => highlighter.codeToHtml('{}', {
-      lang,
-      themes: { light: 'light-plus' },
-      defaultColor: 'light-dark()',
-      transformers: [
-        transformerColorizedBrackets(),
-      ],
-    })).throws('When using `defaultColor: "light-dark()"`, you must provide both `light` and `dark` themes')
+    expect(
+      () => highlighter.codeToHtml('{}', {
+        lang,
+        themes: { light: 'light-plus' },
+        defaultColor: 'light-dark()',
+        transformers: [
+          transformerColorizedBrackets(),
+        ],
+      }),
+    ).throws('When using `defaultColor: "light-dark()"`, you must provide both `light` and `dark` themes')
   })
 
   it('no default', () => {
