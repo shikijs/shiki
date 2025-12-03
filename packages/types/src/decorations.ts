@@ -6,11 +6,17 @@ export interface DecorationOptions {
    */
   decorations?: DecorationItem[]
   /**
-   * Whether to check for intersecting decorations.
+   * The style of applying decorations.
    *
-   * @default true
+   * - `wrap`: Apply decorations with nested wrappers (default).
+   *           This checks for intersecting decorations and throws an error if found.
+   * - `flatten`: Apply decorations without nested wrappers.
+   *              This skips the intersection check and allows overlapping decorations.
+   *              Useful for deeply nested or complex decoration scenarios.
+   *
+   * @default 'wrap'
    */
-  checkIntersections?: boolean
+  decorationsStyle?: 'wrap' | 'flatten'
 }
 
 export interface DecorationItem {

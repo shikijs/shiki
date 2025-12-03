@@ -66,7 +66,9 @@ export function transformerDecorations(): ShikiTransformer {
           end: normalizePosition(d.end),
         }))
 
-      if (shiki.options.checkIntersections !== false)
+      // Only verify intersections in 'wrap' mode (default)
+      // In 'flatten' mode, skip verification to allow overlapping decorations
+      if (shiki.options.decorationsStyle !== 'flatten')
         verifyIntersections(decorations)
 
       map.set(shiki.meta, {
