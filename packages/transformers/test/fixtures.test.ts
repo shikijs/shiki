@@ -13,6 +13,7 @@ import {
   transformerRemoveComments,
   transformerRemoveLineBreak,
   transformerRemoveNotationEscape,
+  transformerRenderLineNumber,
   transformerRenderWhitespace,
 } from '../src'
 
@@ -284,4 +285,21 @@ body { margin: 0; }
 </style>`,
   undefined,
   { includeExplanation: true },
+)
+
+suite(
+  'render-line-number',
+  import.meta.glob('./fixtures/highlight/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRenderLineNumber(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.line-number { color: #888; margin-right: 1em; }
+</style>`,
+  '.line-number',
 )
