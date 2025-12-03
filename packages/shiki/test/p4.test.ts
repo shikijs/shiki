@@ -1,7 +1,7 @@
-import { expect } from 'vitest'
+import { expect, test } from 'vitest'
 import { codeToHtml } from '../src'
 
-it('p4', async () => {
+test('p4', async () => {
   const code = `
 #include <core.p4>
 
