@@ -1,25 +1,25 @@
 // @noErrors
-console.e
+console.log
 //       ^|
 
 
 const a: { test: 'foo' | 'bar' | 'baz' } = {
   test: 'foo'
 }
-a.t
-// ^|
+a.test
+//   ^|
 
 
-a.test === '
+a.test === 'foo'
 //          ^|
-
-
-a.test === 'b
-//           ^|
 
 
 a.test === 'bar'
 //           ^|
+
+
+a.test === 'baz'
+//          ^|
 
 
 a.test === 'bar'

@@ -103,23 +103,29 @@ export async function loadLangs() {
       }
     }
 
+    if (!lang) {
+      console.warn(`No language definition found for ${content.name}`)
+      continue
+    }
+
     const json: LanguageRegistration = {
       ...content,
-      name: content.name || lang.name,
-      scopeName: content.scopeName || lang.scopeName,
-      displayName: lang.displayName,
-      embeddedLangs: lang.embedded,
-      aliases: lang.aliases,
+      name: content.name || lang?.name || '',
+      scopeName: content.scopeName || lang?.scopeName || '',
+      displayName: lang?.displayName,
+      embeddedLangs: lang?.embedded,
+      aliases: lang?.aliases,
     }
 
     // We don't load all the embedded langs for markdown
-    if (LANGS_LAZY_EMBEDDED_ALL[lang.name]) {
-      const includes = LANGS_LAZY_EMBEDDED_ALL[lang.name]
+    const langName = lang?.name
+    if (langName && LANGS_LAZY_EMBEDDED_ALL[langName]) {
+      const includes = LANGS_LAZY_EMBEDDED_ALL[langName]
       json.embeddedLangsLazy = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
       json.embeddedLangs = includes
     }
-    else if (LANGS_LAZY_EMBEDDED_PARTIAL[lang.name]) {
-      const includes = LANGS_LAZY_EMBEDDED_PARTIAL[lang.name]
+    else if (langName && LANGS_LAZY_EMBEDDED_PARTIAL[langName]) {
+      const includes = LANGS_LAZY_EMBEDDED_PARTIAL[langName]
       json.embeddedLangsLazy = includes
       json.embeddedLangs = (json.embeddedLangs || []).filter(i => !includes.includes(i)) || []
     }

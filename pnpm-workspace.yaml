@@ -4,6 +4,11 @@ packages:
   - playground
   - examples/*
   - docs
+
+catalog:
+  '@types/minimatch': ^6.0.0
+  '@vitest/ui': ^4.0.15
+
 catalogs:
   bundling:
     '@rollup/plugin-alias': ^6.0.0
@@ -101,6 +106,7 @@ catalogs:
     '@types/mdast': ^4.0.4
     '@types/node': ^24.10.1
     '@types/unist': ^3.0.3
+
 onlyBuiltDependencies:
   - esbuild
   - sharp

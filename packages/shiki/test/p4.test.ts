@@ -1,24 +1,9 @@
-import { expect, test } from 'vitest'
+import { expect, it } from 'vitest'
 import { codeToHtml } from '../src'
 
-test('p4', async () => {
+it('p4', async () => {
   const code = `
 #include <core.p4>
-
-typedef bit<16> etherType_t;
-typedef bit<48> macAddr_t;
-
-const etherType_t TYPE_IPV4 = 16w0x0800;
-
-header ethernet_t {
-    macAddr_t   dstAddr;
-    macAddr_t   srcAddr;
-    etherType_t etherType;
-}
-
-struct headers {
-    ethernet_t ethernet;
-}
 
 register<bit<32>, bit<1>>(8) statistical_data;
 

@@ -12,5 +12,5 @@ type Example = {
 }
  
 const example: Example = { name: 'foo' }
-example.name === '   
+example.name === 'foo'
 //                ^|

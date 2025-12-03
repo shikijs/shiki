@@ -1,21 +1,6 @@
 <pre class="shiki vitesse-dark" style="background-color:#121212;color:#dbd7caee" tabindex="0"><code><span class="line"></span>
 <span class="line"><span style="color:#4D9375">#include</span><span style="color:#DBD7CAEE"> &#x3C;</span><span style="color:#BD976A">core</span><span style="color:#DBD7CAEE">.</span><span style="color:#BD976A">p4</span><span style="color:#DBD7CAEE">></span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#4D9375">typedef</span><span style="color:#CB7676"> bit</span><span style="color:#DBD7CAEE">&#x3C;</span><span style="color:#4C9A91">16</span><span style="color:#DBD7CAEE">> </span><span style="color:#5DA994">etherType_t</span><span style="color:#DBD7CAEE">;</span></span>
-<span class="line"><span style="color:#4D9375">typedef</span><span style="color:#CB7676"> bit</span><span style="color:#DBD7CAEE">&#x3C;</span><span style="color:#4C9A91">48</span><span style="color:#DBD7CAEE">> </span><span style="color:#5DA994">macAddr_t</span><span style="color:#DBD7CAEE">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CB7676">const</span><span style="color:#DBD7CAEE"> etherType_t TYPE_IPV4 = 16w0x0800;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CB7676">header</span><span style="color:#5DA994"> ethernet_t</span><span style="color:#DBD7CAEE"> {</span></span>
-<span class="line"><span style="color:#DBD7CAEE">    macAddr_t   dstAddr;</span></span>
-<span class="line"><span style="color:#DBD7CAEE">    macAddr_t   srcAddr;</span></span>
-<span class="line"><span style="color:#DBD7CAEE">    etherType_t etherType;</span></span>
-<span class="line"><span style="color:#DBD7CAEE">}</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#CB7676">struct</span><span style="color:#5DA994"> headers</span><span style="color:#DBD7CAEE"> {</span></span>
-<span class="line"><span style="color:#DBD7CAEE">    ethernet_t ethernet;</span></span>
-<span class="line"><span style="color:#DBD7CAEE">}</span></span>
-<span class="line"></span>
 <span class="line"><span style="color:#DBD7CAEE">register&#x3C;</span><span style="color:#CB7676">bit</span><span style="color:#DBD7CAEE">&#x3C;</span><span style="color:#4C9A91">32</span><span style="color:#DBD7CAEE">>, </span><span style="color:#CB7676">bit</span><span style="color:#DBD7CAEE">&#x3C;</span><span style="color:#4C9A91">1</span><span style="color:#DBD7CAEE">>>(</span><span style="color:#4C9A91">8</span><span style="color:#DBD7CAEE">) statistical_data;</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#CB7676">action</span><span style="color:#80A665"> drop</span><span style="color:#DBD7CAEE">() {</span></span>

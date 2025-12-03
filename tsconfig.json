@@ -29,7 +29,7 @@
       "shiki": ["./packages/shiki/src/index.ts"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client", "node"],
+    "types": ["node", "vite/client", "vitest/globals"],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
@@ -44,7 +44,8 @@
     "**/*.mjs",
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.vue",
-    "eslint.config.js"
+    "eslint.config.js",
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "**/vendor/**",
