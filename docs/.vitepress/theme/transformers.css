@@ -46,10 +46,12 @@ pre.shiki .highlighted-word {
 
 .vp-doc [class*='language-'] pre {
   background-color: var(--shiki-light-bg, inherit);
+  border: 1px solid var(--vp-c-border);
 }
 
 .dark .vp-doc [class*='language-'] pre {
   background-color: var(--shiki-dark-bg, inherit);
+  border: none;
 }
 
 pre.shiki,
