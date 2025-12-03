@@ -1,7 +1,7 @@
-import { expect, test } from 'vitest'
+import { expect } from 'vitest'
 import { codeToHtml } from '../src'
 
-test('p4', async () => {
+it('p4', async () => {
   const code = `
 #include <core.p4>
 
@@ -45,5 +45,5 @@ table ipv4_lpm {
     theme: 'vitesse-dark',
   })
 
-  expect(html).toMatchFileSnapshot('./out/p4.html')
+  await expect(html).toMatchFileSnapshot('./out/p4.html')
 })
