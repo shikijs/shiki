@@ -9,6 +9,7 @@ export interface TransformerNotationMapOptions extends MatchAlgorithmOptions {
    */
   classActivePre?: string
   startOffset?: number
+  classActiveCode?: string
 }
 
 function escapeRegExp(str: string): string {
@@ -23,6 +24,7 @@ export function transformerNotationMap(
     classMap = {},
     classActivePre = undefined,
     startOffset = 0,
+    classActiveCode = undefined,
   } = options
 
   return createCommentNotationTransformer(
