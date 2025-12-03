@@ -20,7 +20,7 @@ export function transformerRemoveComments(
     name: '@shikijs/transformers:remove-comments',
     preprocess(_code, options) {
       if (options.includeExplanation !== true && options.includeExplanation !== 'scopeName')
-        throw new Error('`transformerRemoveComments` requires `includeExplanation: true` to work')
+        throw new Error('`transformerRemoveComments` requires `includeExplanation` to be set to `true` or `\'scopeName\'`')
     },
     tokens(tokens) {
       const result = []
