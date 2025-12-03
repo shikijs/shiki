@@ -145,6 +145,11 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode' | 'includeExplanation'> {
 
   /**
+   * Data to be added to the root `<pre>` element.
+   */
+  data?: Record<string, unknown>
+
+  /**
    * The grammar name for the code.
    */
   lang: StringLiteralUnion<Languages | SpecialLanguage>

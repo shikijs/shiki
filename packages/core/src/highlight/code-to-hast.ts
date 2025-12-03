@@ -128,6 +128,7 @@ export function tokensToHast(
     tagName: 'pre',
     properties,
     children: [],
+    data: options.data as any,
   }
 
   let codeNode: Element = {
