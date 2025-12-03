@@ -76,7 +76,7 @@ export function codeToHast(
       fg,
       bg,
       themeName,
-      rootStyle,
+      rootStyle: rootStyle ?? (options.rootStyle === false ? undefined : options.rootStyle),
     },
     contextSource,
     grammarState,
@@ -107,7 +107,9 @@ export function tokensToHast(
     tagName: 'pre',
     properties: {
       class: `shiki ${options.themeName || ''}`,
-      style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
+      style: options.rootStyle !== undefined
+        ? (options.rootStyle === false ? undefined : options.rootStyle)
+        : `background-color:${options.bg};color:${options.fg}`,
       ...(tabindex !== false && tabindex != null)
         ? {
             tabindex: tabindex.toString(),
