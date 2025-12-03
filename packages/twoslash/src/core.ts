@@ -111,7 +111,7 @@ export function createTransformerFactory(
         if (lang in langAlias)
           lang = langAlias[this.options.lang]
 
-        if (filter(lang, code, this.options)) {
+        if (filter(lang, code, this.options, this)) {
           try {
             const codeWithIncludes = includes.applyInclude(code)
 
