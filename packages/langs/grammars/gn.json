@@ -1,0 +1,62 @@
+{
+  "fileTypes": [
+    "gn",
+    "gni"
+  ],
+  "name": "gn",
+  "patterns": [
+    {
+      "comment": "keywords",
+      "match": "\\b(?:if|else)\\b",
+      "name": "keyword.control.gn"
+    },
+    {
+      "comment": "constants",
+      "match": "\\b(?:true|false)\\b",
+      "name": "constant.language.gn"
+    },
+    {
+      "comment": "numbers",
+      "match": "\\b\\d+\\.?(?:\\d+)?\\b",
+      "name": "constant.numeric.gn"
+    },
+    {
+      "comment": "double quoted string",
+      "match": "\\\"[^\\\"]*\\\"",
+      "name": "string.quoted.double.gn"
+    },
+    {
+      "comment": "comment",
+      "begin": "#",
+      "end": "$",
+      "name": "comment.gn"
+    },
+    {
+      "comment": "operators",
+      "match": "(?:=|==|\\+=|-=|\\+|-)",
+      "name": "keyword.operator.gn"
+    },
+    {
+      "comment": "targets",
+      "match": "\\b(?:action|action_foreach|copy|executable|group|loadable_module|shared_library|source_set|static_library|generated_file)\\b",
+      "name": "entity.name.tag.gn"
+    },
+    {
+      "comment": "functions",
+      "match": "\\b(?:assert|config|declare_args|defined|exec_script|foreach|get_label_info|get_path_info|get_target_outputs|getenv|import|print|process_file_template|read_file|rebase_path|set_default_toolchain|set_defaults|set_sources_assignment_filter|template|tool|toolchain|toolchain_args|propagates_configs|write_file)\\b",
+      "name": "entity.name.function.gn"
+    },
+    {
+      "comment": "predefined variables",
+      "match": "\\b(?:current_cpu|current_os|current_toolchain|default_toolchain|host_cpu|host_os|python_path|root_build_dir|root_gen_dir|root_out_dir|target_cpu|target_gen_dir|target_os|target_out_dir)\\b",
+      "name": "variable.parameter.gn"
+    },
+    {
+      "comment": "target variables",
+      "match": "\\b(?:all_dependent_configs|allow_circular_includes_from|args|asmflags|cflags|cflags_c|cflags_cc|cflags_objc|cflags_objcc|check_includes|complete_static_lib|configs|data|data_deps|defines|depfile|deps|include_dirs|inputs|ldflags|lib_dirs|libs|output_extension|output_name|outputs|public|public_configs|public_deps|script|sources|testonly|visibility|contents|output_conversion|rebase|data_keys|walk_keys)\\b",
+      "name": "entity.other.attribute-name.gn"
+    }
+  ],
+  "scopeName": "source.gn",
+  "uuid": "DE419F8C-EC46-4824-87F3-732BD08694DC"
+}
