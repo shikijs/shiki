@@ -549,19 +549,23 @@ CSS output:
 
 Remove comments from the code. It works by checking the internal grammar token metadata to determine if the token is a comment.
 
-It requires `includeExplanation: true` to work.
+This transformer requires `includeExplanation: true` to work.
 
 ```ts
 import { transformerRemoveComments } from '@shikijs/transformers'
 
 const html = await codeToHtml(code, {
   lang: 'ts',
-  includeExplanation: true,
+  includeExplanation: true, // [!code highlight]
   transformers: [
-    transformerRemoveComments(),
+    transformerRemoveComments(), // [!code highlight]
   ],
 })
 ```
+
+Options:
+
+- `removeEmptyLines`: Remove lines that become empty after removing comments. Default `true`.
 
 For example:
 
@@ -576,13 +580,9 @@ const y = 2;
 ```
 ````
 
-Renders:
+Will renders:
 
 ```js
 const x = 1
 const y = 2
 ```
-
-Options:
-
-- `removeEmptyLines`: Remove lines that become empty after removing comments. Default `true`.
