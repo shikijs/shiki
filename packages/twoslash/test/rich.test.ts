@@ -157,7 +157,7 @@ obj.boo
 
 it('custom-tags', async () => {
   const code = `
-// @errors: 2307
+// @errors: 2307 "this line is added"
 import { createHighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
