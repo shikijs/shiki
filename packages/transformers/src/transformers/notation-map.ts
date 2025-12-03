@@ -24,7 +24,7 @@ export function transformerNotationMap(
     classMap = {},
     classActivePre = undefined,
     startOffset = 0,
-    classActiveCode = undefined,
+    classActiveCode: _classActiveCode = undefined,
   } = options
 
   return createCommentNotationTransformer(
