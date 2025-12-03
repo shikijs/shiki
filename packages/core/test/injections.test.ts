@@ -28,7 +28,7 @@ const count = ref(0)
 })
 
 it('injections-side-effects vue', async () => {
-  const highlighter = await createHighlighterCore({
+  using highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],
@@ -54,7 +54,7 @@ it('injections-side-effects vue', async () => {
 })
 
 it('injections-side-effects angular-html', async () => {
-  const highlighter = await createHighlighterCore({
+  using highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],
@@ -125,7 +125,7 @@ it('injections-side-effects angular-html', async () => {
 })
 
 it('injections-side-effects angular-ts', async () => {
-  const highlighter = await createHighlighterCore({
+  using highlighter = await createHighlighterCore({
     themes: [
       vl,
     ],

@@ -13,7 +13,7 @@ import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 
 it('run', async () => {
-  const highlighter = await createHighlighter({
+  using highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
@@ -39,7 +39,7 @@ it('run', async () => {
 })
 
 it('run with lazy', async () => {
-  const highlighter = await createHighlighter({
+  using highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
@@ -64,7 +64,7 @@ it('run with lazy', async () => {
 })
 
 it('run with rehype-raw', async () => {
-  const highlighter = await createHighlighter({
+  using highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
@@ -101,7 +101,7 @@ it('run with rehype-raw', async () => {
 })
 
 it('run with lazy + fallback language', async () => {
-  const highlighter = await createHighlighter({
+  using highlighter = await createHighlighter({
     themes: [
       'vitesse-light',
     ],
