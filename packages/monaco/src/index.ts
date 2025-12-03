@@ -135,16 +135,16 @@ export function shikiToMonaco(
     if (!monacoLanguageIds.has(lang)) {
       // Resolve the alias to get the base language name
       const baseLang = highlighter.resolveLangAlias(lang)
-      
+
       // Register the alias as a Monaco language
       monaco.languages.register({ id: lang })
-      
+
       // If the base language is different and exists in Monaco, set it as an alias
       if (baseLang !== lang && monacoLanguageIds.has(baseLang)) {
         // Monaco doesn't have a direct alias API, but registering it as a separate language works
         // The tokenizer will be set for each alias individually
       }
-      
+
       monacoLanguageIds.add(lang)
     }
   }
@@ -153,7 +153,7 @@ export function shikiToMonaco(
   for (const lang of loadedLanguages) {
     // Resolve to the base language to get the correct grammar
     const baseLang = highlighter.resolveLangAlias(lang)
-    
+
     monaco.languages.setTokensProvider(lang, {
       getInitialState() {
         return new TokenizerState(INITIAL)

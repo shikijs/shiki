@@ -35,6 +35,7 @@ describe('shikiToMonaco', () => {
         }
       },
       getLoadedLanguages: () => ['javascript'],
+      resolveLangAlias: (lang: string) => lang, // Return the same language (no aliases in this test)
       getLanguage: (_lang: string) => ({
         tokenizeLine2: (line: string, stack: any) => {
           return {
@@ -145,7 +146,7 @@ describe('shikiToMonaco', () => {
         const aliases = ['shellscript', 'bash', 'sh', 'zsh']
         return aliases.includes(lang) ? 'shell' : lang
       },
-      getLanguage: (lang: string) => ({
+      getLanguage: (_lang: string) => ({
         tokenizeLine2: (line: string, stack: any) => ({
           tokens: new Uint32Array([0, 0]),
           ruleStack: stack,
