@@ -547,17 +547,40 @@ CSS output:
 
 ### `transformerRemoveComments`
 
-Remove comments from the code.
+Remove comments from the code. It works by checking the internal grammar token metadata to determine if the token is a comment.
+
+It requires `includeExplanation: true` to work.
 
 ```ts
 import { transformerRemoveComments } from '@shikijs/transformers'
 
 const html = await codeToHtml(code, {
   lang: 'ts',
+  includeExplanation: true,
   transformers: [
     transformerRemoveComments(),
   ],
 })
+```
+
+For example:
+
+````md
+```js
+// This is a comment
+const x = 1; // Inline comment
+/* Block comment */
+const y = 2;
+
+// Another comment
+```
+````
+
+Renders:
+
+```js
+const x = 1
+const y = 2
 ```
 
 Options:

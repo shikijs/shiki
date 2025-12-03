@@ -142,7 +142,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   extends
   TransformerOptions,
   DecorationOptions,
-  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode'> {
+  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode' | 'includeExplanation'> {
 
   lang: StringLiteralUnion<Languages | SpecialLanguage>
 
