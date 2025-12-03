@@ -21,7 +21,9 @@ describe('verify', async () => {
     const name = basename(file, '.wasm.json')
 
     describe(`record: ${name}`, async () => {
-      const executions = JSON.parse(await fs.readFile(file, 'utf-8')) as Execution[]
+      const jsFile = file.replace('.wasm.json', '.js.json')
+      const fileToRead = await fs.stat(jsFile).then(() => jsFile).catch(() => file)
+      const executions = JSON.parse(await fs.readFile(fileToRead, 'utf-8')) as Execution[]
       let i = 0
 
       it('', () => {})
