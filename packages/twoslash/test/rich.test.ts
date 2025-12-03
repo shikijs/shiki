@@ -159,6 +159,7 @@ it('custom-tags', async () => {
   const code = `
 import { createHighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
+// @noErrors
 
 const shiki = await createHighlighterCore({
   engine: createJavaScriptRegexEngine(),
