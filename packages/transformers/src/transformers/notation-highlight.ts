@@ -32,6 +32,7 @@ export function transformerNotationHighlight(
       },
       classActivePre,
       matchAlgorithm: options.matchAlgorithm,
+      startOffset: 1,
     },
     '@shikijs/transformers:notation-highlight',
   )
