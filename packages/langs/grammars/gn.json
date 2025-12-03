@@ -1,0 +1,83 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "gn",
+  "scopeName": "source.gn",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#constants"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "match": "#.*$",
+          "name": "comment.line.number-sign.gn"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "begin": "\"",
+          "end": "\"",
+          "name": "string.quoted.double.gn",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.gn"
+            },
+            {
+              "match": "\\$[a-zA-Z0-9_]+",
+              "name": "variable.other.gn"
+            },
+            {
+              "match": "\\${[^}]*}",
+              "name": "variable.other.gn"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(if|else|true|false)\\b",
+          "name": "keyword.control.gn"
+        }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "match": "\\b(assert|config|declare_args|defined|exec_script|foreach|get_label_info|get_path_info|get_target_outputs|getenv|import|print|process_file_template|read_file|rebase_path|set_default_toolchain|set_defaults|template|tool|toolchain|toolchain_args|write_file)\\b",
+          "name": "support.function.gn"
+        },
+        {
+          "match": "\\b(action|action_foreach|bundle_data|copy|create_bundle|executable|generated_file|group|loadable_module|rust_library|rust_proc_macro|shared_library|source_set|static_library|target)\\b",
+          "name": "entity.name.function.gn"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "match": "\\b(current_cpu|current_os|current_toolchain|default_toolchain|host_cpu|host_os|root_build_dir|root_gen_dir|root_out_dir|target_cpu|target_gen_dir|target_os|target_out_dir)\\b",
+          "name": "constant.language.gn"
+        }
+      ]
+    }
+  }
+}
