@@ -46,6 +46,7 @@ export async function run(
   cli
     .option('--theme <theme>', 'Color theme to use', { default: 'vitesse-dark' })
     .option('--lang <lang>', 'Programming language')
+    .option('--format <format>', 'Output format (ansi, html)', { default: 'ansi' })
     .help()
     .version(version)
 
@@ -55,7 +56,16 @@ export async function run(
   const codes = await Promise.all(files.map(async (path) => {
     const { content, ext } = await readSource(path)
     const lang = options.lang || ext
-    return await codeToANSI(content, lang as BundledLanguage, options.theme)
+    if (options.format === 'html') {
+      const { codeToHtml } = await import('shiki')
+      return await codeToHtml(content, {
+        lang: lang as BundledLanguage,
+        theme: options.theme,
+      })
+    }
+    else {
+      return await codeToANSI(content, lang as BundledLanguage, options.theme)
+    }
   }))
 
   for (const code of codes)
