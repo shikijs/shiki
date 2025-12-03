@@ -160,6 +160,24 @@ describe('should', () => {
     const code3 = shiki.codeToHtml(ansiCode, { lang: 'lang3', theme: 'nord' })
     expect(code3).toBe(original2)
   })
+
+  it('custom root style', async () => {
+    using shiki = await createHighlighterCore({
+      themes: [nord],
+      langs: [js],
+      engine: createJavaScriptRegexEngine(),
+    })
+
+    // Override root style
+    const code1 = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord', rootStyle: 'custom-style:true;' })
+    expect(code1)
+      .toMatchInlineSnapshot(`"<pre class="shiki nord" style="custom-style:true;" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">"</span><span style="color:#A3BE8C">Hi</span><span style="color:#ECEFF4">"</span><span style="color:#D8DEE9FF">)</span></span></code></pre>"`)
+
+    // Disable root style
+    const code2 = shiki.codeToHtml('console.log("Hi")', { lang: 'javascript', theme: 'nord', rootStyle: false })
+    expect(code2)
+      .toMatchInlineSnapshot(`"<pre class="shiki nord" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">"</span><span style="color:#A3BE8C">Hi</span><span style="color:#ECEFF4">"</span><span style="color:#D8DEE9FF">)</span></span></code></pre>"`)
+  })
 })
 
 describe('errors', () => {
