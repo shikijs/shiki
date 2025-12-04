@@ -127,4 +127,20 @@ describe('run', () => {
 
     vi.unstubAllGlobals()
   })
+
+  it('--format html option', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('console.log("hello")'),
+    }))
+
+    const output: string[] = []
+    await run(['node', 'shiki', '--format', 'html', 'https://example.com/code.js'], msg => output.push(msg))
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('<pre class="shiki')
+    expect(output[0]).toContain('console')
+
+    vi.unstubAllGlobals()
+  })
 })
