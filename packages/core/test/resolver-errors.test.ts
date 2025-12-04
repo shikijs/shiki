@@ -56,4 +56,38 @@ describe('resolver error handling', () => {
     expect(() => shiki.getLanguage('invalid-lang'))
       .toThrowError(/Language `invalid-lang` not found/)
   })
+
+  it('should handle lazy embedded language loading', async () => {
+    const shiki = await createShikiInternal({
+      engine: createJavaScriptRegexEngine(),
+      themes: [],
+      langs: [],
+    })
+
+    // Load a parent language that embeds another language lazily
+    const parentLang = {
+      name: 'parent',
+      scopeName: 'source.parent',
+      patterns: [],
+      repository: {},
+      embeddedLangsLazy: ['child'],
+    }
+
+    const childLang = {
+      name: 'child',
+      scopeName: 'source.child',
+      patterns: [],
+      repository: {},
+    }
+
+    // Load parent first (child not loaded yet)
+    await shiki.loadLanguage(parentLang)
+
+    // Now load child - this should trigger lazy reload of parent
+    await shiki.loadLanguage(childLang)
+
+    // Both should be loaded
+    expect(shiki.getLoadedLanguages()).toContain('parent')
+    expect(shiki.getLoadedLanguages()).toContain('child')
+  })
 })
