@@ -149,7 +149,21 @@ function rehypeShikiFromHighlighter(
       if (lazyLoad) {
         try {
           // passed language is checked in sync, promise `.catch()` wouldn't work
-          queue.push(highlighter.loadLanguage(lang).then(() => processNode(lang)))
+          queue.push(
+            highlighter.loadLanguage(lang)
+              .then(() => processNode(lang))
+              .catch((error) => {
+                if (fallbackLanguage) {
+                  processNode(fallbackLanguage)
+                }
+                else if (onError) {
+                  onError(error)
+                }
+                else {
+                  throw error
+                }
+              }),
+          )
         }
         catch (error) {
           if (fallbackLanguage)
