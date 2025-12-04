@@ -167,3 +167,75 @@ describe('merge same style', () => {
     expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F" class="highlighted-word">name</span><span style="color:#D32F2F">:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
   })
 })
+
+describe('preserve HAST data and properties', () => {
+  it('preserves data field in pre element', async () => {
+    using shiki = await createHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log("test")', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      data: { meta: 'fileName="hello.js"' },
+    })
+
+    const preNode = hast.children[0]
+    expect(preNode).toHaveProperty('data')
+    expect(preNode.data).toEqual({ meta: 'fileName="hello.js"' })
+  })
+
+  it('preserves properties field in pre element', async () => {
+    using shiki = await createHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log("test")', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      properties: { 'data-custom': 'value', 'data-file': 'test.js' },
+    })
+
+    const preNode = hast.children[0]
+    expect(preNode.properties).toHaveProperty('data-custom', 'value')
+    expect(preNode.properties).toHaveProperty('data-file', 'test.js')
+  })
+
+  it('preserves both data and properties', async () => {
+    using shiki = await createHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log("test")', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      data: { meta: 'fileName="hello.js"', customData: 123 },
+      properties: { 'data-custom': 'value' },
+    })
+
+    const preNode = hast.children[0]
+    expect(preNode.data).toEqual({ meta: 'fileName="hello.js"', customData: 123 })
+    expect(preNode.properties).toHaveProperty('data-custom', 'value')
+    expect(preNode.properties).toHaveProperty('class') // Shiki class is still there
+  })
+
+  it('shiki properties override incoming properties for critical fields', async () => {
+    using shiki = await createHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log("test")', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      properties: { class: 'my-custom-class' }, // Should be overridden
+    })
+
+    const preNode = hast.children[0]
+    // Shiki's class should override the incoming class
+    expect(preNode.properties.class).toBe('shiki vitesse-light')
+  })
+})

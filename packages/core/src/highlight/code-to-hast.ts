@@ -105,7 +105,8 @@ export function tokensToHast(
   } = options
 
   const properties: Element['properties'] = {
-    class: `shiki ${options.themeName || ''}`,
+    ...options.properties, // Merge incoming properties first
+    class: `shiki ${options.themeName || ''}`, // Override with Shiki class
   }
 
   if (options.rootStyle !== false) {
@@ -127,6 +128,7 @@ export function tokensToHast(
     type: 'element',
     tagName: 'pre',
     properties,
+    data: options.data, // Add incoming data
     children: [],
   }
 

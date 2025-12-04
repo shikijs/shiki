@@ -12,6 +12,8 @@ export type RehypeShikiHandler = (
   meta?: string
   lang?: string
   code: string
+  data?: Record<string, unknown>
+  properties?: Record<string, unknown>
 } | undefined
 
 export const InlineCodeHandlers: Record<Truthy<RehypeShikiCoreOptions['inline']>, RehypeShikiHandler> = {
@@ -57,5 +59,7 @@ export const PreHandler: RehypeShikiHandler = (_tree, node) => {
       : undefined,
     code: toString(head),
     meta: head.data?.meta ?? head.properties.metastring?.toString() ?? '',
+    data: node.data,
+    properties: node.properties,
   }
 }
