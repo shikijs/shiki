@@ -178,6 +178,21 @@ describe('should', () => {
     expect(code2)
       .toMatchInlineSnapshot(`"<pre class="shiki nord" tabindex="0"><code><span class="line"><span style="color:#D8DEE9">console</span><span style="color:#ECEFF4">.</span><span style="color:#88C0D0">log</span><span style="color:#D8DEE9FF">(</span><span style="color:#ECEFF4">"</span><span style="color:#A3BE8C">Hi</span><span style="color:#ECEFF4">"</span><span style="color:#D8DEE9FF">)</span></span></code></pre>"`)
   })
+
+  it('theme with colors.foreground (not editor.foreground)', async () => {
+    using shiki = await createHighlighterCore({
+      themes: [import('@shikijs/themes/aurora-x')],
+      langs: [js],
+      engine: createJavaScriptRegexEngine(),
+    })
+
+    const theme = shiki.getTheme('aurora-x')
+
+    // aurora-x has colors.foreground set to #576daf (not colors.editor.foreground)
+    // It should NOT fall back to the default #bbbbbb
+    expect(theme.fg).toBe('#576daf')
+    expect(theme.bg).toBe('#07090F')
+  })
 })
 
 describe('errors', () => {

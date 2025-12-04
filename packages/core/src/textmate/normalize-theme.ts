@@ -39,7 +39,10 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
      * Used as default value for foreground/background
      */
     const globalSetting = theme.settings
-      ? theme.settings.find((s: any) => !s.name && !s.scope)
+      ? theme.settings.find((s: any) => {
+          const isGlobal = !s.name && !s.scope
+          return isGlobal
+        })
       : undefined
 
     if (globalSetting?.settings?.foreground)
@@ -55,6 +58,9 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
      */
     if (!fg && (<any>theme)?.colors?.['editor.foreground'])
       fg = (<any>theme).colors['editor.foreground']
+
+    if (!fg && (<any>theme)?.colors?.foreground)
+      fg = (<any>theme).colors.foreground
 
     if (!bg && (<any>theme)?.colors?.['editor.background'])
       bg = (<any>theme).colors['editor.background']
