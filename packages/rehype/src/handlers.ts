@@ -59,7 +59,7 @@ export const PreHandler: RehypeShikiHandler = (_tree, node) => {
       : undefined,
     code: toString(head),
     meta: head.data?.meta ?? head.properties.metastring?.toString() ?? '',
-    data: node.data,
-    properties: node.properties,
+    data: node.data as any,
+    properties: node.properties as any,
   }
 }

@@ -128,7 +128,7 @@ export function tokensToHast(
     type: 'element',
     tagName: 'pre',
     properties,
-    data: options.data, // Add incoming data
+    data: options.data as any, // Type assertion needed for flexible metadata
     children: [],
   }
 

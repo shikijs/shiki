@@ -199,6 +199,8 @@ describe('preserve HAST data and properties', () => {
     })
 
     const preNode = hast.children[0]
+    if (preNode.type !== 'element')
+      throw new Error('Expected element')
     expect(preNode.properties).toHaveProperty('data-custom', 'value')
     expect(preNode.properties).toHaveProperty('data-file', 'test.js')
   })
@@ -217,6 +219,8 @@ describe('preserve HAST data and properties', () => {
     })
 
     const preNode = hast.children[0]
+    if (preNode.type !== 'element')
+      throw new Error('Expected element')
     expect(preNode.data).toEqual({ meta: 'fileName="hello.js"', customData: 123 })
     expect(preNode.properties).toHaveProperty('data-custom', 'value')
     expect(preNode.properties).toHaveProperty('class') // Shiki class is still there
@@ -235,6 +239,8 @@ describe('preserve HAST data and properties', () => {
     })
 
     const preNode = hast.children[0]
+    if (preNode.type !== 'element')
+      throw new Error('Expected element')
     // Shiki's class should override the incoming class
     expect(preNode.properties.class).toBe('shiki vitesse-light')
   })
