@@ -20,9 +20,17 @@ export interface ShikiToMonacoOptions {
    * @default 500
    */
   tokenizeTimeLimit?: number
+  /**
+   * A map of theme names to their Monaco theme options.
+   *
+   * This is useful for specifying the base theme for high contrast themes.
+   */
+  themes?: Record<string, {
+    type?: 'light' | 'dark' | 'hc' | 'hc-light'
+  }>
 }
 
-export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): MonacoTheme {
+export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved, options?: ShikiToMonacoOptions['themes']): MonacoTheme {
   let rules = 'rules' in theme
     ? theme.rules as MonacoTheme['rules']
     : undefined
@@ -54,8 +62,19 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
       .map(([key, value]) => [key, `#${normalizeColor(value)}`]),
   )
 
+  let base = theme.type === 'light' ? 'vs' : 'vs-dark'
+  if (options?.[theme.name]?.type) {
+    const type = options[theme.name].type
+    if (type === 'hc' || type === 'hc-light')
+      base = type === 'hc' ? 'hc-black' : 'hc-light'
+    else if (type === 'light')
+      base = 'vs'
+    else if (type === 'dark')
+      base = 'vs-dark'
+  }
+
   return {
-    base: theme.type === 'light' ? 'vs' : 'vs-dark',
+    base: base as any,
     inherit: false,
     colors,
     rules,
@@ -72,7 +91,7 @@ export function shikiToMonaco(
   const themeIds = highlighter.getLoadedThemes()
   for (const themeId of themeIds) {
     const tmTheme = highlighter.getTheme(themeId)
-    const monacoTheme = textmateThemeToMonacoTheme(tmTheme)
+    const monacoTheme = textmateThemeToMonacoTheme(tmTheme, options.themes)
     themeMap.set(themeId, monacoTheme)
     monaco.editor.defineTheme(themeId, monacoTheme)
   }
