@@ -76,7 +76,11 @@ export function createCommentNotationTransformer(
           comment.info[1] = ''
 
         if (isEmpty && comment.isLineCommentOnly) {
-          linesToRemove.push(comment.line)
+          const classNames = comment.line.properties.className
+          const hasOtherClasses = Array.isArray(classNames) && classNames.some(c => c !== 'line')
+
+          if (!hasOtherClasses)
+            linesToRemove.push(comment.line)
         }
         else if (isEmpty && comment.isJsxStyle) {
           comment.line.children.splice(comment.line.children.indexOf(comment.token) - 1, 3)
