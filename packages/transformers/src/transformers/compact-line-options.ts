@@ -14,10 +14,16 @@ export interface TransformerCompactLineOption {
 export function transformerCompactLineOptions(
   lineOptions: TransformerCompactLineOption[] = [],
 ): ShikiTransformer {
+  // Pre-compute line options into a Map for O(1) lookup
+  const lineOptionsMap = new Map<number, TransformerCompactLineOption>()
+  for (const option of lineOptions) {
+    lineOptionsMap.set(option.line, option)
+  }
+
   return {
     name: '@shikijs/transformers:compact-line-options',
     line(node, line) {
-      const lineOption = lineOptions.find(o => o.line === line)
+      const lineOption = lineOptionsMap.get(line)
       if (lineOption?.classes)
         this.addClassToHast(node, lineOption.classes)
       return node
