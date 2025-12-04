@@ -113,7 +113,7 @@ export function tokenizeWithTheme(
   const result = _tokenizeWithTheme(code, grammar, theme, colorMap, options)
 
   const grammarState = new GrammarStateImpl(
-    _tokenizeWithTheme(code, grammar, theme, colorMap, options).stateStack,
+    result.stateStack,
     grammar.name,
     theme.name,
   )
