@@ -80,9 +80,16 @@ export class JavaScriptScanner implements PatternScanner {
     const pending: [index: number, match: RegExpExecArray, offset: number][] = []
 
     function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
+      if (!match.indices) {
+        throw new Error(
+          'Regex pattern must be created with the "d" flag to capture indices. '
+          + 'Ensure regexConstructor returns RegExp with hasIndices enabled.',
+        )
+      }
+
       return {
         index,
-        captureIndices: match.indices!.map((indice) => {
+        captureIndices: match.indices.map((indice) => {
           if (indice == null) {
             return {
               start: MAX,

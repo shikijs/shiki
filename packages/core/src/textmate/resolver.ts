@@ -1,5 +1,6 @@
 import type { LanguageRegistration, RegexEngine } from '@shikijs/types'
 import type { IOnigLib, RegistryOptions } from '@shikijs/vscode-textmate'
+import { ShikiError } from '@shikijs/types'
 
 export class Resolver implements RegistryOptions {
   private readonly _langs = new Map<string, LanguageRegistration>()
@@ -21,11 +22,18 @@ export class Resolver implements RegistryOptions {
   }
 
   public getLangRegistration(langIdOrAlias: string): LanguageRegistration {
-    return this._langs.get(langIdOrAlias)!
+    const lang = this._langs.get(langIdOrAlias)
+    if (!lang) {
+      const available = Array.from(this._langs.keys()).join(', ')
+      throw new ShikiError(
+        `Language "${langIdOrAlias}" not found. Available languages: ${available}`,
+      )
+    }
+    return lang
   }
 
   public loadGrammar(scopeName: string): any {
-    return this._scopeToLang.get(scopeName)!
+    return this._scopeToLang.get(scopeName)
   }
 
   public addLanguage(l: LanguageRegistration): void {

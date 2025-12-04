@@ -112,7 +112,14 @@ export class Registry extends TextMateRegistry {
         this._loadedLanguagesCache = null
         this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
         this._syncRegistry?._grammars?.delete(e.scopeName)
-        this.loadLanguage(this._langMap.get(e.name)!)
+
+        const lang = this._langMap.get(e.name)
+        if (!lang) {
+          throw new ShikiError(
+            `Language "${e.name}" not found in language map during lazy reload`,
+          )
+        }
+        this.loadLanguage(lang)
       }
     }
   }
@@ -166,8 +173,11 @@ export class Registry extends TextMateRegistry {
     this._langGraph.set(lang.name, lang)
     const embedded = lang.embeddedLanguages ?? lang.embeddedLangs
     if (embedded) {
-      for (const embeddedLang of embedded)
-        this._langGraph.set(embeddedLang, this._langMap.get(embeddedLang)!)
+      for (const embeddedLang of embedded) {
+        // Explicitly allow undefined - will be validated in loadLanguages()
+        const embeddedLangRegistration = this._langMap.get(embeddedLang)
+        this._langGraph.set(embeddedLang, embeddedLangRegistration as any)
+      }
     }
   }
 }
