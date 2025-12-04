@@ -133,11 +133,12 @@ it('lazy loading error handling with fallbackLanguage', async () => {
   // Create a mock highlighter that fails to load a specific language
   const mockHighlighter = {
     ...highlighter,
-    loadLanguage: async (lang: string) => {
+    loadLanguage: async (...langs: Parameters<typeof highlighter.loadLanguage>) => {
+      const lang = langs[0] as string
       if (lang === 'nonexistent-lang') {
         throw new Error(`Language 'nonexistent-lang' not found`)
       }
-      return highlighter.loadLanguage(lang)
+      return highlighter.loadLanguage(...langs)
     },
   }
 
@@ -173,17 +174,18 @@ it('lazy loading error handling with onError callback', async () => {
   // Create a mock highlighter that fails to load a specific language
   const mockHighlighter = {
     ...highlighter,
-    loadLanguage: async (lang: string) => {
+    loadLanguage: async (...langs: Parameters<typeof highlighter.loadLanguage>) => {
+      const lang = langs[0] as string
       if (lang === 'failing-lang') {
         throw new Error(`Language 'failing-lang' not found`)
       }
-      return highlighter.loadLanguage(lang)
+      return highlighter.loadLanguage(...langs)
     },
   }
 
   const markdown = '```failing-lang\nconst x = 1\n```'
 
-  const file = await unified()
+  await unified()
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeShikiFromHighlighter, mockHighlighter, {
@@ -208,11 +210,12 @@ it('lazy loading error handling throws when no fallback or onError', async () =>
   // Create a mock highlighter that fails to load a specific language
   const mockHighlighter = {
     ...highlighter,
-    loadLanguage: async (lang: string) => {
+    loadLanguage: async (...langs: Parameters<typeof highlighter.loadLanguage>) => {
+      const lang = langs[0] as string
       if (lang === 'error-lang') {
         throw new Error(`Language 'error-lang' not found`)
       }
-      return highlighter.loadLanguage(lang)
+      return highlighter.loadLanguage(...langs)
     },
   }
 
