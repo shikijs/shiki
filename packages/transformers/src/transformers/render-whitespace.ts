@@ -17,6 +17,13 @@ export interface TransformerRenderWhitespaceOptions {
   classSpace?: string
 
   /**
+   * Class for newline
+   *
+   * @default undefined
+   */
+  classNewline?: string
+
+  /**
    * Position of rendered whitespace
    * @default all position
    */
@@ -44,9 +51,20 @@ export function transformerRenderWhitespace(
     root(root) {
       const pre = root.children[0] as Element
       const code = pre.tagName === 'pre' ? pre.children[0] as Element : { children: [root] }
-      code.children.forEach((line) => {
+      code.children.forEach((line, idx) => {
         if (line.type !== 'element' && line.type !== 'root')
           return
+
+        const lastLine = idx === code.children.length - 1
+        if (options.classNewline && !lastLine) {
+          line.children.push({
+            type: 'element',
+            tagName: 'span',
+            properties: { class: options.classNewline },
+            children: [{ type: 'text', value: '\n' }],
+          })
+        }
+
         const elements = line.children.filter(token => token.type === 'element')
         const last = elements.length - 1
         line.children = line.children.flatMap((token) => {
