@@ -1,9 +1,9 @@
 /* eslint-disable node/prefer-global/process */
 import type { ShikiTransformer } from 'shiki'
+import type { ModuleResolutionKind } from 'typescript'
 import type { VitePressPluginTwoslashOptions } from './types'
 import { createTransformerFactory } from '@shikijs/twoslash/core'
-import { removeTwoslashNotations } from 'twoslash'
-import { createTwoslasher } from 'twoslash-vue'
+import { createTwoslasher, removeTwoslashNotations } from 'twoslash'
 import { rendererFloatingVue } from './renderer-floating-vue'
 
 export * from './renderer-floating-vue'
@@ -32,7 +32,13 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   }
 
   const twoslash = createTransformerFactory(
-    createTwoslasher(options.twoslashOptions),
+    createTwoslasher({
+      ...options.twoslashOptions,
+      compilerOptions: {
+        moduleResolution: 100 satisfies ModuleResolutionKind.Bundler,
+        ...options.twoslashOptions?.compilerOptions,
+      },
+    }),
   )({
     langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
     renderer: rendererFloatingVue(options),
