@@ -1,7 +1,7 @@
 import Shiki from '@shikijs/markdown-it'
 import { transformerMetaHighlight } from '@shikijs/transformers'
 import { rendererRich, transformerTwoslash } from '@shikijs/twoslash'
-import MarkdownIt from 'markdown-it'
+import MarkdownIt from 'markdown-it-ts'
 import { describe, expect, it } from 'vitest'
 
 const styleTag = `
@@ -23,7 +23,7 @@ html:not(.dark) .shiki span {
 </style>
 `
 
-describe('markdown-it', () => {
+describe('markdown-it-ts', () => {
   it('works', async () => {
     const md = MarkdownIt()
 
