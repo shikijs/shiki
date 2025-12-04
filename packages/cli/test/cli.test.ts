@@ -143,4 +143,21 @@ describe('run', () => {
 
     vi.unstubAllGlobals()
   })
+
+  it('--theme option', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('console.log("hello")'),
+    }))
+
+    const output: string[] = []
+    await run(['node', 'shiki', '--format', 'html', '--theme', 'min-light', 'https://example.com/code.js'], msg => output.push(msg))
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('<pre class="shiki min-light"')
+    expect(output[0]).toContain('style="background-color:#ffffff;color:#24292eff"')
+    expect(output[0]).toContain('console')
+
+    vi.unstubAllGlobals()
+  })
 })
