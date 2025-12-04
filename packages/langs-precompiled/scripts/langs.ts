@@ -6,6 +6,7 @@ import { precompileGrammar } from './precompile'
 export async function prepareLangs() {
   const resolvedLangs = await loadLangs()
   const exportedFileNames: string[] = []
+  const unsupportedLangs: string[] = []
 
   for (const json of resolvedLangs) {
     const deps: string[] = json.embeddedLangs || []
@@ -21,6 +22,7 @@ export async function prepareLangs() {
     }
     catch (e) {
       console.error(`Failed to precompile ${json.name}: ${e}`)
+      unsupportedLangs.push(json.name)
     }
 
     await fs.writeFile(
@@ -103,6 +105,26 @@ export const languageAliasNames: string[]
     ),
   }
   await fs.writeFile('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`, 'utf-8')
+
+  // Update README with unsupported languages
+  await updateReadme(unsupportedLangs)
+}
+
+async function updateReadme(unsupportedLangs: string[]) {
+  const readmePath = './README.md'
+  let readme = await fs.readFile(readmePath, 'utf-8')
+
+  const unsupportedSection = unsupportedLangs.length > 0
+    ? unsupportedLangs.map(lang => `- \`${lang}\``).join('\n')
+    : '_None currently_'
+
+  // Replace the TODO comment with the actual list
+  readme = readme.replace(
+    /## Unsupported Languages\n\n<!-- TODOs -->/,
+    `## Unsupported Languages\n\nThe following languages cannot be precompiled due to grammar limitations:\n\n${unsupportedSection}`,
+  )
+
+  await fs.writeFile(readmePath, readme, 'utf-8')
 }
 
 function isInvalidFilename(filename: string) {

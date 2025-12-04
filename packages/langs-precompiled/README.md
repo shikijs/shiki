@@ -8,7 +8,9 @@ Requires ES2024+ environment.
 
 ## Unsupported Languages
 
-<!-- TODOs -->
+The following languages cannot be precompiled due to grammar limitations:
+
+_None currently_
 
 ## License
 
