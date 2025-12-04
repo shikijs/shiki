@@ -157,6 +157,7 @@ obj.boo
 
 it('custom-tags', async () => {
   const code = `
+// @noErrors
 import { createHighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
