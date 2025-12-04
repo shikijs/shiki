@@ -112,14 +112,7 @@ export class Registry extends TextMateRegistry {
         this._loadedLanguagesCache = null
         this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
         this._syncRegistry?._grammars?.delete(e.scopeName)
-
-        const lang = this._langMap.get(e.name)
-        if (!lang) {
-          throw new ShikiError(
-            `Language "${e.name}" not found in language map during lazy reload`,
-          )
-        }
-        this.loadLanguage(lang)
+        this.loadLanguage(this._langMap.get(e.name)!)
       }
     }
   }
