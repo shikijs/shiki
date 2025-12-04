@@ -544,3 +544,45 @@ CSS output:
   --shiki-light-bg: #ffffff;
 }
 ```
+
+### `transformerRemoveComments`
+
+Remove comments from the code. It works by checking the internal grammar token metadata to determine if the token is a comment.
+
+This transformer requires `includeExplanation: true` to work.
+
+```ts
+import { transformerRemoveComments } from '@shikijs/transformers'
+
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  includeExplanation: true, // [!code highlight]
+  transformers: [
+    transformerRemoveComments(), // [!code highlight]
+  ],
+})
+```
+
+Options:
+
+- `removeEmptyLines`: Remove lines that become empty after removing comments. Default `true`.
+
+For example:
+
+````md
+```js
+// This is a comment
+const x = 1 // Inline comment
+/* Block comment */
+const y = 2
+
+// Another comment
+```
+````
+
+Will renders:
+
+```js
+const x = 1
+const y = 2
+```

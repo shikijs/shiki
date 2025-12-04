@@ -16,6 +16,7 @@ describe('explicitTrigger', async () => {
     ['foo colorize-brackets bar'],
     ['colorize-brackets bar'],
   ]
+
   it.each(validMetaStrings)('should colorize brackets for meta string "%s"', (meta) => {
     const code = 'let values: number[] = [1, 2, 3];'
     expect(

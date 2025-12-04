@@ -4,7 +4,7 @@ import { transformerNotationDiff, transformerNotationFocus, transformerNotationH
 
 describe('multi-token comment support', () => {
   it('transformerNotationDiff works with rose-pine theme (multi-token comments)', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -25,7 +25,7 @@ describe('multi-token comment support', () => {
   })
 
   it('transformerNotationDiff still works with dracula theme (single-token comments)', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['dracula'],
       langs: ['javascript'],
     })
@@ -46,7 +46,7 @@ describe('multi-token comment support', () => {
   })
 
   it('transformerNotationDiff works with rose-pine theme for add notation', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -65,7 +65,7 @@ describe('multi-token comment support', () => {
   })
 
   it('transformerNotationHighlight works with rose-pine theme', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -83,7 +83,7 @@ describe('multi-token comment support', () => {
   })
 
   it('transformerNotationFocus works with rose-pine theme', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -101,7 +101,7 @@ describe('multi-token comment support', () => {
   })
 
   it('handles multi-line code with mixed single and multi-token comments', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -124,7 +124,7 @@ const c = 3 // [!code highlight]`
   })
 
   it('handles edge case where comment does not match pattern', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -145,7 +145,7 @@ const c = 3 // [!code highlight]`
   })
 
   it('handles single token without multi-token fallback', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -163,7 +163,7 @@ const c = 3 // [!code highlight]`
   })
 
   it('handles JSX parsing without notation', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['jsx'],
     })
@@ -181,7 +181,7 @@ const c = 3 // [!code highlight]`
   })
 
   it('handles v1 match algorithm', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })
@@ -200,7 +200,7 @@ const c = 3 // [!code highlight]`
   })
 
   it('handles actual multi-token comment scenario from rose-pine theme', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       themes: ['rose-pine'],
       langs: ['javascript'],
     })

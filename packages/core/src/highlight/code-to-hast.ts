@@ -76,7 +76,9 @@ export function codeToHast(
       fg,
       bg,
       themeName,
-      rootStyle,
+      rootStyle: options.rootStyle === false
+        ? false
+        : options.rootStyle ?? rootStyle,
     },
     contextSource,
     grammarState,
@@ -102,24 +104,29 @@ export function tokensToHast(
     tabindex = '0',
   } = options
 
+  const properties: Element['properties'] = {
+    class: `shiki ${options.themeName || ''}`,
+  }
+
+  if (options.rootStyle !== false) {
+    if (options.rootStyle != null)
+      properties.style = options.rootStyle
+    else
+      properties.style = `background-color:${options.bg};color:${options.fg}`
+  }
+
+  if (tabindex !== false && tabindex != null)
+    properties.tabindex = tabindex.toString()
+
+  for (const [key, value] of Object.entries(options.meta || {})) {
+    if (!key.startsWith('_'))
+      properties[key] = value
+  }
+
   let preNode: Element = {
     type: 'element',
     tagName: 'pre',
-    properties: {
-      class: `shiki ${options.themeName || ''}`,
-      style: options.rootStyle || `background-color:${options.bg};color:${options.fg}`,
-      ...(tabindex !== false && tabindex != null)
-        ? {
-            tabindex: tabindex.toString(),
-          }
-        : {},
-      ...Object.fromEntries(
-        Array.from(
-          Object.entries(options.meta || {}),
-        )
-          .filter(([key]) => !key.startsWith('_')),
-      ),
-    },
+    properties,
     children: [],
   }
 

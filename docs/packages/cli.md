@@ -68,6 +68,15 @@ Language is auto-inferred from the file extension. You can override it with `--l
 npx @shikijs/cli src/index.js --lang=ts
 ```
 
+### `--format`
+
+Specify the output format. Defaults to `ansi`.
+Supported values: `ansi`, `html`.
+
+```bash
+npx @shikijs/cli README.md --format=html
+```
+
 ## Node.js API
 
 The `@shikijs/cli` package also provides a Node.js API.
