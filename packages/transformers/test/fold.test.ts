@@ -1,6 +1,6 @@
 import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import { transformerNotationFold } from '../src/transformers/notation-fold'
+import { transformerNotationFold } from '../src'
 
 describe('transformerNotationFold', () => {
   it('shiki', async () => {
