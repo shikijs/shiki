@@ -1,8 +1,9 @@
 import type { ShikiTransformer, TransformerOptions } from '@shikijs/types'
 import { transformerDecorations } from '../transformer-decorations'
-
+import { transformerPlaintextDiff } from './transformer-plaintext-diff'
 const builtInTransformers: ShikiTransformer[] = [
   /* @__PURE__ */ transformerDecorations(),
+  /* @__PURE__ */ transformerPlaintextDiff()
 ]
 
 export function getTransformers(options: TransformerOptions): ShikiTransformer[] {
