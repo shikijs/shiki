@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+import { useThrottleFn } from '@vueuse/core'
 import FloatingVue, { recomputeAllPoppers } from 'floating-vue'
 
 const isMobile = typeof navigator !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -14,10 +15,12 @@ const TwoslashFloatingVue = {
   install: (app: App, options: FloatingVueConfig = {}) => {
     if (typeof window !== 'undefined') {
       // Recompute poppers when clicking on a tab
-      window.addEventListener('vitepress:codeGroupTabActivate', async (e) => {
-        if (e instanceof CustomEvent) {
-          recomputeAllPoppers()
-        }
+      const recomputePoppers = useThrottleFn(() => recomputeAllPoppers(), 100)
+      window.addEventListener('vitepress:codeGroupTabActivate', recomputePoppers, { passive: true })
+      window.addEventListener('click', (e) => {
+        const path = e.composedPath()
+        if (path.some((el: any) => el?.classList?.contains?.('vp-code-group') || el?.classList?.contains?.('tabs')))
+          recomputePoppers()
       }, { passive: true })
 
       // On desktop where the poppers are shown on hover, make sure that they do
