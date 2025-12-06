@@ -16,6 +16,7 @@ export function getTransformers(options: TransformerOptions): ShikiTransformer[]
   ]
 }
 
+
 function sortTransformersByEnforcement(transformers: ShikiTransformer[]): {
   pre: ShikiTransformer[]
   post: ShikiTransformer[]
