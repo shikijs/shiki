@@ -14,6 +14,7 @@ const TwoslashFloatingVue = {
   install: (app: App, options: FloatingVueConfig = {}) => {
     if (typeof window !== 'undefined') {
       // Recompute poppers when clicking on a tab
+      window.addEventListener('vitepress:codeGroupTabActivate', recomputeAllPoppers, { passive: true })
       window.addEventListener('click', (e) => {
         const path = e.composedPath()
         if (path.some((el: any) => el?.classList?.contains?.('vp-code-group') || el?.classList?.contains?.('tabs')))
