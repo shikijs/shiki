@@ -80,7 +80,7 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    * <span style="color:#111;--shiki-dark:#fff;">code</span>
    * ```
    *
-   * @see https://github.com/shikijs/shiki#lightdark-dual-themes
+   * @see https://shiki.style/guide/dual-themes
    */
   themes: Partial<Record<string, ThemeRegistrationAny | StringLiteralUnion<Themes>>>
 
@@ -142,9 +142,19 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   extends
   TransformerOptions,
   DecorationOptions,
-  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode'> {
+  Pick<TokenizeWithThemeOptions, 'colorReplacements' | 'tokenizeMaxLineLength' | 'tokenizeTimeLimit' | 'grammarState' | 'grammarContextCode' | 'includeExplanation'> {
 
+  /**
+   * The grammar name for the code.
+   */
   lang: StringLiteralUnion<Languages | SpecialLanguage>
+
+  /**
+   * Custom style string to be applied to the root `<pre>` element.
+   *
+   * When set to `false`, no style will be applied.
+   */
+  rootStyle?: string | false
 
   /**
    * Merge whitespace tokens to saving extra `<span>`.

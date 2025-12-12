@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type { ShikiTransformer } from 'shiki'
+import type { CodeToHastOptions, ShikiTransformer } from 'shiki'
 import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import {
@@ -10,6 +10,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
   transformerNotationWordHighlight,
+  transformerRemoveComments,
   transformerRemoveLineBreak,
   transformerRemoveNotationEscape,
   transformerRenderWhitespace,
@@ -25,6 +26,7 @@ function suite(
   transformers: ShikiTransformer[],
   replace?: (code: string) => string,
   outputSuffix = '',
+  options: Partial<CodeToHastOptions> = {},
 ) {
   describe(name, () => {
     for (const path of Object.keys(files)) {
@@ -36,6 +38,7 @@ function suite(
         const ext = path.split('.').pop()!
 
         let code = await codeToHtml(files[path], {
+          ...options,
           lang: ext,
           theme: 'github-dark',
           transformers,
@@ -264,4 +267,21 @@ body { margin: 0; }
 .shiki { padding: 1em; }
 .line { display: block; width: 100%; height: 1.2em; }
 </style>`,
+)
+
+suite(
+  'remove-comments',
+  import.meta.glob('./fixtures/remove-comments/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRemoveComments(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1em; }
+.line { display: block; width: 100%; height: 1.2em; }
+</style>`,
+  undefined,
+  { includeExplanation: true },
 )

@@ -6,6 +6,11 @@
   "scripts": {
     "play": "vite"
   },
+  "dependencies": {
+    "@shikijs/monaco": "workspace:*",
+    "monaco-editor-core": "catalog:integrations",
+    "shiki": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "catalog:cli",
     "vite": "catalog:bundling"

@@ -82,6 +82,18 @@ export function createCommentNotationTransformer(
           comment.line.children.splice(comment.line.children.indexOf(comment.token) - 1, 3)
         }
         else if (isEmpty) {
+          // Handle multi-token comments
+          if (comment.additionalTokens) {
+            // Remove additional tokens first (in reverse order to maintain indices)
+            for (let j = comment.additionalTokens.length - 1; j >= 0; j--) {
+              const additionalToken = comment.additionalTokens[j]
+              const tokenIndex = comment.line.children.indexOf(additionalToken)
+              if (tokenIndex !== -1) {
+                comment.line.children.splice(tokenIndex, 1)
+              }
+            }
+          }
+          // Remove the main token
           comment.line.children.splice(comment.line.children.indexOf(comment.token), 1)
         }
         else {
@@ -89,6 +101,16 @@ export function createCommentNotationTransformer(
 
           if (head.type === 'text') {
             head.value = comment.info.join('')
+
+            // For multi-token comments, clear the additional tokens
+            if (comment.additionalTokens) {
+              for (const additionalToken of comment.additionalTokens) {
+                const additionalHead = additionalToken.children[0]
+                if (additionalHead?.type === 'text') {
+                  additionalHead.value = ''
+                }
+              }
+            }
           }
         }
       }

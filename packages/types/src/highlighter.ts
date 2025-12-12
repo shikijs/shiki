@@ -61,6 +61,10 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
   }
 
   /**
+   * Resolve a language alias
+   */
+  resolveLangAlias: (lang: string) => string
+  /**
    * Get the names of loaded languages
    *
    * Special-handled languages like `text`, `plain` and `ansi` are not included.
@@ -161,8 +165,15 @@ export type HighlighterCore = HighlighterGeneric<never, never>
 /**
  * Options for creating a bundled highlighter.
  */
-export interface CreatedBundledHighlighterOptions<BundledLangs extends string, BundledThemes extends string> {
+export interface CreateBundledHighlighterOptions<BundledLangs extends string, BundledThemes extends string> {
   langs: Record<BundledLangs, LanguageInput>
   themes: Record<BundledThemes, ThemeInput>
   engine: () => Awaitable<RegexEngine>
+}
+
+/**
+ * @deprecated Use `CreateBundledHighlighterOptions` instead.
+ */
+export interface CreatedBundledHighlighterOptions<BundledLangs extends string, BundledThemes extends string>
+  extends CreateBundledHighlighterOptions<BundledLangs, BundledThemes> {
 }
