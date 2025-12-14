@@ -1,3 +1,7 @@
+catalogMode: prefer
+shellEmulator: true
+trustPolicy: no-downgrade
+
 packages:
   - packages/*
   - packages/*/playground
@@ -12,32 +16,32 @@ catalogs:
     '@rollup/plugin-node-resolve': ^16.0.3
     '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^0.4.4
-    esbuild: ^0.25.12
+    esbuild: ^0.27.1
     rollup: ^4.53.3
     rollup-plugin-copy: ^3.5.0
     rollup-plugin-dts: ^6.3.0
     rollup-plugin-esbuild: ^6.2.1
     unbuild: ^3.6.1
-    vite: ^7.2.6
+    vite: ^7.2.7
     vite-tsconfig-paths: ^5.1.4
   cli:
-    '@antfu/eslint-config': ^6.3.0
+    '@antfu/eslint-config': ^6.7.0
     '@antfu/ni': ^28.0.0
     bumpp: ^10.3.2
-    eslint: ^9.39.1
-    eslint-plugin-format: ^1.0.2
+    eslint: ^9.39.2
+    eslint-plugin-format: ^1.1.0
     jiti: ^2.6.1
     lint-staged: ^16.2.7
     pinia: ^3.0.4
-    pnpm: ^10.24.0
+    pnpm: ^10.25.0
     prettier: ^3.7.4
     rimraf: ^6.1.2
     simple-git-hooks: ^2.13.1
     taze: ^19.9.2
     tsx: ^4.21.0
     typescript: ^5.9.3
-    vue-tsc: ^3.1.5
-    wrangler: ^4.51.0
+    vue-tsc: ^3.1.8
+    wrangler: ^4.54.0
   docs:
     '@unocss/reset': ^66.5.10
     '@vueuse/core': ^14.1.0
@@ -50,8 +54,8 @@ catalogs:
     vitepress-plugin-mermaid: ^2.0.17
     vue: ^3.5.25
   icons:
-    '@iconify-json/carbon': ^1.2.14
-    '@iconify-json/codicon': ^1.2.34
+    '@iconify-json/carbon': ^1.2.15
+    '@iconify-json/codicon': ^1.2.36
     '@iconify-json/ph': ^1.2.2
     '@iconify-json/svg-spinners': ^1.2.4
   inlined:
@@ -99,7 +103,7 @@ catalogs:
     '@types/js-yaml': ^4.0.9
     '@types/markdown-it': ^14.1.2
     '@types/mdast': ^4.0.4
-    '@types/node': ^24.10.1
+    '@types/node': ^24.10.4
     '@types/unist': ^3.0.3
 onlyBuiltDependencies:
   - esbuild
