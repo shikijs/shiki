@@ -16,6 +16,10 @@
   z-index: calc(var(--vp-z-index-local-nav) - 1);
 }
 
+.v-popper--theme-twoslash.v-popper__popper {
+  content-visibility: auto;
+}
+
 .v-popper--theme-twoslash .v-popper__inner {
   background: var(--twoslash-popup-bg);
   color: var(--twoslash-popup-color);
