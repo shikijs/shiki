@@ -36,6 +36,8 @@ function rehypeShikiFromHighlighter(
     code: string,
     metaString: string = '',
     meta: Record<string, unknown> = {},
+    data?: Record<string, unknown>,
+    properties?: Record<string, unknown>,
   ): Root | undefined {
     const cacheKey = `${lang}:${metaString}:${code}`
     const cachedValue = cache?.get(cacheKey)
@@ -52,6 +54,8 @@ function rehypeShikiFromHighlighter(
         ...meta,
         __raw: metaString,
       },
+      data,
+      properties,
     }
 
     if (addLanguageClass) {
@@ -132,7 +136,7 @@ function rehypeShikiFromHighlighter(
       const meta = parsed.meta ? parseMetaString?.(parsed.meta, node, tree) : undefined
 
       const processNode = (targetLang: string): void => {
-        const fragment = highlight(targetLang, parsed.code, parsed.meta, meta ?? {})
+        const fragment = highlight(targetLang, parsed.code, parsed.meta, meta ?? {}, parsed.data, parsed.properties)
         if (!fragment)
           return
 

@@ -193,6 +193,18 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    * @default 0
    */
   tabindex?: number | string | false
+
+  /**
+   * HAST data to be merged into the root element.
+   * Useful for passing metadata from remark/rehype processing.
+   */
+  data?: Record<string, unknown>
+
+  /**
+   * HAST properties to be merged into the root element.
+   * Useful for preserving original element properties from remark/rehype.
+   */
+  properties?: Record<string, unknown>
 }
 
 export interface CodeOptionsMeta {
