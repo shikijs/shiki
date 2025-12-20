@@ -73,6 +73,12 @@ export async function loadLangs() {
     onlyFiles: true,
   })
 
+  allLangFiles.push(...await fg('*.json', {
+    cwd: './grammars',
+    absolute: true,
+    onlyFiles: true,
+  }))
+
   allLangFiles.sort()
 
   const resolvedLangs: LanguageRegistration[] = []
@@ -81,6 +87,18 @@ export async function loadLangs() {
     const content = await fs.readJSON(file)
     const lang = grammars.find(i => i.name === content.name) || injections.find(i => i.name === content.name)
     if (!lang) {
+      if (content.name === 'gn') {
+        const json: LanguageRegistration = {
+          ...content,
+          name: 'gn',
+          scopeName: 'source.gn',
+          displayName: 'GN',
+          embeddedLangs: [],
+          aliases: [],
+        }
+        resolvedLangs.push(json)
+        continue
+      }
       console.warn(`unknown ${content.name}`)
       continue
     }
