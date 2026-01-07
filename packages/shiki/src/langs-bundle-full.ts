@@ -130,6 +130,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/c')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'c3',
+    'name': 'C3',
+    'import': (() => import('@shikijs/langs/c3')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'cadence',
     'name': 'Cadence',
     'aliases': [
@@ -432,6 +437,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'glsl',
     'name': 'GLSL',
     'import': (() => import('@shikijs/langs/glsl')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'gn',
+    'name': 'GN',
+    'import': (() => import('@shikijs/langs/gn')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'gnuplot',
@@ -742,6 +752,15 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'mojo',
     'name': 'Mojo',
     'import': (() => import('@shikijs/langs/mojo')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'moonbit',
+    'name': 'MoonBit',
+    'aliases': [
+      'mbt',
+      'mbti'
+    ],
+    'import': (() => import('@shikijs/langs/moonbit')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'move',
@@ -1398,6 +1417,7 @@ export type BundledLanguage =
   | 'c'
   | 'c#'
   | 'c++'
+  | 'c3'
   | 'cadence'
   | 'cairo'
   | 'cdc'
@@ -1473,6 +1493,7 @@ export type BundledLanguage =
   | 'glimmer-js'
   | 'glimmer-ts'
   | 'glsl'
+  | 'gn'
   | 'gnuplot'
   | 'go'
   | 'gql'
@@ -1535,6 +1556,8 @@ export type BundledLanguage =
   | 'markdown'
   | 'marko'
   | 'matlab'
+  | 'mbt'
+  | 'mbti'
   | 'md'
   | 'mdc'
   | 'mdx'
@@ -1545,6 +1568,7 @@ export type BundledLanguage =
   | 'mjs'
   | 'mmd'
   | 'mojo'
+  | 'moonbit'
   | 'move'
   | 'mts'
   | 'nar'
