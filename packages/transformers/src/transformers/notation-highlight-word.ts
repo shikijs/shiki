@@ -12,6 +12,10 @@ export interface TransformerNotationWordHighlightOptions extends MatchAlgorithmO
    * Class added to the root element when the code has highlighted words
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the code has highlighted words
+   */
+  classActiveCode?: string
 }
 
 export function transformerNotationWordHighlight(
@@ -20,6 +24,7 @@ export function transformerNotationWordHighlight(
   const {
     classActiveWord = 'highlighted-word',
     classActivePre = undefined,
+    classActiveCode = undefined,
   } = options
 
   return createCommentNotationTransformer(
@@ -36,6 +41,8 @@ export function transformerNotationWordHighlight(
 
       if (classActivePre)
         this.addClassToHast(this.pre, classActivePre)
+      if (classActiveCode)
+        this.addClassToHast(this.code, classActiveCode)
       return true
     },
     options.matchAlgorithm,
