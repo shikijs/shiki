@@ -380,11 +380,18 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'gdresource',
     'name': 'GDResource',
+    'aliases': [
+      'tscn',
+      'tres'
+    ],
     'import': (() => import('@shikijs/langs/gdresource')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'gdscript',
     'name': 'GDScript',
+    'aliases': [
+      'gd'
+    ],
     'import': (() => import('@shikijs/langs/gdscript')) as DynamicImportLanguageRegistration
   },
   {
@@ -825,6 +832,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/ocaml')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'odin',
+    'name': 'Odin',
+    'import': (() => import('@shikijs/langs/odin')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'openscad',
     'name': 'OpenSCAD',
     'aliases': [
@@ -996,6 +1008,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/riscv')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'ron',
+    'name': 'RON',
+    'import': (() => import('@shikijs/langs/ron')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'rosmsg',
     'name': 'ROS Interface',
     'import': (() => import('@shikijs/langs/rosmsg')) as DynamicImportLanguageRegistration
@@ -1134,6 +1151,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'styl'
     ],
     'import': (() => import('@shikijs/langs/stylus')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'surrealql',
+    'name': 'SurrealQL',
+    'aliases': [
+      'surql'
+    ],
+    'import': (() => import('@shikijs/langs/surrealql')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'svelte',
@@ -1481,6 +1506,7 @@ export type BundledLanguage =
   | 'fsharp'
   | 'fsl'
   | 'ftl'
+  | 'gd'
   | 'gdresource'
   | 'gdscript'
   | 'gdshader'
@@ -1584,6 +1610,7 @@ export type BundledLanguage =
   | 'objective-c'
   | 'objective-cpp'
   | 'ocaml'
+  | 'odin'
   | 'openscad'
   | 'pascal'
   | 'perl'
@@ -1624,6 +1651,7 @@ export type BundledLanguage =
   | 'regexp'
   | 'rel'
   | 'riscv'
+  | 'ron'
   | 'rosmsg'
   | 'rs'
   | 'rst'
@@ -1653,6 +1681,8 @@ export type BundledLanguage =
   | 'stata'
   | 'styl'
   | 'stylus'
+  | 'surql'
+  | 'surrealql'
   | 'svelte'
   | 'swift'
   | 'system-verilog'
@@ -1667,8 +1697,10 @@ export type BundledLanguage =
   | 'tf'
   | 'tfvars'
   | 'toml'
+  | 'tres'
   | 'ts'
   | 'ts-tags'
+  | 'tscn'
   | 'tsp'
   | 'tsv'
   | 'tsx'
