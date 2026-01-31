@@ -248,6 +248,7 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           ...this.options,
           meta: {},
           transformers: [],
+          decorations: [],
           lang,
           structure: content.trim().includes('\n') ? 'classic' : 'inline',
         },
@@ -309,14 +310,14 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
               },
               ...tag[1]
                 ? [
-                    <Element>{
-                      type: 'element',
-                      tagName: 'span',
-                      properties: {
-                        class: 'twoslash-popup-docs-tag-value',
-                      },
-                      children: renderMarkdownInline.call(this, tag[1], `tag:${tag[0]}`),
+                  <Element>{
+                    type: 'element',
+                    tagName: 'span',
+                    properties: {
+                      class: 'twoslash-popup-docs-tag-value',
                     },
+                    children: renderMarkdownInline.call(this, tag[1], `tag:${tag[0]}`),
+                  },
                   ]
                 : [],
             ],
