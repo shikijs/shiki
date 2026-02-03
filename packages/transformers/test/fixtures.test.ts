@@ -184,6 +184,16 @@ suite(
 )
 
 suite(
+  'whitespace:leading',
+  import.meta.glob('./fixtures/whitespace/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRenderWhitespace({ position: 'leading' }),
+  ],
+  code => `${code}${CSS_RENDER_WHITESPACE}`,
+  '.leading',
+)
+
+suite(
   'all',
   import.meta.glob('./fixtures/all/*.*', { query: '?raw', import: 'default', eager: true }),
   [
