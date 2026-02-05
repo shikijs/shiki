@@ -20,7 +20,7 @@ export interface TransformerRenderWhitespaceOptions {
    * Position of rendered whitespace
    * @default all position
    */
-  position?: 'all' | 'boundary' | 'trailing'
+  position?: 'all' | 'boundary' | 'trailing' | 'leading'
 }
 
 /**
@@ -57,6 +57,8 @@ export function transformerRenderWhitespace(
             return token
           if (position === 'trailing' && index !== last)
             return token
+          if (position === 'leading' && index !== 0)
+            return token
 
           const node = token.children[0]
           if (node.type !== 'text' || !node.value)
@@ -68,7 +70,7 @@ export function transformerRenderWhitespace(
             (position === 'boundary' && index === last && last !== 0)
               ? 'trailing'
               : position,
-            position !== 'trailing',
+            position !== 'trailing' && position !== 'leading',
           )
           if (parts.length <= 1)
             return token
