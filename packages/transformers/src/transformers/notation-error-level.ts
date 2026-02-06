@@ -24,6 +24,7 @@ export function transformerNotationErrorLevel(
     classMap = {
       error: ['highlighted', 'error'],
       warning: ['highlighted', 'warning'],
+      info: ['highlighted', 'info'],
     },
     classActivePre = 'has-highlighted',
     classActiveCode,
