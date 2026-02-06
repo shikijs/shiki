@@ -211,6 +211,43 @@ const z = 3`
     await expect(style + html)
       .toMatchFileSnapshot('./out/decorations/inline-multiline.html')
   })
+
+  it('should not throw on intersecting decorations with flatten mode', async () => {
+    const html = await codeToHtml(code, {
+      theme: 'vitesse-light',
+      lang: 'ts',
+      decorationsStyle: 'flatten',
+      decorations: [
+        // Deeply nested decorations that would cause problems in wrap mode
+        // These are fully nested (not intersecting)
+        {
+          start: { line: 3, character: 0 },
+          end: { line: 3, character: 20 },
+          properties: { class: 'highlighted' },
+        },
+        {
+          start: { line: 3, character: 2 },
+          end: { line: 3, character: 18 },
+          properties: { class: 'highlighted-body' },
+        },
+        {
+          start: { line: 3, character: 4 },
+          end: { line: 3, character: 16 },
+          properties: { class: 'highlighted-border' },
+        },
+        {
+          start: { line: 3, character: 6 },
+          end: { line: 3, character: 14 },
+          properties: { class: 'highlighted' },
+        },
+      ],
+    })
+
+    // Should not throw an error
+    expect(html).toBeTruthy()
+    await expect(style + html)
+      .toMatchFileSnapshot('./out/decorations/flatten.html')
+  })
 })
 
 describe('decorations errors', () => {
