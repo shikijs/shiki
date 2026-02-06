@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`transformerRenderLineNumber > basic 1`] = `
+"<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span class="line-number">1</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'hello'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span class="line-number">2</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'world'</span><span style="color:#E1E4E8">)</span></span></code></pre>"
+`;
+
+exports[`transformerRenderLineNumber > custom class 1`] = `"<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span class="my-line-number">1</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'hello'</span><span style="color:#E1E4E8">)</span></span></code></pre>"`;
+
+exports[`transformerRenderLineNumber > custom start number 1`] = `
+"<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span class="line-number">10</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'hello'</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span class="line-number">11</span><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">'world'</span><span style="color:#E1E4E8">)</span></span></code></pre>"
+`;
