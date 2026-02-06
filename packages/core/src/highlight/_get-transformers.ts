@@ -8,10 +8,10 @@ const builtInTransformers: ShikiTransformer[] = [
 export function getTransformers(options: TransformerOptions): ShikiTransformer[] {
   const transformers = sortTransformersByEnforcement(options.transformers || [])
   return [
+    ...builtInTransformers,
     ...transformers.pre,
     ...transformers.normal,
     ...transformers.post,
-    ...builtInTransformers,
   ]
 }
 
