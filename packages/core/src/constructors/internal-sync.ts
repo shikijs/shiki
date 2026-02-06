@@ -71,10 +71,10 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
   } {
     ensureNotDisposed()
     const theme = getTheme(name)
-    if (_lastTheme !== name) {
-      _registry.setTheme(theme)
-      _lastTheme = name
-    }
+    // Always set the theme to ensure the registry is in sync.
+    // The registry has its own cache so this is not too expensive.
+    _registry.setTheme(theme)
+    _lastTheme = name
     const colorMap = _registry.getColorMap()
     return {
       theme,
