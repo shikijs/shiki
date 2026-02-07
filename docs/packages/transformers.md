@@ -404,6 +404,37 @@ pre.shiki .indent::before {
 
 ---
 
+### `transformerRenderLineNumber`
+
+Render line numbers as individual spans, with class `line-number`.
+
+```ts
+import { transformerRenderLineNumber } from '@shikijs/transformers'
+
+const html = await codeToHtml(code, {
+  transformers: [
+    transformerRenderLineNumber(),
+  ],
+})
+```
+
+Options:
+
+- `start`: Start number. Default `1`.
+- `classLineNumber`: Class for line number. Default `'line-number'`.
+
+With some additional CSS rules, you can make it look like this:
+
+```css
+pre.shiki .line-number {
+  user-select: none;
+  opacity: 0.5;
+  margin-right: 1em;
+}
+```
+
+---
+
 ### `transformerMetaHighlight`
 
 Highlight lines based on the [meta string](/guide/transformers#meta) provided on the code snippet.
