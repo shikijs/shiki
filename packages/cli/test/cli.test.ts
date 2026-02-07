@@ -143,4 +143,22 @@ describe('run', () => {
 
     vi.unstubAllGlobals()
   })
+
+  it('--list-themes', async () => {
+    const output: string[] = []
+    await run(['node', 'shiki', '--list-themes'], msg => output.push(msg))
+
+    expect(output.length).toBeGreaterThan(0)
+    expect(output).toContain('vitesse-dark')
+    expect(output).toContain('nord')
+  })
+
+  it('--list-langs', async () => {
+    const output: string[] = []
+    await run(['node', 'shiki', '--list-langs'], msg => output.push(msg))
+
+    expect(output.length).toBeGreaterThan(0)
+    expect(output).toContain('javascript')
+    expect(output).toContain('python')
+  })
 })
