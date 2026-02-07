@@ -404,6 +404,35 @@ pre.shiki .indent::before {
 
 ---
 
+### `transformerMetaDiff`
+
+Mark lines as added or removed based on the meta string provided on the code snippet.
+
+````md
+```js {1+, 3-5-}
+console.log('added')
+console.log('kept')
+console.log('removed')
+console.log('removed')
+console.log('removed')
+```
+````
+
+Renders (with custom CSS rules):
+
+```js {1+, 3-5-}
+console.log('added')
+console.log('kept')
+console.log('removed')
+console.log('removed')
+console.log('removed')
+```
+
+- `1+` outputs: `<span class="line diff add">`
+- `3-5-` outputs: `<span class="line diff remove">`
+
+---
+
 ### `transformerMetaHighlight`
 
 Highlight lines based on the [meta string](/guide/transformers#meta) provided on the code snippet.
