@@ -47,11 +47,58 @@ export async function run(
     .option('--theme <theme>', 'Color theme to use', { default: 'vitesse-dark' })
     .option('--lang <lang>', 'Programming language')
     .option('--format <format>', 'Output format (ansi, html)', { default: 'ansi' })
+    .option('--list-themes', 'List all available themes')
+    .option('--list-langs', 'List all available languages')
     .help()
     .version(version)
 
   const { options, args } = cli.parse(argv)
+
+  if (options.listThemes) {
+    const { bundledThemes } = await import('shiki')
+    for (const theme of Object.keys(bundledThemes))
+      log(theme)
+    return
+  }
+
+  if (options.listLangs) {
+    const { bundledLanguages } = await import('shiki')
+    for (const lang of Object.keys(bundledLanguages))
+      log(lang)
+    return
+  }
+
   const files = args
+
+  if (files.length === 0) {
+    // If no files provided, verify if we are in a TTY environment
+    // If NOT in TTY (piped), read from stdin
+    // If in TTY, show help
+    if (!process.stdin.isTTY) {
+      const content = await new Promise<string>((resolve, reject) => {
+        let data = ''
+        process.stdin.on('data', chunk => data += chunk)
+        process.stdin.on('end', () => resolve(data))
+        process.stdin.on('error', reject)
+      })
+
+      const lang = options.lang || 'text'
+      if (options.format === 'html') {
+        const { codeToHtml } = await import('shiki')
+        log(await codeToHtml(content, {
+          lang: lang as BundledLanguage,
+          theme: options.theme,
+        }))
+      }
+      else {
+        log(await codeToANSI(content, lang as BundledLanguage, options.theme))
+      }
+      return
+    }
+
+    cli.outputHelp()
+    return
+  }
 
   const codes = await Promise.all(files.map(async (path) => {
     const { content, ext } = await readSource(path)
