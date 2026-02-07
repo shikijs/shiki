@@ -15,6 +15,8 @@ export interface TransformerRenderLineNumberOptions {
 
 /**
  * Render line number as separate tokens.
+ *
+ * @param options
  */
 export function transformerRenderLineNumber(
   options: TransformerRenderLineNumberOptions = {},
