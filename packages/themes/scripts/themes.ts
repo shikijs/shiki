@@ -17,7 +17,7 @@ export default Object.freeze(JSON.parse(${JSON.stringify(JSON.stringify(theme))}
       await fs.writeFile(
         `./dist/${t.name}.d.mts`,
         `import type { ThemeRegistration } from '@shikijs/core'
-const theme: ThemeRegistration
+declare const theme: ThemeRegistration
 export default theme
 `,
         'utf-8',
