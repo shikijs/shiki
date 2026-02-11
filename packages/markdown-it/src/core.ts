@@ -1,4 +1,4 @@
-import type MarkdownIt from 'markdown-it'
+import type { MarkdownIt } from 'markdown-it-ts'
 import type {
   CodeToHastOptions,
   HighlighterGeneric,
@@ -27,7 +27,7 @@ export function setupMarkdownIt(
     if (fallbackLanguage && !langs.includes(lang)) {
       lang = fallbackLanguage as string
     }
-    const meta = parseMetaString?.(attrs, code, lang) || {}
+    const meta = parseMetaString?.(attrs!, code, lang) || {}
     const codeOptions: CodeToHastOptions = {
       ...options,
       lang,
