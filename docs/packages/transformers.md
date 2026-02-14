@@ -314,6 +314,22 @@ console.log('Info') // [\!code info]
 - Outputs: `<span class="line highlighted info">` for info
 - The outer `<pre>` tag is modified: `<pre class="has-highlighted">`
 
+You can also provide a message to be displayed:
+
+````md
+```ts
+console.error('Error') // [\!code error:This is an error message]
+```
+````
+
+Renders:
+
+```ts
+console.error('Error') // [!code error:This is an error message]
+```
+
+- Outputs: `<span class="line highlighted error" data-error="This is an error message">`
+
 With some additional CSS rules, you can make it look like this:
 
 ```ts
