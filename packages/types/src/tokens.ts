@@ -242,7 +242,7 @@ export interface TokensResult {
    * Custom style string to be applied to the root `<pre>` element.
    * When specified, `fg` and `bg` will be ignored.
    */
-  rootStyle?: string
+  rootStyle?: string | false
 
   /**
    * The last grammar state of the code snippet.

@@ -127,4 +127,4 @@ const html = await codeToHtml(code, {
 })
 ```
 
-Note that you can only provide decorations in or before the `preprocess` hook. In later hooks, changes to the decorations arrary will be ignored.
+Note that you can only provide decorations in or before the `preprocess` hook. In later hooks, changes to the decorations array will be ignored.

@@ -166,4 +166,23 @@ describe('merge same style', () => {
 
     expect(html).toMatchInlineSnapshot(`"<pre class="shiki min-light" style="background-color:#ffffff;color:#24292eff" tabindex="0"><code><span class="line"><span style="color:#D32F2F" class="highlighted-word">name</span><span style="color:#D32F2F">:</span><span style="color:#22863A"> CI</span></span></code></pre>"`)
   })
+
+  it('supports data', async () => {
+    using shiki = await createHighlighter({
+      themes: ['vitesse-light'],
+      langs: ['javascript'],
+    })
+
+    const hast = shiki.codeToHast('console.log', {
+      lang: 'js',
+      theme: 'vitesse-light',
+      data: {
+        meta: 'foo="bar"',
+      },
+    })
+
+    expect((hast.children[0] as any).data).toEqual({
+      meta: 'foo="bar"',
+    })
+  })
 })

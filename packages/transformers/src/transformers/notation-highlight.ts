@@ -11,6 +11,10 @@ export interface TransformerNotationHighlightOptions extends MatchAlgorithmOptio
    * Class added to the root element when the code has highlighted lines
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the code has highlighted lines
+   */
+  classActiveCode?: string
 }
 
 /**
@@ -22,6 +26,7 @@ export function transformerNotationHighlight(
   const {
     classActiveLine = 'highlighted',
     classActivePre = 'has-highlighted',
+    classActiveCode,
   } = options
 
   return transformerNotationMap(
@@ -31,6 +36,7 @@ export function transformerNotationHighlight(
         hl: classActiveLine,
       },
       classActivePre,
+      classActiveCode,
       matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-highlight',

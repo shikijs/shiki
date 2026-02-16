@@ -11,6 +11,10 @@ export interface TransformerNotationFocusOptions extends MatchAlgorithmOptions {
    * Class added to the root element when the code has focused lines
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the code has focused lines
+   */
+  classActiveCode?: string
 }
 
 /**
@@ -22,6 +26,7 @@ export function transformerNotationFocus(
   const {
     classActiveLine = 'focused',
     classActivePre = 'has-focused',
+    classActiveCode,
   } = options
 
   return transformerNotationMap(
@@ -30,6 +35,7 @@ export function transformerNotationFocus(
         focus: classActiveLine,
       },
       classActivePre,
+      classActiveCode,
       matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-focus',

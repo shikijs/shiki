@@ -7,9 +7,15 @@ Shiki in the command line.
 ## Usage
 
 The Shiki CLI works like `cat` command, but with syntax highlighting.
+It also supports remote files.
 
 ```bash
 npx @shikijs/cli README.md
+```
+
+```bash
+npx @shikijs/cli \
+  'https://github.com/shikijs/shiki/blob/main/taze.config.ts?raw=true'
 ```
 
 ## Install
@@ -60,6 +66,15 @@ Language is auto-inferred from the file extension. You can override it with `--l
 
 ```bash
 npx @shikijs/cli src/index.js --lang=ts
+```
+
+### `--format`
+
+Specify the output format. Defaults to `ansi`.
+Supported values: `ansi`, `html`.
+
+```bash
+npx @shikijs/cli README.md --format=html
 ```
 
 ## Node.js API

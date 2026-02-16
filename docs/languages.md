@@ -4,9 +4,12 @@
 
 Language grammars listed below are re-distributed via [`tm-grammars`](https://github.com/shikijs/textmate-grammars-themes/tree/main/packages/tm-grammars) into the `shiki` package.
 
+> [!NOTE]
+> Shiki does NOT control/maintain the grammars. If you want to contribute to the grammars, please refer to [`textmate-grammars-themes`](https://github.com/shikijs/textmate-grammars-themes#contribute).
+
 <LanguagesList />
 
-Grammars are covered by their repositories’ respective licenses, which are permissive (apache-2.0, mit, etc), and made available in [this NOTICE](https://github.com/shikijs/textmate-grammars-themes/blob/main/packages/tm-grammars/NOTICE).
+Grammars are covered by their repositories's respective licenses, which are permissive (apache-2.0, mit, etc), and made available in [this NOTICE](https://github.com/shikijs/textmate-grammars-themes/blob/main/packages/tm-grammars/NOTICE).
 
 For loading your custom languages, please reference to [this guide](/guide/load-lang).
 

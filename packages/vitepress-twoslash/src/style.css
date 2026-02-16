@@ -16,6 +16,10 @@
   z-index: calc(var(--vp-z-index-local-nav) - 1);
 }
 
+.v-popper--theme-twoslash.v-popper__popper {
+  content-visibility: auto;
+}
+
 .v-popper--theme-twoslash .v-popper__inner {
   background: var(--twoslash-popup-bg);
   color: var(--twoslash-popup-color);
@@ -34,7 +38,7 @@
   transform: translateY(1.5em);
 }
 
-.twoslash-query-presisted .twoslash-popup-container {
+.twoslash-query-persisted .twoslash-popup-container {
   transform: translateY(1.8em);
 }
 

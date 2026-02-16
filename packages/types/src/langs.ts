@@ -1,7 +1,7 @@
 import type { RawGrammar } from './textmate'
 import type { MaybeArray, MaybeGetter } from './utils'
 
-export type PlainTextLanguage = 'text' | 'plaintext' | 'txt'
+export type PlainTextLanguage = 'text' | 'plaintext' | 'txt' | 'plain'
 export type AnsiLanguage = 'ansi'
 export type SpecialLanguage = PlainTextLanguage | AnsiLanguage
 
@@ -20,6 +20,7 @@ export interface LanguageRegistration extends RawGrammar {
    * languages for each parent language.
    */
   embeddedLangs?: string[]
+  embeddedLanguages?: string[] // for VS code
   /**
    * A list of languages that embed the current language.
    * Unlike `embeddedLangs`, the embedded languages will not be loaded automatically.

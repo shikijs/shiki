@@ -34,9 +34,10 @@ export function codeToTokensBase(
   options: CodeToTokensBaseOptions = {},
 ): ThemedToken[][] {
   const {
-    lang = 'text',
     theme: themeName = internal.getLoadedThemes()[0],
   } = options
+
+  const lang = internal.resolveLangAlias(options.lang || 'text')
 
   if (isPlainLang(lang) || isNoneTheme(themeName))
     return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
@@ -46,7 +47,7 @@ export function codeToTokensBase(
   if (lang === 'ansi')
     return tokenizeAnsiWithTheme(theme, code, options)
 
-  const _grammar = internal.getLanguage(lang)
+  const _grammar = internal.getLanguage(options.lang || 'text')
 
   if (options.grammarState) {
     if (options.grammarState.lang !== _grammar.name) {
@@ -112,7 +113,7 @@ export function tokenizeWithTheme(
   const result = _tokenizeWithTheme(code, grammar, theme, colorMap, options)
 
   const grammarState = new GrammarStateImpl(
-    _tokenizeWithTheme(code, grammar, theme, colorMap, options).stateStack,
+    result.stateStack,
     grammar.name,
     theme.name,
   )

@@ -8,6 +8,10 @@ export interface TransformerNotationErrorLevelOptions extends MatchAlgorithmOpti
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the current code has diff
+   */
+  classActiveCode?: string
 }
 
 /**
@@ -20,14 +24,17 @@ export function transformerNotationErrorLevel(
     classMap = {
       error: ['highlighted', 'error'],
       warning: ['highlighted', 'warning'],
+      info: ['highlighted', 'info'],
     },
     classActivePre = 'has-highlighted',
+    classActiveCode,
   } = options
 
   return transformerNotationMap(
     {
       classMap,
       classActivePre,
+      classActiveCode,
       matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-error-level',

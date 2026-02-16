@@ -104,23 +104,6 @@ const file = await unified()
 
 ## Features
 
-### Line Highlight
-
-::: warning
-This is deprecated. It's disabled by default in `v0.10.0` and will be removed in the next minor. Consider use [`transformerNotationHighlight`](https://shiki.style/packages/transformers#transformernotationhighlight) instead.
-:::
-
-In addition to the features of `shiki`, this plugin also supports line highlighting. You can specify line numbers to highlight after the language name in the format `{<line-numbers>}` - a comma separated list of `<line-number>`s, wrapped in curly braces. Each line number can be a single number (e.g. `{2}` highlights line 2 and `{1,4}` highlights lines 1 and 4) or a range (e.g. `{1-7}` highlights lines 1 through 7, and `{1-3,5-6}` highlights lines 1 through 3 and 5 through 6). For example:
-
-````md
-```js {1,3-4}
-console.log('1') // highlighted
-console.log('2')
-console.log('3') // highlighted
-console.log('4') // highlighted
-```
-````
-
 ### Inline Code
 
 You can also highlight inline codes with the `inline` option.
@@ -156,4 +139,57 @@ Then you can use inline code in markdown:
 
 ```md
 This code `console.log("Hello World"){:js}` will be highlighted.
+```
+
+## Postprocess Transformers
+
+::: info
+The `postprocess` transformer hook is only invoked when producing HTML strings (i.e., when using `codeToHtml`). Since `@shikijs/rehype` operates on HAST (Hypertext Abstract Syntax Tree) rather than HTML strings, postprocess transformers will not be executed.
+:::
+
+This design is intentional: running `postprocess` hooks in rehype would require converting HAST → HTML → running postprocess → parsing back to HAST, which changes the semantics and could surprise users expecting HAST-only transformers.
+
+### Workaround for HTML-based Postprocessing
+
+If you need to run HTML-based postprocessing with rehype, you can apply a `root` transformer that:
+
+1. Converts the HAST fragment to HTML using `hast-util-to-html`
+2. Runs your HTML transformers
+3. Converts back to HAST using `hast-util-from-html`
+
+Example:
+
+```ts
+import { fromHtml } from 'hast-util-from-html'
+import { toHtml } from 'hast-util-to-html'
+
+const file = await unified()
+  .use(remarkParse)
+  .use(remarkRehype)
+  .use(rehypeShiki, {
+    themes: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+    transformers: [
+      {
+        name: 'custom-html-postprocessor',
+        root(node) {
+          // Convert HAST to HTML
+          const html = toHtml(node)
+
+          // Apply your HTML transformations
+          const processedHtml = myCustomPostprocess(html)
+
+          // Parse back to HAST
+          const newNode = fromHtml(processedHtml, { fragment: true })
+
+          // Replace the node
+          return newNode
+        }
+      }
+    ]
+  })
+  .use(rehypeStringify)
+  .process(await fs.readFile('./input.md'))
 ```

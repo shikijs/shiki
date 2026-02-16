@@ -37,9 +37,12 @@ async function run() {
   await fs.rm(new URL('./compares', import.meta.url), { recursive: true, force: true })
 
   for (const lang of Object.keys(bundledLanguages)) {
-    const sample = await fs
+    const sample = (await fs
       .readFile(`../tm-grammars-themes/samples/${lang}.sample`, 'utf-8')
-      .catch(() => '')
+      .catch(() => ''))
+    || (await fs
+      .readFile(`../textmate-grammars-themes/samples/${lang}.sample`, 'utf-8')
+      .catch(() => ''))
 
     if (!sample) {
       console.log(c.dim`[${lang}] Sample not found`)

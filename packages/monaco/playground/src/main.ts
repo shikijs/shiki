@@ -20,7 +20,7 @@ monaco.languages.register({ id: 'vue' })
 monaco.languages.register({ id: 'typescript' })
 monaco.languages.register({ id: 'javascript' })
 
-// Register the themes from Shiki, and provide syntax highlighting for Monaco. // [!code highlight:2]
+// Register the themes from Shiki, and provide syntax highlighting for Monaco.
 shikiToMonaco(highlighter, monaco)
 
 // Create the editor

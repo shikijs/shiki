@@ -1,4 +1,4 @@
-import type { CodeToHastOptions, ShikiTransformerContext, ShikiTransformerContextMeta } from '@shikijs/types'
+import type { CodeToHastOptions, ShikiTransformerContext, ShikiTransformerContextCommon, ShikiTransformerContextMeta } from '@shikijs/types'
 import type { Element, ElementContent, Text } from 'hast'
 import type {
   NodeCompletion,
@@ -76,7 +76,7 @@ export interface TransformerTwoslashOptions {
    * Custom filter function to apply this transformer to
    * When specified, `langs`, `explicitTrigger`, and `disableTriggers` will be ignored
    */
-  filter?: (lang: string, code: string, options: CodeToHastOptions) => boolean
+  filter?: (lang: string, code: string, options: CodeToHastOptions, context?: ShikiTransformerContextCommon) => boolean
   /**
    * Custom instance of twoslasher function
    */

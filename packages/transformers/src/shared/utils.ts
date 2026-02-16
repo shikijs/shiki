@@ -37,14 +37,14 @@ export function separateContinuousSpaces(inputs: string[]): string[] {
 
 export function splitSpaces(
   parts: string[],
-  type: 'all' | 'boundary' | 'trailing',
+  type: 'all' | 'boundary' | 'trailing' | 'leading',
   renderContinuousSpaces = true,
 ): string[] {
   if (type === 'all')
     return parts
   let leftCount = 0
   let rightCount = 0
-  if (type === 'boundary') {
+  if (type === 'boundary' || type === 'leading') {
     for (let i = 0; i < parts.length; i++) {
       if (isSpace(parts[i]))
         leftCount++

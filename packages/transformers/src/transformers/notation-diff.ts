@@ -15,6 +15,10 @@ export interface TransformerNotationDiffOptions extends MatchAlgorithmOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the current code has diff
+   */
+  classActiveCode?: string
 }
 
 /**
@@ -27,6 +31,7 @@ export function transformerNotationDiff(
     classLineAdd = 'diff add',
     classLineRemove = 'diff remove',
     classActivePre = 'has-diff',
+    classActiveCode,
   } = options
 
   return transformerNotationMap(
@@ -36,6 +41,7 @@ export function transformerNotationDiff(
         '--': classLineRemove,
       },
       classActivePre,
+      classActiveCode,
       matchAlgorithm: options.matchAlgorithm,
     },
     '@shikijs/transformers:notation-diff',

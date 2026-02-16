@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 describe('should', async () => {
   it('astro syntax highlighting', async () => {
-    const highlighter = await createHighlighter({
+    using highlighter = await createHighlighter({
       langs: ['astro'],
       themes: ['vitesse-dark'],
     })

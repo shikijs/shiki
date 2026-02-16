@@ -86,7 +86,7 @@ Check the [RegExp Engines](/guide/regex-engines) guide for more details.
 
 ## Use Workers
 
-Shiki hightlights code using regular expressions, which can be CPU-intensive. You can offload the highlighting work to a Web Worker/Node Worker to avoid blocking the main thread.
+Shiki highlights code using regular expressions, which can be CPU-intensive. You can offload the highlighting work to a Web Worker/Node Worker to avoid blocking the main thread.
 
 ::: info
 

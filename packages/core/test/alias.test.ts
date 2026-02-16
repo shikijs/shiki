@@ -3,7 +3,7 @@ import { createHighlighter } from 'shiki'
 import { it } from 'vitest'
 
 it('langAlias', async () => {
-  const highlighter = await createHighlighter({
+  using highlighter = await createHighlighter({
     langs: ['javascript'],
     langAlias: {
       mylang: 'javascript',

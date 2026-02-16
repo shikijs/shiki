@@ -8,6 +8,7 @@ import type { IGrammarConfiguration, IRawTheme } from '@shikijs/vscode-textmate'
 import type { Resolver } from './resolver'
 import { Registry as TextMateRegistry, Theme as TextMateTheme } from '@shikijs/vscode-textmate'
 import { ShikiError } from '../../../types/src/error'
+import { resolveLangAlias } from '../constructors/_alias'
 import { normalizeTheme } from './normalize-theme'
 
 export class Registry extends TextMateRegistry {
@@ -71,15 +72,7 @@ export class Registry extends TextMateRegistry {
   }
 
   public getGrammar(name: string): Grammar | undefined {
-    if (this._alias[name]) {
-      const resolved = new Set<string>([name])
-      while (this._alias[name]) {
-        name = this._alias[name]
-        if (resolved.has(name))
-          throw new ShikiError(`Circular alias \`${Array.from(resolved).join(' -> ')} -> ${name}\``)
-        resolved.add(name)
-      }
-    }
+    name = resolveLangAlias(name, this._alias)
     return this._resolvedGrammars.get(name)
   }
 
@@ -142,7 +135,12 @@ export class Registry extends TextMateRegistry {
     const missingLangs = langsGraphArray.filter(([_, lang]) => !lang)
     if (missingLangs.length) {
       const dependents = langsGraphArray
-        .filter(([_, lang]) => lang && lang.embeddedLangs?.some(l => missingLangs.map(([name]) => name).includes(l)))
+        .filter(([_, lang]) => {
+          if (!lang)
+            return false
+          const embedded = lang.embeddedLanguages || lang.embeddedLangs
+          return embedded?.some(l => missingLangs.map(([name]) => name).includes(l))
+        })
         .filter(lang => !missingLangs.includes(lang))
       throw new ShikiError(`Missing languages ${missingLangs.map(([name]) => `\`${name}\``).join(', ')}, required by ${dependents.map(([name]) => `\`${name}\``).join(', ')}`)
     }
@@ -166,8 +164,9 @@ export class Registry extends TextMateRegistry {
   private resolveEmbeddedLanguages(lang: LanguageRegistration): void {
     this._langMap.set(lang.name, lang)
     this._langGraph.set(lang.name, lang)
-    if (lang.embeddedLangs) {
-      for (const embeddedLang of lang.embeddedLangs)
+    const embedded = lang.embeddedLanguages ?? lang.embeddedLangs
+    if (embedded) {
+      for (const embeddedLang of embedded)
         this._langGraph.set(embeddedLang, this._langMap.get(embeddedLang)!)
     }
   }

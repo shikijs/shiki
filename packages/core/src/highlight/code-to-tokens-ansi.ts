@@ -100,26 +100,39 @@ export function tokenizeAnsiWithTheme(
  * Adds 50% alpha to a hex color string or the "-dim" postfix to a CSS variable
  */
 function dimColor(color: string): string {
-  const hexMatch = color.match(/#([0-9a-f]{3})([0-9a-f]{3})?([0-9a-f]{2})?/i)
+  const hexMatch = color.match(/#([0-9a-f]{3,8})/i)
   if (hexMatch) {
-    if (hexMatch[3]) {
-      // convert from #rrggbbaa to #rrggbb(aa/2)
+    const hex = hexMatch[1]
+    if (hex.length === 8) {
+      // #rrggbbaa -> #rrggbb(aa/2)
       const alpha = Math
-        .round(Number.parseInt(hexMatch[3], 16) / 2)
+        .round(Number.parseInt(hex.slice(6, 8), 16) / 2)
         .toString(16)
         .padStart(2, '0')
-      return `#${hexMatch[1]}${hexMatch[2]}${alpha}`
+      return `#${hex.slice(0, 6)}${alpha}`
     }
-    else if (hexMatch[2]) {
-      // convert from #rrggbb to #rrggbb80
-      return `#${hexMatch[1]}${hexMatch[2]}80`
+    else if (hex.length === 6) {
+      // #rrggbb -> #rrggbb80
+      return `#${hex}80`
     }
-    else {
-      // convert from #rgb to #rrggbb80
-      return `#${Array
-        .from(hexMatch[1])
-        .map(x => `${x}${x}`)
-        .join('')}80`
+    else if (hex.length === 4) {
+      // #rgba -> #rrggbb(aa/2)
+      const r = hex[0]
+      const g = hex[1]
+      const b = hex[2]
+      const a = hex[3]
+      const alpha = Math
+        .round(Number.parseInt(`${a}${a}`, 16) / 2)
+        .toString(16)
+        .padStart(2, '0')
+      return `#${r}${r}${g}${g}${b}${b}${alpha}`
+    }
+    else if (hex.length === 3) {
+      // #rgb -> #rrggbb80
+      const r = hex[0]
+      const g = hex[1]
+      const b = hex[2]
+      return `#${r}${r}${g}${g}${b}${b}80`
     }
   }
 

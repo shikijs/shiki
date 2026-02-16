@@ -20,7 +20,7 @@ console.log(html) // highlighted html string
 You can create your own shorthands with fine-grained bundles. Here is an example of creating shorthands with fine-grained bundles:
 
 ```ts
-import { createdBundledHighlighter, createSingletonShorthands } from 'shiki/core'
+import { createBundledHighlighter, createSingletonShorthands } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
 const BundledLanguage = {
@@ -35,7 +35,7 @@ const BundledTheme = {
 }
 
 // This creates your custom 'createHighlighter' function with fine-grained bundles
-export const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+export const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >({

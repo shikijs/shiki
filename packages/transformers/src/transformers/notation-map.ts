@@ -8,6 +8,10 @@ export interface TransformerNotationMapOptions extends MatchAlgorithmOptions {
    * Class added to the <pre> element when the current code has diff
    */
   classActivePre?: string
+  /**
+   * Class added to the <code> element when the current code has diff
+   */
+  classActiveCode?: string
 }
 
 function escapeRegExp(str: string): string {
@@ -21,6 +25,7 @@ export function transformerNotationMap(
   const {
     classMap = {},
     classActivePre = undefined,
+    classActiveCode = undefined,
   } = options
 
   return createCommentNotationTransformer(
@@ -35,6 +40,8 @@ export function transformerNotationMap(
 
       if (classActivePre)
         this.addClassToHast(this.pre, classActivePre)
+      if (classActiveCode)
+        this.addClassToHast(this.code, classActiveCode)
       return true
     },
     options.matchAlgorithm,

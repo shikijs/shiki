@@ -5,8 +5,8 @@ import type {
   HighlighterGeneric,
 } from '@shikijs/types'
 import {
+  createBundledHighlighter,
   createSingletonShorthands,
-  createdBundledHighlighter,
 } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
@@ -40,7 +40,7 @@ const bundledThemes = {
   'vitesse-dark': () => import('@shikijs/themes/vitesse-dark'),
 } as Record<BundledTheme, DynamicImportThemeRegistration>
 
-const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >({

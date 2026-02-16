@@ -63,14 +63,14 @@
   box-shadow: var(--twoslash-popup-shadow);
 }
 
-.twoslash .twoslash-query-presisted .twoslash-popup-container {
+.twoslash .twoslash-query-persisted .twoslash-popup-container {
   z-index: 9;
   transform: translateY(1.5em);
 }
 
 .twoslash .twoslash-hover:hover .twoslash-popup-container,
 .twoslash .twoslash-error-hover:hover .twoslash-popup-container,
-.twoslash .twoslash-query-presisted .twoslash-popup-container,
+.twoslash .twoslash-query-persisted .twoslash-popup-container,
 .twoslash .twoslash-query-line .twoslash-popup-container {
   opacity: 1;
   pointer-events: auto;
