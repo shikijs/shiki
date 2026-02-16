@@ -118,6 +118,7 @@ describe('coverage', () => {
     const scanner = new JavaScriptScanner([pattern], {
       regexConstructor: defaultJavaScriptRegexConstructor,
     })
-    expect(scanner.regexps[0][0]).toBe(regex)
+    expect(scanner.regexps[0][0]).toBeInstanceOf(RegExp)
+    expect((scanner.regexps[0][0] as RegExp).source).toBe('abc')
   })
 })
