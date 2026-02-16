@@ -119,7 +119,7 @@ export class JavaScriptScanner implements PatternScanner {
       const regexpList = this.regexps[i]
       for (let j = 0; j < regexpList.length; j++) {
         const regexp = regexpList[j]
-        if (!regexp)
+        if (!regexp || !(regexp instanceof RegExp))
           continue
         try {
           regexp.lastIndex = startPosition
