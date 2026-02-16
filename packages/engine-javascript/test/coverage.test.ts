@@ -40,19 +40,10 @@ describe('coverage', () => {
   })
 
   it('isSingleGroup returns false for unbalanced or multi-part', () => {
-    // Indirectly test via splitPattern not splitting invalid wrappers
-    // (a)b -> starts with ( ends with ), but not single group.
-    // If we pass a long pattern that LOOKS like a group but isn't, it should NOT split (return 1 chunk of original).
     const part1 = `(${'a'.repeat(180)})`
     const part2 = `(${'b'.repeat(180)})`
     const pattern = part1 + part2
     const scanner = new JavaScriptScanner([pattern], { regexConstructor: defaultJavaScriptRegexConstructor })
-    // Should NOT split because it's not a SingleGroup outer wrapper,
-    // AND it doesn't have a top-level pipe (unless we add one?)
-    // Wait, splitPattern splits on top-level pipe first.
-    // If no pipe, it checks wrappers.
-    // (a)(b) -> starts with (, ends with ). isSingleGroup should be false.
-    // So it returns [pattern].
     expect(scanner.regexps[0].length).toBe(1)
   })
 
@@ -61,7 +52,6 @@ describe('coverage', () => {
       regexConstructor: defaultJavaScriptRegexConstructor,
       forgiving: true,
     })
-    // Should catch error and cache null/error
     expect(scanner.regexps[0][0]).toBeNull()
   })
 
@@ -73,12 +63,10 @@ describe('coverage', () => {
   })
 
   it('handles regex constructor errors', () => {
-    // Test without forgiving: should throw
     expect(() => {
       const _ = new JavaScriptScanner(['('], { regexConstructor: defaultJavaScriptRegexConstructor })
     }).toThrow()
 
-    // Test with forgiving: should return null
     const scanner = new JavaScriptScanner(['('], {
       regexConstructor: defaultJavaScriptRegexConstructor,
       forgiving: true,
@@ -89,10 +77,8 @@ describe('coverage', () => {
   it('handles cached errors', () => {
     const cache = new Map<string, RegExp | Error>()
     const pattern = '('
-    // Pre-populate cache with error
     cache.set(pattern, new Error('Cached error'))
 
-    // Without forgiving: throw cached error
     expect(() => {
       const _ = new JavaScriptScanner([pattern], {
         regexConstructor: defaultJavaScriptRegexConstructor,
@@ -100,7 +86,6 @@ describe('coverage', () => {
       })
     }).toThrow('Cached error')
 
-    // With forgiving: return null from cached error
     const scanner = new JavaScriptScanner([pattern], {
       regexConstructor: defaultJavaScriptRegexConstructor,
       cache,
@@ -117,6 +102,7 @@ describe('coverage', () => {
 
     const scanner = new JavaScriptScanner([pattern], {
       regexConstructor: defaultJavaScriptRegexConstructor,
+      cache,
     })
     expect(scanner.regexps[0][0]).toBeInstanceOf(RegExp)
     expect((scanner.regexps[0][0] as RegExp).source).toBe('abc')
