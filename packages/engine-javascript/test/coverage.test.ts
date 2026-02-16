@@ -71,4 +71,53 @@ describe('coverage', () => {
     expect(scanner.regexps[0][0]).toBe(123)
     expect(scanner.patternGroupCounts[0]).toBe(0)
   })
+
+  it('handles regex constructor errors', () => {
+    // Test without forgiving: should throw
+    expect(() => {
+      const _ = new JavaScriptScanner(['('], { regexConstructor: defaultJavaScriptRegexConstructor })
+    }).toThrow()
+
+    // Test with forgiving: should return null
+    const scanner = new JavaScriptScanner(['('], {
+      regexConstructor: defaultJavaScriptRegexConstructor,
+      forgiving: true,
+    })
+    expect(scanner.regexps[0][0]).toBeNull()
+  })
+
+  it('handles cached errors', () => {
+    const cache = new Map<string, RegExp | Error>()
+    const pattern = '('
+    // Pre-populate cache with error
+    cache.set(pattern, new Error('Cached error'))
+
+    // Without forgiving: throw cached error
+    expect(() => {
+      const _ = new JavaScriptScanner([pattern], {
+        regexConstructor: defaultJavaScriptRegexConstructor,
+        cache,
+      })
+    }).toThrow('Cached error')
+
+    // With forgiving: return null from cached error
+    const scanner = new JavaScriptScanner([pattern], {
+      regexConstructor: defaultJavaScriptRegexConstructor,
+      cache,
+      forgiving: true,
+    })
+    expect(scanner.regexps[0][0]).toBeNull()
+  })
+
+  it('handles cached regex', () => {
+    const cache = new Map<string, RegExp | Error>()
+    const pattern = 'abc'
+    const regex = /abc/
+    cache.set(pattern, regex)
+
+    const scanner = new JavaScriptScanner([pattern], {
+      regexConstructor: defaultJavaScriptRegexConstructor,
+    })
+    expect(scanner.regexps[0][0]).toBe(regex)
+  })
 })
