@@ -81,6 +81,14 @@ export interface RehypeShikiExtraOptions {
    * If not provided, the error will be thrown
    */
   onError?: (error: unknown) => void
+
+  /**
+   * Called when falling back to `fallbackLanguage`
+   */
+  onFallback?: (context: {
+    requestedLanguage: string
+    fallbackLanguage: string
+  }) => void
 }
 
 export type RehypeShikiCoreOptions
