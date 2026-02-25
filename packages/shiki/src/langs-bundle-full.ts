@@ -916,7 +916,8 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'name': 'PowerShell',
     'aliases': [
       'ps',
-      'ps1'
+      'ps1',
+      'pwsh'
     ],
     'import': (() => import('@shikijs/langs/powershell')) as DynamicImportLanguageRegistration
   },
