@@ -1,10 +1,8 @@
 export * from './hast'
+export * from './strings'
+export * from './tokens'
 export {
   applyColorReplacements,
-  createPositionConverter,
-  flatTokenVariants,
-  getTokenStyleObject,
-  guessEmbeddedLanguages,
   isNoneTheme,
   isPlainLang,
   isSpecialLang,
@@ -12,8 +10,5 @@ export {
   normalizeGetter,
   resolveColorReplacements,
   splitLines,
-  splitToken,
-  splitTokens,
-  stringifyTokenStyle,
   toArray,
 } from '@shikijs/tokenizer'

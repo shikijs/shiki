@@ -1,8 +1,6 @@
 export { createShikiInternal } from './constructors/internal'
 export { createShikiInternalSync } from './constructors/internal-sync'
 // Highlight
-export { codeToTokens } from './highlight/code-to-tokens'
-
 export { codeToTokensBase, getLastGrammarState, tokenizeWithTheme } from './highlight/code-to-tokens-base'
 export { alignThemesTokenization, codeToTokensWithThemes } from './highlight/code-to-tokens-themes'
 // TextMate
