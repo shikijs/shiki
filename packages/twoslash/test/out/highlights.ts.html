@@ -4,72 +4,7 @@
 <span class="line"></span>
 <span class="line"><span style="color:#CB7676">cons</span><span class="twoslash-highlighted"><span style="color:#CB7676">t </span><span style="color:#BD976A"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#CB7676">const </span><span style="color:#BD976A">world</span><span style="color:#666666">: </span><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">OK</span><span style="color:#C98A7D77">"</span></code></span>worl</span></span></span><span style="color:#BD976A"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#CB7676">const </span><span style="color:#BD976A">world</span><span style="color:#666666">: </span><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">OK</span><span style="color:#C98A7D77">"</span></code></span>d</span></span><span style="color:#666666"> =</span><span style="color:#C98A7D77"> "</span><span style="color:#C98A7D">OK</span><span style="color:#C98A7D77">"</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#BD976A"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#CB7676">var </span><span style="color:#BD976A">console</span><span style="color:#666666">: </span><span style="color:#5DA994">Console</span></code><div class="twoslash-popup-docs">The `console` module provides a simple debugging console that is similar to the
-JavaScript console mechanism provided by web browsers.
+<span class="line"><span style="color:#BD976A"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#CB7676">var </span><span style="color:#BD976A">console</span><span style="color:#666666">: </span><span style="color:#5DA994">Console</span></code></span>console</span></span><span style="color:#666666">.</span><span style="color:#80A665"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#BD976A">Console</span><span style="color:#666666">.</span><span style="color:#80A665">log</span><span style="color:#666666">(...</span><span style="color:#BD976A">data</span><span style="color:#DBD7CAEE">: </span><span style="color:#BD976A">any</span><span style="color:#666666">[])</span><span style="color:#DBD7CAEE">: </span><span style="color:#CB7676">void</span></code><div class="twoslash-popup-docs">The **`console.log()`** static method outputs a message to the console.
 
-The module exports two specific components:
-
-* A `Console` class with methods such as `console.log()`, `console.error()` and `console.warn()` that can be used to write to any Node.js stream.
-* A global `console` instance configured to write to [`process.stdout`](https://nodejs.org/docs/latest-v24.x/api/process.html#processstdout) and
-[`process.stderr`](https://nodejs.org/docs/latest-v24.x/api/process.html#processstderr). The global `console` can be used without importing the `node:console` module.
-
-_**Warning**_: The global console object's methods are neither consistently
-synchronous like the browser APIs they resemble, nor are they consistently
-asynchronous like all other Node.js streams. See the [`note on process I/O`](https://nodejs.org/docs/latest-v24.x/api/process.html#a-note-on-process-io) for
-more information.
-
-Example using the global `console`:
-
-```js
-console.log('hello world');
-// Prints: hello world, to stdout
-console.log('hello %s', 'world');
-// Prints: hello world, to stdout
-console.error(new Error('Whoops, something bad happened'));
-// Prints error message and stack trace to stderr:
-//   Error: Whoops, something bad happened
-//     at [eval]:5:15
-//     at Script.runInThisContext (node:vm:132:18)
-//     at Object.runInThisContext (node:vm:309:38)
-//     at node:internal/process/execution:77:19
-//     at [eval]-wrapper:6:22
-//     at evalScript (node:internal/process/execution:76:60)
-//     at node:internal/main/eval_string:23:3
-
-const name = 'Will Robinson';
-console.warn(`Danger ${name}! Danger!`);
-// Prints: Danger Will Robinson! Danger!, to stderr
-```
-
-Example using the `Console` class:
-
-```js
-const out = getStreamSomehow();
-const err = getStreamSomehow();
-const myConsole = new console.Console(out, err);
-
-myConsole.log('hello world');
-// Prints: hello world, to out
-myConsole.log('hello %s', 'world');
-// Prints: hello world, to out
-myConsole.error(new Error('Whoops, something bad happened'));
-// Prints: [Error: Whoops, something bad happened], to err
-
-const name = 'Will Robinson';
-myConsole.warn(`Danger ${name}! Danger!`);
-// Prints: Danger Will Robinson! Danger!, to err
-```</div><div class="twoslash-popup-docs twoslash-popup-docs-tags"><span class="twoslash-popup-docs-tag"><span class="twoslash-popup-docs-tag-name">@see</span><span class="twoslash-popup-docs-tag-value">[source](https://github.com/nodejs/node/blob/v24.x/lib/console.js)</span></span></div></span>console</span></span><span style="color:#666666">.</span><span style="color:#80A665"><span class="twoslash-hover"><span class="twoslash-popup-container"><code class="twoslash-popup-code"><span style="color:#BD976A">Console</span><span style="color:#666666">.</span><span style="color:#80A665">log</span><span style="color:#666666">(</span><span style="color:#BD976A">message</span><span style="color:#CB7676">?:</span><span style="color:#BD976A"> any</span><span style="color:#666666">,</span><span style="color:#666666"> ...</span><span style="color:#BD976A">optionalParams</span><span style="color:#DBD7CAEE">: </span><span style="color:#BD976A">any</span><span style="color:#666666">[])</span><span style="color:#DBD7CAEE">: </span><span style="color:#CB7676">void</span><span style="color:#666666"> (</span><span style="color:#CB7676">+</span><span style="color:#4C9A91">1</span><span style="color:#BD976A"> overload</span><span style="color:#666666">)</span></code><div class="twoslash-popup-docs">Prints to `stdout` with newline. Multiple arguments can be passed, with the
-first used as the primary message and all additional used as substitution
-values similar to [`printf(3)`](http://man7.org/linux/man-pages/man3/printf.3.html)
-(the arguments are all passed to [`util.format()`](https://nodejs.org/docs/latest-v24.x/api/util.html#utilformatformat-args)).
-
-```js
-const count = 5;
-console.log('count: %d', count);
-// Prints: count: 5, to stdout
-console.log('count:', count);
-// Prints: count: 5, to stdout
-```
-
-See [`util.format()`](https://nodejs.org/docs/latest-v24.x/api/util.html#utilformatformat-args) for more information.</div><div class="twoslash-popup-docs twoslash-popup-docs-tags"><span class="twoslash-popup-docs-tag"><span class="twoslash-popup-docs-tag-name">@since</span><span class="twoslash-popup-docs-tag-value">v0.1.100</span></span></div></span>log</span></span><span style="color:#666666">(</span><span class="twoslash-highlighted"><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">OK</span><span style="color:#C98A7D77">"</span><span style="color:#666666">)</span></span></span>
+[MDN Reference](https://developer.mozilla.org/docs/Web/API/console/log_static)</div></span>log</span></span><span style="color:#666666">(</span><span class="twoslash-highlighted"><span style="color:#C98A7D77">"</span><span style="color:#C98A7D">OK</span><span style="color:#C98A7D77">"</span><span style="color:#666666">)</span></span></span>
 <span class="line"></span></code></pre>

@@ -357,63 +357,6 @@
                                   ]
                                 }
                               ]
-                            },
-                            {
-                              "type": "element",
-                              "tagName": "div",
-                              "properties": {
-                                "class": "twoslash-popup-docs"
-                              },
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "value": "The `console` module provides a simple debugging console that is similar to the\nJavaScript console mechanism provided by web browsers.\n\nThe module exports two specific components:\n\n* A `Console` class with methods such as `console.log()`, `console.error()` and `console.warn()` that can be used to write to any Node.js stream.\n* A global `console` instance configured to write to [`process.stdout`](https://nodejs.org/docs/latest-v24.x/api/process.html#processstdout) and\n[`process.stderr`](https://nodejs.org/docs/latest-v24.x/api/process.html#processstderr). The global `console` can be used without importing the `node:console` module.\n\n_**Warning**_: The global console object's methods are neither consistently\nsynchronous like the browser APIs they resemble, nor are they consistently\nasynchronous like all other Node.js streams. See the [`note on process I/O`](https://nodejs.org/docs/latest-v24.x/api/process.html#a-note-on-process-io) for\nmore information.\n\nExample using the global `console`:\n\n```js\nconsole.log('hello world');\n// Prints: hello world, to stdout\nconsole.log('hello %s', 'world');\n// Prints: hello world, to stdout\nconsole.error(new Error('Whoops, something bad happened'));\n// Prints error message and stack trace to stderr:\n//   Error: Whoops, something bad happened\n//     at [eval]:5:15\n//     at Script.runInThisContext (node:vm:132:18)\n//     at Object.runInThisContext (node:vm:309:38)\n//     at node:internal/process/execution:77:19\n//     at [eval]-wrapper:6:22\n//     at evalScript (node:internal/process/execution:76:60)\n//     at node:internal/main/eval_string:23:3\n\nconst name = 'Will Robinson';\nconsole.warn(`Danger ${name}! Danger!`);\n// Prints: Danger Will Robinson! Danger!, to stderr\n```\n\nExample using the `Console` class:\n\n```js\nconst out = getStreamSomehow();\nconst err = getStreamSomehow();\nconst myConsole = new console.Console(out, err);\n\nmyConsole.log('hello world');\n// Prints: hello world, to out\nmyConsole.log('hello %s', 'world');\n// Prints: hello world, to out\nmyConsole.error(new Error('Whoops, something bad happened'));\n// Prints: [Error: Whoops, something bad happened], to err\n\nconst name = 'Will Robinson';\nmyConsole.warn(`Danger ${name}! Danger!`);\n// Prints: Danger Will Robinson! Danger!, to err\n```"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "element",
-                              "tagName": "div",
-                              "properties": {
-                                "class": "twoslash-popup-docs twoslash-popup-docs-tags"
-                              },
-                              "children": [
-                                {
-                                  "type": "element",
-                                  "tagName": "span",
-                                  "properties": {
-                                    "class": "twoslash-popup-docs-tag"
-                                  },
-                                  "children": [
-                                    {
-                                      "type": "element",
-                                      "tagName": "span",
-                                      "properties": {
-                                        "class": "twoslash-popup-docs-tag-name"
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "text",
-                                          "value": "@see"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "type": "element",
-                                      "tagName": "span",
-                                      "properties": {
-                                        "class": "twoslash-popup-docs-tag-value"
-                                      },
-                                      "children": [
-                                        {
-                                          "type": "text",
-                                          "value": "[source](https://github.com/nodejs/node/blob/v24.x/lib/console.js)"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
                             }
                           ]
                         },
