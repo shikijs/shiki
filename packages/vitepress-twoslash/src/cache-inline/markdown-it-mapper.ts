@@ -1,5 +1,5 @@
 import type { MarkdownFenceSourceMap, MarkdownFencesSourceMapper } from './markdown-fence'
-import MarkdownIt from 'markdown-it'
+import MarkdownIt from 'markdown-it-ts'
 
 export const markdownItMapper: MarkdownFencesSourceMapper = function (code, path) {
   const md = new MarkdownIt()

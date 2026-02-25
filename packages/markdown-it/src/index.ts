@@ -1,4 +1,4 @@
-import type MarkdownIt from 'markdown-it'
+import type { MarkdownIt } from 'markdown-it-ts'
 import type { BuiltinLanguage, BuiltinTheme, LanguageInput } from 'shiki'
 import type { MarkdownItShikiSetupOptions } from './common'
 import { bundledLanguages, createHighlighter } from 'shiki'

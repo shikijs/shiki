@@ -1,11 +1,11 @@
-import type { MarkdownItAsync } from 'markdown-it-async'
+import type { MarkdownIt } from 'markdown-it-ts'
 import type { CodeToHastOptions, ShikiTransformer } from 'shiki'
 import type { MarkdownItShikiSetupOptions } from './core'
 
 export type { MarkdownItShikiExtraOptions, MarkdownItShikiSetupOptions } from './common'
 
 export function setupMarkdownWithCodeToHtml(
-  markdownit: MarkdownItAsync,
+  markdownit: MarkdownIt,
   codeToHtml: (code: string, options: CodeToHastOptions<any, any>) => Promise<string>,
   options: MarkdownItShikiSetupOptions,
 ): void {
@@ -19,7 +19,7 @@ export function setupMarkdownWithCodeToHtml(
     if (lang === '') {
       lang = defaultLanguage as string
     }
-    const meta = parseMetaString?.(attrs, code, lang) || {}
+    const meta = parseMetaString?.(attrs!, code, lang) || {}
     const codeOptions: CodeToHastOptions = {
       ...options,
       lang,
@@ -66,7 +66,7 @@ export function fromAsyncCodeToHtml(
   codeToHtml: (code: string, options: CodeToHastOptions<any, any>) => Promise<string>,
   options: MarkdownItShikiSetupOptions,
 ) {
-  return async function (markdownit: MarkdownItAsync) {
+  return async function (markdownit: MarkdownIt) {
     return setupMarkdownWithCodeToHtml(markdownit, codeToHtml, options)
   }
 }
