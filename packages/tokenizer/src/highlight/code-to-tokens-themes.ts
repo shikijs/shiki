@@ -36,7 +36,7 @@ export function codeToTokensWithThemes(
     }
   })
 
-  const tokens = syncThemesTokenization(
+  const tokens = alignThemesTokenization(
     ...themedTokens.map(i => i.tokens),
   )
 
@@ -93,7 +93,7 @@ export function codeToTokensWithThemes(
  * - `console . log ( " hello " )` (8 tokens)
  * - `console . log ( " hello " )` (8 tokens)
  */
-export function syncThemesTokenization(...themes: ThemedToken[][][]): ThemedToken[][][] {
+export function alignThemesTokenization(...themes: ThemedToken[][][]): ThemedToken[][][] {
   const outThemes = themes.map<ThemedToken[][]>(() => [])
   const count = themes.length
 

@@ -11,12 +11,12 @@ import type {
   ThemeRegistrationAny,
   ThemeRegistrationResolved,
 } from '@shikijs/types'
-import { ShikiError } from '../../../types/src/error'
+import { ShikiError } from '@shikijs/types'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
 import { normalizeTheme } from '../textmate/normalize-theme'
 import { Registry } from '../textmate/registry'
 import { Resolver } from '../textmate/resolver'
-import { resolveLangAlias as _resolveLangAlias } from './_alias'
+import { resolveLangAlias as _resolveLangAlias } from '../utils/alias'
 
 let instancesCount = 0
 

@@ -12,9 +12,5 @@ export default defineConfig({
       paths: {},
     },
   },
-  inlineOnly: [
-    'ansi-sequence-parser',
-  ],
   external: ['hast', ...Object.keys(pkg.dependencies)],
-  noExternal: [/^(?!hast$|@shikijs\/tokenizer$)/],
 })

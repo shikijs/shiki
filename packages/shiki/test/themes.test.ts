@@ -1,13 +1,13 @@
-import type { ThemedToken } from '../src'
+import type { ThemedToken } from '@shikijs/types'
+import { alignThemesTokenization } from '@shikijs/tokenizer'
 import { describe, expect, it } from 'vitest'
-import { syncThemesTokenization } from '../../core/src/highlight/code-to-tokens-themes'
 import { codeToHtml, codeToTokensBase, codeToTokensWithThemes } from '../src'
 
 function stringifyTokens(tokens: ThemedToken[][]) {
   return tokens.map(line => line.map(token => token.content).join(' ')).join('\n')
 }
 
-describe('syncThemesTokenization', () => {
+describe('alignThemesTokenization', () => {
   it('two themes', async () => {
     const lines1 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'vitesse-dark', includeExplanation: true })
     const lines2 = await codeToTokensBase('console.log("hello")', { lang: 'js', theme: 'min-light', includeExplanation: true })
@@ -17,7 +17,7 @@ describe('syncThemesTokenization', () => {
     expect(stringifyTokens(lines2))
       .toMatchInlineSnapshot(`"console .log ( "hello" )"`)
 
-    const [out1, out2] = syncThemesTokenization(lines1, lines2)
+    const [out1, out2] = alignThemesTokenization(lines1, lines2)
 
     expect(stringifyTokens(out1))
       .toBe(stringifyTokens(out2))
@@ -35,7 +35,7 @@ describe('syncThemesTokenization', () => {
     expect(stringifyTokens(lines3))
       .toMatchInlineSnapshot(`"console . log ( " hello " ) ;"`)
 
-    const [out1, out2, out3] = syncThemesTokenization(lines1, lines2, lines3)
+    const [out1, out2, out3] = alignThemesTokenization(lines1, lines2, lines3)
 
     expect(stringifyTokens(out1))
       .toBe(stringifyTokens(out2))

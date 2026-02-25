@@ -1,4 +1,4 @@
-import { ShikiError } from '../../../types/src/error'
+import { ShikiError } from '@shikijs/types'
 
 export function resolveLangAlias(name: string, alias?: Record<string, string>): string {
   if (!alias)

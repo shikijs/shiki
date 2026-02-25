@@ -1,44 +1,41 @@
 .:
-  addClassToHast: function
+  alignThemesTokenization: function
   applyColorReplacements: function
-  codeToHast: function
-  codeToHtml: function
   codeToTokens: function
   codeToTokensBase: function
   codeToTokensWithThemes: function
-  createBundledHighlighter: function
-  createCssVariablesTheme: function
-  createHighlighterCore: function
-  createHighlighterCoreSync: function
+  COLOR_KEYS: object
   createPositionConverter: function
   createShikiInternal: function
   createShikiInternalSync: function
-  createSingletonShorthands: function
+  DEFAULT_COLOR_LIGHT_DARK: string
   flatTokenVariants: function
+  getGrammarStack: function
   getLastGrammarState: function
-  getSingletonHighlighterCore: function
+  getLastGrammarStateFromMap: function
   getTokenStyleObject: function
+  GrammarState: function
   guessEmbeddedLanguages: function
-  hastToHtml: function
   isNoneTheme: function
   isPlainLang: function
   isSpecialLang: function
   isSpecialTheme: function
-  makeSingletonHighlighter: function
-  makeSingletonHighlighterCore: function
   normalizeGetter: function
   normalizeTheme: function
+  Registry: function
   resolveColorReplacements: function
+  resolveLangAlias: function
+  resolveLangs: function
+  Resolver: function
+  resolveThemes: function
+  setLastGrammarStateToMap: function
   ShikiError: function
   splitLines: function
   splitToken: function
   splitTokens: function
   stringifyTokenStyle: function
   toArray: function
-  tokenizeAnsiWithTheme: function
   tokenizeWithTheme: function
-  tokensToHast: function
-  transformerDecorations: function
 ./textmate:
   disposeOnigString: function
   EncodedTokenMetadata: function

@@ -1,6 +1,6 @@
+import { createShikiInternal } from '@shikijs/tokenizer'
 import { describe, expect, it } from 'vitest'
 import { createJavaScriptRegexEngine } from '../../engine-javascript/src/index'
-import { createShikiInternal } from '../src/constructors/internal'
 
 describe('repro issue', () => {
   it('should throw error when missing embeddedLanguages', async () => {

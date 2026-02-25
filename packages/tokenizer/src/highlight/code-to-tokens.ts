@@ -1,8 +1,10 @@
 import type { CodeOptionsMultipleThemes, CodeToTokensOptions, GrammarState, ShikiInternal, StringLiteralUnion, ThemedToken, ThemeRegistrationAny, TokensResult } from '@shikijs/types'
-import { codeToTokensWithThemes, DEFAULT_COLOR_LIGHT_DARK, getLastGrammarStateFromMap, setLastGrammarStateToMap } from '@shikijs/tokenizer'
 import { ShikiError } from '@shikijs/types'
+import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { applyColorReplacements, flatTokenVariants, resolveColorReplacements } from '../utils'
+import { DEFAULT_COLOR_LIGHT_DARK } from '../utils/constants'
 import { codeToTokensBase } from './code-to-tokens-base'
+import { codeToTokensWithThemes } from './code-to-tokens-themes'
 
 /**
  * High-level code-to-tokens API.

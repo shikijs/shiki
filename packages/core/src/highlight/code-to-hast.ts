@@ -14,8 +14,8 @@ import type {
   Text,
 } from 'hast'
 
+import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '@shikijs/tokenizer'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
 import { getTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'

@@ -1,5 +1,19 @@
-export * from './colors'
-export * from './general'
 export * from './hast'
-export * from './strings'
-export * from './tokens'
+export {
+  applyColorReplacements,
+  createPositionConverter,
+  flatTokenVariants,
+  getTokenStyleObject,
+  guessEmbeddedLanguages,
+  isNoneTheme,
+  isPlainLang,
+  isSpecialLang,
+  isSpecialTheme,
+  normalizeGetter,
+  resolveColorReplacements,
+  splitLines,
+  splitToken,
+  splitTokens,
+  stringifyTokenStyle,
+  toArray,
+} from '@shikijs/tokenizer'

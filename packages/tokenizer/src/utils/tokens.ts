@@ -1,7 +1,7 @@
 import type { CodeOptionsMultipleThemes, ThemedToken, ThemedTokenWithVariants, TokenStyles } from '@shikijs/types'
 import { ShikiError } from '@shikijs/types'
 import { FontStyle } from '@shikijs/vscode-textmate'
-import { COLOR_KEYS, DEFAULT_COLOR_LIGHT_DARK } from './_constants'
+import { COLOR_KEYS, DEFAULT_COLOR_LIGHT_DARK } from './constants'
 
 /**
  * Split a token into multiple tokens by given offsets.
