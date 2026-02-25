@@ -173,7 +173,7 @@ export const bundledThemesInfo: BundledThemeInfo[] = [
   {
     "id": "horizon-bright",
     "displayName": "Horizon Bright",
-    "type": "dark",
+    "type": "light",
     "import": (() => import('@shikijs/themes/horizon-bright')) as unknown as DynamicImportThemeRegistration
   },
   {
