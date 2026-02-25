@@ -6,6 +6,10 @@ outline: deep
 
 We suggest you to migrate step by step, following each version's migration guide.
 
+## Migrate from v3.0
+
+If you are on v3.0, v4.0 only drops support for Node.js 18 and remove deprecated APIs, so you should be able to directly bump to v4.0. Read [Shiki v4.0](/blog/v4) for more details.
+
 ## Migrate from v2.0
 
 If you are on v2.0 and there is no warning in your usage, you should be able to directly bump to v3.0, read [Shiki v3.0](/blog/v3) for more details.

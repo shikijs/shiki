@@ -27,9 +27,12 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "prepublishOnly": "nr build",
     "test": "vitest",
     "play": "nr -C playground play"

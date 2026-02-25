@@ -270,8 +270,3 @@ export function createSingletonShorthands<L extends string, T extends string>(
     },
   }
 }
-
-/**
- * @deprecated Use `createBundledHighlighter` instead.
- */
-export const createdBundledHighlighter = createBundledHighlighter

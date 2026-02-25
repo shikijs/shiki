@@ -372,6 +372,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "prepare": "tsx scripts/prepare.ts",
     "build": "pnpm prepare",

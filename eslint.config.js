@@ -15,6 +15,7 @@ export default antfu(
         'unicorn/prefer-node-protocol': 'off',
         'import/first': 'off',
         'ts/explicit-function-return-type': 'off',
+        'import/no-duplicates': 'off',
       },
     },
     vue: {

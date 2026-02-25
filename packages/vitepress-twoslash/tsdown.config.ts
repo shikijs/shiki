@@ -1,25 +1,22 @@
 import fs from 'node:fs/promises'
-import { defineBuildConfig } from 'unbuild'
+import { defineConfig } from 'tsdown'
 
-export default defineBuildConfig({
-  entries: [
+export default defineConfig({
+  entry: [
     'src/index.ts',
     'src/client.ts',
     'src/cache-fs.ts',
     'src/cache-inline/index.ts',
   ],
-  declaration: 'node16',
-  rollup: {
-    emitCJS: false,
-  },
-  externals: [
+  external: [
     'hast',
     '@shikijs/vitepress-twoslash',
     '@shikijs/vitepress-twoslash/style.css',
     'vitepress',
   ],
+  dts: true,
   hooks: {
-    'rollup:done': async () => {
+    'build:done': async () => {
       console.log('Building style.css')
       const floatingVue = await fs.readFile(new URL('./node_modules/floating-vue/dist/style.css', import.meta.url), 'utf-8')
       const twoslash = await fs.readFile(new URL('./../twoslash/style-rich.css', import.meta.url), 'utf-8')

@@ -52,6 +52,7 @@ const INTEGRATIONS = [
 ] as const satisfies (DefaultTheme.NavItemWithLink | DefaultTheme.SidebarItem)[]
 
 const BLOGS: DefaultTheme.NavItemWithLink[] = [
+  { text: 'Shiki v4.0', link: '/blog/v4' },
   { text: 'Shiki v3.0', link: '/blog/v3' },
   { text: 'Shiki v2.0', link: '/blog/v2' },
   { text: 'The Evolution of Shiki v1.0', link: 'https://nuxt.com/blog/shiki-v1' },
@@ -63,6 +64,7 @@ const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] 
   { text: `Contributing`, link: 'https://github.com/shikijs/shiki/blob/main/CONTRIBUTING.md' },
   {
     items: [
+      { text: 'Migration from v3.0', link: '/blog/v4' },
       { text: 'Migration from v2.0', link: '/blog/v3' },
       { text: 'Migration from v1.0', link: '/blog/v2' },
       { text: 'Migration from v0.14', link: '/guide/migrate#migrate-from-v0-14' },
@@ -134,7 +136,7 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
         name: 'shiki:inline-decorations',
         preprocess(code, options) {
           const reg = /^\/\/ @decorations:(.*)\n/
-          code = code.replace(reg, (match, decorations) => {
+          code = code.replace(reg, (_match, decorations) => {
             options.decorations ||= []
             options.decorations.push(...JSON.parse(decorations))
             return ''

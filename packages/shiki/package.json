@@ -45,10 +45,13 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "prepare": "tsx scripts/prepare.ts",
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "prepublishOnly": "nr build",
     "test": "vitest",
     "test:cf": "wrangler dev test/cf.ts --port 60001"

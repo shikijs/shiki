@@ -3,6 +3,9 @@
   "version": "3.23.0",
   "private": true,
   "packageManager": "pnpm@10.30.2",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "lint": "eslint . --cache",
     "release": "bumpp",
@@ -77,9 +80,9 @@
     "tinyexec": "catalog:bundling",
     "tm-grammars": "catalog:inlined",
     "tm-themes": "catalog:inlined",
+    "tsdown": "catalog:bundling",
     "tsx": "catalog:cli",
     "typescript": "catalog:cli",
-    "unbuild": "catalog:bundling",
     "unist-util-visit": "catalog:integrations",
     "vite": "catalog:bundling",
     "vite-tsconfig-paths": "catalog:bundling",

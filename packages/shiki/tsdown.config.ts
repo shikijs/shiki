@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises'
 import fg from 'fast-glob'
 import { basename, dirname, join } from 'pathe'
-import { defineBuildConfig } from 'unbuild'
+import { defineConfig } from 'tsdown'
 
-export default defineBuildConfig({
-  entries: [
+export default defineConfig({
+  entry: [
     'src/index.ts',
     'src/core.ts',
     'src/core-unwasm.ts',
@@ -18,17 +18,17 @@ export default defineBuildConfig({
     'src/engine-oniguruma.ts',
     'src/textmate.ts',
   ],
-  externals: [
+  external: [
     'shiki/wasm',
     '@shikijs/types',
     'hast',
-    /^@shikijs[/\\].*/g,
-    /[/\\](langs|themes)[/\\]/g,
+    /^@shikijs[/\\].*/,
+    /[/\\](langs|themes)[/\\]/,
   ],
-  declaration: 'node16',
+  dts: true,
   clean: true,
   hooks: {
-    'rollup:build': async () => {
+    'build:done': async () => {
       await fs.cp('./src/langs', './dist/langs', { recursive: true })
       await fs.cp('./src/themes', './dist/themes', { recursive: true })
 
