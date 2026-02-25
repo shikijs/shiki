@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsdown'
+import pkg from './package.json' with { type: 'json' }
 
 export default defineConfig({
   entry: [
@@ -9,5 +10,5 @@ export default defineConfig({
       paths: {},
     },
   },
-  external: ['hast'],
+  external: ['hast', ...Object.keys(pkg.dependencies)],
 })
