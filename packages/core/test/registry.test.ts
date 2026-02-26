@@ -1,4 +1,4 @@
-import { createShikiInternal } from '@shikijs/tokenizer'
+import { createShikiInternal } from '@shikijs/primitive'
 import { describe, expect, it } from 'vitest'
 import { createJavaScriptRegexEngine } from '../../engine-javascript/src/index'
 

@@ -11,4 +11,4 @@ export {
   resolveColorReplacements,
   splitLines,
   toArray,
-} from '@shikijs/tokenizer'
+} from '@shikijs/primitive'

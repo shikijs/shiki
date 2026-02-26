@@ -1,5 +1,5 @@
 import type { HighlighterGeneric, Position } from '@shikijs/types'
-import { splitLines } from '@shikijs/tokenizer'
+import { splitLines } from '@shikijs/primitive'
 
 /**
  * Creates a converter between index and position in a code block.

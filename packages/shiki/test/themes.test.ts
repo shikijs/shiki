@@ -1,5 +1,5 @@
 import type { ThemedToken } from '@shikijs/types'
-import { alignThemesTokenization } from '@shikijs/tokenizer'
+import { alignThemesTokenization } from '@shikijs/primitive'
 import { describe, expect, it } from 'vitest'
 import { codeToHtml, codeToTokensBase, codeToTokensWithThemes } from '../src'
 

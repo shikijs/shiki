@@ -1,5 +1,5 @@
 import type { CodeOptionsMultipleThemes, CodeToTokensOptions, GrammarState, ShikiInternal, StringLiteralUnion, ThemedToken, ThemeRegistrationAny, TokensResult } from '@shikijs/types'
-import { codeToTokensWithThemes, getLastGrammarStateFromMap, setLastGrammarStateToMap } from '@shikijs/tokenizer'
+import { codeToTokensWithThemes, getLastGrammarStateFromMap, setLastGrammarStateToMap } from '@shikijs/primitive'
 import { ShikiError } from '@shikijs/types'
 import { applyColorReplacements, flatTokenVariants, resolveColorReplacements } from '../utils'
 import { DEFAULT_COLOR_LIGHT_DARK } from '../utils/constants'

@@ -1,5 +1,5 @@
 import type { CodeToTokensBaseOptions, ShikiInternal, ThemedToken } from '@shikijs/types'
-import { getLastGrammarState, codeToTokensBase as tokenizerCodeToTokensBase, tokenizeWithTheme } from '@shikijs/tokenizer'
+import { getLastGrammarState, codeToTokensBase as tokenizerCodeToTokensBase, tokenizeWithTheme } from '@shikijs/primitive'
 import { isNoneTheme, isPlainLang } from '../utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
 

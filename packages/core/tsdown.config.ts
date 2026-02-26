@@ -16,5 +16,5 @@ export default defineConfig({
     'ansi-sequence-parser',
   ],
   external: ['hast', ...Object.keys(pkg.dependencies)],
-  noExternal: [/^(?!hast$|@shikijs\/tokenizer$)/],
+  noExternal: [/^(?!hast$|@shikijs\/primitive$)/],
 })

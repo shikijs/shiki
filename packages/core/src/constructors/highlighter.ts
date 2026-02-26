@@ -1,6 +1,6 @@
 import type { HighlighterCore, HighlighterCoreOptions } from '@shikijs/types'
 
-import { codeToTokensWithThemes, createShikiInternal, createShikiInternalSync } from '@shikijs/tokenizer'
+import { codeToTokensWithThemes, createShikiInternal, createShikiInternalSync } from '@shikijs/primitive'
 import { codeToHast } from '../highlight/code-to-hast'
 import { codeToHtml } from '../highlight/code-to-html'
 import { codeToTokens } from '../highlight/code-to-tokens'

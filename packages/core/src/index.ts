@@ -19,6 +19,6 @@ export {
   createShikiInternalSync,
   normalizeTheme,
   ShikiError,
-} from '@shikijs/tokenizer'
+} from '@shikijs/primitive'
 
 export * from '@shikijs/types'
