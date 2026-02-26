@@ -1,11 +1,11 @@
-import type { HighlighterCoreOptions, ShikiInternal } from '@shikijs/types'
+import type { HighlighterCoreOptions, ShikiPrimitive } from '@shikijs/types'
 import { resolveLangs, resolveThemes } from '../textmate/getters-resolve'
-import { createShikiInternalSync } from './internal-sync'
+import { createShikiPrimitive } from './primitive'
 
 /**
- * Get the minimal shiki context for rendering.
+ * Get the minimal shiki primitive instance.
  */
-export async function createShikiInternal(options: HighlighterCoreOptions): Promise<ShikiInternal> {
+export async function createShikiPrimitiveAsync(options: HighlighterCoreOptions): Promise<ShikiPrimitive> {
   if (!options.engine) {
     console.warn('`engine` option is required. Use `createOnigurumaEngine` or `createJavaScriptRegexEngine` to create an engine.')
   }
@@ -20,10 +20,15 @@ export async function createShikiInternal(options: HighlighterCoreOptions): Prom
     options.engine,
   ] as const)
 
-  return createShikiInternalSync({
+  return createShikiPrimitive({
     ...options,
     themes,
     langs,
     engine,
   })
 }
+
+/**
+ * @deprecated Use `createShikiPrimitiveAsync` instead.
+ */
+export const createShikiInternal = createShikiPrimitiveAsync

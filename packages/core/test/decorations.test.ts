@@ -19,7 +19,7 @@ const code = `/**
  * Get highlighted code in HTML.
  */
 export function codeToHtml(
-  internal: ShikiInternal,
+  internal: ShikiPrimitive,
   code: string,
   options: CodeToHastOptions,
 ): string {
@@ -295,7 +295,7 @@ describe('decorations errors', () => {
       })
     })
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: 1000. Code length: 252]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: 1000. Code length: 253]`)
 
     await expect(async () => {
       await codeToHtml(code, {
@@ -305,6 +305,6 @@ describe('decorations errors', () => {
       })
     })
       .rejects
-      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: -3. Code length: 252]`)
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Invalid decoration offset: -3. Code length: 253]`)
   })
 })

@@ -1,5 +1,6 @@
-export { createShikiInternal } from './constructors/internal'
-export { createShikiInternalSync } from './constructors/internal-sync'
+export { createShikiInternal, createShikiPrimitiveAsync } from './constructors/async'
+export { createShikiInternalSync, createShikiPrimitive } from './constructors/primitive'
+
 // Highlight
 export { codeToTokensBase, getLastGrammarState, tokenizeWithTheme } from './highlight/code-to-tokens-base'
 export { alignThemesTokenization, codeToTokensWithThemes } from './highlight/code-to-tokens-themes'

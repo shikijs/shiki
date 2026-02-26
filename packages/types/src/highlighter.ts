@@ -23,7 +23,7 @@ export type GrammarStateMapKey = Root | ThemedToken[][]
 /**
  * Internal context of Shiki, core textmate logic
  */
-export interface ShikiInternal<BundledLangKeys extends string = never, BundledThemeKeys extends string = never> {
+export interface ShikiPrimitive<BundledLangKeys extends string = never, BundledThemeKeys extends string = never> {
   /**
    * Load a theme to the highlighter, so later it can be used synchronously.
    */
@@ -90,7 +90,7 @@ export interface ShikiInternal<BundledLangKeys extends string = never, BundledTh
  * Generic instance interface of Shiki
  */
 export interface HighlighterGeneric<BundledLangKeys extends string, BundledThemeKeys extends string>
-  extends ShikiInternal<BundledLangKeys, BundledThemeKeys> {
+  extends ShikiPrimitive<BundledLangKeys, BundledThemeKeys> {
   /**
    * Get highlighted code in HTML string
    */
@@ -146,7 +146,7 @@ export interface HighlighterGeneric<BundledLangKeys extends string, BundledTheme
    * @internal
    * @deprecated
    */
-  getInternalContext: () => ShikiInternal
+  getInternalContext: () => ShikiPrimitive
   /**
    * Get bundled languages object
    */

@@ -1,6 +1,6 @@
 import type {
   CodeToTokensWithThemesOptions,
-  ShikiInternal,
+  ShikiPrimitive,
   ThemedToken,
   ThemedTokenWithVariants,
 } from '@shikijs/types'
@@ -11,7 +11,7 @@ import { codeToTokensBase } from './code-to-tokens-base'
  * Get tokens with multiple themes
  */
 export function codeToTokensWithThemes(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   code: string,
   options: CodeToTokensWithThemesOptions,
 ): ThemedTokenWithVariants[][] {
@@ -21,7 +21,7 @@ export function codeToTokensWithThemes(
     .map(i => ({ color: i[0], theme: i[1]! }))
 
   const themedTokens = themes.map((t) => {
-    const tokens = codeToTokensBase(internal, code, {
+    const tokens = codeToTokensBase(primitive, code, {
       ...options,
       theme: t.theme,
     })

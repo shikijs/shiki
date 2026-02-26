@@ -4,7 +4,7 @@ import type {
   LanguageInput,
   LanguageRegistration,
   MaybeArray,
-  ShikiInternal,
+  ShikiPrimitive,
   SpecialLanguage,
   SpecialTheme,
   ThemeInput,
@@ -21,11 +21,11 @@ import { resolveLangAlias as _resolveLangAlias } from '../utils/alias'
 let instancesCount = 0
 
 /**
- * Get the minimal shiki context for rendering.
+ * Get the minimal shiki primitive instance.
  *
- * Synchronous version of `createShikiInternal`, which requires to provide the engine and all themes and languages upfront.
+ * Requires to provide the engine and all themes and languages upfront.
  */
-export function createShikiInternalSync(options: HighlighterCoreOptions<true>): ShikiInternal {
+export function createShikiPrimitive(options: HighlighterCoreOptions<true>): ShikiPrimitive {
   instancesCount += 1
   if (options.warnings !== false && instancesCount >= 10 && instancesCount % 10 === 0)
     console.warn(`[Shiki] ${instancesCount} instances have been created. Shiki is supposed to be used as a singleton, consider refactoring your code to cache your highlighter instance; Or call \`highlighter.dispose()\` to release unused instances.`)
@@ -141,3 +141,8 @@ export function createShikiInternalSync(options: HighlighterCoreOptions<true>): 
     [Symbol.dispose]: dispose,
   }
 }
+
+/**
+ * @deprecated Use `createShikiPrimitive` instead.
+ */
+export const createShikiInternalSync = createShikiPrimitive

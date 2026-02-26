@@ -2,11 +2,11 @@ import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import js from '@shikijs/langs/javascript'
 import nord from '@shikijs/themes/nord'
 import { describe, expect, it } from 'vitest'
-import { codeToTokensBase, codeToTokensWithThemes, createShikiInternal, createShikiInternalSync } from '../src'
+import { codeToTokensBase, codeToTokensWithThemes, createShikiPrimitive, createShikiPrimitiveAsync } from '../src'
 
 describe('tokenizer', () => {
-  it('createShikiInternal + codeToTokensBase', async () => {
-    const internal = await createShikiInternal({
+  it('createShikiPrimitiveAsync + codeToTokensBase', async () => {
+    const internal = await createShikiPrimitiveAsync({
       langs: [js],
       themes: [nord],
       engine: createJavaScriptRegexEngine(),
@@ -20,8 +20,8 @@ describe('tokenizer', () => {
     expect(tokens[0][0].content).toBe('const')
   })
 
-  it('createShikiInternalSync + codeToTokensBase', () => {
-    const internal = createShikiInternalSync({
+  it('createShikiPrimitive + codeToTokensBase', () => {
+    const internal = createShikiPrimitive({
       langs: [js as any],
       themes: [nord],
       engine: createJavaScriptRegexEngine(),
@@ -34,7 +34,7 @@ describe('tokenizer', () => {
   })
 
   it('throws ShikiError for ANSI lang', async () => {
-    const internal = await createShikiInternal({
+    const internal = await createShikiPrimitiveAsync({
       langs: [js],
       themes: [nord],
       engine: createJavaScriptRegexEngine(),
@@ -45,7 +45,7 @@ describe('tokenizer', () => {
   })
 
   it('codeToTokensWithThemes', async () => {
-    const internal = await createShikiInternal({
+    const internal = await createShikiPrimitiveAsync({
       langs: [js],
       themes: [nord],
       engine: createJavaScriptRegexEngine(),
@@ -61,7 +61,7 @@ describe('tokenizer', () => {
   })
 
   it('plain text returns plain tokens', async () => {
-    const internal = await createShikiInternal({
+    const internal = await createShikiPrimitiveAsync({
       langs: [],
       themes: [nord],
       engine: createJavaScriptRegexEngine(),

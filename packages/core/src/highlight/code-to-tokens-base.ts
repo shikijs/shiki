@@ -1,4 +1,4 @@
-import type { CodeToTokensBaseOptions, ShikiInternal, ThemedToken } from '@shikijs/types'
+import type { CodeToTokensBaseOptions, ShikiPrimitive, ThemedToken } from '@shikijs/types'
 import { getLastGrammarState, codeToTokensBase as tokenizerCodeToTokensBase, tokenizeWithTheme } from '@shikijs/primitive'
 import { isNoneTheme, isPlainLang } from '../utils'
 import { tokenizeAnsiWithTheme } from './code-to-tokens-ansi'
@@ -10,18 +10,18 @@ export { getLastGrammarState, tokenizeWithTheme }
  * This wraps the tokenizer's implementation to add ANSI support.
  */
 export function codeToTokensBase(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   code: string,
   options: CodeToTokensBaseOptions = {},
 ): ThemedToken[][] {
-  const lang = internal.resolveLangAlias(options.lang || 'text')
-  const { theme: themeName = internal.getLoadedThemes()[0] } = options
+  const lang = primitive.resolveLangAlias(options.lang || 'text')
+  const { theme: themeName = primitive.getLoadedThemes()[0] } = options
 
   // Intercept 'ansi' before delegating to tokenizer (tokenizer doesn't support ANSI)
   if (!isPlainLang(lang) && !isNoneTheme(themeName) && lang === 'ansi') {
-    const { theme } = internal.setTheme(themeName)
+    const { theme } = primitive.setTheme(themeName)
     return tokenizeAnsiWithTheme(theme, code, options)
   }
 
-  return tokenizerCodeToTokensBase(internal, code, options)
+  return tokenizerCodeToTokensBase(primitive, code, options)
 }

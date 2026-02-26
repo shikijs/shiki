@@ -1,6 +1,6 @@
 import type {
   CodeToHastOptions,
-  ShikiInternal,
+  ShikiPrimitive,
   ShikiTransformerContextCommon,
 } from '@shikijs/types'
 
@@ -16,18 +16,18 @@ export const hastToHtml = toHtml
  * Get highlighted code in HTML.
  */
 export function codeToHtml(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   code: string,
   options: CodeToHastOptions,
 ): string {
   const context: ShikiTransformerContextCommon = {
     meta: {},
     options,
-    codeToHast: (_code, _options) => codeToHast(internal, _code, _options),
-    codeToTokens: (_code, _options) => codeToTokens(internal, _code, _options),
+    codeToHast: (_code, _options) => codeToHast(primitive, _code, _options),
+    codeToTokens: (_code, _options) => codeToTokens(primitive, _code, _options),
   }
 
-  let result = hastToHtml(codeToHast(internal, code, options, context))
+  let result = hastToHtml(codeToHast(primitive, code, options, context))
 
   for (const transformer of getTransformers(options))
     result = transformer.postprocess?.call(context, result, options) || result

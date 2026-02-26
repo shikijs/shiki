@@ -1,6 +1,6 @@
 import type { HighlighterCore, HighlighterCoreOptions } from '@shikijs/types'
 
-import { codeToTokensWithThemes, createShikiInternal, createShikiInternalSync } from '@shikijs/primitive'
+import { codeToTokensWithThemes, createShikiPrimitive, createShikiPrimitiveAsync } from '@shikijs/primitive'
 import { codeToHast } from '../highlight/code-to-hast'
 import { codeToHtml } from '../highlight/code-to-html'
 import { codeToTokens } from '../highlight/code-to-tokens'
@@ -13,19 +13,19 @@ import { codeToTokensBase, getLastGrammarState } from '../highlight/code-to-toke
  * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
 export async function createHighlighterCore(options: HighlighterCoreOptions<false>): Promise<HighlighterCore> {
-  const internal = await createShikiInternal(options)
+  const primitive = await createShikiPrimitiveAsync(options)
 
   return {
-    getLastGrammarState: (...args: any[]) => getLastGrammarState(internal, ...args as [any])!,
-    codeToTokensBase: (code, options) => codeToTokensBase(internal, code, options),
-    codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(internal, code, options),
-    codeToTokens: (code, options) => codeToTokens(internal, code, options),
-    codeToHast: (code, options) => codeToHast(internal, code, options),
-    codeToHtml: (code, options) => codeToHtml(internal, code, options),
+    getLastGrammarState: (...args: any[]) => getLastGrammarState(primitive, ...args as [any])!,
+    codeToTokensBase: (code, options) => codeToTokensBase(primitive, code, options),
+    codeToTokensWithThemes: (code, options) => codeToTokensWithThemes(primitive, code, options),
+    codeToTokens: (code, options) => codeToTokens(primitive, code, options),
+    codeToHast: (code, options) => codeToHast(primitive, code, options),
+    codeToHtml: (code, options) => codeToHtml(primitive, code, options),
     getBundledLanguages: () => ({}),
     getBundledThemes: () => ({}),
-    ...internal,
-    getInternalContext: () => internal,
+    ...primitive,
+    getInternalContext: () => primitive,
   }
 }
 
@@ -38,7 +38,7 @@ export async function createHighlighterCore(options: HighlighterCoreOptions<fals
  * @see http://shiki.style/guide/bundles#fine-grained-bundle
  */
 export function createHighlighterCoreSync(options: HighlighterCoreOptions<true>): HighlighterCore {
-  const internal = createShikiInternalSync(options)
+  const internal = createShikiPrimitive(options)
 
   return {
     getLastGrammarState: (...args: any[]) => getLastGrammarState(internal, ...args as [any, any]),

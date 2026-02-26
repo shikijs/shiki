@@ -1,7 +1,7 @@
-import { codeToHtml, createShikiInternal } from '@shikijs/core'
+import { codeToHtml, createShikiPrimitiveAsync } from '@shikijs/core'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
-const shiki = createShikiInternal(
+const shiki = createShikiPrimitiveAsync(
   {
     langs: [
       import('@shikijs/langs/ts'),

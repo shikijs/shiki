@@ -1,9 +1,9 @@
 import { createJavaScriptRegexEngine } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, codeToTokens, codeToTokensBase, createShikiInternal } from '../src'
+import { codeToHtml, codeToTokens, codeToTokensBase, createShikiPrimitiveAsync } from '../src'
 
 it('includeExplanation', async () => {
-  using engine = await createShikiInternal({
+  using engine = await createShikiPrimitiveAsync({
     themes: [
       import('@shikijs/themes/vitesse-dark'),
     ],
@@ -25,7 +25,7 @@ it('includeExplanation', async () => {
 
 describe('defaultColor light-dark()', () => {
   it('basic', async () => {
-    using engine = await createShikiInternal({
+    using engine = await createShikiPrimitiveAsync({
       themes: [
         import('@shikijs/themes/vitesse-light'),
         import('@shikijs/themes/vitesse-dark'),
@@ -53,7 +53,7 @@ describe('defaultColor light-dark()', () => {
   })
 
   it('with font style', async () => {
-    using engine = await createShikiInternal({
+    using engine = await createShikiPrimitiveAsync({
       themes: [
         import('@shikijs/themes/dracula'),
         import('@shikijs/themes/dracula-soft'),
@@ -82,7 +82,7 @@ describe('defaultColor light-dark()', () => {
   })
 
   it('defaultColor light-dark() with multiple themes', async () => {
-    using engine = await createShikiInternal({
+    using engine = await createShikiPrimitiveAsync({
       themes: [
         import('@shikijs/themes/vitesse-light'),
         import('@shikijs/themes/vitesse-dark'),
@@ -119,7 +119,7 @@ describe('defaultColor light-dark()', () => {
   })
 
   it('should throw when no light or dark theme is provided', async () => {
-    using engine = await createShikiInternal({
+    using engine = await createShikiPrimitiveAsync({
       themes: [
         import('@shikijs/themes/vitesse-light'),
         import('@shikijs/themes/vitesse-dark'),
@@ -167,7 +167,7 @@ describe('defaultColor light-dark()', () => {
 })
 
 it('colorsRendering none', async () => {
-  using engine = await createShikiInternal({
+  using engine = await createShikiPrimitiveAsync({
     themes: [
       import('@shikijs/themes/vitesse-light'),
       import('@shikijs/themes/vitesse-dark'),

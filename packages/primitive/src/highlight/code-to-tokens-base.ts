@@ -2,7 +2,7 @@ import type {
   CodeToTokensBaseOptions,
   Grammar,
   GrammarState,
-  ShikiInternal,
+  ShikiPrimitive,
   ThemedToken,
   ThemedTokenScopeExplanation,
   ThemeRegistrationResolved,
@@ -25,22 +25,22 @@ import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplaceme
  * Code to tokens, with a simple theme.
  */
 export function codeToTokensBase(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   code: string,
   options: CodeToTokensBaseOptions = {},
 ): ThemedToken[][] {
   const {
-    theme: themeName = internal.getLoadedThemes()[0],
+    theme: themeName = primitive.getLoadedThemes()[0],
   } = options
 
-  const lang = internal.resolveLangAlias(options.lang || 'text')
+  const lang = primitive.resolveLangAlias(options.lang || 'text')
 
   if (isPlainLang(lang) || isNoneTheme(themeName))
     return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
 
-  const { theme, colorMap } = internal.setTheme(themeName)
+  const { theme, colorMap } = primitive.setTheme(themeName)
 
-  const _grammar = internal.getLanguage(options.lang || 'text')
+  const _grammar = primitive.getLanguage(options.lang || 'text')
 
   if (options.grammarState) {
     if (options.grammarState.lang !== _grammar.name) {
@@ -55,11 +55,11 @@ export function codeToTokensBase(
 }
 
 export function getLastGrammarState(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   element: ThemedToken[][] | Root,
 ): GrammarState | undefined
 export function getLastGrammarState(
-  internal: ShikiInternal,
+  primitive: ShikiPrimitive,
   code: string,
   options?: CodeToTokensBaseOptions,
 ): GrammarState
@@ -68,10 +68,10 @@ export function getLastGrammarState(...args: any[]): GrammarState | undefined {
     return getLastGrammarStateFromMap(args[1])
   }
 
-  const [internal, code, options = {}] = args as [ShikiInternal, string, CodeToTokensBaseOptions]
+  const [primitive, code, options = {}] = args as [ShikiPrimitive, string, CodeToTokensBaseOptions]
   const {
     lang = 'text',
-    theme: themeName = internal.getLoadedThemes()[0],
+    theme: themeName = primitive.getLoadedThemes()[0],
   } = options
 
   if (isPlainLang(lang) || isNoneTheme(themeName))
@@ -79,9 +79,9 @@ export function getLastGrammarState(...args: any[]): GrammarState | undefined {
   if (lang === 'ansi')
     throw new ShikiError('ANSI language does not have grammar state')
 
-  const { theme, colorMap } = internal.setTheme(themeName)
+  const { theme, colorMap } = primitive.setTheme(themeName)
 
-  const _grammar = internal.getLanguage(lang)
+  const _grammar = primitive.getLanguage(lang)
 
   return new GrammarStateImpl(
     _tokenizeWithTheme(code, _grammar, theme, colorMap, options).stateStack,

@@ -1,4 +1,4 @@
-import type { ShikiInternal, ThemeRegistrationResolved } from '@shikijs/types'
+import type { ShikiPrimitive, ThemeRegistrationResolved } from '@shikijs/types'
 import type * as monacoNs from 'monaco-editor-core'
 import type { MonacoLineToken } from './types'
 import { EncodedTokenMetadata, FontStyle, INITIAL } from '@shikijs/vscode-textmate'
@@ -63,7 +63,7 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
 }
 
 export function shikiToMonaco(
-  highlighter: ShikiInternal<any, any>,
+  highlighter: ShikiPrimitive<any, any>,
   monaco: typeof monacoNs,
   options: ShikiToMonacoOptions = {},
 ): void {

@@ -17,6 +17,8 @@ export {
   codeToTokensWithThemes,
   createShikiInternal,
   createShikiInternalSync,
+  createShikiPrimitive,
+  createShikiPrimitiveAsync,
   normalizeTheme,
   ShikiError,
 } from '@shikijs/primitive'
