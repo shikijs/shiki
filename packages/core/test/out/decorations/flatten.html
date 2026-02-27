@@ -1,0 +1,24 @@
+
+<style>
+.highlighted {
+  background-color: #ff000050;
+  display: inline;
+}
+.highlighted-body {
+  background-color: #8883;
+}
+.highlighted-border {
+  border: 1px solid #ff0000;
+}
+</style><pre class="shiki vitesse-light" style="background-color:#ffffff;color:#393a34" tabindex="0"><code><span class="line"><span style="color:#A0ADA0">/**</span></span>
+<span class="line"><span style="color:#A0ADA0"> * Get highlighted code in HTML.</span></span>
+<span class="line"><span style="color:#A0ADA0"> */</span></span>
+<span class="line"><span style="color:#1E754F" class="highlighted">ex</span><span style="color:#1E754F" class="highlighted-body highlighted">po</span><span style="color:#1E754F" class="highlighted-border highlighted-body highlighted">rt</span><span style="color:#AB5959" class="highlighted highlighted-border highlighted-body"> functio</span><span style="color:#AB5959" class="highlighted-border highlighted-body highlighted">n</span><span style="color:#59873A" class="highlighted-border highlighted-body highlighted"> </span><span style="color:#59873A" class="highlighted-body highlighted">co</span><span style="color:#59873A" class="highlighted">de</span><span style="color:#59873A">ToHtml</span><span style="color:#999999">(</span></span>
+<span class="line"><span style="color:#B07D48">  internal</span><span style="color:#999999">: </span><span style="color:#2E8F82">ShikiInternal</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#B07D48">  code</span><span style="color:#999999">: </span><span style="color:#2E8F82">string</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#B07D48">  options</span><span style="color:#999999">: </span><span style="color:#2E8F82">CodeToHastOptions</span><span style="color:#999999">,</span></span>
+<span class="line"><span style="color:#999999">):</span><span style="color:#2E8F82"> string</span><span style="color:#999999"> {</span></span>
+<span class="line"><span style="color:#AB5959">  let </span><span style="color:#B07D48">result</span><span style="color:#999999"> =</span><span style="color:#59873A"> hastToHtml</span><span style="color:#999999">(</span><span style="color:#59873A">codeToHast</span><span style="color:#999999">(</span><span style="color:#B07D48">internal</span><span style="color:#999999">,</span><span style="color:#B07D48"> code</span><span style="color:#999999">,</span><span style="color:#B07D48"> options</span><span style="color:#999999">,</span><span style="color:#B07D48"> context</span><span style="color:#999999">))</span></span>
+<span class="line"><span style="color:#1E754F">  return</span><span style="color:#B07D48"> result</span></span>
+<span class="line"><span style="color:#999999">}</span></span>
+<span class="line"><span style="color:#A0ADA0">// final</span></span></code></pre>
