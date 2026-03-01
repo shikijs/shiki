@@ -98,6 +98,12 @@ catalogs:
       specifier: ^4.68.1
       version: 4.68.1
   docs:
+    '@unocss/core':
+      specifier: ^66.6.0
+      version: 66.6.0
+    '@unocss/preset-uno':
+      specifier: ^66.6.0
+      version: 66.6.0
     '@unocss/reset':
       specifier: ^66.6.0
       version: 66.6.0
@@ -201,6 +207,9 @@ catalogs:
       specifier: ^11.1.2
       version: 11.1.2
     twoslash:
+      specifier: ^0.3.6
+      version: 0.3.6
+    twoslash-protocol:
       specifier: ^0.3.6
       version: 0.3.6
     twoslash-vue:
@@ -853,6 +862,19 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+
+  packages/twoslash-unocss:
+    dependencies:
+      twoslash-protocol:
+        specifier: catalog:integrations
+        version: 0.3.6
+    devDependencies:
+      '@unocss/core':
+        specifier: catalog:docs
+        version: 66.6.0
+      '@unocss/preset-uno':
+        specifier: catalog:docs
+        version: 66.6.0
 
   packages/types:
     dependencies:

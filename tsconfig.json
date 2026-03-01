@@ -1,37 +1,92 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["esnext", "DOM"],
+    "lib": [
+      "esnext",
+      "DOM"
+    ],
     "rootDir": ".",
     "module": "esnext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@shikijs/core/types": ["./packages/core/src/types.ts"],
-      "@shikijs/core/wasm-inlined": ["./packages/core/src/wasm.ts"],
-      "@shikijs/core": ["./packages/core/src/index.ts"],
-      "@shikijs/primitive": ["./packages/primitive/src/index.ts"],
-      "@shikijs/transformers": ["./packages/transformers/src/index.ts"],
-      "@shikijs/twoslash/core": ["./packages/twoslash/src/core.ts"],
-      "@shikijs/twoslash": ["./packages/twoslash/src/index.ts"],
-      "@shikijs/vitepress-twoslash/cache-fs": ["./packages/vitepress-twoslash/src/cache-fs.ts"],
-      "@shikijs/vitepress-twoslash/client": ["./packages/vitepress-twoslash/src/client.ts"],
-      "@shikijs/vitepress-twoslash": ["./packages/vitepress-twoslash/src/index.ts"],
-      "@shikijs/markdown-it": ["./packages/markdown-it/src/index.ts"],
-      "@shikijs/markdown-exit": ["./packages/markdown-exit/src/index.ts"],
-      "@shikijs/types": ["./packages/types/src/index.ts"],
-      "@shikijs/engine-javascript": ["./packages/engine-javascript/src/index.ts"],
-      "@shikijs/engine-oniguruma/wasm-inline": ["./packages/engine-oniguruma/src/wasm-inline.ts"],
-      "@shikijs/engine-oniguruma": ["./packages/engine-oniguruma/src/index.ts"],
-      "shiki/core": ["./packages/shiki/src/core.ts"],
-      "shiki/wasm": ["./packages/shiki/src/wasm.ts"],
-      "shiki/langs": ["./packages/shiki/src/langs.ts"],
-      "shiki/themes": ["./packages/shiki/src/themes.ts"],
-      "shiki/bundle/web": ["./packages/shiki/src/bundle-web.ts"],
-      "shiki/bundle/full": ["./packages/shiki/src/bundle-full.ts"],
-      "shiki": ["./packages/shiki/src/index.ts"]
+      "@shikijs/core/types": [
+        "./packages/core/src/types.ts"
+      ],
+      "@shikijs/core/wasm-inlined": [
+        "./packages/core/src/wasm.ts"
+      ],
+      "@shikijs/core": [
+        "./packages/core/src/index.ts"
+      ],
+      "@shikijs/primitive": [
+        "./packages/primitive/src/index.ts"
+      ],
+      "@shikijs/transformers": [
+        "./packages/transformers/src/index.ts"
+      ],
+      "@shikijs/twoslash-unocss": [
+        "./packages/twoslash-unocss/src/index.ts"
+      ],
+      "@shikijs/twoslash/core": [
+        "./packages/twoslash/src/core.ts"
+      ],
+      "@shikijs/twoslash": [
+        "./packages/twoslash/src/index.ts"
+      ],
+      "@shikijs/vitepress-twoslash/cache-fs": [
+        "./packages/vitepress-twoslash/src/cache-fs.ts"
+      ],
+      "@shikijs/vitepress-twoslash/client": [
+        "./packages/vitepress-twoslash/src/client.ts"
+      ],
+      "@shikijs/vitepress-twoslash": [
+        "./packages/vitepress-twoslash/src/index.ts"
+      ],
+      "@shikijs/markdown-it": [
+        "./packages/markdown-it/src/index.ts"
+      ],
+      "@shikijs/markdown-exit": [
+        "./packages/markdown-exit/src/index.ts"
+      ],
+      "@shikijs/types": [
+        "./packages/types/src/index.ts"
+      ],
+      "@shikijs/engine-javascript": [
+        "./packages/engine-javascript/src/index.ts"
+      ],
+      "@shikijs/engine-oniguruma/wasm-inline": [
+        "./packages/engine-oniguruma/src/wasm-inline.ts"
+      ],
+      "@shikijs/engine-oniguruma": [
+        "./packages/engine-oniguruma/src/index.ts"
+      ],
+      "shiki/core": [
+        "./packages/shiki/src/core.ts"
+      ],
+      "shiki/wasm": [
+        "./packages/shiki/src/wasm.ts"
+      ],
+      "shiki/langs": [
+        "./packages/shiki/src/langs.ts"
+      ],
+      "shiki/themes": [
+        "./packages/shiki/src/themes.ts"
+      ],
+      "shiki/bundle/web": [
+        "./packages/shiki/src/bundle-web.ts"
+      ],
+      "shiki/bundle/full": [
+        "./packages/shiki/src/bundle-full.ts"
+      ],
+      "shiki": [
+        "./packages/shiki/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client", "node"],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
