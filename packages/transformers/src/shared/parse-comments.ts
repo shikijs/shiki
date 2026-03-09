@@ -213,18 +213,3 @@ export function v1ClearEndCommentPrefix(text: string): string {
 
   return text
 }
-
-/**
- * Remove empty comment prefixes at line end, e.g. `// `
- *
- * For matchAlgorithm v3
- */
-export function v3ClearEndCommentPrefix(text: string): string {
-  const match = text.match(/(?:\/\/|#|;{1,2}|%{1,2}|--)(\s*)$/)
-
-  if (match && match[1].trim().length === 0) {
-    return text.slice(0, match.index).trimEnd()
-  }
-
-  return text
-}

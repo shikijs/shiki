@@ -5,11 +5,11 @@ import { createCommentNotationTransformer } from '../shared/notation-transformer
 export interface TransformerNotationMapOptions extends MatchAlgorithmOptions {
   classMap?: Record<string, string | string[]>
   /**
-   * Class added to the <pre> element when the current code has diff
+   * Class added to the <pre> element when the current code has a notation match
    */
   classActivePre?: string
   /**
-   * Class added to the <code> element when the current code has diff
+   * Class added to the <code> element when the current code has a notation match
    */
   classActiveCode?: string
 }

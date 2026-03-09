@@ -25,8 +25,8 @@ export interface ShikiTransformerStyleToClass extends ShikiTransformer {
 }
 
 /**
- * Remove line breaks between lines.
- * Useful when you override `display: block` to `.line` in CSS.
+ * Convert inline `style` attributes on tokens to equivalent CSS class names.
+ * Use `getCSS()` on the returned transformer to retrieve the generated stylesheet.
  */
 export function transformerStyleToClass(options: TransformerStyleToClassOptions = {}): ShikiTransformerStyleToClass {
   const {

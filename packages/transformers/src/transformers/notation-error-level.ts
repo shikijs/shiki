@@ -5,11 +5,11 @@ import { transformerNotationMap } from './notation-map'
 export interface TransformerNotationErrorLevelOptions extends MatchAlgorithmOptions {
   classMap?: Record<string, string | string[]>
   /**
-   * Class added to the <pre> element when the current code has diff
+   * Class added to the <pre> element when the current code has error/warning annotations
    */
   classActivePre?: string
   /**
-   * Class added to the <code> element when the current code has diff
+   * Class added to the <code> element when the current code has error/warning annotations
    */
   classActiveCode?: string
 }
