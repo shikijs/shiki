@@ -64,6 +64,7 @@ const TwoslashFloatingVue = {
     }
 
     app.use(FloatingVue, {
+      strategy: 'fixed',
       ...options,
       themes: {
         ...options.themes,
