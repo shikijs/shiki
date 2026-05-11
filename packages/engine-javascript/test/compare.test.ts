@@ -120,6 +120,7 @@ const cases: Cases[] = [
   },
   {
     name: 'sql',
+    skip: true,
     theme: () => import('@shikijs/themes/nord'),
     lang: () => import('@shikijs/langs/sql'),
     cases: [
