@@ -1,4 +1,11 @@
 ignoreWorkspaceRootCheck: true
+minimumReleaseAgeExclude:
+  - '@types/node@25.9.0'
+  - '@vue/language-core@3.3.0'
+  - baseline-browser-mapping@2.10.31
+  - pnpm@11.1.3
+  - tsx@4.22.2
+  - vue-tsc@3.3.0
 shellEmulator: true
 trustPolicy: no-downgrade
 packages:
@@ -16,50 +23,50 @@ catalogs:
     '@rollup/plugin-node-resolve': ^16.0.3
     '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^1.0.0
-    baseline-browser-mapping: ^2.10.0
-    esbuild: ^0.27.3
+    baseline-browser-mapping: ^2.10.31
+    esbuild: ^0.28.0
     pathe: ^2.0.3
-    rolldown-plugin-dts: ^0.22.4
-    rollup: ^4.59.0
+    rolldown-plugin-dts: ^0.25.1
+    rollup: ^4.60.4
     rollup-plugin-copy: ^3.5.0
-    rollup-plugin-dts: ^6.3.0
+    rollup-plugin-dts: ^6.4.1
     rollup-plugin-esbuild: ^6.2.1
-    tinyexec: ^1.0.2
-    tsdown: ^0.20.3
-    vite: ^7.3.1
+    tinyexec: ^1.1.2
+    tsdown: ^0.22.0
+    vite: ^8.0.13
     vite-tsconfig-paths: ^6.1.1
   cli:
-    '@antfu/eslint-config': ^7.7.0
-    '@antfu/ni': ^28.3.0
-    bumpp: ^10.4.1
-    eslint: ^10.0.3
+    '@antfu/eslint-config': ^9.0.0
+    '@antfu/ni': ^30.1.0
+    bumpp: ^11.1.0
+    eslint: ^10.4.0
     eslint-plugin-format: ^2.0.1
-    jiti: ^2.6.1
-    lint-staged: ^16.3.2
+    jiti: ^2.7.0
+    lint-staged: ^17.0.5
     pinia: ^3.0.4
-    pnpm: ^10.31.0
-    prettier: ^3.8.1
+    pnpm: ^11.1.3
+    prettier: ^3.8.3
     rimraf: ^6.1.3
     simple-git-hooks: ^2.13.1
-    taze: ^19.10.0
-    tsx: ^4.21.0
-    typescript: ^5.9.3
-    vue-tsc: ^3.2.5
-    wrangler: ^4.71.0
+    taze: ^19.12.0
+    tsx: ^4.22.2
+    typescript: ^6.0.3
+    vue-tsc: ^3.3.0
+    wrangler: ^4.92.0
   docs:
-    '@unocss/reset': ^66.6.6
-    '@vueuse/core': ^14.2.1
+    '@unocss/reset': ^66.6.8
+    '@vueuse/core': ^14.3.0
     floating-vue: ^5.2.2
-    fuse.js: ^7.1.0
-    unocss: ^66.6.6
-    unplugin-vue-components: ^31.0.0
-    vitepress: ^2.0.0-alpha.16
-    vitepress-plugin-group-icons: ^1.7.1
+    fuse.js: ^7.3.0
+    unocss: ^66.6.8
+    unplugin-vue-components: ^32.0.0
+    vitepress: ^2.0.0-alpha.17
+    vitepress-plugin-group-icons: ^1.7.5
     vitepress-plugin-mermaid: ^2.0.17
-    vue: ^3.5.29
+    vue: ^3.5.34
   icons:
-    '@iconify-json/carbon': ^1.2.19
-    '@iconify-json/codicon': ^1.2.48
+    '@iconify-json/carbon': ^1.2.21
+    '@iconify-json/codicon': ^1.2.55
     '@iconify-json/ph': ^1.2.2
     '@iconify-json/svg-spinners': ^1.2.4
   inlined:
@@ -67,8 +74,8 @@ catalogs:
     hast-util-from-html: ^2.0.3
     hast-util-to-html: ^9.0.5
     hast-util-to-string: ^3.0.1
-    tm-grammars: ^1.31.6
-    tm-themes: ^1.12.1
+    tm-grammars: ^1.31.15
+    tm-themes: ^1.12.2
     vscode-oniguruma: 1.7.0
   integrations:
     lz-string: ^1.5.0
@@ -85,22 +92,22 @@ catalogs:
     rehype-stringify: ^10.0.1
     remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
-    twoslash: ^0.3.6
-    twoslash-vue: ^0.3.6
+    twoslash: ^0.3.8
+    twoslash-vue: ^0.3.8
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   prod:
     '@shikijs/vscode-textmate': ^10.0.2
-    ansis: ^4.2.0
+    ansis: ^4.3.0
     cac: ^7.0.0
-    oniguruma-to-es: ^4.3.4
+    oniguruma-to-es: ^4.3.6
   testing:
-    '@vitest/coverage-v8': ^4.0.18
+    '@vitest/coverage-v8': ^4.1.6
     diff-match-patch-es: ^1.0.1
     fast-glob: ^3.3.3
-    fs-extra: ^11.3.4
+    fs-extra: ^11.3.5
     js-yaml: ^4.1.1
-    vitest: ^4.0.18
+    vitest: ^4.1.6
     vitest-package-exports: ^1.2.0
   types:
     '@types/fs-extra': ^11.0.4
@@ -108,7 +115,7 @@ catalogs:
     '@types/js-yaml': ^4.0.9
     '@types/markdown-it': ^14.1.2
     '@types/mdast': ^4.0.4
-    '@types/node': ^25.3.5
+    '@types/node': ^25.9.0
     '@types/unist': ^3.0.3
 onlyBuiltDependencies:
   - esbuild
@@ -116,3 +123,8 @@ onlyBuiltDependencies:
   - simple-git-hooks
   - unrs-resolver
   - workerd
+allowBuilds:
+  esbuild: true
+  sharp: true
+  simple-git-hooks: true
+  workerd: true
