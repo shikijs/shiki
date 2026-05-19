@@ -157,7 +157,7 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
   },
 
   cleanUrls: true,
-  vite,
+  vite: vite as any,
   themeConfig: {
     logo: '/logo.svg',
     nav: [

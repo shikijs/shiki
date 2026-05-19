@@ -57,7 +57,7 @@ export function createTwoslashWithInlineCache(
 
     // config vite plugins
     const plugins = (config.vite ??= {}).plugins ??= []
-    plugins.push(PatchPlugin)
+    plugins.push(PatchPlugin as any)
 
     return config
   }
@@ -96,7 +96,7 @@ function withFenceSourceMap(config: UserConfig, codec: MarkdownFenceSourceMapCod
 
   // config vite plugins
   const plugins = (config.vite ??= {}).plugins ??= []
-  plugins.push(InjectPlugin)
+  plugins.push(InjectPlugin as any)
 
   return config
 }
