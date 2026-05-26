@@ -180,6 +180,7 @@ You can also highlight multiple lines with a single comment:
 // [\!code highlight:3]
 console.log('Highlighted')
 console.log('Highlighted')
+console.log('Highlighted')
 console.log('Not highlighted')
 ```
 
@@ -195,6 +196,7 @@ Renders:
 
 ```ts
 // [!code highlight:3]
+console.log('Highlighted')
 console.log('Highlighted')
 console.log('Highlighted')
 console.log('Not highlighted')
@@ -281,6 +283,7 @@ You can also focus multiple lines with a single comment:
 // [\!code focus:3]
 console.log('Focused')
 console.log('Focused')
+console.log('Focused')
 console.log('Not focused')
 ```
 ````
@@ -289,6 +292,7 @@ Renders:
 
 ```ts
 // [!code focus:3]
+console.log('Focused')
 console.log('Focused')
 console.log('Focused')
 console.log('Not focused')
