@@ -52,6 +52,8 @@ const INTEGRATIONS = [
   { text: 'Astro', link: '/packages/astro' },
   { text: 'Common Transformers', link: '/packages/transformers' },
   { text: 'Colorized Brackets', link: '/packages/colorized-brackets' },
+  { text: 'Magic Move', link: '/packages/magic-move' },
+  { text: 'Stream', link: '/packages/stream' },
   { text: 'Codegen', link: '/packages/codegen' },
   { text: 'CLI', link: '/packages/cli' },
 ] as const satisfies (DefaultTheme.NavItemWithLink | DefaultTheme.SidebarItem)[]

@@ -1,0 +1,71 @@
+{
+  "name": "@shikijs/stream",
+  "type": "module",
+  "version": "4.1.0",
+  "description": "Streaming colorization for Shiki, useful for highlighting LLM outputs and other text streams",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/shikijs/shiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikijs/shiki.git",
+    "directory": "packages/stream"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
+  "keywords": [
+    "shiki",
+    "@shikijs/stream",
+    "streaming",
+    "llm"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./vue": "./dist/vue.mjs",
+    "./react": "./dist/react.mjs",
+    "./solid": "./dist/solid.mjs"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "prepublishOnly": "nr build",
+    "test": "vitest",
+    "play": "nr -C playground dev"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "solid-js": "^1.9.0",
+    "vue": "^3.2.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@shikijs/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@antfu/utils": "catalog:inlined",
+    "@types/react": "catalog:types",
+    "react": "catalog:integrations",
+    "solid-js": "catalog:integrations",
+    "unbuild": "catalog:bundling",
+    "vue": "catalog:docs"
+  }
+}

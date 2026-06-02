@@ -1,0 +1,52 @@
+.shiki-magic-move-container {
+  position: relative;
+  white-space: pre;
+}
+
+.shiki-magic-move-line-number {
+  opacity: 0.3;
+  user-select: none;
+}
+
+.shiki-magic-move-item {
+  display: inline-block;
+  transition: color var(--smm-duration, 0.5s) var(--smm-easing, 'ease');
+}
+
+.shiki-magic-move-move {
+  transition: all var(--smm-duration, 0.5s) var(--smm-easing, 'ease');
+}
+
+.shiki-magic-move-enter-active,
+.shiki-magic-move-leave-active {
+  transition: all var(--smm-duration, 0.5s) var(--smm-easing, 'ease');
+}
+
+.shiki-magic-move-container-resize,
+.shiki-magic-move-container-restyle {
+  transition: all var(--smm-duration, 0.5s) var(--smm-easing, 'ease');
+  transition-delay: calc(var(--smm-duration, 0.5s) * var(--smm-delay-container, 1));
+}
+
+.shiki-magic-move-move {
+  transition-delay: calc(calc(var(--smm-duration, 0.5s) * var(--smm-delay-move, 1)) + var(--smm-stagger, 0));
+  z-index: 1;
+}
+
+.shiki-magic-move-enter-active {
+  transition-delay: calc(calc(var(--smm-duration, 0.5s) * var(--smm-delay-enter, 1)) + var(--smm-stagger, 0));
+  z-index: 1;
+}
+
+.shiki-magic-move-leave-active {
+  transition-delay: calc(calc(var(--smm-duration, 0.5s) * var(--smm-delay-leave, 1)) + var(--smm-stagger, 0));
+}
+
+.shiki-magic-move-enter-from,
+.shiki-magic-move-leave-to {
+  opacity: 0;
+}
+
+br.shiki-magic-move-leave-active {
+  display: none;
+}

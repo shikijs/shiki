@@ -1,0 +1,34 @@
+{
+  "name": "playground",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@shikijs/magic-move": "workspace:*",
+    "shiki": "workspace:*",
+    "vue": "catalog:docs"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "catalog:bundling",
+    "@types/react": "catalog:types",
+    "@types/react-dom": "catalog:types",
+    "@unocss/reset": "catalog:docs",
+    "@vitejs/plugin-react": "catalog:bundling",
+    "@vitejs/plugin-vue": "catalog:bundling",
+    "@vueuse/core": "catalog:docs",
+    "react": "catalog:integrations",
+    "react-dom": "catalog:integrations",
+    "solid-js": "catalog:integrations",
+    "svelte": "catalog:integrations",
+    "typescript": "catalog:cli",
+    "unocss": "catalog:docs",
+    "vite": "catalog:bundling",
+    "vite-plugin-solid": "catalog:bundling",
+    "vue-tsc": "catalog:cli"
+  }
+}

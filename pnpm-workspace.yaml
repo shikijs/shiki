@@ -1,4 +1,6 @@
 ignoreWorkspaceRootCheck: true
+overrides:
+  semver: ^7.8.0
 minimumReleaseAgeExclude:
   - '@types/node@25.9.0'
   - '@vue/language-core@3.3.0'
@@ -17,12 +19,19 @@ packages:
 
 catalogs:
   bundling:
+    '@babel/preset-react': ^7.28.5
+    '@babel/preset-typescript': ^7.28.5
     '@rollup/plugin-alias': ^6.0.0
+    '@rollup/plugin-babel': ^7.0.0
     '@rollup/plugin-commonjs': ^29.0.2
     '@rollup/plugin-json': ^6.1.0
     '@rollup/plugin-node-resolve': ^16.0.3
     '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^1.0.0
+    '@sveltejs/vite-plugin-svelte': ^7.1.2
+    '@vitejs/plugin-react': ^6.0.2
+    '@vitejs/plugin-vue': ^6.0.7
+    babel-preset-solid: ^1.9.12
     baseline-browser-mapping: ^2.10.31
     esbuild: ^0.28.0
     pathe: ^2.0.3
@@ -33,7 +42,9 @@ catalogs:
     rollup-plugin-esbuild: ^6.2.1
     tinyexec: ^1.1.2
     tsdown: ^0.22.0
+    unbuild: ^3.6.1
     vite: ^8.0.13
+    vite-plugin-solid: ^2.11.12
     vite-tsconfig-paths: ^6.1.1
   cli:
     '@antfu/eslint-config': ^9.0.0
@@ -70,6 +81,7 @@ catalogs:
     '@iconify-json/ph': ^1.2.2
     '@iconify-json/svg-spinners': ^1.2.4
   inlined:
+    '@antfu/utils': ^9.3.0
     ansi-sequence-parser: ^1.1.3
     hast-util-from-html: ^2.0.3
     hast-util-to-html: ^9.0.5
@@ -78,6 +90,7 @@ catalogs:
     tm-themes: ^1.12.2
     vscode-oniguruma: 1.7.0
   integrations:
+    diff-match-patch-es: ^1.0.1
     lz-string: ^1.5.0
     magic-string: ^0.30.21
     markdown-exit: ^1.0.0-beta.9
@@ -88,10 +101,14 @@ catalogs:
     mdast-util-to-hast: ^13.2.1
     monaco-editor-core: ^0.55.1
     ohash: ^2.0.11
+    react: ^19.2.6
+    react-dom: ^19.2.6
     rehype-raw: ^7.0.0
     rehype-stringify: ^10.0.1
     remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
+    solid-js: ^1.9.13
+    svelte: ^5.55.8
     twoslash: ^0.3.8
     twoslash-vue: ^0.3.8
     unified: ^11.0.5
@@ -116,6 +133,8 @@ catalogs:
     '@types/markdown-it': ^14.1.2
     '@types/mdast': ^4.0.4
     '@types/node': ^25.9.0
+    '@types/react': ^19.2.14
+    '@types/react-dom': ^19.2.3
     '@types/unist': ^3.0.3
 onlyBuiltDependencies:
   - esbuild

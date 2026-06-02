@@ -1,0 +1,113 @@
+{
+  "name": "@shikijs/magic-move",
+  "type": "module",
+  "version": "4.1.0",
+  "description": "Smoothly animated code blocks with Shiki",
+  "author": "Anthony Fu <anthonyfu117@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/shikijs/shiki#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikijs/shiki.git",
+    "directory": "packages/magic-move"
+  },
+  "bugs": "https://github.com/shikijs/shiki/issues",
+  "keywords": [
+    "shiki",
+    "@shikijs/magic-move",
+    "animations"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./core": "./dist/core.mjs",
+    "./renderer": "./dist/renderer.mjs",
+    "./types": "./dist/types.mjs",
+    "./vue": "./dist/vue.mjs",
+    "./react": "./dist/react.mjs",
+    "./solid": "./dist/solid.mjs",
+    "./svelte": "./dist/svelte.mjs",
+    "./style.css": "./dist/style.css",
+    "./dist/*": "./dist/*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "./vue": [
+        "./dist/vue.d.mts"
+      ],
+      "./react": [
+        "./dist/react.d.mts"
+      ],
+      "./svelte": [
+        "./dist/svelte.d.mts"
+      ],
+      "./solid": [
+        "./dist/solid.d.mts"
+      ],
+      "./core": [
+        "./dist/core.d.mts"
+      ],
+      "*": [
+        "./dist/*",
+        "./dist/index.d.mts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "dev": "nr play",
+    "prepublishOnly": "nr build",
+    "test": "vitest",
+    "play": "nr -C playground dev"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0",
+    "shiki": "^4.0.0",
+    "solid-js": "^1.9.1",
+    "svelte": "^5.0.0-0",
+    "vue": "^3.4.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "shiki": {
+      "optional": true
+    },
+    "solid-js": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "diff-match-patch-es": "catalog:integrations",
+    "ohash": "catalog:integrations"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "catalog:bundling",
+    "@babel/preset-typescript": "catalog:bundling",
+    "@rollup/plugin-babel": "catalog:bundling",
+    "@types/react": "catalog:types",
+    "babel-preset-solid": "catalog:bundling",
+    "react": "catalog:integrations",
+    "shiki": "workspace:*",
+    "solid-js": "catalog:integrations",
+    "svelte": "catalog:integrations",
+    "unbuild": "catalog:bundling",
+    "vue": "catalog:docs"
+  }
+}
