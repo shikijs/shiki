@@ -209,9 +209,6 @@ catalogs:
       specifier: 1.7.0
       version: 1.7.0
   integrations:
-    diff-match-patch-es:
-      specifier: ^1.0.1
-      version: 1.0.1
     lz-string:
       specifier: ^1.5.0
       version: 1.5.0
@@ -714,7 +711,7 @@ importers:
   packages/magic-move:
     dependencies:
       diff-match-patch-es:
-        specifier: catalog:integrations
+        specifier: catalog:testing
         version: 1.0.1
       ohash:
         specifier: catalog:integrations

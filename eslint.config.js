@@ -51,6 +51,17 @@ export default antfu(
   },
   {
     files: [
+      'packages/stream/**/*.ts',
+      'packages/stream/**/*.tsx',
+      'packages/magic-move/**/*.ts',
+      'packages/magic-move/**/*.tsx',
+    ],
+    rules: {
+      'ts/explicit-function-return-type': 'off',
+    },
+  },
+  {
+    files: [
       'packages/shiki/**/*.ts',
       'packages/core/**/*.ts',
       'packages/engine-javascript/**/*.ts',

@@ -49,6 +49,8 @@ export default defineConfig({
         'packages/cli/**',
         'packages/monaco/**',
         'packages/vitepress-twoslash/**',
+        'packages/stream/**',
+        'packages/magic-move/**',
       ],
     },
   },

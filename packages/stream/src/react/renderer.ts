@@ -23,7 +23,6 @@ export function ShikiStreamRenderer(
   const _onStreamEnd = useEffectEvent(() => onStreamEnd?.())
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setTokens(prevTokens => prevTokens.length ? [] : prevTokens)
     let started = false
     stream.pipeTo(new WritableStream({
@@ -39,7 +38,6 @@ export function ShikiStreamRenderer(
       },
       close: () => _onStreamEnd(),
     }))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_onStreamEnd, _onStreamStart, stream])
 
   return h(

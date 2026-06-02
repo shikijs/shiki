@@ -1,6 +1,4 @@
 ignoreWorkspaceRootCheck: true
-overrides:
-  semver: ^7.8.0
 minimumReleaseAgeExclude:
   - '@types/node@25.9.0'
   - '@vue/language-core@3.3.0'
@@ -16,6 +14,9 @@ packages:
   - playground
   - examples/*
   - docs
+
+overrides:
+  semver: ^7.8.0
 
 catalogs:
   bundling:
@@ -90,7 +91,6 @@ catalogs:
     tm-themes: ^1.12.2
     vscode-oniguruma: 1.7.0
   integrations:
-    diff-match-patch-es: ^1.0.1
     lz-string: ^1.5.0
     magic-string: ^0.30.21
     markdown-exit: ^1.0.0-beta.9
