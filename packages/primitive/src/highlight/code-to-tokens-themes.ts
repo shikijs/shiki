@@ -95,29 +95,58 @@ export function codeToTokensWithThemes(
  * - `console . log ( " hello " )` (8 tokens)
  */
 export function alignThemesTokenization(...themes: ThemedToken[][][]): ThemedToken[][][] {
-  const outThemes = themes.map<ThemedToken[][]>(() => [])
   const count = themes.length
 
-  for (let i = 0; i < themes[0].length; i++) {
-    const lines = themes.map(t => t[i])
+  // Pre-allocate the per-theme output 2D arrays once.
+  const outThemes: ThemedToken[][][] = Array.from({ length: count }, () => [])
+  // Per-iteration scratch arrays. Reused across lines to avoid repeated
+  // `Array.from`/`.map` allocations on the multi-theme hot path.
+  const lines: ThemedToken[][] = Array.from({ length: count })
+  const indexes = new Int32Array(count)
+  const current: (ThemedToken | undefined)[] = Array.from({ length: count })
 
-    const outLines = outThemes.map<ThemedToken[]>(() => [])
-    outThemes.forEach((t, i) => t.push(outLines[i]))
+  const lineCount = themes[0].length
+  for (let i = 0; i < lineCount; i++) {
+    // Fresh per-line output rows; push them into each theme's 2D array.
+    const outLines: ThemedToken[][] = Array.from({ length: count }, () => [])
+    for (let n = 0; n < count; n++) {
+      outThemes[n].push(outLines[n])
+      lines[n] = themes[n][i]
+      indexes[n] = 0
+      current[n] = lines[n][0]
+    }
 
-    const indexes = lines.map(() => 0)
-    const current = lines.map(l => l[0])
-
-    while (current.every(t => t)) {
-      const minLength = Math.min(...current.map(t => t.content.length))
+    // Walk every theme's token stream in parallel, slicing at the smallest
+    // remaining token-content length.
+    while (true) {
+      // Track minLength inline instead of `Math.min(...current.map(...))`
+      // (which builds an intermediate array and spreads N args per call).
+      let minLength = Infinity
+      let allPresent = true
+      for (let n = 0; n < count; n++) {
+        const t = current[n]
+        if (!t) {
+          allPresent = false
+          break
+        }
+        const l = t.content.length
+        if (l < minLength)
+          minLength = l
+      }
+      if (!allPresent)
+        break
 
       for (let n = 0; n < count; n++) {
-        const token = current[n]
+        const token = current[n]!
         if (token.content.length === minLength) {
           outLines[n].push(token)
           indexes[n] += 1
           current[n] = lines[n][indexes[n]]
         }
         else {
+          // Token spans more than minLength: emit a head slice and continue
+          // with the tail. Two clones are required because downstream code
+          // treats `ThemedToken` as immutable.
           outLines[n].push({
             ...token,
             content: token.content.slice(0, minLength),

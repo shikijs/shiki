@@ -42,6 +42,14 @@ export function createShikiPrimitive(options: HighlighterCoreOptions<true>): Shi
   const _registry = new Registry(resolver, themes, langs, options.langAlias)
 
   let _lastTheme: string | ThemeRegistrationAny
+  // Cached colorMap reference from the most recent `setTheme(name)`.
+  //
+  // Safe to cache because vscode-textmate's color map is append-only by
+  // index: when a new scope is observed during tokenization, the registry
+  // *appends* a new color; existing indices keep their values. The cached
+  // array reference therefore stays valid for any prior index. We still
+  // invalidate on theme change because `setTheme` rebuilds the index map.
+  let _lastColorMap: string[] | undefined
 
   function resolveLangAlias(name: string): string {
     return _resolveLangAlias(name, options.langAlias)
@@ -74,8 +82,9 @@ export function createShikiPrimitive(options: HighlighterCoreOptions<true>): Shi
     if (_lastTheme !== name) {
       _registry.setTheme(theme)
       _lastTheme = name
+      _lastColorMap = undefined
     }
-    const colorMap = _registry.getColorMap()
+    const colorMap = _lastColorMap ??= _registry.getColorMap()
     return {
       theme,
       colorMap,

@@ -77,27 +77,14 @@ export class JavaScriptScanner implements PatternScanner {
     const str = typeof string === 'string'
       ? string
       : string.content
-    const pending: [index: number, match: RegExpExecArray, offset: number][] = []
 
-    function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
-      return {
-        index,
-        captureIndices: match.indices!.map((indice) => {
-          if (indice == null) {
-            return {
-              start: MAX,
-              end: MAX,
-              length: 0,
-            }
-          }
-          return {
-            start: indice[0] + offset,
-            end: indice[1] + offset,
-            length: indice[1] - indice[0],
-          }
-        }),
-      }
-    }
+    // Track the best non-anchored match inline rather than collecting
+    // every candidate into a `pending` array and then spreading it into
+    // `Math.min` afterwards. Saves N tuple allocations + one spread call
+    // per scan position on grammars with many patterns.
+    let bestIndex = -1
+    let bestRegexIndex = -1
+    let bestMatch: RegExpExecArray | null = null
 
     for (let i = 0; i < this.regexps.length; i++) {
       const regexp = this.regexps[i]
@@ -110,12 +97,17 @@ export class JavaScriptScanner implements PatternScanner {
         if (!match)
           continue
 
-        // If the match is at the start position, return it immediately
+        // If the match is at the start position, return it immediately —
+        // it can't be beaten by a later regex (leftmost-first semantics).
         if (match.index === startPosition) {
           return toResult(i, match, 0)
         }
-        // Otherwise, store it for later
-        pending.push([i, match, 0])
+        // Else keep the leftmost non-anchored hit seen so far.
+        if (bestMatch === null || match.index < bestIndex) {
+          bestIndex = match.index
+          bestRegexIndex = i
+          bestMatch = match
+        }
       }
       catch (e) {
         if (this.options.forgiving)
@@ -124,16 +116,31 @@ export class JavaScriptScanner implements PatternScanner {
       }
     }
 
-    // Find the closest match to the start position
-    if (pending.length) {
-      const minIndex = Math.min(...pending.map(m => m[1].index))
-      for (const [i, match, offset] of pending) {
-        if (match.index === minIndex) {
-          return toResult(i, match, offset)
-        }
-      }
-    }
+    if (bestMatch !== null)
+      return toResult(bestRegexIndex, bestMatch, 0)
 
     return null
   }
+}
+
+function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
+  // Manual loop avoids the `match.indices!.map(...)` intermediate-array
+  // allocation. `match.indices` is a sparse-ish array of `[start, end]`
+  // pairs or `undefined` for non-participating optional groups.
+  const indices = match.indices!
+  const captureIndices: { start: number, end: number, length: number }[] = Array.from({ length: indices.length })
+  for (let k = 0, klen = indices.length; k < klen; k++) {
+    const indice = indices[k]
+    if (indice == null) {
+      captureIndices[k] = { start: MAX, end: MAX, length: 0 }
+    }
+    else {
+      captureIndices[k] = {
+        start: indice[0] + offset,
+        end: indice[1] + offset,
+        length: indice[1] - indice[0],
+      }
+    }
+  }
+  return { index, captureIndices }
 }

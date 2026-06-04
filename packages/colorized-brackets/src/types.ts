@@ -38,3 +38,9 @@ export interface BracketPair {
   scopesAllowList?: string[]
   scopesDenyList?: string[]
 }
+
+/** Shape returned by `resolveConfig` (after merging lang-specific overrides). */
+export interface ResolvedConfig {
+  themes: Record<string, string[]>
+  bracketPairs: BracketPair[]
+}

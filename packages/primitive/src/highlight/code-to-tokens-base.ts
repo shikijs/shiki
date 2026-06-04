@@ -19,7 +19,7 @@ import { ShikiError } from '@shikijs/types'
 
 import { EncodedTokenMetadata, INITIAL } from '@shikijs/vscode-textmate'
 import { getGrammarStack, getLastGrammarStateFromMap, GrammarState as GrammarStateImpl, setLastGrammarStateToMap } from '../textmate/grammar-state'
-import { applyColorReplacements, isNoneTheme, isPlainLang, resolveColorReplacements, splitLines } from '../utils'
+import { isNoneTheme, isPlainLang, resolveColorMap, resolveColorReplacements, splitLines } from '../utils'
 
 const RE_COMMA = /,/
 const RE_SPACE = / /
@@ -99,6 +99,41 @@ interface ThemeSettingsSelectors {
   selectors: string[][]
 }
 
+/**
+ * Per-theme cache of the parsed scope-selector index used by full
+ * `includeExplanation`. Building this requires walking `theme.settings` and
+ * splitting each `scope` string twice; without the cache it's redone for
+ * every token of every file.
+ */
+const themeSettingsSelectorsCache = new WeakMap<ThemeRegistrationResolved, ThemeSettingsSelectors[]>()
+
+function getThemeSettingsSelectors(theme: ThemeRegistrationResolved): ThemeSettingsSelectors[] {
+  let cached = themeSettingsSelectorsCache.get(theme)
+  if (cached !== undefined)
+    return cached
+  cached = []
+  for (const setting of theme.settings) {
+    let selectors: string[]
+    switch (typeof setting.scope) {
+      case 'string':
+        selectors = setting.scope.split(RE_COMMA).map(scope => scope.trim())
+        break
+      case 'object':
+        selectors = setting.scope
+        break
+      default:
+        continue
+    }
+
+    cached.push({
+      settings: setting,
+      selectors: selectors.map(selector => selector.split(RE_SPACE)),
+    })
+  }
+  themeSettingsSelectorsCache.set(theme, cached)
+  return cached
+}
+
 export function tokenizeWithTheme(
   code: string,
   grammar: Grammar,
@@ -130,6 +165,10 @@ function _tokenizeWithTheme(
   stateStack: StateStack
 } {
   const colorReplacements = resolveColorReplacements(theme, options)
+  // Pre-resolve replacement-applied colors so the per-token loop becomes a
+  // single Array indexed read instead of calling `applyColorReplacements`
+  // (which `.toLowerCase()`s the color) once per token.
+  const resolvedColorMap = resolveColorMap(colorMap, colorReplacements)
 
   const {
     tokenizeMaxLineLength = 0,
@@ -180,11 +219,16 @@ function _tokenizeWithTheme(
     let resultWithScopes
     let tokensWithScopes
     let tokensWithScopesIndex
+    let themeSettingsSelectors: ThemeSettingsSelectors[] | undefined
 
     if (options.includeExplanation) {
       resultWithScopes = grammar.tokenizeLine(line, stateStack, tokenizeTimeLimit)
       tokensWithScopes = resultWithScopes.tokens
       tokensWithScopesIndex = 0
+      // Lift the (theme-only) selector parse out of the per-token loop and
+      // memoise it per theme reference. Build only when needed.
+      if (options.includeExplanation !== 'scopeName')
+        themeSettingsSelectors = getThemeSettingsSelectors(theme)
     }
 
     const result = grammar.tokenizeLine2(line, stateStack, tokenizeTimeLimit)
@@ -197,10 +241,7 @@ function _tokenizeWithTheme(
         continue
 
       const metadata = result.tokens[2 * j + 1]
-      const color = applyColorReplacements(
-        colorMap[EncodedTokenMetadata.getForeground(metadata)],
-        colorReplacements,
-      )
+      const color = resolvedColorMap[EncodedTokenMetadata.getForeground(metadata)]
       const fontStyle: FontStyle = EncodedTokenMetadata.getFontStyle(metadata)
 
       const token: ThemedToken = {
@@ -211,29 +252,6 @@ function _tokenizeWithTheme(
       }
 
       if (options.includeExplanation) {
-        const themeSettingsSelectors: ThemeSettingsSelectors[] = []
-
-        if (options.includeExplanation !== 'scopeName') {
-          for (const setting of theme.settings) {
-            let selectors: string[]
-            switch (typeof setting.scope) {
-              case 'string':
-                selectors = setting.scope.split(RE_COMMA).map(scope => scope.trim())
-                break
-              case 'object':
-                selectors = setting.scope
-                break
-              default:
-                continue
-            }
-
-            themeSettingsSelectors.push({
-              settings: setting,
-              selectors: selectors.map(selector => selector.split(RE_SPACE)),
-            })
-          }
-        }
-
         token.explanation = []
         let offset = 0
         while (startIndex + offset < nextStartIndex) {
@@ -251,7 +269,7 @@ function _tokenizeWithTheme(
                   tokenWithScopes.scopes,
                 )
               : explainThemeScopesFull(
-                  themeSettingsSelectors,
+                  themeSettingsSelectors!,
                   tokenWithScopes.scopes,
                 ),
           })

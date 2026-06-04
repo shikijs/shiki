@@ -93,7 +93,12 @@ export function transformerDecorations(): ShikiTransformer {
         return
       const ctx = getContext(this)
 
-      const lines = [...codeEl.children].filter(i => i.type === 'element' && i.tagName === 'span') as Element[]
+      // Single pass; avoids the array-clone from `[...codeEl.children]`.
+      const lines: Element[] = []
+      for (const child of codeEl.children) {
+        if (child.type === 'element' && child.tagName === 'span')
+          lines.push(child)
+      }
 
       if (lines.length !== ctx.converter.lines.length)
         throw new ShikiError(`Number of lines in code element (${lines.length}) does not match the number of lines in the source (${ctx.converter.lines.length}). Failed to apply decorations.`)
@@ -173,7 +178,8 @@ export function transformerDecorations(): ShikiTransformer {
       const lineApplies: (() => void)[] = []
 
       // Apply decorations in reverse order so the nested ones get applied first.
-      const sorted = ctx.decorations.sort((a, b) => b.start.offset - a.start.offset || a.end.offset - b.end.offset)
+      // Use a sorted *copy* so the user-supplied `decorations` array isn't mutated.
+      const sorted = ctx.decorations.slice().sort((a, b) => b.start.offset - a.start.offset || a.end.offset - b.end.offset)
       for (const decoration of sorted) {
         const { start, end } = decoration
         if (start.line === end.line) {

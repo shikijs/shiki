@@ -1,8 +1,50 @@
 import type { CodeOptionsSingleTheme, CodeOptionsThemes, ThemedToken } from 'shiki'
-import type { TransformerColorizedBracketsOptions } from './types'
+import type { ResolvedConfig, TransformerColorizedBracketsOptions } from './types'
 import { ShikiError } from 'shiki'
 import builtInThemes from './themes'
 import { getEmbeddedLang, resolveConfig, shouldIgnoreToken } from './utils'
+
+/**
+ * Per `(config, lang)` cache for the indexed bracket-pair data. Walking the
+ * `bracketPairs` array and building Sets/Maps for every token of every file
+ * is wasteful — the data only depends on the resolved config, not the token.
+ */
+const indexedConfigCache = new WeakMap<TransformerColorizedBracketsOptions, Map<string, IndexedConfig>>()
+
+interface IndexedConfig extends ResolvedConfig {
+  openers: Set<string>
+  closers: Set<string>
+  /** `opener-or-closer string → BracketPair` for O(1) classification. */
+  byBracket: Map<string, ResolvedConfig['bracketPairs'][number]>
+  closerToOpener: Map<string, string>
+}
+
+function getIndexedConfig(config: TransformerColorizedBracketsOptions, lang: string): IndexedConfig {
+  let bucket = indexedConfigCache.get(config)
+  if (!bucket) {
+    bucket = new Map()
+    indexedConfigCache.set(config, bucket)
+  }
+  let indexed = bucket.get(lang)
+  if (indexed)
+    return indexed
+
+  const resolved = resolveConfig(config, lang) as ResolvedConfig
+  const openers = new Set<string>()
+  const closers = new Set<string>()
+  const byBracket = new Map<string, ResolvedConfig['bracketPairs'][number]>()
+  const closerToOpener = new Map<string, string>()
+  for (const pair of resolved.bracketPairs) {
+    openers.add(pair.opener)
+    closers.add(pair.closer)
+    byBracket.set(pair.opener, pair)
+    byBracket.set(pair.closer, pair)
+    closerToOpener.set(pair.closer, pair.opener)
+  }
+  indexed = { ...resolved, openers, closers, byBracket, closerToOpener }
+  bucket.set(lang, indexed)
+  return indexed
+}
 
 export default function colorizeBracketTokens(
   tokens: ThemedToken[],
@@ -14,22 +56,10 @@ export default function colorizeBracketTokens(
 
   for (const token of tokens) {
     const embeddedLang = getEmbeddedLang(token)
-    const resolvedConfig = resolveConfig(config, embeddedLang ?? lang)
-    const openers = new Set(
-      resolvedConfig.bracketPairs.map(pair => pair.opener),
-    )
-    const closers = new Set(
-      resolvedConfig.bracketPairs.map(pair => pair.closer),
-    )
-    const closerToOpener = Object.fromEntries(
-      resolvedConfig.bracketPairs.map(pair => [pair.closer, pair.opener]),
-    )
+    const resolved = getIndexedConfig(config, embeddedLang ?? lang)
+    const trimmed = token.content.trim()
 
-    const pairDefinition = resolvedConfig.bracketPairs.find(
-      pair =>
-        pair.opener === token.content.trim()
-        || pair.closer === token.content.trim(),
-    )
+    const pairDefinition = resolved.byBracket.get(trimmed)
     if (
       !pairDefinition
       || shouldIgnoreToken(
@@ -40,19 +70,19 @@ export default function colorizeBracketTokens(
     ) {
       continue
     }
-    if (openers.has(token.content.trim())) {
+    if (resolved.openers.has(trimmed)) {
       openerStack.push(token)
     }
-    else if (closers.has(token.content.trim())) {
-      const opener = openerStack.toReversed()
-        .find(t => t.content.trim() === closerToOpener[token.content.trim()])
+    else if (resolved.closers.has(trimmed)) {
+      const expectedOpener = resolved.closerToOpener.get(trimmed)
+      const opener = openerStack.findLast(t => t.content.trim() === expectedOpener)
       if (opener) {
         while (openerStack.at(-1) !== opener) {
           const unexpected = openerStack.pop()
           if (unexpected) {
             assignColorToToken(
               unexpected,
-              resolvedConfig.themes,
+              resolved.themes,
               shikiOptions,
               -1,
             )
@@ -61,30 +91,33 @@ export default function colorizeBracketTokens(
         openerStack.pop()
         assignColorToToken(
           token,
-          resolvedConfig.themes,
+          resolved.themes,
           shikiOptions,
           openerStack.length,
         )
         assignColorToToken(
           opener,
-          resolvedConfig.themes,
+          resolved.themes,
           shikiOptions,
           openerStack.length,
         )
       }
       else {
-        assignColorToToken(token, resolvedConfig.themes, shikiOptions, -1)
+        assignColorToToken(token, resolved.themes, shikiOptions, -1)
       }
     }
   }
 
-  for (const token of openerStack) {
-    assignColorToToken(
-      token,
-      resolveConfig(config, lang).themes,
-      shikiOptions,
-      -1,
-    )
+  if (openerStack.length) {
+    const fallback = getIndexedConfig(config, lang)
+    for (const token of openerStack) {
+      assignColorToToken(
+        token,
+        fallback.themes,
+        shikiOptions,
+        -1,
+      )
+    }
   }
 }
 

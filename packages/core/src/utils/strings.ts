@@ -10,6 +10,12 @@ const RE_SCRIPT_LANG = /<script\s+(?:type|lang)=["']([^"']+)["']/gi
  * Creates a converter between index and position in a code block.
  *
  * Overflow/underflow are unchecked.
+ *
+ * Uses a `Uint32Array` prefix-sum of line lengths so `indexToPos` and
+ * `posToIndex` are O(log lines) and O(1) respectively, rather than the
+ * O(lines) linear scan that the naive form needs. Decoration transformers
+ * call these per offset / per decoration / per breakpoint, so the speed-up
+ * is meaningful on large files.
  */
 export function createPositionConverter(code: string): {
   lines: string[]
@@ -17,6 +23,15 @@ export function createPositionConverter(code: string): {
   posToIndex: (line: number, character: number) => number
 } {
   const lines = splitLines(code, true).map(([line]) => line)
+
+  // `lineStarts[i]` is the index of the first character of line `i`.
+  // `lineStarts[lines.length]` = code.length (sentinel for end-of-file).
+  const lineStarts = new Uint32Array(lines.length + 1)
+  for (let i = 0, acc = 0; i < lines.length; i++) {
+    lineStarts[i] = acc
+    acc += lines[i].length
+  }
+  lineStarts[lines.length] = code.length
 
   function indexToPos(index: number): Position {
     if (index === code.length) {
@@ -26,24 +41,21 @@ export function createPositionConverter(code: string): {
       }
     }
 
-    let character = index
-    let line = 0
-    for (const lineText of lines) {
-      if (character < lineText.length)
-        break
-      character -= lineText.length
-      line++
+    // Binary search for the largest `lineStarts[line] <= index`.
+    let lo = 0
+    let hi = lines.length - 1
+    while (lo < hi) {
+      const mid = (lo + hi + 1) >>> 1
+      if (lineStarts[mid] <= index)
+        lo = mid
+      else
+        hi = mid - 1
     }
-    return { line, character }
+    return { line: lo, character: index - lineStarts[lo] }
   }
 
   function posToIndex(line: number, character: number): number {
-    let index = 0
-    for (let i = 0; i < line; i++)
-      index += lines[i].length
-
-    index += character
-    return index
+    return lineStarts[line] + character
   }
 
   return {

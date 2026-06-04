@@ -17,10 +17,22 @@ export function addClassToHast(node: Element, className: string | string[]): Ele
   if (!Array.isArray(node.properties.class))
     node.properties.class = []
 
+  const list = node.properties.class as string[]
   const targets = Array.isArray(className) ? className : className.split(RE_WHITESPACE)
+  // Build a Set once instead of doing O(n²) `.includes` for each new class.
+  // The class array is typically tiny but `addClassToHast` is called per-token
+  // by decoration transformers, so the constant matters.
+  let seen: Set<string> | undefined
   for (const c of targets) {
-    if (c && !node.properties.class.includes(c))
-      node.properties.class.push(c)
+    if (!c)
+      continue
+    if (!seen) {
+      seen = new Set(list)
+    }
+    if (!seen.has(c)) {
+      list.push(c)
+      seen.add(c)
+    }
   }
   return node
 }

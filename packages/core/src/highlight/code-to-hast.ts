@@ -17,7 +17,7 @@ import type {
 import { getLastGrammarStateFromMap, setLastGrammarStateToMap } from '@shikijs/primitive'
 import { FontStyle } from '@shikijs/vscode-textmate'
 import { addClassToHast, getTokenStyleObject, stringifyTokenStyle } from '../utils'
-import { getTransformers } from './_get-transformers'
+import { resolveTransformers } from './_get-transformers'
 import { codeToTokens } from './code-to-tokens'
 
 const RE_WHITESPACE_ONLY = /^\s+$/
@@ -37,8 +37,10 @@ export function codeToHast(
 ): Root {
   let input = code
 
-  for (const transformer of getTransformers(options))
-    input = transformer.preprocess?.call(transformerContext, input, options) || input
+  const transformers = resolveTransformers(options)
+
+  for (const transformer of transformers.preprocess)
+    input = transformer.preprocess!.call(transformerContext, input, options) || input
 
   let {
     tokens,
@@ -70,8 +72,8 @@ export function codeToHast(
     },
   }
 
-  for (const transformer of getTransformers(options))
-    tokens = transformer.tokens?.call(contextSource, tokens) || tokens
+  for (const transformer of transformers.tokens)
+    tokens = transformer.tokens!.call(contextSource, tokens) || tokens
 
   return tokensToHast(
     tokens,
@@ -86,6 +88,7 @@ export function codeToHast(
     },
     contextSource,
     grammarState,
+    transformers,
   )
 }
 
@@ -94,8 +97,9 @@ export function tokensToHast(
   options: CodeToHastRenderOptions,
   transformerContext: ShikiTransformerContextSource,
   grammarState: GrammarState | undefined = getLastGrammarStateFromMap(tokens),
+  transformersView?: ReturnType<typeof resolveTransformers>,
 ): Root {
-  const transformers = getTransformers(options)
+  const transformers = transformersView ?? resolveTransformers(options)
 
   const lines: (Element | Text)[] = []
   const root: Root = {
@@ -143,6 +147,35 @@ export function tokensToHast(
   }
 
   const lineNodes: Element[] = []
+
+  // Per-call style intern table — typical code only uses ~5-20 distinct
+  // `(color, bgColor, fontStyle)` triples; without caching every token
+  // re-builds the same intermediate object and re-joins the style string.
+  // The cache is local to `tokensToHast`, so cross-call mutation can't
+  // affect output.
+  const styleCache = new Map<string, string>()
+
+  function getStyle(token: ThemedToken): string {
+    if (typeof token.htmlStyle === 'string')
+      return token.htmlStyle
+    if (token.htmlStyle) {
+      // Object-htmlStyle is built by the multi-theme code path per token
+      // (and is per-token identity-stable); skip caching there since each
+      // object is unique.
+      return stringifyTokenStyle(token.htmlStyle)
+    }
+    // No htmlStyle → key by raw (color, bgColor, fontStyle) so two tokens
+    // with identical styling hit the cache.
+    const key = (token.color || token.bgColor || token.fontStyle)
+      ? `${token.color || ''}|${token.bgColor || ''}|${token.fontStyle || 0}`
+      : ''
+    let cached = styleCache.get(key)
+    if (cached === undefined) {
+      cached = stringifyTokenStyle(getTokenStyleObject(token))
+      styleCache.set(key, cached)
+    }
+    return cached
+  }
 
   const context: ShikiTransformerContext = {
     ...transformerContext,
@@ -198,12 +231,12 @@ export function tokensToHast(
         children: [{ type: 'text', value: token.content }],
       }
 
-      const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
+      const style = getStyle(token)
       if (style)
         tokenNode.properties.style = style
 
-      for (const transformer of transformers)
-        tokenNode = transformer?.span?.call(context, tokenNode, idx + 1, col, lineNode, token) || tokenNode
+      for (const transformer of transformers.span)
+        tokenNode = transformer.span!.call(context, tokenNode, idx + 1, col, lineNode, token) || tokenNode
 
       if (structure === 'inline')
         root.children.push(tokenNode)
@@ -213,8 +246,8 @@ export function tokensToHast(
     }
 
     if (structure === 'classic') {
-      for (const transformer of transformers)
-        lineNode = transformer?.line?.call(context, lineNode, idx + 1) || lineNode
+      for (const transformer of transformers.line)
+        lineNode = transformer.line!.call(context, lineNode, idx + 1) || lineNode
 
       lineNodes.push(lineNode)
       lines.push(lineNode)
@@ -225,13 +258,13 @@ export function tokensToHast(
   })
 
   if (structure === 'classic') {
-    for (const transformer of transformers)
-      codeNode = transformer?.code?.call(context, codeNode) || codeNode
+    for (const transformer of transformers.code)
+      codeNode = transformer.code!.call(context, codeNode) || codeNode
 
     preNode.children.push(codeNode)
 
-    for (const transformer of transformers)
-      preNode = transformer?.pre?.call(context, preNode) || preNode
+    for (const transformer of transformers.pre)
+      preNode = transformer.pre!.call(context, preNode) || preNode
 
     root.children.push(preNode)
   }
@@ -270,8 +303,8 @@ export function tokensToHast(
     }
 
     let transformedCode = syntheticCode
-    for (const transformer of transformers)
-      transformedCode = transformer?.code?.call(context, transformedCode) || transformedCode
+    for (const transformer of transformers.code)
+      transformedCode = transformer.code!.call(context, transformedCode) || transformedCode
 
     // Extract the transformed children back to root
     root.children = []
@@ -286,8 +319,8 @@ export function tokensToHast(
   }
 
   let result = root
-  for (const transformer of transformers)
-    result = transformer?.root?.call(context, result) || result
+  for (const transformer of transformers.root)
+    result = transformer.root!.call(context, result) || result
 
   if (grammarState)
     setLastGrammarStateToMap(result, grammarState)
@@ -378,29 +411,34 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
 function mergeAdjacentStyledTokens(tokens: ThemedToken[][]): ThemedToken[][] {
   return tokens.map((line) => {
     const newLine: ThemedToken[] = []
+    // Carry the previous token's style string across iterations instead of
+    // recomputing it from scratch each loop turn (it equals last iteration's
+    // `currentStyle`). Halves the work in this function on the hot path.
+    let prevStyle: string | undefined
+    let prevIsDecorated = false
     for (const token of line) {
+      const isDecorated = !!(token.fontStyle && (
+        (token.fontStyle & FontStyle.Underline)
+        || (token.fontStyle & FontStyle.Strikethrough)
+      ))
+
       if (newLine.length === 0) {
         newLine.push({ ...token })
+        prevStyle = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
+        prevIsDecorated = isDecorated
         continue
       }
 
-      const prevToken = newLine.at(-1)!
-      const prevStyle = stringifyTokenStyle(prevToken.htmlStyle || getTokenStyleObject(prevToken))
       const currentStyle = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
-      const isPrevDecorated = prevToken.fontStyle && (
-        (prevToken.fontStyle & FontStyle.Underline)
-        || (prevToken.fontStyle & FontStyle.Strikethrough)
-      )
-      const isDecorated = token.fontStyle && (
-        (token.fontStyle & FontStyle.Underline)
-        || (token.fontStyle & FontStyle.Strikethrough)
-      )
 
-      if (!isPrevDecorated && !isDecorated && prevStyle === currentStyle) {
-        prevToken.content += token.content
+      if (!prevIsDecorated && !isDecorated && prevStyle === currentStyle) {
+        newLine.at(-1)!.content += token.content
+        // prevStyle stays the same, prevIsDecorated already false
       }
       else {
         newLine.push({ ...token })
+        prevStyle = currentStyle
+        prevIsDecorated = isDecorated
       }
     }
     return newLine

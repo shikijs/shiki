@@ -59,11 +59,29 @@ function throwLastOnigError(onigBinding: IOnigBinding): void {
 }
 
 class UtfString {
-  private static _utf8ByteLength(str: string): number {
+  /**
+   * Walks the string once to compute the UTF-8 byte length AND determine
+   * whether the source is pure ASCII.
+   *
+   * Pure ASCII is the overwhelmingly common case (typical source code is
+   * almost entirely ASCII), and lets the constructor skip the
+   * `utf16OffsetToUtf8` / `utf8OffsetToUtf16` mapping arrays plus the
+   * complex multi-branch UTF-8 encode loop.
+   */
+  private static _scan(str: string): { utf8Length: number, isAscii: boolean } {
     let result = 0
-    for (let i = 0, len = str.length; i < len; i++) {
+    let isAscii = true
+    const len = str.length
+    for (let i = 0; i < len; i++) {
       const charCode = str.charCodeAt(i)
 
+      // Fast path inside the loop: ASCII chars (the vast majority) are 1 byte.
+      if (charCode < 0x80) {
+        result += 1
+        continue
+      }
+
+      isAscii = false
       let codepoint = charCode
       let wasSurrogatePair = false
 
@@ -79,15 +97,10 @@ class UtfString {
         }
       }
 
-      if (codepoint <= 0x7F)
-        result += 1
-
-      else if (codepoint <= 0x7FF)
+      if (codepoint <= 0x7FF)
         result += 2
-
       else if (codepoint <= 0xFFFF)
         result += 3
-
       else
         result += 4
 
@@ -95,7 +108,7 @@ class UtfString {
         i++
     }
 
-    return result
+    return { utf8Length: result, isAscii }
   }
 
   public readonly utf16Length: number
@@ -107,15 +120,29 @@ class UtfString {
 
   constructor(str: string) {
     const utf16Length = str.length
-    const utf8Length = UtfString._utf8ByteLength(str)
-    const computeIndicesMapping = (utf8Length !== utf16Length)
-    const utf16OffsetToUtf8 = computeIndicesMapping ? new Uint32Array(utf16Length + 1) : null!
-    if (computeIndicesMapping)
-      utf16OffsetToUtf8[utf16Length] = utf8Length
+    const { utf8Length, isAscii } = UtfString._scan(str)
 
-    const utf8OffsetToUtf16 = computeIndicesMapping ? new Uint32Array(utf8Length + 1) : null!
-    if (computeIndicesMapping)
-      utf8OffsetToUtf16[utf8Length] = utf16Length
+    this.utf16Length = utf16Length
+    this.utf8Length = utf8Length
+    this.utf16Value = str
+
+    // Fast path: pure ASCII. No offset-mapping arrays needed and the
+    // encode loop collapses to a single `charCodeAt` copy.
+    if (isAscii) {
+      const utf8Value = new Uint8Array(utf8Length)
+      for (let i = 0; i < utf8Length; i++)
+        utf8Value[i] = str.charCodeAt(i)
+      this.utf8Value = utf8Value
+      this.utf16OffsetToUtf8 = null
+      this.utf8OffsetToUtf16 = null
+      return
+    }
+
+    const computeIndicesMapping = true
+    const utf16OffsetToUtf8 = new Uint32Array(utf16Length + 1)
+    utf16OffsetToUtf8[utf16Length] = utf8Length
+    const utf8OffsetToUtf16 = new Uint32Array(utf8Length + 1)
+    utf8OffsetToUtf16[utf8Length] = utf16Length
 
     const utf8Value = new Uint8Array(utf8Length)
 
@@ -186,9 +213,6 @@ class UtfString {
         i16++
     }
 
-    this.utf16Length = utf16Length
-    this.utf8Length = utf8Length
-    this.utf16Value = str
     this.utf8Value = utf8Value
     this.utf16OffsetToUtf8 = utf16OffsetToUtf8
     this.utf8OffsetToUtf16 = utf8OffsetToUtf16
