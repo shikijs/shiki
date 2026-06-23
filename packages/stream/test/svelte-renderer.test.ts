@@ -52,23 +52,27 @@ describe('svelte stream renderer', () => {
     expect(target.querySelector('pre')?.className).toBe('shiki shiki-stream extra')
 
     await controlled.enqueue(first)
+    expect(target.querySelector('code')?.textContent).toBe('const ')
     const firstSpan = target.querySelector('span')!
     const firstHtml = firstSpan.outerHTML
     expect(firstSpan.textContent).toBe('const ')
 
     await controlled.enqueue(unstable)
+    expect(target.querySelector('code')?.textContent).toBe('const answer')
     const [firstAfterAppend, unstableSpan] = [...target.querySelectorAll('span')]
     expect(firstAfterAppend).toBe(firstSpan)
     expect(firstAfterAppend.outerHTML).toBe(firstHtml)
     expect(unstableSpan.textContent).toBe('answer')
 
     await controlled.enqueue({ recall: 1 })
+    expect(target.querySelector('code')?.textContent).toBe('const ')
     const [firstAfterRecall] = [...target.querySelectorAll('span')]
     expect(firstAfterRecall).toBe(firstSpan)
     expect(firstAfterRecall.outerHTML).toBe(firstHtml)
     expect(target.querySelectorAll('span')).toHaveLength(1)
 
     await controlled.enqueue(replacement)
+    expect(target.querySelector('code')?.textContent).toBe('const count')
     const [firstAfterReplacement, replacementSpan] = [...target.querySelectorAll('span')]
     const replacementHtml = replacementSpan.outerHTML
     expect(firstAfterReplacement).toBe(firstSpan)
@@ -77,6 +81,7 @@ describe('svelte stream renderer', () => {
     expect(replacementSpan.textContent).toBe('count')
 
     await controlled.enqueue(suffix)
+    expect(target.querySelector('code')?.textContent).toBe('const count = 1')
     const [firstAfterSuffix, replacementAfterSuffix, suffixSpan] = [...target.querySelectorAll('span')]
     expect(firstAfterSuffix).toBe(firstSpan)
     expect(firstAfterSuffix.outerHTML).toBe(firstHtml)
