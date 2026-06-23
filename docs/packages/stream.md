@@ -68,7 +68,7 @@ Due to the fact that highlighting may change based on the context of the code, t
 
 By default, `CodeToTokenTransformStream` only emits **stable** tokens — no recalls. The trade-off is coarser granularity, usually one line at a time.
 
-For stream consumers that can handle recalls (e.g. the bundled Vue, React, and Solid components), set `allowRecalls: true` to get finer-grained tokens.
+For stream consumers that can handle recalls (e.g. the bundled Vue, React, Solid, and Svelte components), set `allowRecalls: true` to get finer-grained tokens.
 
 Typically recalls should be handled like:
 
@@ -145,6 +145,18 @@ export function MyComponent() {
   // get the token stream
   return <ShikiStreamRenderer stream={tokensStream} />
 }
+```
+
+### Svelte
+
+```svelte
+<script lang="ts">
+import { ShikiStreamRenderer } from '@shikijs/stream/svelte'
+
+// get the token stream
+</script>
+
+<ShikiStreamRenderer stream={tokensStream} />
 ```
 
 ## Cached Renderer

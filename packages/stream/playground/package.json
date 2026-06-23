@@ -11,9 +11,11 @@
   "dependencies": {
     "@shikijs/stream": "workspace:*",
     "shiki": "workspace:*",
+    "svelte": "catalog:integrations",
     "vue": "catalog:docs"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "catalog:bundling",
     "@types/react-dom": "catalog:types",
     "@unocss/reset": "catalog:docs",
     "@vitejs/plugin-react": "catalog:bundling",

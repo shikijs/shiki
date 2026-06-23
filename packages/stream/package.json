@@ -23,11 +23,32 @@
     ".": "./dist/index.mjs",
     "./vue": "./dist/vue.mjs",
     "./react": "./dist/react.mjs",
-    "./solid": "./dist/solid.mjs"
+    "./solid": "./dist/solid.mjs",
+    "./svelte": "./dist/svelte.mjs"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
+  "typesVersions": {
+    "*": {
+      "./vue": [
+        "./dist/vue.d.mts"
+      ],
+      "./react": [
+        "./dist/react.d.mts"
+      ],
+      "./svelte": [
+        "./dist/svelte.d.mts"
+      ],
+      "./solid": [
+        "./dist/solid.d.mts"
+      ],
+      "*": [
+        "./dist/*",
+        "./dist/index.d.mts"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
@@ -44,6 +65,7 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "solid-js": "^1.9.0",
+    "svelte": "^5.0.0-0",
     "vue": "^3.2.0"
   },
   "peerDependenciesMeta": {
@@ -51,6 +73,9 @@
       "optional": true
     },
     "solid-js": {
+      "optional": true
+    },
+    "svelte": {
       "optional": true
     },
     "vue": {
@@ -62,9 +87,12 @@
   },
   "devDependencies": {
     "@antfu/utils": "catalog:inlined",
+    "@sveltejs/vite-plugin-svelte": "catalog:bundling",
     "@types/react": "catalog:types",
+    "happy-dom": "catalog:testing",
     "react": "catalog:integrations",
     "solid-js": "catalog:integrations",
+    "svelte": "catalog:integrations",
     "unbuild": "catalog:bundling",
     "vue": "catalog:docs"
   }

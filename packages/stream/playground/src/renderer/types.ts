@@ -1,7 +1,7 @@
 import type { ThemedToken } from 'shiki/core'
 import type { RecallToken } from '../../../src'
 
-export type RendererType = 'vue' | 'react' | 'solid'
+export type RendererType = 'vue' | 'react' | 'solid' | 'svelte'
 
 export interface RendererUpdatePayload {
   stream: ReadableStream<ThemedToken | RecallToken>

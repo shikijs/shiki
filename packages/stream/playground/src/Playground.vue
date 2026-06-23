@@ -13,6 +13,7 @@ import { generateRandomTextStream } from '../../test/utils'
 import { vueAfter, vueBefore } from './fixture'
 import { createRendererReact } from './renderer/react'
 import { createRendererSolid } from './renderer/solid'
+import { createRendererSvelte } from './renderer/svelte'
 import { createRendererVue } from './renderer/vue'
 
 const defaultOptions = {
@@ -101,9 +102,9 @@ function rendererUpdate() {
       case 'solid':
         renderer = createRendererSolid(rendererOptions)
         break
-      // case 'svelte':
-      //   renderer = createRendererSvelte(rendererOptions)
-      //   break
+      case 'svelte':
+        renderer = createRendererSvelte(rendererOptions)
+        break
       // case 'web-component':
       //   renderer = createRendererWebComponent(rendererOptions)
       //   break
@@ -290,10 +291,10 @@ watch(
             <option value="solid">
               Solid Renderer
             </option>
-            <!-- <option value="svelte">
+            <option value="svelte">
               Svelte Renderer
             </option>
-            <option value="web-component">
+            <!-- <option value="web-component">
               Web Component Renderer
             </option> -->
           </select>
