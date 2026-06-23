@@ -18,17 +18,15 @@
   }
 
   $effect(() => {
-    if (!stream) {
-      tokens = []
+    tokens = []
+    if (!stream)
       return
-    }
 
     let started = false
     const abortController = new AbortController()
     const { signal } = abortController
 
-    tokens = []
-    const process = stream.pipeTo(new WritableStream({
+    stream.pipeTo(new WritableStream({
       write(token) {
         if (signal.aborted)
           return
@@ -50,12 +48,12 @@
         if (!signal.aborted)
           onStreamEnd?.()
       },
-    }), { signal })
+    }), { signal }).catch((error) => {
+      if (error.name !== 'AbortError')
+        console.error('Stream error:', error)
+    })
 
-    return () => {
-      abortController.abort()
-      process.catch(() => {})
-    }
+    return () => abortController.abort()
   })
 </script>
 
