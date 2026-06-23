@@ -57,4 +57,4 @@
   })
 </script>
 
-<pre class={`shiki shiki-stream${className ? ` ${className}` : ''}`}><code>{#each tokens as token (token)}<span style={getTokenStyle(token)}>{token.content}</span>{/each}</code></pre>
+<pre class={['shiki shiki-stream', className]}><code>{#each tokens as token (token)}<span style={getTokenStyle(token)}>{token.content}</span>{/each}</code></pre>
