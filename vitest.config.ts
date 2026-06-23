@@ -1,15 +1,18 @@
+import { svelte as Svelte } from '@sveltejs/vite-plugin-svelte'
 import { defineConfig } from 'vitest/config'
 import { wasmPlugin } from './packages/engine-oniguruma/rollup.config.mjs'
 
 export default defineConfig({
   plugins: [
     wasmPlugin(),
+    Svelte(),
   ],
   resolve: {
     tsconfigPaths: true,
-    alias: {
-      '@shikijs/engine-oniguruma/wasm-inlined': new URL('./packages/engine-oniguruma/src/wasm-inlined.ts', import.meta.url).pathname,
-    },
+    alias: [
+      { find: '@shikijs/engine-oniguruma/wasm-inlined', replacement: new URL('./packages/engine-oniguruma/src/wasm-inlined.ts', import.meta.url).pathname },
+      { find: /^svelte$/, replacement: new URL('./node_modules/svelte/src/index-client.js', import.meta.url).pathname },
+    ],
   },
   test: {
     testTimeout: 30_000,

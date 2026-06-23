@@ -403,6 +403,9 @@ importers:
       '@shikijs/vitepress-twoslash':
         specifier: workspace:*
         version: link:packages/vitepress-twoslash
+      '@sveltejs/vite-plugin-svelte':
+        specifier: catalog:bundling
+        version: 7.1.2(svelte@5.56.1(@typescript-eslint/types@8.60.1))(vite@8.0.16(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))
       '@types/fs-extra':
         specifier: catalog:types
         version: 11.0.4
@@ -511,6 +514,9 @@ importers:
       simple-git-hooks:
         specifier: catalog:cli
         version: 2.13.1
+      svelte:
+        specifier: catalog:integrations
+        version: 5.56.1(@typescript-eslint/types@8.60.1)
       taze:
         specifier: catalog:cli
         version: 19.14.1
