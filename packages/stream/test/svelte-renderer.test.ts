@@ -39,7 +39,6 @@ async function flushRenderer() {
   await Promise.resolve()
   await Promise.resolve()
   await tick()
-  await Promise.resolve()
 }
 
 describe('svelte stream renderer', () => {
