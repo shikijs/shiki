@@ -48,7 +48,6 @@ export function splitTokens<
   tokens: T[][],
   breakpoints: number[] | Set<number>,
 ): T[][] {
-  // eslint-disable-next-line e18e/prefer-array-to-sorted -- Set doesn't have toSorted()
   const sorted = [...(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))].sort((a, b) => a - b)
 
   if (!sorted.length)

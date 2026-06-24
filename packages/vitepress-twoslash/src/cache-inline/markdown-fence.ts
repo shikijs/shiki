@@ -43,7 +43,7 @@ export function createMarkdownFenceSourceCodec(mapper: MarkdownFencesSourceMappe
 
     // start injection, process in descending order to preserve offsets
     let newCode = code
-    // eslint-disable-next-line e18e/prefer-array-to-sorted -- MapIterator doesn't have toSorted()
+
     const injectAts = [...injects.keys()].sort((a, b) => b - a)
     for (const at of injectAts) {
       const sourceMap = injects.get(at)!

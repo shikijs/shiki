@@ -18,8 +18,6 @@ export const createRendererSvelte: RendererFactory = (options): RendererFactoryR
     mount: (element, payload) => {
       target = element
       render(payload)
-      // eslint-disable-next-line no-console
-      console.log('Svelte renderer mounted')
     },
     update: (payload) => {
       render(payload)
