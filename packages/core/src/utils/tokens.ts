@@ -39,6 +39,22 @@ export function splitToken<
   return tokens
 }
 
+// Find the first candidate so each token only scans its contained breakpoints.
+function findFirstBreakpointAfter(breakpoints: number[], offset: number): number {
+  let start = 0
+  let end = breakpoints.length
+
+  while (start < end) {
+    const middle = start + ((end - start) >> 1)
+    if (breakpoints[middle] <= offset)
+      start = middle + 1
+    else
+      end = middle
+  }
+
+  return start
+}
+
 /**
  * Split 2D tokens array by given breakpoints.
  */
@@ -55,13 +71,19 @@ export function splitTokens<
 
   return tokens.map((line) => {
     return line.flatMap((token) => {
-      const breakpointsInToken = sorted
-        .filter(i => token.offset < i && i < token.offset + token.content.length)
-        .map(i => i - token.offset)
-        .sort((a, b) => a - b)
+      const tokenEnd = token.offset + token.content.length
+      const start = findFirstBreakpointAfter(sorted, token.offset)
+      let end = start
 
-      if (!breakpointsInToken.length)
+      while (end < sorted.length && sorted[end] < tokenEnd)
+        end++
+
+      if (start === end)
         return token
+
+      const breakpointsInToken = sorted.slice(start, end)
+      for (let index = 0; index < breakpointsInToken.length; index++)
+        breakpointsInToken[index] -= token.offset
 
       return splitToken(token, breakpointsInToken)
     })
