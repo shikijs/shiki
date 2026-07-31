@@ -5,6 +5,12 @@ const RE_LANG_ATTR = /:?lang=["']([^"']+)["']/g
 const RE_CODE_FENCE = /(?:```|~~~)([\w-]+)/g
 const RE_LATEX_BEGIN = /\\begin\{([\w-]+)\}/g
 const RE_SCRIPT_LANG = /<script\s+(?:type|lang)=["']([^"']+)["']/gi
+// Matches a YAML/frontmatter block delimited by `---` at the very start of
+// the document, e.g.:
+// ---
+// foo: bar
+// ---
+const RE_FRONTMATTER = /^\s*---\r?\n[\s\S]*?\r?\n---(?:\r?\n|\s*$)/
 
 /**
  * Creates a converter between index and position in a code block.
@@ -114,6 +120,13 @@ export function guessEmbeddedLanguages(
     if (lang)
       langs.add(lang)
   }
+
+  // For frontmatter blocks (commonly found in markdown files)
+  // Matches: ---\nfoo: bar\n---
+  // Frontmatter is most commonly YAML (or JSON, which is a subset of YAML),
+  // so loading the YAML grammar is enough to cover both cases.
+  if (RE_FRONTMATTER.test(code))
+    langs.add('yaml')
 
   if (!highlighter)
     return [...langs]

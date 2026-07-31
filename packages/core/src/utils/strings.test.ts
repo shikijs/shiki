@@ -176,6 +176,36 @@ describe('guessEmbeddedLanguages', () => {
     expect(langs).toContain('scss')
   })
 
+  it('detects yaml from frontmatter', () => {
+    const code = '---\nfoo: bar\n---\n\n# Title'
+    const langs = guessEmbeddedLanguages(code, undefined)
+    expect(langs).toContain('yaml')
+  })
+
+  it('detects yaml from frontmatter with only frontmatter', () => {
+    const code = '---\nfoo: bar\n---'
+    const langs = guessEmbeddedLanguages(code, undefined)
+    expect(langs).toContain('yaml')
+  })
+
+  it('detects yaml from frontmatter with CRLF line endings', () => {
+    const code = '---\r\nfoo: bar\r\n---\r\n'
+    const langs = guessEmbeddedLanguages(code, undefined)
+    expect(langs).toContain('yaml')
+  })
+
+  it('does not detect yaml when there is no frontmatter', () => {
+    const code = '# Title\n\nSome text\n\n---\n\nMore text after a horizontal rule'
+    const langs = guessEmbeddedLanguages(code, undefined)
+    expect(langs).not.toContain('yaml')
+  })
+
+  it('does not detect yaml when frontmatter delimiters are not at the start', () => {
+    const code = '# Title\n---\nfoo: bar\n---'
+    const langs = guessEmbeddedLanguages(code, undefined)
+    expect(langs).not.toContain('yaml')
+  })
+
   it('handles markdown with multiple code blocks', () => {
     const code = `
 # Title
