@@ -206,12 +206,15 @@ catalogs:
       specifier: 1.7.0
       version: 1.7.0
   integrations:
+    diff-match-patch-es:
+      specifier: ^2.0.0
+      version: 2.0.0
     lz-string:
       specifier: ^1.5.0
       version: 1.5.0
     magic-string:
-      specifier: ^0.30.21
-      version: 0.30.21
+      specifier: ^1.1.0
+      version: 1.1.0
     markdown-exit:
       specifier: ^1.1.0-beta.2
       version: 1.1.0-beta.2
@@ -231,8 +234,8 @@ catalogs:
       specifier: ^13.2.1
       version: 13.2.1
     monaco-editor-core:
-      specifier: ^0.55.1
-      version: 0.55.1
+      specifier: ^0.56.0
+      version: 0.56.0
     ohash:
       specifier: ^2.0.11
       version: 2.0.11
@@ -289,9 +292,6 @@ catalogs:
     '@vitest/coverage-v8':
       specifier: ^4.1.10
       version: 4.1.10
-    diff-match-patch-es:
-      specifier: ^1.0.1
-      version: 1.0.1
     fast-glob:
       specifier: ^3.3.3
       version: 3.3.3
@@ -431,8 +431,8 @@ importers:
         specifier: catalog:cli
         version: 11.1.0
       diff-match-patch-es:
-        specifier: catalog:testing
-        version: 1.0.1
+        specifier: catalog:integrations
+        version: 2.0.0
       esbuild:
         specifier: catalog:bundling
         version: 0.28.1
@@ -708,8 +708,8 @@ importers:
   packages/magic-move:
     dependencies:
       diff-match-patch-es:
-        specifier: catalog:testing
-        version: 1.0.1
+        specifier: catalog:integrations
+        version: 2.0.0
       ohash:
         specifier: catalog:integrations
         version: 2.0.11
@@ -855,7 +855,7 @@ importers:
     devDependencies:
       monaco-editor-core:
         specifier: catalog:integrations
-        version: 0.55.1
+        version: 0.56.0
 
   packages/monaco/playground:
     dependencies:
@@ -864,7 +864,7 @@ importers:
         version: link:..
       monaco-editor-core:
         specifier: catalog:integrations
-        version: 0.55.1
+        version: 0.56.0
       shiki:
         specifier: workspace:*
         version: link:../../shiki
@@ -1120,7 +1120,7 @@ importers:
         version: 1.5.0
       magic-string:
         specifier: catalog:integrations
-        version: 0.30.21
+        version: 1.1.0
       markdown-it:
         specifier: catalog:integrations
         version: 14.3.0
@@ -4315,8 +4315,8 @@ packages:
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
 
-  diff-match-patch-es@1.0.1:
-    resolution: {integrity: sha512-KhSofrZDERg/NE6Nd+TK53knp2qz0o2Ix8rhkXd3Chfm7Wlo58Eq/juNmkyS6bS+3xS26L3Pstz3BdY/q+e9UQ==}
+  diff-match-patch-es@2.0.0:
+    resolution: {integrity: sha512-FQfgpCVMF0K7a+TRTKffqVSESFT5jZDnK+Oisjvsn0JXy4eoxgaNgr9/qrbtSat4ovbXYlwA6iDlDiKY7nPsKw==}
 
   diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
@@ -4336,11 +4336,8 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
-  dompurify@3.2.7:
-    resolution: {integrity: sha512-WhL/YuveyGXJaerVlMYGWhvQswa7myDG17P7Vu65EWC05o8vfeNbvNf4d/BOvH99+ZW+LlQsc1GDKMa1vNK6dw==}
-
-  dompurify@3.4.7:
-    resolution: {integrity: sha512-2jBxDJY4RR06tQNy4w5FlFH7kfxsQZlufd0sbv+chfHCxeJwrFw2baUDsSwvBISD4K4RDbd0PTfy3uNXsR6siA==}
+  dompurify@3.4.8:
+    resolution: {integrity: sha512-yb1cEmaOum7wFvOCSQxyfgVlv5D47Rc30iZWoMpbDIWTnJ6grDDQyu2KFJzB2k7u0pMuJcQ1zphH//fFnw2tjQ==}
 
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
@@ -5208,6 +5205,9 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
+  magic-string@1.1.0:
+    resolution: {integrity: sha512-kS3VHe0nEPST2saQV4Rbkchcd3UBRkVTQHo1D3h/ZTwFDhai/mfKkmtPAtD129EOI7K3HlHIsFOt0WrI2/oU9g==}
+
   magicast@0.5.3:
     resolution: {integrity: sha512-pVKE4UdSQ7DvHzivsCIFx2BJn1mHG6KsyrFcaxFx6tONdneEuThrDx0Cj3AMg58KyN4pzYT+LHOotxDQDjNvkw==}
 
@@ -5457,8 +5457,8 @@ packages:
   module-replacements@3.0.0-beta.8:
     resolution: {integrity: sha512-sc8TepP9elxoOBXEpxmhPzKKjTjbswHVcmsKGbgvm3k6jZlLu/WMV/Lfmga6IGMgHU/V3WtY2s6VEgM4nTElUQ==}
 
-  monaco-editor-core@0.55.1:
-    resolution: {integrity: sha512-UTk7U9VkSFy2qruSYC70+vHHo5DffN164QGkDn4vTaaO40a1UMSNHVqS2MF6Z+s0LWOeAzez/Kp85oAPZG2d0g==}
+  monaco-editor-core@0.56.0:
+    resolution: {integrity: sha512-zuY3UTjedTxWnEUDs84Us/6tvYH9mG89fkHMpzXuvrqTdyWgybn536GR/TG6XNyG5N5heYICRMxT1ox5hZ7rxQ==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -9645,7 +9645,7 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
-  diff-match-patch-es@1.0.1: {}
+  diff-match-patch-es@2.0.0: {}
 
   diff-sequences@29.6.3: {}
 
@@ -9665,11 +9665,7 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
-  dompurify@3.2.7:
-    optionalDependencies:
-      '@types/trusted-types': 2.0.7
-
-  dompurify@3.4.7:
+  dompurify@3.4.8:
     optionalDependencies:
       '@types/trusted-types': 2.0.7
 
@@ -10625,6 +10621,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  magic-string@1.1.0:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.5
+
   magicast@0.5.3:
     dependencies:
       '@babel/parser': 7.29.7
@@ -10838,7 +10838,7 @@ snapshots:
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.14
       dayjs: 1.11.21
-      dompurify: 3.4.7
+      dompurify: 3.4.8
       es-toolkit: 1.47.0
       katex: 0.16.47
       khroma: 2.1.0
@@ -11118,9 +11118,9 @@ snapshots:
 
   module-replacements@3.0.0-beta.8: {}
 
-  monaco-editor-core@0.55.1:
+  monaco-editor-core@0.56.0:
     dependencies:
-      dompurify: 3.2.7
+      dompurify: 3.4.8
       marked: 14.0.0
 
   mrmime@2.0.1: {}
