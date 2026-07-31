@@ -75,11 +75,19 @@ export default defineConfig([
 ])
 
 /**
- * @returns {import('rollup').Plugin} Plugin
+ * @returns {import('rollup').Plugin & { enforce?: 'pre' | 'post' }} Plugin
  */
 export function wasmPlugin() {
   return {
     name: 'wasm',
+    // Vite 8+ ships a built-in plugin that also intercepts bare `.wasm`
+    // imports (previously only `.wasm?init` was handled) and tries to
+    // instantiate them as real WebAssembly ESM modules, which fails for
+    // vscode-oniguruma's `onig.wasm` since it imports from a synthetic
+    // `env` module. Running this plugin with `enforce: 'pre'` makes Vite
+    // resolve our inlined-ArrayBuffer version first. Rollup ignores the
+    // unknown `enforce` field, so this is a no-op for the actual build.
+    enforce: 'pre',
     async load(id) {
       if (!id.endsWith('.wasm'))
         return

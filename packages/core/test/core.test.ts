@@ -82,7 +82,6 @@ describe('should', () => {
           "glsl",
           "regex",
           "regexp",
-          "sql",
         ]
       `)
   })

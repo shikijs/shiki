@@ -4,9 +4,10 @@ import js from '@shikijs/langs/javascript'
 import nord from '@shikijs/themes/nord'
 
 import { createHighlighterCore } from 'shiki/core'
-// @ts-expect-error no types
 // eslint-disable-next-line antfu/no-import-dist
 import wasm from '../dist/onig.wasm'
+
+const wasmBinary = wasm as unknown as ArrayBuffer
 
 export default {
   async fetch() {
@@ -15,7 +16,7 @@ export default {
       langs: [js as LanguageRegistration[]],
       // cloudflare also supports dynamic import
       // engine: createOnigurumaEngine(import('shiki/onig.wasm')),
-      engine: createOnigurumaEngine(wasm),
+      engine: createOnigurumaEngine(wasmBinary),
     })
 
     return new Response(
