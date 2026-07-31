@@ -10,12 +10,29 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'actionscript-3',
     'name': 'ActionScript',
+    'aliases': [
+      'actionscript',
+      'as3'
+    ],
     'import': (() => import('@shikijs/langs/actionscript-3')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'ada',
     'name': 'Ada',
     'import': (() => import('@shikijs/langs/ada')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'ahk',
+    'name': 'AutoHotkey',
+    'aliases': [
+      'ahk1'
+    ],
+    'import': (() => import('@shikijs/langs/ahk')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'ahk2',
+    'name': 'AutoHotkey2',
+    'import': (() => import('@shikijs/langs/ahk2')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'angular-html',
@@ -84,7 +101,8 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'bat',
     'name': 'Batch File',
     'aliases': [
-      'batch'
+      'batch',
+      'cmd'
     ],
     'import': (() => import('@shikijs/langs/bat')) as DynamicImportLanguageRegistration
   },
@@ -156,6 +174,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/cairo')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'chapel',
+    'name': 'Chapel',
+    'aliases': [
+      'chpl'
+    ],
+    'import': (() => import('@shikijs/langs/chapel')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'clarity',
     'name': 'Clarity',
     'import': (() => import('@shikijs/langs/clarity')) as DynamicImportLanguageRegistration
@@ -209,7 +235,7 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'coq',
-    'name': 'Coq',
+    'name': 'Rocq',
     'import': (() => import('@shikijs/langs/coq')) as DynamicImportLanguageRegistration
   },
   {
@@ -644,6 +670,9 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'just',
     'name': 'Just',
+    'aliases': [
+      'justfile'
+    ],
     'import': (() => import('@shikijs/langs/just')) as DynamicImportLanguageRegistration
   },
   {
@@ -824,6 +853,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/nix')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'nsis',
+    'name': 'NSIS',
+    'import': (() => import('@shikijs/langs/nsis')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'nushell',
     'name': 'nushell',
     'aliases': [
@@ -861,6 +895,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
       'scad'
     ],
     'import': (() => import('@shikijs/langs/openscad')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'org',
+    'name': 'Org Markup',
+    'import': (() => import('@shikijs/langs/org')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'pascal',
@@ -916,7 +955,8 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'name': 'PowerShell',
     'aliases': [
       'ps',
-      'ps1'
+      'ps1',
+      'pwsh'
     ],
     'import': (() => import('@shikijs/langs/powershell')) as DynamicImportLanguageRegistration
   },
@@ -1001,6 +1041,14 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'id': 'razor',
     'name': 'ASP.NET Razor',
     'import': (() => import('@shikijs/langs/razor')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'rbs',
+    'name': 'RBS',
+    'aliases': [
+      'ruby-signature'
+    ],
+    'import': (() => import('@shikijs/langs/rbs')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'reg',
@@ -1118,8 +1166,13 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   },
   {
     'id': 'smalltalk',
-    'name': 'Smalltalk',
+    'name': 'GNU Smalltalk',
     'import': (() => import('@shikijs/langs/smalltalk')) as DynamicImportLanguageRegistration
+  },
+  {
+    'id': 'smithy',
+    'name': 'Smithy',
+    'import': (() => import('@shikijs/langs/smithy')) as DynamicImportLanguageRegistration
   },
   {
     'id': 'solidity',
@@ -1307,9 +1360,6 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
   {
     'id': 'vb',
     'name': 'Visual Basic',
-    'aliases': [
-      'cmd'
-    ],
     'import': (() => import('@shikijs/langs/vb')) as DynamicImportLanguageRegistration
   },
   {
@@ -1432,9 +1482,13 @@ export type BundledLanguage =
   | '1c'
   | '1c-query'
   | 'abap'
+  | 'actionscript'
   | 'actionscript-3'
   | 'ada'
   | 'adoc'
+  | 'ahk'
+  | 'ahk1'
+  | 'ahk2'
   | 'angular-html'
   | 'angular-ts'
   | 'apache'
@@ -1442,6 +1496,7 @@ export type BundledLanguage =
   | 'apl'
   | 'applescript'
   | 'ara'
+  | 'as3'
   | 'asciidoc'
   | 'asm'
   | 'astro'
@@ -1466,6 +1521,8 @@ export type BundledLanguage =
   | 'cadence'
   | 'cairo'
   | 'cdc'
+  | 'chapel'
+  | 'chpl'
   | 'cjs'
   | 'clarity'
   | 'clj'
@@ -1580,6 +1637,7 @@ export type BundledLanguage =
   | 'jsx'
   | 'julia'
   | 'just'
+  | 'justfile'
   | 'kdl'
   | 'kotlin'
   | 'kql'
@@ -1626,6 +1684,7 @@ export type BundledLanguage =
   | 'nginx'
   | 'nim'
   | 'nix'
+  | 'nsis'
   | 'nu'
   | 'nushell'
   | 'objc'
@@ -1634,6 +1693,7 @@ export type BundledLanguage =
   | 'ocaml'
   | 'odin'
   | 'openscad'
+  | 'org'
   | 'pascal'
   | 'perl'
   | 'perl6'
@@ -1657,6 +1717,7 @@ export type BundledLanguage =
   | 'pug'
   | 'puppet'
   | 'purescript'
+  | 'pwsh'
   | 'py'
   | 'python'
   | 'ql'
@@ -1668,6 +1729,7 @@ export type BundledLanguage =
   | 'raku'
   | 'razor'
   | 'rb'
+  | 'rbs'
   | 'reg'
   | 'regex'
   | 'regexp'
@@ -1678,6 +1740,7 @@ export type BundledLanguage =
   | 'rs'
   | 'rst'
   | 'ruby'
+  | 'ruby-signature'
   | 'rust'
   | 'sas'
   | 'sass'
@@ -1693,6 +1756,7 @@ export type BundledLanguage =
   | 'shellscript'
   | 'shellsession'
   | 'smalltalk'
+  | 'smithy'
   | 'solidity'
   | 'soy'
   | 'sparql'

@@ -84,3 +84,6 @@ export default antfu(
     },
   },
 )
+  .removeRules(
+    'markdown/heading-increment',
+  )

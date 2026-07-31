@@ -251,6 +251,11 @@ export const bundledLanguagesInfo: BundledLanguageInfo[] = [
     'import': (() => import('@shikijs/langs/shellscript')) as DynamicImportLanguageRegistration
   },
   {
+    'id': 'smithy',
+    'name': 'Smithy',
+    'import': (() => import('@shikijs/langs/smithy')) as DynamicImportLanguageRegistration
+  },
+  {
     'id': 'sql',
     'name': 'SQL',
     'import': (() => import('@shikijs/langs/sql')) as DynamicImportLanguageRegistration
@@ -401,6 +406,7 @@ export type BundledLanguage =
   | 'sh'
   | 'shell'
   | 'shellscript'
+  | 'smithy'
   | 'sql'
   | 'styl'
   | 'stylus'
