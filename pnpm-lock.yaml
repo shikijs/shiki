@@ -137,12 +137,27 @@ catalogs:
       specifier: ^4.115.0
       version: 4.115.0
   docs:
+    '@braintree/sanitize-url':
+      specifier: ^7.1.2
+      version: 7.1.2
     '@unocss/reset':
       specifier: ^66.7.5
       version: 66.7.5
     '@vueuse/core':
       specifier: ^14.4.0
       version: 14.4.0
+    cytoscape:
+      specifier: ^3.34.0
+      version: 3.34.0
+    cytoscape-cose-bilkent:
+      specifier: ^4.1.0
+      version: 4.1.0
+    dayjs:
+      specifier: ^1.11.21
+      version: 1.11.21
+    debug:
+      specifier: ^4.4.3
+      version: 4.4.3
     floating-vue:
       specifier: ^5.2.2
       version: 5.2.2
@@ -344,6 +359,15 @@ importers:
       '@antfu/ni':
         specifier: catalog:cli
         version: 30.3.0
+      '@iconify-json/carbon':
+        specifier: catalog:icons
+        version: 1.2.24
+      '@iconify-json/ph':
+        specifier: catalog:icons
+        version: 1.2.2
+      '@iconify-json/svg-spinners':
+        specifier: catalog:icons
+        version: 1.2.4
       '@rollup/plugin-alias':
         specifier: catalog:bundling
         version: 6.0.0(rollup@4.62.3)
@@ -565,26 +589,34 @@ importers:
         version: 4.115.0
 
   docs:
-    dependencies:
-      '@iconify-json/ph':
-        specifier: catalog:icons
-        version: 1.2.2
-      fuse.js:
-        specifier: catalog:docs
-        version: 7.5.0
     devDependencies:
-      '@iconify-json/svg-spinners':
-        specifier: catalog:icons
-        version: 1.2.4
+      '@braintree/sanitize-url':
+        specifier: catalog:docs
+        version: 7.1.2
       '@unocss/reset':
         specifier: catalog:docs
         version: 66.7.5
       '@vueuse/core':
         specifier: catalog:docs
         version: 14.4.0(vue@3.5.40(typescript@6.0.3))
+      cytoscape:
+        specifier: catalog:docs
+        version: 3.34.0
+      cytoscape-cose-bilkent:
+        specifier: catalog:docs
+        version: 4.1.0(cytoscape@3.34.0)
+      dayjs:
+        specifier: catalog:docs
+        version: 1.11.21
+      debug:
+        specifier: catalog:docs
+        version: 4.4.3(supports-color@10.2.2)
       floating-vue:
         specifier: catalog:docs
         version: 5.2.2(vue@3.5.40(typescript@6.0.3))
+      fuse.js:
+        specifier: catalog:docs
+        version: 7.5.0
       pinia:
         specifier: catalog:cli
         version: 3.0.4(typescript@6.0.3)(vue@3.5.40(typescript@6.0.3))
@@ -4015,6 +4047,10 @@ packages:
 
   cytoscape@3.33.4:
     resolution: {integrity: sha512-HIN5Pmd9MrX9BkV7tDwnOcEJCSFvCpc8X97h3f508J6I5FsqAY65wKOCvgH2CuP42CaahWaz4tuh32SOOIH7ww==}
+    engines: {node: '>=0.10'}
+
+  cytoscape@3.34.0:
+    resolution: {integrity: sha512-62rNSrioXw93uliKFBwjukeQyeWwH2PqDrTac31r2P6464u3AUvTk0xS4LVvT251g7IgkFunrI48ZEZGjywSOg==}
     engines: {node: '>=0.10'}
 
   d3-array@2.12.1:
@@ -9234,12 +9270,19 @@ snapshots:
       cose-base: 1.0.3
       cytoscape: 3.33.4
 
+  cytoscape-cose-bilkent@4.1.0(cytoscape@3.34.0):
+    dependencies:
+      cose-base: 1.0.3
+      cytoscape: 3.34.0
+
   cytoscape-fcose@2.2.0(cytoscape@3.33.4):
     dependencies:
       cose-base: 2.2.0
       cytoscape: 3.33.4
 
   cytoscape@3.33.4: {}
+
+  cytoscape@3.34.0: {}
 
   d3-array@2.12.1:
     dependencies:

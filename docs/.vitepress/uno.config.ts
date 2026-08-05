@@ -1,7 +1,7 @@
 import {
   defineConfig,
   presetIcons,
-  presetUno,
+  presetWind3,
 } from 'unocss'
 
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
     'container',
   ],
   presets: [
-    presetUno(),
+    presetWind3(),
     presetIcons(),
   ],
   safelist: [
