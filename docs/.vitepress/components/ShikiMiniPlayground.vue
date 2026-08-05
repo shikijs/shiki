@@ -29,24 +29,24 @@ function onInput() {
 
 <template>
   <div
-    class="language-ts vp-adaptive-theme transition-none! mini-playground" shadow
+    class="language-ts vp-adaptive-theme transition-none! mini-playground shadow"
     :style="[play.preStyle, { colorScheme: currentTheme?.type || 'inherit' }]"
   >
-    <div sticky z-12 p2 px3 pl5 flex="~ gap-4 items-center" left-0 top-0 right-0 border="b-solid gray/5" bg-inherit>
-      <label relative flex="~ gap-1 items-center" justify-start class="min-w-[8em]">
-        <div i-carbon:chevron-down op50 />
-        <span font-mono text-xs>{{ currentLang?.name }}</span>
-        <select v-model="play.lang" font-mono :style="play.preStyle" absolute inset-0 min-w-0 op0>
+    <div class="sticky z-12 p2 px3 pl5 flex gap-4 items-center left-0 top-0 right-0 b-solid border-gray/5 bg-inherit">
+      <label class="relative flex gap-1 items-center justify-start min-w-[8em]">
+        <div class="i-carbon:chevron-down op50" />
+        <span class="font-mono text-xs">{{ currentLang?.name }}</span>
+        <select v-model="play.lang" :style="play.preStyle" class="font-mono absolute inset-0 min-w-0 op0">
           <option v-for="lang in play.allLanguages" :key="lang.name" :value="lang.name">
             {{ lang.name }}
           </option>
         </select>
         <FundingButton :name="`${currentLang?.displayName} grammar`" :funding="currentLang?.funding" />
       </label>
-      <label relative flex="~ gap-1 items-center" justify-start class="min-w-[8em]">
-        <div i-carbon:chevron-down op50 />
-        <span font-mono text-xs>{{ currentTheme?.displayName }}</span>
-        <select v-model="play.theme" font-mono :style="play.preStyle" absolute inset-0 min-w-0 op0>
+      <label class="relative flex gap-1 items-center justify-start min-w-[8em]">
+        <div class="i-carbon:chevron-down op50" />
+        <span class="font-mono text-xs">{{ currentTheme?.displayName }}</span>
+        <select v-model="play.theme" :style="play.preStyle" class="font-mono absolute inset-0 min-w-0 op0">
           <option v-for="theme in play.allThemes.filter(i => i.type === 'light')" :key="theme.name" :value="theme.name">
             {{ theme.displayName }}
           </option>
@@ -59,28 +59,24 @@ function onInput() {
         </select>
         <FundingButton :name="`${currentTheme?.displayName} theme`" :funding="currentTheme?.funding" />
       </label>
-      <div flex-auto />
+      <div class="flex-auto" />
       <div
-        i-svg-spinners-3-dots-fade
+        class="i-svg-spinners-3-dots-fade flex-none transition-opacity"
         :class="play.isLoading ? 'op100' : 'op0'"
-        flex-none transition-opacity
       />
-      <a op50 text-xs mx-2 hover="op75" href="https://textmate-grammars-themes.netlify.app/" target="_blank" title="Full Playground" class="decoration-none! text-inherit!">
+      <a href="https://textmate-grammars-themes.netlify.app/" target="_blank" title="Full Playground" class="op50 text-xs mx-2 hover:op75 decoration-none! text-inherit!">
         Playground
       </a>
-      <button title="Randomize" hover="bg-gray/10" p1 rounded @click="play.randomize">
-        <div i-carbon:shuffle op50 />
+      <button title="Randomize" class="hover:bg-gray/10 p1 rounded" @click="play.randomize">
+        <div class="i-carbon:shuffle op50" />
       </button>
     </div>
-    <div relative min-h-100 float-left min-w-full>
+    <div class="relative min-h-100 float-left min-w-full">
       <span ref="highlightContainerRef" v-html="play.output" />
       <textarea
         ref="textAreaRef"
         v-model="play.input"
-        whitespace-pre overflow-auto w-full h-full
-        font-mono bg-transparent absolute inset-0 py-20px px-24px
-        text-transparent caret-gray tab-4 resize-none z-10
-        class="line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
+        class="whitespace-pre overflow-auto w-full h-full font-mono bg-transparent absolute inset-0 py-20px px-24px text-transparent caret-gray tab-4 resize-none z-10 line-height-$vp-code-line-height font-$vp-font-family-mono text-size-$vp-code-font-size"
         autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
         @input="onInput"
         @scroll="syncScroll"

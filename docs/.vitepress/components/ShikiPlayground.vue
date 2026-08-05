@@ -6,8 +6,8 @@ const play = usePlayground()
 
 <template>
   <div class="vp-doc">
-    <div grid="~ cols-2 gap-4" p4>
-      <textarea v-model="play.input" font-mono rounded p4 my4.5 />
+    <div class="grid cols-2 gap-4 p4">
+      <textarea v-model="play.input" class="font-mono rounded p4 my4.5" />
       <ShikiMiniPlayground />
     </div>
   </div>
