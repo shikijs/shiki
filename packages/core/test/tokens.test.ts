@@ -1,6 +1,23 @@
 import { createJavaScriptRegexEngine } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import { codeToHtml, codeToTokens, codeToTokensBase, createShikiPrimitiveAsync } from '../src'
+import { codeToHtml, codeToTokens, codeToTokensBase, createShikiPrimitiveAsync, splitTokens } from '../src'
+
+describe('splitTokens', () => {
+  it('splits at contained breakpoints while preserving token order and fields', () => {
+    const tokens = [[
+      { content: 'wxyz', marker: 'later', offset: 10 },
+      { content: 'abcd', marker: 'earlier', offset: 0 },
+    ]]
+
+    expect(splitTokens(tokens, [14, 2, 13, 11, 10, 4, 0, 2])).toEqual([[
+      { content: 'w', marker: 'later', offset: 10 },
+      { content: 'xy', marker: 'later', offset: 11 },
+      { content: 'z', marker: 'later', offset: 13 },
+      { content: 'ab', marker: 'earlier', offset: 0 },
+      { content: 'cd', marker: 'earlier', offset: 2 },
+    ]])
+  })
+})
 
 it('includeExplanation', async () => {
   using engine = await createShikiPrimitiveAsync({
