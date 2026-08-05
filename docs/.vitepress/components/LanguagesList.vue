@@ -31,13 +31,13 @@ watch(showModel, () => {
 
 <template>
   <div>
-    <div flex="~ gap-0.5 items-center">
+    <div class="flex gap-0.5 items-center">
       <input id="radio-all" v-model="bundle" type="radio" name="lang" value="all">
       <label for="radio-all">Full Bundle</label>
-      <div mx2 />
+      <div class="mx2" />
       <input id="radio-web" v-model="bundle" type="radio" name="lang" value="web">
       <label for="radio-web">Web Bundle</label>
-      <div mx2 />
+      <div class="mx2" />
       <a href="/guide/bundles">?</a>
     </div>
     <table>
@@ -59,22 +59,22 @@ watch(showModel, () => {
             <code v-for="alias in l.aliases" :key="alias">{{ alias }}</code>
           </td>
           <td>
-            <div flex>
+            <div class="flex">
               <button
                 title="Preview Example"
-                ma text-lg
+                class="ma text-lg"
                 @click="preview(l.name)"
               >
-                <div i-carbon:code />
+                <div class="i-carbon:code" />
               </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <div v-if="showModel" fixed inset-0 z-100 flex items-center justify-center>
-      <div bg-black:50 absolute inset-0 backdrop-blur-sm @click="showModel = false" />
-      <ShikiMiniPlayground max-h-80vh w-full md:w-150 lg:w-200 />
+    <div v-if="showModel" class="fixed inset-0 z-100 flex items-center justify-center">
+      <div class="bg-black:50 absolute inset-0 backdrop-blur-sm" @click="showModel = false" />
+      <ShikiMiniPlayground class="max-h-80vh w-full md:w-150 lg:w-200" />
     </div>
   </div>
 </template>
