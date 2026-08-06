@@ -6,6 +6,7 @@ import { describe, expect, it } from 'vitest'
 import {
   transformerCompactLineOptions,
   transformerNotationDiff,
+  transformerNotationDiffWord,
   transformerNotationErrorLevel,
   transformerNotationFocus,
   transformerNotationHighlight,
@@ -85,6 +86,23 @@ body { margin: 0; }
 .diff:before { position: absolute; left: 5px; }
 .diff.add:before { content: "+"; color: green;}
 .diff.remove:before { content: "-"; color: red; }
+</style>`,
+)
+
+suite(
+  'diff-word',
+  import.meta.glob('./fixtures/diff-word/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerNotationDiffWord({ matchAlgorithm: 'v3' }),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1.5em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.diff.add { background-color: #0505; color: green; }
+.diff.remove { background-color: #8005; color: red; }
 </style>`,
 )
 
