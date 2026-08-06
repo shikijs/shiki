@@ -102,7 +102,7 @@ export async function run(
 
   const codes = await Promise.all(files.map(async (path) => {
     const { content, ext } = await readSource(path)
-    const lang = (options.lang || ext).toLowerCase()
+    const lang = (options.lang || ext || 'text').toLowerCase()
     if (options.format === 'html') {
       const { codeToHtml } = await import('shiki')
       return await codeToHtml(content, {
