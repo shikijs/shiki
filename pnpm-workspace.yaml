@@ -21,7 +21,7 @@ packages:
   - docs
 
 overrides:
-  rollup: ^4.62.3
+  rollup: ^4.62.4
   semver: ^7.8.5
 
 catalogs:
@@ -35,42 +35,42 @@ catalogs:
     '@rollup/plugin-node-resolve': ^16.0.3
     '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^1.0.0
-    '@sveltejs/vite-plugin-svelte': ^7.2.0
-    '@vitejs/plugin-react': ^6.0.4
+    '@sveltejs/vite-plugin-svelte': ^7.3.0
+    '@vitejs/plugin-react': ^6.0.5
     '@vitejs/plugin-vue': ^6.0.8
     babel-preset-solid: ^1.9.12
-    baseline-browser-mapping: ^2.11.7
-    esbuild: ^0.28.1
+    baseline-browser-mapping: ^2.11.13
+    esbuild: ^0.28.2
     pathe: ^2.0.3
-    rolldown-plugin-dts: ^0.27.14
-    rollup: ^4.62.3
+    rolldown-plugin-dts: ^0.28.0
+    rollup: ^4.62.4
     rollup-plugin-copy: ^3.5.0
-    rollup-plugin-dts: ^6.4.1
+    rollup-plugin-dts: ^6.5.1
     rollup-plugin-esbuild: ^6.2.1
-    tinyexec: ^1.2.4
+    tinyexec: ^1.3.0
     tsdown: ^0.22.14
     unbuild: ^3.6.1
-    vite: ^8.1.5
+    vite: ^8.2.1
     vite-plugin-solid: ^2.11.14
   cli:
-    '@antfu/eslint-config': ^9.2.0
-    '@antfu/ni': ^30.3.0
-    bumpp: ^11.1.0
-    eslint: ^10.8.0
+    '@antfu/eslint-config': ^9.3.0
+    '@antfu/ni': ^30.5.0
+    bumpp: ^12.2.0
+    eslint: ^10.8.1
     eslint-plugin-format: ^2.0.1
     jiti: ^2.7.0
-    lint-staged: ^17.2.0
-    pinia: ^3.0.4
-    pnpm: ^11.18.0
+    lint-staged: ^17.3.0
+    pinia: ^4.0.2
+    pnpm: ^11.20.0
     prettier: ^3.9.6
     rimraf: ^6.1.3
     simple-git-hooks: ^2.13.1
-    taze: ^19.16.0
-    tsx: ^4.23.1
-    turbo: ^2.10.8
+    taze: ^20.0.0
+    tsx: ^4.23.11
+    turbo: ^2.10.9
     typescript: ^6.0.3
-    vue-tsc: ^3.3.8
-    wrangler: ^4.115.0
+    vue-tsc: ^3.3.9
+    wrangler: ^4.120.0
   docs:
     '@braintree/sanitize-url': ^7.1.2
     '@unocss/reset': ^66.7.5
@@ -83,13 +83,13 @@ catalogs:
     fuse.js: ^7.5.0
     unocss: ^66.7.5
     unplugin-vue-components: ^32.1.0
-    vitepress: ^2.0.0-alpha.18
+    vitepress: ^2.0.0-alpha.19
     vitepress-plugin-group-icons: ^1.7.6
     vitepress-plugin-mermaid: ^2.0.17
-    vue: ^3.5.40
+    vue: ^3.5.41
   icons:
-    '@iconify-json/carbon': ^1.2.24
-    '@iconify-json/codicon': ^1.2.65
+    '@iconify-json/carbon': ^1.2.25
+    '@iconify-json/codicon': ^1.2.68
     '@iconify-json/ph': ^1.2.2
     '@iconify-json/svg-spinners': ^1.2.4
   inlined:
@@ -98,7 +98,7 @@ catalogs:
     hast-util-from-html: ^2.0.3
     hast-util-to-html: ^9.0.5
     hast-util-to-string: ^3.0.1
-    tm-grammars: ^1.32.0
+    tm-grammars: ^1.32.3
     tm-themes: ^1.12.3
     vscode-oniguruma: 1.7.0
   integrations:
@@ -134,8 +134,8 @@ catalogs:
     '@vitest/coverage-v8': ^4.1.10
     fast-glob: ^3.3.3
     fs-extra: ^11.4.0
-    happy-dom: ^20.11.1
-    js-yaml: ^5.2.2
+    happy-dom: ^20.11.2
+    js-yaml: ^5.2.3
     vitest: ^4.1.10
     vitest-package-exports: ^1.2.0
   types:
@@ -143,9 +143,9 @@ catalogs:
     '@types/hast': ^3.0.5
     '@types/markdown-it': ^14.1.2
     '@types/mdast': ^4.0.4
-    '@types/node': ^26.1.2
-    '@types/react': ^19.2.17
-    '@types/react-dom': ^19.2.3
+    '@types/node': ^26.2.0
+    '@types/react': ^19.2.18
+    '@types/react-dom': ^19.2.4
     '@types/unist': ^3.0.3
 onlyBuiltDependencies:
   - esbuild
