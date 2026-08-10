@@ -14,8 +14,6 @@ Thank you for contributing!
 > - Make sure the change is scoped, tested, and matches this project's conventions — don't dump a large, unreviewed AI-generated patch.
 >
 > PRs that are clearly unreviewed AI output (unexplained scope, made-up APIs, failing tests/build, or descriptions that read like raw model output) will be rejected and closed without further notice. In severe cases, your account might be banned organization-wide and reported to GitHub.
->
-> **PLEASE SHOW SOME RESPECT** and do not abuse this.
 
 ---
 
