@@ -4,13 +4,18 @@ Thank you for contributing!
 
 ---
 
-> Please be aware that vibe-coding contributions are **🚫 STRICTLY PROHIBITED**.
+> AI-assisted contributions are welcome, but **you are responsible for everything you submit**.
 > We are humans behind these open source projects, trying hard to maintain good quality and a healthy community.
-> Not only do vibe-coding contributions pollute the code, but they also drain A LOT of unnecessary energy and time from maintainers and toxify the community and collaboration.
+> Unreviewed, "vibe-coded" PRs pollute the code and drain A LOT of unnecessary energy and time from maintainers.
 >
-> All vibe-coded, AI-generated PRs will be rejected and closed without further notice. In severe cases, your account might be banned organization-wide and reported to GitHub.
+> If you used AI tools to help with this contribution:
+> - Read and understand every line of the diff before submitting it.
+> - Write the PR description and comments in your own words, not copy-pasted AI output.
+> - Make sure the change is scoped, tested, and matches this project's conventions — don't dump a large, unreviewed AI-generated patch.
 >
-> **PLEASE SHOW SOME RESPECT** and do not do so.
+> PRs that are clearly unreviewed AI output (unexplained scope, made-up APIs, failing tests/build, or descriptions that read like raw model output) will be rejected and closed without further notice. In severe cases, your account might be banned organization-wide and reported to GitHub.
+>
+> **PLEASE SHOW SOME RESPECT** and do not abuse this.
 
 ---
 
