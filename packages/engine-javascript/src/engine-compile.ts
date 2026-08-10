@@ -29,6 +29,7 @@ export function defaultJavaScriptRegexConstructor(pattern: string, options?: ToR
   return toRegExp(
     pattern,
     {
+      target: 'ES2018',
       global: true,
       hasIndices: true,
       // This has no benefit for the standard JS engine, but it avoids a perf penalty for
