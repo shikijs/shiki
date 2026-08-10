@@ -174,4 +174,31 @@ describe('run', () => {
     expect(output).toContain('javascript')
     expect(output).toContain('python')
   })
+  it('local file without extension falls back to plaintext', async () => {
+    const noExtFile = path.join(testDir, 'Makefile')
+    await fs.writeFile(noExtFile, 'all:\n\techo Hello')
+
+    const output: string[] = []
+    // should not throw; without the fix, lang='' caused shiki to error
+    await run(['node', 'shiki', noExtFile], msg => output.push(msg))
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('all')
+  })
+
+  it('remote URL without file extension falls back to plaintext', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      text: () => Promise.resolve('FROM node:18'),
+    }))
+
+    const output: string[] = []
+    // URL has no extension → ext='', lang must fall back to 'text'
+    await run(['node', 'shiki', 'https://raw.githubusercontent.com/user/repo/main/Dockerfile'], msg => output.push(msg))
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('FROM')
+
+    vi.unstubAllGlobals()
+  })
 })
