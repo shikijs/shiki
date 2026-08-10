@@ -74,7 +74,7 @@ const TwoslashFloatingVue = {
           popperTriggers: isMobile ? ['touch'] : ['hover', 'touch'],
           placement: 'bottom-start',
           overflowPadding: 10,
-          delay: 0,
+          delay: { show: 200, hide: 0 },
           handleResize: false,
           autoHide: true,
           noAutoFocus: true,
