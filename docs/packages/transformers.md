@@ -150,6 +150,33 @@ console.log('goodbye')
 
 ---
 
+### `transformerNotationDiffWord`
+
+Use `[!code ++:text]` and `[!code --:text]` to mark added and removed text in the code.
+
+````md
+```ts
+// [\!code --:hello]
+// [\!code ++:hola]
+console.log('hello')
+```
+````
+
+Renders (with custom CSS rules):
+
+```ts
+// [!code --:hello]
+// [!code ++:hola]
+console.log('hello')
+```
+
+- `// [!code ++:text]` outputs: `<span class="diff add">text</span>`
+- `// [!code --:text]` outputs: `<span class="diff remove">text</span>`
+
+You can also specify the number of lines to highlight matched words on, similar to `transformerNotationWordHighlight`.
+
+---
+
 ### `transformerNotationHighlight`
 
 Use `[!code highlight]` to highlight a line.
