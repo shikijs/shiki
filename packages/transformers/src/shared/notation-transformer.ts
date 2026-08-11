@@ -3,6 +3,8 @@ import type { Element, Text } from 'hast'
 import type { ParsedComments } from './parse-comments'
 import { parseComments, v1ClearEndCommentPrefix, v3ClearEndCommentPrefix } from './parse-comments'
 
+const RE_NOTATION = /#?\s*\[!code\b(?:\\.|[^\]])*\]/gi
+
 export type MatchAlgorithm = 'v1' | 'v3'
 
 export interface MatchAlgorithmOptions {
@@ -49,7 +51,12 @@ export function createCommentNotationTransformer(
           continue
 
         let lineIdx = lines.indexOf(comment.line)
-        if (comment.isLineCommentOnly && matchAlgorithm !== 'v1')
+        const isStandaloneNotation = comment.info[1]
+          .replace(RE_NOTATION, '')
+          .replace(regex, '')
+          .trim()
+          .length === 0
+        if (comment.isLineCommentOnly && isStandaloneNotation && matchAlgorithm !== 'v1')
           lineIdx++
 
         let replaced = false
