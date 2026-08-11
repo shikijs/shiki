@@ -1,6 +1,6 @@
 import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
-import { transformerNotationDiff, transformerNotationFocus } from '../src'
+import { createCommentNotationTransformer, transformerNotationDiff, transformerNotationFocus } from '../src'
 
 function getLineClasses(html: string): string[] {
   return [...html.matchAll(/<span class="line([^"]*)">/g)]
@@ -37,5 +37,29 @@ describe('comment-only line notations', () => {
     expect(lineClasses[0]).toContain('focused')
     expect(html).toContain('bar')
     expect(html).not.toContain('[!code')
+  })
+
+  it('supports standalone markers with a custom notation syntax', async () => {
+    const customTransformer = createCommentNotationTransformer(
+      'custom-focus',
+      /\s*@focus/,
+      function (_match, _line, _comment, lines, index) {
+        this.addClassToHast(lines[index], 'focused')
+        return true
+      },
+      'v3',
+    )
+
+    const html = await codeToHtml(`# @focus\nbar`, {
+      lang: 'yaml',
+      theme: 'github-dark',
+      transformers: [customTransformer],
+    })
+
+    const lineClasses = getLineClasses(html)
+    expect(lineClasses).toHaveLength(1)
+    expect(lineClasses[0]).toContain('focused')
+    expect(html).toContain('bar')
+    expect(html).not.toContain('@focus')
   })
 })

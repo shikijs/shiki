@@ -51,7 +51,11 @@ export function createCommentNotationTransformer(
           continue
 
         let lineIdx = lines.indexOf(comment.line)
-        const isStandaloneNotation = comment.info[1].replace(RE_NOTATION, '').trim().length === 0
+        const isStandaloneNotation = comment.info[1]
+          .replace(RE_NOTATION, '')
+          .replace(regex, '')
+          .trim()
+          .length === 0
         if (comment.isLineCommentOnly && isStandaloneNotation && matchAlgorithm !== 'v1')
           lineIdx++
 
