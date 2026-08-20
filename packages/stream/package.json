@@ -87,8 +87,11 @@
   },
   "devDependencies": {
     "@antfu/utils": "catalog:inlined",
+    "@babel/preset-typescript": "catalog:bundling",
+    "@rollup/plugin-babel": "catalog:bundling",
     "@sveltejs/vite-plugin-svelte": "catalog:bundling",
     "@types/react": "catalog:types",
+    "babel-preset-solid": "catalog:bundling",
     "happy-dom": "catalog:testing",
     "react": "catalog:integrations",
     "solid-js": "catalog:integrations",
