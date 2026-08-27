@@ -1016,12 +1016,18 @@ importers:
       '@types/react':
         specifier: catalog:types
         version: 19.2.18
+      '@types/react-dom':
+        specifier: catalog:types
+        version: 19.2.4(@types/react@19.2.18)
       happy-dom:
         specifier: catalog:testing
         version: 20.11.2
       react:
         specifier: catalog:integrations
         version: 19.2.8
+      react-dom:
+        specifier: catalog:integrations
+        version: 19.2.8(react@19.2.8)
       solid-js:
         specifier: catalog:integrations
         version: 1.9.14
