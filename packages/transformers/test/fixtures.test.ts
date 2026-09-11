@@ -5,6 +5,7 @@ import { codeToHtml } from 'shiki'
 import { describe, expect, it } from 'vitest'
 import {
   transformerCompactLineOptions,
+  transformerMetaDiff,
   transformerNotationDiff,
   transformerNotationErrorLevel,
   transformerNotationFocus,
@@ -86,6 +87,29 @@ body { margin: 0; }
 .diff.add:before { content: "+"; color: green;}
 .diff.remove:before { content: "-"; color: red; }
 </style>`,
+)
+
+suite(
+  'meta-diff',
+  import.meta.glob('./fixtures/meta-diff/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerMetaDiff(),
+    transformerRemoveLineBreak(),
+  ],
+  code => `${code}
+<style>
+body { margin: 0; }
+.shiki { padding: 1.5em; }
+.line { display: block; width: 100%; height: 1.2em; }
+.diff.add { background-color: #0505; color: green; }
+.diff.remove { background-color: #8005; color: red; }
+</style>`,
+  undefined,
+  {
+    meta: {
+      __raw: '{1+, 3-, 5+}',
+    },
+  },
 )
 
 suite(
