@@ -13,6 +13,7 @@ import {
   transformerRemoveComments,
   transformerRemoveLineBreak,
   transformerRemoveNotationEscape,
+  transformerRenderLineNumber,
   transformerRenderWhitespace,
 } from '../src'
 
@@ -191,6 +192,22 @@ suite(
   ],
   code => `${code}${CSS_RENDER_WHITESPACE}`,
   '.leading',
+)
+
+suite(
+  'line-number',
+  import.meta.glob('./fixtures/line-number/*.*', { query: '?raw', import: 'default', eager: true }),
+  [
+    transformerRenderLineNumber(),
+  ],
+  code => `${code}
+<style>
+.line-number {
+  user-select: none;
+  opacity: 0.5;
+  margin-right: 1em;
+}
+</style>`,
 )
 
 suite(

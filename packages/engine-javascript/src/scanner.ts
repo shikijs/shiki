@@ -3,6 +3,7 @@ import type {
   RegexEngineString,
 } from '@shikijs/types'
 import type { IOnigMatch } from '@shikijs/vscode-textmate'
+import type { JavaScriptEngineString } from './string'
 
 const MAX = 4294967295
 
@@ -27,8 +28,47 @@ export interface JavaScriptRegexScannerOptions {
   regexConstructor?: (pattern: string) => RegExp
 }
 
+interface LastSearch {
+  strId: number
+  searchedFrom: number
+  matchIndex: number // -1 for no match
+  indices: RegExpIndicesArray | null
+}
+
+// Sticky regexps and `EmulatedRegExp`s with a search strategy (how `oniguruma-to-es` emulates `\G`)
+// depend on the exact start position, so their searches can't be reused
+function isSearchCacheable(regexp: RegExp): boolean {
+  return !regexp.sticky && !(regexp as { rawOptions?: { strategy?: string | null } }).rawOptions?.strategy
+}
+
+function toResult(index: number, indices: RegExpIndicesArray): IOnigMatch {
+  return {
+    index,
+    captureIndices: indices.map((indice) => {
+      if (indice == null) {
+        return {
+          start: MAX,
+          end: MAX,
+          length: 0,
+        }
+      }
+      return {
+        start: indice[0],
+        end: indice[1],
+        length: indice[1] - indice[0],
+      }
+    }),
+  }
+}
+
 export class JavaScriptScanner implements PatternScanner {
   regexps: (RegExp | null)[]
+
+  /**
+   * Last search of each regexp on the current string, reused the way `vscode-oniguruma` does.
+   * `null` for regexps whose searches can't be reused.
+   */
+  private lastSearches: (LastSearch | null)[]
 
   constructor(
     public patterns: (string | RegExp)[],
@@ -71,51 +111,66 @@ export class JavaScriptScanner implements PatternScanner {
         throw e
       }
     })
+
+    this.lastSearches = this.regexps.map(regexp => regexp && isSearchCacheable(regexp)
+      ? { strId: 0, searchedFrom: 0, matchIndex: -1, indices: null }
+      : null,
+    )
   }
 
   findNextMatchSync(string: string | RegexEngineString, startPosition: number, _options: number): IOnigMatch | null {
     const str = typeof string === 'string'
       ? string
       : string.content
-    const pending: [index: number, match: RegExpExecArray, offset: number][] = []
+    // No id (plain string or a string from another engine): never reuse
+    const strId = typeof string === 'string'
+      ? 0
+      : (string as Partial<JavaScriptEngineString>).id || 0
 
-    function toResult(index: number, match: RegExpExecArray, offset = 0): IOnigMatch {
-      return {
-        index,
-        captureIndices: match.indices!.map((indice) => {
-          if (indice == null) {
-            return {
-              start: MAX,
-              end: MAX,
-              length: 0,
-            }
-          }
-          return {
-            start: indice[0] + offset,
-            end: indice[1] + offset,
-            length: indice[1] - indice[0],
-          }
-        }),
-      }
-    }
+    let bestIndex = -1
+    let bestMatchIndex = 0
+    let bestIndices: RegExpIndicesArray | null = null
 
     for (let i = 0; i < this.regexps.length; i++) {
       const regexp = this.regexps[i]
       if (!regexp)
         continue
       try {
-        regexp.lastIndex = startPosition
-        const match = regexp.exec(str)
+        const last = strId ? this.lastSearches[i] : null
+        let matchIndex: number
+        let indices: RegExpIndicesArray | null
 
-        if (!match)
+        // Still valid if it found nothing, or a match at or after the start position
+        if (last && last.strId === strId && last.searchedFrom <= startPosition && (last.matchIndex === -1 || last.matchIndex >= startPosition)) {
+          matchIndex = last.matchIndex
+          indices = last.indices
+        }
+        else {
+          regexp.lastIndex = startPosition
+          const match = regexp.exec(str)
+          matchIndex = match ? match.index : -1
+          indices = match ? match.indices! : null
+          if (last) {
+            last.strId = strId
+            last.searchedFrom = startPosition
+            last.matchIndex = matchIndex
+            last.indices = indices
+          }
+        }
+
+        if (matchIndex === -1)
           continue
 
         // If the match is at the start position, return it immediately
-        if (match.index === startPosition) {
-          return toResult(i, match, 0)
+        if (matchIndex === startPosition) {
+          return toResult(i, indices!)
         }
-        // Otherwise, store it for later
-        pending.push([i, match, 0])
+        // Otherwise, keep the closest one
+        if (bestIndex === -1 || matchIndex < bestMatchIndex) {
+          bestIndex = i
+          bestMatchIndex = matchIndex
+          bestIndices = indices
+        }
       }
       catch (e) {
         if (this.options.forgiving)
@@ -124,16 +179,8 @@ export class JavaScriptScanner implements PatternScanner {
       }
     }
 
-    // Find the closest match to the start position
-    if (pending.length) {
-      const minIndex = Math.min(...pending.map(m => m[1].index))
-      for (const [i, match, offset] of pending) {
-        if (match.index === minIndex) {
-          return toResult(i, match, offset)
-        }
-      }
-    }
-
-    return null
+    return bestIndex === -1
+      ? null
+      : toResult(bestIndex, bestIndices!)
   }
 }

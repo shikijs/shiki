@@ -588,6 +588,8 @@ importers:
         specifier: catalog:cli
         version: 4.120.0
 
+  bench/bundle-test: {}
+
   docs:
     devDependencies:
       '@braintree/sanitize-url':
@@ -1022,6 +1024,9 @@ importers:
       '@types/react':
         specifier: catalog:types
         version: 19.2.18
+      '@types/react-dom':
+        specifier: catalog:types
+        version: 19.2.4(@types/react@19.2.18)
       babel-preset-solid:
         specifier: catalog:bundling
         version: 1.9.12(@babel/core@7.29.7(supports-color@10.2.2))(solid-js@1.9.14)
@@ -1031,6 +1036,9 @@ importers:
       react:
         specifier: catalog:integrations
         version: 19.2.8
+      react-dom:
+        specifier: catalog:integrations
+        version: 19.2.8(react@19.2.8)
       solid-js:
         specifier: catalog:integrations
         version: 1.9.14

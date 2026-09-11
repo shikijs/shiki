@@ -2,9 +2,9 @@
 
 Compatibility reference of all built-in grammars with the [JavaScript RegExp engine](/guide/regex-engines#javascript-regexp-engine).
 
-> Generated on Friday, July 31, 2026
+> Generated on Friday, September 11, 2026
 >
-> Version `4.3.1`
+> Version `4.4.3`
 >
 > Runtime: Node.js v24.16.0
 
@@ -239,7 +239,7 @@ In some edge cases, it's not guaranteed that the highlighting will be 100% the s
 | twig               | ✅ OK           |              2445 |               - |      |
 | typescript         | ✅ OK           |               362 |               - |      |
 | typespec           | ✅ OK           |                73 |               - |      |
-| typst              | ✅ OK           |                78 |               - |      |
+| typst              | ✅ OK           |              5699 |               - |      |
 | v                  | ✅ OK           |                77 |               - |      |
 | vala               | ✅ OK           |                20 |               - |      |
 | vb                 | ✅ OK           |                34 |               - |      |

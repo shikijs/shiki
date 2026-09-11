@@ -1,6 +1,7 @@
 import type { RegexEngine } from '@shikijs/types'
 import type { JavaScriptRegexScannerOptions } from './scanner'
 import { JavaScriptScanner } from './scanner'
+import { createJavaScriptEngineString } from './string'
 
 /**
  * Raw JavaScript regex engine that only supports precompiled grammars.
@@ -21,10 +22,6 @@ export function createJavaScriptRawEngine(): RegexEngine {
     createScanner(patterns) {
       return new JavaScriptScanner(patterns, options)
     },
-    createString(s: string) {
-      return {
-        content: s,
-      }
-    },
+    createString: createJavaScriptEngineString,
   }
 }

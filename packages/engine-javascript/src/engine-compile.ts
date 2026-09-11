@@ -3,6 +3,7 @@ import type { ToRegExpOptions } from 'oniguruma-to-es'
 import type { JavaScriptRegexScannerOptions } from './scanner'
 import { toRegExp } from 'oniguruma-to-es'
 import { JavaScriptScanner } from './scanner'
+import { createJavaScriptEngineString } from './string'
 
 export interface JavaScriptRegexEngineOptions extends JavaScriptRegexScannerOptions {
   /**
@@ -73,10 +74,6 @@ export function createJavaScriptRegexEngine(options: JavaScriptRegexEngineOption
     createScanner(patterns) {
       return new JavaScriptScanner(patterns, _options)
     },
-    createString(s: string) {
-      return {
-        content: s,
-      }
-    },
+    createString: createJavaScriptEngineString,
   }
 }
