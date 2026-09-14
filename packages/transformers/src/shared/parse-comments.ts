@@ -4,6 +4,7 @@ import type { MatchAlgorithm } from './notation-transformer'
 const RE_SPLIT_COMMENT = /(\s+\/\/)/
 const RE_V1_END_COMMENT_PREFIX = /(?:\/\/|["'#]|;{1,2}|%{1,2}|--)(\s*)$/
 const RE_V3_END_COMMENT_PREFIX = /(?:\/\/|#|;{1,2}|%{1,2}|--)(\s*)$/
+const RE_LINE_COMMENT_PREFIX = /^(?:\/\/|["'#]|;{1,2}|%{1,2}|--)$/
 
 export type ParsedComments = {
   line: Element
@@ -105,14 +106,14 @@ export function parseComments(
       let match = matchToken(head.value, isLast)
       let additionalTokens: Element[] | undefined
 
-      // Handle multi-token comments (e.g., rose-pine theme splits "//" and " [!code --]")
+      // Handle multi-token comments (e.g., rose-pine theme splits "//" or "#" and " [!code --]")
       // Check if current token might be the second part of a split comment
       if (!match && i > 0 && head.value.trim().startsWith('[!code')) {
         // Look back to see if the previous token contains the comment prefix
         const prevToken = elements[i - 1]
         if (prevToken?.type === 'element') {
           const prevHead = prevToken.children.at(0)
-          if (prevHead?.type === 'text' && prevHead.value.includes('//')) {
+          if (prevHead?.type === 'text' && RE_LINE_COMMENT_PREFIX.test(prevHead.value.trim())) {
             const combinedValue = prevHead.value + head.value
             const combinedMatch = matchToken(combinedValue, isLast)
             if (combinedMatch) {
