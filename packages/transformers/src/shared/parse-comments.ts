@@ -113,7 +113,7 @@ export function parseComments(
         const prevToken = elements[i - 1]
         if (prevToken?.type === 'element') {
           const prevHead = prevToken.children.at(0)
-          if (prevHead?.type === 'text' && RE_LINE_COMMENT_PREFIX.test(prevHead.value.trim())) {
+          if (prevHead?.type === 'text' && (prevHead.value.includes('//') || RE_LINE_COMMENT_PREFIX.test(prevHead.value.trim()))) {
             const combinedValue = prevHead.value + head.value
             const combinedMatch = matchToken(combinedValue, isLast)
             if (combinedMatch) {
