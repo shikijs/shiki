@@ -18,6 +18,7 @@ const RE_DECORATIONS_META = /^\/\/ @decorations:(.*)\n/
 const GUIDES = [
   { text: 'Getting Started', link: '/guide/' },
   { text: 'Installation & Usage', link: '/guide/install' },
+  { text: 'Comparison', link: '/guide/comparison' },
   { text: 'Bundles', link: '/guide/bundles' },
   { text: 'Dual Themes', link: '/guide/dual-themes' },
   { text: 'Shorthands', link: '/guide/shorthands' },
