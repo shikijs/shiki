@@ -42,7 +42,8 @@ for (const lang of langs) {
   it(lang, async ({ bench }) => {
     const code = samples[langs.indexOf(lang)]
 
-    await it.compare(
+    // eslint-disable-next-line test/consistent-test-it -- compare lives on the bench fixture in Vitest 5
+    await bench.compare(
       bench('js', () => {
         shikiJs.codeToTokensBase(code, { lang, theme: 'vitesse-dark' })
       }),
