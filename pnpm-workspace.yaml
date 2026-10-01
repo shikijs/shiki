@@ -2,29 +2,27 @@ ignoreWorkspaceRootCheck: true
 
 minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
-  - '@types/node@25.9.0'
-  - '@vue/language-core@3.3.0'
-  - baseline-browser-mapping@2.10.31 || 2.11.22
-  - pnpm@11.1.3
-  - tsx@4.22.2
-  - vue-tsc@3.3.0
-  - fuse.js@7.4.1
-  - miniflare@4.20260601.0 || 5.20260910.0-alpha
-  - wrangler@4.97.0 || 4.131.0
-  - tm-grammars@1.32.0 || 1.32.17
-  - tm-themes@1.12.3
-  - '@cloudflare/workerd-darwin-64@1.20260910.1'
-  - '@cloudflare/workerd-darwin-arm64@1.20260910.1'
-  - '@cloudflare/workerd-linux-64@1.20260910.1'
-  - '@cloudflare/workerd-linux-arm64@1.20260910.1'
-  - '@cloudflare/workerd-windows-64@1.20260910.1'
-  - '@iconify-json/carbon@1.2.27'
+  - miniflare@5.20260930.0-alpha
+  - wrangler@4.145.0
+  - '@cloudflare/workerd-darwin-64@1.20260930.2'
+  - '@cloudflare/workerd-darwin-arm64@1.20260930.2'
+  - '@cloudflare/workerd-linux-64@1.20260930.2'
+  - '@cloudflare/workerd-linux-arm64@1.20260930.2'
+  - '@cloudflare/workerd-windows-64@1.20260930.2'
   - floating-vue@5.4.0
-  - lint-staged@17.5.1
-  - magic-string@1.3.1
-  - vite@8.3.0
-  - workerd@1.20260910.1
+  - workerd@1.20260930.2
   - lz-string-es@1.0.0
+  - '@turbo/darwin-64@2.11.6'
+  - '@turbo/darwin-arm64@2.11.6'
+  - '@turbo/linux-64@2.11.6'
+  - '@turbo/linux-arm64@2.11.6'
+  - '@turbo/windows-64@2.11.6'
+  - '@turbo/windows-arm64@2.11.6'
+  - '@vitest/coverage-v8@5.0.3'
+  - '@vitest/mocker@5.0.3'
+  - '@vitest/spy@5.0.3'
+  - turbo@2.11.6
+  - vitest@5.0.3
 
 trustPolicy: no-downgrade
 
@@ -43,7 +41,7 @@ packages:
   - bench/*
 
 overrides:
-  rollup: ^4.63.1
+  rollup: ^4.63.5
   semver: ^7.8.5
 
 allowBuilds:
@@ -64,61 +62,61 @@ catalogs:
     '@rollup/plugin-node-resolve': ^16.0.3
     '@rollup/plugin-replace': ^6.0.3
     '@rollup/plugin-terser': ^1.0.0
-    '@sveltejs/vite-plugin-svelte': ^7.3.0
+    '@sveltejs/vite-plugin-svelte': ^7.3.1
     '@vitejs/plugin-react': ^6.1.1
-    '@vitejs/plugin-vue': ^6.0.8
+    '@vitejs/plugin-vue': ^6.0.9
     babel-preset-solid: ^1.9.15
-    baseline-browser-mapping: ^2.11.22
+    baseline-browser-mapping: ^2.11.26
     esbuild: ^0.28.2
     pathe: ^2.0.3
-    rolldown-plugin-dts: ^0.28.5
-    rollup: ^4.63.1
+    rolldown-plugin-dts: ^0.28.6
+    rollup: ^4.63.5
     rollup-plugin-copy: ^3.5.0
     rollup-plugin-dts: ^6.5.1
     rollup-plugin-esbuild: ^6.2.1
     tinyexec: ^1.3.1
     tsdown: ^0.23.0
     unbuild: ^3.6.1
-    vite: ^8.3.0
+    vite: ^8.3.1
     vite-plugin-solid: ^2.11.14
   cli:
     '@antfu/eslint-config': ^9.5.1
-    '@antfu/ni': ^30.5.0
+    '@antfu/ni': ^30.6.0
     bumpp: ^12.3.0
-    eslint: ^10.10.0
+    eslint: ^10.11.0
     eslint-plugin-format: ^2.0.1
     jiti: ^2.7.0
-    lint-staged: ^17.5.1
+    lint-staged: ^17.6.0
     pinia: ^4.0.3
-    pnpm: ^12.3.4
-    prettier: ^3.9.6
+    pnpm: ^12.8.1
+    prettier: ^3.9.9
     rimraf: ^6.1.3
     simple-git-hooks: ^2.14.0
-    taze: ^21.1.0
-    tsx: ^4.23.13
-    turbo: ^2.10.12
+    taze: ^21.3.0
+    tsx: ^4.23.15
+    turbo: ^2.11.6
     typescript: ^6.0.3
     vue-tsc: ^3.3.11
-    wrangler: ^4.131.0
+    wrangler: ^4.145.0
   docs:
     '@braintree/sanitize-url': ^7.1.2
-    '@unocss/reset': ^66.10.1
-    '@vueuse/core': ^14.4.0
+    '@unocss/reset': ^66.10.5
+    '@vueuse/core': ^15.0.0
     cytoscape: ^3.34.3
     cytoscape-cose-bilkent: ^4.1.0
     dayjs: ^1.11.23
     debug: ^4.4.3
     floating-vue: ^5.4.0
     fuse.js: ^7.5.0
-    unocss: ^66.10.1
+    unocss: ^66.10.5
     unplugin-vue-components: ^32.1.0
     vitepress: ^2.0.0-alpha.20
     vitepress-plugin-group-icons: ^1.7.6
     vitepress-plugin-mermaid: ^2.0.17
-    vue: ^3.5.42
+    vue: ^3.5.43
   icons:
-    '@iconify-json/carbon': ^1.2.27
-    '@iconify-json/codicon': ^1.2.72
+    '@iconify-json/carbon': ^1.2.28
+    '@iconify-json/codicon': ^1.2.73
     '@iconify-json/ph': ^1.2.2
     '@iconify-json/svg-spinners': ^1.2.4
   inlined:
@@ -127,15 +125,15 @@ catalogs:
     hast-util-from-html: ^2.0.3
     hast-util-to-html: ^9.0.5
     hast-util-to-string: ^3.0.1
-    tm-grammars: ^1.32.17
-    tm-themes: ^1.12.11
+    tm-grammars: ^1.32.22
+    tm-themes: ^1.12.12
     vscode-oniguruma: 1.7.0
   integrations:
     diff-match-patch-es: ^2.0.1
     lz-string-es: ^1.0.0
-    magic-string: ^1.3.1
+    magic-string: ^1.4.2
     markdown-exit: ^1.3.0
-    markdown-it: ^15.0.1
+    markdown-it: ^15.0.2
     markdown-it-async: ^2.2.0
     mdast-util-from-markdown: ^2.0.3
     mdast-util-gfm: ^3.1.0
@@ -149,30 +147,30 @@ catalogs:
     remark-parse: ^11.0.0
     remark-rehype: ^11.1.2
     solid-js: ^1.9.15
-    svelte: ^5.57.0
+    svelte: ^5.57.1
     twoslash: ^0.3.9
     twoslash-vue: ^0.3.9
     unified: ^11.0.5
     unist-util-visit: ^5.1.0
   prod:
     '@shikijs/vscode-textmate': ^10.0.2
-    ansis: ^4.3.1
+    ansis: ^4.4.0
     cac: ^7.0.0
     oniguruma-to-es: ^4.3.6
   testing:
-    '@vitest/coverage-v8': ^5.0.0
+    '@vitest/coverage-v8': ^5.0.3
     fast-glob: ^3.3.3
-    fs-extra: ^11.4.0
-    happy-dom: ^20.14.3
-    js-yaml: ^5.4.1
-    vitest: ^5.0.0
+    fs-extra: ^11.4.1
+    happy-dom: ^20.14.5
+    js-yaml: ^5.4.2
+    vitest: ^5.0.3
     vitest-package-exports: ^1.2.0
   types:
     '@types/fs-extra': ^11.0.4
     '@types/hast': ^3.0.5
     '@types/markdown-it': ^14.2.0
     '@types/mdast': ^4.0.4
-    '@types/node': ^26.5.1
+    '@types/node': ^26.6.3
     '@types/react': ^19.3.0
     '@types/react-dom': ^19.3.0
     '@types/unist': ^3.0.3
