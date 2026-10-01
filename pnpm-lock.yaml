@@ -325,9 +325,9 @@ catalogs:
     diff-match-patch-es:
       specifier: ^2.0.1
       version: 2.0.1
-    lz-string:
-      specifier: ^1.5.0
-      version: 1.5.0
+    lz-string-es:
+      specifier: ^1.0.0
+      version: 1.0.0
     magic-string:
       specifier: ^1.3.1
       version: 1.3.1
@@ -1266,9 +1266,9 @@ importers:
       floating-vue:
         specifier: catalog:docs
         version: 5.4.0(vue@3.5.42(typescript@6.0.3))
-      lz-string:
+      lz-string-es:
         specifier: catalog:integrations
-        version: 1.5.0
+        version: 1.0.0
       magic-string:
         specifier: catalog:integrations
         version: 1.3.1
@@ -5370,9 +5370,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lz-string@1.5.0:
-    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
-    hasBin: true
+  lz-string-es@1.0.0:
+    resolution: {integrity: sha512-2VpNj4+9zmknzR80HPgcXnuvnzNwxneAwH75KKGJLcJg5OAoZLscmEeqdAzU3d9J/CGLzSfA3K7p8DQco+K+zA==}
 
   magic-regexp@0.10.0:
     resolution: {integrity: sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg==}
@@ -10732,7 +10731,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lz-string@1.5.0: {}
+  lz-string-es@1.0.0: {}
 
   magic-regexp@0.10.0:
     dependencies:
