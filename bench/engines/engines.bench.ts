@@ -39,18 +39,17 @@ const shikiJsPrecompiled = await createHighlighter({
 })
 
 for (const lang of langs) {
-  it(lang, async ({ bench }) => {
+  it(lang, async ({ bench: b }) => {
     const code = samples[langs.indexOf(lang)]
 
-    // eslint-disable-next-line test/consistent-test-it -- vitest 5: compare lives on the bench fixture
-    await bench.compare(
-      bench('js', () => {
+    await b.compare(
+      b('js', () => {
         shikiJs.codeToTokensBase(code, { lang, theme: 'vitesse-dark' })
       }),
-      bench('js-precompiled', () => {
+      b('js-precompiled', () => {
         shikiJsPrecompiled.codeToTokensBase(code, { lang, theme: 'vitesse-dark' })
       }),
-      bench('wasm', () => {
+      b('wasm', () => {
         shikiWasm.codeToTokensBase(code, { lang, theme: 'vitesse-dark' })
       }),
     )

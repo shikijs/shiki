@@ -220,4 +220,48 @@ const c = 3 // [!code highlight]`
     expect(html).toContain('diff remove')
     expect(html).not.toContain('[!code --]')
   })
+
+  it('transformerNotationDiff works with rose-pine theme for `#` and `--` comments', async () => {
+    using highlighter = await createHighlighter({
+      themes: ['rose-pine-dawn'],
+      langs: ['yaml', 'bash', 'sql'],
+    })
+
+    const cases = [
+      ['yaml', 'foo: bar # [!code ++]'],
+      ['bash', 'echo hi # [!code ++]'],
+      ['sql', 'SELECT 1 -- [!code ++]'],
+    ] as const
+
+    for (const [lang, code] of cases) {
+      const html = highlighter.codeToHtml(code, {
+        lang,
+        theme: 'rose-pine-dawn',
+        transformers: [transformerNotationDiff()],
+      })
+
+      expect(html).toContain('diff add')
+      expect(html).not.toContain('[!code ++]')
+    }
+  })
+
+  it('removes comment-only lines with `#` comments in rose-pine theme', async () => {
+    using highlighter = await createHighlighter({
+      themes: ['rose-pine'],
+      langs: ['yaml'],
+    })
+
+    const code = `# [!code highlight:2]
+foo: 1
+bar: 2`
+
+    const html = highlighter.codeToHtml(code, {
+      lang: 'yaml',
+      theme: 'rose-pine',
+      transformers: [transformerNotationHighlight()],
+    })
+
+    expect(html).not.toContain('[!code')
+    expect(html.match(/class="line highlighted"/g)).toHaveLength(2)
+  })
 })
