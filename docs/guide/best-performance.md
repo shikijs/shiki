@@ -60,6 +60,10 @@ To compose the fine-grained bundles easily, we also provide the [`shiki-codegen`
 
 Learn more about [Fine-Grained Bundles](/guide/bundles#fine-grained-bundle).
 
+::: tip
+When using languages with embedded content (like `markdown`, `vue`, `mdx`), remember that embedded languages are **not loaded automatically** in fine-grained bundles. See [Handling Embedded Languages](/guide/bundles#handling-embedded-languages) for solutions.
+:::
+
 ## Use Shorthands
 
 `createHighlighter` and `createHighlighterCore` load all the themes and languages **upfront** to ensure subsequent highlight operations are synchronous. This can add significant overhead to startup time, especially when you have a lot of themes and languages. Shorthands abstract the theme and language loading process and maintain an internal highlighter instance underneath, only loading the necessary themes and languages when needed. When your highlighting process can be asynchronous, you can use shorthands to reduce startup time.
