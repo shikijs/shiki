@@ -9,9 +9,9 @@ export function getTransformers(options: TransformerOptions): ShikiTransformer[]
   const transformers = sortTransformersByEnforcement(options.transformers || [])
   return [
     ...transformers.pre,
+    ...builtInTransformers,
     ...transformers.normal,
     ...transformers.post,
-    ...builtInTransformers,
   ]
 }
 

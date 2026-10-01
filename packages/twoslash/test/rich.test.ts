@@ -232,3 +232,37 @@ Number.parseInt(todo.title, 10);
   await expect(styleTag + htmlWithSeparateLine + colorToggle)
     .toMatchFileSnapshot('./out/rich/line-query.html')
 })
+
+// https://github.com/shikijs/shiki/pull/1174
+it('works with decorations added by other transformers', async () => {
+  const code = 'const a = 1\n//    ^?'
+
+  const html = await codeToHtml(code, {
+    lang: 'ts',
+    theme: 'vitesse-dark',
+    transformers: [
+      {
+        name: 'test:meta-word-highlight',
+        preprocess(code, options) {
+          const index = code.indexOf('a')
+          options.decorations ||= []
+          options.decorations.push({
+            start: index,
+            end: index + 1,
+            properties: { class: 'highlighted-word' },
+          })
+        },
+      },
+      transformerTwoslash({
+        explicitTrigger: true,
+        renderer: rendererRich(),
+      }),
+    ],
+    meta: {
+      __raw: '/codeToHtml/ twoslash',
+    },
+  })
+
+  expect(html).toContain('highlighted-word')
+  expect(html).toContain('twoslash-popup-container')
+})
