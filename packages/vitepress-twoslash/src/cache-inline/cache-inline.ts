@@ -2,7 +2,7 @@ import type { TwoslashShikiReturn, TwoslashTypesCache } from '@shikijs/twoslash'
 import type { TwoslashExecuteOptions, TwoslashReturn } from 'twoslash'
 import type { MarkdownFenceSourceMap } from './markdown-fence'
 import { createHash } from 'node:crypto'
-import LZString from 'lz-string'
+import { compressToBase64, decompressFromBase64 } from 'lz-string-es'
 import { hash as createOHash } from 'ohash'
 import { FilePatcher } from './file-patcher'
 
@@ -51,7 +51,7 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
     const payload: TwoslashCachePayload = {
       v: 1,
       hash,
-      data: LZString.compressToBase64(JSON.stringify(data)),
+      data: compressToBase64(JSON.stringify(data)),
     }
     return JSON.stringify(payload)
   }
@@ -70,7 +70,8 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
           payload,
           twoslash: () => {
             try {
-              return JSON.parse(LZString.decompressFromBase64(payload.data))
+              const json = decompressFromBase64(payload.data)
+              return json ? JSON.parse(json) : null
             }
             catch {
               return null

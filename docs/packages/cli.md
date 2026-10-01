@@ -123,3 +123,18 @@ console.log(highlighted)
 1. `code: string`
 2. `lang: BundledLanguage`
 3. `theme: BundledTheme`
+
+and one optional parameter:
+
+4. `options?: CodeToANSIOptions`
+
+The color level of the emitted escape codes is explicit instead of being inferred from the environment, and defaults to `3` (truecolor). Use `options.colorLevel` to target a different level — pass the level reported by `ansis` to follow the current terminal, or `0` to get plain text:
+
+```ts
+import { codeToANSI } from '@shikijs/cli'
+import ansis from 'ansis'
+
+const highlighted = await codeToANSI(source, 'typescript', 'nord', {
+  colorLevel: ansis.level,
+})
+```

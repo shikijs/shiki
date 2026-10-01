@@ -107,6 +107,7 @@ export class Registry extends TextMateRegistry {
     // If there is a language that embeds this language lazily, we need to reload it
     if (embeddedLazilyBy.size) {
       for (const e of embeddedLazilyBy) {
+        this._syncRegistry?._grammars?.get(e.scopeName)?.dispose()
         this._resolvedGrammars.delete(e.name)
         // Reset cache
         this._loadedLanguagesCache = null
