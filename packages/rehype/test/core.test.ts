@@ -5,10 +5,10 @@ import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { createHighlighter } from 'shiki'
-import { unified } from 'unified'
 
+import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
-import { expect, it } from 'vitest'
+import { expect, it, vi } from 'vitest'
 import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 
@@ -199,6 +199,103 @@ it('lazy loading error handling with onError callback', async () => {
   // onError should be called
   expect(errors.length).toBeGreaterThan(0)
   expect(errors[0]).toBeInstanceOf(Error)
+})
+
+it('onFallback with lazy sync error', async () => {
+  using highlighter = await createHighlighter({
+    themes: ['vitesse-light'],
+    langs: ['text'],
+  })
+
+  const mockHighlighter = {
+    ...highlighter,
+    loadLanguage: (...langs: Parameters<typeof highlighter.loadLanguage>) => {
+      const lang = langs[0] as string
+      if (lang === 'sync-fail-lang')
+        throw new Error(`Language 'sync-fail-lang' not found`)
+      return highlighter.loadLanguage(...langs)
+    },
+  }
+
+  const onFallback = vi.fn()
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, mockHighlighter, {
+      lazy: true,
+      theme: 'vitesse-light',
+      fallbackLanguage: 'text',
+      onFallback,
+    })
+    .use(rehypeStringify)
+    .process('```sync-fail-lang\nconst x = 1\n```')
+
+  expect(onFallback).toHaveBeenCalledWith({
+    requestedLanguage: 'sync-fail-lang',
+    fallbackLanguage: 'text',
+  })
+  expect(file.toString()).toContain('<pre')
+})
+
+it('onFallback with lazy async error', async () => {
+  using highlighter = await createHighlighter({
+    themes: ['vitesse-light'],
+    langs: ['text'],
+  })
+
+  const mockHighlighter = {
+    ...highlighter,
+    loadLanguage: async (...langs: Parameters<typeof highlighter.loadLanguage>) => {
+      const lang = langs[0] as string
+      if (lang === 'unknown-lang')
+        throw new Error(`Language 'unknown-lang' not found`)
+      return highlighter.loadLanguage(...langs)
+    },
+  }
+
+  const onFallback = vi.fn()
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, mockHighlighter, {
+      lazy: true,
+      theme: 'vitesse-light',
+      fallbackLanguage: 'text',
+      onFallback,
+    })
+    .use(rehypeStringify)
+    .process('```unknown-lang\nconst x = 1\n```')
+
+  expect(onFallback).toHaveBeenCalledWith({
+    requestedLanguage: 'unknown-lang',
+    fallbackLanguage: 'text',
+  })
+  expect(file.toString()).toContain('<pre')
+})
+
+it('onFallback with non-lazy fallback', async () => {
+  using highlighter = await createHighlighter({
+    themes: ['vitesse-light'],
+    langs: ['javascript'],
+  })
+
+  const onFallback = vi.fn()
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, highlighter, {
+      theme: 'vitesse-light',
+      fallbackLanguage: 'javascript',
+      onFallback,
+    })
+    .use(rehypeStringify)
+    .process('```python\nprint("hello")\n```')
+
+  expect(onFallback).toHaveBeenCalledWith({
+    requestedLanguage: 'python',
+    fallbackLanguage: 'javascript',
+  })
+  expect(file.toString()).toContain('<pre')
 })
 
 it('lazy loading error handling throws when no fallback or onError', async () => {

@@ -25,6 +25,7 @@ function rehypeShikiFromHighlighter(
     defaultLanguage,
     fallbackLanguage,
     onError,
+    onFallback,
     stripEndNewline = true,
     inline = false,
     lazy = false,
@@ -123,6 +124,7 @@ function rehypeShikiFromHighlighter(
         lang = parsed.lang
       }
       else if (fallbackLanguage) {
+        onFallback?.({ requestedLanguage: parsed.lang, fallbackLanguage })
         lang = fallbackLanguage
       }
 
@@ -154,6 +156,7 @@ function rehypeShikiFromHighlighter(
               .then(() => processNode(lang))
               .catch((error) => {
                 if (fallbackLanguage) {
+                  onFallback?.({ requestedLanguage: lang, fallbackLanguage })
                   processNode(fallbackLanguage)
                 }
                 else if (onError) {
@@ -166,11 +169,16 @@ function rehypeShikiFromHighlighter(
           )
         }
         catch (error) {
-          if (fallbackLanguage)
+          if (fallbackLanguage) {
+            onFallback?.({ requestedLanguage: lang, fallbackLanguage })
             return processNode(fallbackLanguage)
-          else if (onError)
+          }
+          else if (onError) {
             onError(error)
-          else throw error
+          }
+          else {
+            throw error
+          }
         }
       }
       else {
