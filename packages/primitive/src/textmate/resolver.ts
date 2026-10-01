@@ -40,7 +40,8 @@ export class Resolver implements RegistryOptions {
       l.injectTo.forEach((i) => {
         if (!this._injections.get(i))
           this._injections.set(i, [])
-        this._injections.get(i)!.push(l.scopeName)
+        if (!this._injections.get(i)!.includes(l.scopeName))
+          this._injections.get(i)!.push(l.scopeName)
       })
     }
   }
