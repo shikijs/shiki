@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { Readable } from 'node:stream'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { getExtFromUrl, isUrl, readSource, run } from '../src/cli'
+import { getExtFromUrl, isUrl, readSource, resolveLanguage, run } from '../src/cli'
 
 describe('isUrl', () => {
   it('valid URL', () => {
@@ -29,6 +30,32 @@ describe('getExtFromUrl', () => {
 
   it('invalid URL', () => {
     expect(getExtFromUrl('not-a-url')).toBe('')
+  })
+})
+
+describe('resolveLanguage', () => {
+  it('keeps bundled languages and aliases', () => {
+    expect(resolveLanguage('ts')).toBe('ts')
+    expect(resolveLanguage('typescript')).toBe('typescript')
+    expect(resolveLanguage('md')).toBe('md')
+    expect(resolveLanguage('dotenv')).toBe('dotenv')
+  })
+
+  it('keeps special languages', () => {
+    expect(resolveLanguage('text')).toBe('text')
+    expect(resolveLanguage('txt')).toBe('txt')
+    expect(resolveLanguage('plain')).toBe('plain')
+    expect(resolveLanguage('ansi')).toBe('ansi')
+  })
+
+  it('falls back to text for unknown languages', () => {
+    expect(resolveLanguage('example')).toBe('text')
+    expect(resolveLanguage('env.example')).toBe('text')
+  })
+
+  it('normalizes casing before lookup', () => {
+    expect(resolveLanguage('TS')).toBe('ts')
+    expect(resolveLanguage('DOTENV')).toBe('dotenv')
   })
 })
 
@@ -184,6 +211,12 @@ describe('run', () => {
 
     expect(output.length).toBe(1)
     expect(output[0]).toContain('all')
+
+    const asHtml: string[] = []
+    const plain: string[] = []
+    await run(['node', 'shiki', '--format', 'html', noExtFile], msg => asHtml.push(msg))
+    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', noExtFile], msg => plain.push(msg))
+    expect(asHtml[0]).toBe(plain[0])
   })
 
   it('remote URL without file extension falls back to plaintext', async () => {
@@ -200,5 +233,75 @@ describe('run', () => {
     expect(output[0]).toContain('FROM')
 
     vi.unstubAllGlobals()
+  })
+
+  it('unknown extension falls back to plaintext without throwing', async () => {
+    const envFile = path.join(testDir, '.env.example')
+    await fs.writeFile(envFile, 'FOO=bar')
+
+    const output: string[] = []
+    await run(['node', 'shiki', '--format', 'html', envFile], msg => output.push(msg))
+
+    const plain: string[] = []
+    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', envFile], msg => plain.push(msg))
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('FOO=bar')
+    expect(output[0]).toBe(plain[0])
+  })
+
+  it('highlights known extensions', async () => {
+    const mdFile = path.join(testDir, 'README.md')
+    await fs.writeFile(mdFile, '# Title')
+
+    const md: string[] = []
+    const mdPlain: string[] = []
+    await run(['node', 'shiki', '--format', 'html', mdFile], msg => md.push(msg))
+    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', mdFile], msg => mdPlain.push(msg))
+    expect(md[0]).toContain('Title')
+    expect(md[0]).not.toBe(mdPlain[0])
+
+    const ts: string[] = []
+    const tsPlain: string[] = []
+    await run(['node', 'shiki', '--format', 'html', testFile], msg => ts.push(msg))
+    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', testFile], msg => tsPlain.push(msg))
+    expect(ts[0]).toContain('const')
+    expect(ts[0]).not.toBe(tsPlain[0])
+  })
+
+  it('respects explicit --lang over unknown extension', async () => {
+    const envFile = path.join(testDir, 'file.env.example')
+    await fs.writeFile(envFile, 'FOO=bar')
+
+    const explicit: string[] = []
+    const fallback: string[] = []
+    await run(['node', 'shiki', '--lang', 'dotenv', '--format', 'html', envFile], msg => explicit.push(msg))
+    await run(['node', 'shiki', '--format', 'html', envFile], msg => fallback.push(msg))
+
+    expect(explicit.length).toBe(1)
+    expect(explicit[0]).toContain('FOO')
+    expect(explicit[0]).not.toBe(fallback[0])
+  })
+
+  it('stdin without --lang uses text', async () => {
+    function createStdin() {
+      const stdin = Readable.from(['const x = 1']) as Readable & { isTTY?: boolean }
+      stdin.isTTY = false
+      return stdin
+    }
+
+    const output: string[] = []
+    await run(['node', 'shiki', '--format', 'html'], msg => output.push(msg), createStdin())
+
+    const plain: string[] = []
+    await run(['node', 'shiki', '--lang', 'text', '--format', 'html'], msg => plain.push(msg), createStdin())
+
+    const asTs: string[] = []
+    await run(['node', 'shiki', '--lang', 'ts', '--format', 'html'], msg => asTs.push(msg), createStdin())
+
+    expect(output.length).toBe(1)
+    expect(output[0]).toContain('const x = 1')
+    expect(output[0]).toBe(plain[0])
+    expect(output[0]).not.toBe(asTs[0])
   })
 })
