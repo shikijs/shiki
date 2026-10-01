@@ -230,27 +230,40 @@ export function createTransformerFactory(
 
           const tokens = locateTextTokens(node.line, node.character, node.length)
 
-          if (!tokens.length && !(node.type === 'error' && renderer.nodesError)) {
+          // Errors may land past EOF (TS 1005 for an unclosed paren) with no matching tokens
+          if (!tokens.length && !(node.type === 'error' && (renderer.nodesError || renderer.lineError))) {
             onShikiError(new ShikiTwoslashError(`Cannot find tokens for node: ${JSON.stringify(node)}`), this.source, this.options.lang)
             continue
           }
 
           // Wrap tokens with new elements, all tokens has to be in the same line
           const wrapTokens = (fn: (children: ElementContent[]) => ElementContent[]): void => {
-            const line = this.lines[node.line]
+            let line = this.lines[node.line]
+            let start = node.character
+            let end = node.character + node.length
+
+            if (!line) {
+              // Clamp past-EOF errors onto the last rendered line
+              line = this.lines[this.lines.length - 1]
+              if (!line)
+                return
+              start = Number.POSITIVE_INFINITY
+              end = start
+            }
+
             let charIndex = 0
             let itemStart = line.children.length
             let itemEnd = 0
 
             line.children.forEach((token, index) => {
-              if (charIndex >= node.character && index < itemStart)
+              if (charIndex >= start && index < itemStart)
                 itemStart = index
-              if ((charIndex <= node.character + node.length) && index > itemEnd)
+              if ((charIndex <= end) && index > itemEnd)
                 itemEnd = index
               charIndex += getTokenString(token).length
             })
 
-            if ((charIndex <= node.character + node.length))
+            if (charIndex <= end)
               itemEnd = line.children.length
 
             const targets = line.children.slice(itemStart, itemEnd)
