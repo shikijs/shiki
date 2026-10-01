@@ -23,12 +23,12 @@ function notify() {
 }
 `
 
-it('bundle', async ({ bench }) => {
-  await it.compare(
-    bench('js-precompiled', async () => {
+it('bundle', async ({ bench: b }) => {
+  await b.compare(
+    b('js-precompiled', async () => {
       await highlightA(code)
     }),
-    bench('wasm', async () => {
+    b('wasm', async () => {
       await highlightB(code)
     }),
   )
