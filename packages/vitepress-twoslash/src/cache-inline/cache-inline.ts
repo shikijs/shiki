@@ -70,7 +70,8 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
           payload,
           twoslash: () => {
             try {
-              return JSON.parse(decompressFromBase64(payload.data))
+              const json = decompressFromBase64(payload.data)
+              return json ? JSON.parse(json) : null
             }
             catch {
               return null
