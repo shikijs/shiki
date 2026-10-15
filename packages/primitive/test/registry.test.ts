@@ -102,6 +102,67 @@ describe('injection registration', () => {
     }
   })
 
+  it('applies an injection loaded after its target grammar', async () => {
+    const shiki = await createShikiPrimitiveAsync({
+      engine: createJavaScriptRegexEngine(),
+      themes: [],
+      langs: [host],
+    })
+
+    await shiki.loadLanguage(first)
+
+    expect(shiki.getLanguage(host.name).tokenizeLine('INJECT', null).tokens[0].scopes)
+      .toEqual([host.scopeName, 'keyword.first'])
+  })
+
+  it('applies an injection loaded after its target was already tokenized', async () => {
+    const shiki = await createShikiPrimitiveAsync({
+      engine: createJavaScriptRegexEngine(),
+      themes: [],
+      langs: [host],
+    })
+
+    expect(shiki.getLanguage(host.name).tokenizeLine('INJECT', null).tokens[0].scopes)
+      .toEqual([host.scopeName])
+
+    await shiki.loadLanguage(first)
+
+    expect(shiki.getLanguage(host.name).tokenizeLine('INJECT', null).tokens[0].scopes)
+      .toEqual([host.scopeName, 'keyword.first'])
+  })
+
+  it('keeps injections when a lazily embedding grammar is reloaded', async () => {
+    const lazyHost: LanguageRegistration = { ...host, embeddedLangsLazy: ['guest'] }
+    const shiki = await createShikiPrimitiveAsync({
+      engine: createJavaScriptRegexEngine(),
+      themes: [],
+      langs: [lazyHost, first],
+    })
+
+    await shiki.loadLanguage({
+      name: 'guest',
+      scopeName: 'source.guest',
+      patterns: [],
+      repository: {},
+    })
+
+    expect(shiki.getLanguage(host.name).tokenizeLine('INJECT', null).tokens[0].scopes)
+      .toEqual([host.scopeName, 'keyword.first'])
+  })
+
+  it('does not reload a target that already has the injection', async () => {
+    const shiki = await createShikiPrimitiveAsync({
+      engine: createJavaScriptRegexEngine(),
+      themes: [],
+      langs: [host, first],
+    })
+
+    const before = shiki.getLanguage(host.name)
+    await shiki.loadLanguage(first)
+
+    expect(shiki.getLanguage(host.name)).toBe(before)
+  })
+
   it('preserves injections registered for different scope prefixes', () => {
     const shared = { ...first, injectTo: ['source', host.scopeName] }
     const resolver = new Resolver(createJavaScriptRegexEngine(), [shared, second])
