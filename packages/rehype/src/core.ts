@@ -37,7 +37,7 @@ function rehypeShikiFromHighlighter(
     metaString: string = '',
     meta: Record<string, unknown> = {},
   ): Root | undefined {
-    const cacheKey = `${lang}:${metaString}:${code}`
+    const cacheKey = JSON.stringify([lang, metaString, code])
     const cachedValue = cache?.get(cacheKey)
 
     if (cachedValue) {

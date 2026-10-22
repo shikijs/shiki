@@ -38,6 +38,32 @@ it('run', async () => {
   await expect(file.toString()).toMatchFileSnapshot('./fixtures/a.core.out.html')
 })
 
+it('keeps metadata and code distinct in cache keys', async () => {
+  using highlighter = await createHighlighter({
+    themes: ['vitesse-light'],
+    langs: [],
+  })
+
+  const markdown = '```text first:second\nthird\n```\n\n```text first\nsecond:third\n```'
+  const render = (cache?: Map<string, Root>) => unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeShikiFromHighlighter, highlighter, {
+      theme: 'vitesse-light',
+      cache,
+    })
+    .use(rehypeStringify)
+    .processSync(markdown)
+    .toString()
+
+  const expected = render()
+  const cache = new Map<string, Root>()
+  expect(render(cache)).toBe(expected)
+  expect(cache.size).toBe(2)
+  expect(render(cache)).toBe(expected)
+  expect(cache.size).toBe(2)
+})
+
 it('run with lazy', async () => {
   using highlighter = await createHighlighter({
     themes: [
