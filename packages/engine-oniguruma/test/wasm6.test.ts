@@ -4,14 +4,14 @@ import nord from '@shikijs/themes/nord'
 import { expect, it } from 'vitest'
 
 // eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../dist/wasm-inlined.mjs'
+import { wasmBinaryPromise } from '../dist/wasm-inlined.mjs'
 import { createOnigurumaEngine } from '../src/index'
 
 it('loadWasm: { default: WebAssembly.Module }', async () => {
   const shiki = await createHighlighterCore({
     themes: [nord],
     langs: [js as any],
-    engine: createOnigurumaEngine(Promise.resolve({ default: await WebAssembly.compile(wasmBinary) }) as any),
+    engine: createOnigurumaEngine(Promise.resolve({ default: await wasmBinaryPromise.then(wasmBinary => WebAssembly.compile(wasmBinary)) }) as any),
   })
 
   expect(shiki.codeToHtml('1 + 1', { lang: 'javascript', theme: 'nord' }))

@@ -5,14 +5,14 @@ import { createOnigurumaEngine } from 'shiki'
 import { expect, it } from 'vitest'
 
 // eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../dist/wasm-inlined.mjs'
+import { wasmBinaryPromise } from '../dist/wasm-inlined.mjs'
 
 it('wasm', async () => {
   const shiki = await createHighlighterCore({
     themes: [nord],
     langs: [js as any],
     engine: createOnigurumaEngine({
-      default: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance.exports),
+      default: obj => wasmBinaryPromise.then(wasmBinary => WebAssembly.instantiate(wasmBinary, obj)).then(r => r.instance.exports),
     }),
   })
 

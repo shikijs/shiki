@@ -1,4 +1,6 @@
 // @ts-check
+import { buffer } from 'node:stream/consumers'
+import { createGzip } from 'node:zlib'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
@@ -91,7 +93,7 @@ export function wasmPlugin() {
     async load(id) {
       if (!id.endsWith('.wasm'))
         return
-      const binary = await fs.readFile(id)
+      const binary = await buffer(fs.createReadStream(id).pipe(createGzip()))
       const base64 = binary.toString('base64')
       return `export default Uint8Array.from(atob(${JSON.stringify(base64)}), c => c.charCodeAt(0))`
     },

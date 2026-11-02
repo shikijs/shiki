@@ -1,7 +1,7 @@
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
 import { createOnigurumaEngine } from '@shikijs/engine-oniguruma'
 
-import { wasmBinary } from '@shikijs/engine-oniguruma/wasm-inlined'
+import { wasmBinaryPromise } from '@shikijs/engine-oniguruma/wasm-inlined'
 import js from '@shikijs/langs/javascript'
 import ts from '@shikijs/langs/typescript'
 import mtp from '@shikijs/themes/material-theme-palenight'
@@ -15,7 +15,7 @@ describe('should', () => {
       themes: [nord],
       langs: [js],
       engine: createOnigurumaEngine({
-        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
+        instantiator: obj => wasmBinaryPromise.then(wasmBinary => WebAssembly.instantiate(wasmBinary, obj)),
       }),
     })
 
@@ -32,7 +32,7 @@ describe('should', () => {
       ],
       engine: createOnigurumaEngine({
         // https://github.com/WebAssembly/esm-integration/tree/main/proposals/esm-integration
-        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj).then(r => r.instance.exports),
+        instantiator: obj => wasmBinaryPromise.then(wasmBinary => WebAssembly.instantiate(wasmBinary, obj)).then(r => r.instance.exports),
       }),
     })
 
@@ -207,7 +207,7 @@ describe('errors', () => {
       themes: [nord],
       langs: [js as any],
       engine: createOnigurumaEngine({
-        instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
+        instantiator: obj => wasmBinaryPromise.then(wasmBinary => WebAssembly.instantiate(wasmBinary, obj)),
       }),
     })
 

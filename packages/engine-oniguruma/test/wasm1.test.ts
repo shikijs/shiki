@@ -4,7 +4,7 @@ import nord from '@shikijs/themes/nord'
 import { expect, it } from 'vitest'
 
 // eslint-disable-next-line antfu/no-import-dist
-import { wasmBinary } from '../dist/wasm-inlined.mjs'
+import { wasmBinaryPromise } from '../dist/wasm-inlined.mjs'
 import { createOnigurumaEngine } from '../src/index'
 
 it('wasm', async () => {
@@ -12,7 +12,7 @@ it('wasm', async () => {
     themes: [nord],
     langs: [js as any],
     engine: createOnigurumaEngine({
-      instantiator: obj => WebAssembly.instantiate(wasmBinary, obj),
+      instantiator: obj => wasmBinaryPromise.then(wasmBinary => WebAssembly.instantiate(wasmBinary, obj)),
     }),
   })
 
