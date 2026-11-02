@@ -19,7 +19,7 @@ Oh by the way, all the code blocks in this site are highlighted by Shiki, as you
 - ESM-only ([CDN Usage](/guide/install#cdn-usage), [CJS Usage](/guide/install#cjs-usage)).
 - [Bundles languages/themes composedly](/guide/bundles#fine-grained-bundle).
 - [Light/Dark themes support](/guide/dual-themes)
-- [`hast` support](/guide/transformers#codetohast)
+- [`hast` support](/guide/install#shorthands)
 - [Transformers API](/guide/transformers)
 - [Decorations API](/guide/decorations)
 - [TypeScript Twoslash integrations](/packages/twoslash)
