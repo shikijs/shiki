@@ -22,6 +22,34 @@ button {
 </style>
 `
 
+it('continues a clone and the original independently', async () => {
+  const highlighter = await createHighlighter({
+    langs: ['ts'],
+    themes: ['vitesse-light'],
+  })
+  const options: ShikiStreamTokenizerOptions = { highlighter, lang: 'ts', theme: 'vitesse-light' }
+  async function streamChunks(...chunks: string[]): Promise<ShikiStreamTokenizer> {
+    const streamer = new ShikiStreamTokenizer(options)
+    for (const chunk of chunks)
+      await streamer.enqueue(chunk)
+    return streamer
+  }
+
+  const original = await streamChunks('const a = 1\nconst b')
+  const clone = original.clone()
+  await clone.enqueue(' = 2\nc')
+  await original.enqueue(' = 3\nd')
+
+  expect(clone.tokensStable).toEqual((await streamChunks('const a = 1\nconst b', ' = 2\nc')).tokensStable)
+  expect(original.tokensStable).toEqual((await streamChunks('const a = 1\nconst b', ' = 3\nd')).tokensStable)
+
+  // Cloned before any line completes: the stable history is still empty
+  const unfinished = await streamChunks('const b')
+  const unfinishedClone = unfinished.clone()
+  await unfinishedClone.enqueue(' = 2\n')
+  expect(unfinished.tokensStable).toEqual([])
+})
+
 it('exported', async () => {
   const highlighter = await createHighlighter({
     langs: ['vue'],

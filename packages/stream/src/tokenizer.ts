@@ -80,7 +80,7 @@ export class ShikiStreamTokenizer {
     )
     clone.lastUnstableCodeChunk = this.lastUnstableCodeChunk
     clone.tokensUnstable = this.tokensUnstable
-    clone.tokensStable = this.tokensStable
+    clone.tokensStable = [...this.tokensStable]
     clone.lastStableGrammarState = this.lastStableGrammarState
     return clone
   }
