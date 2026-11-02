@@ -35,30 +35,38 @@ const TwoslashFloatingVue = {
 
         const _component = app.component
         app.component = function (this: typeof app, ...rest: any[]) {
-          // @ts-expect-error type mismatch for `rest`
-          const comp = _component.apply(this, rest)
           if (rest.length >= 2 && rest[0] === 'VMenu') {
-            try {
-              const PopperVue = rest[1].components.Popper
-              const PopperTs = PopperVue.extends
+            // `VMenu` is a `PopperWrapper` that renders the actual popper as a
+            // child ref. The popper component is not reachable from the
+            // wrapper's options in floating-vue >= 5.4 (it used to be
+            // `components.Popper`), so patch the popper instance once mounted.
+            const _mounted = rest[1].mounted
+            rest[1] = {
+              ...rest[1],
+              mounted(this: any, ...args: any[]) {
+                try {
+                  const popper = this.$refs.popper
+                  const _show = popper.show
+                  popper.show = function (...args: any[]) {
+                    if (!isDragging)
+                      return _show.apply(this, args)
+                  }
 
-              const _show = PopperTs.methods.show
-              PopperTs.methods.show = function (...args: any[]) {
-                if (!isDragging)
-                  return _show.apply(this, args)
-              }
-
-              const _hide = PopperTs.methods.hide
-              PopperTs.methods.hide = function (...args: any[]) {
-                if (!isDragging)
-                  return _hide.apply(this, args)
-              }
-            }
-            catch (e) {
-              console.error('Failed to patch FloatingVue', e)
+                  const _hide = popper.hide
+                  popper.hide = function (...args: any[]) {
+                    if (!isDragging)
+                      return _hide.apply(this, args)
+                  }
+                }
+                catch (e) {
+                  console.error('Failed to patch FloatingVue', e)
+                }
+                return _mounted?.apply(this, args)
+              },
             }
           }
-          return comp
+          // @ts-expect-error type mismatch for `rest`
+          return _component.apply(this, rest)
         }
       }
     }
