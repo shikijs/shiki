@@ -164,7 +164,9 @@ export class MagicMoveRenderer {
         return el
       }
       else {
-        const el = document.createElement(token.content === '\n' ? 'br' : 'span')
+        const el = document.createElement(token.content === '\n'
+          ? 'br'
+          : 'span')
         this.applyElement(el, token)
         newDomMap.set(token.key, el)
         return el
@@ -227,7 +229,9 @@ export class MagicMoveRenderer {
         return el
       }
       else {
-        const el = document.createElement(token.content === '\n' ? 'br' : 'span')
+        const el = document.createElement(token.content === '\n'
+          ? 'br'
+          : 'span')
         this.applyElement(el, token)
         enter.push(el)
         newDomMap.set(token.key, el)

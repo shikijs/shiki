@@ -7,7 +7,9 @@ import { fromHtml } from 'hast-util-from-html'
 async function buildIcons(filepath: string, map: Record<string, string>): Promise<void> {
   const result = Object.fromEntries(
     Object.entries(map).map(([key, value]) => {
-      const iconset = value.startsWith('codicon:') ? codicon : carbon
+      const iconset = value.startsWith('codicon:')
+        ? codicon
+        : carbon
       const icon = iconset.icons[value.split(':')[1]]
       if (!icon)
         throw new Error(`Icon not found: ${value}`)

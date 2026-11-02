@@ -115,7 +115,9 @@ export function guessEmbeddedLanguages(
   for (const match of code.matchAll(RE_SCRIPT_LANG)) {
     // Extract language from MIME types like 'text/javascript' or 'application/typescript'
     const fullType = match[1].toLowerCase().trim()
-    const lang = fullType.includes('/') ? fullType.split('/').pop() : fullType
+    const lang = fullType.includes('/')
+      ? fullType.split('/').pop()
+      : fullType
     if (lang)
       langs.add(lang)
   }

@@ -67,7 +67,10 @@ it('scoped colorReplacements', async () => {
     name: 'custom-light',
     type: 'light',
     settings: [
-      { scope: 'string', settings: { foreground: '#a3be8c' } },
+      {
+        scope: 'string',
+        settings: { foreground: '#a3be8c' },
+      },
     ],
     fg: '#393a34',
     bg: '#b07d48',

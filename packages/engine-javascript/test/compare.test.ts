@@ -22,7 +22,13 @@ function createEngineWrapper(engine: RegexEngine): RegexEngine & { executions: E
           executions.push({
             id: createHash({ patterns }),
             patterns,
-            args: [typeof string === 'string' ? string : string.content, startPosition, options],
+            args: [
+              typeof string === 'string'
+                ? string
+                : string.content,
+              startPosition,
+              options,
+            ],
             result,
           })
           return result

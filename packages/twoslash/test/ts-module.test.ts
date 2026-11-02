@@ -28,7 +28,9 @@ describe('transformerTwoslash: tsModule forwarding', () => {
     await codeToHtml(sample, {
       lang: 'ts',
       theme: 'vitesse-dark',
-      transformers: [transformerTwoslash({ cache: false, tsModule })],
+      transformers: [
+        transformerTwoslash({ cache: false, tsModule }),
+      ],
     })
 
     expect(createLanguageService).toHaveBeenCalled()
@@ -40,7 +42,12 @@ describe('transformerTwoslash: tsModule forwarding', () => {
     await codeToHtml(sample, {
       lang: 'ts',
       theme: 'vitesse-dark',
-      transformers: [transformerTwoslash({ cache: false, twoslashOptions: { tsModule } })],
+      transformers: [
+        transformerTwoslash({
+          cache: false,
+          twoslashOptions: { tsModule },
+        }),
+      ],
     })
 
     expect(createLanguageService).toHaveBeenCalled()

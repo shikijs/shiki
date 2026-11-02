@@ -36,7 +36,11 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
     for (const { scope, settings: { foreground, background, fontStyle } = {} } of themeSettings) {
       if (!foreground && !background && !fontStyle)
         continue
-      const scopes = Array.isArray(scope) ? scope : scope ? [scope] : []
+      const scopes = Array.isArray(scope)
+        ? scope
+        : scope
+          ? [scope]
+          : []
 
       const normalizedFontStyle = normalizeFontStyleString(fontStyle)
       const normalizedForeground = normalizeColor(foreground)
@@ -57,7 +61,9 @@ export function textmateThemeToMonacoTheme(theme: ThemeRegistrationResolved): Mo
   )
 
   return {
-    base: theme.type === 'light' ? 'vs' : 'vs-dark',
+    base: theme.type === 'light'
+      ? 'vs'
+      : 'vs-dark',
     inherit: false,
     colors,
     rules,
@@ -141,7 +147,9 @@ export function shikiToMonaco(
           if (line.length >= tokenizeMaxLineLength) {
             return {
               endState: state,
-              tokens: [{ startIndex: 0, scopes: '' }],
+              tokens: [
+                { startIndex: 0, scopes: '' },
+              ],
             }
           }
 
@@ -163,11 +171,16 @@ export function shikiToMonaco(
 
             // Because Monaco only support one scope per token,
             // we workaround this to use color (and font style when available) to trace back the scope
-            const scope = color ? (findScopeByColorAndStyle(color, fontStyle) || '') : ''
+            const scope = color
+              ? (findScopeByColorAndStyle(color, fontStyle) || '')
+              : ''
             tokens.push({ startIndex, scopes: scope })
           }
 
-          return { endState: new TokenizerState(result.ruleStack), tokens }
+          return {
+            endState: new TokenizerState(result.ruleStack),
+            tokens,
+          }
         },
       })
     }

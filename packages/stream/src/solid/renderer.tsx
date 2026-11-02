@@ -62,7 +62,10 @@ export function ShikiStreamRenderer(props: {
   ))
 
   return (
-    <pre class={`shiki shiki-stream${props.class ? ` ${props.class}` : ''}`}>
+    <pre class={`shiki shiki-stream${props.class
+      ? ` ${props.class}`
+      : ''}`}
+    >
       <code>
         <For each={tokens()}>
           {token => (

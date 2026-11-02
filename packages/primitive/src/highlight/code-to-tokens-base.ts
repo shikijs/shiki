@@ -38,8 +38,11 @@ export function codeToTokensBase(
 
   const lang = primitive.resolveLangAlias(options.lang || 'text')
 
-  if (isPlainLang(lang) || isNoneTheme(themeName))
-    return splitLines(code).map(line => [{ content: line[0], offset: line[1] }])
+  if (isPlainLang(lang) || isNoneTheme(themeName)) {
+    return splitLines(code).map(line => [
+      { content: line[0], offset: line[1] },
+    ])
+  }
 
   const { theme, colorMap } = primitive.setTheme(themeName)
 
@@ -169,12 +172,14 @@ function _tokenizeWithTheme(
     // Do not attempt to tokenize if the line length is longer than the `tokenizationMaxLineLength`
     if (tokenizeMaxLineLength > 0 && line.length >= tokenizeMaxLineLength) {
       actual = []
-      final.push([{
-        content: line,
-        offset: lineOffset,
-        color: '',
-        fontStyle: 0,
-      }])
+      final.push([
+        {
+          content: line,
+          offset: lineOffset,
+          color: '',
+          fontStyle: 0,
+        },
+      ])
       continue
     }
 
@@ -193,7 +198,9 @@ function _tokenizeWithTheme(
     const tokensLength = result.tokens.length / 2
     for (let j = 0; j < tokensLength; j++) {
       const startIndex = result.tokens[2 * j]
-      const nextStartIndex = j + 1 < tokensLength ? result.tokens[2 * j + 2] : line.length
+      const nextStartIndex = j + 1 < tokensLength
+        ? result.tokens[2 * j + 2]
+        : line.length
       if (startIndex === nextStartIndex)
         continue
 

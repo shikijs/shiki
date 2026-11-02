@@ -11,7 +11,9 @@ export function normalizeColor(color: string | string[] | undefined): string | u
   if (!color)
     return undefined
 
-  color = (color.charCodeAt(0) === 35 ? color.slice(1) : color).toLowerCase()
+  color = (color.charCodeAt(0) === 35
+    ? color.slice(1)
+    : color).toLowerCase()
 
   // #RGB => #RRGGBB - Monaco does not support hex color with 3 or 4 digits
   if (color.length === 3 || color.length === 4)

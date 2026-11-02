@@ -15,7 +15,9 @@ describe('transformerMetaHighlight - zeroIndexed behavior', () => {
       lang: 'js',
       theme: 'nord',
       meta: { __raw: '{1,3}' },
-      transformers: [transformerMetaHighlight()],
+      transformers: [
+        transformerMetaHighlight(),
+      ],
     })
     expect(html).toMatchSnapshot()
   })
@@ -25,7 +27,9 @@ describe('transformerMetaHighlight - zeroIndexed behavior', () => {
       lang: 'js',
       theme: 'nord',
       meta: { __raw: '{1,3}' },
-      transformers: [transformerMetaHighlight({ zeroIndexed: true })],
+      transformers: [
+        transformerMetaHighlight({ zeroIndexed: true }),
+      ],
     })
     expect(html).toMatchSnapshot()
   })

@@ -19,13 +19,17 @@ describe('shikiToMonaco', () => {
           return {
             type: 'light',
             colors: {},
-            rules: [{ token: 'string', foreground: '#000000' }],
+            rules: [
+              { token: 'string', foreground: '#000000' },
+            ],
           }
         }
       },
       setTheme: (id: string) => {
         if (id === 'theme1') {
-          return { colorMap: ['#000000', '#ff0000'] }
+          return {
+            colorMap: ['#000000', '#ff0000'],
+          }
         }
         else {
           // theme2 has sparse color map at index 0
@@ -56,7 +60,9 @@ describe('shikiToMonaco', () => {
       },
       languages: {
         register: vi.fn(),
-        getLanguages: () => [{ id: 'javascript' }],
+        getLanguages: () => [
+          { id: 'javascript' },
+        ],
         setTokensProvider: vi.fn(),
       },
     } as any

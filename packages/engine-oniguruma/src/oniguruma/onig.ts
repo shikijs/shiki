@@ -5,7 +5,9 @@ function getHeapMax(): number {
 }
 
 function _emscripten_get_now(): number {
-  return typeof performance !== 'undefined' ? performance.now() : Date.now()
+  return typeof performance !== 'undefined'
+    ? performance.now()
+    : Date.now()
 }
 
 const alignUp = (x: number, multiple: number): number => x + ((multiple - (x % multiple)) % multiple)
@@ -52,7 +54,9 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     return false
   }
 
-  const UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder('utf8') : undefined
+  const UTF8Decoder = typeof TextDecoder != 'undefined'
+    ? new TextDecoder('utf8')
+    : undefined
   function UTF8ArrayToString(heapOrArray: Uint8Array, idx: number, maxBytesToRead = 1024): string {
     const endIdx = idx + maxBytesToRead
     let endPtr = idx
@@ -93,7 +97,9 @@ export default async function main(init: Instantiator): Promise<IOnigBinding> {
     return str
   }
   function UTF8ToString(ptr: number, maxBytesToRead?: number): string {
-    return ptr ? UTF8ArrayToString(binding.HEAPU8, ptr, maxBytesToRead) : ''
+    return ptr
+      ? UTF8ArrayToString(binding.HEAPU8, ptr, maxBytesToRead)
+      : ''
   }
 
   const asmLibraryArg = {

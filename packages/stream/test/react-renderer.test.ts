@@ -12,7 +12,11 @@ beforeAll(() => {
 })
 
 function createToken(content: string, color: string): ThemedToken {
-  return { content, offset: 0, htmlStyle: { color } }
+  return {
+    content,
+    offset: 0,
+    htmlStyle: { color },
+  }
 }
 
 /**
@@ -60,7 +64,10 @@ async function mountRenderer(props: Parameters<typeof ShikiStreamRenderer>[0]) {
   await act(async () => {
     root.render(h(ShikiStreamRenderer, props))
   })
-  return { container, unmount: () => act(() => root.unmount()) }
+  return {
+    container,
+    unmount: () => act(() => root.unmount()),
+  }
 }
 
 describe('react stream renderer', () => {

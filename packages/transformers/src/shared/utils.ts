@@ -67,7 +67,9 @@ export function splitSpaces(
     ...parts.slice(0, leftCount),
     ...(renderContinuousSpaces
       ? separateContinuousSpaces(middle)
-      : [middle.join('')]),
+      : [
+          middle.join(''),
+        ]),
     ...parts.slice(parts.length - rightCount),
   ]
 }

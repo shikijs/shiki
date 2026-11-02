@@ -34,7 +34,9 @@ export function transformerNotationWordHighlight(
     '@shikijs/transformers:notation-highlight-word',
     RE_CODE_WORD,
     function ([_, word, range], _line, comment, lines, index) {
-      const lineNum = range ? Number.parseInt(range.slice(1), 10) : lines.length
+      const lineNum = range
+        ? Number.parseInt(range.slice(1), 10)
+        : lines.length
 
       // escape backslashes
       word = word.replace(RE_UNESCAPE, '$1')

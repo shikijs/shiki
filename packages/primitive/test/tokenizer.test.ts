@@ -68,6 +68,10 @@ describe('tokenizer', () => {
     })
 
     const tokens = codeToTokensBase(internal, 'hello world', { lang: 'text', theme: 'nord' })
-    expect(tokens).toEqual([[{ content: 'hello world', offset: 0 }]])
+    expect(tokens).toEqual([
+      [
+        { content: 'hello world', offset: 0 },
+      ],
+    ])
   })
 })

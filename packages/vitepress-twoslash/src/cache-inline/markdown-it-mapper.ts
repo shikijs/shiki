@@ -60,11 +60,17 @@ function findNextNewLine(str: string, position: number): [number, number] {
     return [-1, 0]
 
   let idx: number
-  if (nIdx === -1)
+  if (nIdx === -1) {
     idx = rIdx
-  else if (rIdx === -1)
+  }
+  else if (rIdx === -1) {
     idx = nIdx
-  else idx = nIdx < rIdx ? nIdx : rIdx
+  }
+  else {
+    idx = nIdx < rIdx
+      ? nIdx
+      : rIdx
+  }
 
   // CRLF case
   if (str.charCodeAt(idx) === 13 /* \r */ && str.charCodeAt(idx + 1) === 10 /* \n */) {

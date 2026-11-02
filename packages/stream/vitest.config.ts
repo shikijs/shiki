@@ -8,7 +8,12 @@ export default defineConfig({
     Svelte(),
   ],
   resolve: {
-    conditions: ['browser', 'import', 'module', 'default'],
+    conditions: [
+      'browser',
+      'import',
+      'module',
+      'default',
+    ],
     tsconfigPaths: true,
     alias: [
       { find: '@shikijs/engine-oniguruma/wasm-inlined', replacement: new URL('../engine-oniguruma/src/wasm-inlined.ts', import.meta.url).pathname },

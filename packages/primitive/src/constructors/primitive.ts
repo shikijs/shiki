@@ -49,15 +49,24 @@ export function createShikiPrimitive(options: HighlighterCoreOptions<true>): Shi
 
   function getLanguage(name: string | LanguageRegistration): Grammar {
     ensureNotDisposed()
-    const _lang = _registry.getGrammar(typeof name === 'string' ? name : name.name)
+    const _lang = _registry.getGrammar(typeof name === 'string'
+      ? name
+      : name.name)
     if (!_lang)
       throw new ShikiError(`Language \`${name}\` not found, you may need to load it first`)
     return _lang
   }
 
   function getTheme(name: string | ThemeRegistrationAny): ThemeRegistrationResolved {
-    if (name === 'none')
-      return { bg: '', fg: '', name: 'none', settings: [], type: 'dark' }
+    if (name === 'none') {
+      return {
+        bg: '',
+        fg: '',
+        name: 'none',
+        settings: [],
+        type: 'dark',
+      }
+    }
     ensureNotDisposed()
     const _theme = _registry.getTheme(name)
     if (!_theme)

@@ -132,10 +132,14 @@ async function fetchSample(id: string): Promise<string> {
 }
 
 async function reset() {
-  if (lang.value === 'vue')
-    example.value = example.value === vueBefore ? vueAfter : vueBefore
-  else
+  if (lang.value === 'vue') {
+    example.value = example.value === vueBefore
+      ? vueAfter
+      : vueBefore
+  }
+  else {
     example.value = await fetchSample(lang.value)
+  }
   input.value = example.value
   code.value = example.value
 }
@@ -154,7 +158,16 @@ function rerun() {
 let timer: ReturnType<typeof setTimeout> | undefined
 
 watch(
-  [theme, lang, code, interval, allowRecalls, rendererContainer, highlighter, loadingPromise],
+  [
+    theme,
+    lang,
+    code,
+    interval,
+    allowRecalls,
+    rendererContainer,
+    highlighter,
+    loadingPromise,
+  ],
   (n, o) => {
     if (n.every((v, i) => v === o[i]))
       return

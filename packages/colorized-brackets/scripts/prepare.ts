@@ -39,7 +39,9 @@ async function main() {
     const theme = await fs.readJSON(`./node_modules/shiki/node_modules/tm-themes/themes/${t.name}.json`)
     const isHighContrast = t.name.includes('high-contrast')
     const themeType = theme.type ?? 'dark'
-    const baseTheme = isHighContrast ? `${themeType}HighContrast` : themeType
+    const baseTheme = isHighContrast
+      ? `${themeType}HighContrast`
+      : themeType
     const colors: Record<string, string> = {
       ...vsCodeBaseThemes[baseTheme],
       ...theme.colors,

@@ -33,7 +33,11 @@ export function codeToTokens(
       .entries(options.themes)
       .filter(i => i[1])
       .map(i => ({ color: i[0], theme: i[1]! }))
-      .sort((a, b) => a.color === defaultColor ? -1 : b.color === defaultColor ? 1 : 0)
+      .sort((a, b) => a.color === defaultColor
+        ? -1
+        : b.color === defaultColor
+          ? 1
+          : 0)
 
     if (themes.length === 0)
       throw new ShikiError('`themes` option must not be empty')
@@ -64,7 +68,9 @@ export function codeToTokens(
     bg = mapThemeColors(themes, themeRegs, themeColorReplacements, cssVariablePrefix, defaultColor, 'bg', colorsRendering)
 
     themeName = `shiki-themes ${themeRegs.map(t => t.name).join(' ')}`
-    rootStyle = defaultColor ? undefined : [fg, bg].join(';')
+    rootStyle = defaultColor
+      ? undefined
+      : [fg, bg].join(';')
   }
   else if ('theme' in options) {
     const colorReplacements = resolveColorReplacements(options.theme, options)
@@ -107,7 +113,9 @@ function mapThemeColors(
   return themes
     .map((t, idx) => {
       const value = applyColorReplacements(themeRegs[idx][property], themeColorReplacements[idx]) || 'inherit'
-      const cssVar = `${cssVariablePrefix + t.color}${property === 'bg' ? '-bg' : ''}:${value}`
+      const cssVar = `${cssVariablePrefix + t.color}${property === 'bg'
+        ? '-bg'
+        : ''}:${value}`
       if (idx === 0 && defaultColor) {
         // light-dark()
         if (defaultColor === DEFAULT_COLOR_LIGHT_DARK && themes.length > 1) {

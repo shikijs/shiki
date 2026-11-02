@@ -14,7 +14,9 @@ describe('multi-token comment support', () => {
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     // Should have the diff classes applied
@@ -35,7 +37,9 @@ describe('multi-token comment support', () => {
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'dracula',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     // Should have the diff classes applied
@@ -56,7 +60,9 @@ describe('multi-token comment support', () => {
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     expect(html).toContain('has-diff')
@@ -75,7 +81,9 @@ describe('multi-token comment support', () => {
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationHighlight()],
+      transformers: [
+        transformerNotationHighlight(),
+      ],
     })
 
     expect(html).toContain('highlighted')
@@ -93,7 +101,9 @@ describe('multi-token comment support', () => {
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationFocus()],
+      transformers: [
+        transformerNotationFocus(),
+      ],
     })
 
     expect(html).toContain('focused')
@@ -113,7 +123,10 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff(), transformerNotationHighlight()],
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationHighlight(),
+      ],
     })
 
     expect(html).toContain('has-diff')
@@ -134,7 +147,9 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     // Should not have diff classes since notation is invalid
@@ -155,7 +170,9 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     expect(html).not.toContain('has-diff')
@@ -173,7 +190,9 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'jsx',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     expect(html).not.toContain('has-diff')
@@ -191,7 +210,9 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff({ matchAlgorithm: 'v1' })],
+      transformers: [
+        transformerNotationDiff({ matchAlgorithm: 'v1' }),
+      ],
     })
 
     expect(html).toContain('has-diff')
@@ -212,7 +233,9 @@ const c = 3 // [!code highlight]`
     const html = highlighter.codeToHtml(code, {
       lang: 'javascript',
       theme: 'rose-pine',
-      transformers: [transformerNotationDiff()],
+      transformers: [
+        transformerNotationDiff(),
+      ],
     })
 
     // Verify the multi-token handling works
@@ -237,7 +260,9 @@ const c = 3 // [!code highlight]`
       const html = highlighter.codeToHtml(code, {
         lang,
         theme: 'rose-pine-dawn',
-        transformers: [transformerNotationDiff()],
+        transformers: [
+          transformerNotationDiff(),
+        ],
       })
 
       expect(html).toContain('diff add')
@@ -258,7 +283,9 @@ bar: 2`
     const html = highlighter.codeToHtml(code, {
       lang: 'yaml',
       theme: 'rose-pine',
-      transformers: [transformerNotationHighlight()],
+      transformers: [
+        transformerNotationHighlight(),
+      ],
     })
 
     expect(html).not.toContain('[!code')

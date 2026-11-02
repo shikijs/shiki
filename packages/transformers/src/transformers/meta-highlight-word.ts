@@ -8,7 +8,9 @@ export function parseMetaHighlightWords(meta: string): string[] {
     return []
 
   // https://regex101.com/r/BHS5fd/1
-  const match = [...meta.matchAll(RE_WORD_MATCH)]
+  const match = [
+    ...meta.matchAll(RE_WORD_MATCH),
+  ]
 
   return match
     // Escape backslashes

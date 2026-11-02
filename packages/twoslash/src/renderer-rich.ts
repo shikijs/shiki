@@ -251,7 +251,9 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           meta: {},
           transformers: [],
           lang,
-          structure: content.trim().includes('\n') ? 'classic' : 'inline',
+          structure: content.trim().includes('\n')
+            ? 'classic'
+            : 'inline',
         },
       ).children as ElementContent[],
     }
@@ -436,14 +438,16 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
             properties: {},
             children: [
               ...completionIcons
-                ? [<Element>{
-                  type: 'element',
-                  tagName: 'span',
-                  properties: { class: `twoslash-completions-icon completions-${kind.replace(RE_WHITESPACE_CHAR, '-')}` },
-                  children: [
-                    completionIcons[kind] || completionIcons.property,
-                  ].filter(Boolean),
-                }]
+                ? [
+<Element>{
+  type: 'element',
+  tagName: 'span',
+  properties: { class: `twoslash-completions-icon completions-${kind.replace(RE_WHITESPACE_CHAR, '-')}` },
+  children: [
+    completionIcons[kind] || completionIcons.property,
+  ].filter(Boolean),
+},
+                  ]
                 : [],
               {
                 type: 'element',
@@ -544,7 +548,10 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
               type: 'element',
               tagName: 'span',
               properties: {
-                class: [`twoslash-error`, getErrorLevelClass(error)].filter(Boolean).join(' '),
+                class: [
+                  `twoslash-error`,
+                  getErrorLevelClass(error),
+                ].filter(Boolean).join(' '),
               },
               children,
             },
@@ -605,8 +612,12 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
         return []
 
       const themedContent = highlightPopupContent.call(this, query)
-      const targetNode = node?.type === 'element' ? node.children[0] : undefined
-      const targetText = targetNode?.type === 'text' ? targetNode.value : ''
+      const targetNode = node?.type === 'element'
+        ? node.children[0]
+        : undefined
+      const targetText = targetNode?.type === 'text'
+        ? targetNode.value
+        : ''
       const offset = Math.max(0, (query.character || 0) + Math.floor(targetText.length / 2) - 2)
 
       return [
@@ -617,7 +628,10 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
             class: ['twoslash-meta-line twoslash-query-line', classExtra].filter(Boolean).join(' '),
           },
           children: [
-            { type: 'text', value: ' '.repeat(offset) },
+            {
+              type: 'text',
+              value: ' '.repeat(offset),
+            },
             {
               type: 'element',
               tagName: 'span',
@@ -647,7 +661,11 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           type: 'element',
           tagName: 'div',
           properties: {
-            class: ['twoslash-meta-line twoslash-error-line', getErrorLevelClass(error), classExtra].filter(Boolean).join(' '),
+            class: [
+              'twoslash-meta-line twoslash-error-line',
+              getErrorLevelClass(error),
+              classExtra,
+            ].filter(Boolean).join(' '),
           },
           children: [
             {
@@ -669,14 +687,16 @@ export function rendererRich(options: RendererRichOptions = {}): TwoslashRendere
           },
           children: [
             ...customTagIcons
-              ? [<Element>{
-                type: 'element',
-                tagName: 'span',
-                properties: { class: `twoslash-tag-icon tag-${tag.name}-icon` },
-                children: [
-                  customTagIcons[tag.name],
-                ].filter(Boolean),
-              }]
+              ? [
+<Element>{
+  type: 'element',
+  tagName: 'span',
+  properties: { class: `twoslash-tag-icon tag-${tag.name}-icon` },
+  children: [
+    customTagIcons[tag.name],
+  ].filter(Boolean),
+},
+                ]
               : [],
             {
               type: 'text',

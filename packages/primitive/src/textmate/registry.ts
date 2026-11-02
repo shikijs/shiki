@@ -51,8 +51,11 @@ export class Registry extends TextMateRegistry {
   }
 
   public getLoadedThemes(): string[] {
-    if (!this._loadedThemesCache)
-      this._loadedThemesCache = [...this._resolvedThemes.keys()]
+    if (!this._loadedThemesCache) {
+      this._loadedThemesCache = [
+        ...this._resolvedThemes.keys(),
+      ]
+    }
     return this._loadedThemesCache
   }
 
@@ -81,7 +84,9 @@ export class Registry extends TextMateRegistry {
       return
 
     const embeddedLazilyBy = new Set(
-      [...this._langMap.values()]
+      [
+        ...this._langMap.values(),
+      ]
         .filter(i => i.embeddedLangsLazy?.includes(lang.name)),
     )
 
@@ -111,7 +116,9 @@ export class Registry extends TextMateRegistry {
     // TextMate only looks up a grammar's injections the first time its scope is loaded,
     // so grammars loaded before this injection need to be reloaded to pick it up
     if (lang.injectTo) {
-      const targets = [...this._langMap.values()].filter(i =>
+      const targets = [
+        ...this._langMap.values(),
+      ].filter(i =>
         i !== lang
         && this._resolvedGrammars.has(i.name)
         && lang.injectTo!.some(scope => i.scopeName === scope || i.scopeName.startsWith(`${scope}.`))
@@ -153,7 +160,9 @@ export class Registry extends TextMateRegistry {
     for (const lang of langs)
       this.resolveEmbeddedLanguages(lang)
 
-    const langsGraphArray = [...this._langGraph.entries()]
+    const langsGraphArray = [
+      ...this._langGraph.entries(),
+    ]
 
     const missingLangs = langsGraphArray.filter(([_, lang]) => !lang)
     if (missingLangs.length) {
@@ -178,7 +187,10 @@ export class Registry extends TextMateRegistry {
   public getLoadedLanguages(): string[] {
     if (!this._loadedLanguagesCache) {
       this._loadedLanguagesCache = [
-        ...new Set([...this._resolvedGrammars.keys(), ...Object.keys(this._alias)]),
+        ...new Set([
+          ...this._resolvedGrammars.keys(),
+          ...Object.keys(this._alias),
+        ]),
       ]
     }
     return this._loadedLanguagesCache

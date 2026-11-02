@@ -6,7 +6,11 @@ import { describe, expect, it, vi } from 'vitest'
 import { ShikiStreamRenderer } from '../src/svelte'
 
 function createToken(content: string, color: string): ThemedToken {
-  return { content, offset: 0, htmlStyle: { color } }
+  return {
+    content,
+    offset: 0,
+    htmlStyle: { color },
+  }
 }
 
 function createControlledTokenStream() {
@@ -47,7 +51,15 @@ describe('svelte stream renderer', () => {
     const ended = vi.fn()
     const target = document.createElement('div')
     const controlled = createControlledTokenStream()
-    const app = mount(ShikiStreamRenderer, { target, props: { stream: controlled.stream, onStreamStart: started, onStreamEnd: ended, class: 'extra' } })
+    const app = mount(ShikiStreamRenderer, {
+      target,
+      props: {
+        stream: controlled.stream,
+        onStreamStart: started,
+        onStreamEnd: ended,
+        class: 'extra',
+      },
+    })
 
     await flushRenderer()
     expect(target.querySelector('pre')?.className).toBe('shiki shiki-stream extra')
@@ -61,7 +73,9 @@ describe('svelte stream renderer', () => {
     // Appending an unstable token must not touch the already-rendered first span.
     await controlled.enqueue(createToken('answer', '#222'))
     expect(target.querySelector('code')?.textContent).toBe('const answer')
-    const [firstAfterAppend, unstableSpan] = [...target.querySelectorAll('span')]
+    const [firstAfterAppend, unstableSpan] = [
+      ...target.querySelectorAll('span'),
+    ]
     expect(firstAfterAppend).toBe(firstSpan)
     expect(firstAfterAppend.outerHTML).toBe(firstHtml)
     expect(unstableSpan.textContent).toBe('answer')
@@ -75,7 +89,9 @@ describe('svelte stream renderer', () => {
     // The replacement is a brand-new node, never the recalled one.
     await controlled.enqueue(createToken('count', '#333'))
     expect(target.querySelector('code')?.textContent).toBe('const count')
-    const [firstAfterReplacement, replacementSpan] = [...target.querySelectorAll('span')]
+    const [firstAfterReplacement, replacementSpan] = [
+      ...target.querySelectorAll('span'),
+    ]
     expect(firstAfterReplacement).toBe(firstSpan)
     expect(replacementSpan).not.toBe(unstableSpan)
     expect(replacementSpan.textContent).toBe('count')
@@ -91,7 +107,15 @@ describe('svelte stream renderer', () => {
     const ended = vi.fn()
     const target = document.createElement('div')
     const controlled = createControlledTokenStream()
-    const app = mount(ShikiStreamRenderer, { target, props: { stream: controlled.stream, onStreamStart: started, onStreamEnd: ended, class: '' } })
+    const app = mount(ShikiStreamRenderer, {
+      target,
+      props: {
+        stream: controlled.stream,
+        onStreamStart: started,
+        onStreamEnd: ended,
+        class: '',
+      },
+    })
 
     await flushRenderer()
     await controlled.enqueue(createToken('const ', '#111'))
@@ -108,7 +132,10 @@ describe('svelte stream renderer', () => {
     const ended = vi.fn()
     const target = document.createElement('div')
     const controlled = createControlledTokenStream()
-    const app = mount(ShikiStreamRenderer, { target, props: { stream: controlled.stream, onStreamEnd: ended, class: '' } })
+    const app = mount(ShikiStreamRenderer, {
+      target,
+      props: { stream: controlled.stream, onStreamEnd: ended, class: '' },
+    })
 
     await flushRenderer()
     await controlled.enqueue(createToken('const ', '#111'))

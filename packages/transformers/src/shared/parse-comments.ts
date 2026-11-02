@@ -199,7 +199,9 @@ function matchToken(text: string, isLast: boolean): [prefix: string, content: st
     return [
       ' '.repeat(spaceFront) + result[1],
       result[2],
-      result[3] ? result[3] + ' '.repeat(spaceEnd) : undefined,
+      result[3]
+        ? result[3] + ' '.repeat(spaceEnd)
+        : undefined,
     ]
   }
 }

@@ -45,7 +45,9 @@ import { codeToHtml } from 'shiki'
 const html = await codeToHtml('let values: number[] = [];', {
   lang: 'ts',
   theme: 'dark-plus',
-  transformers: [transformerColorizedBrackets()],
+  transformers: [
+    transformerColorizedBrackets()
+  ],
 })
 ```
 
@@ -57,11 +59,18 @@ Brackets are automatically colored according to your Shiki theme (or themes if u
 const html = await codeToHtml('let values: number[] = [];', {
   lang: 'ts',
   theme: myCustomTheme,
-  transformers: [transformerColorizedBrackets({
-    themes: {
-      'my-custom-theme': ['goldenrod', 'blueviolet', 'dodgerblue', 'crimson'],
-    },
-  })],
+  transformers: [
+    transformerColorizedBrackets({
+      themes: {
+        'my-custom-theme': [
+          'goldenrod',
+          'blueviolet',
+          'dodgerblue',
+          'crimson'
+        ],
+      },
+    })
+  ],
 })
 ```
 
@@ -75,7 +84,9 @@ You can customize the bracket pairs:
 
 ```ts colorize-brackets
 const transformer = transformerColorizedBrackets({
-  bracketPairs: [{ opener: '{', closer: '}' }],
+  bracketPairs: [
+    { opener: '{', closer: '}' }
+  ],
 })
 ```
 

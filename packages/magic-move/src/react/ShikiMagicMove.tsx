@@ -49,7 +49,13 @@ export function ShikiMagicMove(props: ShikiMagicMoveProps) {
 
       return machine.current!.commit(props.code, props.options)
     },
-    [props.code, props.options, props.theme, props.lang, lineNumbers],
+    [
+      props.code,
+      props.options,
+      props.theme,
+      props.lang,
+      lineNumbers,
+    ],
   )
 
   return (

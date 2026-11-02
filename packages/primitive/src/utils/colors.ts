@@ -4,8 +4,12 @@ export function resolveColorReplacements(
   theme: ThemeRegistrationAny | string,
   options?: TokenizeWithThemeOptions,
 ): Record<string, string | undefined> {
-  const replacements = typeof theme === 'string' ? {} : { ...theme.colorReplacements }
-  const themeName = typeof theme === 'string' ? theme : theme.name
+  const replacements = typeof theme === 'string'
+    ? {}
+    : { ...theme.colorReplacements }
+  const themeName = typeof theme === 'string'
+    ? theme
+    : theme.name
   for (const [key, value] of Object.entries(options?.colorReplacements || {})) {
     if (typeof value === 'string')
       replacements[key] = value

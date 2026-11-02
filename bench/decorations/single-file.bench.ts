@@ -49,8 +49,14 @@ const plainCode = Array.from(
 const wordDecorations: DecorationItem[] = Array.from(
   { length: wordLineCount },
   (_, line): DecorationItem[] => [
-    { start: { line, character: 6 }, end: { line, character: 16 } },
-    { start: { line, character: 27 }, end: { line, character: 35 } },
+    {
+      start: { line, character: 6 },
+      end: { line, character: 16 },
+    },
+    {
+      start: { line, character: 27 },
+      end: { line, character: 35 },
+    },
   ],
 ).flat()
 

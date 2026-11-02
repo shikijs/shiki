@@ -86,9 +86,13 @@ function separateToken(span: Element, textNode: Text, index: number, len: number
   })
 
   return [
-    index > 0 ? createNode(text.slice(0, index)) : undefined,
+    index > 0
+      ? createNode(text.slice(0, index))
+      : undefined,
     createNode(text.slice(index, index + len)),
-    index + len < text.length ? createNode(text.slice(index + len)) : undefined,
+    index + len < text.length
+      ? createNode(text.slice(index + len))
+      : undefined,
   ]
 }
 

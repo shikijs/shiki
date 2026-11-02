@@ -55,7 +55,9 @@ export function transformerRenderIndentGuides(
         }
 
         for (const [line, level] of emptyLines) {
-          line.children.unshift(...Array.from({ length: Math.min(ranges.length, level + 1) }, (_, i) => ({
+          line.children.unshift(...Array.from({
+            length: Math.min(ranges.length, level + 1),
+          }, (_, i) => ({
             type: 'element',
             tagName: 'span',
             properties: {
@@ -76,10 +78,12 @@ export function transformerRenderIndentGuides(
               properties: {
                 class: 'indent',
               },
-              children: [{
-                type: 'text',
-                value: text.value.slice(start, end),
-              }],
+              children: [
+                {
+                  type: 'text',
+                  value: text.value.slice(start, end),
+                },
+              ],
             } satisfies Element)),
           )
           text.value = text.value.slice(ranges.at(-1)![1])

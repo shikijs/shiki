@@ -113,7 +113,12 @@ export class JavaScriptScanner implements PatternScanner {
     })
 
     this.lastSearches = this.regexps.map(regexp => regexp && isSearchCacheable(regexp)
-      ? { strId: 0, searchedFrom: 0, matchIndex: -1, indices: null }
+      ? {
+          strId: 0,
+          searchedFrom: 0,
+          matchIndex: -1,
+          indices: null,
+        }
       : null,
     )
   }
@@ -148,7 +153,9 @@ export class JavaScriptScanner implements PatternScanner {
         else {
           regexp.lastIndex = startPosition
           const match = regexp.exec(str)
-          matchIndex = match ? match.index : -1
+          matchIndex = match
+            ? match.index
+            : -1
           indices = match ? match.indices! : null
           if (last) {
             last.strId = strId

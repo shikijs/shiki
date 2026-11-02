@@ -7,7 +7,10 @@ await fs.emptyDir('./src/langs')
 await fs.ensureDir('./src/themes')
 await fs.emptyDir('./src/themes')
 
-for (const lang of [...languageNames, ...languageAliasNames]) {
+for (const lang of [
+  ...languageNames,
+  ...languageAliasNames,
+]) {
   await fs.writeFile(
     `./src/langs/${lang}.mjs`,
     `export { default } from '@shikijs/langs/${lang}'\n`,

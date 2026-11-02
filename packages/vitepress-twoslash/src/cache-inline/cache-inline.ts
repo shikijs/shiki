@@ -71,7 +71,9 @@ export function createInlineTypesCache({ remove, ignoreCache }: {
           twoslash: () => {
             try {
               const json = decompressFromBase64(payload.data)
-              return json ? JSON.parse(json) : null
+              return json
+                ? JSON.parse(json)
+                : null
             }
             catch {
               return null
@@ -181,6 +183,8 @@ function simplifyTwoslashReturn(ret: TwoslashReturn | TwoslashShikiReturn): Twos
   return {
     nodes: ret.nodes,
     code: ret.code,
-    meta: ret.meta ? { extension: ret.meta.extension } : undefined,
+    meta: ret.meta
+      ? { extension: ret.meta.extension }
+      : undefined,
   }
 }

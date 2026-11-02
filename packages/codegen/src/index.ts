@@ -84,7 +84,10 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
   })
 
   const langsCode = `{\n${langs.flatMap((lang) => {
-    const ids = [lang.id, ...(lang.aliases || [])]
+    const ids = [
+      lang.id,
+      ...(lang.aliases || []),
+    ]
     return ids.map((id) => {
       return `${JSON.stringify(id)}: () => import('@shikijs/${precompiled ? 'langs-precompiled' : 'langs'}/${lang.id}'),\n`
     })
@@ -109,7 +112,10 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
   if (typescript) {
     lines.push(
       '',
-      `type BundledLanguage = ${langs.flatMap(lang => [lang.id, ...(lang.aliases || [])]).map(lang => `'${lang}'`).join(' | ')}`,
+      `type BundledLanguage = ${langs.flatMap(lang => [
+        lang.id,
+        ...(lang.aliases || []),
+      ]).map(lang => `'${lang}'`).join(' | ')}`,
       `type BundledTheme = ${themes.map(theme => `'${theme.id}'`).join(' | ')}`,
       `type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>`,
       '',
@@ -212,7 +218,9 @@ export async function codegen(options: ShikiCodegenOptions): Promise<ShikiCodege
       useTabs: false,
       singleQuote: true,
       trailingComma: 'all',
-      ...(_format === true ? {} : _format),
+      ...(_format === true
+        ? {}
+        : _format),
     }
     code = await format(code, prettierOptions)
   }

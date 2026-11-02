@@ -11,5 +11,8 @@ export default defineConfig({
       paths: {},
     },
   },
-  external: ['hast', ...Object.keys(pkg.dependencies)],
+  external: [
+    'hast',
+    ...Object.keys(pkg.dependencies),
+  ],
 })

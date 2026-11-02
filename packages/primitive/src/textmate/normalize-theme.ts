@@ -63,10 +63,16 @@ export function normalizeTheme(rawTheme: ThemeRegistrationAny): ThemeRegistratio
      * Last try:
      * If there's no fg/bg color specified in theme, use default
      */
-    if (!fg)
-      fg = theme.type === 'light' ? VSCODE_FALLBACK_EDITOR_FG.light : VSCODE_FALLBACK_EDITOR_FG.dark
-    if (!bg)
-      bg = theme.type === 'light' ? VSCODE_FALLBACK_EDITOR_BG.light : VSCODE_FALLBACK_EDITOR_BG.dark
+    if (!fg) {
+      fg = theme.type === 'light'
+        ? VSCODE_FALLBACK_EDITOR_FG.light
+        : VSCODE_FALLBACK_EDITOR_FG.dark
+    }
+    if (!bg) {
+      bg = theme.type === 'light'
+        ? VSCODE_FALLBACK_EDITOR_BG.light
+        : VSCODE_FALLBACK_EDITOR_BG.dark
+    }
 
     theme.fg = fg
     theme.bg = bg

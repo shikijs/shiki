@@ -173,10 +173,17 @@ export function tokensToHast(
 
   tokens.forEach((line, idx) => {
     if (idx) {
-      if (structure === 'inline')
-        root.children.push({ type: 'element', tagName: 'br', properties: {}, children: [] })
-      else if (structure === 'classic')
+      if (structure === 'inline') {
+        root.children.push({
+          type: 'element',
+          tagName: 'br',
+          properties: {},
+          children: [],
+        })
+      }
+      else if (structure === 'classic') {
         lines.push({ type: 'text', value: '\n' })
+      }
     }
 
     let lineNode: Element = {
@@ -195,7 +202,9 @@ export function tokensToHast(
         properties: {
           ...token.htmlAttrs,
         },
-        children: [{ type: 'text', value: token.content }],
+        children: [
+          { type: 'text', value: token.content },
+        ],
       }
 
       const style = stringifyTokenStyle(token.htmlStyle || getTokenStyleObject(token))
@@ -276,8 +285,14 @@ export function tokensToHast(
     // Extract the transformed children back to root
     root.children = []
     for (let i = 0; i < transformedCode.children.length; i++) {
-      if (i > 0)
-        root.children.push({ type: 'element', tagName: 'br', properties: {}, children: [] })
+      if (i > 0) {
+        root.children.push({
+          type: 'element',
+          tagName: 'br',
+          properties: {},
+          children: [],
+        })
+      }
 
       const line = transformedCode.children[i]
       if (line.type === 'element')
@@ -353,11 +368,13 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]): ThemedToken[][] {
       if (!leading && !trailing)
         return token
 
-      const expanded = [{
-        ...token,
-        offset: token.offset + leading.length,
-        content,
-      }]
+      const expanded = [
+        {
+          ...token,
+          offset: token.offset + leading.length,
+          content,
+        },
+      ]
       if (leading) {
         expanded.unshift({
           content: leading,

@@ -19,7 +19,10 @@ export function createMagicMoveMachine(
   function commit(code: string, override?: MagicMoveDifferOptions): { current: KeyedTokensInfo, previous: KeyedTokensInfo } {
     previous = current
     const mergedOptions = override
-      ? { ...options, ...override }
+      ? {
+          ...options,
+          ...override,
+        }
       : options
     const newTokens = codeToKeyedTokens(code, mergedOptions.lineNumbers);
     ({ from: previous, to: current } = syncTokenKeys(previous, newTokens, mergedOptions))
@@ -59,7 +62,12 @@ export function codeToKeyedTokens<
       code,
       result.tokens,
       // We put the lang and theme to participate in the hash calculation because they can affect the tokenization
-      JSON.stringify([options.lang, 'themes' in options ? options.themes : options.theme]),
+      JSON.stringify([
+        options.lang,
+        'themes' in options
+          ? options.themes
+          : options.theme,
+      ]),
       lineNumbers,
     ),
     bg: result.bg,
@@ -132,11 +140,13 @@ function splitWhitespaceTokens(tokens: ThemedToken[][]) {
       if (!leading && !trailing)
         return token
 
-      const expanded = [{
-        ...token,
-        offset: token.offset + leading.length,
-        content,
-      }]
+      const expanded = [
+        {
+          ...token,
+          offset: token.offset + leading.length,
+          content,
+        },
+      ]
       if (leading) {
         expanded.unshift({
           content: leading,
@@ -204,7 +214,9 @@ function splitToken(
  * Split 2D tokens array by given breakpoints.
  */
 function splitTokens(tokens: KeyedToken[], breakpoints: number[] | Set<number>): KeyedToken[] {
-  const sorted = Array.from(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))
+  const sorted = Array.from(breakpoints instanceof Set
+    ? breakpoints
+    : new Set(breakpoints))
     .sort((a, b) => a - b)
 
   if (!sorted.length)
@@ -296,8 +308,12 @@ export function syncTokenKeys(
   }
 
   return {
-    from: tokensFrom.length === from.tokens.length ? from : { ...from, tokens: tokensFrom },
-    to: tokensTo.length === to.tokens.length ? to : { ...to, tokens: tokensTo },
+    from: tokensFrom.length === from.tokens.length
+      ? from
+      : { ...from, tokens: tokensFrom },
+    to: tokensTo.length === to.tokens.length
+      ? to
+      : { ...to, tokens: tokensTo },
   }
 }
 

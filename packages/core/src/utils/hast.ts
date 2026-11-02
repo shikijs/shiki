@@ -17,7 +17,9 @@ export function addClassToHast(node: Element, className: string | string[]): Ele
   if (!Array.isArray(node.properties.class))
     node.properties.class = []
 
-  const targets = Array.isArray(className) ? className : className.split(RE_WHITESPACE)
+  const targets = Array.isArray(className)
+    ? className
+    : className.split(RE_WHITESPACE)
   for (const c of targets) {
     if (c && !node.properties.class.includes(c))
       node.properties.class.push(c)

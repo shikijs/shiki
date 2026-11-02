@@ -78,8 +78,12 @@ const TwoslashFloatingVue = {
         ...options.themes,
         'twoslash': {
           $extend: 'dropdown',
-          triggers: isMobile ? ['touch'] : ['hover', 'touch'],
-          popperTriggers: isMobile ? ['touch'] : ['hover', 'touch'],
+          triggers: isMobile
+            ? ['touch']
+            : ['hover', 'touch'],
+          popperTriggers: isMobile
+            ? ['touch']
+            : ['hover', 'touch'],
           placement: 'bottom-start',
           overflowPadding: 10,
           delay: { show: 200, hide: 0 },

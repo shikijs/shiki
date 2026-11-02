@@ -16,7 +16,10 @@ export default defineConfig({
     onlyBundle: [
       'ansi-sequence-parser',
     ],
-    neverBundle: ['hast', ...Object.keys(pkg.dependencies)],
+    neverBundle: [
+      'hast',
+      ...Object.keys(pkg.dependencies),
+    ],
     alwaysBundle: [/^(?!hast$|@shikijs\/primitive$)/],
   },
 })
