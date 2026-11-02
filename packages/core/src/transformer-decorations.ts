@@ -182,17 +182,23 @@ export function transformerDecorations(): ShikiTransformer {
         else if (start.line < end.line) {
           applyLineSection(start.line, start.character, Number.POSITIVE_INFINITY, decoration)
           for (let i = start.line + 1; i < end.line; i++)
-            lineApplies.unshift(() => applyLine(i, decoration))
+            lineApplies.push(() => applyLine(i, decoration))
           applyLineSection(end.line, 0, end.character, decoration)
         }
       }
 
-      lineApplies.forEach(i => i())
+      // Apply line decorations in reverse push order.
+      for (let i = lineApplies.length - 1; i >= 0; i--)
+        lineApplies[i]()
     },
   }
 }
 
 function verifyIntersections(items: ResolvedDecorationItem[]): void {
+  if (areDecorationsNested(items))
+    return
+
+  // Find the first invalid pair in input order for the error message.
   for (let i = 0; i < items.length; i++) {
     const foo = items[i]
     if (foo.start.offset > foo.end.offset)
@@ -217,6 +223,49 @@ function verifyIntersections(items: ResolvedDecorationItem[]): void {
       }
     }
   }
+}
+
+/**
+ * Checks in O(n log n) time that every pair of decorations is valid, as `verifyIntersections` defines it.
+ */
+function areDecorationsNested(items: ResolvedDecorationItem[]): boolean {
+  const ranges: ResolvedDecorationItem[] = []
+  // Offset -> index of the first non-empty decoration starting there.
+  const firstStart = new Map<number, number>()
+  // Offset -> index of the last non-empty decoration ending there.
+  const lastEnd = new Map<number, number>()
+  for (let i = 0; i < items.length; i++) {
+    const { start, end } = items[i]
+    if (start.offset > end.offset)
+      return false
+    if (start.offset === end.offset)
+      continue
+    ranges.push(items[i])
+    if (!firstStart.has(start.offset))
+      firstStart.set(start.offset, i)
+    lastEnd.set(end.offset, i)
+  }
+
+  // An empty decoration may touch the start of a later decoration or the end of an earlier one.
+  for (let i = 0; i < items.length; i++) {
+    const { start, end } = items[i]
+    if (start.offset === end.offset
+      && ((firstStart.get(start.offset) ?? i) < i || (lastEnd.get(start.offset) ?? i) > i)) {
+      return false
+    }
+  }
+
+  // Non-empty decorations must nest or be disjoint; sharing a boundary is allowed.
+  ranges.sort((a, b) => a.start.offset - b.start.offset || b.end.offset - a.end.offset)
+  const ends: number[] = []
+  for (const { start, end } of ranges) {
+    while (ends.length && ends.at(-1)! <= start.offset)
+      ends.pop()
+    if (ends.length && end.offset > ends.at(-1)!)
+      return false
+    ends.push(end.offset)
+  }
+  return true
 }
 
 function stringify(el: ElementContent): string {

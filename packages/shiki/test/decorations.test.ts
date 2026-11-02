@@ -243,6 +243,37 @@ describe('decorations errors', () => {
       .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":0,"character":1,"offset":1} intersect.]`)
   })
 
+  it('throws when decorations intersect around a nested one', async () => {
+    await expect(async () => {
+      await codeToHtml(code, {
+        theme: 'vitesse-light',
+        lang: 'ts',
+        decorations: [
+          { start: 0, end: 10 },
+          { start: 2, end: 4 },
+          { start: 5, end: 12 },
+        ],
+      })
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":0,"offset":0} and {"line":1,"character":1,"offset":5} intersect.]`)
+  })
+
+  it('throws when an empty decoration precedes the decoration it ends', async () => {
+    await expect(async () => {
+      await codeToHtml(code, {
+        theme: 'vitesse-light',
+        lang: 'ts',
+        decorations: [
+          { start: 3, end: 3 },
+          { start: 1, end: 3 },
+        ],
+      })
+    })
+      .rejects
+      .toThrowErrorMatchingInlineSnapshot(`[ShikiError: Decorations {"line":0,"character":3,"offset":3} and {"line":0,"character":1,"offset":1} intersect.]`)
+  })
+
   it('throws when lines overflow', async () => {
     await expect(async () => {
       await codeToHtml(code, {

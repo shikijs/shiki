@@ -39,3 +39,32 @@ it(`single file (${lineCount} lines and decorations)`, async ({ bench }) => {
     warmupTime: 0,
   })
 })
+
+const wordLineCount = 20_000
+const plainCode = Array.from(
+  { length: wordLineCount },
+  (_, line) => `const value${line.toString().padStart(5, '0')} = compute(${line}, 'before');`,
+).join('\n')
+// Two decorations per line, like word-level diff highlights.
+const wordDecorations: DecorationItem[] = Array.from(
+  { length: wordLineCount },
+  (_, line): DecorationItem[] => [
+    { start: { line, character: 6 }, end: { line, character: 16 } },
+    { start: { line, character: 27 }, end: { line, character: 35 } },
+  ],
+).flat()
+
+it(`plain text (${wordLineCount} lines, ${wordDecorations.length} decorations)`, async ({ bench }) => {
+  await bench('plain text decoration rendering', () => {
+    highlighter.codeToHast(plainCode, {
+      decorations: wordDecorations,
+      lang: 'text',
+      theme: 'vitesse-dark',
+    })
+  }).run({
+    iterations: 3,
+    time: 0,
+    warmupIterations: 1,
+    warmupTime: 0,
+  })
+})

@@ -22,7 +22,9 @@ export function createPositionConverter(code: string): {
   indexToPos: (index: number) => Position
   posToIndex: (line: number, character: number) => number
 } {
-  const lines = splitLines(code, true).map(([line]) => line)
+  const split = splitLines(code, true)
+  const lines = split.map(([line]) => line)
+  const offsets = split.map(([, offset]) => offset)
 
   function indexToPos(index: number): Position {
     if (index === code.length) {
@@ -32,24 +34,21 @@ export function createPositionConverter(code: string): {
       }
     }
 
-    let character = index
-    let line = 0
-    for (const lineText of lines) {
-      if (character < lineText.length)
-        break
-      character -= lineText.length
-      line++
+    // Find the last line that starts at or before the index.
+    let low = 0
+    let high = lines.length - 1
+    while (low < high) {
+      const mid = (low + high + 1) >>> 1
+      if (offsets[mid] <= index)
+        low = mid
+      else
+        high = mid - 1
     }
-    return { line, character }
+    return { line: low, character: index - offsets[low] }
   }
 
   function posToIndex(line: number, character: number): number {
-    let index = 0
-    for (let i = 0; i < line; i++)
-      index += lines[i].length
-
-    index += character
-    return index
+    return offsets[line] + character
   }
 
   return {
