@@ -105,17 +105,39 @@ export class Registry extends TextMateRegistry {
     this._loadedLanguagesCache = null
 
     // If there is a language that embeds this language lazily, we need to reload it
-    if (embeddedLazilyBy.size) {
-      for (const e of embeddedLazilyBy) {
-        this._syncRegistry?._grammars?.get(e.scopeName)?.dispose()
-        this._resolvedGrammars.delete(e.name)
-        // Reset cache
-        this._loadedLanguagesCache = null
-        this._syncRegistry?._injectionGrammars?.delete(e.scopeName)
-        this._syncRegistry?._grammars?.delete(e.scopeName)
-        this.loadLanguage(this._langMap.get(e.name)!)
-      }
+    for (const e of embeddedLazilyBy)
+      this.reloadLanguage(e)
+
+    // TextMate only looks up a grammar's injections the first time its scope is loaded,
+    // so grammars loaded before this injection need to be reloaded to pick it up
+    if (lang.injectTo) {
+      const targets = [...this._langMap.values()].filter(i =>
+        i !== lang
+        && this._resolvedGrammars.has(i.name)
+        && lang.injectTo!.some(scope => i.scopeName === scope || i.scopeName.startsWith(`${scope}.`))
+        && !this.hasCurrentInjections(i.scopeName),
+      )
+      for (const target of targets)
+        this.reloadLanguage(target)
     }
+  }
+
+  private hasCurrentInjections(scopeName: string): boolean {
+    const loaded = this._syncRegistry?._injectionGrammars?.get(scopeName) || []
+    const current = this._resolver.getInjections(scopeName) || []
+    return loaded.length === current.length && loaded.every((s, i) => s === current[i])
+  }
+
+  private reloadLanguage(lang: LanguageRegistration): void {
+    this._syncRegistry?._grammars?.get(lang.scopeName)?.dispose()
+    this._resolvedGrammars.delete(lang.name)
+    // Reset cache
+    this._loadedLanguagesCache = null
+    this._syncRegistry?._grammars?.delete(lang.scopeName)
+    // The scope is not looked up again on reload, so refresh its injections here
+    // instead of dropping them
+    this._syncRegistry?._injectionGrammars?.set(lang.scopeName, this._resolver.getInjections(lang.scopeName) || [])
+    this.loadLanguage(this._langMap.get(lang.name) || lang)
   }
 
   public override dispose(): void {
