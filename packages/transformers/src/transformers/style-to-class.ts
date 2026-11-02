@@ -1,4 +1,5 @@
 import type { ShikiTransformer } from '@shikijs/types'
+import { getTokenStyleObject } from '@shikijs/core'
 
 export interface TransformerStyleToClassOptions {
   /**
@@ -25,8 +26,8 @@ export interface ShikiTransformerStyleToClass extends ShikiTransformer {
 }
 
 /**
- * Remove line breaks between lines.
- * Useful when you override `display: block` to `.line` in CSS.
+ * Replace inline `style` attributes with class names.
+ * The collected styles can be emitted as CSS with `getCSS()`.
  */
 export function transformerStyleToClass(options: TransformerStyleToClassOptions = {}): ShikiTransformerStyleToClass {
   const {
@@ -72,10 +73,12 @@ export function transformerStyleToClass(options: TransformerStyleToClassOptions 
     tokens(lines) {
       for (const line of lines) {
         for (const token of line) {
-          if (!token.htmlStyle)
+          // With a single theme, tokens carry `color`/`fontStyle` instead of `htmlStyle`
+          const style = token.htmlStyle || getTokenStyleObject(token)
+          if (!Object.keys(style).length)
             continue
 
-          const className = registerStyle(token.htmlStyle)
+          const className = registerStyle(style)
           token.htmlStyle = {}
           token.htmlAttrs ||= {}
           if (!token.htmlAttrs.class)
