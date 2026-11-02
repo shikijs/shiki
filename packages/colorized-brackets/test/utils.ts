@@ -56,8 +56,11 @@ export function prettifyBrackets(
   brackets: ColoredBracket[],
   { noAnsi = false } = {},
 ): string {
-  if (!brackets.length)
-    return noAnsi ? 'none' : c.gray('none')
+  if (!brackets.length) {
+    return noAnsi
+      ? 'none'
+      : c.gray('none')
+  }
   return brackets
     .map(b => getColoredBracketTerminalOutput(b, { noAnsi }))
     .join(' ')
@@ -68,8 +71,11 @@ function getColoredBracketTerminalOutput(
   { noAnsi = false } = {},
 ): string {
   const isCloser = [']', '}', ')', '>', '}}', '%}'].includes(bracket)
-  if (noAnsi)
-    return isCloser ? `${bracket}${color}` : `${color}${bracket}`
+  if (noAnsi) {
+    return isCloser
+      ? `${bracket}${color}`
+      : `${color}${bracket}`
+  }
   if (color === 'R') {
     return c.red(bracket)
   }

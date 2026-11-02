@@ -38,7 +38,14 @@ export function transformerTwoslash(options: VitePressPluginTwoslashOptions = {}
   const twoslash = createTransformerFactory(
     createTwoslasher(options.twoslashOptions),
   )({
-    langs: ['ts', 'tsx', 'js', 'jsx', 'json', 'vue'],
+    langs: [
+      'ts',
+      'tsx',
+      'js',
+      'jsx',
+      'json',
+      'vue',
+    ],
     renderer: rendererFloatingVue(options),
     onTwoslashError: onError,
     onShikiError: onError,

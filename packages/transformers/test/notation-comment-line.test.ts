@@ -3,7 +3,9 @@ import { describe, expect, it } from 'vitest'
 import { createCommentNotationTransformer, transformerNotationDiff, transformerNotationFocus } from '../src'
 
 function getLineClasses(html: string): string[] {
-  return [...html.matchAll(/<span class="line([^"]*)">/g)]
+  return [
+    ...html.matchAll(/<span class="line([^"]*)">/g),
+  ]
     .map(match => match[1].trim())
 }
 
@@ -12,7 +14,10 @@ describe('comment-only line notations', () => {
     const html = await codeToHtml(`# foo # [!code ++] [!code focus]\nbar`, {
       lang: 'yaml',
       theme: 'github-dark',
-      transformers: [transformerNotationDiff(), transformerNotationFocus()],
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationFocus(),
+      ],
     })
 
     const lineClasses = getLineClasses(html)
@@ -28,7 +33,10 @@ describe('comment-only line notations', () => {
     const html = await codeToHtml(`# [!code ++] [!code focus]\nbar`, {
       lang: 'yaml',
       theme: 'github-dark',
-      transformers: [transformerNotationDiff(), transformerNotationFocus()],
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationFocus(),
+      ],
     })
 
     const lineClasses = getLineClasses(html)

@@ -27,7 +27,9 @@ export async function createOnigurumaEngine(options?: LoadWasmOptions | null): P
 
   return {
     createScanner(patterns) {
-      return new OnigScanner(patterns.map(p => typeof p === 'string' ? p : p.source))
+      return new OnigScanner(patterns.map(p => typeof p === 'string'
+        ? p
+        : p.source))
     },
     createString(s) {
       return new OnigString(s)

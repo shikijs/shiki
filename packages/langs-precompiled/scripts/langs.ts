@@ -36,7 +36,9 @@ export async function prepareLangs() {
 throw new Error("${json.name} is not supported due to the grammar limits")
 `
         : `
-${precompiledStr.includes('new EmulatedRegExp') ? 'import { EmulatedRegExp } from \'oniguruma-to-es\'' : ''}
+${precompiledStr.includes('new EmulatedRegExp')
+  ? 'import { EmulatedRegExp } from \'oniguruma-to-es\''
+  : ''}
 ${deps.map(i => `import ${i.replace(RE_NON_WORD, '_')} from './${i}.mjs'`).join('\n')}
 
 const lang = Object.freeze(${precompiledStr})
@@ -58,7 +60,10 @@ export { default } from './${json.name}.mjs'
       )
     }
 
-    for (const name of [...json.aliases || [], json.name]) {
+    for (const name of [
+      ...json.aliases || [],
+      json.name,
+    ]) {
       if (isInvalidFilename(name))
         continue
       exportedFileNames.push(name)

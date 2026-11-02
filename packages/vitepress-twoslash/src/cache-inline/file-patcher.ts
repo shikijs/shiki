@@ -5,7 +5,9 @@ export class FilePatcher {
   private files = new Map<string, { content: string, patches: Map<string, string> } | null>()
 
   static key(from: number, to?: number): string {
-    return `${from}${to ? `:${to}` : ''}`
+    return `${from}${to
+      ? `:${to}`
+      : ''}`
   }
 
   load(path: string): { content: string, patches: Map<string, string> } | null {
@@ -13,7 +15,10 @@ export class FilePatcher {
     if (file === undefined) {
       if (existsSync(path)) {
         const content = readFileSync(path, { encoding: 'utf-8' })
-        file = { content, patches: new Map() }
+        file = {
+          content,
+          patches: new Map(),
+        }
       }
       else {
         file = null
@@ -31,7 +36,9 @@ export class FilePatcher {
 
         // apply patches
         for (const [key, value] of file.patches) {
-          const [from, to] = key.split(':').map(s => s !== '' ? Number(s) : undefined)
+          const [from, to] = key.split(':').map(s => s !== ''
+            ? Number(s)
+            : undefined)
           if (from === undefined)
             continue
 

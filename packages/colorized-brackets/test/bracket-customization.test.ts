@@ -19,7 +19,9 @@ describe('bracket customization', async () => {
         theme,
         transformers: [
           transformerColorizedBrackets({
-            themes: { 'dark-plus': ['Y', 'P', 'B', 'R'] },
+            themes: {
+              'dark-plus': ['Y', 'P', 'B', 'R'],
+            },
           }),
         ],
       }),
@@ -31,7 +33,9 @@ describe('bracket customization', async () => {
         theme,
         transformers: [
           transformerColorizedBrackets({
-            themes: { 'dark-plus': ['Y', 'P', 'B', 'R'] },
+            themes: {
+              'dark-plus': ['Y', 'P', 'B', 'R'],
+            },
             bracketPairs: [
               {
                 opener: '[',

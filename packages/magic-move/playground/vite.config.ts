@@ -22,7 +22,11 @@ export default defineConfig({
     Vue(),
     UnoCSS(),
     Svelte(),
-    Solid({ include: ['src/renderer/solid.tsx', '../src/solid/**'] }),
-    React({ include: ['src/renderer/react.tsx', '../src/react/**'] }),
+    Solid({
+      include: ['src/renderer/solid.tsx', '../src/solid/**'],
+    }),
+    React({
+      include: ['src/renderer/react.tsx', '../src/react/**'],
+    }),
   ],
 })

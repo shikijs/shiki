@@ -43,8 +43,12 @@ it('run', async () => {
         return Object.fromEntries(str.split(' ').reduce((prev: [string, boolean | string][], curr: string) => {
           const [key, value] = curr.split('=')
           const isNormalKey = RE_NORMAL_KEY.test(key)
-          if (isNormalKey)
-            prev = [...prev, [key, value || true]]
+          if (isNormalKey) {
+            prev = [
+              ...prev,
+              [key, value || true],
+            ]
+          }
           return prev
         }, []))
       },

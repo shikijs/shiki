@@ -61,12 +61,20 @@ export function tokenizeAnsiWithTheme(
       let bgColor: string | undefined
 
       if (token.decorations.has('reverse')) {
-        color = token.background ? colorPalette.value(token.background) : theme.bg
-        bgColor = token.foreground ? colorPalette.value(token.foreground) : theme.fg
+        color = token.background
+          ? colorPalette.value(token.background)
+          : theme.bg
+        bgColor = token.foreground
+          ? colorPalette.value(token.foreground)
+          : theme.fg
       }
       else {
-        color = token.foreground ? colorPalette.value(token.foreground) : theme.fg
-        bgColor = token.background ? colorPalette.value(token.background) : undefined
+        color = token.foreground
+          ? colorPalette.value(token.foreground)
+          : theme.fg
+        bgColor = token.background
+          ? colorPalette.value(token.background)
+          : undefined
       }
 
       color = applyColorReplacements(color, colorReplacements)

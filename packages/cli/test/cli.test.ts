@@ -160,7 +160,13 @@ describe('run', () => {
     }))
 
     const output: string[] = []
-    await run(['node', 'shiki', '--lang', 'PYTHON', 'https://example.com/code'], msg => output.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'PYTHON',
+      'https://example.com/code',
+    ], msg => output.push(msg))
 
     expect(output.length).toBe(1)
     expect(output[0]).toContain('print')
@@ -175,7 +181,13 @@ describe('run', () => {
     }))
 
     const output: string[] = []
-    await run(['node', 'shiki', '--format', 'html', 'https://example.com/code.js'], msg => output.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      'https://example.com/code.js',
+    ], msg => output.push(msg))
 
     expect(output.length).toBe(1)
     expect(output[0]).toContain('<pre class="shiki')
@@ -214,8 +226,22 @@ describe('run', () => {
 
     const asHtml: string[] = []
     const plain: string[] = []
-    await run(['node', 'shiki', '--format', 'html', noExtFile], msg => asHtml.push(msg))
-    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', noExtFile], msg => plain.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      noExtFile,
+    ], msg => asHtml.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'text',
+      '--format',
+      'html',
+      noExtFile,
+    ], msg => plain.push(msg))
     expect(asHtml[0]).toBe(plain[0])
   })
 
@@ -240,10 +266,24 @@ describe('run', () => {
     await fs.writeFile(envFile, 'FOO=bar')
 
     const output: string[] = []
-    await run(['node', 'shiki', '--format', 'html', envFile], msg => output.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      envFile,
+    ], msg => output.push(msg))
 
     const plain: string[] = []
-    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', envFile], msg => plain.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'text',
+      '--format',
+      'html',
+      envFile,
+    ], msg => plain.push(msg))
 
     expect(output.length).toBe(1)
     expect(output[0]).toContain('FOO=bar')
@@ -256,15 +296,43 @@ describe('run', () => {
 
     const md: string[] = []
     const mdPlain: string[] = []
-    await run(['node', 'shiki', '--format', 'html', mdFile], msg => md.push(msg))
-    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', mdFile], msg => mdPlain.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      mdFile,
+    ], msg => md.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'text',
+      '--format',
+      'html',
+      mdFile,
+    ], msg => mdPlain.push(msg))
     expect(md[0]).toContain('Title')
     expect(md[0]).not.toBe(mdPlain[0])
 
     const ts: string[] = []
     const tsPlain: string[] = []
-    await run(['node', 'shiki', '--format', 'html', testFile], msg => ts.push(msg))
-    await run(['node', 'shiki', '--lang', 'text', '--format', 'html', testFile], msg => tsPlain.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      testFile,
+    ], msg => ts.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'text',
+      '--format',
+      'html',
+      testFile,
+    ], msg => tsPlain.push(msg))
     expect(ts[0]).toContain('const')
     expect(ts[0]).not.toBe(tsPlain[0])
   })
@@ -275,8 +343,22 @@ describe('run', () => {
 
     const explicit: string[] = []
     const fallback: string[] = []
-    await run(['node', 'shiki', '--lang', 'dotenv', '--format', 'html', envFile], msg => explicit.push(msg))
-    await run(['node', 'shiki', '--format', 'html', envFile], msg => fallback.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'dotenv',
+      '--format',
+      'html',
+      envFile,
+    ], msg => explicit.push(msg))
+    await run([
+      'node',
+      'shiki',
+      '--format',
+      'html',
+      envFile,
+    ], msg => fallback.push(msg))
 
     expect(explicit.length).toBe(1)
     expect(explicit[0]).toContain('FOO')
@@ -294,10 +376,24 @@ describe('run', () => {
     await run(['node', 'shiki', '--format', 'html'], msg => output.push(msg), createStdin())
 
     const plain: string[] = []
-    await run(['node', 'shiki', '--lang', 'text', '--format', 'html'], msg => plain.push(msg), createStdin())
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'text',
+      '--format',
+      'html',
+    ], msg => plain.push(msg), createStdin())
 
     const asTs: string[] = []
-    await run(['node', 'shiki', '--lang', 'ts', '--format', 'html'], msg => asTs.push(msg), createStdin())
+    await run([
+      'node',
+      'shiki',
+      '--lang',
+      'ts',
+      '--format',
+      'html',
+    ], msg => asTs.push(msg), createStdin())
 
     expect(output.length).toBe(1)
     expect(output[0]).toContain('const x = 1')

@@ -7,7 +7,10 @@ For example, if we want to highlight the type annotation `Pick<MyObject, string>
 ```ts
 import { createHighlighter } from 'shiki'
 
-const shiki = await createHighlighter({ langs: ['ts'], themes: ['github-dark'] })
+const shiki = await createHighlighter({
+  langs: ['ts'],
+  themes: ['github-dark']
+})
 
 const stateTypeAnnotation = shiki.getLastGrammarState('let a:', { lang: 'ts', theme: 'github-dark' })
 

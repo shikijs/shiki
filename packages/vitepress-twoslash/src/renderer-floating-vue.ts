@@ -107,7 +107,9 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
                 },
                 content: {
                   type: 'root',
-                  children: [vPre(popup)],
+                  children: [
+                    vPre(popup),
+                  ],
                 },
               },
             ],
@@ -131,7 +133,11 @@ function vPre<T extends ElementContent>(el: T): T {
 function renderMarkdown(this: ShikiTransformerContextCommon, md: string): ElementContent[] {
   const mdast = fromMarkdown(
     md.replace(RE_JSDOC_LINK, '$1'), // replace jsdoc links
-    { mdastExtensions: [gfmFromMarkdown()] },
+    {
+      mdastExtensions: [
+        gfmFromMarkdown(),
+      ],
+    },
   )
 
   return (toHast(
@@ -151,7 +157,9 @@ function renderMarkdown(this: ShikiTransformerContextCommon, md: string): Elemen
                   ...this.options,
                   transformers: [],
                   lang,
-                  structure: node.value.trim().includes('\n') ? 'classic' : 'inline',
+                  structure: node.value.trim().includes('\n')
+                    ? 'classic'
+                    : 'inline',
                 },
               ).children,
             }
@@ -194,7 +202,9 @@ function compose(parts: { token: Element | Text, popup: Element }): Element[] {
       },
       content: {
         type: 'root',
-        children: [vPre(parts.popup)],
+        children: [
+          vPre(parts.popup),
+        ],
       },
       children: [],
     },

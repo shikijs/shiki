@@ -25,7 +25,9 @@ describe('explicitTrigger', async () => {
         theme,
         transformers: [
           transformerColorizedBrackets({
-            themes: { 'dark-plus': ['Y', 'P', 'B', 'R'] },
+            themes: {
+              'dark-plus': ['Y', 'P', 'B', 'R'],
+            },
             explicitTrigger: true,
           }),
         ],
@@ -47,7 +49,9 @@ describe('explicitTrigger', async () => {
         theme,
         transformers: [
           transformerColorizedBrackets({
-            themes: { 'dark-plus': ['Y', 'P', 'B', 'R'] },
+            themes: {
+              'dark-plus': ['Y', 'P', 'B', 'R'],
+            },
             explicitTrigger: true,
           }),
         ],

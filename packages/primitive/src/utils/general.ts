@@ -8,14 +8,18 @@ import type {
 } from '@shikijs/types'
 
 export function toArray<T>(x: MaybeArray<T>): T[] {
-  return Array.isArray(x) ? x : [x]
+  return Array.isArray(x)
+    ? x
+    : [x]
 }
 
 /**
  * Normalize a getter to a promise.
  */
 export async function normalizeGetter<T>(p: MaybeGetter<T>): Promise<T> {
-  return Promise.resolve(typeof p === 'function' ? (p as any)() : p).then(r => r.default || r)
+  return Promise.resolve(typeof p === 'function'
+    ? (p as any)()
+    : p).then(r => r.default || r)
 }
 
 /**

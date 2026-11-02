@@ -8,7 +8,9 @@ function mountMenu() {
   const root = document.createElement('div')
   document.body.appendChild(root)
 
-  const probe = createApp({ render: () => null })
+  const probe = createApp({
+    render: () => null,
+  })
   probe.use(TwoslashFloatingVue)
   const Menu: any = probe.component('VMenu')
 

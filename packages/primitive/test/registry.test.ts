@@ -28,13 +28,17 @@ describe('repro issue', () => {
     const shiki = await createShikiPrimitiveAsync({
       engine: createJavaScriptRegexEngine(),
       themes: [],
-      langs: [{
-        name: 'host',
-        scopeName: 'source.host',
-        embeddedLangsLazy: ['guest'],
-        patterns: [{ include: 'source.guest' }],
-        repository: {},
-      }],
+      langs: [
+        {
+          name: 'host',
+          scopeName: 'source.host',
+          embeddedLangsLazy: ['guest'],
+          patterns: [
+            { include: 'source.guest' },
+          ],
+          repository: {},
+        },
+      ],
     })
 
     const before = shiki.getLanguage('host')
@@ -64,19 +68,26 @@ describe('injection registration', () => {
     scopeName: 'source.first',
     injectTo: [host.scopeName],
     injectionSelector: `L:${host.scopeName}`,
-    patterns: [{ match: 'INJECT', name: 'keyword.first' }],
+    patterns: [
+      { match: 'INJECT', name: 'keyword.first' },
+    ],
     repository: {},
   }
   const second: LanguageRegistration = {
     ...first,
     name: 'second',
     scopeName: 'source.second',
-    patterns: [{ match: 'INJECT', name: 'keyword.second' }],
+    patterns: [
+      { match: 'INJECT', name: 'keyword.second' },
+    ],
   }
 
   const reloadCases: [name: string, reload: LanguageRegistration[]][] = [
     ['empty', []],
-    ['duplicate', [first]],
+    [
+      'duplicate',
+      [first],
+    ],
   ]
 
   it.each(reloadCases)('keeps injections unique and ordered after %s language loads', (_name, reload) => {
@@ -132,7 +143,10 @@ describe('injection registration', () => {
   })
 
   it('keeps injections when a lazily embedding grammar is reloaded', async () => {
-    const lazyHost: LanguageRegistration = { ...host, embeddedLangsLazy: ['guest'] }
+    const lazyHost: LanguageRegistration = {
+      ...host,
+      embeddedLangsLazy: ['guest'],
+    }
     const shiki = await createShikiPrimitiveAsync({
       engine: createJavaScriptRegexEngine(),
       themes: [],
@@ -164,7 +178,10 @@ describe('injection registration', () => {
   })
 
   it('preserves injections registered for different scope prefixes', () => {
-    const shared = { ...first, injectTo: ['source', host.scopeName] }
+    const shared = {
+      ...first,
+      injectTo: ['source', host.scopeName],
+    }
     const resolver = new Resolver(createJavaScriptRegexEngine(), [shared, second])
 
     resolver.addLanguage(shared)

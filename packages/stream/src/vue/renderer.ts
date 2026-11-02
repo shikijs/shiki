@@ -70,7 +70,10 @@ export const ShikiStreamRenderer = defineComponent({
       { class: 'shiki shiki-stream' },
       h(
         'code',
-        renderList(tokens, token => h('span', { key: objectId(token), style: token.htmlStyle || getTokenStyleObject(token) }, token.content)),
+        renderList(tokens, token => h('span', {
+          key: objectId(token),
+          style: token.htmlStyle || getTokenStyleObject(token),
+        }, token.content)),
       ),
     )
   },

@@ -11,7 +11,15 @@ export const createRendererSvelte: RendererFactory = (options): RendererFactoryR
       return
     if (app)
       unmount(app)
-    app = mount(ShikiStreamRenderer, { target, props: { ...payload, onStreamStart: options.onStart, onStreamEnd: options.onEnd, class: '' } })
+    app = mount(ShikiStreamRenderer, {
+      target,
+      props: {
+        ...payload,
+        onStreamStart: options.onStart,
+        onStreamEnd: options.onEnd,
+        class: '',
+      },
+    })
   }
 
   return {

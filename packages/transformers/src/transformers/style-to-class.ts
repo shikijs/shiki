@@ -102,7 +102,9 @@ export function transformerStyleToClass(options: TransformerStyleToClassOptions 
     getCSS() {
       let css = ''
       for (const [className, style] of classToStyle.entries()) {
-        css += `.${className}{${typeof style === 'string' ? style : stringifyStyle(style)}}`
+        css += `.${className}{${typeof style === 'string'
+          ? style
+          : stringifyStyle(style)}}`
       }
       return css
     },

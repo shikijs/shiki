@@ -14,11 +14,15 @@ import { normalizeTheme } from './normalize-theme'
  * Resolve
  */
 export async function resolveLangs(langs: (LanguageInput | SpecialLanguage)[]): Promise<LanguageRegistration[]> {
-  return [...new Set((await Promise.all(
-    langs
-      .filter(l => !isSpecialLang(l))
-      .map(async lang => await normalizeGetter(lang as LanguageInput).then(r => Array.isArray(r) ? r : [r])),
-  )).flat())]
+  return [
+    ...new Set((await Promise.all(
+      langs
+        .filter(l => !isSpecialLang(l))
+        .map(async lang => await normalizeGetter(lang as LanguageInput).then(r => Array.isArray(r)
+          ? r
+          : [r])),
+    )).flat()),
+  ]
 }
 
 export async function resolveThemes(themes: (ThemeInput | SpecialTheme)[]): Promise<ThemeRegistrationResolved[]> {

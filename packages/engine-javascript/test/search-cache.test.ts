@@ -40,14 +40,20 @@ const lines: Record<string, string> = {
   escapedStars: fill(LINE_LENGTH, () => '\\*'),
   yamlAliases: fill(LINE_LENGTH, () => '*a '),
   argumentList: `const result = compute(${fill(LINE_LENGTH, i => `arg${i}, `)}`,
-  objectLiteral: `const cfg = { ${fill(LINE_LENGTH, i => i % 2 ? `key${i}: "value${i}", ` : `key${i}: ${i * 3}, `)}`,
+  objectLiteral: `const cfg = { ${fill(LINE_LENGTH, i => i % 2
+    ? `key${i}: "value${i}", `
+    : `key${i}: ${i * 3}, `)}`,
   minified: fill(LINE_LENGTH, () => 'function a(b,c){return b&&c||d?e:f}var g=h(1,2),i=[j,k];if(l){m.n(o)}else{p=q+"r"}'),
   json: `[${fill(LINE_LENGTH, i => `{"id":${i},"name":"item${i}","tags":["a","b"],"nested":{"x":1.5,"y":null,"ok":true}},`)}`,
   markdownInline: fill(LINE_LENGTH, i => `The **config${i}** option uses \`value_${i}\` and links to [the docs](https://example.com/${i}), see _notes_. `),
   logLine: fill(LINE_LENGTH, i => `2026-09-04T12:34:${10 + (i % 50)}.789Z INFO [worker-${i}] request id=abc${i} status=200 path=/api/v1/items/${i} `),
   jsx: `<div className="row">${fill(LINE_LENGTH, i => `<span key={${i}} className="cell" onClick={() => select(${i})}>{label${i}}</span>`)}`,
   shell: `docker run --rm ${fill(LINE_LENGTH, i => `-e VAR_${i}=value${i} -v /host/${i}:/container/${i} `)}`,
-  pythonCall: `result = build(${fill(LINE_LENGTH, i => (i % 3 === 0 ? `p_${i}="s${i}", ` : i % 3 === 1 ? `p_${i}=True, ` : `p_${i}=${i}.5, `))}`,
+  pythonCall: `result = build(${fill(LINE_LENGTH, i => (i % 3 === 0
+    ? `p_${i}="s${i}", `
+    : i % 3 === 1
+      ? `p_${i}=True, `
+      : `p_${i}=${i}.5, `))}`,
   html: fill(LINE_LENGTH, i => `<div class="item item-${i}" data-id="${i}"><a href="/p/${i}">Item ${i}</a></div>`),
 }
 
@@ -108,7 +114,12 @@ describe('search cache', async () => {
   const grammars = (await Promise.all(Object.values(langs).map(load => load().then(m => m.default)))).flat()
 
   function highlighter(engine: RegexEngine): ShikiPrimitive {
-    return createShikiPrimitive({ engine, langs: grammars, themes: [theme], warnings: false })
+    return createShikiPrimitive({
+      engine,
+      langs: grammars,
+      themes: [theme],
+      warnings: false,
+    })
   }
 
   // Shared pattern cache, so both use the same RegExp objects
@@ -117,11 +128,19 @@ describe('search cache', async () => {
   const uncached = highlighter(createUncachedEngine({ cache }))
 
   function tokenize(shiki: ShikiPrimitive, code: string, lang: string, includeExplanation = true): ThemedToken[][] {
-    return codeToTokensBase(shiki, code, { lang, theme: theme.name!, includeExplanation, tokenizeTimeLimit: 0 })
+    return codeToTokensBase(shiki, code, {
+      lang,
+      theme: theme.name!,
+      includeExplanation,
+      tokenizeTimeLimit: 0,
+    })
   }
 
   it.each(Object.keys(langs))('gives the same tokens as searching every time (%s)', (lang) => {
-    for (const [name, code] of [...Object.entries(lines), ...(snippets[lang] ?? []).map((s, i) => [`snippet ${i}`, s])]) {
+    for (const [name, code] of [
+      ...Object.entries(lines),
+      ...(snippets[lang] ?? []).map((s, i) => [`snippet ${i}`, s]),
+    ]) {
       const actual = tokenize(cached, code, lang)
       const expected = tokenize(uncached, code, lang)
       if (JSON.stringify(actual) !== JSON.stringify(expected))
@@ -150,19 +169,42 @@ describe('scanner search reuse', () => {
       },
     })
     const execs = regexps.map(re => vi.spyOn(re, 'exec'))
-    return { scanner, execs: () => execs.map(e => e.mock.calls.length) }
+    return {
+      scanner,
+      execs: () => execs.map(e => e.mock.calls.length),
+    }
   }
 
   it('reuses a search until the position passes its match', () => {
     const { scanner, execs } = createScanner([/b/dg, /x/dg])
     const str = engine.createString('aaab aaab')
 
-    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({ index: 0, captureIndices: [{ start: 3, end: 4, length: 1 }] })
-    expect(scanner.findNextMatchSync(str, 2, 0)).toMatchObject({ index: 0, captureIndices: [{ start: 3 }] })
-    expect(scanner.findNextMatchSync(str, 3, 0)).toMatchObject({ index: 0, captureIndices: [{ start: 3 }] })
+    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({
+      index: 0,
+      captureIndices: [
+        { start: 3, end: 4, length: 1 },
+      ],
+    })
+    expect(scanner.findNextMatchSync(str, 2, 0)).toMatchObject({
+      index: 0,
+      captureIndices: [
+        { start: 3 },
+      ],
+    })
+    expect(scanner.findNextMatchSync(str, 3, 0)).toMatchObject({
+      index: 0,
+      captureIndices: [
+        { start: 3 },
+      ],
+    })
     expect(execs()).toEqual([1, 1])
 
-    expect(scanner.findNextMatchSync(str, 4, 0)).toMatchObject({ index: 0, captureIndices: [{ start: 8 }] })
+    expect(scanner.findNextMatchSync(str, 4, 0)).toMatchObject({
+      index: 0,
+      captureIndices: [
+        { start: 8 },
+      ],
+    })
     expect(execs()).toEqual([2, 1])
 
     expect(scanner.findNextMatchSync(str, 9, 0)).toBe(null)
@@ -174,10 +216,18 @@ describe('scanner search reuse', () => {
     const str = engine.createString('ab ab')
 
     scanner.findNextMatchSync(str, 3, 0)
-    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({ captureIndices: [{ start: 1 }] })
+    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({
+      captureIndices: [
+        { start: 1 },
+      ],
+    })
     expect(execs()).toEqual([2])
 
-    expect(scanner.findNextMatchSync(engine.createString('ab ab'), 0, 0)).toMatchObject({ captureIndices: [{ start: 1 }] })
+    expect(scanner.findNextMatchSync(engine.createString('ab ab'), 0, 0)).toMatchObject({
+      captureIndices: [
+        { start: 1 },
+      ],
+    })
     expect(execs()).toEqual([3])
 
     scanner.findNextMatchSync('ab ab', 0, 0)
@@ -187,12 +237,29 @@ describe('scanner search reuse', () => {
   })
 
   it('always searches sticky regexps and regexps with a search strategy', () => {
-    const withStrategy = Object.assign(/(?<=a)b/dg, { rawOptions: { strategy: 'clip_search' } })
+    const withStrategy = Object.assign(/(?<=a)b/dg, {
+      rawOptions: { strategy: 'clip_search' },
+    })
     const { scanner, execs } = createScanner([/x/dgy, withStrategy, /c/dg])
     const str = engine.createString('abcab')
-    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({ index: 1, captureIndices: [{ start: 1 }] })
-    expect(scanner.findNextMatchSync(str, 1, 0)).toMatchObject({ index: 1, captureIndices: [{ start: 1 }] })
-    expect(scanner.findNextMatchSync(str, 2, 0)).toMatchObject({ index: 2, captureIndices: [{ start: 2 }] })
+    expect(scanner.findNextMatchSync(str, 0, 0)).toMatchObject({
+      index: 1,
+      captureIndices: [
+        { start: 1 },
+      ],
+    })
+    expect(scanner.findNextMatchSync(str, 1, 0)).toMatchObject({
+      index: 1,
+      captureIndices: [
+        { start: 1 },
+      ],
+    })
+    expect(scanner.findNextMatchSync(str, 2, 0)).toMatchObject({
+      index: 2,
+      captureIndices: [
+        { start: 2 },
+      ],
+    })
     expect(execs()).toEqual([3, 3, 1])
   })
 

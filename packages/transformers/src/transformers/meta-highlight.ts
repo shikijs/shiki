@@ -57,7 +57,9 @@ export function transformerMetaHighlight(
       meta[symbol] ??= parseMetaHighlightString(this.options.meta.__raw)
 
       const highlightedLines: number[] = meta[symbol] ?? []
-      const effectiveLine = zeroIndexed ? lineNumber - 1 : lineNumber
+      const effectiveLine = zeroIndexed
+        ? lineNumber - 1
+        : lineNumber
 
       if (highlightedLines.includes(effectiveLine))
         this.addClassToHast(node, className)

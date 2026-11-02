@@ -82,7 +82,9 @@ export function createTransformerFactory(
       filter = (lang, _, options) => {
         return langs.includes(lang)
           && (!explicitTrigger || trigger.test(options.meta?.__raw || ''))
-          && !disableTriggers.some(i => typeof i === 'string' ? options.meta?.__raw?.includes(i) : i.test(options.meta?.__raw || ''))
+          && !disableTriggers.some(i => typeof i === 'string'
+            ? options.meta?.__raw?.includes(i)
+            : i.test(options.meta?.__raw || ''))
       },
     } = options
 
@@ -144,7 +146,13 @@ export function createTransformerFactory(
         return splitTokens(
           tokens,
           twoslash.nodes.flatMap(i =>
-            ['hover', 'error', 'query', 'highlight', 'completion'].includes(i.type)
+            [
+              'hover',
+              'error',
+              'query',
+              'highlight',
+              'completion',
+            ].includes(i.type)
               ? [i.start, i.start + i.length]
               : [],
           ),
@@ -188,9 +196,16 @@ export function createTransformerFactory(
         const tokensMap: [line: number, charStart: number, charEnd: number, token: Element | Text][] = []
         this.lines.forEach((lineEl, line) => {
           let index = 0
-          for (const token of lineEl.children.flatMap(i => i.type === 'element' ? i.children || [] : []) as (Text | Element)[]) {
+          for (const token of lineEl.children.flatMap(i => i.type === 'element'
+            ? i.children || []
+            : []) as (Text | Element)[]) {
             if ('value' in token && typeof token.value === 'string') {
-              tokensMap.push([line, index, index + token.value.length, token])
+              tokensMap.push([
+                line,
+                index,
+                index + token.value.length,
+                token,
+              ])
               index += token.value.length
             }
           }

@@ -5,7 +5,12 @@ import { getPackageExportsManifest } from 'vitest-package-exports'
 
 describe('exports-snapshot', async () => {
   const packages: { name: string, path: string, private?: boolean }[] = JSON.parse(
-    await x('pnpm', ['ls', '--only-projects', '-r', '--json']).then(r => r.stdout),
+    await x('pnpm', [
+      'ls',
+      '--only-projects',
+      '-r',
+      '--json',
+    ]).then(r => r.stdout),
   )
 
   for (const pkg of packages) {
@@ -21,7 +26,12 @@ describe('exports-snapshot', async () => {
           // Framework-adapter subpaths require framework toolchains (Solid babel preset, Svelte
           // compiler, React JSX transform, etc.) that the root vitest env does not load. The
           // built artifacts are still validated by `pnpm -r run build`.
-          const FRAMEWORK_SUBPATHS = new Set(['./vue', './react', './solid', './svelte'])
+          const FRAMEWORK_SUBPATHS = new Set([
+            './vue',
+            './react',
+            './solid',
+            './svelte',
+          ])
           return entries.filter(([path]) => {
             if (path === './cli')
               return false
@@ -36,7 +46,9 @@ describe('exports-snapshot', async () => {
           })
         },
       })
-      await expect(dump(manifest.exports, { sortKeys: (a, b) => a.localeCompare(b) }))
+      await expect(dump(manifest.exports, {
+        sortKeys: (a, b) => a.localeCompare(b),
+      }))
         .toMatchFileSnapshot(`./exports/${pkg.name}.yaml`)
     })
   }

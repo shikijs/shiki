@@ -42,7 +42,9 @@ describe('file-driven tests', async () => {
         && lstatSync(join(import.meta.dirname, 'fixtures', fileName)).isFile(),
     )
     .map<[string]>(fileName => [fileName])
-  const langs = [...new Set(testCaseFiles.map(fileName => fileName[0].split(sep)[0]))]
+  const langs = [
+    ...new Set(testCaseFiles.map(fileName => fileName[0].split(sep)[0])),
+  ]
   const highlighter = await createHighlighter({
     langs,
     themes: ['dark-plus'],
@@ -58,7 +60,9 @@ describe('file-driven tests', async () => {
       theme: 'dark-plus',
       transformers: [
         transformerColorizedBrackets({
-          themes: { 'dark-plus': ['Y', 'P', 'B', 'R'] },
+          themes: {
+            'dark-plus': ['Y', 'P', 'B', 'R'],
+          },
         }),
       ],
     })

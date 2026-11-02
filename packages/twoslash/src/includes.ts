@@ -33,7 +33,9 @@ export class TwoslashIncludesManager {
       const replaceWith = this.map.get(key)
 
       if (!replaceWith) {
-        const msg = `Could not find an include with the key: '${key}'.\nThere is: ${[...this.map.keys()]}.`
+        const msg = `Could not find an include with the key: '${key}'.\nThere is: ${[
+          ...this.map.keys(),
+        ]}.`
         throw new Error(msg)
       }
       else {

@@ -280,7 +280,10 @@ describe('decorations errors', () => {
         theme: 'vitesse-light',
         lang: 'ts',
         decorations: [
-          { start: { line: 100, character: 0 }, end: { line: 100, character: 1 } },
+          {
+            start: { line: 100, character: 0 },
+            end: { line: 100, character: 1 },
+          },
         ],
       })
     })
@@ -294,7 +297,10 @@ describe('decorations errors', () => {
         theme: 'vitesse-light',
         lang: 'ts',
         decorations: [
-          { start: { line: 0, character: 0 }, end: { line: 0, character: 10 } },
+          {
+            start: { line: 0, character: 0 },
+            end: { line: 0, character: 10 },
+          },
         ],
       })
     })
@@ -322,7 +328,9 @@ describe('decorations errors', () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
-        decorations: [{ start: 1, end: 1000 }],
+        decorations: [
+          { start: 1, end: 1000 },
+        ],
       })
     })
       .rejects
@@ -332,7 +340,9 @@ describe('decorations errors', () => {
       await codeToHtml(code, {
         theme: 'vitesse-light',
         lang: 'ts',
-        decorations: [{ start: -3, end: 5 }],
+        decorations: [
+          { start: -3, end: 5 },
+        ],
       })
     })
       .rejects

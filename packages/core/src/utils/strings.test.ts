@@ -47,15 +47,21 @@ describe('splitLines', () => {
 
   it('handles empty string', () => {
     const result = splitLines('', false)
-    expect(result).toEqual([['', 0]])
+    expect(result).toEqual([
+      ['', 0],
+    ])
 
     const resultWithEnding = splitLines('', true)
-    expect(resultWithEnding).toEqual([['', 0]])
+    expect(resultWithEnding).toEqual([
+      ['', 0],
+    ])
   })
 
   it('handles single line without newline', () => {
     const result = splitLines('hello world', false)
-    expect(result).toEqual([['hello world', 0]])
+    expect(result).toEqual([
+      ['hello world', 0],
+    ])
   })
 
   it('handles different line endings', () => {

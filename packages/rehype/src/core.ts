@@ -129,7 +129,9 @@ function rehypeShikiFromHighlighter(
       if (!lang)
         return
 
-      const meta = parsed.meta ? parseMetaString?.(parsed.meta, node, tree) : undefined
+      const meta = parsed.meta
+        ? parseMetaString?.(parsed.meta, node, tree)
+        : undefined
 
       const processNode = (targetLang: string): void => {
         const fragment = highlight(targetLang, parsed.code, parsed.meta, meta ?? {})

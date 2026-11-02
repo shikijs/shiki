@@ -64,7 +64,11 @@ export function splitTokens<
   tokens: T[][],
   breakpoints: number[] | Set<number>,
 ): T[][] {
-  const sorted = [...(breakpoints instanceof Set ? breakpoints : new Set(breakpoints))].sort((a, b) => a - b)
+  const sorted = [
+    ...(breakpoints instanceof Set
+      ? breakpoints
+      : new Set(breakpoints)),
+  ].sort((a, b) => a - b)
 
   if (!sorted.length)
     return tokens
@@ -110,8 +114,14 @@ export function flatTokenVariants(
   const mergedStyles: Record<string, string> = {}
 
   const varKey = (idx: number, key: string): string => {
-    const keyName = key === 'color' ? '' : key === 'background-color' ? '-bg' : `-${key}`
-    return cssVariablePrefix + variantsOrder[idx] + (key === 'color' ? '' : keyName)
+    const keyName = key === 'color'
+      ? ''
+      : key === 'background-color'
+        ? '-bg'
+        : `-${key}`
+    return cssVariablePrefix + variantsOrder[idx] + (key === 'color'
+      ? ''
+      : keyName)
   }
 
   styles.forEach((cur, idx) => {

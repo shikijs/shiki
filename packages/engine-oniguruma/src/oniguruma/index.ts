@@ -109,11 +109,15 @@ class UtfString {
     const utf16Length = str.length
     const utf8Length = UtfString._utf8ByteLength(str)
     const computeIndicesMapping = (utf8Length !== utf16Length)
-    const utf16OffsetToUtf8 = computeIndicesMapping ? new Uint32Array(utf16Length + 1) : null!
+    const utf16OffsetToUtf8 = computeIndicesMapping
+      ? new Uint32Array(utf16Length + 1)
+      : null!
     if (computeIndicesMapping)
       utf16OffsetToUtf8[utf16Length] = utf8Length
 
-    const utf8OffsetToUtf16 = computeIndicesMapping ? new Uint32Array(utf8Length + 1) : null!
+    const utf8OffsetToUtf16 = computeIndicesMapping
+      ? new Uint32Array(utf8Length + 1)
+      : null!
     if (computeIndicesMapping)
       utf8OffsetToUtf16[utf8Length] = utf16Length
 

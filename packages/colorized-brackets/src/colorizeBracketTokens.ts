@@ -110,7 +110,9 @@ function assignColorToToken(
       : structuredClone(token.htmlStyle ?? {})
 
     for (const [colorName, theme] of Object.entries(shikiOptions.themes)) {
-      const themeName = typeof theme === 'string' ? theme : theme?.name
+      const themeName = typeof theme === 'string'
+        ? theme
+        : theme?.name
       const cssProperty
         = colorName === defaultColor
           ? 'color'

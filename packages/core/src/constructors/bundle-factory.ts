@@ -222,7 +222,9 @@ export function createSingletonShorthands<L extends string, T extends string>(
   async function get(code: string, options: CodeToTokensOptions<L, T> | CodeToHastOptions<L, T>): Promise<HighlighterGeneric<L, T>> {
     const shiki = await getSingletonHighlighter({
       langs: [options.lang as L],
-      themes: ('theme' in options ? [options.theme] : Object.values(options.themes)) as T[],
+      themes: ('theme' in options
+        ? [options.theme]
+        : Object.values(options.themes)) as T[],
     })
     const langs = await config?.guessEmbeddedLanguages?.(code, options.lang, shiki) as L[]
     if (langs) {

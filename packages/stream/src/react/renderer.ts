@@ -20,20 +20,29 @@ const EMPTY: Grouped = { lines: [], tail: [] }
  * so every line above the one currently streaming bails out of reconciliation.
  */
 const Line = memo(
-  ({ tokens }: { tokens: ThemedToken[] }): JSX.Element => h(Fragment, {}, tokens.map(token => h('span', { key: objectId(token), style: token.htmlStyle || getTokenStyleObject(token) }, token.content))),
+  ({ tokens }: { tokens: ThemedToken[] }): JSX.Element => h(Fragment, {}, tokens.map(token => h('span', {
+    key: objectId(token),
+    style: token.htmlStyle || getTokenStyleObject(token),
+  }, token.content))),
 )
 
 function append(state: Grouped, token: ThemedToken): Grouped {
   const tail = [...state.tail, token]
   // Tokens carrying a newline close the current line; the tokenizer emits `\n` as its own token.
   return token.content.includes('\n')
-    ? { lines: [...state.lines, tail], tail: [] }
+    ? {
+        lines: [...state.lines, tail],
+        tail: [],
+      }
     : { lines: state.lines, tail }
 }
 
 function recall(state: Grouped, count: number): Grouped {
   // A recall only ever revokes the unstable tokens of the line being streamed.
-  return { lines: state.lines, tail: state.tail.slice(0, state.tail.length - count) }
+  return {
+    lines: state.lines,
+    tail: state.tail.slice(0, state.tail.length - count),
+  }
 }
 
 export function ShikiStreamRenderer(
@@ -53,7 +62,9 @@ export function ShikiStreamRenderer(
   const _onStreamEnd = useEffectEvent(() => onStreamEnd?.())
 
   useEffect(() => {
-    setState(prev => (prev.lines.length || prev.tail.length) ? EMPTY : prev)
+    setState(prev => (prev.lines.length || prev.tail.length)
+      ? EMPTY
+      : prev)
     let started = false
     stream.pipeTo(new WritableStream({
       write(token) {

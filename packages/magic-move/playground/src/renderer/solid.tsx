@@ -16,7 +16,10 @@ export const createRendererSolid: RendererFactory = (options): RendererFactoryRe
 
   return {
     mount: (element, payload) => {
-      setProps(props => ({ ...props, ...payload }))
+      setProps(props => ({
+        ...props,
+        ...payload,
+      }))
       dispose = render(
         () => <ShikiMagicMove {...props()} />,
         element,
@@ -24,7 +27,10 @@ export const createRendererSolid: RendererFactory = (options): RendererFactoryRe
     },
 
     update: (payload) => {
-      setProps(props => ({ ...props, ...payload }))
+      setProps(props => ({
+        ...props,
+        ...payload,
+      }))
     },
     dispose: () => {
       if (dispose) {

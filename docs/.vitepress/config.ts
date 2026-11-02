@@ -234,14 +234,41 @@ export default withTwoslashInlineCache(withMermaid(defineConfig({
   },
 
   head: [
-    ['meta', { name: 'theme-color', content: '#ffffff' }],
-    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
-    ['meta', { name: 'author', content: 'Pine Wu, Anthony Fu' }],
-    ['meta', { property: 'og:title', content: 'Shiki' }],
-    ['meta', { property: 'og:image', content: 'https://shiki.style/og.png' }],
-    ['meta', { property: 'og:description', content: 'A beautiful yet powerful syntax highlighter' }],
-    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: 'https://shiki.style/og.png' }],
-    ['meta', { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' }],
+    [
+      'meta',
+      { name: 'theme-color', content: '#ffffff' },
+    ],
+    [
+      'link',
+      { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' },
+    ],
+    [
+      'meta',
+      { name: 'author', content: 'Pine Wu, Anthony Fu' },
+    ],
+    [
+      'meta',
+      { property: 'og:title', content: 'Shiki' },
+    ],
+    [
+      'meta',
+      { property: 'og:image', content: 'https://shiki.style/og.png' },
+    ],
+    [
+      'meta',
+      { property: 'og:description', content: 'A beautiful yet powerful syntax highlighter' },
+    ],
+    [
+      'meta',
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    [
+      'meta',
+      { name: 'twitter:image', content: 'https://shiki.style/og.png' },
+    ],
+    [
+      'meta',
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' },
+    ],
   ],
 })))

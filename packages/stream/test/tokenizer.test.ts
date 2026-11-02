@@ -46,14 +46,22 @@ it('exported', async () => {
   let index = 0
   for (const slice of slices) {
     const { stable, unstable } = await streamer.enqueue(slice)
-    await expect.soft(tokensToHtml([...stable, ...unstable]))
+    await expect.soft(tokensToHtml([
+      ...stable,
+      ...unstable,
+    ]))
       .toMatchFileSnapshot(`output/slice-${index++}.html`)
   }
   streamer.close()
 
   const onepassTokens = highlighter.codeToTokens(fixture, options as any)
     .tokens
-    .flatMap((i, idx) => idx === 0 ? i : [{ content: '\n', offset: 0 }, ...i])
+    .flatMap((i, idx) => idx === 0
+      ? i
+      : [
+          { content: '\n', offset: 0 },
+          ...i,
+        ])
   const onepass = tokensToHtml(onepassTokens)
 
   const merged = tokensToHtml(streamer.tokensStable)
@@ -78,7 +86,10 @@ async function tokenizeInChunks(options: ShikiStreamTokenizerOptions, code: stri
   const streamer = new ShikiStreamTokenizer(options)
   for (let i = 0; i < code.length; i += size)
     await streamer.enqueue(code.slice(i, i + size))
-  return [...streamer.tokensStable, ...streamer.close().stable]
+  return [
+    ...streamer.tokensStable,
+    ...streamer.close().stable,
+  ]
 }
 
 // The streamed tokens, apart from the inserted `\n` ones, match the one-pass tokens,
@@ -88,7 +99,9 @@ function expectSameTokens(options: ShikiStreamTokenizerOptions, code: string, to
   for (const token of tokens)
     expect(code.slice(token.offset, token.offset + token.content.length)).toBe(token.content)
   expect(tokens.filter(token => token.content === '\n').map(token => token.offset))
-    .toEqual([...code.matchAll(/\n/g)].map(match => match.index))
+    .toEqual([
+      ...code.matchAll(/\n/g),
+    ].map(match => match.index))
 }
 
 it('handles CRLF line endings like codeToTokens', async () => {
@@ -100,7 +113,12 @@ it('handles CRLF line endings like codeToTokens', async () => {
   const onepass = tokensToHtml(
     highlighter.codeToTokens(code, tokensOptions)
       .tokens
-      .flatMap((i, idx) => idx === 0 ? i : [{ content: '\n', offset: 0 }, ...i]),
+      .flatMap((i, idx) => idx === 0
+        ? i
+        : [
+            { content: '\n', offset: 0 },
+            ...i,
+          ]),
   )
 
   // A chunk size of 1 splits every `\r\n` across two chunks
@@ -119,7 +137,10 @@ it('reports token offsets relative to the whole code', async () => {
 
   const options: ShikiStreamTokenizerOptions = { highlighter, ...tokensOptions }
 
-  for (const code of [fixture.trimEnd(), fixture.trimEnd().replaceAll('\n', '\r\n')]) {
+  for (const code of [
+    fixture.trimEnd(),
+    fixture.trimEnd().replaceAll('\n', '\r\n'),
+  ]) {
     for (const size of [1, 5, code.length])
       expectSameTokens(options, code, await tokenizeInChunks(options, code, size))
   }
@@ -134,16 +155,30 @@ it('reports whole-code offsets after every chunk', async () => {
   const streamer = new ShikiStreamTokenizer(options)
 
   // `\r`, an empty chunk, `\n` and the two halves of the emoji arrive separately
-  const chunks = ['const a = 1', '\r', '', '\n', 'const b = \'\uD83D', '\uDE00\'\r\n', 'b']
+  const chunks = [
+    'const a = 1',
+    '\r',
+    '',
+    '\n',
+    'const b = \'\uD83D',
+    '\uDE00\'\r\n',
+    'b',
+  ]
   let code = ''
   const received: ThemedToken[] = []
   for (const chunk of chunks) {
     code += chunk
     const { stable, unstable } = await streamer.enqueue(chunk)
     received.push(...stable)
-    expectSameTokens(options, code, [...received, ...unstable])
+    expectSameTokens(options, code, [
+      ...received,
+      ...unstable,
+    ])
   }
-  expectSameTokens(options, code, [...received, ...streamer.close().stable])
+  expectSameTokens(options, code, [
+    ...received,
+    ...streamer.close().stable,
+  ])
 })
 
 it('continues offsets in a clone', async () => {
@@ -157,7 +192,10 @@ it('continues offsets in a clone', async () => {
 
   const clone = streamer.clone()
   await clone.enqueue(' = 2\nc')
-  expectSameTokens(options, 'const a = 1\r\nconst b = 2\nc', [...clone.tokensStable, ...clone.close().stable])
+  expectSameTokens(options, 'const a = 1\r\nconst b = 2\nc', [
+    ...clone.tokensStable,
+    ...clone.close().stable,
+  ])
 })
 
 it('restarts offsets after clear() and close()', async () => {
@@ -172,6 +210,9 @@ it('restarts offsets after clear() and close()', async () => {
     await streamer.enqueue('const a = 1\nconst b')
     streamer[reset]()
     const { stable, unstable } = await streamer.enqueue('let c\nd')
-    expectSameTokens(options, 'let c\nd', [...stable, ...unstable])
+    expectSameTokens(options, 'let c\nd', [
+      ...stable,
+      ...unstable,
+    ])
   }
 })

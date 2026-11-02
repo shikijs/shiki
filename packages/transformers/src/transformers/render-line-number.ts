@@ -37,7 +37,12 @@ export function transformerRenderLineNumber(
           properties: {
             class: classLineNumber,
           },
-          children: [{ type: 'text', value: String(num) }],
+          children: [
+            {
+              type: 'text',
+              value: String(num),
+            },
+          ],
         })
       }
     },

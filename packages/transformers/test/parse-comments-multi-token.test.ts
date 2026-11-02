@@ -5,31 +5,39 @@ import { parseComments } from '../src/shared/parse-comments'
 describe('parseComments multi-token handling', () => {
   it('handles multi-token comments where comment is split across tokens', () => {
     // Simulate how rose-pine theme splits "// [!code --]" into separate tokens
-    const lines: Element[] = [{
-      type: 'element',
-      tagName: 'span',
-      properties: { class: 'line' },
-      children: [
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children: [{ type: 'text', value: 'const a = 1 ' }],
-        },
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children: [{ type: 'text', value: '//' }],
-        },
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children: [{ type: 'text', value: ' [!code --]' }],
-        },
-      ],
-    }]
+    const lines: Element[] = [
+      {
+        type: 'element',
+        tagName: 'span',
+        properties: { class: 'line' },
+        children: [
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children: [
+              { type: 'text', value: 'const a = 1 ' },
+            ],
+          },
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children: [
+              { type: 'text', value: '//' },
+            ],
+          },
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children: [
+              { type: 'text', value: ' [!code --]' },
+            ],
+          },
+        ],
+      },
+    ]
 
     const result = parseComments(lines, false, 'v3')
 
@@ -39,25 +47,31 @@ describe('parseComments multi-token handling', () => {
   })
 
   it('handles case where previous token does not contain comment prefix', () => {
-    const lines: Element[] = [{
-      type: 'element',
-      tagName: 'span',
-      properties: { class: 'line' },
-      children: [
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children: [{ type: 'text', value: 'const a = 1' }],
-        },
-        {
-          type: 'element',
-          tagName: 'span',
-          properties: {},
-          children: [{ type: 'text', value: ' [!code --]' }],
-        },
-      ],
-    }]
+    const lines: Element[] = [
+      {
+        type: 'element',
+        tagName: 'span',
+        properties: { class: 'line' },
+        children: [
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children: [
+              { type: 'text', value: 'const a = 1' },
+            ],
+          },
+          {
+            type: 'element',
+            tagName: 'span',
+            properties: {},
+            children: [
+              { type: 'text', value: ' [!code --]' },
+            ],
+          },
+        ],
+      },
+    ]
 
     const result = parseComments(lines, false, 'v3')
 

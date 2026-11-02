@@ -18,11 +18,15 @@ cli
   .action(async (path, options) => {
     const output: string = resolve(path || 'shiki.bundle.ts')
 
-    const langs = ((Array.isArray(options.langs) ? options.langs.join(',') : options.langs || '') as string)
+    const langs = ((Array.isArray(options.langs)
+      ? options.langs.join(',')
+      : options.langs || '') as string)
       .split(',')
       .map(lang => lang.trim())
       .filter(Boolean)
-    const themes = ((Array.isArray(options.themes) ? options.themes.join(',') : options.themes || '') as string)
+    const themes = ((Array.isArray(options.themes)
+      ? options.themes.join(',')
+      : options.themes || '') as string)
       .split(',')
       .map(theme => theme.trim())
       .filter(Boolean)

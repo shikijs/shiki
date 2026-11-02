@@ -19,7 +19,9 @@ const RE_NEWLINE = /(\r?\n)/g
 export function splitLines(code: string, preserveEnding = false): [string, number][] {
   // Handle empty string edge case
   if (code.length === 0) {
-    return [['', 0]]
+    return [
+      ['', 0],
+    ]
   }
 
   const parts = code.split(RE_NEWLINE)

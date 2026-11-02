@@ -69,7 +69,10 @@ async function run() {
         parsablePatterns.push(pattern)
       }
       catch (e: any) {
-        unparsablePatterns.push([pattern, String(e.cause || e)])
+        unparsablePatterns.push([
+          pattern,
+          String(e.cause || e),
+        ])
       }
     }
 
@@ -181,17 +184,35 @@ async function run() {
 
   function createTable(report: ReportItem[]) {
     const table: readonly [string, string, string, string, string][] = [
-      ['Language', 'Highlight Match', 'Patterns Parsable', 'Patterns Failed', 'Diff'],
+      [
+        'Language',
+        'Highlight Match',
+        'Patterns Parsable',
+        'Patterns Failed',
+        'Diff',
+      ],
       ['---', ':---', '---:', '---:', '---:'],
       ...report
         .map((item) => {
-          const diffChars = item.diff.map(diff => diff[0] === 1 ? diff[1].length : 0).reduce((a, b) => a + b, 0)
+          const diffChars = item.diff.map(diff => diff[0] === 1
+            ? diff[1].length
+            : 0).reduce((a, b) => a + b, 0)
           return [
             item.lang,
-            item.highlightMatch === true ? '✅ OK' : item.highlightMatch === 'error' ? '❌ Error' : `[🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=${item.lang})`,
-            item.patternsParsable === 0 ? '-' : item.patternsParsable.toString(),
-            item.patternsFailed.length === 0 ? '-' : item.patternsFailed.length.toString(),
-            diffChars ? diffChars.toString() : '',
+            item.highlightMatch === true
+              ? '✅ OK'
+              : item.highlightMatch === 'error'
+                ? '❌ Error'
+                : `[🚧 Mismatch](https://textmate-grammars-themes.netlify.app/?grammar=${item.lang})`,
+            item.patternsParsable === 0
+              ? '-'
+              : item.patternsParsable.toString(),
+            item.patternsFailed.length === 0
+              ? '-'
+              : item.patternsFailed.length.toString(),
+            diffChars
+              ? diffChars.toString()
+              : '',
           ] as [string, string, string, string, string]
         }),
     ]
