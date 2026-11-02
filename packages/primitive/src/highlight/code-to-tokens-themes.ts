@@ -6,6 +6,7 @@ import type {
 } from '@shikijs/types'
 import { getLastGrammarStateFromMap, GrammarState, setLastGrammarStateToMap } from '../textmate/grammar-state'
 import { codeToTokensBase } from './code-to-tokens-base'
+import { tokenizeWithThemes } from './tokenize-themes'
 
 /**
  * Get tokens with multiple themes
@@ -21,12 +22,21 @@ export function codeToTokensWithThemes(
     .filter(i => i[1])
     .map(i => ({ color: i[0], theme: i[1]! }))
 
-  const themedTokens = themes.map((t) => {
-    const tokens = codeToTokensBaseFn(primitive, code, {
-      ...options,
-      theme: t.theme,
-    })
-    const state = getLastGrammarStateFromMap(tokens)
+  // Scan the code once for all themes when possible
+  const scanned = themes.length > 1
+    ? tokenizeWithThemes(primitive, code, themes.map(t => t.theme), options)
+    : undefined
+
+  const themedTokens = themes.map((t, idx) => {
+    const tokens = scanned
+      ? scanned[idx].tokens
+      : codeToTokensBaseFn(primitive, code, {
+          ...options,
+          theme: t.theme,
+        })
+    const state = scanned
+      ? scanned[idx].state
+      : getLastGrammarStateFromMap(tokens)
     const theme = typeof t.theme === 'string'
       ? t.theme
       : t.theme.name
