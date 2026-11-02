@@ -25,8 +25,10 @@ export interface ShikiTransformerStyleToClass extends ShikiTransformer {
 }
 
 /**
- * Remove line breaks between lines.
- * Useful when you override `display: block` to `.line` in CSS.
+ * Convert inline styles to class names, and collect the styles it creates a CSS stylesheet for
+ * via `getCSS()`.
+ *
+ * Works on the `<pre>` element, on the token spans, and on tokens with custom `htmlStyle`.
  */
 export function transformerStyleToClass(options: TransformerStyleToClassOptions = {}): ShikiTransformerStyleToClass {
   const {
@@ -68,6 +70,15 @@ export function transformerStyleToClass(options: TransformerStyleToClassOptions 
       const className = registerStyle(t.properties.style as string)
       delete t.properties.style
       this.addClassToHast(t, className)
+    },
+    span(hast) {
+      // Token colors are applied to the `<span>` elements after the `tokens` hook runs, so spans
+      // with a plain single-theme style are caught here.
+      if (!hast.properties.style)
+        return
+      const className = registerStyle(hast.properties.style as string)
+      delete hast.properties.style
+      this.addClassToHast(hast, className)
     },
     tokens(lines) {
       for (const line of lines) {
