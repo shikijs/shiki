@@ -1,10 +1,14 @@
 import type { Root } from 'hast'
 import fs from 'node:fs/promises'
+import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript'
+import javascript from '@shikijs/langs/javascript'
+import vitesseLight from '@shikijs/themes/vitesse-light'
 import rehypeRaw from 'rehype-raw'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { createHighlighter } from 'shiki'
+import { createHighlighterCore } from 'shiki/core'
 import { unified } from 'unified'
 
 import { visit } from 'unist-util-visit'
@@ -12,15 +16,17 @@ import { expect, it, vi } from 'vitest'
 import { transformerMetaHighlight } from '../../transformers/src'
 import rehypeShikiFromHighlighter from '../src/core'
 
-it('run', async () => {
-  using highlighter = await createHighlighter({
-    themes: [
-      'vitesse-light',
-    ],
-    langs: [
-      'javascript',
-    ],
-  })
+it.each([false, true])('run with core: %s', async (core) => {
+  using highlighter = core
+    ? await createHighlighterCore({
+        themes: [vitesseLight],
+        langs: [javascript],
+        engine: createJavaScriptRegexEngine(),
+      })
+    : await createHighlighter({
+        themes: ['vitesse-light'],
+        langs: ['javascript'],
+      })
 
   const file = unified()
     .use(remarkParse)
