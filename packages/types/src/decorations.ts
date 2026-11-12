@@ -4,7 +4,7 @@ export interface DecorationOptions {
   /**
    * Custom decorations to wrap highlighted tokens with.
    */
-  decorations?: DecorationItem[]
+  decorations?: DecorationItem[] | undefined
 }
 
 export interface DecorationItem {
@@ -20,15 +20,15 @@ export interface DecorationItem {
    * Tag name of the element to create.
    * @default 'span'
    */
-  tagName?: string
+  tagName?: string | undefined
   /**
    * Properties of the element to create.
    */
-  properties?: Element['properties']
+  properties?: Element['properties'] | undefined
   /**
    * A custom function to transform the element after it has been created.
    */
-  transform?: (element: Element, type: DecorationTransformType) => Element | void
+  transform?: ((element: Element, type: DecorationTransformType) => Element | void) | undefined
 
   /**
    * By default when the decoration contains only one token, the decoration will be applied to the token.
@@ -37,7 +37,7 @@ export interface DecorationItem {
    *
    * @default false
    */
-  alwaysWrap?: boolean
+  alwaysWrap?: boolean | undefined
 }
 
 export interface ResolvedDecorationItem extends Omit<DecorationItem, 'start' | 'end'> {

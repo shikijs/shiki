@@ -6,7 +6,7 @@ export interface TransformerOptions {
   /**
    * Transformers for the Shiki pipeline.
    */
-  transformers?: ShikiTransformer[]
+  transformers?: ShikiTransformer[] | undefined
 }
 
 export interface ShikiTransformerContextMeta { }
@@ -49,7 +49,7 @@ export interface ShikiTransformer {
   /**
    * Name of the transformer
    */
-  name?: string
+  name?: string | undefined
   /**
    * Enforce plugin invocation tier similar to webpack loaders. Hooks ordering
    * is still subject to the `order` property in the hook object.
@@ -60,42 +60,42 @@ export interface ShikiTransformer {
    * - `enforce: 'post'` plugins
    * - shiki post plugins
    */
-  enforce?: 'pre' | 'post'
+  enforce?: 'pre' | 'post' | undefined
   /**
    * Transform the raw input code before passing to the highlighter.
    */
-  preprocess?: (this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions) => string | void
+  preprocess?: ((this: ShikiTransformerContextCommon, code: string, options: CodeToHastOptions) => string | void) | undefined
   /**
    * Transform the full tokens list before converting to HAST.
    * Return a new tokens list will replace the original one.
    */
-  tokens?: (this: ShikiTransformerContextSource, tokens: ThemedToken[][]) => ThemedToken[][] | void
+  tokens?: ((this: ShikiTransformerContextSource, tokens: ThemedToken[][]) => ThemedToken[][] | void) | undefined
   /**
    * Transform the entire generated HAST tree. Return a new Node will replace the original one.
    */
-  root?: (this: ShikiTransformerContext, hast: Root) => Root | void
+  root?: ((this: ShikiTransformerContext, hast: Root) => Root | void) | undefined
   /**
    * Transform the `<pre>` element. Return a new Node will replace the original one.
    */
-  pre?: (this: ShikiTransformerContext, hast: Element) => Element | void
+  pre?: ((this: ShikiTransformerContext, hast: Element) => Element | void) | undefined
   /**
    * Transform the `<code>` element. Return a new Node will replace the original one.
    */
-  code?: (this: ShikiTransformerContext, hast: Element) => Element | void
+  code?: ((this: ShikiTransformerContext, hast: Element) => Element | void) | undefined
   /**
    * Transform each line `<span class="line">` element.
    *
    * @param hast
    * @param line 1-based line number
    */
-  line?: (this: ShikiTransformerContext, hast: Element, line: number) => Element | void
+  line?: ((this: ShikiTransformerContext, hast: Element, line: number) => Element | void) | undefined
   /**
    * Transform each token `<span>` element.
    */
-  span?: (this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element, token: ThemedToken) => Element | void
+  span?: ((this: ShikiTransformerContext, hast: Element, line: number, col: number, lineElement: Element, token: ThemedToken) => Element | void) | undefined
   /**
    * Transform the generated HTML string before returning.
    * This hook will only be called with `codeToHtml`.
    */
-  postprocess?: (this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => string | void
+  postprocess?: ((this: ShikiTransformerContextCommon, html: string, options: CodeToHastOptions) => string | void) | undefined
 }
