@@ -5,6 +5,7 @@ import { defaultHoverInfoProcessor, rendererRich } from '@shikijs/twoslash'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { gfmFromMarkdown } from 'mdast-util-gfm'
 import { defaultHandlers, toHast } from 'mdast-util-to-hast'
+import { registerPopup } from './popup-optimization'
 
 export { defaultHoverInfoProcessor }
 
@@ -124,6 +125,7 @@ export function rendererFloatingVue(options: TwoslashFloatingVueRendererOptions 
 
 function vPre<T extends ElementContent>(el: T): T {
   if (el.type === 'element') {
+    registerPopup(el)
     el.properties = el.properties || {}
     el.properties['v-pre'] = ''
   }

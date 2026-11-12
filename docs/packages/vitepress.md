@@ -111,6 +111,18 @@ console.log('hello')
 
 <div class="h-100" /> <!-- leaving some space for the query above -->
 
+### Popup compilation
+
+To reduce build memory, `transformerTwoslash()` compiles popup content as static HTML in ordinary VitePress code fences. Hover information, documentation, errors, and completions remain available. Interpolated `*-vue` fences, custom renderers, and unrecognized hook orders keep their full HAST.
+
+All `code()` hooks can inspect popup descendants. Register Twoslash before custom `pre()` hooks to enable the optimization. Those hooks and later `root()` hooks see the optimized popup content as a string. Disable the optimization when later hooks need the descendants:
+
+```ts
+transformerTwoslash({ optimizePopups: false })
+```
+
+Scoped SFC styles do not apply to the inserted descendants. Use global styles, a `:deep()` selector anchored to `.twoslash-popup-container`, or `optimizePopups: false` to retain compiler-generated scope attributes. The package's global popup styles work with either setting.
+
 ### Vue Single File Component
 
 In addition, this plugin also integrated [`twoslash-vue`](https://twoslash.netlify.app/packages/vue) for you, so that you can also highlight Vue SFC blocks with `vue twoslash`:
