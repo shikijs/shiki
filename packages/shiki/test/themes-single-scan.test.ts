@@ -40,8 +40,13 @@ const themeSets: Record<string, BundledTheme>[] = [
 ]
 
 const highlighter = await createHighlighter({
-  langs: [...Object.keys(samples) as BundledLanguage[], 'json'],
-  themes: [...new Set(themeSets.flatMap(Object.values))],
+  langs: [
+    ...Object.keys(samples) as BundledLanguage[],
+    'json',
+  ],
+  themes: [
+    ...new Set(themeSets.flatMap(Object.values)),
+  ],
 })
 
 function perTheme(tokens: ThemedTokenWithVariants[][], key: string): ThemedToken[][] {
@@ -60,7 +65,12 @@ describe('codeToTokensWithThemes scans once', () => {
           ...names.map(theme => highlighter.codeToTokensBase(code, { lang, theme })),
         )
         keys.forEach((key, i) => {
-          expect(perTheme(tokens, key)).toEqual(expected[i].map(line => line.map(t => ({ content: t.content, offset: t.offset, color: t.color, fontStyle: t.fontStyle }))))
+          expect(perTheme(tokens, key)).toEqual(expected[i].map(line => line.map(t => ({
+            content: t.content,
+            offset: t.offset,
+            color: t.color,
+            fontStyle: t.fontStyle,
+          }))))
         })
 
         // Each theme gets its own grammar state, equal to the one of a single-theme tokenization

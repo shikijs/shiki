@@ -87,7 +87,9 @@ export function tokenizeWithThemes(
   const roots = new Map<string, ScopeNode>()
   let nodeCount = 0
   const childOf = (parent: ScopeNode | null, scopeName: string): ScopeNode => {
-    const siblings = parent ? (parent.children ??= new Map()) : roots
+    const siblings = parent
+      ? (parent.children ??= new Map())
+      : roots
     let node = siblings.get(scopeName)
     if (!node) {
       node = { parent, scopeName, attributes: [] }
@@ -183,7 +185,9 @@ export function tokenizeWithThemes(
           basic.languageId,
           basic.tokenType,
           null,
-          style ? style.fontStyle : -1,
+          style
+            ? style.fontStyle
+            : -1,
           style ? style.foregroundId : 0,
           style ? style.backgroundId : 0,
         )
@@ -199,7 +203,14 @@ export function tokenizeWithThemes(
       if (!lineTokens) {
         final.push(line === ''
           ? []
-          : [{ content: line, offset: lineOffset, color: '', fontStyle: 0 }])
+          : [
+              {
+                content: line,
+                offset: lineOffset,
+                color: '',
+                fontStyle: 0,
+              },
+            ])
         continue
       }
 
