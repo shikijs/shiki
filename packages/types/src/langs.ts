@@ -12,25 +12,25 @@ export type ResolveBundleKey<T extends string> = [T] extends [never] ? string : 
 export interface LanguageRegistration extends RawGrammar {
   name: string
   scopeName: string
-  displayName?: string
-  aliases?: string[]
+  displayName?: string | undefined
+  aliases?: string[] | undefined
   /**
    * A list of languages the current language embeds.
    * If manually specifying languages to load, make sure to load the embedded
    * languages for each parent language.
    */
-  embeddedLangs?: string[]
-  embeddedLanguages?: string[] // for VS code
+  embeddedLangs?: string[] | undefined
+  embeddedLanguages?: string[] | undefined // for VS code
   /**
    * A list of languages that embed the current language.
    * Unlike `embeddedLangs`, the embedded languages will not be loaded automatically.
    */
-  embeddedLangsLazy?: string[]
-  balancedBracketSelectors?: string[]
-  unbalancedBracketSelectors?: string[]
+  embeddedLangsLazy?: string[] | undefined
+  balancedBracketSelectors?: string[] | undefined
+  unbalancedBracketSelectors?: string[] | undefined
 
-  foldingStopMarker?: string
-  foldingStartMarker?: string
+  foldingStopMarker?: string | undefined
+  foldingStartMarker?: string | undefined
 
   /**
    * Inject this language to other scopes.
@@ -38,14 +38,14 @@ export interface LanguageRegistration extends RawGrammar {
    *
    * @see https://code.visualstudio.com/api/language-extensions/syntax-highlight-guide#injection-grammars
    */
-  injectTo?: string[]
+  injectTo?: string[] | undefined
 }
 
 export interface BundledLanguageInfo {
   id: string
   name: string
   import: DynamicImportLanguageRegistration
-  aliases?: string[]
+  aliases?: string[] | undefined
 }
 
 export type DynamicImportLanguageRegistration = () => Promise<{ default: LanguageRegistration[] }>

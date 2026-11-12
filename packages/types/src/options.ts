@@ -14,28 +14,28 @@ export interface HighlighterCoreOptions<Sync extends boolean = false> {
   /**
    * Theme names, or theme registration objects to be loaded upfront.
    */
-  themes?: Sync extends true ? MaybeArray<ThemeRegistrationAny>[] : ThemeInput[]
+  themes?: (Sync extends true ? MaybeArray<ThemeRegistrationAny>[] : ThemeInput[]) | undefined
   /**
    * Language names, or language registration objects to be loaded upfront.
    */
-  langs?: Sync extends true ? MaybeArray<LanguageRegistration>[] : LanguageInput[]
+  langs?: (Sync extends true ? MaybeArray<LanguageRegistration>[] : LanguageInput[]) | undefined
   /**
    * Alias of languages
    * @example { 'my-lang': 'javascript' }
    */
-  langAlias?: Record<string, string>
+  langAlias?: Record<string, string> | undefined
   /**
    * Emit console warnings to alert users of potential issues.
    * @default true
    */
-  warnings?: boolean
+  warnings?: boolean | undefined
 }
 
 export interface BundledHighlighterOptions<L extends string, T extends string> extends Pick<HighlighterCoreOptions, 'warnings'> {
   /**
    * Custom RegExp engine.
    */
-  engine?: Awaitable<RegexEngine>
+  engine?: Awaitable<RegexEngine> | undefined
   /**
    * Theme registation
    *
@@ -52,7 +52,7 @@ export interface BundledHighlighterOptions<L extends string, T extends string> e
    * Alias of languages
    * @example { 'my-lang': 'javascript' }
    */
-  langAlias?: Record<string, StringLiteralUnion<L>>
+  langAlias?: Record<string, StringLiteralUnion<L>> | undefined
 }
 
 export interface CodeOptionsSingleTheme<Themes extends string = string> {
@@ -109,7 +109,7 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    *
    * @default 'light'
    */
-  defaultColor?: StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | false
+  defaultColor?: StringLiteralUnion<'light' | 'dark'> | 'light-dark()' | false | undefined
 
   /**
    * The strategy to render multiple colors.
@@ -119,14 +119,14 @@ export interface CodeOptionsMultipleThemes<Themes extends string = string> {
    *
    * @default 'css-vars'
    */
-  colorsRendering?: 'css-vars' | 'none'
+  colorsRendering?: 'css-vars' | 'none' | undefined
 
   /**
    * Prefix of CSS variables used to store the color of the other theme.
    *
    * @default '--shiki-'
    */
-  cssVariablePrefix?: string
+  cssVariablePrefix?: string | undefined
 }
 
 export type CodeOptionsThemes<Themes extends string = string>
@@ -147,7 +147,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
   /**
    * Data to be added to the root `<pre>` element.
    */
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | undefined
 
   /**
    * The grammar name for the code.
@@ -159,7 +159,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    *
    * When set to `false`, no style will be applied.
    */
-  rootStyle?: string | false
+  rootStyle?: string | false | undefined
 
   /**
    * Merge whitespace tokens to saving extra `<span>`.
@@ -170,7 +170,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    *
    * @default true
    */
-  mergeWhitespaces?: boolean | 'never'
+  mergeWhitespaces?: boolean | 'never' | undefined
 
   /**
    * Merge consecutive tokens with the same style to reduce the number of DOM nodes.
@@ -178,7 +178,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    *
    * @default false
    */
-  mergeSameStyleTokens?: boolean
+  mergeSameStyleTokens?: boolean | undefined
 
   /**
    * The structure of the generated HAST and HTML.
@@ -188,7 +188,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    *
    * @default 'classic'
    */
-  structure?: 'classic' | 'inline'
+  structure?: 'classic' | 'inline' | undefined
 
   /**
    * Tab index of the root `<pre>` element.
@@ -197,7 +197,7 @@ export interface CodeToHastOptionsCommon<Languages extends string = string>
    *
    * @default 0
    */
-  tabindex?: number | string | false
+  tabindex?: number | string | false | undefined
 }
 
 export interface CodeOptionsMeta {
@@ -214,14 +214,14 @@ export interface CodeOptionsMeta {
     /**
      * Raw string of the code block header.
      */
-    __raw?: string
+    __raw?: string | undefined
     [key: string]: any
-  }
+  } | undefined
 }
 
 export interface CodeToHastRenderOptionsCommon extends TransformerOptions, Omit<TokensResult, 'tokens'> {
-  lang?: string
-  langId?: string
+  lang?: string | undefined
+  langId?: string | undefined
 }
 
 export type CodeToHastRenderOptions = CodeToHastRenderOptionsCommon & CodeToHastOptions

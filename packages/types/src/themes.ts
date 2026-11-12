@@ -20,7 +20,7 @@ export interface ThemeRegistrationResolved extends RawTheme {
    *
    * @field shiki custom property
    */
-  displayName?: string
+  displayName?: string | undefined
 
   /**
    * Light/dark theme
@@ -37,7 +37,7 @@ export interface ThemeRegistrationResolved extends RawTheme {
   /**
    * Same as `settings`, will use as fallback if `settings` is not present.
    */
-  tokenColors?: RawThemeSetting[]
+  tokenColors?: RawThemeSetting[] | undefined
 
   /**
    * Default foreground color
@@ -60,35 +60,35 @@ export interface ThemeRegistrationResolved extends RawTheme {
    *
    * @field shiki custom property
    */
-  colorReplacements?: Record<string, string>
+  colorReplacements?: Record<string, string> | undefined
 
   /**
    * Color map of VS Code options
    *
    * Will be used by shiki on `lang: 'ansi'` to find ANSI colors, and to find the default foreground/background colors.
    */
-  colors?: Record<string, string>
+  colors?: Record<string, string> | undefined
 
   /**
    * JSON schema path
    *
    * @field not used by shiki
    */
-  $schema?: string
+  $schema?: string | undefined
 
   /**
    * Enable semantic highlighting
    *
    * @field not used by shiki
    */
-  semanticHighlighting?: boolean
+  semanticHighlighting?: boolean | undefined
 
   /**
    * Tokens for semantic highlighting
    *
    * @field not used by shiki
    */
-  semanticTokenColors?: Record<string, string>
+  semanticTokenColors?: Record<string, string> | undefined
 }
 
 export type ThemeRegistrationAny = ThemeRegistrationRaw | ThemeRegistration | ThemeRegistrationResolved
