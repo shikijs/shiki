@@ -2,6 +2,7 @@
 import { expect, it } from 'vitest'
 import {
   codeToHtml,
+  codeToTokens,
 } from '../src'
 
 it('renders ansi to html', async () => {
@@ -53,4 +54,32 @@ it('renders ansi with multiple themes', async () => {
   })
 
   await expect(out).toMatchFileSnapshot('./out/ansi-multi-themes.html')
+})
+
+// https://github.com/shikijs/shiki/issues/1350
+it('ignores non-SGR escape sequences', async () => {
+  const tokenize = async (code: string) =>
+    (await codeToTokens(code, { lang: 'ansi', theme: 'github-dark' })).tokens
+
+  // CSI sequences other than SGR: erase line, cursor movement, cursor visibility, and private `m` forms
+  expect(await tokenize('\x1B[2Kcompiling main.js'))
+    .toEqual(await tokenize('compiling main.js'))
+  expect(await tokenize('\x1B[1G\x1B[32mok\x1B[0m done'))
+    .toEqual(await tokenize('\x1B[32mok\x1B[0m done'))
+  expect(await tokenize('\x1B[?25lworking\x1B[?25h'))
+    .toEqual(await tokenize('working'))
+  expect(await tokenize('\x1B[>4;2mplain \x1B[?1;2mtext'))
+    .toEqual(await tokenize('plain text'))
+
+  // Control strings terminated by BEL or ST: OSC hyperlinks, DCS, APC
+  expect(await tokenize('\x1B]8;;https://example.com\x07docs\x1B]8;;\x07 \x1B[31merror\x1B[0m'))
+    .toEqual(await tokenize('docs \x1B[31merror\x1B[0m'))
+  expect(await tokenize('\x1B]8;;https://example.com\x1B\\docs\x1B]8;;\x1B\\ \x1B[31merror\x1B[0m'))
+    .toEqual(await tokenize('docs \x1B[31merror\x1B[0m'))
+  expect(await tokenize('\x1BP1$r0m\x1B\\a\x1B_Gi=1\x1B\\b'))
+    .toEqual(await tokenize('ab'))
+
+  // Other escape sequences, e.g. the charset selection `tput sgr0` emits before its SGR reset
+  expect(await tokenize('\x1B[1mbold\x1B(B\x1B[0m plain \x1B7saved\x1B8'))
+    .toEqual(await tokenize('\x1B[1mbold\x1B[0m plain saved'))
 })

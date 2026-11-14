@@ -11,6 +11,11 @@ import { applyColorReplacements, resolveColorReplacements, splitLines } from '..
 
 const RE_HEX_COLOR = /#([0-9a-f]{3,8})/i
 const RE_CSS_VAR_ANSI = /var\((--[\w-]+-ansi-[\w-]+)\)/
+// ansi-sequence-parser only understands SGR (`ESC [ <digits ; :> m`) and garbles other escape
+// sequences, so these are removed first: control strings ending in BEL or ST (OSC, DCS, SOS, PM, APC),
+// any other CSI sequence, and the remaining two-byte or nF escape sequences.
+// eslint-disable-next-line no-control-regex
+const RE_NON_SGR_ESCAPE = /\x1B(?:[\]PX^_][^\x07\x1B]*(?:\x07|\x1B\\)|\[(?![\d;:]*m)[\x30-\x3F]*[\x20-\x2F]*[\x40-\x7E]|[\x20-\x2F]*[\x30-\x4F\x51-\x57\x59\x5A\x5C\x60-\x7E])/g
 
 /**
  * Default ANSI palette (VSCode compatible fallbacks)
@@ -56,7 +61,7 @@ export function tokenizeAnsiWithTheme(
   const parser = createAnsiSequenceParser()
 
   return lines.map(line =>
-    parser.parse(line[0]).map((token): ThemedToken => {
+    parser.parse(line[0].replace(RE_NON_SGR_ESCAPE, '')).map((token): ThemedToken => {
       let color: string
       let bgColor: string | undefined
 
