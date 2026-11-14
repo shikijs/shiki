@@ -116,12 +116,12 @@ export class MagicMoveRenderer {
   }
 
   private registerTransitionEnd(el: HTMLElement, cb: () => void) {
-    return () => {
+    return (animationsByElement: Map<Element, Animation[]>) => {
       let resolved = false
       let resolve = () => { }
       const promise = Promise.race([
         // wait for the finish of all animation and transitions on this element then invoke the callback
-        Promise.allSettled(el.getAnimations().map(animation => animation.finished)).then(() => cb()),
+        Promise.allSettled((animationsByElement.get(el) ?? []).map(animation => animation.finished)).then(() => cb()),
         // race it with another promise so it's still resolvable separately
         new Promise<void>((_resolve) => {
           resolve = () => {
@@ -194,7 +194,7 @@ export class MagicMoveRenderer {
     const move: HTMLElement[] = []
     const enter: HTMLElement[] = []
     const leave: HTMLElement[] = []
-    const promises: (() => PromiseWithResolve)[] = []
+    const promises: ((animationsByElement: Map<Element, Animation[]>) => PromiseWithResolve)[] = []
 
     this.previousPromises.forEach(p => p.resolve())
     this.previousPromises = []
@@ -315,10 +315,16 @@ export class MagicMoveRenderer {
 
     // We recalculate the anchor position because the container might be moved
     anchorRect = this.anchor.getBoundingClientRect()
+    // Read all destination rectangles before writing any styles, so the
+    // browser performs a single layout instead of one per token
+    const newRects = new Map(move.map(el => [
+      el,
+      el.getBoundingClientRect(),
+    ]))
     // Set the position of the move elements to the old position
     // Set the transition duration to 0ms to make it immediate
     move.forEach((el, idx) => {
-      const newRect = el.getBoundingClientRect()
+      const newRect = newRects.get(el)!
       const newPos = { x: newRect.x - anchorRect.x, y: newRect.y - anchorRect.y }
       const oldPos = position.get(el)!
       el.style.transitionDuration = el.style.transitionDelay = '0ms'
@@ -392,7 +398,23 @@ export class MagicMoveRenderer {
     postReflow.forEach(cb => cb())
     // we need to call the functions that return the promises after the reflow
     // to to allow getAnimations to have the correct transitions
-    const actualPromises = promises.map(promise => promise())
+    // Collect the animations once for the whole subtree: querying them
+    // per element flushes styles repeatedly on large token counts
+    const animationsByElement = new Map<Element, Animation[]>()
+    for (const animation of this.container.getAnimations({ subtree: true })) {
+      const effect = animation.effect
+      // Narrowing to KeyframeEffect is required by vue-tsc to access .target.
+      // This is safe because all CSS transitions/animations are KeyframeEffects.
+      if (!(effect instanceof KeyframeEffect))
+        continue
+      const target = effect.target
+      if (!target)
+        continue
+      const animations = animationsByElement.get(target) ?? []
+      animations.push(animation)
+      animationsByElement.set(target, animations)
+    }
+    const actualPromises = promises.map(promise => promise(animationsByElement))
 
     this.isFirstRender = false
     this.previousPromises = actualPromises
