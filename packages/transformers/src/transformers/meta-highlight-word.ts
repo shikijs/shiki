@@ -1,6 +1,8 @@
 import type { ShikiTransformer } from '@shikijs/types'
 
-const RE_WORD_MATCH = /\/((?:\\.|[^/])+)\//g
+// `key="value"` and `key='value'` are matched too, so that the slashes in
+// something like `title="src/utils/index.ts"` are not read as `/utils/`
+const RE_WORD_MATCH = /[\w-]+=(?:"[^"]*"|'[^']*')|\/((?:\\.|[^/])+)\//g
 const RE_ESCAPE_BACKSLASH = /\\(.)/g
 
 export function parseMetaHighlightWords(meta: string): string[] {
@@ -13,6 +15,7 @@ export function parseMetaHighlightWords(meta: string): string[] {
   ]
 
   return match
+    .filter(v => v[1] !== undefined)
     // Escape backslashes
     .map(v => v[1].replace(RE_ESCAPE_BACKSLASH, '$1'))
 }
