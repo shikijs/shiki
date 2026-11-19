@@ -9,3 +9,10 @@ it('parseHighlightWords', () => {
   expect(findAllSubstringIndexes('xxx', 'xx')).toEqual([0])
   expect(findAllSubstringIndexes('xxxx', 'xx')).toEqual([0, 2])
 })
+
+it('parseHighlightWords skips quoted attribute values', () => {
+  expect(parseMetaHighlightWords('title="src/utils/index.ts"')).toEqual([])
+  expect(parseMetaHighlightWords('{6} /db/ title="src/routes/users/index.tsx"')).toEqual(['db'])
+  expect(parseMetaHighlightWords('title=\'src/utils/index.ts\' /hello/')).toEqual(['hello'])
+  expect(parseMetaHighlightWords('/class="btn"/')).toEqual(['class="btn"'])
+})
