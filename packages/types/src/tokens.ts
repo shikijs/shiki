@@ -194,6 +194,7 @@ export interface TokenizeWithThemeOptions {
 
   /**
    * Lines above this length will not be tokenized for performance reasons.
+   * Such lines are returned as a single token with no color.
    *
    * @default 0 (no limit)
    */
@@ -201,6 +202,13 @@ export interface TokenizeWithThemeOptions {
 
   /**
    * Time limit in milliseconds for tokenizing a single line.
+   *
+   * When the limit is reached, the rest of that line is returned as a single token with no color.
+   * No error or warning is raised, and the following lines are not affected.
+   * The time is wall-clock time, so a busy machine can reach the limit on lines that are fast otherwise.
+   *
+   * Set to `0` to disable the limit. Some grammars get much slower as a line gets longer,
+   * so with no limit a very long line (for example minified code) can take seconds.
    *
    * @default 500 (0.5s)
    */
