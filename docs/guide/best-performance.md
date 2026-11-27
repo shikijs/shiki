@@ -84,6 +84,30 @@ If you are bundling Shiki for the web, using the JavaScript engine results in a 
 
 Check the [RegExp Engines](/guide/regex-engines) guide for more details.
 
+## Long Lines
+
+Some grammars get much slower as a line gets longer. For example, with the TypeScript grammar, a line with a 4,000-character string takes about a second to tokenize, and a line with a 20,000-character string takes about 25 seconds. To stop this from blocking your program, Shiki gives up on a line after 500ms (the `tokenizeTimeLimit` option), and returns the rest of that line with no color. This happens without an error or a warning.
+
+The limit is wall-clock time. If you highlight on a busy machine (for example during a parallel build, or while rendering video), lines that are usually fast can reach it, and parts of your code show up without colors. If that happens, increase the limit:
+
+```ts
+const html = await codeToHtml(code, {
+  lang: 'ts',
+  theme: 'nord',
+  tokenizeTimeLimit: 5000, // ms per line, `0` disables the limit
+})
+```
+
+If your input can contain very long lines, such as minified code, also set `tokenizeMaxLineLength` so that those lines are skipped instead of being tokenized:
+
+```ts
+const html = await codeToHtml(code, {
+  lang: 'js',
+  theme: 'nord',
+  tokenizeMaxLineLength: 1000, // longer lines are shown with no color
+})
+```
+
 ## Use Workers
 
 Shiki highlights code using regular expressions, which can be CPU-intensive. You can offload the highlighting work to a Web Worker/Node Worker to avoid blocking the main thread.
